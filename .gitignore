@@ -1,10 +1,3 @@
-
-LibreOfficeWriter.au3.bak
-LibreOfficeWriter — kopia.au3.bak
-LibreOfficeWriter — kopia.au3
-BackUp/LibreOfficeWriter_Constants_old2.au3
-BackUp/
-BackUp/LibreOfficeWriter_Table_old1.au3
-BackUp/LibreOfficeWriter_Field_old1.au3
-BackUp/LibreOfficeWriter_Font_old1.au3
-BackUp/LibreOfficeWriter_Internal_old1.au3
+*.au3.bak
+*kopia.au3
+BackUp/*
