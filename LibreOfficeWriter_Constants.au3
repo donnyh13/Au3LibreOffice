@@ -1,9 +1,10 @@
+#AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 #include-once
 
 ; #INDEX# =======================================================================================================================
-; Title .........: Libre Office Writer (LOWriter) Constants for the Libre Office Writer UDF.
+; Title .........: Libre Office Writer Constants for the Libre Office UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the Libre Office Writer UDF.
+; Description ...: Constants for various functions in the Libre Office UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; ===============================================================================================================================
@@ -820,3 +821,9 @@ Global Const _
 		$LOW_FIELD_PLACEHOLD_TYPE_FRAME = 2, _                  ; The field initiates the insertion of a text frame.
 		$LOW_FIELD_PLACEHOLD_TYPE_GRAPHIC = 3, _                ; The field initiates the insertion of a graphic object.
 		$LOW_FIELD_PLACEHOLD_TYPE_OBJECT = 4                    ; The field initiates the insertion of an embedded object.
+
+Global Const _
+		$LOW_COLORMODE_STANDARD = 0, _                          ; The graphic is rendered in the default color style of the output device.
+		$LOW_COLORMODE_GRAYSCALE = 1, _                         ; The graphic is rendered in grayscale on the output device.
+		$LOW_COLORMODE_BLACK_WHITE = 2, _                       ; The graphic is rendered in black and white only.
+		$LOW_COLORMODE_WATERMARK = 3                            ; The graphic is rendered in a watermark like style.
