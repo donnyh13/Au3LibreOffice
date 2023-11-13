@@ -5,7 +5,7 @@
 #include "LibreOfficeWriter_Constants.au3"
 #include "LibreOfficeWriter_Helper.au3"
 
-; Requred AutoIt Include
+; Required AutoIt Include
 #include <WinAPIGdiDC.au3>
 
 ; #INDEX# =======================================================================================================================
