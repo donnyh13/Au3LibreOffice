@@ -4,7 +4,7 @@
 
 .gitattributes  export-ignore
 .gitignore      export-ignore
-Ignore/**         export-ignore
+Ignore/*         export-ignore
 
 # Exclude a file: .gitignore      export-ignore
 # Exclude a whole folder: MyFolder/**   export-ignore
