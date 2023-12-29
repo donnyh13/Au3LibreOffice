@@ -1,7 +1,7 @@
-
-#include "LibreOfficeWriter.au3"
-#include <MsgBoxConstants.au3>
 #include <Array.au3>
+#include <MsgBoxConstants.au3>
+
+#include "..\LibreOfficeWriter.au3"
 
 Example()
 
@@ -12,7 +12,7 @@ Func Example()
 	MsgBox($MB_OK, "", "I will list your currently available printers")
 
 	$asPrinters = _LOWriter_DocEnumPrintersAlt()
-	If (@error > 0) Then _ERROR("Error retrieving array of Printers. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Error retrieving array of Printers. Error:" & @error & " Extended:" & @extended)
 
 	MsgBox($MB_OK, "", "There were " & @extended & " results.")
 
@@ -21,7 +21,7 @@ Func Example()
 	MsgBox($MB_OK, "", "I will list your currently default printer next.")
 
 	$sDefault = _LOWriter_DocEnumPrintersAlt("", True)
-	If (@error > 0) Then _ERROR("Error retrieving Default Printer. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Error retrieving Default Printer. Error:" & @error & " Extended:" & @extended)
 
 	If ($sDefault = "") Then
 		MsgBox($MB_OK, "", "You do not have a default printer.")
@@ -37,7 +37,7 @@ Func Example()
 	EndIf
 
 	$asPrinters = _LOWriter_DocEnumPrintersAlt($sSearch)
-	If (@error > 0) Then _ERROR("Error retrieving array of Printers. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Error retrieving array of Printers. Error:" & @error & " Extended:" & @extended)
 
 	MsgBox($MB_OK, "", "There were: " & @extended & " results")
 
@@ -49,4 +49,3 @@ Func _ERROR($sErrorText)
 	MsgBox($MB_OK, "Error", $sErrorText)
 	Exit
 EndFunc
-

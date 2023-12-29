@@ -1,0 +1,70 @@
+; #CHANGES ======================================================================================================================
+; # When you see, ;@# ♦ , it means that there is a possible Script Breaking Change
+; #
+; # 2023/08/10 -- Ver. 0.0.0.3
+; # ♦ Removed "IsCollpased" check and error from _LOWriter_DocGetString.
+; # ♦ Added a warning to _LOWriter_ShapesListNames, about Images inserted in a document also being called "TextFrames". Also
+; #		modified it to correct an error that could occur if images are present.
+; # ♦ Filled in "Related" section for most function headers.
+;@# ♦ Modified _LOWriter_FramesListNames to have an option to search for Frames listed under shapes.
+;@# ♦ Added a missing Datatype for possible Cursor data position types, $LOW_CURDATA_HEADER_FOOTER, previously attempting to
+; #		insert a table while the insertion point cursor was in a Header/Footer would have failed. Attempting to insert a
+; #		Footnote/Endnote while the cursor was in the Header/Footer would have caused an unknown Data type error, instead of
+; #		an inccorrect data type error. Also attempting to create a TextCursor at the ViewCursor position while the ViewCursor
+; #		was presently in a Header/Footer would have failed with an unknown data type error. Furthermore attempting to retrieve
+; #		What data type the cursor was presently in also would have returned an error, instead of indicating the Header/Footer
+; #		Data type. This has all been fixed. The affected functions are: _LOWriter_TableInsert, _LOWriter_FootnoteInsert,
+; #		_LOWriter_EndnoteInsert, _LOWriter_DocCreateTextCursor, _LOWriter_CursorGetDataType. — Thanks to user Heiko for
+; #		helping me locate this error.
+; # ♦ Modified _LOWriter_DocInsertString and _LOWriter_DocInsertControlChar to fix an error where a COM error would be
+; #		produced when attempting to insert a string or control character in certain data types. Also added a processing error
+; #		check. — Thanks to user Heiko for helping me locate this error.
+;@# ♦ Renamed _LOWriter_DocListTableNames to _LOWriter_TablesGetNames for consistency in Name Listing functions.
+; #		Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_ShapesListNames to _LOWriter_ShapesGetNames for consistency in Name Listing functions.
+; #		Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_FramesListNames to _LOWriter_FramesGetNames for consistency in Name Listing functions.
+; #		Also renamed examples for this function.
+; # ♦ Added _LOWriter_DocConvertTextToTable, and _LOWriter_DocConvertTableToText functions.
+; # ♦ Added _LOWriter_DocExecuteDispatch function, which adds some shortcuts to certain commands, such as select all, etc.
+; #		Also adds ability to copy content selected to clipboard and also to paste.
+;@# ♦ Renamed _LOWriter_ParGetObjects to _LOWriter_ParObjCreateList. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_ParSectionsGet to _LOWriter_ParObjSectionsGet. Also renamed examples for this function.
+; # ♦ Added several Paragraph Object functions, namely: _LOWriter_ParObjSelect, _LOWriter_ParObjCopy, _LOWriter_ParObjPaste,
+; #		_LOWriter_ParObjDelete, which allows the ability to copy and paste content without using the clipboard quickly. Thanks
+; #		to user Heiko for inspiration.
+;@# ♦ Renamed _LOWriter_TableGetByCursor to _LOWriter_TableGetObjByCursor. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_TableGetByName to _LOWriter_TableGetObjByName. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_TableGetCellByCursor to _LOWriter_TableGetCellObjByCursor. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_TableGetCellByName to _LOWriter_TableGetCellObjByName. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_TableGetCellByPosition to _LOWriter_TableGetCellObjByPosition. Also renamed examples for this function.
+; # ♦ Added examples for the new functions.
+; #
+; # 2023/07/16 -- Ver. 0.0.0.2
+; # ♦ Modified _LOWriter_DocFindNext; _LOWriter_DocFindAll; _LOWriter_DocFindAllInRange, $atFindFormat parameter checking to not
+; # 	have an if/else block.
+; # ♦ Fixed _LOWriter_DocReplaceAll; _LOWriter_DocReplaceAllInRange, changed the way you skip $atFindFormat and
+; # 	$atReplaceFormat, you can no longer use Null keyword to skip the parameter (which due to an oversight on my part, didn't
+; # 	work anyway). You now use an empty array (Local $aArray[0]) called in each parameter to skip them. Also removed the
+; # 	if/else block in parameter checking.
+; # ♦ Modified _LOWriter_DocReplaceAllInRange, to have two methods of performing a Regular Expression find and replace, as the
+; #		original one was not performing replacements correctly, this function still doesn't work the best.
+; # ♦ Updated function documentation to reflect the changes.
+; # ♦ Added a UDF version number in the UDF Header.
+; #
+; ===============================================================================================================================
+
+
+; #NO_DOC_FUNCTION# =============================================================================================================
+;_LOWriter_DocListTableNames                      ; --> _LOWriter_TablesGetNames
+;_LOWriter_ShapesListNames                        ; --> _LOWriter_ShapesGetNames
+;_LOWriter_FramesListNames                        ; --> _LOWriter_FramesGetNames
+;_LOWriter_ParGetObjects                          ; --> _LOWriter_ParObjCreateList
+;_LOWriter_ParSectionsGet                         ; --> _LOWriter_ParObjSectionsGet
+;_LOWriter_TableGetByCursor                       ; --> _LOWriter_TableGetObjByCursor
+;_LOWriter_TableGetByName                         ; --> _LOWriter_TableGetObjByName
+;_LOWriter_TableGetCellByCursor                   ; --> _LOWriter_TableGetCellObjByCursor
+;_LOWriter_TableGetCellByName                     ; --> _LOWriter_TableGetCellObjByName
+;_LOWriter_TableGetCellByPosition                 ; --> _LOWriter_TableGetCellObjByPosition
+; ===============================================================================================================================
+

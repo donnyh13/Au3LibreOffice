@@ -1,6 +1,6 @@
-
-#include "LibreOfficeWriter.au3"
 #include <MsgBoxConstants.au3>
+
+#include "..\LibreOfficeWriter.au3"
 
 Example()
 
@@ -8,42 +8,42 @@ Func Example()
 	Local $oDoc, $oViewCursor, $oField
 	Local $avSettings
 
-	;Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
-	If (@error > 0) Then _ERROR("Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended)
 
-	;Retrieve the document view cursor to insert text with.
+	; Retrieve the document view cursor to insert text with.
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
-	If (@error > 0) Then _ERROR("Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended)
 
-	;Insert a 50 Paragraphs to create a second page.
+	; Insert a 50 Paragraphs to create a second page.
 	For $i = 0 To 50
-		;Insert some more text.
+		; Insert some more text.
 		_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR)
-		If (@error > 0) Then _ERROR("Failed to insert text. Error:" & @error & " Extended:" & @extended)
+		If @error Then _ERROR("Failed to insert text. Error:" & @error & " Extended:" & @extended)
 	Next
 
-	;Insert some text.
+	; Insert some text.
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a field at the end of this line. ")
-	If (@error > 0) Then _ERROR("Failed to insert text. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to insert text. Error:" & @error & " Extended:" & @extended)
 
-	;Insert a Page Number Field at the View Cursor.
+	; Insert a Page Number Field at the View Cursor.
 	$oField = _LOWriter_FieldPageNumberInsert($oDoc, $oViewCursor)
-	If (@error > 0) Then _ERROR("Failed to insert a field. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to insert a field. Error:" & @error & " Extended:" & @extended)
 
-	;Insert some more text.
+	; Insert some more text.
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, " <--- This is a Page Number Field.")
-	If (@error > 0) Then _ERROR("Failed to insert text. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to insert text. Error:" & @error & " Extended:" & @extended)
 
 	MsgBox($MB_OK, "", "Press Ok to modify the Page Number Field.")
 
-	;Modify the Page Number Field settings. Number format = $LOW_NUM_STYLE_TEXT_CARDINAL, Offset = -1,
+	; Modify the Page Number Field settings. Number format = $LOW_NUM_STYLE_TEXT_CARDINAL, Offset = -1,
 	_LOWriter_FieldPageNumberModify($oDoc, $oField, $LOW_NUM_STYLE_TEXT_CARDINAL, -1)
-	If (@error > 0) Then _ERROR("Failed to modfiy field. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to modfiy field. Error:" & @error & " Extended:" & @extended)
 
-	;Retrieve current Field settings. Return will be an Array with elements in the order of function parameters.
+	; Retrieve current Field settings. Return will be an Array with elements in the order of function parameters.
 	$avSettings = _LOWriter_FieldPageNumberModify($oDoc, $oField)
-	If (@error > 0) Then _ERROR("Failed to retrieve field settings. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to retrieve field settings. Error:" & @error & " Extended:" & @extended)
 
 	MsgBox($MB_OK, "", "The current Field settings are: " & @CRLF & _
 			"The Page Number's numbering format is, (See UDF Constants): " & $avSettings[0] & @CRLF & _
@@ -53,9 +53,9 @@ Func Example()
 
 	MsgBox($MB_OK, "", "Press ok to close the document.")
 
-	;Close the document.
+	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
-	If (@error > 0) Then _ERROR("Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended)
 
 EndFunc
 
@@ -63,4 +63,3 @@ Func _ERROR($sErrorText)
 	MsgBox($MB_OK, "Error", $sErrorText)
 	Exit
 EndFunc
-

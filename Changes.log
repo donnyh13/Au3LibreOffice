@@ -1,0 +1,13 @@
+﻿
+2023/10/13 — Ver. 0.0.0.4
+ ♦ @mLipok and @donnyh13 began jointly working on this project. — Thanks to @mLipok for his tireless work cleaning up many things in this UDF.
+ ♦ Made examples work from their separate folder. — @mLipok.
+ ♦ Fixed errors in functions _LOWriter_DocFindAllInRange and _LOWriter_DocGenPropTemplate having residual function calls from filling in "Related" section of the header. — @mLipok.
+ ♦ Original LibreOffice UDF file was split into individual elements, per their specific usages. — @mLipok. LibreOfficeWriter_Cell, LibreOfficeWriter_Char, LibreOfficeWriter_Constants, LibreOfficeWriter_Cursor, LibreOfficeWriter_DirectFormating, LibreOfficeWriter_Doc, LibreOfficeWriter_Field, LibreOfficeWriter_Font, LibreOfficeWriter_FootEndNotes, LibreOfficeWriter_Frame, LibreOfficeWriter_Helper, LibreOfficeWriter_Internal, LibreOfficeWriter_Num, LibreOfficeWriter_Page, LibreOfficeWriter_Par, LibreOfficeWriter_Table. 
+ ♦ Constants are now all located in the separate Constants files. All Constants descriptions are moved to that location also. — @mLipok.
+ ♦ Major re-working of Header layout for every function. As well as several typo corrections and wordiness. — @mLipok & @donnyh13.
+ ♦ Change examples layout and error checking slightly. — @mLipok.
+ ♦ Added several Image functions. _LOWriter_ImageAreaColor, _LOWriter_ImageAreaGradient, _LOWriter_ImageAreaTransparency, _LOWriter_ImageAreaTransparencyGradient, _LOWriter_ImageBorderColor, _LOWriter_ImageBorderPadding, _LOWriter_ImageBorderStyle, _LOWriter_ImageBorderWidth, _LOWriter_ImageColorAdjust, _LOWriter_ImageCrop, _LOWriter_ImageDelete, _LOWriter_ImageGetAnchor, _LOWriter_ImageGetObjByName, _LOWriter_ImageHyperlink, _LOWriter_ImageInsert, _LOWriter_ImageModify, _LOWriter_ImageOptions, _LOWriter_ImageOptionsName, _LOWriter_ImageReplace, _LOWriter_ImagesGetNames, _LOWriter_ImageShadow, _LOWriter_ImageSize, _LOWriter_ImageTransparency, _LOWriter_ImageTypePosition, _LOWriter_ImageTypeSize, _LOWriter_ImageWrap, _LOWriter_ImageWrapOptions
+@♦ Renamed Constants $LOW_PAPER_PORTRAIT, 
+$LOW_PAPER_LANDSCAPE to $LOW_PAPER_ORIENT_PORTRAIT
+, $LOW_PAPER_ORIENT_LANDSCAPE

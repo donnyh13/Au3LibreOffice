@@ -1,27 +1,27 @@
-
-#include "LibreOfficeWriter.au3"
 #include <MsgBoxConstants.au3>
+
+#include "..\LibreOfficeWriter.au3"
 
 Example()
 
 Func Example()
 	Local $iInch_From_MicroM, $iCM_From_MicroM, $iMM_From_MicroM, $iPt_From_MicroM
 
-	;Convert 2540 Micrometers to Inches.
+	; Convert 2540 Micrometers to Inches.
 	$iInch_From_MicroM = _LOWriter_ConvertFromMicrometer(2540)
-	If (@error > 0) Then _ERROR("Failed to convert from Micrometers to Inch. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to convert from Micrometers to Inch. Error:" & @error & " Extended:" & @extended)
 
-	;Convert 2540 Micrometers to Centimeters.
+	; Convert 2540 Micrometers to Centimeters.
 	$iCM_From_MicroM = _LOWriter_ConvertFromMicrometer(Null, 2540)
-	If (@error > 0) Then _ERROR("Failed to convert to Micrometers from Centimeter. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to convert to Micrometers from Centimeter. Error:" & @error & " Extended:" & @extended)
 
-	;Convert 2540 Micrometers to Millimeters.
+	; Convert 2540 Micrometers to Millimeters.
 	$iMM_From_MicroM = _LOWriter_ConvertFromMicrometer(Null, Null, 2540)
-	If (@error > 0) Then _ERROR("Failed to convert to Micrometers from Millimeter. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to convert to Micrometers from Millimeter. Error:" & @error & " Extended:" & @extended)
 
-	;Convert 2540 Micrometers to Printer's Points.
+	; Convert 2540 Micrometers to Printer's Points.
 	$iPt_From_MicroM = _LOWriter_ConvertFromMicrometer(Null, Null, Null, 2540)
-	If (@error > 0) Then _ERROR("Failed to convert to Micrometers from Millimeter. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to convert to Micrometers from Millimeter. Error:" & @error & " Extended:" & @extended)
 
 	MsgBox($MB_OK, "", "2540 Micrometers converted to Inches = " & $iInch_From_MicroM & @CRLF & _
 			"2540 Micrometers to CM = " & $iCM_From_MicroM & @CRLF & _
@@ -35,4 +35,3 @@ Func _ERROR($sErrorText)
 	MsgBox($MB_OK, "Error", $sErrorText)
 	Exit
 EndFunc
-

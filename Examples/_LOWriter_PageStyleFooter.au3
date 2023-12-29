@@ -1,6 +1,6 @@
-
-#include "LibreOfficeWriter.au3"
 #include <MsgBoxConstants.au3>
+
+#include "..\LibreOfficeWriter.au3"
 
 Example()
 
@@ -9,34 +9,34 @@ Func Example()
 	Local $iMicrometers, $iMicrometers2
 	Local $avPageStyleSettings
 
-	;Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
-	If (@error > 0) Then _ERROR("Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended)
 
-	;Retrieve the Default Page Style's Object, to modify its settings.
+	; Retrieve the Default Page Style's Object, to modify its settings.
 	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Default Page Style")
-	If (@error > 0) Then _ERROR("Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended)
 
-	;Set Page style Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.
+	; Set Page style Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.
 	_LOWriter_PageStyleBorderWidth($oPageStyle, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
-	If (@error > 0) Then _ERROR("Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended)
 
-	;Convert 1/4" to Micrometers
+	; Convert 1/4" to Micrometers
 	$iMicrometers = _LOWriter_ConvertToMicrometer(.25)
-	If (@error > 0) Then _ERROR("Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended)
 
-	;Convert 1/2" to Micrometers
+	; Convert 1/2" to Micrometers
 	$iMicrometers2 = _LOWriter_ConvertToMicrometer(.5)
-	If (@error > 0) Then _ERROR("Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended)
 
-	;Set Page style Footer settings to: Footer on = True, Same content on left and right pages = False, Same content on the first page = Ture,
-	;Left & Right margins = 1/4", Spacing between Footer content and Page content = 1/2", Dynamic spacing = False, Skip Height and set AutoHeight to True.
+	; Set Page style Footer settings to: Footer on = True, Same content on left and right pages = False, Same content on the first page = Ture,
+	; Left & Right margins = 1/4", Spacing between Footer content and Page content = 1/2", Dynamic spacing = False, Skip Height and set AutoHeight to True.
 	_LOWriter_PageStyleFooter($oPageStyle, True, False, True, $iMicrometers, $iMicrometers, $iMicrometers2, False, Null, True)
-	If (@error > 0) Then _ERROR("Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended)
 
-	;Retrieve the current settings. Return will be an array with elements in order of function parameters.
+	; Retrieve the current settings. Return will be an array with elements in order of function parameters.
 	$avPageStyleSettings = _LOWriter_PageStyleFooter($oPageStyle)
-	If (@error > 0) Then _ERROR("Failed to retrieve the Page style settings. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to retrieve the Page style settings. Error:" & @error & " Extended:" & @extended)
 
 	MsgBox($MB_OK, "", "The Page Style's current Footer settings are as follows: " & @CRLF & _
 			"Is the Footer on for this PageStyle? True/False: " & $avPageStyleSettings[0] & @CRLF & _
@@ -51,9 +51,9 @@ Func Example()
 
 	MsgBox($MB_OK, "", "Press ok to close the document.")
 
-	;Close the document.
+	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
-	If (@error > 0) Then _ERROR("Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended)
+	If @error Then _ERROR("Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended)
 
 EndFunc
 
@@ -61,4 +61,3 @@ Func _ERROR($sErrorText)
 	MsgBox($MB_OK, "Error", $sErrorText)
 	Exit
 EndFunc
-
