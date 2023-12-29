@@ -1,4 +1,4 @@
-#AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
+;~ #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
 #include-once
 #include "LibreOfficeWriterConstants.au3"
@@ -6,7 +6,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: Libre Office Writer (LOWriter)
 ; AutoIt Version : v3.3.16.1
-; UDF Version    : 0.0.0.2
+; UDF Version    : 0.0.0.3
 ; Description ...: Provides basic functionality through Autoit for interacting with Libre Office Writer.
 ; Author(s) .....: donnyh13
 ; Sources . . . .:  jguinch -- Printmgr.au3, used (_PrintMgr_EnumPrinter);
@@ -16,9 +16,9 @@
 ;					Leagnus & GMK -- OOoCalc.au3, used (SetPropertyValue)
 ; Dll ...........:
 ; Note...........: Tips/templates taken from OOoCalc UDF written by user GMK; also from Word UDF by user water.
-;					I found the The book by Andrew Pitonyak very helpful also, titled, "OpenOffice.org Macros Explained;
+;					I found the book by Andrew Pitonyak very helpful also, titled, "OpenOffice.org Macros Explained;
 ;						OOME Third Edition".
-;					Of course, this UDF is written using the English version of LibreOffice, and may work for the English
+;					Of course, this UDF is written using the English version of LibreOffice, and may only work for the English
 ;						version of LibreOffice installations. Many functions in this UDF may or may not work with OpenOffice
 ;						Writer, however some settings are definitely for LibreOffice only.
 ; ===============================================================================================================================
@@ -119,11 +119,14 @@
 ;_LOWriter_DocBookmarksList
 ;_LOWriter_DocClose
 ;_LOWriter_DocConnect
+;_LOWriter_DocConvertTableToText
+;_LOWriter_DocConvertTextToTable
 ;_LOWriter_DocCreate
 ;_LOWriter_DocCreateTextCursor
 ;_LOWriter_DocDescription
 ;_LOWriter_DocEnumPrinters
 ;_LOWriter_DocEnumPrintersAlt
+;_LOWriter_DocExecuteDispatch
 ;_LOWriter_DocExport
 ;_LOWriter_DocFindAll
 ;_LOWriter_DocFindAllInRange
@@ -149,7 +152,6 @@
 ;_LOWriter_DocIsActive
 ;_LOWriter_DocIsModified
 ;_LOWriter_DocIsReadOnly
-;_LOWriter_DocListTableNames
 ;_LOWriter_DocMaximize
 ;_LOWriter_DocMinimize
 ;_LOWriter_DocOpen
@@ -320,8 +322,8 @@
 ;_LOWriter_FrameHyperlink
 ;_LOWriter_FrameOptions
 ;_LOWriter_FrameOptionsName
+;_LOWriter_FramesGetNames
 ;_LOWriter_FrameShadow
-;_LOWriter_FramesListNames
 ;_LOWriter_FrameStyleAreaColor
 ;_LOWriter_FrameStyleAreaGradient
 ;_LOWriter_FrameStyleBorderColor
@@ -406,8 +408,12 @@
 ;_LOWriter_PageStyleShadow
 ;_LOWriter_PageStyleTransparency
 ;_LOWriter_PageStyleTransparencyGradient
-;_LOWriter_ParGetObjects
-;_LOWriter_ParSectionsGet
+;_LOWriter_ParObjCopy
+;_LOWriter_ParObjCreateList
+;_LOWriter_ParObjDelete
+;_LOWriter_ParObjPaste
+;_LOWriter_ParObjSectionsGet
+;_LOWriter_ParObjSelect
 ;_LOWriter_ParStyleAlignment
 ;_LOWriter_ParStyleBackColor
 ;_LOWriter_ParStyleBorderColor
@@ -446,7 +452,7 @@
 ;_LOWriter_SearchDescriptorCreate
 ;_LOWriter_SearchDescriptorModify
 ;_LOWriter_SearchDescriptorSimilarityModify
-;_LOWriter_ShapesListNames
+;_LOWriter_ShapesGetNames
 ;_LOWriter_TableBorderColor
 ;_LOWriter_TableBorderPadding
 ;_LOWriter_TableBorderStyle
@@ -460,13 +466,13 @@
 ;_LOWriter_TableCreateCursor
 ;_LOWriter_TableCursor
 ;_LOWriter_TableDelete
-;_LOWriter_TableGetByCursor
-;_LOWriter_TableGetByName
-;_LOWriter_TableGetCellByCursor
-;_LOWriter_TableGetCellByName
-;_LOWriter_TableGetCellByPosition
 ;_LOWriter_TableGetCellNames
+;_LOWriter_TableGetCellObjByCursor
+;_LOWriter_TableGetCellObjByName
+;_LOWriter_TableGetCellObjByPosition
 ;_LOWriter_TableGetData
+;_LOWriter_TableGetObjByCursor
+;_LOWriter_TableGetObjByName
 ;_LOWriter_TableInsert
 ;_LOWriter_TableMargin
 ;_LOWriter_TableProperties
@@ -476,6 +482,7 @@
 ;_LOWriter_TableRowInsert
 ;_LOWriter_TableRowProperty
 ;_LOWriter_TableSetData
+;_LOWriter_TablesGetNames
 ;_LOWriter_TableShadow
 ;_LOWriter_TableWidth
 ;_LOWriter_VersionGet
@@ -506,13 +513,13 @@
 ;__LOWriter_DirFrmtCheck
 ;__LOWriter_FieldCountType
 ;__LOWriter_FieldsGetList
-;__LOwriter_FieldTypeServices
+;__LOWriter_FieldTypeServices
 ;__LOWriter_FilterNameGet
 ;__LOWriter_FindFormatAddSetting
 ;__LOWriter_FindFormatDeleteSetting
 ;__LOWriter_FindFormatRetrieveSetting
 ;__LOWriter_FooterBorder
-;__LOWriter_FrameRelativeSize
+;__LOWriter_ObjRelativeSize
 ;__LOWriter_GetPrinterSetting
 ;__LOWriter_GradientNameInsert
 ;__LOWriter_GradientPresets
@@ -587,15 +594,70 @@ Global Enum $__LOWCONST_CONVERT_TWIPS_CM, $__LOWCONST_CONVERT_TWIPS_INCH, $__LOW
 		$__LOWCONST_CONVERT_UM_MM, $__LOWCONST_CONVERT_CM_UM, $__LOWCONST_CONVERT_UM_CM, $__LOWCONST_CONVERT_INCH_UM, $__LOWCONST_CONVERT_UM_INCH, _
 		$__LOWCONST_CONVERT_PT_UM, $__LOWCONST_CONVERT_UM_PT
 
-;Fill Style Constants
-Global Const $__LOWCONST__FILL_STYLE_OFF = 0, $__LOWCONST__FILL_STYLE_SOLID = 1, $__LOWCONST__FILL_STYLE_GRADIENT = 2, _
-		$__LOWCONST__FILL_STYLE_HATCH = 3, $__LOWCONST__FILL_STYLE_BITMAP = 4
+;Fill Style Type Constants
+Global Const $__LOWCONST_FILL_STYLE_OFF = 0, $__LOWCONST_FILL_STYLE_SOLID = 1, $__LOWCONST_FILL_STYLE_GRADIENT = 2, _
+		$__LOWCONST_FILL_STYLE_HATCH = 3, $__LOWCONST_FILL_STYLE_BITMAP = 4
+; ===============================================================================================================================
 
+; #NO_DOC_FUNCTION# =============================================================================================================
+;_LOWriter_DocListTableNames                      ; --> _LOWriter_TablesGetNames
+;_LOWriter_ShapesListNames                        ; --> _LOWriter_ShapesGetNames
+;_LOWriter_FramesListNames                        ; --> _LOWriter_FramesGetNames
+;_LOWriter_ParGetObjects                          ; --> _LOWriter_ParObjCreateList
+;_LOWriter_ParSectionsGet                         ; --> _LOWriter_ParObjSectionsGet
+;_LOWriter_TableGetByCursor                       ; --> _LOWriter_TableGetObjByCursor
+;_LOWriter_TableGetByName                         ; --> _LOWriter_TableGetObjByName
+;_LOWriter_TableGetCellByCursor                   ; --> _LOWriter_TableGetCellObjByCursor
+;_LOWriter_TableGetCellByName                     ; --> _LOWriter_TableGetCellObjByName
+;_LOWriter_TableGetCellByPosition                 ; --> _LOWriter_TableGetCellObjByPosition
 ; ===============================================================================================================================
 
 ; #CHANGES ======================================================================================================================
+; # When you see, ;@# ♦ , it means that there is a possible Script Breaking Change
 ; #
-; # 2023/07/16
+; # 2023/9/12 -- Ver. 0.0.0.4
+; # ♦ Renamed all Examples with multiple example files to match requirements in UDF Spec.
+; #
+; # 2023/09/10 -- Ver. 0.0.0.3
+; # ♦ Removed "IsCollpased" check and error from _LOWriter_DocGetString.
+; # ♦ Added a warning to _LOWriter_ShapesListNames, about Images inserted in a document also being called "TextFrames". Also
+; #		modified it to correct an error that could occur if images are present.
+; # ♦ Filled in "Related" section for most function headers.
+;@# ♦ Modified _LOWriter_FramesListNames to have an option to search for Frames listed under shapes.
+;@# ♦ Added a missing Datatype for possible Cursor data position types, $LOW_CURDATA_HEADER_FOOTER, previously attempting to
+; #		insert a table while the insertion point cursor was in a Header/Footer would have failed. Attempting to insert a
+; #		Footnote/Endnote while the cursor was in the Header/Footer would have caused an unknown Data type error, instead of
+; #		an incorrect data type error. Also attempting to create a TextCursor at the ViewCursor position while the ViewCursor
+; #		was presently in a Header/Footer would have failed with an unknown data type error. Furthermore attempting to retrieve
+; #		What data type the cursor was presently in also would have returned an error, instead of indicating the Header/Footer
+; #		Data type. This has all been fixed. The affected functions are: _LOWriter_TableInsert, _LOWriter_FootnoteInsert,
+; #		_LOWriter_EndnoteInsert, _LOWriter_DocCreateTextCursor, _LOWriter_CursorGetDataType. — Thanks to user Heiko for
+; #		helping me locate this error.
+; # ♦ Modified _LOWriter_DocInsertString and _LOWriter_DocInsertControlChar to fix an error where a COM error would be
+; #		produced when attempting to insert a string or control character in certain data types. Also added a processing error
+; #		check. — Thanks to user Heiko for helping me locate this error.
+;@# ♦ Renamed _LOWriter_DocListTableNames to _LOWriter_TablesGetNames for consistency in Name Listing functions.
+; #		Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_ShapesListNames to _LOWriter_ShapesGetNames for consistency in Name Listing functions.
+; #		Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_FramesListNames to _LOWriter_FramesGetNames for consistency in Name Listing functions.
+; #		Also renamed examples for this function.
+; # ♦ Added _LOWriter_DocConvertTextToTable, and _LOWriter_DocConvertTableToText functions.
+; # ♦ Added _LOWriter_DocExecuteDispatch function, which adds some shortcuts to certain commands, such as select all, etc.
+; #		Also adds ability to copy content selected to clipboard and also to paste.
+;@# ♦ Renamed _LOWriter_ParGetObjects to _LOWriter_ParObjCreateList. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_ParSectionsGet to _LOWriter_ParObjSectionsGet. Also renamed examples for this function.
+; # ♦ Added several Paragraph Object functions, namely: _LOWriter_ParObjSelect, _LOWriter_ParObjCopy, _LOWriter_ParObjPaste,
+; #		_LOWriter_ParObjDelete, which allows the ability to copy and paste content without using the clipboard quickly. Thanks
+; #		to user Heiko for inspiration.
+;@# ♦ Renamed _LOWriter_TableGetByCursor to _LOWriter_TableGetObjByCursor. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_TableGetByName to _LOWriter_TableGetObjByName. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_TableGetCellByCursor to _LOWriter_TableGetCellObjByCursor. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_TableGetCellByName to _LOWriter_TableGetCellObjByName. Also renamed examples for this function.
+;@# ♦ Renamed _LOWriter_TableGetCellByPosition to _LOWriter_TableGetCellObjByPosition. Also renamed examples for this function.
+; # ♦ Added examples for the new functions.
+; #
+; # 2023/07/16 -- Ver. 0.0.0.2
 ; # ♦ Modified _LOWriter_DocFindNext; _LOWriter_DocFindAll; _LOWriter_DocFindAllInRange, $atFindFormat parameter checking to not
 ; # 	have an if/else block.
 ; # ♦ Fixed _LOWriter_DocReplaceAll; _LOWriter_DocReplaceAllInRange, changed the way you skip $atFindFormat and
@@ -608,6 +670,7 @@ Global Const $__LOWCONST__FILL_STYLE_OFF = 0, $__LOWCONST__FILL_STYLE_SOLID = 1,
 ; # ♦ Added a UDF version number in the UDF Header.
 ; #
 ; ===============================================================================================================================
+
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CellBackColor
@@ -660,7 +723,8 @@ Global Const $__LOWCONST__FILL_STYLE_OFF = 0, $__LOWCONST__FILL_STYLE_SOLID = 1,
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -742,7 +806,6 @@ EndFunc   ;==>_LOWriter_CellBackColor
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
 ; Color Constants: $LOW_COLOR_BLACK(0),
 ;					$LOW_COLOR_WHITE(16777215),
 ;					$LOW_COLOR_LGRAY(11711154),
@@ -761,6 +824,9 @@ EndFunc   ;==>_LOWriter_CellBackColor
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
+; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_CellBorderWidth,
+;					_LOWriter_CellBorderStyle, _LOWriter_CellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -817,7 +883,9 @@ EndFunc   ;==>_LOWriter_CellBorderColor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_CellBorderColor,
+;					_LOWriter_CellBorderStyle, _LOWriter_CellBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -936,7 +1004,8 @@ EndFunc   ;==>_LOWriter_CellBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+;					_LOWriter_CellBorderWidth, _LOWriter_CellBorderColor, _LOWriter_CellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -999,7 +1068,9 @@ EndFunc   ;==>_LOWriter_CellBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_CellBorderStyle,
+;					_LOWriter_CellBorderColor, _LOWriter_CellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1033,7 +1104,8 @@ EndFunc   ;==>_LOWriter_CellBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+;					_LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1070,7 +1142,7 @@ EndFunc   ;==>_LOWriter_CellCreateTextCursor
 ; 					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					To retrieve the total of a formula, use _LOWriter_CellValue.
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1109,7 +1181,7 @@ EndFunc   ;==>_LOWriter_CellFormula
 ;						$LOW_CELL_TYPE_VALUE(1), cell contains a value.
 ;						$LOW_CELL_TYPE_TEXT(2), cell contains text.
 ;						$LOW_CELL_TYPE_FORMULA(3), cell contains a formula.
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1139,7 +1211,7 @@ EndFunc   ;==>_LOWriter_CellGetDataType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Integer error value. If the cell is not a formula, the error value is zero.
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1170,7 +1242,7 @@ EndFunc   ;==>_LOWriter_CellGetError
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1208,7 +1280,7 @@ EndFunc   ;==>_LOWriter_CellGetName
 ; Modified ......:
 ; Remarks .......: Calling $bProtect with Null keyword returns the current WriteProtection setting of the cell. (True or
 ;					False)
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1247,7 +1319,7 @@ EndFunc   ;==>_LOWriter_CellProtect
 ;					Setting the String will overwrite any existing data in the cell.
 ; 					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1290,7 +1362,7 @@ EndFunc   ;==>_LOWriter_CellString
 ;						value of a formula is returned.
 ; 					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1336,7 +1408,7 @@ EndFunc   ;==>_LOWriter_CellValue
 ;									$LOW_ORIENT_VERT_TOP(1),
 ;									$LOW_ORIENT_VERT_CENTER(2),
 ;									$LOW_ORIENT_VERT_BOTTOM(3)
-; Related .......:
+; Related .......:_LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1425,7 +1497,9 @@ EndFunc   ;==>_LOWriter_CellVertOrient
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong, _LOWriter_CharStyleBorderWidth, _LOWriter_CharStyleBorderStyle,
+;					_LOWriter_CharStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1494,7 +1568,9 @@ EndFunc   ;==>_LOWriter_CharStyleBorderColor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					All distance values are set in MicroMeters. Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_CharStyleBorderWidth, _LOWriter_CharStyleBorderStyle,
+;					_LOWriter_CharStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1592,7 +1668,8 @@ EndFunc   ;==>_LOWriter_CharStyleBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_CharStyleBorderWidth,
+;					_LOWriter_CharStyleBorderColor, _LOWriter_CharStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1665,7 +1742,9 @@ EndFunc   ;==>_LOWriter_CharStyleBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_CharStyleBorderColor, _LOWriter_CharStyleBorderStyle,
+;					_LOWriter_CharStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1713,7 +1792,7 @@ EndFunc   ;==>_LOWriter_CharStyleBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_CharStyleDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1776,7 +1855,7 @@ EndFunc   ;==>_LOWriter_CharStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1859,7 +1938,7 @@ EndFunc   ;==>_LOWriter_CharStyleDelete
 ;						$LOW_CASEMAP_LOWER(2); All characters are put in lower case.
 ;						$LOW_CASEMAP_TITLE(3); The first character of each word is put in upper case.
 ;						$LOW_CASEMAP_SM_CAPS(4); All characters are put in upper case, but with a smaller font height.
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1971,7 +2050,7 @@ EndFunc   ;==>_LOWriter_CharStyleExists
 ;							$LOW_POSTURE_DontKnow(3); specifies a font with an unknown slant.
 ;							$LOW_POSTURE_REV_OBLIQUE(4); specifies a reverse oblique font (slant not designed into the font).
 ;							$LOW_POSTURE_REV_ITALIC(5); specifies a reverse italic font (slant designed into the font).
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_FontsList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2052,7 +2131,8 @@ EndFunc   ;==>_LOWriter_CharStyleFont
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2090,7 +2170,7 @@ EndFunc   ;==>_LOWriter_CharStyleFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_CharStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2154,7 +2234,7 @@ EndFunc   ;==>_LOWriter_CharStyleGetObj
 ; Remarks .......:  Call this function with only the required parameters (or with all other parameters set
 ;					to Null keyword), to get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2288,7 +2368,8 @@ EndFunc   ;==>_LOWriter_CharStyleOrganizer
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2357,7 +2438,7 @@ EndFunc   ;==>_LOWriter_CharStyleOverLine
 ;						SubScript. If you set both Auto SuperScript to True and Auto SubScript to True, or $iSuperScript
 ;						to an integer and $iSubScript to an integer, Subscript will be set as it is the last in the
 ;						line to be set in this function, and thus will over-write any SuperScript settings.
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2407,7 +2488,7 @@ EndFunc   ;==>_LOWriter_CharStylePosition
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2432,7 +2513,7 @@ EndFunc   ;==>_LOWriter_CharStyleRotateScale
 ;				   +					DocCreate function.
 ;                  $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object returned from
-;				   +						_LOWriter_ParGetObjects function.
+;				   +						_LOWriter_ParObjCreateList function.
 ;                  $sCharStyle          - a string value. The Character Style name.
 ; Return values .: Success: 1
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2449,7 +2530,11 @@ EndFunc   ;==>_LOWriter_CharStyleRotateScale
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor,
+;					_LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_CharStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2612,7 +2697,8 @@ EndFunc   ;==>_LOWriter_CharStylesGetNames
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_ConvertColorFromLong,
+;					 _LOWriter_ConvertColorToLong, _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2674,7 +2760,8 @@ EndFunc   ;==>_LOWriter_CharStyleShadow
 ;						kerning value to anything over 32768 uM causes a COM exception, and attempting to set the kerning to
 ;						any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the
 ;						max settable kerning is -2.0 Pt  to 928.8 Pt.
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2735,7 +2822,7 @@ EndFunc   ;==>_LOWriter_CharStyleSpacing
 ;					$LOW_STRIKEOUT_BOLD(4); specifies to strike out the characters with a bold line.
 ;					$LOW_STRIKEOUT_SLASH(5); specifies to strike out the characters with slashes.
 ;					$LOW_STRIKEOUT_X(6); specifies to strike out the characters with X's.
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2832,7 +2919,8 @@ EndFunc   ;==>_LOWriter_CharStyleStrikeOut
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_CharStyleGetObj, _LOWriter_CharStyleCreate, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2962,8 +3050,8 @@ EndFunc   ;==>_LOWriter_ComError_UserFunction
 ;					Hex returns as a string variable, all others (RGB, HSB, CMYK) return an array. Array[0] = R, Array [1] = G
 ;					etc.
 ;					Note: The Hexadecimal figure returned doesn't contain the usual "0x", as LibeOffice does not implement it in
-;						it's numbering system.
-; Related .......:
+;						its numbering system.
+; Related .......: _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3111,8 +3199,8 @@ EndFunc   ;==>_LOWriter_ConvertColorFromLong
 ;					To convert C(yan)Y(ellow)M(agenta)(Blac)K enter C in $vVal1 in Integer format, Y in $vVal2 in Integer
 ;						Format, M in $vVal3 in Integer format, and K in $vVal4 in Integer format.
 ;					Note: The Hexadecimal figure entered cannot contain the usual "0x", as LibeOffice does not implement it in
-;						it's numbering system.
-; Related .......:
+;						its numbering system.
+; Related .......: _LOWriter_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3268,7 +3356,7 @@ EndFunc   ;==>_LOWriter_ConvertColorToLong
 ;					converting to Millimeters, $nInchOut and $nCentimeter are set to Null, and $nCMillimetersOut is set.  A
 ;					Micrometer is 1000th of a centimeter, and is used in almost all Libre Office functions that contain a
 ;					measurement parameter.
-; Related .......:
+; Related .......:  _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3341,7 +3429,7 @@ EndFunc   ;==>_LOWriter_ConvertFromMicrometer
 ; Remarks .......: To skip a parameter, set it to Null. If you are converting from Inches, place the inches in $nInchIn, if
 ;					converting from Centimeters, $nInchIn is set to Null, and $nCentimeters is set. A Micrometer is 1000th of a
 ;					centimeter, and is used in almost all Libre Office functions that contain a measurement parameter.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3400,12 +3488,16 @@ EndFunc   ;==>_LOWriter_ConvertToMicrometer
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns what type of data a cursor is currently located in, such as a TextTable, Footnote etc.
-;Cursor Data Type Constants: $LOW_CURDATA_BODY_TEXT = 1,
-;								$LOW_CURDATA_FRAME = 2,
-;								$LOW_CURDATA_CELL = 3,
-;								$LOW_CURDATA_FOOTNOTE = 4,
-;								$LOW_CURDATA_ENDNOTE = 5,
-; Related .......:
+;Cursor Data Type Constants: $LOW_CURDATA_BODY_TEXT(1),
+;								$LOW_CURDATA_FRAME(2),
+;								$LOW_CURDATA_CELL(3),
+;								$LOW_CURDATA_FOOTNOTE(4),
+;								$LOW_CURDATA_ENDNOTE(5),
+;								$LOW_CURDATA_HEADER_FOOTER(6)
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					 _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					 _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor,
+;					_LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3464,7 +3556,10 @@ EndFunc   ;==>_LOWriter_CursorGetDataType
 ;Table Cursor Status Flag Constants:
 ;				$LOW_CURSOR_STAT_GET_RANGE_NAME, Returns the cell range selected by this cursor as a string. For example,
 ;					“B3:D5”.
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					 _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					 _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor,
+;					_LOWriter_FootnoteGetTextCursor, _LOWriter_CursorGetType
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3530,11 +3625,16 @@ EndFunc   ;==>_LOWriter_CursorGetStatus
 ;				   @Error 0 @Extended 0 Return Integer  = Success, Return value will be one of the Constants below.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Will also work for Paragraph object and paragraph section objects.
 ;Cursor Type Constants: $LOW_CURTYPE_TEXT_CURSOR(1),
 ;						$LOW_CURTYPE_TABLE_CURSOR(2),
-;						$LOW_CURTYPE_VIEW_CURSOR(3)
-; Related .......:
+;						$LOW_CURTYPE_VIEW_CURSOR(3),
+;						$LOW_CURTYPE_PARAGRAPH(4), such as from _LOWriter_ParObjCreateList
+;						$LOW_CURTYPE_TEXT_PORTION(5) such as from _LOWriter_ParObjSectionsGet
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					 _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					 _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor,
+;					_LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3575,7 +3675,10 @@ EndFunc   ;==>_LOWriter_CursorGetType
 ; Modified ......:
 ; Remarks .......: If the Cursor being used as a range has anything selected, the selection will be selected in the Text Cursor
 ;					also.
-; Related .......:
+; Related .......:  _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					 _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor,	_LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet, _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3694,7 +3797,10 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 ;					-ViewCursor
 ;						$LOW_VIEWCUR_JUMP_TO_PAGE (accepts page number to jump to in $iCount, Returns what page was successfully
 ;						jumped to.
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					 _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					 _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor,
+;					_LOWriter_FootnoteGetTextCursor, _LOWriter_TableCreateCursor, _LOWriter_CursorGoToRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3746,7 +3852,7 @@ EndFunc   ;==>_LOWriter_CursorMove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......:_LOWriter_DateFormatKeyDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3796,7 +3902,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DateFormatKeyCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3844,7 +3950,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeyDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3878,7 +3984,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......:_LOWriter_DateFormatKeyList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3934,7 +4040,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyGetString
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeyDelete, _LOWriter_DateFormatKeyGetString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4032,7 +4138,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4326,7 +4432,12 @@ EndFunc   ;==>_LOWriter_DateStructModify
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet, _LOWriter_DirFrmtCharBorderWidth, _LOWriter_DirFrmtCharBorderStyle,
+;					_LOWriter_DirFrmtCharBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4414,7 +4525,12 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderColor
 ;				   Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;				   Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet, _LOWriter_DirFrmtCharBorderWidth, _LOWriter_DirFrmtCharBorderStyle,
+;					_LOWriter_DirFrmtCharBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4529,7 +4645,12 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet, _LOWriter_DirFrmtCharBorderWidth,
+;					_LOWriter_DirFrmtCharBorderColor, _LOWriter_DirFrmtCharBorderPadding
+;
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4621,7 +4742,12 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet, _LOWriter_DirFrmtCharBorderStyle, _LOWriter_DirFrmtCharBorderColor,
+;					_LOWriter_DirFrmtCharBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4713,7 +4839,10 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderWidth
 ;						$LOW_CASEMAP_LOWER(2); All characters are put in lower case.
 ;						$LOW_CASEMAP_TITLE(3); The first character of each word is put in upper case.
 ;						$LOW_CASEMAP_SM_CAPS(4); All characters are put in upper case, but with a smaller font height.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4823,7 +4952,10 @@ EndFunc   ;==>_LOWriter_DirFrmtCharEffect
 ;						SubScript. If you set both Auto SuperScript to True and Auto SubScript to True, or $iSuperScript
 ;						to an integer and $iSubScript to an integer, Subscript will be set as it is the last in the
 ;						line to be set in this function, and thus will over-write any SuperScript settings.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					 _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					 _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4896,7 +5028,10 @@ EndFunc   ;==>_LOWriter_DirFrmtCharPosition
 ;					get the current settings.
 ;				   Call any optional parameter with Null keyword to skip it.
 ;				   Call a Parameter with Default keyword to clear direct formatting for that setting.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtClear,_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor,_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5018,7 +5153,12 @@ EndFunc   ;==>_LOWriter_DirFrmtCharRotateScale
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer,  _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5096,7 +5236,11 @@ EndFunc   ;==>_LOWriter_DirFrmtCharShadow
 ;						value to anything over 32768 uM causes a COM exception, and attempting to set the kerning to any of
 ;						these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max
 ;						settable kerning is -2.0 Pt  to 928.8 Pt.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5142,22 +5286,34 @@ EndFunc   ;==>_LOWriter_DirFrmtCharSpacing
 ;				   @Error 1 @Extended 2 Return 0 = $oSelection not an Object.
 ;				   @Error 1 @Extended 3 Return 0 = $oSelection does not support any of the following:
 ;				   +								"com.sun.star.text.Paragraph";"TextPortion"; "TextCursor"; "TextViewCursor".
+;				   @Error 1 @Extended 4 Return 0 = $oSelection is a Table Cursor, which is not supported.
 ;				   --Initialization Errors--
 ;				   @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
 ;				   @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
-;				   @Error 2 @Extended 3 Return 0 = Error retrieving Frame Object.
+;				   @Error 2 @Extended 3 Return 0 = Error retrieving Text Object for creating a ViewCursor Backup.
+;				   --Processing Errors--
+;				   @Error 3 @Extended 1 Return 0 = Failed to determine $oSelection's cursor type.
+;				   @Error 3 @Extended 2 Return 0 = Failed to retrieve document's Viewcursor.
+;				   @Error 3 @Extended 3 Return 0 = Failed to retrieve Text Object for the Viewcursor.
+;				   @Error 3 @Extended 4 Return 0 = Failed to a cursor at the position of the View cursor.
 ;				   --Success--
 ;				   @Error 0 @Extended 0 Return 1 = Success. Direct Formatting was successfully cleared.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
-; Related .......:
+; Remarks .......: This function causes the ViewCursor to select the data input in $oSelection, unless $oSelection is a
+;						a ViewCursor object. After the formatting has been cleared the ViewCursor is returned to its previous
+;						position.
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOWriter_DirFrmtClear(ByRef $oDoc, ByRef $oSelection)
 	Local $aArray[0]
-	Local $oServiceManager, $oDispatcher, $oFrame
+	Local $oServiceManager, $oDispatcher, $oText, $oViewCursor, $oViewCursorBackup
+	Local $iCursorType
 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
 	#forceref $oCOM_ErrorHandler
@@ -5172,10 +5328,36 @@ Func _LOWriter_DirFrmtClear(ByRef $oDoc, ByRef $oSelection)
 	$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
 	If Not IsObj($oDispatcher) Then Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0)
 
-	$oFrame = $oDoc.CurrentController.Frame()
-	If Not IsObj($oFrame) Then Return SetError($__LOW_STATUS_INIT_ERROR, 3, 0)
+	$iCursorType = __LOWriter_Internal_CursorGetType($oSelection)
+	If @error Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
+	If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 
-	$oDispatcher.executeDispatch($oFrame, ".uno:ResetAttributes", "", 0, $aArray)
+	Switch $iCursorType
+
+		Case $LOW_CURTYPE_TEXT_CURSOR, $LOW_CURTYPE_PARAGRAPH, $LOW_CURTYPE_TEXT_PORTION
+
+			;Retrieve the ViewCursor.
+			$oViewCursor = $oDoc.CurrentController.getViewCursor()
+			If Not IsObj($oViewCursor) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 2, 0)
+
+			;Create a Text cursor at the current viewCursor position to move the Viewcursor back to.
+			$oText = __LOWriter_CursorGetText($oDoc, $oViewCursor)
+			If @error Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsObj($oText) Then Return SetError($__LOW_STATUS_INIT_ERROR, 3, 0)
+			$oViewCursorBackup = $oText.createTextCursorByRange($oViewCursor)
+			If Not IsObj($oViewCursorBackup) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 4, 0)
+
+			$oViewCursor.gotoRange($oSelection, False)
+
+			$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:ResetAttributes", "", 0, $aArray)
+
+			;Restore the ViewCursor to its previous location.
+			$oViewCursor.gotoRange($oViewCursorBackup, False)
+
+		Case $LOW_CURTYPE_VIEW_CURSOR
+
+			$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:ResetAttributes", "", 0, $aArray)
+	EndSwitch
 
 	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_DirFrmtClear
@@ -5252,7 +5434,11 @@ EndFunc   ;==>_LOWriter_DirFrmtClear
 ;							$LOW_POSTURE_DontKnow(3); specifies a font with an unknown slant.
 ;							$LOW_POSTURE_REV_OBLIQUE(4); specifies a reverse oblique font (slant not designed into the font).
 ;							$LOW_POSTURE_REV_ITALIC(5); specifies a reverse italic font (slant designed into the font).
-; Related .......:
+; Related .......: _LOWriter_FontsList, _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor,
+;					 _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor,
+;					 _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5370,7 +5556,11 @@ EndFunc   ;==>_LOWriter_DirFrmtFont
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5426,7 +5616,10 @@ EndFunc   ;==>_LOWriter_DirFrmtFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Some of the returned style values may be blank if they are not set, particularly Numberingstyle.
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5539,7 +5732,11 @@ EndFunc   ;==>_LOWriter_DirFrmtGetCurStyles
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5588,7 +5785,7 @@ EndFunc   ;==>_LOWriter_DirFrmtOverLine
 ; Syntax ........: _LOWriter_DirFrmtParAlignment(Byref $oSelection[, $iHorAlign = Null[, $iVertAlign = Null[, $iLastLineAlign = Null[, $bExpandSingleWord = Null[, $bSnapToGrid = Null[, $iTxtDirection = Null]]]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iHorAlign           - [optional] an integer value. Default is Null. The Horizontal alignment of the
 ;				   +						paragraph. See Constants below. See Remarks.
 ;                  $iVertAlign          - [optional] an integer value. Default is Null. The Vertical alignment of the
@@ -5670,7 +5867,10 @@ EndFunc   ;==>_LOWriter_DirFrmtOverLine
 ;							$LOW_TXT_DIR_CONTEXT(4), — obtain actual writing mode from the context of the object.
 ;							$LOW_TXT_DIR_BT_LR(5), — text within a line is written bottom-to-top. Lines and blocks are placed
 ;								left-to-right. (LibreOffice 6.3)
-; Related .......:
+; Related .......: _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					 _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					 _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					 _LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5728,7 +5928,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAlignment
 ; Syntax ........: _LOWriter_DirFrmtParBackColor(Byref $oSelection[, $iBackColor = Null[, $bBackTransparent = Null[, $bClearDirFrmt = False]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iBackColor          - [optional] an integer value. Default is Null. The color to make the background. Set in
 ;				   +							Long integer format. Can be one of the below constants or a custom value.
 ;												Set to $LOW_COLOR_OFF(-1) to turn Background color off.
@@ -5785,7 +5985,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParAlignment
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong,  _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5813,7 +6017,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBackColor
 ; Syntax ........: _LOWriter_DirFrmtParBorderColor(Byref $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iTop                - [optional] an integer value. Default is Null. Sets the Top Border Line Color of the
 ;				   +						Paragraph Style in Long Color code format. One of the predefined constants listed
 ;				   +						below can be used, or a custom value can be used.
@@ -5888,7 +6092,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParBackColor
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong,  _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet, _LOWriter_DirFrmtParBorderWidth, _LOWriter_DirFrmtParBorderStyle,
+;					_LOWriter_DirFrmtParBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5925,7 +6134,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderColor
 ; Syntax ........: _LOWriter_DirFrmtParBorderPadding(Byref $oSelection[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iAll                - [optional] an integer value. Default is Null. Set all four padding distances to one
 ;				   +						distance in Micrometers (uM).
 ;                  $iTop                - [optional] an integer value. Default is Null. Set the Top Distance between the Border
@@ -5974,7 +6183,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderColor
 ;				   Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;				   Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer,  _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet,  _LOWriter_DirFrmtParBorderWidth, _LOWriter_DirFrmtParBorderStyle,
+;					_LOWriter_DirFrmtParBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6002,7 +6216,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderPadding
 ; Syntax ........: _LOWriter_DirFrmtParBorderStyle(Byref $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iTop                - [optional] an integer value. Default is Null. Sets the Top Border Line Style of the
 ;				   +							Paragraph Style using one of the line style constants, See below for list. To
 ;				   +							skip a parameter, set it to Null.
@@ -6085,7 +6299,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					 _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet,  _LOWriter_DirFrmtParBorderWidth,
+;					_LOWriter_DirFrmtParBorderColor, _LOWriter_DirFrmtParBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6122,7 +6340,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderStyle
 ; Syntax ........: _LOWriter_DirFrmtParBorderWidth(Byref $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bConnectBorder = Null[, $bClearDirFrmt = False]]]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iTop                - [optional] an integer value. Default is Null. Sets the Top Border Line width of the
 ;				   +							Paragraph in MicroMeters. One of the predefined constants listed below can
 ;				   +						be used. To skip a parameter, set it to Null. Libre Office Version 3.4 and Up.
@@ -6185,7 +6403,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer,  _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet, _LOWriter_DirFrmtParBorderStyle, _LOWriter_DirFrmtParBorderColor,
+;					_LOWriter_DirFrmtParBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6242,13 +6465,13 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderWidth
 ;				   +					DocCreate function.
 ;                  $oSelection             - [in/out] an object. an object. A Cursor Object returned from any Cursor Object
 ;				   +						creation or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iNumChar            - [optional] an integer value. Default is Null. The number of characters to make into
 ;				   +									DropCaps. Min is 0, max is 9.
 ;                  $iLines              - [optional] an integer value. Default is Null. The number of lines to drop down, min is
 ;				   +								0, max is 9, cannot be 1.
 ;                  $iSpcTxt             - [optional] an integer value. Default is Null. The distance between the drop cap and the
-;				   +								following text.
+;				   +								following text. In Micrometers.
 ;                  $bWholeWord          - [optional] a boolean value. Default is Null. Whether to DropCap the whole first word.
 ;				   +									(Nullifys $iNumChars.)
 ;                  $sCharStyle          - [optional] a string value. Default is Null. The character style to use for the
@@ -6301,7 +6524,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderWidth
 ;					error/Exception, even when attempting to set it to Libre's own return value without any in-between
 ;					variables, in case I was mistaken as to it being a blank string, but this still caused a COM error. So
 ;					consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6333,7 +6560,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParDropCaps
 ; Syntax ........: _LOWriter_DirFrmtParHyphenation(Byref $oSelection[, $bAutoHyphen = Null[, $bHyphenNoCaps = Null[, $iMaxHyphens = Null[, $iMinLeadingChar = Null[, $iMinTrailingChar = Null[, $bClearDirFrmt = False]]]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $bAutoHyphen         - [optional] a boolean value. Default is Null. Whether  automatic hyphenation is applied.
 ;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null.  Setting to true will disable hyphenation
 ;				   +						of words written in CAPS for this paragraph. Libre 6.4 and up.
@@ -6390,7 +6617,10 @@ EndFunc   ;==>_LOWriter_DirFrmtParDropCaps
 ;				   Call any optional parameter with Null keyword to skip it.
 ;					 Note: $bAutoHyphen set to True for the rest of the settings to be activated, but they will be still
 ;					successfully set regardless.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6419,7 +6649,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParHyphenation
 ; Syntax ........: _LOWriter_DirFrmtParIndent(Byref $oSelection[, $iBeforeTxt = Null[, $iAfterTxt = Null[, $iFirstLine = Null[, $bAutoFirstLine = Null[, $bClearDirFrmt = False]]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iBeforeTxt          - [optional] an integer value. Default is Null. The amount of space that you want
 ;				   +						to indent the paragraph from the page margin. If you want the paragraph to extend
 ;				   +						into the page margin, enter a negative number. Set in MicroMeters(uM) Min. -9998989,
@@ -6469,7 +6699,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParHyphenation
 ;					get the current settings.
 ;				   Call any optional parameter with Null keyword to skip it.
 ;					 Note: $iFirstLine Indent cannot be set if $bAutoFirstLine is set to True.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer,  _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6503,7 +6737,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParIndent
 ;				   +					DocCreate function.
 ;                  $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iOutline            - [optional] an integer value. Default is Null. The Outline Level, see Constants below.
 ;				   +							Min is 0, max is 10.
 ;                  $sNumStyle           - [optional] a string value. Default is Null. Specifies the name of the style for the
@@ -6534,7 +6768,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParIndent
 ;				   --Success--
 ;				   @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;				   @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current
-;				   +								settings in a 5 Element Array with values in order of function parameters.
+;				   +								settings in a 4 Element Array with values in order of function parameters.
 ;				   @Error 0 @Extended 0 Return 2 = Success. One or more parameter was set to Default, and rest of parameters
 ;				   +								were set to Null. Direct formatting has been successfully cleared.
 ; Author ........: donnyh13
@@ -6565,7 +6799,10 @@ EndFunc   ;==>_LOWriter_DirFrmtParIndent
 ;					$LOW_OUTLINE_LEVEL_8(8),
 ;					$LOW_OUTLINE_LEVEL_9(9),
 ;					$LOW_OUTLINE_LEVEL_10(10)
-; Related .......:
+; Related .......: _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6619,7 +6856,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParOutLineAndList
 ;				   +					DocCreate function.
 ;                  $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iBreakType          - [optional] an integer value. Default is Null. The Page Break Type. See Constants below.
 ;                  $iPgNumOffSet        - [optional] an integer value. Default is Null. If a page break property is set at a
 ;				   +						paragraph, this property contains the new value for the page number.
@@ -6668,7 +6905,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParOutLineAndList
 ;					a time if this is the case.
 ;					Note: Break Type must be set before PageStyle will be able to be set, and page style needs set before
 ;					$iPgNumOffSet can be set.
-;					Libre doesn't directly show in it's User interface options for Break type constants #3 and #6 (Column both)
+;					Libre doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both)
 ;						and (Page both), but  doesn't throw an error when being set to either one, so they are included here,
 ;						 though I'm not sure if they will work correctly.
 ;Break Constants : $LOW_BREAK_NONE(0) – No column or page break is applied.
@@ -6684,7 +6921,10 @@ EndFunc   ;==>_LOWriter_DirFrmtParOutLineAndList
 ;						therefore, is the last on the page.
 ;						$LOW_BREAK_PAGE_BOTH(6) – A page break is applied before and after the current Paragraph. The current
 ;						Paragraph, therefore, is the only paragraph on the page.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6721,7 +6961,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParPageBreak
 ; Syntax ........: _LOWriter_DirFrmtParShadow(Byref $oSelection[, $iWidth = Null[, $iColor = Null[, $bTransparent = Null[, $iLocation = Null[, $bClearDirFrmt = False]]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iWidth              - [optional] an integer value. Default is Null. The width of the shadow set in
 ;				   +							Micrometers.
 ;                  $iColor              - [optional] an integer value. Default is Null. The color of the shadow, set in Long
@@ -6793,7 +7033,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParPageBreak
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer,  _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor,
+;					_LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor,
+;					_LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor,
+;					_LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
+;
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6822,7 +7067,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParShadow
 ; Syntax ........: _LOWriter_DirFrmtParSpace(Byref $oSelection[, $iAbovePar = Null[, $iBelowPar = Null[, $bAddSpace = Null[, $iLineSpcMode = Null[, $iLineSpcHeight = Null[, $bPageLineSpc = Null]]]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iAbovePar           - [optional] an integer value. Default is Null. The Space above a paragraph, in
 ;				   +									Micrometers. Min 0 Micrometers (uM) Max 10,008 uM.
 ;                  $iBelowPar           - [optional] an integer value. Default is Null. The Space Below a paragraph, in
@@ -6903,7 +7148,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParShadow
 ;							Min 0, Max 10008 MicroMeters (uM)
 ;						$LOW_LINE_SPC_MODE_FIX(3); This specifies the height value as a fixed line height. Min 51 MicroMeters,
 ;							Max 10008 MicroMeters (uM)
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6962,7 +7211,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParSpace
 ; Syntax ........: _LOWriter_DirFrmtParTabStopCreate(Byref $oSelection, $iPosition[, $iFillChar = Null[, $iAlignment = Null[, $iDecChar = Null]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iPosition           - an integer value. The TabStop position/length to set the new TabStop to. Set in
 ;				   +						Micrometers (uM). See Remarks.
 ;                  $iAlignment          - [optional] an integer value. Default is Null. The Asc (see autoit function) value of
@@ -7026,7 +7275,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParSpace
 ;							$LOW_TAB_ALIGN_DEFAULT(4);4 = This setting is the default, setting when no TabStops are present.
 ;								Setting and Tabstop to this constant will make it disappear from the TabStop list. It is
 ;								therefore only listed here for property reading purposes.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DirFrmtParTabStopDelete,
+;					_LOWriter_DirFrmtParTabStopMod, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
+;
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7050,7 +7304,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopCreate
 ;				   +					DocCreate function.
 ;                  $oSelection      - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iTabStop            - an integer value. The Tab position of the TabStop to modify. See Remarks.
 ; Return values .: Success: Boolean.
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -7073,7 +7327,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopCreate
 ; Remarks .......: Note: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin.
 ;						This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be
 ;						one of a certain length per document.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtParTabStopCreate, _LOWriter_DirFrmtParTabStopList, _LOWriter_DocGetViewCursor,
+;					_LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor,
+;					_LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor,
+;					_LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
+;
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7096,7 +7354,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopDelete
 ; Syntax ........: _LOWriter_DirFrmtParTabStopList(Byref $oSelection)
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ; Return values .:  Success: Array
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;				   --Input Errors--
@@ -7110,7 +7368,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopDelete
 ; Modified ......:
 ; Remarks .......: Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different
 ;						settings could be selected at once, which would result in a return of 0, false, null, etc.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtParTabStopCreate, _LOWriter_DirFrmtParTabStopDelete, _LOWriter_DirFrmtParTabStopMod,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7130,7 +7392,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopList
 ; Syntax ........: _LOWriter_DirFrmtParTabStopMod(Byref $oSelection, $iTabStop[, $iPosition = Null[, $iFillChar = Null[, $iAlignment = Null[, $iDecChar = Null]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $iTabStop            - an integer value. The Tab position of the TabStop to modify. See Remarks.
 ;                  $iPosition           - [optional] an integer value. Default is Null. The New position to set the input
 ;				   +						position to. Set in Micrometers (uM). See Remarks.
@@ -7209,7 +7471,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopList
 ;							$LOW_TAB_ALIGN_DEFAULT(4);4 = This setting is the default, setting when no TabStops are present.
 ;								Setting and Tabstop to this constant will make it disappear from the TabStop list. It is
 ;								therefore only listed here for property reading purposes.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DirFrmtParTabStopCreate,
+;					_LOWriter_DirFrmtParTabStopDelete, _LOWriter_DirFrmtParTabStopList,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7240,7 +7507,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopMod
 ; Syntax ........: _LOWriter_DirFrmtParTxtFlowOpt(Byref $oSelection[, $bParSplit = Null[, $bKeepTogether = Null[, $iParOrphans = Null[, $iParWidows = Null]]]])
 ; Parameters ....: $oSelection             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions, Or A Paragraph Object/Object Section returned from
-;				   +						_LOWriter_ParGetObjects or _LOWriter_ParSectionsGet function.
+;				   +						_LOWriter_ParObjCreateList or _LOWriter_ParObjSectionsGet function.
 ;                  $bParSplit           - [optional] a boolean value. Default is Null.  FALSE prevents the paragraph from
 ;				   +						getting split into two pages or columns
 ;                  $bKeepTogether       - [optional] a boolean value. Default is Null. TRUE prevents page or column breaks
@@ -7289,7 +7556,10 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopMod
 ;					Widow will reset $bParSplit to False if it was set to True.
 ;					 Note: If you do not set ParSplit to True, the rest of the settings will still show to have been set but
 ;					will not become active until $bParSplit is set to true.
-; Related .......:
+; Related .......:_LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7386,7 +7656,10 @@ EndFunc   ;==>_LOWriter_DirFrmtParTxtFlowOpt
 ;					$LOW_STRIKEOUT_BOLD(4); specifies to strike out the characters with a bold line.
 ;					$LOW_STRIKEOUT_SLASH(5); specifies to strike out the characters with slashes.
 ;					$LOW_STRIKEOUT_X(6); specifies to strike out the characters with X's.
-; Related .......:
+; Related .......:_LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7514,7 +7787,11 @@ EndFunc   ;==>_LOWriter_DirFrmtStrikeOut
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_DirFrmtClear,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList,
+;					_LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7577,7 +7854,7 @@ EndFunc   ;==>_LOWriter_DirFrmtUnderLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarkGetObj, _LOWriter_DocBookmarksList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7613,8 +7890,9 @@ EndFunc   ;==>_LOWriter_DocBookmarkDelete
 ;				   @Error 0 @Extended 0 Return Object = Success. Returning requested Bookmark Anchor Cursor Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
-; Related .......:
+; Remarks .......: The Anchor cursor returned is just a Text Cursor placed at the anchor's position.
+; Related .......: _LOWriter_DocBookmarkGetObj, _LOWriter_DocBookmarkInsert, _LOWriter_CursorMove, _LOWriter_DocGetString,
+;					_LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7653,7 +7931,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocBookmarksList, _LOWriter_DocBookmarkModify, _LOWriter_DocBookmarkDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7708,7 +7986,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkGetObj
 ;					A Bookmark name cannot contain the following characters:  / \ @ : * ? " ; , . #
 ;					If the document already contains a Bookmark by the same name, Libre Office adds a digit after the name, such
 ;					as Bookmark 1, Bookmark 2 etc.
-; Related .......:
+; Related .......: _LOWriter_DocBookmarkModify, _LOWriter_DocBookmarkDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7770,7 +8048,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkInsert
 ;					A Bookmark name cannot contain the following characters:  / \ @ : * ? " ; , . #
 ;					If the document already contains a Bookmark by the same name, Libre Office adds a digit after the name, such
 ;					as Bookmark 1, Bookmark 2 etc.
-; Related .......:
+; Related .......: _LOWriter_DocBookmarkGetObj, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarkDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7852,7 +8130,7 @@ EndFunc   ;==>_LOWriter_DocBookmarksHasName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocBookmarkGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7897,7 +8175,7 @@ EndFunc   ;==>_LOWriter_DocBookmarksList
 ;				   @Error 0 @Extended 1 Return String = Success, document was successfully closed, and was saved to the
 ;				   +			 returned file Path.
 ;				   @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved
-;				   +			 to it's existing location.
+;				   +			 to its existing location.
 ;				   @Error 0 @Extended 3 Return String = Success, Document was successfully closed, document either had no
 ;				   +			changes to save, or $bSaveChanges was set to False. If document had a save location, or if
 ;				   +			document was saved to a location, it is returned, else an empty string is returned.
@@ -7907,7 +8185,7 @@ EndFunc   ;==>_LOWriter_DocBookmarksList
 ;					If $sSaveName is undefined, it is saved as an .odt document to the desktop, named
 ;					Year-Month-Day_Hour-Minute-Second.odt. $sSaveName may be just a name, in which case the file will be saved
 ;					in .odt format. Or you may define your own format by including an extension, such as "Test.docx"
-; Related .......:
+; Related .......: _LOWriter_DocOpen, _LOWriter_DocConnect, _LOWriter_DocCreate, _LOWriter_DocSaveAs, _LOWriter_DocSave
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8013,7 +8291,7 @@ EndFunc   ;==>_LOWriter_DocClose
 ;				    	$aArray[0][2] = C:\Folder1\Folder2\This Test File.Docx
 ;					Row 2, Column 0 contain the Object variable for the next document. And so on.
 ;					    $aArray[1][0] = $oDoc2
-; Related .......:
+; Related .......: _LOWriter_DocOpen, _LOWriter_DocClose, _LOWriter_DocCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8126,6 +8404,229 @@ Func _LOWriter_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False
 EndFunc   ;==>_LOWriter_DocConnect
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_DocConvertTableToText
+; Description ...: Convert a Table to Text, separated by a delimiter.
+; Syntax ........: _LOWriter_DocConvertTableToText(Byref $oDoc, Byref $oTable, $sDelimiter)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +					DocCreate function.
+;                  $oTable              - [in/out] an object. A Table Object returned from any Table Object creation
+;				   +						Or retrieval functions.
+;                  $sDelimiter          - [optional] a string value. Default is @TAB. A character to separate each column by,
+;				   +						such as a Tab etc.
+; Return values .: Success: 1
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $oTable not an Object.
+;				   @Error 1 @Extended 3 Return 0 = $sDelimiter not a String.
+;				   --Initialization Errors--
+;				   @Error 2 @Extended 1 Return 0 = Failed to retrieve ViewCursor object.
+;				   @Error 2 @Extended 2 Return 0 = Failed to create a backup of the ViewCursor's current location.
+;				   @Error 2 @Extended 3 Return 0 = Failed to create a Text Cursor in the first cell.
+;				   @Error 2 @Extended 4 Return 0 = Failed to create "com.sun.star.ServiceManager" Object.
+;				   @Error 2 @Extended 5 Return 0 = Failed to create "com.sun.star.frame.DispatchHelper" Object.
+;				   --Processing Errors--
+;				   @Error 3 @Extended 1 Return 0 = Failed to retrieve array of CellNames.
+;				   --Success--
+;				   @Error 0 @Extended 0 Return 1 = Success. Table was successfully converted to text.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Note: This function temporarily moves the Viewcursor to the Table indicated, and then attempts to restore
+;					the ViewCursor to its former position. This could cause a COM error if the Cursor was presently in the
+;					Table.
+; Related .......: _LOWriter_DocConvertTextToTable, _LOWriter_TableGetObjByName, _LOWriter_TableGetObjByCursor,
+;					_LOWriter_TableInsert
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_DocConvertTableToText(ByRef $oDoc, ByRef $oTable, $sDelimiter = @TAB)
+	Local $aArgs[1]
+	Local $asCellNames
+	Local $oServiceManager, $oDispatcher, $oCellTextCursor, $oViewCursor, $oViewCursorBackup
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oTable) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsString($sDelimiter) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
+
+	$aArgs[0] = __LOWriter_SetPropertyValue("Delimiter", $sDelimiter)
+
+	$asCellNames = $oTable.getCellNames()
+	If Not IsArray($asCellNames) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
+
+	;Retrieve the ViewCursor.
+	$oViewCursor = $oDoc.CurrentController.getViewCursor()
+	If Not IsObj($oViewCursor) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
+
+	;Create a Text cursor at the current viewCursor position to move the Viewcursor back to.
+	$oViewCursorBackup = _LOWriter_DocCreateTextCursor($oDoc, False, True)
+	If Not IsObj($oViewCursorBackup) Then
+	$oViewCursorBackup = _LOWriter_DocCreateTextCursor($oDoc, False); If That Failed, create a Backup Cursor at the beginning of the document.
+	If Not IsObj($oViewCursorBackup) Then Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0)
+	EndIf
+
+	;Retrieve the first cell  in the table and create a text cursor in it to move the ViewCursor to.
+	$oCellTextCursor = $oTable.getCellByName($asCellNames[0]).Text.createTextCursor()
+	If Not IsObj($oCellTextCursor) Then Return SetError($__LOW_STATUS_INIT_ERROR, 3, 0)
+
+	$oViewCursor.gotoRange($oCellTextCursor, False)
+
+	$oServiceManager = ObjCreate("com.sun.star.ServiceManager")
+	If Not IsObj($oServiceManager) Then Return SetError($__LOW_STATUS_INIT_ERROR, 4, 0)
+
+	$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+	If Not IsObj($oDispatcher) Then Return SetError($__LOW_STATUS_INIT_ERROR, 5, 0)
+
+	$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:ConvertTableToText", "", 0, $aArgs)
+
+	;Restore the ViewCursor to its previous location.
+	$oViewCursor.gotoRange($oViewCursorBackup, False)
+
+	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
+
+EndFunc   ;==>_LOWriter_DocConvertTableToText
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_DocConvertTextToTable
+; Description ...: Convert some selected text into a Table.
+; Syntax ........: _LOWriter_DocConvertTextToTable(Byref $oDoc, Byref $oCursor[, $sDelimiter = @TAB[, $bHeader = False[, $iRepeatHeaderLines = 0[, $bBorder = False[, $bDontSplitTable = False]]]]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +					DocCreate function.
+;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
+;				   +						Or retrieval functions. Default is Null. See Remarks.
+;                  $sDelimiter          - [optional] a string value. Default is @TAB. A character to the text into each column
+;				   +						by, such as a Tab etc.
+;                  $bHeader             - [optional] a boolean value. Default is False. If True, Formats the first row of the
+;				   +						new table as a heading.
+;                  $iRepeatHeaderLines  - [optional] an integer value. Default is 0. If greater than 0, then Repeats the first n
+;				   +						rows as a header.
+;                  $bBorder             - [optional] a boolean value. Default is False. If True, Adds a border to the table and
+;				   +						the table cells.
+;                  $bDontSplitTable     - [optional] a boolean value. Default is False. If True, Does not divide the table
+;				   +						across pages.
+; Return values .: Success:Object
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
+;				   @Error 1 @Extended 3 Return 0 = $sDelimiter not a String.
+;				   @Error 1 @Extended 4 Return 0 = $bHeader not a Boolean.
+;				   @Error 1 @Extended 5 Return 0 = $iRepeatHeaderLines not an Integer.
+;				   @Error 1 @Extended 6 Return 0 = $bBorder not a Boolean.
+;				   @Error 1 @Extended 7 Return 0 = $bDontSplitTable not a Boolean.
+;				   @Error 1 @Extended 8 Return 0 = $oCursor is a Table Cursor and cannot be used.
+;				   @Error 1 @Extended 9 Return 0 = $oCursor has no data selected.
+;				   --Initialization Errors--
+;				   @Error 2 @Extended 1 Return 0 = Failed to retrieve TextTables Object.
+;				   @Error 2 @Extended 2 Return 0 = Failed to create "com.sun.star.ServiceManager" Object.
+;				   @Error 2 @Extended 3 Return 0 = Failed to create "com.sun.star.frame.DispatchHelper" Object.
+;				   @Error 2 @Extended 4 Return 0 = Failed to retrieve ViewCursor object.
+;				   @Error 2 @Extended 5 Return 0 = Failed to create a backup of the ViewCursor's current location.
+;				   --Processing Errors--
+;				   @Error 3 @Extended 1 Return 0 = Failed to $oCursor's cursor type.
+;				   @Error 3 @Extended 2 Return 0 = Failed to retrieve new Table's Object.
+;				   --Success--
+;				   @Error 0 @Extended 0 Return Object = Success. Text was successfully converted to a Table, returning the new
+;				   +								Table's Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:  Note: This function temporarily moves the Viewcursor to and selectes the Text, and then attempts to
+;					restore the ViewCursor to its former position.
+; Related .......:   _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					 _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					 _LOWriter_DocFooterGetTextCursor, _LOWriter_ParObjCreateList, _LOWriter_DocConvertTableToText
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_DocConvertTextToTable(ByRef $oDoc, ByRef $oCursor, $sDelimiter = @TAB, $bHeader = False, $iRepeatHeaderLines = 0, _
+		$bBorder = False, $bDontSplitTable = False)
+	Local $asTables[0]
+	Local $atArgs[5]
+	Local $oServiceManager, $oDispatcher, $oViewCursor, $oViewCursorBackup, $oTables, $oTable
+	Local $iCursorType
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oCursor) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsString($sDelimiter) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bHeader) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsInt($iRepeatHeaderLines) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
+	If Not IsBool($bBorder) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
+	If Not IsBool($bDontSplitTable) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 7, 0)
+
+	$oTables = $oDoc.TextTables()
+	If Not IsObj($oTables) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
+	ReDim $asTables[$oTables.getCount()]
+	;Store all current Table Names.
+	For $i = 0 To $oTables.getCount() - 1
+		$asTables[$i] = $oTables.getByIndex($i).Name()
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))     ;Sleep every x cycles.
+	Next
+
+	$iCursorType = __LOWriter_Internal_CursorGetType($oCursor)
+	If @error Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
+	If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
+
+	;If Cursor has no data selected, return error.
+	If $oCursor.isCollapsed() Then Return SetError($__LOW_STATUS_INPUT_ERROR, 9, 0)
+
+	$oServiceManager = ObjCreate("com.sun.star.ServiceManager")
+	If Not IsObj($oServiceManager) Then Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0)
+
+	$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+	If Not IsObj($oDispatcher) Then Return SetError($__LOW_STATUS_INIT_ERROR, 3, 0)
+
+	$atArgs[0] = __LOWriter_SetPropertyValue("Delimiter", $sDelimiter)
+	$atArgs[1] = __LOWriter_SetPropertyValue("WithHeader", $bHeader)
+	$atArgs[2] = __LOWriter_SetPropertyValue("RepeatHeaderLines", $iRepeatHeaderLines)
+	$atArgs[3] = __LOWriter_SetPropertyValue("WithBorder", $bBorder)
+	$atArgs[4] = __LOWriter_SetPropertyValue("DontSplitTable", $bDontSplitTable)
+
+	If ($iCursorType = $LOW_CURTYPE_TEXT_CURSOR) Then
+
+		;Retrieve the ViewCursor.
+		$oViewCursor = $oDoc.CurrentController.getViewCursor()
+		If Not IsObj($oViewCursor) Then Return SetError($__LOW_STATUS_INIT_ERROR, 4, 0)
+
+		;Create a Text cursor at the current viewCursor position to move the Viewcursor back to.
+		$oViewCursorBackup = _LOWriter_DocCreateTextCursor($oDoc, False, True)
+		If Not IsObj($oViewCursorBackup) Then Return SetError($__LOW_STATUS_INIT_ERROR, 5, 0)
+
+		$oViewCursor.gotoRange($oCursor, False)
+
+		$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:ConvertTextToTable", "", 0, $atArgs)
+
+		;Restore the ViewCursor to its previous location.
+		$oViewCursor.gotoRange($oViewCursorBackup, False)
+	Else
+
+		$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:ConvertTextToTable", "", 0, $atArgs)
+	EndIf
+
+	;Obtain the newly created table object by comparing the original table names to the new list of tables. If none match,
+	;then it is the new one. Return that Table's Object.
+	For $i = 0 To $oTables.getCount() - 1
+
+		For $j = 0 To UBound($asTables) - 1
+			If ($asTables[$j] = $oTables.getByIndex($i).Name()) Then ExitLoop
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0)) ;Sleep every x cycles.
+		Next
+
+		If ($j = UBound($asTables)) Then ;If No matches in the original table names, then set Table Object and exit loop
+
+			$oTable = $oTables.getByIndex($i)
+			ExitLoop
+		EndIf
+	Next
+
+	Return (IsObj($oTable)) ? SetError($__LOW_STATUS_SUCCESS, 0, $oTable) : SetError($__LOW_STATUS_PROCESSING_ERROR, 2, 0)
+EndFunc   ;==>_LOWriter_DocConvertTextToTable
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocCreate
 ; Description ...: Open a new Libre Office Writer Document or Connect to an existing blank, unsaved, writable document.
 ; Syntax ........: _LOWriter_DocCreate([$bForceNew = True[, $bHidden = False]])
@@ -8154,7 +8655,7 @@ EndFunc   ;==>_LOWriter_DocConnect
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocOpen, _LOWriter_DocClose, _LOWriter_DocConnect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8237,7 +8738,7 @@ EndFunc   ;==>_LOWriter_DocCreate
 ;					you do not see, called the "TextCursor". A "ViewCursor" is the blinking cursor you see when you are editing
 ;					a Word document, there is only one per document. A "TextCursor" on the other hand, is an invisible cursor
 ;					used for inserting text etc., into a Writer document. You can have multiple "TextCursors" per document.
-; Related .......:
+; Related .......: _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8260,7 +8761,7 @@ Func _LOWriter_DocCreateTextCursor(ByRef $oDoc, $bCreateAtEnd = True, $bCreateAt
 		If @error Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
 		$iCursorType = @extended
 		If Not IsObj($oText) Then Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0)
-		If __LOWriter_IntIsBetween($iCursorType, $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_ENDNOTE) Then
+		If __LOWriter_IntIsBetween($iCursorType, $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_HEADER_FOOTER) Then
 			$oCursor = $oText.createTextCursorByRange($oViewCursor)
 		Else
 			Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0) ;ViewCursor in unknown data type.
@@ -8465,7 +8966,7 @@ EndFunc   ;==>_LOWriter_DocEnumPrinters
 ;					be exact, or no results will be found. Use an asterisk (*) for partial name searches, either prefixed
 ;					(*Canon), suffixed (Canon*), or both (*Canon*). When $bReturnDefault is True, The function returns only the
 ;					default printer's name or sets an error if no default printer is found.
-; Related .......:
+; Related .......: _LOWriter_DocEnumPrinters
 ; Link ..........: https://www.autoitscript.com/forum/topic/155485-printers-management-udf/
 ; UDF title......: Printmgr.au3
 ; Example .......: Yes
@@ -8503,6 +9004,93 @@ Func _LOWriter_DocEnumPrintersAlt($sPrinterName = "", $bReturnDefault = False)
 	ReDim $asPrinterNames[$iCount]
 	Return SetError($__LOW_STATUS_SUCCESS, $iCount, $asPrinterNames)
 EndFunc   ;==>_LOWriter_DocEnumPrintersAlt
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_DocExecuteDispatch
+; Description ...: Executes a command for a document.
+; Syntax ........: _LOWriter_DocExecuteDispatch(Byref $oDoc, $sDispatch)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +					DocCreate function.
+;                  $sDispatch           - a string value. The Dispatch command to execute. See List of commands below.
+; Return values .: Success: 1
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $sDispatch not a String.
+;				   --Initialization Errors--
+;				   @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
+;				   @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;				   --Success--
+;				   @Error 0 @Extended 0 Return 1 = Success. Succesfully executed dispatch command.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: A Dispatch is essentialy a simulation of the user performing an action, such as pressing Ctrl+A to select
+;						all, etc.
+; Dispatch Commands: 	uno:FullScreen -- Toggles full screen mode.
+;						uno:ChangeCaseToLower -- Changes all selected text to lower case.  Text must be selected with the
+;														ViewCursor.
+;						uno:ChangeCaseToUpper -- Changes all selected text to upper case.  Text must be selected with the
+;														ViewCursor.
+;						uno:ChangeCaseRotateCase -- Cycles the Case (Title Case, Sentence case, UPPERCASE, lowercase). Text
+;														must be selected with the ViewCursor.
+;						uno:ChangeCaseToSentenceCase -- Changes the sentence to Sentence case where the Viewcursor is currently
+;														positioned or has selected.
+;						uno:ChangeCaseToTitleCase -- Changes the selected text to Title case. Text must be selected with
+;														the ViewCursor.
+;						uno:ChangeCaseToToggleCase -- Toggles the selected text's case (A becomes a, b becomes B, etc.).Text
+;														must be selected with the ViewCursor.
+;						uno:UpdateAll -- Causes all non fixed Fields, Links, Indexes, Charts etc., to be updated.
+;						uno:UpdateFields -- Causes all Fields to be updated.
+;						uno:UpdateAllIndexes -- Causes all Indexes to be updated.
+;						uno:UpdateAllLinks -- Causes all Links to be updated.
+;						uno:UpdateCharts -- Causes all Charts to be updated.
+;						uno:Repaginate -- Update Page Formatting.
+;						uno:ResetAttributes -- Removes all direct formatting from the selected text. Text must be selected with
+;														the ViewCursor.
+;					 	uno:SwBackspace -- Simulates pressing the Backspace key.
+;						uno:Delete -- Simulates pressing the Delete key.
+;						uno:Paste -- Pastes the data out of the clipboard. Simulating Ctrl+V.
+;						uno:PasteUnformatted -- Pastes the data out of the clipboard unformatted.
+;						uno:PasteSpecial -- Simulates pasting with Ctrl+Shift+V, opens a dialog for selecting paste format.
+;						uno:Copy -- Simulates Ctrl+C, copies selected data to the clipboard. Text must be selected with
+;														the ViewCursor.
+;						uno:Cut -- Simulates Ctrl+X, cuts selected data, placing it into the clipboard. Text must be
+;														selected with the ViewCursor.
+;						uno:SelectAll -- Simulates Ctrl+A being pressed at the ViewCursor location.
+;						uno:Zoom50Percent -- Set the zoom level to 50%.
+;						uno:Zoom75Percent -- Set the zoom level to 75%.
+;						uno:Zoom100Percent -- Set the zoom level to 100%.
+;						uno:Zoom150Percent -- Set the zoom level to 150%.
+;						uno:Zoom200Percent -- Set the zoom level to 200%.
+;						uno:ZoomMinus -- Decreases the zoom value to the next increment down.
+;						uno:ZoomPlus -- Increases the zoom value to the next increment up.
+;						uno:ZoomPageWidth -- Set zoom to fit page width.
+;						uno:ZoomPage -- Set zoom to fit page.
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_CursorMove
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_DocExecuteDispatch(ByRef $oDoc, $sDispatch)
+	Local $aArray[0]
+	Local $oServiceManager, $oDispatcher
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sDispatch) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+
+	$oServiceManager = ObjCreate("com.sun.star.ServiceManager")
+	If Not IsObj($oServiceManager) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
+
+	$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+	If Not IsObj($oDispatcher) Then Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0)
+
+	$oDispatcher.executeDispatch($oDoc.CurrentController(), "." & $sDispatch, "", 0, $aArray)
+
+	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
+
+EndFunc   ;==>_LOWriter_DocExecuteDispatch
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocExport
@@ -8548,7 +9136,7 @@ EndFunc   ;==>_LOWriter_DocEnumPrintersAlt
 ;					new file format if one is chosen.
 ;					If $bSamePath is set to True, the same save path as the current document is used. You must still fill in
 ;						 "sFilePath" with the desired File Name and new extension, but you do not need to enter the file path.
-; Related .......:
+; Related .......: _LOWriter_DocSave, _LOWriter_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8638,7 +9226,13 @@ EndFunc   ;==>_LOWriter_DocExport
 ; Modified ......:
 ; Remarks .......: Note: The Objects returned can be used in any of the functions accepting a Paragraph or Cursor Object etc.,
 ;						to modify their properties or even the text itself.
-; Related .......:
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext,
+;					_LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment,
+;					_LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation,
+;					_LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak,
+;					_LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace,
+;					_LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout,
+;					_LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8708,7 +9302,16 @@ EndFunc   ;==>_LOWriter_DocFindAll
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_SearchDescriptorCreate,
+;					_LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll,
+;					_LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment,
+;					_LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation,
+;					_LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak,
+;					_LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace,
+;					_LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout,
+;					_LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8835,7 +9438,13 @@ EndFunc   ;==>_LOWriter_DocFindAllInRange
 ;					True, the search continues until the whole document has been searched, but be warned, if the search has many
 ;					hits, this could slow the search considerably. There is no use setting this to True in a full document
 ;					search.
-; Related .......:
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange,
+;					_LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment,
+;					_LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation,
+;					_LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak,
+;					_LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace,
+;					_LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout,
+;					_LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8968,7 +9577,7 @@ EndFunc   ;==>_LOWriter_DocFindNext
 ;					Note: If same content on left and right and first pages is active for the requested page style, you only
 ;					need to use the $bFooter parameter, the others are only for when same content on first page or same content
 ;					on left and right pages is deactivated.
-; Related .......:
+; Related .......: _LOWriter_PageStyleGetObj, _LOWriter_PageStyleCreate, _LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9147,7 +9756,7 @@ EndFunc   ;==>_LOWriter_DocGenProp
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_DateStructCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9214,7 +9823,7 @@ EndFunc   ;==>_LOWriter_DocGenPropCreation
 ; Remarks .......:Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_DateStructCreate, _LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9282,7 +9891,7 @@ EndFunc   ;==>_LOWriter_DocGenPropModification
 ; Remarks .......:Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_DateStructCreate, _LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9358,7 +9967,7 @@ EndFunc   ;==>_LOWriter_DocGenPropPrint
 ; Remarks .......:Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_DateStructCreate, _LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9512,7 +10121,7 @@ EndFunc   ;==>_LOWriter_DocGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_PathConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9543,14 +10152,13 @@ EndFunc   ;==>_LOWriter_DocGetPath
 ; Syntax ........: _LOWriter_DocGetString(Byref $oObj)
 ; Parameters ....: $oObj             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions with Data selected, Or A Paragraph Object returned from
-;				   +						_LOWriter_ParGetObjects function.
+;				   +						_LOWriter_ParObjCreateList function.
 ; Return values .:  Success: String
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;				   --Input Errors--
 ;				   @Error 1 @Extended 1 Return 0 = $oObj not an Object.
 ;				   @Error 1 @Extended 2 Return 0 = $oObj doesn't support Paragraph Properties service.
-;				   @Error 1 @Extended 3 Return 0 = $oObj is a cursor and has no text selected.
-;				   @Error 1 @Extended 4 Return 0 = $oObj is a TableCursor. Can only use View Cursor or Text Cursor.
+;				   @Error 1 @Extended 3 Return 0 = $oObj is a TableCursor. Can only use View Cursor or Text Cursor.
 ;				   --Processing Errors--
 ;				   @Error 3 @Extended 1 Return 0 = Error retrieving Cursor type.
 ;				   --Success--
@@ -9560,7 +10168,9 @@ EndFunc   ;==>_LOWriter_DocGetPath
 ; Remarks .......: Note: Libre Office documentation states that when used in Libre Basic, GetString is limited to 64kb's in size.
 ;					I do not know if the same limitation applies to any outside use of GetString (such as through Autoit). Also,
 ;					If there are multiple selections, the returned value will be an empty string ("").
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9571,10 +10181,9 @@ Func _LOWriter_DocGetString(ByRef $oObj)
 	If Not IsObj($oObj) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oObj.supportsService("com.sun.star.style.ParagraphProperties") Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 	If $oObj.supportsService("com.sun.star.text.TextCursor") Or $oObj.supportsService("com.sun.star.text.TextViewCursor") Then
-		If $oObj.IsCollapsed() Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
 		Local $iCursorType = __LOWriter_Internal_CursorGetType($oObj)
 		If @error > 0 Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
-		If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
+		If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
 	EndIf
 	Return SetError($__LOW_STATUS_SUCCESS, 0, $oObj.getString())
 EndFunc   ;==>_LOWriter_DocGetString
@@ -9597,7 +10206,7 @@ EndFunc   ;==>_LOWriter_DocGetString
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9634,8 +10243,9 @@ EndFunc   ;==>_LOWriter_DocGetViewCursor
 ;				   +												as a shape.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Some document types, such as docx list frames as Shapes instead of TextFrames, so this function searches both.
-; Related .......:
+; Remarks .......: Some document types, such as docx list frames as Shapes instead of TextFrames, so this function searches
+;					both.
+; Related .......: _LOWriter_FrameDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9659,7 +10269,9 @@ Func _LOWriter_DocHasFrameName(ByRef $oDoc, $sFrameName)
 	If $oShapes.hasElements() Then
 		For $i = 0 To $oShapes.getCount() - 1
 			If ($oShapes.getByIndex($i).Name() = $sFrameName) Then
-				If ($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") Then Return SetError($__LOW_STATUS_SUCCESS, 2, True)
+				If ($oShapes.getByIndex($i).supportsService("com.sun.star.drawing.Text")) And _
+						($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") And Not _
+						$oShapes.getByIndex($i).getPropertySetInfo().hasPropertyByName("ActualSize") Then Return SetError($__LOW_STATUS_SUCCESS, 2, True)
 			EndIf
 
 			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
@@ -9717,7 +10329,7 @@ EndFunc   ;==>_LOWriter_DocHasPath
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_TableGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9769,7 +10381,7 @@ EndFunc   ;==>_LOWriter_DocHasTableName
 ;					Note: If same content on left and right and first pages is active for the requested page style, you only
 ;					need to use the $bHeader parameter, the others are only for when same content on first page or same content
 ;					on left and right pages is deactivated.
-; Related .......:
+; Related .......: _LOWriter_PageStyleGetObj, _LOWriter_PageStyleCreate, _LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9855,7 +10467,9 @@ EndFunc   ;==>_LOWriter_DocHeaderGetTextCursor
 ;					a Word document, there is only one per document. A "TextCursor" on the other hand, is an invisible cursor
 ;					used for inserting text etc., into a Writer document. You can have multiple "TextCursors". If You set
 ;					$bInsertAtViewCursor to True, the Link will be inserted at the current ViewCursor in the document.
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9930,6 +10544,7 @@ EndFunc   ;==>_LOWriter_DocHyperlinkInsert
 ;				   @Error 1 @Extended 5 Return 0 = $oCursor is a TableCursor. Can only use View Cursor or Text Cursor.
 ;				   --Processing Errors--
 ;				   @Error 3 @Extended 1 Return 0 = Error retrieving Cursor type.
+;				   @Error 3 @Extended 2 Return 0 = Error creating Text Cursor.
 ;				   --Success--
 ;				   @Error 0 @Extended 0 Return 1 = Success. Control Character was successfully inserted.
 ; Author ........: donnyh13
@@ -9942,7 +10557,9 @@ EndFunc   ;==>_LOWriter_DocHyperlinkInsert
 ;								end of a line.
 ;							$LOW_CON_CHAR_HARD_SPACE(4), Insert a space that prevents two words from splitting at a line break
 ;							$LOW_CON_CHAR_APPEND_PAR(5), appends a new paragraph.
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9960,7 +10577,9 @@ Func _LOWriter_DocInsertControlChar(ByRef $oDoc, ByRef $oCursor, $iConChar, $bOv
 	$iCursorType = __LOWriter_Internal_CursorGetType($oCursor)
 	If @error > 0 Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
 	If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
-	If ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then $oTextCursor = $oDoc.Text.createTextCursorByRange($oCursor)
+	If ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then $oTextCursor = _LOWriter_DocCreateTextCursor($oDoc, False, True)
+
+	If Not IsObj($oTextCursor) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oTextCursor.Text.insertControlCharacter($oTextCursor, $iConChar, $bOverwrite)
 	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
@@ -9989,12 +10608,15 @@ EndFunc   ;==>_LOWriter_DocInsertControlChar
 ;				   @Error 1 @Extended 5 Return 0 = $oCursor is a TableCursor. Can only use View Cursor or Text Cursor.
 ;				   --Processing Errors--
 ;				   @Error 3 @Extended 1 Return 0 = Error retrieving Cursor type.
+;				   @Error 3 @Extended 2 Return 0 = Error creating Text Cursor.
 ;				   --Success--
 ;				   @Error 0 @Extended 0 Return 1 = Success. String was successfully inserted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -10013,7 +10635,9 @@ Func _LOWriter_DocInsertString(ByRef $oDoc, ByRef $oCursor, $sString, $bOverwrit
 	If @error > 0 Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
-	If ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then $oTextCursor = $oDoc.Text.createTextCursorByRange($oCursor)
+	If ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then $oTextCursor = _LOWriter_DocCreateTextCursor($oDoc, False, True)
+
+	If Not IsObj($oTextCursor) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oTextCursor.Text.insertString($oTextCursor, $sString, $bOverwrite)
 	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
@@ -10104,59 +10728,13 @@ Func _LOWriter_DocIsReadOnly(ByRef $oDoc)
 EndFunc   ;==>_LOWriter_DocIsReadOnly
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DocListTableNames
-; Description ...: List the names of all tables contained in a document.
-; Syntax ........: _LOWriter_DocListTableNames(Byref $oDoc)
-; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
-;				   +					DocCreate function.
-; Return values .: Success: Array of Strings.
-;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;				   --Input Errors--
-;				   @Error 1 @Extended 1 Return 0 = $oDoc variable not an Object.
-;				   --Initialization Errors--
-;				   @Error 2 @Extended 1 Return 0 = Failure retrieving Table objects.
-;				   @Error 2 @Extended 2 Return 0 = Document contains no Tables.
-;				   --Success--
-;				   @Error 0 @Extended ? Return Array. Returning Array of Table Names. @Extended set to number of Names returned.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_DocListTableNames(ByRef $oDoc)
-	Local $oTable, $oTables
-	Local $asTableNames[0]
-
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
-	#forceref $oCOM_ErrorHandler
-
-	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
-	$oTables = $oDoc.TextTables()
-	If Not IsObj($oTables) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
-	If $oTables.hasElements() Then
-		ReDim $asTableNames[$oTables.getCount()]
-		For $i = 0 To $oTables.getCount() - 1
-			$oTable = $oTables.getByIndex($i)
-			$asTableNames[$i] = $oTable.Name
-			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0)) ;Sleep every x cycles.
-		Next
-		Return SetError($__LOW_STATUS_SUCCESS, UBound($asTableNames), $asTableNames)
-	Else
-		Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0) ; No tables.
-	EndIf
-
-EndFunc   ;==>_LOWriter_DocListTableNames
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocMaximize
 ; Description ...: Maximize or restore a document.
 ; Syntax ........: _LOWriter_DocMaximize(Byref $oDoc[, $bMaximize = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
 ;                  $bMaximize           - [optional] a boolean value. Default is Null. If True, document window is maximized,
-;				   +						else if false, document is restored to it's previous size and location. If Null,
+;				   +						else if false, document is restored to its previous size and location. If Null,
 ;				   +						returns a Boolean indicating if document is currently maximized (True).
 ; Return values .: Success: 1 or Boolean.
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -10195,7 +10773,7 @@ EndFunc   ;==>_LOWriter_DocMaximize
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
 ;                  $bMinimize           - [optional] a boolean value. Default is Null. If True, document window is minimized,
-;				   +						else if false, document is restored to it's previous size and location. If Null,
+;				   +						else if false, document is restored to its previous size and location. If Null,
 ;				   +						returns a Boolean indicating if document is currently minimized (True).
 ; Return values .: Success: 1 or Boolean
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -10276,7 +10854,7 @@ EndFunc   ;==>_LOWriter_DocMinimize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocCreate, _LOWriter_DocClose, _LOWriter_DocConnect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -10288,8 +10866,8 @@ Func _LOWriter_DocOpen($sFilePath, $bConnectIfOpen = True, $bHidden = Null, $bRe
 	Local $aoProperties[0]
 	Local $vProperty
 	Local $sFileURL
-	Local $oComError = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
 
+	Local $oComError = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
 
 	If Not IsString($sFilePath) Or Not FileExists($sFilePath) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
 	$sFileURL = _LOWriter_PathConvert($sFilePath, $LOW_PATHCONV_OFFICE_RETURN)
@@ -10504,7 +11082,8 @@ EndFunc   ;==>_LOWriter_DocPosAndSize
 ;						$LOW_DUPLEX_OFF(1) [Default],
 ;						$LOW_DUPLEX_LONG(2),
 ;						$LOW_DUPLEX_SHORT(3)
-; Related .......:
+; Related .......:_LOWriter_DocEnumPrintersAlt, _LOWriter_DocEnumPrinters, _LOWriter_DocPrintSizeSettings,
+;					_LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -10605,7 +11184,7 @@ EndFunc   ;==>_LOWriter_DocPrint
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -10722,7 +11301,7 @@ EndFunc   ;==>_LOWriter_DocPrintIncludedSettings
 ;									at the end of the document;
 ;								$LOW_PRINT_NOTES_NEXT_PAGE(3), Document content is printed and comments are appended to a blank
 ;									page after the page they are found in the document.
-; Related .......:
+; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintIncludedSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -10842,7 +11421,7 @@ EndFunc   ;==>_LOWriter_DocPrintMiscSettings
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11012,7 +11591,8 @@ EndFunc   ;==>_LOWriter_DocPrintPageSettings
 ;							$LOW_PAPER_HEIGHT_11ENVELOPE(26365),
 ;							$LOW_PAPER_HEIGHT_12ENVELOPE(27940),
 ;							$LOW_PAPER_HEIGHT_JAP_POSTCARD(14808)
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DocPrintPageSettings,
+;					_LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11093,7 +11673,8 @@ EndFunc   ;==>_LOWriter_DocPrintSizeSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocUndo, _LOWriter_DocRedoIsPossible, _LOWriter_DocRedoGetAllActionTitles,
+;					_LOWriter_DocRedoCurActionTitle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11128,7 +11709,7 @@ EndFunc   ;==>_LOWriter_DocRedo
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocRedo, _LOWriter_DocRedoGetAllActionTitles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11162,7 +11743,7 @@ EndFunc   ;==>_LOWriter_DocRedoCurActionTitle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocRedo, _LOWriter_DocRedoCurActionTitle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11195,7 +11776,7 @@ EndFunc   ;==>_LOWriter_DocRedoGetAllActionTitles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocRedo
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11241,7 +11822,13 @@ EndFunc   ;==>_LOWriter_DocRedoIsPossible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext,
+;					_LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment,
+;					_LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation,
+;					_LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak,
+;					_LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace,
+;					_LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout,
+;					_LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11322,31 +11909,41 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 ;				   +											in @Extended.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Note: Libre Office does not offer a Function to call to replace only results within a selection, consequently
-;						I have had to create my own. This function uses the "FindAllInRange" function, so any errors with Find/
-;						Replace formatting causing deletions will cause problems here. As best as I can tell all options for find
-;						and replace should be available, Formatting, Paragraph styles etc. How I created this function to still
-;						accept Regular Expressions is I use Libre's FindAll command, modified by my FindAllInRange function.
-; 						I then ran into another problem, as my next step was to use AutoIt's RegExpReplace function to perform
-;						the replacement, but some replacements don't work as expected. To Fix this I have created two versions
-;						of Regular Expression replacement, the first way is only implemented if $atReplaceFormat is skipped using
-;						an empty array. I use an ExecutionHelper to execute the Find and replace command, however this method
-;						doesn't accept formatting for find and replace. So I developed my second method, which accepts formatting,
-;						and uses AutoIt's RegExpReplace function to "Search" the resulting matched Strings and replace it, then I
-;						set the new string to that result. However I have had to create a separate function to convert the
-;						ReplaceString to be compatible with AutoIt's Regular Expression formatting. A BackSlash (\) must be
-;						doubled(\\) in order to be literally inserted, at the beginning of the conversion process all double
-;						Backslashes are replaced with a specific flag to aid in identifying commented and non-commented keywords
+; Remarks .......: Note: Libre Office does not offer a Function to call to replace only results within a selection,
+;						consequently I have had to create my own. This function uses the "FindAllInRange" function,
+;						so any errors with Find/Replace formatting causing deletions will cause problems here. As best
+;						as I can tell all options for find and replace should be available, Formatting, Paragraph styles
+;						etc. How I created this function to still accept Regular Expressions is I use Libre's FindAll
+;						command, modified by my FindAllInRange function. I then ran into another problem, as my next step
+;						was to use AutoIt's RegExpReplace function to perform the replacement, but some replacements don't
+;						work as expected. To Fix this I have created two versions of Regular Expression replacement, the
+;						first way is only implemented if $atReplaceFormat is skipped using an empty array. I use an
+;						ExecutionHelper to execute the Find and replace command, however this method doesn't accept formatting
+;						for find and replace. So I developed my second method, which accepts formatting, and uses AutoIt's
+;						RegExpReplace function to "Search" the resulting matched Strings and replace it, then I set the new
+;						string to that result. However I have had to create a separate function to convert the ReplaceString
+;						to be compatible with AutoIt's Regular Expression formatting. A BackSlash (\) must be doubled(\\) in
+;						order to be literally inserted, at the beginning of the conversion process all double Backslashes
+;						are replaced with a specific flag to aid in identifying commented and non-commented keywords
 ;						(\n, \t, & etc.), after the  conversion process the special flag is replaced again with the double
-;						Backslashes, this should not cause any issues, \n (new Paragraph) in L.O. RegExp. formatting is replaced
-;						with @CR, unless the Backslash is doubled (\\n), then \n becomes literal, \t (Tab) in L.O. format is
-;						replaced with @Tab, and &(Find Result/BackReference) is replaced with $0 which means insert the entire
-;						found string at that position, To insert a regular "&" character, comment it with a Backslash, \&. As
-;						with LibreOffice, this function should still accept BackReferences ($0-9 or \0-9). However I have found
-;						certain problems with some of the expressions still not working, such as $ (end of paragraph mark) not
-;						replacing correctly because Autoit uses @CRLF for it's newline marks, and Libre uses @CR for a paragraph
-;						and @LF for a soft newline.
-; Related .......:
+;						Backslashes, this should not cause any issues, \n (new Paragraph) in L.O. RegExp. formatting is
+;						replaced with @CR, unless the Backslash is doubled (\\n), then \n becomes literal, \t (Tab) in L.O.
+;						format is replaced with @Tab, and &(Find Result/BackReference) is replaced with $0 which means insert
+;						the entire found string at that position, To insert a regular "&" character, comment it with a
+;						Backslash, \&. As with LibreOffice, this function should still accept BackReferences ($0-9 or \0-9).
+;						However I have found certain problems with some of the expressions still not working, such as
+;						$ (end of paragraph mark) not replacing correctly because Autoit uses @CRLF for its newline marks, and
+;						Libre uses @CR for a paragraph and @LF for a soft newline.
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext,
+;					_LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_FindFormatModifyAlignment,
+;					_LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation,
+;					_LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak,
+;					_LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace,
+;					_LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout,
+;					_LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11375,7 +11972,8 @@ Func _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oR
 	If (UBound($atReplaceFormat) > 0) And Not IsObj($atReplaceFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 11, 0)
 	If (UBound($atReplaceFormat) > 0) Then $bFormat = True
 
-	;If Find/Replace using a Regular expression is True, and replace formatting is set, convert the regular expressions for my alternate replacement function to use.
+	;If Find/Replace using a Regular expression is True, and replace formatting is set, convert the regular expressions for my
+	;alternate replacement function to use.
 	If ($oSrchDescript.SearchRegularExpression() = True) And ($bFormat = True) Then __LOWriter_RegExpConvert($sReplaceString)
 	If (@error > 0) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -11471,7 +12069,7 @@ EndFunc   ;==>_LOWriter_DocReplaceAllInRange
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocExport, _LOWriter_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11520,7 +12118,7 @@ EndFunc   ;==>_LOWriter_DocSave
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Alters original save path (if there was one) to the new path.
-; Related .......:
+; Related .......: _LOWriter_DocExport, _LOWriter_DocSave
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11610,7 +12208,8 @@ EndFunc   ;==>_LOWriter_DocToFront
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocUndoIsPossible, _LOWriter_DocUndoGetAllActionTitles, _LOWriter_DocUndoCurActionTitle,
+;					_LOWriter_DocRedo
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11645,7 +12244,7 @@ EndFunc   ;==>_LOWriter_DocUndo
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocUndo, _LOWriter_DocUndoGetAllActionTitles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11680,7 +12279,7 @@ EndFunc   ;==>_LOWriter_DocUndoCurActionTitle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocUndo, _LOWriter_DocUndoCurActionTitle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11713,7 +12312,7 @@ EndFunc   ;==>_LOWriter_DocUndoGetAllActionTitles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocUndo
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11746,7 +12345,8 @@ EndFunc   ;==>_LOWriter_DocUndoIsPossible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_CursorMove, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11883,7 +12483,7 @@ EndFunc   ;==>_LOWriter_DocZoom
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11913,8 +12513,9 @@ EndFunc   ;==>_LOWriter_EndnoteDelete
 ;				   @Error 0 @Extended 0 Return Object = Success. Successfully returned the Endnote Anchor.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
-; Related .......:
+; Remarks .......: The Anchor cursor returned is just a Text Cursor placed at the anchor's position.
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorMove, _LOWriter_DocGetString,
+;					_LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11949,7 +12550,7 @@ EndFunc   ;==>_LOWriter_EndnoteGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11986,8 +12587,8 @@ EndFunc   ;==>_LOWriter_EndnoteGetTextCursor
 ;				   @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
 ;				   @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
 ;				   @Error 1 @Extended 4 Return 0 = $oCursor is a Table cursor type, not supported.
-;				   @Error 1 @Extended 5 Return 0 = $oCursor currently located in a Frame, Footnote, Endnote, cannot insert
-;				   +									a Endnote in those data types.
+;				   @Error 1 @Extended 5 Return 0 = $oCursor currently located in a Frame, Footnote, Endnote, or Header/ Footer
+;				   +									cannot insert a Endnote in those data types.
 ;				   @Error 1 @Extended 6 Return 0 = $oCursor located in unknown data type.
 ;				   @Error 1 @Extended 7 Return 0 = $sLabel not a string.
 ;				   --Initialization Errors--
@@ -11996,8 +12597,9 @@ EndFunc   ;==>_LOWriter_EndnoteGetTextCursor
 ;				   @Error 0 @Extended 0 Return Object = Success. Successfully inserted a new Endnote, returning Endnote Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: A Endnote cannot be inserted into a Frame, a Footnote, or an Endnote.
-; Related .......:
+; Remarks .......: A Endnote cannot be inserted into a Frame, a Footnote, a Endnote, or the Header/ Footer.
+; Related .......: _LOWriter_EndnoteDelete,  _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12013,7 +12615,7 @@ Func _LOWriter_EndnoteInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = False, $
 	If (__LOWriter_Internal_CursorGetType($oCursor) = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	Switch __LOWriter_Internal_CursorGetDataType($oDoc, $oCursor)
 
-		Case $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE
+		Case $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE, $LOW_CURDATA_HEADER_FOOTER
 			Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0) ;Unsupported cursor type.
 		Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_CELL
 			$oEndNote = $oDoc.createInstance("com.sun.star.text.Endnote")
@@ -12058,7 +12660,7 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12192,7 +12794,7 @@ EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL_KO(69), Numbering is in Korean Digital number.
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL2_KO(70), Numbering is in Korean Digital Number, reserved "koreanDigital2".
 ;	$LOW_NUM_STYLE_NUMBER_LEGAL_KO(71), Numbering is in Korean Legal Number, reserved "koreanLegal".
-; Related .......:
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12280,7 +12882,7 @@ EndFunc   ;==>_LOWriter_EndnoteSettingsAutoNumber
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_CharStylesGetNames, _LOWriter_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12355,7 +12957,7 @@ EndFunc   ;==>_LOWriter_EndnoteSettingsStyles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_EndnoteDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12422,7 +13024,9 @@ EndFunc   ;==>_LOWriter_EndnotesGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldAuthorModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12500,7 +13104,7 @@ EndFunc   ;==>_LOWriter_FieldAuthorInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldAuthorInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12579,7 +13183,9 @@ EndFunc   ;==>_LOWriter_FieldAuthorModify
 ;								displayed.
 ;							$LOW_FIELD_CHAP_FRMT_NO_PREFIX_SUFFIX(3), The name and number of the chapter are displayed.
 ;							$LOW_FIELD_CHAP_FRMT_DIGIT(4), The number of the chapter is displayed.
-; Related .......:
+; Related .......: _LOWriter_FieldChapterModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12650,7 +13256,7 @@ EndFunc   ;==>_LOWriter_FieldChapterInsert
 ;								displayed.
 ;							$LOW_FIELD_CHAP_FRMT_NO_PREFIX_SUFFIX(3), The name and number of the chapter are displayed.
 ;							$LOW_FIELD_CHAP_FRMT_DIGIT(4), The number of the chapter is displayed.
-; Related .......:
+; Related .......: _LOWriter_FieldChapterInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12715,7 +13321,9 @@ EndFunc   ;==>_LOWriter_FieldChapterModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldCombCharModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12773,7 +13381,7 @@ EndFunc   ;==>_LOWriter_FieldCombCharInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldCombCharInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12842,7 +13450,10 @@ EndFunc   ;==>_LOWriter_FieldCombCharModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldCommentModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DateStructCreate _LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12955,7 +13566,7 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldCommentInsert, _LOWriter_FieldsGetList, _LOWriter_DateStructCreate _LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13068,7 +13679,9 @@ EndFunc   ;==>_LOWriter_FieldCommentModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldCondTextModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13143,7 +13756,7 @@ EndFunc   ;==>_LOWriter_FieldCondTextInsert
 ; Remarks .......:  Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldCondTextInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13202,7 +13815,7 @@ EndFunc   ;==>_LOWriter_FieldCondTextModify
 ; Remarks .......: Note, a Comment Field will return an empty string, use the Comment Field function to retrieve the current
 ;					comment content. A DocInfoComments field will work with this function however.
 ;					Note: This will work for most Fields, but not all. Check and see which will work and which wont.
-; Related .......:
+; Related .......: _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13269,7 +13882,10 @@ EndFunc   ;==>_LOWriter_FieldCurrentDisplayGet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDateTimeModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DateStructCreate, _LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13375,7 +13991,8 @@ EndFunc   ;==>_LOWriter_FieldDateTimeInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDateTimeInsert, _LOWriter_FieldsGetList, _LOWriter_DateStructCreate,
+;					_LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13390,7 +14007,7 @@ Func _LOWriter_FieldDateTimeModify(ByRef $oDoc, ByRef $oDateTimeField, $bIsFixed
 	If Not IsObj($oDateTimeField) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LOWriter_VarsAreNull($bIsFixed, $tDateStruct, $bIsDate, $iOffset, $iDateFormatKey) Then
-		;Libre Office Seems to insert it's Number formats by adding 10,000 to the number, but if I insert that same value, it
+		;Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		;fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		;from the value.
 		$iNumberFormat = $oDateTimeField.NumberFormat()
@@ -13467,7 +14084,7 @@ EndFunc   ;==>_LOWriter_FieldDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......:  _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13537,7 +14154,10 @@ EndFunc   ;==>_LOWriter_FieldDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoCommentsModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13606,7 +14226,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCommentsInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoCommentsInsert, _LOWriter_FieldsGetList, _LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13673,7 +14293,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCommentsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoCreateAuthModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DocGenPropCreation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13742,7 +14365,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateAuthInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoCreateAuthInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenPropCreation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13811,7 +14434,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoCreateDateTimeModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeyList, _LOWriter_DocGenPropCreation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13882,7 +14508,8 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateDateTimeInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoCreateDateTimeInsert, _LOWriter_FieldsDocInfoGetList,
+;					_LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeyList, _LOWriter_DocGenPropCreation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13897,7 +14524,7 @@ Func _LOWriter_FieldDocInfoCreateDateTimeModify(ByRef $oDoc, ByRef $oDocInfoCrea
 	If Not IsObj($oDocInfoCreateDtTmField) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LOWriter_VarsAreNull($bIsFixed, $iDateFormatKey) Then
-		;Libre Office Seems to insert it's Number formats by adding 10,000 to the number, but if I insert that same value, it
+		;Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		;fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000 from
 		;the value.
 		$iNumberFormat = $oDocInfoCreateDtTmField.NumberFormat()
@@ -13958,7 +14585,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateDateTimeModify
 ;				   +											Returning the Document Info Total Editing Time Field Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: _LOWriter_FieldDocInfoEditTimeModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeyList, _LOWriter_DocGenProp
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -14030,7 +14660,8 @@ EndFunc   ;==>_LOWriter_FieldDocInfoEditTimeInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoEditTimeInsert, _LOWriter_FieldsDocInfoGetList,
+;					_LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeyList, _LOWriter_DocGenProp
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14045,7 +14676,7 @@ Func _LOWriter_FieldDocInfoEditTimeModify(ByRef $oDoc, ByRef $oDocInfoEditTimeFi
 	If Not IsObj($oDocInfoEditTimeField) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LOWriter_VarsAreNull($bIsFixed, $iTimeFormatKey) Then
-		;Libre Office Seems to insert it's Number formats by adding 10,000 to the number, but if I insert that same value, it
+		;Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		;fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		;from the value.
 		$iNumberFormat = $oDocInfoEditTimeField.NumberFormat()
@@ -14105,7 +14736,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoEditTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoKeywordsModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14174,7 +14808,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoKeywordsInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoKeywordsInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14241,7 +14875,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoKeywordsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoModAuthModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DocGenPropModification
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14310,7 +14947,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModAuthInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoModAuthInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenPropModification
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14379,7 +15016,11 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoModDateTimeModify, _LOWriter_DateFormatKeyCreate,
+;					_LOWriter_DateFormatKeyList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DocGenPropModification
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14450,7 +15091,8 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModDateTimeInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoModDateTimeInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate,
+;					_LOWriter_DateFormatKeyList, _LOWriter_DocGenPropModification
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14465,7 +15107,7 @@ Func _LOWriter_FieldDocInfoModDateTimeModify(ByRef $oDoc, ByRef $oDocInfoModDtTm
 	If Not IsObj($oDocInfoModDtTmField) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LOWriter_VarsAreNull($bIsFixed, $iDateFormatKey) Then
-		;Libre Office Seems to insert it's Number formats by adding 10,000 to the number, but if I insert that same value, it
+		;Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		;fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		;from the value.
 		$iNumberFormat = $oDocInfoModDtTmField.NumberFormat()
@@ -14525,7 +15167,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoPrintAuthModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DocGenPropPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14594,7 +15239,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintAuthInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoPrintAuthInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenPropPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14663,7 +15308,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoPrintDateTimeModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeyList, _LOWriter_DocGenPropPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14734,7 +15382,8 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintDateTimeInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoPrintDateTimeInsert,  _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate,
+;					_LOWriter_DateFormatKeyList, _LOWriter_DocGenPropPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14749,7 +15398,7 @@ Func _LOWriter_FieldDocInfoPrintDateTimeModify(ByRef $oDoc, ByRef $oDocInfoPrint
 	If Not IsObj($oDocInfoPrintDtTmField) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LOWriter_VarsAreNull($bIsFixed, $iDateFormatKey) Then
-		;Libre Office Seems to insert it's Number formats by adding 10,000 to the number, but if I insert that same value, it
+		;Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		;fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		;from the value.
 		$iNumberFormat = $oDocInfoPrintDtTmField.NumberFormat()
@@ -14809,7 +15458,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoRevNumModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DocGenProp
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14878,7 +15530,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoRevNumInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoRevNumInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenProp
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -14945,7 +15597,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoRevNumModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoSubjectModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15014,7 +15669,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoSubjectInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoSubjectInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15081,7 +15736,10 @@ EndFunc   ;==>_LOWriter_FieldDocInfoSubjectModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoTitleModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15150,7 +15808,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoTitleInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldDocInfoTitleInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15223,7 +15881,9 @@ EndFunc   ;==>_LOWriter_FieldDocInfoTitleModify
 ;						$LOW_FIELD_FILENAME_PATH(1), Only the path of the file is displayed.
 ;						$LOW_FIELD_FILENAME_NAME(2), Only the name of the file without the file extension is displayed.
 ;						$LOW_FIELD_FILENAME_NAME_AND_EXT(3), The file name including the file extension is displayed.
-; Related .......:
+; Related .......: _LOWriter_FieldFileNameModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15295,7 +15955,7 @@ EndFunc   ;==>_LOWriter_FieldFileNameInsert
 ;						$LOW_FIELD_FILENAME_PATH(1), Only the path of the file is displayed.
 ;						$LOW_FIELD_FILENAME_NAME(2), Only the name of the file without the file extension is displayed.
 ;						$LOW_FIELD_FILENAME_NAME_AND_EXT(3), The file name including the file extension is displayed.
-; Related .......:
+; Related .......: _LOWriter_FieldFileNameInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15358,7 +16018,9 @@ EndFunc   ;==>_LOWriter_FieldFileNameModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldFuncHiddenParModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15415,7 +16077,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenParInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldFuncHiddenParInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15474,7 +16136,9 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenParModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldFuncHiddenTextModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15539,7 +16203,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenTextInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldFuncHiddenTextInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15605,7 +16269,9 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenTextModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldFuncInputModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15669,7 +16335,7 @@ EndFunc   ;==>_LOWriter_FieldFuncInputInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldFuncInputInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15743,7 +16409,9 @@ EndFunc   ;==>_LOWriter_FieldFuncInputModify
 ;							$LOW_FIELD_PLACEHOLD_TYPE_FRAME(2), The field initiates the insertion of a text frame.
 ;							$LOW_FIELD_PLACEHOLD_TYPE_GRAPHIC(3), The field initiates the insertion of a graphic object.
 ;							$LOW_FIELD_PLACEHOLD_TYPE_OBJECT(4), The field initiates the insertion of an embedded object.
-; Related .......:
+; Related .......: _LOWriter_FieldFuncPlaceholderModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15822,7 +16490,7 @@ EndFunc   ;==>_LOWriter_FieldFuncPlaceholderInsert
 ;							$LOW_FIELD_PLACEHOLD_TYPE_FRAME(2), The field initiates the insertion of a text frame.
 ;							$LOW_FIELD_PLACEHOLD_TYPE_GRAPHIC(3), The field initiates the insertion of a graphic object.
 ;							$LOW_FIELD_PLACEHOLD_TYPE_OBJECT(4), The field initiates the insertion of an embedded object.
-; Related .......:
+; Related .......: _LOWriter_FieldFuncPlaceholderInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15880,7 +16548,7 @@ EndFunc   ;==>_LOWriter_FieldFuncPlaceholderModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList, _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -15932,7 +16600,9 @@ EndFunc   ;==>_LOWriter_FieldGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldInputListModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16008,7 +16678,7 @@ EndFunc   ;==>_LOWriter_FieldInputListInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldInputListInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16162,7 +16832,9 @@ EndFunc   ;==>_LOWriter_FieldInputListModify
 ;Page Number Type Constants: $LOW_PAGE_NUM_TYPE_PREV(0), The Previous Page's page number.
 ;								$LOW_PAGE_NUM_TYPE_CURRENT(1), The current page number.
 ;								$LOW_PAGE_NUM_TYPE_NEXT(2), The Next Page's page number.
-; Related .......:
+; Related .......: _LOWriter_FieldPageNumberModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16336,7 +17008,7 @@ EndFunc   ;==>_LOWriter_FieldPageNumberInsert
 ;Page Number Type Constants: $LOW_PAGE_NUM_TYPE_PREV(0), The Previous Page's page number.
 ;								$LOW_PAGE_NUM_TYPE_CURRENT(1), The current page number.
 ;								$LOW_PAGE_NUM_TYPE_NEXT(2), The Next Page's page number.
-; Related .......:
+; Related .......: _LOWriter_FieldPageNumberInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16444,7 +17116,10 @@ EndFunc   ;==>_LOWriter_FieldPageNumberModify
 ;								"below".
 ;							$LOW_FIELD_REF_USING_PAGE_NUM_STYLED(4), The page number is displayed using the numbering type
 ;								defined in the page style of the reference position.
-; Related .......:
+; Related .......: _LOWriter_FieldRefBookMarkModify, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarksList,
+;					 _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16521,7 +17196,8 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkInsert
 ;								"below".
 ;							$LOW_FIELD_REF_USING_PAGE_NUM_STYLED(4), The page number is displayed using the numbering type
 ;								defined in the page style of the reference position.
-; Related .......:
+; Related .......: _LOWriter_FieldRefBookMarkInsert, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarksList,
+;					_LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16598,7 +17274,10 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkModify
 ;								"below".
 ;							$LOW_FIELD_REF_USING_PAGE_NUM_STYLED(4), The page number is displayed using the numbering type
 ;								defined in the page style of the reference position.
-; Related .......:
+; Related .......: _LOWriter_FieldRefEndnoteModify, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16677,7 +17356,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteInsert
 ;								"below".
 ;							$LOW_FIELD_REF_USING_PAGE_NUM_STYLED(4), The page number is displayed using the numbering type
 ;								defined in the page style of the reference position.
-; Related .......:
+; Related .......: _LOWriter_FieldRefEndnoteInsert, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16765,7 +17444,10 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteModify
 ;								"below".
 ;							$LOW_FIELD_REF_USING_PAGE_NUM_STYLED(4), The page number is displayed using the numbering type
 ;								defined in the page style of the reference position.
-; Related .......:
+; Related .......: _LOWriter_FieldRefFootnoteModify, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16844,7 +17526,8 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteInsert
 ;								"below".
 ;							$LOW_FIELD_REF_USING_PAGE_NUM_STYLED(4), The page number is displayed using the numbering type
 ;								defined in the page style of the reference position.
-; Related .......:
+; Related .......: _LOWriter_FieldRefFootnoteInsert, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList,
+;					_LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16909,13 +17592,13 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteModify
 ; Modified ......:
 ; Remarks .......: A Reference Field can be referencing multiple different types of Data, such as a Reference Mark, or Bookmark,
 ;					etc.
-;Reference Type Constants: $LOW_FIELD_REF_TYPE_REF_MARK(0), The source is a reference mark.
-;							$LOW_FIELD_REF_TYPE_SEQ_FIELD(1), The source is a number sequence field. Such as a Number range
-;															variable, numbered Paragraph, etc.
-;							$LOW_FIELD_REF_TYPE_BOOKMARK(2), The source is a bookmark.
-;							$LOW_FIELD_REF_TYPE_FOOTNOTE(3), The source is a footnote.
-;							$LOW_FIELD_REF_TYPE_ENDNOTE(4), The source is an endnote.
-; Related .......:
+;Reference Type Constants: $LOW_FIELD_REF_TYPE_REF_MARK(0), The source is referencing a reference mark.
+;							$LOW_FIELD_REF_TYPE_SEQ_FIELD(1), The source is referencing a number sequence field. Such as a
+;															Number range variable, numbered Paragraph, etc.
+;							$LOW_FIELD_REF_TYPE_BOOKMARK(2), The source is referencing a bookmark.
+;							$LOW_FIELD_REF_TYPE_FOOTNOTE(3), The source is referencing a footnote.
+;							$LOW_FIELD_REF_TYPE_ENDNOTE(4), The source is referencing an endnote.
+; Related .......: _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -16969,7 +17652,10 @@ EndFunc   ;==>_LOWriter_FieldRefGetType
 ;								"below".
 ;							$LOW_FIELD_REF_USING_PAGE_NUM_STYLED(4), The page number is displayed using the numbering type
 ;								defined in the page style of the reference position.
-; Related .......:
+; Related .......: _LOWriter_FieldRefModify, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarkList,
+;					_LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17033,7 +17719,7 @@ EndFunc   ;==>_LOWriter_FieldRefInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarkList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17081,7 +17767,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarkDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldRefMarkList, _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17127,7 +17813,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarkGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldRefMarkDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17179,7 +17865,9 @@ EndFunc   ;==>_LOWriter_FieldRefMarkList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldRefMarkDelete, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17253,7 +17941,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarkSet
 ;								"below".
 ;							$LOW_FIELD_REF_USING_PAGE_NUM_STYLED(4), The page number is displayed using the numbering type
 ;								defined in the page style of the reference position.
-; Related .......:
+; Related .......: _LOWriter_FieldRefInsert, _LOWriter_FieldsGetList, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarkList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17354,7 +18042,8 @@ EndFunc   ;==>_LOWriter_FieldRefModify
 ;								$LOW_FIELDADV_TYPE_DDE, A DDE Field, found in Fields dialog, Variables tab.
 ;								$LOW_FIELDADV_TYPE_INPUT_USER, ?
 ;								$LOW_FIELDADV_TYPE_USER, A User Field, found in Fields dialog, Variables tab.
-; Related .......:
+; Related .......: _LOWriter_FieldsDocInfoGetList, _LOWriter_FieldsGetList, _LOWriter_FieldDelete, _LOWriter_FieldGetAnchor,
+;					_LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17369,7 +18058,7 @@ Func _LOWriter_FieldsAdvGetList(ByRef $oDoc, $iType = $LOW_FIELDADV_TYPE_ALL, $b
 	If Not IsBool($bFieldType) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	$avFieldTypes = __LOwriter_FieldTypeServices($iType, True, False)
+	$avFieldTypes = __LOWriter_FieldTypeServices($iType, True, False)
 	If @error > 0 Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
 	$vReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
@@ -17452,7 +18141,8 @@ EndFunc   ;==>_LOWriter_FieldsAdvGetList
 ;									$LOW_FIELD_DOCINFO_TYPE_SUBJECT, A Subject Field, found in Fields dialog, DocInformation
 ;																	Tab.
 ;									$LOW_FIELD_DOCINFO_TYPE_TITLE, A Title Field, found in Fields dialog, DocInformation Tab.
-; Related .......:
+; Related .......: _LOWriter_FieldsAdvGetList, _LOWriter_FieldsGetList, _LOWriter_FieldDelete, _LOWriter_FieldGetAnchor,
+;					_LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17467,7 +18157,7 @@ Func _LOWriter_FieldsDocInfoGetList(ByRef $oDoc, $iType = $LOW_FIELD_DOCINFO_TYP
 	If Not IsBool($bFieldType) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	$avFieldTypes = __LOwriter_FieldTypeServices($iType, False, True)
+	$avFieldTypes = __LOWriter_FieldTypeServices($iType, False, True)
 	If @error > 0 Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
 	$vReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
@@ -17524,7 +18214,9 @@ EndFunc   ;==>_LOWriter_FieldsDocInfoGetList
 ;								$LOW_FIELD_USER_DATA_FAX(12), The field shows the fax number.
 ;								$LOW_FIELD_USER_DATA_EMAIL(13), The field shows the e-Mail.
 ;								$LOW_FIELD_USER_DATA_STATE(14), The field shows the state.
-; Related .......:
+; Related .......: _LOWriter_FieldSenderModify,  _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17616,7 +18308,7 @@ EndFunc   ;==>_LOWriter_FieldSenderInsert
 ;								$LOW_FIELD_USER_DATA_FAX(12), The field shows the fax number.
 ;								$LOW_FIELD_USER_DATA_EMAIL(13), The field shows the e-Mail.
 ;								$LOW_FIELD_USER_DATA_STATE(14), The field shows the state.
-; Related .......:
+; Related .......: _LOWriter_FieldSenderInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17697,7 +18389,11 @@ EndFunc   ;==>_LOWriter_FieldSenderModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldSetVarModify,  _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_FormatKeyCreate _LOWriter_FormatKeyList, _LOWriter_FieldSetVarMasterCreate,
+;					_LOWriter_FieldSetVarMasterList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17774,7 +18470,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldSetVarMasterDelete, _LOWriter_FieldSetVarInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17827,7 +18523,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMasterList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17925,7 +18621,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldSetVarMasterList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -17971,7 +18667,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObj
 ; Modified ......:
 ; Remarks .......:Note: This function includes in the list about 5 built-in Master Fields from Libre Office, namely:
 ;					Illustration, Table, Text, Drawing, and Figure.
-; Related .......:
+; Related .......: _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMasterDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18032,7 +18728,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Dependent Fields are SetVariable Fields that are referencing the Master field.
-; Related .......:
+; Related .......: _LOWriter_FieldSetVarMasterGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18090,7 +18786,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterListFields
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldSetVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate _LOWriter_FormatKeyList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18105,7 +18801,7 @@ Func _LOWriter_FieldSetVarModify(ByRef $oDoc, ByRef $oSetVarField, $sValue = Nul
 	If Not IsObj($oSetVarField) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LOWriter_VarsAreNull($sValue, $iNumFormatKey, $bIsVisible) Then
-		;Libre Office Seems to insert it's Number formats by adding 10,000 to the number, but if I insert that same value, it
+		;Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		;fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		;from the value.
 		$iNumberFormat = $oSetVarField.NumberFormat()
@@ -18230,7 +18926,8 @@ EndFunc   ;==>_LOWriter_FieldSetVarModify
 ;						$LOW_FIELD_TYPE_URL,
 ;						$LOW_FIELD_TYPE_WORD_COUNT, A Word Count field, found in the Fields Dialog, Document tab, Statistics
 ;							Type.
-; Related .......:
+; Related .......: _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList, _LOWriter_FieldDelete, _LOWriter_FieldGetAnchor,
+;					_LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18245,7 +18942,7 @@ Func _LOWriter_FieldsGetList(ByRef $oDoc, $iType = $LOW_FIELD_TYPE_ALL, $bSuppor
 	If Not IsBool($bFieldType) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	$avFieldTypes = __LOwriter_FieldTypeServices($iType)
+	$avFieldTypes = __LOWriter_FieldTypeServices($iType)
 	If (@error > 0) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
 	$vReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
@@ -18289,7 +18986,11 @@ EndFunc   ;==>_LOWriter_FieldsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Note: This function checks if there is a Set Variable matching the name called in $sSetVarName.
-; Related .......:
+; Related .......: _LOWriter_FieldShowVarModify, _LOWriter_FieldSetVarInsert, _LOWriter_FieldsGetList,
+;					_LOWriter_FormatKeyCreate _LOWriter_FormatKeyList, _LOWriter_DocGetViewCursor,
+;					_LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor,
+;					 _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor,
+;					_LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18370,7 +19071,7 @@ EndFunc   ;==>_LOWriter_FieldShowVarInsert
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
 ;					 Note: This function checks if there is a Set Variable matching the name called in $sSetVarName.
-; Related .......:
+; Related .......: _LOWriter_FieldShowVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate,  _LOWriter_FormatKeyList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18385,7 +19086,7 @@ Func _LOWriter_FieldShowVarModify(ByRef $oDoc, ByRef $oShowVarField, $sSetVarNam
 	If Not IsObj($oShowVarField) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LOWriter_VarsAreNull($sSetVarName, $iNumFormatKey, $bShowName) Then
-		;Libre Office Seems to insert it's Number formats by adding 10,000 to the number, but if I insert that same value, it
+		;Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		;fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		;from the value.
 		$iNumberFormat = $oShowVarField.NumberFormat()
@@ -18534,7 +19235,9 @@ EndFunc   ;==>_LOWriter_FieldShowVarModify
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL_KO(69), Numbering is in Korean Digital number.
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL2_KO(70), Numbering is in Korean Digital Number, reserved "koreanDigital2".
 ;	$LOW_NUM_STYLE_NUMBER_LEGAL_KO(71), Numbering is in Korean Legal Number, reserved "koreanLegal".
-; Related .......:
+; Related .......: _LOWriter_FieldStatCountModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18689,7 +19392,7 @@ EndFunc   ;==>_LOWriter_FieldStatCountInsert
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL_KO(69), Numbering is in Korean Digital number.
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL2_KO(70), Numbering is in Korean Digital Number, reserved "koreanDigital2".
 ;	$LOW_NUM_STYLE_NUMBER_LEGAL_KO(71), Numbering is in Korean Legal Number, reserved "koreanLegal".
-; Related .......:
+; Related .......: _LOWriter_FieldStatCountInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18782,7 +19485,10 @@ EndFunc   ;==>_LOWriter_FieldStatCountModify
 ;						$LOW_FIELD_FILENAME_NAME_AND_EXT(3), The file name including the file extension is displayed.
 ;						$LOW_FIELD_FILENAME_CATEGORY(4), The Category of the Template is displayed.
 ;						$LOW_FIELD_FILENAME_TEMPLATE_NAME(5), The Template Name is displayed.
-; Related .......:
+; Related .......: _LOWriter_FieldStatTemplateModify, _LOWriter_DocGenPropTemplate,  _LOWriter_DocGetViewCursor,
+;					_LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor,
+;					_LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor,
+;					_LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18844,7 +19550,7 @@ EndFunc   ;==>_LOWriter_FieldStatTemplateInsert
 ;						$LOW_FIELD_FILENAME_NAME_AND_EXT(3), The file name including the file extension is displayed.
 ;						$LOW_FIELD_FILENAME_CATEGORY(4), The Category of the Template is displayed.
 ;						$LOW_FIELD_FILENAME_TEMPLATE_NAME(5), The Template Name is displayed.
-; Related .......:
+; Related .......: _LOWriter_FieldStatTemplateInsert, _LOWriter_DocGenPropTemplate, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18895,7 +19601,7 @@ EndFunc   ;==>_LOWriter_FieldStatTemplateModify
 ; Modified ......:
 ; Remarks .......: Updating a fixed field will usually erase any user-provided content, such as an author name, creation date
 ;						etc. If a Field is fixed, the field wont be updated unless $bForceUpdate is set to true.
-; Related .......:
+; Related .......: _LOWriter_FieldsGetList _LOWriter_FieldsAdvGetList _LOWriter_FieldsDocInfoGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -18980,7 +19686,9 @@ EndFunc   ;==>_LOWriter_FieldUpdate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldVarSetPageModify, _LOWriter_DocGetViewCursor,	_LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -19044,7 +19752,7 @@ EndFunc   ;==>_LOWriter_FieldVarSetPageInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FieldVarSetPageInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -19180,7 +19888,9 @@ EndFunc   ;==>_LOWriter_FieldVarSetPageModify
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL_KO(69), Numbering is in Korean Digital number.
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL2_KO(70), Numbering is in Korean Digital Number, reserved "koreanDigital2".
 ;	$LOW_NUM_STYLE_NUMBER_LEGAL_KO(71), Numbering is in Korean Legal Number, reserved "koreanLegal".
-; Related .......:
+; Related .......: _LOWriter_FieldVarShowPageModify, _LOWriter_DocGetViewCursor,	_LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -19310,7 +20020,7 @@ EndFunc   ;==>_LOWriter_FieldVarShowPageInsert
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL_KO(69), Numbering is in Korean Digital number.
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL2_KO(70), Numbering is in Korean Digital Number, reserved "koreanDigital2".
 ;	$LOW_NUM_STYLE_NUMBER_LEGAL_KO(71), Numbering is in Korean Legal Number, reserved "koreanLegal".
-; Related .......:
+; Related .......: _LOWriter_FieldVarShowPageInsert, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -19403,7 +20113,8 @@ EndFunc   ;==>_LOWriter_FieldVarShowPageModify
 ;							$LOW_TXT_DIR_CONTEXT(4), — obtain actual writing mode from the context of the object.
 ;							$LOW_TXT_DIR_BT_LR(5), — text within a line is written bottom-to-top. Lines and blocks are placed
 ;								left-to-right. (LibreOffice 6.3)
-; Related .......:
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll
+;					_LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -19510,7 +20221,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ; Relief Constants: $LOW_RELIEF_NONE(0); no relief is used.
 ;						$LOW_RELIEF_EMBOSSED(1); the font relief is embossed.
 ;						$LOW_RELIEF_ENGRAVED(2); the font relief is engraved.
-; Related .......:
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll
+;					_LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -19640,7 +20352,9 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong,_LOWriter_DocFindAll,
+;					_LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange,
+;					_LOWriter_FontsList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -19764,7 +20478,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyFont
 ;					Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;					If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local
 ;						$aArray[0])
-; Related .......:
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll
+;					_LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -19860,7 +20575,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyHyphenation
 ;					If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local
 ;						$aArray[0])
 ;					Note: $iFirstLine Indent cannot be set if $bAutoFirstLine is set to True.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DocFindAll,
+;					_LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -19983,7 +20699,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyIndent
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_DocFindAll,
+;					_LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20076,7 +20793,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyOverline
 ;						therefore, is the last on the page.
 ;						$LOW_BREAK_PAGE_BOTH(6) – A page break is applied before and after the current Paragraph. The current
 ;						Paragraph, therefore, is the only paragraph on the page.
-; Related .......:
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll
+;					_LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20167,7 +20885,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPageBreak
 ;						SubScript. If you set both Auto SuperScript to True and Auto SubScript to True, or $iSuperScript to an
 ;						integer and $iSubScript to an integer, Subscript will be set as it is the last in the line to be set in
 ;						this function, and thus will over-write any SuperScript settings.
-; Related .......:
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll
+;					_LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20278,7 +20997,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ;						Libre's kerning value to anything over 32768 uM causes a COM exception, and attempting to set the
 ;						 kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these
 ;						reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DocFindAll,
+;					_LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20386,7 +21106,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ;							Min 0, Max 10008 MicroMeters (uM)
 ;						$LOW_LINE_SPC_MODE_FIX(3); This specifies the height value as a fixed line height. Min 51 MicroMeters,
 ;							Max 10008 MicroMeters (uM)
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DocFindAll,
+;					_LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20499,7 +21220,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifySpacing
 ;					$LOW_STRIKEOUT_BOLD(4); specifies to strike out the characters with a bold line.
 ;					$LOW_STRIKEOUT_SLASH(5); specifies to strike out the characters with slashes.
 ;					$LOW_STRIKEOUT_X(6); specifies to strike out the characters with X's.
-; Related .......:
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll
+;					_LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20576,7 +21298,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyStrikeout
 ;					Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;					If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local
 ;						$aArray[0])
-; Related .......:
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll
+;					_LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20697,7 +21420,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyTxtFlowOpt
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_DocFindAll,
+;					_LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20765,7 +21489,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function may cause a processor usage spike for a moment or two. If you wish to eliminate this, comment
-;						out the current sleep function and place a sleep(10) in it's place.
+;						out the current sleep function and place a sleep(10) in its place.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -20812,7 +21536,7 @@ EndFunc   ;==>_LOWriter_FontExists
 ;					Italic, etc. Style Name is really a repeat of weight(Bold) and Slant (Italic) settings, but is included for
 ;					easier processing if required. From personal tests, Slant only returns 0 or 2. This function may cause a
 ;					 processor usage spike for a moment or two. If you wish to eliminate this, comment out the current sleep
-;					function and place a sleep(10) in it's place.
+;					function and place a sleep(10) in its place.
 ; Weight Constants : $LOW_WEIGHT_DONT_KNOW(0); The font weight is not specified/known.
 ;						$LOW_WEIGHT_THIN(50); specifies a 50% font weight.
 ;						$LOW_WEIGHT_ULTRA_LIGHT(60); specifies a 60% font weight.
@@ -20872,7 +21596,7 @@ EndFunc   ;==>_LOWriter_FontsList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20903,7 +21627,7 @@ EndFunc   ;==>_LOWriter_FootnoteDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FootnotesGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20938,7 +21662,7 @@ EndFunc   ;==>_LOWriter_FootnoteGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_CursorMove, _LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -20975,8 +21699,8 @@ EndFunc   ;==>_LOWriter_FootnoteGetTextCursor
 ;				   @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
 ;				   @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
 ;				   @Error 1 @Extended 4 Return 0 = $oCursor is a Table cursor type, not supported.
-;				   @Error 1 @Extended 5 Return 0 = $oCursor currently located in a Frame, Footnote, Endnote, cannot insert
-;				   +									a Footnote in those data types.
+;				   @Error 1 @Extended 5 Return 0 = $oCursor currently located in a Frame, Footnote, Endnote, or Header/Footer,
+;				   +									cannot insert a Footnote in those data types.
 ;				   @Error 1 @Extended 6 Return 0 = $oCursor located in unknown data type.
 ;				   @Error 1 @Extended 7 Return 0 = $sLabel not a string.
 ;				   --Initialization Errors--
@@ -20986,8 +21710,9 @@ EndFunc   ;==>_LOWriter_FootnoteGetTextCursor
 ;				   +									Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: A Footnote cannot be inserted into a Frame, a Footnote, or an Endnote.
-; Related .......:
+; Remarks .......: A Footnote cannot be inserted into a Frame, a Footnote, a Endnote, or a Header/ Footer.
+; Related .......: _LOWriter_FootnoteDelete, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -21004,7 +21729,7 @@ Func _LOWriter_FootnoteInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = False, 
 
 	Switch __LOWriter_Internal_CursorGetDataType($oDoc, $oCursor)
 
-		Case $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE
+		Case $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE, $LOW_CURDATA_HEADER_FOOTER
 			Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0) ;Unsupported cursor type.
 		Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_CELL
 			$oFootNote = $oDoc.createInstance("com.sun.star.text.Footnote")
@@ -21049,7 +21774,7 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -21362,7 +22087,7 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsContinuation
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_PageStylesGetNames, _LOWriter_CharStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -21437,7 +22162,7 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsStyles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FootnoteDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -21492,7 +22217,7 @@ EndFunc   ;==>_LOWriter_FootnotesGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FormatKeyDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -21542,7 +22267,7 @@ EndFunc   ;==>_LOWriter_FormatKeyCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FormatKeyList, _LOWriter_FormatKeyCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -21657,7 +22382,7 @@ EndFunc   ;==>_LOWriter_FormatKeyExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FormatKeyList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -21724,7 +22449,7 @@ EndFunc   ;==>_LOWriter_FormatKeyGetString
 ;							$LOW_FORMAT_KEYS_UNDEFINED(2048), Is used as a return value if no format exists.
 ;							$LOW_FORMAT_KEYS_EMPTY(4096),
 ;							$LOW_FORMAT_KEYS_DURATION(8196),
-; Related .......:
+; Related .......: _LOWriter_FormatKeyDelete, _LOWriter_FormatKeyGetString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -21827,7 +22552,8 @@ EndFunc   ;==>_LOWriter_FormatKeyList
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -21987,7 +22713,8 @@ EndFunc   ;==>_LOWriter_FrameAreaColor
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22015,7 +22742,7 @@ Func _LOWriter_FrameAreaGradient(ByRef $oDoc, ByRef $oFrame, $sGradientName = Nu
 		Return SetError($__LOW_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	If ($oFrame.FillStyle() <> $__LOWCONST__FILL_STYLE_GRADIENT) Then $oFrame.FillStyle = $__LOWCONST__FILL_STYLE_GRADIENT
+	If ($oFrame.FillStyle() <> $__LOWCONST_FILL_STYLE_GRADIENT) Then $oFrame.FillStyle = $__LOWCONST_FILL_STYLE_GRADIENT
 
 	If ($sGradientName <> Null) Then
 		If Not IsString($sGradientName) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
@@ -22025,7 +22752,7 @@ Func _LOWriter_FrameAreaGradient(ByRef $oDoc, ByRef $oFrame, $sGradientName = Nu
 
 	If ($iType <> Null) Then
 		If ($iType = $LOW_GRAD_TYPE_OFF) Then ;Turn Off Gradient
-			$oFrame.FillStyle = $__LOWCONST__FILL_STYLE_OFF
+			$oFrame.FillStyle = $__LOWCONST_FILL_STYLE_OFF
 			$oFrame.FillGradientName = ""
 			Return SetError($__LOW_STATUS_SUCCESS, 0, 2)
 		EndIf
@@ -22171,7 +22898,9 @@ EndFunc   ;==>_LOWriter_FrameAreaGradient
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_FrameBorderWidth,
+;					_LOWriter_FrameBorderStyle, _LOWriter_FrameBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22234,7 +22963,9 @@ EndFunc   ;==>_LOWriter_FrameBorderColor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer,  _LOWriter_FrameBorderWidth,
+;					_LOWriter_FrameBorderStyle, _LOWriter_FrameBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22359,7 +23090,8 @@ EndFunc   ;==>_LOWriter_FrameBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_FrameBorderWidth, _LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22424,7 +23156,9 @@ EndFunc   ;==>_LOWriter_FrameBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_FrameBorderStyle,
+;					_LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22519,7 +23253,9 @@ EndFunc   ;==>_LOWriter_FrameBorderWidth
 ;Line Position ants: $LOW_ALIGN_VERT_TOP(0),
 ;						$LOW_ALIGN_VERT_MIDDLE(1),
 ;						$LOW_ALIGN_VERT_BOTTOM(2)
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22611,7 +23347,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSeparator
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22690,7 +23426,8 @@ EndFunc   ;==>_LOWriter_FrameColumnSettings
 ;					Note: To set $bAutoWidth or $iGlobalSpacing you may enter any number in $iColumn as long as you are not
 ;						setting width or spacing, as AutoWidth is not column specific. If you set a value for $iGlobalSpacing
 ;						with $bAutoWidth set to false, the value is applied to all the columns still.
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22843,7 +23580,10 @@ EndFunc   ;==>_LOWriter_FrameColumnSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DocGetViewCursor,
+;					_LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor,
+;					_LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor,
+;					_LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22901,7 +23641,8 @@ EndFunc   ;==>_LOWriter_FrameCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_CursorMove _LOWriter_DocInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22936,7 +23677,7 @@ EndFunc   ;==>_LOWriter_FrameCreateTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -22969,7 +23710,7 @@ EndFunc   ;==>_LOWriter_FrameDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -23006,7 +23747,8 @@ EndFunc   ;==>_LOWriter_FrameGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_FrameCreateTextCursor,
+;					_LOWriter_FrameDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -23045,7 +23787,7 @@ EndFunc   ;==>_LOWriter_FrameGetObjByCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FramesGetNames, _LOWriter_FrameDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -23122,7 +23864,7 @@ EndFunc   ;==>_LOWriter_FrameGetObjByName
 ;								is no parent frame, the current frame is used.
 ;							$LOW_FRAME_TARGET_BLANK = "_blank", File opens in a new page.
 ;							$LOW_FRAME_TARGET_SELF = "_self", File opens in the current frame.
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -23239,7 +23981,7 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ;								object.
 ;							$LOW_TXT_DIR_BT_LR(5), — text within a line is written bottom-to-top. Lines and blocks are placed
 ;								left-to-right. (LibreOffice 6.3)
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -23348,7 +24090,7 @@ EndFunc   ;==>_LOWriter_FrameOptions
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -23396,6 +24138,90 @@ Func _LOWriter_FrameOptionsName(ByRef $oDoc, ByRef $oFrame, $sName = Null, $sDes
 
 	Return ($iError > 0) ? SetError($__LOW_STATUS_PROP_SETTING_ERROR, $iError, 0) : SetError($__LOW_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FrameOptionsName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FramesGetNames
+; Description ...: List the names of all frames contained in a document.
+; Syntax ........: _LOWriter_FramesGetNames(Byref $oDoc[, $bSearchShapes = False])
+; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +					DocCreate function.
+;                  $bSearchShapes       - [optional] a boolean value. Default is False. If True, function searches and adds
+;				   +					any Frames listed as "Shapes" in the document to the array of Frame names. See
+;				   +					remarks.
+; Return values .: Success: Array of Strings.
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $bSearchShapes not a Boolean.
+;				   --Initialization Errors--
+;				   @Error 2 @Extended 1 Return 0 = Failure retrieving Frame objects.
+;				   @Error 2 @Extended 2 Return 0 = Failure retrieving Shape objects.
+;				   --Success--
+;				   @Error 0 @Extended ? Return Array. Returning Array of Frame names. @Extended set to number of Frame Names
+;				   +							returned.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Note: in Docx (and possibly other formats) Frames seem to be saved as "Shapes" instead of "Frames", if this
+;					function returns no results, or not the ones you expect, try setting $bSearchShapes to true.
+; Related .......: _LOWriter_FrameGetObjByName
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FramesGetNames(ByRef $oDoc, $bSearchShapes = False)
+	Local $asFrameNames[0], $asShapes[0]
+	Local $oFrames, $oShapes
+	Local $iCount = 0, $iEndofArray
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bSearchShapes) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+	$oFrames = $oDoc.TextFrames()
+	If Not IsObj($oFrames) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
+
+	If $oFrames.hasElements() Then
+		ReDim $asFrameNames[$oFrames.getCount()]
+		For $i = 0 To $oFrames.getCount() - 1
+			$asFrameNames[$i] = $oFrames.getByIndex($i).Name()
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
+		Next
+	EndIf
+
+	If ($bSearchShapes = True) Then
+		$oShapes = $oDoc.DrawPage()
+		If Not IsObj($oShapes) Then Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0)
+
+		If $oShapes.hasElements() Then
+			ReDim $asShapes[$oShapes.getCount()]
+			For $i = 0 To $oShapes.getCount() - 1
+
+				If $oShapes.getByIndex($i).supportsService("com.sun.star.drawing.Text") Then ;Determin if the Shape is an actual Frame or not.
+					If ($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") And Not _
+							$oShapes.getByIndex($i).getPropertySetInfo().hasPropertyByName("ActualSize") Then
+						$asShapes[$iCount] = $oShapes.getByIndex($i).Name()
+						$iCount += 1
+					EndIf
+				EndIf
+			Next
+
+			ReDim $asShapes[$iCount]
+
+			$iEndofArray = UBound($asFrameNames)
+			ReDim $asFrameNames[UBound($asFrameNames) + $iCount]
+
+			For $i = 0 To UBound($asShapes) - 1
+				$asFrameNames[$iEndofArray] = $asShapes[$i]
+				$iEndofArray += 1
+			Next
+
+		EndIf
+
+	EndIf
+
+	Return SetError($__LOW_STATUS_SUCCESS, UBound($asFrameNames), $asFrameNames)
+
+EndFunc   ;==>_LOWriter_FramesGetNames
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameShadow
@@ -23462,7 +24288,9 @@ EndFunc   ;==>_LOWriter_FrameOptionsName
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -23517,51 +24345,6 @@ Func _LOWriter_FrameShadow(ByRef $oFrame, $iWidth = Null, $iColor = Null, $bTran
 EndFunc   ;==>_LOWriter_FrameShadow
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FramesListNames
-; Description ...: List the names of all frames contained in a document.
-; Syntax ........: _LOWriter_FramesListNames(Byref $oDoc)
-; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
-;				   +					DocCreate function.
-; Return values .: Success: Array of Strings.
-;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;				   --Input Errors--
-;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;				   --Initialization Errors--
-;				   @Error 2 @Extended 1 Return 0 = Failure retrieving Frame objects.
-;				   --Success--
-;				   @Error 0 @Extended ? Return Array. Returning Array of Frame names. @Extended set to number of Frame Names
-;				   +							returned.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Note: in Docx (and possibly other formats) Frames seem to be saved as "Shapes" instead of "Frames", if this
-;					function returns no results, try using the ShapesListNames function instead.
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_FramesListNames(ByRef $oDoc)
-	Local $asFrameNames[0]
-	Local $oFrames
-
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
-	#forceref $oCOM_ErrorHandler
-
-	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
-	$oFrames = $oDoc.TextFrames()
-	If Not IsObj($oFrames) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
-
-	If $oFrames.hasElements() Then
-		ReDim $asFrameNames[$oFrames.getCount()]
-		For $i = 0 To $oFrames.getCount() - 1
-			$asFrameNames[$i] = $oFrames.getByIndex($i).Name()
-			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
-		Next
-	EndIf
-
-	Return SetError($__LOW_STATUS_SUCCESS, UBound($asFrameNames), $asFrameNames)
-EndFunc   ;==>_LOWriter_FramesListNames
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleAreaColor
 ; Description ...: Set or Retrieve background color settings for a Frame style.
 ; Syntax ........: _LOWriter_FrameStyleAreaColor(Byref $oFrameStyle[, $iBackColor = Null[, $bBackTransparent = Null]])
@@ -23613,7 +24396,8 @@ EndFunc   ;==>_LOWriter_FramesListNames
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -23775,7 +24559,8 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaColor
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -23804,7 +24589,7 @@ Func _LOWriter_FrameStyleAreaGradient(ByRef $oDoc, ByRef $oFrameStyle, $sGradien
 		Return SetError($__LOW_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	If ($oFrameStyle.FillStyle() <> $__LOWCONST__FILL_STYLE_GRADIENT) Then $oFrameStyle.FillStyle = $__LOWCONST__FILL_STYLE_GRADIENT
+	If ($oFrameStyle.FillStyle() <> $__LOWCONST_FILL_STYLE_GRADIENT) Then $oFrameStyle.FillStyle = $__LOWCONST_FILL_STYLE_GRADIENT
 
 	If ($sGradientName <> Null) Then
 		If Not IsString($sGradientName) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
@@ -23814,7 +24599,7 @@ Func _LOWriter_FrameStyleAreaGradient(ByRef $oDoc, ByRef $oFrameStyle, $sGradien
 
 	If ($iType <> Null) Then
 		If ($iType = $LOW_GRAD_TYPE_OFF) Then ;Turn Off Gradient
-			$oFrameStyle.FillStyle = $__LOWCONST__FILL_STYLE_OFF
+			$oFrameStyle.FillStyle = $__LOWCONST_FILL_STYLE_OFF
 			$oFrameStyle.FillGradientName = ""
 			Return SetError($__LOW_STATUS_SUCCESS, 0, 2)
 		EndIf
@@ -23961,7 +24746,9 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradient
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong,  _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle,
+;					_LOWriter_FrameStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24026,7 +24813,9 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderColor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer,  _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle,
+;					_LOWriter_FrameStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24153,7 +24942,8 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_FrameStyleBorderWidth,
+;					_LOWriter_FrameStyleBorderColor, _LOWriter_FrameStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24220,7 +25010,9 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderColor,
+;					_LOWriter_FrameStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24317,7 +25109,8 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderWidth
 ;Line Position Constants: $LOW_ALIGN_VERT_TOP(0),
 ;							$LOW_ALIGN_VERT_MIDDLE(1),
 ;							$LOW_ALIGN_VERT_BOTTOM(2)
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong, _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24411,7 +25204,7 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSeparator
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24492,7 +25285,8 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSettings
 ;					Note: To set $bAutoWidth or $iGlobalSpacing you may enter any number in $iColumn as long as you are not
 ;						setting width or spacing, as AutoWidth is not column specific. If you set a value for $iGlobalSpacing
 ;						with $bAutoWidth set to false, the value is applied to all the columns still.
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24638,7 +25432,7 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameStyleDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24701,7 +25495,7 @@ EndFunc   ;==>_LOWriter_FrameStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24788,7 +25582,7 @@ EndFunc   ;==>_LOWriter_FrameStyleExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24873,7 +25667,7 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObj
 ;								object.
 ;							$LOW_TXT_DIR_BT_LR(5), — text within a line is written bottom-to-top. Lines and blocks are placed
 ;								left-to-right. (LibreOffice 6.3)
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -24989,7 +25783,7 @@ EndFunc   ;==>_LOWriter_FrameStyleOptions
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_FrameStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -25072,7 +25866,8 @@ EndFunc   ;==>_LOWriter_FrameStyleOrganizer
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName,
+;					_LOWriter_FrameStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -25117,7 +25912,7 @@ EndFunc   ;==>_LOWriter_FrameStyleSet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -25163,9 +25958,9 @@ Func _LOWriter_FrameStylesGetNames(ByRef $oDoc, $bUserOnly = False, $bAppliedOnl
 EndFunc   ;==>_LOWriter_FrameStylesGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: FrameStyleShadow
+; Name ..........: _LOWriter_FrameStyleShadow
 ; Description ...: Set or Retrieve the shadow settings for a Frame Style.
-; Syntax ........: FrameStyleShadow(Byref $oFrameStyle[, $iWidth = Null[, $iColor = Null[, $bTransparent = Null[, $iLocation = Null]]]])
+; Syntax ........: _LOWriter_FrameStyleShadow(Byref $oFrameStyle[, $iWidth = Null[, $iColor = Null[, $bTransparent = Null[, $iLocation = Null]]]])
 ; Parameters ....: $oFrameStyle           - [in/out] an object. A Frame Style object returned by previous FrameStyle Create or
 ;				   +						Object Retrieval function.
 ;                  $iWidth              - [optional] an integer value. Default is Null. The Width of the Frame Shadow set in
@@ -25228,7 +26023,8 @@ EndFunc   ;==>_LOWriter_FrameStylesGetNames
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:  _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -25286,7 +26082,7 @@ EndFunc   ;==>_LOWriter_FrameStyleShadow
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleTransparency
 ; Description ...: Modify or retrieve Transparency settings for a Frame style.
-; Syntax ........: _LOWriter_FrameStyleTransparency(Byref $oDoc, $sFrameStyle[, $iTransparency = Null])
+; Syntax ........: _LOWriter_FrameStyleTransparency(Byref $oDoc[, $iTransparency = Null])
 ; Parameters ....: $oFrameStyle           - [in/out] an object. A Frame Style object returned by previous FrameStyle Create or
 ;				   +						Object Retrieval function.
 ;                  $iTransparency       - [optional] an integer value. Default is Null. The color transparency. 0% is fully
@@ -25310,7 +26106,7 @@ EndFunc   ;==>_LOWriter_FrameStyleShadow
 ; Remarks .......:  Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......:  _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -25406,7 +26202,7 @@ EndFunc   ;==>_LOWriter_FrameStyleTransparency
 ;							$LOW_GRAD_TYPE_ELLIPTICAL(3),
 ;							$LOW_GRAD_TYPE_SQUARE(4),
 ;							$LOW_GRAD_TYPE_RECT(5)
-; Related .......:
+; Related .......:  _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -25668,7 +26464,7 @@ EndFunc   ;==>_LOWriter_FrameStyleTransparencyGradient
 ;						match the height of the selection.
 ;					$LOW_ANCHOR_AT_PAGE(2), Anchors the frame to the current page.
 ;					$LOW_ANCHOR_AT_CHARACTER(4), Anchors the frame to a character.
-; Related .......:
+; Related .......:  _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -25885,7 +26681,8 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ;					When Keep Ratio is set to True, setting Width/Height values via this function will not be kept in ratio.
 ;Relative Constants: $LOW_RELATIVE_PARAGRAPH(0), means: text area (excluding margins).
 ;						$LOW_RELATIVE_PAGE(7), means: entire page (including margins).
-; Related .......:
+; Related .......:  _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -25930,7 +26727,7 @@ Func _LOWriter_FrameStyleTypeSize(ByRef $oDoc, ByRef $oFrameStyle, $iWidth = Nul
 		$iError = ($oFrameStyle.RelativeWidth() = $iRelativeWidth) ? $iError : BitOR($iError, 2)
 
 		If ($iRelativeWidth <> 0) And ($bAutoWidth <> True) Then ;If AutoWidth is not On, and Relative Width isn't being turned off, then set Width Value.
-			If ($oFrameStyle.WidthType() = $iCONST_AutoHW_OFF) Or ($bAutoWidth = False) Then __LOWriter_FrameRelativeSize($oDoc, $oFrameStyle, True)
+			If ($oFrameStyle.WidthType() = $iCONST_AutoHW_OFF) Or ($bAutoWidth = False) Then __LOWriter_ObjRelativeSize($oDoc, $oFrameStyle, True)
 		EndIf
 	EndIf
 
@@ -25959,7 +26756,7 @@ Func _LOWriter_FrameStyleTypeSize(ByRef $oDoc, ByRef $oFrameStyle, $iWidth = Nul
 		$iError = ($oFrameStyle.RelativeHeight() = $iRelativeHeight) ? $iError : BitOR($iError, 32)
 
 		If ($iRelativeHeight <> 0) And ($bAutoHeight <> True) Then ;If AutoHeight is not On, and Relative Height isn't being turned off, then set Height Value.
-			If ($oFrameStyle.SizeType() = $iCONST_AutoHW_OFF) Or ($bAutoHeight = False) Then __LOWriter_FrameRelativeSize($oDoc, $oFrameStyle, False, True)
+			If ($oFrameStyle.SizeType() = $iCONST_AutoHW_OFF) Or ($bAutoHeight = False) Then __LOWriter_ObjRelativeSize($oDoc, $oFrameStyle, False, True)
 		EndIf
 	EndIf
 
@@ -26038,7 +26835,8 @@ EndFunc   ;==>_LOWriter_FrameStyleTypeSize
 ;								on all four sides of the border frame of the frame.
 ;						$LOW_WRAP_MODE_LEFT(4), the same as "Before", Wraps text on the left side of the frame.
 ;						$LOW_WRAP_MODE_RIGHT(5), the same as "After", Wraps text on the right side of the frame.
-; Related .......:
+; Related .......:  _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -26144,7 +26942,7 @@ EndFunc   ;==>_LOWriter_FrameStyleWrap
 ;					Call any optional parameter with Null keyword to skip it.
 ;					This function may indicate the settings were set successfully when they haven't been if the appropriate
 ;						wrap type, anchor type etc. hasn't been set before hand.
-; Related .......:
+; Related .......:  _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -26211,7 +27009,7 @@ EndFunc   ;==>_LOWriter_FrameStyleWrapOptions
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -26305,7 +27103,7 @@ EndFunc   ;==>_LOWriter_FrameTransparency
 ;							$LOW_GRAD_TYPE_ELLIPTICAL(3),
 ;							$LOW_GRAD_TYPE_SQUARE(4),
 ;							$LOW_GRAD_TYPE_RECT(5)
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -26564,7 +27362,7 @@ EndFunc   ;==>_LOWriter_FrameTransparencyGradient
 ;						match the height of the selection.
 ;					$LOW_ANCHOR_AT_PAGE(2), Anchors the frame to the current page.
 ;					$LOW_ANCHOR_AT_CHARACTER(4), Anchors the frame to a character.
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -26778,7 +27576,8 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ;						for "Keep Ratio".
 ;Relative Constants: $LOW_RELATIVE_PARAGRAPH(0), means: text area (excluding margins).
 ;						$LOW_RELATIVE_PAGE(7), means: entire page (including margins).
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -26822,7 +27621,7 @@ Func _LOWriter_FrameTypeSize(ByRef $oDoc, ByRef $oFrame, $iWidth = Null, $iRelat
 		$iError = ($oFrame.RelativeWidth() = $iRelativeWidth) ? $iError : BitOR($iError, 2)
 
 		If ($iRelativeWidth <> 0) And ($bAutoWidth <> True) Then ;If AutoWidth is not On, and Relative Width isn't being turned off, then set Width Value.
-			If ($oFrame.WidthType() = $iCONST_AutoHW_OFF) Or ($bAutoWidth = False) Then __LOWriter_FrameRelativeSize($oDoc, $oFrame, True)
+			If ($oFrame.WidthType() = $iCONST_AutoHW_OFF) Or ($bAutoWidth = False) Then __LOWriter_ObjRelativeSize($oDoc, $oFrame, True)
 		EndIf
 	EndIf
 
@@ -26851,7 +27650,7 @@ Func _LOWriter_FrameTypeSize(ByRef $oDoc, ByRef $oFrame, $iWidth = Null, $iRelat
 		$iError = ($oFrame.RelativeHeight() = $iRelativeHeight) ? $iError : BitOR($iError, 32)
 
 		If ($iRelativeHeight <> 0) And ($bAutoHeight <> True) Then ;If AutoHeight is not On, and Relative Height isn't being turned off, then set Height Value.
-			If ($oFrame.SizeType() = $iCONST_AutoHW_OFF) Or ($bAutoHeight = False) Then __LOWriter_FrameRelativeSize($oDoc, $oFrame, False, True)
+			If ($oFrame.SizeType() = $iCONST_AutoHW_OFF) Or ($bAutoHeight = False) Then __LOWriter_ObjRelativeSize($oDoc, $oFrame, False, True)
 		EndIf
 	EndIf
 
@@ -26929,7 +27728,8 @@ EndFunc   ;==>_LOWriter_FrameTypeSize
 ;								on all four sides of the border frame of the frame.
 ;						$LOW_WRAP_MODE_LEFT(4), the same as "Before", Wraps text on the left side of the frame.
 ;						$LOW_WRAP_MODE_RIGHT(5), the same as "After", Wraps text on the right side of the frame.
-; Related .......:
+; Related .......:  _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27037,7 +27837,7 @@ EndFunc   ;==>_LOWriter_FrameWrap
 ;					Call any optional parameter with Null keyword to skip it.
 ;					This function may indicate the settings were set successfully when they haven't been if the appropriate
 ;						wrap type, anchor type etc. hasn't been set before hand.
-; Related .......:
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27102,7 +27902,7 @@ EndFunc   ;==>_LOWriter_FrameWrapOptions
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_NumStyleDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27293,7 +28093,7 @@ EndFunc   ;==>_LOWriter_NumStyleCreate
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL_KO(69), Numbering is in Korean Digital number.
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL2_KO(70), Numbering is in Korean Digital Number, reserved "koreanDigital2".
 ;	$LOW_NUM_STYLE_NUMBER_LEGAL_KO(71), Numbering is in Korean Legal Number, reserved "koreanLegal".
-; Related .......:
+; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27468,7 +28268,7 @@ EndFunc   ;==>_LOWriter_NumStyleCustomize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27551,7 +28351,7 @@ EndFunc   ;==>_LOWriter_NumStyleExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_NumStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27608,7 +28408,7 @@ EndFunc   ;==>_LOWriter_NumStyleGetObj
 ; Remarks .......:  Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27722,7 +28522,8 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ;							$LOW_FOLLOW_BY_SPACE(1),
 ;							$LOW_FOLLOW_BY_NOTHING(2),
 ;							$LOW_FOLLOW_BY_NEWLINE(3)
-; Related .......:
+; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27819,8 +28620,8 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
 ;                  $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation
-;				   +						or retrieval functions, Or A Paragraph Object returned from _LOWriter_ParGetObjects
-;				   +						function.
+;				   +						or retrieval functions, Or A Paragraph Object returned from
+;				   +						_LOWriter_ParObjCreateList function.
 ;                  $sNumStyle           - a string value. The Numbering Style name.
 ; Return values .: Success: 1
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -27837,7 +28638,10 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_ParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor,
+;					_LOWriter_NumStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27862,8 +28666,8 @@ EndFunc   ;==>_LOWriter_NumStyleSet
 ; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
 ;                  $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation
-;				   +						or retrieval functions, Or A Paragraph Object returned from _LOWriter_ParGetObjects
-;				   +						function.
+;				   +						or retrieval functions, Or A Paragraph Object returned from
+;				   +						_LOWriter_ParObjCreateList function.
 ;                  $iLevel              - [optional] an integer value. Default is Null. The Numbering Style level to set the
 ;											paragraph to, Min 1, Max 10. Set to Null to retrieve the current level set.
 ; Return values .: Success: 1 or Integer
@@ -27880,7 +28684,9 @@ EndFunc   ;==>_LOWriter_NumStyleSet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_ParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -27930,7 +28736,7 @@ EndFunc   ;==>_LOWriter_NumStyleSetLevel
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_NumStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -28025,7 +28831,8 @@ EndFunc   ;==>_LOWriter_NumStylesGetNames
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -28188,7 +28995,8 @@ EndFunc   ;==>_LOWriter_PageStyleAreaColor
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -28217,7 +29025,7 @@ Func _LOWriter_PageStyleAreaGradient(ByRef $oDoc, ByRef $oPageStyle, $sGradientN
 		Return SetError($__LOW_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	If ($oPageStyle.FillStyle() <> $__LOWCONST__FILL_STYLE_GRADIENT) Then $oPageStyle.FillStyle = $__LOWCONST__FILL_STYLE_GRADIENT
+	If ($oPageStyle.FillStyle() <> $__LOWCONST_FILL_STYLE_GRADIENT) Then $oPageStyle.FillStyle = $__LOWCONST_FILL_STYLE_GRADIENT
 
 	If ($sGradientName <> Null) Then
 		If Not IsString($sGradientName) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
@@ -28227,7 +29035,7 @@ Func _LOWriter_PageStyleAreaGradient(ByRef $oDoc, ByRef $oPageStyle, $sGradientN
 
 	If ($iType <> Null) Then
 		If ($iType = $LOW_GRAD_TYPE_OFF) Then ;Turn Off Gradient
-			$oPageStyle.FillStyle = $__LOWCONST__FILL_STYLE_OFF
+			$oPageStyle.FillStyle = $__LOWCONST_FILL_STYLE_OFF
 			Return SetError($__LOW_STATUS_SUCCESS, 0, 2)
 		EndIf
 
@@ -28373,7 +29181,9 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradient
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong,  _LOWriter_PageStyleBorderWidth, _LOWriter_PageStyleBorderStyle,
+;					_LOWriter_PageStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -28438,7 +29248,9 @@ EndFunc   ;==>_LOWriter_PageStyleBorderColor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_PageStyleBorderWidth, _LOWriter_PageStyleBorderStyle,
+;					_LOWriter_PageStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -28565,7 +29377,8 @@ EndFunc   ;==>_LOWriter_PageStyleBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_PageStyleBorderWidt,
+;					_LOWriter_PageStyleBorderColor, _LOWriter_PageStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -28632,7 +29445,9 @@ EndFunc   ;==>_LOWriter_PageStyleBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_PageStyleBorderStyle, _LOWriter_PageStyleBorderColor,
+;					_LOWriter_PageStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -28729,7 +29544,8 @@ EndFunc   ;==>_LOWriter_PageStyleBorderWidth
 ;Line Position Constants: $LOW_ALIGN_VERT_TOP(0),
 ;							$LOW_ALIGN_VERT_MIDDLE(1),
 ;							$LOW_ALIGN_VERT_BOTTOM(2)
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -28823,7 +29639,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSeparator
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -28904,7 +29720,8 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSettings
 ;					Note: To set $bAutoWidth or $iGlobalSpacing you may enter any number in $iColumn as long as you are not
 ;						setting width or spacing, as AutoWidth is not column specific. If you set a value for $iGlobalSpacing
 ;						with $bAutoWidth set to false, the value is applied to all the columns still.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -29051,7 +29868,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_PageStyleDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -29106,7 +29923,7 @@ EndFunc   ;==>_LOWriter_PageStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -29232,7 +30049,8 @@ EndFunc   ;==>_LOWriter_PageStyleExists
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -29374,7 +30192,8 @@ EndFunc   ;==>_LOWriter_PageStyleFooter
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -29538,7 +30357,8 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaColor
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -29568,7 +30388,7 @@ Func _LOWriter_PageStyleFooterAreaGradient(ByRef $oDoc, ByRef $oPageStyle, $sGra
 		Return SetError($__LOW_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	If ($oPageStyle.FooterFillStyle() <> $__LOWCONST__FILL_STYLE_GRADIENT) Then $oPageStyle.FooterFillStyle = $__LOWCONST__FILL_STYLE_GRADIENT
+	If ($oPageStyle.FooterFillStyle() <> $__LOWCONST_FILL_STYLE_GRADIENT) Then $oPageStyle.FooterFillStyle = $__LOWCONST_FILL_STYLE_GRADIENT
 
 	If ($sGradientName <> Null) Then
 		If Not IsString($sGradientName) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
@@ -29578,7 +30398,7 @@ Func _LOWriter_PageStyleFooterAreaGradient(ByRef $oDoc, ByRef $oPageStyle, $sGra
 
 	If ($iType <> Null) Then
 		If ($iType = $LOW_GRAD_TYPE_OFF) Then ;Turn Off Gradient
-			$oPageStyle.FooterFillStyle = $__LOWCONST__FILL_STYLE_OFF
+			$oPageStyle.FooterFillStyle = $__LOWCONST_FILL_STYLE_OFF
 			Return SetError($__LOW_STATUS_SUCCESS, 0, 2)
 		EndIf
 
@@ -29727,7 +30547,9 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradient
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong, _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleFooterBorderStyle,
+;					_LOWriter_PageStyleFooterBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -29795,7 +30617,9 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderColor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleFooterBorderStyle,
+;					_LOWriter_PageStyleFooterBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -29922,7 +30746,8 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_PageStyleFooterBorderWidth,
+;					_LOWriter_PageStyleFooterBorderColor, _LOWriter_PageStyleFooterBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -29993,7 +30818,9 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_PageStyleFooterBorderStyle, _LOWriter_PageStyleFooterBorderColor,
+;					_LOWriter_PageStyleFooterBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -30084,7 +30911,8 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderWidth
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -30170,7 +30998,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterShadow
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -30268,7 +31096,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterTransparency
 ;							$LOW_GRAD_TYPE_ELLIPTICAL(3),
 ;							$LOW_GRAD_TYPE_SQUARE(4),
 ;							$LOW_GRAD_TYPE_RECT(5)
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -30389,7 +31217,8 @@ EndFunc   ;==>_LOWriter_PageStyleFooterTransparencyGradient
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -30497,7 +31326,8 @@ EndFunc   ;==>_LOWriter_PageStyleFootnoteArea
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer,	_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -30581,7 +31411,7 @@ EndFunc   ;==>_LOWriter_PageStyleFootnoteLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -30665,7 +31495,8 @@ EndFunc   ;==>_LOWriter_PageStyleGetObj
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -30807,7 +31638,8 @@ EndFunc   ;==>_LOWriter_PageStyleHeader
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -30971,7 +31803,8 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaColor
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -31001,7 +31834,7 @@ Func _LOWriter_PageStyleHeaderAreaGradient(ByRef $oDoc, ByRef $oPageStyle, $sGra
 		Return SetError($__LOW_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	If ($oPageStyle.HeaderFillStyle() <> $__LOWCONST__FILL_STYLE_GRADIENT) Then $oPageStyle.HeaderFillStyle = $__LOWCONST__FILL_STYLE_GRADIENT
+	If ($oPageStyle.HeaderFillStyle() <> $__LOWCONST_FILL_STYLE_GRADIENT) Then $oPageStyle.HeaderFillStyle = $__LOWCONST_FILL_STYLE_GRADIENT
 
 	If ($sGradientName <> Null) Then
 		If Not IsString($sGradientName) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
@@ -31011,7 +31844,7 @@ Func _LOWriter_PageStyleHeaderAreaGradient(ByRef $oDoc, ByRef $oPageStyle, $sGra
 
 	If ($iType <> Null) Then
 		If ($iType = $LOW_GRAD_TYPE_OFF) Then ;Turn Off Gradient
-			$oPageStyle.HeaderFillStyle = $__LOWCONST__FILL_STYLE_OFF
+			$oPageStyle.HeaderFillStyle = $__LOWCONST_FILL_STYLE_OFF
 			Return SetError($__LOW_STATUS_SUCCESS, 0, 2)
 		EndIf
 
@@ -31160,7 +31993,9 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradient
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong, _LOWriter_PageStyleHeaderBorderWidth, _LOWriter_PageStyleHeaderBorderStyle,
+;					_LOWriter_PageStyleHeaderBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -31228,7 +32063,9 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderColor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_PageStyleHeaderBorderWidth, _LOWriter_PageStyleHeaderBorderStyle,
+;					_LOWriter_PageStyleHeaderBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -31355,7 +32192,8 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_PageStyleHeaderBorderWidth,
+;					_LOWriter_PageStyleHeaderBorderColor, _LOWriter_PageStyleHeaderBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -31426,7 +32264,9 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_PageStyleHeaderBorderStyle, _LOWriter_PageStyleHeaderBorderColor,
+;					_LOWriter_PageStyleHeaderBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -31517,7 +32357,8 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderWidth
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong, _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -31602,7 +32443,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -31700,7 +32541,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderTransparency
 ;							$LOW_GRAD_TYPE_ELLIPTICAL(3),
 ;							$LOW_GRAD_TYPE_SQUARE(4),
 ;							$LOW_GRAD_TYPE_RECT(5)
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -31932,7 +32773,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderTransparencyGradient
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL_KO(69), Numbering is in Korean Digital number.
 ;	$LOW_NUM_STYLE_NUMBER_DIGITAL2_KO(70), Numbering is in Korean Digital Number, reserved "koreanDigital2".
 ;	$LOW_NUM_STYLE_NUMBER_LEGAL_KO(71), Numbering is in Korean Legal Number, reserved "koreanLegal".
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -32067,7 +32908,8 @@ EndFunc   ;==>_LOWriter_PageStyleLayout
 ; Remarks .......:  Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -32169,7 +33011,7 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -32311,7 +33153,8 @@ EndFunc   ;==>_LOWriter_PageStyleOrganizer
 ;							$LOW_PAPER_HEIGHT_11ENVELOPE(26365),
 ;							$LOW_PAPER_HEIGHT_12ENVELOPE(27940),
 ;							$LOW_PAPER_HEIGHT_JAP_POSTCARD(14808)
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj,  _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -32371,8 +33214,8 @@ EndFunc   ;==>_LOWriter_PageStylePaperFormat
 ; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
 ;                  $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation
-;				   +						or retrieval functions, Or A Paragraph Object returned from _LOWriter_ParGetObjects
-;				   +						function.
+;				   +						or retrieval functions, Or A Paragraph Object returned from
+;				   +						_LOWriter_ParObjCreateList function.
 ;                  $sPageStyle          - a string value. The Page Style name.
 ; Return values .: Success: 1
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -32389,7 +33232,8 @@ EndFunc   ;==>_LOWriter_PageStylePaperFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_ParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -32438,7 +33282,7 @@ EndFunc   ;==>_LOWriter_PageStyleSet
 ; Remarks .......: Note: One Page style has two separate names, Default Page Style is also internally called "Standard"  Either
 ;					name works when setting a Page Style, but on certain functions that return a Page Style Name, you may see
 ;					the alternative name.
-; Related .......:
+; Related .......: _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -32547,7 +33391,8 @@ EndFunc   ;==>_LOWriter_PageStylesGetNames
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer,	_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -32629,7 +33474,7 @@ EndFunc   ;==>_LOWriter_PageStyleShadow
 ; Remarks .......:  Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -32724,7 +33569,7 @@ EndFunc   ;==>_LOWriter_PageStyleTransparency
 ;							$LOW_GRAD_TYPE_ELLIPTICAL(3),
 ;							$LOW_GRAD_TYPE_SQUARE(4),
 ;							$LOW_GRAD_TYPE_RECT(5)
-; Related .......:
+; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -32813,69 +33658,207 @@ Func _LOWriter_PageStyleTransparencyGradient(ByRef $oDoc, ByRef $oPageStyle, $iT
 EndFunc   ;==>_LOWriter_PageStyleTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_ParGetObjects
-; Description ...: Return Objects for every paragraph contained in a document for Direct Formatting use etc.
-; Syntax ........: _LOWriter_ParGetObjects(Byref $oDoc)
-; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
-;				   +					DocCreate function.
-; Return values .: Success: Array
+; Name ..........: _LOWriter_ParObjCopy
+; Description ...: "Copies" data selected by the ViewCursor, returning an Object for use in inserting later.
+; Syntax ........: _LOWriter_ParObjCopy(Byref $oDoc)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +						DocCreate function.
+; Return values .: Success: Object
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;				   --Input Errors--
 ;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;				   --Initialization Errors--
-;				   @Error 2 @Extended 1 Return 0 = Failed to create Enumeration of Paragraphs for Document.
+;				   @Error 2 @Extended 1 Return 0 = Failed to Copy Selected Data, make sure Data is selected using the
+;				   +						ViewCursor.
 ;				   --Success--
-;				   @Error 0 @Extended ? Return Array  = Success. Returns an Array of Paragraph Objects, @Extended is set to the
-;				   +		number of results.
+;				   @Error 0 @Extended 0 Return Object  = Success. Data was successfully selected, returning an Object for use in
+;				   +						_LOWriter_ParObjPaste.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Returns an Array of objects for Direct Formatting paragraphs in a document, etc.
-; Related .......:
+; Remarks .......: Note: Data you desire to be copied MUST be selected with the ViewCursor, see _LOWriter_ParObjSelect.
+;				   This function works essentially the same as Copy/ Ctrl+C, except it doesn't use your clipboard. The Object
+;					returned is used in _LOWriter_ParObjPaste to insert the data again. Copying data this way works for
+;					Tables, Images, frames and Text, including with direct formatting, etc. Data copied can be inserted into
+;					the same or another document.
+; Related .......: _LOWriter_ParObjPaste, _LOWriter_ParObjSelect, _LOWriter_DocGetViewCursor, _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ParGetObjects(ByRef $oDoc)
-	Local $oEnum, $oPar
-	Local $iCount = 0, $iResults = 0
-	Local $aoParagraphs[1]
+Func _LOWriter_ParObjCopy(ByRef $oDoc)
+	Local $oObj
 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
 	#forceref $oCOM_ErrorHandler
 
 	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
-	$oEnum = $oDoc.Text.createEnumeration()
+
+	$oObj = $oDoc.CurrentController.getTransferable() ;Copy
+	If Not IsObj($oObj) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LOW_STATUS_SUCCESS, 0, $oObj)
+EndFunc   ;==>_LOWriter_ParObjCopy
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_ParObjCreateList
+; Description ...: Return Objects for every paragraph contained in a specific section of a document.
+; Syntax ........: _LOWriter_ParObjCreateList(Byref $oCursor[, $bTableCheck = False])
+; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
+;				   +						Or retrieval functions. See Remarks
+;                  $bTableCheck         - [optional] a boolean value. Default is False. If True, returned array will be 2
+;				   +						dimensional, with the second column indicating if the paragraph object is a
+;				   +						Table (True) or not (False).
+; Return values .: Success: 1D or 2D Array
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $bTableCheck not a Boolean.
+;				   --Initialization Errors--
+;				   @Error 2 @Extended 1 Return 0 = Failed to create Enumeration of Paragraphs.
+;				   --Success--
+;				   @Error 0 @Extended ? Return Array  = Success. Returns an Array of Paragraph Objects, @Extended is set to the
+;				   +		number of results.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: 	$oCursor can be either a ViewCursor or a TextCursor, the paragraphs are enumerated for the area the cursor
+;						is currently within, for example, the ViewCursor is currently in a Table, the enumeration of paragraphs
+;						would be for the Cell the cursor was presently in. In the main document the enumeration would be for
+;						the entire Text Body, in the Header, it would for the that Header for that Page Style etc. The
+;						different possible areas are: Text Body, Table Cell, Header, Footer, Footnote, Endnote, Frame.
+;					Returns an Array of objects for Direct Formatting paragraphs in a document, or for copying and inserting
+;						etc. Table Objects returned from this function can be used as a regular Table Object to modify the Table
+;						with.
+; Related .......: _LOWriter_ParObjSectionsGet, _LOWriter_ParObjSelect, _LOWriter_ParObjDelete
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_ParObjCreateList(ByRef $oCursor, $bTableCheck = False)
+	Local $oEnum, $oPar
+	Local $iCount = 0
+	Local $aoParagraphs[1]
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oCursor) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bTableCheck) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+
+	$oEnum = $oCursor.Text.createEnumeration()
 	If Not IsObj($oEnum) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
+
+	If ($bTableCheck = True) Then ReDim $aoParagraphs[1][2]
 
 	While $oEnum.hasMoreElements()
 		$oPar = $oEnum.nextElement()
 
-		;The returned paragraph will be a paragraph or a text table--Test for a paragraph.
-		If $oPar.supportsService("com.sun.star.text.Paragraph") Then
-			If UBound($aoParagraphs) <= ($iCount) Then ReDim $aoParagraphs[UBound($aoParagraphs) * 10]
+		If ($bTableCheck = True) Then
+
+			If UBound($aoParagraphs) <= ($iCount) Then ReDim $aoParagraphs[UBound($aoParagraphs) * 2][2]
+			$aoParagraphs[$iCount][0] = $oPar
+			$aoParagraphs[$iCount][1] = ($oPar.supportsService("com.sun.star.text.TextTable"))
+			$iCount += 1
+
+		Else
+			If UBound($aoParagraphs) <= ($iCount) Then ReDim $aoParagraphs[UBound($aoParagraphs) * 2]
 			$aoParagraphs[$iCount] = $oPar
 			$iCount += 1
 		EndIf
 
-		$iResults += 1
-		Sleep((IsInt($iResults / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
+		Sleep((IsInt($iCount / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
 	WEnd
-	ReDim $aoParagraphs[$iCount]
+
+	If ($bTableCheck = True) Then
+		ReDim $aoParagraphs[$iCount][2]
+	Else
+		ReDim $aoParagraphs[$iCount]
+
+	EndIf
+
 	Return SetError($__LOW_STATUS_SUCCESS, $iCount, $aoParagraphs)
-EndFunc   ;==>_LOWriter_ParGetObjects
+EndFunc   ;==>_LOWriter_ParObjCreateList
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_ParSectionsGet
+; Name ..........: _LOWriter_ParObjDelete
+; Description ...: Delete a Paragraph Object returned from _LOWriter_ParObjCreateList. See Remarks.
+; Syntax ........: _LOWriter_ParObjDelete(Byref $oParObj)
+; Parameters ....: $oParObj             - [in/out] an object. A Paragraph Object returned by _LOWriter_ParObjCreateList.
+; Return values .: Success: Integer
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oParObj not an Object.
+;				   --Success--
+;				   @Error 0 @Extended 0 Return 1  = Success. Paragraph was successfully deleted.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Note: you cannot delete the last paragraph contained in a Text area, it will cause a COM error.
+; Related .......: _LOWriter_ParObjCreateList
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_ParObjDelete(ByRef $oParObj)
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oParObj) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+
+	If ($oParObj.supportsService("com.sun.star.text.TextTable")) Then
+		$oParObj.dispose()
+
+	Else
+		$oParObj.Text.removeTextContent($oParObj)
+
+	EndIf
+
+	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_ParObjDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_ParObjPaste
+; Description ...: Inserts a ParObjCopy Object at the current ViewCursor location.
+; Syntax ........: _LOWriter_ParObjPaste(Byref $oDoc, Byref $oParObj)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +						DocCreate function.
+;                  $oParObj             - [in/out] an object. A Object returned from _LOWriter_ParObjCopy to insert.
+; Return values .: Success: Integer
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $oParObj not an Object.
+;				   --Success--
+;				   @Error 0 @Extended 0 Return 1  = Success. Data was successfully inserted as the ViewCursor location.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_ParObjCopy
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_ParObjPaste(ByRef $oDoc, ByRef $oParObj)
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oParObj) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+
+	$oDoc.CurrentController.insertTransferable($oParObj)
+
+	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_ParObjPaste
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_ParObjSectionsGet
 ; Description ...: Break a Paragraph Object into individual Sections for Direct Formatting etc. See Remarks.
-; Syntax ........: _LOWriter_ParSectionsGet(Byref $oParagraph)
-; Parameters ....: $oParagraph          - [in/out] an object. A Paragraph Object returned from _LOWriter_ParGetObjects
-;				   +						function.
+; Syntax ........: _LOWriter_ParObjSectionsGet(Byref $oParagraph)
+; Parameters ....: $oParagraph          - [in/out] an object. A Paragraph Object returned from _LOWriter_ParObjCreateList
+;				   +						function. Make sure it's not a Table!
 ; Return values .: Success: Array
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;				   --Input Errors--
 ;				   @Error 1 @Extended 1 Return 0 = $oParagraph is not an Object.
 ;				   @Error 1 @Extended 2 Return 0 = $oParagraph does not support Paragraph service -- Not a paragraph Object.
 ;				   --Initialization Errors--
-;				   @Error 2 @Extended 1 Return 0 = Erro enumerating Paragraph sections.
+;				   @Error 2 @Extended 1 Return 0 = Error enumerating Paragraph sections.
 ;				   --Success--
 ;				   @Error 0 @Extended 0 Return Array = Success. A two column array. See remarks.
 ; Author ........: donnyh13
@@ -32900,11 +33883,11 @@ EndFunc   ;==>_LOWriter_ParGetObjects
 ;					InContentMetadata — a text range with attached metadata
 ;					For Reference marks, document index marks, etc., 2 text portions will be generated, one for the start
 ;						position and one for the end position.
-; Related .......:
+; Related .......: _LOWriter_ParObjCreateList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ParSectionsGet(ByRef $oParagraph)
+Func _LOWriter_ParObjSectionsGet(ByRef $oParagraph)
 	Local $oSecEnum, $oParSection
 	Local $aoSections[1][2]
 	Local $iCount = 0
@@ -32928,7 +33911,64 @@ Func _LOWriter_ParSectionsGet(ByRef $oParagraph)
 	WEnd
 	ReDim $aoSections[$iCount][2]
 	Return SetError($__LOW_STATUS_SUCCESS, $iCount, $aoSections)
-EndFunc   ;==>_LOWriter_ParSectionsGet
+EndFunc   ;==>_LOWriter_ParObjSectionsGet
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_ParObjSelect
+; Description ...: Causes a Paragraph Object to be selected by the ViewCursor.
+; Syntax ........: _LOWriter_ParObjSelect(Byref $oDoc, Byref $oObj)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +						DocCreate function.
+;                  $oObj             - [in/out] an object. A Paragraph Object returned from _LOWriter_ParObjCreateList,
+;				   +						a Table or Frame Object, or a data selected by a Text Cursor, can be used.
+; Return values .: Success: Integer
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $oObj not an Object.
+;				   --Processing Errors--
+;				   @Error 3 @Extended 1 Return 0 = Failed to retrieve ViewCursor Object.
+;				   @Error 3 @Extended 2 Return 0 = Failed to Move ViewCursor.
+;				   --Success--
+;				   @Error 0 @Extended 0 Return 1  = Success. Object was successfully selected.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function causes the ViewCursor to move and select a Paragraph, Table, Frame, TextCursor data, etc.,
+;					usually in preparation for calling _LOWriter_ParObjCopy.
+; Related .......: _LOWriter_ParObjCreateList, _LOWriter_ParObjCopy, _LOWriter_TableGetObjByName, _LOWriter_TableGetObjByCursor,
+;					_LOWriter_TableInsert, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName,
+;					_LOWriter_DocGetViewCursor,	_LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor,	_LOWriter_FootnoteGetTextCursor
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_ParObjSelect(ByRef $oDoc, ByRef $oObj)
+	Local $oViewCursor
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+
+	$oDoc.CurrentController.Select($oObj)
+
+	If ($oObj.supportsService("com.sun.star.text.TextTable")) Then
+
+		$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+		If (@error > 0) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
+
+		_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GOTO_END, 1, True) ;Move and select to End of cell
+		If (@error > 0) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 2, 0)
+
+		_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GOTO_END, 1, True) ;Move and select to End of Table
+		If (@error > 0) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 2, 0)
+
+	EndIf
+
+	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_ParObjSelect
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ParStyleAlignment
@@ -32972,7 +34012,7 @@ EndFunc   ;==>_LOWriter_ParSectionsGet
 ;				   --Success--
 ;				   @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;				   @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current
-;				   +								settings in a 5 Element Array with values in order of function parameters.
+;				   +								settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Note: $iHorAlign must be set to $LOW_PAR_ALIGN_HOR_JUSTIFIED(2) before you can set $iLastLineAlign, and
@@ -33008,7 +34048,7 @@ EndFunc   ;==>_LOWriter_ParSectionsGet
 ;								object.
 ;							$LOW_TXT_DIR_BT_LR(5), — text within a line is written bottom-to-top. Lines and blocks are placed
 ;								left-to-right. (LibreOffice 6.3)
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33078,7 +34118,8 @@ EndFunc   ;==>_LOWriter_ParStyleAlignment
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33166,7 +34207,9 @@ EndFunc   ;==>_LOWriter_ParStyleBackColor
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong, _LOWriter_ParStyleBorderWidth, _LOWriter_ParStyleBorderStyle,
+;					_LOWriter_ParStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33232,7 +34275,9 @@ EndFunc   ;==>_LOWriter_ParStyleBorderColor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_ParStyleBorderWidth, _LOWriter_ParStyleBorderStyle,
+;					_LOWriter_ParStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33329,7 +34374,8 @@ EndFunc   ;==>_LOWriter_ParStyleBorderPadding
 ;						line consisting of two fixed thin lines separated by a variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ParStyleBorderWidth,
+;					_LOWriter_ParStyleBorderColor, _LOWriter_ParStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33405,7 +34451,9 @@ EndFunc   ;==>_LOWriter_ParStyleBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_ParStyleBorderStyle, _LOWriter_ParStyleBorderColor,
+;					_LOWriter_ParStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33462,7 +34510,7 @@ EndFunc   ;==>_LOWriter_ParStyleBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_ParStyleDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33525,7 +34573,7 @@ EndFunc   ;==>_LOWriter_ParStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ParStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33614,7 +34662,8 @@ EndFunc   ;==>_LOWriter_ParStyleDelete
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33684,7 +34733,7 @@ EndFunc   ;==>_LOWriter_ParStyleDropCaps
 ;						$LOW_CASEMAP_LOWER(2); All characters are put in lower case.
 ;						$LOW_CASEMAP_TITLE(3); The first character of each word is put in upper case.
 ;						$LOW_CASEMAP_SM_CAPS(4); All characters are put in upper case, but with a smaller font height.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33796,7 +34845,7 @@ EndFunc   ;==>_LOWriter_ParStyleExists
 ;							$LOW_POSTURE_DontKnow(3); specifies a font with an unknown slant.
 ;							$LOW_POSTURE_REV_OBLIQUE(4); specifies a reverse oblique font (slant not designed into the font).
 ;							$LOW_POSTURE_REV_ITALIC(5); specifies a reverse italic font (slant designed into the font).
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_FontsList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33878,7 +34927,8 @@ EndFunc   ;==>_LOWriter_ParStyleFont
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33916,7 +34966,7 @@ EndFunc   ;==>_LOWriter_ParStyleFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_ParStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -33987,7 +35037,7 @@ EndFunc   ;==>_LOWriter_ParStyleGetObj
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34050,7 +35100,8 @@ EndFunc   ;==>_LOWriter_ParStyleHyphenation
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34122,7 +35173,7 @@ EndFunc   ;==>_LOWriter_ParStyleIndent
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ParStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34229,7 +35280,7 @@ EndFunc   ;==>_LOWriter_ParStyleOrganizer
 ;				   --Success--
 ;				   @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;				   @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current
-;				   +								settings in a 5 Element Array with values in order of function parameters.
+;				   +								settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
@@ -34246,7 +35297,7 @@ EndFunc   ;==>_LOWriter_ParStyleOrganizer
 ;					$LOW_OUTLINE_LEVEL_8(8),
 ;					$LOW_OUTLINE_LEVEL_9(9),
 ;					$LOW_OUTLINE_LEVEL_10(10)
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_NumStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34347,7 +35398,8 @@ EndFunc   ;==>_LOWriter_ParStyleOutLineAndList
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34403,7 +35455,7 @@ EndFunc   ;==>_LOWriter_ParStyleOverLine
 ; Modified ......:
 ; Remarks .......: Note: Break Type must be set before PageStyle will be able to be set, and page style needs set before
 ;					$iPgNumOffSet can be set.
-;					Libre doesn't directly show in it's User interface options for Break type constants #3 and #6 (Column both)
+;					Libre doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both)
 ;							and (Page both), but  doesn't throw an error when being set to either one, so they are included
 ;							here, though I'm not sure if they will work correctly.
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
@@ -34422,7 +35474,7 @@ EndFunc   ;==>_LOWriter_ParStyleOverLine
 ;						therefore, is the last on the page.
 ;						$LOW_BREAK_PAGE_BOTH(6) – A page break is applied before and after the current Paragraph. The current
 ;						Paragraph, therefore, is the only paragraph on the page.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34492,7 +35544,7 @@ EndFunc   ;==>_LOWriter_ParStylePageBreak
 ;						SubScript. If you set both Auto SuperScript to True and Auto SubScript to True, or $iSuperScript
 ;						to an integer and $iSubScript to an integer, Subscript will be set as it is the last in the
 ;						line to be set in this function, and thus will over-write any SuperScript settings.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34542,7 +35594,7 @@ EndFunc   ;==>_LOWriter_ParStylePosition
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34566,8 +35618,8 @@ EndFunc   ;==>_LOWriter_ParStyleRotateScale
 ; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
 ;                  $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation
-;				   +						or retrieval functions, Or A Paragraph Object returned from _LOWriter_ParGetObjects
-;				   +						function.
+;				   +						or retrieval functions, Or A Paragraph Object returned from
+;				   +						_LOWriter_ParObjCreateList function.
 ;                  $sParStyle           - a string value. The Paragraph Style name.
 ; Return values .: Success: 1
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -34584,7 +35636,9 @@ EndFunc   ;==>_LOWriter_ParStyleRotateScale
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+;					_LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor,
+;					_LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34629,11 +35683,11 @@ EndFunc   ;==>_LOWriter_ParStyleSet
 ;				   +		Both are true then only User-Created paragraph styles that are applied are returned.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Note: Two paragraph styles have two separate names, Default Paragraph Style is also internally  called
+; Remarks .......: Note: Two paragraph styles have two separate names, Default Paragraph Style is also internally called
 ;					"Standard" and Complimentary Close, which is internally called "Salutation". Either name works when setting
 ;					a Paragraph Style, but on certain functions that return a Paragraph Style Name, you may see one of these
 ;					alternative names.
-; Related .......:
+; Related .......: _LOWriter_ParStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34743,7 +35797,8 @@ EndFunc   ;==>_LOWriter_ParStylesGetNames
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34836,7 +35891,8 @@ EndFunc   ;==>_LOWriter_ParStyleShadow
 ;							Min 0, Max 10008 MicroMeters (uM)
 ;						$LOW_LINE_SPC_MODE_FIX(3); This specifies the height value as a fixed line height. Min 51 MicroMeters,
 ;							Max 10008 MicroMeters (uM)
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34898,7 +35954,8 @@ EndFunc   ;==>_LOWriter_ParStyleSpace
 ;						kerning value to anything over 32768 uM causes a COM exception, and attempting to set the kerning to any
 ;						of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the
 ;						max settable kerning is -2.0 Pt  to 928.8 Pt.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -34959,7 +36016,7 @@ EndFunc   ;==>_LOWriter_ParStyleSpacing
 ;					$LOW_STRIKEOUT_BOLD(4); specifies to strike out the characters with a bold line.
 ;					$LOW_STRIKEOUT_SLASH(5); specifies to strike out the characters with slashes.
 ;					$LOW_STRIKEOUT_X(6); specifies to strike out the characters with X's.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35041,7 +36098,8 @@ EndFunc   ;==>_LOWriter_ParStyleStrikeOut
 ;							$LOW_TAB_ALIGN_DEFAULT(4);4 = This setting is the default, setting when no TabStops are present.
 ;								Setting and Tabstop to this constant will make it disappear from the TabStop list. It is
 ;								therefore only listed here for property reading purposes.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer, _LOWriter_ParStyleTabStopDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35088,7 +36146,8 @@ EndFunc   ;==>_LOWriter_ParStyleTabStopCreate
 ; Remarks .......: Note: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin.
 ;						This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be
 ;						one of a certain length per document.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ParStyleTabStopList,
+;					_LOWriter_ParStyleTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35127,7 +36186,8 @@ EndFunc   ;==>_LOWriter_ParStyleTabStopDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ParStyleTabStopMod,
+;					_LOWriter_ParStyleTabStopDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35219,7 +36279,8 @@ EndFunc   ;==>_LOWriter_ParStyleTabStopList
 ;							$LOW_TAB_ALIGN_DEFAULT(4);4 = This setting is the default, setting when no TabStops are present.
 ;								Setting and Tabstop to this constant will make it disappear from the TabStop list. It is
 ;								therefore only listed here for property reading purposes.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ParStyleTabStopCreate,
+;					_LOWriter_ParStyleTabStopList, _LOWriter_ConvertFromMicrometer,	_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35282,7 +36343,7 @@ EndFunc   ;==>_LOWriter_ParStyleTabStopMod
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35379,7 +36440,8 @@ EndFunc   ;==>_LOWriter_ParStyleTxtFlowOpt
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObj, _LOWriter_ConvertColorFromLong,
+;					_LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35530,7 +36592,7 @@ EndFunc   ;==>_LOWriter_PathConvert
 ;						anything directly formatted unless $bStyles is also true.
 ;					Note: The returned Search Descriptor is only good for the Document it was created by, it WILL NOT work for
 ;						other documents.
-; Related .......:
+; Related .......: _LOWriter_SearchDescriptorModify, _LOWriter_SearchDescriptorSimilarityModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35615,7 +36677,7 @@ EndFunc   ;==>_LOWriter_SearchDescriptorCreate
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;						get the current settings.
 ;						Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_SearchDescriptorSimilarityModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35709,7 +36771,7 @@ EndFunc   ;==>_LOWriter_SearchDescriptorModify
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;						get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_SearchDescriptorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35761,9 +36823,9 @@ Func _LOWriter_SearchDescriptorSimilarityModify(ByRef $oSrchDescript, $bSimilari
 EndFunc   ;==>_LOWriter_SearchDescriptorSimilarityModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_ShapesListNames
+; Name ..........: _LOWriter_ShapesGetNames
 ; Description ...: Return a list of Shape names contained in a document.
-; Syntax ........: _LOWriter_ShapesListNames(Byref $oDoc)
+; Syntax ........: _LOWriter_ShapesGetNames(Byref $oDoc)
 ; Parameters ....: $oDoc                - [in/out] an object.  A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
 ; Return values .: Success: 2D Array
@@ -35781,14 +36843,17 @@ EndFunc   ;==>_LOWriter_SearchDescriptorSimilarityModify
 ; Modified ......:
 ; Remarks .......: The Implementation name identifies what type of shape object it is, as there can be multiple things counted
 ;						as "Shapes", such as Text Frames etc.
-;						I have found the two following Implementation names being returned, SwXTextFrame, indicating the shape
-;						is actually a Text Frame, and SwXShape, is a regular shape such as a line, circle etc. There may be
-;						other return types I haven't found yet.
+;						I have found the three Implementation names being returned, SwXTextFrame, indicating the shape
+;						is actually a Text Frame, SwXShape, is a regular shape such as a line, circle etc. And
+;						"SwXTextGraphicObject", which is an image / picture. There may be other return types I haven't found
+;						yet. Images inserted into the document are also listed as TextFrames in the shapes category. There isn't
+;						and easy way to differentiate between them yet, see _LOWriter_FramesGetNames, to search for Frames in
+;						the shapes category.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ShapesListNames(ByRef $oDoc)
+Func _LOWriter_ShapesGetNames(ByRef $oDoc)
 	Local $asShapeNames[0][2]
 	Local $oShapes
 
@@ -35803,14 +36868,19 @@ Func _LOWriter_ShapesListNames(ByRef $oDoc)
 		ReDim $asShapeNames[$oShapes.getCount()][2]
 		For $i = 0 To $oShapes.getCount() - 1
 			$asShapeNames[$i][0] = $oShapes.getByIndex($i).Name()
-			$asShapeNames[$i][1] = $oShapes.getByIndex($i).Text.ImplementationName()
+			If $oShapes.getByIndex($i).supportsService("com.sun.star.drawing.Text") Then
+				; If Supports Text Method, then get that impl. name, else just te regular impl. name.
+				$asShapeNames[$i][1] = $oShapes.getByIndex($i).Text.ImplementationName()
+			Else
+				$asShapeNames[$i][1] = $oShapes.getByIndex($i).ImplementationName()
+			EndIf
 
 			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
 		Next
 	EndIf
 
 	Return SetError($__LOW_STATUS_SUCCESS, UBound($asShapeNames), $asShapeNames)
-EndFunc   ;==>_LOWriter_ShapesListNames
+EndFunc   ;==>_LOWriter_ShapesGetNames
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableBorderColor
@@ -35896,7 +36966,9 @@ EndFunc   ;==>_LOWriter_ShapesListNames
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_TableBorderWidth,
+;					_LOWriter_TableBorderStyle, _LOWriter_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -35960,7 +37032,9 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_TableBorderWidth,
+;					_LOWriter_TableBorderStyle, _LOWriter_TableBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36103,7 +37177,8 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 ;						variable gap,
 ;					$LOW_BORDERSTYLE_DASH_DOT(16) Line consisting of a repetition of one dash and one dot,
 ;					$LOW_BORDERSTYLE_DASH_DOT_DOT(17) Line consisting of a repetition of one dash and 2 dots.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_TableBorderWidth,	_LOWriter_TableBorderColor, _LOWriter_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36179,7 +37254,9 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 ;					$LOW_BORDERWIDTH_MEDIUM(53),
 ;					$LOW_BORDERWIDTH_THICK(79),
 ;					$LOW_BORDERWIDTH_EXTRA_THICK(159)
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_TableBorderStyle,
+;					_LOWriter_TableBorderColor,	_LOWriter_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36237,7 +37314,7 @@ EndFunc   ;==>_LOWriter_TableBorderWidth
 ; Modified ......:
 ; Remarks .......:  Note: Break Type must be set before PageStyle will be able to be set, and page style needs set before
 ;					$iPgNumOffSet can be set.
-;					Libre doesn't directly show in it's User interface options for Break type constants #3 and #6 (Column both)
+;					Libre doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both)
 ;						and (Page both), but  doesn't throw an error when being set to either one, so they are included here,
 ;						though I'm not sure if they will work correctly.
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
@@ -36256,7 +37333,8 @@ EndFunc   ;==>_LOWriter_TableBorderWidth
 ;						therefore, is the last on the page.
 ;						$LOW_BREAK_PAGE_BOTH(6) – A page break is applied before and after the Table. The current
 ;						Paragraph, therefore, is the only paragraph on the page.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36349,7 +37427,8 @@ EndFunc   ;==>_LOWriter_TableBreak
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36409,7 +37488,8 @@ EndFunc   ;==>_LOWriter_TableColor
 ; Remarks .......: LibreOffice counts columns and Rows starting at 0. So to delete the first column in a Table you would set
 ;					$iColumn to 0. If you attempt to delete more columns than are present all columns from $iColumn over will be
 ;					deleted. If you delete all columns starting from column 0, the entire Table is deleted.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_TableColumnGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36449,7 +37529,7 @@ EndFunc   ;==>_LOWriter_TableColumnDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36494,7 +37574,8 @@ EndFunc   ;==>_LOWriter_TableColumnGetCount
 ;					of a table you would set $iColumn to one higher than the last column. e.g. a Table containing 3 columns,
 ;					would be numbered as follows: 0(first-Column), 1(second-Column), 2(third-Column), to insert columns
 ;					at the very Right of the columns, you would set $iColumn to 3.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_TableColumnGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36573,7 +37654,7 @@ EndFunc   ;==>_LOWriter_TableColumnInsert
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36622,7 +37703,7 @@ EndFunc   ;==>_LOWriter_TableCreate
 ;				   +						Or retrieval functions. See remarks.
 ;                  $sCellName           - [optional] a string value. Default is "". The name of the Table Cell to create a Text
 ;				   +						Table Cursor in. See Remarks.
-;                  $oCursor             - [optional] ;an object. A Cursor Object returned from any Cursor Object creation
+;                  $oCursor             - [optional] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						Or retrieval functions. Default is Null. See Remarks.
 ; Return values .: Success: Object.
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -36646,7 +37727,8 @@ EndFunc   ;==>_LOWriter_TableCreate
 ;					Text-TableCursor (Not a TableCursor, but a TextCursor already in a Table). $sCellName can be left blank,
 ;					which will place the TextTableCursor at the first cell (Typically "A1") if $oTable is called with an Object,
 ;					else if $oCursor is used, the cell the cursor is currently located in is used.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_TableGetCellNames, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36719,7 +37801,7 @@ EndFunc   ;==>_LOWriter_TableCreateCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_TableCreateCursor, _LOWriter_CursorMove, _LOWriter_TableGetCellNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36777,7 +37859,7 @@ EndFunc   ;==>_LOWriter_TableCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -36797,76 +37879,43 @@ Func _LOWriter_TableDelete(ByRef $oDoc, ByRef $oTable)
 EndFunc   ;==>_LOWriter_TableDelete
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_TableGetByCursor
-; Description ...: Returns a Table Object, for later Table related functions.
-; Syntax ........: _LOWriter_TableGetByCursor(Byref $oDoc, Byref $oCursor)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
-;				   +					DocCreate function.
-;                  $oCursor             - [in/out] an object.  A Cursor Object returned from any Cursor Object creation
-;				   +						Or retrieval functions. Cursor object must be located in a Table.
-; Return values .: Success: Object.
+; Name ..........: _LOWriter_TableGetCellNames
+; Description ...: Retrieve an array list of Cell names from a Table.
+; Syntax ........: _LOWriter_TableGetCellNames(Byref $oTable)
+; Parameters ....: $oTable              - [in/out] an object. A Table Object returned from any Table Object creation
+;				   +						Or retrieval functions.
+; Return values .: Success: Array.
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;				   --Input Errors--
-;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;				   @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;				   @Error 1 @Extended 3 Return 0 = $oCursor not located in a Table.
+;				   @Error 1 @Extended 1 Return 0 = $oTable variable not an Object.
+;				   --Initialization Errors--
+;				   @Error 2 @Extended 1 Return 0 = Failed to retrieve Array of Cell Names.
 ;				   --Success--
-;				   @Error 0 @Extended 0 Return Object = Success, Returns an Object for the Table.
+;				   @Error 0 @Extended ? Return Array. Array of Cell names. @Extended set to number of Cell names contained in
+;				   +									the array.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_TableGetByCursor(ByRef $oDoc, ByRef $oCursor)
+Func _LOWriter_TableGetCellNames(ByRef $oTable)
+	Local $asCellNames
+
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
 	#forceref $oCOM_ErrorHandler
 
-	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oCursor) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
-	If (__LOWriter_Internal_CursorGetDataType($oDoc, $oCursor) <> $LOW_CURDATA_CELL) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0) ;Cursor not in Table
-
-	Return SetError($__LOW_STATUS_SUCCESS, 0, $oDoc.TextTables.getByName($oCursor.TextTable.Name))
-EndFunc   ;==>_LOWriter_TableGetByCursor
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_TableGetByName
-; Description ...: Returns a Table Object, for later Table related functions.
-; Syntax ........: _LOWriter_TableGetByName(Byref $oDoc, $sTableName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
-;				   +					DocCreate function.
-;                  $sTableName          - a string value. Name of Table to retrieve an Object for.
-; Return values .: Success: Object.
-;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;				   --Input Errors--
-;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;				   @Error 1 @Extended 2 Return 0 = $sTableName not a String.
-;				   @Error 1 @Extended 3 Return 0 = No table matching $sTableName found in Document.
-;				   --Success--
-;				   @Error 0 @Extended 0 Return Object = Success, Returns an Object for the requested Table.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_TableGetByName(ByRef $oDoc, $sTableName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
-	#forceref $oCOM_ErrorHandler
-
-	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($sTableName) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
-	If Not _LOWriter_DocHasTableName($oDoc, $sTableName) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
-
-	Return SetError($__LOW_STATUS_SUCCESS, 0, $oDoc.TextTables.getByName($sTableName))
-EndFunc   ;==>_LOWriter_TableGetByName
+	If Not IsObj($oTable) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0) ;Not an Object.
+	$asCellNames = $oTable.getCellNames()
+	If Not IsArray($asCellNames) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0) ;failed to get array of names.
+	Return SetError($__LOW_STATUS_SUCCESS, UBound($asCellNames), $asCellNames)
+EndFunc   ;==>_LOWriter_TableGetCellNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_TableGetCellByCursor
+; Name ..........: _LOWriter_TableGetCellObjByCursor
 ; Description ...: Retrieve a single Cell Object or a Cell Range by Cursor.
-; Syntax ........: _LOWriter_TableGetCellByCursor(Byref $oDoc, Byref $oTable, Byref $oCursor)
+; Syntax ........: _LOWriter_TableGetCellObjByCursor(Byref $oDoc, Byref $oTable, Byref $oCursor)
 ; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
 ;                  $oTable              - [in/out] an object. A Table Object returned from any Table Object creation
@@ -36891,11 +37940,12 @@ EndFunc   ;==>_LOWriter_TableGetByName
 ; Remarks .......: This function will accept a Table Cursor, a ViewCursor, or a Text Cursor. A TableCursor and ViewCursor can
 ;					retrieve the single cell they are located in, or a range of cells that have been selected by them. A
 ;					TextCursor can only retrieve the single cell it is located in.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_DocGetViewCursor,
+;					_LOWriter_DocCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_TableGetCellByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCursor)
+Func _LOWriter_TableGetCellObjByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCursor)
 	Local $iCursorType, $iCursorDataType
 	Local $oCell, $oSelection
 	Local $sCellRange
@@ -36936,12 +37986,12 @@ Func _LOWriter_TableGetCellByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCursor)
 	If Not IsObj($oCell) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 	Return $oCell
 
-EndFunc   ;==>_LOWriter_TableGetCellByCursor
+EndFunc   ;==>_LOWriter_TableGetCellObjByCursor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_TableGetCellByName
+; Name ..........: _LOWriter_TableGetCellObjByName
 ; Description ...: Retrieve a Cell Object or a Cell range by Cell name.
-; Syntax ........: _LOWriter_TableGetCellByName(Byref $oTable, $sCellName[, $sToCellName = $sCellName])
+; Syntax ........: _LOWriter_TableGetCellObjByName(Byref $oTable, $sCellName[, $sToCellName = $sCellName])
 ; Parameters ....: $oTable              - [in/out] an object. A Table Object returned from any Table Object creation
 ;				   +						Or retrieval functions.
 ;                  $sCellName           - a string value. A Cell Name. Note: Case Sensitive. See remarks.
@@ -36965,11 +38015,11 @@ EndFunc   ;==>_LOWriter_TableGetCellByCursor
 ; Remarks .......: Cell names are Case Sensitive. LibreOffice first goes from A to Z, and then a to z and then AA to ZZ etc.
 ;					$sCellName can contain a Cell name that is located after $sToCellName in the Table.
 ;					If $sToCellName is left blank, a cell object is returned instead of a Cell Range.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableGetCellNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_TableGetCellByName(ByRef $oTable, $sCellName, $sToCellName = $sCellName)
+Func _LOWriter_TableGetCellObjByName(ByRef $oTable, $sCellName, $sToCellName = $sCellName)
 	Local $oCell
 	Local Const $STR_STRIPALL = 8
 
@@ -36990,12 +38040,12 @@ Func _LOWriter_TableGetCellByName(ByRef $oTable, $sCellName, $sToCellName = $sCe
 	$oCell = ($sCellName = $sToCellName) ? $oTable.getCellByName($sCellName) : $oTable.getCellRangeByName($sCellName & ":" & $sToCellName)
 	If Not IsObj($oCell) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 	Return $oCell
-EndFunc   ;==>_LOWriter_TableGetCellByName
+EndFunc   ;==>_LOWriter_TableGetCellObjByName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_TableGetCellByPosition
+; Name ..........: _LOWriter_TableGetCellObjByPosition
 ; Description ...: Retrieve a Cell object or Cell Range by position in a Table. See Remarks
-; Syntax ........: _LOWriter_TableGetCellByPosition(Byref $oTable, $iColumn, $iRow[, $iToColumn = $iColumn [, $iToRow = $iRow]])
+; Syntax ........: _LOWriter_TableGetCellObjByPosition(Byref $oTable, $iColumn, $iRow[, $iToColumn = $iColumn [, $iToRow = $iRow]])
 ; Parameters ....: $oTable              - [in/out] an object. A Table Object returned from any Table Object creation
 ;				   +						Or retrieval functions.
 ;                  $iColumn             - an integer value. The column the desired cell is located in, or where to start the
@@ -37041,11 +38091,12 @@ EndFunc   ;==>_LOWriter_TableGetCellByName
 ;					call $iColumn with the lowest integer value column and then $iToColumn with the highest integer value column
 ;					desired. Same for $iRow and $iToRow. You may request the same row in both $iRow and $iToRow, but neither
 ;					$iToRow or $iToColumn may be a lower integer value than $iRow and $iColumn respectively.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_TableColumnGetCount, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_TableGetCellByPosition(ByRef $oTable, $iColumn, $iRow, $iToColumn = $iColumn, $iToRow = $iRow)
+Func _LOWriter_TableGetCellObjByPosition(ByRef $oTable, $iColumn, $iRow, $iToColumn = $iColumn, $iToRow = $iRow)
 	Local $oCell
 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
@@ -37070,41 +38121,7 @@ Func _LOWriter_TableGetCellByPosition(ByRef $oTable, $iColumn, $iRow, $iToColumn
 	If Not IsObj($oCell) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 	Return $oCell
 
-EndFunc   ;==>_LOWriter_TableGetCellByPosition
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_TableGetCellNames
-; Description ...: Retrieve an array list of Cell names from a Table.
-; Syntax ........: _LOWriter_TableGetCellNames(Byref $oTable)
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned from any Table Object creation
-;				   +						Or retrieval functions.
-; Return values .: Success: Array.
-;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;				   --Input Errors--
-;				   @Error 1 @Extended 1 Return 0 = $oTable variable not an Object.
-;				   --Initialization Errors--
-;				   @Error 2 @Extended 1 Return 0 = Failed to retrieve Array of Cell Names.
-;				   --Success--
-;				   @Error 0 @Extended ? Return Array. Array of Cell names. @Extended set to number of Cell names contained in
-;				   +									the array.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_TableGetCellNames(ByRef $oTable)
-	Local $asCellNames
-
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
-	#forceref $oCOM_ErrorHandler
-
-	If Not IsObj($oTable) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0) ;Not an Object.
-	$asCellNames = $oTable.getCellNames()
-	If Not IsArray($asCellNames) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0) ;failed to get array of names.
-	Return SetError($__LOW_STATUS_SUCCESS, UBound($asCellNames), $asCellNames)
-EndFunc   ;==>_LOWriter_TableGetCellNames
+EndFunc   ;==>_LOWriter_TableGetCellObjByPosition
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableGetData
@@ -37142,7 +38159,8 @@ EndFunc   ;==>_LOWriter_TableGetCellNames
 ;					Note, LibreOffice sees Tables as starting at 0, so to get the first Row/Column, you would set $iRow or
 ;						$iColumn to 0.
 ;					This function can fail if the Table is "complex", meaning it has joined or split cells.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_TableColumnGetCount, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37191,6 +38209,73 @@ Func _LOWriter_TableGetData(ByRef $oTable, $iRow = -1, $iColumn = -1)
 EndFunc   ;==>_LOWriter_TableGetData
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_TableGetObjByCursor
+; Description ...: Returns a Table Object, for later Table related functions.
+; Syntax ........: _LOWriter_TableGetObjByCursor(Byref $oDoc, Byref $oCursor)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +					DocCreate function.
+;                  $oCursor             - [in/out] an object.  A Cursor Object returned from any Cursor Object creation
+;				   +						Or retrieval functions. Cursor object must be located in a Table.
+; Return values .: Success: Object.
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
+;				   @Error 1 @Extended 3 Return 0 = $oCursor not located in a Table.
+;				   --Success--
+;				   @Error 0 @Extended 0 Return Object = Success, Returns an Object for the Table.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_TableGetObjByName, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_TableGetObjByCursor(ByRef $oDoc, ByRef $oCursor)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oCursor) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+	If (__LOWriter_Internal_CursorGetDataType($oDoc, $oCursor) <> $LOW_CURDATA_CELL) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0) ;Cursor not in Table
+
+	Return SetError($__LOW_STATUS_SUCCESS, 0, $oDoc.TextTables.getByName($oCursor.TextTable.Name))
+EndFunc   ;==>_LOWriter_TableGetObjByCursor
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_TableGetObjByName
+; Description ...: Returns a Table Object, for later Table related functions.
+; Syntax ........: _LOWriter_TableGetObjByName(Byref $oDoc, $sTableName)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +					DocCreate function.
+;                  $sTableName          - a string value. Name of Table to retrieve an Object for.
+; Return values .: Success: Object.
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $sTableName not a String.
+;				   @Error 1 @Extended 3 Return 0 = No table matching $sTableName found in Document.
+;				   --Success--
+;				   @Error 0 @Extended 0 Return Object = Success, Returns an Object for the requested Table.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_TableGetObjByCursor, _LOWriter_TablesGetNames
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_TableGetObjByName(ByRef $oDoc, $sTableName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sTableName) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+	If Not _LOWriter_DocHasTableName($oDoc, $sTableName) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
+
+	Return SetError($__LOW_STATUS_SUCCESS, 0, $oDoc.TextTables.getByName($sTableName))
+EndFunc   ;==>_LOWriter_TableGetObjByName
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableInsert
 ; Description ...:  Inserts the Table Object into a document.
 ; Syntax ........: _LOWriter_TableInsert(Byref $oDoc, Byref $oCursor, Byref $oTable[, $bHeading = False])
@@ -37234,7 +38319,9 @@ EndFunc   ;==>_LOWriter_TableGetData
 ;					you set $bHeading to True, "Table Heading" Paragraph Style will be applied. If these styles are not present
 ;					a Property setting error will result, however the Table will still have been successfully inserted into the
 ;					document.
-; Related .......:
+; Related .......: _LOWriter_TableCreate, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,
+;					_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor,
+;					_LOWriter_DocFooterGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37258,7 +38345,7 @@ Func _LOWriter_TableInsert(ByRef $oDoc, $oCursor, ByRef $oTable, $bHeading = Fal
 		Switch $iCursorDataType
 			Case $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE
 				Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0) ;Unable to insert tables in footnotes/ EndNotes
-			Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_CELL, $LOW_CURDATA_FRAME
+			Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_CELL, $LOW_CURDATA_FRAME, $LOW_CURDATA_HEADER_FOOTER
 				$oInsertPoint = $oCursor
 			Case Else
 				Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0) ;unknown Cursor type
@@ -37337,7 +38424,8 @@ EndFunc   ;==>_LOWriter_TableInsert
 ;					 Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37455,7 +38543,7 @@ EndFunc   ;==>_LOWriter_TableMargin
 ;						$LOW_ORIENT_HORI_LEFT = 3 – The table is aligned at the left side.
 ;						$LOW_ORIENT_HORI_FULL = 6 – The table uses the full space (for text tables only).
 ;						$LOW_ORIENT_HORI_LEFT_AND_WIDTH = 7 – The left offset and the width of the table are defined.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37585,7 +38673,8 @@ EndFunc   ;==>_LOWriter_TableProperties
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37651,7 +38740,7 @@ EndFunc   ;==>_LOWriter_TableRowColor
 ; Remarks .......: LibreOffice counts Rows starting at 0. So to delete the first Row in a Table you would set
 ;					$iRow to 0. If you attempt to delete more rows than are present, all rows from $iRow over will be deleted.
 ;					If you delete all Rows starting from Row 0, the entire Table is deleted.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37691,7 +38780,7 @@ EndFunc   ;==>_LOWriter_TableRowDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37736,7 +38825,7 @@ EndFunc   ;==>_LOWriter_TableRowGetCount
 ;					you would set $iRow to one higher than the last row. e.g. a Table containing 3 rows, would be numbered as
 ;					follows: 0(first-row), 1(second-row), 2(third-row), to insert rows at the very bottom of the rows, I would
 ;					set $iRow to 3.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37798,7 +38887,7 @@ EndFunc   ;==>_LOWriter_TableRowInsert
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37869,7 +38958,7 @@ EndFunc   ;==>_LOWriter_TableRowProperty
 ;					rows, and each sub Array must have the same number of Elements as there are columns. To skip a Cell, just
 ;					leave the sub array element blank you want to skip. This will replace all previous data in the Table. The
 ;					Array will not be modified.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -37891,6 +38980,52 @@ Func _LOWriter_TableSetData(ByRef $oTable, ByRef $avData)
 	$oTable.setDataArray($avData)
 	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_TableSetData
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_TablesGetNames
+; Description ...: List the names of all tables contained in a document.
+; Syntax ........: _LOWriter_TablesGetNames(Byref $oDoc)
+; Parameters ....: $oDoc           - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
+;				   +					DocCreate function.
+; Return values .: Success: Array of Strings.
+;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;				   --Input Errors--
+;				   @Error 1 @Extended 1 Return 0 = $oDoc variable not an Object.
+;				   --Initialization Errors--
+;				   @Error 2 @Extended 1 Return 0 = Failure retrieving Table objects.
+;				   @Error 2 @Extended 2 Return 0 = Document contains no Tables.
+;				   --Success--
+;				   @Error 0 @Extended ? Return Array. Returning Array of Table Names. @Extended set to number of Names returned.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:_LOWriter_TableGetObjByName
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_TablesGetNames(ByRef $oDoc)
+	Local $oTable, $oTables
+	Local $asTableNames[0]
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
+	$oTables = $oDoc.TextTables()
+	If Not IsObj($oTables) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
+	If $oTables.hasElements() Then
+		ReDim $asTableNames[$oTables.getCount()]
+		For $i = 0 To $oTables.getCount() - 1
+			$oTable = $oTables.getByIndex($i)
+			$asTableNames[$i] = $oTable.Name
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0)) ;Sleep every x cycles.
+		Next
+		Return SetError($__LOW_STATUS_SUCCESS, UBound($asTableNames), $asTableNames)
+	Else
+		Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0) ; No tables.
+	EndIf
+
+EndFunc   ;==>_LOWriter_TablesGetNames
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableShadow
@@ -37957,7 +39092,9 @@ EndFunc   ;==>_LOWriter_TableSetData
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......:  _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_ConvertColorFromLong,	_LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -38049,7 +39186,8 @@ EndFunc   ;==>_LOWriter_TableShadow
 ;					Call this function with only the required parameters (or with all other parameters set to Null keyword), to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName,
+;					_LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -38146,6 +39284,8 @@ Func _LOWriter_VersionGet($bSimpleVersion = False, $bReturnName = False)
 
 	Return SetError($__LOW_STATUS_SUCCESS, 0, $sReturn)
 EndFunc   ;==>_LOWriter_VersionGet
+
+
 
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -38350,7 +39490,7 @@ EndFunc   ;==>__LOWriter_ArrayFill
 ; Remarks .......:   Call this function with all other parameters set to Null keyword, and $bWid, or $bSty, or $bCol set to true
 ;						to get the corresponding current settings.
 ;					All distance values are set in MicroMeters. Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -38456,7 +39596,7 @@ EndFunc   ;==>__LOWriter_Border
 ; Remarks .......: Call this function with only the Object parameter and all other parameters set to Null keyword, and $bWid,
 ;					or $bSty, or $bCol set to true to get the corresponding current settings.
 ;					All distance values are set in MicroMeters. Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -38566,7 +39706,7 @@ EndFunc   ;==>__LOWriter_CharBorder
 ; Remarks .......: Call this function with only the Object parameter and all other parameters set to Null keyword, to get the
 ;					current settings.
 ;					All distance values are set in MicroMeters. Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -38875,7 +40015,7 @@ EndFunc   ;==>__LOWriter_CharFont
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -39004,7 +40144,7 @@ EndFunc   ;==>__LOWriter_CharFontColor
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -39295,7 +40435,8 @@ EndFunc   ;==>__LOWriter_CharRotateScale
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -39390,7 +40531,7 @@ EndFunc   ;==>__LOWriter_CharShadow
 ;						kerning value to  anything over 32768 uM causes a COM exception, and attempting to set the kerning to
 ;						any of these negative  numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the
 ;						 max settable kerning  is -2.0 Pt to 928.8 Pt.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -39630,7 +40771,7 @@ EndFunc   ;==>__LOWriter_CharStyleNameToggle
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -39731,7 +40872,8 @@ EndFunc   ;==>__LOWriter_CreateStruct
 ;				   @Error 3 @Extended 2 Return 0 = Cursor is in an unknown data field.
 ;				   --Success--
 ;				   @Error 0 @Extended ? Return Object = Success, Text object was returned. @Extended can be from
-;				   +		1 - 5; BodyText = 1, TextFrame = 2, TextTableCell = 3, FootNote = 4,  EndNote = 5)
+;				   +		1 - 6; $LOW_CURDATA_BODY_TEXT = 1, $LOW_CURDATA_FRAME = 2, $LOW_CURDATA_CELL = 3,
+;				   +				$LOW_CURDATA_FOOTNOTE = 4, $LOW_CURDATA_ENDNOTE = 5, $LOW_CURDATA_HEADER_FOOTER = 6
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Also returns what type of cursor, such as a text Table, footnote etc. Can throw a COM-Error when retrieving
@@ -39760,7 +40902,7 @@ Func __LOWriter_CursorGetText(ByRef $oDoc, ByRef $oCursor)
 	If Not IsObj($oReturnedObj) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Switch $iCursorDataType
-		Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE
+		Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE, $LOW_CURDATA_HEADER_FOOTER
 			$oText = $oReturnedObj.getText()
 			If Not IsObj($oText) Then Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0)
 			Return SetError($__LOW_STATUS_SUCCESS, $iCursorDataType, $oText)
@@ -40013,9 +41155,9 @@ Func __LOWriter_FieldsGetList(ByRef $oDoc, $bSupportedServices, $bFieldType, $bF
 EndFunc   ;==>__LOWriter_FieldsGetList
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOwriter_FieldTypeServices
+; Name ..........: __LOWriter_FieldTypeServices
 ; Description ...: Retrieve an Array of Supported Service Names and Integer Constants to search for Fields.
-; Syntax ........: __LOwriter_FieldTypeServices($iFieldType[, $bAdvancedServices = False[, $bDocInfoServices = False]])
+; Syntax ........: __LOWriter_FieldTypeServices($iFieldType[, $bAdvancedServices = False[, $bDocInfoServices = False]])
 ; Parameters ....: $iFieldType          - an integer value. The Integer Constant Field type.
 ;                  $bAdvancedServices   - [optional] a boolean value. Default is False. If True, search in Advanced Field Type
 ;				   +						Array.
@@ -40049,7 +41191,7 @@ EndFunc   ;==>__LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOwriter_FieldTypeServices($iFieldType, $bAdvancedServices = False, $bDocInfoServices = False)
+Func __LOWriter_FieldTypeServices($iFieldType, $bAdvancedServices = False, $bDocInfoServices = False)
 	Local $avFieldTypes[30][2] = [[$LOW_FIELD_TYPE_COMMENT, "com.sun.star.text.TextField.Annotation"], _
 			[$LOW_FIELD_TYPE_AUTHOR, "com.sun.star.text.TextField.Author"], [$LOW_FIELD_TYPE_CHAPTER, "com.sun.star.text.TextField.Chapter"], _
 			[$LOW_FIELD_TYPE_CHAR_COUNT, "com.sun.star.text.TextField.CharacterCount"], [$LOW_FIELD_TYPE_COMBINED_CHAR, "com.sun.star.text.TextField.CombinedCharacters"], _
@@ -40117,7 +41259,7 @@ Func __LOwriter_FieldTypeServices($iFieldType, $bAdvancedServices = False, $bDoc
 	ReDim $avFieldResults[$iCount][2]
 
 	Return SetError($__LOW_STATUS_SUCCESS, 3, $avFieldResults)
-EndFunc   ;==>__LOwriter_FieldTypeServices
+EndFunc   ;==>__LOWriter_FieldTypeServices
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_FilterNameGet
@@ -40382,7 +41524,7 @@ EndFunc   ;==>__LOWriter_FindFormatRetrieveSetting
 ; Remarks .......: Call this function with all other parameters set to Null keyword, and $bWid, or $bSty, or $bCol set to true
 ;						to get the corresponding current settings.
 ;					All distance values are set in MicroMeters. Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -40453,13 +41595,14 @@ Func __LOWriter_FooterBorder(ByRef $oObj, $bWid, $bSty, $bCol, $iTop, $iBottom, 
 EndFunc   ;==>__LOWriter_FooterBorder
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOWriter_FrameRelativeSize
-; Description ...: Calculate appropriate values to set Frame or Frame Style Width or Height, when using relative values.
-; Syntax ........: __LOWriter_FrameRelativeSize(Byref $oDoc, Byref $oFrameObj[, $bRelativeWidth = False[, $bRelativeHeight = False]])
+; Name ..........: __LOWriter_ObjRelativeSize
+; Description ...: Calculate appropriate values to set Frame, Frame Style or Image Width or Height, when using relative values.
+; Syntax ........: __LOWriter_ObjRelativeSize(Byref $oDoc, Byref $oObj[, $bRelativeWidth = False[, $bRelativeHeight = False]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
-;                  $oFrameObj         - [in/out] an object. A Frame or Frame Style object returned by previous FrameStyle Create
-;				   +						or Object Retrieval function, or Frame Create or Object retrieval function.
+;                  $oObj         - [in/out] an object. A Frame or Frame Style object returned by previous FrameStyle Create
+;				   +						or Object Retrieval function, or Frame Create or Object retrieval function. Can also
+;				   +						be an Image Object.
 ;                  $bRelativeWidth      - [optional] a boolean value. Default is False. If True, modify Width based on relative
 ;				   +						width percentage.
 ;                  $bRelativeHeight     - [optional] a boolean value. Default is False. If True, modify Height based on relative
@@ -40468,7 +41611,7 @@ EndFunc   ;==>__LOWriter_FooterBorder
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;				   --Input Errors--
 ;				   @Error 1 @Extended 1 Return 0 = $oDoc parameter not an Object.
-;				   @Error 1 @Extended 2 Return 0 = $oFrameObj not an Object.
+;				   @Error 1 @Extended 2 Return 0 = $oObj not an Object.
 ;				   @Error 1 @Extended 3 Return 0 = $bRelativeWidth not a boolean.
 ;				   @Error 1 @Extended 4 Return 0 = $bRelativeHeight not a boolean.
 ;				   @Error 1 @Extended 5 Return 0 = $bRelativeHeight and $bRelativeWidth both set to False.
@@ -40484,28 +41627,28 @@ EndFunc   ;==>__LOWriter_FooterBorder
 ;					For Frame Styles, If you notice in L.O. when you set the relative value, while the Viewcursor is in one
 ;					PageStyle, and then move the cursor to another type of page style, the percentage changes. So when I am
 ;					modifying a FrameStyle obtain the ViewCursor, retrieve what PageStyle it is currently in, and calculate the
-;					Width/Height values based on that sizing. Or when modifying a Frame, I obtain it's anchor, and retrieve the
+;					Width/Height values based on that sizing. Or when modifying a Frame, I obtain its anchor, and retrieve the
 ;					page style name, and get the page size settings for setting Frame Width/Height. However, is makes no
 ;					material difference, as the frame still is set to the correct width/height regardless.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_FrameRelativeSize(ByRef $oDoc, ByRef $oFrameObj, $bRelativeWidth = False, $bRelativeHeight = False)
-	Local $iPageWidth, $iPageHeight, $iFrameWidth, $iFrameHeight
+Func __LOWriter_ObjRelativeSize(ByRef $oDoc, ByRef $oObj, $bRelativeWidth = False, $bRelativeHeight = False)
+	Local $iPageWidth, $iPageHeight, $iObjWidth, $iObjHeight
 	Local $oPageStyle
 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
 	#forceref $oCOM_ErrorHandler
 
 	If Not IsObj($oDoc) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oFrameObj) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsObj($oObj) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bRelativeWidth) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsBool($bRelativeHeight) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If (($bRelativeHeight = False) And ($bRelativeWidth = False)) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	If ($oFrameObj.supportsService("com.sun.star.text.TextFrame")) Then
-		$oPageStyle = $oDoc.StyleFamilies().getByName("PageStyles").getByName($oFrameObj.Anchor.PageStyleName())
+	If ($oObj.supportsService("com.sun.star.text.TextFrame")) Or ($oObj.supportsService("com.sun.star.text.TextGraphicObject")) Then
+		$oPageStyle = $oDoc.StyleFamilies().getByName("PageStyles").getByName($oObj.Anchor.PageStyleName())
 	Else
 		$oPageStyle = $oDoc.StyleFamilies().getByName("PageStyles").getByName($oDoc.CurrentController.getViewCursor().PageStyleName())
 	EndIf
@@ -40517,9 +41660,9 @@ Func __LOWriter_FrameRelativeSize(ByRef $oDoc, ByRef $oFrameObj, $bRelativeWidth
 		$iPageWidth = $iPageWidth - $oPageStyle.RightMargin()
 		$iPageWidth = $iPageWidth - $oPageStyle.LeftMargin() ;Minus off both margins.
 
-		$iFrameWidth = $iPageWidth * ($oFrameObj.RelativeWidth() / 100) ;Times Page width minus margins by relative width percentage.
+		$iObjWidth = $iPageWidth * ($oObj.RelativeWidth() / 100) ;Times Page width minus margins by relative width percentage.
 
-		$oFrameObj.Width = $iFrameWidth
+		$oObj.Width = $iObjWidth
 
 	EndIf
 
@@ -40528,13 +41671,13 @@ Func __LOWriter_FrameRelativeSize(ByRef $oDoc, ByRef $oFrameObj, $bRelativeWidth
 		$iPageHeight = $iPageHeight - $oPageStyle.TopMargin()
 		$iPageHeight = $iPageHeight - $oPageStyle.BottomMargin() ;Minus off both margins.
 
-		$iFrameHeight = $iPageHeight * ($oFrameObj.RelativeHeight() / 100) ;Times Page Height minus margins by relative Height percentage.
+		$iObjHeight = $iPageHeight * ($oObj.RelativeHeight() / 100) ;Times Page Height minus margins by relative Height percentage.
 
-		$oFrameObj.Height = $iFrameHeight
+		$oObj.Height = $iObjHeight
 	EndIf
 
 	Return SetError($__LOW_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOWriter_FrameRelativeSize
+EndFunc   ;==>__LOWriter_ObjRelativeSize
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_GetPrinterSetting
@@ -40602,7 +41745,7 @@ EndFunc   ;==>__LOWriter_GetPrinterSetting
 ; Remarks .......: If The Gradient name is blank, I need to create a new name and apply it. I think I could re-use
 ;					an old one without problems, but I'm not sure, so to be safe, I will create a new one. If there are no names
 ;					that have been already created, then I need to create and apply one before the transparency gradient will
-;					be displayed. Else if a preset Gradient is called, I need to create it's name before it can be used.
+;					be displayed. Else if a preset Gradient is called, I need to create its name before it can be used.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -40980,7 +42123,7 @@ EndFunc   ;==>__LOWriter_GradientPresets
 ; Remarks .......:  Call this function with all other parameters set to Null keyword, and $bWid, or $bSty, or $bCol set to true
 ;						to get the corresponding current settings.
 ;					All distance values are set in MicroMeters. Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -41085,11 +42228,12 @@ EndFunc   ;==>__LOWriter_HeaderBorder
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns what type of cursor, such as a TextTable, Footnote etc.
-;Cursor Data Type Constants: $LOW_CURDATA_BODY_TEXT = 1,
-;								$LOW_CURDATA_FRAME = 2,
-;								$LOW_CURDATA_CELL = 3,
-;								$LOW_CURDATA_FOOTNOTE = 4,
-;								$LOW_CURDATA_ENDNOTE = 5,
+;Cursor Data Type Constants: $LOW_CURDATA_BODY_TEXT(1),
+;								$LOW_CURDATA_FRAME(2),
+;								$LOW_CURDATA_CELL(3),
+;								$LOW_CURDATA_FOOTNOTE(4),
+;								$LOW_CURDATA_ENDNOTE(5),
+;								$LOW_CURDATA_HEADER_FOOTER(6)
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -41120,6 +42264,11 @@ Func __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor, $bReturn
 			$oReturnObject = $oDoc.TextTables.getByName($oCursor.TextTable.Name)
 			If Not IsObj($oReturnObject) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 2, 0)
 			Return ($bReturnObject) ? SetError($__LOW_STATUS_SUCCESS, $LOW_CURDATA_CELL, $oReturnObject) : SetError($__LOW_STATUS_SUCCESS, 0, $LOW_CURDATA_CELL)
+
+		Case "SwXHeadFootText"
+			$oReturnObject = $oCursor
+			Return ($bReturnObject) ? SetError($__LOW_STATUS_SUCCESS, $LOW_CURDATA_HEADER_FOOTER, $oReturnObject) : SetError($__LOW_STATUS_SUCCESS, 0, $LOW_CURDATA_HEADER_FOOTER)
+
 		Case "SwXFootnote"
 			$oFootNotes = $oDoc.getFootnotes()
 			If Not IsObj($oFootNotes) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
@@ -41185,11 +42334,13 @@ EndFunc   ;==>__LOWriter_Internal_CursorGetDataType
 ;				   --Processing Errors--
 ;				   @Error 3 @Extended 1 Return 0 = Unknown Cursor type.
 ;				   --Success--
-;				   @Error 0 @Extended 0 Return Integer  = Success, Return value can be from 1 - 3;
-;				   +				$LOW_CURTYPE_TEXT_CURSOR = 1, $LOW_CURTYPE_TABLE_CURSOR = 2, $__ViewCursor = 3
+;				   @Error 0 @Extended 0 Return Integer  = Success, Return value can be from 1 - 5;
+;				   +				$LOW_CURTYPE_TEXT_CURSOR(1), $LOW_CURTYPE_TABLE_CURSOR(2), $LOW_CURTYPE_VIEW_CURSOR(3),
+;				   +				$LOW_CURTYPE_PARAGRAPH(4), $LOW_CURTYPE_TEXT_PORTION(5)
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns what type of cursor the input Object is, such as a TableCursor, Text Cursor or a ViewCursor.
+;					Can also be a Paragraph or Text Portion.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -41207,6 +42358,10 @@ Func __LOWriter_Internal_CursorGetType(ByRef $oCursor)
 			Return SetError($__LOW_STATUS_SUCCESS, 0, $LOW_CURTYPE_TABLE_CURSOR)
 		Case "SwXTextCursor"
 			Return SetError($__LOW_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_CURSOR)
+		Case "SwXParagraph"
+			Return SetError($__LOW_STATUS_SUCCESS, 0, $LOW_CURTYPE_PARAGRAPH)
+		Case "SwXTextPortion"
+			Return SetError($__LOW_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_PORTION)
 		Case Else
 			Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0) ;unknown Cursor type.
 	EndSwitch
@@ -41659,7 +42814,7 @@ Func __LOWriter_NumStyleListFormat(ByRef $oNumRules, $iLevel, $iSubLevels, $sPre
 			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
 		Next
 
-	Else ;Else if I'm modifying a specific level, retrieve it's prefix/Suffix
+	Else ;Else if I'm modifying a specific level, retrieve its prefix/Suffix
 		$sPrefix = ($sPrefix = Null) ? __LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "Prefix") : $sPrefix
 		$sSuffix = ($sSuffix = Null) ? __LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "Suffix") : $sSuffix
 
@@ -42074,7 +43229,7 @@ EndFunc   ;==>__LOWriter_ParAlignment
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -42147,7 +43302,7 @@ EndFunc   ;==>__LOWriter_ParBackColor
 ; Modified ......:
 ; Remarks .......:  Call this function with only the Object parameter and all other parameters set to Null keyword, to
 ;					get the current settings.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -42489,7 +43644,7 @@ EndFunc   ;==>__LOWriter_ParHyphenation
 ;					Call this function with only the Object parameter and all other parameters set to Null keyword, to
 ;					get the current settings.
 ;					Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -42588,7 +43743,7 @@ EndFunc   ;==>__LOWriter_ParIndent
 ; ===============================================================================================================================
 Func __LOWriter_ParOutLineAndList(ByRef $oObj, $iOutline, $sNumStyle, $bParLineCount, $iLineCountVal)
 	Local $iError = 0
-	Local $avOutlineNList[5]
+	Local $avOutlineNList[4]
 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
 	#forceref $oCOM_ErrorHandler
@@ -42660,7 +43815,7 @@ EndFunc   ;==>__LOWriter_ParOutLineAndList
 ; Modified ......:
 ; Remarks .......: Note: Break Type must be set before PageStyle will be able to be set, and page style needs set before
 ;					$iPgNumOffSet can be set.
-;					Libre doesn't directly show in it's User interface options for Break type constants #3 and #6 (Column both)
+;					Libre doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both)
 ;						and (Page both), but  doesn't throw an error when being set to either one, so they are included here,
 ;						though I'm not sure if they will work correctly.
 ;					Call this function with only the Object parameter and all other parameters set to Null keyword, to
@@ -42780,7 +43935,8 @@ EndFunc   ;==>__LOWriter_ParPageBreak
 ;					$LOW_COLOR_GREEN(43315),
 ;					$LOW_COLOR_LIME(8508442),
 ;					$LOW_COLOR_BROWN(9127187).
-; Related .......:
+; Related .......: _LOWriter_ConvertColorFromLong, _LOWriter_ConvertColorToLong,  _LOWriter_ConvertFromMicrometer,
+;					_LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -42904,7 +44060,7 @@ EndFunc   ;==>__LOWriter_ParShadow
 ;							Min 0, Max 10008 MicroMeters (uM)
 ;						$LOW_LINE_SPC_MODE_FIX(3); This specifies the height value as a fixed line height. Min 51 MicroMeters,
 ;							Max 10008 MicroMeters (uM)
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -43083,7 +44239,7 @@ EndFunc   ;==>__LOWriter_ParStyleNameToggle
 ;							$LOW_TAB_ALIGN_DEFAULT(4);4 = This setting is the default, setting when no TabStops are present.
 ;								Setting and Tabstop to this constant will make it disappear from the TabStop list. It is
 ;								therefore only listed here for property reading purposes.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -43342,7 +44498,7 @@ EndFunc   ;==>__LOWriter_ParTabStopList
 ;							$LOW_TAB_ALIGN_DEFAULT(4);4 = This setting is the default, setting when no TabStops are present.
 ;								Setting and Tabstop to this constant will make it disappear from the TabStop list. It is
 ;								therefore only listed here for property reading purposes.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -43776,7 +44932,7 @@ EndFunc   ;==>__LOWriter_TableBorder
 ;						$LOW_VIEWCUR_GO_LEFT, Move the cursor left by n characters.
 ;						$LOW_VIEWCUR_GO_RIGHT, Move the cursor right by n characters.
 ;					-TextCursor
-;						$LOW_TEXTCUR_GO_LEFT,Move the cursor left by n characters.
+;						$LOW_TEXTCUR_GO_LEFT, Move the cursor left by n characters.
 ;						$LOW_TEXTCUR_GO_RIGHT, Move the cursor right by n characters.
 ;						$LOW_TEXTCUR_GOTO_NEXT_WORD, Move to the start of the next word.
 ;						$LOW_TEXTCUR_GOTO_PREV_WORD, Move to the end of the previous word.
@@ -43805,9 +44961,8 @@ EndFunc   ;==>__LOWriter_TableBorder
 ;					-TextCursor
 ;						$LOW_TEXTCUR_GOTO_START, Move the cursor to the start of the text.
 ;						$LOW_TEXTCUR_GOTO_END, Move the cursor to the end of the text.
-;						$LOW_TEXTCUR_GOTO_END_OF_WORD, Move to the end of the current
-;						$LOW_TEXTCUR_GOTO_START_OF_WORD, Move to the start of the current
-;							word.
+;						$LOW_TEXTCUR_GOTO_END_OF_WORD, Move to the end of the current word.
+;						$LOW_TEXTCUR_GOTO_START_OF_WORD, Move to the start of the current word.
 ;						$LOW_TEXTCUR_GOTO_END_OF_SENTENCE, Move to the end of the current sentence.
 ;						$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, Move to the start of the current sentence.
 ;						$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, Move to the end of the current paragraph.
@@ -44350,7 +45505,7 @@ EndFunc   ;==>__LOWriter_TransparencyGradientNameInsert
 ;						$__LOWCONST_CONVERT_UM_INCH, From Micrometer (100th of a millimeter) To Inches.
 ;						$__LOWCONST_CONVERT_PT_UM, From Printers Point to MicroMeters.
 ;						$__LOWCONST_CONVERT_UM_PT, From MicroMeters to Printers Point.
-; Related .......:
+; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
