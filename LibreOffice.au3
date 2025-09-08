@@ -1,10 +1,11 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
 #include-once
+
 #include "LibreOffice_Helper.au3"
-#include "LibreOfficeWriter.au3"
 #include "LibreOfficeCalc.au3"
-;~ #include "LibreOfficeDraw.au3" - not supported yet
+#include "LibreOfficeImpress.au3"
+#include "LibreOfficeWriter.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
