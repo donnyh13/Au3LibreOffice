@@ -11,7 +11,6 @@
 #include "LibreOfficeImpress_Doc.au3"
 #include "LibreOfficeImpress_Slides.au3"
 
-
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1

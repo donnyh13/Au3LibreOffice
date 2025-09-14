@@ -67,6 +67,7 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null)
 	Local $oSlide
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
 	If ($iPos = Null) Then $iPos = $oDoc.DrawPages.getCount()
 	If Not __LOImpress_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -292,6 +293,7 @@ Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 				$oBackground.FillGradientStepCount(), $tStyleGradient.XOffset(), $tStyleGradient.YOffset(), ($tStyleGradient.Angle() / 10), _
 				$tStyleGradient.Border(), $tStyleGradient.StartColor(), $tStyleGradient.EndColor(), $tStyleGradient.StartIntensity(), _
 				$tStyleGradient.EndIntensity()) ; Angle is set in thousands
+
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
@@ -744,7 +746,7 @@ EndFunc   ;==>_LOImpress_SlideAreaTransparencyGradient
 ; Description ...: Create a copy of a slide.
 ; Syntax ........: _LOImpress_SlideCopy(ByRef $oSlide)
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-; Return values .:Success: Object
+; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
@@ -937,7 +939,7 @@ EndFunc   ;==>_LOImpress_SlideDeleteByObj
 ; Remarks .......:
 ; Related .......:
 ; Link ..........:
-; Example .......:Yes
+; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOImpress_SlideGetByIndex(ByRef $oDoc, $iSlide)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)

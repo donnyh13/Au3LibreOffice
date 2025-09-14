@@ -61,15 +61,15 @@
 ; Remarks .......: The first parameter passed to the User function will always be the COM Error object. See below.
 ;                  Every COM Error will be passed to that function. The user can then read the following properties. (As Found in the COM Reference section in Autoit HelpFile.) Using the first parameter in the UserFunction.
 ;                  For Example MyFunc($oMyError)
-;                    $oMyError.number The Windows HRESULT value from a COM call
-;                    $oMyError.windescription The FormatWinError() text derived from .number
-;                    $oMyError.source Name of the Object generating the error (contents from ExcepInfo.source)
-;                    $oMyError.description Source Object's description of the error (contents from ExcepInfo.description)
-;                    $oMyError.helpfile Source Object's help file for the error (contents from ExcepInfo.helpfile)
-;                    $oMyError.helpcontext Source Object's help file context id number (contents from ExcepInfo.helpcontext)
-;                    $oMyError.lastdllerror The number returned from GetLastError()
-;                    $oMyError.scriptline The script line on which the error was generated
-;                    NOTE: Not all properties will necessarily contain data, some will be blank.
+;                  - $oMyError.number The Windows HRESULT value from a COM call
+;                  - $oMyError.windescription The FormatWinError() text derived from .number
+;                  - $oMyError.source Name of the Object generating the error (contents from ExcepInfo.source)
+;                  - $oMyError.description Source Object's description of the error (contents from ExcepInfo.description)
+;                  - $oMyError.helpfile Source Object's help file for the error (contents from ExcepInfo.helpfile)
+;                  - $oMyError.helpcontext Source Object's help file context id number (contents from ExcepInfo.helpcontext)
+;                  - $oMyError.lastdllerror The number returned from GetLastError()
+;                  - $oMyError.scriptline The script line on which the error was generated
+;                  - NOTE: Not all properties will necessarily contain data, some will be blank.
 ;                  If MsgBox or ConsoleWrite functions are passed to this function, the error details will be displayed using that function automatically.
 ;                  If called with Default keyword, the current UserFunction, if set, will be returned.
 ;                  If called with Null keyword, the currently set UserFunction is cleared and only the internal ComErrorHandler will be called for COM Errors.
@@ -699,38 +699,38 @@ EndFunc   ;==>_LOImpress_DrawShapeDelete
 ; Modified ......:
 ; Remarks .......: #1 Some shapes are not implemented, or not fully implemented into LibreOffice for automation, consequently they do not have appropriate type names as of yet. Many have simply ambiguous names, such as "non-primitive".
 ;                  Because of this the following Custom shape types cannot be identified, and this function will return -1:
-;                   $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, known as "mso-spt100".
-;                   $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, known as "non-primitive", should be "corner-right-arrow".
-;                   $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, known as "non-primitive", should be "right-left-arrow".
-;                   $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, known as "non-primitive", should be "s-sharped-arrow".
-;                   $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, known as "non-primitive", should be "split-arrow".
-;                   $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT, known as "mso-spt100", should be "striped-right-arrow".
-;                   $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT, known as "mso-spt89", should be "up-right-arrow-callout".
-;                   $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, known as "mso-spt100", should be "up-right-down-arrow".
-;                   $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, known as "mso-spt100", should be "circle-pie".
-;                   $LOI_DRAWSHAPE_TYPE_STARS_6_POINT, known as "non-primitive", should be "star6".
-;                   $LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE, known as "non-primitive", should be "concave-star6".
-;                   $LOI_DRAWSHAPE_TYPE_STARS_12_POINT, known as "non-primitive", should be "star12".
-;                   $LOI_DRAWSHAPE_TYPE_STARS_SIGNET, known as "non-primitive", should be "signet".
-;                   $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD, known as "non-primitive", should be "cloud"?
-;                   $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER, known as "non-primitive", should be "flower"?
-;                   $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING, known as "non-primitive", should be "lightning".
+;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, known as "mso-spt100".
+;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, known as "non-primitive", should be "corner-right-arrow".
+;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, known as "non-primitive", should be "right-left-arrow".
+;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, known as "non-primitive", should be "s-sharped-arrow".
+;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, known as "non-primitive", should be "split-arrow".
+;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT, known as "mso-spt100", should be "striped-right-arrow".
+;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT, known as "mso-spt89", should be "up-right-arrow-callout".
+;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, known as "mso-spt100", should be "up-right-down-arrow".
+;                  - $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, known as "mso-spt100", should be "circle-pie".
+;                  - $LOI_DRAWSHAPE_TYPE_STARS_6_POINT, known as "non-primitive", should be "star6".
+;                  - $LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE, known as "non-primitive", should be "concave-star6".
+;                  - $LOI_DRAWSHAPE_TYPE_STARS_12_POINT, known as "non-primitive", should be "star12".
+;                  - $LOI_DRAWSHAPE_TYPE_STARS_SIGNET, known as "non-primitive", should be "signet".
+;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD, known as "non-primitive", should be "cloud"?
+;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER, known as "non-primitive", should be "flower"?
+;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING, known as "non-primitive", should be "lightning".
 ;                  #2 The following Shapes implement the same type names, and are consequently indistinguishable:
-;                   $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE, $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE is returned for either one.)
-;                   $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE is returned for either one.)
-;                   $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED is returned for either one.)
-;                   $LOI_DRAWSHAPE_TYPE_LINE_POLYGON, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45 (The Value of $LOI_DRAWSHAPE_TYPE_LINE_POLYGON is returned for either of these.)
-;                   $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED (The Value of $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED is returned for either of these.)
+;                  - $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE, $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE is returned for either one.)
+;                  - $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE is returned for either one.)
+;                  - $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED is returned for either one.)
+;                  - $LOI_DRAWSHAPE_TYPE_LINE_POLYGON, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45 (The Value of $LOI_DRAWSHAPE_TYPE_LINE_POLYGON is returned for either of these.)
+;                  - $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED (The Value of $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED is returned for either of these.)
 ;                  #3 The following Shapes have strange names that may change in the future, but currently are able to be identified:
-;                   $LOI_DRAWSHAPE_TYPE_STARS_DOORPLATE, known as, "mso-spt21", should be "doorplate"
-;                   $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, known as, "col-502ad400", should be ??
-;                   $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, known as, "col-60da8460", should be ??
+;                  - $LOI_DRAWSHAPE_TYPE_STARS_DOORPLATE, known as, "mso-spt21", should be "doorplate"
+;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, known as, "col-502ad400", should be ??
+;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, known as, "col-60da8460", should be ??
 ;                  #4 The following Shapes are customizable one to another, and are consequently indistinguishable:
-;                   $LOI_DRAWSHAPE_TYPE_CONNECTOR_* (The Value of $LOI_DRAWSHAPE_TYPE_CONNECTOR is returned for any of these.)
-;                   $LOI_DRAWSHAPE_TYPE_FONTWORK_* (The Value of $LOI_DRAWSHAPE_TYPE_FONTWORK_AIR_MAIL is returned for any of these.)
-;                   $LOI_DRAWSHAPE_TYPE_LINE_ARROW_* or $LOI_DRAWSHAPE_TYPE_LINE_LINE_45 (The Value of $LOI_DRAWSHAPE_TYPE_LINE_LINE is returned for any of these.)
+;                  - $LOI_DRAWSHAPE_TYPE_CONNECTOR_* (The Value of $LOI_DRAWSHAPE_TYPE_CONNECTOR is returned for any of these.)
+;                  - $LOI_DRAWSHAPE_TYPE_FONTWORK_* (The Value of $LOI_DRAWSHAPE_TYPE_FONTWORK_AIR_MAIL is returned for any of these.)
+;                  - $LOI_DRAWSHAPE_TYPE_LINE_ARROW_* or $LOI_DRAWSHAPE_TYPE_LINE_LINE_45 (The Value of $LOI_DRAWSHAPE_TYPE_LINE_LINE is returned for any of these.)
 ;                  #5 The following Shapes are have nothing unique that I have found yet to identify each, and are consequently indistinguishable:
-;                   $LOI_DRAWSHAPE_TYPE_3D_* (The Value of $LOI_DRAWSHAPE_TYPE_3D_CONE is returned for any of these.)
+;                  - $LOI_DRAWSHAPE_TYPE_3D_* (The Value of $LOI_DRAWSHAPE_TYPE_3D_CONE is returned for any of these.)
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -748,7 +748,6 @@ Func _LOImpress_DrawShapeGetType(ByRef $oShape)
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	Switch $oShape.ShapeType()
-
 		Case "com.sun.star.drawing.ConnectorShape" ; No way to differentiate between these??
 
 			Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR)
@@ -812,16 +811,16 @@ Func _LOImpress_DrawShapeGetType(ByRef $oShape)
 			Return SetError($__LO_STATUS_SUCCESS, 9, $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION)
 
 		Case "com.sun.star.drawing.PolyLineShape"
-;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON ; No way to differentiate between these??
-;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45
+			;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON ; No way to differentiate between these??
+			;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45
 
 			Return SetError($__LO_STATUS_SUCCESS, 10, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON)
 
 		Case "com.sun.star.drawing.PolyPolygonShape"
 
 			Return SetError($__LO_STATUS_SUCCESS, 11, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED)
-;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED ; No way to differentiate between these??
-;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED
+			;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED ; No way to differentiate between these??
+			;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED
 
 		Case "com.sun.star.drawing.Shape3DSceneObject" ; No way to differentiate between these??
 
@@ -837,7 +836,7 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ; Name ..........: _LOImpress_DrawShapeTextboxCreateTextCursor
 ; Description ...: Create a Text Cursor in a Textbox for inserting text etc.
 ; Syntax ........: _LOImpress_DrawShapeTextboxCreateTextCursor(ByRef $oTextbox)
-; Parameters ....: $oTextbox              - [in/out] an object. A Frame object returned by a previous _LOImpress_FrameCreate, _LOImpress_FrameGetObjByName, or _LOImpress_FrameGetObjByCursor function.
+; Parameters ....: $oTextbox              - [in/out] an object. A Textbox Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

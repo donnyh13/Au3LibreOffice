@@ -386,37 +386,37 @@ EndFunc   ;==>_LOImpress_DocCreate
 ; Modified ......:
 ; Remarks .......: A Dispatch is essentially a simulation of the user performing an action, such as pressing Ctrl+A to select all, etc.
 ;                  Dispatch Commands:
-;                    uno:FullScreen -- Toggles full screen mode.
-;                    uno:ChangeCaseToLower -- Changes all selected text to lower case. Text must be selected with the ViewCursor.
-;                    uno:ChangeCaseToUpper -- Changes all selected text to upper case. Text must be selected with the ViewCursor.
-;                    uno:ChangeCaseRotateCase -- Cycles the Case (Title Case, Sentence case, UPPERCASE, lowercase). Text must be selected with the ViewCursor.
-;                    uno:ChangeCaseToSentenceCase -- Changes the sentence to Sentence case where the ViewCursor is currently positioned or has selected.
-;                    uno:ChangeCaseToTitleCase -- Changes the selected text to Title case. Text must be selected with the ViewCursor.
-;                    uno:ChangeCaseToToggleCase -- Toggles the selected text's case (A becomes a, b becomes B, etc.).Text must be selected with the ViewCursor.
-;                    uno:Delete -- Simulates pressing the Delete key.
-;                    uno:InsertDateFieldFix -- Insert a fixed Date field.
-;                    uno:InsertDateFieldVar -- Insert a variable Date field.
-;                    uno:InsertPageField -- Insert a current Page (slide) field.
-;                    uno:InsertPageTitleField -- Insert a current Page (slide) Title field.
-;                    uno:InsertPagesField -- Insert a total Pages (slides) field.
-;                    uno:InsertPageQuick -- Insert a new page.
-;                    uno:InsertTimeFieldFix -- Insert a fixed Time field.
-;                    uno:InsertTimeFieldVar -- Insert a variable Time field.
-;                    uno:Paste -- Pastes the data out of the clipboard. Simulating Ctrl+V.
-;                    uno:PasteUnformatted -- Pastes the data out of the clipboard unformatted.
-;                    uno:PasteSpecial -- Simulates pasting with Ctrl+Shift+V, opens a dialog for selecting paste format.
-;                    uno:Copy -- Simulates Ctrl+C, copies selected data to the clipboard. Text must be selected with the ViewCursor.
-;                    uno:Cut -- Simulates Ctrl+X, cuts selected data, placing it into the clipboard. Text must be selected with the ViewCursor.
-;                    uno:SelectAll -- Simulates Ctrl+A being pressed at the ViewCursor location.
-;                    uno:Zoom50Percent -- Set the zoom level to 50%.
-;                    uno:Zoom75Percent -- Set the zoom level to 75%.
-;                    uno:Zoom100Percent -- Set the zoom level to 100%.
-;                    uno:Zoom150Percent -- Set the zoom level to 150%.
-;                    uno:Zoom200Percent -- Set the zoom level to 200%.
-;                    uno:ZoomMinus -- Decreases the zoom value to the next increment down.
-;                    uno:ZoomPlus -- Increases the zoom value to the next increment up.
-;                    uno:ZoomPageWidth -- Set zoom to fit page width.
-;                    uno:ZoomPage -- Set zoom to fit page.
+;                  - uno:FullScreen -- Toggles full screen mode.
+;                  - uno:ChangeCaseToLower -- Changes all selected text to lower case. Text must be selected with the ViewCursor.
+;                  - uno:ChangeCaseToUpper -- Changes all selected text to upper case. Text must be selected with the ViewCursor.
+;                  - uno:ChangeCaseRotateCase -- Cycles the Case (Title Case, Sentence case, UPPERCASE, lowercase). Text must be selected with the ViewCursor.
+;                  - uno:ChangeCaseToSentenceCase -- Changes the sentence to Sentence case where the ViewCursor is currently positioned or has selected.
+;                  - uno:ChangeCaseToTitleCase -- Changes the selected text to Title case. Text must be selected with the ViewCursor.
+;                  - uno:ChangeCaseToToggleCase -- Toggles the selected text's case (A becomes a, b becomes B, etc.).Text must be selected with the ViewCursor.
+;                  - uno:Delete -- Simulates pressing the Delete key.
+;                  - uno:InsertDateFieldFix -- Insert a fixed Date field.
+;                  - uno:InsertDateFieldVar -- Insert a variable Date field.
+;                  - uno:InsertPageField -- Insert a current Page (slide) field.
+;                  - uno:InsertPageTitleField -- Insert a current Page (slide) Title field.
+;                  - uno:InsertPagesField -- Insert a total Pages (slides) field.
+;                  - uno:InsertPageQuick -- Insert a new page.
+;                  - uno:InsertTimeFieldFix -- Insert a fixed Time field.
+;                  - uno:InsertTimeFieldVar -- Insert a variable Time field.
+;                  - uno:Paste -- Pastes the data out of the clipboard. Simulating Ctrl+V.
+;                  - uno:PasteUnformatted -- Pastes the data out of the clipboard unformatted.
+;                  - uno:PasteSpecial -- Simulates pasting with Ctrl+Shift+V, opens a dialog for selecting paste format.
+;                  - uno:Copy -- Simulates Ctrl+C, copies selected data to the clipboard. Text must be selected with the ViewCursor.
+;                  - uno:Cut -- Simulates Ctrl+X, cuts selected data, placing it into the clipboard. Text must be selected with the ViewCursor.
+;                  - uno:SelectAll -- Simulates Ctrl+A being pressed at the ViewCursor location.
+;                  - uno:Zoom50Percent -- Set the zoom level to 50%.
+;                  - uno:Zoom75Percent -- Set the zoom level to 75%.
+;                  - uno:Zoom100Percent -- Set the zoom level to 100%.
+;                  - uno:Zoom150Percent -- Set the zoom level to 150%.
+;                  - uno:Zoom200Percent -- Set the zoom level to 200%.
+;                  - uno:ZoomMinus -- Decreases the zoom value to the next increment down.
+;                  - uno:ZoomPlus -- Increases the zoom value to the next increment up.
+;                  - uno:ZoomPageWidth -- Set zoom to fit page width.
+;                  - uno:ZoomPage -- Set zoom to fit page.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

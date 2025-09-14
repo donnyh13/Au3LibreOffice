@@ -172,7 +172,7 @@ EndFunc   ;==>__LOImpress_CreateStruct
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $sCusShapeType not a String.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Custom Shape Type was successfully identified. Returning the Constant value of the Shape, see Constants $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error 0 @Extended 0 Return Integer = Success. Custom Shape Type was successfully identified. Returning the Constant value of the Shape, see Constants $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  @Error 0 @Extended 0 Return -1 = Success. Custom Shape is of an unimplemented type that has an ambiguous name, and cannot be identified. See Remarks.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -244,8 +244,8 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN)
 
-;~ 	Case "mso-spt100" ; Can't include this one as other shapes return mso-spt100 also
-;~ Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT)
+			;~ 	Case "mso-spt100" ; Can't include this one as other shapes return mso-spt100 also
+			;~ Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT)
 
 		Case "circular-arrow"
 
@@ -342,7 +342,7 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 		Case "ellipse"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE)
-;~ $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE
+			;~ $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE
 
 		Case "paper"
 
@@ -367,12 +367,12 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 		Case "rectangle"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE)
-;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE
+			;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE
 
 		Case "round-rectangle"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED)
-;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED
+			;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED
 
 		Case "pentagon"
 
@@ -628,12 +628,12 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_RIGHT)
 
 		Case "cloud"
-;~ Custom Shape Geometry Type = "non-primitive" ???? Try "cloud"
+			;~ Custom Shape Geometry Type = "non-primitive" ???? Try "cloud"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD)
 
 		Case "flower"
-;~ Custom Shape Geometry Type = "non-primitive" ???? Try "flower"
+			;~ Custom Shape Geometry Type = "non-primitive" ???? Try "flower"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER)
 
@@ -642,7 +642,7 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_HEART)
 
 		Case "lightning"
-;~ Custom Shape Geometry Type = "non-primitive" ???? Try "lightning"
+			;~ Custom Shape Geometry Type = "non-primitive" ???? Try "lightning"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING)
 
