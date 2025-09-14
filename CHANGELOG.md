@@ -639,6 +639,109 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - $__LO_STATUS_DOC_ERROR Error Constant and renumber all after errors.
 
 > [!NOTE]
+> **LibreOfficeImpress**
+
+### Added
+
+- Main Impress File
+	- LibreOfficeImpress.au3
+- Individual Impress Element Files
+	- LibreOfficeImpress_Constants.au3
+	- LibreOfficeImpress_Doc.au3
+	- LibreOfficeImpress_Helper.au3
+	- LibreOfficeImpress_Internal.au3
+	- LibreOfficeImpress_Slides.au3
+- Constants
+	- $LOI_AREA_FILL_STYLE_*
+	- $LOI_COLOR_*
+	- $LOI_DRAWSHAPE_TYPE_*
+	- $LOI_GRAD_NAME_*
+	- $LOI_GRAD_TYPE_*
+	- $LOI_PATHCONV_*
+	- $LOI_SHAPE_TYPE_*
+	- $LOI_ZOOMTYPE_*
+- Document Functions
+	- _LOImpress_DocClose
+	- _LOImpress_DocConnect
+	- _LOImpress_DocCreate
+	- _LOImpress_DocExecuteDispatch
+	- _LOImpress_DocExport
+	- _LOImpress_DocGetName
+	- _LOImpress_DocGetPath
+	- _LOImpress_DocHasPath
+	- _LOImpress_DocIsActive
+	- _LOImpress_DocIsModified
+	- _LOImpress_DocIsReadOnly
+	- _LOImpress_DocMaximize
+	- _LOImpress_DocMinimize
+	- _LOImpress_DocOpen
+	- _LOImpress_DocPosAndSize
+	- _LOImpress_DocRedo
+	- _LOImpress_DocRedoClear
+	- _LOImpress_DocRedoCurActionTitle
+	- _LOImpress_DocRedoGetAllActionTitles
+	- _LOImpress_DocRedoIsPossible
+	- _LOImpress_DocSave
+	- _LOImpress_DocSaveAs
+	- _LOImpress_DocToFront
+	- _LOImpress_DocUndo
+	- _LOImpress_DocUndoActionBegin
+	- _LOImpress_DocUndoActionEnd
+	- _LOImpress_DocUndoClear
+	- _LOImpress_DocUndoCurActionTitle
+	- _LOImpress_DocUndoGetAllActionTitles
+	- _LOImpress_DocUndoIsPossible
+	- _LOImpress_DocUndoReset
+	- _LOImpress_DocVisible
+	- _LOImpress_DocZoom
+- Helper Functions
+	- _LOImpress_ComError_UserFunction
+	- _LOImpress_ConvertColorFromLong
+	- _LOImpress_ConvertColorToLong
+	- _LOImpress_ConvertFromMicrometer
+	- _LOImpress_ConvertToMicrometer
+	- _LOImpress_CursorInsertString
+	- _LOImpress_DrawShapeDelete
+	- _LOImpress_DrawShapeGetType
+	- _LOImpress_DrawShapeTextboxCreateTextCursor
+	- _LOImpress_FontExists
+	- _LOImpress_FontsGetNames
+	- _LOImpress_PathConvert
+	- _LOImpress_VersionGet
+- Internal Functions
+	- __LOImpress_AddTo1DArray
+	- __LOImpress_ArrayFill
+	- __LOImpress_CreateStruct
+	- __LOImpress_DrawShape_GetCustomType
+	- __LOImpress_DrawShapeGetType
+	- __LOImpress_FilterNameGet
+	- __LOImpress_GradientNameInsert
+	- __LOImpress_GradientPresets
+	- __LOImpress_InternalComErrorHandler
+	- __LOImpress_IntIsBetween
+	- __LOImpress_NumIsBetween
+	- __LOImpress_SetPropertyValue
+	- __LOImpress_TransparencyGradientConvert
+	- __LOImpress_TransparencyGradientNameInsert
+	- __LOImpress_UnitConvert
+	- __LOImpress_VarsAreNull
+	- __LOImpress_VersionCheck
+- Slide Functions
+	- _LOImpress_SlideAdd
+	- _LOImpress_SlideAreaColor
+	- _LOImpress_SlideAreaFillStyle
+	- _LOImpress_SlideAreaGradient
+	- _LOImpress_SlideAreaTransparency
+	- _LOImpress_SlideAreaTransparencyGradient
+	- _LOImpress_SlideCopy
+	- _LOImpress_SlideCurrent
+	- _LOImpress_SlideDeleteByIndex
+	- _LOImpress_SlideDeleteByObj
+	- _LOImpress_SlideGetByIndex
+	- _LOImpress_SlidesGetCount
+	- _LOImpress_SlideShapesGetList
+
+> [!NOTE]
 > **LibreOfficeWriter**
 
 ### Added
