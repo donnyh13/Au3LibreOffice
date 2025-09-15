@@ -31,28 +31,6 @@ Global Enum _                                                   ; com.sun.star.d
 		$LOI_AREA_FILL_STYLE_HATCH, _                           ; 3 Fill Style is a Hatch style color.
 		$LOI_AREA_FILL_STYLE_BITMAP                             ; 4 Fill Style is a Bitmap.
 
-; Color in Long Color Format
-Global Const _
-		$LOI_COLOR_OFF = -1, _                                  ; Turn Color off, or to automatic mode.
-		$LOI_COLOR_BLACK = 0, _                                 ; Black color.
-		$LOI_COLOR_GREEN = 43315, _                             ; Green color.
-		$LOI_COLOR_TEAL = 1410150, _                            ; Teal color.
-		$LOI_COLOR_BLUE = 2777241, _                            ; Blue color.
-		$LOI_COLOR_DKGRAY = 3355443, _                          ; Dark Gray color.
-		$LOI_COLOR_INDIGO = 5582989, _                          ; Indigo color.
-		$LOI_COLOR_PURPLE = 8388736, _                          ; Purple color.
-		$LOI_COLOR_GRAY = 8421504, _                            ; Gray color.
-		$LOI_COLOR_LIME = 8508442, _                            ; Lime color.
-		$LOI_COLOR_BROWN = 9127187, _                           ; Brown color.
-		$LOI_COLOR_LGRAY = 11711154, _                          ; Light Gray color.
-		$LOI_COLOR_MAGENTA = 12517441, _                        ; Magenta color.
-		$LOI_COLOR_RED = 16711680, _                            ; Red color.
-		$LOI_COLOR_BRICK = 16728064, _                          ; Brick color.
-		$LOI_COLOR_ORANGE = 16744448, _                         ; Orange color.
-		$LOI_COLOR_GOLD = 16760576, _                           ; Gold color.
-		$LOI_COLOR_YELLOW = 16776960, _                         ; Yellow color.
-		$LOI_COLOR_WHITE = 16777215                             ; White color.
-
 ; Drawing Shape Type Constants.
 Global Enum _
 		$LOI_DRAWSHAPE_TYPE_3D_CONE, _                          ; 0 -- A 3D Cone.
@@ -271,12 +249,6 @@ Global Const _                                                  ; com.sun.star.a
 		$LOI_GRAD_TYPE_ELLIPTICAL = 3, _                        ; Elliptical type Gradient
 		$LOI_GRAD_TYPE_SQUARE = 4, _                            ; Square type Gradient
 		$LOI_GRAD_TYPE_RECT = 5                                 ; Rectangle type Gradient
-
-; Path Convert Constants.
-Global Const _
-		$LOI_PATHCONV_AUTO_RETURN = 0, _                        ; Automatically returns the opposite of the input path, determined by StringInStr search for either "File:///"(L.O.Office URL) or "[A-Z]:\" (Windows File Path).
-		$LOI_PATHCONV_OFFICE_RETURN = 1, _                      ; Returns L.O. Office URL, even if the input is already in that format.
-		$LOI_PATHCONV_PCPATH_RETURN = 2                         ; Returns Windows File Path, even if the input is already in that format.
 
 ; Shape Type Constants.
 Global Enum Step * 2 _

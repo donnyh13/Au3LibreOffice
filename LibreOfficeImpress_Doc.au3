@@ -5,6 +5,7 @@
 
 ; Main LibreOffice Includes
 #include "LibreOffice_Constants.au3"
+#include "LibreOffice_Helper.au3"
 #include "LibreOffice_Internal.au3"
 
 ; Common includes for Impress
@@ -107,20 +108,20 @@ Func _LOImpress_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bD
 			$sFilterName = "impress8"
 		EndIf
 
-		$sSavePath = _LOImpress_PathConvert($sSavePath & $sSaveName, 1)
+		$sSavePath = _LO_PathConvert($sSavePath & $sSaveName, 1)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		If $sFilterName = "" Then $sFilterName = __LOImpress_FilterNameGet($sSavePath)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		$aArgs[0] = __LOImpress_SetPropertyValue("FilterName", $sFilterName)
+		$aArgs[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	EndIf
 
 	If ($bSaveChanges = True) Then
 		If $oDoc.hasLocation() Then
 			$oDoc.store()
-			$sDocPath = _LOImpress_PathConvert($oDoc.getURL(), $LOI_PATHCONV_PCPATH_RETURN)
+			$sDocPath = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
 			$oDoc.Close($bDeliverOwnership)
 
 			Return SetError($__LO_STATUS_SUCCESS, 2, $sDocPath)
@@ -129,11 +130,11 @@ Func _LOImpress_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bD
 			$oDoc.storeAsURL($sSavePath, $aArgs)
 			$oDoc.Close($bDeliverOwnership)
 
-			Return SetError($__LO_STATUS_SUCCESS, 1, _LOImpress_PathConvert($sSavePath, $LOI_PATHCONV_PCPATH_RETURN))
+			Return SetError($__LO_STATUS_SUCCESS, 1, _LO_PathConvert($sSavePath, $LO_PATHCONV_PCPATH_RETURN))
 		EndIf
 	EndIf
 
-	If $oDoc.hasLocation() Then $sDocPath = _LOImpress_PathConvert($oDoc.getURL(), $LOI_PATHCONV_PCPATH_RETURN)
+	If $oDoc.hasLocation() Then $sDocPath = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
 	$oDoc.Close($bDeliverOwnership)
 
 	Return SetError($__LO_STATUS_SUCCESS, 3, $sDocPath)
@@ -219,7 +220,7 @@ Func _LOImpress_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = Fals
 				ReDim $aoConnectAll[$iCount + 1][3]
 				$aoConnectAll[$iCount][0] = $oDoc
 				$aoConnectAll[$iCount][1] = $oDoc.Title()
-				$aoConnectAll[$iCount][2] = _LOImpress_PathConvert($oDoc.getURL(), $LOI_PATHCONV_PCPATH_RETURN)
+				$aoConnectAll[$iCount][2] = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
 				$iCount += 1
 			EndIf
 			Sleep(10)
@@ -229,7 +230,7 @@ Func _LOImpress_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = Fals
 	EndIf
 
 	$sFile = StringStripWS($sFile, $__STR_STRIPLEADING)
-	If StringInStr($sFile, "\") Then $sFile = _LOImpress_PathConvert($sFile, $LOI_PATHCONV_OFFICE_RETURN) ; Convert to L.O File path.
+	If StringInStr($sFile, "\") Then $sFile = _LO_PathConvert($sFile, $LO_PATHCONV_OFFICE_RETURN) ; Convert to L.O File path.
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	If StringInStr($sFile, "file:///") Then ; URL/Path and Name search
@@ -262,7 +263,7 @@ Func _LOImpress_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = Fals
 					ReDim $aoPartNameSearch[$iCount + 1][3]
 					$aoPartNameSearch[$iCount][0] = $oDoc
 					$aoPartNameSearch[$iCount][1] = $oDoc.Title
-					$aoPartNameSearch[$iCount][2] = _LOImpress_PathConvert($oDoc.getURL, $LOI_PATHCONV_PCPATH_RETURN)
+					$aoPartNameSearch[$iCount][2] = _LO_PathConvert($oDoc.getURL, $LO_PATHCONV_PCPATH_RETURN)
 					$iCount += 1
 				EndIf
 
@@ -271,7 +272,7 @@ Func _LOImpress_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = Fals
 					ReDim $aoPartNameSearch[$iCount + 1][3]
 					$aoPartNameSearch[$iCount][0] = $oDoc
 					$aoPartNameSearch[$iCount][1] = $oDoc.Title
-					$aoPartNameSearch[$iCount][2] = _LOImpress_PathConvert($oDoc.getURL, $LOI_PATHCONV_PCPATH_RETURN)
+					$aoPartNameSearch[$iCount][2] = _LO_PathConvert($oDoc.getURL, $LO_PATHCONV_PCPATH_RETURN)
 					$iCount += 1
 				EndIf
 			EndIf
@@ -335,7 +336,7 @@ Func _LOImpress_DocCreate($bForceNew = True, $bHidden = False)
 	If Not IsBool($bForceNew) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$aArgs[0] = __LOImpress_SetPropertyValue("Hidden", $bHidden)
+	$aArgs[0] = __LO_SetPropertyValue("Hidden", $bHidden)
 	$oServiceManager = __LO_ServiceManager()
 	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
@@ -495,7 +496,7 @@ Func _LOImpress_DocExport(ByRef $oDoc, $sFilePath, $bSamePath = False, $sFilterN
 		If $oDoc.hasLocation() Then
 			$sOriginalPath = $oDoc.getURL()
 			$sOriginalPath = StringLeft($sOriginalPath, StringInStr($sOriginalPath, "/", 0, -1)) ; Cut the original name off.
-			If StringInStr($sFilePath, "\") Then $sFilePath = _LOImpress_PathConvert($sFilePath, $LOI_PATHCONV_OFFICE_RETURN) ; Convert to L.O. URL
+			If StringInStr($sFilePath, "\") Then $sFilePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_OFFICE_RETURN) ; Convert to L.O. URL
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 			$sFilePath = $sOriginalPath & $sFilePath ; combine the path with the new name.
@@ -506,20 +507,20 @@ Func _LOImpress_DocExport(ByRef $oDoc, $sFilePath, $bSamePath = False, $sFilterN
 		EndIf
 	EndIf
 
-	If Not $bSamePath Then $sFilePath = _LOImpress_PathConvert($sFilePath, $LOI_PATHCONV_OFFICE_RETURN)
+	If Not $bSamePath Then $sFilePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_OFFICE_RETURN)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($sFilterName = "") Or ($sFilterName = " ") Then $sFilterName = __LOImpress_FilterNameGet($sFilePath, True)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$aProperties[0] = __LOImpress_SetPropertyValue("FilterName", $sFilterName)
+	$aProperties[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
 	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
 
 	If ($bOverwrite <> Null) Then
 		If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
-		$aProperties[UBound($aProperties) - 1] = __LOImpress_SetPropertyValue("Overwrite", $bOverwrite)
+		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Overwrite", $bOverwrite)
 		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 2, 0)
 	EndIf
 
@@ -527,13 +528,13 @@ Func _LOImpress_DocExport(ByRef $oDoc, $sFilePath, $bSamePath = False, $sFilterN
 		If Not IsString($sPassword) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
-		$aProperties[UBound($aProperties) - 1] = __LOImpress_SetPropertyValue("Password", $sPassword)
+		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Password", $sPassword)
 		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 3, 0)
 	EndIf
 
 	$oDoc.storeToURL($sFilePath, $aProperties)
 
-	$sSavePath = _LOImpress_PathConvert($sFilePath, $LOI_PATHCONV_PCPATH_RETURN)
+	$sSavePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_PCPATH_RETURN)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $sSavePath)
@@ -594,7 +595,7 @@ EndFunc   ;==>_LOImpress_DocGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_PathConvert
+; Related .......: _LO_PathConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -611,7 +612,7 @@ Func _LOImpress_DocGetPath(ByRef $oDoc, $bReturnLibreURL = False)
 	$sPath = $oDoc.URL()
 
 	If Not $bReturnLibreURL Then
-		$sPath = _LOImpress_PathConvert($sPath, $LOI_PATHCONV_PCPATH_RETURN)
+		$sPath = _LO_PathConvert($sPath, $LO_PATHCONV_PCPATH_RETURN)
 		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	EndIf
 
@@ -854,7 +855,7 @@ Func _LOImpress_DocOpen($sFilePath, $bConnectIfOpen = True, $bHidden = Null, $bR
 
 	If Not IsString($sFilePath) Or Not FileExists($sFilePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$sFileURL = _LOImpress_PathConvert($sFilePath, $LOI_PATHCONV_OFFICE_RETURN)
+	$sFileURL = _LO_PathConvert($sFilePath, $LO_PATHCONV_OFFICE_RETURN)
 	If @error Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bConnectIfOpen) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -864,45 +865,45 @@ Func _LOImpress_DocOpen($sFilePath, $bConnectIfOpen = True, $bHidden = Null, $bR
 	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-	If Not __LOImpress_VarsAreNull($bHidden, $bReadOnly, $sPassword, $bLoadAsTemplate, $sFilterName) Then
+	If Not __LO_VarsAreNull($bHidden, $bReadOnly, $sPassword, $bLoadAsTemplate, $sFilterName) Then
 		If ($bHidden <> Null) Then
 			If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-			$vProperty = __LOImpress_SetPropertyValue("Hidden", $bHidden)
+			$vProperty = __LO_SetPropertyValue("Hidden", $bHidden)
 			If @error Then $iError = BitOR($iError, 1)
-			If Not BitAND($iError, 1) Then __LOImpress_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 1) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 
 		If ($bReadOnly <> Null) Then
 			If Not IsBool($bReadOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-			$vProperty = __LOImpress_SetPropertyValue("ReadOnly", $bReadOnly)
+			$vProperty = __LO_SetPropertyValue("ReadOnly", $bReadOnly)
 			If @error Then $iError = BitOR($iError, 2)
-			If Not BitAND($iError, 2) Then __LOImpress_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 2) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 
 		If ($sPassword <> Null) Then
 			If Not IsString($sPassword) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-			$vProperty = __LOImpress_SetPropertyValue("Password", $sPassword)
+			$vProperty = __LO_SetPropertyValue("Password", $sPassword)
 			If @error Then $iError = BitOR($iError, 4)
-			If Not BitAND($iError, 4) Then __LOImpress_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 4) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 
 		If ($bLoadAsTemplate <> Null) Then
 			If Not IsBool($bLoadAsTemplate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-			$vProperty = __LOImpress_SetPropertyValue("AsTemplate", $bLoadAsTemplate)
+			$vProperty = __LO_SetPropertyValue("AsTemplate", $bLoadAsTemplate)
 			If @error Then $iError = BitOR($iError, 8)
-			If Not BitAND($iError, 8) Then __LOImpress_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 8) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 
 		If ($sFilterName <> Null) Then
 			If Not IsString($sFilterName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-			$vProperty = __LOImpress_SetPropertyValue("FilterName", $sFilterName)
+			$vProperty = __LO_SetPropertyValue("FilterName", $sFilterName)
 			If @error Then $iError = BitOR($iError, 16)
-			If Not BitAND($iError, 16) Then __LOImpress_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 16) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 	EndIf
 
@@ -968,8 +969,8 @@ Func _LOImpress_DocPosAndSize(ByRef $oDoc, $iX = Null, $iY = Null, $iWidth = Nul
 	$tWindowSize = $oDoc.CurrentController.Frame.ContainerWindow.getPosSize()
 	If Not IsObj($tWindowSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LOImpress_VarsAreNull($iX, $iY, $iWidth, $iHeight) Then
-		__LOImpress_ArrayFill($aiWinPosSize, $tWindowSize.X(), $tWindowSize.Y(), $tWindowSize.Width(), $tWindowSize.Height())
+	If __LO_VarsAreNull($iX, $iY, $iWidth, $iHeight) Then
+		__LO_ArrayFill($aiWinPosSize, $tWindowSize.X(), $tWindowSize.Y(), $tWindowSize.Width(), $tWindowSize.Height())
 
 		Return SetError($__LO_STATUS_SUCCESS, 2, $aiWinPosSize)
 	EndIf
@@ -1248,20 +1249,20 @@ Func _LOImpress_DocSaveAs(ByRef $oDoc, $sFilePath, $sFilterName = "", $bOverwrit
 	If Not IsString($sFilePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sFilterName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	$sFilePath = _LOImpress_PathConvert($sFilePath, $LOI_PATHCONV_OFFICE_RETURN)
+	$sFilePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_OFFICE_RETURN)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($sFilterName = "") Or ($sFilterName = " ") Then $sFilterName = __LOImpress_FilterNameGet($sFilePath)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$aProperties[0] = __LOImpress_SetPropertyValue("FilterName", $sFilterName)
+	$aProperties[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	If ($bOverwrite <> Null) Then
 		If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
-		$aProperties[UBound($aProperties) - 1] = __LOImpress_SetPropertyValue("Overwrite", $bOverwrite)
+		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Overwrite", $bOverwrite)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 	EndIf
 
@@ -1269,13 +1270,13 @@ Func _LOImpress_DocSaveAs(ByRef $oDoc, $sFilePath, $sFilterName = "", $bOverwrit
 		If Not IsString($sPassword) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
-		$aProperties[UBound($aProperties) - 1] = __LOImpress_SetPropertyValue("Password", $sPassword)
+		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Password", $sPassword)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 	EndIf
 
 	$oDoc.storeAsURL($sFilePath, $aProperties)
 
-	$sSavePath = _LOImpress_PathConvert($sFilePath, $LOI_PATHCONV_PCPATH_RETURN)
+	$sSavePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_PCPATH_RETURN)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $sSavePath)
@@ -1642,20 +1643,20 @@ Func _LOImpress_DocZoom(ByRef $oDoc, $iZoomType = Null, $iZoom = Null)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOImpress_VarsAreNull($iZoomType, $iZoom) Then
-		__LOImpress_ArrayFill($aiZoom, $oDoc.CurrentController.ZoomType(), $oDoc.CurrentController.ZoomValue())
+	If __LO_VarsAreNull($iZoomType, $iZoom) Then
+		__LO_ArrayFill($aiZoom, $oDoc.CurrentController.ZoomType(), $oDoc.CurrentController.ZoomValue())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiZoom)
 	EndIf
 
 	If ($iZoomType <> Null) Then
-		If Not __LOImpress_IntIsBetween($iZoomType, $LOI_ZOOMTYPE_OPTIMAL, $LOI_ZOOMTYPE_PAGE_WIDTH_EXACT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iZoomType, $LOI_ZOOMTYPE_OPTIMAL, $LOI_ZOOMTYPE_PAGE_WIDTH_EXACT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oDoc.CurrentController.ZoomType = $iZoomType
 	EndIf
 
 	If ($iZoom <> Null) Then
-		If Not __LOImpress_IntIsBetween($iZoom, 20, 600) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iZoom, 20, 600) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oDoc.CurrentController.ZoomValue = $iZoom
 		$iError = ($oDoc.CurrentController.ZoomValue() = $iZoom) ? ($iError) : (BitOR($iError, 1))

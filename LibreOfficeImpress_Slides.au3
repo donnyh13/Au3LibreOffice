@@ -5,6 +5,8 @@
 
 ; Main LibreOffice Includes
 #include "LibreOffice_Constants.au3"
+#include "LibreOffice_Helper.au3"
+#include "LibreOffice_Internal.au3"
 
 ; Common includes for Impress
 #include "LibreOfficeImpress_Internal.au3"
@@ -69,7 +71,7 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If ($iPos = Null) Then $iPos = $oDoc.DrawPages.getCount()
-	If Not __LOImpress_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oSlide = $oDoc.DrawPages.insertNewByIndex($iPos)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -82,7 +84,7 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Description ...: Set or Retrieve the Slide's background color.
 ; Syntax ........: _LOImpress_SlideAreaColor(ByRef $oSlide[, $iColor = Null])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The color for the background of the Slide, set in Long Color Integer format. Can be a custom value, or one of the constants, $LOI_COLOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The color for the background of the Slide, set in Long Color Integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -101,8 +103,8 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current setting.
-;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LOI_COLOR_OFF is returned.
-; Related .......: _LOImpress_ConvertColorFromLong, _LOImpress_ConvertColorToLong
+;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -117,12 +119,12 @@ Func _LOImpress_SlideAreaColor(ByRef $oSlide, $iColor = Null)
 	$oBackground = $oSlide.Background()
 
 	If ($iColor = Null) Then
-		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_COLOR_OFF) ; If no background is set, this will be void, instead of an Object.
+		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, $LO_COLOR_OFF) ; If no background is set, this will be void, instead of an Object.
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $oBackground.FillColor())
 	EndIf
 
-	If Not __LOImpress_IntIsBetween($iColor, $LOI_COLOR_BLACK, $LOI_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
 		$oDoc = $oSlide.Forms.Parent()
@@ -211,8 +213,8 @@ EndFunc   ;==>_LOImpress_SlideAreaFillStyle
 ;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
 ;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
-;                  $iFromColor          - [optional] an integer value (0-16777215). Default is Null. A color for the beginning point of the gradient, set in Long Color Integer format. Can be a custom value, or one of the constants, $LOI_COLOR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iToColor            - [optional] an integer value (0-16777215). Default is Null. A color for the endpoint of the gradient, set in Long Color Integer format. Can be a custom value, or one of the constants, $LOI_COLOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFromColor          - [optional] an integer value (0-16777215). Default is Null. A color for the beginning point of the gradient, set in Long Color Integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iToColor            - [optional] an integer value (0-16777215). Default is Null. A color for the endpoint of the gradient, set in Long Color Integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iFromIntense        - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
 ;                  $iToIntense          - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
@@ -263,7 +265,7 @@ EndFunc   ;==>_LOImpress_SlideAreaFillStyle
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOImpress_ConvertColorFromLong, _LOImpress_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -283,13 +285,13 @@ Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 
 	$oBackground = $oSlide.Background()
 
-	If __LOImpress_VarsAreNull($sGradientName, $iType, $iIncrement, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iFromColor, $iToColor, $iFromIntense, $iToIntense) Then
+	If __LO_VarsAreNull($sGradientName, $iType, $iIncrement, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iFromColor, $iToColor, $iFromIntense, $iToIntense) Then
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 2, -1) ; No background active.
 
 		$tStyleGradient = $oBackground.FillGradient()
 		If Not IsObj($tStyleGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		__LOImpress_ArrayFill($avGradient, $oBackground.FillGradientName(), $tStyleGradient.Style(), _
+		__LO_ArrayFill($avGradient, $oBackground.FillGradientName(), $tStyleGradient.Style(), _
 				$oBackground.FillGradientStepCount(), $tStyleGradient.XOffset(), $tStyleGradient.YOffset(), ($tStyleGradient.Angle() / 10), _
 				$tStyleGradient.Border(), $tStyleGradient.StartColor(), $tStyleGradient.EndColor(), $tStyleGradient.StartIntensity(), _
 				$tStyleGradient.EndIntensity()) ; Angle is set in thousands
@@ -335,13 +337,13 @@ Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 
-		If Not __LOImpress_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$tStyleGradient.Style = $iType
 	EndIf
 
 	If ($iIncrement <> Null) Then
-		If Not __LOImpress_IntIsBetween($iIncrement, 3, 256, "", 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iIncrement, 3, 256, "", 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oBackground.FillGradientStepCount = $iIncrement
 		$tStyleGradient.StepCount = $iIncrement ; Must set both of these in order for it to take effect.
@@ -349,35 +351,35 @@ Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 	EndIf
 
 	If ($iXCenter <> Null) Then
-		If Not __LOImpress_IntIsBetween($iXCenter, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iXCenter, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$tStyleGradient.XOffset = $iXCenter
 	EndIf
 
 	If ($iYCenter <> Null) Then
-		If Not __LOImpress_IntIsBetween($iYCenter, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iYCenter, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$tStyleGradient.YOffset = $iYCenter
 	EndIf
 
 	If ($iAngle <> Null) Then
-		If Not __LOImpress_IntIsBetween($iAngle, 0, 359) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_IntIsBetween($iAngle, 0, 359) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		$tStyleGradient.Angle = ($iAngle * 10) ; Angle is set in thousands
 	EndIf
 
 	If ($iTransitionStart <> Null) Then
-		If Not __LOImpress_IntIsBetween($iTransitionStart, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not __LO_IntIsBetween($iTransitionStart, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$tStyleGradient.Border = $iTransitionStart
 	EndIf
 
 	If ($iFromColor <> Null) Then
-		If Not __LOImpress_IntIsBetween($iFromColor, $LOI_COLOR_BLACK, $LOI_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not __LO_IntIsBetween($iFromColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
 		$tStyleGradient.StartColor = $iFromColor
 
-		If __LOImpress_VersionCheck(7.6) Then
+		If __LO_VersionCheck(7.6) Then
 			$nRed = (BitAND(BitShift($iFromColor, 16), 0xff) / 255)
 			$nGreen = (BitAND(BitShift($iFromColor, 8), 0xff) / 255)
 			$nBlue = (BitAND($iFromColor, 0xff) / 255)
@@ -402,11 +404,11 @@ Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 	EndIf
 
 	If ($iToColor <> Null) Then
-		If Not __LOImpress_IntIsBetween($iToColor, $LOI_COLOR_BLACK, $LOI_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
+		If Not __LO_IntIsBetween($iToColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 
 		$tStyleGradient.EndColor = $iToColor
 
-		If __LOImpress_VersionCheck(7.6) Then
+		If __LO_VersionCheck(7.6) Then
 			$nRed = (BitAND(BitShift($iToColor, 16), 0xff) / 255)
 			$nGreen = (BitAND(BitShift($iToColor, 8), 0xff) / 255)
 			$nBlue = (BitAND($iToColor, 0xff) / 255)
@@ -431,13 +433,13 @@ Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 	EndIf
 
 	If ($iFromIntense <> Null) Then
-		If Not __LOImpress_IntIsBetween($iFromIntense, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
+		If Not __LO_IntIsBetween($iFromIntense, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
 
 		$tStyleGradient.StartIntensity = $iFromIntense
 	EndIf
 
 	If ($iToIntense <> Null) Then
-		If Not __LOImpress_IntIsBetween($iToIntense, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
+		If Not __LO_IntIsBetween($iToIntense, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
 
 		$tStyleGradient.EndIntensity = $iToIntense
 	EndIf
@@ -507,13 +509,13 @@ Func _LOImpress_SlideAreaTransparency(ByRef $oSlide, $iTransparency = Null)
 
 	$oBackground = $oSlide.Background()
 
-	If __LOImpress_VarsAreNull($iTransparency) Then
+	If __LO_VarsAreNull($iTransparency) Then
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, -1) ; No background present.
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $oBackground.FillTransparence())
 	EndIf
 
-	If Not __LOImpress_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
 		$oDoc = $oSlide.Forms.Parent()
@@ -604,13 +606,13 @@ Func _LOImpress_SlideAreaTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 
 	$oBackground = $oSlide.Background()
 
-	If __LOImpress_VarsAreNull($iType, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iStart, $iEnd) Then
+	If __LO_VarsAreNull($iType, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iStart, $iEnd) Then
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 2, -1)
 
 		$tGradient = $oBackground.FillTransparenceGradient()
 		If Not IsObj($tGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		__LOImpress_ArrayFill($aiTransparent, $tGradient.Style(), $tGradient.XOffset(), $tGradient.YOffset(), _
+		__LO_ArrayFill($aiTransparent, $tGradient.Style(), $tGradient.XOffset(), $tGradient.YOffset(), _
 				($tGradient.Angle() / 10), $tGradient.Border(), __LOImpress_TransparencyGradientConvert(Null, $tGradient.StartColor()), _
 				__LOImpress_TransparencyGradientConvert(Null, $tGradient.EndColor())) ; Angle is set in thousands
 
@@ -636,41 +638,41 @@ Func _LOImpress_SlideAreaTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 
-		If Not __LOImpress_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$tGradient.Style = $iType
 	EndIf
 
 	If ($iXCenter <> Null) Then
-		If Not __LOImpress_IntIsBetween($iXCenter, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iXCenter, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$tGradient.XOffset = $iXCenter
 	EndIf
 
 	If ($iYCenter <> Null) Then
-		If Not __LOImpress_IntIsBetween($iYCenter, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iYCenter, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$tGradient.YOffset = $iYCenter
 	EndIf
 
 	If ($iAngle <> Null) Then
-		If Not __LOImpress_IntIsBetween($iAngle, 0, 359) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iAngle, 0, 359) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$tGradient.Angle = ($iAngle * 10) ; Angle is set in thousands
 	EndIf
 
 	If ($iTransitionStart <> Null) Then
-		If Not __LOImpress_IntIsBetween($iTransitionStart, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTransitionStart, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$tGradient.Border = $iTransitionStart
 	EndIf
 
 	If ($iStart <> Null) Then
-		If Not __LOImpress_IntIsBetween($iStart, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_IntIsBetween($iStart, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		$tGradient.StartColor = __LOImpress_TransparencyGradientConvert($iStart)
 
-		If __LOImpress_VersionCheck(7.6) Then
+		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
 			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
@@ -693,11 +695,11 @@ Func _LOImpress_SlideAreaTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 	EndIf
 
 	If ($iEnd <> Null) Then
-		If Not __LOImpress_IntIsBetween($iEnd, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not __LO_IntIsBetween($iEnd, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$tGradient.EndColor = __LOImpress_TransparencyGradientConvert($iEnd)
 
-		If __LOImpress_VersionCheck(7.6) Then
+		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
 			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
@@ -815,7 +817,7 @@ Func _LOImpress_SlideCurrent(ByRef $oDoc, $oSlide = Null)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOImpress_VarsAreNull($oSlide) Then
+	If __LO_VarsAreNull($oSlide) Then
 		$oCurrSlide = $oDoc.getCurrentController.CurrentPage()
 		If Not IsObj($oCurrSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -862,7 +864,7 @@ Func _LOImpress_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
 	Local $iCount
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOImpress_IntIsBetween($iSlide, 0, $oDoc.DrawPages.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iSlide, 0, $oDoc.DrawPages.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$iCount = $oDoc.DrawPages.getCount()
 	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -948,7 +950,7 @@ Func _LOImpress_SlideGetByIndex(ByRef $oDoc, $iSlide)
 	Local $oSlide
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOImpress_IntIsBetween($iSlide, 0, $oDoc.DrawPages.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iSlide, 0, $oDoc.DrawPages.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oSlide = $oDoc.DrawPages.getByIndex($iSlide)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -1022,7 +1024,7 @@ Func _LOImpress_SlideShapesGetList(ByRef $oSlide, $iTypes = $LOI_SHAPE_TYPE_ALL)
 	Local $iShapeType, $iCount = 0
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOImpress_IntIsBetween($iTypes, $LOI_SHAPE_TYPE_DRAWING_SHAPE, $LOI_SHAPE_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iTypes, $LOI_SHAPE_TYPE_DRAWING_SHAPE, $LOI_SHAPE_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If $oSlide.hasElements() Then
 		ReDim $avShapes[$oSlide.getCount()][2]

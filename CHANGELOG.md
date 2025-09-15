@@ -741,6 +741,29 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOImpress_SlidesGetCount
 	- _LOImpress_SlideShapesGetList
 
+### Removed
+
+- Centralized some internal functions. Thus removing the following individual Functions:
+	- __LOImpress_ArrayFill
+	- __LOImpress_AddTo1DArray
+	- __LOImpress_CreateStruct
+	- __LOImpress_IntIsBetween
+	- __LOImpress_NumIsBetween
+	- __LOImpress_SetPropertyValue
+	- __LOImpress_UnitConvert
+	- __LOImpress_VarsAreNull
+	- __LOImpress_VersionCheck
+- Centralized some Helper functions. Thus removing the following individual Functions:
+	- _LOImpress_ConvertColorFromLong
+	- _LOImpress_ConvertColorToLong
+	- _LOImpress_ConvertFromMicrometer
+	- _LOImpress_ConvertToMicrometer
+	- _LOImpress_PathConvert
+	- _LOImpress_VersionGet
+- Centralized some Constants. Thus removing the following individual Constants:
+	- $LOI_PATHCONV_*
+	- $LOI_COLOR_*
+
 > [!NOTE]
 > **LibreOfficeWriter**
 
