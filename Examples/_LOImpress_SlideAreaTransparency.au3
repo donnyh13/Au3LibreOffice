@@ -16,8 +16,8 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Slide Background Color settings. Background color = $LOI_COLOR_TEAL.
-	_LOImpress_SlideAreaColor($oSlide, $LOI_COLOR_TEAL)
+	; Modify the Slide Background Color settings. Background color = $LO_COLOR_TEAL.
+	_LOImpress_SlideAreaColor($oSlide, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Slide settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to set the slide's background transparency level.")

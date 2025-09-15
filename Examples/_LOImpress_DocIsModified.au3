@@ -39,7 +39,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert some text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Slide's background color.
-	_LOImpress_SlideAreaColor($oSlide, Random($LOI_COLOR_BLACK, $LOI_COLOR_WHITE, 1))
+	_LOImpress_SlideAreaColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
 	If @error Then _ERROR($oDoc, "Failed to set slide color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Check if the document has been modified since being saved or created.

@@ -31,7 +31,7 @@ Func Example()
 			"$LOI_AREA_FILL_STYLE_BITMAP, 4 Fill Style is a Bitmap.")
 
 	; Set slide background.
-	_LOImpress_SlideAreaColor($oSlide, Random($LOI_COLOR_BLACK, $LOI_COLOR_WHITE, 1))
+	_LOImpress_SlideAreaColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
 	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Slide Fill Style

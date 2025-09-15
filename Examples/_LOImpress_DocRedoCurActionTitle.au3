@@ -29,7 +29,7 @@ Func Example()
 	$sRedo = _LOImpress_DocRedoCurActionTitle($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve next Redo action title. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The next Redo action title is: " & $sRedo & @CRLF &  "Press ok to perform it.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The next Redo action title is: " & $sRedo & @CRLF & "Press ok to perform it.")
 
 	; Perform one Redo action.
 	_LOImpress_DocRedo($oDoc)
