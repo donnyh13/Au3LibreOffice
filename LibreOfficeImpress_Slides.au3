@@ -34,6 +34,7 @@
 ; _LOImpress_SlideDeleteByIndex
 ; _LOImpress_SlideDeleteByObj
 ; _LOImpress_SlideGetByIndex
+; _LOImpress_SlideMove
 ; _LOImpress_SlidesGetCount
 ; _LOImpress_SlideShapesGetList
 ; ===============================================================================================================================
@@ -43,21 +44,25 @@
 ; Description ...: Add a slide to a presentation.
 ; Syntax ........: _LOImpress_SlideAdd(ByRef $oDoc[, $iPos = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iPos                - [optional] an integer value. Default is Null. The position to insert the new slide in the collection of slide. 0 Based. See remarks.
+;                  $iPos                - [optional] an integer value. Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iPos not an Integer, less than 0 or greater than number of slides.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to create a slide.
+;                  @Error 3 @Extended 2 Return 0 = Failed to backup currently active slide.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning new slide's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $iPos is set to Null, the new slide is inserted at the end.
-;                  Call $iPos with the last slide index plus 1 to insert the slide at the end.
-;                  It seems to not be possible to insert a Slide at the very beginning (Before slide 1).
+;                  Call $iPos with the last slide index to insert the slide at the end.
+;                  Due to limitations in the API, I have made a small workaround for inserting a slide at the beginning. A dispatch is executed to move the slide to the beginning. The current slide will temporarily be set to the new slide in order to move it.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -66,15 +71,41 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oSlide
+	Local $oSlide, $oServiceManager, $oDispatcher, $oCurrSlide
+	Local $bMoveToFirst = False
+	Local $aArray[0]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If ($iPos = Null) Then $iPos = $oDoc.DrawPages.getCount()
 	If Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
+	$iPos -= 1 ; -1 because when 0 is called in insertNewByIndex, it inserts it in position 1, etc. Also there is no way to insert a new slide at position 0, so I made a workaround.
+
+	If ($iPos = -1) Then
+		$iPos = 0
+		$bMoveToFirst = True
+	EndIf
+
 	$oSlide = $oDoc.DrawPages.insertNewByIndex($iPos)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If $bMoveToFirst Then
+		$oCurrSlide = $oDoc.getCurrentController.CurrentPage() ; Backup current slide
+		If Not IsObj($oCurrSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oDoc.getCurrentController.setCurrentPage($oSlide)
+
+		$oServiceManager = __LO_ServiceManager()
+		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+		If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:MovePageFirst", "", 0, $aArray)
+
+		$oDoc.getCurrentController.setCurrentPage($oCurrSlide) ; Restore current slide.
+	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
 EndFunc   ;==>_LOImpress_SlideAdd
@@ -127,7 +158,7 @@ Func _LOImpress_SlideAreaColor(ByRef $oSlide, $iColor = Null)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = $oSlide.Forms.Parent()
+		$oDoc = $oSlide.MasterPage.Forms.Parent()
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
@@ -299,7 +330,7 @@ Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oDoc = $oSlide.Forms.Parent()
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -518,7 +549,7 @@ Func _LOImpress_SlideAreaTransparency(ByRef $oSlide, $iTransparency = Null)
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = $oSlide.Forms.Parent()
+		$oDoc = $oSlide.MasterPage.Forms.Parent()
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
@@ -619,7 +650,7 @@ Func _LOImpress_SlideAreaTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oDoc = $oSlide.Forms.Parent()
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -746,38 +777,103 @@ EndFunc   ;==>_LOImpress_SlideAreaTransparencyGradient
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideCopy
 ; Description ...: Create a copy of a slide.
-; Syntax ........: _LOImpress_SlideCopy(ByRef $oSlide)
+; Syntax ........: _LOImpress_SlideCopy(ByRef $oSlide[, $iPos = Null])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $iPos                - [optional] an integer value. Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iPos not an Integer, less than 0 or greater than number of slides.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Document.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to copy slide.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify copied slide's position.
+;                  @Error 3 @Extended 4 Return 0 = Failed to backup currently active slide.
+;                  @Error 3 @Extended 5 Return 0 = Failed to move copied slide.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully copied the slide, returning the new slide's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The copied slide is inserted after the slide to be copied.
-;                  Presently it is not possible to move slides.
+;                  If $iPos is set to Null, the slide is left in the position described above. Otherwise, due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideCopy(ByRef $oSlide)
+Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oDoc, $oNewSlide
+	Local $oDoc, $oNewSlide, $oCurrSlide, $oServiceManager, $oDispatcher
+	Local $iNewPos, $iMove
+	Local $sDispatch
+	Local $aArray[0]
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = $oSlide.Forms.Parent()
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If ($iPos <> Null) And Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oNewSlide = $oDoc.Duplicate($oSlide)
 	If Not IsObj($oNewSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Failed to copy Slide.
+
+	If ($iPos <> Null) Then
+		For $i = 0 To $oDoc.DrawPages.getCount() - 1
+			If ($oDoc.DrawPages.getByIndex($i) = $oNewSlide) Then
+				$iNewPos = $i
+				ExitLoop
+			EndIf
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		If Not IsInt($iNewPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$iMove = ($iNewPos > $iPos) ? ($iNewPos - $iPos) : (($iNewPos < $iPos) ? ($iPos - $iNewPos) : (0)) ; 0 = NewPos and current Pos are the same.
+		$sDispatch = ($iNewPos > $iPos) ? (".uno:MovePageUp") : (".uno:MovePageDown")
+		If ($iPos = 0) Then ; Move Slide to beginning.
+			$iMove = 1 ; Set to 1 so it will be called once.
+			$sDispatch = ".uno:MovePageFirst"
+
+		ElseIf ($iPos = $oDoc.DrawPages.getCount() - 1) Then ; Move slide to end.
+			$iMove = 1 ; Set to 1 so it will be called once.
+			$sDispatch = ".uno:MovePageLast"
+
+		EndIf
+
+		$oCurrSlide = $oDoc.getCurrentController.CurrentPage() ; Backup current slide
+		If Not IsObj($oCurrSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		$oDoc.getCurrentController.setCurrentPage($oNewSlide)
+
+		$oServiceManager = __LO_ServiceManager()
+		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+		If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		For $i = 0 To $iMove - 1
+			$oDispatcher.executeDispatch($oDoc.CurrentController(), $sDispatch, "", 0, $aArray)
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		For $i = 0 To $oDoc.DrawPages.getCount() - 1
+			If ($oDoc.DrawPages.getByIndex($i) = $oNewSlide) Then
+				$iNewPos = $i
+				ExitLoop
+			EndIf
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		$oDoc.getCurrentController.setCurrentPage($oCurrSlide) ; Restore current slide.
+
+		If ($iNewPos <> $iPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oNewSlide)
 EndFunc   ;==>_LOImpress_SlideCopy
@@ -909,7 +1005,7 @@ Func _LOImpress_SlideDeleteByObj(ByRef $oSlide)
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = $oSlide.Forms.Parent()
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$iCount = $oDoc.DrawPages.getCount()
@@ -957,6 +1053,103 @@ Func _LOImpress_SlideGetByIndex(ByRef $oDoc, $iSlide)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
 EndFunc   ;==>_LOImpress_SlideGetByIndex
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideMove
+; Description ...: Move a slide in the collection of slides.
+; Syntax ........: _LOImpress_SlideMove(ByRef $oSlide, $iPos)
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $iPos                - an integer value. The position to move the slide to in the collection of slides. 0 Based. See remarks.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iPos not an Integer, less than 0 or greater than number of slides minus 1.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Document.
+;                  @Error 3 @Extended 2 Return 0 = Failed to identify slide's current position.
+;                  @Error 3 @Extended 3 Return 0 = Failed to backup currently active slide.
+;                  @Error 3 @Extended 4 Return 0 = Failed to move slide.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Slide was successfully moved.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oDoc, $oCurrSlide, $oServiceManager, $oDispatcher
+	Local $iCurrPos, $iMove
+	Local $sDispatch
+	Local $aArray[0]
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If ($iPos <> Null) And Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	For $i = 0 To $oDoc.DrawPages.getCount() - 1
+		If ($oDoc.DrawPages.getByIndex($i) = $oSlide) Then
+			$iCurrPos = $i
+			ExitLoop
+		EndIf
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	If Not IsInt($iCurrPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$iMove = ($iCurrPos > $iPos) ? ($iCurrPos - $iPos) : (($iCurrPos < $iPos) ? ($iPos - $iCurrPos) : (0))     ; 0 = CurrPos and New Pos are the same.
+	$sDispatch = ($iCurrPos > $iPos) ? (".uno:MovePageUp") : (".uno:MovePageDown")
+	If ($iPos = 0) Then     ; Move Slide to beginning.
+		$iMove = 1    ; Set to 1 so it will be called once.
+		$sDispatch = ".uno:MovePageFirst"
+
+	ElseIf ($iPos = $oDoc.DrawPages.getCount() - 1) Then     ; Move slide to end.
+		$iMove = 1    ; Set to 1 so it will be called once.
+		$sDispatch = ".uno:MovePageLast"
+
+	EndIf
+
+	$oCurrSlide = $oDoc.getCurrentController.CurrentPage()     ; Backup current slide
+	If Not IsObj($oCurrSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$oDoc.getCurrentController.setCurrentPage($oSlide)
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+	If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	For $i = 0 To $iMove - 1
+		$oDispatcher.executeDispatch($oDoc.CurrentController(), $sDispatch, "", 0, $aArray)
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	For $i = 0 To $oDoc.DrawPages.getCount() - 1
+		If ($oDoc.DrawPages.getByIndex($i) = $oSlide) Then
+			$iCurrPos = $i
+			ExitLoop
+		EndIf
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	$oDoc.getCurrentController.setCurrentPage($oCurrSlide)     ; Restore current slide.
+
+	If ($iCurrPos <> $iPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_SlideMove
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlidesGetCount

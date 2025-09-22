@@ -19,35 +19,39 @@ Func Example()
 	_LOImpress_SlideAreaColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
 	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to add a few slides.")
-
-	; Insert a new slide at the beginning.
-	$oSlide = _LOImpress_SlideAdd($oDoc, 0)
+	; Insert a new slide.
+	_LOImpress_SlideAdd($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to Insert a new slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Set slide background.
-	_LOImpress_SlideAreaColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
-	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a new slide.
-	$oSlide = _LOImpress_SlideAdd($oDoc)
+	_LOImpress_SlideAdd($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to Insert a new slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Set slide background.
-	_LOImpress_SlideAreaColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
-	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a new slide.
-	$oSlide = _LOImpress_SlideAdd($oDoc, 2)
+	_LOImpress_SlideAdd($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to Insert a new slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set slide background.
-	_LOImpress_SlideAreaColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
-	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert a new slide in the middle.
-	_LOImpress_SlideAdd($oDoc, 2)
+	; Insert a new slide.
+	_LOImpress_SlideAdd($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to Insert a new slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to move the slide to end of the list of slides.")
+
+	; Move the first slide to the end of the collection of slides.
+	_LOImpress_SlideMove($oSlide, (_LOImpress_SlidesGetCount($oDoc) - 1))
+	If @error Then _ERROR($oDoc, "Failed to move the slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to move the slide to the middle.")
+
+	; Move the first slide to the end of the collection of slides.
+	_LOImpress_SlideMove($oSlide, 2)
+	If @error Then _ERROR($oDoc, "Failed to move the slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to move the slide to the beginning again.")
+
+	; Move the first slide to the end of the collection of slides.
+	_LOImpress_SlideMove($oSlide, 0)
+	If @error Then _ERROR($oDoc, "Failed to move the slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

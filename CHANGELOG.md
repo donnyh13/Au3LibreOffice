@@ -721,6 +721,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOImpress_SlideDeleteByIndex
 	- _LOImpress_SlideDeleteByObj
 	- _LOImpress_SlideGetByIndex
+	- _LOImpress_SlideMove
 	- _LOImpress_SlidesGetCount
 	- _LOImpress_SlideShapesGetList
 

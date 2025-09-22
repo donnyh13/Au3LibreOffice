@@ -403,6 +403,10 @@ EndFunc   ;==>_LOImpress_DocCreate
 ;                  - uno:InsertPageQuick -- Insert a new page.
 ;                  - uno:InsertTimeFieldFix -- Insert a fixed Time field.
 ;                  - uno:InsertTimeFieldVar -- Insert a variable Time field.
+;                  - uno:MovePageDown -- Move the currently active slide Down one position,
+;                  - uno:MovePageFirst -- Move the currently active slide to the First slide position.
+;                  - uno:MovePageLast -- Move the currently active slide to the Last slide position.
+;                  - uno:MovePageUp -- Move the currently active slide Up one position.
 ;                  - uno:Paste -- Pastes the data out of the clipboard. Simulating Ctrl+V.
 ;                  - uno:PasteUnformatted -- Pastes the data out of the clipboard unformatted.
 ;                  - uno:PasteSpecial -- Simulates pasting with Ctrl+Shift+V, opens a dialog for selecting paste format.

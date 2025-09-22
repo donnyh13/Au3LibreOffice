@@ -23,10 +23,14 @@ Func Example()
 	_LOImpress_SlideAdd($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to Insert a new slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to make a copy of the first slide.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to make two copies of the first slide.")
 
 	; Make a copy of Slide 1
 	_LOImpress_SlideCopy($oSlide)
+	If @error Then _ERROR($oDoc, "Failed to copy a slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Make a second copy of Slide 1, insert it at the end.
+	_LOImpress_SlideCopy($oSlide, _LOImpress_SlidesGetCount($oDoc))
 	If @error Then _ERROR($oDoc, "Failed to copy a slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
