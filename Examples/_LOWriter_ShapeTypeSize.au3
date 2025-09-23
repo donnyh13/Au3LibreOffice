@@ -22,11 +22,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 3" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(3)
+	$iMicrometers = _LO_ConvertToMicrometer(3)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 4" to Micrometers
-	$iMicrometers2 = _LOWriter_ConvertToMicrometer(4)
+	$iMicrometers2 = _LO_ConvertToMicrometer(4)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape Size settings. Width = 3", Height = 4", Protect Size = True

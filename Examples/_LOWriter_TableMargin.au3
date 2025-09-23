@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Text Table settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1 inch to micrometers.
-	$iMicrometers = _LOWriter_ConvertToMicrometer(1)
+	$iMicrometers = _LO_ConvertToMicrometer(1)
 	If @error Then _ERROR($oDoc, "Failed to convert inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set all Table margins to 1 inch except the right.

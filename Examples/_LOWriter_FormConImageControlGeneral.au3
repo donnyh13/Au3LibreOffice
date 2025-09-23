@@ -24,7 +24,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a form control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
-	_LOWriter_FormConImageControlGeneral($oControl, "Renamed_AutoIt_Control", $oLabel, Null, True, True, False, True, True, 1, $LOW_COLOR_BLUE, $LOW_FORM_CON_BORDER_FLAT, $LOW_COLOR_GREEN, @ScriptDir & "\Extras\Plain.png", $LOW_FORM_CON_IMG_BTN_SCALE_KEEP_ASPECT, "Some Additional Information", "This is Help Text", "www.HelpURL.fake")
+	_LOWriter_FormConImageControlGeneral($oControl, "Renamed_AutoIt_Control", $oLabel, Null, True, True, False, True, True, 1, $LO_COLOR_BLUE, $LOW_FORM_CON_BORDER_FLAT, $LO_COLOR_GREEN, @ScriptDir & "\Extras\Plain.png", $LOW_FORM_CON_IMG_BTN_SCALE_KEEP_ASPECT, "Some Additional Information", "This is Help Text", "www.HelpURL.fake")
 	If @error Then _ERROR($oDoc, "Failed to modify the Control's properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings for the control. Return will be an Array in order of function parameters.

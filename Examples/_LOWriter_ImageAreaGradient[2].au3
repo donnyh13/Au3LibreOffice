@@ -23,8 +23,8 @@ Func Example()
 
 	; Modify the Image Gradient settings to: skip pre-set gradient name, Gradient type = $LOW_GRAD_TYPE_SQUARE, increment steps = 150,
 	; horizontal (X) offset = 25%, vertical offset (Y) = 56%, rotational angle = 135 degrees, percentage not covered by "From" color = 50%
-	; Starting color = $LOW_COLOR_ORANGE, Ending color = $LOW_COLOR_TEAL, Starting color intensity = 100%, ending color intensity = 68%
-	_LOWriter_ImageAreaGradient($oDoc, $oImage, Null, $LOW_GRAD_TYPE_SQUARE, 150, 25, 56, 135, 50, $LOW_COLOR_ORANGE, $LOW_COLOR_TEAL, 100, 68)
+	; Starting color = $LO_COLOR_ORANGE, Ending color = $LO_COLOR_TEAL, Starting color intensity = 100%, ending color intensity = 68%
+	_LOWriter_ImageAreaGradient($oDoc, $oImage, Null, $LOW_GRAD_TYPE_SQUARE, 150, 25, 56, 135, 50, $LO_COLOR_ORANGE, $LO_COLOR_TEAL, 100, 68)
 	If @error Then _ERROR($oDoc, "Failed to set Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Image settings. Return will be an array in order of function parameters.

@@ -36,8 +36,8 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now demonstrate modifying a cell's background color settings. The current Background color value is: " & $aCellBackGround[0] & _
 			@CRLF & " And the current Background Transparency setting is: " & $aCellBackGround[1])
 
-	; Set the cell Background color to $LOW_COLOR_INDIGO, and Background Transparent to False.
-	_LOWriter_CellBackColor($oCell, $LOW_COLOR_INDIGO, False)
+	; Set the cell Background color to $LO_COLOR_INDIGO, and Background Transparent to False.
+	_LOWriter_CellBackColor($oCell, $LO_COLOR_INDIGO, False)
 	If @error Then _ERROR($oDoc, "Failed to set Text Table Cell Background settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Table Cell's Text.
@@ -48,7 +48,7 @@ Func Example()
 	$aCellBackGround = _LOWriter_CellBackColor($oCell)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current Text Table Cell Background settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have set the cell's background color to $LOW_COLOR_INDIGO. The current Background color value is: " & $aCellBackGround[0] & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have set the cell's background color to $LO_COLOR_INDIGO. The current Background color value is: " & $aCellBackGround[0] & _
 			@CRLF & " And the current Background Transparency setting is: " & $aCellBackGround[1])
 
 	; Set the cell Background Transparent to True.

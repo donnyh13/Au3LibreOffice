@@ -7,7 +7,6 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oSrchDesc, $oFootNote, $oFootTextCursor, $oResult
 	Local $sResultString
-	Local $aAnEmptyArray[0] ; Create an empty array to skip FindFormat parameter.
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -58,7 +57,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search the word "search" within the ViewCursor selection.
-	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "search", $aAnEmptyArray, $oViewCursor)
+	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "search", Null, $oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$sResultString = ""
@@ -72,7 +71,7 @@ Func Example()
 	; Search for all matching results in this document, one at a time.
 	While IsObj($oResult)
 		; Search for the word "Search" using the search descriptor I just created. Starting from my last result.
-		$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search", $aAnEmptyArray, $oViewCursor, $oResult)
+		$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search", Null, $oViewCursor, $oResult)
 		If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Retrieve the Result's string.
@@ -86,7 +85,7 @@ Func Example()
 			"Did you notice the search didn't find the word ""SEarCH"" in the footnote? I will search again, this time with Exhaustive set to True.")
 
 	; Search the word "search" within the ViewCursor selection exhaustively.
-	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "search", $aAnEmptyArray, $oViewCursor, Null, True)
+	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "search", Null, $oViewCursor, Null, True)
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the string for the result.
@@ -98,7 +97,7 @@ Func Example()
 	; Search for all matching results in this document, one at a time.
 	While IsObj($oResult)
 		; Search for the word "Search" using the search descriptor I just created. Starting from my last result.
-		$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search", $aAnEmptyArray, $oViewCursor, $oResult, True)
+		$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search", Null, $oViewCursor, $oResult, True)
 		If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Retrieve the Result's string.

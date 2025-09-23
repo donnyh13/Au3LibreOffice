@@ -57,11 +57,11 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok size the image again.")
 
 	; Convert 4" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(4)
+	$iMicrometers = _LO_ConvertToMicrometer(4)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 7" to Micrometers
-	$iMicrometers2 = _LOWriter_ConvertToMicrometer(7)
+	$iMicrometers2 = _LO_ConvertToMicrometer(7)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Image's size. Skip Scale Width, Skip Scale Height, Set Width to 4", height to 7"

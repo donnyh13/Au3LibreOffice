@@ -36,8 +36,8 @@ Func Example()
 	_LOWriter_DirFrmtCharBorderWidth($oViewCursor, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Border color to $LOW_COLOR_BRICK
-	_LOWriter_DirFrmtCharBorderColor($oViewCursor, $LOW_COLOR_BRICK, $LOW_COLOR_BRICK, $LOW_COLOR_BRICK, $LOW_COLOR_BRICK)
+	; Set the selected text's Border color to $LO_COLOR_BRICK
+	_LOWriter_DirFrmtCharBorderColor($oViewCursor, $LO_COLOR_BRICK, $LO_COLOR_BRICK, $LO_COLOR_BRICK, $LO_COLOR_BRICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

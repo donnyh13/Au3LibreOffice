@@ -22,12 +22,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/8" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(.125)
+	$iMicrometers = _LO_ConvertToMicrometer(.125)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Shape Line Properties settings to: Set the Line Style to $LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, Line Color to $LOW_COLOR_MAGENTA,
+	; Modify the Shape Line Properties settings to: Set the Line Style to $LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, Line Color to $LO_COLOR_MAGENTA,
 	; Width = 1/8", Transparency = 50%, Corner Style = $LOW_SHAPE_LINE_JOINT_BEVEL, Cap Style = $LOW_SHAPE_LINE_CAP_SQUARE
-	_LOWriter_ShapeLineProperties($oShape, $LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, $LOW_COLOR_MAGENTA, $iMicrometers, 50, $LOW_SHAPE_LINE_JOINT_BEVEL, $LOW_SHAPE_LINE_CAP_SQUARE)
+	_LOWriter_ShapeLineProperties($oShape, $LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, $LO_COLOR_MAGENTA, $iMicrometers, 50, $LOW_SHAPE_LINE_JOINT_BEVEL, $LOW_SHAPE_LINE_CAP_SQUARE)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape settings. Return will be an array in order of function parameters.

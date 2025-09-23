@@ -31,15 +31,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(0.25)
+	$iMicrometers = _LO_ConvertToMicrometer(0.25)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/2" to Micrometers
-	$iMicrometers2 = _LOWriter_ConvertToMicrometer(0.5)
+	$iMicrometers2 = _LO_ConvertToMicrometer(0.5)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1" to Micrometers
-	$iMicrometers3 = _LOWriter_ConvertToMicrometer(1)
+	$iMicrometers3 = _LO_ConvertToMicrometer(1)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the paragraph at the current cursor's location Indent settings to, 1/4" Before paragraph, 1/2" after paragraph, First line indent = 1",

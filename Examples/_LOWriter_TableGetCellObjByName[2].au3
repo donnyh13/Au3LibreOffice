@@ -32,7 +32,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.
-	_LOWriter_CellBackColor($oCell, $LOW_COLOR_BLUE, False)
+	_LOWriter_CellBackColor($oCell, $LO_COLOR_BLUE, False)
 	If @error Then _ERROR($oDoc, "Failed to set Text Table cell background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Cell names.

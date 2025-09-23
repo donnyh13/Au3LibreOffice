@@ -33,8 +33,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Overline settings to Words only = True, Overline style $LOW_UNDERLINE_BOLD_DASH_DOT, Overline has
-	; Color = True, and Color to $LOW_COLOR_BROWN
-	_LOWriter_DirFrmtOverLine($oViewCursor, True, $LOW_UNDERLINE_BOLD_DASH_DOT, True, $LOW_COLOR_BROWN)
+	; Color = True, and Color to $LO_COLOR_BROWN
+	_LOWriter_DirFrmtOverLine($oViewCursor, True, $LOW_UNDERLINE_BOLD_DASH_DOT, True, $LO_COLOR_BROWN)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

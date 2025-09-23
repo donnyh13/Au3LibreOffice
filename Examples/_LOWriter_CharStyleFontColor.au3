@@ -40,8 +40,8 @@ Func Example()
 	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style font color to $LOW_COLOR_RED, Transparency to 50%, and Highlight to $LOW_COLOR_GOLD
-	_LOWriter_CharStyleFontColor($oCharStyle, $LOW_COLOR_RED, 50, $LOW_COLOR_GOLD)
+	; Set "Example" Character style font color to $LO_COLOR_RED, Transparency to 50%, and Highlight to $LO_COLOR_GOLD
+	_LOWriter_CharStyleFontColor($oCharStyle, $LO_COLOR_RED, 50, $LO_COLOR_GOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

@@ -25,13 +25,13 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a form control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 18, $LOW_COLOR_INDIGO, $LOW_UNDERLINE_BOLD, $LOW_COLOR_GREEN, $LOW_STRIKEOUT_NONE, True, $LOW_RELIEF_NONE)
+	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 18, $LO_COLOR_INDIGO, $LOW_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOW_STRIKEOUT_NONE, True, $LOW_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
 	_LOWriter_FormConCurrencyFieldGeneral($oControl, "Renamed_AutoIt_Control", $oLabel, Null, True, True, True, True, True, $LOW_FORM_CON_MOUSE_SCROLL_FOCUS, True, 1, _
-			12.50, 100.75, 1, 13.50, 2, False, "$", True, True, False, Null, $mFont, $LOW_ALIGN_HORI_RIGHT, $LOW_ALIGN_VERT_TOP, $LOW_COLOR_GREEN, _
-			$LOW_FORM_CON_BORDER_WITHOUT, $LOW_COLOR_GOLD, True, "Some Additional Information", "This is Help Text", "www.HelpURL.fake")
+			12.50, 100.75, 1, 13.50, 2, False, "$", True, True, False, Null, $mFont, $LOW_ALIGN_HORI_RIGHT, $LOW_ALIGN_VERT_TOP, $LO_COLOR_GREEN, _
+			$LOW_FORM_CON_BORDER_WITHOUT, $LO_COLOR_GOLD, True, "Some Additional Information", "This is Help Text", "www.HelpURL.fake")
 	If @error Then _ERROR($oDoc, "Failed to modify the Control's properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings for the control. Return will be an Array in order of function parameters.

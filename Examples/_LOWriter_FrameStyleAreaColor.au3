@@ -28,8 +28,8 @@ Func Example()
 	_LOWriter_FrameStyleSet($oDoc, $oFrame, "Test Style")
 	If @error Then _ERROR($oDoc, "Failed to set Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Frame Style Background Color settings. Background color = $LOW_COLOR_TEAL, Background color is transparent = False
-	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LOW_COLOR_TEAL, False)
+	; Modify the Frame Style Background Color settings. Background color = $LO_COLOR_TEAL, Background color is transparent = False
+	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LO_COLOR_TEAL, False)
 	If @error Then _ERROR($oDoc, "Failed to set Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame Style settings. Return will be an array in order of function parameters.

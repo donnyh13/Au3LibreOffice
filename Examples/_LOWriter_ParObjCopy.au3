@@ -29,8 +29,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 4, True)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to move the View Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the font color to $LOW_COLOR_ORANGE, and highlight to $LOW_COLOR_PURPLE
-	_LOWriter_DirFrmtFontColor($oViewCursor, $LOW_COLOR_ORANGE, Null, $LOW_COLOR_PURPLE)
+	; Set the font color to $LO_COLOR_ORANGE, and highlight to $LO_COLOR_PURPLE
+	_LOWriter_DirFrmtFontColor($oViewCursor, $LO_COLOR_ORANGE, Null, $LO_COLOR_PURPLE)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to set Font Color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the Cursor to the right 43 spaces.
@@ -42,7 +42,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to move the View Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Underline the selected portion in red.
-	_LOWriter_DirFrmtUnderLine($oViewCursor, True, $LOW_UNDERLINE_BOLD_DASH_DOT_DOT, True, $LOW_COLOR_RED)
+	_LOWriter_DirFrmtUnderLine($oViewCursor, True, $LOW_UNDERLINE_BOLD_DASH_DOT_DOT, True, $LO_COLOR_RED)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to set underline settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a list of Paragraph Objects

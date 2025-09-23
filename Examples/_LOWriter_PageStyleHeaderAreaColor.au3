@@ -20,8 +20,8 @@ Func Example()
 	_LOWriter_PageStyleHeader($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style headers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Header Background color to $LOW_COLOR_LIME, Background color transparent = False
-	_LOWriter_PageStyleHeaderAreaColor($oPageStyle, $LOW_COLOR_LIME, False)
+	; Set Page style Header Background color to $LO_COLOR_LIME, Background color transparent = False
+	_LOWriter_PageStyleHeaderAreaColor($oPageStyle, $LO_COLOR_LIME, False)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an integer.

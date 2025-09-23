@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-;~ #Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel
 
 #include-once
 
@@ -17,11 +17,156 @@
 ; ===============================================================================================================================
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
+; __LO_AddTo1DArray
+; __LO_ArrayFill
+; __LO_CreateStruct
 ; __LO_DeleteTempReg
 ; __LO_InternalComErrorHandler
+; __LO_IntIsBetween
+; __LO_NumIsBetween
 ; __LO_ServiceManager
 ; __LO_SetPortableServiceManager
+; __LO_SetPropertyValue
+; __LO_UnitConvert
+; __LO_VarsAreNull
+; __LO_VersionCheck
 ; ===============================================================================================================================
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_AddTo1DArray
+; Description ...: Add data to a 1 Dimensional array.
+; Syntax ........: __LO_AddTo1DArray(ByRef $aArray, $vData[, $bCountInFirst = False])
+; Parameters ....: $aArray              - [in/out] an array of unknowns. The Array to directly add data to. Array will be directly modified.
+;                  $vData               - a variant value. The Data to add to the Array.
+;                  $bCountInFirst       - [optional] a boolean value. Default is False. If True the first element of the array is a count of contained elements.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $aArray not an Array
+;                  @Error 1 @Extended 2 Return 0 = $bCountinFirst not a Boolean.
+;                  @Error 1 @Extended 3 Return 0 = $aArray contains too many columns.
+;                  @Error 1 @Extended 4 Return 0 = $aArray[0] contains non integer data or is not empty, and $bCountInFirst is set to True.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Array item was successfully added.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_AddTo1DArray(ByRef $aArray, $vData, $bCountInFirst = False)
+	Local Const $UBOUND_COLUMNS = 2
+
+	If Not IsArray($aArray) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bCountInFirst) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If UBound($aArray, $UBOUND_COLUMNS) > 1 Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Too many columns
+
+	If $bCountInFirst And (UBound($aArray) = 0) Then
+		ReDim $aArray[1]
+		$aArray[0] = 0
+	EndIf
+
+	If $bCountInFirst And (($aArray[0] <> "") And Not IsInt($aArray[0])) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	ReDim $aArray[UBound($aArray) + 1]
+	$aArray[UBound($aArray) - 1] = $vData
+	If $bCountInFirst Then $aArray[0] += 1
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>__LO_AddTo1DArray
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_ArrayFill
+; Description ...: Fill an Array with data.
+; Syntax ........: __LO_ArrayFill(ByRef $aArrayToFill[, $vVar1 = Null[, $vVar2 = Null[, $vVar3 = Null[, $vVar4 = Null[, $vVar5 = Null[, $vVar6 = Null[, $vVar7 = Null[, $vVar8 = Null[, $vVar9 = Null[, $vVar10 = Null[, $vVar11 = Null[, $vVar12 = Null[, $vVar13 = Null[, $vVar14 = Null[, $vVar15 = Null[, $vVar16 = Null[, $vVar17 = Null[, $vVar18 = Null[, $vVar19 = Null[, $vVar20 = Null[, $vVar21 = Null[, $vVar22 = Null[, $vVar23 = Null[, $vVar24 = Null[, $vVar25 = Null[, $vVar26 = Null[, $vVar27 = Null[, $vVar28 = Null[, $vVar29 = Null[, $vVar30 = Null[, $vVar31 = Null[, $vVar32 = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]])
+; Parameters ....: $aArrayToFill        - [in/out] an array of unknowns. The Array to Fill. Array will be directly modified.
+;                  $vVar1               - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar2               - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar3               - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar4               - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar5               - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar6               - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar7               - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar8               - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar9               - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar10              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar11              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar12              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar13              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar14              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar15              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar16              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar17              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar18              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar19              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar20              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar21              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar22              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar23              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar24              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar25              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar26              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar27              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar28              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar29              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar30              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar31              - [optional] a variant value. Default is Null. The Data to add to the Array.
+;                  $vVar32              - [optional] a variant value. Default is Null. The Data to add to the Array.
+; Return values .: None
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call only how many you parameters you need to add to the Array. Automatically resizes the Array if it is the incorrect size.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_ArrayFill(ByRef $aArrayToFill, $vVar1 = Null, $vVar2 = Null, $vVar3 = Null, $vVar4 = Null, $vVar5 = Null, $vVar6 = Null, $vVar7 = Null, $vVar8 = Null, $vVar9 = Null, $vVar10 = Null, $vVar11 = Null, $vVar12 = Null, $vVar13 = Null, $vVar14 = Null, $vVar15 = Null, $vVar16 = Null, $vVar17 = Null, $vVar18 = Null, $vVar19 = Null, $vVar20 = Null, $vVar21 = Null, $vVar22 = Null, $vVar23 = Null, $vVar24 = Null, $vVar25 = Null, $vVar26 = Null, $vVar27 = Null, $vVar28 = Null, $vVar29 = Null, $vVar30 = Null, $vVar31 = Null, $vVar32 = Null)
+	#forceref $vVar1, $vVar2, $vVar3, $vVar4, $vVar5, $vVar6, $vVar7, $vVar8, $vVar9, $vVar10, $vVar11, $vVar12, $vVar13, $vVar14, $vVar15, $vVar16, $vVar17, $vVar18, $vVar19, $vVar20, $vVar21, $vVar22, $vVar23, $vVar24, $vVar25, $vVar26, $vVar27, $vVar28, $vVar29, $vVar30, $vVar31, $vVar32
+
+	If UBound($aArrayToFill) < (@NumParams - 1) Then ReDim $aArrayToFill[@NumParams - 1]
+	For $i = 0 To @NumParams - 2
+		$aArrayToFill[$i] = Eval("vVar" & $i + 1)
+	Next
+EndFunc   ;==>__LO_ArrayFill
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_CreateStruct
+; Description ...: Retrieves a Struct.
+; Syntax ........: __LO_CreateStruct($sStructName)
+; Parameters ....: $sStructName         - a string value. Name of structure to create.
+; Return values .: Success: Structure.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $sStructName not a string
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.ServiceManager" Object
+;                  @Error 2 @Extended 2 Return 0 = Error creating requested structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Structure = Success. Property Structure Returned
+; Author ........: mLipok
+; Modified ......: donnyh13 - Added error checking.
+; Remarks .......: From WriterDemo.au3 as modified by mLipok from WriterDemo.vbs found in the LibreOffice SDK examples.
+; Related .......:
+; Link ..........: https://www.autoitscript.com/forum/topic/204665-libreopenoffice-writer/?do=findComment&comment=1471711
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_CreateStruct($sStructName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oServiceManager, $tStruct
+
+	If Not IsString($sStructName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$tStruct = $oServiceManager.Bridge_GetStruct($sStructName)
+	If Not IsObj($tStruct) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $tStruct)
+EndFunc   ;==>__LO_CreateStruct
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_DeleteTempReg
@@ -122,6 +267,121 @@ Func __LO_InternalComErrorHandler(ByRef $oComError)
 		EndSwitch
 	EndIf
 EndFunc   ;==>__LO_InternalComErrorHandler
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_IntIsBetween
+; Description ...: Test whether an input is an Integer and is between two Integers.
+; Syntax ........: __LO_IntIsBetween($iTest, $iMin, $iMax[, $vNot = ""[, $vIncl = ""]])
+; Parameters ....: $iTest               - an integer value. The Value to test.
+;                  $iMin                - an integer value. The minimum $iTest can be.
+;                  $iMax                - [optional] an integer value. Default is 0. The maximum $iTest can be.
+;                  $vNot                - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
+;                  $vIncl               - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
+; Return values .: Success: Boolean
+;                  Failure: False and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return Boolean = $iTest not an Integer.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_IntIsBetween($iTest, $iMin, $iMax = 0, $vNot = "", $vIncl = "")
+	If Not IsInt($iTest) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, False)
+
+	Switch @NumParams
+		Case 2
+
+			Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest < $iMin) ? (False) : (True))
+
+		Case 3
+
+			Return SetError($__LO_STATUS_SUCCESS, 0, (($iTest < $iMin) Or ($iTest > $iMax)) ? (False) : (True))
+
+		Case 4, 5
+			If IsString($vNot) Then
+				If StringInStr(":" & $vNot & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+
+			ElseIf IsInt($vNot) Then
+				If ($iTest = $vNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+			EndIf
+
+			If (($iTest >= $iMin) And ($iTest <= $iMax)) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+			If @NumParams = 5 Then ContinueCase
+
+			Return SetError($__LO_STATUS_SUCCESS, 0, False)
+
+		Case Else
+			If IsString($vIncl) Then
+				If StringInStr(":" & $vIncl & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+			ElseIf IsInt($vIncl) Then
+				If ($iTest = $vIncl) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+			EndIf
+
+			Return SetError($__LO_STATUS_SUCCESS, 0, False)
+	EndSwitch
+EndFunc   ;==>__LO_IntIsBetween
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_NumIsBetween
+; Description ...: Test whether an input is a Number and is between two Numbers.
+; Syntax ........: __LO_NumIsBetween($nTest, $nMin, $nMax[, $snNot = ""[, $snIncl = Default]])
+; Parameters ....: $nTest               - a general number value. The Value to test.
+;                  $nMin                - a general number value. The minimum $iTest can be.
+;                  $nMax                - a general number value. The maximum $iTest can be.
+;                  $snNot               - [optional] a string value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
+;                  $snIncl              - [optional] a string value. Default is Default. Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
+; Return values .: Success: Boolean
+;                  Failure: False
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_NumIsBetween($nTest, $nMin, $nMax, $snNot = "", $snIncl = Default)
+	Local $bMatch = False
+	Local $anNot, $anIncl
+
+	If Not IsNumber($nTest) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+	If (@NumParams = 3) Then Return (($nTest < $nMin) Or ($nTest > $nMax)) ? (SetError($__LO_STATUS_SUCCESS, 0, False)) : (SetError($__LO_STATUS_SUCCESS, 0, True))
+
+	If ($snNot <> "") Then
+		If IsString($snNot) And StringInStr($snNot, ":") Then
+			$anNot = StringSplit($snNot, ":")
+			For $i = 1 To $anNot[0]
+				If ($anNot[$i] = $nTest) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+			Next
+
+		Else
+			If ($nTest = $snNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		EndIf
+	EndIf
+
+	If (($nTest >= $nMin) And ($nTest <= $nMax)) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+	If IsString($snIncl) And StringInStr($snIncl, ":") Then
+		$anIncl = StringSplit($snIncl, ":")
+		For $j = 1 To $anIncl[0]
+			$bMatch = ($anIncl[$j] = $nTest) ? (True) : (False)
+			If $bMatch Then ExitLoop
+		Next
+
+	ElseIf IsNumber($snIncl) Then
+		$bMatch = ($nTest = $snIncl) ? (True) : (False)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bMatch)
+EndFunc   ;==>__LO_NumIsBetween
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_ServiceManager
@@ -387,3 +647,262 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>__LO_SetPortableServiceManager
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_SetPropertyValue
+; Description ...: Creates a property value struct object.
+; Syntax ........: __LO_SetPropertyValue($sName, $vValue)
+; Parameters ....: $sName               - a string value. Property name.
+;                  $vValue              - a variant value. Property value.
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $sName not a string
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create Properties Structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Property Object Returned
+; Author ........: Leagnus, GMK
+; Modified ......: donnyh13 - added CreateStruct function. Modified variable names.
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_SetPropertyValue($sName, $vValue)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $tProperties
+
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$tProperties = __LO_CreateStruct("com.sun.star.beans.PropertyValue")
+	If @error Or Not IsObj($tProperties) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$tProperties.Name = $sName
+	$tProperties.Value = $vValue
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $tProperties)
+EndFunc   ;==>__LO_SetPropertyValue
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_UnitConvert
+; Description ...: For converting measurement units.
+; Syntax ........: __LO_UnitConvert($nValue, $iReturnType)
+; Parameters ....: $nValue              - a general number value. The Number to be converted.
+;                  $iReturnType         - a Integer value. Determines conversion type. See Constants, $__LOCONST_CONVERT_* as defined in LibreOffice_Constants.au3.
+; Return values .: Success: Integer or Number.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $nValue is not a Number.
+;                  @Error 1 @Extended 2 Return 0 = $iReturnType is not a Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iReturnType does not match constants, See Constants, $__LOCONST_CONVERT_* as defined in LibreOffice_Constants.au3.
+;                  --Success--
+;                  @Error 0 @Extended 1 Return Number = Returns Number converted from TWIPS to Centimeters.
+;                  @Error 0 @Extended 2 Return Number = Returns Number converted from TWIPS to Inches.
+;                  @Error 0 @Extended 3 Return Integer = Returns Number converted from Millimeters to uM (Micrometers).
+;                  @Error 0 @Extended 4 Return Number = Returns Number converted from Micrometers to MM
+;                  @Error 0 @Extended 5 Return Integer = Returns Number converted from Centimeters To uM
+;                  @Error 0 @Extended 6 Return Number = Returns Number converted from um (Micrometers) To CM
+;                  @Error 0 @Extended 7 Return Integer = Returns Number converted from Inches to uM(Micrometers).
+;                  @Error 0 @Extended 8 Return Number = Returns Number converted from uM(Micrometers) to Inches.
+;                  @Error 0 @Extended 9 Return Integer = Returns Number converted from TWIPS to uM(Micrometers).
+;                  @Error 0 @Extended 10 Return Integer = Returns Number converted from Point to uM(Micrometers).
+;                  @Error 0 @Extended 11 Return Number = Returns Number converted from uM(Micrometers) to Point.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_UnitConvert($nValue, $iReturnType)
+	Local $iUM, $iMM, $iCM, $iInch
+
+	If Not IsNumber($nValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iReturnType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	Switch $iReturnType
+		Case $__LOCONST_CONVERT_TWIPS_CM ; TWIPS TO CM
+			; 1 TWIP = 1/20 of a point, 1 Point = 1/72 of an Inch.
+			$iInch = ($nValue / 20 / 72)
+			; 1 Inch = 2.54 CM
+			$iCM = Round(Round($iInch * 2.54, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 1, Number($iCM))
+
+		Case $__LOCONST_CONVERT_TWIPS_INCH ; TWIPS to Inch
+			; 1 TWIP = 1/20 of a point, 1 Point = 1/72 of an Inch.
+			$iInch = ($nValue / 20 / 72)
+			$iInch = Round(Round($iInch, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 2, Number($iInch))
+
+		Case $__LOCONST_CONVERT_MM_UM ; Millimeter to Micrometer
+			$iUM = ($nValue * 100)
+			$iUM = Round(Round($iUM, 1))
+
+			Return SetError($__LO_STATUS_SUCCESS, 3, Number($iUM))
+
+		Case $__LOCONST_CONVERT_UM_MM ; Micrometer to Millimeter
+			$iMM = ($nValue / 100)
+			$iMM = Round(Round($iMM, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 4, Number($iMM))
+
+		Case $__LOCONST_CONVERT_CM_UM ; Centimeter to Micrometer
+			$iUM = ($nValue * 1000)
+			$iUM = Round(Round($iUM, 1))
+
+			Return SetError($__LO_STATUS_SUCCESS, 5, Int($iUM))
+
+		Case $__LOCONST_CONVERT_UM_CM ; Micrometer to Centimeter
+			$iCM = ($nValue / 1000)
+			$iCM = Round(Round($iCM, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 6, Number($iCM))
+
+		Case $__LOCONST_CONVERT_INCH_UM ; Inch to Micrometer
+			; 1 Inch - 2.54 Cm; Micrometer = 1/1000 CM
+			$iUM = ($nValue * 2.54) * 1000 ; + .0055
+			$iUM = Round(Round($iUM, 1))
+
+			Return SetError($__LO_STATUS_SUCCESS, 7, Int($iUM))
+
+		Case $__LOCONST_CONVERT_UM_INCH ; Micrometer to Inch
+			; 1 Inch - 2.54 Cm; Micrometer = 1/1000 CM
+			$iInch = ($nValue / 1000) / 2.54 ; + .0055
+			$iInch = Round(Round($iInch, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 8, $iInch)
+
+		Case $__LOCONST_CONVERT_TWIPS_UM ; TWIPS to MicroMeter
+			; 1 TWIP = 1/20 of a point, 1 Point = 1/72 of an Inch.
+			$iInch = (($nValue / 20) / 72)
+			$iInch = Round(Round($iInch, 3), 2)
+			; 1 Inch - 25.4 MM; Micrometer = 1/100 MM
+			$iUM = Round($iInch * 25.4 * 100)
+
+			Return SetError($__LO_STATUS_SUCCESS, 9, Int($iUM))
+
+		Case $__LOCONST_CONVERT_PT_UM
+			; 1 pt = 35 uM
+
+			Return ($nValue = 0) ? (SetError($__LO_STATUS_SUCCESS, 10, 0)) : (SetError($__LO_STATUS_SUCCESS, 10, Round(($nValue * 35.2778))))
+
+		Case $__LOCONST_CONVERT_UM_PT
+
+			Return ($nValue = 0) ? (SetError($__LO_STATUS_SUCCESS, 11, 0)) : (SetError($__LO_STATUS_SUCCESS, 11, Round(($nValue / 35.2778), 2)))
+
+		Case Else
+
+			Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	EndSwitch
+EndFunc   ;==>__LO_UnitConvert
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_VarsAreNull
+; Description ...: Tests whether all input parameters are equal to Null keyword.
+; Syntax ........: __LO_VarsAreNull($vVar1[, $vVar2 = Null[, $vVar3 = Null[, $vVar4 = Null[, $vVar5 = Null[, $vVar6 = Null[, $vVar7 = Null[, $vVar8 = Null[, $vVar9 = Null[, $vVar10 = Null[, $vVar11 = Null[, $vVar12 = Null[, $vVar13 = Null[, $vVar14 = Null[, $vVar15 = Null[, $vVar16 = Null[, $vVar17 = Null[, $vVar18 = Null[, $vVar19 = Null[, $vVar20 = Null[, $vVar21 = Null[, $vVar22 = Null[, $vVar23 = Null[, $vVar24 = Null[, $vVar25 = Null[, $vVar26 = Null[, $vVar27 = Null[, $vVar28 = Null[, $vVar29 = Null[, $vVar30 = Null[, $vVar31 = Null[, $vVar32 = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]])
+; Parameters ....: $vVar1               - a variant value.
+;                  $vVar2               - [optional] a variant value. Default is Null.
+;                  $vVar3               - [optional] a variant value. Default is Null.
+;                  $vVar4               - [optional] a variant value. Default is Null.
+;                  $vVar5               - [optional] a variant value. Default is Null.
+;                  $vVar6               - [optional] a variant value. Default is Null.
+;                  $vVar7               - [optional] a variant value. Default is Null.
+;                  $vVar8               - [optional] a variant value. Default is Null.
+;                  $vVar9               - [optional] a variant value. Default is Null.
+;                  $vVar10              - [optional] a variant value. Default is Null.
+;                  $vVar11              - [optional] a variant value. Default is Null.
+;                  $vVar12              - [optional] a variant value. Default is Null.
+;                  $vVar13              - [optional] a variant value. Default is Null.
+;                  $vVar14              - [optional] a variant value. Default is Null.
+;                  $vVar15              - [optional] a variant value. Default is Null.
+;                  $vVar16              - [optional] a variant value. Default is Null.
+;                  $vVar17              - [optional] a variant value. Default is Null.
+;                  $vVar18              - [optional] a variant value. Default is Null.
+;                  $vVar19              - [optional] a variant value. Default is Null.
+;                  $vVar20              - [optional] a variant value. Default is Null.
+;                  $vVar21              - [optional] a variant value. Default is Null.
+;                  $vVar22              - [optional] a variant value. Default is Null.
+;                  $vVar23              - [optional] a variant value. Default is Null.
+;                  $vVar24              - [optional] a variant value. Default is Null.
+;                  $vVar25              - [optional] a variant value. Default is Null.
+;                  $vVar26              - [optional] a variant value. Default is Null.
+;                  $vVar27              - [optional] a variant value. Default is Null.
+;                  $vVar28              - [optional] a variant value. Default is Null.
+;                  $vVar29              - [optional] a variant value. Default is Null.
+;                  $vVar30              - [optional] a variant value. Default is Null.
+;                  $vVar31              - [optional] a variant value. Default is Null.
+;                  $vVar32              - [optional] a variant value. Default is Null.
+; Return values .: Success: Boolean
+;                  Failure: False
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = If All parameters are Equal to Null, True is returned. Else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_VarsAreNull($vVar1, $vVar2 = Null, $vVar3 = Null, $vVar4 = Null, $vVar5 = Null, $vVar6 = Null, $vVar7 = Null, $vVar8 = Null, $vVar9 = Null, $vVar10 = Null, $vVar11 = Null, $vVar12 = Null, $vVar13 = Null, $vVar14 = Null, $vVar15 = Null, $vVar16 = Null, $vVar17 = Null, $vVar18 = Null, $vVar19 = Null, $vVar20 = Null, $vVar21 = Null, $vVar22 = Null, $vVar23 = Null, $vVar24 = Null, $vVar25 = Null, $vVar26 = Null, $vVar27 = Null, $vVar28 = Null, $vVar29 = Null, $vVar30 = Null, $vVar31 = Null, $vVar32 = Null)
+	Local $bAllNull1, $bAllNull2, $bAllNull3, $bAllNull4, $bAllNull5, $bAllNull6, $bAllNull7, $bAllNull8
+	$bAllNull1 = (($vVar1 = Null) And ($vVar2 = Null) And ($vVar3 = Null) And ($vVar4 = Null)) ? (True) : (False)
+	If (@NumParams <= 4) Then Return SetError($__LO_STATUS_SUCCESS, 0, ($bAllNull1) ? (True) : (False))
+
+	$bAllNull2 = (($vVar5 = Null) And ($vVar6 = Null) And ($vVar7 = Null) And ($vVar8 = Null)) ? (True) : (False)
+	If (@NumParams <= 8) Then Return SetError($__LO_STATUS_SUCCESS, 0, (($bAllNull1) And ($bAllNull2)) ? (True) : (False))
+
+	$bAllNull3 = (($vVar9 = Null) And ($vVar10 = Null) And ($vVar11 = Null) And ($vVar12 = Null)) ? (True) : (False)
+	If (@NumParams <= 12) Then Return SetError($__LO_STATUS_SUCCESS, 0, (($bAllNull1) And ($bAllNull2) And ($bAllNull3)) ? (True) : (False))
+
+	$bAllNull4 = (($vVar13 = Null) And ($vVar14 = Null) And ($vVar15 = Null) And ($vVar16 = Null)) ? (True) : (False)
+	If (@NumParams <= 16) Then Return SetError($__LO_STATUS_SUCCESS, 0, (($bAllNull1) And ($bAllNull2) And ($bAllNull3) And ($bAllNull4)) ? (True) : (False))
+
+	$bAllNull5 = (($vVar17 = Null) And ($vVar18 = Null) And ($vVar19 = Null) And ($vVar20 = Null)) ? (True) : (False)
+	If (@NumParams <= 20) Then Return SetError($__LO_STATUS_SUCCESS, 0, (($bAllNull1) And ($bAllNull2) And ($bAllNull3) And ($bAllNull4) And ($bAllNull5)) ? (True) : (False))
+
+	$bAllNull6 = (($vVar21 = Null) And ($vVar22 = Null) And ($vVar23 = Null) And ($vVar24 = Null)) ? (True) : (False)
+	If (@NumParams <= 24) Then Return SetError($__LO_STATUS_SUCCESS, 0, (($bAllNull1) And ($bAllNull2) And ($bAllNull3) And ($bAllNull4) And ($bAllNull5) And ($bAllNull6)) ? (True) : (False))
+
+	$bAllNull7 = (($vVar25 = Null) And ($vVar26 = Null) And ($vVar27 = Null) And ($vVar28 = Null)) ? (True) : (False)
+	If (@NumParams <= 28) Then Return SetError($__LO_STATUS_SUCCESS, 0, (($bAllNull1) And ($bAllNull2) And ($bAllNull3) And ($bAllNull4) And ($bAllNull5) And ($bAllNull6) And ($bAllNull7)) ? (True) : (False))
+
+	$bAllNull8 = (($vVar29 = Null) And ($vVar30 = Null) And ($vVar31 = Null) And ($vVar32 = Null)) ? (True) : (False)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, (($bAllNull1) And ($bAllNull2) And ($bAllNull3) And ($bAllNull4) And ($bAllNull5) And ($bAllNull6) And ($bAllNull7) And ($bAllNull8)) ? (True) : (False))
+EndFunc   ;==>__LO_VarsAreNull
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_VersionCheck
+; Description ...: Test if the currently installed LibreOffice version is high enough to support a certain function.
+; Syntax ........: __LO_VersionCheck($fRequiredVersion)
+; Parameters ....: $fRequiredVersion    - a floating point value. The version of LibreOffice required.
+; Return values .: Success: Boolean.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $fRequiredVersion not a Number.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Error retrieving Current L.O. Version.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = Success. If the Current L.O. version is higher than or equal to the required version, then True is returned, else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_VersionCheck($fRequiredVersion)
+	Local Static $sCurrentVersion = _LO_VersionGet(True, False)
+	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, False)
+
+	Local Static $fCurrentVersion = Number($sCurrentVersion)
+
+	If Not IsNumber($fRequiredVersion) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, False)
+
+	Return SetError($__LO_STATUS_SUCCESS, 1, ($fCurrentVersion >= $fRequiredVersion) ? (True) : (False))
+EndFunc   ;==>__LO_VersionCheck

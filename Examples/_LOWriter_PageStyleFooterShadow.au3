@@ -18,15 +18,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/8" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(.125)
+	$iMicrometers = _LO_ConvertToMicrometer(.125)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Turn Footer on.
 	_LOWriter_PageStyleFooter($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style footers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Footer Shadow settings to: Width = 1/8", Color = $LOW_COLOR_RED, Transparent = False, Location = $LOW_SHADOW_TOP_LEFT
-	_LOWriter_PageStyleFooterShadow($oPageStyle, $iMicrometers, $LOW_COLOR_RED, False, $LOW_SHADOW_TOP_LEFT)
+	; Set Page style Footer Shadow settings to: Width = 1/8", Color = $LO_COLOR_RED, Transparent = False, Location = $LOW_SHADOW_TOP_LEFT
+	_LOWriter_PageStyleFooterShadow($oPageStyle, $iMicrometers, $LO_COLOR_RED, False, $LOW_SHADOW_TOP_LEFT)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.

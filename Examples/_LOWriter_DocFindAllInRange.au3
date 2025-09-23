@@ -7,7 +7,6 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oSrchDesc
 	Local $sResultString
-	Local $aAnEmptyArray[0] ; Create an empty array to skip FindFormat parameter.
 	Local $aoResults
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -39,7 +38,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search the word "search" within the ViewCursor selection.
-	$aoResults = _LOWriter_DocFindAllInRange($oDoc, $oSrchDesc, "search", $aAnEmptyArray, $oViewCursor)
+	$aoResults = _LOWriter_DocFindAllInRange($oDoc, $oSrchDesc, "search", $oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$sResultString = ""

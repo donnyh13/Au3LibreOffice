@@ -24,8 +24,8 @@ Func Example()
 	_LOWriter_FrameBorderWidth($oFrame, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Frame Border Color settings to: Top, $LOW_COLOR_ORANGE, Bottom $LOW_COLOR_BLUE, Left, $LOW_COLOR_LGRAY, Right $LOW_COLOR_BLACK
-	_LOWriter_FrameBorderColor($oFrame, $LOW_COLOR_ORANGE, $LOW_COLOR_BLUE, $LOW_COLOR_LGRAY, $LOW_COLOR_BLACK)
+	; Modify the Frame Border Color settings to: Top, $LO_COLOR_ORANGE, Bottom $LO_COLOR_BLUE, Left, $LO_COLOR_LGRAY, Right $LO_COLOR_BLACK
+	_LOWriter_FrameBorderColor($oFrame, $LO_COLOR_ORANGE, $LO_COLOR_BLUE, $LO_COLOR_LGRAY, $LO_COLOR_BLACK)
 	If @error Then _ERROR($oDoc, "Failed to set Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame settings. Return will be an array in order of function parameters.

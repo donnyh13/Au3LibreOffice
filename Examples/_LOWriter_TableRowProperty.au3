@@ -56,7 +56,7 @@ Func Example()
 			"Is the Row allowed to split between pages? True/False: " & $avRowProps[2])
 
 	; Convert 1.5 inches to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(1.5)
+	$iMicrometers = _LO_ConvertToMicrometer(1.5)
 	If @error Then _ERROR($oDoc, "Failed to convert inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Row properties to: 1.5" height, turn off auto height, and disallow splitting the row between pages.

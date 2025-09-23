@@ -23,11 +23,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert an Image. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/2" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(.5)
+	$iMicrometers = _LO_ConvertToMicrometer(.5)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1" to Micrometers
-	$iMicrometers2 = _LOWriter_ConvertToMicrometer(1)
+	$iMicrometers2 = _LO_ConvertToMicrometer(1)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Image wrap type settings. Set wrap type to $LOW_WRAP_MODE_LEFT, Left and Right Spacing to 1/2", and Top and Bottom spacing to 1"

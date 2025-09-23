@@ -21,11 +21,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a form control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 16, $LOW_COLOR_INDIGO, $LOW_UNDERLINE_BOLD, $LOW_COLOR_GREEN, $LOW_STRIKEOUT_NONE, False, $LOW_RELIEF_NONE)
+	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 16, $LO_COLOR_INDIGO, $LOW_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOW_STRIKEOUT_NONE, False, $LOW_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
-	_LOWriter_FormConPushButtonGeneral($oControl, "Renamed_AutoIt_Control", "Push Me", Null, True, True, True, True, 1, True, 150, True, False, $LOW_FORM_CON_CHKBX_STATE_NOT_SELECTED, $mFont, $LOW_ALIGN_HORI_CENTER, $LOW_ALIGN_VERT_MIDDLE, $LOW_COLOR_GOLD, False, $LOW_FORM_CON_PUSH_CMD_OPEN, "https://www.autoitscript.com/site/autoit/", $LOW_FRAME_TARGET_TOP, True, Null, Null, "Some Additional Information", "This is Help Text", "www.HelpURL.fake")
+	_LOWriter_FormConPushButtonGeneral($oControl, "Renamed_AutoIt_Control", "Push Me", Null, True, True, True, True, 1, True, 150, True, False, $LOW_FORM_CON_CHKBX_STATE_NOT_SELECTED, $mFont, $LOW_ALIGN_HORI_CENTER, $LOW_ALIGN_VERT_MIDDLE, $LO_COLOR_GOLD, False, $LOW_FORM_CON_PUSH_CMD_OPEN, "https://www.autoitscript.com/site/autoit/", $LOW_FRAME_TARGET_TOP, True, Null, Null, "Some Additional Information", "This is Help Text", "www.HelpURL.fake")
 	If @error Then _ERROR($oDoc, "Failed to modify the Control's properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings for the control. Return will be an Array in order of function parameters.

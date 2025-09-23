@@ -6,7 +6,8 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oShape
-	Local $iTransparency
+	Local $sStops = ""
+	Local $avStops
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -20,19 +21,29 @@ Func Example()
 	$oShape = _LOWriter_ShapeInsert($oDoc, $oViewCursor, $LOW_SHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Shape Background Color settings. Background color = $LOW_COLOR_TEAL.
-	_LOWriter_ShapeAreaColor($oShape, $LOW_COLOR_TEAL)
+	; Modify the Shape Gradient settings to: Preset Gradient name = $LOW_GRAD_NAME_SUNDOWN
+	_LOWriter_ShapeAreaGradient($oDoc, $oShape, $LOW_GRAD_NAME_SUNDOWN)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Shape Transparency settings to 55% transparent
-	_LOWriter_ShapeTransparency($oShape, 55)
-	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve an array of Multicolor Gradient ColorStops.
+	$avStops = _LOWriter_ShapeAreaGradientMulticolor($oShape)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Multicolor Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current Shape Transparency. Return will be an Integer.
-	$iTransparency = _LOWriter_ShapeTransparency($oShape)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	For $i = 0 To UBound($avStops) - 1
+		$sStops &= "ColorStop offset: " & $avStops[$i][0] & " | " & @TAB & "ColorStop Color: " & $avStops[$i][1] & @CRLF
+	Next
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's current Transparency percentage is: " & $iTransparency)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Gradient ColorStops are as follows: " & @CRLF & _
+			$sStops & @CRLF & @CRLF & _
+			"Press ok to add a new ColorStop.")
+
+	; Add a new ColorStop in the middle.
+	_LOWriter_GradientMulticolorAdd($avStops, 3, 0.6, 1234567)
+	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Apply the new ColorStops.
+	_LOWriter_ShapeAreaGradientMulticolor($oShape, $avStops)
+	If @error Then _ERROR($oDoc, "Failed to modify Multicolor Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

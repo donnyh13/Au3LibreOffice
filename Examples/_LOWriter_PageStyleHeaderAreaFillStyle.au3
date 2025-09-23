@@ -32,8 +32,8 @@ Func Example()
 			"$LOW_AREA_FILL_STYLE_HATCH, 3 Fill Style is a Hatch style color." & @CRLF & _
 			"$LOW_AREA_FILL_STYLE_BITMAP, 4 Fill Style is a Bitmap.")
 
-	; Set Page style Header Background color to $LOW_COLOR_LIME, Background color transparent = False
-	_LOWriter_PageStyleHeaderAreaColor($oPageStyle, $LOW_COLOR_LIME, False)
+	; Set Page style Header Background color to $LO_COLOR_LIME, Background color transparent = False
+	_LOWriter_PageStyleHeaderAreaColor($oPageStyle, $LO_COLOR_LIME, False)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Page Style Header Fill Style

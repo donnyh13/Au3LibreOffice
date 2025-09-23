@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Table Border width settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/2 Inch to Micrometers.
-	$iMicrometers = _LOWriter_ConvertToMicrometer(0.5)
+	$iMicrometers = _LO_ConvertToMicrometer(0.5)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Table padding to 1/2"

@@ -1,10 +1,12 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-;~ #Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel
 #include-once
 
 ; Main LibreOffice Includes
 #include "LibreOffice_Constants.au3"
+#include "LibreOffice_Helper.au3"
+#include "LibreOffice_Internal.au3"
 
 ; Common includes for Writer
 #include "LibreOfficeWriter_Constants.au3"
@@ -294,15 +296,15 @@ Func _LOWriter_EndnoteSettingsAutoNumber(ByRef $oDoc, $iNumFormat = Null, $iStar
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iNumFormat, $iStartAt, $sBefore, $sAfter) Then
-		__LOWriter_ArrayFill($avENSettings, $oDoc.EndnoteSettings.NumberingType(), ($oDoc.EndnoteSettings.StartAt() + 1), _
+	If __LO_VarsAreNull($iNumFormat, $iStartAt, $sBefore, $sAfter) Then
+		__LO_ArrayFill($avENSettings, $oDoc.EndnoteSettings.NumberingType(), ($oDoc.EndnoteSettings.StartAt() + 1), _
 				$oDoc.EndnoteSettings.Prefix(), $oDoc.EndnoteSettings.Suffix())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avENSettings)
 	EndIf
 
 	If ($iNumFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oDoc.EndnoteSettings.NumberingType = $iNumFormat
 		$iError = ($oDoc.EndnoteSettings.NumberingType() = $iNumFormat) ? ($iError) : (BitOR($iError, 1))
@@ -310,7 +312,7 @@ Func _LOWriter_EndnoteSettingsAutoNumber(ByRef $oDoc, $iNumFormat = Null, $iStar
 
 	; 0 Based -- Minus 1
 	If ($iStartAt <> Null) Then
-		If Not __LOWriter_IntIsBetween($iStartAt, 1, 9999) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iStartAt, 1, 9999) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oDoc.EndnoteSettings.StartAt = ($iStartAt - 1)
 		$iError = ($oDoc.EndnoteSettings.StartAt() = ($iStartAt - 1)) ? ($iError) : (BitOR($iError, 2))
@@ -380,8 +382,8 @@ Func _LOWriter_EndnoteSettingsStyles(ByRef $oDoc, $sParagraph = Null, $sPage = N
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sParagraph, $sPage, $sTextArea, $sEndnoteArea) Then
-		__LOWriter_ArrayFill($asENSettings, __LOWriter_ParStyleNameToggle($oDoc.EndnoteSettings.ParaStyleName(), True), _
+	If __LO_VarsAreNull($sParagraph, $sPage, $sTextArea, $sEndnoteArea) Then
+		__LO_ArrayFill($asENSettings, __LOWriter_ParStyleNameToggle($oDoc.EndnoteSettings.ParaStyleName(), True), _
 				__LOWriter_PageStyleNameToggle($oDoc.EndnoteSettings.PageStyleName(), True), _
 				__LOWriter_CharStyleNameToggle($oDoc.EndnoteSettings.AnchorCharStyleName(), True), _
 				__LOWriter_CharStyleNameToggle($oDoc.EndnoteSettings.CharStyleName(), True))
@@ -736,8 +738,8 @@ Func _LOWriter_FootnoteSettingsAutoNumber(ByRef $oDoc, $iNumFormat = Null, $iSta
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iNumFormat, $iStartAt, $sBefore, $sAfter, $iCounting, $bEndOfDoc) Then
-		__LOWriter_ArrayFill($avFNSettings, $oDoc.FootnoteSettings.NumberingType(), ($oDoc.FootnoteSettings.StartAt + 1), _
+	If __LO_VarsAreNull($iNumFormat, $iStartAt, $sBefore, $sAfter, $iCounting, $bEndOfDoc) Then
+		__LO_ArrayFill($avFNSettings, $oDoc.FootnoteSettings.NumberingType(), ($oDoc.FootnoteSettings.StartAt + 1), _
 				$oDoc.FootnoteSettings.Prefix(), $oDoc.FootnoteSettings.Suffix(), $oDoc.FootnoteSettings.FootnoteCounting(), _
 				$oDoc.FootnoteSettings.PositionEndOfDoc())
 
@@ -745,7 +747,7 @@ Func _LOWriter_FootnoteSettingsAutoNumber(ByRef $oDoc, $iNumFormat = Null, $iSta
 	EndIf
 
 	If ($iNumFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oDoc.FootnoteSettings.NumberingType = $iNumFormat
 		$iError = ($oDoc.FootnoteSettings.NumberingType() = $iNumFormat) ? ($iError) : (BitOR($iError, 1))
@@ -753,7 +755,7 @@ Func _LOWriter_FootnoteSettingsAutoNumber(ByRef $oDoc, $iNumFormat = Null, $iSta
 
 	; 0 Based -- Minus 1
 	If ($iStartAt <> Null) Then
-		If Not __LOWriter_IntIsBetween($iStartAt, 1, 9999) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iStartAt, 1, 9999) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oDoc.FootnoteSettings.StartAt = ($iStartAt - 1)
 		$iError = ($oDoc.FootnoteSettings.StartAt() = ($iStartAt - 1)) ? ($iError) : (BitOR($iError, 2))
@@ -774,7 +776,7 @@ Func _LOWriter_FootnoteSettingsAutoNumber(ByRef $oDoc, $iNumFormat = Null, $iSta
 	EndIf
 
 	If ($iCounting <> Null) Then
-		If Not __LOWriter_IntIsBetween($iCounting, $LOW_FOOTNOTE_COUNT_PER_PAGE, $LOW_FOOTNOTE_COUNT_PER_DOC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iCounting, $LOW_FOOTNOTE_COUNT_PER_PAGE, $LOW_FOOTNOTE_COUNT_PER_DOC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oDoc.FootnoteSettings.FootnoteCounting = $iCounting
 		$iError = ($oDoc.FootnoteSettings.FootnoteCounting() = $iCounting) ? ($iError) : (BitOR($iError, 16))
@@ -827,8 +829,8 @@ Func _LOWriter_FootnoteSettingsContinuation(ByRef $oDoc, $sEnd = Null, $sBegin =
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sEnd, $sBegin) Then
-		__LOWriter_ArrayFill($asFNSettings, $oDoc.FootnoteSettings.EndNotice(), $oDoc.FootnoteSettings.BeginNotice())
+	If __LO_VarsAreNull($sEnd, $sBegin) Then
+		__LO_ArrayFill($asFNSettings, $oDoc.FootnoteSettings.EndNotice(), $oDoc.FootnoteSettings.BeginNotice())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asFNSettings)
 	EndIf
@@ -897,8 +899,8 @@ Func _LOWriter_FootnoteSettingsStyles(ByRef $oDoc, $sParagraph = Null, $sPage = 
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sParagraph, $sPage, $sTextArea, $sFootnoteArea) Then
-		__LOWriter_ArrayFill($avFNSettings, __LOWriter_ParStyleNameToggle($oDoc.FootnoteSettings.ParaStyleName(), True), _
+	If __LO_VarsAreNull($sParagraph, $sPage, $sTextArea, $sFootnoteArea) Then
+		__LO_ArrayFill($avFNSettings, __LOWriter_ParStyleNameToggle($oDoc.FootnoteSettings.ParaStyleName(), True), _
 				__LOWriter_PageStyleNameToggle($oDoc.FootnoteSettings.PageStyleName(), True), _
 				__LOWriter_CharStyleNameToggle($oDoc.FootnoteSettings.AnchorCharStyleName(), True), _
 				__LOWriter_CharStyleNameToggle($oDoc.FootnoteSettings.CharStyleName(), True))

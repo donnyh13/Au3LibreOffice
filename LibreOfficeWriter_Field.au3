@@ -1,10 +1,12 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-;~ #Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel
 #include-once
 
 ; Main LibreOffice Includes
 #include "LibreOffice_Constants.au3"
+#include "LibreOffice_Helper.au3"
+#include "LibreOffice_Internal.au3"
 
 ; Common includes for Writer
 #include "LibreOfficeWriter_Constants.au3"
@@ -230,8 +232,8 @@ Func _LOWriter_FieldAuthorModify(ByRef $oAuthField, $bIsFixed = Null, $sAuthor =
 
 	If Not IsObj($oAuthField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $sAuthor, $bFullName) Then
-		__LOWriter_ArrayFill($avAuth, $oAuthField.IsFIxed(), $oAuthField.Content(), $oAuthField.FullName())
+	If __LO_VarsAreNull($bIsFixed, $sAuthor, $bFullName) Then
+		__LO_ArrayFill($avAuth, $oAuthField.IsFIxed(), $oAuthField.Content(), $oAuthField.FullName())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avAuth)
 	EndIf
@@ -306,13 +308,13 @@ Func _LOWriter_FieldChapterInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = Fal
 	If Not IsObj($oChapField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If ($iChapFrmt <> Null) Then
-		If Not __LOWriter_IntIsBetween($iChapFrmt, $LOW_FIELD_CHAP_FRMT_NAME, $LOW_FIELD_CHAP_FRMT_DIGIT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iChapFrmt, $LOW_FIELD_CHAP_FRMT_NAME, $LOW_FIELD_CHAP_FRMT_DIGIT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oChapField.ChapterFormat = $iChapFrmt
 	EndIf
 
 	If ($iLevel <> Null) Then
-		If Not __LOWriter_IntIsBetween($iLevel, 1, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iLevel, 1, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oChapField.Level = ($iLevel - 1) ; Level is 0 Based
 	EndIf
@@ -361,21 +363,21 @@ Func _LOWriter_FieldChapterModify(ByRef $oChapField, $iChapFrmt = Null, $iLevel 
 
 	If Not IsObj($oChapField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iChapFrmt, $iLevel) Then
-		__LOWriter_ArrayFill($aiChap, $oChapField.ChapterFormat(), ($oChapField.Level() + 1)) ; Level is 0 Based -- Add 1 to make it like L.O. UI
+	If __LO_VarsAreNull($iChapFrmt, $iLevel) Then
+		__LO_ArrayFill($aiChap, $oChapField.ChapterFormat(), ($oChapField.Level() + 1)) ; Level is 0 Based -- Add 1 to make it like L.O. UI
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiChap)
 	EndIf
 
 	If ($iChapFrmt <> Null) Then
-		If Not __LOWriter_IntIsBetween($iChapFrmt, $LOW_FIELD_CHAP_FRMT_NAME, $LOW_FIELD_CHAP_FRMT_DIGIT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iChapFrmt, $LOW_FIELD_CHAP_FRMT_NAME, $LOW_FIELD_CHAP_FRMT_DIGIT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oChapField.ChapterFormat = $iChapFrmt
 		$iError = ($oChapField.ChapterFormat() = $iChapFrmt) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iLevel <> Null) Then
-		If Not __LOWriter_IntIsBetween($iLevel, 1, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iLevel, 1, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oChapField.Level = ($iLevel - 1) ; Level is 0 Based
 		$iError = ($oChapField.Level() = ($iLevel - 1)) ? ($iError) : (BitOR($iError, 2))
@@ -476,7 +478,7 @@ Func _LOWriter_FieldCombCharModify(ByRef $oCombCharField, $sCharacters = Null)
 
 	If Not IsObj($oCombCharField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sCharacters) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCombCharField.Content())
+	If __LO_VarsAreNull($sCharacters) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCombCharField.Content())
 
 	If Not IsString($sCharacters) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If (StringLen($sCharacters) > 6) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -568,14 +570,14 @@ Func _LOWriter_FieldCommentInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = Fal
 
 	If ($sInitials <> Null) Then
 		If Not IsString($sInitials) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-		If Not __LOWriter_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oCommentField.Initials = $sInitials
 	EndIf
 
 	If ($sName <> Null) Then
 		If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
-		If Not __LOWriter_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oCommentField.Name = $sName
 	EndIf
@@ -648,13 +650,13 @@ Func _LOWriter_FieldCommentModify(ByRef $oDoc, ByRef $oCommentField, $sContent =
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCommentField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($sContent, $sAuthor, $tDateStruct, $sInitials, $sName, $bResolved) Then
-		If __LOWriter_VersionCheck(4.0) Then
-			__LOWriter_ArrayFill($avAnnot, $oCommentField.Content(), $oCommentField.Author(), $oCommentField.DateTimeValue(), $oCommentField.Initials(), _
+	If __LO_VarsAreNull($sContent, $sAuthor, $tDateStruct, $sInitials, $sName, $bResolved) Then
+		If __LO_VersionCheck(4.0) Then
+			__LO_ArrayFill($avAnnot, $oCommentField.Content(), $oCommentField.Author(), $oCommentField.DateTimeValue(), $oCommentField.Initials(), _
 					$oCommentField.Name(), $oCommentField.Resolved())
 
 		Else
-			__LOWriter_ArrayFill($avAnnot, $oCommentField.Content(), $oCommentField.Author(), $oCommentField.DateTimeValue(), $oCommentField.Resolved())
+			__LO_ArrayFill($avAnnot, $oCommentField.Content(), $oCommentField.Author(), $oCommentField.DateTimeValue(), $oCommentField.Resolved())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avAnnot)
@@ -684,7 +686,7 @@ Func _LOWriter_FieldCommentModify(ByRef $oDoc, ByRef $oCommentField, $sContent =
 
 	If ($sInitials <> Null) Then
 		If Not IsString($sInitials) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-		If Not __LOWriter_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oCommentField.Initials = $sInitials
 		$iError = ($oCommentField.Initials() = $sInitials) ? ($iError) : (BitOR($iError, 8))
@@ -692,7 +694,7 @@ Func _LOWriter_FieldCommentModify(ByRef $oDoc, ByRef $oCommentField, $sContent =
 
 	If ($sName <> Null) Then
 		If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-		If Not __LOWriter_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oCommentField.Name = $sName
 		$iError = ($oCommentField.Name = $sName) ? ($iError) : (BitOR($iError, 16))
@@ -824,8 +826,8 @@ Func _LOWriter_FieldCondTextModify(ByRef $oCondTextField, $sCondition = Null, $s
 
 	If Not IsObj($oCondTextField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sCondition, $sThen, $sElse) Then
-		__LOWriter_ArrayFill($avCond, $oCondTextField.Condition(), $oCondTextField.TrueContent(), $oCondTextField.FalseContent(), _
+	If __LO_VarsAreNull($sCondition, $sThen, $sElse) Then
+		__LO_ArrayFill($avCond, $oCondTextField.Condition(), $oCondTextField.TrueContent(), $oCondTextField.FalseContent(), _
 				($oCondTextField.IsConditionTrue()) ? (False) : (True)) ; IsConditionTrue is Backwards.
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avCond)
@@ -1039,14 +1041,14 @@ Func _LOWriter_FieldDateTimeModify(ByRef $oDoc, ByRef $oDateTimeField, $bIsFixed
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oDateTimeField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $tDateStruct, $bIsDate, $iOffset, $iDateFormatKey) Then
+	If __LO_VarsAreNull($bIsFixed, $tDateStruct, $bIsDate, $iOffset, $iDateFormatKey) Then
 		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDateTimeField.NumberFormat()
 		$iNumberFormat = ($iNumberFormat >= 10000) ? ($iNumberFormat - 10000) : ($iNumberFormat)
 
-		__LOWriter_ArrayFill($avDateTime, $oDateTimeField.IsFixed(), $oDateTimeField.DateTimeValue(), $oDateTimeField.IsDate(), _
+		__LO_ArrayFill($avDateTime, $oDateTimeField.IsFixed(), $oDateTimeField.DateTimeValue(), $oDateTimeField.IsDate(), _
 				($oDateTimeField.IsDate() = True) ? (Int(($oDateTimeField.Adjust() / 1440))) : ($oDateTimeField.Adjust()), $iNumberFormat)
 		; If IsDate = True, Then Calculate number of minutes in a day (1440) divided by number of days of off set. Otherwise return Number of minutes.
 
@@ -1259,8 +1261,8 @@ Func _LOWriter_FieldDocInfoCommentsModify(ByRef $oDocInfoComment, $bIsFixed = Nu
 
 	If Not IsObj($oDocInfoComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $sComments) Then
-		__LOWriter_ArrayFill($avDocInfoCom, $oDocInfoComment.IsFixed(), $oDocInfoComment.Content())
+	If __LO_VarsAreNull($bIsFixed, $sComments) Then
+		__LO_ArrayFill($avDocInfoCom, $oDocInfoComment.IsFixed(), $oDocInfoComment.Content())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoCom)
 	EndIf
@@ -1387,8 +1389,8 @@ Func _LOWriter_FieldDocInfoCreateAuthModify(ByRef $oDocInfoCreateAuth, $bIsFixed
 
 	If Not IsObj($oDocInfoCreateAuth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $sAuthor) Then
-		__LOWriter_ArrayFill($avDocInfoModAuth, $oDocInfoCreateAuth.IsFixed(), $oDocInfoCreateAuth.Author())
+	If __LO_VarsAreNull($bIsFixed, $sAuthor) Then
+		__LO_ArrayFill($avDocInfoModAuth, $oDocInfoCreateAuth.IsFixed(), $oDocInfoCreateAuth.Author())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoModAuth)
 	EndIf
@@ -1517,14 +1519,14 @@ Func _LOWriter_FieldDocInfoCreateDateTimeModify(ByRef $oDoc, ByRef $oDocInfoCrea
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oDocInfoCreateDtTm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $iDateFormatKey) Then
+	If __LO_VarsAreNull($bIsFixed, $iDateFormatKey) Then
 		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000 from
 		; the value.
 		$iNumberFormat = $oDocInfoCreateDtTm.NumberFormat()
 		$iNumberFormat = ($iNumberFormat >= 10000) ? ($iNumberFormat - 10000) : ($iNumberFormat)
 
-		__LOWriter_ArrayFill($avDocInfoCrtDate, $oDocInfoCreateDtTm.IsFixed(), $iNumberFormat)
+		__LO_ArrayFill($avDocInfoCrtDate, $oDocInfoCreateDtTm.IsFixed(), $iNumberFormat)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoCrtDate)
 	EndIf
@@ -1651,14 +1653,14 @@ Func _LOWriter_FieldDocInfoEditTimeModify(ByRef $oDocInfoEditTime, $bIsFixed = N
 
 	If Not IsObj($oDocInfoEditTime) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $iTimeFormatKey) Then
+	If __LO_VarsAreNull($bIsFixed, $iTimeFormatKey) Then
 		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDocInfoEditTime.NumberFormat()
 		$iNumberFormat = ($iNumberFormat >= 10000) ? ($iNumberFormat - 10000) : ($iNumberFormat)
 
-		__LOWriter_ArrayFill($avDocInfoEditTm, $oDocInfoEditTime.IsFixed(), $iNumberFormat)
+		__LO_ArrayFill($avDocInfoEditTm, $oDocInfoEditTime.IsFixed(), $iNumberFormat)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoEditTm)
 	EndIf
@@ -1786,8 +1788,8 @@ Func _LOWriter_FieldDocInfoKeywordsModify(ByRef $oDocInfoKeyword, $bIsFixed = Nu
 
 	If Not IsObj($oDocInfoKeyword) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $sKeywords) Then
-		__LOWriter_ArrayFill($avDocInfoKyWrd, $oDocInfoKeyword.IsFixed(), $oDocInfoKeyword.Content())
+	If __LO_VarsAreNull($bIsFixed, $sKeywords) Then
+		__LO_ArrayFill($avDocInfoKyWrd, $oDocInfoKeyword.IsFixed(), $oDocInfoKeyword.Content())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoKyWrd)
 	EndIf
@@ -1914,8 +1916,8 @@ Func _LOWriter_FieldDocInfoModAuthModify(ByRef $oDocInfoModAuth, $bIsFixed = Nul
 
 	If Not IsObj($oDocInfoModAuth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $sAuthor) Then
-		__LOWriter_ArrayFill($avDocInfoModAuth, $oDocInfoModAuth.IsFixed(), $oDocInfoModAuth.Author())
+	If __LO_VarsAreNull($bIsFixed, $sAuthor) Then
+		__LO_ArrayFill($avDocInfoModAuth, $oDocInfoModAuth.IsFixed(), $oDocInfoModAuth.Author())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoModAuth)
 	EndIf
@@ -2044,14 +2046,14 @@ Func _LOWriter_FieldDocInfoModDateTimeModify(ByRef $oDoc, ByRef $oDocInfoModDtTm
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oDocInfoModDtTm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $iDateFormatKey) Then
+	If __LO_VarsAreNull($bIsFixed, $iDateFormatKey) Then
 		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDocInfoModDtTm.NumberFormat()
 		$iNumberFormat = ($iNumberFormat >= 10000) ? ($iNumberFormat - 10000) : ($iNumberFormat)
 
-		__LOWriter_ArrayFill($avDocInfoModDate, $oDocInfoModDtTm.IsFixed(), $iNumberFormat)
+		__LO_ArrayFill($avDocInfoModDate, $oDocInfoModDtTm.IsFixed(), $iNumberFormat)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoModDate)
 	EndIf
@@ -2179,8 +2181,8 @@ Func _LOWriter_FieldDocInfoPrintAuthModify(ByRef $oDocInfoPrintAuth, $bIsFixed =
 
 	If Not IsObj($oDocInfoPrintAuth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $sAuthor) Then
-		__LOWriter_ArrayFill($avDocInfoModAuth, $oDocInfoPrintAuth.IsFixed(), $oDocInfoPrintAuth.Author())
+	If __LO_VarsAreNull($bIsFixed, $sAuthor) Then
+		__LO_ArrayFill($avDocInfoModAuth, $oDocInfoPrintAuth.IsFixed(), $oDocInfoPrintAuth.Author())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoModAuth)
 	EndIf
@@ -2309,14 +2311,14 @@ Func _LOWriter_FieldDocInfoPrintDateTimeModify(ByRef $oDoc, ByRef $oDocInfoPrint
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oDocInfoPrintDtTm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $iDateFormatKey) Then
+	If __LO_VarsAreNull($bIsFixed, $iDateFormatKey) Then
 		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDocInfoPrintDtTm.NumberFormat()
 		$iNumberFormat = ($iNumberFormat >= 10000) ? ($iNumberFormat - 10000) : ($iNumberFormat)
 
-		__LOWriter_ArrayFill($avDocInfoPrntDate, $oDocInfoPrintDtTm.IsFixed(), $iNumberFormat)
+		__LO_ArrayFill($avDocInfoPrntDate, $oDocInfoPrintDtTm.IsFixed(), $iNumberFormat)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoPrntDate)
 	EndIf
@@ -2444,8 +2446,8 @@ Func _LOWriter_FieldDocInfoRevNumModify(ByRef $oDocInfoRevNum, $bIsFixed = Null,
 
 	If Not IsObj($oDocInfoRevNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $iRevNum) Then
-		__LOWriter_ArrayFill($avDocInfoRev, $oDocInfoRevNum.IsFixed(), $oDocInfoRevNum.Revision())
+	If __LO_VarsAreNull($bIsFixed, $iRevNum) Then
+		__LO_ArrayFill($avDocInfoRev, $oDocInfoRevNum.IsFixed(), $oDocInfoRevNum.Revision())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoRev)
 	EndIf
@@ -2572,8 +2574,8 @@ Func _LOWriter_FieldDocInfoSubjectModify(ByRef $oDocInfoSub, $bIsFixed = Null, $
 
 	If Not IsObj($oDocInfoSub) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $sSubject) Then
-		__LOWriter_ArrayFill($avDocInfoSub, $oDocInfoSub.IsFixed(), $oDocInfoSub.Content())
+	If __LO_VarsAreNull($bIsFixed, $sSubject) Then
+		__LO_ArrayFill($avDocInfoSub, $oDocInfoSub.IsFixed(), $oDocInfoSub.Content())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoSub)
 	EndIf
@@ -2700,8 +2702,8 @@ Func _LOWriter_FieldDocInfoTitleModify(ByRef $oDocInfoTitle, $bIsFixed = Null, $
 
 	If Not IsObj($oDocInfoTitle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $sTitle) Then
-		__LOWriter_ArrayFill($avDocInfoTitle, $oDocInfoTitle.IsFixed(), $oDocInfoTitle.Content())
+	If __LO_VarsAreNull($bIsFixed, $sTitle) Then
+		__LO_ArrayFill($avDocInfoTitle, $oDocInfoTitle.IsFixed(), $oDocInfoTitle.Content())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDocInfoTitle)
 	EndIf
@@ -2776,7 +2778,7 @@ Func _LOWriter_FieldFileNameInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = Fa
 	EndIf
 
 	If ($iFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_NAME_AND_EXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_NAME_AND_EXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oFileNameField.FileFormat = $iFormat
 	EndIf
@@ -2826,8 +2828,8 @@ Func _LOWriter_FieldFileNameModify(ByRef $oFileNameField, $bIsFixed = Null, $iFo
 
 	If Not IsObj($oFileNameField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $iFormat) Then
-		__LOWriter_ArrayFill($avFileName, $oFileNameField.IsFixed(), $oFileNameField.FileFormat())
+	If __LO_VarsAreNull($bIsFixed, $iFormat) Then
+		__LO_ArrayFill($avFileName, $oFileNameField.IsFixed(), $oFileNameField.FileFormat())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avFileName)
 	EndIf
@@ -2840,7 +2842,7 @@ Func _LOWriter_FieldFileNameModify(ByRef $oFileNameField, $bIsFixed = Null, $iFo
 	EndIf
 
 	If ($iFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_NAME_AND_EXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_NAME_AND_EXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oFileNameField.FileFormat = $iFormat
 		$iError = ($oFileNameField.FileFormat() = $iFormat) ? ($iError) : (BitOR($iError, 1))
@@ -2939,8 +2941,8 @@ Func _LOWriter_FieldFuncHiddenParModify(ByRef $oHidParField, $sCondition = Null)
 
 	If Not IsObj($oHidParField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sCondition) Then
-		__LOWriter_ArrayFill($avHidPar, $oHidParField.Condition(), ($oHidParField.IsHidden()) ? (False) : (True)) ; "IsHidden" Is Backwards
+	If __LO_VarsAreNull($sCondition) Then
+		__LO_ArrayFill($avHidPar, $oHidParField.Condition(), ($oHidParField.IsHidden()) ? (False) : (True)) ; "IsHidden" Is Backwards
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avHidPar)
 	EndIf
@@ -3056,8 +3058,8 @@ Func _LOWriter_FieldFuncHiddenTextModify(ByRef $oHidTxtField, $sCondition = Null
 
 	If Not IsObj($oHidTxtField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sCondition, $sText) Then
-		__LOWriter_ArrayFill($avHidPar, $oHidTxtField.Condition(), $oHidTxtField.Content(), ($oHidTxtField.IsHidden()) ? (False) : (True)) ; "IsHidden" Is Backwards
+	If __LO_VarsAreNull($sCondition, $sText) Then
+		__LO_ArrayFill($avHidPar, $oHidTxtField.Condition(), $oHidTxtField.Content(), ($oHidTxtField.IsHidden()) ? (False) : (True)) ; "IsHidden" Is Backwards
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avHidPar)
 	EndIf
@@ -3180,8 +3182,8 @@ Func _LOWriter_FieldFuncInputModify(ByRef $oInputField, $sReference = Null, $sTe
 
 	If Not IsObj($oInputField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sReference, $sText) Then
-		__LOWriter_ArrayFill($asInput, $oInputField.Hint(), $oInputField.Content())
+	If __LO_VarsAreNull($sReference, $sText) Then
+		__LO_ArrayFill($asInput, $oInputField.Hint(), $oInputField.Content())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asInput)
 	EndIf
@@ -3251,7 +3253,7 @@ Func _LOWriter_FieldFuncPlaceholderInsert(ByRef $oDoc, ByRef $oCursor, $bOverwri
 	If Not IsObj($oPHolderField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If ($iPHolderType <> Null) Then
-		If Not __LOWriter_IntIsBetween($iPHolderType, $LOW_FIELD_PLACEHOLD_TYPE_TEXT, $LOW_FIELD_PLACEHOLD_TYPE_OBJECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iPHolderType, $LOW_FIELD_PLACEHOLD_TYPE_TEXT, $LOW_FIELD_PLACEHOLD_TYPE_OBJECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oPHolderField.PlaceHolderType = $iPHolderType
 	EndIf
@@ -3315,14 +3317,14 @@ Func _LOWriter_FieldFuncPlaceholderModify(ByRef $oPHolderField, $iPHolderType = 
 
 	If Not IsObj($oPHolderField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iPHolderType, $sPHolderName, $sReference) Then
-		__LOWriter_ArrayFill($asPHolder, $oPHolderField.PlaceHolderType(), $oPHolderField.PlaceHolder(), $oPHolderField.Hint())
+	If __LO_VarsAreNull($iPHolderType, $sPHolderName, $sReference) Then
+		__LO_ArrayFill($asPHolder, $oPHolderField.PlaceHolderType(), $oPHolderField.PlaceHolder(), $oPHolderField.Hint())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asPHolder)
 	EndIf
 
 	If ($iPHolderType <> Null) Then
-		If Not __LOWriter_IntIsBetween($iPHolderType, $LOW_FIELD_PLACEHOLD_TYPE_TEXT, $LOW_FIELD_PLACEHOLD_TYPE_OBJECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iPHolderType, $LOW_FIELD_PLACEHOLD_TYPE_TEXT, $LOW_FIELD_PLACEHOLD_TYPE_OBJECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oPHolderField.PlaceHolderType = $iPHolderType
 		$iError = ($oPHolderField.PlaceHolderType() = $iPHolderType) ? ($iError) : (BitOR($iError, 1))
@@ -3491,8 +3493,8 @@ Func _LOWriter_FieldInputListModify(ByRef $oInputField, $asItems = Null, $sName 
 
 	If Not IsObj($oInputField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($asItems, $sName, $sSelectedItem) Then
-		__LOWriter_ArrayFill($avDropDwn, $oInputField.Items(), $oInputField.Name(), $oInputField.SelectedItem())
+	If __LO_VarsAreNull($asItems, $sName, $sSelectedItem) Then
+		__LO_ArrayFill($avDropDwn, $oInputField.Items(), $oInputField.Name(), $oInputField.SelectedItem())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDropDwn)
 	EndIf
@@ -3571,7 +3573,7 @@ Func _LOWriter_FieldPageNumberInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = 
 	If Not IsObj($oPageField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If ($iNumFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oPageField.NumberingType = $iNumFormat
 
@@ -3586,7 +3588,7 @@ Func _LOWriter_FieldPageNumberInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = 
 	EndIf
 
 	If ($iPageNumType <> Null) Then
-		If Not __LOWriter_IntIsBetween($iPageNumType, $LOW_PAGE_NUM_TYPE_PREV, $LOW_PAGE_NUM_TYPE_NEXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_IntIsBetween($iPageNumType, $LOW_PAGE_NUM_TYPE_PREV, $LOW_PAGE_NUM_TYPE_NEXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		$oPageField.SubType = $iPageNumType
 
@@ -3663,14 +3665,14 @@ Func _LOWriter_FieldPageNumberModify(ByRef $oDoc, ByRef $oPageNumField, $iNumFor
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPageNumField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($iNumFormat, $iOffset, $iPageNumType, $sUserText) Then
-		__LOWriter_ArrayFill($avField, $oPageNumField.NumberingType(), $oPageNumField.Offset(), $oPageNumField.SubType(), $oPageNumField.UserText())
+	If __LO_VarsAreNull($iNumFormat, $iOffset, $iPageNumType, $sUserText) Then
+		__LO_ArrayFill($avField, $oPageNumField.NumberingType(), $oPageNumField.Offset(), $oPageNumField.SubType(), $oPageNumField.UserText())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avField)
 	EndIf
 
 	If ($iNumFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oNewPageNumField = $oDoc.createInstance("com.sun.star.text.TextField.PageNumber")
 		If Not IsObj($oNewPageNumField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -3700,7 +3702,7 @@ Func _LOWriter_FieldPageNumberModify(ByRef $oDoc, ByRef $oPageNumField, $iNumFor
 	EndIf
 
 	If ($iPageNumType <> Null) Then
-		If Not __LOWriter_IntIsBetween($iPageNumType, $LOW_PAGE_NUM_TYPE_PREV, $LOW_PAGE_NUM_TYPE_NEXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iPageNumType, $LOW_PAGE_NUM_TYPE_PREV, $LOW_PAGE_NUM_TYPE_NEXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oPageNumField.SubType = $iPageNumType
 		$iError = ($oPageNumField.SubType() = $iPageNumType) ? ($iError) : (BitOR($iError, 4))
@@ -3768,7 +3770,7 @@ Func _LOWriter_FieldRefBookMarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkNam
 	$oBookmarkRefField.ReferenceFieldSource = $LOW_FIELD_REF_TYPE_BOOKMARK
 
 	If ($iRefUsing <> Null) Then
-		If Not __LOWriter_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		$oBookmarkRefField.ReferenceFieldPart = $iRefUsing
 	EndIf
@@ -3821,8 +3823,8 @@ Func _LOWriter_FieldRefBookMarkModify(ByRef $oDoc, ByRef $oBookmarkRefField, $sB
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oBookmarkRefField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($sBookmarkName, $iRefUsing) Then
-		__LOWriter_ArrayFill($avBook, $oBookmarkRefField.SourceName(), $oBookmarkRefField.ReferenceFieldPart())
+	If __LO_VarsAreNull($sBookmarkName, $iRefUsing) Then
+		__LO_ArrayFill($avBook, $oBookmarkRefField.SourceName(), $oBookmarkRefField.ReferenceFieldPart())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avBook)
 	EndIf
@@ -3837,7 +3839,7 @@ Func _LOWriter_FieldRefBookMarkModify(ByRef $oDoc, ByRef $oBookmarkRefField, $sB
 	EndIf
 
 	If ($iRefUsing <> Null) Then
-		If Not __LOWriter_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oBookmarkRefField.ReferenceFieldPart = $iRefUsing
 		$iError = ($oBookmarkRefField.ReferenceFieldPart = $iRefUsing) ? ($iError) : (BitOR($iError, 2))
@@ -3897,7 +3899,7 @@ Func _LOWriter_FieldRefEndnoteInsert(ByRef $oDoc, ByRef $oCursor, ByRef $oEndNot
 	$oENoteRefField.ReferenceFieldSource = $LOW_FIELD_REF_TYPE_ENDNOTE
 
 	If ($iRefUsing <> Null) Then
-		If Not __LOWriter_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oENoteRefField.ReferenceFieldPart = $iRefUsing
 	EndIf
@@ -3952,14 +3954,14 @@ Func _LOWriter_FieldRefEndnoteModify(ByRef $oDoc, ByRef $oEndNoteRefField, $oEnd
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oEndNoteRefField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($oEndNote, $iRefUsing) Then
+	If __LO_VarsAreNull($oEndNote, $iRefUsing) Then
 		If Not ($oEndNoteRefField.ReferenceFieldSource() = $LOW_FIELD_REF_TYPE_ENDNOTE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		If $oDoc.Endnotes.hasElements() Then
 			$iSourceSeq = $oEndNoteRefField.SequenceNumber()
 			For $i = 0 To $oDoc.Endnotes.Count() - 1 ; Locate referenced Endnote.
 				If ($oDoc.Endnotes.getByIndex($i).ReferenceId() = $iSourceSeq) Then
-					__LOWriter_ArrayFill($avFoot, $oDoc.Endnotes.getByIndex($i), $oEndNoteRefField.ReferenceFieldPart())
+					__LO_ArrayFill($avFoot, $oDoc.Endnotes.getByIndex($i), $oEndNoteRefField.ReferenceFieldPart())
 
 					Return SetError($__LO_STATUS_SUCCESS, 1, $avFoot)
 				EndIf
@@ -3980,7 +3982,7 @@ Func _LOWriter_FieldRefEndnoteModify(ByRef $oDoc, ByRef $oEndNoteRefField, $oEnd
 	EndIf
 
 	If ($iRefUsing <> Null) Then
-		If Not __LOWriter_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oEndNoteRefField.ReferenceFieldPart = $iRefUsing
 		$iError = ($oEndNoteRefField.ReferenceFieldPart = $iRefUsing) ? ($iError) : (BitOR($iError, 2))
@@ -4040,7 +4042,7 @@ Func _LOWriter_FieldRefFootnoteInsert(ByRef $oDoc, ByRef $oCursor, ByRef $oFootN
 	$oFNoteRefField.ReferenceFieldSource = $LOW_FIELD_REF_TYPE_FOOTNOTE
 
 	If ($iRefUsing <> Null) Then
-		If Not __LOWriter_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oFNoteRefField.ReferenceFieldPart = $iRefUsing
 	EndIf
@@ -4095,14 +4097,14 @@ Func _LOWriter_FieldRefFootnoteModify(ByRef $oDoc, ByRef $oFootNoteRefField, $oF
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oFootNoteRefField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($oFootNote, $iRefUsing) Then
+	If __LO_VarsAreNull($oFootNote, $iRefUsing) Then
 		If Not ($oFootNoteRefField.ReferenceFieldSource() = $LOW_FIELD_REF_TYPE_FOOTNOTE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		If $oDoc.Footnotes.hasElements() Then
 			$iSourceSeq = $oFootNoteRefField.SequenceNumber()
 			For $i = 0 To $oDoc.Footnotes.Count() - 1 ; Locate referenced Footnote.
 				If ($oDoc.Footnotes.getByIndex($i).ReferenceId() = $iSourceSeq) Then
-					__LOWriter_ArrayFill($avFoot, $oDoc.Footnotes.getByIndex($i), $oFootNoteRefField.ReferenceFieldPart())
+					__LO_ArrayFill($avFoot, $oDoc.Footnotes.getByIndex($i), $oFootNoteRefField.ReferenceFieldPart())
 
 					Return SetError($__LO_STATUS_SUCCESS, 1, $avFoot)
 				EndIf
@@ -4123,7 +4125,7 @@ Func _LOWriter_FieldRefFootnoteModify(ByRef $oDoc, ByRef $oFootNoteRefField, $oF
 	EndIf
 
 	If ($iRefUsing <> Null) Then
-		If Not __LOWriter_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oFootNoteRefField.ReferenceFieldPart = $iRefUsing
 		$iError = ($oFootNoteRefField.ReferenceFieldPart = $iRefUsing) ? ($iError) : (BitOR($iError, 2))
@@ -4216,7 +4218,7 @@ Func _LOWriter_FieldRefInsert(ByRef $oDoc, ByRef $oCursor, $sRefMarkName, $bOver
 	$oMarkRefField.ReferenceFieldSource = $LOW_FIELD_REF_TYPE_REF_MARK
 
 	If ($iRefUsing <> Null) Then
-		If Not __LOWriter_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		$oMarkRefField.ReferenceFieldPart = $iRefUsing
 	EndIf
@@ -4456,8 +4458,8 @@ Func _LOWriter_FieldRefModify(ByRef $oDoc, ByRef $oRefField, $sRefMarkName = Nul
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oRefField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($sRefMarkName, $iRefUsing) Then
-		__LOWriter_ArrayFill($avRef, $oRefField.SourceName(), $oRefField.ReferenceFieldPart())
+	If __LO_VarsAreNull($sRefMarkName, $iRefUsing) Then
+		__LO_ArrayFill($avRef, $oRefField.SourceName(), $oRefField.ReferenceFieldPart())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avRef)
 	EndIf
@@ -4475,7 +4477,7 @@ Func _LOWriter_FieldRefModify(ByRef $oDoc, ByRef $oRefField, $sRefMarkName = Nul
 	EndIf
 
 	If ($iRefUsing <> Null) Then
-		If Not __LOWriter_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iRefUsing, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED, $LOW_FIELD_REF_USING_PAGE_NUM_STYLED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oRefField.ReferenceFieldPart = $iRefUsing
 		$iError = ($oRefField.ReferenceFieldPart = $iRefUsing) ? ($iError) : (BitOR($iError, 2))
@@ -4527,7 +4529,7 @@ Func _LOWriter_FieldsAdvGetList(ByRef $oDoc, $iType = $LOW_FIELD_ADV_TYPE_ALL, $
 	Local $vReturn
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_IntIsBetween($iType, $LOW_FIELD_ADV_TYPE_ALL, 1023) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iType, $LOW_FIELD_ADV_TYPE_ALL, 1023) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	; 1023 is all possible Consts added together
 	If Not IsBool($bSupportedServices) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -4583,7 +4585,7 @@ Func _LOWriter_FieldsDocInfoGetList(ByRef $oDoc, $iType = $LOW_FIELD_DOCINFO_TYP
 	Local $vReturn
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_IntIsBetween($iType, $LOW_FIELD_ADV_TYPE_ALL, 16383) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iType, $LOW_FIELD_ADV_TYPE_ALL, 16383) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	; 16383 is all possible Consts added together
 	If Not IsBool($bSupportedServices) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -4656,7 +4658,7 @@ Func _LOWriter_FieldSenderInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = Fals
 	EndIf
 
 	If ($iDataType <> Null) Then
-		If Not __LOWriter_IntIsBetween($iDataType, $LOW_FIELD_USER_DATA_COMPANY, $LOW_FIELD_USER_DATA_STATE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_IntIsBetween($iDataType, $LOW_FIELD_USER_DATA_COMPANY, $LOW_FIELD_USER_DATA_STATE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		$oSenderField.UserDataType = $iDataType
 	EndIf
@@ -4712,8 +4714,8 @@ Func _LOWriter_FieldSenderModify(ByRef $oSenderField, $bIsFixed = Null, $sConten
 
 	If Not IsObj($oSenderField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bIsFixed, $sContent, $iDataType) Then
-		__LOWriter_ArrayFill($avExtUser, $oSenderField.IsFixed(), $oSenderField.Content(), $oSenderField.UserDataType())
+	If __LO_VarsAreNull($bIsFixed, $sContent, $iDataType) Then
+		__LO_ArrayFill($avExtUser, $oSenderField.IsFixed(), $oSenderField.Content(), $oSenderField.UserDataType())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avExtUser)
 	EndIf
@@ -4733,7 +4735,7 @@ Func _LOWriter_FieldSenderModify(ByRef $oSenderField, $bIsFixed = Null, $sConten
 	EndIf
 
 	If ($iDataType <> Null) Then
-		If Not __LOWriter_IntIsBetween($iDataType, $LOW_FIELD_USER_DATA_COMPANY, $LOW_FIELD_USER_DATA_STATE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iDataType, $LOW_FIELD_USER_DATA_COMPANY, $LOW_FIELD_USER_DATA_STATE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oSenderField.UserDataType = $iDataType
 		$iError = ($oSenderField.UserDataType() = $iDataType) ? ($iError) : (BitOR($iError, 4))
@@ -5159,14 +5161,14 @@ Func _LOWriter_FieldSetVarModify(ByRef $oDoc, ByRef $oSetVarField, $sValue = Nul
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oSetVarField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($sValue, $iNumFormatKey, $bIsVisible) Then
+	If __LO_VarsAreNull($sValue, $iNumFormatKey, $bIsVisible) Then
 		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oSetVarField.NumberFormat()
 		$iNumberFormat = ($iNumberFormat >= 10000) ? ($iNumberFormat - 10000) : ($iNumberFormat)
 
-		__LOWriter_ArrayFill($avSetVar, $oSetVarField.Content(), $iNumberFormat, $oSetVarField.IsVisible(), $oSetVarField.VariableName())
+		__LO_ArrayFill($avSetVar, $oSetVarField.Content(), $iNumberFormat, $oSetVarField.IsVisible(), $oSetVarField.VariableName())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avSetVar)
 	EndIf
@@ -5239,7 +5241,7 @@ Func _LOWriter_FieldsGetList(ByRef $oDoc, $iType = $LOW_FIELD_TYPE_ALL, $bSuppor
 	Local $vReturn
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_IntIsBetween($iType, $LOW_FIELD_TYPE_ALL, 1073741823) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iType, $LOW_FIELD_TYPE_ALL, 1073741823) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	; 1073741823 is all possible Consts added together
 	If Not IsBool($bSupportedServices) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -5328,7 +5330,7 @@ EndFunc   ;==>_LOWriter_FieldShowVarInsert
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FieldShowVarModify
-; Description ...:Set or Retrieve a Show Variable Field's settings.
+; Description ...: Set or Retrieve a Show Variable Field's settings.
 ; Syntax ........: _LOWriter_FieldShowVarModify(ByRef $oDoc, ByRef $oShowVarField[, $sSetVarName = Null[, $iNumFormatKey = Null[, $bShowName = Null]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oShowVarField       - [in/out] an object. A Show Variable field Object from a previous _LOWriter_FieldShowVarInsert, or _LOWriter_FieldsGetList function.
@@ -5372,14 +5374,14 @@ Func _LOWriter_FieldShowVarModify(ByRef $oDoc, ByRef $oShowVarField, $sSetVarNam
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oShowVarField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($sSetVarName, $iNumFormatKey, $bShowName) Then
+	If __LO_VarsAreNull($sSetVarName, $iNumFormatKey, $bShowName) Then
 		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oShowVarField.NumberFormat()
 		$iNumberFormat = ($iNumberFormat >= 10000) ? ($iNumberFormat - 10000) : ($iNumberFormat)
 
-		__LOWriter_ArrayFill($avShowVar, $oShowVarField.Content(), $iNumberFormat, $oShowVarField.IsShowFormula())
+		__LO_ArrayFill($avShowVar, $oShowVarField.Content(), $iNumberFormat, $oShowVarField.IsShowFormula())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avShowVar)
 	EndIf
@@ -5453,7 +5455,7 @@ Func _LOWriter_FieldStatCountInsert(ByRef $oDoc, ByRef $oCursor, $iCountType, $b
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If (__LOWriter_Internal_CursorGetType($oCursor) = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LOWriter_IntIsBetween($iCountType, $LOW_FIELD_COUNT_TYPE_CHARACTERS, $LOW_FIELD_COUNT_TYPE_WORDS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iCountType, $LOW_FIELD_COUNT_TYPE_CHARACTERS, $LOW_FIELD_COUNT_TYPE_WORDS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$sFieldType = __LOWriter_FieldCountType($iCountType)
@@ -5463,7 +5465,7 @@ Func _LOWriter_FieldStatCountInsert(ByRef $oDoc, ByRef $oCursor, $iCountType, $b
 	If Not IsObj($oCountField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If ($iNumFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oCountField.NumberingType = $iNumFormat
 
@@ -5525,15 +5527,15 @@ Func _LOWriter_FieldStatCountModify(ByRef $oDoc, ByRef $oCountField, $iCountType
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCountField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LOWriter_VarsAreNull($iCountType, $iNumFormat) Then
-		__LOWriter_ArrayFill($avCountField, __LOWriter_FieldCountType($oCountField), $oCountField.NumberingType())
+	If __LO_VarsAreNull($iCountType, $iNumFormat) Then
+		__LO_ArrayFill($avCountField, __LOWriter_FieldCountType($oCountField), $oCountField.NumberingType())
 		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avCountField)
 	EndIf
 
 	If ($iCountType <> Null) Then
-		If Not __LOWriter_IntIsBetween($iCountType, $LOW_FIELD_COUNT_TYPE_CHARACTERS, $LOW_FIELD_COUNT_TYPE_WORDS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iCountType, $LOW_FIELD_COUNT_TYPE_CHARACTERS, $LOW_FIELD_COUNT_TYPE_WORDS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$sFieldType = __LOWriter_FieldCountType($iCountType)
 		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -5559,7 +5561,7 @@ Func _LOWriter_FieldStatCountModify(ByRef $oDoc, ByRef $oCountField, $iCountType
 	EndIf
 
 	If ($iNumFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oCountField.NumberingType = $iNumFormat
 		$iError = ($oCountField.NumberingType() = $iNumFormat) ? ($iError) : (BitOR($iError, 2))
@@ -5612,7 +5614,7 @@ Func _LOWriter_FieldStatTemplateInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite 
 	If Not IsObj($oTemplateField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If ($iFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_TEMPLATE_NAME) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_TEMPLATE_NAME) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oTemplateField.FileFormat = $iFormat
 	EndIf
@@ -5657,9 +5659,9 @@ Func _LOWriter_FieldStatTemplateModify(ByRef $oTemplateField, $iFormat = Null)
 
 	If Not IsObj($oTemplateField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iFormat) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oTemplateField.FileFormat())
+	If __LO_VarsAreNull($iFormat) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oTemplateField.FileFormat())
 
-	If Not __LOWriter_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_TEMPLATE_NAME) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_TEMPLATE_NAME) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oTemplateField.FileFormat = $iFormat
 	$iError = ($oTemplateField.FileFormat() = $iFormat) ? ($iError) : (BitOR($iError, 1))
@@ -5846,8 +5848,8 @@ Func _LOWriter_FieldVarSetPageModify(ByRef $oPageVarSetField, $bRefOn = Null, $i
 
 	If Not IsObj($oPageVarSetField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bRefOn, $iOffset) Then
-		__LOWriter_ArrayFill($avPage, $oPageVarSetField.On(), $oPageVarSetField.Offset())
+	If __LO_VarsAreNull($bRefOn, $iOffset) Then
+		__LO_ArrayFill($avPage, $oPageVarSetField.On(), $oPageVarSetField.Offset())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avPage)
 	EndIf
@@ -5913,7 +5915,7 @@ Func _LOWriter_FieldVarShowPageInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite =
 	If Not IsObj($oPageShowField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If ($iNumFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oPageShowField.NumberingType = $iNumFormat
 
@@ -5961,9 +5963,9 @@ Func _LOWriter_FieldVarShowPageModify(ByRef $oPageShowField, $iNumFormat = Null)
 
 	If Not IsObj($oPageShowField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iNumFormat) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPageShowField.NumberingType())
+	If __LO_VarsAreNull($iNumFormat) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPageShowField.NumberingType())
 
-	If Not __LOWriter_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oPageShowField.NumberingType = $iNumFormat
 	$iError = ($oPageShowField.NumberingType() = $iNumFormat) ? ($iError) : (BitOR($iError, 1))

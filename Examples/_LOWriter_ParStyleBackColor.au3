@@ -24,8 +24,8 @@ Func Example()
 	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Default Paragraph Style")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Default Paragraph Style" background color to $LOW_COLOR_GRAY, and back transparent to false.
-	_LOWriter_ParStyleBackColor($oParStyle, $LOW_COLOR_GRAY, False)
+	; Set "Default Paragraph Style" background color to $LO_COLOR_GRAY, and back transparent to false.
+	_LOWriter_ParStyleBackColor($oParStyle, $LO_COLOR_GRAY, False)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

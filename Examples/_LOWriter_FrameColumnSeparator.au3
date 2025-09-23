@@ -26,12 +26,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to modify Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/16" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(.0625)
+	$iMicrometers = _LO_ConvertToMicrometer(.0625)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Frame Column Separator line settings to: Separator on (True), Line Style = $LOW_LINE_STYLE_SOLID, Line width to 1/16"
-	; Line Color to $LOW_COLOR_RED, Height to 75%, Line Position to $LOW_ALIGN_VERT_MIDDLE
-	_LOWriter_FrameColumnSeparator($oFrame, True, $LOW_LINE_STYLE_SOLID, $iMicrometers, $LOW_COLOR_RED, 75, $LOW_ALIGN_VERT_MIDDLE)
+	; Line Color to $LO_COLOR_RED, Height to 75%, Line Position to $LOW_ALIGN_VERT_MIDDLE
+	_LOWriter_FrameColumnSeparator($oFrame, True, $LOW_LINE_STYLE_SOLID, $iMicrometers, $LO_COLOR_RED, 75, $LOW_ALIGN_VERT_MIDDLE)
 	If @error Then _ERROR($oDoc, "Failed to set Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame settings. Return will be an array in order of function parameters.

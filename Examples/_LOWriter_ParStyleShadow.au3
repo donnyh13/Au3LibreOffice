@@ -26,11 +26,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(0.25)
+	$iMicrometers = _LO_ConvertToMicrometer(0.25)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Default Paragraph Style" Shadow to 1/4" wide, Color to $LOW_COLOR_PURPLE, Transparent to false, and location to $LOW_SHADOW_TOP_LEFT
-	_LOWriter_ParStyleShadow($oParStyle, $iMicrometers, $LOW_COLOR_PURPLE, False, $LOW_SHADOW_TOP_LEFT)
+	; Set "Default Paragraph Style" Shadow to 1/4" wide, Color to $LO_COLOR_PURPLE, Transparent to false, and location to $LOW_SHADOW_TOP_LEFT
+	_LOWriter_ParStyleShadow($oParStyle, $iMicrometers, $LO_COLOR_PURPLE, False, $LOW_SHADOW_TOP_LEFT)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

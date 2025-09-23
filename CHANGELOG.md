@@ -33,22 +33,43 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Central Constants File
 	- LibreOffice_Constants.au3
+		- $__LOCONST_SLEEP_DIV
+		- $LO_COLOR_*
+		- $LO_PATHCONV_*
+		- $__LO_STATUS_*
+		- $__LOCONST_CONVERT_*
 	- LibreOffice_Helper.au3
 		- _LO_ComError_UserFunction
+		- _LO_ConvertColorFromLong
+		- _LO_ConvertColorToLong
+		- _LO_ConvertFromMicrometer
+		- _LO_ConvertToMicrometer
 		- _LO_InitializePortable
+		- _LO_PathConvert
+		- _LO_VersionGet
 	- LibreOffice_Internal.au3
+		- __LO_AddTo1DArray
+		- __LO_ArrayFill
+		- __LO_CreateStruct
 		- __LO_DeleteTempReg
 		- __LO_InternalComErrorHandler
+		- __LO_IntIsBetween
+		- __LO_NumIsBetween
 		- __LO_ServiceManager
 		- __LO_SetPortableServiceManager
+		- __LO_SetPropertyValue
+		- __LO_UnitConvert
+		- __LO_VarsAreNull
+		- __LO_VersionCheck
 - Central UDF File for all components (@mLipok)
 	- LibreOffice.au3
 - Support for LibreOffice Portable usage. See `_LO_InitializePortable`.
 
 ### Changed
 
-- All Internal Error Constants from $__LOW_STATUS_ or $__LOC_STATUS_ To $__LO_STATUS_
-- Attempted to standardize $__LO_STATUS_INIT_ERROR and $__LO_STATUS_PROCESSING_ERROR usage throughout functions.
+- All Internal Error Constants from `$__LOW_STATUS_` or `$__LOC_STATUS_` To `$__LO_STATUS_`
+- Attempted to standardize `$__LO_STATUS_INIT_ERROR` and `$__LO_STATUS_PROCESSING_ERROR` usage throughout functions.
+- Removed Error returns listed in Function Headers that no longer existed.
 - Added missing error values and corrected wrong error values listed in the headers.
 - All calls to ObjCreate to create a com.sun.star.ServiceManager Object are routed through an internal Function which stores a reference to the Object rather than creating a new instance each time, this also allows the ability to automate Portable LO. Affected Functions are (and any functions using these functions):
 	- _LOCalc_RangeSortAlt
@@ -573,7 +594,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- $LOC_WEIGHT_*
 	- $LOC_ZOOMTYPE_*
 - Auto size option to Range Data, Formulas, and Numbers fill functions.
-- Retrieve Linked Sheet names only to _LOCalc_SheetsGetNames.
+- Retrieve Linked Sheet names only to `_LOCalc_SheetsGetNames`.
 - Line numbers to Example Error messages.
 - Top-Most attribute to Example message boxes.
 - LibreOffice SDK/API Constant names to constants.
@@ -581,62 +602,64 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 ### Fixed
 
 - Removed unused variables and parameters in some functions. Affected functions are as follows:
-	- _LOCalc_FormatKeyDelete -- removed internal variable.
+	- `_LOCalc_FormatKeyDelete` -- removed internal variable.
 - NamedRange names incorrectly reported as invalid in certain functions when the name began with an underscore.
 	- _LOCalc_RangeNamedModify
 	- _LOCalc_RangeNamedAdd
-- _LOCalc_DocOpen now uses a different method for connecting to an already open document, as the previous method was causing errors.
-- _LOCalc_DocCreate would return if there was an error creating a property, instead of increasing the error count.
-- LibreOfficeCalc_Cell.au3 was missing an Include file.
+- `_LOCalc_DocOpen` now uses a different method for connecting to an already open document, as the previous method was causing errors.
+- `_LOCalc_DocCreate` would return if there was an error creating a property, instead of increasing the error count.
+- `LibreOfficeCalc_Cell.au3` was missing an Include file.
 - Several Cell or Cell range functions that should support Column/Rows would not work with them.
-- LibreOfficeCalc_Sheet.au3 was missing an Include file.
-- Fix _LOCalc_DocViewWindowSettings, return values in wrong order. Thanks to user JALucena. <https://www.autoitscript.com/forum/topic/210514-libreoffice-udf-help-and-support/page/2/#findComment-1543326>
+- `LibreOfficeCalc_Sheet.au3` was missing an Include file.
+- `_LOCalc_DocViewWindowSettings`, return values in wrong order. Thanks to user JALucena. <https://www.autoitscript.com/forum/topic/210514-libreoffice-udf-help-and-support/page/2/#findComment-1543326>
 
 ### Changed
 
-- Constant $__LOCCONST_FILL_STYLE_* to $LOC_AREA_FILL_STYLE_*
-- __LOCalc_IntIsBetween to accept only a minimum value. Also optimized it.
+- Constant `$__LOCCONST_FILL_STYLE_*` to `$LOC_AREA_FILL_STYLE_*`
+- `__LOCalc_IntIsBetween` to accept only a minimum value. Also optimized it.
 	- Modified function usage to match changes.
-- Renamed Constant $LOC_COMPUTE_* to $LOC_COMPUTE_FUNC_*
+- Renamed Constant `$LOC_COMPUTE_*` to `$LOC_COMPUTE_FUNC_*`
 - Renamed Functions to be consistent when retrieving arrays of names or objects:
-	- _LOCalc_DocEnumPrinters-->_LOCalc_DocPrintersGetNames
-	- _LOCalc_DocEnumPrintersAlt-->_LOCalc_DocPrintersAltGetNames
-	- _LOCalc_FontsList-->_LOCalc_FontsGetNames
-	- _LOCalc_RangePivotFieldItemsGetList-->_LOCalc_RangePivotFieldItemsGetNames
-	- _LOCalc_RangePivotFieldsColumnsGetList-->_LOCalc_RangePivotFieldsColumnsGetNames
-	- _LOCalc_RangePivotFieldsDataGetList-->_LOCalc_RangePivotFieldsDataGetNames
-	- _LOCalc_RangePivotFieldsFiltersGetList-->_LOCalc_RangePivotFieldsFiltersGetNames
-	- _LOCalc_RangePivotFieldsGetList-->_LOCalc_RangePivotFieldsGetNames
-	- _LOCalc_RangePivotFieldsRowsGetList-->_LOCalc_RangePivotFieldsRowsGetNames
-	- _LOCalc_RangePivotFieldsUnusedGetList-->_LOCalc_RangePivotFieldsUnusedGetNames
-	- _LOCalc_RangePivotsGetList-->_LOCalc_RangePivotsGetNames
+	- `_LOCalc_DocEnumPrinters` --> `_LOCalc_DocPrintersGetNames`
+	- `_LOCalc_DocEnumPrintersAlt` --> `_LOCalc_DocPrintersAltGetNames`
+	- `_LOCalc_FontsList` --> `_LOCalc_FontsGetNames`
+	- `_LOCalc_RangePivotFieldItemsGetList` --> `_LOCalc_RangePivotFieldItemsGetNames`
+	- `_LOCalc_RangePivotFieldsColumnsGetList` --> `_LOCalc_RangePivotFieldsColumnsGetNames`
+	- `_LOCalc_RangePivotFieldsDataGetList` --> `_LOCalc_RangePivotFieldsDataGetNames`
+	- `_LOCalc_RangePivotFieldsFiltersGetList` --> `_LOCalc_RangePivotFieldsFiltersGetNames`
+	- `_LOCalc_RangePivotFieldsGetList` --> `_LOCalc_RangePivotFieldsGetNames`
+	- `_LOCalc_RangePivotFieldsRowsGetList` --> `_LOCalc_RangePivotFieldsRowsGetNames`
+	- `_LOCalc_RangePivotFieldsUnusedGetList` --> `_LOCalc_RangePivotFieldsUnusedGetNames`
+	- `_LOCalc_RangePivotsGetList` --> `_LOCalc_RangePivotsGetNames`
 - Renamed Functions to be consistent when testing if a thing exists:
-	- _LOCalc_DocHasSheetName-->_LOCalc_SheetExists
-	- _LOCalc_RangeDatabaseHasByName-->_LOCalc_RangeDatabaseExists
-	- _LOCalc_RangeNamedHasByName-->_LOCalc_RangeNamedExists
+	- `_LOCalc_DocHasSheetName` --> `_LOCalc_SheetExists`
+	- `_LOCalc_RangeDatabaseHasByName` --> `_LOCalc_RangeDatabaseExists`
+	- `_LOCalc_RangeNamedHasByName` --> `_LOCalc_RangeNamedExists`
 - Some functions would return an integer instead of an empty Array when no results were present when retrieving array of names or objects, this has been changed to return an empty array:
 	- _LOCalc_CellStylesGetNames
 	- _LOCalc_PageStylesGetNames
-- Modified _LOCalc_DocPrintersAltGetNames @Extended value when retrieving the default printer name, @Extended is now 1, instead of 2.
-- _LOCalc_DocRedoGetAllActionTitles now returns the number of results in @Extended value.
-- _LOCalc_DocUndoGetAllActionTitles now returns the number of results in @Extended value.
-- Made $oDoc parameter for _LOCalc_FontExists optional. This will affect the parameters and error return values of the following functions:
+- Modified `_LOCalc_DocPrintersAltGetNames` @Extended value when retrieving the default printer name, @Extended is now 1, instead of 2.
+- `_LOCalc_DocRedoGetAllActionTitles` now returns the number of results in @Extended value.
+- `_LOCalc_DocUndoGetAllActionTitles` now returns the number of results in @Extended value.
+- Made $oDoc parameter for `_LOCalc_FontExists` optional. This will affect the parameters and error return values of the following functions:
 	- __LOCalc_CellFont
 	- _LOCalc_CellFont
 	- _LOCalc_CellStyleFont
 	- _LOCalc_FontExists
 	- _LOCalc_TextCursorFont
 - Renamed more Functions to be consistent when retrieving arrays of names or objects:
-	- _LOCalc_FormatKeyList-->_LOCalc_FormatKeysGetList
-- Made $oDoc Parameter optional for _LOCalc_FontsGetNames.
-- Added count of number of results for _LOCalc_DocConnect, connect-all and partial name search when more than one result is present.
+	- `_LOCalc_FormatKeyList` --> `_LOCalc_FormatKeysGetList`
+- Made $oDoc Parameter optional for `_LOCalc_FontsGetNames`.
+- Added count of number of results for `_LOCalc_DocConnect`, connect-all and partial name search when more than one result is present.
 - Removed _ArrayDisplay from most examples.
+- `_LOWriter_DocRedoCurActionTitle` to only have one Success return, either with an empty String or the Current Redo Action Title.
+- `_LOWriter_DocUndoCurActionTitle` to only have one Success return, either with an empty String or the Current Undo Action Title.
 
 ### Removed
 
 - __LOCalc_VarsAreDefault
-- LibreOfficeCalc_Font file, combined functions into LibreOfficeCalc_Helper.
-- $__LO_STATUS_DOC_ERROR Error Constant and renumber all after errors.
+- `LibreOfficeCalc_Font` file, combined functions into `LibreOfficeCalc_Helper`.
+- `$__LO_STATUS_DOC_ERROR` Error Constant and renumber all after errors.
 
 > [!NOTE]
 > **LibreOfficeImpress**
@@ -799,9 +822,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- __LOWriter_ShapeLineStyleName
 	- __LOWriter_ShapePointGetSettings
 	- __LOWriter_ShapePointModify
-- Shape Point Constants in LibreOfficeWriter_Constants. $LOW_SHAPE_POINT_TYPE_*
-- Standard Format Key retrieval function _LOWriter_FormatKeyGetStandard
-- Alpha Removal function __LOWriter_ColorRemoveAlpha.
+- Shape Point Constants in `LibreOfficeWriter_Constants`. `$LOW_SHAPE_POINT_TYPE_*`
+- Standard Format Key retrieval function `_LOWriter_FormatKeyGetStandard`
+- Alpha Removal function `__LOWriter_ColorRemoveAlpha`.
 - _LOWriter_FrameAreaFillStyle.
 - _LOWriter_FrameStyleAreaFillStyle
 - _LOWriter_ImageAreaFillStyle
@@ -814,7 +837,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Selection set and get functions
 	- _LOWriter_DocSelectionGet
 	- _LOWriter_DocSelectionSet
-- __LOWriter_NumRuleCreateMap for modifying Numbering Rules more efficiently.
+- `__LOWriter_NumRuleCreateMap` for modifying Numbering Rules more efficiently.
 - LibreOffice SDK/API Constant names to constants.
 - Form/Form Control Constants
 	- $LOW_FORM_CON_BORDER_*
@@ -924,6 +947,32 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOWriter_FormPropertiesGeneral
 	- _LOWriter_FormsGetCount
 	- _LOWriter_FormsGetList
+- Multicolor Gradient support, adding the following functions:
+	1. Helper Functions:
+		- _LOWriter_GradientMulticolorAdd
+		- _LOWriter_GradientMulticolorDelete
+		- _LOWriter_GradientMulticolorModify
+		- _LOWriter_TransparencyGradientMultiAdd
+		- _LOWriter_TransparencyGradientMultiDelete
+		- _LOWriter_TransparencyGradientMultiModify
+	2. Frame Functions:
+		- _LOWriter_FrameAreaGradientMulticolor
+		- _LOWriter_FrameAreaTransparencyGradientMulti
+		- _LOWriter_FrameStyleAreaGradientMulticolor
+		- _LOWriter_FrameStyleAreaTransparencyGradientMulti
+	3. Image Functions:
+		- _LOWriter_ImageAreaGradientMulticolor
+		- _LOWriter_ImageAreaTransparencyGradientMulti
+	4. PageStyle Functions:
+		- _LOWriter_PageStyleAreaGradientMulticolor
+		- _LOWriter_PageStyleAreaTransparencyGradientMulti
+		- _LOWriter_PageStyleFooterAreaGradientMulticolor
+		- _LOWriter_PageStyleFooterAreaTransparencyGradientMulti
+		- _LOWriter_PageStyleHeaderAreaGradientMulticolor
+		- _LOWriter_PageStyleHeaderAreaTransparencyGradientMulti
+	5. Shape Functions:
+		- _LOWriter_ShapeAreaGradientMulticolor
+		- _LOWriter_ShapeAreaTransparencyGradientMulti
 
 ### Changed
 
@@ -950,14 +999,14 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOWriter_DocUndoGetAllActionTitles;
 	- _LOWriter_DocUndoCurActionTitle.
 - Minor documentation adjustments.
-- Moved Search Descriptor functions from LibreOfficeWriter.au3 to LibreOfficeWriter_Helper.au3.
+- Moved Search Descriptor functions from `LibreOfficeWriter.au3` to `LibreOfficeWriter_Helper.au3`.
 	- _LOWriter_SearchDescriptorCreate
 	- _LOWriter_SearchDescriptorModify
 	- _LOWriter_SearchDescriptorSimilarityModify
-- Default value of $__LOWCONST_SLEEP_DIV from 15 to 0.
+- Default value of `$__LOWCONST_SLEEP_DIV` from 15 to 0.
 - Sorted Constants in LibreOfficeWriter_Constants alphabetically.
-- Renamed $LOW_FIELDADV_TYPE_* Constants to $LOW_FIELD_ADV_TYPE_* to match formatting of other Field Type Constants.
-- Renamed $LibreOfficeWriter_DirectFormating.au3 to LibreOfficeWriter_DirectFormatting.au3 (misspelling correction)
+- Renamed `$LOW_FIELDADV_TYPE_*` Constants to `$LOW_FIELD_ADV_TYPE_*` to match formatting of other Field Type Constants.
+- Renamed `$LibreOfficeWriter_DirectFormating.au3` to `LibreOfficeWriter_DirectFormatting.au3` (misspelling correction)
 - Renamed Parameter $iBorder for Gradient Functions to $iTransitionStart for clarity of which setting it corresponds to in the L.O. UI.
 	- _LOWriter_FrameAreaGradient
 	- _LOWriter_FrameTransparencyGradient
@@ -973,25 +1022,25 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOWriter_PageStyleTransparencyGradient
 	- _LOWriter_ShapeAreaGradient
 	- _LOWriter_ShapeTransparencyGradient
-- _LOWriter_DocOpen now uses a different method for connecting to an already open document, as the previous method could potentially cause errors.
-- Renamed $__LOWCONST_FILL_STYLE_* Constant to $LOW_AREA_FILL_STYLE_*.
-- __LOWriter_IntIsBetween to accept only a minimum value. Also optimized it.
+- `_LOWriter_DocOpen` now uses a different method for connecting to an already open document, as the previous method could potentially cause errors.
+- Renamed `$__LOWCONST_FILL_STYLE_*` Constant to `$LOW_AREA_FILL_STYLE_*`.
+- `__LOWriter_IntIsBetween` to accept only a minimum value. Also optimized it.
 	- Modified function usage to match changes.
 - Improved the processing speed for modifying Numbering Rules by using Maps.
 - Renamed Functions to be consistent when retrieving arrays of names or objects:
-	- _LOWriter_DocBookmarksList-->_LOWriter_DocBookmarksGetNames
-	- _LOWriter_DocEnumPrinters-->_LOWriter_DocPrintersGetNames
-	- _LOWriter_DocEnumPrintersAlt-->_LOWriter_DocPrintersAltGetNames
-	- _LOWriter_FieldSetVarMasterList-->_LOWriter_FieldSetVarMastersGetNames
-	- _LOWriter_FieldSetVarMasterListFields-->_LOWriter_FieldSetVarMasterFieldsGetList
-	- _LOWriter_FontsList-->_LOWriter_FontsGetNames
-	- _LOWriter_TableGetCellNames-->_LOWriter_TableCellsGetNames
+	- `_LOWriter_DocBookmarksList` --> `_LOWriter_DocBookmarksGetNames`
+	- `_LOWriter_DocEnumPrinters` --> `_LOWriter_DocPrintersGetNames`
+	- `_LOWriter_DocEnumPrintersAlt` --> `_LOWriter_DocPrintersAltGetNames`
+	- `_LOWriter_FieldSetVarMasterList` --> `_LOWriter_FieldSetVarMastersGetNames`
+	- `_LOWriter_FieldSetVarMasterListFields` --> `_LOWriter_FieldSetVarMasterFieldsGetList`
+	- `_LOWriter_FontsList` --> `_LOWriter_FontsGetNames`
+	- `_LOWriter_TableGetCellNames` --> `_LOWriter_TableCellsGetNames`
 - Renamed Functions to be consistent when testing if a thing exists:
-	- _LOWriter_DocBookmarksHasName-->_LOWriter_DocBookmarkExists
-	- _LOWriter_DocHasFrameName-->_LOWriter_FrameExists
-	- _LOWriter_DocHasImageName-->_LOWriter_ImageExists
-	- _LOWriter_DocHasShapeName-->_LOWriter_ShapeExists
-	- _LOWriter_DocHasTableName-->_LOWriter_TableExists
+	- `_LOWriter_DocBookmarksHasName` --> `_LOWriter_DocBookmarkExists`
+	- `_LOWriter_DocHasFrameName` --> `_LOWriter_FrameExists`
+	- `_LOWriter_DocHasImageName` --> `_LOWriter_ImageExists`
+	- `_LOWriter_DocHasShapeName` --> `_LOWriter_ShapeExists`
+	- `_LOWriter_DocHasTableName` --> `_LOWriter_TableExists`
 - Some functions would return an integer instead of an empty Array when no results were present when retrieving array of names or objects, this has been changed to return an empty array:
 	- _LOWriter_CharStylesGetNames
 	- _LOWriter_DocBookmarksGetNames
@@ -1005,10 +1054,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOWriter_PageStylesGetNames
 	- _LOWriter_ParStylesGetNames
 	- _LOWriter_TablesGetNames
-- Modified _LOWriter_DocPrintersAltGetNames @Extended value when retrieving the default printer name, @Extended is now 1, instead of 2.
-- _LOWriter_DocRedoGetAllActionTitles now returns the number of results in @Extended value.
-- _LOWriter_DocUndoGetAllActionTitles now returns the number of results in @Extended value.
-- Made $oDoc parameter for _LOWriter_FontExists optional. This will affect the parameters and error return values of the following functions:
+- Modified `_LOWriter_DocPrintersAltGetNames` @Extended value when retrieving the default printer name, @Extended is now 1, instead of 2.
+- `_LOWriter_DocRedoGetAllActionTitles` now returns the number of results in @Extended value.
+- `_LOWriter_DocUndoGetAllActionTitles` now returns the number of results in @Extended value.
+- Made $oDoc parameter for `_LOWriter_FontExists` optional. This will affect the parameters and error return values of the following functions:
 	- __LOWriter_CharFont
 	- _LOWriter_CharStyleFont
 	- _LOWriter_DirFrmtFont
@@ -1017,21 +1066,40 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOWriter_FontDescCreate
 	- _LOWriter_FontDescEdit
 	- _LOWriter_ParStyleFont
-- Modified _LOWriter_ShapesGetNames to return Shape Type instead of Implementation name.
-- Renamed "__LOWriter_ControlSetGetFontDesc" --> "__LOWriter_FormConSetGetFontDesc" to match other Form control function names.
-- Renamed all internal and user "_LOWriter_FormControl*" functions to "_LOWriter_FormCon*" for brevity.
-- Renamed all $LOW_FORM_CONTROL_* constants to $LOW_FORM_CON_* for brevity.
-- Add $iBorderColor to _LOWriter_FormTableConGeneral parameters. Update function and example as necessary.
+- Modified `_LOWriter_ShapesGetNames` to return Shape Type instead of Implementation name.
+- Renamed `__LOWriter_ControlSetGetFontDesc` --> `__LOWriter_FormConSetGetFontDesc` to match other Form control function names.
+- Renamed all internal and user `_LOWriter_FormControl*` functions to `_LOWriter_FormCon*` for brevity.
+- Renamed all `$LOW_FORM_CONTROL_*` constants to `$LOW_FORM_CON_*` for brevity.
+- Add $iBorderColor to `_LOWriter_FormTableConGeneral` parameters. Update function and example as necessary.
 - Renamed more Functions to be consistent when retrieving arrays of names or objects:
-	- _LOWriter_DateFormatKeyList-->_LOWriter_DateFormatKeysGetList
-	- _LOWriter_DirFrmtParTabStopList-->_LOWriter_DirFrmtParTabStopsGetList
-	- _LOWriter_FieldRefMarkList-->_LOWriter_FieldRefMarksGetNames
-	- _LOWriter_FormatKeyList-->_LOWriter_FormatKeysGetList
-	- _LOWriter_ParStyleTabStopList-->_LOWriter_ParStyleTabStopsGetList
-	- __LOWriter_ParTabStopList-->__LOWriter_ParTabStopsGetList
-- Made $oDoc Parameter optional for _LOWriter_FontsGetNames.
-- Added count of number of results for _LOWriter_DocConnect, connect-all and partial name search when more than one result is present.
+	- `_LOWriter_DateFormatKeyList` --> `_LOWriter_DateFormatKeysGetList`
+	- `_LOWriter_DirFrmtParTabStopList` --> `_LOWriter_DirFrmtParTabStopsGetList`
+	- `_LOWriter_FieldRefMarkList` --> `_LOWriter_FieldRefMarksGetNames`
+	- `_LOWriter_FormatKeyList` --> `_LOWriter_FormatKeysGetList`
+	- `_LOWriter_ParStyleTabStopList` --> `_LOWriter_ParStyleTabStopsGetList`
+	- `__LOWriter_ParTabStopList` --> `__LOWriter_ParTabStopsGetList`
+- Made $oDoc Parameter optional for `_LOWriter_FontsGetNames`.
+- Added count of number of results for `_LOWriter_DocConnect`, connect-all and partial name search when more than one result is present.
 - Removed _ArrayDisplay from most examples.
+- Added checks to some Form functions whether the Document is ReadOnly, which would occur if the Form Document is opened in Viewing mode.
+- Modified all DocFind/DocReplace functions to use null to skip the Format Parameters instead of an empty array.
+- Rearranged Parameters in `_LOWriter_DocFindAllInRange`. $oRange and $atFormat are now in reverse order.
+- Rewrote `_LOWriter_DocReplaceAllInRange` to work better, and also to eliminate buggy `__LOWriter_RegExpConvert` function.
+- Made `_LOWriter_DocReplaceAll` and `_LOWriter_DocReplaceAllInRange` return the number of replacements made, instead of setting @Extended.
+- Made `_LOWriter_DocFindAll` and `_LOWriter_DocFindAllInRange` always return an Array, instead of "1" when no results were found.
+- Renamed Transparency functions to be consistent and kept together with other background functions:
+	- `_LOWriter_FrameStyleTransparency` --> `_LOWriter_FrameStyleAreaTransparency`
+	- `_LOWriter_FrameStyleTransparencyGradient` --> `_LOWriter_FrameStyleAreaTransparencyGradient`
+	- `_LOWriter_FrameTransparency` --> `_LOWriter_FrameAreaTransparency`
+	- `_LOWriter_FrameTransparencyGradient` --> `_LOWriter_FrameAreaTransparencyGradient`
+	- `_LOWriter_PageStyleFooterTransparency` --> `_LOWriter_PageStyleFooterAreaTransparency`
+	- `_LOWriter_PageStyleFooterTransparencyGradient` --> `_LOWriter_PageStyleFooterAreaTransparencyGradient`
+	- `_LOWriter_PageStyleHeaderTransparency` --> `_LOWriter_PageStyleHeaderAreaTransparency`
+	- `_LOWriter_PageStyleHeaderTransparencyGradient` --> `_LOWriter_PageStyleHeaderAreaTransparencyGradient`
+	- `_LOWriter_PageStyleTransparency` --> `_LOWriter_PageStyleAreaTransparency`
+	- `_LOWriter_PageStyleTransparencyGradient` --> `_LOWriter_PageStyleAreaTransparencyGradient`
+	- `_LOWriter_ShapeTransparency` --> `_LOWriter_ShapeAreaTransparency`
+	- `_LOWriter_ShapeTransparencyGradient` --> `_LOWriter_ShapeAreaTransparencyGradient`
 
 ### Fixed
 
@@ -1040,51 +1108,75 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOWriter_EndnoteGetAnchor
 	- _LOWriter_FrameGetAnchor
 	- _LOWriter_ImageGetAnchor
-- Missing Includes in LibreOfficeWriter file.
+- Missing Includes in `LibreOfficeWriter` file.
 - Ternary Operators missing Parenthesis in responses.
 - Export extension was incorrect, "jjpe" --> "jpe"
 - Spell Checked the comments and Headers.
 - Spell Checked Examples
 - Examples on Error now close any documents opened by the example.
-- Missing parameters in Null keyword check for __LOWriter_TableBorder, causing errors in setting Table Horizontal and Vertical borders singly.
-- Wrong error value in _LOWriter_CursorGetStatus for error while determining cursor type.
+- Missing parameters in Null keyword check for `__LOWriter_TableBorder`, causing errors in setting Table Horizontal and Vertical borders singly.
+- Wrong error value in `_LOWriter_CursorGetStatus` for error while determining cursor type.
 - Missing Parameters in some headers or Syntax header.
 - Missing parameter type checks in some functions.
-- Missing ExitLoop in __LOWriter_FieldsGetList causing unnecessary looping.
+- Missing ExitLoop in `__LOWriter_FieldsGetList` causing unnecessary looping.
 - Removed unused variables and parameters in some functions. Affected functions are as follows:
-	- _LOWriter_DocBookmarkModify -- removed $oDoc parameter.
-	- _LOWriter_FieldDelete -- removed $oDoc parameter.
-	- _LOWriter_FieldDocInfoEditTimeModify -- removed $oDoc parameter.
-	- _LOWriter_FieldSetVarMasterFieldsGetList -- removed $oDoc parameter.
-	- _LOWriter_DateFormatKeyDelete -- removed internal variable.
-	- _LOWriter_FormatKeyDelete -- removed internal variable.
-	- _LOWriter_ImageInsert -- removed internal variable, now uses ViewCursor directly to insert an Image.
-	- _LOWriter_NumStyleSetLevel -- removed $oDoc parameter.
-- _LOWriter_DocHyperlinkInsert -- $bOverwrite parameter was not used in function.
+	- `_LOWriter_DocBookmarkModify` -- removed $oDoc parameter.
+	- `_LOWriter_FieldDelete` -- removed $oDoc parameter.
+	- `_LOWriter_FieldDocInfoEditTimeModify` -- removed $oDoc parameter.
+	- `_LOWriter_FieldSetVarMasterFieldsGetList` -- removed $oDoc parameter.
+	- `_LOWriter_DateFormatKeyDelete` -- removed internal variable.
+	- `_LOWriter_FormatKeyDelete` -- removed internal variable.
+	- `_LOWriter_ImageInsert` -- removed internal variable, now uses ViewCursor directly to insert an Image.
+	- `_LOWriter_NumStyleSetLevel` -- removed $oDoc parameter.
+- `_LOWriter_DocHyperlinkInsert` -- $bOverwrite parameter was not used in function.
 - Transparency causing Color values to be returned that including the Alpha value, causing potentially unexpected results.
-- Missing Data Type in _LOWriter_CursorGetDataType example.
-- _LOWriter_DocCreateTextCursor would throw an error when creating a Text Cursor at the ViewCursor position.
-- When any FieldsGetList functions were supposed to return a single dimension array, a two dimensional array was being returned.
+- Missing Data Type in `_LOWriter_CursorGetDataType` example.
+- `_LOWriter_DocCreateTextCursor` would throw an error when creating a Text Cursor at the ViewCursor position.
+- When any `FieldsGetList` functions were supposed to return a single dimension array, a two dimensional array was being returned.
 - Incorrect usage of ObjEvent.
-- _LOWriter_DocCreate would return if there was an error creating a property, instead of increasing the error count.
-- _LOWriter_DocCreate could potentially return a Base Form document, as they have identical Service names.
-- _LOWriter_DocConnect could potentially return a Base Form document, as they have identical Service names.
-- __LOWriter_TransparencyGradientConvert would return a wrong Transparency value for certain percentages.
+- `_LOWriter_DocCreate` would return if there was an error creating a property, instead of increasing the error count.
+- `_LOWriter_DocCreate` could potentially return a Base Form document, as they have identical Service names.
+- `_LOWriter_DocConnect` could potentially return a Base Form document, as they have identical Service names.
+- `__LOWriter_TransparencyGradientConvert` would return a wrong Transparency value for certain percentages.
 - LibreOffice version 7.6 introduced a new setting for gradients, which broke all gradient functions I had made. Implemented a fix to work with both the new version and the old.
-- _LOWriter_DocPrintMiscSettings #2 example no longer worked after a change to how one of the functions worked.
-- __LOWriter_GetShapeName had an error where a COM Error would be triggered each time it was called.
-- Added missing example. _LOWriter_ImageExists
+- `_LOWriter_DocPrintMiscSettings` #2 example no longer worked after a change to how one of the functions worked.
+- `__LOWriter_GetShapeName` had an error where a COM Error would be triggered each time it was called.
+- Added missing example. `_LOWriter_ImageExists`
 - Backwards Parameters in VarsAreNull in the following functions:
 	- _LOWriter_FieldDateTimeModify
 	- _LOWriter_FieldFileNameModify
-- Add missing parameter to VarsAreNull in _LOWriter_DocFormSettings.
+- Add missing parameter to VarsAreNull in `_LOWriter_DocFormSettings`.
+- `_LOWriter_DocCreate` not finding a blank open document to connect to, if available, due to reversed logical operator.
 
 ### Removed
 
-- $LOW_FIELD_TYPE_URL Constant. -- "com.sun.star.text.TextField.URL" is a Calc-only Field type.
-- __LOWriter_NumStyleRetrieve function as it is no longer needed.
-- Remove LibreOfficeWriter_Font file, and merge functions into LibreOfficeWriter_Helper
-- $__LO_STATUS_DOC_ERROR Error Constant and renumber all after errors.
+- `$LOW_FIELD_TYPE_URL` Constant. -- "com.sun.star.text.TextField.URL" is a Calc-only Field type.
+- `__LOWriter_NumStyleRetrieve` function as it is no longer needed.
+- Remove `LibreOfficeWriter_Font` file, and merge functions into `LibreOfficeWriter_Helper`
+- `$__LO_STATUS_DOC_ERROR` Error Constant and renumber all after errors.
+- __LOWriter_RegExpConvert.
+- __LOWriter_AddTo2DArray.
+- __LOWriter_VarsAreDefault
+- Centralized some internal functions. Thus removing the following individual Functions:
+	- __LOWriter_ArrayFill
+	- __LOWriter_AddTo1DArray
+	- __LOWriter_CreateStruct
+	- __LOWriter_IntIsBetween
+	- __LOWriter_NumIsBetween
+	- __LOWriter_SetPropertyValue
+	- __LOWriter_UnitConvert
+	- __LOWriter_VarsAreNull
+	- __LOWriter_VersionCheck
+- Centralized some Helper functions. Thus removing the following individual Functions:
+	- _LOWriter_ConvertColorFromLong
+	- _LOWriter_ConvertColorToLong
+	- _LOWriter_ConvertFromMicrometer
+	- _LOWriter_ConvertToMicrometer
+	- _LOWriter_PathConvert
+	- _LOWriter_VersionGet
+- Centralized some Constants. Thus removing the following individual Constants:
+	- $LOW_PATHCONV_*
+	- $LOW_COLOR_*
 
 [To Top](#releases)
 
@@ -1158,8 +1250,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- LibreOfficeWriter_Shapes,
 	- LibreOfficeWriter_Table.
 - Renamed Constants:
-	- $LOW_PAPER_PORTRAIT --> $LOW_PAPER_ORIENT_PORTRAIT
-	- $LOW_PAPER_LANDSCAPE --> $LOW_PAPER_ORIENT_LANDSCAPE
+	- `$LOW_PAPER_PORTRAIT` --> `$LOW_PAPER_ORIENT_PORTRAIT`
+	- `$LOW_PAPER_LANDSCAPE` --> `$LOW_PAPER_ORIENT_LANDSCAPE`
 - Examples layout and error checking cleaned up. (@mLipok.)
 - Examples now work from their separate folder. (@mLipok.)
 - Major editing of Header layout for every function. As well as several typo corrections and wordiness. (@mLipok) & (@donnyh13.)
@@ -1183,7 +1275,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added CODE_OF_CONDUCT.md (@donnyh13)
 - Added CONTRIBUTING.md. (@donnyh13)
 
-Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents was based on adequate documents from <https://github.com/Danp2/au3WebDriver>.
+Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on adequate documents from <https://github.com/Danp2/au3WebDriver>.
 
 [To Top](#releases)
 
@@ -1204,11 +1296,11 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents was based on a
 - _DocConvertTableToText.
 - examples for the new functions.
 - "Related" functions section for most function headers.
-- Warning to _ShapesGetNames, about Images inserted in a document also being called "TextFrames".
+- Warning to `_ShapesGetNames`, about Images inserted in a document also being called "TextFrames".
 - processing error check.
 	- _DocInsertString,
 	- _DocInsertControlChar.
-- a missing Datatype for possible Cursor data position types, $LOW_CURDATA_HEADER_FOOTER, previously attempting to insert a content while the insertion point was located in a Header/Footer would have failed. — Thanks to user @Heiko for helping me locate this error. The affected functions are:
+- a missing Datatype for possible Cursor data position types, `$LOW_CURDATA_HEADER_FOOTER`, previously attempting to insert a content while the insertion point was located in a Header/Footer would have failed. — Thanks to user @Heiko for helping me locate this error. The affected functions are:
 	- _CursorGetDataType.
 	- _DocCreateTextCursor,
 	- _EndnoteInsert,
@@ -1229,8 +1321,8 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents was based on a
 	- `_TableGetCellByName` --> `_TableGetCellObjByName`.
 	- `_TableGetCellByPosition` --> `_TableGetCellObjByPosition`.
 - Removed "IsCollapsed" check and error from _DocGetString.
-- _FramesListNames to have an option to search for Frames listed under shapes.
-- _ShapesGetNames, Corrected an error that could occur if images are present.
+- `_FramesListNames` to have an option to search for Frames listed under shapes.
+- `_ShapesGetNames`, Corrected an error that could occur if images are present.
 
 ### Fixed
 
@@ -1251,7 +1343,7 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents was based on a
 
 ### Changed
 
-- _DocReplaceAllInRange to have two methods of performing a Regular Expression find and replace.
+- `_DocReplaceAllInRange` to have two methods of performing a Regular Expression find and replace.
 - Removed the if/else block in $atFindFormat parameter checking.
 	- _DocReplaceAll,
 	- _DocReplaceAllInRange,

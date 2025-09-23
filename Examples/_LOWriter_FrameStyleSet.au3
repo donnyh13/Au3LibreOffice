@@ -23,8 +23,8 @@ Func Example()
 	$oFrame = _LOWriter_FrameCreate($oDoc, $oViewCursor, Null, 3000, 3000)
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Frame Style Background Color to $LOW_COLOR_TEAL, Background color is transparent = False
-	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LOW_COLOR_TEAL, False)
+	; Set the Frame Style Background Color to $LO_COLOR_TEAL, Background color is transparent = False
+	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LO_COLOR_TEAL, False)
 	If @error Then _ERROR($oDoc, "Failed to set Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now set the Frame's Frame style to my custom Frame Style with a Teal background.")

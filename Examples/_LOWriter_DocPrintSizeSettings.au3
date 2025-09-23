@@ -30,11 +30,11 @@ Func Example()
 			"7 = $LOW_PAPER_TABLOID;" & @CRLF & _
 			"8 = $LOW_PAPER_USER_DEFINED" & @CRLF & @CRLF & _
 			"Paper Width in Micrometers:— " & $avSettings[1] & @CRLF & _
-			"Which is " & _LOWriter_ConvertFromMicrometer($avSettings[1]) & " Inches, and " & _
-			_LOWriter_ConvertFromMicrometer(Null, $avSettings[1]) & "Centimeters" & @CRLF & @CRLF & _
+			"Which is " & _LO_ConvertFromMicrometer($avSettings[1]) & " Inches, and " & _
+			_LO_ConvertFromMicrometer(Null, $avSettings[1]) & "Centimeters" & @CRLF & @CRLF & _
 			"Paper Height in Micrometers:— " & $avSettings[2] & @CRLF & _
-			"Which is " & _LOWriter_ConvertFromMicrometer($avSettings[2]) & " Inches, and " & _
-			_LOWriter_ConvertFromMicrometer(Null, $avSettings[2]) & "Centimeters" & @CRLF & @CRLF & _
+			"Which is " & _LO_ConvertFromMicrometer($avSettings[2]) & " Inches, and " & _
+			_LO_ConvertFromMicrometer(Null, $avSettings[2]) & "Centimeters" & @CRLF & @CRLF & _
 			"I will now modify the settings and show the result.")
 
 	; Changes the print size settings to Tabloid.
@@ -58,11 +58,11 @@ Func Example()
 			"7 = $LOW_PAPER_TABLOID;" & @CRLF & _
 			"8 = $LOW_PAPER_USER_DEFINED" & @CRLF & @CRLF & _
 			"Paper Width in Micrometers:— " & $avSettingsNew[1] & @CRLF & _
-			"Which is " & _LOWriter_ConvertFromMicrometer($avSettingsNew[1]) & " Inches, and " & _
-			_LOWriter_ConvertFromMicrometer(Null, $avSettingsNew[1]) & "Centimeters" & @CRLF & @CRLF & _
+			"Which is " & _LO_ConvertFromMicrometer($avSettingsNew[1]) & " Inches, and " & _
+			_LO_ConvertFromMicrometer(Null, $avSettingsNew[1]) & "Centimeters" & @CRLF & @CRLF & _
 			"Paper Height in Micrometers:— " & $avSettingsNew[2] & @CRLF & _
-			"Which is " & _LOWriter_ConvertFromMicrometer($avSettingsNew[2]) & " Inches, and " & _
-			_LOWriter_ConvertFromMicrometer(Null, $avSettingsNew[2]) & "Centimeters" & @CRLF & @CRLF & _
+			"Which is " & _LO_ConvertFromMicrometer($avSettingsNew[2]) & " Inches, and " & _
+			_LO_ConvertFromMicrometer(Null, $avSettingsNew[2]) & "Centimeters" & @CRLF & @CRLF & _
 			"I will now modify the settings again and show the result.")
 
 	; Changes the print size settings to Tabloid, but set width to Japanese Postcard.
@@ -86,11 +86,11 @@ Func Example()
 			"7 = $LOW_PAPER_TABLOID;" & @CRLF & _
 			"8 = $LOW_PAPER_USER_DEFINED" & @CRLF & @CRLF & _
 			"Paper Width in Micrometers:— " & $avSettingsNew[1] & @CRLF & _
-			"Which is " & _LOWriter_ConvertFromMicrometer($avSettingsNew[1]) & " Inches, and " & _
-			_LOWriter_ConvertFromMicrometer(Null, $avSettingsNew[1]) & "Centimeters" & @CRLF & @CRLF & _
+			"Which is " & _LO_ConvertFromMicrometer($avSettingsNew[1]) & " Inches, and " & _
+			_LO_ConvertFromMicrometer(Null, $avSettingsNew[1]) & "Centimeters" & @CRLF & @CRLF & _
 			"Paper Height in Micrometers:— " & $avSettingsNew[2] & @CRLF & _
-			"Which is " & _LOWriter_ConvertFromMicrometer($avSettingsNew[2]) & " Inches, and " & _
-			_LOWriter_ConvertFromMicrometer(Null, $avSettingsNew[2]) & "Centimeters" & @CRLF & @CRLF & _
+			"Which is " & _LO_ConvertFromMicrometer($avSettingsNew[2]) & " Inches, and " & _
+			_LO_ConvertFromMicrometer(Null, $avSettingsNew[2]) & "Centimeters" & @CRLF & @CRLF & _
 			"I will now return the settings to their original values, and close the document.")
 
 	; Restore the original settings

@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Table control column. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1.25 inches to Micrometers
-	$iWidth = _LOWriter_ConvertToMicrometer(1.25)
+	$iWidth = _LO_ConvertToMicrometer(1.25)
 	If @error Then _ERROR($oDoc, "Failed to convert inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Column's General properties.

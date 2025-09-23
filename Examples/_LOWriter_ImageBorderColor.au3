@@ -25,8 +25,8 @@ Func Example()
 	_LOWriter_ImageBorderWidth($oImage, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Image Border Color settings to: Top, $LOW_COLOR_ORANGE, Bottom $LOW_COLOR_BLUE, Left, $LOW_COLOR_MAGENTA, Right $LOW_COLOR_BLACK
-	_LOWriter_ImageBorderColor($oImage, $LOW_COLOR_ORANGE, $LOW_COLOR_BLUE, $LOW_COLOR_MAGENTA, $LOW_COLOR_BLACK)
+	; Modify the Image Border Color settings to: Top, $LO_COLOR_ORANGE, Bottom $LO_COLOR_BLUE, Left, $LO_COLOR_MAGENTA, Right $LO_COLOR_BLACK
+	_LOWriter_ImageBorderColor($oImage, $LO_COLOR_ORANGE, $LO_COLOR_BLUE, $LO_COLOR_MAGENTA, $LO_COLOR_BLACK)
 	If @error Then _ERROR($oDoc, "Failed to set Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Image settings. Return will be an array in order of function parameters.

@@ -6,6 +6,7 @@
 ; Main LibreOffice Includes
 #include "LibreOffice_Constants.au3"
 #include "LibreOffice_Helper.au3"
+#include "LibreOffice_Internal.au3"
 
 ; Common includes for Writer
 #include "LibreOfficeWriter_Constants.au3"
@@ -99,7 +100,7 @@
 ; _LOWriter_DocZoom
 ; ===============================================================================================================================
 
-; #FUNCTION# ====================================================================================================================
+;~ ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocBookmarkDelete
 ; Description ...: Delete a Bookmark.
 ; Syntax ........: _LOWriter_DocBookmarkDelete(ByRef $oDoc, ByRef $oBookmark)
@@ -342,7 +343,7 @@ Func _LOWriter_DocBookmarkModify(ByRef $oBookmark, $sBookmarkName = Null)
 
 	If Not IsObj($oBookmark) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sBookmarkName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oBookmark.Name())
+	If __LO_VarsAreNull($sBookmarkName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oBookmark.Name())
 
 	If Not IsString($sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If StringRegExp($sBookmarkName, '[/\@:*?";,.#]') Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Invalid Characters in Name.
@@ -438,20 +439,20 @@ Func _LOWriter_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDe
 			$sFilterName = "writer8"
 		EndIf
 
-		$sSavePath = _LOWriter_PathConvert($sSavePath & $sSaveName, 1)
+		$sSavePath = _LO_PathConvert($sSavePath & $sSaveName, 1)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		If $sFilterName = "" Then $sFilterName = __LOWriter_FilterNameGet($sSavePath)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		$aArgs[0] = __LOWriter_SetPropertyValue("FilterName", $sFilterName)
+		$aArgs[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	EndIf
 
 	If ($bSaveChanges = True) Then
 		If $oDoc.hasLocation() Then
 			$oDoc.store()
-			$sDocPath = _LOWriter_PathConvert($oDoc.getURL(), $LOW_PATHCONV_PCPATH_RETURN)
+			$sDocPath = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
 			$oDoc.Close($bDeliverOwnership)
 
 			Return SetError($__LO_STATUS_SUCCESS, 2, $sDocPath)
@@ -460,11 +461,11 @@ Func _LOWriter_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDe
 			$oDoc.storeAsURL($sSavePath, $aArgs)
 			$oDoc.Close($bDeliverOwnership)
 
-			Return SetError($__LO_STATUS_SUCCESS, 1, _LOWriter_PathConvert($sSavePath, $LOW_PATHCONV_PCPATH_RETURN))
+			Return SetError($__LO_STATUS_SUCCESS, 1, _LO_PathConvert($sSavePath, $LO_PATHCONV_PCPATH_RETURN))
 		EndIf
 	EndIf
 
-	If $oDoc.hasLocation() Then $sDocPath = _LOWriter_PathConvert($oDoc.getURL(), $LOW_PATHCONV_PCPATH_RETURN)
+	If $oDoc.hasLocation() Then $sDocPath = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
 	$oDoc.Close($bDeliverOwnership)
 
 	Return SetError($__LO_STATUS_SUCCESS, 3, $sDocPath)
@@ -516,7 +517,7 @@ Func _LOWriter_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False
 	#forceref $oCOM_ErrorHandler
 
 	Local $iCount = 0
-	Local Const $STR_STRIPLEADING = 1
+	Local Const $__STR_STRIPLEADING = 1
 	Local $aoConnectAll[1], $aoPartNameSearch[1]
 	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
 	Local $sServiceName = "com.sun.star.text.TextDocument"
@@ -551,7 +552,7 @@ Func _LOWriter_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False
 				ReDim $aoConnectAll[$iCount + 1][3]
 				$aoConnectAll[$iCount][0] = $oDoc
 				$aoConnectAll[$iCount][1] = $oDoc.Title()
-				$aoConnectAll[$iCount][2] = _LOWriter_PathConvert($oDoc.getURL(), $LOW_PATHCONV_PCPATH_RETURN)
+				$aoConnectAll[$iCount][2] = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
 				$iCount += 1
 			EndIf
 			Sleep(10)
@@ -560,8 +561,8 @@ Func _LOWriter_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False
 		Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
 	EndIf
 
-	$sFile = StringStripWS($sFile, $STR_STRIPLEADING)
-	If StringInStr($sFile, "\") Then $sFile = _LOWriter_PathConvert($sFile, $LOW_PATHCONV_OFFICE_RETURN) ; Convert to L.O File path.
+	$sFile = StringStripWS($sFile, $__STR_STRIPLEADING)
+	If StringInStr($sFile, "\") Then $sFile = _LO_PathConvert($sFile, $LO_PATHCONV_OFFICE_RETURN) ; Convert to L.O File path.
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	If StringInStr($sFile, "file:///") Then ; URL/Path and Name search
@@ -594,7 +595,7 @@ Func _LOWriter_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False
 					ReDim $aoPartNameSearch[$iCount + 1][3]
 					$aoPartNameSearch[$iCount][0] = $oDoc
 					$aoPartNameSearch[$iCount][1] = $oDoc.Title
-					$aoPartNameSearch[$iCount][2] = _LOWriter_PathConvert($oDoc.getURL, $LOW_PATHCONV_PCPATH_RETURN)
+					$aoPartNameSearch[$iCount][2] = _LO_PathConvert($oDoc.getURL, $LO_PATHCONV_PCPATH_RETURN)
 					$iCount += 1
 				EndIf
 
@@ -603,7 +604,7 @@ Func _LOWriter_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False
 					ReDim $aoPartNameSearch[$iCount + 1][3]
 					$aoPartNameSearch[$iCount][0] = $oDoc
 					$aoPartNameSearch[$iCount][1] = $oDoc.Title
-					$aoPartNameSearch[$iCount][2] = _LOWriter_PathConvert($oDoc.getURL, $LOW_PATHCONV_PCPATH_RETURN)
+					$aoPartNameSearch[$iCount][2] = _LO_PathConvert($oDoc.getURL, $LO_PATHCONV_PCPATH_RETURN)
 					$iCount += 1
 				EndIf
 			EndIf
@@ -639,13 +640,11 @@ EndFunc   ;==>_LOWriter_DocConnect
 ;                  @Error 1 @Extended 2 Return 0 = $oTable not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sDelimiter not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a backup of the ViewCursor's current location.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a Text Cursor in the first cell.
-;                  @Error 2 @Extended 3 Return 0 = Failed to create "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 4 Return 0 = Failed to create "com.sun.star.frame.DispatchHelper" Object.
+;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 Return 0 = Failed to create "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve array of CellNames.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ViewCursor object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a backup of the ViewCursor's current location.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Table was successfully converted to text.
 ; Author ........: donnyh13
@@ -662,44 +661,34 @@ Func _LOWriter_DocConvertTableToText(ByRef $oDoc, ByRef $oTable, $sDelimiter = @
 
 	Local $aArgs[1]
 	Local $asCellNames
-	Local $oServiceManager, $oDispatcher, $oCellTextCursor, $oViewCursor, $oViewCursorBackup
+	Local $oServiceManager, $oDispatcher, $oSelection
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sDelimiter) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	$aArgs[0] = __LOWriter_SetPropertyValue("Delimiter", $sDelimiter)
+	$aArgs[0] = __LO_SetPropertyValue("Delimiter", $sDelimiter)
 
 	$asCellNames = $oTable.getCellNames()
 	If Not IsArray($asCellNames) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	; Retrieve the ViewCursor.
-	$oViewCursor = $oDoc.CurrentController.getViewCursor()
-	If Not IsObj($oViewCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	; Backup the ViewCursor location and selection.
+	$oSelection = $oDoc.getCurrentSelection()
+	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	; Create a Text cursor at the current ViewCursor position to move the Viewcursor back to.
-	$oViewCursorBackup = _LOWriter_DocCreateTextCursor($oDoc, False, True)
-	If Not IsObj($oViewCursorBackup) Then
-		$oViewCursorBackup = _LOWriter_DocCreateTextCursor($oDoc, False) ; If That Failed, create a Backup Cursor at the beginning of the document.
-		If Not IsObj($oViewCursorBackup) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-	EndIf
-
-	; Retrieve the first cell  in the table and create a text cursor in it to move the ViewCursor to.
-	$oCellTextCursor = $oTable.getCellByName($asCellNames[0]).Text.createTextCursor()
-	If Not IsObj($oCellTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-
-	$oViewCursor.gotoRange($oCellTextCursor, False)
+	; Select the Table.
+	$oDoc.CurrentController.Select($oTable)
 
 	$oServiceManager = __LO_ServiceManager()
-	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
-	If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+	If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:ConvertTableToText", "", 0, $aArgs)
 
 	; Restore the ViewCursor to its previous location.
-	$oViewCursor.gotoRange($oViewCursorBackup, False)
+	$oDoc.CurrentController.Select($oSelection)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_DocConvertTableToText
@@ -709,7 +698,7 @@ EndFunc   ;==>_LOWriter_DocConvertTableToText
 ; Description ...: Convert some selected text into a Table.
 ; Syntax ........: _LOWriter_DocConvertTextToTable(ByRef $oDoc, ByRef $oCursor[, $sDelimiter = @TAB[, $bHeader = False[, $iRepeatHeaderLines = 0[, $bBorder = False[, $bDontSplitTable = False]]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions. Default is Null. See Remarks.
+;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
 ;                  $sDelimiter          - [optional] a string value. Default is @TAB. A character to the text into each column by, such as a Tab etc.
 ;                  $bHeader             - [optional] a boolean value. Default is False. If True, Formats the first row of the new table as a heading.
 ;                  $iRepeatHeaderLines  - [optional] an integer value. Default is 0. If greater than 0, then Repeats the first n rows as a header.
@@ -730,12 +719,12 @@ EndFunc   ;==>_LOWriter_DocConvertTableToText
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.ServiceManager" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create "com.sun.star.frame.DispatchHelper" Object.
-;                  @Error 2 @Extended 3 Return 0 = Failed to create a backup of the ViewCursor's current location.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve TextTables Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to $oCursor's cursor type.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve ViewCursor object.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve new Table's Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve array of Table names.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify $oCursor's cursor type.
+;                  @Error 3 @Extended 4 Return 0 = Failed to backup ViewCursor's position.
+;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve new Table's Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Text was successfully converted to a Table, returning the new Table's Object.
 ; Author ........: donnyh13
@@ -751,7 +740,7 @@ Func _LOWriter_DocConvertTextToTable(ByRef $oDoc, ByRef $oCursor, $sDelimiter = 
 
 	Local $asTables[0]
 	Local $atArgs[5]
-	Local $oServiceManager, $oDispatcher, $oViewCursor, $oViewCursorBackup, $oTables, $oTable
+	Local $oServiceManager, $oDispatcher, $oTables, $oTable, $oSelection
 	Local $iCursorType
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -765,15 +754,12 @@ Func _LOWriter_DocConvertTextToTable(ByRef $oDoc, ByRef $oCursor, $sDelimiter = 
 	$oTables = $oDoc.TextTables()
 	If Not IsObj($oTables) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	ReDim $asTables[$oTables.getCount()]
 	; Store all current Table Names.
-	For $i = 0 To $oTables.getCount() - 1
-		$asTables[$i] = $oTables.getByIndex($i).Name()
-		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))     ; Sleep every x cycles.
-	Next
+	$asTables = $oTables.getElementNames()
+	If Not IsArray($asTables) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$iCursorType = __LOWriter_Internal_CursorGetType($oCursor)
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 	; If Cursor has no data selected, return error.
@@ -785,27 +771,23 @@ Func _LOWriter_DocConvertTextToTable(ByRef $oDoc, ByRef $oCursor, $sDelimiter = 
 	$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
 	If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-	$atArgs[0] = __LOWriter_SetPropertyValue("Delimiter", $sDelimiter)
-	$atArgs[1] = __LOWriter_SetPropertyValue("WithHeader", $bHeader)
-	$atArgs[2] = __LOWriter_SetPropertyValue("RepeatHeaderLines", $iRepeatHeaderLines)
-	$atArgs[3] = __LOWriter_SetPropertyValue("WithBorder", $bBorder)
-	$atArgs[4] = __LOWriter_SetPropertyValue("DontSplitTable", $bDontSplitTable)
+	$atArgs[0] = __LO_SetPropertyValue("Delimiter", $sDelimiter)
+	$atArgs[1] = __LO_SetPropertyValue("WithHeader", $bHeader)
+	$atArgs[2] = __LO_SetPropertyValue("RepeatHeaderLines", $iRepeatHeaderLines)
+	$atArgs[3] = __LO_SetPropertyValue("WithBorder", $bBorder)
+	$atArgs[4] = __LO_SetPropertyValue("DontSplitTable", $bDontSplitTable)
 
-	If ($iCursorType = $LOW_CURTYPE_TEXT_CURSOR) Then
-		; Retrieve the ViewCursor.
-		$oViewCursor = $oDoc.CurrentController.getViewCursor()
-		If Not IsObj($oViewCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	If ($iCursorType = $LOW_CURTYPE_TEXT_CURSOR) Or ($iCursorType = $LOW_CURTYPE_PARAGRAPH) Then
+		; Backup the ViewCursor location and selection.
+		$oSelection = $oDoc.getCurrentSelection()
+		If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-		; Create a Text cursor at the current ViewCursor position to move the Viewcursor back to.
-		$oViewCursorBackup = _LOWriter_DocCreateTextCursor($oDoc, False, True)
-		If Not IsObj($oViewCursorBackup) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
-
-		$oViewCursor.gotoRange($oCursor, False)
+		$oDoc.CurrentController.Select($oCursor)
 
 		$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:ConvertTextToTable", "", 0, $atArgs)
 
 		; Restore the ViewCursor to its previous location.
-		$oViewCursor.gotoRange($oViewCursorBackup, False)
+		$oDoc.CurrentController.Select($oSelection)
 
 	Else
 		$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:ConvertTextToTable", "", 0, $atArgs)
@@ -826,7 +808,7 @@ Func _LOWriter_DocConvertTextToTable(ByRef $oDoc, ByRef $oCursor, $sDelimiter = 
 		EndIf
 	Next
 
-	Return (IsObj($oTable)) ? (SetError($__LO_STATUS_SUCCESS, 0, $oTable)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0))
+	Return (IsObj($oTable)) ? (SetError($__LO_STATUS_SUCCESS, 0, $oTable)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0))
 EndFunc   ;==>_LOWriter_DocConvertTextToTable
 
 ; #FUNCTION# ====================================================================================================================
@@ -870,7 +852,7 @@ Func _LOWriter_DocCreate($bForceNew = True, $bHidden = False)
 	If Not IsBool($bForceNew) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$aArgs[0] = __LOWriter_SetPropertyValue("Hidden", $bHidden)
+	$aArgs[0] = __LO_SetPropertyValue("Hidden", $bHidden)
 	$oServiceManager = __LO_ServiceManager()
 	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
@@ -884,7 +866,7 @@ Func _LOWriter_DocCreate($bForceNew = True, $bHidden = False)
 
 		While $oEnumDoc.hasMoreElements()
 			$oDoc = $oEnumDoc.nextElement()
-			If $oDoc.supportsService("com.sun.star.text.TextDocument") And Not ($oDoc.hasLocation() And $oDoc.isReadOnly()) And ($oDoc.WordCount() = 0) Then
+			If $oDoc.supportsService("com.sun.star.text.TextDocument") And Not ($oDoc.hasLocation() And Not $oDoc.isReadOnly()) And Not ($oDoc.isModified()) Then
 				$oDoc.CurrentController.Frame.ContainerWindow.Visible = ($bHidden) ? (False) : (True) ; opposite value of $bHidden.
 				$iError = ($oDoc.CurrentController.Frame.isHidden() = $bHidden) ? ($iError) : (BitOR($iError, 1))
 
@@ -952,7 +934,7 @@ Func _LOWriter_DocCreateTextCursor(ByRef $oDoc, $bCreateAtEnd = True, $bCreateAt
 		$iCursorType = @extended
 		If @error Or Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		If __LOWriter_IntIsBetween($iCursorType, $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_HEADER_FOOTER) Then
+		If __LO_IntIsBetween($iCursorType, $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_HEADER_FOOTER) Then
 			$oCursor = $oText.createTextCursorByRange($oViewCursor)
 
 		Else
@@ -1057,13 +1039,13 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 	$oDocProp = $oDoc.DocumentProperties()
 	If Not IsObj($oDocProp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sTitle, $sSubject, $asKeywords, $sComments, $asContributor, $sCoverage, $sIdentifier, $asPublisher, $asRelation, $sRights, $sSource, $sType) Then
-		If __LOWriter_VersionCheck(24.2) Then ; These properties are only available from L.O. 24.2+.
-			__LOWriter_ArrayFill($avDescription, $oDocProp.Title(), $oDocProp.Subject(), $oDocProp.Keywords(), $oDocProp.Description(), $oDocProp.Contributor(), $oDocProp.Coverage(), _
+	If __LO_VarsAreNull($sTitle, $sSubject, $asKeywords, $sComments, $asContributor, $sCoverage, $sIdentifier, $asPublisher, $asRelation, $sRights, $sSource, $sType) Then
+		If __LO_VersionCheck(24.2) Then ; These properties are only available from L.O. 24.2+.
+			__LO_ArrayFill($avDescription, $oDocProp.Title(), $oDocProp.Subject(), $oDocProp.Keywords(), $oDocProp.Description(), $oDocProp.Contributor(), $oDocProp.Coverage(), _
 					$oDocProp.Identifier(), $oDocProp.Publisher(), $oDocProp.Relation(), $oDocProp.Rights(), $oDocProp.Source(), $oDocProp.Type())
 
 		Else
-			__LOWriter_ArrayFill($avDescription, $oDocProp.Title(), $oDocProp.Subject(), $oDocProp.Keywords(), $oDocProp.Description())
+			__LO_ArrayFill($avDescription, $oDocProp.Title(), $oDocProp.Subject(), $oDocProp.Keywords(), $oDocProp.Description())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDescription)
@@ -1099,7 +1081,7 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 
 	If ($asContributor <> Null) Then
 		If Not IsArray($asContributor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-		If Not __LOWriter_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oDocProp.Contributor = $asContributor
 		$iError = (UBound($oDocProp.Contributor()) = UBound($asContributor)) ? ($iError) : (BitOR($iError, 16))
@@ -1107,7 +1089,7 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 
 	If ($sCoverage <> Null) Then
 		If Not IsString($sCoverage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-		If Not __LOWriter_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oDocProp.Coverage = $sCoverage
 		$iError = ($oDocProp.Coverage() = $sCoverage) ? ($iError) : (BitOR($iError, 32))
@@ -1115,7 +1097,7 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 
 	If ($sIdentifier <> Null) Then
 		If Not IsString($sIdentifier) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-		If Not __LOWriter_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oDocProp.Identifier = $sIdentifier
 		$iError = ($oDocProp.Identifier() = $sIdentifier) ? ($iError) : (BitOR($iError, 64))
@@ -1123,7 +1105,7 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 
 	If ($asPublisher <> Null) Then
 		If Not IsArray($asPublisher) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
-		If Not __LOWriter_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oDocProp.Publisher = $asPublisher
 		$iError = (UBound($oDocProp.Publisher()) = UBound($asPublisher)) ? ($iError) : (BitOR($iError, 128))
@@ -1131,7 +1113,7 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 
 	If ($asRelation <> Null) Then
 		If Not IsArray($asRelation) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
-		If Not __LOWriter_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oDocProp.Relation = $asRelation
 		$iError = (UBound($oDocProp.Relation()) = UBound($asRelation)) ? ($iError) : (BitOR($iError, 256))
@@ -1139,7 +1121,7 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 
 	If ($sRights <> Null) Then
 		If Not IsString($sRights) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
-		If Not __LOWriter_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oDocProp.Rights = $sRights
 		$iError = ($oDocProp.Rights() = $sRights) ? ($iError) : (BitOR($iError, 512))
@@ -1147,7 +1129,7 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 
 	If ($sSource <> Null) Then
 		If Not IsString($sSource) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
-		If Not __LOWriter_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oDocProp.Source = $sSource
 		$iError = ($oDocProp.Source() = $sSource) ? ($iError) : (BitOR($iError, 1024))
@@ -1155,7 +1137,7 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 
 	If ($sType <> Null) Then
 		If Not IsString($sType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 13, 0)
-		If Not __LOWriter_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(24.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oDocProp.Type = $sType
 		$iError = ($oDocProp.Type() = $sType) ? ($iError) : (BitOR($iError, 2048))
@@ -1184,37 +1166,37 @@ EndFunc   ;==>_LOWriter_DocDescription
 ; Modified ......:
 ; Remarks .......: A Dispatch is essentially a simulation of the user performing an action, such as pressing Ctrl+A to select all, etc.
 ;                  Dispatch Commands:
-;                    uno:FullScreen -- Toggles full screen mode.
-;                    uno:ChangeCaseToLower -- Changes all selected text to lower case. Text must be selected with the ViewCursor.
-;                    uno:ChangeCaseToUpper -- Changes all selected text to upper case. Text must be selected with the ViewCursor.
-;                    uno:ChangeCaseRotateCase -- Cycles the Case (Title Case, Sentence case, UPPERCASE, lowercase). Text must be selected with the ViewCursor.
-;                    uno:ChangeCaseToSentenceCase -- Changes the sentence to Sentence case where the Viewcursor is currently positioned or has selected.
-;                    uno:ChangeCaseToTitleCase -- Changes the selected text to Title case. Text must be selected with the ViewCursor.
-;                    uno:ChangeCaseToToggleCase -- Toggles the selected text's case (A becomes a, b becomes B, etc.).Text must be selected with the ViewCursor.
-;                    uno:UpdateAll -- Causes all non fixed Fields, Links, Indexes, Charts etc., to be updated.
-;                    uno:UpdateFields -- Causes all Fields to be updated.
-;                    uno:UpdateAllIndexes -- Causes all Indexes to be updated.
-;                    uno:UpdateAllLinks -- Causes all Links to be updated.
-;                    uno:UpdateCharts -- Causes all Charts to be updated.
-;                    uno:Repaginate -- Update Page Formatting.
-;                    uno:ResetAttributes -- Removes all direct formatting from the selected text. Text must be selected with the ViewCursor.
-;                    uno:SwBackspace -- Simulates pressing the Backspace key.
-;                    uno:Delete -- Simulates pressing the Delete key.
-;                    uno:Paste -- Pastes the data out of the clipboard. Simulating Ctrl+V.
-;                    uno:PasteUnformatted -- Pastes the data out of the clipboard unformatted.
-;                    uno:PasteSpecial -- Simulates pasting with Ctrl+Shift+V, opens a dialog for selecting paste format.
-;                    uno:Copy -- Simulates Ctrl+C, copies selected data to the clipboard. Text must be selected with the ViewCursor.
-;                    uno:Cut -- Simulates Ctrl+X, cuts selected data, placing it into the clipboard. Text must be selected with the ViewCursor.
-;                    uno:SelectAll -- Simulates Ctrl+A being pressed at the ViewCursor location.
-;                    uno:Zoom50Percent -- Set the zoom level to 50%.
-;                    uno:Zoom75Percent -- Set the zoom level to 75%.
-;                    uno:Zoom100Percent -- Set the zoom level to 100%.
-;                    uno:Zoom150Percent -- Set the zoom level to 150%.
-;                    uno:Zoom200Percent -- Set the zoom level to 200%.
-;                    uno:ZoomMinus -- Decreases the zoom value to the next increment down.
-;                    uno:ZoomPlus -- Increases the zoom value to the next increment up.
-;                    uno:ZoomPageWidth -- Set zoom to fit page width.
-;                    uno:ZoomPage -- Set zoom to fit page.
+;                  - uno:FullScreen -- Toggles full screen mode.
+;                  - uno:ChangeCaseToLower -- Changes all selected text to lower case. Text must be selected with the ViewCursor.
+;                  - uno:ChangeCaseToUpper -- Changes all selected text to upper case. Text must be selected with the ViewCursor.
+;                  - uno:ChangeCaseRotateCase -- Cycles the Case (Title Case, Sentence case, UPPERCASE, lowercase). Text must be selected with the ViewCursor.
+;                  - uno:ChangeCaseToSentenceCase -- Changes the sentence to Sentence case where the Viewcursor is currently positioned or has selected.
+;                  - uno:ChangeCaseToTitleCase -- Changes the selected text to Title case. Text must be selected with the ViewCursor.
+;                  - uno:ChangeCaseToToggleCase -- Toggles the selected text's case (A becomes a, b becomes B, etc.).Text must be selected with the ViewCursor.
+;                  - uno:UpdateAll -- Causes all non fixed Fields, Links, Indexes, Charts etc., to be updated.
+;                  - uno:UpdateFields -- Causes all Fields to be updated.
+;                  - uno:UpdateAllIndexes -- Causes all Indexes to be updated.
+;                  - uno:UpdateAllLinks -- Causes all Links to be updated.
+;                  - uno:UpdateCharts -- Causes all Charts to be updated.
+;                  - uno:Repaginate -- Update Page Formatting.
+;                  - uno:ResetAttributes -- Removes all direct formatting from the selected text. Text must be selected with the ViewCursor.
+;                  - uno:SwBackspace -- Simulates pressing the Backspace key.
+;                  - uno:Delete -- Simulates pressing the Delete key.
+;                  - uno:Paste -- Pastes the data out of the clipboard. Simulating Ctrl+V.
+;                  - uno:PasteUnformatted -- Pastes the data out of the clipboard unformatted.
+;                  - uno:PasteSpecial -- Simulates pasting with Ctrl+Shift+V, opens a dialog for selecting paste format.
+;                  - uno:Copy -- Simulates Ctrl+C, copies selected data to the clipboard. Text must be selected with the ViewCursor.
+;                  - uno:Cut -- Simulates Ctrl+X, cuts selected data, placing it into the clipboard. Text must be selected with the ViewCursor.
+;                  - uno:SelectAll -- Simulates Ctrl+A being pressed at the ViewCursor location.
+;                  - uno:Zoom50Percent -- Set the zoom level to 50%.
+;                  - uno:Zoom75Percent -- Set the zoom level to 75%.
+;                  - uno:Zoom100Percent -- Set the zoom level to 100%.
+;                  - uno:Zoom150Percent -- Set the zoom level to 150%.
+;                  - uno:Zoom200Percent -- Set the zoom level to 200%.
+;                  - uno:ZoomMinus -- Decreases the zoom value to the next increment down.
+;                  - uno:ZoomPlus -- Increases the zoom value to the next increment up.
+;                  - uno:ZoomPageWidth -- Set zoom to fit page width.
+;                  - uno:ZoomPage -- Set zoom to fit page.
 ; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
@@ -1293,7 +1275,7 @@ Func _LOWriter_DocExport(ByRef $oDoc, $sFilePath, $bSamePath = False, $sFilterNa
 		If $oDoc.hasLocation() Then
 			$sOriginalPath = $oDoc.getURL()
 			$sOriginalPath = StringLeft($sOriginalPath, StringInStr($sOriginalPath, "/", 0, -1)) ; Cut the original name off.
-			If StringInStr($sFilePath, "\") Then $sFilePath = _LOWriter_PathConvert($sFilePath, $LOW_PATHCONV_OFFICE_RETURN) ; Convert to L.O. URL
+			If StringInStr($sFilePath, "\") Then $sFilePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_OFFICE_RETURN) ; Convert to L.O. URL
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 			$sFilePath = $sOriginalPath & $sFilePath ; combine the path with the new name.
@@ -1304,20 +1286,20 @@ Func _LOWriter_DocExport(ByRef $oDoc, $sFilePath, $bSamePath = False, $sFilterNa
 		EndIf
 	EndIf
 
-	If Not $bSamePath Then $sFilePath = _LOWriter_PathConvert($sFilePath, $LOW_PATHCONV_OFFICE_RETURN)
+	If Not $bSamePath Then $sFilePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_OFFICE_RETURN)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($sFilterName = "") Or ($sFilterName = " ") Then $sFilterName = __LOWriter_FilterNameGet($sFilePath, True)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$aProperties[0] = __LOWriter_SetPropertyValue("FilterName", $sFilterName)
+	$aProperties[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
 	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
 
 	If ($bOverwrite <> Null) Then
 		If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
-		$aProperties[UBound($aProperties) - 1] = __LOWriter_SetPropertyValue("Overwrite", $bOverwrite)
+		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Overwrite", $bOverwrite)
 		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 2, 0)
 	EndIf
 
@@ -1325,13 +1307,13 @@ Func _LOWriter_DocExport(ByRef $oDoc, $sFilePath, $bSamePath = False, $sFilterNa
 		If Not IsString($sPassword) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
-		$aProperties[UBound($aProperties) - 1] = __LOWriter_SetPropertyValue("Password", $sPassword)
+		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Password", $sPassword)
 		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 3, 0)
 	EndIf
 
 	$oDoc.storeToURL($sFilePath, $aProperties)
 
-	$sSavePath = _LOWriter_PathConvert($sFilePath, $LOW_PATHCONV_PCPATH_RETURN)
+	$sSavePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_PCPATH_RETURN)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $sSavePath)
@@ -1340,11 +1322,11 @@ EndFunc   ;==>_LOWriter_DocExport
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocFindAll
 ; Description ...: Find all matches contained in a document of a Specified Search String.
-; Syntax ........: _LOWriter_DocFindAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByRef $atFindFormat)
+; Syntax ........: _LOWriter_DocFindAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString[, $atFindFormat = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or a regular expression to search for.
-;                  $atFindFormat        - [in/out] an array of structs. An Array of formatting properties created from _LOWriter_FindFormat* functions to search for, call with an empty array to skip. Array will not be modified.
+;                  $atFindFormat        - [optional] an array of dll structs. Default is Null. An Array of Formatting properties to search for, either by value or simply by existence, depending on the current setting of "Value Search".
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1357,7 +1339,6 @@ EndFunc   ;==>_LOWriter_DocExport
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Search did not return an Object, something went wrong.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Search was Successful, but found no results.
 ;                  @Error 0 @Extended ? Return Array = Success. Search was Successful, returning 1 dimensional array containing the objects to each match, @Exteneded is set to the number of matches.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1366,7 +1347,7 @@ EndFunc   ;==>_LOWriter_DocExport
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DocFindAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByRef $atFindFormat)
+Func _LOWriter_DocFindAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, $atFindFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1377,10 +1358,10 @@ Func _LOWriter_DocFindAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByR
 	If Not IsObj($oSrchDescript) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not $oSrchDescript.supportsService("com.sun.star.util.SearchDescriptor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsString($sSearchString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If ($atFindFormat <> Null) And Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($atFindFormat <> Null) And (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oSrchDescript.setSearchAttributes($atFindFormat)
+	If IsArray($atFindFormat) Then $oSrchDescript.setSearchAttributes($atFindFormat)
 	$oSrchDescript.SearchString = $sSearchString
 
 	$oResults = $oDoc.findAll($oSrchDescript)
@@ -1394,18 +1375,18 @@ Func _LOWriter_DocFindAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByR
 		Next
 	EndIf
 
-	Return (UBound($aoResults) > 0) ? (SetError($__LO_STATUS_SUCCESS, UBound($aoResults), $aoResults)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError($__LO_STATUS_SUCCESS, UBound($aoResults), $aoResults)
 EndFunc   ;==>_LOWriter_DocFindAll
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocFindAllInRange
 ; Description ...: Find all occurrences of a Search String in a Document in a specific selection.
-; Syntax ........: _LOWriter_DocFindAllInRange(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByRef $atFindFormat, ByRef $oRange)
+; Syntax ........: _LOWriter_DocFindAllInRange(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByRef $oRange[, $atFindFormat = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or a regular expression to search for.
-;                  $atFindFormat        - [in/out] an array of structs. Set to an empty array to skip. An Array of Formatting properties to search for, either by value or simply by existence, depending on the current setting of "Value Search". Array will not be modified.
 ;                  $oRange              - [in/out] an object. A Range, such as a cursor with Data selected, to perform the search within.
+;                  $atFindFormat        - [optional] an array of dll structs. Default is Null. An Array of Formatting properties to search for, either by value or simply by existence, depending on the current setting of "Value Search".
 ; Return values .: Success: 1 or Array..
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1413,15 +1394,14 @@ EndFunc   ;==>_LOWriter_DocFindAll
 ;                  @Error 1 @Extended 2 Return 0 = $oSrchDescript not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $oSrchDescript not a Search Descriptor Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sSearchString not a String.
-;                  @Error 1 @Extended 5 Return 0 = $atFindFormat not an Array.
-;                  @Error 1 @Extended 6 Return 0 = First element in $atFindFormat not an Object.
-;                  @Error 1 @Extended 7 Return 0 = $oRange not set to Null and not an Object.
-;                  @Error 1 @Extended 8 Return 0 = $oRange has no data selected.
+;                  @Error 1 @Extended 5 Return 0 = $oRange not set to Null and not an Object.
+;                  @Error 1 @Extended 6 Return 0 = $oRange has no data selected.
+;                  @Error 1 @Extended 7 Return 0 = $atFindFormat not an Array.
+;                  @Error 1 @Extended 8 Return 0 = First element in $atFindFormat not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Search did not return an Object, something went wrong.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Search was successful but found no matches.
-;                  @Error 0 @Extended ? Return Array = Success. Search was Successful, returning 1 dimensional array containing the objects to each match, @Extended is set to the number of matches.
+;                  @Error 0 @Extended ? Return Array = Success. Search was Successful, returning 1 dimensional array containing the objects for each match, @Extended is set to the number of matches.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1429,7 +1409,7 @@ EndFunc   ;==>_LOWriter_DocFindAll
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DocFindAllInRange(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByRef $atFindFormat, ByRef $oRange)
+Func _LOWriter_DocFindAllInRange(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByRef $oRange, $atFindFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1441,13 +1421,12 @@ Func _LOWriter_DocFindAllInRange(ByRef $oDoc, ByRef $oSrchDescript, $sSearchStri
 	If Not IsObj($oSrchDescript) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not $oSrchDescript.supportsService("com.sun.star.util.SearchDescriptor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsString($sSearchString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($oRange.IsCollapsed()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If ($atFindFormat <> Null) And Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If ($atFindFormat <> Null) And (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-	$oSrchDescript.setSearchAttributes($atFindFormat)
-
-	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-	If ($oRange.IsCollapsed()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+	If IsArray($atFindFormat) Then $oSrchDescript.setSearchAttributes($atFindFormat)
 
 	$oSrchDescript.SearchString = $sSearchString
 
@@ -1506,17 +1485,17 @@ Func _LOWriter_DocFindAllInRange(ByRef $oDoc, ByRef $oSrchDescript, $sSearchStri
 		ReDim $aoResults[$iCount]
 	EndIf
 
-	Return (UBound($aoResults) > 0) ? (SetError($__LO_STATUS_SUCCESS, UBound($aoResults), $aoResults)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError($__LO_STATUS_SUCCESS, UBound($aoResults), $aoResults)
 EndFunc   ;==>_LOWriter_DocFindAllInRange
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocFindNext
 ; Description ...: Find a Search String in a Document once or one at a time.
-; Syntax ........: _LOWriter_DocFindNext(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByRef $atFindFormat[, $oRange = Null[, $oLastFind = Null[, $bExhaustive = False]]])
+; Syntax ........: _LOWriter_DocFindNext(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString[, $atFindFormat = Null[, $oRange = Null[, $oLastFind = Null[, $bExhaustive = False]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or a regular expression to search for.
-;                  $atFindFormat        - [in/out] an array of structs. Set to an empty array to skip. An Array of Formatting properties to search for, either by value or simply by existence, depending on the current setting of "Value Search". Array will not be modified.
+;                  $atFindFormat        - [optional] an array of dll structs. Default is Null. Set to Null to skip. An Array of Formatting properties to search for, either by value or simply by existence, depending on the current setting of "Value Search".
 ;                  $oRange              - [optional] an object. Default is Null. A Range, such as a cursor with Data selected, to perform the search within. If Null, the entire document is searched.
 ;                  $oLastFind           - [optional] an object. Default is Null. The last returned Object by a previous call to this function to begin the search from, if set to Null, the search begins at the start of the Document or selection, depending on if a Range is provided.
 ;                  $bExhaustive         - [optional] a boolean value. Default is False. If True, tests whether every result found in a document is contained in the selection or not. See remarks.
@@ -1545,7 +1524,7 @@ EndFunc   ;==>_LOWriter_DocFindAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DocFindNext(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByRef $atFindFormat, $oRange = Null, $oLastFind = Null, $bExhaustive = False)
+Func _LOWriter_DocFindNext(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, $atFindFormat = Null, $oRange = Null, $oLastFind = Null, $bExhaustive = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1555,10 +1534,10 @@ Func _LOWriter_DocFindNext(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, By
 	If Not IsObj($oSrchDescript) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not $oSrchDescript.supportsService("com.sun.star.util.SearchDescriptor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsString($sSearchString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If ($atFindFormat <> Null) And Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($atFindFormat <> Null) And (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oSrchDescript.setSearchAttributes($atFindFormat)
+	If IsArray($atFindFormat) Then $oSrchDescript.setSearchAttributes($atFindFormat)
 
 	If ($oRange <> Null) And Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
@@ -1822,7 +1801,7 @@ Func _LOWriter_DocFormSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDes
 
 	If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
 
-	If __LOWriter_VarsAreNull($bFormDesignMode, $bOpenInDesignMode, $bAutoControlFocus, $bUseControlWizards) Then
+	If __LO_VarsAreNull($bFormDesignMode, $bOpenInDesignMode, $bAutoControlFocus, $bUseControlWizards) Then
 		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sScript)
 		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
@@ -1834,7 +1813,7 @@ Func _LOWriter_DocFormSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDes
 		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
 		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		__LOWriter_ArrayFill($abForm, $abStatus[0], $oDoc.ApplyFormDesignMode(), $oDoc.AutomaticControlFocus(), $abStatus[1])
+		__LO_ArrayFill($abForm, $abStatus[0], $oDoc.ApplyFormDesignMode(), $oDoc.AutomaticControlFocus(), $abStatus[1])
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $abForm)
 	EndIf
@@ -1935,11 +1914,11 @@ EndFunc   ;==>_LOWriter_DocFormSettings
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Setting $bResetUserData to True resets several attributes at once, as follows:
-;                   + Author is set to $sNewAuthor parameter, ($sNewAuthor MUST be set to a string).
-;                   + CreationDate is set to the current date and time;
-;                   + ModifiedBy is cleared, ModificationDate is cleared;
-;                   + PrintedBy is cleared; PrintDate is cleared;
-;                   + EditingDuration is cleared; EditingCycles is set to 1.
+;                  - Author is set to $sNewAuthor parameter, ($sNewAuthor MUST be set to a string).
+;                  - CreationDate is set to the current date and time;
+;                  - ModifiedBy is cleared, ModificationDate is cleared;
+;                  - PrintedBy is cleared; PrintDate is cleared;
+;                  - EditingDuration is cleared; EditingCycles is set to 1.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1968,8 +1947,8 @@ Func _LOWriter_DocGenProp(ByRef $oDoc, $sNewAuthor = Null, $iRevisions = Null, $
 		Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 	EndIf
 
-	If __LOWriter_VarsAreNull($sNewAuthor, $iRevisions, $iEditDuration, $bApplyUserData) Then
-		__LOWriter_ArrayFill($avGenProp, $oDocProp.Author(), $oDocProp.EditingCycles(), $oDocProp.EditingDuration(), $oSettings.getPropertyValue("ApplyUserData"))
+	If __LO_VarsAreNull($sNewAuthor, $iRevisions, $iEditDuration, $bApplyUserData) Then
+		__LO_ArrayFill($avGenProp, $oDocProp.Author(), $oDocProp.EditingCycles(), $oDocProp.EditingDuration(), $oSettings.getPropertyValue("ApplyUserData"))
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGenProp)
 	EndIf
@@ -2048,8 +2027,8 @@ Func _LOWriter_DocGenPropCreation(ByRef $oDoc, $sAuthor = Null, $tDateStruct = N
 	$oDocProp = $oDoc.DocumentProperties()
 	If Not IsObj($oDocProp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sAuthor, $tDateStruct) Then
-		__LOWriter_ArrayFill($avCreate, $oDocProp.Author(), $oDocProp.CreationDate())
+	If __LO_VarsAreNull($sAuthor, $tDateStruct) Then
+		__LO_ArrayFill($avCreate, $oDocProp.Author(), $oDocProp.CreationDate())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avCreate)
 	EndIf
@@ -2114,8 +2093,8 @@ Func _LOWriter_DocGenPropModification(ByRef $oDoc, $sModifiedBy = Null, $tDateSt
 	$oDocProp = $oDoc.DocumentProperties()
 	If Not IsObj($oDocProp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sModifiedBy, $tDateStruct) Then
-		__LOWriter_ArrayFill($avMod, $oDocProp.ModifiedBy(), $oDocProp.ModificationDate())
+	If __LO_VarsAreNull($sModifiedBy, $tDateStruct) Then
+		__LO_ArrayFill($avMod, $oDocProp.ModifiedBy(), $oDocProp.ModificationDate())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avMod)
 	EndIf
@@ -2180,8 +2159,8 @@ Func _LOWriter_DocGenPropPrint(ByRef $oDoc, $sPrintedBy = Null, $tDateStruct = N
 	$oDocProp = $oDoc.DocumentProperties()
 	If Not IsObj($oDocProp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sPrintedBy, $tDateStruct) Then
-		__LOWriter_ArrayFill($avPrint, $oDocProp.PrintedBy(), $oDocProp.PrintDate())
+	If __LO_VarsAreNull($sPrintedBy, $tDateStruct) Then
+		__LO_ArrayFill($avPrint, $oDocProp.PrintedBy(), $oDocProp.PrintDate())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avPrint)
 	EndIf
@@ -2250,8 +2229,8 @@ Func _LOWriter_DocGenPropTemplate(ByRef $oDoc, $sTemplateName = Null, $sTemplate
 	$oDocProp = $oDoc.DocumentProperties()
 	If Not IsObj($oDocProp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($sTemplateName, $sTemplateURL, $tDateStruct) Then
-		__LOWriter_ArrayFill($avTemplate, $oDocProp.TemplateName(), _LOWriter_PathConvert($oDocProp.TemplateURL(), $LOW_PATHCONV_PCPATH_RETURN), _
+	If __LO_VarsAreNull($sTemplateName, $sTemplateURL, $tDateStruct) Then
+		__LO_ArrayFill($avTemplate, $oDocProp.TemplateName(), _LO_PathConvert($oDocProp.TemplateURL(), $LO_PATHCONV_PCPATH_RETURN), _
 				$oDocProp.TemplateDate())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avTemplate)
@@ -2267,7 +2246,7 @@ Func _LOWriter_DocGenPropTemplate(ByRef $oDoc, $sTemplateName = Null, $sTemplate
 	If ($sTemplateURL <> Null) Then
 		If Not IsString($sTemplateURL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$sTemplateURL = _LOWriter_PathConvert($sTemplateURL, $LOW_PATHCONV_OFFICE_RETURN)
+		$sTemplateURL = _LO_PathConvert($sTemplateURL, $LO_PATHCONV_OFFICE_RETURN)
 		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oDocProp.TemplateURL = $sTemplateURL
@@ -2299,7 +2278,7 @@ EndFunc   ;==>_LOWriter_DocGenPropTemplate
 ;                  @Error 0 @Extended 0 Return Array = Success. A 1 dimension, 0 based, 9 row Array of integers, in the order described in remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:Returns a 1 dimension array with the following counts in this order: Page count; Line Count; Paragraph Count; Word Count; Character Count; NonWhiteSpace Character Count; Table Count; Image Count; Object Count.
+; Remarks .......: Returns a 1 dimension array with the following counts in this order: Page count; Line Count; Paragraph Count; Word Count; Character Count; NonWhiteSpace Character Count; Table Count; Image Count; Object Count.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -2312,7 +2291,7 @@ Func _LOWriter_DocGetCounts(ByRef $oDoc)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	__LOWriter_ArrayFill($aiCounts, $oDoc.CurrentController.PageCount(), $oDoc.CurrentController.LineCount(), $oDoc.ParagraphCount(), _
+	__LO_ArrayFill($aiCounts, $oDoc.CurrentController.PageCount(), $oDoc.CurrentController.LineCount(), $oDoc.ParagraphCount(), _
 			$oDoc.WordCount(), $oDoc.CharacterCount())
 
 	$avDocStats = $oDoc.DocumentProperties.DocumentStatistics()
@@ -2384,7 +2363,7 @@ EndFunc   ;==>_LOWriter_DocGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_PathConvert
+; Related .......: _LO_PathConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2398,12 +2377,10 @@ Func _LOWriter_DocGetPath(ByRef $oDoc, $bReturnLibreURL = False)
 	If Not IsBool($bReturnLibreURL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not $oDoc.hasLocation() Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	If ($bReturnLibreURL = True) Then
-		$sPath = $oDoc.URL()
+	$sPath = $oDoc.URL()
 
-	Else
-		$sPath = $oDoc.URL()
-		$sPath = _LOWriter_PathConvert($sPath, $LOW_PATHCONV_PCPATH_RETURN)
+	If Not $bReturnLibreURL Then
+		$sPath = _LO_PathConvert($sPath, $LO_PATHCONV_PCPATH_RETURN)
 		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	EndIf
 
@@ -2701,7 +2678,7 @@ Func _LOWriter_DocInsertControlChar(ByRef $oDoc, ByRef $oCursor, $iConChar, $bOv
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LOWriter_IntIsBetween($iConChar, $LOW_CON_CHAR_PAR_BREAK, $LOW_CON_CHAR_APPEND_PAR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_IntIsBetween($iConChar, $LOW_CON_CHAR_PAR_BREAK, $LOW_CON_CHAR_APPEND_PAR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$iCursorType = __LOWriter_Internal_CursorGetType($oCursor)
@@ -2979,7 +2956,7 @@ Func _LOWriter_DocOpen($sFilePath, $bConnectIfOpen = True, $bHidden = Null, $bRe
 
 	If Not IsString($sFilePath) Or Not FileExists($sFilePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$sFileURL = _LOWriter_PathConvert($sFilePath, $LOW_PATHCONV_OFFICE_RETURN)
+	$sFileURL = _LO_PathConvert($sFilePath, $LO_PATHCONV_OFFICE_RETURN)
 	If @error Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bConnectIfOpen) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -2989,45 +2966,45 @@ Func _LOWriter_DocOpen($sFilePath, $bConnectIfOpen = True, $bHidden = Null, $bRe
 	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-	If Not __LOWriter_VarsAreNull($bHidden, $bReadOnly, $sPassword, $bLoadAsTemplate, $sFilterName) Then
+	If Not __LO_VarsAreNull($bHidden, $bReadOnly, $sPassword, $bLoadAsTemplate, $sFilterName) Then
 		If ($bHidden <> Null) Then
 			If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-			$vProperty = __LOWriter_SetPropertyValue("Hidden", $bHidden)
+			$vProperty = __LO_SetPropertyValue("Hidden", $bHidden)
 			If @error Then $iError = BitOR($iError, 1)
-			If Not BitAND($iError, 1) Then __LOWriter_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 1) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 
 		If ($bReadOnly <> Null) Then
 			If Not IsBool($bReadOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-			$vProperty = __LOWriter_SetPropertyValue("ReadOnly", $bReadOnly)
+			$vProperty = __LO_SetPropertyValue("ReadOnly", $bReadOnly)
 			If @error Then $iError = BitOR($iError, 2)
-			If Not BitAND($iError, 2) Then __LOWriter_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 2) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 
 		If ($sPassword <> Null) Then
 			If Not IsString($sPassword) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-			$vProperty = __LOWriter_SetPropertyValue("Password", $sPassword)
+			$vProperty = __LO_SetPropertyValue("Password", $sPassword)
 			If @error Then $iError = BitOR($iError, 4)
-			If Not BitAND($iError, 4) Then __LOWriter_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 4) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 
 		If ($bLoadAsTemplate <> Null) Then
 			If Not IsBool($bLoadAsTemplate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-			$vProperty = __LOWriter_SetPropertyValue("AsTemplate", $bLoadAsTemplate)
+			$vProperty = __LO_SetPropertyValue("AsTemplate", $bLoadAsTemplate)
 			If @error Then $iError = BitOR($iError, 8)
-			If Not BitAND($iError, 8) Then __LOWriter_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 8) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 
 		If ($sFilterName <> Null) Then
 			If Not IsString($sFilterName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-			$vProperty = __LOWriter_SetPropertyValue("FilterName", $sFilterName)
+			$vProperty = __LO_SetPropertyValue("FilterName", $sFilterName)
 			If @error Then $iError = BitOR($iError, 16)
-			If Not BitAND($iError, 16) Then __LOWriter_AddTo1DArray($aoProperties, $vProperty)
+			If Not BitAND($iError, 16) Then __LO_AddTo1DArray($aoProperties, $vProperty)
 		EndIf
 	EndIf
 
@@ -3093,8 +3070,8 @@ Func _LOWriter_DocPosAndSize(ByRef $oDoc, $iX = Null, $iY = Null, $iWidth = Null
 	$tWindowSize = $oDoc.CurrentController.Frame.ContainerWindow.getPosSize()
 	If Not IsObj($tWindowSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iX, $iY, $iWidth, $iHeight) Then
-		__LOWriter_ArrayFill($aiWinPosSize, $tWindowSize.X(), $tWindowSize.Y(), $tWindowSize.Width(), $tWindowSize.Height())
+	If __LO_VarsAreNull($iX, $iY, $iWidth, $iHeight) Then
+		__LO_ArrayFill($aiWinPosSize, $tWindowSize.X(), $tWindowSize.Y(), $tWindowSize.Width(), $tWindowSize.Height())
 
 		Return SetError($__LO_STATUS_SUCCESS, 2, $aiWinPosSize)
 	EndIf
@@ -3176,7 +3153,7 @@ EndFunc   ;==>_LOWriter_DocPosAndSize
 ; Remarks .......: Based on OOoCalc UDF Print function by GMK.
 ;                  $vPages range can be called as entered in the user interface, as follows: "1-4,10" to print the pages 1 to 4 and 10. Default is "ALL". Must be in String format to accept more than just a single page number. e.g. This will work: "1-6,12,27" This will not 1-6,12,27. This will work: "7", This will also: 7.
 ;                  Setting $bWait to True is highly recommended. Otherwise following actions (as e.g. closing the Document) can fail.
-; Related .......:_LOWriter_DocPrintersAltGetNames, _LOWriter_DocPrintersGetNames, _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
+; Related .......: _LOWriter_DocPrintersAltGetNames, _LOWriter_DocPrintersGetNames, _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3184,7 +3161,7 @@ Func _LOWriter_DocPrint(ByRef $oDoc, $iCopies = 1, $bCollate = True, $vPages = "
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local Const $STR_STRIPLEADING = 1, $STR_STRIPTRAILING = 2, $STR_STRIPALL = 8
+	Local Const $__STR_STRIPLEADING = 1, $__STR_STRIPTRAILING = 2, $__STR_STRIPALL = 8
 	Local $avPrintOpt[4], $asSetPrinterOpt[1]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -3192,48 +3169,48 @@ Func _LOWriter_DocPrint(ByRef $oDoc, $iCopies = 1, $bCollate = True, $vPages = "
 	If Not IsBool($bCollate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($vPages) And Not IsString($vPages) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$vPages = (IsString($vPages)) ? (StringStripWS($vPages, $STR_STRIPALL)) : ($vPages)
+	$vPages = (IsString($vPages)) ? (StringStripWS($vPages, $__STR_STRIPALL)) : ($vPages)
 	If IsString($vPages) And Not ($vPages = "ALL") Then
 		If StringRegExp($vPages, "[[:alpha:]]|[\.]") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	EndIf
 	If Not IsBool($bWait) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not __LOWriter_IntIsBetween($iDuplexMode, $LOW_DUPLEX_OFF, $LOW_DUPLEX_SHORT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If Not __LO_IntIsBetween($iDuplexMode, $LOW_DUPLEX_OFF, $LOW_DUPLEX_SHORT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 	If Not IsString($sPrinter) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-	$sPrinter = StringStripWS(StringStripWS($sPrinter, $STR_STRIPTRAILING), $STR_STRIPLEADING)
+	$sPrinter = StringStripWS(StringStripWS($sPrinter, $__STR_STRIPTRAILING), $__STR_STRIPLEADING)
 	If Not IsString($sFilePathName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-	$sFilePathName = StringStripWS(StringStripWS($sFilePathName, $STR_STRIPTRAILING), $STR_STRIPLEADING)
+	$sFilePathName = StringStripWS(StringStripWS($sFilePathName, $__STR_STRIPTRAILING), $__STR_STRIPLEADING)
 	If $sPrinter <> "" Then
-		$asSetPrinterOpt[0] = __LOWriter_SetPropertyValue("Name", $sPrinter)
+		$asSetPrinterOpt[0] = __LO_SetPropertyValue("Name", $sPrinter)
 		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
 
 		$oDoc.setPrinter($asSetPrinterOpt)
 	EndIf
-	$avPrintOpt[0] = __LOWriter_SetPropertyValue("CopyCount", $iCopies)
+	$avPrintOpt[0] = __LO_SetPropertyValue("CopyCount", $iCopies)
 	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 2, 0)
 
-	$avPrintOpt[1] = __LOWriter_SetPropertyValue("Collate", $bCollate)
+	$avPrintOpt[1] = __LO_SetPropertyValue("Collate", $bCollate)
 	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 3, 0)
 
-	$avPrintOpt[2] = __LOWriter_SetPropertyValue("Wait", $bWait)
+	$avPrintOpt[2] = __LO_SetPropertyValue("Wait", $bWait)
 	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 4, 0)
 
-	$avPrintOpt[3] = __LOWriter_SetPropertyValue("DuplexMode", $iDuplexMode)
+	$avPrintOpt[3] = __LO_SetPropertyValue("DuplexMode", $iDuplexMode)
 	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 5, 0)
 
 	If $vPages <> "ALL" Then
 		ReDim $avPrintOpt[UBound($avPrintOpt) + 1]
-		$avPrintOpt[UBound($avPrintOpt) - 1] = __LOWriter_SetPropertyValue("Pages", $vPages)
+		$avPrintOpt[UBound($avPrintOpt) - 1] = __LO_SetPropertyValue("Pages", $vPages)
 		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 6, 0)
 	EndIf
 	If $sFilePathName <> "" Then
 		$sFilePathName = $sFilePathName & ".prn"
-		$sFilePathName = _LOWriter_PathConvert($sFilePathName, $LOW_PATHCONV_OFFICE_RETURN)
+		$sFilePathName = _LO_PathConvert($sFilePathName, $LO_PATHCONV_OFFICE_RETURN)
 		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 7, 0)
 
 		ReDim $avPrintOpt[UBound($avPrintOpt) + 1]
-		$avPrintOpt[UBound($avPrintOpt) - 1] = __LOWriter_SetPropertyValue("FileName", $sFilePathName)
+		$avPrintOpt[UBound($avPrintOpt) - 1] = __LO_SetPropertyValue("FileName", $sFilePathName)
 		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 8, 0)
 	EndIf
 	$oDoc.print($avPrintOpt)
@@ -3344,7 +3321,7 @@ Func _LOWriter_DocPrintersGetNames($bDefaultOnly = False)
 	Local $sDefault
 	Local $asPrinters[0]
 
-	If Not __LOWriter_VersionCheck(4.1) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+	If Not __LO_VersionCheck(4.1) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 	If Not IsBool($bDefaultOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oServiceManager = __LO_ServiceManager()
@@ -3354,7 +3331,7 @@ Func _LOWriter_DocPrintersGetNames($bDefaultOnly = False)
 	If Not IsObj($oPrintServer) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	If $bDefaultOnly Then
-		If Not __LOWriter_VersionCheck(6.3) Then Return SetError($__LO_STATUS_VER_ERROR, 2, 0)
+		If Not __LO_VersionCheck(6.3) Then Return SetError($__LO_STATUS_VER_ERROR, 2, 0)
 
 		$sDefault = $oPrintServer.getDefaultPrinterName()
 		If IsString($sDefault) Then Return SetError($__LO_STATUS_SUCCESS, 1, $sDefault)
@@ -3420,8 +3397,8 @@ Func _LOWriter_DocPrintIncludedSettings(ByRef $oDoc, $bGraphics = Null, $bContro
 	$oSettings = $oDoc.createInstance("com.sun.star.text.DocumentSettings")
 	If Not IsObj($oSettings) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bGraphics, $bControls, $bDrawings, $bTables, $bHiddenText) Then
-		__LOWriter_ArrayFill($abPrintSettings, $oSettings.getPropertyValue("PrintGraphics"), $oSettings.getPropertyValue("PrintControls"), _
+	If __LO_VarsAreNull($bGraphics, $bControls, $bDrawings, $bTables, $bHiddenText) Then
+		__LO_ArrayFill($abPrintSettings, $oSettings.getPropertyValue("PrintGraphics"), $oSettings.getPropertyValue("PrintControls"), _
 				$oSettings.getPropertyValue("PrintDrawings"), $oSettings.getPropertyValue("PrintTables"), $oSettings.getPropertyValue("PrintHiddenText"))
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $abPrintSettings)
@@ -3515,7 +3492,7 @@ Func _LOWriter_DocPrintMiscSettings(ByRef $oDoc, $iPaperOrient = Null, $sPrinter
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local Const $STR_STRIPLEADING = 1, $STR_STRIPTRAILING = 2
+	Local Const $__STR_STRIPLEADING = 1, $__STR_STRIPTRAILING = 2
 	Local $iError = 0
 	Local $oSettings
 	Local $bCanSetPaperOrientation = False
@@ -3527,8 +3504,8 @@ Func _LOWriter_DocPrintMiscSettings(ByRef $oDoc, $iPaperOrient = Null, $sPrinter
 	$oSettings = $oDoc.createInstance("com.sun.star.text.DocumentSettings")
 	If Not IsObj($oSettings) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iPaperOrient, $sPrinterName, $iCommentsMode, $bBrochure, $bBrochureRTL, $bReversed) Then
-		__LOWriter_ArrayFill($avPrintSettings, __LOWriter_GetPrinterSetting($oDoc, "PaperOrientation"), _
+	If __LO_VarsAreNull($iPaperOrient, $sPrinterName, $iCommentsMode, $bBrochure, $bBrochureRTL, $bReversed) Then
+		__LO_ArrayFill($avPrintSettings, __LOWriter_GetPrinterSetting($oDoc, "PaperOrientation"), _
 				__LOWriter_GetPrinterSetting($oDoc, "Name"), $oSettings.getPropertyValue("PrintAnnotationMode"), _
 				$oSettings.getPropertyValue("PrintProspect"), $oSettings.getPropertyValue("PrintProspectRTL"), _
 				$oSettings.getPropertyValue("PrintReversed"))
@@ -3540,10 +3517,10 @@ Func _LOWriter_DocPrintMiscSettings(ByRef $oDoc, $iPaperOrient = Null, $sPrinter
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($iPaperOrient <> Null) Then
-		If Not __LOWriter_IntIsBetween($iPaperOrient, $LOW_PAPER_ORIENT_PORTRAIT, $LOW_PAPER_ORIENT_LANDSCAPE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iPaperOrient, $LOW_PAPER_ORIENT_PORTRAIT, $LOW_PAPER_ORIENT_LANDSCAPE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		If $bCanSetPaperOrientation Then
-			$aoSetting[0] = __LOWriter_SetPropertyValue("PaperOrientation", $iPaperOrient)
+			$aoSetting[0] = __LO_SetPropertyValue("PaperOrientation", $iPaperOrient)
 			$oDoc.setPrinter($aoSetting)
 			$iError = (__LOWriter_GetPrinterSetting($oDoc, "PaperOrientation") = $iPaperOrient) ? ($iError) : (BitOR($iError, 1))
 
@@ -3556,14 +3533,14 @@ Func _LOWriter_DocPrintMiscSettings(ByRef $oDoc, $iPaperOrient = Null, $sPrinter
 	If ($sPrinterName <> Null) Then
 		If Not IsString($sPrinterName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$sPrinterName = StringStripWS(StringStripWS($sPrinterName, $STR_STRIPTRAILING), $STR_STRIPLEADING)
-		$aoSetting[0] = __LOWriter_SetPropertyValue("Name", $sPrinterName)
+		$sPrinterName = StringStripWS(StringStripWS($sPrinterName, $__STR_STRIPTRAILING), $__STR_STRIPLEADING)
+		$aoSetting[0] = __LO_SetPropertyValue("Name", $sPrinterName)
 		$oDoc.setPrinter($aoSetting)
 		$iError = (__LOWriter_GetPrinterSetting($oDoc, "Name") = $sPrinterName) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($iCommentsMode <> Null) Then
-		If Not __LOWriter_IntIsBetween($iCommentsMode, $LOW_PRINT_NOTES_NONE, $LOW_PRINT_NOTES_NEXT_PAGE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iCommentsMode, $LOW_PRINT_NOTES_NONE, $LOW_PRINT_NOTES_NEXT_PAGE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oSettings.setPropertyValue("PrintAnnotationMode", $iCommentsMode)
 		$iError = ($oSettings.getPropertyValue("PrintAnnotationMode") = $iCommentsMode) ? ($iError) : (BitOR($iError, 4))
@@ -3646,8 +3623,8 @@ Func _LOWriter_DocPrintPageSettings(ByRef $oDoc, $bBlackOnly = Null, $bLeftOnly 
 	$oSettings = $oDoc.createInstance("com.sun.star.text.DocumentSettings")
 	If Not IsObj($oSettings) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($bBlackOnly, $bLeftOnly, $bRightOnly, $bBackground, $bEmptyPages) Then
-		__LOWriter_ArrayFill($abPrintSettings, $oSettings.getPropertyValue("PrintBlackFonts"), $oSettings.getPropertyValue("PrintLeftPages"), _
+	If __LO_VarsAreNull($bBlackOnly, $bLeftOnly, $bRightOnly, $bBackground, $bEmptyPages) Then
+		__LO_ArrayFill($abPrintSettings, $oSettings.getPropertyValue("PrintBlackFonts"), $oSettings.getPropertyValue("PrintLeftPages"), _
 				$oSettings.getPropertyValue("PrintRightPages"), $oSettings.getPropertyValue("PrintPageBackground"), $oSettings.getPropertyValue("PrintEmptyPages"))
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $abPrintSettings)
@@ -3728,7 +3705,7 @@ EndFunc   ;==>_LOWriter_DocPrintPageSettings
 ;                  For some reason, setting $iPaperWidth and $iPaperHeight modifies the document page size also.
 ;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
+; Related .......: _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3744,10 +3721,10 @@ Func _LOWriter_DocPrintSizeSettings(ByRef $oDoc, $iPaperFormat = Null, $iPaperWi
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iPaperFormat, $iPaperWidth, $iPaperHeight) Then
-		__LOWriter_ArrayFill($aiPrintSettings, __LOWriter_GetPrinterSetting($oDoc, "PaperFormat"), _
-				__LOWriter_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Width(), $__LOCONST_CONVERT_TWIPS_UM), _
-				__LOWriter_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Height(), $__LOCONST_CONVERT_TWIPS_UM))
+	If __LO_VarsAreNull($iPaperFormat, $iPaperWidth, $iPaperHeight) Then
+		__LO_ArrayFill($aiPrintSettings, __LOWriter_GetPrinterSetting($oDoc, "PaperFormat"), _
+				__LO_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Width(), $__LOCONST_CONVERT_TWIPS_UM), _
+				__LO_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Height(), $__LOCONST_CONVERT_TWIPS_UM))
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiPrintSettings)
 	EndIf
@@ -3759,10 +3736,10 @@ Func _LOWriter_DocPrintSizeSettings(ByRef $oDoc, $iPaperFormat = Null, $iPaperWi
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If ($iPaperFormat <> Null) Then
-		If Not __LOWriter_IntIsBetween($iPaperFormat, $LOW_PAPER_A3, $LOW_PAPER_USER_DEFINED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iPaperFormat, $LOW_PAPER_A3, $LOW_PAPER_USER_DEFINED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		If $bCanSetPaperFormat Then
-			$aoSetting[0] = __LOWriter_SetPropertyValue("PaperFormat", $iPaperFormat)
+			$aoSetting[0] = __LO_SetPropertyValue("PaperFormat", $iPaperFormat)
 			$oDoc.setPrinter($aoSetting)
 			$iError = (__LOWriter_GetPrinterSetting($oDoc, "PaperFormat") = $iPaperFormat) ? ($iError) : (BitOR($iError, 1))
 
@@ -3778,16 +3755,16 @@ Func _LOWriter_DocPrintSizeSettings(ByRef $oDoc, $iPaperFormat = Null, $iPaperWi
 			If Not IsInt($iPaperHeight) And ($iPaperHeight <> Null) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 			; Set in uM but retrieved in TWIPS
-			$tSize = __LOWriter_CreateStruct("com.sun.star.awt.Size")
+			$tSize = __LO_CreateStruct("com.sun.star.awt.Size")
 			If Not IsObj($tSize) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$tSize.Width = ($iPaperWidth = Null) ? (__LOWriter_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Width(), $__LOCONST_CONVERT_TWIPS_UM)) : ($iPaperWidth)
-			$tSize.Height = ($iPaperWidth = Null) ? (__LOWriter_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Height(), $__LOCONST_CONVERT_TWIPS_UM)) : ($iPaperHeight)
-			$aoSetting[0] = __LOWriter_SetPropertyValue("PaperSize", $tSize)
+			$tSize.Width = ($iPaperWidth = Null) ? (__LO_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Width(), $__LOCONST_CONVERT_TWIPS_UM)) : ($iPaperWidth)
+			$tSize.Height = ($iPaperWidth = Null) ? (__LO_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Height(), $__LOCONST_CONVERT_TWIPS_UM)) : ($iPaperHeight)
+			$aoSetting[0] = __LO_SetPropertyValue("PaperSize", $tSize)
 			$oDoc.setPrinter($aoSetting)
 
-			$iError = ($iPaperWidth = Null) ? ($iError) : (__LOWriter_IntIsBetween(__LOWriter_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Width(), $__LOCONST_CONVERT_TWIPS_UM), $iPaperWidth - 2, $iPaperWidth + 2)) ? ($iError) : (BitOR($iError, 2))
-			$iError = ($iPaperHeight = Null) ? ($iError) : (__LOWriter_IntIsBetween(__LOWriter_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Height(), $__LOCONST_CONVERT_TWIPS_UM), $iPaperHeight - 2, $iPaperHeight + 2)) ? ($iError) : (BitOR($iError, 4))
+			$iError = ($iPaperWidth = Null) ? ($iError) : (__LO_IntIsBetween(__LO_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Width(), $__LOCONST_CONVERT_TWIPS_UM), $iPaperWidth - 2, $iPaperWidth + 2)) ? ($iError) : (BitOR($iError, 2))
+			$iError = ($iPaperHeight = Null) ? ($iError) : (__LO_IntIsBetween(__LO_UnitConvert(__LOWriter_GetPrinterSetting($oDoc, "PaperSize").Height(), $__LOCONST_CONVERT_TWIPS_UM), $iPaperHeight - 2, $iPaperHeight + 2)) ? ($iError) : (BitOR($iError, 4))
 
 		Else
 
@@ -3873,9 +3850,10 @@ EndFunc   ;==>_LOWriter_DocRedoClear
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Redo Action.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = No Current Redo Action available. Returning Empty String.
-;                  @Error 0 @Extended 1 Return String = Returns the current available redo action Title as a String.
+;                  @Error 0 @Extended 0 Return String = Returning the current available redo action title as a String. Will be an empty String if no action is available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3887,16 +3865,15 @@ Func _LOWriter_DocRedoCurActionTitle(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sRedoAction
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($oDoc.UndoManager.isRedoPossible()) Then
+	$sRedoAction = $oDoc.UndoManager.getCurrentRedoActionTitle()
+	If ($sRedoAction = Null) Then $sRedoAction = ""
+	If Not IsString($sRedoAction) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.UndoManager.getCurrentRedoActionTitle())
-
-	Else
-
-		Return SetError($__LO_STATUS_SUCCESS, 0, $oDoc.UndoManager.getCurrentRedoActionTitle())
-	EndIf
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sRedoAction)
 EndFunc   ;==>_LOWriter_DocRedoCurActionTitle
 
 ; #FUNCTION# ====================================================================================================================
@@ -3963,14 +3940,14 @@ EndFunc   ;==>_LOWriter_DocRedoIsPossible
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocReplaceAll
 ; Description ...: Replace all instances of a search.
-; Syntax ........: _LOWriter_DocReplaceAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, $sReplaceString, ByRef $atFindFormat, ByRef $atReplaceFormat)
+; Syntax ........: _LOWriter_DocReplaceAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, $sReplaceString[, $atFindFormat = Null[, $atReplaceFormat = Null]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or a Regular Expression to Search for.
 ;                  $sReplaceString      - a string value. A String of text or a Regular Expression to replace any results with.
-;                  $atFindFormat        - [in/out] an array of structs. Set to an empty array[0] to skip. An Array of Formatting properties to search for, either by value or simply by existence, depending on the current setting of "Value Search". Array will not be modified.
-;                  $atReplaceFormat     - [in/out] an array of structs. Set to an empty array[0] to skip. An Array of Formatting property values to replace any results with. Array will not be modified.
-; Return values .: Success: 1
+;                  $atFindFormat        - [optional] an array of dll structs. Default is Null. An Array of Formatting properties to search for, either by value or simply by existence, depending on the current setting of "Value Search".
+;                  $atReplaceFormat     - [optional] an array of dll structs. Default is Null. An Array of Formatting property values to replace any results with.
+; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
@@ -3983,15 +3960,16 @@ EndFunc   ;==>_LOWriter_DocRedoIsPossible
 ;                  @Error 1 @Extended 8 Return 0 = First Element of $atFindFormat not an Object.
 ;                  @Error 1 @Extended 9 Return 0 = First Element of $atReplaceFormat not an Object.
 ;                  --Success--
-;                  @Error 0 @Extended ? Return 1 = Success. Search and Replace was successful, @Extended set to number of replacements made.
+;                  @Error 0 @Extended 0 Return Integer = Success. Search and Replace was successful, returning number of replacements made.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: In order for $atReplaceFormat to be applied to replacements, $bSearchPropValues must be True in the Search descriptor. I'm not sure why.
+;                  Having $bBackwards set to True can cause issues with Find and Replace using formats, perhaps other things as well.
 ; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DocReplaceAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, $sReplaceString, ByRef $atFindFormat, ByRef $atReplaceFormat)
+Func _LOWriter_DocReplaceAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, $sReplaceString, $atFindFormat = Null, $atReplaceFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4002,36 +3980,34 @@ Func _LOWriter_DocReplaceAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, 
 	If Not $oSrchDescript.supportsService("com.sun.star.util.SearchDescriptor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsString($sSearchString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsString($sReplaceString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not IsArray($atReplaceFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+	If ($atFindFormat <> Null) And Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If ($atReplaceFormat <> Null) And Not IsArray($atReplaceFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If ($atFindFormat <> Null) And (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+	If ($atReplaceFormat <> Null) And (UBound($atReplaceFormat) > 0) And Not IsObj($atReplaceFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-	$oSrchDescript.setSearchAttributes($atFindFormat)
-
-	If (UBound($atReplaceFormat) > 0) And Not IsObj($atReplaceFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
-
-	$oSrchDescript.setReplaceAttributes($atReplaceFormat)
+	If IsArray($atFindFormat) Then $oSrchDescript.setSearchAttributes($atFindFormat)
+	If IsArray($atReplaceFormat) Then $oSrchDescript.setReplaceAttributes($atReplaceFormat)
 
 	$oSrchDescript.SearchString = $sSearchString
 	$oSrchDescript.ReplaceString = $sReplaceString
 
 	$iReplacements = $oDoc.replaceAll($oSrchDescript)
 
-	Return SetError($__LO_STATUS_SUCCESS, $iReplacements, 1)
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iReplacements)
 EndFunc   ;==>_LOWriter_DocReplaceAll
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocReplaceAllInRange
 ; Description ...: Replace all instances of a search within a selection. See Remarks.
-; Syntax ........: _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oRange, $sSearchString, $sReplaceString, ByRef $atFindFormat, ByRef $atReplaceFormat)
+; Syntax ........: _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oRange, $sSearchString, $sReplaceString[, $atFindFormat = Null[, $atReplaceFormat = Null]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
 ;                  $oRange              - [in/out] an object. A Range, such as a cursor with Data selected, to perform the search within.
 ;                  $sSearchString       - a string value. A String of text or a regular expression to search for.
 ;                  $sReplaceString      - a string value. A String of text or a regular expression to replace any results with.
-;                  $atFindFormat        - [in/out] an array of structs. An Array of Formatting properties to search for, either by value or simply by existence, depending on the current setting of "Value Search". Set to an empty array[0] to skip. Array will not be modified.
-;                  $atReplaceFormat     - [in/out] an array of structs. An Array of Formatting property values to replace any results with. Set to an empty array[0] to skip. Array will not be modified. Not Recommended for use with regular expressions, see remarks.
-; Return values .: Success: 1
+;                  $atFindFormat        - [optional] an array of dll structs. Default is Null. An Array of Formatting properties to search for, either by value or simply by existence, depending on the current setting of "Value Search".
+;                  $atReplaceFormat     - [optional] an array of dll structs. Default is Null. An Array of Formatting property values to replace any results with.
+; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
@@ -4045,41 +4021,42 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 ;                  @Error 1 @Extended 9 Return 0 = $atReplaceFormat not an Array.
 ;                  @Error 1 @Extended 10 Return 0 = First Element in $atFindFormat not a Property Object.
 ;                  @Error 1 @Extended 11 Return 0 = First Element in $atReplaceFormat not a Property Object.
-;                  @Error 1 @Extended 12 Return 0 = Search Styles is True, $atFindFormat and $atReplaceFormat arrays are empty, (Thus searching for Paragraph Styles by Name contained in the document) but $sReplaceString is set to a Paragraph Style that does not exist.
+;                  @Error 1 @Extended 12 Return 0 = Paragraph Style Name called in $sReplaceString does not exist.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating backup of ViewCursor location and selection.
 ;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
 ;                  @Error 2 @Extended 3 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error converting Regular Expression String.
-;                  @Error 3 @Extended 2 Return 0 = Error performing FindAllInRange Function.
-;                  @Error 3 @Extended 3 Return 0 = Error retrieving ViewCursor object.
+;                  @Error 3 @Extended 1 Return 0 = Error Finding all results in Range.
+;                  @Error 3 @Extended 2 Return 0 = Error searching for property values.
+;                  @Error 3 @Extended 3 Return 0 = Error finding temporary property to use.
+;                  @Error 3 @Extended 4 Return 0 = Error retrieving current selection and ViewCursor position.
 ;                  --Success--
-;                  @Error 0 @Extended ? Return 1 = Success. Search and Replace was successful, number of replacements returned in @Extended.
+;                  @Error 0 @Extended 0 Return Integer = Success. Search and Replace was successful, returning number of replacements.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office does not offer a Function to call to replace only results within a selection, consequently I have had to create my own. This function uses the "FindAllInRange" function, so any errors with Find/Replace formatting causing deletions will cause problems here. As best as I can tell all options for find and replace should be available, Formatting, Paragraph styles etc.
-;                  How I created this function to still accept Regular Expressions is I use Libre's FindAll command, modified by my FindAllInRange function. I then ran into another problem, as my next step was to use AutoIt's RegExpReplace function to perform the replacement, but some replacements don't work as expected. To Fix this I have created two versions of Regular Expression replacement, the first way is only implemented if $atReplaceFormat is skipped using an empty array. I use an ExecutionHelper to execute the Find and replace command, however this method doesn't accept formatting for find and replace. So I developed my second method, which accepts formatting, and uses AutoIt's RegExpReplace function to "Search" the resulting matched Strings and replace it, then I set the new string to that result. However I have had to create a separate function to convert the ReplaceString to be compatible with AutoIt's Regular Expression formatting.
-;                  + A Backslash (\) must be doubled(\\) in order to be literally inserted, at the beginning of the conversion process all double Backslashes are replaced with a specific flag to aid in identifying commented and non-commented keywords (\n, \t, & etc.), after the conversion process the special flag is replaced again with the double Backslashes, this should not cause any issues.
-;                  + \n (new Paragraph) in L.O. RegExp. formatting is replaced with @CR, unless the Backslash is doubled (\\n), then \n becomes literal.
-;                  + \t (Tab) in L.O. format is replaced with @Tab.
-;                  + &(Find Result/BackReference) is replaced with $0 which means insert the entire found string at that position, To insert a regular "&" character, comment it with a Backslash, \&.
-;                  As with LibreOffice, this function should still accept BackReferences ($0-9 or \0-9).
-;                  I have found certain problems with some of the expressions still not working, such as $ (end of paragraph mark) not replacing correctly because Autoit uses @CRLF for its newline endings, and Libre uses @CR for a new paragraph and @LF for a newline.
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
+; Remarks .......: Libre Office does not offer a method to replace only results within a selection, consequently I have had to create my own. This function sometimes uses the "FindAllInRange" function, so any errors with Find/Replace formatting causing deletions will cause problems here. As best as I can tell all options for find and replace should be available, Formatting, Paragraph styles etc.
+;                  If formatting is not being search or applied, I use a dispatch command to Find and Replace. However if formatting is being searched or added, A second method is used, which begins with the "FindAllInRange" function to find all matching results, then temporarily applies a normally unused property to the applicable results (CharFlash or CharShadingValue), and then add that temporary property to the Formatting array to search for, then Replace all results. And finally removing the temporary property value again.
+;                  Replacing Paragraph Styles doesn't work with a dispatch command, so I use the "FindAllInRange" function, and then manually apply the new Paragraph Style.
+;                  In order for $atReplaceFormat to be applied to replacements, $bSearchPropValues must be True in the Search descriptor. I'm not sure why.
+;                  Having $bBackwards set to True can cause issues with Find and Replace using formats, perhaps other things as well.
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oRange, $sSearchString, $sReplaceString, ByRef $atFindFormat, ByRef $atReplaceFormat)
+Func _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oRange, $sSearchString, $sReplaceString, $atFindFormat = Null, $atReplaceFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local Const $__LOW_ALG1_ABSOLUTE = 0, $__LOW_ALG1_REGEXP = 1, $__LOW_ALG1_APPROXIMATE = 2 ; com.sun.star.util.SearchAlgorithms
+	Local Const $__LOW_ALG2_ABSOLUTE = 1, $__LOW_ALG2_REGEXP = 2, $__LOW_ALG2_APPROXIMATE = 3 ; com.sun.star.util.SearchAlgorithms2
+	Local Const $__LOW_SRCH_COMMAND_REPLACE_ALL = 3 ; See srchitem.hxx and https://thebiasplanet.blogspot.com/2022/06/writerunosearchoff.html
+	Local Const $__LOW_TRANSLIT_FLAG_NONE = 0, $__LOW_TRANSLIT_FLAG_IGNORE_CASE = 256 ; com.sun.star.i18n:TransliterationModules
+	Local Const $__LOW_SEARCHFLAG_NORM_WORD_ONLY = 16, $__LOW_SEARCHFLAG_SELECTION = 2048, $__LOW_SEARCHFLAG_LEV_RELAXED = 65536 ; See com,sun,star,util,SearchFlags, srchitem.hxx, https://thebiasplanet.blogspot.com/2022/06/writerunosearchoff.html
 	Local $aoResults[0]
-	Local $atArgs[7]
-	Local Const $LOW_SEARCHFLAG_ABSOLUTE = 1, $LOW_SEARCHFLAG_REGEXP = 2, $LOW_SEARCHFLAG_REPLACE_ALL = 3, $LOW_SEARCHFLAG_SELECTION = 2048
-	Local $oViewCursor, $oViewCursorBackup, $oServiceManager, $oDispatcher
-	Local $iResults
-	Local $bFormat = False
+	Local $atArgs[12], $atFormats[1], $atOrigFormats[1]
+	Local $oServiceManager, $oDispatcher, $oTempSrchDescript, $oResults, $oSelection
+	Local $iResults, $iSrchFlags = $__LOW_SEARCHFLAG_SELECTION, $iTranslitFlags = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oSrchDescript) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -4088,89 +4065,133 @@ Func _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oR
 	If ($oRange.IsCollapsed()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsString($sSearchString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 	If Not IsString($sReplaceString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-	If Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-	If Not IsArray($atReplaceFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
-	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
-	If (UBound($atReplaceFormat) > 0) And Not IsObj($atReplaceFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
+	If ($atFindFormat <> Null) And Not IsArray($atFindFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+	If ($atReplaceFormat <> Null) And Not IsArray($atReplaceFormat) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+	If ($atFindFormat <> Null) And (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
+	If ($atReplaceFormat <> Null) And Not (UBound($atReplaceFormat) > 0) And Not IsObj($atReplaceFormat[0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
+	If ($oSrchDescript.SearchStyles() = True) And Not _LOWriter_ParStyleExists($oDoc, $sReplaceString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
 
-	If (UBound($atReplaceFormat) > 0) Then $bFormat = True
-
-	; If Find/Replace using a Regular expression is True, and replace formatting is set, convert the regular expressions for my
-	; alternate replacement function to use.
-	If ($oSrchDescript.SearchRegularExpression() = True) And ($bFormat = True) Then __LOWriter_RegExpConvert($sReplaceString)
-	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	$aoResults = _LOWriter_DocFindAllInRange($oDoc, $oSrchDescript, $sSearchString, $atFindFormat, $oRange)
+	$aoResults = _LOWriter_DocFindAllInRange($oDoc, $oSrchDescript, $sSearchString, $oRange, $atFindFormat)
 	$iResults = @extended
-	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Error performing search
+	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Error performing search
 
-	If ($oSrchDescript.SearchRegularExpression() = True) Then
-		If ($bFormat = True) Then
-			For $i = 0 To $iResults - 1
-				$aoResults[$i].setString(StringRegExpReplace($aoResults[$i].getString(), $sSearchString, $sReplaceString))
-				If ($bFormat = True) Then
-					For $j = 0 To UBound($atReplaceFormat) - 1
-						$aoResults[$i].setPropertyValue($atReplaceFormat[$j].Name(), $atReplaceFormat[$j].Value())
-					Next
-				EndIf
+	If IsArray($atFindFormat) Or IsArray($atReplaceFormat) Then ; Search or replace using formats, use my temporary properties method.
+		$oTempSrchDescript = $oDoc.createSearchDescriptor()
+		If Not IsObj($oTempSrchDescript) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-				Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
-			Next
+		With $oTempSrchDescript
+			.SearchBackwards = False
+			.SearchCaseSensitive = False
+			.SearchWords = False
+			.SearchRegularExpression = True
+			.SearchStyles = True
+			.ValueSearch = False
+		EndWith
 
-		Else ; No Replacement formatting, use UNO Execute method instead.
-			$oViewCursor = $oDoc.CurrentController.getViewCursor()
-			If Not IsObj($oViewCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		; Use these as Temp values. CharFlash, or CharShadingValue.
+		$atFormats[0] = __LO_SetPropertyValue("CharFlash", True)
+		$atOrigFormats[0] = __LO_SetPropertyValue("CharFlash", False)
 
-			; Backup the ViewCursor location and selection.
-			$oViewCursorBackup = $oDoc.Text.createTextCursorByRange($oViewCursor)
-			If Not IsObj($oViewCursorBackup) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+		$oTempSrchDescript.setSearchAttributes($atFormats)
+		$oTempSrchDescript.SearchString = ".*"
 
-			; Move the View Cursor to the input range.
-			$oViewCursor.gotoRange($oRange, False)
+		$oResults = $oDoc.findAll($oTempSrchDescript)
+		If Not IsObj($oResults) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oServiceManager = __LO_ServiceManager()
-			If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-
-			$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
-			If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
-
-			$atArgs[0] = __LOWriter_SetPropertyValue("SearchItem.Backward", $oSrchDescript.SearchBackwards())
-			$atArgs[1] = __LOWriter_SetPropertyValue("SearchItem.AlgorithmType", $LOW_SEARCHFLAG_ABSOLUTE)
-			$atArgs[2] = __LOWriter_SetPropertyValue("SearchItem.SearchFlags", $LOW_SEARCHFLAG_SELECTION)
-			$atArgs[3] = __LOWriter_SetPropertyValue("SearchItem.SearchString", $sSearchString)
-			$atArgs[4] = __LOWriter_SetPropertyValue("SearchItem.ReplaceString", $sReplaceString)
-			$atArgs[5] = __LOWriter_SetPropertyValue("SearchItem.Command", $LOW_SEARCHFLAG_REPLACE_ALL)
-			$atArgs[6] = __LOWriter_SetPropertyValue("SearchItem.AlgorithmType2", $LOW_SEARCHFLAG_REGEXP)
-
-			$oDispatcher.executeDispatch($oDoc.CurrentController, ".uno:ExecuteSearch", "", 0, $atArgs)
-
-			; Restore the ViewCursor to its previous location.
-			$oViewCursor.gotoRange($oViewCursorBackup, False)
+		If ($oResults.getCount() > 0) Then ; If CharFlash is present, try to find another unused property.
+			$atFormats[0] = __LO_SetPropertyValue("CharShadingValue", 28)
+			$atOrigFormats[0] = __LO_SetPropertyValue("CharShadingValue", 0)
+			$oTempSrchDescript.setSearchAttributes($atFormats)
+			$oResults = $oDoc.findAll($oTempSrchDescript)
+			If Not IsObj($oResults) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 		EndIf
 
-	ElseIf ($oSrchDescript.SearchStyles() = True) And ((UBound($atFindFormat) = 0) And (UBound($atReplaceFormat) = 0)) Then ; If Style Search is active and no formatting is set, then search and replace Paragraph style.
-		If Not _LOWriter_ParStyleExists($oDoc, $sReplaceString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
+		If ($oResults.getCount() > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$oDoc.getUndoManager.enterUndoContext("Find and Replace")
+
+		For $i = 0 To $iResults - 1
+			$aoResults[$i].setPropertyValue($atFormats[0].Name(), $atFormats[0].Value())
+
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		If IsArray($atFindFormat) Then
+			__LOWriter_FindFormatAddSetting($atFindFormat, $atFormats[0])
+
+		Else
+			$atFindFormat = $atFormats
+		EndIf
+
+		$oSrchDescript.setSearchAttributes($atFindFormat)
+		If IsArray($atReplaceFormat) Then $oSrchDescript.setReplaceAttributes($atReplaceFormat)
+
+		$oSrchDescript.SearchString = $sSearchString
+		$oSrchDescript.ReplaceString = $sReplaceString
+
+		$oDoc.replaceAll($oSrchDescript)
+
+		$oTempSrchDescript.setReplaceAttributes($atOrigFormats)
+		$oTempSrchDescript.ReplaceString = "&"
+		$oTempSrchDescript.ValueSearch = True
+
+		$oDoc.replaceAll($oTempSrchDescript)
+
+		$oDoc.getUndoManager.leaveUndoContext()
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, $iResults)
+
+	ElseIf ($oSrchDescript.SearchStyles() = True) Then ; Paragraph Style replacement (Dispatch doesn't work for these).
+		$oDoc.getUndoManager.enterUndoContext("Replace Style " & $sSearchString)
 
 		For $i = 0 To $iResults - 1
 			$aoResults[$i].ParaStyleName = $sReplaceString
 
 			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
+		$oDoc.getUndoManager.leaveUndoContext()
 
-	Else
-		For $i = 0 To $iResults - 1
-			$aoResults[$i].setString(StringReplace($aoResults[$i].getString(), $sSearchString, $sReplaceString))
-			If ($bFormat = True) Then
-				For $k = 0 To UBound($atReplaceFormat) - 1
-					$aoResults[$i].setPropertyValue($atReplaceFormat[$k].Name(), $atReplaceFormat[$k].Value())
-				Next
-			EndIf
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iResults)
 
-			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
-		Next
+	Else ; Use Dispatch.
+		; Backup the ViewCursor location and selection.
+		$oSelection = $oDoc.getCurrentSelection()
+		If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		; Move the View Cursor to the input range and select it.
+		$oDoc.CurrentController.Select($oRange)
+
+		$oServiceManager = $oServiceManager = __LO_ServiceManager()
+		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+		If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+		$iSrchFlags = (($oSrchDescript.SearchSimilarity() = True) And ($oSrchDescript.SearchSimilarityRelax() = True)) ? (BitOR($iSrchFlags, $__LOW_SEARCHFLAG_LEV_RELAXED)) : ($iSrchFlags)
+		$iSrchFlags = (($oSrchDescript.SearchWords() = True)) ? (BitOR($iSrchFlags, $__LOW_SEARCHFLAG_NORM_WORD_ONLY)) : ($iSrchFlags)
+
+		$iTranslitFlags = ($oSrchDescript.SearchCaseSensitive() = True) ? ($__LOW_TRANSLIT_FLAG_NONE) : ($__LOW_TRANSLIT_FLAG_IGNORE_CASE)
+
+		$atArgs[0] = __LO_SetPropertyValue("SearchItem.AlgorithmType", (($oSrchDescript.SearchSimilarity() = True) ? ($__LOW_ALG1_APPROXIMATE) : (($oSrchDescript.SearchRegularExpression() = True) ? ($__LOW_ALG1_REGEXP) : ($__LOW_ALG1_ABSOLUTE))))
+		$atArgs[1] = __LO_SetPropertyValue("SearchItem.AlgorithmType2", (($oSrchDescript.SearchSimilarity() = True) ? ($__LOW_ALG2_APPROXIMATE) : (($oSrchDescript.SearchRegularExpression() = True) ? ($__LOW_ALG2_REGEXP) : ($__LOW_ALG2_ABSOLUTE))))
+		$atArgs[2] = __LO_SetPropertyValue("SearchItem.Backward", $oSrchDescript.SearchBackwards())
+		$atArgs[3] = __LO_SetPropertyValue("SearchItem.ChangedChars", $oSrchDescript.SearchSimilarityExchange())
+		$atArgs[4] = __LO_SetPropertyValue("SearchItem.Command", $__LOW_SRCH_COMMAND_REPLACE_ALL)
+		$atArgs[5] = __LO_SetPropertyValue("SearchItem.DeletedChars", $oSrchDescript.SearchSimilarityRemove())
+		$atArgs[6] = __LO_SetPropertyValue("SearchItem.InsertedChars", $oSrchDescript.SearchSimilarityAdd())
+		$atArgs[7] = __LO_SetPropertyValue("SearchItem.Pattern", $oSrchDescript.SearchStyles())
+		$atArgs[8] = __LO_SetPropertyValue("SearchItem.ReplaceString", $sReplaceString)
+		$atArgs[9] = __LO_SetPropertyValue("SearchItem.SearchFlags", $iSrchFlags)
+		$atArgs[10] = __LO_SetPropertyValue("SearchItem.SearchString", $sSearchString)
+		$atArgs[11] = __LO_SetPropertyValue("SearchItem.TransliterateFlags", $iTranslitFlags)
+
+		$oDispatcher.executeDispatch($oDoc.CurrentController, ".uno:ExecuteSearch", "", 0, $atArgs)
+
+		; Restore the ViewCursor to its previous location.
+		$oDoc.CurrentController.Select($oSelection)
+
+		Return SetError($__LO_STATUS_SUCCESS, 2, $iResults)
 	EndIf
-
-	Return SetError($__LO_STATUS_SUCCESS, $iResults, 1)
 EndFunc   ;==>_LOWriter_DocReplaceAllInRange
 
 ; #FUNCTION# ====================================================================================================================
@@ -4248,20 +4269,20 @@ Func _LOWriter_DocSaveAs(ByRef $oDoc, $sFilePath, $sFilterName = "", $bOverwrite
 	If Not IsString($sFilePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sFilterName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	$sFilePath = _LOWriter_PathConvert($sFilePath, $LOW_PATHCONV_OFFICE_RETURN)
+	$sFilePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_OFFICE_RETURN)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($sFilterName = "") Or ($sFilterName = " ") Then $sFilterName = __LOWriter_FilterNameGet($sFilePath)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$aProperties[0] = __LOWriter_SetPropertyValue("FilterName", $sFilterName)
+	$aProperties[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	If ($bOverwrite <> Null) Then
 		If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
-		$aProperties[UBound($aProperties) - 1] = __LOWriter_SetPropertyValue("Overwrite", $bOverwrite)
+		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Overwrite", $bOverwrite)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 	EndIf
 
@@ -4269,13 +4290,13 @@ Func _LOWriter_DocSaveAs(ByRef $oDoc, $sFilePath, $sFilterName = "", $bOverwrite
 		If Not IsString($sPassword) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
-		$aProperties[UBound($aProperties) - 1] = __LOWriter_SetPropertyValue("Password", $sPassword)
+		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Password", $sPassword)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 	EndIf
 
 	$oDoc.storeAsURL($sFilePath, $aProperties)
 
-	$sSavePath = _LOWriter_PathConvert($sFilePath, $LOW_PATHCONV_PCPATH_RETURN)
+	$sSavePath = _LO_PathConvert($sFilePath, $LO_PATHCONV_PCPATH_RETURN)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $sSavePath)
@@ -4374,7 +4395,7 @@ EndFunc   ;==>_LOWriter_DocSelectionGet
 ; Name ..........: _LOWriter_DocSelectionSet
 ; Description ...: Set the current selection for the Document.
 ; Syntax ........: _LOWriter_DocSelectionSet(ByRef $oDoc, ByRef $oObj)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oObj                - [in/out] an object. A selectable object. A Text Cursor with text selected, A ViewCursor with Text Selected, a Table Cursor with cells selected, a Shape or Frame Object, etc.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4573,9 +4594,10 @@ EndFunc   ;==>_LOWriter_DocUndoClear
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Undo Action.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = No Current Undo Action available. Returning Empty String.
-;                  @Error 0 @Extended 1 Return String = Returns the current available undo action Title in String format.
+;                  @Error 0 @Extended 0 Return String = Returning the current available Undo action title as a String. Will be an empty String if no action is available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4587,16 +4609,15 @@ Func _LOWriter_DocUndoCurActionTitle(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sUndoAction
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($oDoc.UndoManager.isUndoPossible()) Then
+	$sUndoAction = $oDoc.UndoManager.getCurrentUndoActionTitle()
+	If ($sUndoAction = Null) Then $sUndoAction = ""
+	If Not IsString($sUndoAction) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.UndoManager.getCurrentUndoActionTitle())
-
-	Else
-
-		Return SetError($__LO_STATUS_SUCCESS, 0, $oDoc.UndoManager.getCurrentUndoActionTitle())
-	EndIf
+		Return SetError($__LO_STATUS_SUCCESS, 0, $sUndoAction)
 EndFunc   ;==>_LOWriter_DocUndoCurActionTitle
 
 ; #FUNCTION# ====================================================================================================================
@@ -4706,7 +4727,7 @@ EndFunc   ;==>_LOWriter_DocUndoReset
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_CursorMove, _LOWriter_ConvertFromMicrometer, _LOWriter_ConvertToMicrometer
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_CursorMove, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4810,11 +4831,11 @@ Func _LOWriter_DocZoom(ByRef $oDoc, $iZoom = Null)
 
 	$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
 	If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-	If Not __LOWriter_IntIsBetween($iZoom, 20, 600) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iZoom, 20, 600) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$aArgs[0] = __LOWriter_SetPropertyValue("Zoom.Value", $iZoom)
-	$aArgs[1] = __LOWriter_SetPropertyValue("Zoom.ValueSet", 28703)
-	$aArgs[2] = __LOWriter_SetPropertyValue("Zoom.Type", 0)
+	$aArgs[0] = __LO_SetPropertyValue("Zoom.Value", $iZoom)
+	$aArgs[1] = __LO_SetPropertyValue("Zoom.ValueSet", 28703)
+	$aArgs[2] = __LO_SetPropertyValue("Zoom.Type", 0)
 
 	$oDispatcher.executeDispatch($oDoc.CurrentController, ".uno:Zoom", "", 0, $aArgs)
 	$iError = ($oDoc.CurrentController.ViewSettings.ZoomValue() = $iZoom) ? ($iError) : (BitOR($iError, 1))

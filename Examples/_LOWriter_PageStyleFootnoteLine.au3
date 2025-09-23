@@ -18,12 +18,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(.25)
+	$iMicrometers = _LO_ConvertToMicrometer(.25)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Page style Footnote separator line settings to: Position = $LOW_ALIGN_HORI_CENTER, Line style = $LOW_LINE_STYLE_DOTTED,
-	; Thickness = 1.25 Printer's Points, Color = $LOW_COLOR_BLACK, Length = 75%, Spacing to 1/4".
-	_LOWriter_PageStyleFootnoteLine($oPageStyle, $LOW_ALIGN_HORI_CENTER, $LOW_LINE_STYLE_DOTTED, 1.25, $LOW_COLOR_BLACK, 75, $iMicrometers)
+	; Thickness = 1.25 Printer's Points, Color = $LO_COLOR_BLACK, Length = 75%, Spacing to 1/4".
+	_LOWriter_PageStyleFootnoteLine($oPageStyle, $LOW_ALIGN_HORI_CENTER, $LOW_LINE_STYLE_DOTTED, 1.25, $LO_COLOR_BLACK, 75, $iMicrometers)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
