@@ -18,19 +18,19 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(1)
+	$iMicrometers = _LO_ConvertToMicrometer(1)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/2" to Micrometers
-	$iMicrometers2 = _LOWriter_ConvertToMicrometer(.5)
+	$iMicrometers2 = _LO_ConvertToMicrometer(.5)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Micrometers
-	$iMicrometers3 = _LOWriter_ConvertToMicrometer(.25)
+	$iMicrometers3 = _LO_ConvertToMicrometer(.25)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; If Libre Office version is higher or equal to 7.2 then set Gutter margin.
-	If (_LOWriter_VersionGet(True) >= 7.2) Then
+	If (_LO_VersionGet(True) >= 7.2) Then
 		; Set Left and Right margins to 1", Top and Bottom Margins to 1/2" and Gutter Margin to 1/4".
 		_LOWriter_PageStyleMargins($oPageStyle, $iMicrometers, $iMicrometers, $iMicrometers2, $iMicrometers2, $iMicrometers3)
 		If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
@@ -46,7 +46,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Page style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; If Libre Office version is higher or equal to 7.2 then display the Gutter margin setting.
-	If (_LOWriter_VersionGet(True) >= 7.2) Then
+	If (_LO_VersionGet(True) >= 7.2) Then
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Margin settings are as follows: " & @CRLF & _
 				"The Left page margin, in Micrometers, is: " & $avPageStyleSettings[0] & @CRLF & _
 				"The Right page margin, in Micrometers, is: " & $avPageStyleSettings[1] & @CRLF & _

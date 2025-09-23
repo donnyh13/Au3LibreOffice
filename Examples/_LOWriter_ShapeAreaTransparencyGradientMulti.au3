@@ -6,7 +6,8 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oShape
-	Local $avSettings
+	Local $sStops = ""
+	Local $avStops
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -20,27 +21,34 @@ Func Example()
 	$oShape = _LOWriter_ShapeInsert($oDoc, $oViewCursor, $LOW_SHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Shape  Background Color settings. Background color = $LOW_COLOR_TEAL.
-	_LOWriter_ShapeAreaColor($oShape, $LOW_COLOR_TEAL)
+	; Modify the Shape  Background Color settings. Background color = $LO_COLOR_TEAL.
+	_LOWriter_ShapeAreaColor($oShape, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape Transparency Gradient settings to: Gradient Type = $LOW_GRAD_TYPE_ELLIPTICAL, XCenter to 75%, YCenter to 45%, Angle to 180 degrees
 	; Border to 16%, Start transparency to 10%, End Transparency to 62%
-	_LOWriter_ShapeTransparencyGradient($oDoc, $oShape, $LOW_GRAD_TYPE_ELLIPTICAL, 75, 45, 180, 16, 10, 62)
+	_LOWriter_ShapeAreaTransparencyGradient($oDoc, $oShape, $LOW_GRAD_TYPE_ELLIPTICAL, 75, 45, 180, 16, 10, 62)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
-	$avSettings = _LOWriter_ShapeTransparencyGradient($oDoc, $oShape)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve an array of Transparency Multi Gradient ColorStops.
+	$avStops = _LOWriter_ShapeAreaTransparencyGradientMulti($oShape)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Transparency Gradient settings are as follows: " & @CRLF & _
-			"The type of Gradient is, (see UDF constants): " & $avSettings[0] & @CRLF & _
-			"The horizontal offset percentage for the gradient is: " & $avSettings[1] & @CRLF & _
-			"The vertical offset percentage for the gradient is: " & $avSettings[2] & @CRLF & _
-			"The rotation angle for the gradient is, in degrees: " & $avSettings[3] & @CRLF & _
-			"The percentage of area not covered by the transparency is: " & $avSettings[4] & @CRLF & _
-			"The starting transparency percentage is: " & $avSettings[5] & @CRLF & _
-			"The ending transparency percentage is: " & $avSettings[6])
+	For $i = 0 To UBound($avStops) - 1
+		$sStops &= "ColorStop offset: " & $avStops[$i][0] & " | " & @TAB & "ColorStop Transparency percentage: " & $avStops[$i][1] & @CRLF
+	Next
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Transparency Gradient ColorStops are as follows: " & @CRLF & _
+			$sStops & @CRLF & @CRLF & _
+			"Press ok to add a new ColorStop.")
+
+	; Add a new ColorStop in the middle.
+	_LOWriter_TransparencyGradientMultiAdd($avStops, 1, 0.5, 76)
+	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Apply the new ColorStops.
+	_LOWriter_ShapeAreaTransparencyGradientMulti($oShape, $avStops)
+	If @error Then _ERROR($oDoc, "Failed to modify Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

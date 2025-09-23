@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Micrometers
-	$iMicrometers = _LOWriter_ConvertToMicrometer(0.25)
+	$iMicrometers = _LO_ConvertToMicrometer(0.25)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Default Paragraph Style" Border padding to 1/4"
@@ -51,7 +51,7 @@ Func Example()
 			"Press Ok, and I will demonstrate setting individual border padding settings.")
 
 	; Convert 1/2" to Micrometers
-	$iMicrometers2 = _LOWriter_ConvertToMicrometer(0.5)
+	$iMicrometers2 = _LO_ConvertToMicrometer(0.5)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Default Paragraph Style" Border padding to, Top and Right, 1/4", Bottom and left, 1/2".

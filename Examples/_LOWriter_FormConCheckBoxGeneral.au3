@@ -25,12 +25,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a form control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 18, $LOW_COLOR_BRICK, $LOW_UNDERLINE_BOLD, $LOW_COLOR_GREEN, $LOW_STRIKEOUT_NONE, True, $LOW_RELIEF_NONE)
+	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 18, $LO_COLOR_BRICK, $LOW_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOW_STRIKEOUT_NONE, True, $LOW_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
 	_LOWriter_FormConCheckBoxGeneral($oControl, "Renamed_AutoIt_Control", "This is a CheckBox", $oLabel, Null, True, True, False, True, 2, _
-			$LOW_FORM_CON_CHKBX_STATE_SELECTED, $mFont, $LOW_FORM_CON_BORDER_FLAT, $LOW_ALIGN_HORI_CENTER, $LOW_ALIGN_VERT_BOTTOM, $LOW_COLOR_DKGRAY, _
+			$LOW_FORM_CON_CHKBX_STATE_SELECTED, $mFont, $LOW_FORM_CON_BORDER_FLAT, $LOW_ALIGN_HORI_CENTER, $LOW_ALIGN_VERT_BOTTOM, $LO_COLOR_DKGRAY, _
 			False, Null, Null, True, "Some Additional Information", "This is Help Text", "www.HelpURL.fake")
 	If @error Then _ERROR($oDoc, "Failed to modify a Control's properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

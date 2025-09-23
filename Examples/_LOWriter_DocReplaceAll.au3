@@ -7,6 +7,7 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oSrchDesc
 	Local $atFindFormat[0], $atReplaceFormat[0] ; Create two Empty Arrays to fill.
+	Local $iResults
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -46,11 +47,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search and replace all bold letter "a"'s with Italic "@".
-	_LOWriter_DocReplaceAll($oDoc, $oSrchDesc, "a", "@", $atFindFormat, $atReplaceFormat)
+	$iResults = _LOWriter_DocReplaceAll($oDoc, $oSrchDesc, "a", "@", $atFindFormat, $atReplaceFormat)
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The search was successful, I searched using a Find Format, looking for any bold ""a""'s, " & _
-			"and replaced all of them with an italic ""@"", I replaced " & @extended & " results.")
+			"and replaced all of them with an italic ""@"", I replaced " & $iResults & " results.")
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -26,12 +26,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/2 Inch to Micrometers.
-	$iMicrometers = _LOWriter_ConvertToMicrometer(0.5)
+	$iMicrometers = _LO_ConvertToMicrometer(0.5)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Table shadow to 1/2 an inch wide, the color to $LOW_COLOR_DKGRAY, Transparent to False, and shadow location to
+	; Set the Table shadow to 1/2 an inch wide, the color to $LO_COLOR_DKGRAY, Transparent to False, and shadow location to
 	; $LOW_SHADOW_BOTTOM_LEFT
-	_LOWriter_TableShadow($oTable, $iMicrometers, $LOW_COLOR_DKGRAY, False, $LOW_SHADOW_BOTTOM_LEFT)
+	_LOWriter_TableShadow($oTable, $iMicrometers, $LO_COLOR_DKGRAY, False, $LOW_SHADOW_BOTTOM_LEFT)
 	If @error Then _ERROR($oDoc, "Failed to set Table shadow settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Table shadow settings. Return will be an Array, with values in order of function parameters.

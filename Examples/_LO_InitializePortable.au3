@@ -18,7 +18,7 @@ Func Example()
 	If @error Then _ERROR($oCalcDoc, $oWriterDoc, "Failed to Initialize L.O. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current full Office version number and name.
-	$sVersionAndName = _LOWriter_VersionGet(False, True)
+	$sVersionAndName = _LO_VersionGet(False, True)
 	If @error Then _ERROR($oCalcDoc, $oWriterDoc, "Failed to retrieve L.O. version information. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Your current full LibreOffice version, including the name is: " & $sVersionAndName & @CRLF & @CRLF & _

@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a form control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 18, $LOW_COLOR_BRICK, $LOW_UNDERLINE_BOLD, $LOW_COLOR_GREEN, $LOW_STRIKEOUT_NONE, True, $LOW_RELIEF_NONE)
+	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 18, $LO_COLOR_BRICK, $LOW_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOW_STRIKEOUT_NONE, True, $LOW_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
@@ -50,7 +50,7 @@ Func Example()
 			"Press ok to modify the Font for this Label control.")
 
 	; Modify the Font Descriptor.
-	_LOWriter_FontDescEdit($avControl[6], "Arial", $LOW_WEIGHT_NORMAL, $LOW_POSTURE_NONE, 16, $LOW_COLOR_LIME, $LOW_UNDERLINE_DBL_WAVE, $LOW_COLOR_PURPLE, Null, False, $LOW_RELIEF_ENGRAVED)
+	_LOWriter_FontDescEdit($avControl[6], "Arial", $LOW_WEIGHT_NORMAL, $LOW_POSTURE_NONE, 16, $LO_COLOR_LIME, $LOW_UNDERLINE_DBL_WAVE, $LO_COLOR_PURPLE, Null, False, $LOW_RELIEF_ENGRAVED)
 	If @error Then _ERROR($oDoc, "Failed to modify the Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new Font descriptor to the Label.

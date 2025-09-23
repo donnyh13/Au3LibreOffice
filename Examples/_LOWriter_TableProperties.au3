@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Table, 5 rows, 3 columns, set Table Split to False, Background color to Teal and set a custom Table name.
-	$oTable = _LOWriter_TableCreate($oDoc, 5, 3, False, $LOW_COLOR_TEAL, "CustomTableName")
+	$oTable = _LOWriter_TableCreate($oDoc, 5, 3, False, $LO_COLOR_TEAL, "CustomTableName")
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert the Table into the document at the View Cursor's location.

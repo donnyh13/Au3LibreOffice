@@ -7,7 +7,6 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oSrchDesc, $oResult
 	Local $sResultString
-	Local $aAnEmptyArray[0] ; Create an empty array to skip FindFormat parameter.
 	Local $atFindFormat[0] ; Create an Empty Array to fill.
 	Local $aoResults
 
@@ -28,7 +27,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the word "Search using the search descriptor I just created.
-	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search", $aAnEmptyArray)
+	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search")
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$sResultString = ""

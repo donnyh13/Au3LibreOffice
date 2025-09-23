@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Text Table settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 4 inches to micrometers.
-	$iMicrometers = _LOWriter_ConvertToMicrometer(4)
+	$iMicrometers = _LO_ConvertToMicrometer(4)
 	If @error Then _ERROR($oDoc, "Failed to convert inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_LOWriter_TableWidth($oTable, $iMicrometers)

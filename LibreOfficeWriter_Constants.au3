@@ -107,28 +107,6 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_CELL_TYPE_TEXT = 2, _                              ; Cell contains text.
 		$LOW_CELL_TYPE_FORMULA = 3                              ; Cell contains a formula.
 
-; Color in Long Color Format
-Global Const _
-		$LOW_COLOR_OFF = -1, _                                  ; Turn Color off, or to automatic mode.
-		$LOW_COLOR_BLACK = 0, _                                 ; Black color.
-		$LOW_COLOR_GREEN = 43315, _                             ; Green color.
-		$LOW_COLOR_TEAL = 1410150, _                            ; Teal color.
-		$LOW_COLOR_BLUE = 2777241, _                            ; Blue color.
-		$LOW_COLOR_DKGRAY = 3355443, _                          ; Dark Gray color.
-		$LOW_COLOR_INDIGO = 5582989, _                          ; Indigo color.
-		$LOW_COLOR_PURPLE = 8388736, _                          ; Purple color.
-		$LOW_COLOR_GRAY = 8421504, _                            ; Gray color.
-		$LOW_COLOR_LIME = 8508442, _                            ; Lime color.
-		$LOW_COLOR_BROWN = 9127187, _                           ; Brown color.
-		$LOW_COLOR_LGRAY = 11711154, _                          ; Light Gray color.
-		$LOW_COLOR_MAGENTA = 12517441, _                        ; Magenta color.
-		$LOW_COLOR_RED = 16711680, _                            ; Red color.
-		$LOW_COLOR_BRICK = 16728064, _                          ; Brick color.
-		$LOW_COLOR_ORANGE = 16744448, _                         ; Orange color.
-		$LOW_COLOR_GOLD = 16760576, _                           ; Gold color.
-		$LOW_COLOR_YELLOW = 16776960, _                         ; Yellow color.
-		$LOW_COLOR_WHITE = 16777215                             ; White color.
-
 ; Color Mode Constants.
 Global Const _                                                  ; com.sun.star.drawing.ColorMode
 		$LOW_COLORMODE_STANDARD = 0, _                          ; The graphic is rendered in the default color style of the output device.
@@ -786,12 +764,6 @@ Global Const _
 		$LOW_PAR_LAST_LINE_START = 0, _                         ; The Paragraph is aligned either to the Left border or the right, depending on the current text direction.
 		$LOW_PAR_LAST_LINE_JUSTIFIED = 2, _                     ; The Paragraph is adjusted to both borders / stretched.
 		$LOW_PAR_LAST_LINE_CENTER = 3                           ; The Paragraph is centered between the left and right borders.
-
-; Path Convert Constants.
-Global Const _
-		$LOW_PATHCONV_AUTO_RETURN = 0, _                        ; Automatically returns the opposite of the input path, determined by StringInStr search for either "File:///"(L.O.Office URL) or "[A-Z]:\" (Windows File Path).
-		$LOW_PATHCONV_OFFICE_RETURN = 1, _                      ; Returns L.O. Office URL, even if the input is already in that format.
-		$LOW_PATHCONV_PCPATH_RETURN = 2                         ; Returns Windows File Path, even if the input is already in that format.
 
 ; Posture/Italic
 Global Const _                                                  ; com.sun.star.awt.FontSlant

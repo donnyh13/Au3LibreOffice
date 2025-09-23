@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the table Background color, and set Transparent to False.
-	_LOWriter_TableColor($oTable, $LOW_COLOR_LIME, False)
+	_LOWriter_TableColor($oTable, $LO_COLOR_LIME, False)
 	If @error Then _ERROR($oDoc, "Failed to set Text Table settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve current settings.

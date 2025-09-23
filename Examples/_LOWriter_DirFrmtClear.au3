@@ -32,8 +32,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Underline settings to Words only = True, Underline style $LOW_UNDERLINE_BOLD_DASH_DOT, Underline has
-	; Color = True, and Color to $LOW_COLOR_BROWN
-	_LOWriter_DirFrmtUnderLine($oViewCursor, True, $LOW_UNDERLINE_BOLD_DASH_DOT, True, $LOW_COLOR_BROWN)
+	; Color = True, and Color to $LO_COLOR_BROWN
+	_LOWriter_DirFrmtUnderLine($oViewCursor, True, $LOW_UNDERLINE_BOLD_DASH_DOT, True, $LO_COLOR_BROWN)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 4 spaces
@@ -44,8 +44,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 11, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's font color to $LOW_COLOR_RED, Transparency to 50%, and Highlight to $LOW_COLOR_GOLD
-	_LOWriter_DirFrmtFontColor($oViewCursor, $LOW_COLOR_RED, 50, $LOW_COLOR_GOLD)
+	; Set the selected text's font color to $LO_COLOR_RED, Transparency to 50%, and Highlight to $LO_COLOR_GOLD
+	_LOWriter_DirFrmtFontColor($oViewCursor, $LO_COLOR_RED, 50, $LO_COLOR_GOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 11 spaces

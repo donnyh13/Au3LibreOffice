@@ -32,8 +32,8 @@ Func Example()
 			"$LOW_AREA_FILL_STYLE_HATCH, 3 Fill Style is a Hatch style color." & @CRLF & _
 			"$LOW_AREA_FILL_STYLE_BITMAP, 4 Fill Style is a Bitmap.")
 
-	; Modify the Frame Background Color settings. Background color = $LOW_COLOR_TEAL, Background color is transparent = False
-	_LOWriter_FrameAreaColor($oFrame, $LOW_COLOR_TEAL, False)
+	; Modify the Frame Background Color settings. Background color = $LO_COLOR_TEAL, Background color is transparent = False
+	_LOWriter_FrameAreaColor($oFrame, $LO_COLOR_TEAL, False)
 	If @error Then _ERROR($oDoc, "Failed to set Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame Fill Style

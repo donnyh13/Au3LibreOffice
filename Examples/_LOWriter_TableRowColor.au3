@@ -45,8 +45,8 @@ Func Example()
 		Next
 	Next
 
-	; Change the 3rd row down (Row 2) background color to: $LOW_COLOR_ORANGE
-	_LOWriter_TableRowColor($oTable, 2, $LOW_COLOR_ORANGE, False)
+	; Change the 3rd row down (Row 2) background color to: $LO_COLOR_ORANGE
+	_LOWriter_TableRowColor($oTable, 2, $LO_COLOR_ORANGE, False)
 	If @error Then _ERROR($oDoc, "Failed to set the row background color settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve row's current background color settings.

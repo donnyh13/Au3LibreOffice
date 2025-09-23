@@ -52,7 +52,7 @@ Func Example()
 	If IsObj($oResult) Then
 		$sResultString = _LOWriter_DocGetString($oResult)
 		If @error Then _ERROR($oDoc, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-		MsgBox($MB_OK + $MB_TOPMOST, Default, "The search was successful, I searched using a Find Format, looking for any paragraphs that are center aligned, " & _
+		MsgBox($MB_OK + $MB_TOPMOST, Default, "The search was successful, I searched using a Find Format, looking for any words that are set to Keep together, " & _
 				"containing the word ""Search"", and found the following: " & $sResultString)
 
 	Else

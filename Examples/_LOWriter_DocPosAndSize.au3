@@ -6,11 +6,15 @@ Example()
 
 Func Example()
 	Local $oDoc
-	Local $aiReturn
+	Local $aiReturn, $aiBackup
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Backup the current document coordinates. Return will be an array in order of function parameters.
+	$aiBackup = _LOWriter_DocPosAndSize($oDoc)
+	If @error Then _ERROR($oDoc, "Failed to retrieve document position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the X coordinate to 50, Y coordinate to 150, Width to 500, Height to 600
 	_LOWriter_DocPosAndSize($oDoc, 50, 150, 500, 600)
@@ -25,6 +29,10 @@ Func Example()
 			"Y Coordinate = " & $aiReturn[1] & @CRLF & _
 			"The document's width, in pixels, is: " & $aiReturn[2] & @CRLF & _
 			"The document's height, in pixels, is: " & $aiReturn[3])
+
+	; Restore the original Document size.
+	_LOWriter_DocPosAndSize($oDoc, $aiBackup[0], $aiBackup[1], $aiBackup[2], $aiBackup[3])
+	If @error Then _ERROR($oDoc, "Failed to set document settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

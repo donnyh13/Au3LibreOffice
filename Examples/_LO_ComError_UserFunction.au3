@@ -7,6 +7,8 @@ Example()
 Func Example()
 	Local $oCOM_Error, $oServiceManager
 	Local $MyFunc, $ReturnedFunc
+	Local $aReturn
+
 	; You don't need to normally set this, as each function already has it set internally. But to speed up the example I'm going to
 	; make a short cut to cause a COM error. This will behave the same as any function in this UDF.
 	$oCOM_Error = ObjEvent("AutoIt.Error", "__LO_InternalComErrorHandler")
@@ -80,7 +82,6 @@ Func Example()
 
 	; Create a COM Error by calling a non existent Method.
 	$oServiceManager.FakeMethod()
-
 EndFunc
 
 Func _FunctionForErrors($oObjectError)

@@ -7,7 +7,6 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oSrchDesc, $oResult
 	Local $sResultString
-	Local $aAnEmptyArray[0] ; Create an empty array to skip FindFormat parameter.
 	Local $abSearch
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -31,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to modify the search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the word "seaRch" using the search descriptor I just created.
-	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "seaRch", $aAnEmptyArray)
+	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "seaRch")
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$sResultString = ""

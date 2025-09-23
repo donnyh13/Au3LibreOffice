@@ -25,11 +25,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a form control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 16, $LOW_COLOR_INDIGO, $LOW_UNDERLINE_BOLD, $LOW_COLOR_GREEN, $LOW_STRIKEOUT_NONE, False, $LOW_RELIEF_NONE)
+	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 16, $LO_COLOR_INDIGO, $LOW_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOW_STRIKEOUT_NONE, False, $LOW_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
-	_LOWriter_FormConNumericFieldGeneral($oControl, "Renamed_AutoIt_Control", $oLabel, Null, False, True, True, False, True, $LOW_FORM_CON_MOUSE_SCROLL_ALWAYS, True, 1, 1.25, 50.00, 2, 18.44, 2, False, True, True, 50, $mFont, $LOW_ALIGN_HORI_CENTER, $LOW_ALIGN_VERT_BOTTOM, $LOW_COLOR_GOLD, $LOW_FORM_CON_BORDER_3D, $LOW_COLOR_BLACK, False, "Some Additional Information", "This is Help Text", "www.HelpURL.fake")
+	_LOWriter_FormConNumericFieldGeneral($oControl, "Renamed_AutoIt_Control", $oLabel, Null, False, True, True, False, True, $LOW_FORM_CON_MOUSE_SCROLL_ALWAYS, True, 1, 1.25, 50.00, 2, 18.44, 2, False, True, True, 50, $mFont, $LOW_ALIGN_HORI_CENTER, $LOW_ALIGN_VERT_BOTTOM, $LO_COLOR_GOLD, $LOW_FORM_CON_BORDER_3D, $LO_COLOR_BLACK, False, "Some Additional Information", "This is Help Text", "www.HelpURL.fake")
 	If @error Then _ERROR($oDoc, "Failed to modify the Control's properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings for the control. Return will be an Array in order of function parameters.

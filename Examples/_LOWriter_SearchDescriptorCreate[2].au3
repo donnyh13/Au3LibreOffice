@@ -7,7 +7,6 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oSrchDesc, $oResult, $oSrchDesc2
 	Local $sResultString
-	Local $aAnEmptyArray[0] ; Create an empty array to skip FindFormat parameter.
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -26,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the word "Search" using the search descriptor I just created.
-	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search", $aAnEmptyArray)
+	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search")
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$sResultString = ""
@@ -44,7 +43,7 @@ Func Example()
 	; Search for all matching results in this document, one at a time.
 	While IsObj($oResult)
 		; Search for the word "Search" using the search descriptor I just created. Starting from my last result.
-		$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search", $aAnEmptyArray, Null, $oResult)
+		$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "Search", Null, Null, $oResult)
 		If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Retrieve the Result's string.
@@ -66,7 +65,7 @@ Func Example()
 
 	; Search for the regular expression \b[a-z]{8}\b, which means find a word 8 letters long, \b means word boundary, meaning the result will start at
 	; the beginning of  a whole word, and end at the end of a whole word.
-	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc2, "\b[a-z]{8}\b", $aAnEmptyArray)
+	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc2, "\b[a-z]{8}\b")
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Result's string.
