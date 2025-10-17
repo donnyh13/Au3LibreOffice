@@ -818,7 +818,6 @@ Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
 
 	$oDoc = $oSlide.MasterPage.Forms.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
 	If ($iPos <> Null) And Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oNewSlide = $oDoc.Duplicate($oSlide)
@@ -844,7 +843,6 @@ Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
 		ElseIf ($iPos = $oDoc.DrawPages.getCount() - 1) Then ; Move slide to end.
 			$iMove = 1 ; Set to 1 so it will be called once.
 			$sDispatch = ".uno:MovePageLast"
-
 		EndIf
 
 		$oCurrSlide = $oDoc.getCurrentController.CurrentPage() ; Backup current slide
@@ -1096,7 +1094,6 @@ Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
 
 	$oDoc = $oSlide.MasterPage.Forms.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
 	If ($iPos <> Null) And Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	For $i = 0 To $oDoc.DrawPages.getCount() - 1
@@ -1118,7 +1115,6 @@ Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
 	ElseIf ($iPos = $oDoc.DrawPages.getCount() - 1) Then     ; Move slide to end.
 		$iMove = 1    ; Set to 1 so it will be called once.
 		$sDispatch = ".uno:MovePageLast"
-
 	EndIf
 
 	$oCurrSlide = $oDoc.getCurrentController.CurrentPage()     ; Backup current slide

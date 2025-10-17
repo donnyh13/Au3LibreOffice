@@ -1006,64 +1006,81 @@ Func _LOImpress_DrawShapeGetType(ByRef $oShape)
 				Case $LOI_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
 					Select
 						Case ($oShape.LineEndName = "Arrow") And ($oShape.LineStartName = "")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_ENDS_ARROW)
 
 						Case ($oShape.LineEndName = "Arrow") And ($oShape.LineStartName = "Arrow")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_ARROWS)
 
 						Case ($oShape.LineEndName = "") And ($oShape.LineStartName = "")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR)
 
 						Case Else
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR)
 					EndSelect
 
 				Case $LOI_DRAWSHAPE_CONNECTOR_TYPE_CURVE
 					Select
 						Case ($oShape.LineEndName = "Arrow") And ($oShape.LineStartName = "")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED_ENDS_ARROW)
 
 						Case ($oShape.LineEndName = "Arrow") And ($oShape.LineStartName = "Arrow")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED_ARROWS)
 
 						Case ($oShape.LineEndName = "") And ($oShape.LineStartName = "")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED)
 
 						Case Else
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED)
 					EndSelect
 
 				Case $LOI_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
 					Select
 						Case ($oShape.LineEndName = "Arrow") And ($oShape.LineStartName = "")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW)
 
 						Case ($oShape.LineEndName = "Arrow") And ($oShape.LineStartName = "Arrow")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ARROWS)
 
 						Case ($oShape.LineEndName = "") And ($oShape.LineStartName = "")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT)
 
 						Case Else
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT)
 					EndSelect
 
 				Case $LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE
 					Select
 						Case ($oShape.LineEndName = "Arrow") And ($oShape.LineStartName = "")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE_ENDS_ARROW)
 
 						Case ($oShape.LineEndName = "Arrow") And ($oShape.LineStartName = "Arrow")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE_ARROWS)
 
 						Case ($oShape.LineEndName = "") And ($oShape.LineStartName = "")
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE)
 
 						Case Else
+
 							Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE)
 					EndSelect
 
 				Case Else ; on error fall back.
+
 					Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR)
 			EndSwitch
 
@@ -1120,30 +1137,39 @@ Func _LOImpress_DrawShapeGetType(ByRef $oShape)
 		Case "com.sun.star.drawing.LineShape" ; No way to differentiate between these?? (Lines + Arrows)
 			Select
 				Case ($oShape.LineStartName = "") And ($oShape.LineEndName = "")
+
 					Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_LINE)
 
 				Case ($oShape.LineStartName = "Arrow") And ($oShape.LineEndName = "")
+
 					Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_STARTS_ARROW)
 
 				Case ($oShape.LineStartName = "Square") And ($oShape.LineEndName = "Arrow")
+
 					Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_SQUARE_ARROW)
 
 				Case ($oShape.LineStartName = "") And ($oShape.LineEndName = "Arrow")
+
 					Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ENDS_ARROW)
 
 				Case ($oShape.LineStartName = "Circle") And ($oShape.LineEndName = "Arrow")
+
 					Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_CIRCLE_ARROW)
 
 				Case ($oShape.LineStartName = "Arrow") And ($oShape.LineEndName = "Square")
+
 					Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROW_SQUARE)
 
 				Case ($oShape.LineStartName = "Arrow") And ($oShape.LineEndName = "Circle")
+
 					Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROW_CIRCLE)
 
 				Case ($oShape.LineStartName = "Arrow") And ($oShape.LineEndName = "Arrow")
+
 					Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROWS)
 
 				Case Else
+
 					Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_LINE) ; On error fall back.
 			EndSelect
 
@@ -1225,6 +1251,7 @@ Func _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight)
 
 	Switch $iShapeType
 		Case $LOI_DRAWSHAPE_TYPE_3D_CONE To $LOI_DRAWSHAPE_TYPE_3D_TORUS ; Can't create a 3D shape.
+
 			Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_4_WAY To $LOI_DRAWSHAPE_TYPE_ARROWS_PENTAGON ; Create an Arrow Shape.
@@ -1248,6 +1275,7 @@ Func _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight)
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_FONTWORK_AIR_MAIL To $LOI_DRAWSHAPE_TYPE_FONTWORK_TRICOLORE ; Can't create Fontwork.
+
 			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROWS To $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED ; Create a Line Shape.
@@ -1605,7 +1633,6 @@ Func _LOImpress_DrawShapeName(ByRef $oShape, $sName = Null)
 
 	$oSlide = $oShape.Parent()
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
 	If _LOImpress_DrawShapeExists($oSlide, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oShape.Name = $sName

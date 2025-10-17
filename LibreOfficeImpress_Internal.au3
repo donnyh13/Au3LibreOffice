@@ -361,7 +361,6 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iShape
 			Case $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT
 				$oShape.Name = __LOImpress_GetShapeName($oSlide, "Ellipse Segment ")
 				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
 		EndSwitch
 
 		$oSlide.add($oShape)
@@ -377,7 +376,6 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iShape
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oSlide.add($oShape)
-
 	EndIf
 
 	Switch $iShapeType
@@ -461,7 +459,6 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iShape
 		$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
 		$oShape.TextAutoGrowHeight = False
 		$oShape.TextAutoGrowWidth = False
-
 	EndIf
 
 	$tPos = $oShape.Position()
@@ -886,7 +883,6 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iShapeT
 			EndSwitch
 
 		Case $LOI_DRAWSHAPE_TYPE_CONNECTOR To $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW
-
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.ConnectorShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
@@ -961,7 +957,6 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iShapeT
 					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
-
 			EndSwitch
 
 		Case $LOI_DRAWSHAPE_TYPE_LINE_CURVE
@@ -2962,6 +2957,7 @@ Func __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
 				Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
 			Next
 		Until $i = $oSlide.getCount()
+
 	Else
 
 		Return SetError($__LO_STATUS_SUCCESS, 0, $sShapeName & "1") ; If Doc has no shapes, just return the name with a "1" appended.
