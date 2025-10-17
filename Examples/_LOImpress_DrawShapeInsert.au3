@@ -6,8 +6,6 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSlide, $oShape
-	Local $avShapes
-	Local $sShapeTypes = ""
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOImpress_DocCreate(True, False)
@@ -40,18 +38,6 @@ Func Example()
 	; Move the Shape.
 	_LOImpress_DrawShapePosition($oShape, 12000, 4300)
 	If @error Then _ERROR($oDoc, "Failed to move a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Retrieve an Array of all drawing Shapes in the current slide.
-	$avShapes = _LOImpress_SlideShapesGetList($oSlide, $LOI_SHAPE_TYPE_DRAWING_SHAPE)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Shapes in slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	For $i = 0 To @extended - 1
-		; Get the Shape type.
-		$sShapeTypes &= "Shape #" & $i + 1 & " is the following type: " & _LOImpress_DrawShapeGetType($avShapes[$i][0]) & @CRLF
-		If @error Then _ERROR($oDoc, "Failed to identify shape type. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-	Next
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The shapes in this slide are the following types (See UDF Constants)." & @CRLF & $sShapeTypes)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

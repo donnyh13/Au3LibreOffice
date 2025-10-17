@@ -54,7 +54,7 @@
 ; Name ..........: _LOImpress_DrawShapeAreaColor
 ; Description ...: Set or Retrieve the Fill color settings for a Shape.
 ; Syntax ........: _LOImpress_DrawShapeAreaColor(ByRef $oShape[, $iColor = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The Fill color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Set to $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -110,7 +110,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaColor
 ; Name ..........: _LOImpress_DrawShapeAreaFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOImpress_DrawShapeAreaFillStyle(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -145,7 +145,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaFillStyle
 ; Name ..........: _LOImpress_DrawShapeAreaGradient
 ; Description ...: Modify or retrieve the settings for Shape Background color Gradient.
 ; Syntax ........: _LOImpress_DrawShapeAreaGradient(ByRef $oShape[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $sGradientName       - [optional] a string value. Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iType               - [optional] an integer value (-1-5). Default is Null. The gradient type to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iIncrement          - [optional] an integer value (0, 3-256). Default is Null. The number of steps of color change. 0 = Automatic.
@@ -200,7 +200,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaFillStyle
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOImpress_DrawShapeInsert, _LOImpress_DrawShapeGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOImpress_DrawShapeInsert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -376,7 +376,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaGradient
 ; Name ..........: _LOImpress_DrawShapeAreaGradientMulticolor
 ; Description ...: Set or Retrieve a Shape's Multicolor Gradient settings. See remarks.
 ; Syntax ........: _LOImpress_DrawShapeAreaGradientMulticolor(ByRef $oShape[, $avColorStops = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by previous _LOImpress_DrawShapeInsert, or _LOImpress_DrawShapeGetObjByName function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -485,7 +485,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaGradientMulticolor
 ; Name ..........: _LOImpress_DrawShapeAreaTransparency
 ; Description ...: Set or retrieve Transparency settings for a Shape.
 ; Syntax ........: _LOImpress_DrawShapeAreaTransparency(ByRef $oShape[, $iTransparency = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -502,7 +502,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaGradientMulticolor
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOImpress_DrawShapeInsert, _LOImpress_DrawShapeGetObjByName
+; Related .......: _LOImpress_DrawShapeInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -529,7 +529,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaTransparency
 ; Name ..........: _LOImpress_DrawShapeAreaTransparencyGradient
 ; Description ...: Set or retrieve the Shape transparency gradient settings.
 ; Syntax ........: _LOImpress_DrawShapeAreaTransparencyGradient(ByRef $oShape[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Set to $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -571,7 +571,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaTransparency
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOImpress_DrawShapeInsert, _LOImpress_DrawShapeGetObjByName
+; Related .......: _LOImpress_DrawShapeInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -718,7 +718,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaTransparencyGradient
 ; Name ..........: _LOImpress_DrawShapeAreaTransparencyGradientMulti
 ; Description ...: Set or Retrieve a Shape's Multi Transparency Gradient settings. See remarks.
 ; Syntax ........: _LOImpress_DrawShapeAreaTransparencyGradientMulti(ByRef $oShape[, $avColorStops = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by previous _LOImpress_DrawShapeInsert, or _LOImpress_DrawShapeGetObjByName function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -827,7 +827,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaTransparencyGradientMulti
 ; Name ..........: _LOImpress_DrawShapeDelete
 ; Description ...: Delete a Shape.
 ; Syntax ........: _LOImpress_DrawShapeDelete(ByRef $oShape)
-; Parameters ....: $oShape                - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape                - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -866,9 +866,9 @@ Func _LOImpress_DrawShapeDelete(ByRef $oShape)
 EndFunc   ;==>_LOImpress_DrawShapeDelete
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_ShapeExists
+; Name ..........: _LOImpress_DrawShapeExists
 ; Description ...: Check if a Slide contains a Shape with the specified name.
-; Syntax ........: _LOImpress_ShapeExists(ByRef $oSlide, $sShapeName)
+; Syntax ........: _LOImpress_DrawShapeExists(ByRef $oSlide, $sShapeName)
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
 ;                  $sShapeName          - a string value. The Shape name to search for.
 ; Return values .: Success: Boolean
@@ -885,7 +885,7 @@ EndFunc   ;==>_LOImpress_DrawShapeDelete
 ; Remarks .......: On newly created shapes, the name value is blank for some reason, even though the shape in the UI has a name.
 ;                  The Shape name must be unique, however due to the above issue, it is possible to have two shapes with the same name in the UI (But not internally).
 ;                  I have modified the check for a Shape name already existing by assuming a Shape's name when encountering one without a name, e.g. assuming the name would be "Shape 1" etc.
-; Related .......: _LOImpress_ShapeGetObjByName
+; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -917,7 +917,7 @@ EndFunc   ;==>_LOImpress_DrawShapeExists
 ; Name ..........: _LOImpress_DrawShapeGetType
 ; Description ...: Return the Drawing Shape's Type corresponding to the constants $LOI_DRAWSHAPE_TYPE_*
 ; Syntax ........: _LOImpress_DrawShapeGetType(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1298,7 +1298,7 @@ EndFunc   ;==>_LOImpress_DrawShapeInsert
 ; Name ..........: _LOImpress_DrawShapeLineArrowStyles
 ; Description ...: Set or Retrieve Shape Line Start and End Arrow Style settings.
 ; Syntax ........: _LOImpress_DrawShapeLineArrowStyles(ByRef $oShape[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $vStartStyle         - [optional] a variant value (0-32, or String). Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOI_DRAWSHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
 ;                  $iStartWidth         - [optional] an integer value (0-5004). Default is Null. The Width of the Starting Arrowhead, in Micrometers.
 ;                  $bStartCenter        - [optional] a boolean value. Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
@@ -1448,7 +1448,7 @@ EndFunc   ;==>_LOImpress_DrawShapeLineArrowStyles
 ; Name ..........: _LOImpress_DrawShapeLineProperties
 ; Description ...: Set or Retrieve Shape Line settings.
 ; Syntax ........: _LOImpress_DrawShapeLineProperties(ByRef $oShape[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $vStyle              - [optional] a variant value (0-31, or String). Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
 ;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Line color, set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] an integer value (0-5004). Default is Null. The line Width, set in Micrometers.
@@ -1485,7 +1485,7 @@ EndFunc   ;==>_LOImpress_DrawShapeLineArrowStyles
 ;                  When retrieving the current settings, $vStyle could be either an integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOImpress_DrawShapeInsert, _LOImpress_DrawShapeGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOImpress_DrawShapeInsert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1592,7 +1592,7 @@ EndFunc   ;==>_LOImpress_DrawShapeLineProperties
 ; Name ..........: _LOImpress_DrawShapeName
 ; Description ...: Set or Retrieve a Shape's Name.
 ; Syntax ........: _LOImpress_DrawShapeName(ByRef $oShape[, $sName = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The new, unique Name for the Shape.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1614,7 +1614,7 @@ EndFunc   ;==>_LOImpress_DrawShapeLineProperties
 ;                  On newly created shapes, the name value is blank for some reason, even though the shape in the UI has a name.
 ;                  The Shape name must be unique, however due to the above issue, it is possible to have two shapes with the same name in the UI (But not internally).
 ;                  I have modified the check for a Shape name already existing by assuming a Shape's name when encountering one without a name, e.g. assuming the name would be "Shape 1" etc.
-; Related .......: _LOImpress_DrawShapeInsert, _LOImpress_DrawShapeGetObjByName
+; Related .......: _LOImpress_DrawShapeInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1645,7 +1645,7 @@ EndFunc   ;==>_LOImpress_DrawShapeName
 ; Name ..........: _LOImpress_DrawShapePointsAdd
 ; Description ...: Add a Position Point to Shape.
 ; Syntax ........: _LOImpress_DrawShapePointsAdd(ByRef $oShape, $iPoint, $iX, $iY[, $iPointType = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL[, $bIsCurve = False]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
 ;                  $iPoint              - an integer value. The Point to insert the new point AFTER. 0 means insert at the beginning.
 ;                  $iX                  - an integer value. The X coordinate value, set in Micrometers.
 ;                  $iY                  - an integer value. The Y coordinate value, set in Micrometers.
@@ -2093,7 +2093,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsAdd
 ; Name ..........: _LOImpress_DrawShapePointsGetCount
 ; Description ...: Retrieve a count of Points present in a Shape.
 ; Syntax ........: _LOImpress_DrawShapePointsGetCount(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2137,7 +2137,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ; Name ..........: _LOImpress_DrawShapePointsModify
 ; Description ...: Modify an existing Position Point or Point Type in a shape.
 ; Syntax ........: _LOImpress_DrawShapePointsModify(ByRef $oShape, $iPoint[, $iX = Null[, $iY = Null[, $iPointType = Null[, $bIsCurve = Null]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
 ;                  $iPoint              - an integer value. The Point to modify, starting at 1.
 ;                  $iX                  - [optional] an integer value. Default is Null. The X coordinate value, set in Micrometers.
 ;                  $iY                  - [optional] an integer value. Default is Null. The Y coordinate value, set in Micrometers.
@@ -2267,7 +2267,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsModify
 ; Name ..........: _LOImpress_DrawShapePointsRemove
 ; Description ...: Remove a position Point from a Shape.
 ; Syntax ........: _LOImpress_DrawShapePointsRemove(ByRef $oShape, $iPoint)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $iPoint              - an integer value. The Point to in the Shape to delete, beginning at 1.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2597,7 +2597,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ; Name ..........: _LOImpress_DrawShapePosition
 ; Description ...: Set or Retrieve the Shape's position settings.
 ; Syntax ........: _LOImpress_DrawShapePosition(ByRef $oShape[, $iX = Null[, $iY = Null[, $bProtectPos = Null]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $iX                  - [optional] an integer value. Default is Null. The X position from the insertion point, in Micrometers.
 ;                  $iY                  - [optional] an integer value. Default is Null. The Y position from the insertion point, in Micrometers.
 ;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, the Shape's position is locked.
@@ -2621,7 +2621,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DrawShapeInsert, _LOImpress_DrawShapeGetObjByName, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOImpress_DrawShapeInsert, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2677,7 +2677,7 @@ EndFunc   ;==>_LOImpress_DrawShapePosition
 ; Name ..........: _LOImpress_DrawShapeRotateSlant
 ; Description ...: Set or retrieve Rotation and Slant settings for a Shape.
 ; Syntax ........: _LOImpress_DrawShapeRotateSlant(ByRef $oShape[, $nRotate = Null[, $nSlant = Null]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $nRotate             - [optional] a general number value (0-359.99). Default is Null. The Degrees to rotate the shape. See remarks.
 ;                  $nSlant              - [optional] a general number value (-89-89.00). Default is Null. The Degrees to slant the shape. See remarks.
 ; Return values .: Success: 1 or Array.
@@ -2701,7 +2701,7 @@ EndFunc   ;==>_LOImpress_DrawShapePosition
 ;                  At the present time Corner Radius setting is not included, as I was unable to identify a shape that utilized this setting.
 ;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOImpress_DrawShapeInsert, _LOImpress_DrawShapeGetObjByName
+; Related .......: _LOImpress_DrawShapeInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2742,7 +2742,7 @@ EndFunc   ;==>_LOImpress_DrawShapeRotateSlant
 ; Name ..........: _LOImpress_DrawShapeTextboxCreateTextCursor
 ; Description ...: Create a Text Cursor in a Shape's Textbox for inserting text etc.
 ; Syntax ........: _LOImpress_DrawShapeTextboxCreateTextCursor(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2778,7 +2778,7 @@ EndFunc   ;==>_LOImpress_DrawShapeTextboxCreateTextCursor
 ; Name ..........: _LOImpress_DrawShapeTypeSize
 ; Description ...: Set or Retrieve Shape Size related settings.
 ; Syntax ........: _LOImpress_DrawShapeTypeSize(ByRef $oShape[, $iWidth = Null[, $iHeight = Null[, $bProtectSize = Null]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Shape, in Micrometers(uM). Min. 51.
 ;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Shape, in Micrometers(uM). Min. 51.
 ;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the Shape.
@@ -2804,7 +2804,7 @@ EndFunc   ;==>_LOImpress_DrawShapeTextboxCreateTextCursor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I have skipped "Keep Ratio", as currently it seems unable to be set for shapes.
-; Related .......: _LOImpress_DrawShapeInsert, _LOImpress_DrawShapeGetObjByName, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOImpress_DrawShapeInsert, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

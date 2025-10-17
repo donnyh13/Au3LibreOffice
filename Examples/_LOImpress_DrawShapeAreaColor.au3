@@ -2,7 +2,6 @@
 
 #include "..\LibreOfficeImpress.au3"
 
-
 Example()
 
 Func Example()
