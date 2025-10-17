@@ -26,11 +26,14 @@
 ; #CURRENT# =====================================================================================================================
 ; _LOImpress_ComError_UserFunction
 ; _LOImpress_CursorInsertString
-; _LOImpress_DrawShapeDelete
-; _LOImpress_DrawShapeGetType
-; _LOImpress_DrawShapeTextboxCreateTextCursor
 ; _LOImpress_FontExists
 ; _LOImpress_FontsGetNames
+; _LOImpress_GradientMulticolorAdd
+; _LOImpress_GradientMulticolorDelete
+; _LOImpress_GradientMulticolorModify
+; _LOImpress_TransparencyGradientMultiAdd
+; _LOImpress_TransparencyGradientMultiDelete
+; _LOImpress_TransparencyGradientMultiModify
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
@@ -148,249 +151,6 @@ Func _LOImpress_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOImpress_CursorInsertString
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_DrawShapeDelete
-; Description ...: Delete a Shape.
-; Syntax ........: _LOImpress_DrawShapeDelete(ByRef $oShape)
-; Parameters ....: $oShape                - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape's containing Slide.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of shapes.
-;                  @Error 3 @Extended 3 Return 0 = Same number of shapes still present. Failed to delete the Shape.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Shape was successfully deleted.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOImpress_DrawShapeDelete(ByRef $oShape)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iShapes
-	Local $oDrawPage
-
-	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$oDrawPage = $oShape.Parent()
-	If Not IsObj($oDrawPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	$iShapes = $oDrawPage.getCount()
-	If Not IsInt($iShapes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	$oDrawPage.remove($oShape)
-
-	Return ($oDrawPage.getCount() = $iShapes) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_DrawShapeDelete
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_DrawShapeGetType
-; Description ...: Return the Drawing Shape's Type corresponding to the constants $LOI_DRAWSHAPE_TYPE_*
-; Syntax ........: _LOImpress_DrawShapeGetType(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
-; Return values .: Success: Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve CustomShapeGeometry Array.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve CustomShapeGeometry "Type" value.
-;                  @Error 3 @Extended 3 Return 0 = Failed to determine CustomShape's type.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify what type of "com.sun.star.drawing.EllipseShape" called shape is.
-;                  @Error 3 @Extended 5 Return 0 = Called Shape is a unknown shape type.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_CONNECTOR_* Type Shape. Returning $LOI_DRAWSHAPE_TYPE_CONNECTOR Constant Value. See Remarks #4.
-;                  @Error 0 @Extended 2 Return Integer = Success. Shape is a Custom Shape Type. Returning appropriate Constant for shape type if successfully identified, else -1 if identification failed. See Remarks #1. See Constants, $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 0 @Extended 3 Return Integer = Success. Shape is a*_BASIC_CIRCLE_SEGMENT or *_BASIC_ARC Type Shape. Returning appropriate Constant, See Constants, $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 0 @Extended 4 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_CURVE Shape.
-;                  @Error 0 @Extended 5 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_CURVE_FILLED Shape.
-;                  @Error 0 @Extended 6 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE Shape.
-;                  @Error 0 @Extended 7 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE_FILLED Shape.
-;                  @Error 0 @Extended 8 Return Integer = Success. Shape is a *_LINE_LINE, *_LINE_LINE_45 or $LOI_DRAWSHAPE_TYPE_LINE_ARROW_* Type Shape. Returning $LOI_DRAWSHAPE_TYPE_LINE_LINE Constant Value. See Remarks #4.
-;                  @Error 0 @Extended 9 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION Shape.
-;                  @Error 0 @Extended 10 Return Integer = Success. Shape is a *_LINE_POLYGON, or *_LINE_POLYGON_45 Type Shape. Returning $LOI_DRAWSHAPE_TYPE_LINE_POLYGON Constant Value. See Remarks #2.
-;                  @Error 0 @Extended 11 Return Integer = Success. Shape is a *_LINE_POLYGON_FILLED, or *_LINE_POLYGON_45_FILLED Type Shape. Returning $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED Constant Value. See Remarks #2.
-;                  @Error 0 @Extended 11 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_3D_* Type Shape. Returning $LOI_DRAWSHAPE_TYPE_3D_CONE Constant Value. See Remarks #5.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: #1 Some shapes are not implemented, or not fully implemented into LibreOffice for automation, consequently they do not have appropriate type names as of yet. Many have simply ambiguous names, such as "non-primitive".
-;                  Because of this the following Custom shape types cannot be identified, and this function will return -1:
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, known as "mso-spt100".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, known as "non-primitive", should be "corner-right-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, known as "non-primitive", should be "right-left-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, known as "non-primitive", should be "s-sharped-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, known as "non-primitive", should be "split-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT, known as "mso-spt100", should be "striped-right-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT, known as "mso-spt89", should be "up-right-arrow-callout".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, known as "mso-spt100", should be "up-right-down-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, known as "mso-spt100", should be "circle-pie".
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_6_POINT, known as "non-primitive", should be "star6".
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE, known as "non-primitive", should be "concave-star6".
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_12_POINT, known as "non-primitive", should be "star12".
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_SIGNET, known as "non-primitive", should be "signet".
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD, known as "non-primitive", should be "cloud"?
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER, known as "non-primitive", should be "flower"?
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING, known as "non-primitive", should be "lightning".
-;                  #2 The following Shapes implement the same type names, and are consequently indistinguishable:
-;                  - $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE, $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE is returned for either one.)
-;                  - $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE is returned for either one.)
-;                  - $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED is returned for either one.)
-;                  - $LOI_DRAWSHAPE_TYPE_LINE_POLYGON, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45 (The Value of $LOI_DRAWSHAPE_TYPE_LINE_POLYGON is returned for either of these.)
-;                  - $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED (The Value of $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED is returned for either of these.)
-;                  #3 The following Shapes have strange names that may change in the future, but currently are able to be identified:
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_DOORPLATE, known as, "mso-spt21", should be "doorplate"
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, known as, "col-502ad400", should be ??
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, known as, "col-60da8460", should be ??
-;                  #4 The following Shapes are customizable one to another, and are consequently indistinguishable:
-;                  - $LOI_DRAWSHAPE_TYPE_CONNECTOR_* (The Value of $LOI_DRAWSHAPE_TYPE_CONNECTOR is returned for any of these.)
-;                  - $LOI_DRAWSHAPE_TYPE_FONTWORK_* (The Value of $LOI_DRAWSHAPE_TYPE_FONTWORK_AIR_MAIL is returned for any of these.)
-;                  - $LOI_DRAWSHAPE_TYPE_LINE_ARROW_* or $LOI_DRAWSHAPE_TYPE_LINE_LINE_45 (The Value of $LOI_DRAWSHAPE_TYPE_LINE_LINE is returned for any of these.)
-;                  #5 The following Shapes are have nothing unique that I have found yet to identify each, and are consequently indistinguishable:
-;                  - $LOI_DRAWSHAPE_TYPE_3D_* (The Value of $LOI_DRAWSHAPE_TYPE_3D_CONE is returned for any of these.)
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOImpress_DrawShapeGetType(ByRef $oShape)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $atCusShapeGeo[0]
-	Local Const $iCircleKind_CUT = 2 ; a circle with a cut connected by a line.
-	Local Const $iCircleKind_ARC = 3 ; a circle with an open cut.
-	Local $sType
-	Local $iReturn
-
-	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	Switch $oShape.ShapeType()
-		Case "com.sun.star.drawing.ConnectorShape" ; No way to differentiate between these??
-
-			Return SetError($__LO_STATUS_SUCCESS, 1, $LOI_DRAWSHAPE_TYPE_CONNECTOR)
-
-		Case "com.sun.star.drawing.CustomShape"
-			$atCusShapeGeo = $oShape.CustomShapeGeometry()
-			If Not IsArray($atCusShapeGeo) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-			For $i = 0 To UBound($atCusShapeGeo) - 1
-				If ($atCusShapeGeo[$i].Name() = "Type") Then
-					$sType = $atCusShapeGeo[$i].Value()
-					If Not IsString($sType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-					ExitLoop
-				EndIf
-
-				Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
-			Next
-
-			$iReturn = __LOImpress_DrawShape_GetCustomType($sType)
-			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-			Return SetError($__LO_STATUS_SUCCESS, 2, $iReturn)
-
-		Case "com.sun.star.drawing.EllipseShape"
-			If ($oShape.CircleKind() = $iCircleKind_CUT) Then ; Circle Segment = CircleKind_CUT(2), Arc = CircleKind_ARC(3)
-
-				Return SetError($__LO_STATUS_SUCCESS, 3, $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT)
-
-			ElseIf ($oShape.CircleKind() = $iCircleKind_ARC) Then
-
-				Return SetError($__LO_STATUS_SUCCESS, 3, $LOI_DRAWSHAPE_TYPE_BASIC_ARC)
-
-			Else
-
-				Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-			EndIf
-
-		Case "com.sun.star.drawing.OpenBezierShape"
-
-			Return SetError($__LO_STATUS_SUCCESS, 4, $LOI_DRAWSHAPE_TYPE_LINE_CURVE)
-
-		Case "com.sun.star.drawing.ClosedBezierShape"
-
-			Return SetError($__LO_STATUS_SUCCESS, 5, $LOI_DRAWSHAPE_TYPE_LINE_CURVE_FILLED)
-
-		Case "com.sun.star.drawing.OpenFreeHandShape"
-
-			Return SetError($__LO_STATUS_SUCCESS, 6, $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE)
-
-		Case "com.sun.star.drawing.ClosedFreeHandShape"
-
-			Return SetError($__LO_STATUS_SUCCESS, 7, $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE_FILLED)
-
-		Case "com.sun.star.drawing.LineShape" ; No way to differentiate between these?? (Lines + Arrows)
-
-			Return SetError($__LO_STATUS_SUCCESS, 8, $LOI_DRAWSHAPE_TYPE_LINE_LINE)
-
-		Case "com.sun.star.drawing.MeasureShape"
-
-			Return SetError($__LO_STATUS_SUCCESS, 9, $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION)
-
-		Case "com.sun.star.drawing.PolyLineShape"
-			;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON ; No way to differentiate between these??
-			;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45
-
-			Return SetError($__LO_STATUS_SUCCESS, 10, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON)
-
-		Case "com.sun.star.drawing.PolyPolygonShape"
-
-			Return SetError($__LO_STATUS_SUCCESS, 11, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED)
-			;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED ; No way to differentiate between these??
-			;~ $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED
-
-		Case "com.sun.star.drawing.Shape3DSceneObject" ; No way to differentiate between these??
-
-			Return SetError($__LO_STATUS_SUCCESS, 12, $LOI_DRAWSHAPE_TYPE_3D_CONE)
-
-		Case Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Unknown shape type.
-	EndSwitch
-EndFunc   ;==>_LOImpress_DrawShapeGetType
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_DrawShapeTextboxCreateTextCursor
-; Description ...: Create a Text Cursor in a Textbox for inserting text etc.
-; Syntax ........: _LOImpress_DrawShapeTextboxCreateTextCursor(ByRef $oTextbox)
-; Parameters ....: $oTextbox              - [in/out] an object. A Textbox Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
-; Return values .: Success: Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextbox not an Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. A Text Cursor Object located in the Frame.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOImpress_DrawShapeTextboxCreateTextCursor(ByRef $oTextbox)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oTextCursor
-	Local $iShapeType
-
-	If Not IsObj($oTextbox) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$iShapeType = __LOImpress_DrawShapeGetType($oTextbox)
-	If ($iShapeType <> $LOI_SHAPE_TYPE_TEXTBOX) And ($iShapeType <> $LOI_SHAPE_TYPE_TEXTBOX_TITLE) And ($iShapeType <> $LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$oTextCursor = $oTextbox.Text.createTextCursor()
-	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextCursor)
-EndFunc   ;==>_LOImpress_DrawShapeTextboxCreateTextCursor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_FontExists
@@ -543,3 +303,307 @@ Func _LOImpress_FontsGetNames($oDoc = Null)
 
 	Return SetError($__LO_STATUS_SUCCESS, UBound($atFonts), $asFonts)
 EndFunc   ;==>_LOImpress_FontsGetNames
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_GradientMulticolorAdd
+; Description ...: Add a ColorStop to a Gradient ColorStop Array.
+; Syntax ........: _LOImpress_GradientMulticolorAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
+;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
+;                  $iColor              - an integer value (0-16777215). The ColorStop color. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully added to array.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_GradientMulticolorAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	ReDim $avColorStops[UBound($avColorStops) + 1][2]
+
+	For $iToWrite = (UBound($avColorStops) - 1) To 0 Step -1
+		If $iToWrite = $iIndex Then
+			$avColorStops[$iToWrite][0] = $nStopOffset
+			$avColorStops[$iToWrite][1] = $iColor
+			ExitLoop
+
+		Else
+			$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite - 1][0]
+			$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite - 1][1]
+		EndIf
+
+		Sleep((IsInt($iToWrite / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_GradientMulticolorAdd
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_GradientMulticolorDelete
+; Description ...: Delete a ColorStop from a Gradient ColorStop Array.
+; Syntax ........: _LOImpress_GradientMulticolorDelete(ByRef $avColorStops, $iIndex)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to delete. 0 Based.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully removed from array.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_GradientMulticolorDelete(ByRef $avColorStops, $iIndex)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $iToRead = 0
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	For $iToWrite = 0 To UBound($avColorStops) - 2
+		If $iToWrite = $iIndex Then $iToRead += 1
+
+		$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite + $iToRead][0]
+		$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite + $iToRead][1]
+
+		Sleep((IsInt($iToWrite / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	ReDim $avColorStops[UBound($avColorStops) - 1][2]
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_GradientMulticolorDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_GradientMulticolorModify
+; Description ...: Modify a ColorStop in a Gradient ColorStop Array.
+; Syntax ........: _LOImpress_GradientMulticolorModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to modify. 0 Based.
+;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
+;                  $iColor              - an integer value (0-16777215). The ColorStop color. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element.
+;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully modified.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_GradientMulticolorModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	For $iToWrite = 0 To UBound($avColorStops) - 1
+		If $iToWrite = $iIndex Then
+			$avColorStops[$iToWrite][0] = $nStopOffset
+			$avColorStops[$iToWrite][1] = $iColor
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($iToWrite / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_GradientMulticolorModify
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_TransparencyGradientMultiAdd
+; Description ...: Add a ColorStop to a Gradient ColorStop Array.
+; Syntax ........: _LOImpress_TransparencyGradientMultiAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
+;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
+;                  $iTransparency       - an integer value (0-100). The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully added to array.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_TransparencyGradientMultiAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	ReDim $avColorStops[UBound($avColorStops) + 1][2]
+
+	For $iToWrite = (UBound($avColorStops) - 1) To 0 Step -1
+		If $iToWrite = $iIndex Then
+			$avColorStops[$iToWrite][0] = $nStopOffset
+			$avColorStops[$iToWrite][1] = $iTransparency
+			ExitLoop
+
+		Else
+			$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite - 1][0]
+			$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite - 1][1]
+		EndIf
+
+		Sleep((IsInt($iToWrite / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_TransparencyGradientMultiAdd
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_TransparencyGradientMultiDelete
+; Description ...: Delete a ColorStop from a Gradient ColorStop Array.
+; Syntax ........: _LOImpress_TransparencyGradientMultiDelete(ByRef $avColorStops, $iIndex)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to delete. 0 Based.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully removed from array.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_TransparencyGradientMultiDelete(ByRef $avColorStops, $iIndex)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $iToRead = 0
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	For $iToWrite = 0 To UBound($avColorStops) - 2
+		If $iToWrite = $iIndex Then $iToRead += 1
+
+		$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite + $iToRead][0]
+		$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite + $iToRead][1]
+
+		Sleep((IsInt($iToWrite / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	ReDim $avColorStops[UBound($avColorStops) - 1][2]
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_TransparencyGradientMultiDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_TransparencyGradientMultiModify
+; Description ...: Modify a ColorStop in a Gradient ColorStop Array.
+; Syntax ........: _LOImpress_TransparencyGradientMultiModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to modify. 0 Based.
+;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
+;                  $iTransparency       - an integer value (0-100). The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element.
+;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully modified.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_TransparencyGradientMultiModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	For $iToWrite = 0 To UBound($avColorStops) - 1
+		If $iToWrite = $iIndex Then
+			$avColorStops[$iToWrite][0] = $nStopOffset
+			$avColorStops[$iToWrite][1] = $iTransparency
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($iToWrite / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_TransparencyGradientMultiModify

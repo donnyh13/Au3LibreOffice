@@ -22,15 +22,1488 @@
 ; ===============================================================================================================================
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
+; __LOImpress_ColorRemoveAlpha
+; __LOImpress_CreatePoint
+; __LOImpress_DrawShape_CreateArrow
+; __LOImpress_DrawShape_CreateBasic
+; __LOImpress_DrawShape_CreateCallout
+; __LOImpress_DrawShape_CreateFlowchart
+; __LOImpress_DrawShape_CreateLine
+; __LOImpress_DrawShape_CreateStars
+; __LOImpress_DrawShape_CreateSymbol
 ; __LOImpress_DrawShape_GetCustomType
-; __LOImpress_DrawShapeGetType
+; __LOImpress_DrawShapeArrowStyleName
+; __LOImpress_DrawShapeLineStyleName
+; __LOImpress_DrawShapePointGetSettings
+; __LOImpress_DrawShapePointModify
 ; __LOImpress_FilterNameGet
+; __LOImpress_GetShapeName
 ; __LOImpress_GradientNameInsert
 ; __LOImpress_GradientPresets
 ; __LOImpress_InternalComErrorHandler
+; __LOImpress_ShapeGetType
 ; __LOImpress_TransparencyGradientConvert
 ; __LOImpress_TransparencyGradientNameInsert
 ; ===============================================================================================================================
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_ColorRemoveAlpha
+; Description ...: Remove the Alpha value from a Long color value.
+; Syntax ........: __LOImpress_ColorRemoveAlpha($iColor)
+; Parameters ....: $iColor              - an integer value. A Long Color value to remove Alpha from.
+; Return values .: Success: Integer
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return $iColor = $iColor not an Integer. Returning $iColor to be sure not to lose the value.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Integer = Success. Color already has no Alpha value, returning same color.
+;                  @Error 0 @Extended 1 Return Integer = Success. Removed Alpha value from Long Color value, returning new Color value.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: In functions which return the current color value, generally background colors, if Transparency (alpha) is set, the background color value is not the literal color set, but also includes the transparency value added to it. This functions removes that value for simpler color values.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_ColorRemoveAlpha($iColor)
+	Local $iRed, $iGreen, $iBlue, $iLong
+
+	If Not IsInt($iColor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, $iColor)
+
+	If __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_SUCCESS, 0, $iColor) ; If Color value is not greater than White(16777215) or less than -1, then there is no alpha to remove.
+
+	; Obtain individual color values.
+	$iRed = BitAND(BitShift($iColor, 16), 0xff)
+	$iGreen = BitAND(BitShift($iColor, 8), 0xff)
+	$iBlue = BitAND($iColor, 0xff)
+	$iLong = BitShift($iRed, -16) + BitShift($iGreen, -8) + $iBlue
+
+	Return SetError($__LO_STATUS_SUCCESS, 1, $iLong)
+EndFunc   ;==>__LOImpress_ColorRemoveAlpha
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_CreatePoint
+; Description ...: Creates a Position structure.
+; Syntax ........: __LOImpress_CreatePoint($iX, $iY)
+; Parameters ....: $iX                  - an integer value. The X position, in Micrometers.
+;                  $iY                  - an integer value. The Y position, in Micrometers.
+; Return values .: Success: Structure
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $iX not an Integer.
+;                  @Error 1 @Extended 2 Return 0 = $iY not an Integer.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to Create a Position Structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Structure = Success. Returning created Position Structure set to $iX and $iY values.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Modified from A. Pitonyak, Listing 493. in OOME 3.0
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_CreatePoint($iX, $iY)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $tPoint
+
+	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$tPoint = __LO_CreateStruct("com.sun.star.awt.Point")
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$tPoint.X = $iX
+	$tPoint.Y = $iY
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $tPoint)
+EndFunc   ;==>__LOImpress_CreatePoint
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShape_CreateArrow
+; Description ...: Create an Arrow type Shape.
+; Syntax ........: __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $iWidth              - an integer value. The Shape's Width in Micrometers.
+;                  $iHeight             - an integer value. The Shape's Height in Micrometers.
+;                  $iShapeType          - an integer value (0-25). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iShapeType not an Integer
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
+;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
+;                  @Error 2 @Extended 3 Return 0 = Failed to create "MirroredX" property structure.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Document Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a unique Shape name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the Position Structure.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve the Size Structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
+;                  $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT,
+;                  $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape, $oDoc
+	Local $tProp, $tProp2, $tSize, $tPos
+	Local $atCusShapeGeo[1]
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$tProp = __LO_SetPropertyValue("Type", "")
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	Switch $iShapeType
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_4_WAY
+			$tProp.Value = "quad-arrow"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_4_WAY
+			$tProp.Value = "quad-arrow-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_DOWN
+			$tProp.Value = "down-arrow-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT
+			$tProp.Value = "left-arrow-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT_RIGHT
+			$tProp.Value = "left-right-arrow-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_RIGHT
+			$tProp.Value = "right-arrow-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP
+			$tProp.Value = "up-arrow-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN
+			$tProp.Value = "up-down-arrow-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT
+			$tProp.Value = "mso-spt100"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CIRCULAR
+			$tProp.Value = "circular-arrow"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT
+			$tProp.Value = "corner-right-arrow" ; "non-primitive"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_DOWN
+			$tProp.Value = "down-arrow"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT
+			$tProp.Value = "left-arrow"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT_RIGHT
+			$tProp.Value = "left-right-arrow"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_NOTCHED_RIGHT
+			$tProp.Value = "notched-right-arrow"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT
+			$tProp.Value = "right-arrow"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT
+			$tProp.Value = "split-arrow" ; "non-primitive"??
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED
+			$tProp.Value = "s-sharped-arrow" ; "non-primitive"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT
+			$tProp.Value = "split-arrow" ; "non-primitive"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT
+			$tProp.Value = "striped-right-arrow" ; "mso-spt100"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP
+			$tProp.Value = "up-arrow"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_DOWN
+			$tProp.Value = "up-down-arrow"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT
+			$tProp.Value = "up-right-arrow-callout" ; "mso-spt89"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN
+			$tProp.Value = "up-right-down-arrow" ; "mso-spt100"
+
+			$tProp2 = __LO_SetPropertyValue("MirroredX", True) ; Shape is an up and left arrow without this Property.
+			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+			ReDim $atCusShapeGeo[2]
+			$atCusShapeGeo[1] = $tProp2
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_CHEVRON
+			$tProp.Value = "chevron"
+
+		Case $LOI_DRAWSHAPE_TYPE_ARROWS_PENTAGON
+			$tProp.Value = "pentagon-right"
+	EndSwitch
+
+	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oSlide.add($oShape)
+
+	$atCusShapeGeo[0] = $tProp
+	$oShape.CustomShapeGeometry = $atCusShapeGeo
+
+	$tPos = $oShape.Position()
+	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$tPos.X = 0
+	$tPos.Y = 0
+
+	$oShape.Position = $tPos
+
+	$tSize = $oShape.Size()
+	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$tSize.Width = $iWidth
+	$tSize.Height = $iHeight
+
+	$oShape.Size = $tSize
+
+	; Settings for TextBox use.
+	$oShape.TextMinimumFrameWidth = $iWidth
+	$oShape.TextMinimumFrameHeight = $iHeight
+	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextAutoGrowHeight = False
+	$oShape.TextAutoGrowWidth = False
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
+EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShape_CreateBasic
+; Description ...: Create a Basic type Shape.
+; Syntax ........: __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $iWidth              - an integer value. The Shape's Width in Micrometers.
+;                  $iHeight             - an integer value. The Shape's Height in Micrometers.
+;                  $iShapeType          - an integer value (26-49). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iShapeType not an Integer
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
+;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Document Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a unique Shape name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the Position Structure.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve the Size Structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
+;                  $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, $LOI_DRAWSHAPE_TYPE_BASIC_FRAME
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape, $oDoc
+	Local $tProp, $tSize, $tPos
+	Local $atCusShapeGeo[1]
+	Local $iCircleKind_CUT = 2 ; a circle with a cut connected by a line.
+	Local $iCircleKind_ARC = 3 ; a circle with an open cut.
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If ($iShapeType = $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT) Or ($iShapeType = $LOI_DRAWSHAPE_TYPE_BASIC_ARC) Then ; These two shapes need special procedures.
+		$oShape = $oDoc.createInstance("com.sun.star.drawing.EllipseShape")
+		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		Switch $iShapeType
+			Case $LOI_DRAWSHAPE_TYPE_BASIC_ARC
+				$oShape.Name = __LOImpress_GetShapeName($oSlide, "Elliptical arc ")
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			Case $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT
+				$oShape.Name = __LOImpress_GetShapeName($oSlide, "Ellipse Segment ")
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		EndSwitch
+
+		$oSlide.add($oShape)
+
+	Else
+		$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
+		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$tProp = __LO_SetPropertyValue("Type", "")
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oSlide.add($oShape)
+
+	EndIf
+
+	Switch $iShapeType
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_ARC
+			$oShape.FillColor = $LO_COLOR_OFF
+
+			$oShape.CircleKind = $iCircleKind_ARC
+			$oShape.CircleStartAngle = 0
+			$oShape.CircleEndAngle = 25000
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_ARC_BLOCK
+			$tProp.Value = "block-arc"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE
+			$tProp.Value = "circle-pie" ; "mso-spt100"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT
+			$oShape.CircleKind = $iCircleKind_CUT
+			$oShape.CircleStartAngle = 0
+			$oShape.CircleEndAngle = 25000
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_CROSS
+			$tProp.Value = "cross"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_CUBE
+			$tProp.Value = "cube"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_CYLINDER
+			$tProp.Value = "can"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_DIAMOND
+			$tProp.Value = "diamond"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE, $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE
+			$tProp.Value = "ellipse"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_FOLDED_CORNER
+			$tProp.Value = "paper"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_FRAME
+			$tProp.Value = "frame" ; Not working
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_HEXAGON
+			$tProp.Value = "hexagon"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_OCTAGON
+			$tProp.Value = "octagon"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_PARALLELOGRAM
+			$tProp.Value = "parallelogram"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE
+			$tProp.Value = "rectangle"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED
+			$tProp.Value = "round-rectangle"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_REGULAR_PENTAGON
+			$tProp.Value = "pentagon"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_RING
+			$tProp.Value = "ring"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_TRAPEZOID
+			$tProp.Value = "trapezoid"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_TRIANGLE_ISOSCELES
+			$tProp.Value = "isosceles-triangle"
+
+		Case $LOI_DRAWSHAPE_TYPE_BASIC_TRIANGLE_RIGHT
+			$tProp.Value = "right-triangle"
+	EndSwitch
+
+	If ($iShapeType <> $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT) And ($iShapeType <> $LOI_DRAWSHAPE_TYPE_BASIC_ARC) Then
+		$atCusShapeGeo[0] = $tProp
+		$oShape.CustomShapeGeometry = $atCusShapeGeo
+
+		; Settings for TextBox use.
+		$oShape.TextMinimumFrameWidth = $iWidth
+		$oShape.TextMinimumFrameHeight = $iHeight
+		$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+		$oShape.TextAutoGrowHeight = False
+		$oShape.TextAutoGrowWidth = False
+
+	EndIf
+
+	$tPos = $oShape.Position()
+	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$tPos.X = 0
+	$tPos.Y = 0
+
+	$oShape.Position = $tPos
+
+	$tSize = $oShape.Size()
+	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$tSize.Width = $iWidth
+	$tSize.Height = $iHeight
+
+	$oShape.Size = $tSize
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
+EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShape_CreateCallout
+; Description ...: Create a Callout type Shape.
+; Syntax ........: __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $iWidth              - an integer value. The Shape's Width in Micrometers.
+;                  $iHeight             - an integer value. The Shape's Height in Micrometers.
+;                  $iShapeType          - an integer value (50-56). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iShapeType not an Integer
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" Object.
+;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Document Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a unique Shape name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the Position Structure.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve the Size Structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape, $oDoc
+	Local $tProp, $tSize, $tPos
+	Local $atCusShapeGeo[1]
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$tProp = __LO_SetPropertyValue("Type", "")
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	Switch $iShapeType
+		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_CLOUD
+			$tProp.Value = "cloud-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_LINE_1
+			$tProp.Value = "line-callout-1"
+
+		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_LINE_2
+			$tProp.Value = "line-callout-2"
+
+		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_LINE_3
+			$tProp.Value = "line-callout-3"
+
+		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR
+			$tProp.Value = "rectangular-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR_ROUNDED
+			$tProp.Value = "round-rectangular-callout"
+
+		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_ROUND
+			$tProp.Value = "round-callout"
+	EndSwitch
+
+	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oSlide.add($oShape)
+
+	$atCusShapeGeo[0] = $tProp
+	$oShape.CustomShapeGeometry = $atCusShapeGeo
+
+	$tPos = $oShape.Position()
+	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$tPos.X = 0
+	$tPos.Y = 0
+
+	$oShape.Position = $tPos
+
+	$tSize = $oShape.Size()
+	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$tSize.Width = $iWidth
+	$tSize.Height = $iHeight
+
+	$oShape.Size = $tSize
+
+	; Settings for TextBox use.
+	$oShape.TextMinimumFrameWidth = $iWidth
+	$oShape.TextMinimumFrameHeight = $iHeight
+	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextAutoGrowHeight = False
+	$oShape.TextAutoGrowWidth = False
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
+EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShape_CreateFlowchart
+; Description ...: Create a FlowChart type Shape.
+; Syntax ........: __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $iWidth              - an integer value. The Shape's Width in Micrometers.
+;                  $iHeight             - an integer value. The Shape's Height in Micrometers.
+;                  $iShapeType          - an integer value (57-84). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iShapeType not an Integer
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" Object.
+;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Document Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a unique Shape name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the Position Structure.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve the Size Structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape, $oDoc
+	Local $tProp, $tSize, $tPos
+	Local $atCusShapeGeo[1]
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$tProp = __LO_SetPropertyValue("Type", "")
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	Switch $iShapeType
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_CARD
+			$tProp.Value = "flowchart-card"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_COLLATE
+			$tProp.Value = "flowchart-collate"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR
+			$tProp.Value = "flowchart-connector"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR_OFF_PAGE
+			$tProp.Value = "flowchart-off-page-connector"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DATA
+			$tProp.Value = "flowchart-data"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DECISION
+			$tProp.Value = "flowchart-decision"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DELAY
+			$tProp.Value = "flowchart-delay"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DIRECT_ACCESS_STORAGE
+			$tProp.Value = "flowchart-direct-access-storage"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DISPLAY
+			$tProp.Value = "flowchart-display"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DOCUMENT
+			$tProp.Value = "flowchart-document"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_EXTRACT
+			$tProp.Value = "flowchart-extract"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_INTERNAL_STORAGE
+			$tProp.Value = "flowchart-internal-storage"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MAGNETIC_DISC
+			$tProp.Value = "flowchart-magnetic-disk"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_INPUT
+			$tProp.Value = "flowchart-manual-input"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_OPERATION
+			$tProp.Value = "flowchart-manual-operation"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MERGE
+			$tProp.Value = "flowchart-merge"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MULTIDOCUMENT
+			$tProp.Value = "flowchart-multidocument"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_OR
+			$tProp.Value = "flowchart-or"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PREPARATION
+			$tProp.Value = "flowchart-preparation"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PROCESS
+			$tProp.Value = "flowchart-process"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_ALTERNATE
+			$tProp.Value = "flowchart-alternate-process"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_PREDEFINED
+			$tProp.Value = "flowchart-predefined-process"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PUNCHED_TAPE
+			$tProp.Value = "flowchart-punched-tape"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_SEQUENTIAL_ACCESS
+			$tProp.Value = "flowchart-sequential-access"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_SORT
+			$tProp.Value = "flowchart-sort"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_STORED_DATA
+			$tProp.Value = "flowchart-stored-data"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_SUMMING_JUNCTION
+			$tProp.Value = "flowchart-summing-junction"
+
+		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_TERMINATOR
+			$tProp.Value = "flowchart-terminator"
+	EndSwitch
+
+	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oSlide.add($oShape)
+
+	$atCusShapeGeo[0] = $tProp
+	$oShape.CustomShapeGeometry = $atCusShapeGeo
+
+	$tPos = $oShape.Position()
+	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$tPos.X = 0
+	$tPos.Y = 0
+
+	$oShape.Position = $tPos
+
+	$tSize = $oShape.Size()
+	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$tSize.Width = $iWidth
+	$tSize.Height = $iHeight
+
+	$oShape.Size = $tSize
+
+	; Settings for TextBox use.
+	$oShape.TextMinimumFrameWidth = $iWidth
+	$oShape.TextMinimumFrameHeight = $iHeight
+	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextAutoGrowHeight = False
+	$oShape.TextAutoGrowWidth = False
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
+EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShape_CreateLine
+; Description ...: Create a Line type Shape.
+; Syntax ........: __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $iWidth              - an integer value. The Shape's Width in Micrometers.
+;                  $iHeight             - an integer value. The Shape's Height in Micrometers.
+;                  $iShapeType          - an integer value (85-92). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iShapeType not an Integer
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create the requested Line type Object.
+;                  @Error 2 @Extended 2 Return 0 = Failed to create a Position structure.
+;                  @Error 2 @Extended 3 Return 0 = Failed to create "com.sun.star.drawing.PolyPolygonBezierCoords" Structure.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Document Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a unique Shape name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the Position Structure.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve the Size Structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape, $oDoc
+	Local $tSize, $tPos, $tPolyCoords, $tStart, $tEnd
+	Local $atPoint[0], $aiFlags[0]
+	Local $avArray[1]
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If ($iShapeType <> $LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSION_LINE) Then
+		$tPolyCoords = __LO_CreateStruct("com.sun.star.drawing.PolyPolygonBezierCoords")
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+	EndIf
+
+	Switch $iShapeType
+		Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROWS To $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_STARTS_ARROW
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.LineShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Line ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$oSlide.add($oShape)
+
+			ReDim $atPoint[2]
+			ReDim $aiFlags[2]
+
+			$atPoint[0] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[1] = __LOImpress_CreatePoint(Int($iWidth), Int($iHeight))
+			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+
+			Switch $iShapeType
+				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROWS
+					$oShape.LineStartName = "Arrow"
+					$oShape.LineStartWidth = 300
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROW_CIRCLE
+					$oShape.LineStartName = "Arrow"
+					$oShape.LineStartWidth = 300
+					$oShape.LineEndName = "Circle"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROW_SQUARE
+					$oShape.LineStartName = "Arrow"
+					$oShape.LineStartWidth = 300
+					$oShape.LineEndName = "Square"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_CIRCLE_ARROW
+					$oShape.LineStartName = "Circle"
+					$oShape.LineStartWidth = 300
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ENDS_ARROW
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_SQUARE_ARROW
+					$oShape.LineStartName = "Square"
+					$oShape.LineStartWidth = 300
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_STARTS_ARROW
+					$oShape.LineStartName = "Arrow"
+					$oShape.LineStartWidth = 300
+			EndSwitch
+
+		Case $LOI_DRAWSHAPE_TYPE_CONNECTOR To $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW
+
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.ConnectorShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Connector ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$oSlide.add($oShape)
+
+			$tStart = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($tStart) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$tEnd = __LOImpress_CreatePoint($iWidth, $iHeight)
+			If Not IsObj($tEnd) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			Switch $iShapeType
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_ARROWS
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
+					$oShape.LineStartName = "Arrow"
+					$oShape.LineStartWidth = 300
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_CURVE
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED_ARROWS
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_CURVE
+					$oShape.LineStartName = "Arrow"
+					$oShape.LineStartWidth = 300
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED_ENDS_ARROW
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_CURVE
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_ENDS_ARROW
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE_ARROWS
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE
+					$oShape.LineStartName = "Arrow"
+					$oShape.LineStartWidth = 300
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE_ENDS_ARROW
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ARROWS
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
+					$oShape.LineStartName = "Arrow"
+					$oShape.LineStartWidth = 300
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW
+					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
+					$oShape.LineEndName = "Arrow"
+					$oShape.LineEndWidth = 300
+
+			EndSwitch
+
+		Case $LOI_DRAWSHAPE_TYPE_LINE_CURVE
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.OpenBezierShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Bézier curve ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$oSlide.add($oShape)
+
+			ReDim $atPoint[4]
+			ReDim $aiFlags[4]
+
+			$atPoint[0] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[1] = __LOImpress_CreatePoint(Int($iWidth / 2), $iHeight)
+			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[2] = __LOImpress_CreatePoint(Int($iWidth / 2), Int($iHeight / 2))
+			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[3] = __LOImpress_CreatePoint($iWidth, 0)
+			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+
+			$oShape.FillColor = $LO_COLOR_OFF
+
+		Case $LOI_DRAWSHAPE_TYPE_LINE_CURVE_FILLED
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.ClosedBezierShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Bézier curve ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$oSlide.add($oShape)
+
+			ReDim $atPoint[4]
+			ReDim $aiFlags[4]
+
+			$atPoint[0] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[1] = __LOImpress_CreatePoint(Int($iWidth / 2), $iHeight)
+			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[2] = __LOImpress_CreatePoint(Int($iWidth / 2), Int($iHeight / 2))
+			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[3] = __LOImpress_CreatePoint($iWidth, 0)
+			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+
+			$oShape.FillColor = 7512015 ; Light blue
+
+		Case $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.MeasureShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oSlide.add($oShape)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Dimension Line ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$tStart = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($tStart) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$tEnd = __LOImpress_CreatePoint($iWidth, $iHeight)
+			If Not IsObj($tEnd) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		Case $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.OpenFreeHandShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Bézier curve ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$oSlide.add($oShape)
+
+			ReDim $atPoint[3]
+			ReDim $aiFlags[3]
+
+			$atPoint[0] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[1] = __LOImpress_CreatePoint(Int($iWidth / 2), Int($iHeight / 2))
+			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[2] = __LOImpress_CreatePoint(Int($iWidth), Int($iHeight))
+			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+
+		Case $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE_FILLED
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.ClosedFreeHandShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Bézier curve ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$oSlide.add($oShape)
+
+			ReDim $atPoint[4]
+			ReDim $aiFlags[4]
+
+			$atPoint[0] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[1] = __LOImpress_CreatePoint($iWidth + Int(($iWidth / 8)), Int(($iHeight / 2)))
+			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[2] = __LOImpress_CreatePoint(Int($iWidth), Int($iHeight))
+			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[3] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+
+			$oShape.FillColor = 7512015 ; Light blue
+
+		Case $LOI_DRAWSHAPE_TYPE_LINE_LINE, $LOI_DRAWSHAPE_TYPE_LINE_LINE_45
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.LineShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Line ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$oSlide.add($oShape)
+
+			ReDim $atPoint[2]
+			ReDim $aiFlags[2]
+
+			$atPoint[0] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[1] = __LOImpress_CreatePoint(Int($iWidth), Int($iHeight))
+			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+
+		Case $LOI_DRAWSHAPE_TYPE_LINE_POLYGON, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.PolyLineShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Polygon 4 corners ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$oSlide.add($oShape)
+
+			ReDim $atPoint[5]
+			ReDim $aiFlags[5]
+
+			$atPoint[0] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[1] = __LOImpress_CreatePoint(Int($iWidth), 0)
+			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[2] = __LOImpress_CreatePoint(Int($iWidth), Int($iHeight))
+			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[3] = __LOImpress_CreatePoint(0, Int($iHeight))
+			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[4] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[4]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[4] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+
+			$oShape.FillColor = $LO_COLOR_OFF
+
+		Case $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED
+			$oShape = $oDoc.createInstance("com.sun.star.drawing.PolyPolygonShape")
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Polygon 4 corners ")
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$oSlide.add($oShape)
+
+			ReDim $atPoint[5]
+			ReDim $aiFlags[5]
+
+			$atPoint[0] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[1] = __LOImpress_CreatePoint(Int($iWidth), 0)
+			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[2] = __LOImpress_CreatePoint(Int($iWidth), Int($iHeight))
+			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[3] = __LOImpress_CreatePoint(0, Int($iHeight))
+			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$atPoint[4] = __LOImpress_CreatePoint(0, 0)
+			If Not IsObj($atPoint[4]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[4] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+
+			$oShape.FillColor = 7512015 ; Light blue
+	EndSwitch
+
+	$tSize = $oShape.Size()
+	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$tSize.Width = $iWidth
+	$tSize.Height = $iHeight
+
+	$oShape.Size = $tSize
+
+	$tPos = $oShape.Position()
+	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$tPos.X = 0
+	$tPos.Y = 0
+
+	$oShape.Position = $tPos
+
+	If __LO_IntIsBetween($iShapeType, $LOI_DRAWSHAPE_TYPE_CONNECTOR, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW, "", $LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSION_LINE) Then
+		$oShape.StartPosition = $tStart
+		$oShape.EndPosition = $tEnd
+
+	Else
+		$avArray[0] = $atPoint
+		$tPolyCoords.Coordinates = $avArray
+
+		$avArray[0] = $aiFlags
+		$tPolyCoords.Flags = $avArray
+
+		$oShape.PolyPolygonBezier = $tPolyCoords
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
+EndFunc   ;==>__LOImpress_DrawShape_CreateLine
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShape_CreateStars
+; Description ...: Create a Star or Banner type Shape.
+; Syntax ........: __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $iWidth              - an integer value. The Shape's Width in Micrometers.
+;                  $iHeight             - an integer value. The Shape's Height in Micrometers.
+;                  $iShapeType          - an integer value (93-104). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iShapeType not an Integer
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" Object.
+;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Document Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a unique Shape name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the Position Structure.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve the Size Structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
+;                  $LOI_DRAWSHAPE_TYPE_STARS_6_POINT, $LOI_DRAWSHAPE_TYPE_STARS_12_POINT, $LOI_DRAWSHAPE_TYPE_STARS_SIGNET, $LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape, $oDoc
+	Local $tProp, $tSize, $tPos
+	Local $atCusShapeGeo[1]
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$tProp = __LO_SetPropertyValue("Type", "")
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	Switch $iShapeType
+		Case $LOI_DRAWSHAPE_TYPE_STARS_4_POINT
+			$tProp.Value = "star4"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_5_POINT
+			$tProp.Value = "star5"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_6_POINT
+			$tProp.Value = "star6" ; "non-primitive"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE
+			$tProp.Value = "concave-star6" ; "non-primitive"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_8_POINT
+			$tProp.Value = "star8"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_12_POINT
+			$tProp.Value = "star12" ; "non-primitive"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_24_POINT
+			$tProp.Value = "star24"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_DOORPLATE
+			$tProp.Value = "mso-spt21" ; "doorplate"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_EXPLOSION
+			$tProp.Value = "bang"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_SCROLL_HORIZONTAL
+			$tProp.Value = "horizontal-scroll"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_SCROLL_VERTICAL
+			$tProp.Value = "vertical-scroll"
+
+		Case $LOI_DRAWSHAPE_TYPE_STARS_SIGNET
+			$tProp.Value = "signet" ; "non-primitive"
+	EndSwitch
+
+	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oSlide.add($oShape)
+
+	$atCusShapeGeo[0] = $tProp
+	$oShape.CustomShapeGeometry = $atCusShapeGeo
+
+	$tPos = $oShape.Position()
+	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$tPos.X = 0
+	$tPos.Y = 0
+
+	$oShape.Position = $tPos
+
+	$tSize = $oShape.Size()
+	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$tSize.Width = $iWidth
+	$tSize.Height = $iHeight
+
+	$oShape.Size = $tSize
+
+	; Settings for TextBox use.
+	$oShape.TextMinimumFrameWidth = $iWidth
+	$oShape.TextMinimumFrameHeight = $iHeight
+	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextAutoGrowHeight = False
+	$oShape.TextAutoGrowWidth = False
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
+EndFunc   ;==>__LOImpress_DrawShape_CreateStars
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShape_CreateSymbol
+; Description ...: Create a Symbol type Shape.
+; Syntax ........: __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $iWidth              - an integer value. The Shape's Width in Micrometers.
+;                  $iHeight             - an integer value. The Shape's Height in Micrometers.
+;                  $iShapeType          - an integer value (105-122). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iShapeType not an Integer
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" Object.
+;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Document Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a unique Shape name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the Position Structure.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve the Size Structure.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
+;                  $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD, $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER, $LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE, $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND
+;                  The following shape is visually different from the manually inserted one in L.O. 7.3.4.2:
+;                  $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape, $oDoc
+	Local $tProp, $tSize, $tPos
+	Local $atCusShapeGeo[1]
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$tProp = __LO_SetPropertyValue("Type", "")
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oSlide.add($oShape)
+
+	Switch $iShapeType
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND
+			$tProp.Value = "col-502ad400"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON
+			$tProp.Value = "col-60da8460"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_SQUARE
+			$tProp.Value = "quad-bevel"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_DOUBLE
+			$tProp.Value = "brace-pair"
+			$oShape.FillColor = $LO_COLOR_OFF
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_LEFT
+			$tProp.Value = "left-brace"
+			$oShape.FillColor = $LO_COLOR_OFF
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_RIGHT
+			$tProp.Value = "right-brace"
+			$oShape.FillColor = $LO_COLOR_OFF
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_DOUBLE
+			$tProp.Value = "bracket-pair"
+			$oShape.FillColor = $LO_COLOR_OFF
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_LEFT
+			$tProp.Value = "left-bracket"
+			$oShape.FillColor = $LO_COLOR_OFF
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_RIGHT
+			$tProp.Value = "right-bracket"
+			$oShape.FillColor = $LO_COLOR_OFF
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD
+;~ Custom Shape Geometry Type = "non-primitive" ???? Try "cloud"
+			$tProp.Value = "cloud"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER
+;~ Custom Shape Geometry Type = "non-primitive" ???? Try "flower"
+			$tProp.Value = "flower"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_HEART
+			$tProp.Value = "heart"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING
+;~ Custom Shape Geometry Type = "non-primitive" ???? Try "lightning"
+			$tProp.Value = "lightning"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_MOON
+			$tProp.Value = "moon"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_SMILEY
+			$tProp.Value = "smiley"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_SUN
+			$tProp.Value = "sun"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_PROHIBITED
+			$tProp.Value = "forbidden"
+
+		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE
+			$tProp.Value = "puzzle"
+	EndSwitch
+
+	$atCusShapeGeo[0] = $tProp
+	$oShape.CustomShapeGeometry = $atCusShapeGeo
+
+	$tPos = $oShape.Position()
+	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$tPos.X = 0
+	$tPos.Y = 0
+
+	$oShape.Position = $tPos
+
+	$tSize = $oShape.Size()
+	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$tSize.Width = $iWidth
+	$tSize.Height = $iHeight
+
+	$oShape.Size = $tSize
+
+	; Settings for TextBox use.
+	$oShape.TextMinimumFrameWidth = $iWidth
+	$oShape.TextMinimumFrameHeight = $iHeight
+	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextAutoGrowHeight = False
+	$oShape.TextAutoGrowWidth = False
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
+EndFunc   ;==>__LOImpress_DrawShape_CreateSymbol
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_GetCustomType
@@ -114,8 +1587,8 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN)
 
-			;~ 	Case "mso-spt100" ; Can't include this one as other shapes return mso-spt100 also
-			;~ Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT)
+;~ 	Case "mso-spt100" ; Can't include this one as other shapes return mso-spt100 also
+;~ Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT)
 
 		Case "circular-arrow"
 
@@ -212,7 +1685,7 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 		Case "ellipse"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE)
-			;~ $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE
+;~ $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE
 
 		Case "paper"
 
@@ -237,12 +1710,12 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 		Case "rectangle"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE)
-			;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE
+;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE
 
 		Case "round-rectangle"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED)
-			;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED
+;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED
 
 		Case "pentagon"
 
@@ -498,12 +1971,12 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_RIGHT)
 
 		Case "cloud"
-			;~ Custom Shape Geometry Type = "non-primitive" ???? Try "cloud"
+;~ Custom Shape Geometry Type = "non-primitive" ???? Try "cloud"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD)
 
 		Case "flower"
-			;~ Custom Shape Geometry Type = "non-primitive" ???? Try "flower"
+;~ Custom Shape Geometry Type = "non-primitive" ???? Try "flower"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER)
 
@@ -512,7 +1985,7 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_HEART)
 
 		Case "lightning"
-			;~ Custom Shape Geometry Type = "non-primitive" ???? Try "lightning"
+;~ Custom Shape Geometry Type = "non-primitive" ???? Try "lightning"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING)
 
@@ -543,19 +2016,21 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 EndFunc   ;==>__LOImpress_DrawShape_GetCustomType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShapeGetType
-; Description ...: Identify a Shape's type.
-; Syntax ........: __LOImpress_DrawShapeGetType(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
-; Return values .: Success: Integer
+; Name ..........: __LOImpress_DrawShapeArrowStyleName
+; Description ...: Convert a Arrow head Constant to the corresponding name or reverse.
+; Syntax ........: __LOImpress_DrawShapeArrowStyleName([$iArrowStyle = Null[, $sArrowStyle = Null]])
+; Parameters ....: $iArrowStyle         - [optional] an integer value (0-32). Default is Null. The Arrow Style Constant to convert to its corresponding name. See $LOI_DRAWSHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $sArrowStyle         - [optional] a string value. Default is Null. The Arrow Style Name to convert to the corresponding constant if found.
+; Return values .: Success: String or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape's type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to identify Shape.
+;                  @Error 1 @Extended 1 Return 0 = $iArrowStyle not set to Null, not an Integer, less than 0, or greater than Arrow type constants. See $LOI_DRAWSHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error 1 @Extended 2 Return 0 = $sArrowStyle not a String and not set to Null.
+;                  @Error 1 @Extended 3 Return 0 = Both $iArrowStyle and $sArrowStyle set to Null.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Shape's Type, corresponding to one of the Constants $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iArrowStyle was successfully converted to its corresponding Arrow Type Name.
+;                  @Error 0 @Extended 1 Return Integer = Success. Arrow Type Name called in $sArrowStyle was successfully converted to its corresponding Constant value.
+;                  @Error 0 @Extended 2 Return String = Success. Arrow Type Name called in $sArrowStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -563,34 +2038,784 @@ EndFunc   ;==>__LOImpress_DrawShape_GetCustomType
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShapeGetType(ByRef $oShape)
+Func __LOImpress_DrawShapeArrowStyleName($iArrowStyle = Null, $sArrowStyle = Null)
+	Local $asArrowStyles[33]
+
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_NONE] = ""
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW_SHORT] = "Arrow short"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CONCAVE_SHORT] = "Concave short"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW] = "Arrow"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_TRIANGLE] = "Triangle"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CONCAVE] = "Concave"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW_LARGE] = "Arrow large"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CIRCLE] = "Circle"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE] = "Square"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_45] = "Square 45"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIAMOND] = "Diamond"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_CIRCLE] = "Half Circle"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINES] = "Dimension Lines"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINE_ARROW] = "Dimension Line Arrow"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSION_LINE] = "Dimension Line"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_LINE_SHORT] = "Line short"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_LINE] = "Line"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_TRIANGLE_UNFILLED] = "Triangle unfilled"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIAMOND_UNFILLED] = "Diamond unfilled"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CIRCLE_UNFILLED] = "Circle unfilled"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED] = "Square 45 unfilled"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_UNFILLED] = "Square unfilled"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_CIRCLE_UNFILLED] = "Half Circle unfilled"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_ARROW_LEFT] = "Half Arrow left"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_ARROW_RIGHT] = "Half Arrow right"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_REVERSED_ARROW] = "Reversed Arrow"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DOUBLE_ARROW] = "Double Arrow"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ONE] = "CF One"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ONLY_ONE] = "CF Only One"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_MANY] = "CF Many"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_MANY_ONE] = "CF Many One"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ZERO_ONE] = "CF Zero One"
+	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY] = "CF Zero Many"
+
+	If ($iArrowStyle <> Null) Then
+		If Not __LO_IntIsBetween($iArrowStyle, 0, UBound($asArrowStyles) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, $asArrowStyles[$iArrowStyle]) ; Return the requested Arrow Style name.
+
+	ElseIf ($sArrowStyle <> Null) Then
+		If Not IsString($sArrowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		For $i = 0 To UBound($asArrowStyles) - 1
+			If ($asArrowStyles[$i] = $sArrowStyle) Then Return SetError($__LO_STATUS_SUCCESS, 1, $i) ; Return the array element where the matching Arrow Style was found.
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, 2, $sArrowStyle) ; If no matches, just return the name, as it could be a custom value.
+
+	Else
+
+		Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; No values called.
+	EndIf
+EndFunc   ;==>__LOImpress_DrawShapeArrowStyleName
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShapeLineStyleName
+; Description ...: Convert a Line Style Constant to the corresponding name or reverse.
+; Syntax ........: __LOImpress_DrawShapeLineStyleName([$iLineStyle = Null[, $sLineStyle = Null]])
+; Parameters ....: $iLineStyle          - [optional] an integer value. Default is Null. The Line Style Constant to convert to its corresponding name. See $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $sLineStyle          - [optional] a string value. Default is Null. The Line Style Name to convert to the corresponding constant if found.
+; Return values .: Success: String or Integer
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $iLineStyle not set to Null, not an Integer, less than 0, or greater than Line Style constants. See $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error 1 @Extended 2 Return 0 = $sLineStyle not a String and not set to Null.
+;                  @Error 1 @Extended 3 Return 0 = Both $iLineStyle and $sLineStyle set to Null.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iLineStyle was successfully converted to its corresponding Line Style Name.
+;                  @Error 0 @Extended 1 Return Integer = Success. Line Style Name called in $sLineStyle was successfully converted to its corresponding Constant value.
+;                  @Error 0 @Extended 2 Return String = Success. Line Style Name called in $sLineStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null)
+	Local $asLineStyles[32]
+
+	; $LOI_DRAWSHAPE_LINE_STYLE_NONE, $LOI_DRAWSHAPE_LINE_STYLE_CONTINUOUS, don't have a name, so to keep things symmetrical I created my own, but those two won't be used.
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_NONE] = "NONE"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_CONTINUOUS] = "CONTINUOUS"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOT] = "Dot"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOT_ROUNDED] = "Dot (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DOT] = "Long Dot"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DOT_ROUNDED] = "Long Dot (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH] = "Dash"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_ROUNDED] = "Dash (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH] = "Long Dash"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH_ROUNDED] = "Long Dash (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH] = "Double Dash"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_ROUNDED] = "Double Dash (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT] = "Dash Dot"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT_ROUNDED] = "Dash Dot (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH_DOT] = "Long Dash Dot"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH_DOT_ROUNDED] = "Long Dash Dot (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT] = "Double Dash Dot"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT_ROUNDED] = "Double Dash Dot (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT_DOT] = "Dash Dot Dot"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT_DOT_ROUNDED] = "Dash Dot Dot (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT] = "Double Dash Dot Dot"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT_ROUNDED] = "Double Dash Dot Dot (Rounded)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_ULTRAFINE_DOTTED] = "Ultrafine Dotted (var)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_FINE_DOTTED] = "Fine Dotted"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_ULTRAFINE_DASHED] = "Ultrafine Dashed"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_FINE_DASHED] = "Fine Dashed"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASHED] = "Dashed (var)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_SPARSE_DASH] = "Sparse Dash"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_3_DASHES_3_DOTS] = "3 Dashes 3 Dots (var)"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES] = "Ultrafine 2 Dots 3 Dashes"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_2_DOTS_1_DASH] = "2 Dots 1 Dash"
+	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS] = "Line with Fine Dots"
+
+	If Not __LO_VersionCheck(24.2) Then $asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_SPARSE_DASH] = "Line Style 9"
+
+	If ($iLineStyle <> Null) Then
+		If Not __LO_IntIsBetween($iLineStyle, 0, UBound($asLineStyles) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, $asLineStyles[$iLineStyle]) ; Return the requested Line Style name.
+
+	ElseIf ($sLineStyle <> Null) Then
+		If Not IsString($sLineStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		For $i = 0 To UBound($asLineStyles) - 1
+			If ($asLineStyles[$i] = $sLineStyle) Then Return SetError($__LO_STATUS_SUCCESS, 1, $i) ; Return the array element where the matching Line Style was found.
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, 2, $sLineStyle) ; If no matches, just return the name, as it could be a custom value.
+
+	Else
+
+		Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; No values called.
+	EndIf
+EndFunc   ;==>__LOImpress_DrawShapeLineStyleName
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShapePointGetSettings
+; Description ...: Retrieve the current settings for a particular point in a shape.
+; Syntax ........: __LOImpress_DrawShapePointGetSettings(ByRef $avArray, ByRef $aiFlags, ByRef $atPoints, $iArrayElement)
+; Parameters ....: $avArray             - [in/out] an array of variants. An array to fill with settings. Array will be directly modified.
+;                  $aiFlags             - [in/out] an array of integers. An Array of Point Type Flags returned from the Shape.
+;                  $atPoints            - [in/out] an array of dll structs. An Array of Points returned from the Shape.
+;                  $iArrayElement       - an integer value. The Array element that contains the point to retrieve the settings for.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avArray is not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $aiFlags is not an Array.
+;                  @Error 1 @Extended 3 Return 0 = $atPoints is not an Array.
+;                  @Error 1 @Extended 4 Return 0 = $iArrayElement not an Integer.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve the current X coordinate.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve the current Y coordinate.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the current Point Type Flag.
+;                  @Error 3 @Extended 4 Return 0 = Failed to determine if the Point is a Curve or not.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Current Settings were successfully retrieved, $avArray has been filled with the current settings.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShapePointGetSettings(ByRef $avArray, ByRef $aiFlags, ByRef $atPoints, $iArrayElement)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $avShapeTypes[20][2] = [[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.Shape3DSceneObject"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.CustomShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.MeasureShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.EllipseShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedBezierShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenBezierShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyPolygonShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyLineShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.LineShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ConnectorShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenFreeHandShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedFreeHandShape"], [$LOI_SHAPE_TYPE_FORM_CONTROL, "com.sun.star.drawing.ControlShape"], _
-			[$LOI_SHAPE_TYPE_IMAGE, "com.sun.star.drawing.GraphicObjectShape"], [$LOI_SHAPE_TYPE_MEDIA, "com.sun.star.drawing.MediaShape"], _
-			[$LOI_SHAPE_TYPE_OLE2, "com.sun.star.drawing.OLE2Shape"], [$LOI_SHAPE_TYPE_TABLE, "com.sun.star.drawing.TableShape"], _
-			[$LOI_SHAPE_TYPE_TEXTBOX, "com.sun.star.drawing.TextShape"], [$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, "com.sun.star.presentation.SubtitleShape"], _
-			[$LOI_SHAPE_TYPE_TEXTBOX_TITLE, "com.sun.star.presentation.TitleTextShape"]]
-	Local $sShapeType
+	Local $iX, $iY, $iPointType
+	Local $bIsCurve
 
-	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsArray($avArray) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsArray($aiFlags) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsArray($atPoints) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iArrayElement) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$sShapeType = $oShape.ShapeType()
-	If Not IsString($sShapeType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$iX = $atPoints[$iArrayElement].X()
+	If Not IsInt($iX) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	For $i = 0 To UBound($avShapeTypes) - 1
-		If ($sShapeType = $avShapeTypes[$i][1]) Then Return SetError($__LO_STATUS_SUCCESS, 0, $avShapeTypes[$i][0])
-	Next
+	$avArray[0] = $iX
 
-	Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-EndFunc   ;==>__LOImpress_DrawShapeGetType
+	$iY = $atPoints[$iArrayElement].Y()
+	If Not IsInt($iY) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$avArray[1] = $iY
+
+	$iPointType = $aiFlags[$iArrayElement]
+	If Not IsInt($iPointType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$avArray[2] = $iPointType
+
+	If ($iPointType = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then
+		If ($iArrayElement <> (UBound($atPoints) - 1)) Then ; Requested point is not at the end of the array of points.
+
+			If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Point after requested point is a Control Point.
+				; If a Point and the following Control point have the same coordinates, the point is not a curve.
+				$bIsCurve = (($atPoints[$iArrayElement].X() = $atPoints[$iArrayElement + 1].X()) And ($atPoints[$iArrayElement].Y() = $atPoints[$iArrayElement + 1].Y())) ? (False) : (True)
+
+			Else ; Next point after requested point is not a control type point.
+				$bIsCurve = False
+			EndIf
+
+		Else ; Point is the last point, cant be a curve.
+			$bIsCurve = False
+		EndIf
+
+	Else ; Point is a Smooth, or Symmetrical Point type, point is a curve regardless.
+		$bIsCurve = True
+	EndIf
+
+	If Not IsBool($bIsCurve) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$avArray[3] = $bIsCurve
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>__LOImpress_DrawShapePointGetSettings
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DrawShapePointModify
+; Description ...: Internal function for modifying A Shape's Points.
+; Syntax ........: __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iArrayElement[, $iX = Null[, $iY = Null[, $iPointType = Null[, $bIsCurve = Null]]]])
+; Parameters ....: $aiFlags             - [in/out] an array of integers. An Array of Point Type Flags returned from the Shape. Array will be directly modified.
+;                  $atPoints            - [in/out] an array of dll structs. An Array of Points returned from the Shape. Array will be directly modified.
+;                  $iArrayElement       - [in/out] an integer value. The Array element that contains the point to modify. This may be directly modified, depending on the settings.
+;                  $iX                  - [optional] an integer value. Default is Null. The X coordinate value, set in Micrometers.
+;                  $iY                  - [optional] an integer value. Default is Null. The Y coordinate value, set in Micrometers.
+;                  $iPointType          - [optional] an integer value (0,1,3). Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $bIsCurve            - [optional] a boolean value. Default is Null. If True, the Normal Point is a Curve. See remarks.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $aiFlags not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $atPoints not an Array.
+;                  @Error 1 @Extended 3 Return 0 = $iArrayElement not an Integer.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to Create a new Position Point Structure for the First Control Point.
+;                  @Error 2 @Extended 2 Return 0 = Failed to Create a new Position Point Structure for the Second Control Point.
+;                  @Error 2 @Extended 3 Return 0 = Failed to Create a new Position Point Structure for the Third Control Point.
+;                  @Error 2 @Extended 4 Return 0 = Failed to Create a new Position Point Structure for the Fourth Control Point.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to identify the next position point in the shape.
+;                  @Error 3 @Extended 2 Return 0 = Failed to identify the previous position point in the shape.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call any optional parameter with Null keyword to skip it.
+;                  Only $LOI_DRAWSHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
+;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with Libre office manually, and may wreck your shape's shape. Use with caution.
+;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you modify a point to "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
+;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
+;                  Calling and Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iArrayElement, $iX = Null, $iY = Null, $iPointType = Null, $bIsCurve = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iNextArrayElement, $iPreviousArrayElement, $iSymmetricalPointXValue, $iSymmetricalPointYValue, $iOffset, $iForOffset, $iReDimCount
+	Local $tControlPoint1, $tControlPoint2, $tControlPoint3, $tControlPoint4
+	Local $avArray[0], $avArray2[0]
+
+	If Not IsArray($aiFlags) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsArray($atPoints) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iArrayElement) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Error if point called is not between 0 or number of points.
+
+	If ($iArrayElement <> UBound($atPoints) - 1) Then ; If The requested point to be modified is not at the end of the Array of points, find the next regular point.
+
+		For $i = ($iArrayElement + 1) To UBound($aiFlags) - 1 ; Locate the next non-Control Point in the Array for later use.
+			If ($aiFlags[$i] <> $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then
+				$iNextArrayElement = $i
+				ExitLoop
+			EndIf
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+		Next
+
+		If Not IsInt($iNextArrayElement) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Else
+		$iNextArrayElement = -1
+	EndIf
+
+	If ($iArrayElement > 0) Then ; If Point requested is not the first point, find the previous Point's position.
+
+		For $i = ($iArrayElement - 1) To 0 Step -1 ; Locate the previous non-Control Point in the Array for later use.
+			If ($aiFlags[$i] <> $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then
+				$iPreviousArrayElement = $i
+				ExitLoop
+			EndIf
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+		Next
+
+		If Not IsInt($iPreviousArrayElement) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Else
+		$iPreviousArrayElement = -1
+	EndIf
+
+	If ($iX <> Null) Then
+		If ($iArrayElement < UBound($atPoints) - 1) And ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Next point is a control point, check if this point is a curve.
+
+			If ($atPoints[$iArrayElement].X() = $atPoints[$iArrayElement + 1].X()) And ($atPoints[$iArrayElement].Y() = $atPoints[$iArrayElement + 1].Y()) Then ; Update the coordinates, because the point is not a curve.
+				$atPoints[$iArrayElement + 1].X = $iX
+			EndIf
+		EndIf
+
+		$atPoints[$iArrayElement].X = $iX
+	EndIf
+
+	If ($iY <> Null) Then
+		If ($iArrayElement < UBound($atPoints) - 1) And ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Next point is a control point, check if this point is a curve.
+
+			If ($atPoints[$iArrayElement].X() = $atPoints[$iArrayElement + 1].X()) And ($atPoints[$iArrayElement].Y() = $atPoints[$iArrayElement + 1].Y()) Then ; Update the coordinates, because the point is not a curve.
+				$atPoints[$iArrayElement + 1].Y = $iY
+			EndIf
+		EndIf
+
+		$atPoints[$iArrayElement].Y = $iY
+	EndIf
+
+	If ($iPointType <> Null) Then
+		If ($iPointType <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; New point type is a curve.
+
+			If ($aiFlags[$iArrayElement] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Converting point from Normal to a curve.
+
+				; Pick the lowest X and Y value difference between previous point and current point and Next point and current Point.
+				$iSymmetricalPointXValue = ((($atPoints[$iArrayElement].X() - $atPoints[$iPreviousArrayElement].X()) * .5) < (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)) ? Int((($atPoints[$iArrayElement].X() - $atPoints[$iPreviousArrayElement].X()) * .5)) : Int((($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5))
+				$iSymmetricalPointYValue = ((($atPoints[$iArrayElement].Y() - $atPoints[$iPreviousArrayElement].Y()) * .5) < (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)) ? Int((($atPoints[$iArrayElement].Y() - $atPoints[$iPreviousArrayElement].Y()) * .5)) : Int((($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5))
+
+				If ($aiFlags[$iArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; previous point is a control Point, might just need to modify it.
+
+					If (($iArrayElement - 2 > $iPreviousArrayElement) And $aiFlags[$iArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; there are two control points before this point, I can just modify the first point before.
+						$tControlPoint1 = $atPoints[$iArrayElement - 2]
+
+						$tControlPoint2 = $atPoints[$iArrayElement - 1]
+						$tControlPoint2.X = ($atPoints[$iArrayElement].X() - $iSymmetricalPointXValue)
+						$tControlPoint2.Y = ($atPoints[$iArrayElement].Y() - $iSymmetricalPointYValue)
+
+					Else ; There is only one control point, I need to create a new one.
+						$tControlPoint1 = $atPoints[$iArrayElement - 1]
+
+						$tControlPoint2 = __LOImpress_CreatePoint($atPoints[$iArrayElement].X() - $iSymmetricalPointXValue, $atPoints[$iArrayElement].Y() - $iSymmetricalPointYValue)
+						If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+					EndIf
+
+				Else ; Previous point is a normal point, need to create new control points.
+					$tControlPoint1 = __LOImpress_CreatePoint($atPoints[$iPreviousArrayElement].X(), $atPoints[$iPreviousArrayElement].Y())
+					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+					$tControlPoint2 = __LOImpress_CreatePoint($atPoints[$iArrayElement].X() - $iSymmetricalPointXValue, $atPoints[$iArrayElement].Y() - $iSymmetricalPointYValue)
+					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+				EndIf
+
+				If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Next point is a control Point, might just need to modify it.
+
+					If (($iArrayElement + 2 < $iNextArrayElement) And $aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; there are two control points after this point, I can just modify the first point after.
+						$tControlPoint4 = $atPoints[$iArrayElement + 2]
+
+						$tControlPoint3 = $atPoints[$iArrayElement + 1]
+						$tControlPoint3.X = ($atPoints[$iArrayElement].X() + $iSymmetricalPointXValue)
+						$tControlPoint3.Y = ($atPoints[$iArrayElement].Y() + $iSymmetricalPointYValue)
+
+					Else ; There is only one control point, I need to create a new one and modify the other.
+						$tControlPoint3 = __LOImpress_CreatePoint($atPoints[$iArrayElement].X() + $iSymmetricalPointXValue, $atPoints[$iArrayElement].Y() + $iSymmetricalPointYValue)
+						If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+						$tControlPoint4 = $atPoints[$iArrayElement + 1] ; Modify the Control Point.
+						$tControlPoint4.X = ($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5))
+						$tControlPoint4.Y = ($atPoints[$iNextArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5))
+					EndIf
+
+				Else ; Next point is a normal point, need to create new control points.
+					$tControlPoint3 = __LOImpress_CreatePoint(($atPoints[$iArrayElement].X() + $iSymmetricalPointXValue), ($atPoints[$iArrayElement].Y() + $iSymmetricalPointYValue))
+					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+					$tControlPoint4 = __LOImpress_CreatePoint(Int($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iNextArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
+					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+				EndIf
+
+				$iOffset = 0
+				$iForOffset = 0
+				$iReDimCount = 4
+				; Check if there already was 4 control point present around this point I am modifying.
+				$iReDimCount -= ($aiFlags[$iArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0)
+				$iReDimCount -= (($iArrayElement - 2 > $iPreviousArrayElement) And ($aiFlags[$iArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0)
+				$iReDimCount -= ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0)
+				$iReDimCount -= (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0)
+
+				ReDim $avArray[UBound($atPoints) + $iReDimCount]
+				ReDim $avArray2[UBound($aiFlags) + $iReDimCount]
+				$iReDimCount = 0
+
+				For $i = 0 To UBound($atPoints) - 1
+					If ($iOffset = 0) Then
+						$avArray[$i + $iForOffset] = $atPoints[$i] ; Add the rest of the points to the array.
+						$avArray2[$i + $iForOffset] = $aiFlags[$i] ; Add the rest of the points to the array.
+
+					Else
+						$iOffset -= 1 ; minus 1 from offset per round so I don't go over array limits
+						$iForOffset -= 1 ; Minus 1 from ForOffset as I am skipping one For cycle.
+					EndIf
+
+					If ($i = $iPreviousArrayElement) Then ; Insert the new or modified control points.
+
+						$avArray[$i + 1] = $tControlPoint1
+						$avArray2[$i + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+						$avArray[$i + 2] = $tControlPoint2
+						$avArray2[$i + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+						$avArray[$i + 3] = $atPoints[$iArrayElement]
+						$avArray2[$i + 3] = $iPointType
+						$avArray[$i + 4] = $tControlPoint3
+						$avArray2[$i + 4] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+						$avArray[$i + 5] = $tControlPoint4
+						$avArray2[$i + 5] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+						$iOffset = 1 ; Add one to offset to skip the point I am modifying.
+						$iOffset += ($aiFlags[$iArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0) ; If the point I am modifying has a control point before it, I need to skip them in the PointsArray.
+						$iOffset += (($iArrayElement - 2 > $iPreviousArrayElement) And ($aiFlags[$iArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0) ; If the point I am modifying has two control points before it, I need to skip them in the PointsArray.
+						$iOffset += ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0) ; If the point I am modifying has a control point after it, I need to skip them in the PointsArray.
+						$iOffset += (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0) ; If the point I am modifying has two control points after it, I need to skip them in the PointsArray.
+
+						$iForOffset += 5 ; Add to $i to skip the elements I manually added.
+					EndIf
+
+					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+				Next
+
+				; Update the ArrayElement value to its new position.
+				$iArrayElement += ($aiFlags[$iArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (0) : (1) ; If the point I am modifying has a control point before it, don't add one to array element, because I didn't have to create and insert a new control point.
+				$iArrayElement += (($iArrayElement - 2 > $iPreviousArrayElement) And ($aiFlags[$iArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (0) : (1) ; If the point I am modifying has two control points before it, don't add one to array element, because I didn't have to create and insert a new control point.
+
+				$atPoints = $avArray
+				$aiFlags = $avArray2
+
+			Else ; Point is already a curve.
+				; Do nothing?
+			EndIf
+
+		Else ; New Point is a Normal Point.
+			If ($aiFlags[$iArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Point being modified is not a normal type of point.
+
+				If ($aiFlags[$iPreviousArrayElement] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; If previous point is a normal point, see if I need to delete control points or not.
+
+					If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Point after previous point is a control point, see if previous point is a curved point.
+
+						If ($atPoints[$iPreviousArrayElement].X() <> $atPoints[$iPreviousArrayElement + 1].X()) And ($atPoints[$iPreviousArrayElement].Y() <> $atPoints[$iPreviousArrayElement + 1].Y()) Then
+							; Previous Point is a Curved normal point, copy the control points present.
+
+							$tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
+
+							If ($iPreviousArrayElement + 2 < $iArrayElement) And ($atPoints[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2] ; If two control points are present, copy them.
+						EndIf
+					EndIf
+
+				Else ; Previous point is not a normal point.
+					; Copy Control Points present.
+
+					If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
+
+					If ($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2] ; If two control points are present, copy them.
+				EndIf
+
+				If ($aiFlags[$iNextArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then
+					; Next point is a curve of some form, copy the control points.
+
+					If ($aiFlags[$iNextArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint4 = $atPoints[$iNextArrayElement - 1]
+
+					If ($iNextArrayElement - 2 > $iArrayElement) And ($aiFlags[$iNextArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint3 = $atPoints[$iNextArrayElement - 2] ; If two control points are present, copy them.
+				EndIf
+
+				$iOffset = 0
+				$iForOffset = 0
+				$iReDimCount = 4
+				; Check how many control points I am keeping.
+				$iReDimCount -= (IsObj($tControlPoint1)) ? (1) : (0)
+				$iReDimCount -= (IsObj($tControlPoint2)) ? (1) : (0)
+				$iReDimCount -= (IsObj($tControlPoint3)) ? (1) : (0)
+				$iReDimCount -= (IsObj($tControlPoint4)) ? (1) : (0)
+
+				ReDim $avArray[UBound($atPoints) - $iReDimCount]
+				ReDim $avArray2[UBound($aiFlags) - $iReDimCount]
+				$iReDimCount = 0
+
+				For $i = 0 To UBound($atPoints) - 1
+					If ($iOffset = 0) Then
+						$avArray[$i + $iForOffset] = $atPoints[$i + $iOffset] ; Add the rest of the points to the array.
+						$avArray2[$i + $iForOffset] = $aiFlags[$i + $iOffset] ; Add the rest of the points to the array.
+
+					Else
+						$iOffset -= 1 ; minus 1 from offset per round so I don't go over array limits
+						$iForOffset -= 1 ; Minus 1 from ForOffset as I am skipping one For cycle.
+					EndIf
+
+					If ($i = $iPreviousArrayElement) Then ; Insert the old control points or remove them.
+
+						If IsObj($tControlPoint1) Then
+							$iForOffset += 1
+							$iOffset += 1
+
+							$avArray[$i + $iForOffset] = $tControlPoint1
+							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+						Else
+							If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+						EndIf
+
+						If IsObj($tControlPoint2) Then
+							$iForOffset += 1
+							$iOffset += 1
+
+							$avArray[$i + $iForOffset] = $tControlPoint2
+							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+						Else
+							If (($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+						EndIf
+
+						$iForOffset += 1
+						$iOffset += 1
+						$avArray[$i + $iForOffset] = $atPoints[$iArrayElement]
+						$avArray2[$i + $iForOffset] = $iPointType
+
+						If IsObj($tControlPoint3) Then
+							$iForOffset += 1
+							$iOffset += 1
+
+							$avArray[$i + $iForOffset] = $tControlPoint3
+							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+						Else
+							If ($aiFlags[$iNextArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1
+						EndIf
+
+						If IsObj($tControlPoint3) Then
+							$iForOffset += 1
+							$iOffset += 1
+
+							$avArray[$i + $iForOffset] = $tControlPoint4
+							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+						Else
+							If (($iNextArrayElement - 2 > $iArrayElement) And ($aiFlags[$iNextArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1
+						EndIf
+					EndIf
+
+					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+				Next
+
+				; Update the ArrayElement value to its new position.
+				$iArrayElement -= (IsObj($tControlPoint1)) ? (0) : (1) ; If ControlPoint 1 is a object, it means I copied it, meaning I didn't remove that point, so Array element will be in the same position. Else I need to remove from from ArrayElement.
+				$iArrayElement -= (IsObj($tControlPoint2)) ? (0) : (1) ; If ControlPoint 2 is a object, it means I copied it, meaning I didn't remove that point, so Array element will be in the same position. Else I need to remove from from ArrayElement.
+
+				$atPoints = $avArray
+				$aiFlags = $avArray2
+
+			Else ; Point being modified is a normal point already.
+				; Do nothing?
+			EndIf
+		EndIf
+	EndIf
+
+	If ($bIsCurve <> Null) Then
+		If ($aiFlags[$iArrayElement] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; If Point to modify is a normal point, then proceed, else point is a curve already.
+
+			If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Point after point to modify is a control point, just modify it.
+				$tControlPoint3 = $atPoints[$iArrayElement + 1]
+
+				If ($bIsCurve = True) Then
+					$tControlPoint3.X = ($atPoints[$iArrayElement].X() + (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5))
+					$tControlPoint3.Y = ($atPoints[$iArrayElement].Y() + (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5))
+
+					If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then
+						$tControlPoint4 = $atPoints[$iArrayElement + 2] ; Copy the second control point.
+
+					Else ; Create a new control point.
+						$tControlPoint4 = __LOImpress_CreatePoint(Int($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
+						If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+					EndIf
+
+				ElseIf ($bIsCurve = False) And ($aiFlags[$iNextArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Next point is a curve, so just modify the control point.
+					$tControlPoint3.X = $atPoints[$iArrayElement].X() ; When the control point after a point has the same coordinates, it means it is not a curve.
+					$tControlPoint3.Y = $atPoints[$iArrayElement].Y()
+					; Copy the second control point if it exists.
+					If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $tControlPoint4 = $atPoints[$iArrayElement + 2]
+
+				Else ; IsCurve = False, and next point is normal. delete control points.
+					$tControlPoint3 = Null
+				EndIf
+
+			Else ; Need to create new control points if IsCurve = True.
+				If ($bIsCurve = True) Then
+					$tControlPoint3 = __LOImpress_CreatePoint(Int($atPoints[$iArrayElement].X() + (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iArrayElement].Y() + (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
+					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+					$tControlPoint4 = __LOImpress_CreatePoint(Int($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iNextArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
+					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+				EndIf
+			EndIf
+
+			$iOffset = 0
+			$iForOffset = 0
+			$iReDimCount = 0
+			; Check how many control points I am keeping vs creating.
+			$iReDimCount += (IsObj($tControlPoint3)) ? (1) : (0)
+			$iReDimCount += (IsObj($tControlPoint4)) ? (1) : (0)
+			$iReDimCount -= ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0) ; If a control point already existed, minus one from ReDim as it is either not new, or I am deleting it.
+			$iReDimCount -= (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0)
+
+			ReDim $avArray[UBound($atPoints) + $iReDimCount]
+			ReDim $avArray2[UBound($aiFlags) + $iReDimCount]
+
+			$iReDimCount = 0
+
+			For $i = 0 To UBound($atPoints) - 1
+				If ($iOffset = 0) Then
+					$avArray[$i + $iForOffset] = $atPoints[$i] ; Add the rest of the points to the array.
+					$avArray2[$i + $iForOffset] = $aiFlags[$i] ; Add the rest of the points to the array.
+
+				Else
+					$iOffset -= 1 ; minus 1 from offset per round so I don't go over array limits
+					$iForOffset -= 1 ; Minus 1 from ForOffset as I am skipping one For cycle.
+				EndIf
+
+				If ($i = $iArrayElement) Then ; Insert the new or modified control points.
+
+					If IsObj($tControlPoint3) Then
+						$iForOffset += 1
+						If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+
+						$avArray[$i + $iForOffset] = $tControlPoint3
+						$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+					Else
+						If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+					EndIf
+
+					If IsObj($tControlPoint4) Then
+						$iForOffset += 1
+						If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1
+
+						$avArray[$i + $iForOffset] = $tControlPoint4
+						$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+					Else
+						If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+					EndIf
+				EndIf
+
+				Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+			Next
+
+			$atPoints = $avArray
+			$aiFlags = $avArray2
+
+		Else ; Point is a Curve, see if bIsCurve = False.
+			If ($bIsCurve = False) Then ; If bIsCurve = True, I can just skip it, as there is nothing to do when the point is a curve already.
+
+				If ($aiFlags[$iNextArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Next point is a curve, need to keep the control points.
+					If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint3 = $atPoints[$iArrayElement + 1]
+					If ($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint4 = $atPoints[$iArrayElement + 2]
+				EndIf
+
+				If ($iPreviousArrayElement <> -1) And ($aiFlags[$iPreviousArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; There is a previous point, and it is a curve, I need to keep the control points.
+					If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
+					If ($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2]
+
+				ElseIf ($iPreviousArrayElement <> -1) And ($aiFlags[$iPreviousArrayElement] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; There is a previous point, and it is a normal point.
+					; See if it is curved.
+
+					If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) And _
+							(($atPoints[$iPreviousArrayElement].X() <> $atPoints[$iPreviousArrayElement + 1].X()) And _
+							($atPoints[$iPreviousArrayElement].Y() <> $atPoints[$iPreviousArrayElement + 1].Y())) Then ; Previous Point is a curve, need to keep the control points.
+						$tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
+
+						If ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2]
+					EndIf
+				EndIf
+
+				$iOffset = 0
+				$iForOffset = 0
+				$iReDimCount = 4
+				; Check how many control points I am keeping vs deleting.
+				$iReDimCount -= (IsObj($tControlPoint1)) ? (1) : (0)
+				$iReDimCount -= (IsObj($tControlPoint2)) ? (1) : (0)
+				$iReDimCount -= (IsObj($tControlPoint3)) ? (1) : (0)
+				$iReDimCount -= (IsObj($tControlPoint4)) ? (1) : (0)
+
+				ReDim $avArray[UBound($atPoints) - $iReDimCount]
+				ReDim $avArray2[UBound($aiFlags) - $iReDimCount]
+				$iReDimCount = 0
+
+				For $i = 0 To UBound($atPoints) - 1
+					If ($iOffset = 0) Then
+						$avArray[$i + $iForOffset] = $atPoints[$i] ; Add the rest of the points to the array.
+						$avArray2[$i + $iForOffset] = $aiFlags[$i] ; Add the rest of the points to the array.
+
+					Else
+						$iOffset -= 1 ; minus 1 from offset per round so I don't go over array limits
+						$iForOffset -= 1 ; Minus 1 from ForOffset as I am skipping one For cycle.
+					EndIf
+
+					If ($i = $iPreviousArrayElement) Then
+						If IsObj($tControlPoint1) Then
+							$iForOffset += 1
+							$iOffset += 1
+
+							$avArray[$i + $iForOffset] = $tControlPoint1
+							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+						Else
+							If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+						EndIf
+
+						If IsObj($tControlPoint2) Then
+							$iForOffset += 1
+							$iOffset += 1
+
+							$avArray[$i + $iForOffset] = $tControlPoint2
+							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+						Else
+							If (($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+						EndIf
+
+					ElseIf ($i = $iArrayElement) Then ; Insert or skip Control Points as necessary.
+						$avArray[$i] = $atPoints[$iArrayElement]
+						$avArray2[$i] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+
+						If IsObj($tControlPoint3) Then
+							$iForOffset += 1
+							$iOffset += 1
+
+							$avArray[$i + 1] = $tControlPoint3
+							$avArray2[$i + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+						Else
+							If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+						EndIf
+
+						If IsObj($tControlPoint4) Then
+							$iForOffset += 1
+							$iOffset += 1
+
+							$avArray[$i + 2] = $tControlPoint4
+							$avArray2[$i + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+
+						Else
+							If (($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+						EndIf
+					EndIf
+
+					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+				Next
+
+				; Update the ArrayElement value to its new position.
+				If ($iPreviousArrayElement <> -1) Then $iArrayElement -= ((IsObj($tControlPoint2) And ($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL))) ? (0) : (1) ; If ControlPoint 2 is a object, it means I copied it, meaining I didn't remove that point, so Array element will be in the same position. Else I need to remove from from ArrayElement.
+				If ($iPreviousArrayElement <> -1) Then $iArrayElement -= ((IsObj($tControlPoint1) And ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL))) ? (0) : (1) ; If ControlPoint 1 is a object, it means I copied it, meaning I didn't remove that point, so Array element will be in the same position. Else I need to remove from from ArrayElement.
+
+				$atPoints = $avArray
+				$aiFlags = $avArray2
+			EndIf
+		EndIf
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>__LOImpress_DrawShapePointModify
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_FilterNameGet
@@ -699,6 +2924,51 @@ Func __LOImpress_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 
 	Return SetError($__LO_STATUS_SUCCESS, 3, "impress8")
 EndFunc   ;==>__LOImpress_FilterNameGet
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_GetShapeName
+; Description ...: Create a Shape Name that hasn't been used yet in the slide.
+; Syntax ........: __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
+; Parameters ....: $oSlide              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+;                  $sShapeName          - a string value. The Shape name to begin with.
+; Return values .: Success: String
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sShapeName not a String.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Slide contained no shapes, returns the Shape name with a "1" appended.
+;                  @Error 0 @Extended 1 Return String = Success. Returns the unique Shape name to use.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function adds a digit after the shape name, incrementing it until that name hasn't been used yet in L.O.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sShapeName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If $oSlide.hasElements() Then
+		Do ; Cycle through until I find a unique name.
+			For $i = 1 To $oSlide.getCount() - 1
+				; Impress doesn't set the Shape name on new shapes. It has names in the UI that would correspond to the order of the shapes inserted, i.e. Shape 1, Shape 2. Etc.
+				If ($oSlide.getByIndex($i).Name() = $sShapeName & $i) Or (($oSlide.getByIndex($i).Name() = "") And (("Shape " & ($i + 1)) = $sShapeName & $i)) Then ExitLoop
+
+				Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Next
+		Until $i = $oSlide.getCount()
+	Else
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, $sShapeName & "1") ; If Doc has no shapes, just return the name with a "1" appended.
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 1, $sShapeName & $i)
+EndFunc   ;==>__LOImpress_GetShapeName
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_GradientNameInsert
@@ -1431,6 +3701,56 @@ Func __LOImpress_InternalComErrorHandler(ByRef $oComError)
 		EndSwitch
 	EndIf
 EndFunc   ;==>__LOImpress_InternalComErrorHandler
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_ShapeGetType
+; Description ...: Identify a Shape's type.
+; Syntax ........: __LOImpress_ShapeGetType(ByRef $oShape)
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Return values .: Success: Integer
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape's type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to identify Shape.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Shape's Type, corresponding to one of the Constants $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_ShapeGetType(ByRef $oShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $avShapeTypes[20][2] = [[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.Shape3DSceneObject"], _
+			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.CustomShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.MeasureShape"], _
+			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.EllipseShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedBezierShape"], _
+			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenBezierShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyPolygonShape"], _
+			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyLineShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.LineShape"], _
+			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ConnectorShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenFreeHandShape"], _
+			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedFreeHandShape"], [$LOI_SHAPE_TYPE_FORM_CONTROL, "com.sun.star.drawing.ControlShape"], _
+			[$LOI_SHAPE_TYPE_IMAGE, "com.sun.star.drawing.GraphicObjectShape"], [$LOI_SHAPE_TYPE_MEDIA, "com.sun.star.drawing.MediaShape"], _
+			[$LOI_SHAPE_TYPE_OLE2, "com.sun.star.drawing.OLE2Shape"], [$LOI_SHAPE_TYPE_TABLE, "com.sun.star.drawing.TableShape"], _
+			[$LOI_SHAPE_TYPE_TEXTBOX, "com.sun.star.drawing.TextShape"], [$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, "com.sun.star.presentation.SubtitleShape"], _
+			[$LOI_SHAPE_TYPE_TEXTBOX_TITLE, "com.sun.star.presentation.TitleTextShape"]]
+	Local $sShapeType
+
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$sShapeType = $oShape.ShapeType()
+	If Not IsString($sShapeType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	For $i = 0 To UBound($avShapeTypes) - 1
+		If ($sShapeType = $avShapeTypes[$i][1]) Then Return SetError($__LO_STATUS_SUCCESS, 0, $avShapeTypes[$i][0])
+	Next
+
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+EndFunc   ;==>__LOImpress_ShapeGetType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_TransparencyGradientConvert

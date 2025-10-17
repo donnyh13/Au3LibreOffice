@@ -10,6 +10,7 @@
 
 ; Common includes for Impress
 #include "LibreOfficeImpress_Internal.au3"
+#include "LibreOfficeImpress_Constants.au3"
 
 ; Other includes for Impress
 

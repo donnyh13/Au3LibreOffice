@@ -675,10 +675,21 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- LibreOfficeImpress_Internal.au3
 	- LibreOfficeImpress_Slides.au3
 - Constants
+	- $LOI_ALIGN_VERT_*
+	- $LOI_ANCHOR_*
 	- $LOI_AREA_FILL_STYLE_*
 	- $LOI_DRAWSHAPE_TYPE_*
+	- $LOI_DRAWSHAPE_CONNECTOR_TYPE_*
+	- $LOI_DRAWSHAPE_LINE_ARROW_TYPE_*
+	- $LOI_DRAWSHAPE_LINE_CAP_*
+	- $LOI_DRAWSHAPE_LINE_JOINT_*
+	- $LOI_DRAWSHAPE_LINE_STYLE_*
+	- $LOI_DRAWSHAPE_POINT_TYPE_*
 	- $LOI_GRAD_NAME_*
 	- $LOI_GRAD_TYPE_*
+	- $LOI_ORIENT_HORI_*
+	- $LOI_ORIENT_VERT_*
+	- $LOI_RELATIVE_*
 	- $LOI_SHAPE_TYPE_*
 	- $LOI_ZOOMTYPE_*
 - Document Functions
@@ -715,21 +726,62 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOImpress_DocUndoReset
 	- _LOImpress_DocVisible
 	- _LOImpress_DocZoom
+- Drawing Shape functions
+	- _LOImpress_DrawShapeAreaColor
+	- _LOImpress_DrawShapeAreaFillStyle
+	- _LOImpress_DrawShapeAreaGradient
+	- _LOImpress_DrawShapeAreaGradientMulticolor
+	- _LOImpress_DrawShapeAreaTransparency
+	- _LOImpress_DrawShapeAreaTransparencyGradient
+	- _LOImpress_DrawShapeAreaTransparencyGradientMulti
+	- _LOImpress_DrawShapeDelete
+	- _LOImpress_DrawShapeExists
+	- _LOImpress_DrawShapeGetType
+	- _LOImpress_DrawShapeInsert
+	- _LOImpress_DrawShapeLineArrowStyles
+	- _LOImpress_DrawShapeLineProperties
+	- _LOImpress_DrawShapeName
+	- _LOImpress_DrawShapePointsAdd
+	- _LOImpress_DrawShapePointsGetCount
+	- _LOImpress_DrawShapePointsModify
+	- _LOImpress_DrawShapePointsRemove
+	- _LOImpress_DrawShapePosition
+	- _LOImpress_DrawShapeRotateSlant
+	- _LOImpress_DrawShapeTextboxCreateTextCursor
+	- _LOImpress_DrawShapeTypePosition
+	- _LOImpress_DrawShapeTypeSize
 - Helper Functions
 	- _LOImpress_ComError_UserFunction
 	- _LOImpress_CursorInsertString
-	- _LOImpress_DrawShapeDelete
-	- _LOImpress_DrawShapeGetType
-	- _LOImpress_DrawShapeTextboxCreateTextCursor
 	- _LOImpress_FontExists
 	- _LOImpress_FontsGetNames
+	- _LOImpress_GradientMulticolorAdd
+	- _LOImpress_GradientMulticolorDelete
+	- _LOImpress_GradientMulticolorModify
+	- _LOImpress_TransparencyGradientMultiAdd
+	- _LOImpress_TransparencyGradientMultiDelete
+	- _LOImpress_TransparencyGradientMultiModify
 - Internal Functions
+	- __LOImpress_ColorRemoveAlpha
+	- __LOImpress_CreatePoint
+	- __LOImpress_DrawShape_CreateArrow
+	- __LOImpress_DrawShape_CreateBasic
+	- __LOImpress_DrawShape_CreateCallout
+	- __LOImpress_DrawShape_CreateFlowchart
+	- __LOImpress_DrawShape_CreateLine
+	- __LOImpress_DrawShape_CreateStars
+	- __LOImpress_DrawShape_CreateSymbol
 	- __LOImpress_DrawShape_GetCustomType
-	- __LOImpress_DrawShapeGetType
+	- __LOImpress_DrawShapeArrowStyleName
+	- __LOImpress_DrawShapeLineStyleName
+	- __LOImpress_DrawShapePointGetSettings
+	- __LOImpress_DrawShapePointModify
 	- __LOImpress_FilterNameGet
+	- __LOImpress_GetShapeName
 	- __LOImpress_GradientNameInsert
 	- __LOImpress_GradientPresets
 	- __LOImpress_InternalComErrorHandler
+	- __LOImpress_ShapeGetType
 	- __LOImpress_TransparencyGradientConvert
 	- __LOImpress_TransparencyGradientNameInsert
 - Slide Functions

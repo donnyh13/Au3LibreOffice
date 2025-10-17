@@ -10,6 +10,7 @@
 
 ; Common includes for Impress
 #include "LibreOfficeImpress_Internal.au3"
+#include "LibreOfficeImpress_Constants.au3"
 
 ; Other includes for Impress
 
@@ -1226,7 +1227,7 @@ Func _LOImpress_SlideShapesGetList(ByRef $oSlide, $iTypes = $LOI_SHAPE_TYPE_ALL)
 			$oShape = $oSlide.getByIndex($i)
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-			$iShapeType = __LOImpress_DrawShapeGetType($oShape)
+			$iShapeType = __LOImpress_ShapeGetType($oShape)
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			If (BitAND($iTypes, $iShapeType) = $iShapeType) Then
