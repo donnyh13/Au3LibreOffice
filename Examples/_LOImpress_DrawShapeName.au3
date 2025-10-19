@@ -16,13 +16,9 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Rectangle Shape into the document, 3000 Wide by 6000 High.
-	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
+	; Insert a Rectangle Shape into the document, 3000 Wide by 6000 High, 12000X, 4300Y.
+	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000, 12000, 4300)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Move the Shape.
-	_LOImpress_DrawShapePosition($oShape, 12000, 4300)
-	If @error Then _ERROR($oDoc, "Failed to move a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape name
 	$sName = _LOImpress_DrawShapeName($oShape)

@@ -17,13 +17,9 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Line Shape into the document, 4000 Wide by 0 High.
-	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_LINE_LINE, 4000, 0)
+	; Insert a Line Shape into the document, 4000 Wide by 0 High, 12000X, 4300Y.
+	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_LINE_LINE, 4000, 0, 12000, 4300)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Move the Shape.
-	_LOImpress_DrawShapePosition($oShape, 12000, 4300)
-	If @error Then _ERROR($oDoc, "Failed to move a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Micrometers
 	$iMicrometers = _LO_ConvertToMicrometer(.25)

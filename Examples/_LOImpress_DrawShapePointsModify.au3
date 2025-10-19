@@ -17,13 +17,9 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Polygon Shape into the document, 5000 Wide by 7000 High.
-	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON, 5000, 7000)
+	; Insert a Polygon Shape into the document, 5000 Wide by 7000 High, 12000X, 4300Y.
+	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON, 5000, 7000, 12000, 4300)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Move the Shape.
-	_LOImpress_DrawShapePosition($oShape, 12000, 4300)
-	If @error Then _ERROR($oDoc, "Failed to move a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Shape's current settings for its third point.
 	$avArray = _LOImpress_DrawShapePointsModify($oShape, 3)

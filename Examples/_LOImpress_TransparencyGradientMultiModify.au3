@@ -17,13 +17,9 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Circle Shape into the document, 5000 Wide by 5000 High.
-	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE, 5000, 5000)
+	; Insert a Circle Shape into the document, 5000 Wide by 5000 High, 12000X, 4300Y.
+	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE, 5000, 5000, 12000, 4300)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Move the Shape.
-	_LOImpress_DrawShapePosition($oShape, 12000, 4300)
-	If @error Then _ERROR($oDoc, "Failed to move a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape  Background Color settings. Background color = $LO_COLOR_TEAL.
 	_LOImpress_DrawShapeAreaColor($oShape, $LO_COLOR_TEAL)
