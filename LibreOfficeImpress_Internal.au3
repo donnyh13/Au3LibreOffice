@@ -1184,6 +1184,20 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iShapeT
 			$oShape.FillColor = 7512015 ; Light blue
 	EndSwitch
 
+	If __LO_IntIsBetween($iShapeType, $LOI_DRAWSHAPE_TYPE_CONNECTOR, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW, "", $LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSION_LINE) Then
+		$oShape.StartPosition = $tStart
+		$oShape.EndPosition = $tEnd
+
+	Else
+		$avArray[0] = $atPoint
+		$tPolyCoords.Coordinates = $avArray
+
+		$avArray[0] = $aiFlags
+		$tPolyCoords.Flags = $avArray
+
+		$oShape.PolyPolygonBezier = $tPolyCoords
+	EndIf
+
 	$tSize = $oShape.Size()
 	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
@@ -1199,20 +1213,6 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iShapeT
 	$tPos.Y = 0
 
 	$oShape.Position = $tPos
-
-	If __LO_IntIsBetween($iShapeType, $LOI_DRAWSHAPE_TYPE_CONNECTOR, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW, "", $LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSION_LINE) Then
-		$oShape.StartPosition = $tStart
-		$oShape.EndPosition = $tEnd
-
-	Else
-		$avArray[0] = $atPoint
-		$tPolyCoords.Coordinates = $avArray
-
-		$avArray[0] = $aiFlags
-		$tPolyCoords.Flags = $avArray
-
-		$oShape.PolyPolygonBezier = $tPolyCoords
-	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
 EndFunc   ;==>__LOImpress_DrawShape_CreateLine
@@ -2945,14 +2945,17 @@ Func __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iCount = 0
+
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sShapeName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If $oSlide.hasElements() Then
 		Do ; Cycle through until I find a unique name.
-			For $i = 1 To $oSlide.getCount() - 1
+			$iCount += 1
+			For $i = 0 To $oSlide.getCount() - 1
 				; Impress doesn't set the Shape name on new shapes. It has names in the UI that would correspond to the order of the shapes inserted, i.e. Shape 1, Shape 2. Etc.
-				If ($oSlide.getByIndex($i).Name() = $sShapeName & $i) Or (($oSlide.getByIndex($i).Name() = "") And (("Shape " & ($i + 1)) = $sShapeName & $i)) Then ExitLoop
+				If ($oSlide.getByIndex($i).Name() = $sShapeName & $iCount) Or (($oSlide.getByIndex($i).Name() = "") And (("Shape " & ($i + 1)) = $sShapeName & $iCount)) Then ExitLoop
 
 				Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
 			Next
@@ -2963,7 +2966,7 @@ Func __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
 		Return SetError($__LO_STATUS_SUCCESS, 0, $sShapeName & "1") ; If Doc has no shapes, just return the name with a "1" appended.
 	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 1, $sShapeName & $i)
+	Return SetError($__LO_STATUS_SUCCESS, 1, $sShapeName & $iCount)
 EndFunc   ;==>__LOImpress_GetShapeName
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
