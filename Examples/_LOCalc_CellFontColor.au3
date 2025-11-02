@@ -24,8 +24,8 @@ Func Example()
 	_LOCalc_CellString($oCell, "Some Text")
 	If @error Then _ERROR($oDoc, "Failed to set Cell Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell's font color to $LOC_COLOR_RED
-	_LOCalc_CellFontColor($oCell, $LOC_COLOR_RED)
+	; Set the Cell's font color to $LO_COLOR_RED
+	_LOCalc_CellFontColor($oCell, $LO_COLOR_RED)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Cell's current Font Color setting. Return will be an integer.

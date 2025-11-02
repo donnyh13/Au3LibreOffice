@@ -20,7 +20,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Row Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Row 3's Background color to Black.
-	_LOCalc_CellBackColor($oRow, $LOC_COLOR_BLACK)
+	_LOCalc_CellBackColor($oRow, $LO_COLOR_BLACK)
 	If @error Then _ERROR($oDoc, "Failed to set Row's Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now Retrieve Cell Range D3 to F7, and set the fourth down row's background color to black also, using the Cell Range." & @CRLF & _
@@ -35,7 +35,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Row Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Row 6's Background color to Black.
-	_LOCalc_CellBackColor($oRow, $LOC_COLOR_BLACK)
+	_LOCalc_CellBackColor($oRow, $LO_COLOR_BLACK)
 	If @error Then _ERROR($oDoc, "Failed to set Row's Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

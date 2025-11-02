@@ -1,10 +1,12 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-;~ #Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel
 #include-once
 
 ; Main LibreOffice Includes
 #include "LibreOffice_Constants.au3"
+#include "LibreOffice_Helper.au3"
+#include "LibreOffice_Internal.au3"
 
 ; Common includes for Calc
 #include "LibreOfficeCalc_Internal.au3"
@@ -142,7 +144,7 @@ Func _LOCalc_SheetAdd(ByRef $oDoc, $sName = Null, $iPosition = Null)
 
 	If ($iPosition = Null) Then $iPosition = $oSheets.Count()
 
-	If Not __LOCalc_IntIsBetween($iPosition, 0, $oSheets.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iPosition, 0, $oSheets.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$oSheets.insertNewByName($sName, $iPosition)
 
@@ -215,7 +217,7 @@ Func _LOCalc_SheetCopy(ByRef $oDoc, ByRef $oSheet, $sNewName = Null, $iPosition 
 
 	If ($iPosition = Null) Then $iPosition = $oSheets.Count()
 
-	If Not __LOCalc_IntIsBetween($iPosition, 0, $oSheets.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not __LO_IntIsBetween($iPosition, 0, $oSheets.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$oSheets.copyByName($sName, $sNewName, $iPosition)
 
@@ -609,7 +611,7 @@ Func _LOCalc_SheetGetObjByPosition(ByRef $oDoc, $iPosition)
 	Local $oSheet, $oSheets
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOCalc_IntIsBetween($iPosition, 0, $oDoc.Sheets.Count() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iPosition, 0, $oDoc.Sheets.Count() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oSheets = $oDoc.Sheets()
 	If Not IsObj($oSheets) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -658,7 +660,7 @@ Func _LOCalc_SheetImport(ByRef $oSourceDoc, ByRef $oDestDoc, $sSheetName, $bInse
 	Local $iPosition, $iNewSheet
 	Local $oSheet
 
-	If Not __LOCalc_VersionCheck(3.5) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+	If Not __LO_VersionCheck(3.5) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 	If Not IsObj($oSourceDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oDestDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sSheetName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -795,7 +797,7 @@ Func _LOCalc_SheetLink(ByRef $oSourceDoc, ByRef $oDestDoc, $sSheetName, $iLinkMo
 	If Not IsObj($oSourceDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oDestDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sSheetName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LOCalc_IntIsBetween($iLinkMode, $LOC_SHEET_LINK_MODE_NONE, $LOC_SHEET_LINK_MODE_VALUE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iLinkMode, $LOC_SHEET_LINK_MODE_NONE, $LOC_SHEET_LINK_MODE_VALUE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If ($oSourceDoc.URL() = "") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not $oSourceDoc.Sheets.hasByName($sSheetName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 	If Not IsBool($bInsertAfter) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
@@ -883,8 +885,8 @@ Func _LOCalc_SheetLinkModify(ByRef $oSheet, $oNewDoc = Null, $sSheetName = Null,
 
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOCalc_VarsAreNull($oNewDoc, $sSheetName, $iLinkMode) Then
-		__LOCalc_ArrayFill($avSheet, _LOCalc_PathConvert($oSheet.LinkUrl(), $LOC_PATHCONV_PCPATH_RETURN), $oSheet.LinkSheetName(), $oSheet.LinkMode())
+	If __LO_VarsAreNull($oNewDoc, $sSheetName, $iLinkMode) Then
+		__LO_ArrayFill($avSheet, _LO_PathConvert($oSheet.LinkUrl(), $LO_PATHCONV_PCPATH_RETURN), $oSheet.LinkSheetName(), $oSheet.LinkMode())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avSheet)
 	EndIf
@@ -892,7 +894,7 @@ Func _LOCalc_SheetLinkModify(ByRef $oSheet, $oNewDoc = Null, $sSheetName = Null,
 	If ($oNewDoc <> Null) Then
 		If Not IsObj($oNewDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 		If Not IsString($sSheetName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-		If Not __LOCalc_IntIsBetween($iLinkMode, $LOC_SHEET_LINK_MODE_NONE, $LOC_SHEET_LINK_MODE_VALUE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iLinkMode, $LOC_SHEET_LINK_MODE_NONE, $LOC_SHEET_LINK_MODE_VALUE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If ($oNewDoc.URL() = "") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 		If Not $oNewDoc.Sheets.hasByName($sSheetName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
@@ -907,7 +909,7 @@ Func _LOCalc_SheetLinkModify(ByRef $oSheet, $oNewDoc = Null, $sSheetName = Null,
 		If Not IsString($sSheetName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 		If ($oSheet.LinkUrl() = "") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		$oSourceDoc = _LOCalc_DocOpen(_LOCalc_PathConvert($oSheet.LinkUrl(), $LOC_PATHCONV_PCPATH_RETURN), True, True)
+		$oSourceDoc = _LOCalc_DocOpen(_LO_PathConvert($oSheet.LinkUrl(), $LO_PATHCONV_PCPATH_RETURN), True, True)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$bClose = (@extended = 2) ? (True) : (False)
@@ -920,7 +922,7 @@ Func _LOCalc_SheetLinkModify(ByRef $oSheet, $oNewDoc = Null, $sSheetName = Null,
 	EndIf
 
 	If ($iLinkMode <> Null) Then
-		If Not __LOCalc_IntIsBetween($iLinkMode, $LOC_SHEET_LINK_MODE_NONE, $LOC_SHEET_LINK_MODE_VALUE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iLinkMode, $LOC_SHEET_LINK_MODE_NONE, $LOC_SHEET_LINK_MODE_VALUE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		If ($iLinkMode = $LOC_SHEET_LINK_MODE_NONE) Then
 			With $oSheet
@@ -986,7 +988,7 @@ Func _LOCalc_SheetMove(ByRef $oDoc, ByRef $oSheet, $iPosition = Null)
 
 	$oSheets = $oDoc.Sheets()
 	If Not IsObj($oSheets) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-	If Not __LOCalc_IntIsBetween($iPosition, 0, $oSheets.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_IntIsBetween($iPosition, 0, $oSheets.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oSheets.moveByName($sName, $iPosition)
 
@@ -1093,7 +1095,7 @@ Func _LOCalc_SheetPrintColumnsRepeat(ByRef $oSheet, $oRange = Null, $bRepeatColu
 
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOCalc_VarsAreNull($oRange, $bRepeatColumns) Then
+	If __LO_VarsAreNull($oRange, $bRepeatColumns) Then
 		$tRangeAddr = $oSheet.getTitleColumns()
 		If Not IsObj($tRangeAddr) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -1101,13 +1103,13 @@ Func _LOCalc_SheetPrintColumnsRepeat(ByRef $oSheet, $oRange = Null, $bRepeatColu
 			$oCell = $oSheet.getCellByPosition($tRangeAddr.StartColumn(), $tRangeAddr.StartRow())
 			If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			__LOCalc_ArrayFill($avPrintColumn, $oCell, $oSheet.PrintTitleColumns())
+			__LO_ArrayFill($avPrintColumn, $oCell, $oSheet.PrintTitleColumns())
 
 		Else
 			$oCellRange = $oSheet.getCellRangeByPosition($tRangeAddr.StartColumn(), $tRangeAddr.StartRow(), $tRangeAddr.EndColumn(), $tRangeAddr.EndRow())
 			If Not IsObj($oCellRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			__LOCalc_ArrayFill($avPrintColumn, $oCellRange, $oSheet.PrintTitleColumns())
+			__LO_ArrayFill($avPrintColumn, $oCellRange, $oSheet.PrintTitleColumns())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avPrintColumn)
@@ -1256,7 +1258,7 @@ Func _LOCalc_SheetPrintRowsRepeat(ByRef $oSheet, $oRange = Null, $bRepeatRows = 
 
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOCalc_VarsAreNull($oRange, $bRepeatRows) Then
+	If __LO_VarsAreNull($oRange, $bRepeatRows) Then
 		$tRangeAddr = $oSheet.getTitleRows()
 		If Not IsObj($tRangeAddr) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -1264,13 +1266,13 @@ Func _LOCalc_SheetPrintRowsRepeat(ByRef $oSheet, $oRange = Null, $bRepeatRows = 
 			$oCell = $oSheet.getCellByPosition($tRangeAddr.StartColumn(), $tRangeAddr.StartRow())
 			If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			__LOCalc_ArrayFill($avPrintRow, $oCell, $oSheet.PrintTitleRows())
+			__LO_ArrayFill($avPrintRow, $oCell, $oSheet.PrintTitleRows())
 
 		Else
 			$oCellRange = $oSheet.getCellRangeByPosition($tRangeAddr.StartColumn(), $tRangeAddr.StartRow(), $tRangeAddr.EndColumn(), $tRangeAddr.EndRow())
 			If Not IsObj($oCellRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			__LOCalc_ArrayFill($avPrintRow, $oCellRange, $oSheet.PrintTitleRows())
+			__LO_ArrayFill($avPrintRow, $oCellRange, $oSheet.PrintTitleRows())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avPrintRow)
@@ -1514,7 +1516,7 @@ EndFunc   ;==>_LOCalc_SheetsGetNames
 ; Description ...: Set or Retrieve a Sheet's Tab Color.
 ; Syntax ........: _LOCalc_SheetTabColor(ByRef $oSheet[, $iColor = Null])
 ; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The tab color in Long Color format. Set to $LOC_COLOR_OFF(-1) to set to Default color setting. Can also be one of the constants $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3
+;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The tab color in Long Color format. Set to $LO_COLOR_OFF(-1) to set to Default color setting. Can also be one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1529,7 +1531,7 @@ EndFunc   ;==>_LOCalc_SheetsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
-; Related .......: _LOCalc_ConvertColorFromLong, _LOCalc_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1541,7 +1543,7 @@ Func _LOCalc_SheetTabColor(ByRef $oSheet, $iColor = Null)
 
 	If ($iColor = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.TabColor())
 
-	If Not __LOCalc_IntIsBetween($iColor, $LOC_COLOR_OFF, $LOC_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oSheet.TabColor = $iColor
 	If Not ($oSheet.TabColor() = $iColor) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)

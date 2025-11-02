@@ -26,7 +26,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Sheet Cursor for the Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set background color to black.
-	_LOCalc_CellBackColor($oSheetCursor, $LOC_COLOR_BLACK)
+	_LOCalc_CellBackColor($oSheetCursor, $LO_COLOR_BLACK)
 	If @error Then _ERROR($oDoc, "Failed to set background color for the Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now move the cursor right 5 Spaces, then set the background color to Blue.")
@@ -36,7 +36,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to perform a Cursor move. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set background color to blue.
-	_LOCalc_CellBackColor($oSheetCursor, $LOC_COLOR_BLUE)
+	_LOCalc_CellBackColor($oSheetCursor, $LO_COLOR_BLUE)
 	If @error Then _ERROR($oDoc, "Failed to set background color for the Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now move the cursor right 1 Space, then expand the selection to cover 3 columns, and 6 Rows, then merge the Range.")

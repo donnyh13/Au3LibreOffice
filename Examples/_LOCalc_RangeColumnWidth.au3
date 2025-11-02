@@ -22,7 +22,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Column Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/2 an inch to Micrometers
-	$iMicrometers = _LOCalc_ConvertToMicrometer(0.5)
+	$iMicrometers = _LO_ConvertToMicrometer(0.5)
 	If @error Then _ERROR($oDoc, "Failed to convert Inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Column C's Width to 1/2 inch.

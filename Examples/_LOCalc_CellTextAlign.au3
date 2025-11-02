@@ -26,7 +26,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Cell Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Micrometers
-	$iMicrometers = _LOCalc_ConvertToMicrometer(0.25)
+	$iMicrometers = _LO_ConvertToMicrometer(0.25)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell's Text Alignment settings to, Horizontal Alignment = $LOC_CELL_ALIGN_HORI_LEFT, Vertical Align = $LOC_CELL_ALIGN_VERT_MIDDLE,

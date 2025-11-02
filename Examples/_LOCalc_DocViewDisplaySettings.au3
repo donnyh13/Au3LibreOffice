@@ -32,8 +32,8 @@ Func Example()
 
 		; Set Document Display settings, Set Display Formulas instead of Results to True, Display zero values = False, display comment indicator = False,
 		; Display Page breaks = False, Display Helplines = True, Color Cell Contents differently = False, display anchors = True, Display a Grid = True,
-		; Grid color = $LOC_COLOR_GOLD.
-		_LOCalc_DocViewDisplaySettings($oDoc, True, False, False, False, True, False, True, True, $LOC_COLOR_GOLD)
+		; Grid color = $LO_COLOR_GOLD.
+		_LOCalc_DocViewDisplaySettings($oDoc, True, False, False, False, True, False, True, True, $LO_COLOR_GOLD)
 		If @error Then _ERROR($oDoc, "Failed to set Document Display settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Retrieve the current Document View Display Settings

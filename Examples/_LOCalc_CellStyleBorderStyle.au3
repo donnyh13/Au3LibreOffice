@@ -20,7 +20,7 @@ Func Example()
 	_LOCalc_CellStyleBorderWidth($oCellStyle, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THIN, $LOC_BORDERWIDTH_THIN)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Border Style to $LOC_COLOR_BRICK for all four sides, and $LOC_BORDERSTYLE_SOLID for the diagonal borders.
+	; Set the Cell Style's Border Style to $LO_COLOR_BRICK for all four sides, and $LOC_BORDERSTYLE_SOLID for the diagonal borders.
 	_LOCalc_CellStyleBorderStyle($oCellStyle, $LOC_BORDERSTYLE_DASH_DOT_DOT, $LOC_BORDERSTYLE_DASH_DOT_DOT, $LOC_BORDERSTYLE_DASH_DOT_DOT, $LOC_BORDERSTYLE_DASH_DOT_DOT, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_SOLID)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

@@ -20,8 +20,8 @@ Func Example()
 	_LOCalc_CellStyleBorderWidth($oCellStyle, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THIN, $LOC_BORDERWIDTH_THIN)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Border color to $LOC_COLOR_BRICK for all four sides, and $LOC_COLOR_BLUE for the diagonal borders.
-	_LOCalc_CellStyleBorderColor($oCellStyle, $LOC_COLOR_BRICK, $LOC_COLOR_BRICK, $LOC_COLOR_BRICK, $LOC_COLOR_BRICK, $LOC_COLOR_BLUE, $LOC_COLOR_BLUE)
+	; Set the Cell Style's Border color to $LO_COLOR_BRICK for all four sides, and $LO_COLOR_BLUE for the diagonal borders.
+	_LOCalc_CellStyleBorderColor($oCellStyle, $LO_COLOR_BRICK, $LO_COLOR_BRICK, $LO_COLOR_BRICK, $LO_COLOR_BRICK, $LO_COLOR_BLUE, $LO_COLOR_BLUE)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

@@ -32,7 +32,7 @@ Func Example()
 
 	; Cycle through the results and set the background color to yellow for each Cell range found
 	For $i = 0 To $iResults - 1
-		_LOCalc_CellBackColor($aoRanges[$i], $LOC_COLOR_YELLOW)
+		_LOCalc_CellBackColor($aoRanges[$i], $LO_COLOR_YELLOW)
 		If @error Then _ERROR($oDoc, "Failed to set Cell Range Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 
@@ -45,7 +45,7 @@ Func Example()
 
 	; Cycle through the results and set the background color to Red for each Cell range found
 	For $i = 0 To $iResults - 1
-		_LOCalc_CellBackColor($aoRanges[$i], $LOC_COLOR_RED)
+		_LOCalc_CellBackColor($aoRanges[$i], $LO_COLOR_RED)
 		If @error Then _ERROR($oDoc, "Failed to set Cell Range Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

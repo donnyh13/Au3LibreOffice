@@ -30,11 +30,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set comment visibility. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 4 Inch to Micrometers
-	$iMicrometers1 = _LOCalc_ConvertToMicrometer(4)
+	$iMicrometers1 = _LO_ConvertToMicrometer(4)
 	If @error Then _ERROR($oDoc, "Failed to convert Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1.5 Inches to Micrometers
-	$iMicrometers2 = _LOCalc_ConvertToMicrometer(1.5)
+	$iMicrometers2 = _LO_ConvertToMicrometer(1.5)
 	If @error Then _ERROR($oDoc, "Failed to convert Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Comment's Position to: 4 Inches Right, and 1.5 inches down from the Cell B3. And lock the position.

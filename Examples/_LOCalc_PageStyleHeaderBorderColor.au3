@@ -24,8 +24,8 @@ Func Example()
 	_LOCalc_PageStyleHeaderBorderWidth($oPageStyle, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Header Border Color settings to: Top, $LOC_COLOR_ORANGE, Bottom $LOC_COLOR_BLUE, Left, $LOC_COLOR_LGRAY, Right $LOC_COLOR_BLACK
-	_LOCalc_PageStyleHeaderBorderColor($oPageStyle, $LOC_COLOR_ORANGE, $LOC_COLOR_BLUE, $LOC_COLOR_LGRAY, $LOC_COLOR_BLACK)
+	; Set Page style Header Border Color settings to: Top, $LO_COLOR_ORANGE, Bottom $LO_COLOR_BLUE, Left, $LO_COLOR_LGRAY, Right $LO_COLOR_BLACK
+	_LOCalc_PageStyleHeaderBorderColor($oPageStyle, $LO_COLOR_ORANGE, $LO_COLOR_BLUE, $LO_COLOR_LGRAY, $LO_COLOR_BLACK)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.

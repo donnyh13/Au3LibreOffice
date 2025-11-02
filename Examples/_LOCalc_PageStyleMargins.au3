@@ -18,11 +18,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1" to Micrometers
-	$iMicrometers = _LOCalc_ConvertToMicrometer(1)
+	$iMicrometers = _LO_ConvertToMicrometer(1)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/2" to Micrometers
-	$iMicrometers2 = _LOCalc_ConvertToMicrometer(.5)
+	$iMicrometers2 = _LO_ConvertToMicrometer(.5)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Left and Right margins to 1", Top and Bottom Margins to 1/2"

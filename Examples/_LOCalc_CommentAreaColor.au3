@@ -29,7 +29,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set comment visibility. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Comment's Background color to Green
-	_LOCalc_CommentAreaColor($oComment, $LOC_COLOR_GREEN)
+	_LOCalc_CommentAreaColor($oComment, $LO_COLOR_GREEN)
 	If @error Then _ERROR($oDoc, "Failed to set comment Area Color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Background color value

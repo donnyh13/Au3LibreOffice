@@ -39,7 +39,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Word Hi to Green font color.
-	_LOCalc_TextCursorFontColor($oTextCursor, $LOC_COLOR_GREEN)
+	_LOCalc_TextCursorFontColor($oTextCursor, $LO_COLOR_GREEN)
 	If @error Then _ERROR($oDoc, "Failed to set text formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an integer.

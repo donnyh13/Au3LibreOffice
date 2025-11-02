@@ -20,7 +20,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Column Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Column C's Background color to Black.
-	_LOCalc_CellBackColor($oColumn, $LOC_COLOR_BLACK)
+	_LOCalc_CellBackColor($oColumn, $LO_COLOR_BLACK)
 	If @error Then _ERROR($oDoc, "Failed to set Column's Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

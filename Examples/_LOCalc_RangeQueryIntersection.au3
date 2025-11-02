@@ -22,7 +22,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the background Color of Range A1-C6 to Blue
-	_LOCalc_CellBackColor($oCellRange, $LOC_COLOR_BLUE)
+	_LOCalc_CellBackColor($oCellRange, $LO_COLOR_BLUE)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Range Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell Range B3-C3
@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the background Color of Range B3-E5 to Red
-	_LOCalc_CellBackColor($oCellRange2, $LOC_COLOR_RED)
+	_LOCalc_CellBackColor($oCellRange2, $LO_COLOR_RED)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Range Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Query Cell Range 1 and Cell Range 2 for intersecting cells .
@@ -42,7 +42,7 @@ Func Example()
 
 	; Cycle through the results and set the background color to yellow for each Cell range found
 	For $i = 0 To $iResults - 1
-		_LOCalc_CellBackColor($aoRanges[$i], $LOC_COLOR_YELLOW)
+		_LOCalc_CellBackColor($aoRanges[$i], $LO_COLOR_YELLOW)
 		If @error Then _ERROR($oDoc, "Failed to set Cell Range Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

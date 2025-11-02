@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Cell B5's Background color to yellow.
-	_LOCalc_CellBackColor($oCell, $LOC_COLOR_YELLOW)
+	_LOCalc_CellBackColor($oCell, $LO_COLOR_YELLOW)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell range A1 to A6
@@ -29,7 +29,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Cell A1-A6's Background color to Blue.
-	_LOCalc_CellBackColor($oCellRange, $LOC_COLOR_BLUE)
+	_LOCalc_CellBackColor($oCellRange, $LO_COLOR_BLUE)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Range Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell B5's current background color setting, Return will be an array in order of function parameters.

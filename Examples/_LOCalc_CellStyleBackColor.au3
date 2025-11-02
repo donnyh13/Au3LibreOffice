@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Object for Cell Style named ""Default"". Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell Style's Background color to Blue.
-	_LOCalc_CellStyleBackColor($oCellStyle, $LOC_COLOR_BLUE)
+	_LOCalc_CellStyleBackColor($oCellStyle, $LO_COLOR_BLUE)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Style Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell Style's current background color setting, Return will be an array in order of function parameters.

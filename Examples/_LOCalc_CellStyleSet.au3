@@ -24,7 +24,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell Style background color for "Status" to Teal.
-	_LOCalc_CellStyleBackColor($oCellStyle, $LOC_COLOR_TEAL)
+	_LOCalc_CellStyleBackColor($oCellStyle, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now set the current Cell style to ""Status."" for Cell Range A2-B3.")

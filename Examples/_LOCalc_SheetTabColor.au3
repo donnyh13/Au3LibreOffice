@@ -16,7 +16,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a new Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Tab Background color to Gold
-	_LOCalc_SheetTabColor($oSheet, $LOC_COLOR_GOLD)
+	_LOCalc_SheetTabColor($oSheet, $LO_COLOR_GOLD)
 	If @error Then _ERROR($oDoc, "Failed to set Sheet Tab Color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

@@ -24,8 +24,8 @@ Func Example()
 	_LOCalc_CellString($oCell, "Some Text in a long sentence")
 	If @error Then _ERROR($oDoc, "Failed to set Cell Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell's underline settings to Words only = True, Underline style $LOC_UNDERLINE_BOLD_DASH_DOT, Underline has Color = True, and Color to $LOC_COLOR_BROWN
-	_LOCalc_CellUnderLine($oCell, True, $LOC_UNDERLINE_BOLD_DASH_DOT, True, $LOC_COLOR_BROWN)
+	; Set the Cell's underline settings to Words only = True, Underline style $LOC_UNDERLINE_BOLD_DASH_DOT, Underline has Color = True, and Color to $LO_COLOR_BROWN
+	_LOCalc_CellUnderLine($oCell, True, $LOC_UNDERLINE_BOLD_DASH_DOT, True, $LO_COLOR_BROWN)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

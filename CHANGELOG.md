@@ -281,9 +281,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOCalc_CommentAreaColor
 	- _LOCalc_CommentAreaFillStyle
 	- _LOCalc_CommentAreaGradient
+	- _LOCalc_CommentAreaGradientMulticolor
 	- _LOCalc_CommentAreaShadow
 	- _LOCalc_CommentAreaTransparency
 	- _LOCalc_CommentAreaTransparencyGradient
+	- _LOCalc_CommentAreaTransparencyGradientMulti
 	- _LOCalc_CommentCallout
 	- _LOCalc_CommentCreateTextCursor
 	- _LOCalc_CommentDelete
@@ -388,10 +390,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOCalc_FieldTitleInsert
 - Helper Functions
 	- _LOCalc_ComError_UserFunction
-	- _LOCalc_ConvertColorFromLong
-	- _LOCalc_ConvertColorToLong
-	- _LOCalc_ConvertFromMicrometer
-	- _LOCalc_ConvertToMicrometer
+	- ~~_LOCalc_ConvertColorFromLong~~
+	- ~~_LOCalc_ConvertColorToLong~~
+	- ~~_LOCalc_ConvertFromMicrometer~~
+	- ~~_LOCalc_ConvertToMicrometer~~
 	- _LOCalc_FilterDescriptorCreate
 	- _LOCalc_FilterDescriptorModify
 	- _LOCalc_FilterFieldCreate
@@ -404,16 +406,22 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOCalc_FormatKeyGetStandard
 	- _LOCalc_FormatKeyGetString
 	- _LOCalc_FormatKeyList
-	- _LOCalc_PathConvert
+	- _LOCalc_GradientMulticolorAdd
+	- _LOCalc_GradientMulticolorDelete
+	- _LOCalc_GradientMulticolorModify
+	- ~~_LOCalc_PathConvert~~
 	- _LOCalc_SearchDescriptorCreate
 	- _LOCalc_SearchDescriptorModify
 	- _LOCalc_SearchDescriptorSimilarityModify
 	- _LOCalc_SortFieldCreate
 	- _LOCalc_SortFieldModify
-	- _LOCalc_VersionGet
+	- _LOCalc_TransparencyGradientMultiAdd
+	- _LOCalc_TransparencyGradientMultiDelete
+	- _LOCalc_TransparencyGradientMultiModify
+	- ~~_LOCalc_VersionGet~~
 - Internal Functions
-	- __LOCalc_AddTo1DArray
-	- __LOCalc_ArrayFill
+	- ~~__LOCalc_AddTo1DArray~~
+	- ~~__LOCalc_ArrayFill~~
 	- __LOCalc_CellAddressIsSame
 	- __LOCalc_CellBackColor
 	- __LOCalc_CellBorder
@@ -437,7 +445,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- __LOCalc_CommentArrowStyleName
 	- __LOCalc_CommentGetObjByCell
 	- __LOCalc_CommentLineStyleName
-	- __LOCalc_CreateStruct
+	- ~~__LOCalc_CreateStruct~~
 	- __LOCalc_FieldGetObj
 	- __LOCalc_FieldTypeServices
 	- __LOCalc_FilterNameGet
@@ -445,21 +453,21 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- __LOCalc_GradientPresets
 	- __LOCalc_Internal_CursorGetType
 	- __LOCalc_InternalComErrorHandler
-	- __LOCalc_IntIsBetween
+	- ~~__LOCalc_IntIsBetween~~
 	- __LOCalc_NamedRangeGetScopeObj
-	- __LOCalc_NumIsBetween
+	- ~~__LOCalc_NumIsBetween~~
 	- __LOCalc_PageStyleBorder
 	- __LOCalc_PageStyleFooterBorder
 	- __LOCalc_PageStyleHeaderBorder
 	- __LOCalc_RangeAddressIsSame
-	- __LOCalc_SetPropertyValue
+	- ~~__LOCalc_SetPropertyValue~~
 	- __LOCalc_SheetCursorMove
 	- __LOCalc_TextCursorMove
 	- __LOCalc_TransparencyGradientConvert
 	- __LOCalc_TransparencyGradientNameInsert
-	- __LOCalc_UnitConvert
-	- __LOCalc_VarsAreNull
-	- __LOCalc_VersionCheck
+	- ~~__LOCalc_UnitConvert~~
+	- ~~__LOCalc_VarsAreNull~~
+	- ~~__LOCalc_VersionCheck~~
 - Page Style Functions and Examples
 	- _LOCalc_PageStyleAreaColor
 	- _LOCalc_PageStyleBorderColor
@@ -539,7 +547,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- $LOC_CELL_INSERT_MODE_*
 	- $LOC_CELL_ROTATE_REF_*
 	- $LOC_CELL_TYPE_*
-	- $LOC_COLOR_*
+	- ~~$LOC_COLOR_*~~
 	- $LOC_COMMENT_ANCHOR_*
 	- $LOC_COMMENT_ANIMATION_DIR_*
 	- $LOC_COMMENT_ANIMATION_KIND_*
@@ -571,7 +579,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- $LOC_PAGE_LAYOUT_*
 	- $LOC_PAPER_HEIGHT_*
 	- $LOC_PAPER_WIDTH_*
-	- $LOC_PATHCONV_*
+	- ~~$LOC_PATHCONV_*~~
 	- $LOC_PIVOT_TBL_FIELD_BASE_*
 	- $LOC_PIVOT_TBL_FIELD_DISP_*
 	- $LOC_PIVOT_TBL_FIELD_TYPE_*
@@ -612,6 +620,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Several Cell or Cell range functions that should support Column/Rows would not work with them.
 - `LibreOfficeCalc_Sheet.au3` was missing an Include file.
 - `_LOCalc_DocViewWindowSettings`, return values in wrong order. Thanks to user JALucena. <https://www.autoitscript.com/forum/topic/210514-libreoffice-udf-help-and-support/page/2/#findComment-1543326>
+- `_LOCalc_DocCreate` not finding a blank open document to connect to, if available, due to reversed logical operator, and non-existent method.
+- Missing error values in the header and wrong error values in `_LOCalc_CommentAreaTransparencyGradient`.
 
 ### Changed
 
@@ -652,14 +662,39 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Made $oDoc Parameter optional for `_LOCalc_FontsGetNames`.
 - Added count of number of results for `_LOCalc_DocConnect`, connect-all and partial name search when more than one result is present.
 - Removed _ArrayDisplay from most examples.
-- `_LOWriter_DocRedoCurActionTitle` to only have one Success return, either with an empty String or the Current Redo Action Title.
-- `_LOWriter_DocUndoCurActionTitle` to only have one Success return, either with an empty String or the Current Undo Action Title.
+- Corrected wrong usage of `$__LO_STATUS_INIT_ERROR`, and renumbered `$__LO_STATUS_PROCESSING_ERROR`, the following functions were affected:
+	- _LOCalc_CommentAreaGradient
+	- _LOCalc_CommentAreaTransparencyGradient
+	- _LOCalc_CommentPosition
+	- _LOCalc_CommentSize
+- `_LOCalc_DocRedoCurActionTitle` to only have one Success return, either with an empty String or the Current Redo Action Title.
+- `_LOCalc_DocUndoCurActionTitle` to only have one Success return, either with an empty String or the Current Undo Action Title.
 
 ### Removed
 
 - __LOCalc_VarsAreDefault
 - `LibreOfficeCalc_Font` file, combined functions into `LibreOfficeCalc_Helper`.
 - `$__LO_STATUS_DOC_ERROR` Error Constant and renumber all after errors.
+- Centralized some internal functions. Thus removing the following individual Functions:
+	- __LOCalc_ArrayFill
+	- __LOCalc_AddTo1DArray
+	- __LOCalc_CreateStruct
+	- __LOCalc_IntIsBetween
+	- __LOCalc_NumIsBetween
+	- __LOCalc_SetPropertyValue
+	- __LOCalc_UnitConvert
+	- __LOCalc_VarsAreNull
+	- __LOCalc_VersionCheck
+- Centralized some Helper functions. Thus removing the following individual Functions:
+	- _LOCalc_ConvertColorFromLong
+	- _LOCalc_ConvertColorToLong
+	- _LOCalc_ConvertFromMicrometer
+	- _LOCalc_ConvertToMicrometer
+	- _LOCalc_PathConvert
+	- _LOCalc_VersionGet
+- Centralized some Constants. Thus removing the following individual Constants:
+	- $LOC_PATHCONV_*
+	- $LOC_COLOR_*
 
 > [!NOTE]
 > **LibreOfficeImpress**
@@ -1168,6 +1203,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- `_LOWriter_PageStyleTransparencyGradient` --> `_LOWriter_PageStyleAreaTransparencyGradient`
 	- `_LOWriter_ShapeTransparency` --> `_LOWriter_ShapeAreaTransparency`
 	- `_LOWriter_ShapeTransparencyGradient` --> `_LOWriter_ShapeAreaTransparencyGradient`
+- `_LOWriter_DocRedoCurActionTitle` to only have one Success return, either with an empty String or the Current Redo Action Title.
+- `_LOWriter_DocUndoCurActionTitle` to only have one Success return, either with an empty String or the Current Undo Action Title.
 
 ### Fixed
 

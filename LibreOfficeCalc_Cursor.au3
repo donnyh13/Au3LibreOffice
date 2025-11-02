@@ -1,10 +1,12 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-;~ #Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel
 #include-once
 
 ; Main LibreOffice Includes
 #include "LibreOffice_Constants.au3"
+#include "LibreOffice_Helper.au3"
+#include "LibreOffice_Internal.au3"
 
 ; Common includes for Calc
 #include "LibreOfficeCalc_Internal.au3"
@@ -377,7 +379,7 @@ EndFunc   ;==>_LOCalc_TextCursorFont
 ; Description ...: Set or Retrieve the Font Color for a Text Cursor.
 ; Syntax ........: _LOCalc_TextCursorFontColor(ByRef $oTextCursor[, $iFontColor = Null])
 ; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Color value in Long Integer format to make the font, can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3. Set to $LOC_COLOR_OFF(-1) for Auto color.
+;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Color value in Long Integer format to make the font, can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Set to $LO_COLOR_OFF(-1) for Auto color.
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -398,7 +400,7 @@ EndFunc   ;==>_LOCalc_TextCursorFont
 ; Remarks .......: Retrieving current settings in any Text Cursor formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of inaccurate values.
 ;                  Though Transparency is present on the Font Effects page in the UI, there is (as best as I can find) no setting for it available to read and modify. And further, it seems even in L.O. the setting does not affect the font's transparency, though it may change the color value.
 ;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
-; Related .......: _LOCalc_ConvertColorToLong, _LOCalc_ConvertColorFromLong
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -666,7 +668,7 @@ EndFunc   ;==>_LOCalc_TextCursorMove
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If true, white spaces are not Overlined.
 ;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOC_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
 ;                  $bOLHasColor         - [optional] a boolean value. Default is Null. If True, the Overline is colored, must be set to true in order to set the Overline color.
-;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The Overline color, set in Long integer format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3. Set to $LOC_COLOR_OFF(-1) for automatic color mode.
+;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The Overline color, set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Set to $LO_COLOR_OFF(-1) for automatic color mode.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -694,7 +696,7 @@ EndFunc   ;==>_LOCalc_TextCursorMove
 ;                  Overline line style uses the same constants as underline style.
 ;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOCalc_ConvertColorToLong, _LOCalc_ConvertColorFromLong
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -908,7 +910,7 @@ EndFunc   ;==>_LOCalc_TextCursorStrikeOut
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If true, white spaces are not underlined.
 ;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The Underline line style, see constants, $LOC_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bULHasColor         - [optional] a boolean value. Default is Null. If True, the underline is colored, must be set to true in order to set the underline color.
-;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, set in Long integer format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3. Set to $LOC_COLOR_OFF(-1) for automatic color mode.
+;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Set to $LO_COLOR_OFF(-1) for automatic color mode.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -935,7 +937,7 @@ EndFunc   ;==>_LOCalc_TextCursorStrikeOut
 ; Remarks .......: Retrieving current settings in any Text Cursor formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of inaccurate values.
 ;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOCalc_ConvertColorToLong, _LOCalc_ConvertColorFromLong
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

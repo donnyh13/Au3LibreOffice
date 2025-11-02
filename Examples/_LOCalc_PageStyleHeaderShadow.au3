@@ -18,15 +18,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/8" to Micrometers
-	$iMicrometers = _LOCalc_ConvertToMicrometer(.125)
+	$iMicrometers = _LO_ConvertToMicrometer(.125)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Turn Header on.
 	_LOCalc_PageStyleHeader($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style headers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Header Shadow settings to: Width = 1/8", Color = $LOC_COLOR_RED, Transparent = False, Location = $LOC_SHADOW_TOP_LEFT
-	_LOCalc_PageStyleHeaderShadow($oPageStyle, $iMicrometers, $LOC_COLOR_RED, False, $LOC_SHADOW_TOP_LEFT)
+	; Set Page style Header Shadow settings to: Width = 1/8", Color = $LO_COLOR_RED, Transparent = False, Location = $LOC_SHADOW_TOP_LEFT
+	_LOCalc_PageStyleHeaderShadow($oPageStyle, $iMicrometers, $LO_COLOR_RED, False, $LOC_SHADOW_TOP_LEFT)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.

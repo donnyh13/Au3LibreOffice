@@ -1,10 +1,12 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-;~ #Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel
 #include-once
 
 ; Main LibreOffice Includes
 #include "LibreOffice_Constants.au3"
+#include "LibreOffice_Helper.au3"
+#include "LibreOffice_Internal.au3"
 
 ; Common includes for Calc
 #include "LibreOfficeCalc_Internal.au3"
@@ -364,8 +366,8 @@ Func _LOCalc_FieldHyperlinkModify(ByRef $mHyperlinkField, $sURL = Null, $sText =
 
 	If Not IsMap($mHyperlinkField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LOCalc_VarsAreNull($sURL, $sText, $sTargetFrame) Then
-		__LOCalc_ArrayFill($asField, $mHyperlinkField["FieldObj"].URL(), $mHyperlinkField["FieldObj"].Representation(), $mHyperlinkField["FieldObj"].TargetFrame())
+	If __LO_VarsAreNull($sURL, $sText, $sTargetFrame) Then
+		__LO_ArrayFill($asField, $mHyperlinkField["FieldObj"].URL(), $mHyperlinkField["FieldObj"].Representation(), $mHyperlinkField["FieldObj"].TargetFrame())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asField)
 	EndIf
@@ -539,7 +541,7 @@ Func _LOCalc_FieldsGetList(ByRef $oTextCursor, $iType = $LOC_FIELD_TYPE_ALL, $bF
 	Local $avTextFields[1]
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOCalc_IntIsBetween($iType, $LOC_FIELD_TYPE_ALL, 255) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iType, $LOC_FIELD_TYPE_ALL, 255) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	; 255 is all possible Consts added together
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)

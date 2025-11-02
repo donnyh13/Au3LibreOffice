@@ -36,8 +36,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's font color to $LOC_COLOR_RED
-	_LOCalc_CellStyleFontColor($oCellStyle, $LOC_COLOR_RED)
+	; Set the Cell Style's font color to $LO_COLOR_RED
+	_LOCalc_CellStyleFontColor($oCellStyle, $LO_COLOR_RED)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Cell Style's current Font Color setting. Return will be an integer.

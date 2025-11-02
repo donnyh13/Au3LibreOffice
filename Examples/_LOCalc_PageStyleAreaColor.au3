@@ -16,8 +16,8 @@ Func Example()
 	$oPageStyle = _LOCalc_PageStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Background color to $LOC_COLOR_LIME, Background color transparent = False
-	_LOCalc_PageStyleAreaColor($oPageStyle, $LOC_COLOR_LIME, False)
+	; Set Page style Background color to $LO_COLOR_LIME, Background color transparent = False
+	_LOCalc_PageStyleAreaColor($oPageStyle, $LO_COLOR_LIME, False)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.

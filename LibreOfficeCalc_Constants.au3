@@ -124,28 +124,6 @@ Global Const _                                                  ; com.sun.star.t
 		$LOC_CELL_TYPE_TEXT = 2, _                              ; Cell contains text.
 		$LOC_CELL_TYPE_FORMULA = 3                              ; Cell contains a formula.
 
-; Color in Long Color Format
-Global Const _
-		$LOC_COLOR_OFF = -1, _                                  ; Turn Color off, or to automatic mode.
-		$LOC_COLOR_BLACK = 0, _                                 ; Black color.
-		$LOC_COLOR_GREEN = 43315, _                             ; Green color.
-		$LOC_COLOR_TEAL = 1410150, _                            ; Teal color.
-		$LOC_COLOR_BLUE = 2777241, _                            ; Blue color.
-		$LOC_COLOR_DKGRAY = 3355443, _                          ; Dark Gray color.
-		$LOC_COLOR_INDIGO = 5582989, _                          ; Indigo color.
-		$LOC_COLOR_PURPLE = 8388736, _                          ; Purple color.
-		$LOC_COLOR_GRAY = 8421504, _                            ; Gray color.
-		$LOC_COLOR_LIME = 8508442, _                            ; Lime color.
-		$LOC_COLOR_BROWN = 9127187, _                           ; Brown color.
-		$LOC_COLOR_LGRAY = 11711154, _                          ; Light Gray color.
-		$LOC_COLOR_MAGENTA = 12517441, _                        ; Magenta color.
-		$LOC_COLOR_RED = 16711680, _                            ; Red color.
-		$LOC_COLOR_BRICK = 16728064, _                          ; Brick color.
-		$LOC_COLOR_ORANGE = 16744448, _                         ; Orange color.
-		$LOC_COLOR_GOLD = 16760576, _                           ; Gold color.
-		$LOC_COLOR_YELLOW = 16776960, _                         ; Yellow color.
-		$LOC_COLOR_WHITE = 16777215                             ; White color.
-
 ; Comment Text Anchor Position
 Global Enum _
 		$LOC_COMMENT_ANCHOR_TOP_LEFT, _                         ; The comment text is anchored in the Upper-Left corner of the comment box.
@@ -596,12 +574,6 @@ Global Const _
 		$LOC_PAPER_WIDTH_11ENVELOPE = 11430, _                  ; 11 Pound Envelope paper width in Micrometers.
 		$LOC_PAPER_WIDTH_12ENVELOPE = 12065, _                  ; 12 Pound Envelope paper width in Micrometers.
 		$LOC_PAPER_WIDTH_JAP_POSTCARD = 10008                   ; Japanese Postcard paper width in Micrometers.
-
-; Path Convert Constants.
-Global Const _
-		$LOC_PATHCONV_AUTO_RETURN = 0, _                        ; Automatically returns the opposite of the input path, determined by StringInStr search for either "File:///"(L.O.Office URL) or "[A-Z]:\" (Windows File Path).
-		$LOC_PATHCONV_OFFICE_RETURN = 1, _                      ; Returns L.O. Office URL, even if the input is already in that format.
-		$LOC_PATHCONV_PCPATH_RETURN = 2                         ; Returns Windows File Path, even if the input is already in that format.
 
 ; Pivot Table Field Base Item Type
 Global Const _                                                  ; com.sun.star.sheet.DataPilotFieldReferenceItemType

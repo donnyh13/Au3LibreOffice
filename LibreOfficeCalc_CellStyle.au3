@@ -1,10 +1,12 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-;~ #Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel
 #include-once
 
 ; Main LibreOffice Includes
 #include "LibreOffice_Constants.au3"
+#include "LibreOffice_Helper.au3"
+#include "LibreOffice_Internal.au3"
 
 ; Common includes for Calc
 #include "LibreOfficeCalc_Internal.au3"
@@ -52,7 +54,7 @@
 ; Description ...: Set or Retrieve background color settings for a Cell style.
 ; Syntax ........: _LOCalc_CellStyleBackColor(ByRef $oCellStyle[, $iBackColor = Null[, $bBackTransparent = Null]])
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The background color. Set in Long integer format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3. Set to $LOC_COLOR_OFF(-1), to turn Background color off.
+;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Set to $LO_COLOR_OFF(-1), to turn Background color off.
 ;                  $bBackTransparent    - [optional] a boolean value. Default is Null. If True, the background color is transparent.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -73,7 +75,7 @@
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOCalc_CellBackColor, _LOCalc_ConvertColorToLong, _LOCalc_ConvertColorFromLong
+; Related .......: _LOCalc_CellBackColor, _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -96,12 +98,12 @@ EndFunc   ;==>_LOCalc_CellStyleBackColor
 ; Description ...: Set and Retrieve the Cell Style Border Line Color. Libre Office Version 3.6 and Up.
 ; Syntax ........: _LOCalc_CellStyleBorderColor(ByRef $oCellStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]])
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. Set the Top Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. Set the Bottom Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. Set the Left Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. Set the Right Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iTLBRDiag           - [optional] an integer value (0-16777215). Default is Null. Set the Top-Left to Bottom-Right Diagonal Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iBLTRDiag           - [optional] an integer value (0-16777215). Default is Null. Set the Bottom-Left to Top-Right Diagonal Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. Set the Top Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. Set the Bottom Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. Set the Left Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. Set the Right Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iTLBRDiag           - [optional] an integer value (0-16777215). Default is Null. Set the Top-Left to Bottom-Right Diagonal Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBLTRDiag           - [optional] an integer value (0-16777215). Default is Null. Set the Bottom-Left to Top-Right Diagonal Border Line Color of the Cell Style in Long Color code format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -134,7 +136,7 @@ EndFunc   ;==>_LOCalc_CellStyleBackColor
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOCalc_CellStyleBorderWidth, _LOCalc_CellStyleBorderStyle, _LOCalc_CellBorderColor _LOCalc_ConvertColorToLong, _LOCalc_ConvertColorFromLong
+; Related .......: _LOCalc_CellStyleBorderWidth, _LOCalc_CellStyleBorderStyle, _LOCalc_CellBorderColor _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -146,12 +148,12 @@ Func _LOCalc_CellStyleBorderColor(ByRef $oCellStyle, $iTop = Null, $iBottom = Nu
 
 	If Not IsObj($oCellStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If ($iTop <> Null) And Not __LOCalc_IntIsBetween($iTop, $LOC_COLOR_BLACK, $LOC_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($iBottom <> Null) And Not __LOCalc_IntIsBetween($iBottom, $LOC_COLOR_BLACK, $LOC_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If ($iLeft <> Null) And Not __LOCalc_IntIsBetween($iLeft, $LOC_COLOR_BLACK, $LOC_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If ($iRight <> Null) And Not __LOCalc_IntIsBetween($iRight, $LOC_COLOR_BLACK, $LOC_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If ($iTLBRDiag <> Null) And Not __LOCalc_IntIsBetween($iTLBRDiag, $LOC_COLOR_BLACK, $LOC_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-	If ($iBLTRDiag <> Null) And Not __LOCalc_IntIsBetween($iBLTRDiag, $LOC_COLOR_BLACK, $LOC_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+	If ($iTop <> Null) And Not __LO_IntIsBetween($iTop, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iBottom <> Null) And Not __LO_IntIsBetween($iBottom, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($iLeft <> Null) And Not __LO_IntIsBetween($iLeft, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($iRight <> Null) And Not __LO_IntIsBetween($iRight, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If ($iTLBRDiag <> Null) And Not __LO_IntIsBetween($iTLBRDiag, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If ($iBLTRDiag <> Null) And Not __LO_IntIsBetween($iBLTRDiag, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 	$vReturn = __LOCalc_CellStyleBorder($oCellStyle, False, False, True, $iTop, $iBottom, $iLeft, $iRight, $iTLBRDiag, $iBLTRDiag)
 
@@ -266,12 +268,12 @@ Func _LOCalc_CellStyleBorderStyle(ByRef $oCellStyle, $iTop = Null, $iBottom = Nu
 
 	If Not IsObj($oCellStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If ($iTop <> Null) And Not __LOCalc_IntIsBetween($iTop, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($iBottom <> Null) And Not __LOCalc_IntIsBetween($iBottom, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If ($iLeft <> Null) And Not __LOCalc_IntIsBetween($iLeft, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If ($iRight <> Null) And Not __LOCalc_IntIsBetween($iRight, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If ($iTLBRDiag <> Null) And Not __LOCalc_IntIsBetween($iTLBRDiag, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-	If ($iBLTRDiag <> Null) And Not __LOCalc_IntIsBetween($iBLTRDiag, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+	If ($iTop <> Null) And Not __LO_IntIsBetween($iTop, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iBottom <> Null) And Not __LO_IntIsBetween($iBottom, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($iLeft <> Null) And Not __LO_IntIsBetween($iLeft, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($iRight <> Null) And Not __LO_IntIsBetween($iRight, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If ($iTLBRDiag <> Null) And Not __LO_IntIsBetween($iTLBRDiag, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If ($iBLTRDiag <> Null) And Not __LO_IntIsBetween($iBLTRDiag, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_DASH_DOT_DOT, "", $LOC_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 	$vReturn = __LOCalc_CellStyleBorder($oCellStyle, False, True, False, $iTop, $iBottom, $iLeft, $iRight, $iTLBRDiag, $iBLTRDiag)
 
@@ -326,12 +328,12 @@ Func _LOCalc_CellStyleBorderWidth(ByRef $oCellStyle, $iTop = Null, $iBottom = Nu
 
 	If Not IsObj($oCellStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If ($iTop <> Null) And Not __LOCalc_IntIsBetween($iTop, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($iBottom <> Null) And Not __LOCalc_IntIsBetween($iBottom, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If ($iLeft <> Null) And Not __LOCalc_IntIsBetween($iLeft, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If ($iRight <> Null) And Not __LOCalc_IntIsBetween($iRight, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If ($iTLBRDiag <> Null) And Not __LOCalc_IntIsBetween($iTLBRDiag, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-	If ($iBLTRDiag <> Null) And Not __LOCalc_IntIsBetween($iBLTRDiag, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+	If ($iTop <> Null) And Not __LO_IntIsBetween($iTop, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iBottom <> Null) And Not __LO_IntIsBetween($iBottom, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($iLeft <> Null) And Not __LO_IntIsBetween($iLeft, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($iRight <> Null) And Not __LO_IntIsBetween($iRight, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If ($iTLBRDiag <> Null) And Not __LO_IntIsBetween($iTLBRDiag, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If ($iBLTRDiag <> Null) And Not __LO_IntIsBetween($iBLTRDiag, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 	$vReturn = __LOCalc_CellStyleBorder($oCellStyle, True, False, False, $iTop, $iBottom, $iLeft, $iRight, $iTLBRDiag, $iBLTRDiag)
 
@@ -591,7 +593,7 @@ EndFunc   ;==>_LOCalc_CellStyleFont
 ; Description ...: Set or Retrieve the Font Color for a Cell Style.
 ; Syntax ........: _LOCalc_CellStyleFontColor(ByRef $oCellStyle[, $iFontColor = Null])
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
-;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Color value in Long Integer format to make the font, can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3. Set to $LOC_COLOR_OFF(-1) for Auto color.
+;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Color value in Long Integer format to make the font, can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Set to $LO_COLOR_OFF(-1) for Auto color.
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -609,7 +611,7 @@ EndFunc   ;==>_LOCalc_CellStyleFont
 ; Modified ......:
 ; Remarks .......: Though Transparency is present on the Font Effects page in the UI, there is (as best as I can find) no setting for it available to read and modify. And further, it seems even in L.O. the setting does not affect the font's transparency, though it may change the color value.
 ;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
-; Related .......: _LOCalc_ConvertColorToLong, _LOCalc_ConvertColorFromLong, _LOCalc_CellFontColor
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -759,12 +761,12 @@ Func _LOCalc_CellStyleOrganizer(ByRef $oDoc, ByRef $oCellStyle, $sNewCellStyleNa
 	If Not IsObj($oCellStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	If __LOCalc_VarsAreNull($sNewCellStyleName, $sParentStyle, $bHidden) Then
-		If __LOCalc_VersionCheck(4.0) Then
-			__LOCalc_ArrayFill($avOrganizer, $oCellStyle.Name(), $oCellStyle.ParentStyle(), $oCellStyle.Hidden())
+	If __LO_VarsAreNull($sNewCellStyleName, $sParentStyle, $bHidden) Then
+		If __LO_VersionCheck(4.0) Then
+			__LO_ArrayFill($avOrganizer, $oCellStyle.Name(), $oCellStyle.ParentStyle(), $oCellStyle.Hidden())
 
 		Else
-			__LOCalc_ArrayFill($avOrganizer, $oCellStyle.Name(), $oCellStyle.ParentStyle())
+			__LO_ArrayFill($avOrganizer, $oCellStyle.Name(), $oCellStyle.ParentStyle())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -788,7 +790,7 @@ Func _LOCalc_CellStyleOrganizer(ByRef $oDoc, ByRef $oCellStyle, $sNewCellStyleNa
 
 	If ($bHidden <> Null) Then
 		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-		If Not __LOCalc_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oCellStyle.Hidden = $bHidden
 		$iError = ($oCellStyle.Hidden() = $bHidden) ? ($iError) : (BitOR($iError, 4))
@@ -805,7 +807,7 @@ EndFunc   ;==>_LOCalc_CellStyleOrganizer
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If true, white spaces are not Overlined.
 ;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOC_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
 ;                  $bOLHasColor         - [optional] a boolean value. Default is Null. If True, the Overline is colored, must be set to true in order to set the Overline color.
-;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The Overline color, set in Long integer format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3. Set to $LOC_COLOR_OFF(-1) for automatic color mode.
+;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The Overline color, set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Set to $LO_COLOR_OFF(-1) for automatic color mode.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -830,7 +832,7 @@ EndFunc   ;==>_LOCalc_CellStyleOrganizer
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOCalc_CellStyleUnderline, _LOCalc_ConvertColorToLong, _LOCalc_ConvertColorFromLong, _LOCalc_CellOverline
+; Related .......: _LOCalc_CellStyleUnderline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellOverline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1018,7 +1020,7 @@ EndFunc   ;==>_LOCalc_CellStylesGetNames
 ; Syntax ........: _LOCalc_CellStyleShadow(ByRef $oCellStyle[, $iWidth = Null[, $iColor = Null[, $bTransparent = Null[, $iLocation = Null]]]])
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
 ;                  $iWidth              - [optional] an integer value (0-5009). Default is Null. The shadow width, set in Micrometers.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The color of the shadow, set in Long Integer format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The color of the shadow, set in Long Integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bTransparent        - [optional] a boolean value. Default is Null. If True, the shadow is transparent.
 ;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The location of the shadow compared to the Cell. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1 or Array.
@@ -1047,7 +1049,7 @@ EndFunc   ;==>_LOCalc_CellStylesGetNames
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  LibreOffice may change the shadow width +/- a Micrometer.
-; Related .......: _LOCalc_ConvertColorToLong, _LOCalc_ConvertColorFromLong, _LOCalc_CellShadow
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1267,7 +1269,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextProperties
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If true, white spaces are not underlined.
 ;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The Underline line style, see constants, $LOC_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bULHasColor         - [optional] a boolean value. Default is Null. If True, the underline is colored, must be set to true in order to set the underline color.
-;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, set in Long integer format. Can be a custom value, or one of the constants, $LOC_COLOR_* as defined in LibreOfficeCalc_Constants.au3. Set to $LOC_COLOR_OFF(-1) for automatic color mode.
+;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Set to $LO_COLOR_OFF(-1) for automatic color mode.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1291,7 +1293,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextProperties
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOCalc_CellStyleOverline, _LOCalc_ConvertColorToLong, _LOCalc_ConvertColorFromLong, _LOCalc_CellUnderline
+; Related .......: _LOCalc_CellStyleOverline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

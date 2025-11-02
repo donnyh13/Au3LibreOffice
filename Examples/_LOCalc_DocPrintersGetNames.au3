@@ -10,7 +10,7 @@ Func Example()
 	Local $asPrinters
 
 	; Minimum Libre version is 4.1, Check Libre Office Version.
-	If (_LOCalc_VersionGet(True) < 4.1) Then _ERROR("Current Libre Office version lower than 4.1, this function cannot be used." & " On Line: " & @ScriptLineNumber)
+	If (_LO_VersionGet(True) < 4.1) Then _ERROR("Current Libre Office version lower than 4.1, this function cannot be used." & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will list your currently available printers.")
 
@@ -31,7 +31,7 @@ Func Example()
 	EndIf
 
 	; Check Libre version for searching default printer.
-	If (_LOCalc_VersionGet(True) < 6.3) Then
+	If (_LO_VersionGet(True) < 6.3) Then
 		_ERROR("Libre Office version is less than 6.3, I cannot list your default printer." & " On Line: " & @ScriptLineNumber)
 
 	Else
