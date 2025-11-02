@@ -29,6 +29,21 @@ Global Const _                                                       ; com.sun.s
 		$LOI_ALIGN_VERT_MIDDLE = 1, _                                ; Vertically Align the object to the Middle.
 		$LOI_ALIGN_VERT_BOTTOM = 2                                   ; Vertically Align the object to the Bottom.
 
+; Animation Direction
+Global Const _                                                       ; com.sun.star.drawing.TextAnimationDirection
+		$LOI_ANIMATION_DIR_LEFT = 0, _                               ; The Animation begins at the Right and goes to the Left.
+		$LOI_ANIMATION_DIR_RIGHT = 1, _                              ; The Animation begins at the Left and goes to the Right.
+		$LOI_ANIMATION_DIR_UP = 2, _                                 ; The Animation begins at the Bottom and goes to the Top.
+		$LOI_ANIMATION_DIR_DOWN = 3                                  ; The Animation begins at the Top and goes to the Bottom.
+
+; Animation Kind
+Global Const _                                                       ; com.sun.star.drawing.TextAnimationKind
+		$LOI_ANIMATION_TYPE_NONE = 0, _                              ; No Animation is applied.
+		$LOI_ANIMATION_TYPE_BLINK = 1, _                             ; The text switches its state from visible to invisible continuously.
+		$LOI_ANIMATION_TYPE_SCROLL_THROUGH = 2, _                    ; The text scrolls.
+		$LOI_ANIMATION_TYPE_SCROLL_ALTERNATE = 3, _                  ; The text scrolls from one side to the other and back.
+		$LOI_ANIMATION_TYPE_SCROLL_IN = 4                            ; The text Scrolls from one side to the final position and stops there.
+
 ; Anchor Type
 Global Const _                                                       ; com.sun.star.text.TextContentAnchorType
 		$LOI_ANCHOR_AT_PARAGRAPH = 0, _                              ; Anchors the object to the current paragraph.
@@ -51,6 +66,36 @@ Global Const _                                                       ; com.sun.s
 		$LOI_DRAWSHAPE_CONNECTOR_TYPE_CURVE = 1, _                   ; The connector is drawn as a curve.
 		$LOI_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT = 2, _                ; The connector is drawn as a straight line.
 		$LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE = 3                       ; The connector is drawn with three lines.
+
+; Dimension Line Text Horizontal Position.
+Global Const _                                                       ; com.sun.star.drawing.MeasureTextHorzPos
+		$LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_AUTO = 0, _           ; Select the best horizontal position for the text Automatically.
+		$LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_LEFT = 1, _           ; The text is positioned at the Left.
+		$LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_CENTER = 2, _         ; The text is positioned at the Horizontal Center.
+		$LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_RIGHT = 3             ; The text is positioned at the Right.
+
+; Dimension Line Text Vertical Position.
+Global Const _                                                       ; com.sun.star.drawing.MeasureTextVertPos
+		$LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_AUTO = 0, _           ; Select the best vertical position for the text automatically
+		$LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_TOP = 1, _            ; The text is positioned at the Top.
+		$LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_BOTTOM = 3, _         ; The text is positioned at the Bottom. (2 is not used?)
+		$LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_MIDDLE = 4            ; The text is positioned in the Vertical Middle.
+
+; Dimension Line Unit type.
+Global Const _                                                       ; ?
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF = -1, _               ; No Measurement units are used.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_AUTO = 0, _               ; Measurement units are automatically determined.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_MM = 1, _                 ; Measurement units are in Millimeters.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_CM = 2, _                 ; Measurement units are in Centimeters.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_METER = 3, _              ; Measurement units are in Meters.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_KILOMETER = 4, _          ; Measurement units are in Kilometers.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_POINT = 6, _              ; Measurement units are in Points.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_PICA = 7, _               ; Measurement units are in Picas.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_INCH = 8, _               ; Measurement units are in Inches.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_FOOT = 9, _               ; Measurement units are in Feet.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_MILES = 10, _             ; Measurement units are in Miles.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_CHAR = 14, _              ; Measurement units are in Characters.
+		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_LINE = 15                 ; Measurement units are in Lines.
 
 ; Arrowhead Type Constants
 Global Enum _
@@ -413,6 +458,32 @@ Global Enum Step * 2 _
 		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 128 - A Slide Subtitle Box.
 		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 256 - A Slide Title Text Box.
 		$LOI_SHAPE_TYPE_ALL = 511                                    ; All types above.
+
+; Horizontal Text Alignment
+Global Const _                                                       ; com.sun.star.drawing.TextHorizontalAdjust
+		$LOI_TEXT_ALIGN_HORI_LEFT = 0, _                             ; The left edge of the text is adjusted to the left edge of the shape.
+		$LOI_TEXT_ALIGN_HORI_CENTER = 1, _                           ; The text is centered horizontally inside the shape.
+		$LOI_TEXT_ALIGN_HORI_RIGHT = 2, _                            ; The right edge of the text is adjusted to the right edge of the shape.
+		$LOI_TEXT_ALIGN_HORI_BLOCK = 3                               ; The text extends from the left to the right edge of the shape.
+
+; Vertical Text Alignment
+Global Const _                                                       ; com.sun.star.drawing.TextVerticalAdjust
+		$LOI_TEXT_ALIGN_VERT_TOP = 0, _                              ; The top edge of the text is adjusted to the top edge of the shape.
+		$LOI_TEXT_ALIGN_VERT_CENTER = 1, _                           ; The text is centered vertically inside the shape.
+		$LOI_TEXT_ALIGN_VERT_BOTTOM = 2, _                           ; The bottom edge of the text is adjusted to the bottom edge of the shape.
+		$LOI_TEXT_ALIGN_VERT_BLOCK = 3                               ; The text extends from the top to the bottom edge of the shape.
+
+; Text Anchor Position
+Global Enum _
+		$LOI_TEXT_ANCHOR_TOP_LEFT, _                                 ; The text is positioned in the Upper-Left corner of the Shape.
+		$LOI_TEXT_ANCHOR_TOP_CENTER, _                               ; The text is positioned in the Upper-Center of the Shape.
+		$LOI_TEXT_ANCHOR_TOP_RIGHT, _                                ; The text is positioned in the Upper-Right of the Shape.
+		$LOI_TEXT_ANCHOR_MIDDLE_LEFT, _                              ; The text is positioned in the Middle-Left corner of the Shape.
+		$LOI_TEXT_ANCHOR_MIDDLE_CENTER, _                            ; The text is positioned in the Middle-Center of the Shape.
+		$LOI_TEXT_ANCHOR_MIDDLE_RIGHT, _                             ; The text is positioned in the Middle-Right of the Shape.
+		$LOI_TEXT_ANCHOR_BOTTOM_LEFT, _                              ; The text is positioned in the Lower-Left corner of the Shape.
+		$LOI_TEXT_ANCHOR_BOTTOM_CENTER, _                            ; The text is positioned in the Lower-Center of the Shape.
+		$LOI_TEXT_ANCHOR_BOTTOM_RIGHT                                ; The text is positioned in the Lower-Right of the Shape.
 
 ; Zoom Type Constants
 Global Const _                                                       ; com.sun.star.view.DocumentZoomType

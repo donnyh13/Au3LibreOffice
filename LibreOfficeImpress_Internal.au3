@@ -1214,7 +1214,7 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape.FillColor = 7512015 ; Light blue
 	EndSwitch
 
-	If __LO_IntIsBetween($iShapeType, $LOI_DRAWSHAPE_TYPE_CONNECTOR, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW, "", $LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSION_LINE) Then
+	If __LO_IntIsBetween($iShapeType, $LOI_DRAWSHAPE_TYPE_CONNECTOR, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW, "", $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION) Then
 		$oShape.StartPosition = $tStart
 		$oShape.EndPosition = $tEnd
 
@@ -2966,7 +2966,7 @@ EndFunc   ;==>__LOImpress_FilterNameGet
 ; Name ..........: __LOImpress_GetShapeName
 ; Description ...: Create a Shape Name that hasn't been used yet in the slide.
 ; Syntax ........: __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
-; Parameters ....: $oSlide              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oSlide              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $sShapeName          - a string value. The Shape name to begin with.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -3747,7 +3747,7 @@ EndFunc   ;==>__LOImpress_InternalComErrorHandler
 ; Name ..........: __LOImpress_ShapeGetType
 ; Description ...: Identify a Shape's type.
 ; Syntax ........: __LOImpress_ShapeGetType(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

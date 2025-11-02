@@ -671,26 +671,35 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Individual Impress Element Files
 	- LibreOfficeImpress_Constants.au3
 	- LibreOfficeImpress_Doc.au3
+	- LibreOfficeImpress_DrawShapes.au3
 	- LibreOfficeImpress_Helper.au3
 	- LibreOfficeImpress_Internal.au3
 	- LibreOfficeImpress_Slides.au3
 - Constants
 	- $LOI_ALIGN_VERT_*
 	- $LOI_ANCHOR_*
+	- $LOI_ANIMATION_DIR_*
+	- $LOI_ANIMATION_TYPE_*
 	- $LOI_AREA_FILL_STYLE_*
-	- $LOI_DRAWSHAPE_TYPE_*
 	- $LOI_DRAWSHAPE_CONNECTOR_TYPE_*
+	- $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_*
+	- $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_*
+	- $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_*
 	- $LOI_DRAWSHAPE_LINE_ARROW_TYPE_*
 	- $LOI_DRAWSHAPE_LINE_CAP_*
 	- $LOI_DRAWSHAPE_LINE_JOINT_*
 	- $LOI_DRAWSHAPE_LINE_STYLE_*
 	- $LOI_DRAWSHAPE_POINT_TYPE_*
+	- $LOI_DRAWSHAPE_TYPE_*
 	- $LOI_GRAD_NAME_*
 	- $LOI_GRAD_TYPE_*
 	- $LOI_ORIENT_HORI_*
 	- $LOI_ORIENT_VERT_*
 	- $LOI_RELATIVE_*
 	- $LOI_SHAPE_TYPE_*
+	- $LOI_TEXT_ALIGN_HORI_*
+	- $LOI_TEXT_ALIGN_VERT_*
+	- $LOI_TEXT_ANCHOR_*
 	- $LOI_ZOOMTYPE_*
 - Document Functions
 	- _LOImpress_DocClose
@@ -734,7 +743,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOImpress_DrawShapeAreaTransparency
 	- _LOImpress_DrawShapeAreaTransparencyGradient
 	- _LOImpress_DrawShapeAreaTransparencyGradientMulti
+	- _LOImpress_DrawShapeConnectorModify
+	- _LOImpress_DrawShapeConnectorSettings
 	- _LOImpress_DrawShapeDelete
+	- _LOImpress_DrawShapeDimensionSettings
+	- _LOImpress_DrawShapeDimensionTextAnimation
+	- _LOImpress_DrawShapeDimensionTextColumns
+	- _LOImpress_DrawShapeDimensionTextSettings
 	- _LOImpress_DrawShapeExists
 	- _LOImpress_DrawShapeGetType
 	- _LOImpress_DrawShapeInsert
@@ -747,6 +762,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOImpress_DrawShapePointsRemove
 	- _LOImpress_DrawShapePosition
 	- _LOImpress_DrawShapeRotateSlant
+	- _LOImpress_DrawShapeText
 	- _LOImpress_DrawShapeTextboxCreateTextCursor
 	- _LOImpress_DrawShapeTypePosition
 	- _LOImpress_DrawShapeTypeSize
