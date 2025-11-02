@@ -1104,7 +1104,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorSettings
 ; Name ..........: _LOImpress_DrawShapeDelete
 ; Description ...: Delete a Shape.
 ; Syntax ........: _LOImpress_DrawShapeDelete(ByRef $oShape)
-; Parameters ....: $oShape                - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1592,7 +1592,6 @@ Func _LOImpress_DrawShapeDimensionTextSettings(ByRef $oShape, $bFit = Null, $bAd
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bFit, $bAdjust, $iLeft, $iRight, $iTop, $iBottom, $iAnchor, $bFullWidth) Then
-
 		Select
 			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_TOP) And ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_LEFT)
 				$iCurAnchor = $LOI_TEXT_ANCHOR_TOP_LEFT
@@ -3665,7 +3664,6 @@ Func _LOImpress_DrawShapeText(ByRef $oShape, $sText = Null)
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($sText) Then
-
 		$sCurrText = $oShape.String()
 		If Not IsString($sCurrText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
