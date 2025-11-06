@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSlide, $oShape
-	Local $iMicrometers, $iMicrometers2
+	Local $i100thMM, $i100thMM2
 	Local $avSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -21,16 +21,16 @@ Func Example()
 	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(1)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1" to Hundredths of a Millimeter (100th MM)
+	$i100thMM = _LO_UnitConvert(1, $LO_CONVERT_UNIT_INCH_100THMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (100th MM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 2" to Micrometers
-	$iMicrometers2 = _LO_ConvertToMicrometer(2)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 2" to Hundredths of a Millimeter (100th MM)
+	$i100thMM2 = _LO_UnitConvert(2, $LO_CONVERT_UNIT_INCH_100THMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (100th MM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape's Position to 1" over, 2" down, and set Protect Position to True.
-	_LOImpress_DrawShapePosition($oShape, $iMicrometers, $iMicrometers2, True)
+	_LOImpress_DrawShapePosition($oShape, $i100thMM, $i100thMM2, True)
 	If @error Then _ERROR($oDoc, "Failed to modify Shape's position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
@@ -38,8 +38,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Position settings are as follows: " & @CRLF & _
-			"The Shape's X coordinate is, in Micrometers: " & $avSettings[0] & @CRLF & _
-			"The Shape's Y coordinate is, in Micrometers: " & $avSettings[1] & @CRLF & _
+			"The Shape's X coordinate is, in Hundredths of a Millimeter (100th MM): " & $avSettings[0] & @CRLF & _
+			"The Shape's Y coordinate is, in Hundredths of a Millimeter (100th MM): " & $avSettings[1] & @CRLF & _
 			"Is the Shape's position protected against changes? True/False: " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
