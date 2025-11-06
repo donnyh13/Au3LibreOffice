@@ -833,12 +833,12 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaTransparencyGradientMulti
 ; Description ...: Set or Retrieve Connector line connections or position.
 ; Syntax ........: _LOImpress_DrawShapeConnectorModify(ByRef $oShape[, $iStartX = Null[, $iStartY = Null[, $oStartShape = Null[, $iStartGluePoint = Null[, $iEndX = Null[, $iEndY = Null[, $oEndShape = Null[, $iEndGluePoint = Null]]]]]]]])
 ; Parameters ....: $oShape              - [in/out] an object. A Connector Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
-;                  $iStartX             - [optional] an integer value. Default is Null. The X position from the insertion point of the Start of the line, in Micrometers.
-;                  $iStartY             - [optional] an integer value. Default is Null. The Y position from the insertion point of the Start of the line, in Micrometers.
+;                  $iStartX             - [optional] an integer value. Default is Null. The X position from the insertion point of the Start of the line, in Hundredths of a Millimeter (100th MM).
+;                  $iStartY             - [optional] an integer value. Default is Null. The Y position from the insertion point of the Start of the line, in Hundredths of a Millimeter (100th MM).
 ;                  $oStartShape         - [optional] an object. Default is Null. The Shape to attach the Start of the line to.
 ;                  $iStartGluePoint     - [optional] an integer value. Default is Null. If the Start of the line is connected to a Shape, this is the Glue point it is attached to. 0 Based. See remarks.
-;                  $iEndX               - [optional] an integer value. Default is Null. The X position from the insertion point of the End of the line, in Micrometers.
-;                  $iEndY               - [optional] an integer value. Default is Null. The Y position from the insertion point of the End of the line, in Micrometers.
+;                  $iEndX               - [optional] an integer value. Default is Null. The X position from the insertion point of the End of the line, in Hundredths of a Millimeter (100th MM).
+;                  $iEndY               - [optional] an integer value. Default is Null. The Y position from the insertion point of the End of the line, in Hundredths of a Millimeter (100th MM).
 ;                  $oEndShape           - [optional] an object. Default is Null. The Shape to attach the End of the line to.
 ;                  $iEndGluePoint       - [optional] an integer value. Default is Null. If the End of the line is connected to a Shape, this is the Glue point it is attached to. 0 Based. See remarks.
 ; Return values .: Success: 1 or Array.
@@ -985,13 +985,13 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorModify
 ; Syntax ........: _LOImpress_DrawShapeConnectorSettings(ByRef $oShape[, $iType = Null[, $iL1Skew = Null[, $iL2Skew = Null[, $iL3Skew = Null[, $iHoriBeg = Null[, $iHoriEnd = Null[, $iVertBeg = Null[, $iVertEnd = Null]]]]]]]])
 ; Parameters ....: $oShape              - [in/out] an object. A Connector Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $iType               - [optional] an integer value (0-3). Default is Null. The connector line type. See Constants, $LOI_DRAWSHAPE_CONNECTOR_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iL1Skew             - [optional] an integer value (-100000-100000). Default is Null. The skew amount of line 1, in Micrometers.
-;                  $iL2Skew             - [optional] an integer value (-100000-100000). Default is Null. The skew amount of line 2, in Micrometers.
-;                  $iL3Skew             - [optional] an integer value (-100000-100000). Default is Null. The skew amount of line 3, in Micrometers.
-;                  $iHoriBeg            - [optional] an integer value (0-10,008). Default is Null. The amount of horizontal spacing, in Micrometers, at the beginning of the connector.
-;                  $iHoriEnd            - [optional] an integer value (0-10,008). Default is Null. The amount of horizontal spacing, in Micrometers, at the end of the connector.
-;                  $iVertBeg            - [optional] an integer value (0-10,008). Default is Null. The amount of vertical spacing, in Micrometers, at the beginning of the connector.
-;                  $iVertEnd            - [optional] an integer value (0-10,008). Default is Null. The amount of vertical spacing, in Micrometers, at the end of the connector.
+;                  $iL1Skew             - [optional] an integer value (-100000-100000). Default is Null. The skew amount of line 1, in Hundredths of a Millimeter (100th MM).
+;                  $iL2Skew             - [optional] an integer value (-100000-100000). Default is Null. The skew amount of line 2, in Hundredths of a Millimeter (100th MM).
+;                  $iL3Skew             - [optional] an integer value (-100000-100000). Default is Null. The skew amount of line 3, in Hundredths of a Millimeter (100th MM).
+;                  $iHoriBeg            - [optional] an integer value (0-10,008). Default is Null. The amount of horizontal spacing, in Hundredths of a Millimeter (100th MM), at the beginning of the connector.
+;                  $iHoriEnd            - [optional] an integer value (0-10,008). Default is Null. The amount of horizontal spacing, in Hundredths of a Millimeter (100th MM), at the end of the connector.
+;                  $iVertBeg            - [optional] an integer value (0-10,008). Default is Null. The amount of vertical spacing, in Hundredths of a Millimeter (100th MM), at the beginning of the connector.
+;                  $iVertEnd            - [optional] an integer value (0-10,008). Default is Null. The amount of vertical spacing, in Hundredths of a Millimeter (100th MM), at the end of the connector.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1363,7 +1363,7 @@ Func _LOImpress_DrawShapeDimensionTextAnimation(ByRef $oShape, $iEffect = Null, 
 	If __LO_VarsAreNull($iEffect, $iDirection, $bStartInside, $bVisibleOnExit, $iCycles, $iInc, $bPixels, $iDelay) Then
 		__LO_ArrayFill($avDimension, $oShape.TextAnimationKind(), $oShape.TextAnimationDirection(), $oShape.TextAnimationStartInside(), _
 				$oShape.TextAnimationStopInside(), $oShape.TextAnimationCount(), _
-				($oShape.TextAnimationAmount() < 0) ? ($oShape.TextAnimationAmount() * -1) : ($oShape.TextAnimationAmount()), _ ; If TextAnimationAmount is negative, Pixels are used, if positive Micrometers.
+				($oShape.TextAnimationAmount() < 0) ? ($oShape.TextAnimationAmount() * -1) : ($oShape.TextAnimationAmount()), _ ; If TextAnimationAmount is negative, Pixels are used, if positive Hundredths of a Millimeter (100th MM).
 				($oShape.TextAnimationAmount() < 0) ? (True) : (False), _ ; $bPixels
 				$oShape.TextAnimationDelay())
 
@@ -1412,7 +1412,7 @@ Func _LOImpress_DrawShapeDimensionTextAnimation(ByRef $oShape, $iEffect = Null, 
 			$oShape.TextAnimationAmount = ($iInc * -1) ; Multiply by -1 to change to negative, as Pixels are set in negative values.
 			$iError = ($oShape.TextAnimationAmount() = ($iInc * -1)) ? ($iError) : (BitOR($iError, 32))
 
-		Else ; Set in Micrometers.
+		Else ; Set in Hundredths of a Millimeter (100th MM).
 			If Not __LO_IntIsBetween($iInc, 25, 32766) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 			$oShape.TextAnimationAmount = $iInc
@@ -1433,8 +1433,8 @@ Func _LOImpress_DrawShapeDimensionTextAnimation(ByRef $oShape, $iEffect = Null, 
 			EndIf
 
 		Else
-			If ($iValue < 0) Then ; Set to pixels, convert to Micrometers.
-				$iValue = ($iValue * -1) ; Convert the value to positive for Micrometers.
+			If ($iValue < 0) Then ; Set to pixels, convert to Hundredths of a Millimeter (100th MM).
+				$iValue = ($iValue * -1) ; Convert the value to positive for Hundredths of a Millimeter (100th MM).
 				$oShape.TextAnimationAmount = $iValue
 			EndIf
 		EndIf
@@ -2088,10 +2088,10 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ; Syntax ........: _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight[, $iX = 0[, $iY = 0]])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
 ;                  $iShapeType          - an integer value (0-187). The Type of shape to create. See remarks. See $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  $iWidth              - an integer value. The Shape's Width in Micrometers. Note, for Lines, Width is the length of the line.
-;                  $iHeight             - an integer value. The Shape's Height in Micrometers. Note, for Lines, Height is the amount the line goes below the point of insertion.
-;                  $iX                  - [optional] an integer value. Default is 0. The X position from the insertion point, in Micrometers.
-;                  $iY                  - [optional] an integer value. Default is 0. The Y position from the insertion point, in Micrometers.
+;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (100th MM). Note, for Lines, Width is the length of the line.
+;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (100th MM). Note, for Lines, Height is the amount the line goes below the point of insertion.
+;                  $iX                  - [optional] an integer value. Default is 0. The X position from the insertion point, in Hundredths of a Millimeter (100th MM).
+;                  $iY                  - [optional] an integer value. Default is 0. The Y position from the insertion point, in Hundredths of a Millimeter (100th MM).
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2121,7 +2121,7 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ;                  The following shape is visually different from the manually inserted one in L.O. 7.3.4.2:
 ;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING
 ;                  I presently don't know how to insert 3D shapes or Fontwork, consequently all $LOI_DRAWSHAPE_TYPE_3D_* and $LOI_DRAWSHAPE_TYPE_FONTWORK_* will return a processing error.
-; Related .......: _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2189,11 +2189,11 @@ EndFunc   ;==>_LOImpress_DrawShapeInsert
 ; Syntax ........: _LOImpress_DrawShapeLineArrowStyles(ByRef $oShape[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
 ; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $vStartStyle         - [optional] a variant value (0-32, or String). Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOI_DRAWSHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
-;                  $iStartWidth         - [optional] an integer value (0-5004). Default is Null. The Width of the Starting Arrowhead, in Micrometers.
+;                  $iStartWidth         - [optional] an integer value (0-5004). Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (100th MM).
 ;                  $bStartCenter        - [optional] a boolean value. Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
 ;                  $bSync               - [optional] a boolean value. Default is Null. If True, Synchronizes the Start Arrowhead settings with the end Arrowhead settings. See remarks.
 ;                  $vEndStyle           - [optional] a variant value (0-32, or String). Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOI_DRAWSHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
-;                  $iEndWidth           - [optional] an integer value (0-5004). Default is Null. The Width of the Ending Arrowhead, in Micrometers.
+;                  $iEndWidth           - [optional] an integer value (0-5004). Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (100th MM).
 ;                  $bEndCenter          - [optional] a boolean value. Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2340,7 +2340,7 @@ EndFunc   ;==>_LOImpress_DrawShapeLineArrowStyles
 ; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $vStyle              - [optional] a variant value (0-31, or String). Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
 ;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Line color, set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value (0-5004). Default is Null. The line Width, set in Micrometers.
+;                  $iWidth              - [optional] an integer value (0-5004). Default is Null. The line Width, set in Hundredths of a Millimeter (100th MM).
 ;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The Line transparency percentage. 100% = fully transparent.
 ;                  $iCornerStyle        - [optional] an integer value (0,2-4). Default is Null. The Line Corner Style. See Constants $LOI_DRAWSHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $iCapStyle           - [optional] an integer value (0-2). Default is Null. The Line Cap Style. See Constants $LOI_DRAWSHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3
@@ -2536,8 +2536,8 @@ EndFunc   ;==>_LOImpress_DrawShapeName
 ; Syntax ........: _LOImpress_DrawShapePointsAdd(ByRef $oShape, $iPoint, $iX, $iY[, $iPointType = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL[, $bIsCurve = False]])
 ; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
 ;                  $iPoint              - an integer value. The Point to insert the new point AFTER. 0 means insert at the beginning.
-;                  $iX                  - an integer value. The X coordinate value, set in Micrometers.
-;                  $iY                  - an integer value. The Y coordinate value, set in Micrometers.
+;                  $iX                  - an integer value. The X coordinate value, set in Hundredths of a Millimeter (100th MM).
+;                  $iY                  - an integer value. The Y coordinate value, set in Hundredths of a Millimeter (100th MM).
 ;                  $iPointType          - [optional] an integer value (0,1,3). Default is $LOI_DRAWSHAPE_POINT_TYPE_NORMAL. The Type of Point this new Point is. See Remarks. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $bIsCurve            - [optional] a boolean value. Default is False. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
@@ -3028,8 +3028,8 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ; Syntax ........: _LOImpress_DrawShapePointsModify(ByRef $oShape, $iPoint[, $iX = Null[, $iY = Null[, $iPointType = Null[, $bIsCurve = Null]]]])
 ; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
 ;                  $iPoint              - an integer value. The Point to modify, starting at 1.
-;                  $iX                  - [optional] an integer value. Default is Null. The X coordinate value, set in Micrometers.
-;                  $iY                  - [optional] an integer value. Default is Null. The Y coordinate value, set in Micrometers.
+;                  $iX                  - [optional] an integer value. Default is Null. The X coordinate value, set in Hundredths of a Millimeter (100th MM).
+;                  $iY                  - [optional] an integer value. Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (100th MM).
 ;                  $iPointType          - [optional] an integer value (0,1,3). Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $bIsCurve            - [optional] a boolean value. Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1 or Array.
@@ -3487,8 +3487,8 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ; Description ...: Set or Retrieve the Shape's position settings.
 ; Syntax ........: _LOImpress_DrawShapePosition(ByRef $oShape[, $iX = Null[, $iY = Null[, $bProtectPos = Null]]])
 ; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
-;                  $iX                  - [optional] an integer value. Default is Null. The X position from the insertion point, in Micrometers.
-;                  $iY                  - [optional] an integer value. Default is Null. The Y position from the insertion point, in Micrometers.
+;                  $iX                  - [optional] an integer value. Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (100th MM).
+;                  $iY                  - [optional] an integer value. Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (100th MM).
 ;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, the Shape's position is locked.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -3510,7 +3510,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DrawShapeInsert, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOImpress_DrawShapeInsert, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3719,8 +3719,8 @@ EndFunc   ;==>_LOImpress_DrawShapeTextboxCreateTextCursor
 ; Description ...: Set or Retrieve Shape Size related settings.
 ; Syntax ........: _LOImpress_DrawShapeTypeSize(ByRef $oShape[, $iWidth = Null[, $iHeight = Null[, $bProtectSize = Null]]])
 ; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Shape, in Micrometers(uM). Min. 51.
-;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Shape, in Micrometers(uM). Min. 51.
+;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Shape, in Hundredths of a Millimeter (100th MM). Min. 51.
+;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Shape, in Hundredths of a Millimeter (100th MM). Min. 51.
 ;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the Shape.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -3744,7 +3744,7 @@ EndFunc   ;==>_LOImpress_DrawShapeTextboxCreateTextCursor
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I have skipped "Keep Ratio", as currently it seems unable to be set for shapes.
-; Related .......: _LOImpress_DrawShapeInsert, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOImpress_DrawShapeInsert, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
