@@ -48,16 +48,16 @@
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_ColorRemoveAlpha
-; Description ...: Remove the Alpha value from a Long color value.
+; Description ...: Remove the Alpha value from a RGB Color Integer.
 ; Syntax ........: __LOImpress_ColorRemoveAlpha($iColor)
-; Parameters ....: $iColor              - an integer value. A Long Color value to remove Alpha from.
+; Parameters ....: $iColor              - an integer value. A RGB Color Integer to remove Alpha from.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return $iColor = $iColor not an Integer. Returning $iColor to be sure not to lose the value.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Color already has no Alpha value, returning same color.
-;                  @Error 0 @Extended 1 Return Integer = Success. Removed Alpha value from Long Color value, returning new Color value.
+;                  @Error 0 @Extended 1 Return Integer = Success. Removed Alpha value from RGB Color Integer, returning new Color value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: In functions which return the current color value, generally background colors, if Transparency (alpha) is set, the background color value is not the literal color set, but also includes the transparency value added to it. This functions removes that value for simpler color values.
@@ -3797,15 +3797,15 @@ EndFunc   ;==>__LOImpress_ShapeGetType
 ; Name ..........: __LOImpress_TransparencyGradientConvert
 ; Description ...: Convert a Transparency Gradient percentage value to a color value or from a color value to a percentage.
 ; Syntax ........: __LOImpress_TransparencyGradientConvert([$iPercentToLong = Null[, $iLongToPercent = Null]])
-; Parameters ....: $iPercentToLong      - [optional] an integer value. Default is Null. The percentage to convert to Long color integer value.
-;                  $iLongToPercent      - [optional] an integer value. Default is Null. The Long color integer value to convert to percentage.
+; Parameters ....: $iPercentToLong      - [optional] an integer value. Default is Null. The percentage to convert to a RGB Color Integer.
+;                  $iLongToPercent      - [optional] an integer value. Default is Null. The RGB Color Integer to convert to percentage.
 ; Return values .: Success: Integer.
 ;                  Failure: Null and sets the @Error and @Extended flags to non-zero.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return Null = No values called in parameters.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. The requested Integer value converted from percentage to Long color format.
-;                  @Error 0 @Extended 1 Return Integer = Success. The requested Integer value from Long color format to percentage.
+;                  @Error 0 @Extended 0 Return Integer = Success. The requested Integer value converted from percentage to a RGB Color Integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. The requested Integer value from a RGB Color Integer to percentage.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
