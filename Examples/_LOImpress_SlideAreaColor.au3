@@ -6,6 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSlide
+	Local $iColor
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOImpress_DocCreate(True, False)
@@ -20,6 +21,13 @@ Func Example()
 	; Set slide background.
 	_LOImpress_SlideAreaColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
 	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve the current Slide settings. Return will be an Integer.
+	$iColor = _LOImpress_SlideAreaColor($oSlide)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Slide settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Slide's Background color settings are as follows: " & @CRLF & _
+			"The Slide's Background color is (as a RGB Color Integer): " & $iColor)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -36,7 +36,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Line Properties settings are as follows: " & @CRLF & _
 			"The Line Style is (See UDF Constants): " & $avSettings[0] & @CRLF & _
-			"The Line color is, is long Color format: " & $avSettings[1] & @CRLF & _
+			"The Line color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
 			"The Line's Width is, in Hundredths of a Millimeter (100th MM): " & $avSettings[2] & @CRLF & _
 			"The Line's transparency percentage is: " & $avSettings[3] & @CRLF & _
 			"The Line Corner Style is, (See UDF Constants): " & $avSettings[4] & @CRLF & _

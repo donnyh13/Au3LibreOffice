@@ -29,7 +29,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Background color settings are as follows: " & @CRLF & _
-			"The Shape's Background color is, in Long color format: " & $iColor)
+			"The Shape's Background color is (as a RGB Color Integer): " & $iColor)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

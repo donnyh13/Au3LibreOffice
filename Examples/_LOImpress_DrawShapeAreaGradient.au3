@@ -36,8 +36,8 @@ Func Example()
 			"The vertical offset percentage for the gradient is: " & $avSettings[4] & @CRLF & _
 			"The rotation angle for the gradient is, in degrees: " & $avSettings[5] & @CRLF & _
 			"The percentage of area not covered by the ending color is: " & $avSettings[6] & @CRLF & _
-			"The starting color is, in Long Color format: " & $avSettings[7] & @CRLF & _
-			"The ending color is, in Long Color format: " & $avSettings[8] & @CRLF & _
+			"The starting color is (as a RGB Color Integer): " & $avSettings[7] & @CRLF & _
+			"The ending color is (as a RGB Color Integer): " & $avSettings[8] & @CRLF & _
 			"The starting color intensity percentage is: " & $avSettings[9] & @CRLF & _
 			"The ending color intensity percentage is: " & $avSettings[10])
 
@@ -59,8 +59,8 @@ Func Example()
 			"The vertical offset percentage for the gradient is: " & $avSettings[4] & @CRLF & _
 			"The rotation angle for the gradient is, in degrees: " & $avSettings[5] & @CRLF & _
 			"The percentage of area not covered by the ending color is: " & $avSettings[6] & @CRLF & _
-			"The starting color is, in Long Color format: " & $avSettings[7] & @CRLF & _
-			"The ending color is, in Long Color format: " & $avSettings[8] & @CRLF & _
+			"The starting color is (as a RGB Color Integer): " & $avSettings[7] & @CRLF & _
+			"The ending color is (as a RGB Color Integer): " & $avSettings[8] & @CRLF & _
 			"The starting color intensity percentage is: " & $avSettings[9] & @CRLF & _
 			"The ending color intensity percentage is: " & $avSettings[10])
 
