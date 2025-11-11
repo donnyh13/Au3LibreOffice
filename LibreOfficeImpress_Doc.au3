@@ -1616,7 +1616,7 @@ EndFunc   ;==>_LOImpress_DocVisible
 ; Description ...: Modify the zoom value for a document.
 ; Syntax ........: _LOImpress_DocZoom(ByRef $oDoc[, $iZoomType = Null[, $iZoom = Null]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iZoomType           - [optional] an integer value (0 - 4). Default is Null. The Zoom type, See remarks. See constants $LOI_ZOOMTYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iZoomType           - [optional] an integer value (0-4). Default is Null. The Zoom type, See remarks. See constants $LOI_ZOOMTYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iZoom               - [optional] an integer value (20-600). Default is Null. The zoom percentage. Only valid if Zoom type is set to "By Value"
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

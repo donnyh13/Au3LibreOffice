@@ -2138,7 +2138,7 @@ EndFunc   ;==>__LOImpress_DrawShapeArrowStyleName
 ; Name ..........: __LOImpress_DrawShapeLineStyleName
 ; Description ...: Convert a Line Style Constant to the corresponding name or reverse.
 ; Syntax ........: __LOImpress_DrawShapeLineStyleName([$iLineStyle = Null[, $sLineStyle = Null]])
-; Parameters ....: $iLineStyle          - [optional] an integer value. Default is Null. The Line Style Constant to convert to its corresponding name. See $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+; Parameters ....: $iLineStyle          - [optional] an integer value (0-31). Default is Null. The Line Style Constant to convert to its corresponding name. See $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $sLineStyle          - [optional] a string value. Default is Null. The Line Style Name to convert to the corresponding constant if found.
 ; Return values .: Success: String or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
