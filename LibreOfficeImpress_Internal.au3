@@ -95,7 +95,7 @@ EndFunc   ;==>__LOImpress_ColorRemoveAlpha
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to Create a Position Structure.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Structure = Success. Returning created Position Structure set to $iX and $iY values.
+;                  @Error 0 @Extended 0 Return Structure = Success. Returning created Position Structure using $iX and $iY values.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Modified from A. Pitonyak, Listing 493. in OOME 3.0

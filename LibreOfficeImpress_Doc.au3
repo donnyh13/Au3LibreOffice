@@ -81,7 +81,7 @@
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
 ;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
-;                  @Error 0 @Extended 3 Return String = Success, Document was successfully closed, document either had no changes to save, or $bSaveChanges was set to False. If document had a save location, or if document was saved to a location, it is returned, else an empty string is returned.
+;                  @Error 0 @Extended 3 Return String = Success, Document was successfully closed, document either had no changes to save, or $bSaveChanges was called with False. If document had a save location, or if document was saved to a location, it is returned, else an empty string is returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bSaveChanges is true and the document hasn't been saved yet, the document is saved to the desktop.
@@ -469,7 +469,7 @@ EndFunc   ;==>_LOImpress_DocExecuteDispatch
 ;                  @Error 1 @Extended 6 Return 0 = $sPassword not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error Converting Path to/from L.O. URL
-;                  @Error 3 @Extended 2 Return 0 = Document has no save path, and $bSamePath is set to True.
+;                  @Error 3 @Extended 2 Return 0 = Document has no save path, and $bSamePath is called with True.
 ;                  @Error 3 @Extended 3 Return 0 = Error retrieving Filter Name.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended 1 Return 0 = Error setting Filter Name Property
@@ -745,7 +745,7 @@ EndFunc   ;==>_LOImpress_DocIsReadOnly
 ;                  @Error 1 @Extended 2 Return 0 = $bMaximize not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize set to Null, returning boolean indicating if Document is currently maximized (True) or not (False).
+;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bMaximize is set to Null, returns a Boolean indicating if document is currently maximized (True).
@@ -781,7 +781,7 @@ EndFunc   ;==>_LOImpress_DocMaximize
 ;                  @Error 1 @Extended 2 Return 0 = $bMinimize not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize set to Null, returning boolean indicating if Document is currently minimized (True) or not (False).
+;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bMinimize is set to Null, returns a Boolean indicating if document is currently minimized (True).
