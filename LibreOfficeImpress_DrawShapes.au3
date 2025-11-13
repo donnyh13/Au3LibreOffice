@@ -73,7 +73,7 @@
 ;                  |                               1 = Error setting $iColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning current Fill color as an integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Fill color as an integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -199,7 +199,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaFillStyle
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
 ;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -404,7 +404,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaGradient
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were set to Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -502,7 +502,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaGradientMulticolor
 ;                  |                               1 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning current setting for Transparency in integer format.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency in integer format.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -571,7 +571,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
 ;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -746,7 +746,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaTransparencyGradient
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were set to Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -868,7 +868,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaTransparencyGradientMulti
 ;                  |                               128 = Error setting $iEndGluePoint
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If no shape is set for either the Start or the End, Null is returned when retrieving the current settings.
@@ -1016,7 +1016,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorModify
 ;                  |                               128 = Error setting $iVertEnd
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -1188,7 +1188,7 @@ EndFunc   ;==>_LOImpress_DrawShapeDelete
 ;                  |                               1024 = Error setting $iUnitType
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -1342,7 +1342,7 @@ EndFunc   ;==>_LOImpress_DrawShapeDimensionSettings
 ;                  |                               128 = Error setting $iDelay
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -1476,7 +1476,7 @@ EndFunc   ;==>_LOImpress_DrawShapeDimensionTextAnimation
 ;                  |                               2 = Error setting $iSpacing
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -1572,7 +1572,7 @@ EndFunc   ;==>_LOImpress_DrawShapeDimensionTextColumns
 ;                  |                               128 = Error setting $bFullWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -2221,7 +2221,7 @@ EndFunc   ;==>_LOImpress_DrawShapeInsert
 ;                  |                               64 = Error setting $bEndCenter
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function works for connector shapes also.
@@ -2367,7 +2367,7 @@ EndFunc   ;==>_LOImpress_DrawShapeLineArrowStyles
 ;                  |                               32 = Error setting $iCapStyle
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $vStyle accepts a String or an Integer because there is the possibility of a custom Line Style being available that the user may want to use.
@@ -2496,7 +2496,7 @@ EndFunc   ;==>_LOImpress_DrawShapeLineProperties
 ;                  |                               1 = Error setting $sName
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Shape's name was successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were set to Null, returning the Shape's current name.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning the Shape's current name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -3054,7 +3054,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ;                  @Error 4 @Extended 1 Return 0 = Failed to modify the requested point.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings for the Array Element called in $iArrayElement.
@@ -3506,7 +3506,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ;                  |                               4 = Error setting $bProtectPos
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3581,7 +3581,7 @@ EndFunc   ;==>_LOImpress_DrawShapePosition
 ;                  |                               2 = Error setting $nSlant
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you attempt to apply rotation to an already slanted Shape, or vice versa, a property setting error will occur, and the values will be very inaccurately applied.
@@ -3645,7 +3645,7 @@ EndFunc   ;==>_LOImpress_DrawShapeRotateSlant
 ;                  |                               1 = Error setting $sText
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were set to Null, returning shape's current text content.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning shape's current text content.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: When setting the text of a Shape, any previous text will be overwritten.
@@ -3738,7 +3738,7 @@ EndFunc   ;==>_LOImpress_DrawShapeTextboxCreateTextCursor
 ;                  |                               4 = Error setting $bProtectSize
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.

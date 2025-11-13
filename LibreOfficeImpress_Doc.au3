@@ -949,7 +949,7 @@ EndFunc   ;==>_LOImpress_DocOpen
 ;                  |                               8 = Error setting $iHeight
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: X & Y, on my computer at least, seem to go no lower than 8(X) and 30(Y), if you enter lower than this, it will cause a "property setting Error".
@@ -1629,7 +1629,7 @@ EndFunc   ;==>_LOImpress_DocVisible
 ;                  |                               1 = Error setting $iZoom
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Zoom type always has the value of $LOI_ZOOMTYPE_BY_VALUE(3), when using the other zoom types, the value stays the same, but the zoom level is modified. Consequently, I have not added an error check for the Zoom Type property being correctly set.

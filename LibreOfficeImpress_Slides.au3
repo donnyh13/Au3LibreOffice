@@ -131,7 +131,7 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ;                  |                               1 = Error setting $iColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning current setting as an Integer value. See remarks.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer value. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current setting.
@@ -290,8 +290,8 @@ EndFunc   ;==>_LOImpress_SlideAreaFillStyle
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
 ;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 11 Element Array with values in order of function parameters.
-;                  @Error 0 @Extended 2 Return -1 = Success. All optional parameters were set to Null, no background is currently active for the slide. Returning -1.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 2 Return -1 = Success. All optional parameters were called with Null, no background is currently active for the slide. Returning -1.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -521,7 +521,7 @@ EndFunc   ;==>_LOImpress_SlideAreaGradient
 ;                  |                               1 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning current setting for Transparency in integer format. See remarks.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency in integer format. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -612,8 +612,8 @@ EndFunc   ;==>_LOImpress_SlideAreaTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
 ;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  @Error 0 @Extended 1 Return -1 = Success. All optional parameters were set to Null no background is currently active for the slide. Returning -1.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return -1 = Success. All optional parameters were called with Null no background is currently active for the slide. Returning -1.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
@@ -895,7 +895,7 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ;                  |                               1 = Error setting $oSlide
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Object = Success. All optional parameters were set to Null, returning currently active slide.
+;                  @Error 0 @Extended 1 Return Object = Success. All optional parameters were called with Null, returning currently active slide.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current slide.
