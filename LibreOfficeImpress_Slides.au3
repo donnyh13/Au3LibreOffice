@@ -61,7 +61,7 @@
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning new slide's Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $iPos is set to Null, the new slide is inserted at the end.
+; Remarks .......: If $iPos is called with Null, the new slide is inserted at the end.
 ;                  Call $iPos with the last slide index to insert the slide at the end.
 ;                  Due to limitations in the API, I have made a small workaround for inserting a slide at the beginning. A dispatch is executed to move the slide to the beginning. The current slide will temporarily be set to the new slide in order to move it.
 ; Related .......:
@@ -134,7 +134,7 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer value. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current setting.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current setting.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
@@ -181,7 +181,7 @@ EndFunc   ;==>_LOImpress_SlideAreaColor
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOImpress_SlideAreaFillStyle(ByRef $oSlide[, $bFillOff = False])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $bFillOff            - [optional] a boolean value. Default is False. If set to True, the Fill style will be set to Off. See remarks.
+;                  $bFillOff            - [optional] a boolean value. Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -197,7 +197,7 @@ EndFunc   ;==>_LOImpress_SlideAreaColor
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  When the Fill style is disabled for a Slide, the Fill properties are completely removed. This is how Impress works normally.
-;                  $bFillOff will do nothing if it is set to False, and also it is, of course, not returned when retrieving the FillStyle value.
+;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -294,7 +294,7 @@ EndFunc   ;==>_LOImpress_SlideAreaFillStyle
 ;                  @Error 0 @Extended 2 Return -1 = Success. All optional parameters were called with Null, no background is currently active for the slide. Returning -1.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
@@ -524,7 +524,7 @@ EndFunc   ;==>_LOImpress_SlideAreaGradient
 ;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency in integer format. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, -1 is returned.
 ; Related .......:
 ; Link ..........:
@@ -573,7 +573,7 @@ EndFunc   ;==>_LOImpress_SlideAreaTransparency
 ; Syntax ........: _LOImpress_SlideAreaTransparencyGradient(ByRef $oDoc, ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Set to $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
+;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -616,7 +616,7 @@ EndFunc   ;==>_LOImpress_SlideAreaTransparency
 ;                  @Error 0 @Extended 1 Return -1 = Success. All optional parameters were called with Null no background is currently active for the slide. Returning -1.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -800,7 +800,7 @@ EndFunc   ;==>_LOImpress_SlideAreaTransparencyGradient
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The copied slide is inserted after the slide to be copied.
-;                  If $iPos is set to Null, the slide is left in the position described above. Otherwise, due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
+;                  If $iPos is called with Null, the slide is left in the position described above. Otherwise, due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -898,7 +898,7 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ;                  @Error 0 @Extended 1 Return Object = Success. All optional parameters were called with Null, returning currently active slide.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current slide.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current slide.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

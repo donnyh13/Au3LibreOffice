@@ -455,7 +455,7 @@ EndFunc   ;==>_LOImpress_DocExecuteDispatch
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $sFilePath           - a string value. Full path to save the document to, including Filename and extension. See Remarks.
 ;                  $bSamePath           - [optional] a boolean value. Default is False. If True, uses the path of the current document to export to. See Remarks
-;                  $sFilterName         - [optional] a string value. Default is "". Filter name. If set to "" (blank string), Filter is chosen automatically based on the file extension. If no extension is present, or if not matched to the list of extensions in this UDF, the .odp extension is used instead, with the filter name of "impress8".
+;                  $sFilterName         - [optional] a string value. Default is "". Filter name. If called with "" (blank string), Filter is chosen automatically based on the file extension. If no extension is present, or if not matched to the list of extensions in this UDF, the .odp extension is used instead, with the filter name of "impress8".
 ;                  $bOverwrite          - [optional] a boolean value. Default is Null. If True, file will be overwritten.
 ;                  $sPassword           - [optional] a string value. Default is Null. Password String to set for the document. (Not all file formats can have a Password set). "" (blank string) or Null = No Password.
 ; Return values .: Success: String
@@ -480,7 +480,7 @@ EndFunc   ;==>_LOImpress_DocExecuteDispatch
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Does not alter the original save path (if there was one), saves a copy of the document to the new path, in the new file format if one is chosen.
-;                  If $bSamePath is set to True, the same save path as the current document is used. You must still fill in "$sFilePath" with the desired File Name and new extension, but you do not need to enter the file path.
+;                  If $bSamePath is called with True, the same save path as the current document is used. You must still fill in "$sFilePath" with the desired File Name and new extension, but you do not need to enter the file path.
 ; Related .......: _LOImpress_DocSave, _LOImpress_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
@@ -707,7 +707,7 @@ EndFunc   ;==>_LOImpress_DocIsModified
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DocIsReadOnly
-; Description ...: Tests whether a document is currently set to Read Only.
+; Description ...: Tests whether a document is opened in Read Only mode.
 ; Syntax ........: _LOImpress_DocIsReadOnly(ByRef $oDoc)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
@@ -748,7 +748,7 @@ EndFunc   ;==>_LOImpress_DocIsReadOnly
 ;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMaximize is set to Null, returns a Boolean indicating if document is currently maximized (True).
+; Remarks .......: If $bMaximize is called with Null, returns a Boolean indicating if document is currently maximized (True).
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -784,7 +784,7 @@ EndFunc   ;==>_LOImpress_DocMaximize
 ;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMinimize is set to Null, returns a Boolean indicating if document is currently minimized (True).
+; Remarks .......: If $bMinimize is called with Null, returns a Boolean indicating if document is currently minimized (True).
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -954,7 +954,7 @@ EndFunc   ;==>_LOImpress_DocOpen
 ; Modified ......:
 ; Remarks .......: X & Y, on my computer at least, seem to go no lower than 8(X) and 30(Y), if you enter lower than this, it will cause a "property setting Error".
 ;                  If you want more accurate functionality, use the "WinMove" AutoIt function.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -1633,7 +1633,7 @@ EndFunc   ;==>_LOImpress_DocVisible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Zoom type always has the value of $LOI_ZOOMTYPE_BY_VALUE(3), when using the other zoom types, the value stays the same, but the zoom level is modified. Consequently, I have not added an error check for the Zoom Type property being correctly set.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
