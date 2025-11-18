@@ -1585,7 +1585,7 @@ EndFunc   ;==>_LOImpress_DocUndoReset
 ;                  @Error 4 @Extended 1 Return 0 = Error setting $bVisible.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, false if invisible.
+;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $bVisible with Null to return the current visibility setting.
