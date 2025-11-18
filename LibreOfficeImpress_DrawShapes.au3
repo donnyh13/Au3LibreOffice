@@ -1325,7 +1325,7 @@ EndFunc   ;==>_LOImpress_DrawShapeDimensionSettings
 ;                  @Error 1 @Extended 4 Return 0 = $bStartInside not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $bVisibleOnExit not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $iCycles not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iInc not an Integer, less than 1 or greater than 100 pixels, or less than 25 or greater than 32,766 1/100th mm.
+;                  @Error 1 @Extended 7 Return 0 = $iInc not an Integer, less than 1 or greater than 100 pixels, less than 25 or greater than 32,766 1/100th mm.
 ;                  @Error 1 @Extended 8 Return 0 = $bPixels not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $iDelay not an Integer, less than 0 or greater than 30,000.
 ;                  --Processing Errors--
