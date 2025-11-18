@@ -254,16 +254,16 @@ EndFunc   ;==>_LOImpress_SlideAreaFillStyle
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sGradientName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $iType not an Integer, less than -1, or greater than 5. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error 1 @Extended 4 Return 0 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
-;                  @Error 1 @Extended 5 Return 0 = $iXCenter not an Integer, less than 0, or greater than 100.
-;                  @Error 1 @Extended 6 Return 0 = $iYCenter not an Integer, less than 0, or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iAngle not an Integer, less than 0, or greater than 359.
-;                  @Error 1 @Extended 8 Return 0 = $iTransitionStart not an Integer, less than 0, or greater than 100.
-;                  @Error 1 @Extended 9 Return 0 = $iFromColor not an Integer, less than 0, or greater than 16777215.
-;                  @Error 1 @Extended 10 Return 0 = $iToColor not an Integer, less than 0, or greater than 16777215.
-;                  @Error 1 @Extended 11 Return 0 = $iFromIntense not an Integer, less than 0, or greater than 100.
-;                  @Error 1 @Extended 12 Return 0 = $iToIntense not an Integer, less than 0, or greater than 100.
+;                  @Error 1 @Extended 5 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 6 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 7 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 8 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 9 Return 0 = $iFromColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 10 Return 0 = $iToColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 11 Return 0 = $iFromIntense not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 12 Return 0 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.Background" service.
 ;                  --Processing Errors--
@@ -511,7 +511,7 @@ EndFunc   ;==>_LOImpress_SlideAreaGradient
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0, or greater than 100.
+;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.Background" service.
 ;                  --Processing Errors--
@@ -584,13 +584,13 @@ EndFunc   ;==>_LOImpress_SlideAreaTransparency
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iType Not an Integer, less than -1, or greater than 5, see constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iXCenter Not an Integer, less than 0, or greater than 100.
-;                  @Error 1 @Extended 4 Return 0 = $iYCenter Not an Integer, less than 0, or greater than 100.
-;                  @Error 1 @Extended 5 Return 0 = $iAngle Not an Integer, less than 0, or greater than 359.
-;                  @Error 1 @Extended 6 Return 0 = $iTransitionStart Not an Integer, less than 0, or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iStart Not an Integer, less than 0, or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iEnd Not an Integer, less than 0, or greater than 100.
+;                  @Error 1 @Extended 2 Return 0 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iXCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 4 Return 0 = $iYCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 5 Return 0 = $iAngle Not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 6 Return 0 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 7 Return 0 = $iStart Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 Return 0 = $iEnd Not an Integer, less than 0 or greater than 100.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 =
 ;                  --Processing Errors--
@@ -1192,7 +1192,7 @@ EndFunc   ;==>_LOImpress_SlidesGetCount
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTypes not an Integer, less than 1, or greater than 511. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iTypes not an Integer, less than 1 or greater than 511. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to identify Shape Type.
