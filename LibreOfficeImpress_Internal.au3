@@ -2867,8 +2867,8 @@ EndFunc   ;==>__LOImpress_DrawShapePointModify
 ;                  @Error 1 @Extended 2 Return 0 = $bExportFilters not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $sDocSavePath is not a correct path or URL.
 ;                  --Success--
-;                  @Error 0 @Extended 1 Return String = Success. Returns required filter name from "SaveAs" Filter Names.
-;                  @Error 0 @Extended 2 Return String = Success. Returns required filter name from "Export" Filter Names.
+;                  @Error 0 @Extended 1 Return String = Success. Returning required filter name from "SaveAs" Filter Names.
+;                  @Error 0 @Extended 2 Return String = Success. Returning required filter name from "Export" Filter Names.
 ;                  @Error 0 @Extended 3 Return String = Filter Name not found for given file extension, defaulting to .odp file format and updating save path accordingly.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2974,8 +2974,8 @@ EndFunc   ;==>__LOImpress_FilterNameGet
 ;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sShapeName not a String.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Slide contained no shapes, returns the Shape name with a "1" appended.
-;                  @Error 0 @Extended 1 Return String = Success. Returns the unique Shape name to use.
+;                  @Error 0 @Extended 0 Return String = Success. Slide contained no shapes, returning the Shape name with a "1" appended.
+;                  @Error 0 @Extended 1 Return String = Success. Returning the unique Shape name to use.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function adds a digit after the shape name, incrementing it until that name hasn't been used yet in L.O.
