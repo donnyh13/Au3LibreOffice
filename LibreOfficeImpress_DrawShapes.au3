@@ -65,7 +65,7 @@
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColor not an integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 2 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
@@ -73,7 +73,7 @@
 ;                  |                               1 = Error setting $iColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Fill color as an integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Fill color as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -502,7 +502,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAreaGradientMulticolor
 ;                  |                               1 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.

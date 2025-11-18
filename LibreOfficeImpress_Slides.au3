@@ -521,7 +521,7 @@ EndFunc   ;==>_LOImpress_SlideAreaGradient
 ;                  |                               1 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an integer. See remarks.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
