@@ -1860,7 +1860,7 @@ EndFunc   ;==>_LOImpress_DrawShapeExists
 ;                  #5 The following Shapes are have nothing unique that I have found yet to identify each, and are consequently indistinguishable:
 ;                  - $LOI_DRAWSHAPE_TYPE_3D_* (The Value of $LOI_DRAWSHAPE_TYPE_3D_CONE is returned for any of these.)
 ;                  #6 The following shapes are customizable one to another, they may be identified, or may return a general shape type:
-;                  When the arrowhead type "Arrow" is set in the LO UI, or upon creation of a line with arrows, the internal name of the arrowhead is set to an incrementing name of "Arrowheads x", where x is an integer value. Since I have no way to determine if the head is a custom arrowhead or supposed to be the "Arrow" type, I cannot necessarily identify the right connector or Line.
+;                  When the arrowhead type "Arrow" is set in the LO UI, or upon creation of a line with arrows, the internal name of the arrowhead is set to an incrementing name of "Arrowheads x", where x is an Integer value. Since I have no way to determine if the head is a custom arrowhead or supposed to be the "Arrow" type, I cannot necessarily identify the right connector or Line.
 ;                  When setting an Arrowhead to be $LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW, the head is set correctly, but the LibreOffice UI will show "None". The return for Arrowhead type will be the correct name however, and will allow me to identify the shape.
 ;                  - If I fail to identify, or it is customized differently, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_* Connector, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT will be returned.
 ;                  - If I fail to identify, or it is customized differently, $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE_* Connector, $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE will be returned.
@@ -2225,12 +2225,12 @@ EndFunc   ;==>_LOImpress_DrawShapeInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function works for connector shapes also.
-;                  When the arrowhead type "Arrow" is set in the LO UI, or upon creation of a line with arrows, the internal name of the arrowhead is set to an incrementing name of "Arrowheads x", where x is an integer value. Since I have no way to determine if the head is a custom arrowhead or supposed to be the "Arrow" type, the return when this is present will be the name "Arrowheads x", and not $LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW.
+;                  When the arrowhead type "Arrow" is set in the LO UI, or upon creation of a line with arrows, the internal name of the arrowhead is set to an incrementing name of "Arrowheads x", where x is an Integer value. Since I have no way to determine if the head is a custom arrowhead or supposed to be the "Arrow" type, the return when this is present will be the name "Arrowheads x", and not $LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW.
 ;                  When setting an Arrowhead to be $LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW, the head is set correctly, but the LibreOffice UI will show "None". The return for Arrowhead type will be correct, $LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW.
 ;                  Libre Office has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
 ;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
 ;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
-;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOI_DRAWSHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOI_DRAWSHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
@@ -2371,7 +2371,7 @@ EndFunc   ;==>_LOImpress_DrawShapeLineArrowStyles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $vStyle accepts a String or an Integer because there is the possibility of a custom Line Style being available that the user may want to use.
-;                  When retrieving the current settings, $vStyle could be either an integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOImpress_DrawShapeInsert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
