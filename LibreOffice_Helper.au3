@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-#Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 
 #include-once
 
@@ -20,10 +20,9 @@
 ; _LO_ComError_UserFunction
 ; _LO_ConvertColorFromLong
 ; _LO_ConvertColorToLong
-; _LO_ConvertFromMicrometer
-; _LO_ConvertToMicrometer
 ; _LO_InitializePortable
 ; _LO_PathConvert
+; _LO_UnitConvert
 ; _LO_VersionGet
 ; ===============================================================================================================================
 
@@ -31,7 +30,7 @@
 ; Name ..........: _LO_ComError_UserFunction
 ; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
 ; Syntax ........: _LO_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
-; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default value is Default. Accepts a Function, or the Keyword Default and Null. If set to a User function, the function may have up to 5 required parameters.
+; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
 ;                  $vParam1             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam2             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam3             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
@@ -110,25 +109,25 @@ EndFunc   ;==>_LO_ComError_UserFunction
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_ConvertColorFromLong
-; Description ...: Convert Long color code to Hex, RGB, HSB or CMYK.
+; Description ...: Convert a RGB Color Integer to Hex, RGB, HSB or CMYK.
 ; Syntax ........: _LO_ConvertColorFromLong([$iHex = Null[, $iRGB = Null[, $iHSB = Null[, $iCMYK = Null]]]])
-; Parameters ....: $iHex                - [optional] an integer value. Default is Null. Convert Long Color Integer to Hexadecimal.
-;                  $iRGB                - [optional] an integer value. Default is Null. Convert Long Color Integer to R.G.B.
-;                  $iHSB                - [optional] an integer value. Default is Null. Convert Long Color Integer to H.S.B.
-;                  $iCMYK               - [optional] an integer value. Default is Null. Convert Long Color Integer to C.M.Y.K.
+; Parameters ....: $iHex                - [optional] an integer value. Default is Null. Convert a RGB Color Integer to Hexadecimal.
+;                  $iRGB                - [optional] an integer value. Default is Null. Convert a RGB Color Integer to R.G.B.
+;                  $iHSB                - [optional] an integer value. Default is Null. Convert a RGB Color Integer to H.S.B.
+;                  $iCMYK               - [optional] an integer value. Default is Null. Convert a RGB Color Integer to C.M.Y.K.
 ; Return values .: Success: String or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = No parameters set.
-;                  @Error 1 @Extended 2 Return 0 = No parameters set to an integer.
+;                  @Error 1 @Extended 2 Return 0 = No parameters called with an Integer.
 ;                  --Success--
-;                  @Error 0 @Extended 1 Return String = Long integer converted To Hexadecimal (as a String). (Without the "0x" prefix)
-;                  @Error 0 @Extended 2 Return Array = Array containing Long integer converted To Red, Green, Blue,(RGB). $Array[0] = R, $Array[1] = G, etc.
-;                  @Error 0 @Extended 3 Return Array = Array containing Long integer converted To Hue, Saturation, Brightness, (HSB). $Array[0] = H, $Array[1] = S, etc.
-;                  @Error 0 @Extended 4 Return Array = Array containing Long integer converted To Cyan, Magenta, Yellow, Black, (CMYK). $Array[0] = C, $Array[1] = M, etc.
+;                  @Error 0 @Extended 1 Return String = RGB Integer converted To Hexadecimal (as a String). (Without the "0x" prefix)
+;                  @Error 0 @Extended 2 Return Array = Array containing RGB Integer converted To Red, Green, Blue,(RGB). $Array[0] = R, $Array[1] = G, etc.
+;                  @Error 0 @Extended 3 Return Array = Array containing RGB Integer converted To Hue, Saturation, Brightness, (HSB). $Array[0] = H, $Array[1] = S, etc.
+;                  @Error 0 @Extended 4 Return Array = Array containing RGB Integer converted To Cyan, Magenta, Yellow, Black, (CMYK). $Array[0] = C, $Array[1] = M, etc.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: To retrieve a Hexadecimal color value, call the Long Color code in $iHex, To retrieve a R(ed)G(reen)B(lue) color value, call Null in $iHex, and call the Long color code into $iRGB, etc. for the other color types.
+; Remarks .......: To retrieve a Hexadecimal color value, call the RGB Color Integer in $iHex, To retrieve a R(ed)G(reen)B(lue) color value, call Null in $iHex, and call the RGB Color Integer into $iRGB, etc. for the other color types.
 ;                  Hex returns as a string variable, all others (RGB, HSB, CMYK) return an array.
 ;                  The Hexadecimal figure returned doesn't contain the usual "0x", as LibeOffice does not implement it in its numbering system.
 ; Related .......: _LO_ConvertColorToLong
@@ -256,7 +255,7 @@ EndFunc   ;==>_LO_ConvertColorFromLong
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_ConvertColorToLong
-; Description ...: Convert Hex, RGB, HSB or CMYK to Long color code.
+; Description ...: Convert Hex, RGB, HSB or CMYK to a RGB Color Integer.
 ; Syntax ........: _LO_ConvertColorToLong([$vVal1 = Null[, $vVal2 = Null[, $vVal3 = Null[, $vVal4 = Null]]]])
 ; Parameters ....: $vVal1               - [optional] a variant value. Default is Null. See remarks.
 ;                  $vVal2               - [optional] a variant value. Default is Null. See remarks.
@@ -276,16 +275,16 @@ EndFunc   ;==>_LO_ConvertColorFromLong
 ;                  @Error 1 @Extended 9 Return 0 = Four parameters called but not all Integers(CMYK).
 ;                  @Error 1 @Extended 10 Return 0 = Too many or too few parameters called.
 ;                  --Success--
-;                  @Error 0 @Extended 1 Return Integer = Long Int. Color code converted from Hexadecimal.
-;                  @Error 0 @Extended 2 Return Integer = Long Int. Color code converted from Red, Green, Blue, (RGB).
-;                  @Error 0 @Extended 3 Return Integer = Long Int. Color code converted from (H)ue, (S)aturation, (B)rightness,
-;                  @Error 0 @Extended 4 Return Integer = Long Int. Color code converted from (C)yan, (M)agenta, (Y)ellow, Blac(k)
+;                  @Error 0 @Extended 1 Return Integer = RGB Color Integer converted from Hexadecimal.
+;                  @Error 0 @Extended 2 Return Integer = RGB Color Integer converted from Red, Green, Blue, (RGB).
+;                  @Error 0 @Extended 3 Return Integer = RGB Color Integer converted from (H)ue, (S)aturation, (B)rightness,
+;                  @Error 0 @Extended 4 Return Integer = RGB Color Integer converted from (C)yan, (M)agenta, (Y)ellow, Blac(k)
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To Convert a Hex(adecimal) color code, call the Hex code in $vVal1 in String Format.
 ;                  To convert a R(ed) G(reen) B(lue color, call R value in $vVal1 as an Integer, G in $vVal2 as an Integer, and B in $vVal3 as an Integer.
 ;                  To convert a H(ue) S(aturation) B(rightness) color, call H in $vVal1 as a String, S in $vVal2 as a String, and B in $vVal3 as a string.
-;                  To convert C(yan) M(agenta) Y(ellow) Blac(k) call C in $vVal1 as an Integer, M in $vVal2 as an Integer, Y in $vVal3 as an Integer, and K in $vVal4 as an Integer format.
+;                  To convert C(yan) M(agenta) Y(ellow) Blac(k) call C in $vVal1 as an Integer, M in $vVal2 as an Integer, Y in $vVal3 as an Integer, and K in $vVal4 as an Integer.
 ;                  The Hexadecimal figure entered cannot contain the usual "0x", as LibeOffice does not implement it in its numbering system.
 ; Related .......: _LO_ConvertColorFromLong
 ; Link ..........:
@@ -426,159 +425,6 @@ Func _LO_ConvertColorToLong($vVal1 = Null, $vVal2 = Null, $vVal3 = Null, $vVal4 
 EndFunc   ;==>_LO_ConvertColorToLong
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LO_ConvertFromMicrometer
-; Description ...: Convert from Micrometer to Inch, Centimeter, Millimeter, or Printer's Points.
-; Syntax ........: _LO_ConvertFromMicrometer([$nInchOut = Null[, $nCentimeterOut = Null[, $nMillimeterOut = Null[, $nPointsOut = Null]]]])
-; Parameters ....: $nInchOut            - [optional] a general number value. Default is Null. The Micrometers to convert to Inches. See remarks.
-;                  $nCentimeterOut      - [optional] a general number value. Default is Null. The Micrometers to convert to Centimeters. See remarks.
-;                  $nMillimeterOut      - [optional] a general number value. Default is Null. The Micrometers to convert to Millimeters. See remarks.
-;                  $nPointsOut          - [optional] a general number value. Default is Null. The Micrometers to convert to Printer's Points. See remarks.
-; Return values .: Success: Number
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $nInchOut not a number.
-;                  @Error 1 @Extended 2 Return 0 = $nCentimeterOut not a number.
-;                  @Error 1 @Extended 3 Return 0 = $nMillimeterOut not a number.
-;                  @Error 1 @Extended 4 Return 0 = $nPointsOut not a number.
-;                  @Error 1 @Extended 5 Return 0 = No parameters set to other than Null.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error converting from Micrometers to Inch.
-;                  @Error 3 @Extended 2 Return 0 = Error converting from Micrometers to Centimeter.
-;                  @Error 3 @Extended 3 Return 0 = Error converting from Micrometers to Millimeter.
-;                  @Error 3 @Extended 4 Return 0 = Error converting from Micrometers to Printer's Points.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Number = Converted from Micrometers to Inch.
-;                  @Error 0 @Extended 2 Return Number = Converted from Micrometers to Centimeter.
-;                  @Error 0 @Extended 3 Return Number = Converted from Micrometers to Millimeter.
-;                  @Error 0 @Extended 4 Return Number = Converted from Micrometers to Printer's Points.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To skip a parameter, set it to Null.
-;                  If you are converting to Inches, place the Micrometers in $nInchOut, if converting to Millimeters, $nInchOut and $nCentimeter are set to Null, and $nMillimetersOut is set.
-;                  A Micrometer is 1000th of a centimeter, and is used in almost all Libre Office functions that contain a measurement parameter.
-; Related .......: _LO_ConvertToMicrometer
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LO_ConvertFromMicrometer($nInchOut = Null, $nCentimeterOut = Null, $nMillimeterOut = Null, $nPointsOut = Null)
-	Local $nReturnValue
-
-	If ($nInchOut <> Null) Then
-		If Not IsNumber($nInchOut) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-		$nReturnValue = __LO_UnitConvert($nInchOut, $__LOCONST_CONVERT_UM_INCH)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $nReturnValue)
-	EndIf
-
-	If ($nCentimeterOut <> Null) Then
-		If Not IsNumber($nCentimeterOut) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$nReturnValue = __LO_UnitConvert($nCentimeterOut, $__LOCONST_CONVERT_UM_CM)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 2, $nReturnValue)
-	EndIf
-
-	If ($nMillimeterOut <> Null) Then
-		If Not IsNumber($nMillimeterOut) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$nReturnValue = __LO_UnitConvert($nMillimeterOut, $__LOCONST_CONVERT_UM_MM)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 3, $nReturnValue)
-	EndIf
-
-	If ($nPointsOut <> Null) Then
-		If Not IsNumber($nPointsOut) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$nReturnValue = __LO_UnitConvert($nPointsOut, $__LOCONST_CONVERT_UM_PT)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 4, $nReturnValue)
-	EndIf
-
-	Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; NO Unit set.
-EndFunc   ;==>_LO_ConvertFromMicrometer
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LO_ConvertToMicrometer
-; Description ...: Convert from Inch, Centimeter, Millimeter, or Printer's Points to Micrometer.
-; Syntax ........: _LO_ConvertToMicrometer([$nInchIn = Null[, $nCentimeterIn = Null[, $nMillimeterIn = Null[, $nPointsIn = Null]]]])
-; Parameters ....: $nInchIn             - [optional] a general number value. Default is Null. The Inches to convert to Micrometers. See remarks.
-;                  $nCentimeterIn       - [optional] a general number value. Default is Null. The Centimeters to convert to Micrometers. See remarks.
-;                  $nMillimeterIn       - [optional] a general number value. Default is Null. The Millimeters to convert to Micrometers. See remarks.
-;                  $nPointsIn           - [optional] a general number value. Default is Null. The Printer's Points to convert to Micrometers. See remarks.
-; Return values .: Success: Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $nInchIn not a number.
-;                  @Error 1 @Extended 2 Return 0 = $nCentimeterIn not a number.
-;                  @Error 1 @Extended 3 Return 0 = $nMillimeterIn not a number.
-;                  @Error 1 @Extended 4 Return 0 = $nPointsIn not a number.
-;                  @Error 1 @Extended 5 Return 0 = No parameters set to other than Null.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error converting from Inches to Micrometers.
-;                  @Error 3 @Extended 2 Return 0 = Error converting from Centimeters to Micrometers.
-;                  @Error 3 @Extended 3 Return 0 = Error converting from Millimeters to Micrometers.
-;                  @Error 3 @Extended 4 Return 0 = Error converting from Printer's Points to Micrometers.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Integer = Converted Inches to Micrometers.
-;                  @Error 0 @Extended 2 Return Integer = Converted Centimeters to Micrometers.
-;                  @Error 0 @Extended 3 Return Integer = Converted Millimeters to Micrometers.
-;                  @Error 0 @Extended 4 Return Integer = Converted Printer's Points to Micrometers.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To skip a parameter, set it to Null. If you are converting from Inches, call inches in $nInchIn, if converting from Centimeters, $nInchIn is called with Null, and $nCentimeters is set.
-;                  A Micrometer is 1000th of a centimeter, and is used in almost all Libre Office functions that contain a measurement parameter.
-; Related .......: _LO_ConvertFromMicrometer
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LO_ConvertToMicrometer($nInchIn = Null, $nCentimeterIn = Null, $nMillimeterIn = Null, $nPointsIn = Null)
-	Local $nReturnValue
-
-	If ($nInchIn <> Null) Then
-		If Not IsNumber($nInchIn) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-		$nReturnValue = __LO_UnitConvert($nInchIn, $__LOCONST_CONVERT_INCH_UM)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $nReturnValue)
-	EndIf
-
-	If ($nCentimeterIn <> Null) Then
-		If Not IsNumber($nCentimeterIn) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$nReturnValue = __LO_UnitConvert($nCentimeterIn, $__LOCONST_CONVERT_CM_UM)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 2, $nReturnValue)
-	EndIf
-
-	If ($nMillimeterIn <> Null) Then
-		If Not IsNumber($nMillimeterIn) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$nReturnValue = __LO_UnitConvert($nMillimeterIn, $__LOCONST_CONVERT_MM_UM)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 3, $nReturnValue)
-	EndIf
-
-	If ($nPointsIn <> Null) Then
-		If Not IsNumber($nPointsIn) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$nReturnValue = __LO_UnitConvert($nPointsIn, $__LOCONST_CONVERT_PT_UM)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 4, $nReturnValue)
-	EndIf
-
-	Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; NO Unit set.
-EndFunc   ;==>_LO_ConvertToMicrometer
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_InitializePortable
 ; Description ...: Setup Portable LibreOffice (Or Open Office) for use in this UDF. See remarks.
 ; Syntax ........: _LO_InitializePortable($sOfficePortablePath)
@@ -608,7 +454,7 @@ EndFunc   ;==>_LO_ConvertToMicrometer
 ;                  5a. The ServiceManager created from the registry is no longer used.
 ;                  5b. The ServiceManager created from the registry is no longer used, and the temporary Registry entries created in HKEY_CURRENT_USER are (hopefully) deleted.
 ;                  If the COM error "Binary URP bridge already disposed" is encountered, all instances of soffice.exe or soffice.bin must be closed with TaskManager.
-;                  If running this with an installed version of LibreOffice present the flag SingleAppInstance may need to be set to false in the "LibreOfficePortablePrevious.ini" [or similar name], found at: C:\LibreOfficePortablePrevious\App\AppInfo\Launcher\LibreOfficePortablePrevious.ini.
+;                  If running this with an installed version of LibreOffice present the flag SingleAppInstance may need to be set to False in the "LibreOfficePortablePrevious.ini" [or similar name], found at: C:\LibreOfficePortablePrevious\App\AppInfo\Launcher\LibreOfficePortablePrevious.ini.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -652,7 +498,7 @@ EndFunc   ;==>_LO_InitializePortable
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $sFilePath is not a string
-;                  @Error 1 @Extended 2 Return 0 = $iReturnMode not a Integer, less than 0, or greater than 2, see constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3..
+;                  @Error 1 @Extended 2 Return 0 = $iReturnMode not a Integer, less than 0 or greater than 2. See constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3..
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Returning converted File Path from Libre Office URL.
 ;                  @Error 0 @Extended 2 Return String = Returning converted path from File Path to Libre Office URL.
@@ -718,6 +564,121 @@ Func _LO_PathConvert($sFilePath, $iReturnMode = $LO_PATHCONV_AUTO_RETURN)
 EndFunc   ;==>_LO_PathConvert
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_UnitConvert
+; Description ...: For converting measurement units.
+; Syntax ........: _LO_UnitConvert($nValue, $iReturnType)
+; Parameters ....: $nValue              - a general number value. The Number to be converted.
+;                  $iReturnType         - an Integer value (0-10). The conversion type to perform on $nValue. See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
+; Return values .: Success: Integer or Number.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $nValue is not a Number.
+;                  @Error 1 @Extended 2 Return 0 = $iReturnType is not a Integer, less than 0 or greater than 10. See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iReturnType does not match constants, See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
+;                  --Success--
+;                  @Error 0 @Extended 1 Return Number = Returning Number converted from TWIPS to Centimeters.
+;                  @Error 0 @Extended 2 Return Number = Returning Number converted from TWIPS to Inches.
+;                  @Error 0 @Extended 3 Return Integer = Returning Number converted from Millimeters to Hundredths of a Millimeter (HMM).
+;                  @Error 0 @Extended 4 Return Number = Returning Number converted from Hundredths of a Millimeter (HMM) to MM
+;                  @Error 0 @Extended 5 Return Integer = Returning Number converted from Centimeters To Hundredths of a Millimeter (HMM)
+;                  @Error 0 @Extended 6 Return Number = Returning Number converted from Hundredths of a Millimeter (HMM) To CM
+;                  @Error 0 @Extended 7 Return Integer = Returning Number converted from Inches to Hundredths of a Millimeter (HMM).
+;                  @Error 0 @Extended 8 Return Number = Returning Number converted from Hundredths of a Millimeter (HMM) to Inches.
+;                  @Error 0 @Extended 9 Return Integer = Returning Number converted from TWIPS to Hundredths of a Millimeter (HMM).
+;                  @Error 0 @Extended 10 Return Integer = Returning Number converted from Point to Hundredths of a Millimeter (HMM).
+;                  @Error 0 @Extended 11 Return Number = Returning Number converted from Hundredths of a Millimeter (HMM) to Point.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Hundredths of a Millimeter (HMM), is used in almost all LibreOffice functions that contain a measurement parameter.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func _LO_UnitConvert($nValue, $iReturnType)
+	Local $iHMM, $iMM, $iCM, $iInch
+
+	If Not IsNumber($nValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iReturnType, $LO_CONVERT_UNIT_TWIPS_CM, $LO_CONVERT_UNIT_HMM_PT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	Switch $iReturnType
+		Case $LO_CONVERT_UNIT_TWIPS_CM ; TWIPS TO CM
+			; 1 TWIP = 1/20 of a point, 1 Point = 1/72 of an Inch.
+			$iInch = ($nValue / 20 / 72)
+			; 1 Inch = 2.54 CM
+			$iCM = Round(Round($iInch * 2.54, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 1, Number($iCM))
+
+		Case $LO_CONVERT_UNIT_TWIPS_INCH ; TWIPS to Inch
+			; 1 TWIP = 1/20 of a point, 1 Point = 1/72 of an Inch.
+			$iInch = ($nValue / 20 / 72)
+			$iInch = Round(Round($iInch, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 2, Number($iInch))
+
+		Case $LO_CONVERT_UNIT_MM_HMM ; Millimeter to Hundredths of a Millimeter (HMM).
+			$iHMM = ($nValue * 100)
+			$iHMM = Round(Round($iHMM, 1))
+
+			Return SetError($__LO_STATUS_SUCCESS, 3, Number($iHMM))
+
+		Case $LO_CONVERT_UNIT_HMM_MM ; Hundredths of a Millimeter (HMM) to Millimeter
+			$iMM = ($nValue / 100)
+			$iMM = Round(Round($iMM, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 4, Number($iMM))
+
+		Case $LO_CONVERT_UNIT_CM_HMM ; Centimeter to Hundredths of a Millimeter (HMM)
+			$iHMM = ($nValue * 1000)
+			$iHMM = Round(Round($iHMM, 1))
+
+			Return SetError($__LO_STATUS_SUCCESS, 5, Int($iHMM))
+
+		Case $LO_CONVERT_UNIT_HMM_CM ; Hundredths of a Millimeter (HMM) to Centimeter
+			$iCM = ($nValue / 1000)
+			$iCM = Round(Round($iCM, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 6, Number($iCM))
+
+		Case $LO_CONVERT_UNIT_INCH_HMM ; Inch to Hundredths of a Millimeter (HMM)
+			; 1 Inch - 2.54 Cm; Hundredths of a Millimeter (HMM) = 1/1000 CM
+			$iHMM = ($nValue * 2.54) * 1000
+			$iHMM = Round(Round($iHMM, 1))
+
+			Return SetError($__LO_STATUS_SUCCESS, 7, Int($iHMM))
+
+		Case $LO_CONVERT_UNIT_HMM_INCH ; Hundredths of a Millimeter (HMM) to Inch
+			; 1 Inch - 2.54 Cm; Hundredths of a Millimeter (HMM) = 1/1000 CM
+			$iInch = ($nValue / 1000) / 2.54
+			$iInch = Round(Round($iInch, 3), 2)
+
+			Return SetError($__LO_STATUS_SUCCESS, 8, $iInch)
+
+		Case $LO_CONVERT_UNIT_TWIPS_HMM ; TWIPS to Hundredths of a Millimeter (HMM)
+			; 1 TWIP = 1/20 of a point, 1 Point = 1/72 of an Inch.
+			$iInch = (($nValue / 20) / 72)
+			$iInch = Round(Round($iInch, 3), 2)
+			; 1 Inch = 25.4 MM; 100 Hundredths of a Millimeter (HMM) = 1 MM
+			$iHMM = Round($iInch * 25.4 * 100)
+
+			Return SetError($__LO_STATUS_SUCCESS, 9, Int($iHMM))
+
+		Case $LO_CONVERT_UNIT_PT_HMM
+			; 1 pt = 35 Hundredths of a Millimeter (HMM)
+
+			Return ($nValue = 0) ? (SetError($__LO_STATUS_SUCCESS, 10, 0)) : (SetError($__LO_STATUS_SUCCESS, 10, Round(($nValue * 35.2778))))
+
+		Case $LO_CONVERT_UNIT_HMM_PT
+
+			Return ($nValue = 0) ? (SetError($__LO_STATUS_SUCCESS, 11, 0)) : (SetError($__LO_STATUS_SUCCESS, 11, Round(($nValue / 35.2778), 2)))
+
+		Case Else
+
+			Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	EndSwitch
+EndFunc   ;==>_LO_UnitConvert
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_VersionGet
 ; Description ...: Retrieve the current Office version.
 ; Syntax ........: _LO_VersionGet([$bSimpleVersion = False[, $bReturnName = False]])
@@ -734,7 +695,7 @@ EndFunc   ;==>_LO_PathConvert
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error setting property value.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returns the Office version in String format.
+;                  @Error 0 @Extended 0 Return String = Success. Returning the Office version in String format.
 ; Author ........: Laurent Godard as found in Andrew Pitonyak's book; Zizi64 as found on OpenOffice forum.
 ; Modified ......: donnyh13, modified for AutoIt compatibility and error checking.
 ; Remarks .......: From Macro code by Zizi64 found at: https://forum.openoffice.org/en/forum/viewtopic.php?t=91542&sid=7f452d65e58ac1cd3cc6063350b5ada0
