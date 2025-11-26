@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSlide, $oShape
-	Local $i100thMM
+	Local $iHMM
 	Local $avSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -21,13 +21,13 @@ Func Example()
 	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_LINE_LINE, 4000, 0, 12000, 4300)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Hundredths of a Millimeter (100th MM)
-	$i100thMM = _LO_UnitConvert(.25, $LO_CONVERT_UNIT_INCH_100THMM)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (100th MM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape Arrow Style settings to: Set the Start Arrowhead to $LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED, Start width = 1/4",
 	; Start Center = True, Synchronize Start and End = True.
-	_LOImpress_DrawShapeLineArrowStyles($oShape, $LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED, $i100thMM, True, True)
+	_LOImpress_DrawShapeLineArrowStyles($oShape, $LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED, $iHMM, True, True)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
@@ -36,11 +36,11 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Arrow Style settings are as follows: " & @CRLF & _
 			"The Start Arrowhead Style is (See UDF Constants): " & $avSettings[0] & @CRLF & _
-			"The Start Arrowhead Width is, in Hundredths of a Millimeter (100th MM): " & $avSettings[1] & @CRLF & _
+			"The Start Arrowhead Width is, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
 			"Is the Start Arrowhead centered on the line end? True/False: " & $avSettings[2] & @CRLF & _
 			"Is the Starting and Ending Arrowhead settings synchronized? True/False: " & $avSettings[3] & @CRLF & _
 			"The End Arrowhead Style is (See UDF Constants): " & $avSettings[4] & @CRLF & _
-			"The End Arrowhead Width is, in Hundredths of a Millimeter (100th MM): " & $avSettings[5] & @CRLF & _
+			"The End Arrowhead Width is, in Hundredths of a Millimeter (HMM): " & $avSettings[5] & @CRLF & _
 			"Is the Start Arrowhead centered on the line end? True/False: " & $avSettings[6])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

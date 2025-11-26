@@ -32,10 +32,10 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Connector Shape's settings are as follows: " & @CRLF & _
 			"Is the Text adjusted to fit the Text Box size? True/False: " & $avSettings[0] & @CRLF & _
 			"Is the text flow contoured to fit the Shape's contour? True/False: " & $avSettings[1] & @CRLF & _
-			"The amount of space between the left edge of the text and the left edge of the shape is (in 1/100th mm): " & $avSettings[2] & @CRLF & _
-			"The amount of space between the right edge of the text and the right edge of the shape is (in 1/100th mm): " & $avSettings[3] & @CRLF & _
-			"The amount of space between the top edge of the text and the top edge of the shape is (in 1/100th mm): " & $avSettings[4] & @CRLF & _
-			"The amount of space between the bottom edge of the text and the bottom edge of the shape is (in 1/100th mm): " & $avSettings[5] & @CRLF & _
+			"The amount of space between the left edge of the text and the left edge of the shape is (in Hundredths of a Millimeter (HMM)): " & $avSettings[2] & @CRLF & _
+			"The amount of space between the right edge of the text and the right edge of the shape is (in Hundredths of a Millimeter (HMM)): " & $avSettings[3] & @CRLF & _
+			"The amount of space between the top edge of the text and the top edge of the shape is (in Hundredths of a Millimeter (HMM)): " & $avSettings[4] & @CRLF & _
+			"The amount of space between the bottom edge of the text and the bottom edge of the shape is (in Hundredths of a Millimeter (HMM)): " & $avSettings[5] & @CRLF & _
 			"The position the text is anchored is (See UDF Constants): " & $avSettings[6] & @CRLF & _
 			"Will the text be fit to the shape's full width? True/False" & $avSettings[7])
 

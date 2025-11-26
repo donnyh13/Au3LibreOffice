@@ -30,7 +30,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Dimension Shape's settings are as follows: " & @CRLF & _
 			"The number of columns is: " & $avSettings[0] & @CRLF & _
-			"The amount of spacing between each column is (in 1/100th mm): " & $avSettings[1])
+			"The amount of spacing between each column is (in Hundredths of a Millimeter (HMM)): " & $avSettings[1])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

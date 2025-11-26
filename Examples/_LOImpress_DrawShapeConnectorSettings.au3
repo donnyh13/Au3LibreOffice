@@ -34,10 +34,10 @@ Func Example()
 			"The skew value of Line 1 is: " & $avSettings[1] & @CRLF & _
 			"The skew value of Line 2 is: " & $avSettings[2] & @CRLF & _
 			"The skew value of Line 3 is: " & $avSettings[3] & @CRLF & _
-			"The horizontal spacing at the beginning of the connector is (in 1/100th mm): " & $avSettings[4] & @CRLF & _
-			"The horizontal spacing at the end of the connector is (in 1/100th mm): " & $avSettings[5] & @CRLF & _
-			"The vertical spacing at the beginning of the connector is (in 1/100th mm): " & $avSettings[6] & @CRLF & _
-			"The vertical spacing at the end of the connector is (in 1/100th mm): " & $avSettings[7])
+			"The horizontal spacing at the beginning of the connector is (in Hundredths of a Millimeter (HMM)): " & $avSettings[4] & @CRLF & _
+			"The horizontal spacing at the end of the connector is (in Hundredths of a Millimeter (HMM)): " & $avSettings[5] & @CRLF & _
+			"The vertical spacing at the beginning of the connector is (in Hundredths of a Millimeter (HMM)): " & $avSettings[6] & @CRLF & _
+			"The vertical spacing at the end of the connector is (in Hundredths of a Millimeter (HMM)): " & $avSettings[7])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

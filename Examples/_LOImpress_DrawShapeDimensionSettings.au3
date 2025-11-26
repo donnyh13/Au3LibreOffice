@@ -30,11 +30,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Dimension Shape's settings are as follows: " & @CRLF & _
-			"The distance of the Dimension line from the base line is (in 1/100th mm): " & $avSettings[0] & @CRLF & _
-			"The Guide overhang is (in 1/100th mm): " & $avSettings[1] & @CRLF & _
-			"The Guide distance is (in 1/100th mm): " & $avSettings[2] & @CRLF & _
-			"The Left Guide length is (in 1/100th mm): " & $avSettings[3] & @CRLF & _
-			"The Right Guide length is (in 1/100th mm): " & $avSettings[4] & @CRLF & _
+			"The distance of the Dimension line from the base line is (in Hundredths of a Millimeter (HMM)): " & $avSettings[0] & @CRLF & _
+			"The Guide overhang is (in Hundredths of a Millimeter (HMM)): " & $avSettings[1] & @CRLF & _
+			"The Guide distance is (in Hundredths of a Millimeter (HMM)): " & $avSettings[2] & @CRLF & _
+			"The Left Guide length is (in Hundredths of a Millimeter (HMM)): " & $avSettings[3] & @CRLF & _
+			"The Right Guide length is (in Hundredths of a Millimeter (HMM)): " & $avSettings[4] & @CRLF & _
 			"Measure below the shape? True/False: " & $avSettings[5] & @CRLF & _
 			"The number of decimal places is: " & $avSettings[6] & @CRLF & _
 			"The Vertical alignment of the Dimension line to the text is (See UDF Constants): " & $avSettings[7] & @CRLF & _

@@ -33,10 +33,10 @@ Func Example()
 
 	; I will retrieve the first point's current position, and add to its X and Y values to determine my new point's new X and Y values.
 
-	; Minus 400 Hundredths of a Millimeter (100th MM) from the X coordinate
+	; Minus 400 Hundredths of a Millimeter (HMM) from the X coordinate
 	$iNewX = $avArray[0] - 400
 
-	; Add 1600 Hundredths of a Millimeter (100th MM) to the Y coordinate
+	; Add 1600 Hundredths of a Millimeter (HMM) to the Y coordinate
 	$iNewY = $avArray[1] + 1600
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to insert the new Point into the shape.")
