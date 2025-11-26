@@ -85,8 +85,8 @@ EndFunc   ;==>__LOImpress_ColorRemoveAlpha
 ; Name ..........: __LOImpress_CreatePoint
 ; Description ...: Creates a Position structure.
 ; Syntax ........: __LOImpress_CreatePoint($iX, $iY)
-; Parameters ....: $iX                  - an integer value. The X position, in Hundredths of a Millimeter (100th MM).
-;                  $iY                  - an integer value. The Y position, in Hundredths of a Millimeter (100th MM).
+; Parameters ....: $iX                  - an integer value. The X position, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - an integer value. The Y position, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: Structure
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -126,10 +126,10 @@ EndFunc   ;==>__LOImpress_CreatePoint
 ; Description ...: Create an Arrow type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (100th MM).
-;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (100th MM).
-;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (100th MM).
-;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (100th MM).
+;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
+;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - an integer value (0-25). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -309,10 +309,10 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ; Description ...: Create a Basic type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (100th MM).
-;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (100th MM).
-;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (100th MM).
-;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (100th MM).
+;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
+;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - an integer value (26-49). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -497,10 +497,10 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ; Description ...: Create a Callout type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (100th MM).
-;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (100th MM).
-;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (100th MM).
-;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (100th MM).
+;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
+;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - an integer value (50-56). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -614,10 +614,10 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ; Description ...: Create a FlowChart type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (100th MM).
-;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (100th MM).
-;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (100th MM).
-;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (100th MM).
+;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
+;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - an integer value (57-84). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -794,10 +794,10 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ; Description ...: Create a Line type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (100th MM).
-;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (100th MM).
-;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (100th MM).
-;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (100th MM).
+;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
+;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - an integer value (85-92). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1252,10 +1252,10 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ; Description ...: Create a Star or Banner type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (100th MM).
-;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (100th MM).
-;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (100th MM).
-;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (100th MM).
+;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
+;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - an integer value (93-104). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1385,10 +1385,10 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ; Description ...: Create a Symbol type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
-;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (100th MM).
-;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (100th MM).
-;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (100th MM).
-;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (100th MM).
+;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
+;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - an integer value (105-122). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2307,8 +2307,8 @@ EndFunc   ;==>__LOImpress_DrawShapePointGetSettings
 ; Parameters ....: $aiFlags             - [in/out] an array of integers. An Array of Point Type Flags returned from the Shape. Array will be directly modified.
 ;                  $atPoints            - [in/out] an array of dll structs. An Array of Points returned from the Shape. Array will be directly modified.
 ;                  $iArrayElement       - [in/out] an integer value. The Array element that contains the point to modify. This may be directly modified, depending on the settings.
-;                  $iX                  - [optional] an integer value. Default is Null. The X coordinate value, set in Hundredths of a Millimeter (100th MM).
-;                  $iY                  - [optional] an integer value. Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (100th MM).
+;                  $iX                  - [optional] an integer value. Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
+;                  $iY                  - [optional] an integer value. Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iPointType          - [optional] an integer value (0,1,3). Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $bIsCurve            - [optional] a boolean value. Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
