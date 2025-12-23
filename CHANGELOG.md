@@ -20,16 +20,15 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## [0.10.0] - 2024-04-
 
-### Project
+#### Project
 
 - Added logo to ReadMe. @mLipok
 - Filled in ReadMe. @mLipok
 - Formatted Changelog
 
-> [!NOTE]
-> **LibreOfficeUDF**
+### LibreOfficeUDF
 
-### Added
+#### Added
 
 - Central Constants File
 	- LibreOffice_Constants.au3
@@ -65,7 +64,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- LibreOffice.au3
 - Support for LibreOffice Portable usage. See `_LO_InitializePortable`.
 
-### Changed
+#### Changed
 
 - All Internal Error Constants from `$__LOW_STATUS_` or `$__LOC_STATUS_` To `$__LO_STATUS_`
 - Attempted to standardize `$__LO_STATUS_INIT_ERROR` and `$__LO_STATUS_PROCESSING_ERROR` usage throughout functions.
@@ -99,11 +98,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOWriter_ImageInsert
 	- _LOWriter_VersionGet
 
-### Fixed
+#### Fixed
 
 - Align Parameters, Error/Return values, Remarks, and Related, to the same position.
 
-### Removed
+#### Removed
 
 - "Note" from Remarks section in Header. (@mLipok)
 - Double spaces from Headers.
@@ -111,10 +110,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Manual line breaks from headers.
 - Removed Error returns listed in Function Headers that no longer existed.
 
-> [!NOTE]
-> **LibreOfficeCalc**
+### LibreOfficeCalc
 
-### Added
+#### Added
 
 - Main Calc File
 	- LibreOfficeCalc.au3
@@ -607,7 +605,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Top-Most attribute to Example message boxes.
 - LibreOffice SDK/API Constant names to constants.
 
-### Fixed
+#### Fixed
 
 - Removed unused variables and parameters in some functions. Affected functions are as follows:
 	- `_LOCalc_FormatKeyDelete` -- removed internal variable.
@@ -623,7 +621,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOCalc_DocCreate` not finding a blank open document to connect to, if available, due to reversed logical operator, and non-existent method.
 - Missing error values in the header and wrong error values in `_LOCalc_CommentAreaTransparencyGradient`.
 
-### Changed
+#### Changed
 
 - Constant `$__LOCCONST_FILL_STYLE_*` to `$LOC_AREA_FILL_STYLE_*`
 - `__LOCalc_IntIsBetween` to accept only a minimum value. Also optimized it.
@@ -670,7 +668,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOCalc_DocRedoCurActionTitle` to only have one Success return, either with an empty String or the Current Redo Action Title.
 - `_LOCalc_DocUndoCurActionTitle` to only have one Success return, either with an empty String or the Current Undo Action Title.
 
-### Removed
+#### Removed
 
 - __LOCalc_VarsAreDefault
 - `LibreOfficeCalc_Font` file, combined functions into `LibreOfficeCalc_Helper`.
@@ -696,10 +694,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- $LOC_PATHCONV_*
 	- $LOC_COLOR_*
 
-> [!NOTE]
-> **LibreOfficeImpress**
+### LibreOfficeImpress
 
-### Added
+#### Added
 
 - Main Impress File
 	- LibreOfficeImpress.au3
@@ -851,11 +848,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOImpress_SlidesGetCount
 	- _LOImpress_SlideShapesGetList
 
-### Changed
+#### Changed
 
 - Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.
 
-### Removed
+#### Removed
 
 - Centralized some internal functions. Thus removing the following individual Functions:
 	- __LOImpress_ArrayFill
@@ -878,10 +875,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- $LOI_PATHCONV_*
 	- $LOI_COLOR_*
 
-> [!NOTE]
-> **LibreOfficeWriter**
+### LibreOfficeWriter
 
-### Added
+#### Added
 
 - More Undo Functions and Examples
 	- _LOWriter_DocRedoClear
@@ -1081,7 +1077,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 		- _LOWriter_ShapeAreaGradientMulticolor
 		- _LOWriter_ShapeAreaTransparencyGradientMulti
 
-### Changed
+#### Changed
 
 - ReArranged Parameters in PageBreak functions to be more logically ordered. The previous order was:
 
@@ -1210,7 +1206,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_DocRedoCurActionTitle` to only have one Success return, either with an empty String or the Current Redo Action Title.
 - `_LOWriter_DocUndoCurActionTitle` to only have one Success return, either with an empty String or the Current Undo Action Title.
 
-### Fixed
+#### Fixed
 
 - Missing error return value descriptions in:
 	- _LOWriter_FootnoteGetAnchor
@@ -1257,7 +1253,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Add missing parameter to VarsAreNull in `_LOWriter_DocFormSettings`.
 - `_LOWriter_DocCreate` not finding a blank open document to connect to, if available, due to reversed logical operator.
 
-### Removed
+#### Removed
 
 - `$LOW_FIELD_TYPE_URL` Constant. -- "com.sun.star.text.TextField.URL" is a Calc-only Field type.
 - `__LOWriter_NumStyleRetrieve` function as it is no longer needed.
@@ -1291,10 +1287,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## [0.9.1] - 2023-10-28
 
-> [!NOTE]
-> **LibreOfficeWriter**
+### LibreOfficeWriter
 
-### Changed
+#### Changed
 
 - Minor documentation adjustments.
 
@@ -1302,10 +1297,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## [0.9.0] - 2023-10-28
 
-> [!NOTE]
-> **LibreOfficeWriter**
+### LibreOfficeWriter
 
-### Added
+#### Added
 
 - directive for Au3Check to each UDF file branch. (@mLipok)
 - Image functions. (@donnyh13)
@@ -1337,7 +1331,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _ImageWrap,
 	- _ImageWrapOptions
 
-### Changed
+#### Changed
 
 - Original LibreOffice UDF file split into individual elements, per specific usages. (@mLipok.)
 	- LibreOfficeWriter_Cell,
@@ -1367,13 +1361,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Constants are now all located in the separate Constants files. (@mLipok.)
 - All files re-processed with TIDY. (@mLipok)
 
-### Fixed
+#### Fixed
 
 - Errors caused by residual function calls from filling in "Related" section of the header. (@mLipok.)
 	- _LOWriter_DocFindAllInRange,
 	- _LOWriter_DocGenPropTemplate.
 
-### Project
+#### Project
 
 - @mLipok and @donnyh13 began jointly working on this project. — Thanks to @mLipok for his tireless work cleaning up many things in this UDF.
 - All Constants descriptions are moved to the Constants file. (@donnyh13)
@@ -1390,10 +1384,9 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 
 ## [0.0.0.3] - 2023-08-10
 
-> [!NOTE]
-> **LibreOfficeWriter**
+### LibreOfficeWriter
 
-### Added
+#### Added
 
 - Paragraph Object functions which allows the ability to copy and paste content without using the clipboard quickly. Thanks to user @Heiko for inspiration.
 	- _ParObjSelect,
@@ -1416,7 +1409,7 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 	- _FootnoteInsert,
 	- _TableInsert,
 
-### Changed
+#### Changed
 
 - Renamed Name functions and examples for consistency.
 	- `_DocListTableNames` --> `_TablesGetNames`
@@ -1433,7 +1426,7 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 - `_FramesListNames` to have an option to search for Frames listed under shapes.
 - `_ShapesGetNames`, Corrected an error that could occur if images are present.
 
-### Fixed
+#### Fixed
 
 - An error where a COM error would be produced when attempting to insert a string or control character in certain data types. — Thanks to user @Heiko for helping me locate this error.
 	- _DocInsertControlChar,
@@ -1443,14 +1436,13 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 
 ## [0.0.0.2] - 2023-07-16
 
-> [!NOTE]
-> **LibreOfficeWriter**
+### LibreOfficeWriter
 
-### Added
+#### Added
 
 - UDF version number in the UDF Header.
 
-### Changed
+#### Changed
 
 - `_DocReplaceAllInRange` to have two methods of performing a Regular Expression find and replace.
 - Removed the if/else block in $atFindFormat parameter checking.
@@ -1460,13 +1452,13 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 	- _DocFindAll,
 	- _DocFindAllInRange.
 
-### Fixed
+#### Fixed
 
 - Method for skipping $atFindFormat and $atReplaceFormat, now uses an empty array called in each parameter to skip.
 	- _DocReplaceAll,
 	- _DocReplaceAllInRange.
 
-### Project
+#### Project
 
 - Updated function documentation to reflect the changes.
 
@@ -1474,10 +1466,9 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 
 ## [0.0.0.1] - 2023-07-02
 
-> [!NOTE]
-> **LibreOfficeWriter**
+### LibreOfficeWriter
 
-### Added
+#### Added
 
 - Initial UDF Release.
 
@@ -1485,7 +1476,7 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 
 ---
 
-### Legend - Types of changes
+#### Legend - Types of changes
 
 - `Added` for new features.
 - `Changed` for changes in existing functionality.
