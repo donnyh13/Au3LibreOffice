@@ -851,6 +851,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOImpress_SlidesGetCount
 	- _LOImpress_SlideShapesGetList
 
+### Changed
+
+- Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.
+
 ### Removed
 
 - Centralized some internal functions. Thus removing the following individual Functions:

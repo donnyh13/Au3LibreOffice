@@ -150,7 +150,7 @@ Func _LOImpress_SlideAreaColor(ByRef $oSlide, $iColor = Null)
 
 	$oBackground = $oSlide.Background()
 
-	If ($iColor = Null) Then
+	If __LO_VarsAreNull($iColor) Then
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, $LO_COLOR_OFF) ; If no background is set, this will be void, instead of an Object.
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $oBackground.FillColor())
@@ -488,15 +488,15 @@ Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 	$oSlide.Background = $oBackground
 
 	; Error checking
-	$iError = ($iType = Null) ? $iError : ($oSlide.Background.FillGradient.Style() = $iType) ? ($iError) : (BitOR($iError, 2))
-	$iError = ($iXCenter = Null) ? $iError : ($oSlide.Background.FillGradient.XOffset() = $iXCenter) ? ($iError) : (BitOR($iError, 8))
-	$iError = ($iYCenter = Null) ? $iError : ($oSlide.Background.FillGradient.YOffset() = $iYCenter) ? ($iError) : (BitOR($iError, 16))
-	$iError = ($iAngle = Null) ? $iError : (($oSlide.Background.FillGradient.Angle() / 10) = $iAngle) ? ($iError) : (BitOR($iError, 32))
-	$iError = ($iTransitionStart = Null) ? $iError : ($oSlide.Background.FillGradient.Border() = $iTransitionStart) ? ($iError) : (BitOR($iError, 64))
-	$iError = ($iFromColor = Null) ? $iError : ($oSlide.Background.FillGradient.StartColor() = $iFromColor) ? ($iError) : (BitOR($iError, 128))
-	$iError = ($iToColor = Null) ? $iError : ($oSlide.Background.FillGradient.EndColor() = $iToColor) ? ($iError) : (BitOR($iError, 256))
-	$iError = ($iFromIntense = Null) ? $iError : ($oSlide.Background.FillGradient.StartIntensity() = $iFromIntense) ? ($iError) : (BitOR($iError, 512))
-	$iError = ($iToIntense = Null) ? $iError : ($oSlide.Background.FillGradient.EndIntensity() = $iToIntense) ? ($iError) : (BitOR($iError, 1024))
+	$iError = (__LO_VarsAreNull($iType)) ? $iError : ($oSlide.Background.FillGradient.Style() = $iType) ? ($iError) : (BitOR($iError, 2))
+	$iError = (__LO_VarsAreNull($iXCenter)) ? $iError : ($oSlide.Background.FillGradient.XOffset() = $iXCenter) ? ($iError) : (BitOR($iError, 8))
+	$iError = (__LO_VarsAreNull($iYCenter)) ? $iError : ($oSlide.Background.FillGradient.YOffset() = $iYCenter) ? ($iError) : (BitOR($iError, 16))
+	$iError = (__LO_VarsAreNull($iAngle)) ? $iError : (($oSlide.Background.FillGradient.Angle() / 10) = $iAngle) ? ($iError) : (BitOR($iError, 32))
+	$iError = (__LO_VarsAreNull($iTransitionStart)) ? $iError : ($oSlide.Background.FillGradient.Border() = $iTransitionStart) ? ($iError) : (BitOR($iError, 64))
+	$iError = (__LO_VarsAreNull($iFromColor)) ? $iError : ($oSlide.Background.FillGradient.StartColor() = $iFromColor) ? ($iError) : (BitOR($iError, 128))
+	$iError = (__LO_VarsAreNull($iToColor)) ? $iError : ($oSlide.Background.FillGradient.EndColor() = $iToColor) ? ($iError) : (BitOR($iError, 256))
+	$iError = (__LO_VarsAreNull($iFromIntense)) ? $iError : ($oSlide.Background.FillGradient.StartIntensity() = $iFromIntense) ? ($iError) : (BitOR($iError, 512))
+	$iError = (__LO_VarsAreNull($iToIntense)) ? $iError : ($oSlide.Background.FillGradient.EndIntensity() = $iToIntense) ? ($iError) : (BitOR($iError, 1024))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOImpress_SlideAreaGradient
@@ -763,13 +763,13 @@ Func _LOImpress_SlideAreaTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 	$oBackground.FillTransparenceGradient = $tGradient
 	$oSlide.Background = $oBackground
 
-	$iError = ($iType = Null) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.Style() = $iType) ? ($iError) : (BitOR($iError, 1)))
-	$iError = ($iXCenter = Null) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.XOffset() = $iXCenter) ? ($iError) : (BitOR($iError, 2)))
-	$iError = ($iYCenter = Null) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.YOffset() = $iYCenter) ? ($iError) : (BitOR($iError, 4)))
-	$iError = ($iAngle = Null) ? ($iError) : ((($oSlide.Background.FillTransparenceGradient.Angle() / 10) = $iAngle) ? ($iError) : (BitOR($iError, 8)))
-	$iError = ($iTransitionStart = Null) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.Border() = $iTransitionStart) ? ($iError) : (BitOR($iError, 16)))
-	$iError = ($iStart = Null) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.StartColor() = __LOImpress_TransparencyGradientConvert($iStart)) ? ($iError) : (BitOR($iError, 32)))
-	$iError = ($iEnd = Null) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.EndColor() = __LOImpress_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
+	$iError = (__LO_VarsAreNull($iType)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.Style() = $iType) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iXCenter)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.XOffset() = $iXCenter) ? ($iError) : (BitOR($iError, 2)))
+	$iError = (__LO_VarsAreNull($iYCenter)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.YOffset() = $iYCenter) ? ($iError) : (BitOR($iError, 4)))
+	$iError = (__LO_VarsAreNull($iAngle)) ? ($iError) : ((($oSlide.Background.FillTransparenceGradient.Angle() / 10) = $iAngle) ? ($iError) : (BitOR($iError, 8)))
+	$iError = (__LO_VarsAreNull($iTransitionStart)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.Border() = $iTransitionStart) ? ($iError) : (BitOR($iError, 16)))
+	$iError = (__LO_VarsAreNull($iStart)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.StartColor() = __LOImpress_TransparencyGradientConvert($iStart)) ? ($iError) : (BitOR($iError, 32)))
+	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.EndColor() = __LOImpress_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOImpress_SlideAreaTransparencyGradient
