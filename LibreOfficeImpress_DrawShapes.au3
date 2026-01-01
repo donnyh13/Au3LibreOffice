@@ -3049,9 +3049,8 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Array of Points.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to identify the requested Array element.
 ;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve current settings for requested point.
-;                  @Error 3 @Extended 5 Return 0 = Failed to Retrieve PolyPolygonBezier Structure.
-;                  --Property Setting Errors--
-;                  @Error 4 @Extended 1 Return 0 = Failed to modify the requested point.
+;                  @Error 3 @Extended 5 Return 0 = Failed to modify the requested point.
+;                  @Error 3 @Extended 6 Return 0 = Failed to Retrieve PolyPolygonBezier Structure.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -3131,10 +3130,10 @@ Func _LOImpress_DrawShapePointsModify(ByRef $oShape, $iPoint, $iX = Null, $iY = 
 	EndIf
 
 	__LOImpress_DrawShapePointModify($aiFlags, $atPoints, $iArrayElement, $iX, $iY, $iPointType, $bIsCurve)
-	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 	$tPolyCoords = $oShape.PolyPolygonBezier()
-	If Not IsObj($tPolyCoords) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	If Not IsObj($tPolyCoords) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
 	; Each Array needs to be nested in an array.
 	$avArray[0] = $atPoints

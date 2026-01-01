@@ -851,6 +851,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Changed
 
 - Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.
+- Changed error values for the following:
+	- _LOImpress_DocExport
+	- _LOImpress_DrawShapePointsModify
 
 #### Removed
 
