@@ -74,10 +74,11 @@
 ;                  @Error 1 @Extended 2 Return 0 = $bSaveChanges not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $sSaveName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $bDeliverOwnership not a Boolean.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error while creating Filter Name properties.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Path Conversion to L.O. URL Failed.
 ;                  @Error 3 @Extended 2 Return 0 = Error while retrieving Filter Name.
-;                  @Error 3 @Extended 3 Return 0 = Error while setting Filter Name properties.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
 ;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
@@ -116,7 +117,7 @@ Func _LOImpress_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bD
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$aArgs[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 	EndIf
 
 	If ($bSaveChanges = True) Then
@@ -1228,12 +1229,13 @@ EndFunc   ;==>_LOImpress_DocSave
 ;                  @Error 1 @Extended 3 Return 0 = $sFilterName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $sPassword not a String.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating Filter Name Property
+;                  @Error 2 @Extended 2 Return 0 = Error creating Overwrite Property
+;                  @Error 2 @Extended 3 Return 0 = Error creating Password Property
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error Converting Path to/from L.O. URL
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving Filter Name.
-;                  @Error 3 @Extended 3 Return 0 = Error setting Filter Name Property
-;                  @Error 3 @Extended 4 Return 0 = Error setting Overwrite Property
-;                  @Error 3 @Extended 5 Return 0 = Error setting Password Property
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Successfully Saved the document. Returning document save path.
 ; Author ........: donnyh13
@@ -1261,14 +1263,14 @@ Func _LOImpress_DocSaveAs(ByRef $oDoc, $sFilePath, $sFilterName = "", $bOverwrit
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$aProperties[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If ($bOverwrite <> Null) Then
 		If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
 		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Overwrite", $bOverwrite)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 	EndIf
 
 	If $sPassword <> Null Then
@@ -1276,7 +1278,7 @@ Func _LOImpress_DocSaveAs(ByRef $oDoc, $sFilePath, $sFilterName = "", $bOverwrit
 
 		ReDim $aProperties[UBound($aProperties) + 1]
 		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Password", $sPassword)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 	EndIf
 
 	$oDoc.storeAsURL($sFilePath, $aProperties)

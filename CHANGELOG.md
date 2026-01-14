@@ -854,6 +854,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Changed error values for the following:
 	- _LOImpress_DocExport
 	- _LOImpress_DrawShapePointsModify
+- Fix inconsistent Initialization and Processing error usage:
+	- _LOImpress_DocClose
+	- _LOImpress_DocSaveAs
 
 #### Removed
 
