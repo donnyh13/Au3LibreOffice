@@ -850,13 +850,16 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 #### Changed
 
-- Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.
 - Changed error values for the following:
 	- _LOImpress_DocExport
 	- _LOImpress_DrawShapePointsModify
 - Fix inconsistent Initialization and Processing error usage:
 	- _LOImpress_DocClose
 	- _LOImpress_DocSaveAs
+
+#### Refactored
+
+- Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.
 
 #### Removed
 
@@ -1487,10 +1490,12 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 - `Added` for new features.
 - `Changed` for changes in existing functionality.
 - `Deprecated` for soon-to-be removed features.
+- `Documented` for documentation only changes.
 - `Fixed` for any bug fixes.
+- `Refactored` for changes that neither fixes a bug nor adds a feature.
 - `Removed` for now removed features.
 - `Security` in case of vulnerabilities.
-- `Project` for documentation or overall project improvements.
+- `Styled` for changes like whitespaces, formatting, missing semicolons etc.
 
 [To the top](#changelog)
 
