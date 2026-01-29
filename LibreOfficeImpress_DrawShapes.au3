@@ -3706,7 +3706,7 @@ Func _LOImpress_DrawShapeTextboxCreateTextCursor(ByRef $oShape)
 	Local $oTextCursor
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oShape.PropertySetInfo.hasPropertyByName("Text") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not $oShape.supportsService("com.sun.star.drawing.Text") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oTextCursor = $oShape.Text.createTextCursor()
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
