@@ -3672,7 +3672,8 @@ Func _LOImpress_DrawShapeText(ByRef $oShape, $sText = Null)
 	If Not IsString($sText) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oShape.String = $sText
-	$iError = ($oShape.String() = $sText) ? ($iError) : (BitOR($iError, 1))
+	; Strip @CR and @LF, otherwise errors result when comparing.
+	$iError = (StringRegExpReplace($oShape.String(), @CR & "|" & @LF, "") = StringRegExpReplace($sText, @CR & "|" & @LF, "")) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOImpress_DrawShapeText
