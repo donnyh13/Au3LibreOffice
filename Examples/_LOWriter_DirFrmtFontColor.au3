@@ -41,9 +41,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current font color settings are as follows: " & @CRLF & _
-			"The current Font color, in Long color format: " & $avSettings[0] & @CRLF & _
+			"The current Font color is (as a RGB Color Integer): " & $avSettings[0] & @CRLF & _
 			"Transparency of the font color, in percentage: " & $avSettings[1] & @CRLF & _
-			"Current Font highlight color, in long color format: " & $avSettings[2] & @CRLF & @CRLF & _
+			"Current Font highlight color is (as a RGB Color Integer): " & $avSettings[2] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")
 
 	; Remove Direct formatting.

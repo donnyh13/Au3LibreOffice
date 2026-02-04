@@ -7,7 +7,7 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oShape
 	Local $avSettings[0]
-	Local $iMicrometers
+	Local $iHMM
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -21,13 +21,13 @@ Func Example()
 	$oShape = _LOWriter_ShapeInsert($oDoc, $oViewCursor, $LOW_SHAPE_TYPE_BASIC_FOLDED_CORNER, 3000, 6000)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/8" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(.125)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/8" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(.125, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape Line Properties settings to: Set the Line Style to $LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, Line Color to $LO_COLOR_MAGENTA,
 	; Width = 1/8", Transparency = 50%, Corner Style = $LOW_SHAPE_LINE_JOINT_BEVEL, Cap Style = $LOW_SHAPE_LINE_CAP_SQUARE
-	_LOWriter_ShapeLineProperties($oShape, $LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, $LO_COLOR_MAGENTA, $iMicrometers, 50, $LOW_SHAPE_LINE_JOINT_BEVEL, $LOW_SHAPE_LINE_CAP_SQUARE)
+	_LOWriter_ShapeLineProperties($oShape, $LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, $LO_COLOR_MAGENTA, $iHMM, 50, $LOW_SHAPE_LINE_JOINT_BEVEL, $LOW_SHAPE_LINE_CAP_SQUARE)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
@@ -36,8 +36,8 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Line Properties settings are as follows: " & @CRLF & _
 			"The Line Style is (See UDF Constants): " & $avSettings[0] & @CRLF & _
-			"The Line color is, is long Color format: " & $avSettings[1] & @CRLF & _
-			"The Line's Width is, in Micrometers: " & $avSettings[2] & @CRLF & _
+			"The Line color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"The Line's Width is, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
 			"The Line's transparency percentage is: " & $avSettings[3] & @CRLF & _
 			"The Line Corner Style is, (See UDF Constants): " & $avSettings[4] & @CRLF & _
 			"The Line Cap Style is, (See UDF Constants): " & $avSettings[5])

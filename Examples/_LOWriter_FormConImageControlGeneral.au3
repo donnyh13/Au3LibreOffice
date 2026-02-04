@@ -41,9 +41,9 @@ Func Example()
 			"Is the Control currently Printable? True/False: " & $avControl[6] & @CRLF & _
 			"Is the Control a Tab Stop position? True/False: " & $avControl[7] & @CRLF & _
 			"If the Control is a Tab Stop position, what order position is it? " & $avControl[8] & @CRLF & _
-			"The Long Integer background color is: " & $avControl[9] & @CRLF & _
+			"The background color is (as a RGB Color Integer): " & $avControl[9] & @CRLF & _
 			"The Border Style is (See UDF Constants): " & $avControl[10] & @CRLF & _
-			"The Border color is, in Long Integer format: " & $avControl[11] & @CRLF & _
+			"The Border color is (as a RGB Color Integer): " & $avControl[11] & @CRLF & _
 			"The Graphic used (if any) will be here as an Graphic Object. I'll test if it is an Object: " & IsObj($avControl[12]) & @CRLF & _
 			"The Scaling of the Graphic is (See UDF Constants): " & $avControl[13] & @CRLF & _
 			"The Additional Information text is: " & $avControl[14] & @CRLF & _

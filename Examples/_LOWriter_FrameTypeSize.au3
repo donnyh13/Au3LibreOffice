@@ -16,7 +16,7 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Frame into the document at the ViewCursor position, and 3000x3000 Micrometers wide.
+	; Insert a Frame into the document at the ViewCursor position, and 3000x3000 Hundredths of a Millimeter (HMM) wide.
 	$oFrame = _LOWriter_FrameCreate($oDoc, $oViewCursor, Null, 3000, 3000)
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -30,11 +30,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame's size settings are as follows: " & @CRLF & _
-			"The Frame's width is, in Micrometers: " & $avSettings[0] & @CRLF & _
+			"The Frame's width is, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
 			"The frame's relative width percentage is: " & $avSettings[1] & @CRLF & _
 			"The width is relative to what? (See UDF Constants): " & $avSettings[2] & @CRLF & _
 			"Automatic width? True/False: " & $avSettings[3] & @CRLF & _
-			"The Frame's height is, in Micrometers: " & $avSettings[4] & @CRLF & _
+			"The Frame's height is, in Hundredths of a Millimeter (HMM): " & $avSettings[4] & @CRLF & _
 			"The frame's relative height percentage is: " & $avSettings[5] & @CRLF & _
 			"The height is relative to what? (See UDF Constants): " & $avSettings[6] & @CRLF & _
 			"Automatic Height? True/False: " & $avSettings[7] & @CRLF & _

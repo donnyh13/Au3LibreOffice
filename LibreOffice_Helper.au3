@@ -22,6 +22,8 @@
 ; _LO_ConvertColorToLong
 ; _LO_InitializePortable
 ; _LO_PathConvert
+; _LO_PrintersGetNames
+; _LO_PrintersGetNamesAlt
 ; _LO_UnitConvert
 ; _LO_VersionGet
 ; ===============================================================================================================================
@@ -564,6 +566,133 @@ Func _LO_PathConvert($sFilePath, $iReturnMode = $LO_PATHCONV_AUTO_RETURN)
 EndFunc   ;==>_LO_PathConvert
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_PrintersGetNames
+; Description ...: Enumerates all installed printers, or current default printer.
+; Syntax ........: _LO_PrintersGetNames([$bDefaultOnly = False])
+; Parameters ....: $bDefaultOnly        - [optional] a boolean value. Default is False. If True, returns only the name of the current default printer. LibreOffice 6.3 and up only.
+; Return values .: Success: An array or String.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $bDefaultOnly not a Boolean.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failure Creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 Return 0 = Failure creating "com.sun.star.awt.PrinterServer" Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Default printer name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Array of printer names.
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.1.
+;                  @Error 6 @Extended 2 Return 0 = Current Libre Office version lower than 6.3.
+;                  --Success--
+;                  @Error 0 @Extended 1 Return String = Returning the default printer's name.
+;                  @Error 0 @Extended ? Return Array = Returning an array of strings of all installed printers' names. @Extended set to number of results.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function works for LibreOffice 4.1 and Up.
+; Related .......: _LO_DocPrintersAltGetNames
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_PrintersGetNames($bDefaultOnly = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oServiceManager, $oPrintServer
+	Local $sDefault
+	Local $asPrinters[0]
+
+	If Not __LO_VersionCheck(4.1) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+	If Not IsBool($bDefaultOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oServiceManager = __LO_ServiceManager()
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oPrintServer = $oServiceManager.createInstance("com.sun.star.awt.PrinterServer")
+	If Not IsObj($oPrintServer) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	If $bDefaultOnly Then
+		If Not __LO_VersionCheck(6.3) Then Return SetError($__LO_STATUS_VER_ERROR, 2, 0)
+
+		$sDefault = $oPrintServer.getDefaultPrinterName()
+		If IsString($sDefault) Then Return SetError($__LO_STATUS_SUCCESS, 1, $sDefault)
+
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	EndIf
+
+	$asPrinters = $oPrintServer.getPrinterNames()
+	If Not IsArray($asPrinters) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, UBound($asPrinters), $asPrinters)
+EndFunc   ;==>_LO_PrintersGetNames
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_PrintersGetNamesAlt
+; Description ...: Alternate function; Enumerates all installed printers, or current default printer.
+; Syntax ........: _LO_PrintersGetNamesAlt([$sPrinterName = ""[, $bReturnDefault = False]])
+; Parameters ....: $sPrinterName        - [optional] a string value. Default is "". Name of the printer to list. Default "" returns the list of all printers. See Remarks.
+;                  $bReturnDefault      - [optional] a boolean value. Default is False. If True, returns only the name of the current default printer.
+; Return values .: Success: Array or String.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $sPrinterName not a String.
+;                  @Error 1 @Extended 2 Return 0 = $bReturnDefault not a Boolean.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failure Creating Object.
+;                  @Error 2 @Extended 2 Return 0 = Failure retrieving printer list Object.
+;                  --Printer Related Errors--
+;                  @Error 5 @Extended 1 Return 0 = No default printer found.
+;                  --Success--
+;                  @Error 0 @Extended 1 Return String = Returning the default printer name. See remarks. @Extended is set to the number of results.
+;                  @Error 0 @Extended ? Return Array = Returning an array of strings containing all installed printers. See remarks. Number of results returned in @Extended.
+; Author ........: jguinch (_PrintMgr_EnumPrinter)
+; Modified ......: donnyh13 - Added input error checking. Added a return default printer only option.
+; Remarks .......: When $bReturnDefault is False, The function returns all installed printers for the user running the script in an array.
+;                  If $sPrinterName is set, the name must be exact, or no results will be found, unless you use an asterisk (*) for partial name searches, either prefixed (*Canon), suffixed (Canon*), or both (*Canon*).
+;                  When $bReturnDefault is True, The function returns only the default printer's name or sets an error if no default printer is found.
+; Related .......: _LO_DocPrintersGetNames
+; Link ..........: https://www.autoitscript.com/forum/topic/155485-printers-management-udf/
+; UDF title......: Printmgr.au3
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_PrintersGetNamesAlt($sPrinterName = "", $bReturnDefault = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $asPrinterNames[10]
+	Local $sFilter
+	Local $iCount = 0
+	Local Const $wbemFlagReturnImmediately = 0x10, $wbemFlagForwardOnly = 0x20
+	Local $oWMIService, $oPrinters
+
+	If Not IsString($sPrinterName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bReturnDefault) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If $sPrinterName <> "" Then $sFilter = StringReplace(" Where Name like '" & StringReplace($sPrinterName, "\", "\\") & "'", "*", "%")
+	$oWMIService = ObjGet("winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2")
+	If Not IsObj($oWMIService) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oPrinters = $oWMIService.ExecQuery("Select * from Win32_Printer" & $sFilter, "WQL", $wbemFlagReturnImmediately + $wbemFlagForwardOnly)
+	If Not IsObj($oPrinters) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	For $oPrinter In $oPrinters
+		Switch $bReturnDefault
+			Case False
+				If $iCount >= (UBound($asPrinterNames) - 1) Then ReDim $asPrinterNames[UBound($asPrinterNames) * 2]
+				$asPrinterNames[$iCount] = $oPrinter.Name
+				$iCount += 1
+
+			Case True
+				If $oPrinter.Default Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPrinter.Name)
+		EndSwitch
+	Next
+	If $bReturnDefault Then Return SetError($__LO_STATUS_PRINTER_RELATED_ERROR, 1, 0)
+
+	ReDim $asPrinterNames[$iCount]
+
+	Return SetError($__LO_STATUS_SUCCESS, $iCount, $asPrinterNames)
+EndFunc   ;==>_LO_PrintersGetNamesAlt
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_UnitConvert
 ; Description ...: For converting measurement units.
 ; Syntax ........: _LO_UnitConvert($nValue, $iReturnType)
@@ -692,8 +821,7 @@ EndFunc   ;==>_LO_UnitConvert
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.configuration.ConfigurationProvider" Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error setting property value.
+;                  @Error 2 @Extended 3 Return 0 = Error creating property value.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the Office version in String format.
 ; Author ........: Laurent Godard as found in Andrew Pitonyak's book; Zizi64 as found on OpenOffice forum.
@@ -722,7 +850,7 @@ Func _LO_VersionGet($bSimpleVersion = False, $bReturnName = False)
 	If Not IsObj($oConfigProvider) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	$aParamArray[0] = __LO_SetPropertyValue("nodepath", "/org.openoffice.Setup/Product")
-	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If (@error > 0) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
 	$oSettings = $oConfigProvider.createInstanceWithArguments($sAccess, $aParamArray)
 

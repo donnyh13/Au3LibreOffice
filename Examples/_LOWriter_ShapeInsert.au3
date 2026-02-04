@@ -15,8 +15,16 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Rectangle Shape into the document, 3000 Wide by 6000 High.
-	_LOWriter_ShapeInsert($oDoc, $oViewCursor, $LOW_SHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
+	; Insert a Arrow Shape into the document, 1500 Wide by 1500 High, 500 X position, and 200 Y position.
+	_LOWriter_ShapeInsert($oDoc, $oViewCursor, $LOW_SHAPE_TYPE_ARROWS_ARROW_UP_DOWN, 1500, 1500, 500, 200)
+	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Insert a Rectangle Shape into the document, 3000 Wide by 6000 High, 5000 X position, and 2000 Y position.
+	_LOWriter_ShapeInsert($oDoc, $oViewCursor, $LOW_SHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000, 5000, 2000)
+	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Insert a Line Shape into the document, 2000 Wide by 1500 High, 2000 X position, and 4000 Y position.
+	_LOWriter_ShapeInsert($oDoc, $oViewCursor, $LOW_SHAPE_TYPE_LINE_FREEFORM_LINE_FILLED, 2000, 1500, 2000, 4000)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

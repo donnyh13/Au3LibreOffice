@@ -16,13 +16,9 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 5 rows, 3 columns.
-	$oTable = _LOWriter_TableCreate($oDoc, 5, 3)
+	; Create a Table, 3 columns, 5 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert the Table into the document at the View Cursor's location.
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve how many Rows the Table currently contains.
 	$iRows = _LOWriter_TableRowGetCount($oTable)

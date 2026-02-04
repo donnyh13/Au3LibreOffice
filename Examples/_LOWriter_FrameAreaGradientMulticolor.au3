@@ -17,7 +17,7 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Frame into the document at the ViewCursor position, and 6000x6000 Micrometers wide.
+	; Insert a Frame into the document at the ViewCursor position, and 6000x6000 Hundredths of a Millimeter (HMM) wide.
 	$oFrame = _LOWriter_FrameCreate($oDoc, $oViewCursor, Null, 6000, 6000)
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

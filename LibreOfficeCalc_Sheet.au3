@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-#Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 #include-once
 
 ; Main LibreOffice Includes
@@ -168,7 +168,7 @@ EndFunc   ;==>_LOCalc_SheetAdd
 ;                  @Error 1 @Extended 2 Return 0 = $oSheet not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sNewName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = Document already contains a Sheet with the same name as called in $sNewName.
-;                  @Error 1 @Extended 5 Return 0 = $iPosition not an Integer, less than 0, or greater than number of Sheets contained in the document.
+;                  @Error 1 @Extended 5 Return 0 = $iPosition not an Integer, less than 0 or greater than number of Sheets contained in the document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Sheets Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve original Sheet's name.
@@ -306,7 +306,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveClear
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve called Cell's Address.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to process Show/Hide Dependent function.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if Dependents were marked/cleared one level, else false.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if Dependents were marked/cleared one level, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Each time that $bShow is called with True, another level of Dependents is marked with arrows.
@@ -352,7 +352,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveDependent
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to process Invalid Data function.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if invalid data was marked, else False.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if invalid data was marked, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Validity rules must be set up for Cell(s) before invalid data will be marked.
@@ -390,7 +390,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveInvalidData
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve called Cell's Address.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to process Show/Hide Precedent function.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if precedents were marked/cleared one level, else false.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if precedents were marked/cleared one level, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Each time that $bShow is called with True, another level of precedents is marked with arrows.
@@ -438,7 +438,7 @@ EndFunc   ;==>_LOCalc_SheetDetectivePrecedent
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve called Cell's Address.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to process Trace Error function.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if Errors were marked, else False.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if Errors were marked, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -769,7 +769,7 @@ EndFunc   ;==>_LOCalc_SheetIsProtected
 ;                  @Error 1 @Extended 1 Return 0 = $oSourceDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oDestDoc not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sSheetName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iLinkMode not an Integer, less than 0, or greater than 2. See Constants $LOC_SHEET_LINK_MODE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iLinkMode not an Integer, less than 0 or greater than 2. See Constants $LOC_SHEET_LINK_MODE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = Document called in $oSourceDoc has no save location.
 ;                  @Error 1 @Extended 6 Return 0 = Document called in $oSourceDoc does not have a Sheet with the name called in $sSheetName.
 ;                  @Error 1 @Extended 7 Return 0 = $bInsertAfter not a Boolean.
@@ -847,7 +847,7 @@ EndFunc   ;==>_LOCalc_SheetLink
 ;                  @Error 1 @Extended 1 Return 0 = $oSheet not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oNewDoc not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sSheetName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iLinkMode not an Integer, less than 0, or greater than 2. See Constants $LOC_SHEET_LINK_MODE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iLinkMode not an Integer, less than 0 or greater than 2. See Constants $LOC_SHEET_LINK_MODE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = Document called in $oNewDoc has no save location.
 ;                  @Error 1 @Extended 6 Return 0 = Document called in $oNewDoc does not have a Sheet with the name called in $sSheetName.
 ;                  @Error 1 @Extended 7 Return 0 = Document currently set as source does not contain a Sheet with the name as called in $sSheetName.
@@ -862,10 +862,10 @@ EndFunc   ;==>_LOCalc_SheetLink
 ;                  |                               4 = Error setting $iLinkMode
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  The Return for $oNewDoc is the File path of the linked Document.
 ;                  If you set $oNewDoc, you must set $sSheetName and $iLinkMode also.
@@ -981,7 +981,7 @@ Func _LOCalc_SheetMove(ByRef $oDoc, ByRef $oSheet, $iPosition = Null)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If ($iPosition = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.RangeAddress.Sheet())
+	If __LO_VarsAreNull($iPosition) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.RangeAddress.Sheet())
 
 	$sName = $oSheet.Name()
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -1016,10 +1016,10 @@ EndFunc   ;==>_LOCalc_SheetMove
 ;                  |                               1 = Error setting $sName
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Sheet's new name was successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were set to Null, returning the Sheet's current name.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning the Sheet's current name.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOCalc_SheetExists
 ; Link ..........:
 ; Example .......: Yes
@@ -1034,7 +1034,7 @@ Func _LOCalc_SheetName(ByRef $oDoc, ByRef $oSheet, $sName = Null)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If ($sName = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.Name())
+	If __LO_VarsAreNull($sName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.Name())
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -1073,11 +1073,11 @@ EndFunc   ;==>_LOCalc_SheetName
 ;                  |                               2 = Error setting $bRepeatColumns
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $oRange with the Default keyword to reset the Column Range to none.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  The Return for $oRange will be a Cell Range or Cell Object, if no Column is set, the return will always be the first cell (A1) of the Sheet.
 ; Related .......: _LOCalc_SheetPrintRowsRepeat
@@ -1169,12 +1169,12 @@ EndFunc   ;==>_LOCalc_SheetPrintColumnsRepeat
 ;                  |                               1 = Error setting $aoRange
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Print Range was successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were set to Null, returning Array of Range Objects set to be printed. @extended set to number of Ranges. See remarks.
+;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning Array of Range Objects set to be printed. @Extended set to number of Ranges. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $aoRange with an empty Array (local $aArray[0]) to set the whole sheet to be printed (default), instead of a specific range.
 ;                  Likewise, when retrieving the current print range, if the returned array is empty, that means the entire sheet (all of the used cells) is set to be printed.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  If you set a Print Range for one sheet, any other Sheet without a Print Range set will NOT be printed.
 ; Related .......:
 ; Link ..........:
@@ -1186,7 +1186,7 @@ Func _LOCalc_SheetPrintRangeModify(ByRef $oSheet, $aoRange = Null)
 
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($aoRange = Null) Then
+	If __LO_VarsAreNull($aoRange) Then
 		$aoRange = $oSheet.getPrintAreas()
 		If Not IsArray($aoRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -1236,11 +1236,11 @@ EndFunc   ;==>_LOCalc_SheetPrintRangeModify
 ;                  |                               2 = Error setting $bRepeatRows
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $oRange with the Default keyword to reset the Row Range to none.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  The Return for $oRange will be a Cell Range or Cell Object, if no Row is set, the return will always be the first cell (A1) of the Sheet.
 ; Related .......: _LOCalc_SheetPrintColumnsRepeat
@@ -1516,7 +1516,7 @@ EndFunc   ;==>_LOCalc_SheetsGetNames
 ; Description ...: Set or Retrieve a Sheet's Tab Color.
 ; Syntax ........: _LOCalc_SheetTabColor(ByRef $oSheet[, $iColor = Null])
 ; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The tab color in Long Color format. Set to $LO_COLOR_OFF(-1) to set to Default color setting. Can also be one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3
+;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The tab color, as a RGB Color Integer. Call with $LO_COLOR_OFF(-1) for "Default" color setting. Can also be one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1527,10 +1527,10 @@ EndFunc   ;==>_LOCalc_SheetsGetNames
 ;                  |                               1 = Error setting $iColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning current Tab Color as an Integer
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Tab Color as an Integer
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -1541,7 +1541,7 @@ Func _LOCalc_SheetTabColor(ByRef $oSheet, $iColor = Null)
 
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($iColor = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.TabColor())
+	If __LO_VarsAreNull($iColor) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.TabColor())
 
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -1606,10 +1606,10 @@ EndFunc   ;==>_LOCalc_SheetUnprotect
 ;                  |                               1 = Error setting $bVisiblee
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Sheet Visibility setting was successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bVisible set to Null, returning current visibility setting. True indicates the Sheet is currently visible.
+;                  @Error 0 @Extended 1 Return Boolean = Success. $bVisible called with Null, returning current visibility setting. True indicates the Sheet is currently visible.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1620,7 +1620,7 @@ Func _LOCalc_SheetVisible(ByRef $oSheet, $bVisible = Null)
 
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($bVisible = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.IsVisible())
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 

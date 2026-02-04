@@ -86,7 +86,7 @@ Func Example()
 
 	For $i = 0 To UBound($aoResults) - 1
 		; Set the Cell Background color to a Random value.
-		_LOCalc_CellBackColor($aoResults[$i], Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1), False)
+		_LOCalc_CellBackColor($aoResults[$i], Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
 		If @error Then _ERROR($oDoc, "Failed to set Cell Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

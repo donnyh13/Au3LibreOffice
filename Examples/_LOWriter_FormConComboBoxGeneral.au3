@@ -55,9 +55,9 @@ Func Example()
 			"The Control's Default Text is: " & $avControl[12] & @CRLF & _
 			"This is the current Font settings. I'll just check if it is a Map. " & IsMap($avControl[13]) & @CRLF & _
 			"The Horizontal Alignment is: (See UDF Constants) " & $avControl[14] & @CRLF & _
-			"The Long Integer background color is: " & $avControl[15] & @CRLF & _
+			"The background color is (as a RGB Color Integer): " & $avControl[15] & @CRLF & _
 			"The Border Style is (See UDF Constants): " & $avControl[16] & @CRLF & _
-			"The Border color is, in Long Integer format: " & $avControl[17] & @CRLF & _
+			"The Border color is (as a RGB Color Integer): " & $avControl[17] & @CRLF & _
 			"Is the Combo box acting as a Drop Down? True/False " & $avControl[18] & @CRLF & _
 			"How many lines are displayed in the drop down? " & $avControl[19] & @CRLF & _
 			"Is the Auto Fill function active? True/False: " & $avControl[20] & @CRLF & _

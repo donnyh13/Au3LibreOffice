@@ -7,7 +7,7 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor
 	Local $sTabStops = ""
-	Local $iMicrometers
+	Local $iHMM
 	Local $aiTabStops
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -26,28 +26,28 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GOTO_START)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Tab Stop for the demonstration.
-	_LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iMicrometers)
+	_LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to Create a Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/2" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.5)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/2" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.5, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create another Tab Stop for the demonstration.
-	_LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iMicrometers)
+	_LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to Create a Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(1)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(1, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create another Tab Stop for the demonstration.
-	_LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iMicrometers)
+	_LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to Create a Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of tab stop positions.

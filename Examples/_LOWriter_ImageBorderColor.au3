@@ -34,10 +34,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Image's Border Color settings are as follows: " & @CRLF & _
-			"The Top Border Color is, in Long Color Format: " & $avSettings[0] & @CRLF & _
-			"The Bottom Border Color is, in Long Color Format: " & $avSettings[1] & @CRLF & _
-			"The Left Border Color is, in Long Color Format: " & $avSettings[2] & @CRLF & _
-			"The Right Border Color is, in Long Color Format: " & $avSettings[3])
+			"The Top Border Color is (as a RGB Color Integer): " & $avSettings[0] & @CRLF & _
+			"The Bottom Border Color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"The Left Border Color is (as a RGB Color Integer): " & $avSettings[2] & @CRLF & _
+			"The Right Border Color is (as a RGB Color Integer): " & $avSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

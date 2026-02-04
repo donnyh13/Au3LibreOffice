@@ -20,11 +20,11 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the "Default Paragraph Style" object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Default Paragraph Style")
+	; Retrieve the Default Paragraph Style object.
+	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Default Paragraph Style" font position to auto Superscript, and relative size to 50%.
+	; Set Default Paragraph Style font position to auto Superscript, and relative size to 50%.
 	_LOWriter_ParStylePosition($oParStyle, True, Null, Null, Null, 50)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -40,7 +40,7 @@ Func Example()
 			"Relative size percentage: " & $avParStyleSettings[4] & @CRLF & @CRLF & _
 			"Press ok and I will set it to auto Subscript next.")
 
-	; Set "Default Paragraph Style" font position to auto Subscript
+	; Set Default Paragraph Style font position to auto Subscript
 	_LOWriter_ParStylePosition($oParStyle, Null, Null, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

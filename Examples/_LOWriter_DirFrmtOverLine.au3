@@ -45,7 +45,7 @@ Func Example()
 			"Overline words only? True/False: " & $avSettings[0] & @CRLF & _
 			"Overline style (See UDF constants): " & $avSettings[1] & @CRLF & _
 			"Overline has color? True/False: " & $avSettings[2] & @CRLF & _
-			"Overline color, in long color format: " & $avSettings[3] & @CRLF & @CRLF & _
+			"Overline color is (as a RGB Color Integer): " & $avSettings[3] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")
 
 	; Remove Direct formatting.

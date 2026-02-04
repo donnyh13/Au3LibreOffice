@@ -53,7 +53,7 @@ Func Example()
 			"The Display type of the control is: (See UDF Constants) " & $avControl[11] & @CRLF & _
 			"The Horizontal Alignment is: (See UDF Constants) " & $avControl[12] & @CRLF & _
 			"The Vertical Alignment is: (See UDF Constants) " & $avControl[13] & @CRLF & _
-			"The Long Integer background color is: " & $avControl[14] & @CRLF & _
+			"The background color is (as a RGB Color Integer): " & $avControl[14] & @CRLF & _
 			"Are line breaks used? True/False " & $avControl[15] & @CRLF & _
 			"If there is a Graphic used for the control, this would be its Object. I'll just check if it is an Object. " & IsObj($avControl[16]) & @CRLF & _
 			"The Graphic Alignment is: (See UDF Constants) " & $avControl[17] & @CRLF & _

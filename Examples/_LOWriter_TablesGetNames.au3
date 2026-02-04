@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oViewCursor, $oTable, $oTable2
+	Local $oDoc, $oViewCursor
 	Local $asTables
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -16,25 +16,17 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create the Table, 5 rows, 3 columns.
-	$oTable = _LOWriter_TableCreate($oDoc, 5, 3)
+	; Create the Table, 3 columns, 5 rows.
+	_LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert the Table into the document at the View Cursor's location.
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a paragraph break to separate the tables.
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create another Table, 2 rows, 3 columns.
-	$oTable2 = _LOWriter_TableCreate($oDoc, 2, 3)
+	; Create another Table, 3 columns, 2 rows.
+	_LOWriter_TableCreate($oDoc, $oViewCursor, 3, 2)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert the Table into the document at the View Cursor's location.
-	$oTable2 = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable2)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Table names
 	$asTables = _LOWriter_TablesGetNames($oDoc)

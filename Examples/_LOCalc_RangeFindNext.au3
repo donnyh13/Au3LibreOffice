@@ -73,7 +73,7 @@ Func Example()
 
 		If IsObj($oResult) Then
 			; Set the Cell Background color to a Random value.
-			_LOCalc_CellBackColor($oResult, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1), False)
+			_LOCalc_CellBackColor($oResult, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
 			If @error Then _ERROR($oDoc, "Failed to set Cell Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 			MsgBox($MB_OK + $MB_TOPMOST, Default, "The Search was successful, I found a Cell containing ""2"" and set the background color.")

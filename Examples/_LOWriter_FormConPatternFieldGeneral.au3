@@ -55,9 +55,9 @@ Func Example()
 			"This is the current Font settings. I'll just check if it is a Map. " & IsMap($avControl[15]) & @CRLF & _
 			"The Horizontal Alignment is: (See UDF Constants) " & $avControl[16] & @CRLF & _
 			"The Vertical Alignment is: (See UDF Constants) " & $avControl[17] & @CRLF & _
-			"The Long Integer background color is: " & $avControl[18] & @CRLF & _
+			"The background color is (as a RGB Color Integer): " & $avControl[18] & @CRLF & _
 			"The Border Style is (See UDF Constants): " & $avControl[19] & @CRLF & _
-			"The Border color is, in Long Integer format: " & $avControl[20] & @CRLF & _
+			"The Border color is (as a RGB Color Integer): " & $avControl[20] & @CRLF & _
 			"Are selections hidden when the control loses focus? True/False: " & $avControl[21] & @CRLF & _
 			"The Additional Information text is: " & $avControl[22] & @CRLF & _
 			"The Help text is: " & $avControl[23] & @CRLF & _

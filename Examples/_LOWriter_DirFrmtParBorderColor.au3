@@ -37,10 +37,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Paragraph Border color settings are as follows: " & @CRLF & _
-			"Top color, in Long Color Format: " & $avSettings[0] & @CRLF & _
-			"Bottom color, in Long Color Format: " & $avSettings[1] & @CRLF & _
-			"Left color, in Long Color Format: " & $avSettings[2] & @CRLF & _
-			"Right color, in Long Color Format: " & $avSettings[3] & @CRLF & @CRLF & _
+			"Top color is (as a RGB Color Integer): " & $avSettings[0] & @CRLF & _
+			"Bottom color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"Left color is (as a RGB Color Integer): " & $avSettings[2] & @CRLF & _
+			"Right color is (as a RGB Color Integer): " & $avSettings[3] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")
 
 	; Remove Direct Formatting.

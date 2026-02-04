@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oFrameStyle, $oViewCursor, $oFrame
-	Local $avSettings
+	Local $iColor
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -25,20 +25,18 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Frame's style to my created style, "Test Style"
-	_LOWriter_FrameStyleSet($oDoc, $oFrame, "Test Style")
+	_LOWriter_FrameStyleCurrent($oDoc, $oFrame, "Test Style")
 	If @error Then _ERROR($oDoc, "Failed to set Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Frame Style Background Color settings. Background color = $LO_COLOR_TEAL, Background color is transparent = False
-	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LO_COLOR_TEAL, False)
+	; Modify the Frame Style Background Color settings. Background color = $LO_COLOR_TEAL
+	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current Frame Style settings. Return will be an array in order of function parameters.
-	$avSettings = _LOWriter_FrameStyleAreaColor($oFrameStyle)
+	; Retrieve the current Frame Style settings. Return will be an Integer.
+	$iColor = _LOWriter_FrameStyleAreaColor($oFrameStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame style's Background color settings are as follows: " & @CRLF & _
-			"The Frame Style's Background color is, in Long color format: " & $avSettings[0] & @CRLF & _
-			"Is the frame style's background color transparent? True/False: " & $avSettings[1])
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame style's Background color is (as a RGB Color Integer): " & $iColor)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

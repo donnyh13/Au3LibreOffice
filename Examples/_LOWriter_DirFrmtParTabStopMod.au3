@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor
-	Local $iMicrometers, $iTabStop
+	Local $iHMM, $iTabStop
 	Local $avTabStop
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -25,22 +25,22 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GOTO_START)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Tab Stop for the demonstration.
-	$iTabStop = _LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iMicrometers)
+	$iTabStop = _LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to Create a Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/2" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.5)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/2" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.5, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the TabStop from 1/4" to 1/2" Tab Stop position, Set the fill character to Asc(~) the Tilde key ASCII Value 126.
 	; Set alignment To  $LOW_TAB_ALIGN_DECIMAL, and the decimal character to ASC(.) a period, ASCII value 46.
 	; Since I am modifying the TabStop position, @Extended will be my new Tab Stop position.
-	_LOWriter_DirFrmtParTabStopMod($oViewCursor, $iTabStop, $iMicrometers, Asc("~"), $LOW_TAB_ALIGN_DECIMAL, Asc("."))
+	_LOWriter_DirFrmtParTabStopMod($oViewCursor, $iTabStop, $iHMM, Asc("~"), $LOW_TAB_ALIGN_DECIMAL, Asc("."))
 	$iTabStop = @extended
 	If @error Then _ERROR($oDoc, "Failed to modify Paragraph Tab stop settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -49,7 +49,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph Tab stop settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Tab stop, having the position of " & $iTabStop & " has the following settings: " & @CRLF & _
-			"The Current position is, in micrometers: " & $avTabStop[0] & @CRLF & _
+			"The Current position is, in Hundredths of a Millimeter (HMM): " & $avTabStop[0] & @CRLF & _
 			"The Current Fill Character is, in ASC value: " & $avTabStop[1] & " and looks like: " & Chr($avTabStop[1]) & @CRLF & _
 			"The Current Alignment setting is, (See UDF constants): " & $avTabStop[2] & @CRLF & _
 			"The Current Decimal Character is, in ASC value: " & $avTabStop[3] & " and looks like: " & Chr($avTabStop[3]))

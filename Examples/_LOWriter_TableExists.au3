@@ -17,18 +17,14 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Table, 2 rows, 2 columns
-	$oTable = _LOWriter_TableCreate($oDoc, 2, 2, Null, Null, "AutoItTest")
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 2, 2, Null, "AutoItTest")
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert the Table into the document.
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Check if the document has a table by the name of "AutoItTest"
 	$bReturn = _LOWriter_TableExists($oDoc, "AutoItTest")
 	If @error Then _ERROR($oDoc, "Failed to look for Text Table name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does this document contain a Table named ""AutoItTest""? True/ False. " & $bReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does this document contain a Table named ""AutoItTest""? True/ False: " & $bReturn)
 
 	; Delete the table.
 	_LOWriter_TableDelete($oDoc, $oTable)
@@ -38,7 +34,7 @@ Func Example()
 	$bReturn = _LOWriter_TableExists($oDoc, "AutoItTest")
 	If @error Then _ERROR($oDoc, "Failed to look for Text Table name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now does this document contain a Table named ""AutoItTest""? True/ False. " & $bReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now does this document contain a Table named ""AutoItTest""? True/ False: " & $bReturn)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Frame's style to my created style, "Test Style"
-	_LOWriter_FrameStyleSet($oDoc, $oFrame, "Test Style")
+	_LOWriter_FrameStyleCurrent($oDoc, $oFrame, "Test Style")
 	If @error Then _ERROR($oDoc, "Failed to set Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Frame style Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.
@@ -37,10 +37,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame style's current Border Width settings are as follows: " & @CRLF & _
-			"The Top Border Width is, in Micrometers, (see UDF constants): " & $avSettings[0] & @CRLF & _
-			"The Bottom Border Width is, in Micrometers, (see UDF constants): " & $avSettings[1] & @CRLF & _
-			"The Left Border Width is, in Micrometers, (see UDF constants): " & $avSettings[2] & @CRLF & _
-			"The Right Border Width is, in Micrometers, (see UDF constants): " & $avSettings[3])
+			"The Top Border Width is, in Hundredths of a Millimeter (HMM), (see UDF constants): " & $avSettings[0] & @CRLF & _
+			"The Bottom Border Width is, in Hundredths of a Millimeter (HMM), (see UDF constants): " & $avSettings[1] & @CRLF & _
+			"The Left Border Width is, in Hundredths of a Millimeter (HMM), (see UDF constants): " & $avSettings[2] & @CRLF & _
+			"The Right Border Width is, in Hundredths of a Millimeter (HMM), (see UDF constants): " & $avSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

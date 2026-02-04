@@ -50,7 +50,7 @@ Func Example()
 			"Are words only Overlined? True/False: " & $avSettings[0] & @CRLF & _
 			"The Overline style is (See UDF Constants): " & $avSettings[1] & @CRLF & _
 			"Is the Overline colored? True/False: " & $avSettings[2] & @CRLF & _
-			"The Overline color is (in Long Integer format): " & $avSettings[3])
+			"The Overline color is (as a RGB Color Integer): " & $avSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

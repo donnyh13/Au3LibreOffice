@@ -52,9 +52,9 @@ Func Example()
 			"This is the Array of entries in the control. I will only see how many elements the array has, which is: " & UBound($avControl[10]) & @CRLF & _
 			"This is the current Font settings. I'll just check if it is a Map. " & IsMap($avControl[11]) & @CRLF & _
 			"The Horizontal Alignment is: (See UDF Constants) " & $avControl[12] & @CRLF & _
-			"The Long Integer background color is: " & $avControl[13] & @CRLF & _
+			"The background color is (as a RGB Color Integer): " & $avControl[13] & @CRLF & _
 			"The Border Style is (See UDF Constants): " & $avControl[14] & @CRLF & _
-			"The Border color is, in Long Integer format: " & $avControl[15] & @CRLF & _
+			"The Border color is (as a RGB Color Integer): " & $avControl[15] & @CRLF & _
 			"Will this control behave as a drop down? True/False: " & $avControl[16] & @CRLF & _
 			"If this control behaves as a drop down, this is how many lines will be shown: " & $avControl[17] & @CRLF & _
 			"Are multiple selections allowed? True/False: " & $avControl[18] & @CRLF & _

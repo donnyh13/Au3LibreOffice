@@ -25,11 +25,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Text Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Frame Style to "Test Style"
-	_LOWriter_FrameStyleSet($oDoc, $oFrame, "Test Style")
+	_LOWriter_FrameStyleCurrent($oDoc, $oFrame, "Test Style")
 	If @error Then _ERROR($oDoc, "Failed to set the Text Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Test Style" frame Style background color to $LO_COLOR_RED
-	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LO_COLOR_RED, False)
+	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LO_COLOR_RED)
 	If @error Then _ERROR($oDoc, "Failed to set the Frame style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; See if a Frame Style called "Test Style" exists.

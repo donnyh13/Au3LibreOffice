@@ -20,13 +20,9 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "First Paragraph" & @CR & "Second Paragraph" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 3 rows, 2 columns
-	$oTable = _LOWriter_TableCreate($oDoc, 3, 2)
+	; Create a Table, 2 columns, 3 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 2, 3)
 	If @error Then _ERROR($oDoc, "Failed to create a Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert the Table
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert the table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a list of Paragraph Objects
 	$aoPars = _LOWriter_ParObjCreateList($oViewCursor)

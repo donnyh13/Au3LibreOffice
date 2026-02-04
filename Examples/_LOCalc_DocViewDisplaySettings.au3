@@ -25,7 +25,7 @@ Func Example()
 			"Are Cell contents colored differently depending on content type? True/False: " & $avOrigSettings[5] & @CRLF & _
 			"Are Anchor icons displayed for Images, shapes etc.? True/False: " & $avOrigSettings[6] & @CRLF & _
 			"Are Gridlines shown? True/False: " & $avOrigSettings[7] & @CRLF & _
-			"The Gridline color is (in Long Integer Color format): " & $avOrigSettings[8])
+			"The Gridline color is (as a RGB Color Integer): " & $avOrigSettings[8])
 
 	If $IDYES = MsgBox($MB_YESNO + $MB_ICONQUESTION + $MB_DEFBUTTON1, "", "Would you like a demonstration of modifying these settings?" & @CRLF & _
 			"Warning, if the script fails to complete these settings may remain changed from your current setting values. Proceed with caution.") Then
@@ -49,7 +49,7 @@ Func Example()
 				"Are Cell contents colored differently depending on content type? True/False: " & $avSettings[5] & @CRLF & _
 				"Are Anchor icons displayed for Images, shapes etc.? True/False: " & $avSettings[6] & @CRLF & _
 				"Are Grid lines shown? True/False: " & $avSettings[7] & @CRLF & _
-				"The Grid line color is (in Long Integer Color format): " & $avSettings[8])
+				"The Grid line color is (as a RGB Color Integer): " & $avSettings[8])
 
 		; Return settings to User's old settings.
 		_LOCalc_DocViewDisplaySettings($oDoc, $avOrigSettings[0], $avOrigSettings[1], $avOrigSettings[2], $avOrigSettings[3], $avOrigSettings[4], $avOrigSettings[5], _

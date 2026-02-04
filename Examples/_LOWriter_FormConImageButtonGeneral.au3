@@ -35,9 +35,9 @@ Func Example()
 			"Is the Control currently Printable? True/False: " & $avControl[4] & @CRLF & _
 			"Is the Control a Tab Stop position? True/False: " & $avControl[5] & @CRLF & _
 			"If the Control is a Tab Stop position, what order position is it? " & $avControl[6] & @CRLF & _
-			"The Long Integer background color is: " & $avControl[7] & @CRLF & _
+			"The background color is (as a RGB Color Integer): " & $avControl[7] & @CRLF & _
 			"The Border Style is (See UDF Constants): " & $avControl[8] & @CRLF & _
-			"The Border color is, in Long Integer format: " & $avControl[9] & @CRLF & _
+			"The Border color is (as a RGB Color Integer): " & $avControl[9] & @CRLF & _
 			"The action that occurs when this button is clicked is (See UDF Constants): " & $avControl[10] & @CRLF & _
 			"The URL that will be opened, if applicable is: " & $avControl[11] & @CRLF & _
 			"The Frame used when opening the URL is (See UDF Constants): " & $avControl[12] & @CRLF & _

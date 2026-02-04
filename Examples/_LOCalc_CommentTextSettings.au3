@@ -29,7 +29,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set comment visibility. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Comment's Text's settings to: Fit Width to Text = False, Fit Height to Text = False, Fit Text to Comment box size = True, Skip setting all spacing,
-	; Set left and right spacing to 170 Micrometers, set top and bottom spacing to 120 Micrometers.
+	; Set left and right spacing to 170 Hundredths of a Millimeter (HMM), set top and bottom spacing to 120 Hundredths of a Millimeter (HMM).
 	_LOCalc_CommentTextSettings($oComment, False, False, True, Null, 170, 170, 120, 120)
 	If @error Then _ERROR($oDoc, "Failed to set Comment settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -41,11 +41,11 @@ Func Example()
 			"Is the Comment Box's width adjusted to fit the Text's width? True/False: " & $avSettings[0] & @CRLF & _
 			"Is the Comment Box's height adjusted to fit the Text's height? True/False: " & $avSettings[1] & @CRLF & _
 			"Is the Text's font size adjusted to fit the Comment Box? True/False: " & $avSettings[2] & @CRLF & _
-			"The Spacing for all of the borders is, in Micrometers (Will be 0 if they are not all equal): " & $avSettings[3] & @CRLF & _
-			"The Left side Spacing between the text and the Comment box border is, in Micrometers: " & $avSettings[4] & @CRLF & _
-			"The Right side Spacing between the text and the Comment box border is, in Micrometers: " & $avSettings[5] & @CRLF & _
-			"The Top Spacing between the text and the Comment box border is, in Micrometers: " & $avSettings[6] & @CRLF & _
-			"The Bottom Spacing between the text and the Comment box border is, in Micrometers: " & $avSettings[7])
+			"The Spacing for all of the borders is, in Hundredths of a Millimeter (HMM) (Will be 0 if they are not all equal): " & $avSettings[3] & @CRLF & _
+			"The Left side Spacing between the text and the Comment box border is, in Hundredths of a Millimeter (HMM): " & $avSettings[4] & @CRLF & _
+			"The Right side Spacing between the text and the Comment box border is, in Hundredths of a Millimeter (HMM): " & $avSettings[5] & @CRLF & _
+			"The Top Spacing between the text and the Comment box border is, in Hundredths of a Millimeter (HMM): " & $avSettings[6] & @CRLF & _
+			"The Bottom Spacing between the text and the Comment box border is, in Hundredths of a Millimeter (HMM): " & $avSettings[7])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

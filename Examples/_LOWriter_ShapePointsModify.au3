@@ -27,10 +27,10 @@ Func Example()
 
 	; I will retrieve the second points current position, and add to its X and Y values to determine my new point's new X and Y values.
 
-	; Minus 1400 Micrometers from the X coordinate
+	; Minus 1400 Hundredths of a Millimeter (HMM) from the X coordinate
 	$iNewX = $avArray[0] - 1400
 
-	; Add 400 Micrometers to the Y coordinate
+	; Add 400 Hundredths of a Millimeter (HMM) to the Y coordinate
 	$iNewY = $avArray[1] + 400
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to modify the Shape's Point.")
@@ -55,8 +55,8 @@ Func Example()
 	$avArray = _LOWriter_ShapePointsModify($oShape, 3)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Array of settings for a Shape point. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's X Coordinate is, in Micrometers: " & $avArray[0] & @CRLF & _
-			"The Shape's Y Coordinate is, in Micrometers: " & $avArray[1] & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's X Coordinate is, in Hundredths of a Millimeter (HMM): " & $avArray[0] & @CRLF & _
+			"The Shape's Y Coordinate is, in Hundredths of a Millimeter (HMM): " & $avArray[1] & @CRLF & _
 			"The Shape's Point Type is, (See UDF Constants): " & $avArray[2] & @CRLF & _
 			"Is this point a Curve? True/False: " & $avArray[3])
 

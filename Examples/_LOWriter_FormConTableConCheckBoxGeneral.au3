@@ -24,9 +24,9 @@ Func Example()
 	$oColumn = _LOWriter_FormConTableConColumnAdd($oControl, $LOW_FORM_CON_TYPE_CHECK_BOX)
 	If @error Then _ERROR($oDoc, "Failed to insert a Table control column. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1.25 inches to Micrometers
-	$iWidth = _LO_ConvertToMicrometer(1.25)
-	If @error Then _ERROR($oDoc, "Failed to convert inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1.25 inches to Hundredths of a Millimeter (HMM)
+	$iWidth = _LO_UnitConvert(1.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Column's General properties.
 	_LOWriter_FormConTableConCheckBoxGeneral($oColumn, "Renamed_AutoIt_Control", "CheckBox 5", Null, True, $LOW_FORM_CON_CHKBX_STATE_SELECTED, $iWidth, _
@@ -43,7 +43,7 @@ Func Example()
 			"The Text Direction is: (See UDF Constants) " & $avColumn[2] & @CRLF & _
 			"Is the Column currently enabled? True/False: " & $avColumn[3] & @CRLF & _
 			"What is the Column's Default State? (See UDF Constants) " & $avColumn[4] & @CRLF & _
-			"The Column's width is, in Micrometers: " & $avColumn[5] & @CRLF & _
+			"The Column's width is, in Hundredths of a Millimeter (HMM): " & $avColumn[5] & @CRLF & _
 			"The Display type of the Column is: (See UDF Constants) " & $avColumn[6] & @CRLF & _
 			"The Horizontal Alignment is: (See UDF Constants) " & $avColumn[7] & @CRLF & _
 			"Are line breaks used? True/False " & $avColumn[8] & @CRLF & _

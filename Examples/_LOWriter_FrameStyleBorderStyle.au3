@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Frame's style to my created style, "Test Style"
-	_LOWriter_FrameStyleSet($oDoc, $oFrame, "Test Style")
+	_LOWriter_FrameStyleCurrent($oDoc, $oFrame, "Test Style")
 	If @error Then _ERROR($oDoc, "Failed to set Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Frame style Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.

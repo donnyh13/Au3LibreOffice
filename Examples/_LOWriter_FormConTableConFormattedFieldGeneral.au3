@@ -25,9 +25,9 @@ Func Example()
 	$oColumn = _LOWriter_FormConTableConColumnAdd($oControl, $LOW_FORM_CON_TYPE_FORMATTED_FIELD)
 	If @error Then _ERROR($oDoc, "Failed to insert a Table control column. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1.25 inches to Micrometers
-	$iWidth = _LO_ConvertToMicrometer(1.25)
-	If @error Then _ERROR($oDoc, "Failed to convert inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1.25 inches to Hundredths of a Millimeter (HMM)
+	$iWidth = _LO_UnitConvert(1.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve a Format key value for "#,###.00"
 	$iFormat = _LOWriter_FormatKeyCreate($oDoc, "#,###.00")
@@ -57,7 +57,7 @@ Func Example()
 			"Does this Column act as a spin button? True/False: " & $avColumn[11] & @CRLF & _
 			"Does the button action repeat if clicked and held? True/False: " & $avColumn[12] & @CRLF & _
 			"If the button action repeats when clicked and held, how much delay is between each repeat? (In Milliseconds): " & $avColumn[13] & @CRLF & _
-			"The Column's width is, in Micrometers: " & $avColumn[14] & @CRLF & _
+			"The Column's width is, in Hundredths of a Millimeter (HMM): " & $avColumn[14] & @CRLF & _
 			"The Horizontal Alignment is: (See UDF Constants) " & $avColumn[15] & @CRLF & _
 			"Will selections be hidden when losing focus? True/False: " & $avColumn[16] & @CRLF & _
 			"The Additional Information text is: " & $avColumn[17] & @CRLF & _

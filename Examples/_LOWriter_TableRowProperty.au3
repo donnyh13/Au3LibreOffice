@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
-	Local $iRows, $iColumns, $iMicrometers
+	Local $iRows, $iColumns, $iHMM
 	Local $avRowProps
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -17,13 +17,9 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 5 rows, 3 columns.
-	$oTable = _LOWriter_TableCreate($oDoc, 5, 3)
+	; Create a Table, 3 columns, 5 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert the Table into the document at the View Cursor's location.
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve how many Rows the Table currently contains.
 	$iRows = _LOWriter_TableRowGetCount($oTable)
@@ -55,12 +51,12 @@ Func Example()
 			"Is Auto Height? True/False: " & $avRowProps[1] & @CRLF & _
 			"Is the Row allowed to split between pages? True/False: " & $avRowProps[2])
 
-	; Convert 1.5 inches to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(1.5)
-	If @error Then _ERROR($oDoc, "Failed to convert inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1.5 inches to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(1.5, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Row properties to: 1.5" height, turn off auto height, and disallow splitting the row between pages.
-	_LOWriter_TableRowProperty($oTable, 2, $iMicrometers, False, False)
+	_LOWriter_TableRowProperty($oTable, 2, $iHMM, False, False)
 	If @error Then _ERROR($oDoc, "Failed to set row properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the third down (Row 2) settings again.

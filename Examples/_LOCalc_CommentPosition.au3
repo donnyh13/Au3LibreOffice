@@ -7,7 +7,7 @@ Example()
 Func Example()
 	Local $oDoc, $oSheet, $oCell, $oComment
 	Local $avSettings[0]
-	Local $iMicrometers1, $iMicrometers2
+	Local $iHMM1, $iHMM2
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
@@ -29,16 +29,16 @@ Func Example()
 	_LOCalc_CommentVisible($oComment, True)
 	If @error Then _ERROR($oDoc, "Failed to set comment visibility. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 4 Inch to Micrometers
-	$iMicrometers1 = _LO_ConvertToMicrometer(4)
-	If @error Then _ERROR($oDoc, "Failed to convert Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 4 Inch to Hundredths of a Millimeter (HMM)
+	$iHMM1 = _LO_UnitConvert(4, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1.5 Inches to Micrometers
-	$iMicrometers2 = _LO_ConvertToMicrometer(1.5)
-	If @error Then _ERROR($oDoc, "Failed to convert Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1.5 Inches to Hundredths of a Millimeter (HMM)
+	$iHMM2 = _LO_UnitConvert(1.5, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Comment's Position to: 4 Inches Right, and 1.5 inches down from the Cell B3. And lock the position.
-	_LOCalc_CommentPosition($oComment, $iMicrometers1, $iMicrometers2, True)
+	_LOCalc_CommentPosition($oComment, $iHMM1, $iHMM2, True)
 	If @error Then _ERROR($oDoc, "Failed to set Comment settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Comment settings. Return will be an array in order of function parameters.
@@ -46,8 +46,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Comment settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Comment's Position settings are as follows: " & @CRLF & _
-			"The Horizontal distance from the insertion point is, in Micrometers: " & $avSettings[0] & @CRLF & _
-			"The Vertical distance from the insertion point is, in Micrometers: " & $avSettings[1] & @CRLF & _
+			"The Horizontal distance from the insertion point is, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
+			"The Vertical distance from the insertion point is, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
 			"Is the Position protected from User changes? True/False: " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

@@ -16,7 +16,7 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Frame into the document at the ViewCursor position, and 3000x3000 Micrometers wide.
+	; Insert a Frame into the document at the ViewCursor position, and 3000x3000 Hundredths of a Millimeter (HMM) wide.
 	$oFrame = _LOWriter_FrameCreate($oDoc, $oViewCursor, Null, 3000, 3000)
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -33,10 +33,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame's Border Color settings are as follows: " & @CRLF & _
-			"The Top Border Color is, in Long Color Format: " & $avSettings[0] & @CRLF & _
-			"The Bottom Border Color is, in Long Color Format: " & $avSettings[1] & @CRLF & _
-			"The Left Border Color is, in Long Color Format: " & $avSettings[2] & @CRLF & _
-			"The Right Border Color is, in Long Color Format: " & $avSettings[3])
+			"The Top Border Color is (as a RGB Color Integer): " & $avSettings[0] & @CRLF & _
+			"The Bottom Border Color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"The Left Border Color is (as a RGB Color Integer): " & $avSettings[2] & @CRLF & _
+			"The Right Border Color is (as a RGB Color Integer): " & $avSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

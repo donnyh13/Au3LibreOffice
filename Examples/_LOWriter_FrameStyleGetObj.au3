@@ -20,7 +20,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Text Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Frame Style to "Labels"
-	_LOWriter_FrameStyleSet($oDoc, $oFrame, "Labels")
+	_LOWriter_FrameStyleCurrent($oDoc, $oFrame, "Labels")
 	If @error Then _ERROR($oDoc, "Failed to set the Text Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now retrieve the Labels Frame style object, and modify some of its settings.")
@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Labels" frame Style background color to $LO_COLOR_RED
-	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LO_COLOR_RED, False)
+	_LOWriter_FrameStyleAreaColor($oFrameStyle, $LO_COLOR_RED)
 	If @error Then _ERROR($oDoc, "Failed to set the Frame style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

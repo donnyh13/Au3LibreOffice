@@ -33,7 +33,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Character style to "Example" Character style.
-	_LOWriter_CharStyleSet($oDoc, $oViewCursor, "Example")
+	_LOWriter_CharStyleCurrent($oDoc, $oViewCursor, "Example")
 	If @error Then _ERROR($oDoc, "Failed to set the Character style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the "Example" object.
@@ -53,7 +53,7 @@ Func Example()
 			"Overline words only? True/False: " & $avCharStyleSettings[0] & @CRLF & _
 			"Overline style (See UDF constants): " & $avCharStyleSettings[1] & @CRLF & _
 			"Overline has color? True/False: " & $avCharStyleSettings[2] & @CRLF & _
-			"Overline color, in long color format: " & $avCharStyleSettings[3])
+			"Overline color is (as a RGB Color Integer): " & $avCharStyleSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

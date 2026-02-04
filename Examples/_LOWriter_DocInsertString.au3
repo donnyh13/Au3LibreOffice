@@ -18,9 +18,8 @@ Func Example()
 	; Insert some text at the ViewCursor.
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate inserting text into a document." & @CR & "This is a New line. Note:" & _
 			" In Libre Office, AutoIt's @CR is used for a paragraph break (such as is inserted by pressing Enter key), " & @LF & _
-			"and @LF is used for a Line break, Such as when you press Shift + Enter. If you use the standard AutoIt @CRLF," & @CRLF & _
-			" this double space, with a paragraph break and a line break results. Try turning on Formatting marks to see the difference, normally " & _
-			"done by pressing CTRL + F10.")
+			"and @LF is used for a Line break, Such as when you press Shift + Enter." & @CR & _
+			"Try turning on Formatting marks to see the difference, normally done by pressing CTRL + F10.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

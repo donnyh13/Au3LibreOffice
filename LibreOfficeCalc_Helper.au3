@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-#Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 #include-once
 
 ; Main LibreOffice Includes
@@ -54,7 +54,7 @@
 ; Name ..........: _LOCalc_ComError_UserFunction
 ; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
 ; Syntax ........: _LOCalc_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
-; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default value is Default. Accepts a Function, or the Keyword Default and Null. If set to a User function, the function may have up to 5 required parameters.
+; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
 ;                  $vParam1             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam2             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam3             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
@@ -154,10 +154,10 @@ EndFunc   ;==>_LOCalc_ComError_UserFunction
 ;                  @Error 1 @Extended 5 Return 0 = $bUseRegExp not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bHeaders not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bCopyOutput not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $oCopyOutput not an Object and not set to Null.
+;                  @Error 1 @Extended 8 Return 0 = $oCopyOutput not an Object.
 ;                  @Error 1 @Extended 9 Return 0 = $bSaveCriteria not a Boolean.
 ;                  @Error 1 @Extended 10 Return ? = $atFilterField contains an element that is not an Object. Returning the element number containing the error.
-;                  @Error 1 @Extended 11 Return 0 = $bCopyOutput set to True, but $oCopyOutput not an Object.
+;                  @Error 1 @Extended 11 Return 0 = $bCopyOutput called with True, but $oCopyOutput not an Object.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create a Filter Descriptor Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.table.CellAddress" Struct.
@@ -257,7 +257,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ;                  @Error 1 @Extended 7 Return 0 = $bUseRegExp not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bHeaders not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bCopyOutput not a Boolean.
-;                  @Error 1 @Extended 10 Return 0 = $bCopyOutput set to True, but $oCopyOutput not an Object.
+;                  @Error 1 @Extended 10 Return 0 = $bCopyOutput called with True, but $oCopyOutput not an Object.
 ;                  @Error 1 @Extended 11 Return 0 = $oCopyOutput not an Object.
 ;                  @Error 1 @Extended 12 Return 0 = $bSaveCriteria not a Boolean.
 ;                  --Initialization Errors--
@@ -267,11 +267,11 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Cell Address for Cell or Cell Range called in $oCopyOutput.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Filter Descriptor was successfully modified.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: When retrieving the current settings for a filter descriptor, the Return value for $oCopyOutput is a single Cell Object.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_FilterDescriptorCreate, _LOCalc_FilterFieldCreate
 ; Link ..........:
@@ -370,8 +370,8 @@ EndFunc   ;==>_LOCalc_FilterDescriptorModify
 ; Syntax ........: _LOCalc_FilterFieldCreate($iColumn[, $bIsNumeric = False[, $nValue = 0[, $sString = ""[, $iCondition = $LOC_FILTER_CONDITION_EMPTY[, $iOperator = $LOC_FILTER_OPERATOR_AND]]]]])
 ; Parameters ....: $iColumn             - an integer value. The 0 based Column number to perform the filtering operation upon counting from the beginning of the range.
 ;                  $bIsNumeric          - [optional] a boolean value. Default is False. If True, the filter Value to search for is a number. If False, the filter value to search for is a string.
-;                  $nValue              - [optional] a general number value. Default is 0. The numerical Value to filter the Range for. Only valid if $bIsNumeric is set to True. Set to any number to skip, it will not be used unless $bIsNumeric is True.
-;                  $sString             - [optional] a string value. Default is "". The string Value to filter the Range for. Only valid if $bIsNumeric is set to False. Set to an empty string to skip, it will not be used unless $bIsNumeric is False.
+;                  $nValue              - [optional] a general number value. Default is 0. The numerical Value to filter the Range for. Only valid if $bIsNumeric is set to True. Call with any number to skip, it will not be used unless $bIsNumeric is True.
+;                  $sString             - [optional] a string value. Default is "". The string Value to filter the Range for. Only valid if $bIsNumeric is set to False. Call with an empty string to skip, it will not be used unless $bIsNumeric is False.
 ;                  $iCondition          - [optional] an integer value (0-17). Default is $LOC_FILTER_CONDITION_EMPTY. The comparative condition to test each cell and value by. See Constants $LOC_FILTER_CONDITION_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iOperator           - [optional] an integer value (0,1). Default is $LOC_FILTER_OPERATOR_AND. The connection this filter field has with the previous filter field. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Struct
@@ -445,11 +445,11 @@ EndFunc   ;==>_LOCalc_FilterFieldCreate
 ;                  @Error 1 @Extended 7 Return 0 = $iOperator not an Integer, less than 0 or greater than 1. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Filter Field Structure was successfully modified.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Filter Descriptor can contain up to 8 of these Filter Fields. Once you create the Filter Field Structure, place it in an array before using it to create a Filter descriptor. Place each Filter Field Structure in a separate element of the Array.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_FilterFieldCreate
 ; Link ..........:
@@ -526,7 +526,7 @@ EndFunc   ;==>_LOCalc_FilterFieldModify
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Font list.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if the Font is available, else False.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Font is available, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oDoc is optional, if not called, a Calc Document is created invisibly to perform the check.
@@ -597,7 +597,7 @@ EndFunc   ;==>_LOCalc_FontExists
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Font list.
 ;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returns a 4 Column Array, @extended is set to the number of results. See remarks
+;                  @Error 0 @Extended ? Return Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oDoc is optional, if not called, a Calc Document is created invisibly to perform the check.
@@ -677,8 +677,8 @@ EndFunc   ;==>_LOCalc_FontsGetNames
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to Create or Retrieve the Format key.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Format Key was successfully created, returning Format Key integer.
-;                  @Error 0 @Extended 1 Return Integer = Success. Format Key already existed, returning Format Key integer.
+;                  @Error 0 @Extended 0 Return Integer = Success. Format Key was successfully created, returning Format Key Integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. Format Key already existed, returning Format Key Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -774,7 +774,7 @@ EndFunc   ;==>_LOCalc_FormatKeyDelete
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to obtain Array of Date/Time Formats.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. If the Format Key exists in document, True is returned, else false.
+;                  @Error 0 @Extended 0 Return Boolean = Success. If the Format Key exists in document, True is returned, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -922,9 +922,9 @@ EndFunc   ;==>_LOCalc_FormatKeyGetString
 ;                  @Error 0 @Extended ? Return Array = Success. Returning a 2 or 3 column Array, depending on current $bIsUser setting. See remarks. @Extended is set to the number of Keys returned.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Column One (Array[0][0]) will contain the Format Key integer,
+; Remarks .......: Column One (Array[0][0]) will contain the Format Key Integer,
 ;                  Column two (Array[0][1]) will contain the Format Key String,
-;                  If $bIsUser is set to True, Column Three (Array[0][2]) will contain a Boolean, True if the Format Key is User-created, else false.
+;                  If $bIsUser is called with True, Column Three (Array[0][2]) will contain a Boolean, True if the Format Key is User-created, else False.
 ; Related .......: _LOCalc_FormatKeyDelete, _LOCalc_FormatKeyGetString, _LOCalc_FormatKeyGetStandard
 ; Link ..........:
 ; Example .......: Yes
@@ -987,7 +987,7 @@ EndFunc   ;==>_LOCalc_FormatKeysGetList
 ; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
 ;                  $iIndex              - an integer value. The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
 ;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iColor              - an integer value (0-16777215). The ColorStop color. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iColor              - an integer value (0-16777215). The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1089,7 +1089,7 @@ EndFunc   ;==>_LOCalc_GradientMulticolorDelete
 ; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
 ;                  $iIndex              - an integer value. The array index to modify. 0 Based.
 ;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iColor              - an integer value (0-16777215). The ColorStop color. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iColor              - an integer value (0-16777215). The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1140,7 +1140,7 @@ EndFunc   ;==>_LOCalc_GradientMulticolorModify
 ;                  $bBackwards          - [optional] a boolean value. Default is False. If True, the document is searched backwards.
 ;                  $bSearchRows         - [optional] a boolean value. Default is True. If True, Search is performed left to right along the rows, else if False, the search is performed top to bottom along the columns.
 ;                  $bMatchCase          - [optional] a boolean value. Default is False. If True, the case of the letters is important for the Search.
-;                  $iSearchIn           - [optional] an integer value. Default is $LOC_SEARCH_IN_FORMULAS. Set the Cell data type to search in. See Constants $LOC_SEARCH_IN_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iSearchIn           - [optional] an integer value (0-2). Default is $LOC_SEARCH_IN_FORMULAS. The Cell data type to search in. See Constants $LOC_SEARCH_IN_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bEntireCell         - [optional] a boolean value. Default is False. If True, Searches for whole words or cells that are identical to the search text.
 ;                  $bRegExp             - [optional] a boolean value. Default is False. If True, the search string is evaluated as a regular expression.
 ;                  $bWildcards          - [optional] a boolean value. Default is False. If True, the search string is considered to contain wildcards (* ?). A Backslash can be used to escape a wildcard.
@@ -1157,11 +1157,11 @@ EndFunc   ;==>_LOCalc_GradientMulticolorModify
 ;                  @Error 1 @Extended 7 Return 0 = $bRegExp not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bWildcards not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bStyles not a Boolean.
-;                  @Error 1 @Extended 10 Return 0 = Both $bRegExp and $bWildcards are set to True, only one can be True at one time.
+;                  @Error 1 @Extended 10 Return 0 = Both $bRegExp and $bWildcards are called with True, only one can be True at one time.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create Search Descriptor.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returns a Search Descriptor Object for setting Search options.
+;                  @Error 0 @Extended 0 Return Object = Success. Returning a Search Descriptor Object for setting Search options.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The returned Search Descriptor is only good for the Document that contained the Range it was created by, it WILL NOT work for other Documents.
@@ -1213,7 +1213,7 @@ EndFunc   ;==>_LOCalc_SearchDescriptorCreate
 ;                  $bBackwards          - [optional] a boolean value. Default is Null. If True, the document is searched backwards.
 ;                  $bSearchRows         - [optional] a boolean value. Default is Null. If True, Search is performed left to right along the rows, else if False, the search is performed top to bottom along the columns.
 ;                  $bMatchCase          - [optional] a boolean value. Default is Null. If True, the case of the letters is important for the Search.
-;                  $iSearchIn           - [optional] an integer value. Default is Null. Set the Cell data type to search in. See Constants $LOC_SEARCH_IN_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iSearchIn           - [optional] an integer value (0-2). Default is Null. The Cell data type to search in. See Constants $LOC_SEARCH_IN_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bEntireCell         - [optional] a boolean value. Default is Null. If True, Searches for whole words or cells that are identical to the search text.
 ;                  $bRegExp             - [optional] a boolean value. Default is Null. If True, the search string is evaluated as a regular expression.
 ;                  $bWildcards          - [optional] a boolean value. Default is Null. If True, the search string is considered to contain wildcards (* ?). A Backslash can be used to escape a wildcard.
@@ -1232,12 +1232,12 @@ EndFunc   ;==>_LOCalc_SearchDescriptorCreate
 ;                  @Error 1 @Extended 9 Return 0 = $bWildcards not a Boolean.
 ;                  @Error 1 @Extended 10 Return 0 = $bStyles not a Boolean.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Returns 1 after directly modifying Search Descriptor Object.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 0 Return 1 = Success. Returning 1 after directly modifying Search Descriptor Object.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: When setting $bRegExp or $bWildcards to True, if any of following three are set to True, they will be set to False: $bSimilarity(From the Similarity function), $bRegExp or $bWildcards.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: When calling $bRegExp or $bWildcards with True, if any of following three are set to True, they will be set to False: $bSimilarity(From the Similarity function), $bRegExp or $bWildcards.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_SearchDescriptorCreate, _LOCalc_SearchDescriptorSimilarityModify
 ; Link ..........:
@@ -1332,18 +1332,18 @@ EndFunc   ;==>_LOCalc_SearchDescriptorModify
 ;                  @Error 1 @Extended 2 Return 0 = $oSrchDescript Object not a Search Descriptor Object.
 ;                  @Error 1 @Extended 3 Return 0 = $bSimilarity not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bCombine not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iRemove, $iAdd, or $iExchange set to a value, but $bSimilarity not set to True.
+;                  @Error 1 @Extended 5 Return 0 = $iRemove, $iAdd, or $iExchange set to a value, but $bSimilarity not called with True.
 ;                  @Error 1 @Extended 6 Return 0 = $iRemove not an Integer.
 ;                  @Error 1 @Extended 7 Return 0 = $iAdd not an Integer.
 ;                  @Error 1 @Extended 8 Return 0 = $iExchange not an Integer.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Returns 1 after directly modifying Search Descriptor Object.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 0 Return 1 = Success. Returning 1 after directly modifying Search Descriptor Object.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-;                  If $bSimilarity is set to True while Regular Expression, or Wildcards setting is set to True, those settings will be set to False.
+;                  If $bSimilarity is called with True while Regular Expression, or Wildcards setting is set to True, those settings will be set to False.
 ; Related .......: _LOCalc_SearchDescriptorCreate
 ; Link ..........:
 ; Example .......: Yes
@@ -1459,7 +1459,7 @@ EndFunc   ;==>_LOCalc_SortFieldCreate
 ; Syntax ........: _LOCalc_SortFieldModify(ByRef $tSortField[, $iIndex = Null[, $iDataType = Null[, $bAscending = Null[, $bCaseSensitive = Null]]]])
 ; Parameters ....: $tSortField          - [in/out] a dll struct value. A Sort Field Struct created by a previous _LOCalc_SortFieldCreate function.
 ;                  $iIndex              - [optional] an integer value. Default is Null. The Column or Row to perform the sort upon. 0 Based. 0 is the first Column/Row in the Cell Range.
-;                  $iDataType           - [optional] an integer value. Default is Null. The type of data that will be sorted. See Constants $LOC_SORT_DATA_TYPE_* as defined in LibreOfficeCalc_Constants.au3
+;                  $iDataType           - [optional] an integer value (0-2). Default is Null. The type of data that will be sorted. See Constants $LOC_SORT_DATA_TYPE_* as defined in LibreOfficeCalc_Constants.au3
 ;                  $bAscending          - [optional] a boolean value. Default is Null. If True, data will be sorted into ascending order.
 ;                  $bCaseSensitive      - [optional] a boolean value. Default is Null. If True, sort will be case sensitive.
 ; Return values .: Success: 1
@@ -1472,10 +1472,10 @@ EndFunc   ;==>_LOCalc_SortFieldCreate
 ;                  @Error 1 @Extended 5 Return 0 = $bCaseSensitive not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:

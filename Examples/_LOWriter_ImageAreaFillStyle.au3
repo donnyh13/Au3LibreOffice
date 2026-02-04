@@ -33,8 +33,8 @@ Func Example()
 			"$LOW_AREA_FILL_STYLE_HATCH, 3 Fill Style is a Hatch style color." & @CRLF & _
 			"$LOW_AREA_FILL_STYLE_BITMAP, 4 Fill Style is a Bitmap.")
 
-	; Modify the Image Background Color settings. Background color = $LO_COLOR_TEAL, Background color is transparent = False
-	_LOWriter_ImageAreaColor($oImage, $LO_COLOR_TEAL, False)
+	; Modify the Image Background Color settings. Background color = $LO_COLOR_TEAL
+	_LOWriter_ImageAreaColor($oImage, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Image's current Fill Style.

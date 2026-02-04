@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-#Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 #include-once
 
 ; Main LibreOffice Includes
@@ -41,8 +41,6 @@
 ; _LOCalc_DocOpen
 ; _LOCalc_DocPosAndSize
 ; _LOCalc_DocPrint
-; _LOCalc_DocPrintersAltGetNames
-; _LOCalc_DocPrintersGetNames
 ; _LOCalc_DocRedo
 ; _LOCalc_DocRedoClear
 ; _LOCalc_DocRedoCurActionTitle
@@ -80,7 +78,7 @@
 ; Description ...: Close an existing Calc Document, returning its save path if applicable.
 ; Syntax ........: _LOCalc_DocClose(ByRef $oDoc[, $bSaveChanges = True[, $sSaveName = ""[, $bDeliverOwnership = True]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $bSaveChanges        - [optional] a boolean value. Default is True. If true, saves changes if any were made before closing. See remarks.
+;                  $bSaveChanges        - [optional] a boolean value. Default is True. If True, saves changes if any were made before closing. See remarks.
 ;                  $sSaveName           - [optional] a string value. Default is "". The file name to save the file as, if the file hasn't been saved before. See Remarks.
 ;                  $bDeliverOwnership   - [optional] a boolean value. Default is True. If True, deliver ownership of the document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: String
@@ -90,17 +88,18 @@
 ;                  @Error 1 @Extended 2 Return 0 = $bSaveChanges not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $sSaveName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $bDeliverOwnership not a Boolean.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error while creating Filter Name properties.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Path Conversion to L.O. URL Failed.
 ;                  @Error 3 @Extended 2 Return 0 = Error while retrieving FilterName.
-;                  @Error 3 @Extended 3 Return 0 = Error while setting Filter Name properties.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
 ;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
-;                  @Error 0 @Extended 3 Return String = Success, Document was successfully closed, document either had no changes to save, or $bSaveChanges was set to False. If document had a save location, or if document was saved to a location, it is returned, else an empty string is returned.
+;                  @Error 0 @Extended 3 Return String = Success, Document was successfully closed, document either had no changes to save, or $bSaveChanges was called with False. If document had a save location, or if document was saved to a location, it is returned, else an empty string is returned.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bSaveChanges is true and the document hasn't been saved yet, the document is saved to the desktop.
+; Remarks .......: If $bSaveChanges is True and the document hasn't been saved yet, the document is saved to the desktop.
 ;                  If $sSaveName is undefined, it is saved as an .ods document to the desktop, named Year-Month-Day_Hour-Minute-Second.ods. $sSaveName may be a name only without an extension, in which case the file will be saved in .ods format. Or you may define your own format by including an extension, such as "Test.xlsx"
 ; Related .......: _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_DocSaveAs, _LOCalc_DocSave
 ; Link ..........:
@@ -132,7 +131,7 @@ Func _LOCalc_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDeli
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$aArgs[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 	EndIf
 
 	If ($bSaveChanges = True) Then
@@ -169,7 +168,7 @@ EndFunc   ;==>_LOCalc_DocClose
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to query Document whether frozen Columns/Rows are present.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if the Document currently contains frozen Columns/Rows.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Document currently contains frozen Columns/Rows.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -196,7 +195,7 @@ EndFunc   ;==>_LOCalc_DocColumnsRowsAreFrozen
 ; Description ...: Set Columns and/or Rows of a document to be frozen in view.
 ; Syntax ........: _LOCalc_DocColumnsRowsFreeze(ByRef $oDoc[, $iColumns = 0[, $iRows = 0]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $iColumns            - [optional] an integer value. Default is 0. The number of Columns to freeze. Set to 0 to skip. See remarks.
+;                  $iColumns            - [optional] an integer value. Default is 0. The number of Columns to freeze. Call with 0 to skip. See remarks.
 ;                  $iRows               - [optional] an integer value. Default is 0. The number of Rows to freeze. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -461,7 +460,7 @@ EndFunc   ;==>_LOCalc_DocCreate
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $sFilePath           - a string value. Full path to save the document to, including Filename and extension. See Remarks.
 ;                  $bSamePath           - [optional] a boolean value. Default is False. If True, uses the path of the current document to export to. See Remarks
-;                  $sFilterName         - [optional] a string value. Default is "". Filter name. If set to "" (blank string), Filter is chosen automatically based on the file extension. If no extension is present, or if not matched to the list of extensions in this UDF, the .ods extension is used instead, with the filter name of "calc8".
+;                  $sFilterName         - [optional] a string value. Default is "". Filter name. If called with "" (blank string), Filter is chosen automatically based on the file extension. If no extension is present, or if not matched to the list of extensions in this UDF, the .ods extension is used instead, with the filter name of "calc8".
 ;                  $bOverwrite          - [optional] a boolean value. Default is Null. If True, file will be overwritten.
 ;                  $sPassword           - [optional] a string value. Default is Null. Password String to set for the document. (Not all file formats can have a Password set). "" (blank string) or Null = No Password.
 ; Return values .: Success: String
@@ -473,20 +472,20 @@ EndFunc   ;==>_LOCalc_DocCreate
 ;                  @Error 1 @Extended 4 Return 0 = $sFilterName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $sPassword not a String.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating FilterName Property
+;                  @Error 2 @Extended 2 Return 0 = Error creating Overwrite Property
+;                  @Error 2 @Extended 3 Return 0 = Error creating Password Property
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error Converting Path to/from L.O. URL
-;                  @Error 3 @Extended 2 Return 0 = Document has no save path, and $bSamePath is set to True.
+;                  @Error 3 @Extended 2 Return 0 = Document has no save path, and $bSamePath is called with True.
 ;                  @Error 3 @Extended 3 Return 0 = Error retrieving FilterName.
-;                  --Property Setting Errors--
-;                  @Error 4 @Extended 1 Return 0 = Error setting FilterName Property
-;                  @Error 4 @Extended 2 Return 0 = Error setting Overwrite Property
-;                  @Error 4 @Extended 3 Return 0 = Error setting Password Property
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning save path for exported document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Does not alter the original save path (if there was one), saves a copy of the document to the new path, in the new file format if one is chosen.
-;                  If $bSamePath is set to True, the same save path as the current document is used. You must still fill in "$sFilePath" with the desired File Name and new extension, but you do not need to enter the file path.
+;                  If $bSamePath is called with True, the same save path as the current document is used. You must still fill in "$sFilePath" with the desired File Name and new extension, but you do not need to enter the file path.
 ; Related .......: _LOCalc_DocSave, _LOCalc_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
@@ -525,14 +524,14 @@ Func _LOCalc_DocExport(ByRef $oDoc, $sFilePath, $bSamePath = False, $sFilterName
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	$aProperties[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
-	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If ($bOverwrite <> Null) Then
 		If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
 		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Overwrite", $bOverwrite)
-		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 2, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 	EndIf
 
 	If ($sPassword <> Null) Then
@@ -540,7 +539,7 @@ Func _LOCalc_DocExport(ByRef $oDoc, $sFilePath, $bSamePath = False, $sFilterName
 
 		ReDim $aProperties[UBound($aProperties) + 1]
 		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Password", $sPassword)
-		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 3, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 	EndIf
 
 	$oDoc.storeToURL($sFilePath, $aProperties)
@@ -569,10 +568,10 @@ EndFunc   ;==>_LOCalc_DocExport
 ;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version less than 7.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning current Formula Bar Height as an Integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Formula Bar Height as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -608,8 +607,8 @@ EndFunc   ;==>_LOCalc_DocFormulaBarHeight
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returns the document's current Name/Title
-;                  @Error 0 @Extended 1 Return String = Success. Returns the document's current Window Title, which includes the document name and usually: "-LibreOffice Calc".
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
+;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "-LibreOffice Calc".
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -636,7 +635,7 @@ EndFunc   ;==>_LOCalc_DocGetName
 ; Description ...: Returns a Document's current save path.
 ; Syntax ........: _LOCalc_DocGetPath(ByRef $oDoc[, $bReturnLibreURL = False])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in Libre Office URL format, else false returns a regular Windows path.
+;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in Libre Office URL format, else False returns a regular Windows path.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -646,8 +645,8 @@ EndFunc   ;==>_LOCalc_DocGetName
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error converting Libre URL to Computer path format.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returns the P.C. path to the current document's save path.
-;                  @Error 0 @Extended 1 Return String = Success. Returns the Libre Office URL to the current document's save path.
+;                  @Error 0 @Extended 0 Return String = Success. Returning the P.C. path to the current document's save path.
+;                  @Error 0 @Extended 1 Return String = Success. Returning the Libre Office URL to the current document's save path.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -685,7 +684,7 @@ EndFunc   ;==>_LOCalc_DocGetPath
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if the document has a save location. Else False.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has a save location. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -712,7 +711,7 @@ EndFunc   ;==>_LOCalc_DocHasPath
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if document is the currently active Libre window. See remarks.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active Libre window. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other Libre Office documents.
@@ -739,7 +738,7 @@ EndFunc   ;==>_LOCalc_DocIsActive
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if the document has been modified since last being saved.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has been modified since last being saved.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -758,7 +757,7 @@ EndFunc   ;==>_LOCalc_DocIsModified
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_DocIsReadOnly
-; Description ...: Tests whether a document is currently set to Read Only.
+; Description ...: Tests whether a document is opened in Read Only mode.
 ; Syntax ........: _LOCalc_DocIsReadOnly(ByRef $oDoc)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean
@@ -766,7 +765,7 @@ EndFunc   ;==>_LOCalc_DocIsModified
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True is document is currently Read Only, else False.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True is document is currently Read Only, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only documents that have been saved to a location, will ever be "ReadOnly".
@@ -788,7 +787,7 @@ EndFunc   ;==>_LOCalc_DocIsReadOnly
 ; Description ...: Maximize or restore a document.
 ; Syntax ........: _LOCalc_DocMaximize(ByRef $oDoc[, $bMaximize = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $bMaximize           - [optional] a boolean value. Default is Null. If True, document window is maximized, else if false, document is restored to its previous size and location.
+;                  $bMaximize           - [optional] a boolean value. Default is Null. If True, document window is maximized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -796,10 +795,10 @@ EndFunc   ;==>_LOCalc_DocIsReadOnly
 ;                  @Error 1 @Extended 2 Return 0 = $bMaximize not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize set to Null, returning boolean indicating if Document is currently maximized (True) or not (False).
+;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMaximize is set to Null, returns a Boolean indicating if document is currently maximized (True).
+; Remarks .......: If $bMaximize is called with Null, returns a Boolean indicating if document is currently maximized (True).
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -810,7 +809,7 @@ Func _LOCalc_DocMaximize(ByRef $oDoc, $bMaximize = Null)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($bMaximize = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.Frame.ContainerWindow.IsMaximized())
+	If __LO_VarsAreNull($bMaximize) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.Frame.ContainerWindow.IsMaximized())
 
 	If Not IsBool($bMaximize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -824,7 +823,7 @@ EndFunc   ;==>_LOCalc_DocMaximize
 ; Description ...: Minimize or restore a document.
 ; Syntax ........: _LOCalc_DocMinimize(ByRef $oDoc[, $bMinimize = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $bMinimize           - [optional] a boolean value. Default is Null. If True, document window is minimized, else if false, document is restored to its previous size and location.
+;                  $bMinimize           - [optional] a boolean value. Default is Null. If True, document window is minimized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -832,10 +831,10 @@ EndFunc   ;==>_LOCalc_DocMaximize
 ;                  @Error 1 @Extended 2 Return 0 = $bMinimize not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize set to Null, returning boolean indicating if Document is currently minimized (True) or not (False).
+;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMinimize is set to Null, returns a Boolean indicating if document is currently minimized (True).
+; Remarks .......: If $bMinimize is called with Null, returns a Boolean indicating if document is currently minimized (True).
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -846,7 +845,7 @@ Func _LOCalc_DocMinimize(ByRef $oDoc, $bMinimize = Null)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($bMinimize = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.Frame.ContainerWindow.IsMinimized())
+	If __LO_VarsAreNull($bMinimize) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.Frame.ContainerWindow.IsMinimized())
 
 	If Not IsBool($bMinimize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -861,10 +860,10 @@ EndFunc   ;==>_LOCalc_DocMinimize
 ; Syntax ........: _LOCalc_DocOpen($sFilePath[, $bConnectIfOpen = True[, $bHidden = Null[, $bReadOnly = Null[, $sPassword = Null[, $bLoadAsTemplate = Null[, $sFilterName = Null]]]]]])
 ; Parameters ....: $sFilePath           - a string value. Full path and filename of the file to be opened.
 ;                  $bConnectIfOpen      - [optional] a boolean value. Default is True(Connect). Whether to connect to the requested document if it is already open. See remarks.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If true, opens the document invisibly.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If true, opens the document as read-only.
+;                  $bHidden             - [optional] a boolean value. Default is Null. If True, opens the document invisibly.
+;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, opens the document as read-only.
 ;                  $sPassword           - [optional] a string value. Default is Null. The password that was used to read-protect the document, if any.
-;                  $bLoadAsTemplate     - [optional] a boolean value. Default is Null. If true, opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
+;                  $bLoadAsTemplate     - [optional] a boolean value. Default is Null. If True, opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
 ;                  $sFilterName         - [optional] a string value. Default is Null. Name of a LibreOffice filter to use to load the specified document. LibreOffice automatically selects which to use by default.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1000,12 +999,12 @@ EndFunc   ;==>_LOCalc_DocOpen
 ;                  |                               8 = Error setting $iHeight
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: X & Y, on my computer at least, seem to go no lower than 8(X) and 30(Y), if you enter lower than this, it will cause a "property setting Error".
 ;                  If you want more accurate functionality, use the "WinMove" AutoIt function.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -1060,10 +1059,10 @@ Func _LOCalc_DocPosAndSize(ByRef $oDoc, $iX = Null, $iY = Null, $iWidth = Null, 
 	$tWindowSize = $oDoc.CurrentController.Frame.ContainerWindow.getPosSize()
 	If Not IsObj($tWindowSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$iError = ($iX = Null) ? ($iError) : (($tWindowSize.X() = $iX) ? ($iError) : (BitOR($iError, 1)))
-	$iError = ($iY = Null) ? ($iError) : (($tWindowSize.Y() = $iY) ? ($iError) : (BitOR($iError, 2)))
-	$iError = ($iWidth = Null) ? ($iError) : (($tWindowSize.Width() = $iWidth) ? ($iError) : (BitOR($iError, 4)))
-	$iError = ($iHeight = Null) ? ($iError) : (($tWindowSize.Height() = $iHeight) ? ($iError) : (BitOR($iError, 8)))
+	$iError = (__LO_VarsAreNull($iX)) ? ($iError) : (($tWindowSize.X() = $iX) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iY)) ? ($iError) : (($tWindowSize.Y() = $iY) ? ($iError) : (BitOR($iError, 2)))
+	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : (($tWindowSize.Width() = $iWidth) ? ($iError) : (BitOR($iError, 4)))
+	$iError = (__LO_VarsAreNull($iHeight)) ? ($iError) : (($tWindowSize.Height() = $iHeight) ? ($iError) : (BitOR($iError, 8)))
 
 	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_DocPosAndSize
@@ -1092,15 +1091,16 @@ EndFunc   ;==>_LOCalc_DocPosAndSize
 ;                  @Error 1 @Extended 7 Return 0 = $iDuplexMode not an Integer, less than 0 or greater than 3. See Constants, $LOC_DUPLEX_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 8 Return 0 = $sPrinter not a String.
 ;                  @Error 1 @Extended 9 Return 0 = $sFilePathName not a String.
-;                  --Property Setting Errors--
-;                  @Error 4 @Extended 1 Return 0 = Error setting "Printer Name".
-;                  @Error 4 @Extended 2 Return 0 = Error setting "Copies".
-;                  @Error 4 @Extended 3 Return 0 = Error setting "Collate".
-;                  @Error 4 @Extended 4 Return 0 = Error setting "Wait".
-;                  @Error 4 @Extended 5 Return 0 = Error setting "DuplexMode".
-;                  @Error 4 @Extended 6 Return 0 = Error setting "Pages".
-;                  @Error 4 @Extended 7 Return 0 = Error converting PrintToFile Path.
-;                  @Error 4 @Extended 8 Return 0 = Error setting "PrintToFile".
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating "Printer Name" property.
+;                  @Error 2 @Extended 2 Return 0 = Error creating "Copies" property.
+;                  @Error 2 @Extended 3 Return 0 = Error creating "Collate" property.
+;                  @Error 2 @Extended 4 Return 0 = Error creating "Wait" property.
+;                  @Error 2 @Extended 5 Return 0 = Error creating "DuplexMode" property.
+;                  @Error 2 @Extended 6 Return 0 = Error creating "Pages" property.
+;                  @Error 2 @Extended 7 Return 0 = Error creating "PrintToFile" property.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Error converting PrintToFile Path.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success Document was successfully printed.
 ; Author ........: donnyh13
@@ -1139,167 +1139,40 @@ Func _LOCalc_DocPrint(ByRef $oDoc, $iCopies = 1, $bCollate = True, $vPages = "AL
 	$sFilePathName = StringStripWS(StringStripWS($sFilePathName, $__STR_STRIPTRAILING), $__STR_STRIPLEADING)
 	If $sPrinter <> "" Then
 		$asSetPrinterOpt[0] = __LO_SetPropertyValue("Name", $sPrinter)
-		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		$oDoc.setPrinter($asSetPrinterOpt)
 	EndIf
 	$avPrintOpt[0] = __LO_SetPropertyValue("CopyCount", $iCopies)
-	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 2, 0)
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	$avPrintOpt[1] = __LO_SetPropertyValue("Collate", $bCollate)
-	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 3, 0)
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
 	$avPrintOpt[2] = __LO_SetPropertyValue("Wait", $bWait)
-	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 4, 0)
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 
 	$avPrintOpt[3] = __LO_SetPropertyValue("DuplexMode", $iDuplexMode)
-	If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 5, 0)
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 5, 0)
 
 	If $vPages <> "ALL" Then
 		ReDim $avPrintOpt[UBound($avPrintOpt) + 1]
 		$avPrintOpt[UBound($avPrintOpt) - 1] = __LO_SetPropertyValue("Pages", $vPages)
-		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 6, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 6, 0)
 	EndIf
 	If $sFilePathName <> "" Then
 		$sFilePathName = $sFilePathName & ".prn"
 		$sFilePathName = _LO_PathConvert($sFilePathName, $LO_PATHCONV_OFFICE_RETURN)
-		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 7, 0)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		ReDim $avPrintOpt[UBound($avPrintOpt) + 1]
 		$avPrintOpt[UBound($avPrintOpt) - 1] = __LO_SetPropertyValue("FileName", $sFilePathName)
-		If @error Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 8, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 7, 0)
 	EndIf
 	$oDoc.print($avPrintOpt)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_DocPrint
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_DocPrintersAltGetNames
-; Description ...: Alternate function; Retrieve an array of names for all installed printers, or the current default printer.
-; Syntax ........: _LOCalc_DocPrintersAltGetNames([$sPrinterName = ""[, $bReturnDefault = False]])
-; Parameters ....: $sPrinterName        - [optional] a string value. Default is "". Name of the printer to list. Default "" returns the list of all printers. See remarks.
-;                  $bReturnDefault      - [optional] a boolean value. Default is False. If True, returns only the name of the current default printer.
-; Return values .: Success: Array or String.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sPrinterName not a String.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnDefault not a Boolean.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failure Creating Object.
-;                  @Error 2 @Extended 2 Return 0 = Failure retrieving printer list Object.
-;                  --Printer Related Errors--
-;                  @Error 5 @Extended 1 Return 0 = No default printer found.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return String = Returning the default printer name. See remarks.
-;                  @Error 0 @Extended ? Return Array = Returning an array of strings containing all installed printers. See remarks. @Extended is set to the number of results.
-; Author ........: jguinch (_PrintMgr_EnumPrinter)
-; Modified ......: donnyh13 - Added input error checking. Added a return default printer only option.
-; Remarks .......: When $bReturnDefault is False, The function returns all installed printers for the user running the script in an array.
-;                  If $sPrinterName is set, the name must be exact or no results will be found, unless you use an asterisk (*) for partial name searches, either prefixed (*Canon), suffixed (Canon*), or both (*Canon*).
-;                  When $bReturnDefault is True, The function returns only the default printer's name or sets an error if no default printer is found.
-; Related .......: _LOCalc_DocPrintersGetNames
-; Link ..........: https://www.autoitscript.com/forum/topic/155485-printers-management-udf/
-; UDF title......: Printmgr.au3
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOCalc_DocPrintersAltGetNames($sPrinterName = "", $bReturnDefault = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $asPrinterNames[10]
-	Local $sFilter
-	Local $iCount = 0
-	Local Const $wbemFlagReturnImmediately = 0x10, $wbemFlagForwardOnly = 0x20
-	Local $oWMIService, $oPrinters
-
-	If Not IsString($sPrinterName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bReturnDefault) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	If $sPrinterName <> "" Then $sFilter = StringReplace(" Where Name like '" & StringReplace($sPrinterName, "\", "\\") & "'", "*", "%")
-	$oWMIService = ObjGet("winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2")
-	If Not IsObj($oWMIService) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$oPrinters = $oWMIService.ExecQuery("Select * from Win32_Printer" & $sFilter, "WQL", $wbemFlagReturnImmediately + $wbemFlagForwardOnly)
-	If Not IsObj($oPrinters) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-
-	For $oPrinter In $oPrinters
-		Switch $bReturnDefault
-			Case False
-				If $iCount >= (UBound($asPrinterNames) - 1) Then ReDim $asPrinterNames[UBound($asPrinterNames) * 2]
-				$asPrinterNames[$iCount] = $oPrinter.Name
-				$iCount += 1
-
-			Case True
-				If $oPrinter.Default Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPrinter.Name)
-		EndSwitch
-	Next
-	If $bReturnDefault Then Return SetError($__LO_STATUS_PRINTER_RELATED_ERROR, 1, 0)
-
-	ReDim $asPrinterNames[$iCount]
-
-	Return SetError($__LO_STATUS_SUCCESS, $iCount, $asPrinterNames)
-EndFunc   ;==>_LOCalc_DocPrintersAltGetNames
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_DocPrintersGetNames
-; Description ...: Retrieve an array of names for all installed printers, or the current default printer.
-; Syntax ........: _LOCalc_DocPrintersGetNames([$bDefaultOnly = False])
-; Parameters ....: $bDefaultOnly        - [optional] a boolean value. Default is False. If True, returns only the name of the current default printer. Libre 6.3 and up only.
-; Return values .: Success: An array or String.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bDefaultOnly Not a Boolean.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failure Creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failure creating "com.sun.star.awt.PrinterServer" Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Default printer name.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Array of printer names.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.1.
-;                  @Error 6 @Extended 2 Return 0 = Current Libre Office version lower than 6.3.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return String = Returning the default printer name.
-;                  @Error 0 @Extended ? Return Array = Returning an array of strings containing all installed printers. @Extended set to number of results.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: This function works for LibreOffice 4.1 and Up.
-; Related .......: _LOCalc_DocPrintersAltGetNames
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOCalc_DocPrintersGetNames($bDefaultOnly = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oServiceManager, $oPrintServer
-	Local $sDefault
-	Local $asPrinters[0]
-
-	If Not __LO_VersionCheck(4.1) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
-	If Not IsBool($bDefaultOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$oServiceManager = __LO_ServiceManager()
-	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$oPrintServer = $oServiceManager.createInstance("com.sun.star.awt.PrinterServer")
-	If Not IsObj($oPrintServer) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-
-	If $bDefaultOnly Then
-		If Not __LO_VersionCheck(6.3) Then Return SetError($__LO_STATUS_VER_ERROR, 2, 0)
-
-		$sDefault = $oPrintServer.getDefaultPrinterName()
-		If IsString($sDefault) Then Return SetError($__LO_STATUS_SUCCESS, 1, $sDefault)
-
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-	EndIf
-
-	$asPrinters = $oPrintServer.getPrinterNames()
-	If IsArray($asPrinters) Then Return SetError($__LO_STATUS_SUCCESS, UBound($asPrinters), $asPrinters)
-
-	Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-EndFunc   ;==>_LOCalc_DocPrintersGetNames
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_DocRedo
@@ -1512,12 +1385,13 @@ EndFunc   ;==>_LOCalc_DocSave
 ;                  @Error 1 @Extended 3 Return 0 = $sFilterName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $sPassword not a String.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating FilterName Property
+;                  @Error 2 @Extended 2 Return 0 = Error creating Overwrite Property
+;                  @Error 2 @Extended 3 Return 0 = Error creating Password Property
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error Converting Path to/from L.O. URL
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving FilterName.
-;                  @Error 3 @Extended 3 Return 0 = Error setting FilterName Property
-;                  @Error 3 @Extended 4 Return 0 = Error setting Overwrite Property
-;                  @Error 3 @Extended 5 Return 0 = Error setting Password Property
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Successfully Saved the document. Returning document save path.
 ; Author ........: donnyh13
@@ -1545,14 +1419,14 @@ Func _LOCalc_DocSaveAs(ByRef $oDoc, $sFilePath, $sFilterName = "", $bOverwrite =
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$aProperties[0] = __LO_SetPropertyValue("FilterName", $sFilterName)
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If ($bOverwrite <> Null) Then
 		If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		ReDim $aProperties[UBound($aProperties) + 1]
 		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Overwrite", $bOverwrite)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 	EndIf
 
 	If $sPassword <> Null Then
@@ -1560,7 +1434,7 @@ Func _LOCalc_DocSaveAs(ByRef $oDoc, $sFilePath, $sFilterName = "", $bOverwrite =
 
 		ReDim $aProperties[UBound($aProperties) + 1]
 		$aProperties[UBound($aProperties) - 1] = __LO_SetPropertyValue("Password", $sPassword)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 	EndIf
 
 	$oDoc.storeAsURL($sFilePath, $aProperties)
@@ -2090,7 +1964,7 @@ EndFunc   ;==>_LOCalc_DocUndoReset
 ;                  $bValueHighlight     - [optional] a boolean value. Default is Null. If True, Cell contents are displayed in different colors, depending on the content type of the cell.
 ;                  $bAnchors            - [optional] a boolean value. Default is Null. If True, the Anchor icon is displayed when a graphic or other object is selected.
 ;                  $bGrid               - [optional] a boolean value. Default is Null. If True, Gridlines are displayed.
-;                  $iGridColor          - [optional] an integer value (0-16777215). Default is Null. Set the Grid line color in Long Color format. Can be one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3 or a custom value.
+;                  $iGridColor          - [optional] an integer value (0-16777215). Default is Null. The Grid line color, as a RGB Color Integer. Can be one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3 or a custom value.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2119,10 +1993,10 @@ EndFunc   ;==>_LOCalc_DocUndoReset
 ;                  |                               256 = Error setting $iGridColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 9 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_DocViewWindowSettings, _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
@@ -2253,10 +2127,10 @@ EndFunc   ;==>_LOCalc_DocViewDisplaySettings
 ;                  |                               128 = Error setting $bObjects
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -2355,10 +2229,11 @@ EndFunc   ;==>_LOCalc_DocViewWindowSettings
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended 1 Return 0 = Error setting $bVisible.
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $bVisible
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, false if invisible.
+;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $bVisible with Null to return the current visibility setting.
@@ -2374,7 +2249,7 @@ Func _LOCalc_DocVisible(ByRef $oDoc, $bVisible = Null)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($bVisible = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.Frame.ContainerWindow.isVisible())
+	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.Frame.ContainerWindow.isVisible())
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -2394,16 +2269,16 @@ EndFunc   ;==>_LOCalc_DocVisible
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, or less than 0, or greater than number of columns contained in the document.
+;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, less than 0 or greater than number of columns contained in the document.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColumn
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. First visible Column was successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning the first visible column number as an Integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning the first visible column number as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  This will fail if there are currently any frozen Columns.
 ; Related .......:
 ; Link ..........:
@@ -2415,7 +2290,7 @@ Func _LOCalc_DocWindowFirstColumn(ByRef $oDoc, $iColumn = Null)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($iColumn = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.getFirstVisibleColumn())
+	If __LO_VarsAreNull($iColumn) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.getFirstVisibleColumn())
 
 	If Not __LO_IntIsBetween($iColumn, 0, $oDoc.CurrentController.getActiveSheet().Columns.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -2434,16 +2309,16 @@ EndFunc   ;==>_LOCalc_DocWindowFirstColumn
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, or less than 0, or greater than number of Rows contained in the document.
+;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the document.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iRow
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. First visible Row was successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning the first visible row number as an Integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning the first visible row number as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  This will fail if there are currently any frozen Rows.
 ; Related .......:
 ; Link ..........:
@@ -2455,7 +2330,7 @@ Func _LOCalc_DocWindowFirstRow(ByRef $oDoc, $iRow = Null)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($iRow = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.getFirstVisibleRow())
+	If __LO_VarsAreNull($iRow) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.getFirstVisibleRow())
 
 	If Not __LO_IntIsBetween($iRow, 0, $oDoc.CurrentController.getActiveSheet().Rows.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -2476,7 +2351,7 @@ EndFunc   ;==>_LOCalc_DocWindowFirstRow
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to query Document whether the Document view is currently split.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if the Document view is currently split.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Document view is currently split.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2503,8 +2378,8 @@ EndFunc   ;==>_LOCalc_DocWindowIsSplit
 ; Description ...: Split a Document's View either Horizontally, Vertically, or both, or retrieve the current split settings.
 ; Syntax ........: _LOCalc_DocWindowSplit(ByRef $oDoc[, $iX = Null[, $iY = Null[, $bReturnPixels = True]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $iX                  - [optional] an integer value. Default is Null. See remarks. The Horizontal (X) position to split the View, in pixels. Set to 0 for no Horizontal split.
-;                  $iY                  - [optional] an integer value. Default is Null. See remarks. The Vertical (Y) position to split the View, in pixels. Set to 0 to skip.
+;                  $iX                  - [optional] an integer value. Default is Null. See remarks. The Horizontal (X) position to split the View, in pixels. Call with 0 for no Horizontal split.
+;                  $iY                  - [optional] an integer value. Default is Null. See remarks. The Vertical (Y) position to split the View, in pixels. Call with 0 to skip.
 ;                  $bReturnPixels       - [optional] a boolean value. Default is True. See remarks. If True, return value will be in pixels, Else, return value will be Column Number (X), and Row Number (Y).
 ; Return values .: Success: 1, 2 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2515,13 +2390,13 @@ EndFunc   ;==>_LOCalc_DocWindowIsSplit
 ;                  @Error 1 @Extended 4 Return 0 = $iY not an Integer.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in Pixels, in a 2 Element Array with values in order of function parameters.
-;                  @Error 0 @Extended 2 Return Array = Success. All optional parameters were set to Null, returning current settings in Column/Row values, in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in Pixels, in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 2 Return Array = Success. All optional parameters were called with Null, returning current settings in Column/Row values, in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To remove the split view, set both $iX and $iY to 0.
 ;                  $bReturnPixels changes only the return value type, it doesn't change the type of input values to use for $iX and $iY.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -2605,7 +2480,7 @@ EndFunc   ;==>_LOCalc_DocWindowVisibleRange
 ; Description ...: Modify the zoom value for a document.
 ; Syntax ........: _LOCalc_DocZoom(ByRef $oDoc[, $iZoomType = Null[, $iZoom = Null]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $iZoomType           - [optional] an integer value (0 - 4). Default is Null. The Zoom type, See remarks. See constants $LOC_ZOOMTYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iZoomType           - [optional] an integer value (0-4). Default is Null. The Zoom type, See remarks. See constants $LOC_ZOOMTYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iZoom               - [optional] an integer value (20-600). Default is Null. The zoom percentage. Only valid if Zoom type is set to "By Value"
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2618,11 +2493,11 @@ EndFunc   ;==>_LOCalc_DocWindowVisibleRange
 ;                  |                               1 = Error setting $iZoom
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Zoom type always has the value of $LOC_ZOOMTYPE_BY_VALUE(3), when using the other zoom types, the value stays the same, but the zoom level is modified. Consequently, I have not added an error check for the Zoom Type property being correctly set.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:

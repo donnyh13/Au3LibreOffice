@@ -27,6 +27,7 @@
 ; __LO_ServiceManager
 ; __LO_SetPortableServiceManager
 ; __LO_SetPropertyValue
+; __LO_StylesGetNames
 ; __LO_VarsAreNull
 ; __LO_VersionCheck
 ; ===============================================================================================================================
@@ -684,6 +685,124 @@ Func __LO_SetPropertyValue($sName, $vValue)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $tProperties)
 EndFunc   ;==>__LO_SetPropertyValue
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_StylesGetNames
+; Description ...: Retrieve an Array of Style names available.
+; Syntax ........: __LO_StylesGetNames(ByRef $oDoc, $sStyleFamily[, $bUserOnly = False[, $bAppliedOnly = False[, $bDisplayName = False]]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LO*_DocOpen, _LO*_DocConnect, or _LO*_DocCreate function.
+;                  $sStyleFamily        - a string value. The Style type to retrieve names for.
+;                  $bUserOnly           - [optional] a boolean value. Default is False. If True, only user-created Styles are returned.
+;                  $bAppliedOnly        - [optional] a boolean value. Default is False. If True, only applied styles are returned.
+;                  $bDisplayName        - [optional] a boolean value. Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
+; Return values .: Success: Array
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sStyleFamily not a String.
+;                  @Error 1 @Extended 3 Return 0 = $bUserOnly not a Boolean.
+;                  @Error 1 @Extended 4 Return 0 = $bAppliedOnly not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = $bDisplayName not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Style family called in $sStyleFamily doesn't exist.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve called Style family Object.
+;                  --Success--
+;                  @Error 0 @Extended 1 Return Array = Success. An Array containing all Styles matching the called parameters. See remarks.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If Only a Document object is called, all available Paragraph styles will be returned.
+;                  If Both $bUserOnly and $bAppliedOnly are called with True, only User-Created styles that are applied are returned.
+;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Paragraph Styling.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_StylesGetNames(ByRef $oDoc, $sStyleFamily, $bUserOnly = False, $bAppliedOnly = False, $bDisplayName = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oStyles
+	Local $asStyles[0]
+	Local $iCount = 0
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sStyleFamily) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bUserOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bAppliedOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsBool($bDisplayName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not $oDoc.StyleFamilies.hasByName($sStyleFamily) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+	$oStyles = $oDoc.StyleFamilies.getByName($sStyleFamily)
+	If Not IsObj($oStyles) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	ReDim $asStyles[$oStyles.getCount()]
+
+	If $bUserOnly And $bAppliedOnly Then
+		For $i = 0 To $oStyles.getCount() - 1
+			If ($oStyles.getByIndex($i).isUserDefined()) And ($oStyles.getByIndex($i).isInUse()) Then
+				If $bDisplayName Then
+					$asStyles[$iCount] = $oStyles.getByIndex($i).DisplayName()
+
+				Else
+					$asStyles[$iCount] = $oStyles.getByIndex($i).Name()
+				EndIf
+				$iCount += 1
+			EndIf
+
+			Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		ReDim $asStyles[$iCount]
+
+	ElseIf $bUserOnly Then
+		For $i = 0 To $oStyles.getCount() - 1
+			If $oStyles.getByIndex($i).isUserDefined() Then
+				If $bDisplayName Then
+					$asStyles[$iCount] = $oStyles.getByIndex($i).DisplayName()
+
+				Else
+					$asStyles[$iCount] = $oStyles.getByIndex($i).Name()
+				EndIf
+				$iCount += 1
+			EndIf
+
+			Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		ReDim $asStyles[$iCount]
+
+	ElseIf $bAppliedOnly Then
+		For $i = 0 To $oStyles.getCount() - 1
+			If $oStyles.getByIndex($i).isInUse() Then
+				If $bDisplayName Then
+					$asStyles[$iCount] = $oStyles.getByIndex($i).DisplayName()
+
+				Else
+					$asStyles[$iCount] = $oStyles.getByIndex($i).Name()
+				EndIf
+				$iCount += 1
+			EndIf
+
+			Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		ReDim $asStyles[$iCount]
+
+	Else ; Get all Styles.
+		For $i = 0 To $oStyles.getCount() - 1
+			If $bDisplayName Then
+				$asStyles[$i] = $oStyles.getByIndex($i).DisplayName()
+
+			Else
+				$asStyles[$i] = $oStyles.getByIndex($i).Name()
+			EndIf
+
+			Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 1, $asStyles)
+EndFunc   ;==>__LO_StylesGetNames
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_VarsAreNull

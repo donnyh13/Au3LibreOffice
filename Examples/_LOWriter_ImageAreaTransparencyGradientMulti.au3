@@ -21,8 +21,8 @@ Func Example()
 	$oImage = _LOWriter_ImageInsert($oDoc, $sImage, $oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to insert an Image. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Image Background Color settings. Background color = $LO_COLOR_TEAL, Background color is transparent = False
-	_LOWriter_ImageAreaColor($oImage, $LO_COLOR_TEAL, False)
+	; Modify the Image Background Color settings. Background color = $LO_COLOR_TEAL
+	_LOWriter_ImageAreaColor($oImage, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Image Transparency Gradient settings to: Gradient Type = $LOW_GRAD_TYPE_ELLIPTICAL, XCenter to 75%, YCenter to 45%, Angle to 180 degrees

@@ -13,15 +13,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Page Style's Object, to modify its settings.
-	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Default Page Style")
+	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Turn Header on.
 	_LOWriter_PageStyleHeader($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style headers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Header Background Color to $LO_COLOR_RED, Color transparent to False.
-	_LOWriter_PageStyleHeaderAreaColor($oPageStyle, $LO_COLOR_RED, False)
+	; Set Header Background Color to $LO_COLOR_RED
+	_LOWriter_PageStyleHeaderAreaColor($oPageStyle, $LO_COLOR_RED)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Page style Header Transparency settings to 55% transparent

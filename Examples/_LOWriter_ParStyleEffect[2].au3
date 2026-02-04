@@ -20,11 +20,11 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the "Default Paragraph Style" object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Default Paragraph Style")
+	; Retrieve the Default Paragraph Style object.
+	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Default Paragraph Style" Font effects to shadow = True.
+	; Set Default Paragraph Style Font effects to shadow = True.
 	_LOWriter_ParStyleEffect($oParStyle, Null, Null, Null, Null, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -40,7 +40,7 @@ Func Example()
 			"Do the words have a shadow? True/False: " & $avParStyleSettings[4] & @CRLF & @CRLF & _
 			"I will now set shadow to false, and Outline to True.")
 
-	; Set "Default Paragraph Style" Font effects to shadow = False and Outline = True.
+	; Set "Standard" Font effects to shadow = False and Outline = True.
 	_LOWriter_ParStyleEffect($oParStyle, Null, Null, Null, True, False)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -56,7 +56,7 @@ Func Example()
 			"Do the words have a shadow? True/False: " & $avParStyleSettings[4] & @CRLF & @CRLF & _
 			"I will next set Outline to false, and set Hidden to true.")
 
-	; Set "Default Paragraph Style" Font effects Outline to False, and Hidden to true.
+	; Set "Standard" Font effects Outline to False, and Hidden to true.
 	_LOWriter_ParStyleEffect($oParStyle, Null, Null, True, False, Null)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

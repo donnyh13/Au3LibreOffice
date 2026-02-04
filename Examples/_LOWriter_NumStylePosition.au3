@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oNumStyle, $oViewCursor
-	Local $iMicrometers, $iMicrometers2, $iMicrometers3
+	Local $iHMM, $iHMM2, $iHMM3
 	Local $aavSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -22,7 +22,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style at the View Cursor to the new style.
-	_LOWriter_NumStyleSet($oDoc, $oViewCursor, "Test Style")
+	_LOWriter_NumStyleCurrent($oDoc, $oViewCursor, "Test Style")
 	If @error Then _ERROR($oDoc, "Failed to Set the Numbering Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
@@ -30,21 +30,21 @@ Func Example()
 			"Line 2" & @LF & "Line 2.1" & @LF & "Line 2.2" & @CR & "Line 3" & @LF & "Line 3.1" & @LF & "Line 3.2")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/2" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(.5)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/2" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(.5, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 3/4" to Micrometers
-	$iMicrometers2 = _LO_ConvertToMicrometer(.75)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 3/4" to Hundredths of a Millimeter (HMM)
+	$iHMM2 = _LO_UnitConvert(.75, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1" to Micrometers
-	$iMicrometers3 = _LO_ConvertToMicrometer(1)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1" to Hundredths of a Millimeter (HMM)
+	$iHMM3 = _LO_UnitConvert(1, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Numbering Style position settings: Modify all Levels (0), Aligned at = 1/2", Numbering Align = $LOW_ORIENT_HORI_CENTER,
 	; Followed by = $LOW_FOLLOW_BY_TABSTOP, TabStop = 3/4", Indent = 1"
-	_LOWriter_NumStylePosition($oDoc, $oNumStyle, 0, $iMicrometers, $LOW_ORIENT_HORI_CENTER, $LOW_FOLLOW_BY_TABSTOP, $iMicrometers2, $iMicrometers3)
+	_LOWriter_NumStylePosition($oDoc, $oNumStyle, 0, $iHMM, $LOW_ORIENT_HORI_CENTER, $LOW_FOLLOW_BY_TABSTOP, $iHMM2, $iHMM3)
 	If @error Then _ERROR($oDoc, "Failed to set Numbering Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Numbering Style settings for all levels. Return will be an array containing arrays with values in order of function parameters.
@@ -53,11 +53,11 @@ Func Example()
 
 	For $i = 0 To UBound($aavSettings) - 1
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "The Numbering style's current Position settings for level " & ($i + 1) & " are as follows: " & @CRLF & _
-				"The First line indent is, in Micrometers: " & ($aavSettings[$i])[0] & @CRLF & _
+				"The First line indent is, in Hundredths of a Millimeter (HMM): " & ($aavSettings[$i])[0] & @CRLF & _
 				"The Numbering symbols are aligned to, (see UDF constants): " & ($aavSettings[$i])[1] & @CRLF & _
 				"The Numbering Symbol is followed by, (see UDF Constants): " & ($aavSettings[$i])[2] & @CRLF & _
-				"The Tab Stop size following the Numbering symbols is, in Micrometers: " & ($aavSettings[$i])[3] & @CRLF & _
-				"The indent from the left page margin to the Numbering symbols is, in micrometers: " & ($aavSettings[$i])[4])
+				"The Tab Stop size following the Numbering symbols is, in Hundredths of a Millimeter (HMM): " & ($aavSettings[$i])[3] & @CRLF & _
+				"The indent from the left page margin to the Numbering symbols is, in Hundredths of a Millimeter (HMM): " & ($aavSettings[$i])[4])
 	Next
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

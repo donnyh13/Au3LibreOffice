@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor
-	Local $iMicrometers, $iTabStop
+	Local $iHMM, $iTabStop
 	Local $bDeleted
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -25,12 +25,12 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GOTO_START)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a TabStop at 1/4" Tab Stop position.
-	$iTabStop = _LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iMicrometers)
+	$iTabStop = _LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to Create a Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Delete the newly created tab stop.

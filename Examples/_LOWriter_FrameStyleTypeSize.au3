@@ -26,11 +26,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame style's size settings are as follows: " & @CRLF & _
-			"The Frame style width is, in Micrometers: " & $avSettings[0] & @CRLF & _
+			"The Frame style width is, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
 			"The frame style relative width percentage is: " & $avSettings[1] & @CRLF & _
 			"The width is relative to what? (See UDF Constants): " & $avSettings[2] & @CRLF & _
 			"Automatic width? True/False: " & $avSettings[3] & @CRLF & _
-			"The Frame style height is, in Micrometers: " & $avSettings[4] & @CRLF & _
+			"The Frame style height is, in Hundredths of a Millimeter (HMM): " & $avSettings[4] & @CRLF & _
 			"The frame style relative height percentage is: " & $avSettings[5] & @CRLF & _
 			"The height is relative to what? (See UDF Constants): " & $avSettings[6] & @CRLF & _
 			"Automatic Height? True/False: " & $avSettings[7] & @CRLF & _

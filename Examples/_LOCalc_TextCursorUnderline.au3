@@ -50,7 +50,7 @@ Func Example()
 			"Are words only underlined? True/False: " & $avSettings[0] & @CRLF & _
 			"The Underline style is (See UDF Constants): " & $avSettings[1] & @CRLF & _
 			"Is the underline colored? True/False: " & $avSettings[2] & @CRLF & _
-			"The underline color is (in Long Integer format): " & $avSettings[3])
+			"The underline color is (as a RGB Color Integer): " & $avSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

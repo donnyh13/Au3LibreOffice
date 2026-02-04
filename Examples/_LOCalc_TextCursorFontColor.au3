@@ -46,7 +46,7 @@ Func Example()
 	$iColor = _LOCalc_TextCursorFontColor($oTextCursor)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current format settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Character font color at the Cursor's current position is (In Long integer format: " & $iColor)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Character font color at the Cursor's current position is (as a RGB Color Integer): " & $iColor)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

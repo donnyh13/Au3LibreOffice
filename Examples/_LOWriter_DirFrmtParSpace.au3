@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor
-	Local $iMicrometers, $iMicrometers2
+	Local $iHMM, $iHMM2
 	Local $avSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -30,17 +30,17 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_DOWN, 1)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/2" to Micrometers
-	$iMicrometers2 = _LO_ConvertToMicrometer(0.5)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/2" to Hundredths of a Millimeter (HMM)
+	$iHMM2 = _LO_UnitConvert(0.5, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the paragraph at the current cursor's location line space settings to, 1/4" above paragraph, 1/4" below paragraph, AddSpace = True,
 	; Line space mode = $LOW_LINE_SPC_MODE_FIX, Line space height = 1/2",  and Page Line Space = False.
-	_LOWriter_DirFrmtParSpace($oViewCursor, $iMicrometers, $iMicrometers, True, $LOW_LINE_SPC_MODE_FIX, $iMicrometers2, False)
+	_LOWriter_DirFrmtParSpace($oViewCursor, $iHMM, $iHMM, True, $LOW_LINE_SPC_MODE_FIX, $iHMM2, False)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -48,11 +48,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Paragraph Line Spacing settings are as follows: " & @CRLF & _
-			"Spacing above the paragraph, in Micrometers: " & $avSettings[0] & @CRLF & _
-			"Spacing below the paragraph, in Micrometers: " & $avSettings[1] & @CRLF & _
+			"Spacing above the paragraph, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
+			"Spacing below the paragraph, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
 			"Do not apply spacing if above and/or below paragraph are the same style? True/False: " & $avSettings[2] & @CRLF & _
 			"Line spacing mode, (See UDF constants): " & $avSettings[3] & @CRLF & _
-			"Line spacing distance, in micrometers except for $LOW_LINE_SPC_MODE_PROP(0), which is a percentage: " & $avSettings[4] & @CRLF & @CRLF & _
+			"Line spacing distance, in Hundredths of a Millimeter (HMM) except for $LOW_LINE_SPC_MODE_PROP(0), which is a percentage: " & $avSettings[4] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")
 
 	; Remove direct formatting

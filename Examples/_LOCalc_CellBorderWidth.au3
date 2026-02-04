@@ -28,7 +28,7 @@ Func Example()
 	$avSettings = _LOCalc_CellBorderWidth($oCell)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell's current settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Cell B2's Border Width settings are as follows (in Micrometers): " & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Cell B2's Border Width settings are as follows (in Hundredths of a Millimeter (HMM)): " & @CRLF & _
 			"Top Border Width: " & $avSettings[0] & @CRLF & _
 			"Bottom Border Width: " & $avSettings[1] & @CRLF & _
 			"Left Border Width: " & $avSettings[2] & @CRLF & _
@@ -51,7 +51,7 @@ Func Example()
 	$avSettings = _LOCalc_CellBorderWidth($oCellRange)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell Range's current settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Cell Range D2-E5's Border Width settings are as follows (in Micrometers): " & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Cell Range D2-E5's Border Width settings are as follows (in Hundredths of a Millimeter (HMM)): " & @CRLF & _
 			"Top Border Width: " & $avSettings[0] & @CRLF & _
 			"Bottom Border Width: " & $avSettings[1] & @CRLF & _
 			"Left Border Width: " & $avSettings[2] & @CRLF & _

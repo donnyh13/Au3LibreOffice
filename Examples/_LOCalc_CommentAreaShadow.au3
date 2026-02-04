@@ -38,8 +38,8 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Comment's Shadow settings are as follows: " & @CRLF & _
 			"Is a shadow applied to the Comment? True/False: " & $avSettings[0] & @CRLF & _
-			"The Color of the Shadow is, in Long Color format: " & $avSettings[1] & @CRLF & _
-			"The distance of the shadow from the Comment is, in Micrometers: " & $avSettings[2] & @CRLF & _
+			"The Color of the Shadow is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"The distance of the shadow from the Comment is, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
 			"The percentage of transparency is: " & $avSettings[3] & @CRLF & _
 			"The amount of blur applied to the shadow is, in Printer's Points: " & $avSettings[4] & @CRLF & _
 			"The Shadow location is (See UDF Constants): " & $avSettings[5])

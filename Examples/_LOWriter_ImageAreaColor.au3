@@ -7,7 +7,7 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oImage
 	Local $sImage = @ScriptDir & "\Extras\Transparent.png"
-	Local $avSettings
+	Local $iColor
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -21,17 +21,15 @@ Func Example()
 	$oImage = _LOWriter_ImageInsert($oDoc, $sImage, $oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to insert an Image. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Image Background Color settings. Background color = $LO_COLOR_TEAL, Background color is transparent = False
-	_LOWriter_ImageAreaColor($oImage, $LO_COLOR_TEAL, False)
+	; Modify the Image Background Color settings. Background color = $LO_COLOR_TEAL
+	_LOWriter_ImageAreaColor($oImage, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Image settings. Return will be an array in order of function parameters.
-	$avSettings = _LOWriter_ImageAreaColor($oImage)
+	$iColor = _LOWriter_ImageAreaColor($oImage)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Image's Background color settings are as follows: " & @CRLF & _
-			"The Image's Background color is, in Long color format: " & $avSettings[0] & @CRLF & _
-			"Is the Image's background color transparent? True/False: " & $avSettings[1])
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Image's Background color is (as a RGB Color Integer): " & $iColor)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

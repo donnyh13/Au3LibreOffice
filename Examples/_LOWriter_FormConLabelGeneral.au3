@@ -42,9 +42,9 @@ Func Example()
 			"This is the current Font settings. I'll just check if it is a Map. " & IsMap($avControl[6]) & @CRLF & _
 			"The Horizontal Alignment is: (See UDF Constants) " & $avControl[7] & @CRLF & _
 			"The Vertical Alignment is: (See UDF Constants) " & $avControl[8] & @CRLF & _
-			"The Long Integer background color is: " & $avControl[9] & @CRLF & _
+			"The background color is (as a RGB Color Integer): " & $avControl[9] & @CRLF & _
 			"The Border Style is (See UDF Constants): " & $avControl[10] & @CRLF & _
-			"The Border color is, in Long Integer format: " & $avControl[11] & @CRLF & _
+			"The Border color is (as a RGB Color Integer): " & $avControl[11] & @CRLF & _
 			"Will line breaks be allowed to be used? True/False: " & $avControl[12] & @CRLF & _
 			"The Additional Information text is: " & $avControl[13] & @CRLF & _
 			"The Help text is: " & $avControl[14] & @CRLF & _

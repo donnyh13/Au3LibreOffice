@@ -16,9 +16,9 @@ Func Example()
 	$oParStyle = _LOWriter_ParStyleCreate($oDoc, "NewParStyle")
 	If @error Then _ERROR($oDoc, "Failed to Create a new Paragraph Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Change the paragraph Style's name to "New-Par-Name", Set the follow style to "List", the parent style to "Default Paragraph Style",
+	; Change the paragraph Style's name to "New-Par-Name", Set the follow style to "List", the parent style to Default Paragraph Style,
 	; And Auto update To True, and hidden to False
-	_LOWriter_ParStyleOrganizer($oDoc, $oParStyle, "New-Par-Name", "List", "Default Paragraph Style", True, False)
+	_LOWriter_ParStyleOrganizer($oDoc, $oParStyle, "New-Par-Name", "List", "Standard", True, False)
 	If @error Then _ERROR($oDoc, "Failed to modify Paragraph Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

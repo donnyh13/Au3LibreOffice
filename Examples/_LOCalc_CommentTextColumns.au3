@@ -28,7 +28,7 @@ Func Example()
 	_LOCalc_CommentVisible($oComment, True)
 	If @error Then _ERROR($oDoc, "Failed to set comment visibility. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Comment's Column settings to: Use 3 Columns, and set a spacing of 280 Micrometers.
+	; Modify the Comment's Column settings to: Use 3 Columns, and set a spacing of 280 Hundredths of a Millimeter (HMM).
 	_LOCalc_CommentTextColumns($oDoc, $oComment, 3, 280)
 	If @error Then _ERROR($oDoc, "Failed to set Comment settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -38,7 +38,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Comment's Column settings are as follows: " & @CRLF & _
 			"The Comment Box currently has: " & $avSettings[0] & " Columns" & @CRLF & _
-			"The Spacing between the Columns is, in Micrometers: " & $avSettings[1])
+			"The Spacing between the Columns is, in Hundredths of a Millimeter (HMM): " & $avSettings[1])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

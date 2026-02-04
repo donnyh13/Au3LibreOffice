@@ -29,12 +29,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell Style's current settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Default Cell Style's Border color settings are as follows: " & @CRLF & _
-			"Top Border color, in Long Color Format: " & $avSettings[0] & @CRLF & _
-			"Bottom Border color, in Long Color Format: " & $avSettings[1] & @CRLF & _
-			"Left Border color, in Long Color Format: " & $avSettings[2] & @CRLF & _
-			"Right Border color, in Long Color Format: " & $avSettings[3] & @CRLF & _
-			"Top-Left to Bottom-Right Diagonal Border color, in Long Color Format: " & $avSettings[4] & @CRLF & _
-			"Bottom-Left to Top-Right Diagonal Border color, in Long Color Format: " & $avSettings[5])
+			"Top Border color (as a RGB Color Integer): " & $avSettings[0] & @CRLF & _
+			"Bottom Border color (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"Left Border color (as a RGB Color Integer): " & $avSettings[2] & @CRLF & _
+			"Right Border color (as a RGB Color Integer): " & $avSettings[3] & @CRLF & _
+			"Top-Left to Bottom-Right Diagonal Border color (as a RGB Color Integer): " & $avSettings[4] & @CRLF & _
+			"Bottom-Left to Top-Right Diagonal Border color (as a RGB Color Integer): " & $avSettings[5])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

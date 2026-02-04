@@ -20,11 +20,11 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the "Default Paragraph Style" object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Default Paragraph Style")
+	; Retrieve the Default Paragraph Style object.
+	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Default Paragraph Style" underline settings to Words only = True, Underline style $LOW_UNDERLINE_BOLD_DASH_DOT, Underline has
+	; Set Default Paragraph Style underline settings to Words only = True, Underline style $LOW_UNDERLINE_BOLD_DASH_DOT, Underline has
 	; Color = True, and Color to $LO_COLOR_BROWN
 	_LOWriter_ParStyleUnderLine($oParStyle, True, $LOW_UNDERLINE_BOLD_DASH_DOT, True, $LO_COLOR_BROWN)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
@@ -37,7 +37,7 @@ Func Example()
 			"Underline words only? True/False: " & $avParStyleSettings[0] & @CRLF & _
 			"Underline style (See UDF constants): " & $avParStyleSettings[1] & @CRLF & _
 			"Underline has color? True/False: " & $avParStyleSettings[2] & @CRLF & _
-			"Underline color, in long color format: " & $avParStyleSettings[3])
+			"Underline color is (as a RGB Color Integer): " & $avParStyleSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

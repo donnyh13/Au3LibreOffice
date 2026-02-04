@@ -6,7 +6,8 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor
-	Local $asParStyles
+	Local $asParStyles, $asParStylesDisplay
+	Local $sStyles = ""
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -20,6 +21,10 @@ Func Example()
 	$asParStyles = _LOWriter_ParStylesGetNames($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve array of Paragraph style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Retrieve Array of Paragraph Style Display names.
+	$asParStylesDisplay = _LOWriter_ParStylesGetNames($oDoc, False, False, True)
+	If @error Then _ERROR($oDoc, "Failed to retrieve array of Paragraph style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now insert a list of available Paragraph styles. There are " & @extended & " results.")
 
 	; Insert some text.
@@ -27,13 +32,24 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To (UBound($asParStyles) - 1)
-		; Insert the Paragraph Style name.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asParStyles[$i] & @CR)
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+		If ($asParStyles[$i] <> $asParStylesDisplay[$i]) Then
+			$sStyles &= $asParStyles[$i] & @LF & "(Display Name: " & $asParStylesDisplay[$i] & ")" & @CR & @CR
+
+		Else
+			$sStyles &= $asParStyles[$i] & @CR & @CR
+		EndIf
 	Next
+
+	; Insert the Style names.
+	_LOWriter_DocInsertString($oDoc, $oViewCursor, $sStyles)
+	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Paragraph Style names that are applied to the document
 	$asParStyles = _LOWriter_ParStylesGetNames($oDoc, False, True)
+	If @error Then _ERROR($oDoc, "Failed to retrieve array of Paragraph style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve Array of Paragraph Style display names that are applied to the document
+	$asParStylesDisplay = _LOWriter_ParStylesGetNames($oDoc, False, True, True)
 	If @error Then _ERROR($oDoc, "Failed to retrieve array of Paragraph style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now display a list of used Paragraph styles. There is " & @extended & " result.")
@@ -50,11 +66,20 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The Paragraph Styles currently in use in this document are:" & @CR & @CR, True)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	$sStyles = ""
+
 	For $i = 0 To (UBound($asParStyles) - 1)
-		; Insert the Paragraph Style name.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asParStyles[$i] & @CR)
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+		If ($asParStyles[$i] <> $asParStylesDisplay[$i]) Then
+			$sStyles &= $asParStyles[$i] & @LF & "(Display Name: " & $asParStylesDisplay[$i] & ")" & @CR & @CR
+
+		Else
+			$sStyles &= $asParStyles[$i] & @CR & @CR
+		EndIf
 	Next
+
+	; Insert the Paragraph Style names.
+	_LOWriter_DocInsertString($oDoc, $oViewCursor, $sStyles)
+	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

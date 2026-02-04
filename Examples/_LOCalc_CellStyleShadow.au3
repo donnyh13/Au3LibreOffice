@@ -7,7 +7,7 @@ Example()
 Func Example()
 	Local $oDoc, $oSheet, $oCellStyle, $oCell
 	Local $avSettings[0]
-	Local $iMicrometers
+	Local $iHMM
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
@@ -37,12 +37,12 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Shadow to 1/4" wide, Color to $LO_COLOR_PURPLE, Transparent to false, and location to $LOC_SHADOW_TOP_LEFT
-	_LOCalc_CellStyleShadow($oCellStyle, $iMicrometers, $LO_COLOR_PURPLE, False, $LOC_SHADOW_TOP_LEFT)
+	; Set the Cell Style's Shadow to 1/4" wide, Color to $LO_COLOR_PURPLE, and location to $LOC_SHADOW_TOP_LEFT
+	_LOCalc_CellStyleShadow($oCellStyle, $iHMM, $LO_COLOR_PURPLE, $LOC_SHADOW_TOP_LEFT)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -50,10 +50,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell Style's Shadow settings are as follows: " & @CRLF & _
-			"Shadow width, in Micrometers: " & $avSettings[0] & @CRLF & _
-			"Shadow color in long color format: " & $avSettings[1] & @CRLF & _
-			"Is shadow color transparent? True/False: " & $avSettings[2] & @CRLF & _
-			"Shadow location, (see UDF Constants): " & $avSettings[3])
+			"Shadow width, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
+			"Shadow color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"Shadow location, (see UDF Constants): " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

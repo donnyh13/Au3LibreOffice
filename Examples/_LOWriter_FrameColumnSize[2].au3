@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oFrame
-	Local $iMicrometers
+	Local $iHMM
 	Local $avSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -17,7 +17,7 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Frame into the document at the ViewCursor position, and 3000x3000 Micrometers wide.
+	; Insert a Frame into the document at the ViewCursor position, and 3000x3000 Hundredths of a Millimeter (HMM) wide.
 	$oFrame = _LOWriter_FrameCreate($oDoc, $oViewCursor, Null, 3000, 3000)
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -25,12 +25,12 @@ Func Example()
 	_LOWriter_FrameColumnSettings($oFrame, 4)
 	If @error Then _ERROR($oDoc, "Failed to modify Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Frame Column size settings for column 3, set auto width to False, and spacing for this specific column to 1/4"
-	_LOWriter_FrameColumnSize($oFrame, 3, True, Null, $iMicrometers)
+	_LOWriter_FrameColumnSize($oFrame, 3, True, Null, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame settings. Return will be an array in order of function parameters.
@@ -39,9 +39,9 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame's current Column size settings are as follows: " & @CRLF & _
 			"Is Column width automatically adjusted? True/False: " & $avSettings[0] & @CRLF & _
-			"The Global Spacing value for the entire frame, in Micrometers (If there is one): " & $avSettings[1] & @CRLF & _
-			"The Spacing value between this column and the next column to the right is, in Micrometers: " & $avSettings[2] & @CRLF & _
-			"The width of this column, in Micrometers: " & $avSettings[3] & @CRLF & _
+			"The Global Spacing value for the entire frame, in Hundredths of a Millimeter (HMM) (If there is one): " & $avSettings[1] & @CRLF & _
+			"The Spacing value between this column and the next column to the right is, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
+			"The width of this column, in Hundredths of a Millimeter (HMM): " & $avSettings[3] & @CRLF & _
 			"Note: This value will be different from the UI value, even when converted to Inches or Centimeters, because the returned width value is a " & _
 			"relative width, not a metric width, which is why I don't know how to set this value appropriately.")
 

@@ -31,10 +31,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Image's size settings are as follows: " & @CRLF & _
-			"The Image width is, in Micrometers: " & $avSettings[0] & @CRLF & _
+			"The Image width is, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
 			"The Image relative width percentage is: " & $avSettings[1] & @CRLF & _
 			"The width is relative to what? (See UDF Constants): " & $avSettings[2] & @CRLF & _
-			"The Image height is, in Micrometers: " & $avSettings[3] & @CRLF & _
+			"The Image height is, in Hundredths of a Millimeter (HMM): " & $avSettings[3] & @CRLF & _
 			"The Image relative height percentage is: " & $avSettings[4] & @CRLF & _
 			"The height is relative to what? (See UDF Constants): " & $avSettings[5] & @CRLF & _
 			"Keep Height width Ratio? True/False: " & $avSettings[6])

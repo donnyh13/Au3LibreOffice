@@ -41,7 +41,7 @@ Func Example()
 			"If the Control is a Tab Stop position, what order position is it? " & $avControl[5] & @CRLF & _
 			"The delay in Milliseconds between button repeats is: " & $avControl[6] & @CRLF & _
 			"This is the current Font settings. I'll just check if it is a Map. " & IsMap($avControl[7]) & @CRLF & _
-			"The Long Integer background color is: " & $avControl[8] & @CRLF & _
+			"The background color is (as a RGB Color Integer): " & $avControl[8] & @CRLF & _
 			"The Border Style is (See UDF Constants): " & $avControl[9] & @CRLF & _
 			"Are Small icons used? True/False: " & $avControl[10] & @CRLF & _
 			"Are positioning items shown? True/False: " & $avControl[11] & @CRLF & _

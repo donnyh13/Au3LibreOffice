@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-#Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 #include-once
 
 ; Main LibreOffice Includes
@@ -44,7 +44,7 @@
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor Data Type.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success, Return value will be one of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 0 @Extended 0 Return Integer = Success. Return value will be one of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns what type of data a cursor is currently located in, such as a TextTable, Footnote etc.
@@ -75,9 +75,9 @@ EndFunc   ;==>_LOWriter_CursorGetDataType
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFlag not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iFlag set to flag not available for "Text" cursor.
-;                  @Error 1 @Extended 4 Return 0 = $iFlag set to flag not available for "Table" cursor.
-;                  @Error 1 @Extended 5 Return 0 = $iFlag set to flag not available for "View" cursor.
+;                  @Error 1 @Extended 3 Return 0 = Flag called in $iFlag not available for "Text" cursor.
+;                  @Error 1 @Extended 4 Return 0 = Flag called in $iFlag not available for "Table" cursor.
+;                  @Error 1 @Extended 5 Return 0 = Flag called in $iFlag not available for "View" cursor.
 ;                  @Error 1 @Extended 6 Return 0 = $oCursor unknown cursor type.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor Type.
@@ -173,7 +173,7 @@ EndFunc   ;==>_LOWriter_CursorGetStatus
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor Type.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success, Return value will be one of the Constants, $LOW_CURTYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 0 @Extended 0 Return Integer = Success. Return value will be one of the Constants, $LOW_CURTYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Will also work for Paragraph object and paragraph section objects.
@@ -256,17 +256,17 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 ;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer.
 ;                  @Error 1 @Extended 3 Return 0 = $iMove mismatch with Cursor type. See Cursor Type/Move Type Constants, $LOW_VIEWCUR_, $LOW_TEXTCUR_, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iCount not an integer or is a negative.
+;                  @Error 1 @Extended 4 Return 0 = $iCount not an Integer or is a negative.
 ;                  @Error 1 @Extended 5 Return 0 = $bSelect not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error determining cursor type.
 ;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
 ;                  @Error 3 @Extended 3 Return 0 = $oCursor Object unknown cursor type.
 ;                  --Success--
-;                  @Error 0 @Extended ? Return Boolean = Success, Cursor object movement was processed successfully. Returns True if the full count of movements were successful, else false if none or only partially successful. @Extended set to number of successful movements. Or Page Number for "gotoPage" command. See Remarks
+;                  @Error 0 @Extended ? Return Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. Or Page Number for "gotoPage" command. See Remarks
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $iMove may be set to any of the following constants depending on the Cursor type you are intending to move.
+; Remarks .......: $iMove may be called with any of the following constants depending on the Cursor type you are intending to move.
 ;                  Only some movements accept movement amounts (such as "goRight" 2) etc. Also only some accept creating/ extending a selection of text/ data. They will be specified below.
 ;                  To Clear /Unselect a current selection, you can input a move such as "goRight", 0, False.
 ;                  #Cursor Movement Constants which accept Number of Moves and Selecting:

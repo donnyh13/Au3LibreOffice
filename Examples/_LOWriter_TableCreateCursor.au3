@@ -18,12 +18,8 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I am going to insert a table so that I can demonstrate a Table Cursor.")
 
 	; Create a Table, 5 rows, 4 columns
-	$oTable = _LOWriter_TableCreate($oDoc, 5, 4)
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 4, 5)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert the Table into the document.
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Table Cursor at cell A1, which is the first cell of the table.
 	$oTableCursor = _LOWriter_TableCreateCursor($oDoc, $oTable, "A1")

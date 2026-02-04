@@ -36,7 +36,7 @@ Func Example()
 	$iColor = _LOCalc_CommentAreaColor($oComment)
 	If @error Then _ERROR($oDoc, "Failed to retrieve comment Area Color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Comment's current background color is, in Long Color format: " & $iColor)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Comment's current background color is (as a RGB Color Integer): " & $iColor)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

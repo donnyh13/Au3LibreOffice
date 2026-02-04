@@ -22,7 +22,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the last paragraph to Paragraph Style Title using the View Cursor
-	_LOWriter_ParStyleSet($oDoc, $oViewCursor, "Title")
+	_LOWriter_ParStyleCurrent($oDoc, $oViewCursor, "Title")
 
 	; Create a search descriptor for searching with. Set Backward, Match Case, Whole Word, and Regular Expressions to False, and Search Styles to True.
 	$oSrchDesc = _LOWriter_SearchDescriptorCreate($oDoc, False, False, False, False, True)

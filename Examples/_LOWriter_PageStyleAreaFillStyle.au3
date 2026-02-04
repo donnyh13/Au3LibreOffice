@@ -13,7 +13,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Page Style's Object, to modify its settings.
-	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Default Page Style")
+	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Page Style Fill Style
@@ -28,8 +28,8 @@ Func Example()
 			"$LOW_AREA_FILL_STYLE_HATCH, 3 Fill Style is a Hatch style color." & @CRLF & _
 			"$LOW_AREA_FILL_STYLE_BITMAP, 4 Fill Style is a Bitmap.")
 
-	; Set Page style Background color to $LO_COLOR_LIME, Background color transparent = False
-	_LOWriter_PageStyleAreaColor($oPageStyle, $LO_COLOR_LIME, False)
+	; Set Page style Background color to $LO_COLOR_LIME.
+	_LOWriter_PageStyleAreaColor($oPageStyle, $LO_COLOR_LIME)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Page Style Fill Style

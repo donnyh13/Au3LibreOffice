@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-#Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 #include-once
 
 ; Main LibreOffice Includes
@@ -348,10 +348,10 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkInsert
 ;                  |                               4 = Error setting $sTargetFrame
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -505,7 +505,7 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iType not an Integer, less than 1, or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = $bFieldTypeNum not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create enumeration of paragraphs in Cell.
@@ -522,7 +522,7 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ;                  @Error 0 @Extended ? Return Array = Success. Returning Array of maps containing Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: The Array can vary in the number of columns, if $bFieldTypeNum is set to False, the Array will be a single column. If $bFieldTypeNum is set to True, a column will be added to the array. First column will always be the amp containing the Field's Object.
+; Remarks .......: The Array can vary in the number of columns, if $bFieldTypeNum is called with False, the Array will be a single column. If $bFieldTypeNum is called with True, a column will be added to the array. First column will always be the map containing the Field's Object.
 ;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3 for the found Field.
 ;                  This function may fail to identify Fields if text has been inserted recently using the same Cursor.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.

@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-#Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 #include-once
 
 ; Main LibreOffice Includes
@@ -211,10 +211,10 @@ EndFunc   ;==>_LOWriter_FormAdd
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  Reference Values are not included here as they are applicable to Calc only, as far as I can ascertain.
@@ -275,7 +275,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ;                  $iStyle              - [optional] an integer value (1-2). Default is Null. The display style of the checkbox. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
 ;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
 ;                  $iGraphicAlign       - [optional] an integer value (0-12). Default is Null. The Alignment of the Image. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
@@ -339,11 +339,11 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ;                  |                               2097152 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 22 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $sGraphics is set to an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $iDefaultState, $mFont, $sAddInfo.
@@ -617,10 +617,10 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxGeneral
 ;                  |                               1 = Error setting $iState
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning current Check Box State as an integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Check Box State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current check box state.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current check box state.
 ;                  Call $iState with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConCheckBoxGeneral, _LOWriter_FormConCheckBoxData
 ; Link ..........:
@@ -659,7 +659,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxState
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormConComboBoxData
 ; Description ...: Set or Retrieve Combo Box Data Properties.
-; Syntax ........: _LOWriter_FormConComboBoxData(ByRef $oComboBox[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $iType = Null[, $asListContent = Null]]]]])
+; Syntax ........: _LOWriter_FormConComboBoxData(ByRef $oComboBox[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $iType = Null[, $sListContent = Null]]]]])
 ; Parameters ....: $oComboBox           - [in/out] an object. A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
@@ -687,10 +687,10 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxState
 ;                  |                               16 = Error setting $sListContent
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConComboBoxValue, _LOWriter_FormConComboBoxGeneral
@@ -773,9 +773,9 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text of the combo Box.
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bDropdown           - [optional] a boolean value. Default is Null. If True, the Combo Box will behave like a dropdown.
 ;                  $iLines              - [optional] an integer value. Default is Null. If $bDropdown is True, $iLines specifies how many lines are shown in the dropdown list.
 ;                  $bAutoFill           - [optional] a boolean value. Default is Null. If True, the Autofill function is enabled.
@@ -846,10 +846,10 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  |                               16777216 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 25 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $asList, $sDefaultTxt, $mFont, $sAddInfo.
@@ -1159,10 +1159,10 @@ EndFunc   ;==>_LOWriter_FormConComboBoxGeneral
 ;                  |                               1 = Error setting $sValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were set to Null, returning currently selected Combo Box value.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning currently selected Combo Box value.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the currently selected value.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the currently selected value.
 ;                  Call $sValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConComboBoxGeneral, _LOWriter_FormConComboBoxData
 ; Link ..........:
@@ -1221,10 +1221,10 @@ EndFunc   ;==>_LOWriter_FormConComboBoxValue
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConCurrencyFieldValue, _LOWriter_FormConCurrencyFieldGeneral
@@ -1295,9 +1295,9 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
 ;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
@@ -1378,10 +1378,10 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ;                  |                               -1 = Error setting $sHelpURL (See remarks.)
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 32 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 32 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  If there is an error setting $sHelpURL, the @Extended value for Property setting error will be either -1, or if there are other errors present, a negative value of the error value.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
@@ -1759,10 +1759,10 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldGeneral
 ;                  |                               1 = Error setting $nValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were set to Null, returning current value.
+;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current value. Return will be Null if a value hasn't been set.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value. Return will be Null if a value hasn't been set.
 ;                  Call $nValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConCurrencyFieldGeneral, _LOWriter_FormConCurrencyFieldData
 ; Link ..........:
@@ -1820,10 +1820,10 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldValue
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConDateFieldValue, _LOWriter_FormConDateFieldGeneral
@@ -1890,9 +1890,9 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bDropdown           - [optional] a boolean value. Default is Null. If True, the field will behave as a dropdown control.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
@@ -1973,10 +1973,10 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ;                  |                               268435456 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 29 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 29 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -2378,10 +2378,10 @@ EndFunc   ;==>_LOWriter_FormConDateFieldGeneral
 ;                  |                               1 = Error setting $tDateValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were set to Null, returning current Date value as a Date Structure.
+;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were called with Null, returning current Date value as a Date Structure.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current Date value. Return will be Null if the Date hasn't been set.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Date value. Return will be Null if the Date hasn't been set.
 ;                  Call $tDateValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConDateFieldGeneral, _LOWriter_FormConDateFieldData
 ; Link ..........:
@@ -2490,9 +2490,9 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
 ;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
@@ -2546,10 +2546,10 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ;                  |                               262144 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 19 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 19 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sDefaultTxt, $mFont, $sAddInfo.
@@ -2791,10 +2791,10 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldGeneral
 ;                  |                               1 = Error setting $sValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were set to Null, returning current value.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current value.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value.
 ;                  Call $sValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConFileSelFieldGeneral
 ; Link ..........:
@@ -2859,10 +2859,10 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldValue
 ;                  |                               8 = Error setting $bFilter
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConFormattedFieldValue, _LOWriter_FormConFormattedFieldGeneral
@@ -2944,9 +2944,9 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
 ;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
@@ -3020,10 +3020,10 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  |                               134217728 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 28 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -3369,10 +3369,10 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldGeneral
 ;                  |                               1 = Error setting $nValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were set to Null, returning current value.
+;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current value.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value.
 ;                  Call $nValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConFormattedFieldGeneral, _LOWriter_FormConFormattedFieldData
 ; Link ..........:
@@ -3504,10 +3504,10 @@ EndFunc   ;==>_LOWriter_FormConGetParent
 ;                  |                               512 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 10 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $mFont, $sAddInfo.
@@ -3649,9 +3649,9 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
 ;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
 ;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iAction             - [optional] an integer value (0-12). Default is Null. The action that occurs when the button is pushed. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sURL                - [optional] a string value. Default is Null. The URL or Document path to open.
 ;                  $sFrame              - [optional] a string value. Default is Null. The frame to open the URL in. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
@@ -3708,11 +3708,11 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ;                  |                               131072 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 18 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $sGraphics is set to an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
@@ -4049,10 +4049,10 @@ EndFunc   ;==>_LOWriter_FormConImageButtonGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConImageControlGeneral
@@ -4107,9 +4107,9 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
 ;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
 ;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
 ;                  $iScale              - [optional] an integer value (0-2). Default is Null. How to scale the image to fit the button. See Constants $LOW_FORM_CON_IMG_BTN_SCALE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
@@ -4161,11 +4161,11 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ;                  |                               65536 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 17 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $sGraphics is set to an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sAddInfo.
@@ -4375,11 +4375,11 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ; Syntax ........: _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $iHeight[, $sName = ""])
 ; Parameters ....: $oParentForm         - [in/out] an object. A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
 ;                  $iControl            - an integer value (1-524288). The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iX                  - an integer value. The X Coordinate, in Micrometers.
-;                  $iY                  - an integer value. The Y Coordinate, in Micrometers.
-;                  $iWidth              - an integer value. The Width of the control, in Micrometers.
-;                  $iHeight             - an integer value. The Height of the control, in Micrometers.
-;                  $sName               - [optional] a string value. Default is "". The name of the control, if set to "", a name is automatically given it.
+;                  $iX                  - an integer value. The X Coordinate, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - an integer value. The Y Coordinate, in Hundredths of a Millimeter (HMM).
+;                  $iWidth              - an integer value. The Width of the control, in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - an integer value. The Height of the control, in Hundredths of a Millimeter (HMM).
+;                  $sName               - [optional] a string value. Default is "". The name of the control, if called with "", a name is automatically given it.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4408,7 +4408,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ; Modified ......:
 ; Remarks .......: When inserting a Grouped Control, a Group box will be automatically created and inserted into it.
 ;                  I have not found a reliable and working way to add controls to a Group of Controls.
-; Related .......: _LOWriter_FormConsGetList, _LOWriter_FormConDelete, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormConsGetList, _LOWriter_FormConDelete, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4559,9 +4559,9 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
 ;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
@@ -4609,10 +4609,10 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ;                  |                               32768 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 16 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $mFont, $sAddInfo.
@@ -4835,10 +4835,10 @@ EndFunc   ;==>_LOWriter_FormConLabelGeneral
 ;                  |                               16 = Error setting $iBoundField
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  $asListContent is not error checked for the same content, but only that the set array size is the same.
@@ -4923,9 +4923,9 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ;                  $asList              - [optional] an array of strings. Default is Null. An array of List entries. See remarks.
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bDropdown           - [optional] a boolean value. Default is Null. If True, the List Box will behave like a dropdown.
 ;                  $iLines              - [optional] an integer value (-2147483648-2147483647). Default is Null. If $bDropdown is True, $iLines specifies how many lines are shown in the dropdown list.
 ;                  $bMultiSel           - [optional] a boolean value. Default is Null. If True, more than one selection can be made in a list box.
@@ -4994,12 +4994,12 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ;                  |                               4194304 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 23 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 23 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The array called for $asList should be a single dimension array, with one List entry as a String, per array element.
-;                  The array called for $aiDefaultSel should be a single dimension array, with one integer value, corresponding to the position in the $asList array, per array element, to indicate which value(s) is/are default.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  The array called for $aiDefaultSel should be a single dimension array, with one Integer value, corresponding to the position in the $asList array, per array element, to indicate which value(s) is/are default.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $asList, $mFont, $sAddInfo.
@@ -5326,8 +5326,8 @@ EndFunc   ;==>_LOWriter_FormConListBoxGetCount
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oListBox not a List Box Control.
 ;                  @Error 1 @Extended 3 Return 0 = $bReturnValue not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $aiSelection not an array.
-;                  @Error 1 @Extended 5 Return ? = Array called in $aiSelection contains an element with a non-integer value. Returning problem element position.
-;                  @Error 1 @Extended 6 Return ? = Array called in $aiSelection contains an element with an integer value less than 0 or greater than number of List Box entries. Returning problem element position.
+;                  @Error 1 @Extended 5 Return ? = Array called in $aiSelection contains an element with a non-Integer value. Returning problem element position.
+;                  @Error 1 @Extended 6 Return ? = Array called in $aiSelection contains an element with an Integer value less than 0 or greater than number of List Box entries. Returning problem element position.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify control type.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current selection.
@@ -5336,11 +5336,11 @@ EndFunc   ;==>_LOWriter_FormConListBoxGetCount
 ;                  |                               1 = Error setting $aiSelection
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current selection(s) of the List Box. See remarks.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current selection(s) of the List Box. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: The array called for $aiSelection should be a single dimension array, with one integer value, corresponding to the position in the List box value array, per array element, to indicate which value(s) is/are selected.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current Selection(s) of the List Box. If $bReturnValue is false, the return will be a single dimension array with each element containing an integer indicating which List Box value is selected, else if $bReturnValue is True, a single dimension array will be returned, with each element containing a selected value.
+; Remarks .......: The array called for $aiSelection should be a single dimension array, with one Integer value, corresponding to the position in the List box value array, per array element, to indicate which value(s) is/are selected.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Selection(s) of the List Box. If $bReturnValue is False, the return will be a single dimension array with each element containing an Integer indicating which List Box value is selected, else if $bReturnValue is True, a single dimension array will be returned, with each element containing a selected value.
 ;                  Call $aiSelection with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConListBoxGeneral, _LOWriter_FormConListBoxData, _LOWriter_FormConListBoxGetCount
 ; Link ..........:
@@ -5406,7 +5406,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
 ;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
 ;                  $bSmallIcon          - [optional] a boolean value. Default is Null. If True, small Icon sizing is used.
 ;                  $bShowPos            - [optional] a boolean value. Default is Null. If True, positioning items are shown.
@@ -5463,10 +5463,10 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ;                  |                               131072 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 18 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -5702,10 +5702,10 @@ EndFunc   ;==>_LOWriter_FormConNavBarGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConNumericFieldValue, _LOWriter_FormConNumericFieldGeneral
@@ -5774,9 +5774,9 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
 ;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
@@ -5859,10 +5859,10 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  |                               536870912 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 30 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 30 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -6218,10 +6218,10 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldGeneral
 ;                  |                               1 = Error setting $nValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were set to Null, returning current value.
+;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current value. Return will be Null if a value hasn't been set.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value. Return will be Null if a value hasn't been set.
 ;                  Call $nValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConNumericFieldGeneral, _LOWriter_FormConNumericFieldData
 ; Link ..........:
@@ -6279,10 +6279,10 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldValue
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  Reference Values are not included here as they are applicable to Calc only, as far as I can ascertain.
@@ -6344,7 +6344,7 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ;                  $iStyle              - [optional] an integer value (1-2). Default is Null. The display style of the Option button. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
 ;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
 ;                  $iGraphicAlign       - [optional] an integer value (0-12). Default is Null. The Alignment of the Image. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
@@ -6407,11 +6407,11 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ;                  |                               2097152 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 22 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $sGraphics is set to an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $iDefaultState, $mFont, $sAddInfo.
@@ -6686,10 +6686,10 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonGeneral
 ;                  |                               1 = Error setting $iState
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning current Option Button State as an integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Option Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current Option Button state.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Option Button state.
 ;                  Call $iState with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConOptionButtonGeneral, _LOWriter_FormConOptionButtonData
 ; Link ..........:
@@ -6753,10 +6753,10 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonState
 ;                  |                               8 = Error setting $bFilter
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConPatternFieldValue, _LOWriter_FormConPatternFieldGeneral
@@ -6835,9 +6835,9 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
 ;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
@@ -6904,10 +6904,10 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ;                  |                               16777216 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 25 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sDefaultTxt, $mFont, $sAddInfo.
@@ -7213,10 +7213,10 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldGeneral
 ;                  |                               1 = Error setting $sValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were set to Null, returning current value.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current value.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value.
 ;                  Call $sValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConPatternFieldGeneral, _LOWriter_FormConPatternFieldData
 ; Link ..........:
@@ -7258,8 +7258,8 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ; Description ...: Set or Retrieve the Control's position settings.
 ; Syntax ........: _LOWriter_FormConPosition(ByRef $oControl[, $iX = Null[, $iY = Null[, $iAnchor = Null[, $bProtectPos = Null]]]])
 ; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iX                  - [optional] an integer value. Default is Null. The X position from the insertion point, in Micrometers.
-;                  $iY                  - [optional] an integer value. Default is Null. The Y position from the insertion point, in Micrometers.
+;                  $iX                  - [optional] an integer value. Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - [optional] an integer value. Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iAnchor             - [optional] an integer value(0-4). Default is Null. The anchoring position for the Control. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, the Shape's position is locked.
 ; Return values .: Success: 1 or Array.
@@ -7280,11 +7280,11 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ;                  |                               8 = Error setting $bProtectPos
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer, _LOWriter_FormConSize
+; Related .......: _LO_UnitConvert, _LOWriter_FormConSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7322,8 +7322,8 @@ Func _LOWriter_FormConPosition(ByRef $oControl, $iX = Null, $iY = Null, $iAnchor
 
 		$oControl.Position = $tPos
 
-		$iError = ($iX = Null) ? ($iError) : ((__LO_IntIsBetween($oControl.Position.X(), $iX - 1, $iX + 1)) ? ($iError) : (BitOR($iError, 1)))
-		$iError = ($iY = Null) ? ($iError) : ((__LO_IntIsBetween($oControl.Position.Y(), $iY - 1, $iY + 1)) ? ($iError) : (BitOR($iError, 2)))
+		$iError = (__LO_VarsAreNull($iX)) ? ($iError) : ((__LO_IntIsBetween($oControl.Position.X(), $iX - 1, $iX + 1)) ? ($iError) : (BitOR($iError, 1)))
+		$iError = (__LO_VarsAreNull($iY)) ? ($iError) : ((__LO_IntIsBetween($oControl.Position.Y(), $iY - 1, $iY + 1)) ? ($iError) : (BitOR($iError, 2)))
 	EndIf
 
 	If ($iAnchor <> Null) Then
@@ -7364,7 +7364,7 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
 ;                  $iAction             - [optional] an integer value (0-12). Default is Null. The action that occurs when the button is pushed. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sURL                - [optional] a string value. Default is Null. The URL or Document path to open.
@@ -7372,7 +7372,6 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ;                  $bDefault            - [optional] a boolean value. Default is Null. If True, this will be set as the Default button.
 ;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
 ;                  $iGraphicAlign       - [optional] an integer value (0-12). Default is Null. The Alignment of the Image. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sAddInfo            - [optional] a string value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
 ;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
@@ -7442,11 +7441,11 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ;                  |                               67108864 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 27 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 27 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $sGraphics is set to an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $iDefaultState, $mFont, $sAddInfo.
@@ -7873,10 +7872,10 @@ EndFunc   ;==>_LOWriter_FormConPushButtonGeneral
 ;                  |                               1 = Error setting $iState
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were set to Null, returning current Push Button State as an integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Push Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current Push Button state.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Push Button state.
 ;                  Setting the state to selected DOES NOT simulate clicking the button.
 ;                  The Push button State is only valid when Toggle is active.
 ;                  Call $iState with Default keyword to reset the value to default.
@@ -7924,7 +7923,7 @@ EndFunc   ;==>_LOWriter_FormConPushButtonState
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iType not an Integer, less than 1, or greater than 1048575. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iType not an Integer, less than 1 or greater than 1048575. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = Called Object in $oObj, not a Document Object, not a Form Object, and not a Grouped Control.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify parent document of Form.
@@ -8055,8 +8054,8 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ; Description ...: Set or Retrieve Control Size related settings.
 ; Syntax ........: _LOWriter_FormConSize(ByRef $oControl[, $iWidth = Null[, $iHeight = Null[, $bProtectSize = Null]]])
 ; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Shape, in Micrometers(uM). Min. 51.
-;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Shape, in Micrometers(uM). Min. 51.
+;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the Shape.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -8074,13 +8073,13 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ;                  |                               4 = Error setting $bProtectSize
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I have skipped Keep Ratio, as currently it seems unable to be set for controls.
-; Related .......: _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer, _LOWriter_FormConPosition
+; Related .......: _LO_UnitConvert, _LOWriter_FormConPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8118,8 +8117,8 @@ Func _LOWriter_FormConSize(ByRef $oControl, $iWidth = Null, $iHeight = Null, $bP
 
 		$oControl.Size = $tSize
 
-		$iError = ($iWidth = Null) ? ($iError) : ((__LO_IntIsBetween($oControl.Size.Width(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 1)))
-		$iError = ($iHeight = Null) ? ($iError) : ((__LO_IntIsBetween($oControl.Size.Height(), $iHeight - 1, $iHeight + 1)) ? ($iError) : (BitOR($iError, 2)))
+		$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($oControl.Size.Width(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 1)))
+		$iError = (__LO_VarsAreNull($iHeight)) ? ($iError) : ((__LO_IntIsBetween($oControl.Size.Height(), $iHeight - 1, $iHeight + 1)) ? ($iError) : (BitOR($iError, 2)))
 	EndIf
 
 	If ($bProtectSize <> Null) Then
@@ -8154,10 +8153,10 @@ EndFunc   ;==>_LOWriter_FormConSize
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  Reference Values are not included here as they are applicable to Calc only, as far as I can ascertain.
@@ -8209,7 +8208,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $iDefaultState       - [optional] an integer value (0-2). Default is Null. The Default state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $iStyle              - [optional] an integer value (1-2). Default is Null. The display style of the checkbox. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
@@ -8254,14 +8253,14 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ;                  |                               4096 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 13 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 13 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iDefaultState, $sAddInfo.
-; Related .......: _LOWriter_FormConCheckBoxData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormConCheckBoxData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8278,7 +8277,7 @@ Func _LOWriter_FormConTableConCheckBoxGeneral(ByRef $oCheckBox, $sName = Null, $
 
 	If __LO_VarsAreNull($sName, $sLabel, $iTxtDir, $bEnabled, $iDefaultState, $iWidth, $iStyle, $iAlign, $bWordBreak, $bTriState, $sAddInfo, $sHelpText, $sHelpURL) Then
 		__LO_ArrayFill($avControl, $oCheckBox.Name(), $oCheckBox.Label(), $oCheckBox.WritingMode(), $oCheckBox.Enabled(), _
-				$oCheckBox.DefaultState(), Int($oCheckBox.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				$oCheckBox.DefaultState(), Int($oCheckBox.Width() * 10), _ ; Multiply width by 10 to get the Hundredths of a Millimeter value.
 				$oCheckBox.VisualEffect(), $oCheckBox.Align(), $oCheckBox.MultiLine(), $oCheckBox.TriState(), _
 				$oCheckBox.Tag(), $oCheckBox.HelpText(), $oCheckBox.HelpURL())
 
@@ -8341,7 +8340,7 @@ Func _LOWriter_FormConTableConCheckBoxGeneral(ByRef $oCheckBox, $sName = Null, $
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-		$oCheckBox.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oCheckBox.Width = Round($iWidth / 10) ; Divide the Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oCheckBox.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 32))
 	EndIf
 
@@ -8432,12 +8431,13 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxGeneral
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oTableCon not a Table Control Object.
 ;                  @Error 1 @Extended 3 Return 0 = Control type called in $iControl not an Integer, or not one of the accepted controls.
 ;                  @Error 1 @Extended 4 Return 0 = $iPos not an Integer, less than 0 or greater than count of Columns + 1.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create Column object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Control type name.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to split Control type name.
-;                  @Error 3 @Extended 4 Return 0 = Failed to create Column object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to insert new Column.
+;                  @Error 3 @Extended 4 Return 0 = Failed to insert new Column.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully created the Column, returning its Object.
 ; Author ........: donnyh13
@@ -8471,7 +8471,7 @@ Func _LOWriter_FormConTableConColumnAdd(ByRef $oTableCon, $iControl, $iPos = Nul
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	$oColumn = $oTableCon.Control.createColumn($sControl)
-	If Not IsObj($oColumn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+	If Not IsObj($oColumn) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	Switch $iControl
 		Case $LOW_FORM_CON_TYPE_CHECK_BOX
@@ -8519,7 +8519,7 @@ Func _LOWriter_FormConTableConColumnAdd(ByRef $oTableCon, $iControl, $iPos = Nul
 	$oTableCon.Control.insertByIndex($iPos, $oColumn)
 
 	$oColumn = $oTableCon.Control.getByIndex($iPos)
-	If Not IsObj($oColumn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	If Not IsObj($oColumn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oColumn)
 EndFunc   ;==>_LOWriter_FormConTableConColumnAdd
@@ -8627,7 +8627,7 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnsGetList
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormConTableConComboBoxData
 ; Description ...: Set or Retrieve Table Control Combo Box Data Properties.
-; Syntax ........: _LOWriter_FormConTableConComboBoxData(ByRef $oComboBox[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $iType = Null[, $asListContent = Null]]]]])
+; Syntax ........: _LOWriter_FormConTableConComboBoxData(ByRef $oComboBox[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $iType = Null[, $sListContent = Null]]]]])
 ; Parameters ....: $oComboBox           - [in/out] an object. A Table Control Combo Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
@@ -8655,10 +8655,10 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnsGetList
 ;                  |                               16 = Error setting $sListContent
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConComboBoxGeneral
@@ -8733,7 +8733,7 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
 ;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $asList              - [optional] an array of strings. Default is Null. An array of entries. See remarks.
 ;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text of the combo Box.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
@@ -8786,14 +8786,14 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ;                  |                               32768 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 16 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $asList, $sDefaultTxt, $sAddInfo.
-; Related .......: _LOWriter_FormConComboBoxData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormConComboBoxData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -8811,7 +8811,7 @@ Func _LOWriter_FormConTableConComboBoxGeneral(ByRef $oComboBox, $sName = Null, $
 	If __LO_VarsAreNull($sName, $sLabel, $iTxtDir, $iMaxLen, $bEnabled, $bReadOnly, $iMouseScroll, $iWidth, $asList, $sDefaultTxt, $iAlign, $iLines, $bHideSel, $sAddInfo, $sHelpText, $sHelpURL) Then
 		__LO_ArrayFill($avControl, $oComboBox.Name(), $oComboBox.Label(), $oComboBox.WritingMode(), $oComboBox.MaxTextLen(), _
 				$oComboBox.Enabled(), $oComboBox.ReadOnly(), $oComboBox.MouseWheelBehavior(), _
-				Int($oComboBox.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				Int($oComboBox.Width() * 10), _ ; Multiply width by 10 to get Hundredths of a Millimeter value.
 				$oComboBox.StringItemList(), $oComboBox.DefaultText(), _
 				$oComboBox.Align(), $oComboBox.LineCount(), $oComboBox.HideInactiveSelection(), _
 				$oComboBox.Tag(), $oComboBox.HelpText(), _
@@ -8896,7 +8896,7 @@ Func _LOWriter_FormConTableConComboBoxGeneral(ByRef $oComboBox, $sName = Null, $
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 
-		$oComboBox.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oComboBox.Width = Round($iWidth / 10) ; Divide Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oComboBox.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 128))
 	EndIf
 
@@ -9010,10 +9010,10 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConCurrencyFieldGeneral
@@ -9077,7 +9077,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
 ;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
 ;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
@@ -9142,14 +9142,14 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ;                  |                               8388608 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 24 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 24 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sAddInfo.
-; Related .......: _LOWriter_FormConCurrencyFieldData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormConCurrencyFieldData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9171,7 +9171,7 @@ Func _LOWriter_FormConTableConCurrencyFieldGeneral(ByRef $oCurrencyField, $sName
 				$oCurrencyField.ValueMin(), $oCurrencyField.ValueMax(), $oCurrencyField.ValueStep(), $oCurrencyField.DefaultValue(), _
 				$oCurrencyField.DecimalAccuracy(), $oCurrencyField.ShowThousandsSeparator(), $oCurrencyField.CurrencySymbol(), _
 				$oCurrencyField.PrependCurrencySymbol(), $oCurrencyField.Spin(), $oCurrencyField.Repeat(), $oCurrencyField.RepeatDelay(), _
-				Int($oCurrencyField.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				Int($oCurrencyField.Width() * 10), _ ; Multiply width by 10 to get Hundredths of a Millimeter value.
 				$oCurrencyField.Align(), $oCurrencyField.HideInactiveSelection(), $oCurrencyField.Tag(), _
 				$oCurrencyField.HelpText(), $oCurrencyField.HelpURL())
 
@@ -9364,7 +9364,7 @@ Func _LOWriter_FormConTableConCurrencyFieldGeneral(ByRef $oCurrencyField, $sName
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 21, 0)
 
-		$oCurrencyField.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oCurrencyField.Width = Round($iWidth / 10) ; Divide Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oCurrencyField.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 262144))
 	EndIf
 
@@ -9443,10 +9443,10 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConDateFieldGeneral
@@ -9506,7 +9506,7 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
 ;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
 ;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bDropdown           - [optional] a boolean value. Default is Null. If True, the field will behave as a dropdown control.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
@@ -9571,14 +9571,14 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ;                  |                               1048576 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 21 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 21 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sAddInfo.
-; Related .......: _LOWriter_FormConDateFieldData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormConDateFieldData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -9631,7 +9631,7 @@ Func _LOWriter_FormConTableConDateFieldGeneral(ByRef $oDateField, $sName = Null,
 		__LO_ArrayFill($avControl, $oDateField.Name(), $oDateField.Label(), $oDateField.WritingMode(), $oDateField.StrictFormat(), _
 				$oDateField.Enabled(), $oDateField.ReadOnly(), $oDateField.MouseWheelBehavior(), _
 				$tCurMin, $tCurMax, $oDateField.DateFormat(), $tCurDefault, $oDateField.Spin(), _
-				$oDateField.Repeat(), $oDateField.RepeatDelay(), Int($oDateField.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				$oDateField.Repeat(), $oDateField.RepeatDelay(), Int($oDateField.Width() * 10), _ ; Multiply width by 10 to get Hundredths of a Millimeter value.
 				$oDateField.Align(), _
 				$oDateField.Dropdown(), _
 				$oDateField.HideInactiveSelection(), $oDateField.Tag(), $oDateField.HelpText(), $oDateField.HelpURL())
@@ -9806,7 +9806,7 @@ Func _LOWriter_FormConTableConDateFieldGeneral(ByRef $oDateField, $sName = Null,
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 17, 0)
 
-		$oDateField.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oDateField.Width = Round($iWidth / 10) ; Divide Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oDateField.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 16384))
 	EndIf
 
@@ -9901,10 +9901,10 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldGeneral
 ;                  |                               8 = Error setting $bFilter
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConFormattedFieldGeneral
@@ -9979,7 +9979,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
 ;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
 ;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
@@ -10037,14 +10037,14 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ;                  |                               524288 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 20 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sAddInfo.
-; Related .......: _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FormConFormattedFieldData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FormConFormattedFieldData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -10065,7 +10065,7 @@ Func _LOWriter_FormConTableConFormattedFieldGeneral(ByRef $oFormatField, $sName 
 				$oFormatField.Enabled(), $oFormatField.ReadOnly(), _
 				$oFormatField.MouseWheelBehavior(), $oFormatField.EffectiveMin(), _
 				$oFormatField.EffectiveMax(), $oFormatField.EffectiveDefault(), $oFormatField.FormatKey(), $oFormatField.Spin(), _
-				$oFormatField.Repeat(), $oFormatField.RepeatDelay(), Int($oFormatField.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				$oFormatField.Repeat(), $oFormatField.RepeatDelay(), Int($oFormatField.Width() * 10), _ ; Multiply width by 10 to get Hundredths of a Millimeter value.
 				$oFormatField.Align(), _
 				$oFormatField.HideInactiveSelection(), $oFormatField.Tag(), $oFormatField.HelpText(), $oFormatField.HelpURL())
 
@@ -10227,7 +10227,7 @@ Func _LOWriter_FormConTableConFormattedFieldGeneral(ByRef $oFormatField, $sName 
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 18, 0)
 
-		$oFormatField.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oFormatField.Width = Round($iWidth / 10) ; Divide Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oFormatField.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 16384))
 	EndIf
 
@@ -10297,10 +10297,10 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
 ;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $nRowHeight          - [optional] a general number value (-21474836.48-21474836.48). Default is Null. The Row height, set in Micrometers.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $nRowHeight          - [optional] a general number value (-21474836.48-21474836.48). Default is Null. The Row height, set in Hundredths of a Millimeter (HMM).
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bNavBar             - [optional] a boolean value. Default is Null. If True, the Navigation Bar is displayed on the lower border of the Table control.
 ;                  $bRecordMarker       - [optional] a boolean value. Default is Null. If True, a record marker is displayed.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
@@ -10351,10 +10351,10 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ;                  |                               65536 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 17 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -10588,10 +10588,10 @@ EndFunc   ;==>_LOWriter_FormConTableConGeneral
 ;                  |                               16 = Error setting $iBoundField
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  $asListContent is not error checked for the same content, but only that the set array size is the same.
@@ -10669,7 +10669,7 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
 ;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $asList              - [optional] an array of strings. Default is Null. An array of List entries. See remarks.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLines              - [optional] an integer value (-2147483648-2147483647). Default is Null. If $bDropdown is True, $iLines specifies how many lines are shown in the dropdown list.
@@ -10719,16 +10719,16 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ;                  |                               8192 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 14 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The array called for $asList should be a single dimension array, with one List entry as a String, per array element.
-;                  The array called for $aiDefaultSel should be a single dimension array, with one integer value, corresponding to the position in the $asList array, per array element, to indicate which value(s) is/are default.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  The array called for $aiDefaultSel should be a single dimension array, with one Integer value, corresponding to the position in the $asList array, per array element, to indicate which value(s) is/are default.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $asList, $sAddInfo.
-; Related .......: _LOWriter_FormConListBoxData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormConListBoxData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -10745,7 +10745,7 @@ Func _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox, $sName = Null, $sL
 
 	If __LO_VarsAreNull($sName, $sLabel, $iTxtDir, $bEnabled, $bReadOnly, $iMouseScroll, $iWidth, $asList, $iAlign, $iLines, $aiDefaultSel, $sAddInfo, $sHelpText, $sHelpURL) Then
 		__LO_ArrayFill($avControl, $oListBox.Name(), $oListBox.Label(), $oListBox.WritingMode(), $oListBox.Enabled(), _
-				$oListBox.ReadOnly(), $oListBox.MouseWheelBehavior(), Int($oListBox.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				$oListBox.ReadOnly(), $oListBox.MouseWheelBehavior(), Int($oListBox.Width() * 10), _ ; Multiply width by 10 to get Hundredths of a Millimeter value.
 				$oListBox.StringItemList(), $oListBox.Align(), $oListBox.LineCount(), _
 				$oListBox.DefaultSelection(), $oListBox.Tag(), $oListBox.HelpText(), $oListBox.HelpURL())
 
@@ -10818,7 +10818,7 @@ Func _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox, $sName = Null, $sL
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-		$oListBox.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oListBox.Width = Round($iWidth / 10) ; Divide Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oListBox.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 64))
 	EndIf
 
@@ -10928,10 +10928,10 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConNumericFieldGeneral
@@ -10993,7 +10993,7 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
 ;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
 ;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
@@ -11060,14 +11060,14 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ;                  |                               2097152 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 22 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sAddInfo.
-; Related .......: _LOWriter_FormConNumericFieldData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormConNumericFieldData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11088,7 +11088,7 @@ Func _LOWriter_FormConTableConNumericFieldGeneral(ByRef $oNumericField, $sName =
 				$oNumericField.MouseWheelBehavior(), $oNumericField.ValueMin(), _
 				$oNumericField.ValueMax(), $oNumericField.ValueStep(), $oNumericField.DefaultValue(), $oNumericField.DecimalAccuracy(), _
 				$oNumericField.ShowThousandsSeparator(), $oNumericField.Spin(), $oNumericField.Repeat(), $oNumericField.RepeatDelay(), _
-				Int($oNumericField.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				Int($oNumericField.Width() * 10), _ ; Multiply width by 10 to get Hundredths of a Millimeter value.
 				$oNumericField.Align(), $oNumericField.HideInactiveSelection(), $oNumericField.Tag(), _
 				$oNumericField.HelpText(), $oNumericField.HelpURL())
 
@@ -11261,7 +11261,7 @@ Func _LOWriter_FormConTableConNumericFieldGeneral(ByRef $oNumericField, $sName =
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 19, 0)
 
-		$oNumericField.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oNumericField.Width = Round($iWidth / 10) ; Divide Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oNumericField.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 65536))
 	EndIf
 
@@ -11346,10 +11346,10 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldGeneral
 ;                  |                               8 = Error setting $bFilter
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConPatternFieldGeneral
@@ -11420,7 +11420,7 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
 ;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text to display in the field.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
@@ -11472,14 +11472,14 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ;                  |                               65536 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 17 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sDefaultTxt, $sAddInfo.
-; Related .......: _LOWriter_FormConPatternFieldData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormConPatternFieldData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11498,7 +11498,7 @@ Func _LOWriter_FormConTableConPatternFieldGeneral(ByRef $oPatternField, $sName =
 		__LO_ArrayFill($avControl, $oPatternField.Name(), $oPatternField.Label(), $oPatternField.WritingMode(), _
 				$oPatternField.MaxTextLen(), $oPatternField.EditMask(), $oPatternField.LiteralMask(), $oPatternField.StrictFormat(), _
 				$oPatternField.Enabled(), $oPatternField.ReadOnly(), _
-				$oPatternField.MouseWheelBehavior(), Int($oPatternField.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				$oPatternField.MouseWheelBehavior(), Int($oPatternField.Width() * 10), _ ; Multiply width by 10 to get Hundredths of a Millimeter value.
 				$oPatternField.DefaultText(), _
 				$oPatternField.Align(), $oPatternField.HideInactiveSelection(), $oPatternField.Tag(), _
 				$oPatternField.HelpText(), $oPatternField.HelpURL())
@@ -11612,7 +11612,7 @@ Func _LOWriter_FormConTableConPatternFieldGeneral(ByRef $oPatternField, $sName =
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 13, 0)
 
-		$oPatternField.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oPatternField.Width = Round($iWidth / 10) ; Divide Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oPatternField.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 1024))
 	EndIf
 
@@ -11707,10 +11707,10 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldGeneral
 ;                  |                               8 = Error setting $bFilter
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConTextBoxGeneral
@@ -11777,7 +11777,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The max length of text that can be entered. 0 = unlimited.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text to display in the control.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bMultiLine          - [optional] a boolean value. Default is Null. If True, the text may contain multiple lines.
@@ -11827,14 +11827,14 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ;                  |                               16384 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 15 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 15 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sDefaultTxt, $sAddInfo.
-; Related .......: _LOWriter_FormConTextBoxData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormConTextBoxData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -11854,7 +11854,7 @@ Func _LOWriter_FormConTableConTextBoxGeneral(ByRef $oTextBox, $sName = Null, $sL
 	If __LO_VarsAreNull($sName, $sLabel, $iTxtDir, $iMaxLen, $bEnabled, $bReadOnly, $iWidth, $sDefaultTxt, $iAlign, $bMultiLine, $bEndWithLF, $bHideSel, $sAddInfo, $sHelpText, $sHelpURL) Then
 		__LO_ArrayFill($avControl, $oTextBox.Name(), $oTextBox.Label(), $oTextBox.WritingMode(), $oTextBox.MaxTextLen(), _
 				$oTextBox.Enabled(), $oTextBox.ReadOnly(), _
-				Int($oTextBox.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				Int($oTextBox.Width() * 10), _ ; Multiply width by 10 to get Hundredths of a Millimeter value.
 				$oTextBox.DefaultText(), $oTextBox.Align(), $oTextBox.MultiLine(), _
 				(($oTextBox.LineEndFormat() = $__LOW_FORM_CONTROL_LINE_END_LF) ? (True) : (False)), _ ; Line Ending format
 				$oTextBox.HideInactiveSelection(), $oTextBox.Tag(), $oTextBox.HelpText(), $oTextBox.HelpURL())
@@ -11928,7 +11928,7 @@ Func _LOWriter_FormConTableConTextBoxGeneral(ByRef $oTextBox, $sName = Null, $sL
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-		$oTextBox.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oTextBox.Width = Round($iWidth / 10) ; Divide Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oTextBox.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 64))
 	EndIf
 
@@ -12043,10 +12043,10 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConTimeFieldGeneral
@@ -12106,7 +12106,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
 ;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
 ;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Micrometers.
+;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
@@ -12168,14 +12168,14 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ;                  |                               524288 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 20 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
-; Related .......: _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FormConTimeFieldData, _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FormConTimeFieldData, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12234,7 +12234,7 @@ Func _LOWriter_FormConTableConTimeFieldGeneral(ByRef $oTimeField, $sName = Null,
 		__LO_ArrayFill($avControl, $oTimeField.Name(), $oTimeField.Label(), $oTimeField.WritingMode(), $oTimeField.StrictFormat(), _
 				$oTimeField.Enabled(), $oTimeField.ReadOnly(), $oTimeField.MouseWheelBehavior(), _
 				$tCurMin, $tCurMax, $oTimeField.TimeFormat(), $tCurDefault, $oTimeField.Spin(), _
-				$oTimeField.Repeat(), $oTimeField.RepeatDelay(), Int($oTimeField.Width() * 10), _ ; Multiply width by 10 to get Micrometer value.
+				$oTimeField.Repeat(), $oTimeField.RepeatDelay(), Int($oTimeField.Width() * 10), _ ; Multiply width by 10 to get Hundredths of a Millimeter value.
 				$oTimeField.Align(), $oTimeField.HideInactiveSelection(), $oTimeField.Tag(), $oTimeField.HelpText(), $oTimeField.HelpURL())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avControl)
@@ -12413,7 +12413,7 @@ Func _LOWriter_FormConTableConTimeFieldGeneral(ByRef $oTimeField, $sName = Null,
 	ElseIf ($iWidth <> Null) Then
 		If Not __LO_IntIsBetween($iWidth, 100, 200000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 17, 0)
 
-		$oTimeField.Width = Round($iWidth / 10) ; Divide Micrometer value by 10 to obtain 10th MM.
+		$oTimeField.Width = Round($iWidth / 10) ; Divide Hundredths of a Millimeter value by 10 to obtain 10th MM.
 		$iError = ($oTimeField.Width() = Round($iWidth / 10)) ? ($iError) : (BitOR($iError, 16384))
 	EndIf
 
@@ -12537,10 +12537,10 @@ EndFunc   ;==>_LOWriter_FormConTextBoxCreateTextCursor
 ;                  |                               8 = Error setting $bFilter
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConTextBoxGeneral
@@ -12615,9 +12615,9 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iTextType           - [optional] an integer value (0-2). Default is Null. The text type. See Constants $LOW_FORM_CON_TXT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEndWithLF          - [optional] a boolean value. Default is Null. If True, the line ends will be a Line-Feed type, else a Carriage-Return plus a Line-Feed.
 ;                  $iScrollbars         - [optional] an integer value (0-3). Default is Null. The Scrollbars to use, if any. See Constants $LOW_FORM_CON_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
@@ -12688,10 +12688,10 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ;                  |                               16777216 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 25 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sDefaultTxt, $mFont, $sAddInfo.
@@ -13048,10 +13048,10 @@ EndFunc   ;==>_LOWriter_FormConTextBoxGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConTimeFieldValue, _LOWriter_FormConTimeFieldGeneral
@@ -13118,9 +13118,9 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
 ;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color. Set in Long integer format. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
 ;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
 ;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
@@ -13198,10 +13198,10 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ;                  |                               134217728 = Error setting $sHelpURL
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 28 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -13605,10 +13605,10 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldGeneral
 ;                  |                               1 = Error setting $tTimeValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were set to Null, returning current Time value as a Time Structure.
+;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were called with Null, returning current Time value as a Time Structure.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current Time value. Return will be Null if the Time hasn't been set.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Time value. Return will be Null if the Time hasn't been set.
 ;                  Call $tTimeValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConTimeFieldGeneral, _LOWriter_FormConTimeFieldData
 ; Link ..........:
@@ -13746,7 +13746,7 @@ EndFunc   ;==>_LOWriter_FormDelete
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iForm not an Integer, less than 0, or greater then number of forms contained in object.
+;                  @Error 1 @Extended 2 Return 0 = $iForm not an Integer, less than 0 or greater then number of forms contained in object.
 ;                  @Error 1 @Extended 3 Return 0 = Called Object in $oObj, not a Document Object, and not a Form Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve a count of forms.
@@ -13810,17 +13810,18 @@ EndFunc   ;==>_LOWriter_FormGetObjByIndex
 ;                  @Error 1 @Extended 4 Return 0 = Object called in $oParent not an Form and not a Document.
 ;                  @Error 1 @Extended 5 Return 0 = Destination called in $oParent is the same as form's current parent.
 ;                  @Error 1 @Extended 6 Return 0 = Destination called in $oParent is the same as form called in $oForm.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to clone the form Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form's parent Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document's Forms Object.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Destination Parent Object.
 ;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Form's name.
 ;                  @Error 3 @Extended 5 Return 0 = Failed to rename Form.
-;                  @Error 3 @Extended 6 Return 0 = Failed to clone the form Object.
-;                  @Error 3 @Extended 7 Return 0 = Failed to insert cloned form into destination.
-;                  @Error 3 @Extended 8 Return 0 = Failed to delete original form.
-;                  @Error 3 @Extended 9 Return 0 = Failed to retrieve new form's Object.
-;                  @Error 3 @Extended 10 Return 0 = Failed to set form's name back to original name.
+;                  @Error 3 @Extended 6 Return 0 = Failed to insert cloned form into destination.
+;                  @Error 3 @Extended 7 Return 0 = Failed to delete original form.
+;                  @Error 3 @Extended 8 Return 0 = Failed to retrieve new form's Object.
+;                  @Error 3 @Extended 9 Return 0 = Failed to set form's name back to original name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully moved, Object called in $oForm has been updated to new Object.
 ;                  @Error 0 @Extended 1 Return Object = Success. Returning Form's parent Object, which is a Document Object.
@@ -13828,7 +13829,7 @@ EndFunc   ;==>_LOWriter_FormGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function allows you to change a sub-form into being a top-level form, change a top-level form into being a sub-form, or move a sub-form to be a sub-form of another form.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the Form's parent Object.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the Form's parent Object.
 ;                  If the parent Object is a Document, that means the Form is a top-level form. Otherwise it is a Sub-Form.
 ; Related .......:
 ; Link ..........:
@@ -13886,21 +13887,21 @@ Func _LOWriter_FormParent(ByRef $oForm, $oParent = Null)
 	If ($oForm.Name() <> ($sTempName)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 	$oFormCopy = $oForm.CreateClone()
-	If Not IsObj($oFormCopy) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+	If Not IsObj($oFormCopy) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	$oDestParent.insertByName($sTempName, $oFormCopy)
-	If Not $oDestParent.hasByName($sTempName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
+	If Not $oDestParent.hasByName($sTempName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
 	$oOldParent.removeByName($sTempName)
-	If $oOldParent.hasByName($sTempName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
+	If $oOldParent.hasByName($sTempName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 
 	$oNewForm = $oDestParent.getByName($sTempName)
-	If Not IsObj($oNewForm) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 9, 0)
+	If Not IsObj($oNewForm) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
 
 	$oForm = $oNewForm
 
 	$oForm.Name = $sOldName
-	If ($oForm.Name() <> $sOldName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 10, 0)
+	If ($oForm.Name() <> $sOldName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 9, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormParent
@@ -13967,11 +13968,11 @@ EndFunc   ;==>_LOWriter_FormParent
 ;                  |                               8192 = Error setting $iCycle
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 14 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The array called for either $aLinkMaster or $aLinkSlave, should be a single dimension array, with one Field name per array element.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Error checking for $aLinkMaster or $aLinkSlave does not check content, only array size.
 ;                  There currently is no ability to set $iCycle to Default, but when it is already set to Default, the return value will be an empty string.
@@ -14144,10 +14145,10 @@ EndFunc   ;==>_LOWriter_FormPropertiesData
 ;                  |                               16 = Error setting $iSubType
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_FormPropertiesData
 ; Link ..........:

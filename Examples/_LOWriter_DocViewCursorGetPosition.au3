@@ -29,8 +29,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The ViewCursor is located at the following position:" & @CRLF & _
-			"Horizontal, measured in Micrometers: " & $iReturn & @CRLF & _
-			"Vertical, measured in Micrometers: " & @extended & @CRLF & @CRLF & _
+			"Horizontal, measured in Hundredths of a Millimeter (HMM): " & $iReturn & @CRLF & _
+			"Vertical, measured in Hundredths of a Millimeter (HMM): " & @extended & @CRLF & @CRLF & _
 			"Press ok, and I will now move the cursor to the end of the document.")
 
 	; Move the Cursor to the beginning of the document.
@@ -42,8 +42,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The ViewCursor is now located at the following position:" & @CRLF & _
-			"Horizontal, measured in Micrometers: " & $iReturn & @CRLF & _
-			"Vertical, measured in Micrometers: " & @extended)
+			"Horizontal, measured in Hundredths of a Millimeter (HMM): " & $iReturn & @CRLF & _
+			"Vertical, measured in Hundredths of a Millimeter (HMM): " & @extended)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

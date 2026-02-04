@@ -39,7 +39,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now insert a field into the header, and then demonstrate how to delete it.")
 
 	; Retrieve the currently active Sheet's Page Style name.
-	$sPageStyle = _LOCalc_PageStyleSet($oDoc, $oSheet)
+	$sPageStyle = _LOCalc_PageStyleCurrent($oDoc, $oSheet)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Page Style object.

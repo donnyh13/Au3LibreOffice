@@ -21,11 +21,11 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now retrieve the default paragraph style object, and modify some of its settings.")
 
-	; Retrieve the "Default Paragraph Style" object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Default Paragraph Style")
+	; Retrieve the Default Paragraph Style object.
+	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Default Paragraph Style" font weight to bold.
+	; Set Default Paragraph Style font weight to bold.
 	_LOWriter_ParStyleFont($oParStyle, Null, Null, Null, $LOW_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

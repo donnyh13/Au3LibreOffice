@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-;~ #Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 #include-once
 
 ; #INDEX# =======================================================================================================================
@@ -527,9 +527,9 @@ Global Const _                                                  ; com.sun.star.a
 ; Line Spacing
 Global Const _                                                  ; com.sun.star.style.LineSpacingMode
 		$LOW_LINE_SPC_MODE_PROP = 0, _                          ; Specifies the height value as a proportional value. Min 6% Max 65,535%. (without percentage sign)
-		$LOW_LINE_SPC_MODE_MIN = 1, _                           ; Specifies the height as the minimum line height. [Minimum/At least in L.O. U.I.] Min 0, Max 10008 Micrometers (uM)
-		$LOW_LINE_SPC_MODE_LEADING = 2, _                       ; Specifies the height value as the distance to the previous line. Min 0, Max 10008 Micrometers (uM)
-		$LOW_LINE_SPC_MODE_FIX = 3                              ; Specifies the height value as a fixed line height. Min 51 Micrometers, Max 10008 Micrometers (uM)
+		$LOW_LINE_SPC_MODE_MIN = 1, _                           ; Specifies the height as the minimum line height. [Minimum/At least in L.O. U.I.] Min 0, Max 10008 (HMM)
+		$LOW_LINE_SPC_MODE_LEADING = 2, _                       ; Specifies the height value as the distance to the previous line. Min 0, Max 10008 Hundredths of a Millimeter (HMM).
+		$LOW_LINE_SPC_MODE_FIX = 3                              ; Specifies the height value as a fixed line height. Min 51, Max 10008 Hundredths of a Millimeter (HMM).
 
 ; Line Style
 Global Const _                                                  ; com.sun.star.text.ColumnSeparatorStyle
@@ -674,74 +674,74 @@ Global Const _                                                  ; com.sun.star.v
 		$LOW_PAPER_TABLOID = 7, _                               ; Tabloid Paper size.
 		$LOW_PAPER_USER_DEFINED = 8                             ; Paper size is User-Defined.
 
-; Paper Height in uM
+; Paper Height in Hundredths of a Millimeter (HMM)
 Global Const _
-		$LOW_PAPER_HEIGHT_A6 = 14808, _                         ; A6 paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_A5 = 21006, _                         ; A5 paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_A4 = 29693, _                         ; A4 paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_A3 = 42012, _                         ; A3 paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_B6ISO = 17602, _                      ; B6ISO paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_B5ISO = 24994, _                      ; B5ISO paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_B4ISO = 35306, _                      ; B4ISO paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_LETTER = 27940, _                     ; Letter paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_LEGAL = 35560, _                      ; Legal paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_LONG_BOND = 33020, _                  ; Long Bond paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_TABLOID = 43180, _                    ; Tabloid paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_B6JIS = 18200, _                      ; B6JIS paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_B5JIS = 25705, _                      ; B5JIS paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_B4JIS = 36398, _                      ; B4JIS paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_16KAI = 26010, _                      ; 16KAI paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_32KAI = 18390, _                      ; 32KAI paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_BIG_32KAI = 20295, _                  ; Big 32KAI paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_DLENVELOPE = 21996, _                 ; DL Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_C6ENVELOPE = 16205, _                 ; C6 Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_C6_5_ENVELOPE = 22911, _              ; C6/5 Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_C5ENVELOPE = 22911, _                 ; C5 Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_C4ENVELOPE = 32410, _                 ; C4 Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_6_3_4ENVELOPE = 16510, _              ; 6 3/4 Pound Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_7_3_4ENVELOPE = 19050, _              ; 7 3/4 Pound Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_9ENVELOPE = 22543, _                  ; 9 Pound Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_10ENVELOPE = 24130, _                 ; 10 Pound Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_11ENVELOPE = 26365, _                 ; 11 Pound Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_12ENVELOPE = 27940, _                 ; 12 Pound Envelope paper height in Micrometers.
-		$LOW_PAPER_HEIGHT_JAP_POSTCARD = 14808                  ; Japanese Postcard paper height in Micrometers.
+		$LOW_PAPER_HEIGHT_A6 = 14808, _                         ; A6 paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_A5 = 21006, _                         ; A5 paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_A4 = 29693, _                         ; A4 paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_A3 = 42012, _                         ; A3 paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_B6ISO = 17602, _                      ; B6ISO paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_B5ISO = 24994, _                      ; B5ISO paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_B4ISO = 35306, _                      ; B4ISO paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_LETTER = 27940, _                     ; Letter paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_LEGAL = 35560, _                      ; Legal paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_LONG_BOND = 33020, _                  ; Long Bond paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_TABLOID = 43180, _                    ; Tabloid paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_B6JIS = 18200, _                      ; B6JIS paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_B5JIS = 25705, _                      ; B5JIS paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_B4JIS = 36398, _                      ; B4JIS paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_16KAI = 26010, _                      ; 16KAI paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_32KAI = 18390, _                      ; 32KAI paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_BIG_32KAI = 20295, _                  ; Big 32KAI paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_DLENVELOPE = 21996, _                 ; DL Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_C6ENVELOPE = 16205, _                 ; C6 Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_C6_5_ENVELOPE = 22911, _              ; C6/5 Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_C5ENVELOPE = 22911, _                 ; C5 Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_C4ENVELOPE = 32410, _                 ; C4 Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_6_3_4ENVELOPE = 16510, _              ; 6 3/4 Pound Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_7_3_4ENVELOPE = 19050, _              ; 7 3/4 Pound Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_9ENVELOPE = 22543, _                  ; 9 Pound Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_10ENVELOPE = 24130, _                 ; 10 Pound Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_11ENVELOPE = 26365, _                 ; 11 Pound Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_12ENVELOPE = 27940, _                 ; 12 Pound Envelope paper height in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_HEIGHT_JAP_POSTCARD = 14808                  ; Japanese Postcard paper height in Hundredths of a Millimeter (HMM).
 
 ; Printer Paper Orientation Constants.
 Global Const _                                                  ; com.sun.star.view.PaperOrientation
 		$LOW_PAPER_ORIENT_PORTRAIT = 0, _                       ; Portrait Paper Orientation.
 		$LOW_PAPER_ORIENT_LANDSCAPE = 1                         ; Landscape Paper Orientation.
 
-; Paper Width in uM
+; Paper Width in Hundredths of a Millimeter (HMM)
 Global Const _
-		$LOW_PAPER_WIDTH_A6 = 10490, _                          ; A6 paper width in Micrometers.
-		$LOW_PAPER_WIDTH_A5 = 14808, _                          ; A5 paper width in Micrometers.
-		$LOW_PAPER_WIDTH_A4 = 21006, _                          ; A4 paper width in Micrometers.
-		$LOW_PAPER_WIDTH_A3 = 29693, _                          ; A3 paper width in Micrometers.
-		$LOW_PAPER_WIDTH_B6ISO = 12497, _                       ; B6ISO paper width in Micrometers.
-		$LOW_PAPER_WIDTH_B5ISO = 17602, _                       ; B5ISO paper width in Micrometers.
-		$LOW_PAPER_WIDTH_B4ISO = 24994, _                       ; B4ISO paper width in Micrometers.
-		$LOW_PAPER_WIDTH_LETTER = 21590, _                      ; Letter paper width in Micrometers.
-		$LOW_PAPER_WIDTH_LEGAL = 21590, _                       ; Legal paper width in Micrometers.
-		$LOW_PAPER_WIDTH_LONG_BOND = 21590, _                   ; Long Bond paper width in Micrometers.
-		$LOW_PAPER_WIDTH_TABLOID = 27940, _                     ; Tabloid paper width in Micrometers.
-		$LOW_PAPER_WIDTH_B6JIS = 12801, _                       ; B6JIS paper width in Micrometers.
-		$LOW_PAPER_WIDTH_B5JIS = 18212, _                       ; B5JIS paper width in Micrometers.
-		$LOW_PAPER_WIDTH_B4JIS = 25705, _                       ; B4JIS paper width in Micrometers.
-		$LOW_PAPER_WIDTH_16KAI = 18390, _                       ; 16KAI paper width in Micrometers.
-		$LOW_PAPER_WIDTH_32KAI = 13005, _                       ; 32KAI paper width in Micrometers.
-		$LOW_PAPER_WIDTH_BIG_32KAI = 13995, _                   ; Big 32KAI paper width in Micrometers.
-		$LOW_PAPER_WIDTH_DLENVELOPE = 10998, _                  ; DL Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_C6ENVELOPE = 11405, _                  ; C6 Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_C6_5_ENVELOPE = 11405, _               ; C6/5 Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_C5ENVELOPE = 16205, _                  ; C5 Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_C4ENVELOPE = 22911, _                  ; C4 Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_6_3_4ENVELOPE = 9208, _                ; 6 3/4 Pound Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_7_3_4ENVELOPE = 9855, _                ; 7 3/4 Pound Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_9ENVELOPE = 9843, _                    ; 9 Pound Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_10ENVELOPE = 10490, _                  ; 10 Pound Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_11ENVELOPE = 11430, _                  ; 11 Pound Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_12ENVELOPE = 12065, _                  ; 12 Pound Envelope paper width in Micrometers.
-		$LOW_PAPER_WIDTH_JAP_POSTCARD = 10008                   ; Japanese Postcard paper width in Micrometers.
+		$LOW_PAPER_WIDTH_A6 = 10490, _                          ; A6 paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_A5 = 14808, _                          ; A5 paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_A4 = 21006, _                          ; A4 paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_A3 = 29693, _                          ; A3 paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_B6ISO = 12497, _                       ; B6ISO paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_B5ISO = 17602, _                       ; B5ISO paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_B4ISO = 24994, _                       ; B4ISO paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_LETTER = 21590, _                      ; Letter paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_LEGAL = 21590, _                       ; Legal paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_LONG_BOND = 21590, _                   ; Long Bond paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_TABLOID = 27940, _                     ; Tabloid paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_B6JIS = 12801, _                       ; B6JIS paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_B5JIS = 18212, _                       ; B5JIS paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_B4JIS = 25705, _                       ; B4JIS paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_16KAI = 18390, _                       ; 16KAI paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_32KAI = 13005, _                       ; 32KAI paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_BIG_32KAI = 13995, _                   ; Big 32KAI paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_DLENVELOPE = 10998, _                  ; DL Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_C6ENVELOPE = 11405, _                  ; C6 Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_C6_5_ENVELOPE = 11405, _               ; C6/5 Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_C5ENVELOPE = 16205, _                  ; C5 Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_C4ENVELOPE = 22911, _                  ; C4 Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_6_3_4ENVELOPE = 9208, _                ; 6 3/4 Pound Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_7_3_4ENVELOPE = 9855, _                ; 7 3/4 Pound Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_9ENVELOPE = 9843, _                    ; 9 Pound Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_10ENVELOPE = 10490, _                  ; 10 Pound Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_11ENVELOPE = 11430, _                  ; 11 Pound Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_12ENVELOPE = 12065, _                  ; 12 Pound Envelope paper width in Hundredths of a Millimeter (HMM).
+		$LOW_PAPER_WIDTH_JAP_POSTCARD = 10008                   ; Japanese Postcard paper width in Hundredths of a Millimeter (HMM).
 
 ; Paragraph Horizontal Align
 Global Const _                                                  ; com.sun.star.style.ParagraphAdjust
@@ -890,7 +890,7 @@ Global Enum _
 		$LOW_SHAPE_LINE_STYLE_ULTRAFINE_DASHED, _               ; 24 -- A Ultrafine Dashed Line.
 		$LOW_SHAPE_LINE_STYLE_FINE_DASHED, _                    ; 25 -- A Fine Dashed Line.
 		$LOW_SHAPE_LINE_STYLE_DASHED, _                         ; 26 -- A Dashed Line.
-		$LOW_SHAPE_LINE_STYLE_LINE_STYLE_9, _                   ; 27 -- Line Style 9.
+		$LOW_SHAPE_LINE_STYLE_SPARSE_DASH, _                    ; 27 -- A Sparse Dash, formerly named "Line Style 9".
 		$LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, _                ; 28 -- A Line consisting of 3 Dashes and 3 Dots.
 		$LOW_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES, _      ; 29 -- A Ultrafine Line consisting of 2 Dots and 3 Dashes.
 		$LOW_SHAPE_LINE_STYLE_2_DOTS_1_DASH, _                  ; 30 -- A Line consisting of 2 Dots and 1 Dash.

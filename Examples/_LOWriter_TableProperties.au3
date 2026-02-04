@@ -16,21 +16,17 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 5 rows, 3 columns, set Table Split to False, Background color to Teal and set a custom Table name.
-	$oTable = _LOWriter_TableCreate($oDoc, 5, 3, False, $LO_COLOR_TEAL, "CustomTableName")
+	; Create a Table, 3 columns, 5 rows, set Background color to Teal, Create a custom Table name, Heading to False, Skip Table Style, and set Table Split to False.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5, $LO_COLOR_TEAL, "CustomTableName", False, Null, False)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert the Table into the document at the View Cursor's location.
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the table settings to: Table Alignment = $LOW_ORIENT_HORI_NONE, Keep Table with next Paragraph = False, Set a New Table Name,
 	; allow the Table to split across pages, Don't Allow the Rows to Split, and do repeat the Table heading, and include 3 rows as the heading.
-	_LOWriter_TableProperties($oTable, $LOW_ORIENT_HORI_NONE, False, "NewName", True, True, True, 3)
+	_LOWriter_TableProperties($oDoc, $oTable, $LOW_ORIENT_HORI_NONE, False, "NewName", True, True, True, 3)
 	If @error Then _ERROR($oDoc, "Failed to set Text Table settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve current settings.
-	$avTableProps = _LOWriter_TableProperties($oTable)
+	$avTableProps = _LOWriter_TableProperties($oDoc, $oTable)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Current Text Table settings are as follows: " & @CRLF & _

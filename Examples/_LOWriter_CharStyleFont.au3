@@ -33,7 +33,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Character style to "Example" Character style.
-	_LOWriter_CharStyleSet($oDoc, $oViewCursor, "Example")
+	_LOWriter_CharStyleCurrent($oDoc, $oViewCursor, "Example")
 	If @error Then _ERROR($oDoc, "Failed to set the Character style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the "Example" Character Style object.

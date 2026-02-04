@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oPageStyle
-	Local $iMicrometers, $iMicrometers2
+	Local $iHMM, $iHMM2
 	Local $avPageStyleSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -14,24 +14,24 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Page Style's Object, to modify its settings.
-	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Default Page Style")
+	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Page style Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.
 	_LOWriter_PageStyleBorderWidth($oPageStyle, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/2" to Micrometers
-	$iMicrometers2 = _LO_ConvertToMicrometer(.5)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/2" to Hundredths of a Millimeter (HMM)
+	$iHMM2 = _LO_UnitConvert(.5, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Page style Header settings to: Header on = True, Same content on left and right pages = False, Same content on the first page = True,
 	; Left & Right margins = 1/4", Spacing between Header content and Page content = 1/2", Dynamic spacing = False, Skip Height and set AutoHeight to True.
-	_LOWriter_PageStyleHeader($oPageStyle, True, False, True, $iMicrometers, $iMicrometers, $iMicrometers2, False, Null, True)
+	_LOWriter_PageStyleHeader($oPageStyle, True, False, True, $iHMM, $iHMM, $iHMM2, False, Null, True)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.
@@ -42,11 +42,11 @@ Func Example()
 			"Is the Header on for this Page Style? True/False: " & $avPageStyleSettings[0] & @CRLF & _
 			"Is the content on Left and Right pages the same? True/False: " & $avPageStyleSettings[1] & @CRLF & _
 			"Is the content on the first page the same? True/False: " & $avPageStyleSettings[2] & @CRLF & _
-			"The Left Margin Width is, in Micrometers: " & $avPageStyleSettings[3] & @CRLF & _
-			"The Right Margin Width is, in Micrometers: " & $avPageStyleSettings[4] & @CRLF & _
-			"The Spacing between the Header contents and the Page contents, in Micrometers: " & $avPageStyleSettings[5] & @CRLF & _
+			"The Left Margin Width is, in Hundredths of a Millimeter (HMM): " & $avPageStyleSettings[3] & @CRLF & _
+			"The Right Margin Width is, in Hundredths of a Millimeter (HMM): " & $avPageStyleSettings[4] & @CRLF & _
+			"The Spacing between the Header contents and the Page contents, in Hundredths of a Millimeter (HMM): " & $avPageStyleSettings[5] & @CRLF & _
 			"Is the Spacing between the Header contents and the Page contents automatically adjusted? True/False: " & $avPageStyleSettings[6] & @CRLF & _
-			"The height of the Header, in Micrometers: " & $avPageStyleSettings[7] & @CRLF & _
+			"The height of the Header, in Hundredths of a Millimeter (HMM): " & $avPageStyleSettings[7] & @CRLF & _
 			"IS the height of the Header automatically adjusted? True/False: " & $avPageStyleSettings[8])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

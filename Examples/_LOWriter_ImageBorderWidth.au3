@@ -30,10 +30,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Image's Border Width settings are as follows: " & @CRLF & _
-			"The Top Border Width is, in Micrometers, (see UDF constants): " & $avSettings[0] & @CRLF & _
-			"The Bottom Border Width is, in Micrometers, (see UDF constants): " & $avSettings[1] & @CRLF & _
-			"The Left Border Width is, in Micrometers, (see UDF constants): " & $avSettings[2] & @CRLF & _
-			"The Right Border Width is, in Micrometers, (see UDF constants): " & $avSettings[3])
+			"The Top Border Width is, in Hundredths of a Millimeter (HMM), (see UDF constants): " & $avSettings[0] & @CRLF & _
+			"The Bottom Border Width is, in Hundredths of a Millimeter (HMM), (see UDF constants): " & $avSettings[1] & @CRLF & _
+			"The Left Border Width is, in Hundredths of a Millimeter (HMM), (see UDF constants): " & $avSettings[2] & @CRLF & _
+			"The Right Border Width is, in Hundredths of a Millimeter (HMM), (see UDF constants): " & $avSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

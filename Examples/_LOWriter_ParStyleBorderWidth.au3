@@ -20,11 +20,11 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style." & @CR & "Next Line")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the "Default Paragraph Style" object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Default Paragraph Style")
+	; Retrieve the Default Paragraph Style object.
+	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Default Paragraph Style" Border Width to $LOW_BORDERWIDTH_THICK, And Connect border to True.
+	; Set Default Paragraph Style Border Width to $LOW_BORDERWIDTH_THICK, And Connect border to True.
 	_LOWriter_ParStyleBorderWidth($oParStyle, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -33,10 +33,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's current Border width settings are as follows: " & @CRLF & _
-			"Top width, in Micrometers: " & $avParStyleSettings[0] & @CRLF & _
-			"Bottom width, in Micrometers: " & $avParStyleSettings[1] & @CRLF & _
-			"Left width, in Micrometers: " & $avParStyleSettings[2] & @CRLF & _
-			"Right width, in Micrometers: " & $avParStyleSettings[3] & @CRLF & _
+			"Top width, in Hundredths of a Millimeter (HMM): " & $avParStyleSettings[0] & @CRLF & _
+			"Bottom width, in Hundredths of a Millimeter (HMM): " & $avParStyleSettings[1] & @CRLF & _
+			"Left width, in Hundredths of a Millimeter (HMM): " & $avParStyleSettings[2] & @CRLF & _
+			"Right width, in Hundredths of a Millimeter (HMM): " & $avParStyleSettings[3] & @CRLF & _
 			"Connect Paragraph Borders if the settings are identical? True/False: " & $avParStyleSettings[4])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

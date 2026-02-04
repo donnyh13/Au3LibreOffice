@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style at the View Cursor to Numbering 123.
-	_LOWriter_NumStyleSet($oDoc, $oViewCursor, "Numbering 123")
+	_LOWriter_NumStyleCurrent($oDoc, $oViewCursor, "Numbering 123")
 	If @error Then _ERROR($oDoc, "Failed to Set the Numbering Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.

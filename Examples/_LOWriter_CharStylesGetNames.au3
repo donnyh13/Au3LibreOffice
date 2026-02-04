@@ -6,7 +6,8 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor
-	Local $asCharStyles
+	Local $asCharStyles, $asCharStylesDisplay
+	Local $sStyles = ""
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -20,20 +21,35 @@ Func Example()
 	$asCharStyles = _LOWriter_CharStylesGetNames($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve array of Character style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Retrieve Array of Character Style display names.
+	$asCharStylesDisplay = _LOWriter_CharStylesGetNames($oDoc, False, False, True)
+	If @error Then _ERROR($oDoc, "Failed to retrieve array of Character style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now insert a list of available Character styles. There are " & @extended & " results.")
 
 	; Insert some text.
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The Character Styles available in this document are:" & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	For $i = 0 To UBound($asCharStyles) - 1
-		; Insert the character Style name.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asCharStyles[$i] & @CR)
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	For $i = 0 To (UBound($asCharStyles) - 1)
+		If ($asCharStyles[$i] <> $asCharStylesDisplay[$i]) Then
+			$sStyles &= $asCharStyles[$i] & @LF & "(Display Name: " & $asCharStylesDisplay[$i] & ")" & @CR & @CR
+
+		Else
+			$sStyles &= $asCharStyles[$i] & @CR & @CR
+		EndIf
 	Next
+
+	; Insert the Style names.
+	_LOWriter_DocInsertString($oDoc, $oViewCursor, $sStyles)
+	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Character Style names that are applied to the document
 	$asCharStyles = _LOWriter_CharStylesGetNames($oDoc, False, True)
+	If @error Then _ERROR($oDoc, "Failed to retrieve array of Character style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve Array of Character Style names that are applied to the document
+	$asCharStyles = _LOWriter_CharStylesGetNames($oDoc, False, True, True)
 	If @error Then _ERROR($oDoc, "Failed to retrieve array of Character style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now display a list of used Character styles. There are " & @extended & " results.")
@@ -50,11 +66,20 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The Character Styles currently in use in this document are:" & @CR & @CR, True)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	For $i = 0 To UBound($asCharStyles) - 1
-		; Insert the character Style name.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asCharStyles[$i] & @CR)
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	$sStyles = ""
+
+	For $i = 0 To (UBound($asCharStyles) - 1)
+		If ($asCharStyles[$i] <> $asCharStylesDisplay[$i]) Then
+			$sStyles &= $asCharStyles[$i] & @LF & "(Display Name: " & $asCharStylesDisplay[$i] & ")" & @CR & @CR
+
+		Else
+			$sStyles &= $asCharStyles[$i] & @CR & @CR
+		EndIf
 	Next
+
+	; Insert the Style names.
+	_LOWriter_DocInsertString($oDoc, $oViewCursor, $sStyles)
+	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

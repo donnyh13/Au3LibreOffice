@@ -26,9 +26,9 @@ Func Example()
 	$oColumn = _LOWriter_FormConTableConColumnAdd($oControl, $LOW_FORM_CON_TYPE_LIST_BOX)
 	If @error Then _ERROR($oDoc, "Failed to insert a Table control column. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1.25 inches to Micrometers
-	$iWidth = _LO_ConvertToMicrometer(1.25)
-	If @error Then _ERROR($oDoc, "Failed to convert inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1.25 inches to Hundredths of a Millimeter (HMM)
+	$iWidth = _LO_UnitConvert(1.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Column's General properties.
 	_LOWriter_FormConTableConListBoxGeneral($oColumn, "Renamed_AutoIt_Control", "List Box 3", Null, True, True, $LOW_FORM_CON_MOUSE_SCROLL_DISABLED, $iWidth, _
@@ -46,7 +46,7 @@ Func Example()
 			"Is the Column currently enabled? True/False: " & $avColumn[3] & @CRLF & _
 			"Is the Column currently Read-Only? True/False: " & $avColumn[4] & @CRLF & _
 			"What happens when the mouse scroll wheel is used over the Column (See UDF Constants): " & $avColumn[5] & @CRLF & _
-			"The Column's width is, in Micrometers: " & $avColumn[6] & @CRLF & _
+			"The Column's width is, in Hundredths of a Millimeter (HMM): " & $avColumn[6] & @CRLF & _
 			"This is the Array of entries in the Column. I will only see how many elements the array has, which is: " & UBound($avColumn[7]) & @CRLF & _
 			"The Horizontal Alignment is: (See UDF Constants) " & $avColumn[8] & @CRLF & _
 			"If this Column behaves as a drop down, this is how many lines will be shown: " & $avColumn[9] & @CRLF & _

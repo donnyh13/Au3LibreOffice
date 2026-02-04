@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor
-	Local $iMicrometers
+	Local $iHMM
 	Local $avSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -26,13 +26,13 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GOTO_START)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the paragraph at the current cursor's location Drop cap settings to, Number of Characters to DropCap, 3, Lines to drop down, 2,
 	; Space To text To 1/4 ", whole word to False, and Character style to "Example".
-	_LOWriter_DirFrmtParDropCaps($oDoc, $oViewCursor, 3, 2, $iMicrometers, False, "Example")
+	_LOWriter_DirFrmtParDropCaps($oDoc, $oViewCursor, 3, 2, $iHMM, False, "Example")
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -42,7 +42,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Paragraph DropCap settings are as follows: " & @CRLF & _
 			"How many characters are included in the DropCaps?: " & $avSettings[0] & @CRLF & _
 			"How many lines will the Drop cap drop?: " & $avSettings[1] & @CRLF & _
-			"How much distance between the DropCaps and the rest of the text? In micrometers: " & $avSettings[2] & @CRLF & _
+			"How much distance between the DropCaps and the rest of the text? In Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
 			"Is the whole word DropCapped? True/False: " & $avSettings[3] & @CRLF & _
 			"What character style will be used for the DropCaps, if any?: " & $avSettings[4] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")

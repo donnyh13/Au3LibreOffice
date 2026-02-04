@@ -41,9 +41,9 @@ Func Example()
 			"The Font weight is (See UDF Constants): " & $avFont[1] & @CRLF & _
 			"The Font Italic setting is (See UDF Constants): " & $avFont[2] & @CRLF & _
 			"The Font size is: " & $avFont[3] & @CRLF & _
-			"The Font color is (In Long Integer format): " & $avFont[4] & @CRLF & _
+			"The Font color is (as a RGB Color Integer): " & $avFont[4] & @CRLF & _
 			"The Font underline style is (See UDF Constants): " & $avFont[5] & @CRLF & _
-			"The Font Underline color is  (In Long Integer format): " & $avFont[6] & @CRLF & _
+			"The Font Underline color is  (as a RGB Color Integer): " & $avFont[6] & @CRLF & _
 			"The Strikeout line style is (See UDF Constants): " & $avFont[7] & @CRLF & _
 			"Are individual words underlined? True/False: " & $avFont[8] & @CRLF & _
 			"The Relief style is: (See UDF Constants) " & $avFont[9] & @CRLF & @CRLF & _

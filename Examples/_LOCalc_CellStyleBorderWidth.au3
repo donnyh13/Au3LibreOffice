@@ -24,7 +24,7 @@ Func Example()
 	$avSettings = _LOCalc_CellStyleBorderWidth($oCellStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell Style's current settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Default Cell Style's Border Width settings are as follows (in Micrometers): " & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Default Cell Style's Border Width settings are as follows (in Hundredths of a Millimeter (HMM)): " & @CRLF & _
 			"Top Border Width is: " & $avSettings[0] & @CRLF & _
 			"Bottom Border Width is: " & $avSettings[1] & @CRLF & _
 			"Left Border Width is: " & $avSettings[2] & @CRLF & _

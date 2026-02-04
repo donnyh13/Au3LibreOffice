@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style's Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, """Default"" Cell Style's Background color settings are: " & @CRLF & _
-			"The Cell Style's Background color is, in Long integer format: " & $avColor[0] & @CRLF & _
+			"The Cell Style's Background color is (as a RGB Color Integer): " & $avColor[0] & @CRLF & _
 			"Is the Cell Style's Background color transparent? True/False: " & $avColor[1])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

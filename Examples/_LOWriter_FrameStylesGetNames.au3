@@ -6,7 +6,8 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oFrame
-	Local $asNames
+	Local $asFrameStyles, $asFrameStylesDisplay
+	Local $sStyles = ""
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -25,11 +26,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Text Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Frame Style to "Labels"
-	_LOWriter_FrameStyleSet($oDoc, $oFrame, "Labels")
+	_LOWriter_FrameStyleCurrent($oDoc, $oFrame, "Labels")
 	If @error Then _ERROR($oDoc, "Failed to set the Text Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an Array of all available Frame Style Names.
-	$asNames = _LOWriter_FrameStylesGetNames($oDoc)
+	$asFrameStyles = _LOWriter_FrameStylesGetNames($oDoc)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Frame style list. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve an Array of all available Frame Style display Names.
+	$asFrameStylesDisplay = _LOWriter_FrameStylesGetNames($oDoc, False, False, True)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame style list. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now insert a list of all available Frame styles. There are " & @extended & " results.")
@@ -38,14 +43,25 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The available Frame Styles in this document are:" & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	For $i = 0 To (UBound($asNames) - 1)
-		; Insert the Frame Style names.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asNames[$i] & @CR)
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	For $i = 0 To (UBound($asFrameStyles) - 1)
+		If ($asFrameStyles[$i] <> $asFrameStylesDisplay[$i]) Then
+			$sStyles &= $asFrameStyles[$i] & @LF & "(Display Name: " & $asFrameStylesDisplay[$i] & ")" & @CR & @CR
+
+		Else
+			$sStyles &= $asFrameStyles[$i] & @CR & @CR
+		EndIf
 	Next
 
+	; Insert the Style names.
+	_LOWriter_DocInsertString($oDoc, $oViewCursor, $sStyles)
+	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	; Retrieve an Array of all user-created Frame Style Names.
-	$asNames = _LOWriter_FrameStylesGetNames($oDoc, True)
+	$asFrameStyles = _LOWriter_FrameStylesGetNames($oDoc, True)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Frame style list. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve an Array of all user-created Frame Style display Names.
+	$asFrameStylesDisplay = _LOWriter_FrameStylesGetNames($oDoc, True, False, True)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame style list. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now insert a list of all user-created Frame styles. There are " & @extended & " results.")
@@ -66,14 +82,27 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The Frame Styles that are user-created are:" & @CR & @CR, True)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	For $i = 0 To (UBound($asNames) - 1)
-		; Insert the Frame Style name.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asNames[$i] & @CR)
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	$sStyles = ""
+
+	For $i = 0 To (UBound($asFrameStyles) - 1)
+		If ($asFrameStyles[$i] <> $asFrameStylesDisplay[$i]) Then
+			$sStyles &= $asFrameStyles[$i] & @LF & "(Display Name: " & $asFrameStylesDisplay[$i] & ")" & @CR & @CR
+
+		Else
+			$sStyles &= $asFrameStyles[$i] & @CR & @CR
+		EndIf
 	Next
 
+	; Insert the Style names.
+	_LOWriter_DocInsertString($oDoc, $oViewCursor, $sStyles)
+	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	; Retrieve an Array of all applied Frame Style Names.
-	$asNames = _LOWriter_FrameStylesGetNames($oDoc, False, True)
+	$asFrameStyles = _LOWriter_FrameStylesGetNames($oDoc, False, True)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Frame style list. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve an Array of all applied Frame Style display Names.
+	$asFrameStylesDisplay = _LOWriter_FrameStylesGetNames($oDoc, False, True, True)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame style list. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now insert a list of all Frame styles used in this document. There are " & @extended & " results.")
@@ -94,11 +123,20 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The Frame Styles currently in use in this document are:" & @CR & @CR, True)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	For $i = 0 To (UBound($asNames) - 1)
-		; Insert the Frame Style name.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asNames[$i] & @CR)
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	$sStyles = ""
+
+	For $i = 0 To (UBound($asFrameStyles) - 1)
+		If ($asFrameStyles[$i] <> $asFrameStylesDisplay[$i]) Then
+			$sStyles &= $asFrameStyles[$i] & @LF & "(Display Name: " & $asFrameStylesDisplay[$i] & ")" & @CR & @CR
+
+		Else
+			$sStyles &= $asFrameStyles[$i] & @CR & @CR
+		EndIf
 	Next
+
+	; Insert the Style names.
+	_LOWriter_DocInsertString($oDoc, $oViewCursor, $sStyles)
+	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSheet, $oCell, $oColumn
-	Local $asCellStyles
+	Local $asCellStyles, $asCellStylesDisplay
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
@@ -18,6 +18,10 @@ Func Example()
 
 	; Retrieve Array of Cell Style names.
 	$asCellStyles = _LOCalc_CellStylesGetNames($oDoc)
+	If @error Then _ERROR($oDoc, "Failed to retrieve array of Cell style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve Array of Cell Style names.
+	$asCellStylesDisplay = _LOCalc_CellStylesGetNames($oDoc, False, False, True)
 	If @error Then _ERROR($oDoc, "Failed to retrieve array of Cell style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now insert a list of available Cell styles. There are " & @extended & " results.")
@@ -39,12 +43,23 @@ Func Example()
 		$oCell = _LOCalc_RangeGetCellByPosition($oSheet, 0, $i + 1)
 		If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-		; Insert the Cell Style name.
-		_LOCalc_CellString($oCell, $asCellStyles[$i])
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+		If ($asCellStyles[$i] <> $asCellStylesDisplay[$i]) Then
+			; Insert the Cell Style name and display name.
+			_LOCalc_CellString($oCell, $asCellStyles[$i] & " (Display Name: " & $asCellStylesDisplay[$i] & ")")
+			If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+		Else
+			; Insert the Cell Style name.
+			_LOCalc_CellString($oCell, $asCellStyles[$i])
+			If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+		EndIf
 	Next
 
 	; Retrieve Array of Cell Style names that are applied to the document
+	$asCellStyles = _LOCalc_CellStylesGetNames($oDoc, False, True)
+	If @error Then _ERROR($oDoc, "Failed to retrieve array of Cell style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve Array of Cell Style display names that are applied to the document
 	$asCellStyles = _LOCalc_CellStylesGetNames($oDoc, False, True)
 	If @error Then _ERROR($oDoc, "Failed to retrieve array of Cell style names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -67,9 +82,16 @@ Func Example()
 		$oCell = _LOCalc_RangeGetCellByPosition($oSheet, 1, $i + 1)
 		If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-		; Insert the Cell Style name.
-		_LOCalc_CellString($oCell, $asCellStyles[$i])
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+		If ($asCellStyles[$i] <> $asCellStylesDisplay[$i]) Then
+			; Insert the Cell Style name and display name.
+			_LOCalc_CellString($oCell, $asCellStyles[$i] & " (Display Name: " & $asCellStylesDisplay[$i] & ")")
+			If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+		Else
+			; Insert the Cell Style name.
+			_LOCalc_CellString($oCell, $asCellStyles[$i])
+			If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+		EndIf
 	Next
 
 	; Retrieve Column A's Object

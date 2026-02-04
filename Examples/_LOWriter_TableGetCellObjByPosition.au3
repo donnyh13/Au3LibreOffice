@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oViewCursor, $oTable, $oCell
+	Local $oDoc, $oViewCursor, $oTable, $oCell, $oCellRange
 	Local $iRows, $iColumns
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -16,21 +16,27 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 3 rows, 5 columns
-	$oTable = _LOWriter_TableCreate($oDoc, 3, 5)
+	; Create a Table, 5 columns, 6 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 5, 6)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert the Table into the document.
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve middle left Table Cell Object, Table Rows and columns are 0 based, so left hand column is 0, 2nd row down is 1.
 	$oCell = _LOWriter_TableGetCellObjByPosition($oTable, 0, 1)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.
-	_LOWriter_CellBackColor($oCell, $LO_COLOR_BLUE, False)
+	_LOWriter_CellBackColor($oCell, $LO_COLOR_BLUE)
 	If @error Then _ERROR($oDoc, "Failed to set Text Table cell background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; When retrieving multiple cells, a cell range will be returned, a cell range is largely the same as a single cell Object,
+	; but some functions don't accept a cell range.
+
+	; Retrieve the First Column, fourth row to third column, fifth row.
+	$oCellRange = _LOWriter_TableGetCellObjByPosition($oTable, 0, 3, 2, 4)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.
+	_LOWriter_CellBackColor($oCellRange, $LO_COLOR_TEAL)
 
 	; Retrieve how many Rows the Table currently contains.
 	$iRows = _LOWriter_TableRowGetCount($oTable)

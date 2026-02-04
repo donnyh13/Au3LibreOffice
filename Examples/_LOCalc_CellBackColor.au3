@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSheet, $oCell, $oCellRange
-	Local $avColor[0], $avColor2[0]
+	Local $iColor, $iColor2
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
@@ -32,18 +32,16 @@ Func Example()
 	_LOCalc_CellBackColor($oCellRange, $LO_COLOR_BLUE)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Range Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve Cell B5's current background color setting, Return will be an array in order of function parameters.
-	$avColor = _LOCalc_CellBackColor($oCell)
+	; Retrieve Cell B5's current background color setting, Return will be an Integer.
+	$iColor = _LOCalc_CellBackColor($oCell)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve Cell Range A1-A6's current background color setting, Return will be an array in order of function parameters.
-	$avColor2 = _LOCalc_CellBackColor($oCellRange)
+	; Retrieve Cell Range A1-A6's current background color setting, Return will be an Integer.
+	$iColor2 = _LOCalc_CellBackColor($oCellRange)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Cell B5's Background color is, in Long integer format: " & $avColor[0] & @CRLF & _
-			"Is Cell B5's Background color transparent? True/False: " & $avColor[1] & @CRLF & _
-			"Cell Range A1-A6's Background color is, in Long integer format: " & $avColor2[0] & @CRLF & _
-			"Is Cell Range A1-A6's Background color transparent? True/False: " & $avColor2[1])
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Cell B5's Background color is (as a RGB Color Integer): " & $iColor & @CRLF & @CRLF & _
+			"Cell Range A1-A6's Background color is (as a RGB Color Integer): " & $iColor2)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

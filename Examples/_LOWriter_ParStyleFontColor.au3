@@ -20,11 +20,11 @@ Func Example()
 	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the "Default Paragraph Style" object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Default Paragraph Style")
+	; Retrieve the Default Paragraph Style object.
+	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Default Paragraph Style" font color to $LO_COLOR_RED, Transparency to 50%, and Highlight to $LO_COLOR_GOLD
+	; Set Default Paragraph Style font color to $LO_COLOR_RED, Transparency to 50%, and Highlight to $LO_COLOR_GOLD
 	_LOWriter_ParStyleFontColor($oParStyle, $LO_COLOR_RED, 50, $LO_COLOR_GOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -33,9 +33,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's current Font Color settings are as follows: " & @CRLF & _
-			"The current Font color is, in Long color format: " & $avParStyleSettings[0] & @CRLF & _
+			"The Font color is (as a RGB Color Integer): " & $avParStyleSettings[0] & @CRLF & _
 			"Transparency of the font color, in percentage: " & $avParStyleSettings[1] & @CRLF & _
-			"Current Font highlight color, in long color format: " & $avParStyleSettings[2])
+			"The highlight color is (as a RGB Color Integer): " & $avParStyleSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

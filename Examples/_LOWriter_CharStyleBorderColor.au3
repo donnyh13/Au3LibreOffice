@@ -33,7 +33,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Character style to "Example" Character style.
-	_LOWriter_CharStyleSet($oDoc, $oViewCursor, "Example")
+	_LOWriter_CharStyleCurrent($oDoc, $oViewCursor, "Example")
 	If @error Then _ERROR($oDoc, "Failed to set the Character style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the "Example" object.
@@ -53,10 +53,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's current Border color settings are as follows: " & @CRLF & _
-			"Top color, in long color format: " & $avCharStyleSettings[0] & @CRLF & _
-			"Bottom color, in long color format: " & $avCharStyleSettings[1] & @CRLF & _
-			"Left color, in long color format: " & $avCharStyleSettings[2] & @CRLF & _
-			"Right color, in long color format: " & $avCharStyleSettings[3])
+			"Top color is (as a RGB Color Integer): " & $avCharStyleSettings[0] & @CRLF & _
+			"Bottom color is (as a RGB Color Integer): " & $avCharStyleSettings[1] & @CRLF & _
+			"Left color is (as a RGB Color Integer): " & $avCharStyleSettings[2] & @CRLF & _
+			"Right color is (as a RGB Color Integer): " & $avCharStyleSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

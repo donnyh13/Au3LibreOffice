@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oFrameStyle, $oViewCursor, $oFrame
-	Local $iMicrometers
+	Local $iHMM
 	Local $avSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -26,20 +26,20 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Frame's style to my created style, "Test Style"
-	_LOWriter_FrameStyleSet($oDoc, $oFrame, "Test Style")
+	_LOWriter_FrameStyleCurrent($oDoc, $oFrame, "Test Style")
 	If @error Then _ERROR($oDoc, "Failed to set Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Frame Style Column count to 4.
 	_LOWriter_FrameStyleColumnSettings($oFrameStyle, 4)
 	If @error Then _ERROR($oDoc, "Failed to set Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/16" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(.0625)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/16" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(.0625, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Frame Style Column Separator line settings to: Separator on (True), Line Style = $LOW_LINE_STYLE_SOLID, Line width to 1/16"
 	; Line Color to $LO_COLOR_RED, Height to 75%, Line Position to $LOW_ALIGN_VERT_MIDDLE
-	_LOWriter_FrameStyleColumnSeparator($oFrameStyle, True, $LOW_LINE_STYLE_SOLID, $iMicrometers, $LO_COLOR_RED, 75, $LOW_ALIGN_VERT_MIDDLE)
+	_LOWriter_FrameStyleColumnSeparator($oFrameStyle, True, $LOW_LINE_STYLE_SOLID, $iHMM, $LO_COLOR_RED, 75, $LOW_ALIGN_VERT_MIDDLE)
 	If @error Then _ERROR($oDoc, "Failed to set Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame Style settings. Return will be an array in order of function parameters.
@@ -49,8 +49,8 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame style's current Column Separator Line settings are as follows: " & @CRLF & _
 			"Is Column separated by a line? True/False: " & $avSettings[0] & @CRLF & _
 			"The Separator Line style is, (see UDF constants): " & $avSettings[1] & @CRLF & _
-			"The Separator Line width is, in Micrometers: " & $avSettings[2] & @CRLF & _
-			"The Separator Line color is, in Long color format: " & $avSettings[3] & @CRLF & _
+			"The Separator Line width is, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
+			"The Separator Line color is (as a RGB Color Integer): " & $avSettings[3] & @CRLF & _
 			"The Separator Line length percentage is: " & $avSettings[4] & @CRLF & _
 			"The Separator Line position is, (see UDF constants): " & $avSettings[5])
 

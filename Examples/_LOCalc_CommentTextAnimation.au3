@@ -44,8 +44,8 @@ Func Example()
 			"Will the Animation begin with the Text visible inside the Comment Box? True/False: " & $avSettings[2] & @CRLF & _
 			"Will the Animation end with the Text visible inside the Comment Box? True/False: " & $avSettings[3] & @CRLF & _
 			"The Animation will be repeated: " & $avSettings[4] & " times." & @CRLF & _
-			"The Animation will be Incremented by: " & $avSettings[5] & " pixels. (May be 0 if the current setting is in Micrometers.)" & @CRLF & _
-			"The Animation will be Incremented by: " & $avSettings[6] & " Micrometers. (May be 0 if the current setting is in Pixels.)" & @CRLF & _
+			"The Animation will be Incremented by: " & $avSettings[5] & " pixels. (May be 0 if the current setting is in Hundredths of a Millimeter (HMM).)" & @CRLF & _
+			"The Animation will be Incremented by: " & $avSettings[6] & " Hundredths of a Millimeter (HMM). (May be 0 if the current setting is in Pixels.)" & @CRLF & _
 			"The Delay between animation cycles is, in Milliseconds: " & $avSettings[7])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

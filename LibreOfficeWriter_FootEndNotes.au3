@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-#Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 #include-once
 
 ; Main LibreOffice Includes
@@ -210,21 +210,22 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 ; Description ...: Modify a Specific Endnote's settings.
 ; Syntax ........: _LOWriter_EndnoteModifyAnchor(ByRef $oEndNote[, $sLabel = Null])
 ; Parameters ....: $oEndNote            - [in/out] an object. A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
-;                  $sLabel              - [optional] a string value. Default is Null. A custom anchor label for the Endnote. Set to "" for automatic numbering.
+;                  $sLabel              - [optional] a string value. Default is Null. A custom anchor label for the Endnote. Call with "" for automatic numbering.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oEndNote not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sLabel not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended 1 Return 0 = $sLabel was not set successfully.
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sLabel
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Endnote settings were successfully modified.
-;                  @Error 0 @Extended 1 Return String = Success. $sLabel set to Null, current Endnote Label returned.
-;                  @Error 0 @Extended 2 Return String = Success. $sLabel set to Null, current Endnote Auto-Numbering number returned.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, current Endnote Label returned.
+;                  @Error 0 @Extended 2 Return String = Success. All optional parameters were called with Null, current Endnote Auto-Numbering number returned.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Calling $sLabel with Null will either return the current Label, or the current auto-numbering number, depending on if auto-numbering is active.
 ; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
@@ -234,6 +235,8 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 Func _LOWriter_EndnoteModifyAnchor(ByRef $oEndNote, $sLabel = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
 
 	If Not IsObj($oEndNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -249,9 +252,9 @@ Func _LOWriter_EndnoteModifyAnchor(ByRef $oEndNote, $sLabel = Null)
 	If Not IsString($sLabel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oEndNote.Label = $sLabel
-	If ($oEndNote.Label() <> $sLabel) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ($oEndNote.Label() <> $sLabel) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
 
 ; #FUNCTION# ====================================================================================================================
@@ -267,8 +270,8 @@ EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iNumFormat not an Integer, or Less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iStartAt not an integer, less than 1, or greater than 9999.
+;                  @Error 1 @Extended 2 Return 0 = $iNumFormat not an Integer, Less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iStartAt not an Integer, less than 1 or greater than 9999.
 ;                  @Error 1 @Extended 4 Return 0 = $sBefore not a String.
 ;                  @Error 1 @Extended 5 Return 0 = $sAfter not a String.
 ;                  --Property Setting Errors--
@@ -279,7 +282,7 @@ EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
 ;                  |                               8 = Error setting $sAfter
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -364,10 +367,10 @@ EndFunc   ;==>_LOWriter_EndnoteSettingsAutoNumber
 ;                  |                               8 = Error setting $sEndnoteArea
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_CharStylesGetNames, _LOWriter_PageStylesGetNames
 ; Link ..........:
@@ -383,10 +386,7 @@ Func _LOWriter_EndnoteSettingsStyles(ByRef $oDoc, $sParagraph = Null, $sPage = N
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($sParagraph, $sPage, $sTextArea, $sEndnoteArea) Then
-		__LO_ArrayFill($asENSettings, __LOWriter_ParStyleNameToggle($oDoc.EndnoteSettings.ParaStyleName(), True), _
-				__LOWriter_PageStyleNameToggle($oDoc.EndnoteSettings.PageStyleName(), True), _
-				__LOWriter_CharStyleNameToggle($oDoc.EndnoteSettings.AnchorCharStyleName(), True), _
-				__LOWriter_CharStyleNameToggle($oDoc.EndnoteSettings.CharStyleName(), True))
+		__LO_ArrayFill($asENSettings, $oDoc.EndnoteSettings.ParaStyleName(), $oDoc.EndnoteSettings.PageStyleName(), $oDoc.EndnoteSettings.AnchorCharStyleName(), $oDoc.EndnoteSettings.CharStyleName())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asENSettings)
 	EndIf
@@ -395,36 +395,32 @@ Func _LOWriter_EndnoteSettingsStyles(ByRef $oDoc, $sParagraph = Null, $sPage = N
 		If Not IsString($sParagraph) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 		If Not _LOWriter_ParStyleExists($oDoc, $sParagraph) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$sParagraph = __LOWriter_ParStyleNameToggle($sParagraph)
 		$oDoc.EndnoteSettings.ParaStyleName = $sParagraph
-		$iError = ($oDoc.EndnoteSettings.ParaStyleName() = $sParagraph) ? ($iError) : (BitOR($iError, 1))
+		$iError = (__LOWriter_ParStyleCompare($oDoc, $oDoc.EndnoteSettings.ParaStyleName(), $sParagraph)) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($sPage <> Null) Then
 		If Not IsString($sPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If Not _LOWriter_PageStyleExists($oDoc, $sPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-		$sPage = __LOWriter_PageStyleNameToggle($sPage)
 		$oDoc.EndnoteSettings.PageStyleName = $sPage
-		$iError = ($oDoc.EndnoteSettings.PageStyleName() = $sPage) ? ($iError) : (BitOR($iError, 2))
+		$iError = (__LOWriter_PageStyleCompare($oDoc, $oDoc.EndnoteSettings.PageStyleName(), $sPage)) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($sTextArea <> Null) Then
 		If Not IsString($sTextArea) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 		If Not _LOWriter_CharStyleExists($oDoc, $sTextArea) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-		$sTextArea = __LOWriter_CharStyleNameToggle($sTextArea)
 		$oDoc.EndnoteSettings.AnchorCharStyleName = $sTextArea
-		$iError = ($oDoc.EndnoteSettings.AnchorCharStyleName() = $sTextArea) ? ($iError) : (BitOR($iError, 4))
+		$iError = (__LOWriter_CharacterStyleCompare($oDoc, $oDoc.EndnoteSettings.AnchorCharStyleName(), $sTextArea)) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($sEndnoteArea <> Null) Then
 		If Not IsString($sEndnoteArea) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 		If Not _LOWriter_CharStyleExists($oDoc, $sEndnoteArea) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-		$sEndnoteArea = __LOWriter_CharStyleNameToggle($sEndnoteArea)
 		$oDoc.EndnoteSettings.CharStyleName = $sEndnoteArea
-		$iError = ($oDoc.EndnoteSettings.CharStyleName() = $sEndnoteArea) ? ($iError) : (BitOR($iError, 8))
+		$iError = (__LOWriter_CharacterStyleCompare($oDoc, $oDoc.EndnoteSettings.CharStyleName(), $sEndnoteArea)) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -645,21 +641,22 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 ; Description ...: Modify a Footnote's Anchor Character.
 ; Syntax ........: _LOWriter_FootnoteModifyAnchor(ByRef $oFootNote[, $sLabel = Null])
 ; Parameters ....: $oFootNote           - [in/out] an object. A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
-;                  $sLabel              - [optional] a string value. Default is Null. A custom anchor label for the Footnote. Set to "" for automatic numbering.
+;                  $sLabel              - [optional] a string value. Default is Null. A custom anchor label for the Footnote. Call with "" for automatic numbering.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oFootNote not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sLabel not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended 1 Return 0 = Failed to set $sLabel.
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sLabel
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Footnote settings were successfully modified.
-;                  @Error 0 @Extended 1 Return String = Success. $sLabel set to Null, current Footnote Custom Label returned.
-;                  @Error 0 @Extended 2 Return String = Success. $sLabel set to Null, current Footnote AutoNumbering number returned.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, current Footnote Custom Label returned.
+;                  @Error 0 @Extended 2 Return String = Success. All optional parameters were called with Null, current Footnote AutoNumbering number returned.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Calling $sLabel with Null will either return the current Label, or the current auto-numbering number, depending on if auto-numbering is active.
 ; Related .......: _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList
@@ -669,6 +666,8 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 Func _LOWriter_FootnoteModifyAnchor(ByRef $oFootNote, $sLabel = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
 
 	If Not IsObj($oFootNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -684,9 +683,9 @@ Func _LOWriter_FootnoteModifyAnchor(ByRef $oFootNote, $sLabel = Null)
 	If Not IsString($sLabel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oFootNote.Label = $sLabel
-	If ($oFootNote.Label() <> $sLabel) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ($oFootNote.Label() <> $sLabel) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_FootnoteModifyAnchor
 
 ; #FUNCTION# ====================================================================================================================
@@ -705,7 +704,7 @@ EndFunc   ;==>_LOWriter_FootnoteModifyAnchor
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iNumFormat not an Integer, Less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iStartAt not an integer, less than 1 or greater than 9999.
+;                  @Error 1 @Extended 3 Return 0 = $iStartAt not an Integer, less than 1 or greater than 9999.
 ;                  @Error 1 @Extended 4 Return 0 = $sBefore not a String.
 ;                  @Error 1 @Extended 5 Return 0 = $sAfter not a String.
 ;                  @Error 1 @Extended 6 Return 0 = $iCounting not an Integer, less than 0 or greater than 2. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3..
@@ -720,10 +719,10 @@ EndFunc   ;==>_LOWriter_FootnoteModifyAnchor
 ;                  |                               32 = Error setting $bEndOfDoc
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -811,10 +810,10 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsAutoNumber
 ;                  |                               2 = Error setting $sBegin
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -881,10 +880,10 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsContinuation
 ;                  |                               8 = Error setting $sFootnoteArea
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_PageStylesGetNames, _LOWriter_CharStylesGetNames
 ; Link ..........:
@@ -900,10 +899,7 @@ Func _LOWriter_FootnoteSettingsStyles(ByRef $oDoc, $sParagraph = Null, $sPage = 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($sParagraph, $sPage, $sTextArea, $sFootnoteArea) Then
-		__LO_ArrayFill($avFNSettings, __LOWriter_ParStyleNameToggle($oDoc.FootnoteSettings.ParaStyleName(), True), _
-				__LOWriter_PageStyleNameToggle($oDoc.FootnoteSettings.PageStyleName(), True), _
-				__LOWriter_CharStyleNameToggle($oDoc.FootnoteSettings.AnchorCharStyleName(), True), _
-				__LOWriter_CharStyleNameToggle($oDoc.FootnoteSettings.CharStyleName(), True))
+		__LO_ArrayFill($avFNSettings, $oDoc.FootnoteSettings.ParaStyleName(), $oDoc.FootnoteSettings.PageStyleName(), $oDoc.FootnoteSettings.AnchorCharStyleName(), $oDoc.FootnoteSettings.CharStyleName())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avFNSettings)
 	EndIf
@@ -912,36 +908,32 @@ Func _LOWriter_FootnoteSettingsStyles(ByRef $oDoc, $sParagraph = Null, $sPage = 
 		If Not IsString($sParagraph) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 		If Not _LOWriter_ParStyleExists($oDoc, $sParagraph) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$sParagraph = __LOWriter_ParStyleNameToggle($sParagraph)
 		$oDoc.FootnoteSettings.ParaStyleName = $sParagraph
-		$iError = ($oDoc.FootnoteSettings.ParaStyleName() = $sParagraph) ? ($iError) : (BitOR($iError, 1))
+		$iError = (__LOWriter_ParStyleCompare($oDoc, $oDoc.FootnoteSettings.ParaStyleName(), $sParagraph)) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($sPage <> Null) Then
 		If Not IsString($sPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If Not _LOWriter_PageStyleExists($oDoc, $sPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-		$sPage = __LOWriter_PageStyleNameToggle($sPage)
 		$oDoc.FootnoteSettings.PageStyleName = $sPage
-		$iError = ($oDoc.FootnoteSettings.PageStyleName() = $sPage) ? ($iError) : (BitOR($iError, 2))
+		$iError = (__LOWriter_PageStyleCompare($oDoc, $oDoc.FootnoteSettings.PageStyleName(), $sPage)) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($sTextArea <> Null) Then
 		If Not IsString($sTextArea) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 		If Not _LOWriter_CharStyleExists($oDoc, $sTextArea) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-		$sTextArea = __LOWriter_CharStyleNameToggle($sTextArea)
 		$oDoc.FootnoteSettings.AnchorCharStyleName = $sTextArea
-		$iError = ($oDoc.FootnoteSettings.AnchorCharStyleName() = $sTextArea) ? ($iError) : (BitOR($iError, 4))
+		$iError = (__LOWriter_CharacterStyleCompare($oDoc, $oDoc.FootnoteSettings.AnchorCharStyleName(), $sTextArea)) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($sFootnoteArea <> Null) Then
 		If Not IsString($sFootnoteArea) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 		If Not _LOWriter_CharStyleExists($oDoc, $sFootnoteArea) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-		$sFootnoteArea = __LOWriter_CharStyleNameToggle($sFootnoteArea)
 		$oDoc.FootnoteSettings.CharStyleName = $sFootnoteArea
-		$iError = ($oDoc.FootnoteSettings.CharStyleName() = $sFootnoteArea) ? ($iError) : (BitOR($iError, 8))
+		$iError = (__LOWriter_CharacterStyleCompare($oDoc, $oDoc.FootnoteSettings.CharStyleName(), $sFootnoteArea)) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

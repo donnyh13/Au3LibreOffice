@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oViewCursor, $oTable
+	Local $oDoc, $oViewCursor
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -15,15 +15,9 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 5 rows, 3 columns
-	$oTable = _LOWriter_TableCreate($oDoc, 5, 3, True, $LO_COLOR_TEAL, "CustomTableName")
+	; Create a Table, 3 columns, 5 rows.
+	_LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5, $LO_COLOR_TEAL, "CustomTableName", True, "Elegant")
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have created the Table Object, but it doesn't exist in the document until I insert it.")
-
-	; Insert the Table into the document.
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

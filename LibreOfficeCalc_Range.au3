@@ -1,6 +1,6 @@
 #AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 
-#Tidy_Parameters=/sf /reel
+#Tidy_Parameters=/sf /reel /tcl=1
 #include-once
 
 ; Main LibreOffice Includes
@@ -167,7 +167,7 @@ EndFunc   ;==>_LOCalc_RangeAutoOutline
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iFlags not an Integer, less than 1, or greater than 1023. See Constants $LOC_CELL_FLAG_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iFlags not an Integer, less than 1 or greater than 1023. See Constants $LOC_CELL_FLAG_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Contents specified was successfully cleared from the cell range.
 ; Author ........: donnyh13
@@ -200,7 +200,7 @@ EndFunc   ;==>_LOCalc_RangeClearContents
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumns not an Integer or less than 0, or greater than number of Columns contained in the Range.
+;                  @Error 1 @Extended 2 Return 0 = $iColumns not an Integer, less than 0 or greater than number of Columns contained in the Range.
 ;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Columns Object.
@@ -319,7 +319,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetObjByName
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, or less than 0, or greater than number of columns contained in the Range.
+;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, less than 0 or greater than number of columns contained in the Range.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Columns Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Column Object.
@@ -361,7 +361,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetObjByPosition
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer or less than 0, or greater than number of Columns contained in the Range.
+;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, less than 0 or greater than number of Columns contained in the Range.
 ;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Columns Object.
@@ -412,12 +412,12 @@ EndFunc   ;==>_LOCalc_RangeColumnInsert
 ;                  |                               2 = Error setting $bStartOfPageBreak
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Setting $bStartOfPageBreak to True will insert a Manual Page Break, the same as setting $bManualPageBreak to True would.
-;                  $bStartOfPageBreak setting is available more for indicating where Calc is inserting Page Breaks rather than for applying a setting. You can retrieve the settings for each Column, and check if this value is set to True or not. If the Page break is an automatically inserted one, the value for $bManualPageBreak would be false.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  $bStartOfPageBreak setting is available more for indicating where Calc is inserting Page Breaks rather than for applying a setting. You can retrieve the settings for each Column, and check if this value is True or not. If the Page break is an automatically inserted one, the value for $bManualPageBreak would be False.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -505,7 +505,7 @@ EndFunc   ;==>_LOCalc_RangeColumnsGetCount
 ;                  |                               1 = Error setting $bVisible
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were set to Null, returning Column's current visibility setting.
+;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning Column's current visibility setting.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -521,7 +521,7 @@ Func _LOCalc_RangeColumnVisible(ByRef $oColumn, $bVisible = Null)
 
 	If Not IsObj($oColumn) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($bVisible = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oColumn.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oColumn.IsVisible())
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -537,7 +537,7 @@ EndFunc   ;==>_LOCalc_RangeColumnVisible
 ; Syntax ........: _LOCalc_RangeColumnWidth(ByRef $oColumn[, $bOptimal = Null[, $iWidth = Null]])
 ; Parameters ....: $oColumn             - an object. A Column object returned by a previous _LOCalc_RangeColumnGetObjByPosition, or _LOCalc_RangeColumnGetObjByName function.
 ;                  $bOptimal            - [optional] a boolean value. Default is Null. If True, the Optimal width is automatically chosen. See Remarks.
-;                  $iWidth              - [optional] an integer value (0-34464). Default is Null. The Width of the Column, set in Micrometers.
+;                  $iWidth              - [optional] an integer value (0-34464). Default is Null. The Width of the Column, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -550,12 +550,12 @@ EndFunc   ;==>_LOCalc_RangeColumnVisible
 ;                  |                               2 = Error setting $iWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bOptimal only accepts True. False will return an error. Calling True again returns the cell to optimal width, setting a custom width essentially disables it.
 ;                  I am presently unable to find a setting for Optimal Width "Add" Value.
-; Related .......: _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -745,10 +745,10 @@ EndFunc   ;==>_LOCalc_RangeCreateCursor
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $aavData not an Array.
 ;                  @Error 1 @Extended 3 Return 0 = $bStrictSize not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bStrictSize set to True, and $aavData array contains less or more elements than number of rows contained in the cell range.
+;                  @Error 1 @Extended 4 Return 0 = $bStrictSize called with True, and $aavData array contains less or more elements than number of rows contained in the cell range.
 ;                  @Error 1 @Extended 5 Return ? = Element of $aavData does not contain an array. Returning array element number of $aavData containing error.
-;                  @Error 1 @Extended 6 Return ? = $bStrictSize set to True, and Array contained in $aavData has less or more elements than number of columns in the cell range. Returning array element number of $aavData containing faulty array.
-;                  @Error 1 @Extended 7 Return ? = $bStrictSize set to False, and Array contained in $aavData has less or more elements than first Array contained in $aavData. Returning array element number of $aavData containing faulty array.
+;                  @Error 1 @Extended 6 Return ? = $bStrictSize called with True, and Array contained in $aavData has less or more elements than number of columns in the cell range. Returning array element number of $aavData containing faulty array.
+;                  @Error 1 @Extended 7 Return ? = $bStrictSize called with False, and Array contained in $aavData has less or more elements than first Array contained in $aavData. Returning array element number of $aavData containing faulty array.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve array of Formula Data contained in the Cell Range.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Start of Row from Cell Range.
@@ -761,11 +761,11 @@ EndFunc   ;==>_LOCalc_RangeCreateCursor
 ;                  @Error 3 @Extended 9 Return 0 = Failed to re-size Cell Range Columns.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Data was successfully set for the cell range.
-;                  @Error 0 @Extended 1 Return Array of Arrays = Success. $aavData set to Null, returning an array containing arrays, which contain any data content contained in the cell range.
+;                  @Error 0 @Extended 1 Return Array of Arrays = Success. $aavData called with Null, returning an array containing arrays, which contain any data content contained in the cell range.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will return Strings and Numbers contained in the cell range when $aavData is called with Null keyword. Array will be an array of arrays. The internal arrays will contain numerical or string data, depending on cell content.
-;                  $aavData must be an array containing arrays. If $bStrictSize is set to True, the main Array's element count must match the row count contained in the Cell Range, and each internal Array's element count must match the column count of the Cell Range it is to fill. All internal arrays must be the same size.
+;                  $aavData must be an array containing arrays. If $bStrictSize is called with True, the main Array's element count must match the row count contained in the Cell Range, and each internal Array's element count must match the column count of the Cell Range it is to fill. All internal arrays must be the same size.
 ;                  Any data previously contained in the Cell Range will be overwritten.
 ;                  All array elements must contain appropriate data, strings or numbers.
 ;                  Formulas will be inserted as strings only, and will not be valid.
@@ -781,7 +781,7 @@ Func _LOCalc_RangeData(ByRef $oRange, $aavData = Null, $bStrictSize = False)
 
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($aavData = Null) Then
+	If __LO_VarsAreNull($aavData) Then
 		$aavData = $oRange.getDataArray()
 		If Not IsArray($aavData) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -979,7 +979,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseDelete
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Database Ranges Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to query whether document contains the called name.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if the document contains a Database Range by the called name. Else False.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document contains a Database Range by the called name. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1018,7 +1018,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseExists
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Database Ranges Object.
 ;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning an array of Database Ranges contained in the document. @extended set to number of results.
+;                  @Error 0 @Extended ? Return Array = Success. Returning an array of Database Ranges contained in the document. @Extended set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1134,10 +1134,10 @@ EndFunc   ;==>_LOCalc_RangeDatabaseGetObjByName
 ;                  |                               128 = Error setting $bAutoFilter
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  When retrieving the settings, $oRange will be a Range Object.
 ; Related .......: _LOCalc_RangeDatabaseGetObjByName, _LOCalc_RangeDatabaseAdd
@@ -1238,7 +1238,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseModify
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSheet not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iMode not an Integer, less than 0, or greater than 4. See Constants $LOC_CELL_DELETE_MODE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iMode not an Integer, less than 0 or greater than 4. See Constants $LOC_CELL_DELETE_MODE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Range Address Struct from $oRange.
 ;                  --Success--
@@ -1354,7 +1354,7 @@ EndFunc   ;==>_LOCalc_RangeFill
 ; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
 ;                  $nMin                - [optional] a general number value (-2^31-2^31). Default is 0.0000. The minimum number value. Max is -2^31-2^31.
 ;                  $nMax                - [optional] a general number value (-2^31-2^31). Default is 1.0000. The maximum number value. Max is -2^31-2^31.
-;                  $iDecPlc             - [optional] an integer value (0-255). Default is 15. The decimal place to round the value to. Set to 0 to fill with integer only.
+;                  $iDecPlc             - [optional] an integer value (0-255). Default is 15. The decimal place to round the value to. Call with 0 to fill with Integers only.
 ;                  $nSeed               - [optional] a general number value. Default is Null. A seed to use for generating the Random number. Null means no seed is used.
 ;                  $bFillByRows         - [optional] a boolean value. Default is True. If True, the range is filled top to bottom, left to right. If False, the range is filled left to right, top to bottom.
 ; Return values .: Success: 1
@@ -1363,7 +1363,7 @@ EndFunc   ;==>_LOCalc_RangeFill
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $nMin not a number, less than -2^31 or greater then 2^31.
 ;                  @Error 1 @Extended 3 Return 0 = $nMax not a number, less than -2^31 or greater then 2^31.
-;                  @Error 1 @Extended 4 Return 0 = $iDecPlc not an integer, less than 0, or greater than 255.
+;                  @Error 1 @Extended 4 Return 0 = $iDecPlc not an Integer, less than 0 or greater than 255.
 ;                  @Error 1 @Extended 5 Return 0 = $nSeed not a number, less than -2^31 or greater then 2^31.
 ;                  @Error 1 @Extended 6 Return 0 = $bFillByRows not a boolean.
 ;                  --Success--
@@ -1597,7 +1597,7 @@ EndFunc   ;==>_LOCalc_RangeFilterClear
 ;                  @Error 3 @Extended 1 Return 0 = Search did not return an Object, something went wrong.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Search was Successful, but found no results.
-;                  @Error 0 @Extended ? Return Array = Success. Search was Successful, returning 1 dimensional array containing the objects to each match, @Exteneded is set to the number of matches.
+;                  @Error 0 @Extended ? Return Array = Success. Search was Successful, returning 1 dimensional array containing the objects to each match, @Extended is set to the number of matches.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Objects returned are Ranges and can be used in any of the functions accepting a Range Object etc., to modify their properties or even the text itself.
@@ -1641,7 +1641,7 @@ EndFunc   ;==>_LOCalc_RangeFindAll
 ; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOCalc_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or a regular expression to search for.
-;                  $oLastFind           - [optional] an object. Default is Null. The last returned Object by a previous call to this function to begin the search from, if set to Null, the search begins at the start of the Range.
+;                  $oLastFind           - [optional] an object. Default is Null. The last returned Object by a previous call to this function to begin the search from, if called with Null, the search begins at the start of the Range.
 ; Return values .: Success: Object or 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1649,7 +1649,7 @@ EndFunc   ;==>_LOCalc_RangeFindAll
 ;                  @Error 1 @Extended 2 Return 0 = $oSrchDescript not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $oSrchDescript not a Search Descriptor Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sSearchString not a String.
-;                  @Error 1 @Extended 5 Return 0 = $oLastFind not an Object and not set to Null, or failed to retrieve starting position from $oRange.
+;                  @Error 1 @Extended 5 Return 0 = $oLastFind not an Object, or failed to retrieve starting position from $oRange.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Search was successful but found no matches.
 ;                  @Error 0 @Extended 1 Return Object = Success. Search was successful, returning the resulting Object.
@@ -1704,10 +1704,10 @@ EndFunc   ;==>_LOCalc_RangeFindNext
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $aasFormulas not an Array.
 ;                  @Error 1 @Extended 3 Return 0 = $bStrictSize not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bStrictSize set to True, and $aasFormulas array contains less or more elements than number of rows contained in the cell range.
+;                  @Error 1 @Extended 4 Return 0 = $bStrictSize called with True, and $aasFormulas array contains less or more elements than number of rows contained in the cell range.
 ;                  @Error 1 @Extended 5 Return ? = Element of $aasFormulas does not contain an array. Returning array element number of $aasFormulas containing error.
-;                  @Error 1 @Extended 6 Return ? = $bStrictSize set to True, and Array contained in $aasFormulas has less or more elements than number of columns in the cell range. Returning array element number of $aasFormulas containing faulty array.
-;                  @Error 1 @Extended 7 Return ? = $bStrictSize set to False, and Array contained in $aasFormulas has less or more elements than first Array contained in $aasFormulas. Returning array element number of $aasFormulas containing faulty array.
+;                  @Error 1 @Extended 6 Return ? = $bStrictSize called with True, and Array contained in $aasFormulas has less or more elements than number of columns in the cell range. Returning array element number of $aasFormulas containing faulty array.
+;                  @Error 1 @Extended 7 Return ? = $bStrictSize called with False, and Array contained in $aasFormulas has less or more elements than first Array contained in $aasFormulas. Returning array element number of $aasFormulas containing faulty array.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve array of Formula Data contained in the Cell Range.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Start of Row from Cell Range.
@@ -1720,11 +1720,11 @@ EndFunc   ;==>_LOCalc_RangeFindNext
 ;                  @Error 3 @Extended 9 Return 0 = Failed to re-size Cell Range Columns.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Formulas were successfully set for the cell range.
-;                  @Error 0 @Extended 1 Return Array of Arrays = Success. $aasFormulas set to Null, returning an array containing arrays, which contain any Formula content contained in the cell range.
+;                  @Error 0 @Extended 1 Return Array of Arrays = Success. $aasFormulas called with Null, returning an array containing arrays, which contain any Formula content contained in the cell range.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will return only formulas contained in the cell range when $aasFormulas is called with Null keyword. Array will be an array of arrays. The internal arrays will contain blank cells or formula strings, depending on cell content.
-;                  $aasFormulas must be an array containing arrays. If $bStrictSize is set to True, the main Array's element count must match the row count contained in the Cell Range, and each internal Array's element count must match the column count of the Cell Range it is to fill. All internal arrays must be the same size.
+;                  $aasFormulas must be an array containing arrays. If $bStrictSize is called with True, the main Array's element count must match the row count contained in the Cell Range, and each internal Array's element count must match the column count of the Cell Range it is to fill. All internal arrays must be the same size.
 ;                  Any data previously contained in the Cell Range will be overwritten.
 ;                  All array elements must contain strings, blank or otherwise.
 ; Related .......:
@@ -1739,7 +1739,7 @@ Func _LOCalc_RangeFormula(ByRef $oRange, $aasFormulas = Null, $bStrictSize = Fal
 
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($aasFormulas = Null) Then
+	If __LO_VarsAreNull($aasFormulas) Then
 		$aasFormulas = $oRange.getFormulaArray()
 		If Not IsArray($aasFormulas) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -1887,7 +1887,7 @@ EndFunc   ;==>_LOCalc_RangeGetAddressAsPosition
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sFromCellName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sToCellName not set to Null, and not a String.
+;                  @Error 1 @Extended 3 Return 0 = $sToCellName not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve requested Cell or Cell Range Object.
 ;                  --Success--
@@ -1931,10 +1931,10 @@ EndFunc   ;==>_LOCalc_RangeGetCellByName
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, or less than 0, or greater than number of Columns contained in the Range.
-;                  @Error 1 @Extended 3 Return 0 = $iRow not an Integer, or less than 0, or greater than number of Rows contained in the Range.
-;                  @Error 1 @Extended 4 Return 0 = $iToColumn not an Integer, or less than 0, or greater than number of Columns contained in the Range.
-;                  @Error 1 @Extended 5 Return 0 = $iToRow not an Integer, or less than 0, or greater than number of Rows contained in the Range.
+;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, less than 0 or greater than number of Columns contained in the Range.
+;                  @Error 1 @Extended 3 Return 0 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
+;                  @Error 1 @Extended 4 Return 0 = $iToColumn not an Integer, less than 0 or greater than number of Columns contained in the Range.
+;                  @Error 1 @Extended 5 Return 0 = $iToRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
 ;                  @Error 1 @Extended 6 Return 0 = $iToColumn less than $iColumn.
 ;                  @Error 1 @Extended 7 Return 0 = $iToRow less than $iRow.
 ;                  --Processing Errors--
@@ -1968,7 +1968,7 @@ Func _LOCalc_RangeGetCellByPosition(ByRef $oRange, $iColumn, $iRow, $iToColumn =
 		If ($iToRow < $iRow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 	EndIf
 
-	If ($iToColumn = Null) And ($iToRow = Null) Then
+	If __LO_VarsAreNull($iToColumn, $iToRow) Then
 		$oCell = $oRange.getCellByPosition($iColumn, $iRow)
 		If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -2021,7 +2021,7 @@ EndFunc   ;==>_LOCalc_RangeGetSheet
 ; Description ...: Group or Ungroup cells in a Range.
 ; Syntax ........: _LOCalc_RangeGroup(ByRef $oRange[, $iOrientation = $LOC_GROUP_ORIENT_ROWS[, $bGroup = True]])
 ; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
-;                  $iOrientation        - [optional] an integer value. Default is $LOC_GROUP_ORIENT_ROWS. Whether to Group Rows or Columns. See Constants $LOC_GROUP_ORIENT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iOrientation        - [optional] an integer value (0-1). Default is $LOC_GROUP_ORIENT_ROWS. Whether to Group Rows or Columns. See Constants $LOC_GROUP_ORIENT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bGroup              - [optional] a boolean value. Default is True. If True Cells are Grouped, if False, cells are Ungrouped.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2075,7 +2075,7 @@ EndFunc   ;==>_LOCalc_RangeGroup
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSheet not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iMode not an Integer, less than 0, or greater than 4. See Constants $LOC_CELL_INSERT_MODE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iMode not an Integer, less than 0 or greater than 4. See Constants $LOC_CELL_INSERT_MODE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Range Address Struct from $oRange.
 ;                  --Success--
@@ -2204,7 +2204,7 @@ EndFunc   ;==>_LOCalc_RangeMerge
 ; Modified ......:
 ; Remarks .......: The Object called in $oObj determines the scope you are inserting the new Named Range in, either Globally (Document Object), or locally (Sheet Object).
 ;                  $vRange can be a string representation of the Range covered by the NamedRange, i.e., $Sheet1.$A$1:$C$14, or a Formula, such as A1+A2, or a Cell Range Object.
-;                  If $vRange is a String, $oRefCell must be set to the Cell Object of either the first cell of the desired Range, or the reference cell for the formula. See explanation below.
+;                  If $vRange is a String, $oRefCell must be called with the Cell Object of either the first cell of the desired Range, or the reference cell for the formula. See explanation below.
 ;                  $oRefCell "acts as the base address for cells referenced in a relative way. If the cell range is not specified as an absolute address, the referenced range will be different based on where in the spreadsheet the range is used."
 ;                  Or in the case of a formula, an example would if we created a "named range 'AddLeft', which refers to the equation A3+B3 with C3 as the reference cell. The cells A3 and B3 are the two cells directly to the left of C3, so, the equation =AddLeft calculates the sum of the two cells directly to the left of the cell that contains the equation. Changing the reference cell to C4, which is below A3 and B3, causes the AddLeft equation to calculate the sum of the two cells that are to the left on the previous row."
 ;                  [Both quotations above are adapted from Andrew Pitonyak's book OOME 4.1, pdf Page 523, book page 519]
@@ -2423,7 +2423,7 @@ EndFunc   ;==>_LOCalc_RangeNamedDelete
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Named Ranges Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to query whether Scope contains the called name.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returns True if the Scope contains a Named Range by the called name. Else False.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Scope contains a Named Range by the called name. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Object called in $oObj determines the scope you are searching in for the Named Range specified, either Globally (Document Object), or locally (Sheet Object).
@@ -2462,7 +2462,7 @@ EndFunc   ;==>_LOCalc_RangeNamedExists
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Named Ranges Object.
 ;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning an array of Named Ranges contained in the called scope. @extended set to number of results.
+;                  @Error 0 @Extended ? Return Array = Success. Returning an array of Named Ranges contained in the called scope. @Extended set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Object called in $oObj determines the scope you are retrieving the array of names for, either Globally (Document Object), or locally (Sheet Object).
@@ -2568,15 +2568,15 @@ EndFunc   ;==>_LOCalc_RangeNamedGetObjByName
 ;                  |                               4 = Error setting $iOptions
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $vRange can be a string representation of the Range covered by the NamedRange, i.e., $Sheet1.$A$1:$C$14, or a Formula, such as A1+A2, or a Cell Range Object.
-;                  If $vRange is a String, $oRefCell must be set to the Cell Object of either the first cell of the desired Range, or the reference cell for the formula. See explanation below.
+;                  If $vRange is a String, $oRefCell must be called with the Cell Object of either the first cell of the desired Range, or the reference cell for the formula. See explanation below.
 ;                  $oRefCell "acts as the base address for cells referenced in a relative way. If the cell range is not specified as an absolute address, the referenced range will be different based on where in the spreadsheet the range is used."
 ;                  Or in the case of a formula, an example would if we created a "named range 'AddLeft', which refers to the equation A3+B3 with C3 as the reference cell. The cells A3 and B3 are the two cells directly to the left of C3, so, the equation =AddLeft calculates the sum of the two cells directly to the left of the cell that contains the equation. Changing the reference cell to C4, which is below A3 and B3, causes the AddLeft equation to calculate the sum of the two cells that are to the left on the previous row."
 ;                  [Both quotations above are adapted from Andrew Pitonyak's book OOME 4.1, pdf Page 523, book page 519.]
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  When retrieving the settings, $vRange will be in a String format, either being a formula or Range Address String, i.e. $Sheet1.$A$1:$C$14.
 ;                  When retrieving the settings, $oRefCell will be a Cell Object.
@@ -2677,10 +2677,10 @@ EndFunc   ;==>_LOCalc_RangeNamedModify
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $aanNumbers not an Array.
 ;                  @Error 1 @Extended 3 Return 0 = $bStrictSize not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bStrictSize set to True, and $aanNumbers array contains less or more elements than number of rows contained in the cell range.
+;                  @Error 1 @Extended 4 Return 0 = $bStrictSize called with True, and $aanNumbers array contains less or more elements than number of rows contained in the cell range.
 ;                  @Error 1 @Extended 5 Return ? = Element of $aanNumbers does not contain an array. Returning array element number of $aanNumbers containing error.
-;                  @Error 1 @Extended 6 Return ? = $bStrictSize set to True, and Array contained in $aanNumbers has less or more elements than number of columns in the cell range. Returning array element number of $aanNumbers containing faulty array.
-;                  @Error 1 @Extended 7 Return ? = $bStrictSize set to False, and Array contained in $aanNumbers has less or more elements than first Array contained in $aanNumbers. Returning array element number of $aanNumbers containing faulty array.
+;                  @Error 1 @Extended 6 Return ? = $bStrictSize called with True, and Array contained in $aanNumbers has less or more elements than number of columns in the cell range. Returning array element number of $aanNumbers containing faulty array.
+;                  @Error 1 @Extended 7 Return ? = $bStrictSize called with False, and Array contained in $aanNumbers has less or more elements than first Array contained in $aanNumbers. Returning array element number of $aanNumbers containing faulty array.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve array of Formula Data contained in the Cell Range.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Start of Row from Cell Range.
@@ -2693,11 +2693,11 @@ EndFunc   ;==>_LOCalc_RangeNamedModify
 ;                  @Error 3 @Extended 9 Return 0 = Failed to re-size Cell Range Columns.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Values were successfully set for the cell range.
-;                  @Error 0 @Extended 1 Return Array of Arrays = Success. $aanNumbers set to Null, returning an array containing arrays, which contain any numerical content contained in the cell range.
+;                  @Error 0 @Extended 1 Return Array of Arrays = Success. $aanNumbers called with Null, returning an array containing arrays, which contain any numerical content contained in the cell range.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will return only numbers contained in the cell range when $aanNumbers is called with Null keyword. Array will be an array of arrays. The internal arrays will contain blank cells or numbers, depending on cell content.
-;                  $aanNumbers must be an array containing arrays. If $bStrictSize is set to True, the main Array's element count must match the row count contained in the Cell Range, and each internal Array's element count must match the column count of the Cell Range it is to fill. All internal arrays must be the same size.
+;                  $aanNumbers must be an array containing arrays. If $bStrictSize is called with True, the main Array's element count must match the row count contained in the Cell Range, and each internal Array's element count must match the column count of the Cell Range it is to fill. All internal arrays must be the same size.
 ;                  Any data previously contained in the Cell Range will be overwritten.
 ;                  All array elements must contain numbers.
 ; Related .......:
@@ -2712,7 +2712,7 @@ Func _LOCalc_RangeNumbers(ByRef $oRange, $aanNumbers = Null, $bStrictSize = Fals
 
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($aanNumbers = Null) Then
+	If __LO_VarsAreNull($aanNumbers) Then
 		$aanNumbers = $oRange.getData()
 		If Not IsArray($aanNumbers) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -2808,12 +2808,12 @@ EndFunc   ;==>_LOCalc_RangeOutlineClearAll
 ; Syntax ........: _LOCalc_RangeOutlineShow(ByRef $oSheet, $iLevel[, $iOrientation = $LOC_GROUP_ORIENT_ROWS])
 ; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $iLevel              - an integer value. The level of Outlines to show, beginning at 1 and continuing to the level input. Call 0 to collapse them all.
-;                  $iOrientation        - [optional] an integer value. Default is $LOC_GROUP_ORIENT_ROWS. The orientation of the Outlines. See Constants $LOC_GROUP_ORIENT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iOrientation        - [optional] an integer value (0-1). Default is $LOC_GROUP_ORIENT_ROWS. The orientation of the Outlines. See Constants $LOC_GROUP_ORIENT_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSheet not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iLevel not an Integer or less than 0.
+;                  @Error 1 @Extended 2 Return 0 = $iLevel not an Integer, or less than 0.
 ;                  @Error 1 @Extended 3 Return 0 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants $LOC_GROUP_ORIENT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. command was successfully processed for the Sheet.
@@ -2917,11 +2917,11 @@ EndFunc   ;==>_LOCalc_RangePivotDelete
 ;                  |                               1 = Error setting $oDestRange
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Object = Success. All optional parameters were set to Null, returning current destination Range Object.
+;                  @Error 0 @Extended 1 Return Object = Success. All optional parameters were called with Null, returning current destination Range Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I was unable to find a setting for "Show Expand/Collapse buttons", therefore the current setting will be lost, because to change the output range, the entire Pivot Table needs to be copied over and re-inserted.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Any existing data within the Destination range will be overwritten.
 ; Related .......:
@@ -2945,7 +2945,7 @@ Func _LOCalc_RangePivotDest(ByRef $oDoc, ByRef $oPivotTable, $oDestRange = Null)
 	$oOrigRange = $oSheet.getCellRangeByPosition($oPivotTable.OutputRange.StartColumn(), $oPivotTable.OutputRange.StartRow(), $oPivotTable.OutputRange.EndColumn(), $oPivotTable.OutputRange.EndRow())
 	If Not IsObj($oOrigRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	If ($oDestRange = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oOrigRange)
+	If __LO_VarsAreNull($oDestRange) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oOrigRange)
 
 	If Not IsObj($oDestRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -3280,7 +3280,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsDataGetNames
 ;                  @Error 1 @Extended 5 Return 0 = $iDisplayType not an Integer, less than 0 or greater than 8. See Constants $LOC_PIVOT_TBL_FIELD_DISP_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $sBaseField not a String.
 ;                  @Error 1 @Extended 7 Return 0 = $iBaseItem not an Integer, less than 0 or greater than 2. See Constants $LOC_PIVOT_TBL_FIELD_BASE_ITEM_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 8 Return 0 = $iBaseItem set to $LOC_PIVOT_TBL_FIELD_BASE_ITEM_NAMED, and $sBaseItem is not set and no previous value is set.
+;                  @Error 1 @Extended 8 Return 0 = $iBaseItem set to $LOC_PIVOT_TBL_FIELD_BASE_ITEM_NAMED, and $sBaseItem is not called and no previous value is set.
 ;                  @Error 1 @Extended 9 Return 0 = $sBaseItem not a String.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.sheet.DataPilotFieldReference" Struct.
@@ -3297,12 +3297,12 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsDataGetNames
 ;                  |                               64 = Error setting $sBaseItem
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: It is the user's responsibility to ensure the a Base Item's name is correct, and exists, also field names etc.
 ;                  If $iBaseItem is set to $LOC_PIVOT_TBL_FIELD_BASE_ITEM_NAMED, you must fill in $sBaseItem also.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -3389,10 +3389,10 @@ Func _LOCalc_RangePivotFieldSettings(ByRef $oPivotField, $iFieldType = Null, $iF
 
 		$oPivotField.Reference = $tReference
 
-		$iError = ($iDisplayType = Null) ? ($iError) : (($oPivotField.Reference.ReferenceType() = $iDisplayType) ? ($iError) : (BitOR($iError, 8)))
-		$iError = ($sBaseField = Null) ? ($iError) : (($oPivotField.Reference.ReferenceField() = $sBaseField) ? ($iError) : (BitOR($iError, 16)))
-		$iError = ($iBaseItem = Null) ? ($iError) : (($oPivotField.Reference.ReferenceItemType() = $iBaseItem) ? ($iError) : (BitOR($iError, 32)))
-		$iError = ($sBaseItem = Null) ? ($iError) : (($oPivotField.Reference.ReferenceItemName() = $sBaseItem) ? ($iError) : (BitOR($iError, 64)))
+		$iError = (__LO_VarsAreNull($iDisplayType)) ? ($iError) : (($oPivotField.Reference.ReferenceType() = $iDisplayType) ? ($iError) : (BitOR($iError, 8)))
+		$iError = (__LO_VarsAreNull($sBaseField)) ? ($iError) : (($oPivotField.Reference.ReferenceField() = $sBaseField) ? ($iError) : (BitOR($iError, 16)))
+		$iError = (__LO_VarsAreNull($iBaseItem)) ? ($iError) : (($oPivotField.Reference.ReferenceItemType() = $iBaseItem) ? ($iError) : (BitOR($iError, 32)))
+		$iError = (__LO_VarsAreNull($sBaseItem)) ? ($iError) : (($oPivotField.Reference.ReferenceItemName() = $sBaseItem) ? ($iError) : (BitOR($iError, 64)))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -3604,10 +3604,10 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsUnusedGetNames
 ;                  |                               8 = Error setting $bUseRegExp
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_RangePivotFilterClear, _LOCalc_FilterFieldCreate
 ; Link ..........:
@@ -3796,8 +3796,8 @@ EndFunc   ;==>_LOCalc_RangePivotGetObjByName
 ;                  @Error 1 @Extended 2 Return 0 = $oDestRange not an object.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sField not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iFieldType not an Integer, less than 0, or greater than 4. See Constants $LOC_PIVOT_TBL_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iFunc not an Integer, less than 0, or greater than 12. See Constants $LOC_COMPUTE_FUNC_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iFieldType not an Integer, less than 0 or greater than 4. See Constants $LOC_PIVOT_TBL_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iFunc not an Integer, less than 0 or greater than 12. See Constants $LOC_COMPUTE_FUNC_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = Pivot Table name called in $sName or automatically generated name, already exists in Sheet.
 ;                  @Error 1 @Extended 8 Return 0 = Range called in $oDestRange is within the source range.
 ;                  @Error 1 @Extended 9 Return 0 = Field name called in $sField not found in available fields for Pivot Table.
@@ -3913,10 +3913,10 @@ EndFunc   ;==>_LOCalc_RangePivotInsert
 ;                  |                               1 = Error setting $sName
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Name was successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were set to Null, returning Pivot Table's current Name as a string.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning Pivot Table's current Name as a string.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -3930,7 +3930,7 @@ Func _LOCalc_RangePivotName(ByRef $oDoc, ByRef $oPivotTable, $sName = Null)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPivotTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If ($sName = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPivotTable.Name())
+	If __LO_VarsAreNull($sName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPivotTable.Name())
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -4006,11 +4006,11 @@ EndFunc   ;==>_LOCalc_RangePivotRefresh
 ;                  |                               32 = Error setting $bEnableDrill
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I was unable to find a setting for "Show Expand/Collapse buttons", therefore it is not settable currently.
-;                  Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -4177,10 +4177,10 @@ EndFunc   ;==>_LOCalc_RangePivotsGetNames
 ;                  |                               1 = Error setting $oSourceRange
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Source Range was successfully set.
-;                  @Error 0 @Extended 1 Return Object = Success. All optional parameters were set to Null, returning current source Range Object.
+;                  @Error 0 @Extended 1 Return Object = Success. All optional parameters were called with Null, returning current source Range Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -4195,7 +4195,7 @@ Func _LOCalc_RangePivotSource(ByRef $oDoc, ByRef $oPivotTable, $oSourceRange = N
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPivotTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If ($oSourceRange = Null) Then
+	If __LO_VarsAreNull($oSourceRange) Then
 		$oSheet = $oDoc.Sheets.getByIndex($oPivotTable.SourceRange.Sheet())
 		If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -4429,7 +4429,7 @@ EndFunc   ;==>_LOCalc_RangeQueryEmpty
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iResultType not an Integer, less than 1, or greater than 7. See Constants $LOC_FORMULA_RESULT_TYPE_* as defined in LibreOfficeCalc_Constants.au3
+;                  @Error 1 @Extended 2 Return 0 = $iResultType not an Integer, less than 1 or greater than 7. See Constants $LOC_FORMULA_RESULT_TYPE_* as defined in LibreOfficeCalc_Constants.au3
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to query cell formula results.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve query result cell addresses.
@@ -4803,7 +4803,7 @@ EndFunc   ;==>_LOCalc_RangeReplaceAll
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer or less than 0, or greater than number of Rows contained in the Range.
+;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
 ;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Rows Object.
@@ -4845,7 +4845,7 @@ EndFunc   ;==>_LOCalc_RangeRowDelete
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer or less than 0, or greater than number of Rows contained in the Range.
+;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
 ;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Rows Object.
@@ -4883,7 +4883,7 @@ EndFunc   ;==>_LOCalc_RangeRowGetObjByPosition
 ; Syntax ........: _LOCalc_RangeRowHeight(ByRef $oRow[, $bOptimal = Null[, $iHeight = Null]])
 ; Parameters ....: $oRow                - an object. A Row object returned by a previous _LOCalc_RangeRowGetObjByPosition function.
 ;                  $bOptimal            - [optional] a boolean value. Default is Null. If True, the Optimal height is automatically chosen.
-;                  $iHeight             - [optional] an integer value (0-34464). Default is Null. The Height of the row, set in Micrometers.
+;                  $iHeight             - [optional] an integer value (0-34464). Default is Null. The Height of the row, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4896,11 +4896,11 @@ EndFunc   ;==>_LOCalc_RangeRowGetObjByPosition
 ;                  |                               2 = Error setting $iHeight
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I am presently unable to find a setting for Optimal Height "Add" Value.
-; Related .......: _LO_ConvertFromMicrometer, _LO_ConvertToMicrometer
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4947,7 +4947,7 @@ EndFunc   ;==>_LOCalc_RangeRowHeight
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer or less than 0, or greater than number of Rows contained in the Range.
+;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
 ;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Rows Object.
@@ -4998,13 +4998,13 @@ EndFunc   ;==>_LOCalc_RangeRowInsert
 ;                  |                               2 = Error setting $bStartOfPageBreak
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Setting $bStartOfPageBreak to True will insert a Manual Page Break, the same as setting $bManualPageBreak to True would.
-;                  $bStartOfPageBreak setting is available more for indicating where Calc is inserting Page Breaks rather than for applying a setting. You can retrieve the settings for each row, and check if this value is set to True or not. If the Page break is an automatically inserted one, the value for $bManualPageBreak would be false.
+;                  $bStartOfPageBreak setting is available more for indicating where Calc is inserting Page Breaks rather than for applying a setting. You can retrieve the settings for each row, and check if this value is True or not. If the Page break is an automatically inserted one, the value for $bManualPageBreak would be False.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -5091,7 +5091,7 @@ EndFunc   ;==>_LOCalc_RangeRowsGetCount
 ;                  |                               1 = Error setting $bVisible
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were set to Null, returning Row's current visibility setting.
+;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning Row's current visibility setting.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5107,7 +5107,7 @@ Func _LOCalc_RangeRowVisible(ByRef $oRow, $bVisible = Null)
 
 	If Not IsObj($oRow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($bVisible = Null) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oRow.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oRow.IsVisible())
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -5141,9 +5141,9 @@ EndFunc   ;==>_LOCalc_RangeRowVisible
 ;                  @Error 1 @Extended 5 Return 0 = $bHasHeader not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bBindFormat not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bCopyOutput not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $tSortField2 not set to Null, and not an Object.
-;                  @Error 1 @Extended 9 Return 0 = $tSortField3 not set to Null, and not an Object.
-;                  @Error 1 @Extended 10 Return 0 = $bCopyOutput set to True, but $oCellOutput not an Object.
+;                  @Error 1 @Extended 8 Return 0 = $tSortField2 not an Object.
+;                  @Error 1 @Extended 9 Return 0 = $tSortField3 not an Object.
+;                  @Error 1 @Extended 10 Return 0 = $bCopyOutput called with True, but $oCellOutput not an Object.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create a Sort Descriptor.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.table.CellAddress" Struct.
@@ -5267,7 +5267,7 @@ Func _LOCalc_RangeSort(ByRef $oDoc, ByRef $oRange, ByRef $tSortField, $bSortColu
 		EndSwitch
 	Next
 
-	;~ $oRange.Sort($avSortDesc); This doesn't sort properly, thus a work around method is required.
+;~ $oRange.Sort($avSortDesc); This doesn't sort properly, thus a work around method is required.
 
 	$sMacro = "REM Macro for Performing a Sort Function. Created By an AutoIt Script." & @CR & _ ; Just a description of the Macro
 			"Sub AU3LibreOffice_Sort(oRange, avSortDesc, atField)" & @CR & _ ; Macro header, Parameters, oRange = Range to Sort, avSortDesc = The array of Sort Descriptor settings,  atField = Sort Descriptor Column/Row settings.
@@ -5334,8 +5334,8 @@ EndFunc   ;==>_LOCalc_RangeSort
 ;                  @Error 1 @Extended 7 Return 0 = $bNaturalOrder not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bIncludeComments not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bIncludeImages not a Boolean.
-;                  @Error 1 @Extended 10 Return 0 = $tSortField2 not set to Null, and not an Object.
-;                  @Error 1 @Extended 11 Return 0 = $tSortField3 not set to Null, and not an Object.
+;                  @Error 1 @Extended 10 Return 0 = $tSortField2 not an Object.
+;                  @Error 1 @Extended 11 Return 0 = $tSortField3 not an Object.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "Col1" Property.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create "Ascending1" Property.
@@ -5493,13 +5493,13 @@ EndFunc   ;==>_LOCalc_RangeSortAlt
 ; Description ...: Set or Retrieve Validation settings for a Range.
 ; Syntax ........: _LOCalc_RangeValidation(ByRef $oRange[, $iType = Null[, $iCondition = Null[, $sValue1 = Null[, $sValue2 = Null[, $oBaseCell = Null[, $bIgnoreBlanks = Null[, $iShowList = Null]]]]]]])
 ; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
-;                  $iType               - [optional] an integer value. Default is Null. The Validity check type. See Constants $LOC_VALIDATION_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iCondition          - [optional] an integer value. Default is Null. The Condition to check the cell data with. See Constants $LOC_VALIDATION_COND_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iType               - [optional] an integer value (0-7). Default is Null. The Validity check type. See Constants $LOC_VALIDATION_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iCondition          - [optional] an integer value (0-9). Default is Null. The Condition to check the cell data with. See Constants $LOC_VALIDATION_COND_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $sValue1             - [optional] a string value. Default is Null. If Condition is such that it requires a value, enter it here as a string.
 ;                  $sValue2             - [optional] a string value. Default is Null. If Condition is such that it requires a second value, enter it here as a string.
 ;                  $oBaseCell           - [optional] an object. Default is Null. The Cell that is used as a base for relative references in the formulas.
 ;                  $bIgnoreBlanks       - [optional] a boolean value. Default is Null. If True, empty cells are allowed, and not marked as invalid.
-;                  $iShowList           - [optional] an integer value. Default is Null. If $iType is set to $LOC_VALIDATION_TYPE_LIST, $iShowList determines the visibility of the list. See Constants $LOC_VALIDATION_LIST_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iShowList           - [optional] an integer value (0-2). Default is Null. If $iType is set to $LOC_VALIDATION_TYPE_LIST, $iShowList determines the visibility of the list. See Constants $LOC_VALIDATION_LIST_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -5527,13 +5527,13 @@ EndFunc   ;==>_LOCalc_RangeSortAlt
 ;                  |                               64 = Error setting $iShowList
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-;                  When $iType is set to $LOC_VALIDATION_TYPE_LIST, $sValue1 is set to a single string of words that constitute the list, each word needs to be surrounded by quotations, and separated by semicolons, such as: "abc";"def";"ghi"
-;                  When $iType is set to $LOC_VALIDATION_TYPE_LIST, set $iCondition to $LOC_VALIDATION_COND_EQUAL.
+;                  When $iType is set to $LOC_VALIDATION_TYPE_LIST, $sValue1 is set to a single string of words that constitute the list, each word needs to be surrounded by quotations, and separated by semicolons, such as: '"abc";"def";"ghi"'
+;                  When $iType is set to $LOC_VALIDATION_TYPE_LIST, call $iCondition with $LOC_VALIDATION_COND_EQUAL.
 ;                  The return for $oBaseCell will always be a cell object, whether or not it is currently set or not. If it has never been set before, it will generally be cell A1.
 ; Related .......: _LOCalc_RangeValidationSettings
 ; Link ..........:
@@ -5614,13 +5614,13 @@ Func _LOCalc_RangeValidation(ByRef $oRange, $iType = Null, $iCondition = Null, $
 
 	$oRange.Validation = $oValidation
 
-	$iError = ($iType = Null) ? ($iError) : ($oRange.Validation.Type() = $iType) ? ($iError) : (BitOR($iError, 1))
-	$iError = ($iCondition = Null) ? ($iError) : ($oRange.Validation.getOperator() = $iCondition) ? ($iError) : (BitOR($iError, 2))
-	$iError = ($sValue1 = Null) ? ($iError) : ($oRange.Validation.getFormula1() = $sValue1) ? ($iError) : (BitOR($iError, 4))
-	$iError = ($sValue2 = Null) ? ($iError) : ($oRange.Validation.getFormula2() = $sValue2) ? ($iError) : (BitOR($iError, 8))
-	$iError = ($oBaseCell = Null) ? ($iError) : (__LOCalc_CellAddressIsSame($oRange.Validation.getSourcePosition(), $tCellAddress)) ? ($iError) : (BitOR($iError, 16))
-	$iError = ($bIgnoreBlanks = Null) ? ($iError) : ($oRange.Validation.IgnoreBlankCells() = $bIgnoreBlanks) ? ($iError) : (BitOR($iError, 32))
-	$iError = ($iShowList = Null) ? ($iError) : ($oRange.Validation.ShowList() = $iShowList) ? ($iError) : (BitOR($iError, 64))
+	$iError = (__LO_VarsAreNull($iType)) ? ($iError) : ($oRange.Validation.Type() = $iType) ? ($iError) : (BitOR($iError, 1))
+	$iError = (__LO_VarsAreNull($iCondition)) ? ($iError) : ($oRange.Validation.getOperator() = $iCondition) ? ($iError) : (BitOR($iError, 2))
+	$iError = (__LO_VarsAreNull($sValue1)) ? ($iError) : ($oRange.Validation.getFormula1() = $sValue1) ? ($iError) : (BitOR($iError, 4))
+	$iError = (__LO_VarsAreNull($sValue2)) ? ($iError) : ($oRange.Validation.getFormula2() = $sValue2) ? ($iError) : (BitOR($iError, 8))
+	$iError = (__LO_VarsAreNull($oBaseCell)) ? ($iError) : (__LOCalc_CellAddressIsSame($oRange.Validation.getSourcePosition(), $tCellAddress)) ? ($iError) : (BitOR($iError, 16))
+	$iError = (__LO_VarsAreNull($bIgnoreBlanks)) ? ($iError) : ($oRange.Validation.IgnoreBlankCells() = $bIgnoreBlanks) ? ($iError) : (BitOR($iError, 32))
+	$iError = (__LO_VarsAreNull($iShowList)) ? ($iError) : ($oRange.Validation.ShowList() = $iShowList) ? ($iError) : (BitOR($iError, 64))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_RangeValidation
@@ -5634,7 +5634,7 @@ EndFunc   ;==>_LOCalc_RangeValidation
 ;                  $sInputTitle         - [optional] a string value. Default is Null. If $bInputMsg is True, the Title of the Input tip to display.
 ;                  $sInputMsg           - [optional] a string value. Default is Null. If $bInputMsg is True, the Message of the Input tip to display.
 ;                  $bErrorMsg           - [optional] a boolean value. Default is Null. If True, a error message is displayed when invalid data is entered into a cell.
-;                  $iErrorStyle         - [optional] an integer value. Default is Null. The Error alert style. See Constants $LOC_VALIDATION_ERROR_ALERT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iErrorStyle         - [optional] an integer value (0-3). Default is Null. The Error alert style. See Constants $LOC_VALIDATION_ERROR_ALERT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $sErrorTitle         - [optional] a string value. Default is Null. If $bErrorMsg is True, the Title of the error alert to display.
 ;                  $sErrorMsg           - [optional] a string value. Default is Null. If $bErrorMsg is True, the Message of the error alert to display.
 ; Return values .: Success: 1 or Array
@@ -5661,12 +5661,12 @@ EndFunc   ;==>_LOCalc_RangeValidation
 ;                  |                               64 = Error setting $sErrorMsg
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were set to Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or with all other parameters set to Null keyword), to get the current settings.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-;                  When $iErrorStyle is set to $LOC_VALIDATION_ERROR_ALERT_MACRO, $sErrorTitle is set to the macro address to execute, the macro address will look similar to the following, filling in the data between the"<>", including the last parameter for location, which will be either application, or document: "vnd.sun.star.script:<LibraryName>.<ModuleName>.<MacroName>?language=Basic&location=<application|document>"
+;                  When $iErrorStyle is set to $LOC_VALIDATION_ERROR_ALERT_MACRO, $sErrorTitle is called with the macro address to execute, the macro address will look similar to the following, filling in the data between the"<>", including the last parameter for location, which will be either application, or document: "vnd.sun.star.script:<LibraryName>.<ModuleName>.<MacroName>?language=Basic&location=<application|document>"
 ;                  At this time I have no functions for locating or creating macros. They may be added later.
 ; Related .......: _LOCalc_RangeValidation
 ; Link ..........:
@@ -5736,13 +5736,13 @@ Func _LOCalc_RangeValidationSettings(ByRef $oRange, $bInputMsg = Null, $sInputTi
 
 	$oRange.Validation = $oValidation
 
-	$iError = ($bInputMsg = Null) ? ($iError) : ($oRange.Validation.ShowInputMessage() = $bInputMsg) ? ($iError) : (BitOR($iError, 1))
-	$iError = ($sInputTitle = Null) ? ($iError) : ($oRange.Validation.InputTitle() = $sInputTitle) ? ($iError) : (BitOR($iError, 2))
-	$iError = ($sInputMsg = Null) ? ($iError) : ($oRange.Validation.InputMessage() = $sInputMsg) ? ($iError) : (BitOR($iError, 4))
-	$iError = ($bErrorMsg = Null) ? ($iError) : ($oRange.Validation.ShowErrorMessage() = $bErrorMsg) ? ($iError) : (BitOR($iError, 8))
-	$iError = ($iErrorStyle = Null) ? ($iError) : ($oRange.Validation.ErrorAlertStyle() = $iErrorStyle) ? ($iError) : (BitOR($iError, 16))
-	$iError = ($sErrorTitle = Null) ? ($iError) : ($oRange.Validation.ErrorTitle() = $sErrorTitle) ? ($iError) : (BitOR($iError, 32))
-	$iError = ($sErrorMsg = Null) ? ($iError) : ($oRange.Validation.ErrorMessage() = $sErrorMsg) ? ($iError) : (BitOR($iError, 64))
+	$iError = (__LO_VarsAreNull($bInputMsg)) ? ($iError) : ($oRange.Validation.ShowInputMessage() = $bInputMsg) ? ($iError) : (BitOR($iError, 1))
+	$iError = (__LO_VarsAreNull($sInputTitle)) ? ($iError) : ($oRange.Validation.InputTitle() = $sInputTitle) ? ($iError) : (BitOR($iError, 2))
+	$iError = (__LO_VarsAreNull($sInputMsg)) ? ($iError) : ($oRange.Validation.InputMessage() = $sInputMsg) ? ($iError) : (BitOR($iError, 4))
+	$iError = (__LO_VarsAreNull($bErrorMsg)) ? ($iError) : ($oRange.Validation.ShowErrorMessage() = $bErrorMsg) ? ($iError) : (BitOR($iError, 8))
+	$iError = (__LO_VarsAreNull($iErrorStyle)) ? ($iError) : ($oRange.Validation.ErrorAlertStyle() = $iErrorStyle) ? ($iError) : (BitOR($iError, 16))
+	$iError = (__LO_VarsAreNull($sErrorTitle)) ? ($iError) : ($oRange.Validation.ErrorTitle() = $sErrorTitle) ? ($iError) : (BitOR($iError, 32))
+	$iError = (__LO_VarsAreNull($sErrorMsg)) ? ($iError) : ($oRange.Validation.ErrorMessage() = $sErrorMsg) ? ($iError) : (BitOR($iError, 64))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_RangeValidationSettings

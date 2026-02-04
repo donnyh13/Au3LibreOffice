@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable
-	Local $iMicrometers
+	Local $iHMM
 	Local $avTableProps
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -17,24 +17,20 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 5 rows, 3 columns.
-	$oTable = _LOWriter_TableCreate($oDoc, 5, 3)
+	; Create a Table, 3 columns, 5 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert the Table into the document at the View Cursor's location.
-	$oTable = _LOWriter_TableInsert($oDoc, $oViewCursor, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to insert Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
 	; Set the Table Alignment to $LOW_ORIENT_HORI_LEFT_AND_WIDTH so I can set Table margins.
-	_LOWriter_TableProperties($oTable, $LOW_ORIENT_HORI_LEFT_AND_WIDTH)
+	_LOWriter_TableProperties($oDoc, $oTable, $LOW_ORIENT_HORI_LEFT_AND_WIDTH)
 	If @error Then _ERROR($oDoc, "Failed to set Text Table settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1 inch to micrometers.
-	$iMicrometers = _LO_ConvertToMicrometer(1)
-	If @error Then _ERROR($oDoc, "Failed to convert inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1 inch to Hundredths of a Millimeter (HMM).
+	$iHMM = _LO_UnitConvert(1, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set all Table margins to 1 inch except the right.
-	_LOWriter_TableMargin($oTable, $iMicrometers, $iMicrometers, $iMicrometers, Null)
+	_LOWriter_TableMargin($oTable, $iHMM, $iHMM, $iHMM, Null)
 	If @error Then _ERROR($oDoc, "Failed to set Text Table settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
@@ -46,10 +42,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Current Text Table Margin settings are: " & @CRLF & _
-			"Top Table Margin: " & $avTableProps[0] & " Micrometers" & @CRLF & _
-			"Bottom Table Margin: " & $avTableProps[1] & " Micrometers" & @CRLF & _
-			"Left Table Margin: " & $avTableProps[2] & " Micrometers" & @CRLF & _
-			"Right Table Margin: " & $avTableProps[3] & " Micrometers")
+			"Top Table Margin: " & $avTableProps[0] & " Hundredths of a Millimeter (HMM)" & @CRLF & _
+			"Bottom Table Margin: " & $avTableProps[1] & " Hundredths of a Millimeter (HMM)" & @CRLF & _
+			"Left Table Margin: " & $avTableProps[2] & " Hundredths of a Millimeter (HMM)" & @CRLF & _
+			"Right Table Margin: " & $avTableProps[3] & " Hundredths of a Millimeter (HMM)")
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -51,9 +51,9 @@ Func Example()
 			"This is the current Font settings. I'll just check if it is a Map. " & IsMap($avControl[11]) & @CRLF & _
 			"The Horizontal Alignment is: (See UDF Constants) " & $avControl[12] & @CRLF & _
 			"The Vertical Alignment is: (See UDF Constants) " & $avControl[13] & @CRLF & _
-			"The Long Integer background color is: " & $avControl[14] & @CRLF & _
+			"The background color is (as a RGB Color Integer): " & $avControl[14] & @CRLF & _
 			"The Border Style is (See UDF Constants): " & $avControl[15] & @CRLF & _
-			"The Border color is, in Long Integer format: " & $avControl[16] & @CRLF & _
+			"The Border color is (as a RGB Color Integer): " & $avControl[16] & @CRLF & _
 			"The text type is (See UDF Constants): " & $avControl[17] & @CRLF & _
 			"Is the end of line type a LineFeed? True/False: " & $avControl[18] & @CRLF & _
 			"The current Scrollbar mode is (See UDF Constants): " & $avControl[19] & @CRLF & _

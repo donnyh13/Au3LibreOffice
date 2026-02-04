@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSheet, $oCell
-	Local $iMicrometers, $iMicrometers2
+	Local $iHMM, $iHMM2
 	Local $avSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -21,12 +21,12 @@ Func Example()
 	$oCell = _LOCalc_RangeGetCellByName($oSheet, "B2")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell's Border padding to 1/4"
-	_LOCalc_CellBorderPadding($oCell, $iMicrometers)
+	_LOCalc_CellBorderPadding($oCell, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -34,19 +34,19 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell's Border padding settings are as follows: " & @CRLF & _
-			"All Padding distance, in Micrometers: " & $avSettings[0] & " This setting will be either Null or an Integer, depending on whether all four distances are equal or not." & @CRLF & _
-			"Top Padding distance, in Micrometers: " & $avSettings[1] & @CRLF & _
-			"Bottom Padding distance, in Micrometers: " & $avSettings[2] & @CRLF & _
-			"Left Padding distance, in Micrometers: " & $avSettings[3] & @CRLF & _
-			"Right Padding distance, in Micrometers: " & $avSettings[4] & @CRLF & @CRLF & _
+			"All Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & " This setting will be either Null or an Integer, depending on whether all four distances are equal or not." & @CRLF & _
+			"Top Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
+			"Bottom Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
+			"Left Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[3] & @CRLF & _
+			"Right Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[4] & @CRLF & @CRLF & _
 			"Press Ok, and I will demonstrate setting individual border padding settings.")
 
-	; Convert 1/2" to Micrometers
-	$iMicrometers2 = _LO_ConvertToMicrometer(0.5)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/2" to Hundredths of a Millimeter (HMM)
+	$iHMM2 = _LO_UnitConvert(0.5, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell's Border padding to, Top and Right, 1/4", Bottom and left, 1/2".
-	_LOCalc_CellBorderPadding($oCell, Null, $iMicrometers, $iMicrometers2, $iMicrometers2, $iMicrometers)
+	_LOCalc_CellBorderPadding($oCell, Null, $iHMM, $iHMM2, $iHMM2, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -54,11 +54,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current paragraph Border color settings are as follows: " & @CRLF & _
-			"All Padding distance, in Micrometers: " & $avSettings[0] & " This will be Null because the four padding distances aren't equal." & @CRLF & _
-			"Top Padding distance, in Micrometers: " & $avSettings[1] & @CRLF & _
-			"Bottom Padding distance, in Micrometers: " & $avSettings[2] & @CRLF & _
-			"Left Padding distance, in Micrometers: " & $avSettings[3] & @CRLF & @CRLF & _
-			"Right Padding distance, in Micrometers: " & $avSettings[4])
+			"All Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & " This will be Null because the four padding distances aren't equal." & @CRLF & _
+			"Top Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
+			"Bottom Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
+			"Left Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[3] & @CRLF & @CRLF & _
+			"Right Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[4])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

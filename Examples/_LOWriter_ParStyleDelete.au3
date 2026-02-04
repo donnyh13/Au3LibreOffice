@@ -22,8 +22,8 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does a Paragraph style called ""NewParStyle"" exist in the document? True/False: " & $bExists)
 
-	; Delete the paragraph style, Force delete it, if it is in use, and Replacement it with paragraph style, "Default Paragraph Style"
-	_LOWriter_ParStyleDelete($oDoc, $oParStyle, True, "Default Paragraph Style")
+	; Delete the paragraph style, Force delete it, if it is in use, and Replacement it with paragraph style, Default Paragraph Style
+	_LOWriter_ParStyleDelete($oDoc, $oParStyle, True, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to delete the Paragraph Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Check if the paragraph style still exists.

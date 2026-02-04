@@ -33,7 +33,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Character style to "Example" Character style.
-	_LOWriter_CharStyleSet($oDoc, $oViewCursor, "Example")
+	_LOWriter_CharStyleCurrent($oDoc, $oViewCursor, "Example")
 	If @error Then _ERROR($oDoc, "Failed to set the Character style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the "Example" Character Style object.
@@ -49,9 +49,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's current font color settings are as follows: " & @CRLF & _
-			"The current Font color, in Long color format: " & $avCharStyleSettings[0] & @CRLF & _
+			"The current Font color is (as a RGB Color Integer): " & $avCharStyleSettings[0] & @CRLF & _
 			"Transparency of the font color, in percentage: " & $avCharStyleSettings[1] & @CRLF & _
-			"Current Font highlight color, in long color format: " & $avCharStyleSettings[2])
+			"Current Font highlight color is (as a RGB Color Integer): " & $avCharStyleSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oFrame
-	Local $iMicrometers
+	Local $iHMM
 	Local $avSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -17,7 +17,7 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Frame into the document at the ViewCursor position, and 6000x6000 Micrometers wide.
+	; Insert a Frame into the document at the ViewCursor position, and 6000x6000 Hundredths of a Millimeter (HMM) wide.
 	$oFrame = _LOWriter_FrameCreate($oDoc, $oViewCursor, Null, 6000, 6000)
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -25,13 +25,13 @@ Func Example()
 	_LOWriter_FrameColumnSettings($oFrame, 4)
 	If @error Then _ERROR($oDoc, "Failed to modify Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/16" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(.0625)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/16" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(.0625, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Frame Column Separator line settings to: Separator on (True), Line Style = $LOW_LINE_STYLE_SOLID, Line width to 1/16"
 	; Line Color to $LO_COLOR_RED, Height to 75%, Line Position to $LOW_ALIGN_VERT_MIDDLE
-	_LOWriter_FrameColumnSeparator($oFrame, True, $LOW_LINE_STYLE_SOLID, $iMicrometers, $LO_COLOR_RED, 75, $LOW_ALIGN_VERT_MIDDLE)
+	_LOWriter_FrameColumnSeparator($oFrame, True, $LOW_LINE_STYLE_SOLID, $iHMM, $LO_COLOR_RED, 75, $LOW_ALIGN_VERT_MIDDLE)
 	If @error Then _ERROR($oDoc, "Failed to set Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame settings. Return will be an array in order of function parameters.
@@ -41,8 +41,8 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame's current Column Separator Line settings are as follows: " & @CRLF & _
 			"Is Column separated by a line? True/False: " & $avSettings[0] & @CRLF & _
 			"The Separator Line style is, (see UDF constants): " & $avSettings[1] & @CRLF & _
-			"The Separator Line width is, in Micrometers: " & $avSettings[2] & @CRLF & _
-			"The Separator Line color is, in Long color format: " & $avSettings[3] & @CRLF & _
+			"The Separator Line width is, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
+			"The Separator Line color is (as a RGB Color Integer): " & $avSettings[3] & @CRLF & _
 			"The Separator Line length percentage is: " & $avSettings[4] & @CRLF & _
 			"The Separator Line position is, (see UDF constants): " & $avSettings[5])
 

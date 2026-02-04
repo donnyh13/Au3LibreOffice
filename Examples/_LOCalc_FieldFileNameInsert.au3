@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the currently active Sheet's Page Style name.
-	$sPageStyle = _LOCalc_PageStyleSet($oDoc, $oSheet)
+	$sPageStyle = _LOCalc_PageStyleCurrent($oDoc, $oSheet)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Page Style object.

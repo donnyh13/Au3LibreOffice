@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor
-	Local $iMicrometers, $iMicrometers2
+	Local $iHMM, $iHMM2
 	Local $avSettings
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -37,12 +37,12 @@ Func Example()
 	_LOWriter_DirFrmtCharBorderWidth($oViewCursor, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Micrometers
-	$iMicrometers = _LO_ConvertToMicrometer(0.25)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Border padding to 1/4"
-	_LOWriter_DirFrmtCharBorderPadding($oViewCursor, $iMicrometers)
+	_LOWriter_DirFrmtCharBorderPadding($oViewCursor, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -50,20 +50,20 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current Character Border padding settings are as follows: " & @CRLF & _
-			"All Padding distance, in Micrometers: " & $avSettings[0] & " This setting is best only used to set the distance, as" & _
+			"All Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & " This setting is best only used to set the distance, as" & _
 			" the value will still be present, even though there are individual settings per side present." & @CRLF & _
-			"Top Padding distance, in Micrometers: " & $avSettings[1] & @CRLF & _
-			"Bottom Padding distance, in Micrometers: " & $avSettings[2] & @CRLF & _
-			"Left Padding distance, in Micrometers: " & $avSettings[3] & @CRLF & @CRLF & _
-			"Right Padding distance, in Micrometers: " & $avSettings[4] & @CRLF & @CRLF & _
+			"Top Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
+			"Bottom Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
+			"Left Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[3] & @CRLF & @CRLF & _
+			"Right Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[4] & @CRLF & @CRLF & _
 			"Press Ok, and I will demonstrate setting individual border padding settings.")
 
-	; Convert 1/2" to Micrometers
-	$iMicrometers2 = _LO_ConvertToMicrometer(0.5)
-	If @error Then _ERROR($oDoc, "Failed to convert from inches to Micrometers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/2" to Hundredths of a Millimeter (HMM)
+	$iHMM2 = _LO_UnitConvert(0.5, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Border padding to, Top and Right, 1/4", Bottom and left, 1/2".
-	_LOWriter_DirFrmtCharBorderPadding($oViewCursor, Null, $iMicrometers, $iMicrometers2, $iMicrometers2, $iMicrometers)
+	_LOWriter_DirFrmtCharBorderPadding($oViewCursor, Null, $iHMM, $iHMM2, $iHMM2, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -71,12 +71,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current Border color settings are as follows: " & @CRLF & _
-			"All Padding distance, in Micrometers: " & $avSettings[0] & " This setting is best only used to set the distance, as" & _
+			"All Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & " This setting is best only used to set the distance, as" & _
 			" the value will still be present, even though there are individual settings per side present." & @CRLF & _
-			"Top Padding distance, in Micrometers: " & $avSettings[1] & @CRLF & _
-			"Bottom Padding distance, in Micrometers: " & $avSettings[2] & @CRLF & _
-			"Left Padding distance, in Micrometers: " & $avSettings[3] & @CRLF & @CRLF & _
-			"Right Padding distance, in Micrometers: " & $avSettings[4] & @CRLF & @CRLF & _
+			"Top Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
+			"Bottom Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
+			"Left Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[3] & @CRLF & @CRLF & _
+			"Right Padding distance, in Hundredths of a Millimeter (HMM): " & $avSettings[4] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")
 
 	; Remove Direct Formatting.
