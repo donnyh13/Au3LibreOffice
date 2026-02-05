@@ -25,11 +25,11 @@
 
 ; #CURRENT# =====================================================================================================================
 ; _LOImpress_SlideAdd
-; _LOImpress_SlideAreaColor
-; _LOImpress_SlideAreaFillStyle
-; _LOImpress_SlideAreaGradient
-; _LOImpress_SlideAreaTransparency
-; _LOImpress_SlideAreaTransparencyGradient
+; _LOImpress_SlideBackColor
+; _LOImpress_SlideBackFillStyle
+; _LOImpress_SlideBackGradient
+; _LOImpress_SlideBackTransparency
+; _LOImpress_SlideBackTransparencyGradient
 ; _LOImpress_SlideCopy
 ; _LOImpress_SlideCurrent
 ; _LOImpress_SlideDeleteByIndex
@@ -112,9 +112,9 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null)
 EndFunc   ;==>_LOImpress_SlideAdd
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideAreaColor
+; Name ..........: _LOImpress_SlideBackColor
 ; Description ...: Set or Retrieve the Slide's background color.
-; Syntax ........: _LOImpress_SlideAreaColor(ByRef $oSlide[, $iColor = Null])
+; Syntax ........: _LOImpress_SlideBackColor(ByRef $oSlide[, $iColor = Null])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
 ;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Slide background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
@@ -140,7 +140,7 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideAreaColor(ByRef $oSlide, $iColor = Null)
+Func _LOImpress_SlideBackColor(ByRef $oSlide, $iColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -174,12 +174,12 @@ Func _LOImpress_SlideAreaColor(ByRef $oSlide, $iColor = Null)
 	If ($oSlide.Background.FillColor() <> $iColor) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideAreaColor
+EndFunc   ;==>_LOImpress_SlideBackColor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideAreaFillStyle
+; Name ..........: _LOImpress_SlideBackFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
-; Syntax ........: _LOImpress_SlideAreaFillStyle(ByRef $oSlide[, $bFillOff = False])
+; Syntax ........: _LOImpress_SlideBackFillStyle(ByRef $oSlide[, $bFillOff = False])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
 ;                  $bFillOff            - [optional] a boolean value. Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
@@ -202,7 +202,7 @@ EndFunc   ;==>_LOImpress_SlideAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideAreaFillStyle(ByRef $oSlide, $bFillOff = False)
+Func _LOImpress_SlideBackFillStyle(ByRef $oSlide, $bFillOff = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -231,12 +231,12 @@ Func _LOImpress_SlideAreaFillStyle(ByRef $oSlide, $bFillOff = False)
 	If Not IsInt($iFillStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iFillStyle)
-EndFunc   ;==>_LOImpress_SlideAreaFillStyle
+EndFunc   ;==>_LOImpress_SlideBackFillStyle
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideAreaGradient
+; Name ..........: _LOImpress_SlideBackGradient
 ; Description ...: Modify or retrieve the settings for Slide Background color Gradient.
-; Syntax ........: _LOImpress_SlideAreaGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
+; Syntax ........: _LOImpress_SlideBackGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
 ;                  $sGradientName       - [optional] a string value. Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iType               - [optional] an integer value (-1-5). Default is Null. The gradient type to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
@@ -301,7 +301,7 @@ EndFunc   ;==>_LOImpress_SlideAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
+Func _LOImpress_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -499,12 +499,12 @@ Func _LOImpress_SlideAreaGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 	$iError = (__LO_VarsAreNull($iToIntense)) ? $iError : ($oSlide.Background.FillGradient.EndIntensity() = $iToIntense) ? ($iError) : (BitOR($iError, 1024))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideAreaGradient
+EndFunc   ;==>_LOImpress_SlideBackGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideAreaTransparency
+; Name ..........: _LOImpress_SlideBackTransparency
 ; Description ...: Set or retrieve Transparency settings for a Slide.
-; Syntax ........: _LOImpress_SlideAreaTransparency(ByRef $oSlide[, $iTransparency = Null])
+; Syntax ........: _LOImpress_SlideBackTransparency(ByRef $oSlide[, $iTransparency = Null])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
 ;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
@@ -530,7 +530,7 @@ EndFunc   ;==>_LOImpress_SlideAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideAreaTransparency(ByRef $oSlide, $iTransparency = Null)
+Func _LOImpress_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -565,12 +565,12 @@ Func _LOImpress_SlideAreaTransparency(ByRef $oSlide, $iTransparency = Null)
 	$iError = ($oSlide.Background.FillTransparence() = $iTransparency) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideAreaTransparency
+EndFunc   ;==>_LOImpress_SlideBackTransparency
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideAreaTransparencyGradient
+; Name ..........: _LOImpress_SlideBackTransparencyGradient
 ; Description ...: Set or retrieve the Slide's transparency gradient settings.
-; Syntax ........: _LOImpress_SlideAreaTransparencyGradient(ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
+; Syntax ........: _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
 ;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -621,7 +621,7 @@ EndFunc   ;==>_LOImpress_SlideAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideAreaTransparencyGradient(ByRef $oSlide, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
+Func _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -772,7 +772,7 @@ Func _LOImpress_SlideAreaTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.EndColor() = __LOImpress_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideAreaTransparencyGradient
+EndFunc   ;==>_LOImpress_SlideBackTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideCopy

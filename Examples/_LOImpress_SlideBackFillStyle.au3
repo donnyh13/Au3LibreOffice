@@ -19,7 +19,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to change the slide's background color.")
 
 	; Retrieve the current Slide Fill Style
-	$iFillStyle = _LOImpress_SlideAreaFillStyle($oSlide)
+	$iFillStyle = _LOImpress_SlideBackFillStyle($oSlide)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Slide Fill Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Slide's current Fill Style is: " & $iFillStyle & @CRLF & _
@@ -31,11 +31,11 @@ Func Example()
 			"$LOI_AREA_FILL_STYLE_BITMAP, 4 Fill Style is a Bitmap.")
 
 	; Set slide background.
-	_LOImpress_SlideAreaColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
+	_LOImpress_SlideBackColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
 	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Slide Fill Style
-	$iFillStyle = _LOImpress_SlideAreaFillStyle($oSlide)
+	$iFillStyle = _LOImpress_SlideBackFillStyle($oSlide)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Slide Fill Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Slide's current Fill Style is: " & $iFillStyle & @CRLF & _
@@ -47,11 +47,11 @@ Func Example()
 			"$LOI_AREA_FILL_STYLE_BITMAP, 4 Fill Style is a Bitmap.")
 
 	; Modify the Slide Gradient settings to: Preset Gradient name = $LOI_GRAD_NAME_GREEN_GRASS
-	_LOImpress_SlideAreaGradient($oSlide, $LOI_GRAD_NAME_GREEN_GRASS)
+	_LOImpress_SlideBackGradient($oSlide, $LOI_GRAD_NAME_GREEN_GRASS)
 	If @error Then _ERROR($oDoc, "Failed to set Slide settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Slide Fill Style
-	$iFillStyle = _LOImpress_SlideAreaFillStyle($oSlide)
+	$iFillStyle = _LOImpress_SlideBackFillStyle($oSlide)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Slide Fill Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Slide's current Fill Style is: " & $iFillStyle & @CRLF & _

@@ -1239,11 +1239,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- __LOImpress_TransparencyGradientNameInsert
 - Slide Functions
 	- _LOImpress_SlideAdd
-	- _LOImpress_SlideAreaColor
-	- _LOImpress_SlideAreaFillStyle
-	- _LOImpress_SlideAreaGradient
-	- _LOImpress_SlideAreaTransparency
-	- _LOImpress_SlideAreaTransparencyGradient
+	- _LOImpress_SlideBackColor
+	- _LOImpress_SlideBackFillStyle
+	- _LOImpress_SlideBackGradient
+	- _LOImpress_SlideBackTransparency
+	- _LOImpress_SlideBackTransparencyGradient
 	- _LOImpress_SlideCopy
 	- _LOImpress_SlideCurrent
 	- _LOImpress_SlideDeleteByIndex

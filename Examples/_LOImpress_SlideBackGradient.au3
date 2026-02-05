@@ -21,11 +21,11 @@ Func Example()
 	; Modify the Slide Gradient settings to: skip pre-set gradient name, Gradient type = $LOI_GRAD_TYPE_SQUARE, increment steps = 150,
 	; horizontal (X) offset = 25%, vertical offset (Y) = 56%, rotational angle = 135 degrees, percentage not covered by "From" color = 50%
 	; Starting color = $LO_COLOR_ORANGE, Ending color = $LO_COLOR_TEAL, Starting color intensity = 100%, ending color intensity = 68%
-	_LOImpress_SlideAreaGradient($oSlide, Null, $LOI_GRAD_TYPE_SQUARE, 150, 25, 56, 135, 50, $LO_COLOR_ORANGE, $LO_COLOR_TEAL, 100, 68)
+	_LOImpress_SlideBackGradient($oSlide, Null, $LOI_GRAD_TYPE_SQUARE, 150, 25, 56, 135, 50, $LO_COLOR_ORANGE, $LO_COLOR_TEAL, 100, 68)
 	If @error Then _ERROR($oDoc, "Failed to set Slide settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Slide settings. Return will be an array in order of function parameters.
-	$avSettings = _LOImpress_SlideAreaGradient($oSlide)
+	$avSettings = _LOImpress_SlideBackGradient($oSlide)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Slide settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Slide's Gradient settings are as follows: " & @CRLF & _
@@ -42,11 +42,11 @@ Func Example()
 			"The ending color intensity percentage is: " & $avSettings[10])
 
 	; Modify the Slide Gradient settings to: Preset Gradient name = $LOI_GRAD_NAME_GREEN_GRASS
-	_LOImpress_SlideAreaGradient($oSlide, $LOI_GRAD_NAME_GREEN_GRASS)
+	_LOImpress_SlideBackGradient($oSlide, $LOI_GRAD_NAME_GREEN_GRASS)
 	If @error Then _ERROR($oDoc, "Failed to set Slide settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Slide settings. Return will be an array in order of function parameters.
-	$avSettings = _LOImpress_SlideAreaGradient($oSlide)
+	$avSettings = _LOImpress_SlideBackGradient($oSlide)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Slide settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Slide's Gradient settings are as follows: " & @CRLF & _

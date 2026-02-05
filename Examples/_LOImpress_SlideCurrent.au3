@@ -18,7 +18,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Current Slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set slide background.
-	_LOImpress_SlideAreaColor($oCurrentSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
+	_LOImpress_SlideBackColor($oCurrentSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
 	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a new slide.
@@ -26,7 +26,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Insert a new slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set slide background.
-	_LOImpress_SlideAreaColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
+	_LOImpress_SlideBackColor($oSlide, Random($LO_COLOR_BLACK, $LO_COLOR_WHITE, 1))
 	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to modify which slide is the current slide.")
