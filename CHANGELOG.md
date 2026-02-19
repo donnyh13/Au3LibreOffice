@@ -1133,6 +1133,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- $LOI_ORIENT_HORI_*
 	- $LOI_ORIENT_VERT_*
 	- $LOI_SLIDE_LAYOUT_*
+	- $LOI_SLIDESHOW_VIEW_MODE_*
+	- $LOI_SLIDESHOW_PEN_WIDTH_*
+	- $LOI_SLIDESHOW_PRES_*
+	- $LOI_SLIDESHOW_RANGE_*
 	- $LOI_RELATIVE_*
 	- $LOI_SHAPE_TYPE_*
 	- $LOI_TEXT_ALIGN_HORI_*
@@ -1258,6 +1262,19 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOImpress_SlidesGetCount
 	- _LOImpress_SlidesGetNames
 	- _LOImpress_SlideShapesGetList
+	- _LOImpress_SlideshowActiveSettings
+	- _LOImpress_SlideshowCustomCreate
+	- _LOImpress_SlideshowCustomDelete
+	- _LOImpress_SlideshowCustomModify
+	- _LOImpress_SlideshowCustomSetName
+	- _LOImpress_SlideshowIsRunning
+	- _LOImpress_SlideshowPresentationControl
+	- _LOImpress_SlideshowsCustomGetNames
+	- _LOImpress_SlideshowSettingsMode
+	- _LOImpress_SlideshowSettingsOptions
+	- _LOImpress_SlideshowSettingsRange
+	- _LOImpress_SlideshowStart
+	- _LOImpress_SlideshowStop
 
 #### Changed
 

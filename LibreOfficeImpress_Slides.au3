@@ -43,6 +43,19 @@
 ; _LOImpress_SlidesGetCount
 ; _LOImpress_SlidesGetNames
 ; _LOImpress_SlideShapesGetList
+; _LOImpress_SlideshowActiveSettings
+; _LOImpress_SlideshowCustomCreate
+; _LOImpress_SlideshowCustomDelete
+; _LOImpress_SlideshowCustomModify
+; _LOImpress_SlideshowCustomSetName
+; _LOImpress_SlideshowIsRunning
+; _LOImpress_SlideshowPresentationControl
+; _LOImpress_SlideshowsCustomGetNames
+; _LOImpress_SlideshowSettingsMode
+; _LOImpress_SlideshowSettingsOptions
+; _LOImpress_SlideshowSettingsRange
+; _LOImpress_SlideshowStart
+; _LOImpress_SlideshowStop
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
@@ -1461,3 +1474,1100 @@ Func _LOImpress_SlideShapesGetList(ByRef $oSlide, $iTypes = $LOI_SHAPE_TYPE_ALL)
 
 	Return SetError($__LO_STATUS_SUCCESS, $iCount, $avShapes)
 EndFunc   ;==>_LOImpress_SlideShapesGetList
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowActiveSettings
+; Description ...: Set or Retrieve settings for an actively running presentation.
+; Syntax ........: _LOImpress_SlideshowActiveSettings(ByRef $oDoc[, $bKeepOnTop = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $iPenColor = Null[, $iPenWidth = Null]]]]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $bKeepOnTop          - [optional] a boolean value. Default is Null. If True, the presentation will be always kept on top of other programs.
+;                  $bMouseVisible       - [optional] a boolean value. Default is Null. If True, the mouse is visible in the presentation.
+;                  $bMouseAsPen         - [optional] a boolean value. Default is Null. If True, the mouse can be used as a pen to draw on slides.
+;                  $iPenColor           - [optional] an integer value (0-16777215). Default is Null. If $bMouseAsPen is True, the color of the drawn line, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iPenWidth           - [optional] an integer value (4-400). Default is Null. The width of the drawn line. L.O. 4.2+. See Constants, $LOI_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: 1 or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bKeepOnTop not a Boolean.
+;                  @Error 1 @Extended 3 Return 0 = $bMouseVisible not a Boolean.
+;                  @Error 1 @Extended 4 Return 0 = $bMouseAsPen not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = $iPenColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 6 Return 0 = $iPenWidth not an Integer, less than 4 or greater than 400. See Constants, $LOI_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = There is no presentation currently running.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Object for currently running presentation.
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version less than 4.2, $iPenWidth not available.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $bKeepOnTop
+;                  |                               2 = Error setting $bMouseVisible
+;                  |                               4 = Error setting $bMouseAsPen
+;                  |                               8 = Error setting $iPenColor
+;                  |                               16 = Error setting $iPenWidth
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the Libre Office version is below 4.2, the Array will contain 4 elements because $iPenWidth is not available.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $iPenColor = Null, $iPenWidth = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $oPresentation
+	Local $avSlideShow[4]
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oDoc.Presentation.isRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; No Slideshow active.
+
+	$oPresentation = $oDoc.Presentation.getController()
+	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	If __LO_VarsAreNull($bKeepOnTop, $bMouseVisible, $bMouseAsPen, $iPenColor, $iPenWidth) Then
+		If __LO_VersionCheck(4.2) Then
+			__LO_ArrayFill($avSlideShow, $oPresentation.AlwaysOnTop(), $oPresentation.MouseVisible(), $oPresentation.UsePen(), $oPresentation.PenColor(), $oPresentation.PenWidth())
+
+		Else
+			__LO_ArrayFill($avSlideShow, $oPresentation.AlwaysOnTop(), $oPresentation.MouseVisible(), $oPresentation.UsePen(), $oPresentation.PenColor())
+
+		EndIf
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avSlideShow)
+	EndIf
+
+	If ($bKeepOnTop <> Null) Then
+		If Not IsBool($bKeepOnTop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		$oPresentation.AlwaysOnTop = $bKeepOnTop
+
+		$iError = ($oPresentation.AlwaysOnTop() = $bKeepOnTop) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($bMouseVisible <> Null) Then
+		If Not IsBool($bMouseVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oPresentation.MouseVisible = $bMouseVisible
+
+		$iError = ($oPresentation.MouseVisible() = $bMouseVisible) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bMouseAsPen <> Null) Then
+		If Not IsBool($bMouseAsPen) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oPresentation.UsePen = $bMouseAsPen
+
+		$iError = ($oPresentation.UsePen() = $bMouseAsPen) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($iPenColor <> Null) Then
+		If Not __LO_IntIsBetween($iPenColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$oPresentation.PenColor = $iPenColor
+
+		$iError = ($oPresentation.PenColor() = $iPenColor) ? ($iError) : (BitOR($iError, 8))
+	EndIf
+
+	If ($iPenWidth <> Null) Then
+		If Not __LO_VersionCheck(4.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+		If Not __LO_IntIsBetween($iPenWidth, $LOI_SLIDESHOW_PEN_WIDTH_VERY_THIN, $LOI_SLIDESHOW_PEN_WIDTH_VERY_THICK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+		$oPresentation.PenWidth = $iPenWidth
+
+		$iError = ($oPresentation.PenWidth() = $iPenWidth) ? ($iError) : (BitOR($iError, 16))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideshowActiveSettings
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowCustomCreate
+; Description ...: Create a Custom Slideshow.
+; Syntax ........: _LOImpress_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - a string value. The name of the Custom Slideshow to create.
+;                  $asSlides            - an array of strings. A single column Array of Slide names. See remarks.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 3 Return 0 = Name called in $sName already exists as a Custom Slideshow in Document.
+;                  @Error 1 @Extended 4 Return 0 = $asSlides not an Array.
+;                  @Error 1 @Extended 5 Return 0 = Array called in $asSlides has 0 elements.
+;                  @Error 1 @Extended 6 Return ? = Element contained in $asSlides not a String. Returning problem element number.
+;                  @Error 1 @Extended 7 Return ? = Slide name contained in $asSlides not found in Document. Returning problem element number.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create a CustomPresentation Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve the Links Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Slide's Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to insert new Custom Slideshow.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully created new Custom Slideshow.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oLinks, $oCustomPres, $oSlide
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsArray($asSlides) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If (UBound($asSlides) < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	$oLinks = $oDoc.Links.getByName("Slide").Links()
+	If Not IsObj($oLinks) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	For $i = 0 To UBound($asSlides) - 1
+		If Not IsString($asSlides[$i]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $i)
+		If Not $oLinks.hasByName($asSlides[$i]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, $i)
+	Next
+
+	$oCustomPres = $oDoc.CustomPresentations.createInstance()
+	If Not IsObj($oCustomPres) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	For $i = 0 To UBound($asSlides) - 1
+		$oSlide = $oLinks.getByName($asSlides[$i])
+		If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oCustomPres.insertByIndex($oCustomPres.getCount(), $oSlide)
+	Next
+
+	$oDoc.CustomPresentations.insertByName($sName, $oCustomPres)
+	If Not $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_SlideshowCustomCreate
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowCustomDelete
+; Description ...: Deletes a Custom Slideshow.
+; Syntax ........: _LOImpress_SlideshowCustomDelete(ByRef $oDoc, $sName)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - a string value. The Custom Slideshow's name to delete.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 3 Return 0 = Name called in $sName not found as a Custom Slideshow in Document.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to delete the requested Custom Slideshow.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Custom Slideshow was successfully deleted.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowCustomDelete(ByRef $oDoc, $sName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oDoc.CustomPresentations.removeByName($sName)
+	If $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_SlideshowCustomDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowCustomModify
+; Description ...: Set or Retrieve the Slides and order of the slides contained in a Custom Slideshow.
+; Syntax ........: _LOImpress_SlideshowCustomModify(ByRef $oDoc, $sName[, $asSlides = Null])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - a string value. The name of the Custom Slideshow to modify.
+;                  $asSlides            - [optional] an array of strings. Default is Null. A single column Array of Slide names. See remarks.
+; Return values .: Success: 1 or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 3 Return 0 = Name called in $sName already exists as a Custom Slideshow in Document.
+;                  @Error 1 @Extended 4 Return 0 = $asSlides not an Array.
+;                  @Error 1 @Extended 5 Return 0 = Array called in $asSlides has 0 elements.
+;                  @Error 1 @Extended 6 Return ? = Element contained in $asSlides not a String. Returning problem element number.
+;                  @Error 1 @Extended 7 Return ? = Slide name contained in $asSlides not found in Document. Returning problem element number.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create a CustomPresentation Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Custom Slideshow's Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Slide's name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the Links Object.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Slide's Object.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $asSlides
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Custom Slideshow successfully modified.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning Array of Slide names contained in the Custom Slideshow. See remarks.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
+;                  When retrieving the current order and content of the Slideshow, an array is returned with all the Slides contained in the Custom Slideshow, in the order they are set to be played. Slides may be present multiple times.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowCustomModify(ByRef $oDoc, $sName, $asSlides = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $oLinks, $oCustomPres, $oNewCustomPres, $oSlide
+	Local $asCurrSlides[0]
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	If __LO_VarsAreNull($asSlides) Then
+		$oCustomPres = $oDoc.CustomPresentations.getByName($sName)
+		If Not IsObj($oCustomPres) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		ReDim $asCurrSlides[$oCustomPres.getCount()]
+		For $i = 0 To $oCustomPres.getCount() - 1
+			$asCurrSlides[$i] = $oCustomPres.getByIndex($i).LinkDisplayName()
+			If Not IsString($asCurrSlides[$i]) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $asCurrSlides)
+	EndIf
+
+	If Not IsArray($asSlides) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If (UBound($asSlides) < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	$oLinks = $oDoc.Links.getByName("Slide").Links()
+	If Not IsObj($oLinks) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	For $i = 0 To UBound($asSlides) - 1
+		If Not IsString($asSlides[$i]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $i)
+		If Not $oLinks.hasByName($asSlides[$i]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, $i)
+	Next
+
+	$oNewCustomPres = $oDoc.CustomPresentations.createInstance()
+	If Not IsObj($oNewCustomPres) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	For $i = 0 To UBound($asSlides) - 1
+		$oSlide = $oLinks.getByName($asSlides[$i])
+		If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		$oNewCustomPres.insertByIndex($oNewCustomPres.getCount(), $oSlide)
+	Next
+
+	$oDoc.CustomPresentations.replaceByName($sName, $oNewCustomPres)
+	$iError = ($oDoc.CustomPresentations.getByName($sName).getCount() = UBound($asSlides)) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideshowCustomModify
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowCustomSetName
+; Description ...: Rename a Custom Slideshow.
+; Syntax ........: _LOImpress_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - a string value. The name of the Custom Slideshow to rename.
+;                  $sNewName            - a string value. The name to rename the Custom Slideshow to.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 3 Return 0 = Name called in $sName not found as a Custom Slideshow in Document.
+;                  @Error 1 @Extended 4 Return 0 = $sNewName not a String.
+;                  @Error 1 @Extended 5 Return 0 = Name called in $sNewName already exists as a Custom Slideshow in Document.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve requested Custom Slideshow Object.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sNewName
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Custom Slideshow was successfully renamed.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $oCustomPres
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsString($sNewName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If $oDoc.CustomPresentations.hasByName($sNewName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	$oCustomPres = $oDoc.CustomPresentations.getByName($sName)
+	If Not IsObj($oCustomPres) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oCustomPres.setName($sNewName)
+	$iError = ($oCustomPres.Name() = $sNewName) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideshowCustomSetName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowIsRunning
+; Description ...: Check whether there is a presentation currently running.
+; Syntax ........: _LOImpress_SlideshowIsRunning(ByRef $oDoc)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Return values .: Success: Boolean
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to determine if a Presentation is currently active.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if there is currently a Presentation running, else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowIsRunning(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $bIsRunning
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$bIsRunning = $oDoc.Presentation.IsRunning()
+	If Not IsBool($bIsRunning) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bIsRunning)
+EndFunc   ;==>_LOImpress_SlideshowIsRunning
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowPresentationControl
+; Description ...: Query the status of, or send commands to, a currently running presentation.
+; Syntax ........: _LOImpress_SlideshowPresentationControl(ByRef $oDoc, $iAction[, $vValue = Null])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iAction             - an integer value. The Query or Command to perform on the presentation. See Constants, $LOI_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $vValue              - [optional] a variant value. Default is Null. If the Query or Command requires an input value, it goes here. See Remarks.
+; Return values .: Success: Boolean, Integer, or Object.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iAction not an Integer, less than 0 or greater than 25. See Constants, $LOI_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iAction called with $LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX, and index value called in $vValue is not an Integer, less than 0 or greater than number of slides in the Presentation.
+;                  @Error 1 @Extended 4 Return 0 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN, and color value called in $vValue is not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 Return 0 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE, and value called in $vValue is not an Object.
+;                  @Error 1 @Extended 6 Return 0 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_INDEX, and index value called in $vValue is not an Integer, less than 0 or greater than number of slides in the Presentation.
+;                  @Error 1 @Extended 7 Return 0 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME, and value called in $vValue is not a String.
+;                  @Error 1 @Extended 8 Return 0 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME, and Slide name called in $vValue does not exist.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = There is no presentation currently running.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Object for currently running presentation.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Object for current slide.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve current slide's index value.
+;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve next slide's index value.
+;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object for requested slide.
+;                  @Error 3 @Extended 7 Return 0 = Failed to retrieve count of slides in the presentation.
+;                  @Error 3 @Extended 8 Return 0 = Failed to determine if the presentation is Active.
+;                  @Error 3 @Extended 9 Return 0 = Failed to determine if the presentation is Endless.
+;                  @Error 3 @Extended 10 Return 0 = Failed to determine if the presentation is FullScreen.
+;                  @Error 3 @Extended 11 Return 0 = Failed to determine if the presentation is Paused.
+;                  @Error 3 @Extended 12 Return 0 = Failed to activate presentation.
+;                  @Error 3 @Extended 13 Return 0 = Failed to activate blank screen for presentation.
+;                  @Error 3 @Extended 14 Return 0 = Failed to move to first slide.
+;                  @Error 3 @Extended 15 Return 0 = Failed to move to last slide.
+;                  @Error 3 @Extended 16 Return 0 = Failed to move to requested slide by Object.
+;                  @Error 3 @Extended 17 Return 0 = Failed to move to requested slide by Index.
+;                  @Error 3 @Extended 18 Return 0 = Failed to move to requested slide by Name.
+;                  @Error 3 @Extended 19 Return 0 = Failed to Pause the presentation.
+;                  @Error 3 @Extended 20 Return 0 = Failed to Resume the presentation.
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 Return 0 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK, and current LibreOffice version is less than 7.2.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully processed a command.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Successfully processed a query that returns a Boolean. (See description of the specific query to see what is returned.)
+;                  @Error 0 @Extended 0 Return Integer = Success. Successfully processed a query that returns an Integer. (See description of the specific query to see what is returned.)
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully processed a query that returns an Object. (See description of the specific query to see what is returned.)
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Any queries or commands that require an input parameter will have the type of input required indicated in the description for the Constant.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowPresentationControl(ByRef $oDoc, $iAction, $vValue = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn = 1
+	Local $oPresentation
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iAction, $LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE, $LOI_SLIDESHOW_PRES_COMMAND_STOP_SOUND) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If Not $oDoc.Presentation.isRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; No Slideshow active.
+
+	$oPresentation = $oDoc.Presentation.getController()
+	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Switch $iAction
+		Case $LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE
+			$vReturn = $oPresentation.getCurrentSlide()
+			If Not IsObj($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		Case $LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE_INDEX
+			$vReturn = $oPresentation.getCurrentSlideIndex()
+			If Not IsInt($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		Case $LOI_SLIDESHOW_PRES_QUERY_GET_NEXT_SLIDE_INDEX
+			$vReturn = $oPresentation.getNextSlideIndex()
+			If Not IsInt($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+		Case $LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX
+			If Not __LO_IntIsBetween($vValue, 0, $oPresentation.getSlideCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+			$vReturn = $oPresentation.getSlideByIndex($vValue)
+			If Not IsObj($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+
+		Case $LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_COUNT
+			$vReturn = $oPresentation.getSlideCount()
+			If Not IsInt($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
+
+		Case $LOI_SLIDESHOW_PRES_QUERY_IS_ACTIVE
+			$vReturn = $oPresentation.isActive()
+			If Not IsBool($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
+
+		Case $LOI_SLIDESHOW_PRES_QUERY_IS_ENDLESS
+			$vReturn = $oPresentation.isEndless()
+			If Not IsBool($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 9, 0)
+
+		Case $LOI_SLIDESHOW_PRES_QUERY_IS_FULLSCREEN
+			$vReturn = $oPresentation.isFullScreen()
+			If Not IsBool($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 10, 0)
+
+		Case $LOI_SLIDESHOW_PRES_QUERY_IS_PAUSED
+			$vReturn = $oPresentation.isPaused()
+			If Not IsBool($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 11, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE
+			$oPresentation.activate()
+			If Not $oPresentation.isActive() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 12, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN
+			If Not __LO_IntIsBetween($vValue, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+			$oPresentation.blankScreen($vValue)
+			If Not $oPresentation.isPaused() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_DEACTIVATE
+			$oPresentation.deactivate() ; Doesn't seem to set IsActive to False!
+;~ 			If $oPresentation.isActive() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK
+			If Not __LO_VersionCheck(7.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+
+			$oPresentation.setEraseAllInk(True)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_FIRST_SLIDE
+			$oPresentation.gotoFirstSlide()
+			If ($oPresentation.getCurrentSlideIndex() <> 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_LAST_SLIDE
+			$oPresentation.gotoLastSlide()
+			If ($oPresentation.getCurrentSlideIndex() <> $oPresentation.getSlideCount() - 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 15, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_EFFECT
+			$oPresentation.gotoNextEffect()
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_SLIDE
+			$oPresentation.gotoNextSlide()
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_EFFECT
+			$oPresentation.gotoPreviousEffect()
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_SLIDE
+			$oPresentation.gotoPreviousSlide()
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE
+			If Not IsObj($vValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+			$oPresentation.gotoSlide($vValue)
+			If ($oPresentation.getCurrentSlide() <> $vValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 16, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_INDEX
+			If Not __LO_IntIsBetween($vValue, 0, $oPresentation.getSlideCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+			$oPresentation.gotoSlideIndex($vValue)
+			If ($oPresentation.getCurrentSlideIndex() <> $vValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 17, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME
+			If Not IsString($vValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+			If Not $oDoc.Links.getByName("Slide").Links.hasByName($vValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+
+			$oPresentation.gotoBookmark($vValue)
+			If ($oPresentation.getCurrentSlide.LinkDisplayName() <> $vValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 18, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_PAUSE
+			$oPresentation.pause()
+			If Not $oPresentation.isPaused() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 19, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_RESUME
+			$oPresentation.resume()
+			If $oPresentation.isPaused() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 20, 0)
+
+		Case $LOI_SLIDESHOW_PRES_COMMAND_STOP_SOUND
+			$oPresentation.stopSound()
+
+	EndSwitch
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $vReturn)
+EndFunc   ;==>_LOImpress_SlideshowPresentationControl
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowsCustomGetNames
+; Description ...: Retrieve an array of Custom Slideshow names available in the document.
+; Syntax ........: _LOImpress_SlideshowsCustomGetNames(ByRef $oDoc)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Return values .: Success: Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Custom Presentations Object.
+;                  --Success--
+;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Custom Slideshow names. @Extended is set to the number of names returned.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowsCustomGetNames(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $asCustomSlideShows[0]
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$asCustomSlideShows = $oDoc.CustomPresentations.ElementNames()
+	If Not IsArray($asCustomSlideShows) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, UBound($asCustomSlideShows), $asCustomSlideShows)
+EndFunc   ;==>_LOImpress_SlideshowsCustomGetNames
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowSettingsMode
+; Description ...: Set or Retrieve the Slideshow's play mode settings.
+; Syntax ........: _LOImpress_SlideshowSettingsMode(ByRef $oDoc[, $iPresMode = Null[, $iRepeatPause = Null[, $bShowLogo = Null]]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iPresMode           - [optional] an integer value (0-2). Default is Null. The mode the presentation is displayed in. See Constants, $LOI_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRepeatPause        - [optional] an integer value (0-86399). Default is Null. If $iPresMode is set to $LOI_SLIDESHOW_VIEW_MODE_LOOP, the amount of seconds before the presentation is played again.
+;                  $bShowLogo           - [optional] a boolean value. Default is Null. If True, the LibreOffice logo is displayed during the pause.
+; Return values .: Success: 1 or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iPresMode not an Integer, less than 0 or greater than 2. See Constants, $LOI_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iRepeatPause not an Integer, less than 0 or greater than 86399.
+;                  @Error 1 @Extended 4 Return 0 = $bShowLogo not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Presentation Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to identify current mode.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iPresMode
+;                  |                               2 = Error setting $iRepeatPause
+;                  |                               4 = Error setting $bShowLogo
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPause = Null, $bShowLogo = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0, $iCurrMode
+	Local $oPresentation
+	Local $avSlideShow[3]
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oPresentation = $oDoc.Presentation()
+	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iPresMode, $iRepeatPause, $bShowLogo) Then
+		If ($oPresentation.IsFullScreen() = True) And ($oPresentation.IsEndless() = False) Then
+			$iCurrMode = $LOI_SLIDESHOW_VIEW_MODE_FULL_SCREEN
+
+		ElseIf ($oPresentation.IsFullScreen() = False) And ($oPresentation.IsEndless() = False) Then
+			$iCurrMode = $LOI_SLIDESHOW_VIEW_MODE_IN_WINDOW
+
+		ElseIf ($oPresentation.IsEndless() = True) Then
+			$iCurrMode = $LOI_SLIDESHOW_VIEW_MODE_LOOP
+
+		Else
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Failed to identify current mode.
+
+		EndIf
+
+		__LO_ArrayFill($avSlideShow, $iCurrMode, $oPresentation.Pause(), $oPresentation.IsShowLogo())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avSlideShow)
+	EndIf
+
+	If ($iPresMode <> Null) Then
+		If Not __LO_IntIsBetween($iPresMode, $LOI_SLIDESHOW_VIEW_MODE_FULL_SCREEN, $LOI_SLIDESHOW_VIEW_MODE_LOOP) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		Switch $iPresMode
+			Case $LOI_SLIDESHOW_VIEW_MODE_FULL_SCREEN
+				$oPresentation.IsFullScreen = True
+				$oPresentation.IsEndless = False
+				$iError = ($oPresentation.IsFullScreen() = True) ? ($iError) : (BitOR($iError, 1))
+				$iError = ($oPresentation.IsEndless = False) ? ($iError) : (BitOR($iError, 1))
+
+			Case $LOI_SLIDESHOW_VIEW_MODE_IN_WINDOW
+				$oPresentation.IsFullScreen = False
+				$oPresentation.IsEndless = False
+				$iError = ($oPresentation.IsFullScreen() = False) ? ($iError) : (BitOR($iError, 1))
+				$iError = ($oPresentation.IsEndless = False) ? ($iError) : (BitOR($iError, 1))
+
+			Case $LOI_SLIDESHOW_VIEW_MODE_LOOP
+				$oPresentation.IsEndless = True
+				$iError = ($oPresentation.IsEndless = True) ? ($iError) : (BitOR($iError, 1))
+
+		EndSwitch
+	EndIf
+
+	If ($iRepeatPause <> Null) Then
+		If Not __LO_IntIsBetween($iRepeatPause, 0, 86399) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; 0 seconds to 23:59:59 hours.
+
+		$oPresentation.Pause = $iRepeatPause
+		$iError = ($oPresentation.Pause() = $iRepeatPause) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bShowLogo <> Null) Then
+		If Not IsBool($bShowLogo) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oPresentation.IsShowLogo = $bShowLogo
+		$iError = ($oPresentation.IsShowLogo() = $bShowLogo) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideshowSettingsMode
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowSettingsOptions
+; Description ...: Set or Retrieve the Slideshow's play options settings.
+; Syntax ........: _LOImpress_SlideshowSettingsOptions(ByRef $oDoc[, $bDisableAutoSlides = Null[, $bChangeSlideByClick = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $bPlayAnimatedFiles = Null[, $bKeepOnTop = Null]]]]]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $bDisableAutoSlides  - [optional] a boolean value. Default is Null. If True, slides will not transition to the next slide automatically (overriding individual slide settings).
+;                  $bChangeSlideByClick - [optional] a boolean value. Default is Null. If True, slides will transition when the mouse is clicked.
+;                  $bMouseVisible       - [optional] a boolean value. Default is Null. If True, the mouse is visible in the presentation.
+;                  $bMouseAsPen         - [optional] a boolean value. Default is Null. If True, the mouse can be used as a pen to draw on slides.
+;                  $bPlayAnimatedFiles  - [optional] a boolean value. Default is Null. If True, animated files (such as GIFs) will be played.
+;                  $bKeepOnTop          - [optional] a boolean value. Default is Null. If True, the presentation will be always kept on top of other programs.
+; Return values .: Success: 1 or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bDisableAutoSlides not a Boolean.
+;                  @Error 1 @Extended 3 Return 0 = $bChangeSlideByClick not a Boolean.
+;                  @Error 1 @Extended 4 Return 0 = $bMouseVisible not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = $bMouseAsPen not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = $bPlayAnimatedFiles not a Boolean.
+;                  @Error 1 @Extended 7 Return 0 = $bKeepOnTop not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Presentation Object.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $bDisableAutoSlides
+;                  |                               2 = Error setting $bChangeSlideByClick
+;                  |                               4 = Error setting $bMouseVisible
+;                  |                               8 = Error setting $bMouseAsPen
+;                  |                               16 = Error setting $bPlayAnimatedFiles
+;                  |                               32 = Error setting $bKeepOnTop
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowSettingsOptions(ByRef $oDoc, $bDisableAutoSlides = Null, $bChangeSlideByClick = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $bPlayAnimatedFiles = Null, $bKeepOnTop = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $oPresentation
+	Local $avSlideShow[6]
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oPresentation = $oDoc.Presentation()
+	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($bDisableAutoSlides, $bChangeSlideByClick, $bMouseVisible, $bMouseAsPen, $bPlayAnimatedFiles, $bKeepOnTop) Then
+
+		__LO_ArrayFill($avSlideShow, $oPresentation.IsAutomatic(), $oPresentation.IsTransitionOnClick(), $oPresentation.IsMouseVisible(), _
+				$oPresentation.UsePen(), $oPresentation.AllowAnimations(), $oPresentation.IsAlwaysOnTop())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avSlideShow)
+	EndIf
+
+	If ($bDisableAutoSlides <> Null) Then
+		If Not IsBool($bDisableAutoSlides) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		$oPresentation.IsAutomatic = $bDisableAutoSlides
+		$iError = ($oPresentation.IsAutomatic() = $bDisableAutoSlides) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($bChangeSlideByClick <> Null) Then
+		If Not IsBool($bChangeSlideByClick) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oPresentation.IsTransitionOnClick = $bChangeSlideByClick
+		$iError = ($oPresentation.IsTransitionOnClick() = $bChangeSlideByClick) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bMouseVisible <> Null) Then
+		If Not IsBool($bMouseVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oPresentation.IsMouseVisible = $bMouseVisible
+		$iError = ($oPresentation.IsMouseVisible() = $bMouseVisible) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($bMouseAsPen <> Null) Then
+		If Not IsBool($bMouseAsPen) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$oPresentation.UsePen = $bMouseAsPen
+		$iError = ($oPresentation.UsePen() = $bMouseAsPen) ? ($iError) : (BitOR($iError, 8))
+	EndIf
+
+	If ($bPlayAnimatedFiles <> Null) Then
+		If Not IsBool($bPlayAnimatedFiles) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+		$oPresentation.AllowAnimations = $bPlayAnimatedFiles
+		$iError = ($oPresentation.AllowAnimations() = $bPlayAnimatedFiles) ? ($iError) : (BitOR($iError, 16))
+	EndIf
+
+	If ($bKeepOnTop <> Null) Then
+		If Not IsBool($bKeepOnTop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+
+		$oPresentation.IsAlwaysOnTop = $bKeepOnTop
+		$iError = ($oPresentation.IsAlwaysOnTop() = $bKeepOnTop) ? ($iError) : (BitOR($iError, 32))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideshowSettingsOptions
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowSettingsRange
+; Description ...: Set or Retrieve the Slideshow's play Range settings.
+; Syntax ........: _LOImpress_SlideshowSettingsRange(ByRef $oDoc[, $iRange = Null[, $sValue = Null]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iRange              - [optional] an integer value (0-2). Default is Null. The Range of slides that will be shown when the Presentation is started. See Constants, $LOI_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $sValue              - [optional] a string value. Default is Null. The "From" slide or Custom Slide Show name. See remarks.
+; Return values .: Success: 1 or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iRange not an Integer, less than 0 or greater than 2. See Constants, $LOI_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $sValue not a String.
+;                  @Error 1 @Extended 4 Return 0 = Range set to $LOI_SLIDESHOW_RANGE_FROM, and the Slide name called in $sValue does not exist.
+;                  @Error 1 @Extended 5 Return 0 = Range set to $LOI_SLIDESHOW_RANGE_CUSTOM, and the Custom Slideshow name called in $sValue does not exist.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Presentation Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Start From slide value.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Custom Slideshow name.
+;                  @Error 3 @Extended 4 Return 0 = Failed to identify current range.
+;                  @Error 3 @Extended 5 Return 0 = $iRange is called with other than $LOI_SLIDESHOW_RANGE_ALL, and $sValue is not set.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iRange
+;                  |                               2 = Error setting $sValue
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If you call $iRange with any other value than $LOI_SLIDESHOW_RANGE_ALL, $sValue must be called with an appropriate name, either a Slide name to start from, or a Custom Slideshow name.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+;                  If there are two slides with the same name, and one is set to the "From Slide" property, there is no guarantee which slide will be the one used.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0, $iCurrRange
+	Local $oPresentation
+	Local $avSlideShow[2]
+	Local $sCurrValue
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oPresentation = $oDoc.Presentation()
+	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If ($oPresentation.IsShowAll() = True) Then
+		$iCurrRange = $LOI_SLIDESHOW_RANGE_ALL
+		$sCurrValue = ""
+
+	ElseIf ($oPresentation.FirstPage() <> "") Then
+		$iCurrRange = $LOI_SLIDESHOW_RANGE_FROM
+		$sCurrValue = $oPresentation.FirstPage()
+		If Not IsString($sCurrValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$sCurrValue = $oDoc.DrawPages.getByName($sCurrValue).LinkDisplayName()    ; Get Link Display Name as it is more reliable?
+		If Not IsString($sCurrValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	ElseIf ($oPresentation.CustomShow() <> "") Then
+		$iCurrRange = $LOI_SLIDESHOW_RANGE_CUSTOM
+		$sCurrValue = $oPresentation.CustomShow()
+		If Not IsString($sCurrValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	Else
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)     ; Failed to identify current range.
+
+	EndIf
+
+	If __LO_VarsAreNull($iRange, $sValue) Then
+		__LO_ArrayFill($avSlideShow, $iCurrRange, $sCurrValue)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avSlideShow)
+	EndIf
+
+	If ($iRange <> Null) Then
+		If Not __LO_IntIsBetween($iRange, $LOI_SLIDESHOW_RANGE_ALL, $LOI_SLIDESHOW_RANGE_CUSTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		Switch $iRange
+			Case $LOI_SLIDESHOW_RANGE_ALL
+				$oPresentation.IsShowAll = True
+				$oPresentation.FirstPage = ""
+				$oPresentation.CustomShow = ""
+
+				$iError = ($oPresentation.IsShowAll() = True) ? ($iError) : (BitOR($iError, 1))
+				$iError = ($oPresentation.FirstPage() = "") ? ($iError) : (BitOR($iError, 1))
+				$iError = ($oPresentation.CustomShow() = "") ? ($iError) : (BitOR($iError, 1))
+
+			Case $LOI_SLIDESHOW_RANGE_FROM
+				If ($iCurrRange <> $iRange) Then
+					If ($sValue = Null) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Value not called
+
+					$oPresentation.IsShowAll = False
+					$oPresentation.CustomShow = ""
+
+					$iError = ($oPresentation.IsShowAll() = False) ? ($iError) : (BitOR($iError, 1))
+					$iError = ($oPresentation.CustomShow() = "") ? ($iError) : (BitOR($iError, 1))
+				EndIf
+
+			Case $LOI_SLIDESHOW_RANGE_CUSTOM
+				If ($iCurrRange <> $iRange) Then
+					If ($sValue = Null) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Value not called
+
+					$oPresentation.IsShowAll = False
+					$oPresentation.FirstPage = ""
+
+					$iError = ($oPresentation.IsShowAll() = False) ? ($iError) : (BitOR($iError, 1))
+					$iError = ($oPresentation.FirstPage() = "") ? ($iError) : (BitOR($iError, 1))
+				EndIf
+		EndSwitch
+
+		$iCurrRange = $iRange
+	EndIf
+
+	If ($sValue <> Null) Then
+		If Not IsString($sValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		Switch $iCurrRange
+			Case $LOI_SLIDESHOW_RANGE_FROM
+				If Not $oDoc.Links.getByName("Slide").Links.hasByName($sValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+				$sValue = $oDoc.Links.getByName("Slide").Links.getByName($sValue).Name()    ; Overwrite value (LinkDisplayName) with Slide's name, as that is what L.O. uses.
+
+				$oPresentation.FirstPage = $sValue
+				$iError = ($oPresentation.FirstPage() = $sValue) ? ($iError) : (BitOR($iError, 2))
+
+			Case $LOI_SLIDESHOW_RANGE_CUSTOM
+				If Not $oDoc.CustomPresentations.hasByName($sValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+				$oPresentation.CustomShow = $sValue
+				$iError = ($oPresentation.CustomShow() = $sValue) ? ($iError) : (BitOR($iError, 2))
+		EndSwitch
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideshowSettingsRange
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowStart
+; Description ...: Begins a presentation.
+; Syntax ........: _LOImpress_SlideshowStart(ByRef $oDoc[, $bRehearse = False[, $sStartSlide = ""[, $sCustomShow = ""]]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $bRehearse           - [optional] a boolean value. Default is False. If True, starts the presentation from the beginning and shows a rehearsal timer to the user.
+;                  $sStartSlide         - [optional] a string value. Default is "". The Slide's name to begin this presentation from.
+;                  $sCustomShow         - [optional] a string value. Default is "". The Custom Slideshow's name to play for this presentation.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bRehearse not a Boolean.
+;                  @Error 1 @Extended 3 Return 0 = $sStartSlide not a String.
+;                  @Error 1 @Extended 4 Return 0 = $sCustomShow not a String.
+;                  @Error 1 @Extended 5 Return 0 = Slide name called in $sStartSlide not found.
+;                  @Error 1 @Extended 6 Return 0 = Custom Slideshow name called in $sCustomShow not found.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to retrieve presentation Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create FirstPage property.
+;                  @Error 2 @Extended 3 Return 0 = Failed to create CustomShow property.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = There is already a presentation running.
+;                  @Error 3 @Extended 2 Return 0 = Failed to start the presentation.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. The Presentation was started successfully.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If $bRehearse is called with True, both $sStartSlide and $sCustomShow will be ignored.
+;                  If both $sStartSlide and $sCustomShow are called with a parameter, $sCustomShow will be ignored.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "", $sCustomShow = "")
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $atProperties[0]
+	Local $oPresentation
+	Local $bBackupShowAll
+	Local $sBackupFirst, $sBackupCustom
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bRehearse) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsString($sStartSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsString($sCustomShow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oPresentation = $oDoc.Presentation()
+	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If $oPresentation.IsRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; A Slideshow is already active.
+
+	If $bRehearse Then
+		$oPresentation.rehearseTimings()
+
+	ElseIf ($sStartSlide <> "") Then
+		If Not $oDoc.Links.getByName("Slide").Links.hasByName($sStartSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		ReDim $atProperties[1]
+		$atProperties[0] = __LO_SetPropertyValue("FirstPage", $sStartSlide)
+		If Not IsObj($atProperties[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$oPresentation.startWithArguments($atProperties)
+	ElseIf ($sCustomShow <> "") Then
+		If Not $oDoc.CustomPresentations.hasByName($sCustomShow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		; This does not work (IllegalArgument COM error, I think there is some form of bug in L.O., so I use a workaround.
+		; ReDim $atProperties[1]
+		; $atProperties[0] = __LO_SetPropertyValue("CustomShow", $sCustomShow)
+		; If Not IsObj($atProperties[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		; $oPresentation.startWithArguments($atProperties)
+
+		$bBackupShowAll = $oPresentation.IsShowAll()
+		$sBackupFirst = $oPresentation.FirstPage()
+		$sBackupCustom = $oPresentation.CustomShow()
+
+		$oPresentation.IsShowAll = False
+		$oPresentation.FirstPage = ""
+		$oPresentation.CustomShow = $sCustomShow
+
+		$oPresentation.start()
+
+		$oPresentation.IsShowAll = $bBackupShowAll
+		$oPresentation.FirstPage = $sBackupFirst
+		$oPresentation.CustomShow = $sBackupCustom
+
+	Else
+
+		$oPresentation.start()
+	EndIf
+
+	If Not $oPresentation.IsRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_SlideshowStart
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideshowStop
+; Description ...: Stop the presently playing presentation.
+; Syntax ........: _LOImpress_SlideshowStop(ByRef $oDoc)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to stop the running presentation.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Presentation was successfully stopped.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideshowStop(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If $oDoc.Presentation.IsRunning() Then
+		$oDoc.Presentation.end()
+		If $oDoc.Presentation.IsRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Failed to stop Slideshow.
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_SlideshowStop

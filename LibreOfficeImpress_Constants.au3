@@ -474,6 +474,54 @@ Global Const _
 		$LOI_SLIDE_LAYOUT_CENTERED_TEXT = 32, _                      ; The Slide will contain a content textbox with centered text.
 		$LOI_SLIDE_LAYOUT_TITLE_6_CONTENT = 34                       ; The Slide will contain a Title textbox with six smaller content textboxes.
 
+; SlideShow Presentation Mode.
+Global Enum _
+		$LOI_SLIDESHOW_VIEW_MODE_FULL_SCREEN, _                      ; The SlideShow is Full Screen.
+		$LOI_SLIDESHOW_VIEW_MODE_IN_WINDOW, _                        ; The SlideShow is displayed in the LibreOffice program window.
+		$LOI_SLIDESHOW_VIEW_MODE_LOOP                                ; The SlideShow is looped after a set pause.
+
+; SlideShow Pen Width
+Global Const _
+		$LOI_SLIDESHOW_PEN_WIDTH_VERY_THIN = 4, _                    ; A very thin width pen line for drawing with.
+		$LOI_SLIDESHOW_PEN_WIDTH_THIN = 100, _                       ; A thin width pen line for drawing with.
+		$LOI_SLIDESHOW_PEN_WIDTH_NORMAL = 150, _                     ; A normal width pen line for drawing with.
+		$LOI_SLIDESHOW_PEN_WIDTH_THICK = 200, _                      ; A thick width pen line for drawing with.
+		$LOI_SLIDESHOW_PEN_WIDTH_VERY_THICK = 400                    ; A very thick width pen line for drawing with.
+
+; SlideShow active Presentation commands and queries.
+Global Enum _
+		$LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE, _               ; Returns the Object for the slide that is currently displayed.
+		$LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE_INDEX, _         ; Returns the index of the current slide. Index is 0 based.
+		$LOI_SLIDESHOW_PRES_QUERY_GET_NEXT_SLIDE_INDEX, _            ; Returns the index for the slide that is displayed next. Index is 0 based.
+		$LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX, _              ; Returns the Object for the slide at the index. Index is 0 based. Slides are in the order they will be displayed in the presentation which can be different than the orders of slides in the document. Not all slides must be present and each slide can be used more than once.
+		$LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_COUNT, _                 ; Returns the number of slides in this slide show.
+		$LOI_SLIDESHOW_PRES_QUERY_IS_ACTIVE, _                       ; Determines if the slide show is active. Returns TRUE for UI active slide show, FALSE otherwise.
+		$LOI_SLIDESHOW_PRES_QUERY_IS_ENDLESS, _                      ; Returns TRUE if the slide show was started to run endlessly.
+		$LOI_SLIDESHOW_PRES_QUERY_IS_FULLSCREEN, _                   ; Returns TRUE if the slide show was started in full-screen mode.
+		$LOI_SLIDESHOW_PRES_QUERY_IS_PAUSED, _                       ; Returns TRUE if the slide show is currently paused.
+		$LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE, _                      ; Activates the user interface of this slide show.
+		$LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN, _         ; >Expects Parameter: Pause Screen Color as a RGB Color Integer.< Pauses the slide show and blanks the screen in the given color. Call Resume to unpause the slide show.
+		$LOI_SLIDESHOW_PRES_COMMAND_DEACTIVATE, _                    ; Can be called to deactivate the user interface of this slide show. (Doesn't seem to set IsActive to False!)
+		$LOI_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK, _                 ; Clears ink drawing from the slideshow being played. L.O. 7.2+
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_FIRST_SLIDE, _              ; Goto and display the first slide.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_LAST_SLIDE, _               ; Goto and display last slide. Remaining effects on the current slide will be skipped.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_EFFECT, _              ; Start next effects that wait on a generic trigger. If no generic triggers are waiting the next slide will be displayed.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_SLIDE, _               ; Goto and display next slide. Remaining effects on the current slide will be skipped.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_EFFECT, _              ; Undo the last effects that were triggered by a generic trigger. If there is no previous effect that can be undone then the previous slide will be displayed.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_SLIDE, _               ; Goto and display previous slide. Remaining effects on the current slide will be skipped.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE, _                    ; >Expects Parameter: Slide Object to jump to.< Jumps to the given slide. The slide can also be a slide that would normally not be shown during the current slide show.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_INDEX, _           ; >Expects Parameter: Slide's index to jump to.< Jumps to the slide at the given index. 0 based.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME, _            ; >Expects Parameter: Slide's name to jump to.< Jumps to the slide with the given name.
+		$LOI_SLIDESHOW_PRES_COMMAND_PAUSE, _                         ; Pauses the slide show. All effects are paused. The slide show continues on next user input or if resume is called.
+		$LOI_SLIDESHOW_PRES_COMMAND_RESUME, _                        ; Resumes a paused slide show.
+		$LOI_SLIDESHOW_PRES_COMMAND_STOP_SOUND                       ; Stop all currently played sounds
+
+; SlideShow Presentation Range
+Global Enum _
+		$LOI_SLIDESHOW_RANGE_ALL, _                                  ; All the slides in the presentation are included in the SlideShow.
+		$LOI_SLIDESHOW_RANGE_FROM, _                                 ; The SlideShow begins at the defined slide.
+		$LOI_SLIDESHOW_RANGE_CUSTOM                                  ; A custom SlideShow order is followed.
+
 ; Horizontal Text Alignment
 Global Const _                                                       ; com.sun.star.drawing.TextHorizontalAdjust
 		$LOI_TEXT_ALIGN_HORI_LEFT = 0, _                             ; The left edge of the text is adjusted to the left edge of the shape.
