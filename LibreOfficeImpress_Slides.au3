@@ -1189,6 +1189,7 @@ Func _LOImpress_SlideLayout(ByRef $oSlide, $iLayout = Null)
 	EndIf
 
 	If Not __LO_IntIsBetween($iLayout, $LOI_SLIDE_LAYOUT_TITLE, $LOI_SLIDE_LAYOUT_TITLE_6_CONTENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 	$oSlide.Layout = $iLayout
 	$iError = ($oSlide.Layout() = $iLayout) ? ($iError) : (BitOR($iError, 64))
 
@@ -1340,7 +1341,6 @@ Func _LOImpress_SlideName(ByRef $oSlide, $sName = Null)
 
 	$oDoc = $oSlide.MasterPage.Forms.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
 	If $oDoc.Links.getByName("Slide").Links.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oSlide.name = $sName
@@ -1537,7 +1537,6 @@ Func _LOImpress_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouse
 
 		Else
 			__LO_ArrayFill($avSlideShow, $oPresentation.AlwaysOnTop(), $oPresentation.MouseVisible(), $oPresentation.UsePen(), $oPresentation.PenColor())
-
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avSlideShow)
@@ -1932,7 +1931,6 @@ Func _LOImpress_SlideshowPresentationControl(ByRef $oDoc, $iAction, $vValue = Nu
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iAction, $LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE, $LOI_SLIDESHOW_PRES_COMMAND_STOP_SOUND) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
 	If Not $oDoc.Presentation.isRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; No Slideshow active.
 
 	$oPresentation = $oDoc.Presentation.getController()
@@ -2045,7 +2043,6 @@ Func _LOImpress_SlideshowPresentationControl(ByRef $oDoc, $iAction, $vValue = Nu
 
 		Case $LOI_SLIDESHOW_PRES_COMMAND_STOP_SOUND
 			$oPresentation.stopSound()
-
 	EndSwitch
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $vReturn)
@@ -2143,8 +2140,8 @@ Func _LOImpress_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPa
 			$iCurrMode = $LOI_SLIDESHOW_VIEW_MODE_LOOP
 
 		Else
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Failed to identify current mode.
 
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Failed to identify current mode.
 		EndIf
 
 		__LO_ArrayFill($avSlideShow, $iCurrMode, $oPresentation.Pause(), $oPresentation.IsShowLogo())
@@ -2171,7 +2168,6 @@ Func _LOImpress_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPa
 			Case $LOI_SLIDESHOW_VIEW_MODE_LOOP
 				$oPresentation.IsEndless = True
 				$iError = ($oPresentation.IsEndless = True) ? ($iError) : (BitOR($iError, 1))
-
 		EndSwitch
 	EndIf
 
@@ -2248,7 +2244,6 @@ Func _LOImpress_SlideshowSettingsOptions(ByRef $oDoc, $bDisableAutoSlides = Null
 	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bDisableAutoSlides, $bChangeSlideByClick, $bMouseVisible, $bMouseAsPen, $bPlayAnimatedFiles, $bKeepOnTop) Then
-
 		__LO_ArrayFill($avSlideShow, $oPresentation.IsAutomatic(), $oPresentation.IsTransitionOnClick(), $oPresentation.IsMouseVisible(), _
 				$oPresentation.UsePen(), $oPresentation.AllowAnimations(), $oPresentation.IsAlwaysOnTop())
 
@@ -2370,8 +2365,8 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 		If Not IsString($sCurrValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	Else
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)     ; Failed to identify current range.
 
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)     ; Failed to identify current range.
 	EndIf
 
 	If __LO_VarsAreNull($iRange, $sValue) Then
@@ -2425,6 +2420,7 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 		Switch $iCurrRange
 			Case $LOI_SLIDESHOW_RANGE_FROM
 				If Not $oDoc.Links.getByName("Slide").Links.hasByName($sValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
 				$sValue = $oDoc.Links.getByName("Slide").Links.getByName($sValue).Name()    ; Overwrite value (LinkDisplayName) with Slide's name, as that is what L.O. uses.
 
 				$oPresentation.FirstPage = $sValue
@@ -2491,7 +2487,6 @@ Func _LOImpress_SlideshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "
 
 	$oPresentation = $oDoc.Presentation()
 	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
 	If $oPresentation.IsRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; A Slideshow is already active.
 
 	If $bRehearse Then
@@ -2505,8 +2500,10 @@ Func _LOImpress_SlideshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "
 		If Not IsObj($atProperties[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		$oPresentation.startWithArguments($atProperties)
+
 	ElseIf ($sCustomShow <> "") Then
 		If Not $oDoc.CustomPresentations.hasByName($sCustomShow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
 		; This does not work (IllegalArgument COM error, I think there is some form of bug in L.O., so I use a workaround.
 		; ReDim $atProperties[1]
 		; $atProperties[0] = __LO_SetPropertyValue("CustomShow", $sCustomShow)
@@ -2529,7 +2526,6 @@ Func _LOImpress_SlideshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "
 		$oPresentation.CustomShow = $sBackupCustom
 
 	Else
-
 		$oPresentation.start()
 	EndIf
 
