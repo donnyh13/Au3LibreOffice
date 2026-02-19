@@ -125,7 +125,7 @@ EndFunc   ;==>__LOImpress_CreatePoint
 ; Name ..........: __LOImpress_DrawShape_CreateArrow
 ; Description ...: Create an Arrow type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -308,7 +308,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ; Name ..........: __LOImpress_DrawShape_CreateBasic
 ; Description ...: Create a Basic type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -496,7 +496,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ; Name ..........: __LOImpress_DrawShape_CreateCallout
 ; Description ...: Create a Callout type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -613,7 +613,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ; Name ..........: __LOImpress_DrawShape_CreateFlowchart
 ; Description ...: Create a FlowChart type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -793,7 +793,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ; Name ..........: __LOImpress_DrawShape_CreateLine
 ; Description ...: Create a Line type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1251,7 +1251,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ; Name ..........: __LOImpress_DrawShape_CreateStars
 ; Description ...: Create a Star or Banner type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1384,7 +1384,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ; Name ..........: __LOImpress_DrawShape_CreateSymbol
 ; Description ...: Create a Symbol type Shape.
 ; Syntax ........: __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).

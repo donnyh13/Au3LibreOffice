@@ -1132,6 +1132,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- $LOI_GRAD_TYPE_*
 	- $LOI_ORIENT_HORI_*
 	- $LOI_ORIENT_VERT_*
+	- $LOI_SLIDE_LAYOUT_*
 	- $LOI_RELATIVE_*
 	- $LOI_SHAPE_TYPE_*
 	- $LOI_TEXT_ALIGN_HORI_*
@@ -1247,10 +1248,15 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 	- _LOImpress_SlideCopy
 	- _LOImpress_SlideCurrent
 	- _LOImpress_SlideDeleteByIndex
+	- _LOImpress_SlideExists
 	- _LOImpress_SlideDeleteByObj
 	- _LOImpress_SlideGetByIndex
+	- _LOImpress_SlideGetByName
+	- _LOImpress_SlideLayout
 	- _LOImpress_SlideMove
+	- _LOImpress_SlideName
 	- _LOImpress_SlidesGetCount
+	- _LOImpress_SlidesGetNames
 	- _LOImpress_SlideShapesGetList
 
 #### Changed

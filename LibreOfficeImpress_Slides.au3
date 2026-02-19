@@ -34,9 +34,14 @@
 ; _LOImpress_SlideCurrent
 ; _LOImpress_SlideDeleteByIndex
 ; _LOImpress_SlideDeleteByObj
+; _LOImpress_SlideExists
 ; _LOImpress_SlideGetByIndex
+; _LOImpress_SlideGetByName
+; _LOImpress_SlideLayout
 ; _LOImpress_SlideMove
+; _LOImpress_SlideName
 ; _LOImpress_SlidesGetCount
+; _LOImpress_SlidesGetNames
 ; _LOImpress_SlideShapesGetList
 ; ===============================================================================================================================
 
@@ -115,7 +120,7 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Name ..........: _LOImpress_SlideBackColor
 ; Description ...: Set or Retrieve the Slide's background color.
 ; Syntax ........: _LOImpress_SlideBackColor(ByRef $oSlide[, $iColor = Null])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Slide background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -180,7 +185,7 @@ EndFunc   ;==>_LOImpress_SlideBackColor
 ; Name ..........: _LOImpress_SlideBackFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOImpress_SlideBackFillStyle(ByRef $oSlide[, $bFillOff = False])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $bFillOff            - [optional] a boolean value. Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -237,7 +242,7 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 ; Name ..........: _LOImpress_SlideBackGradient
 ; Description ...: Modify or retrieve the settings for Slide Background color Gradient.
 ; Syntax ........: _LOImpress_SlideBackGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $sGradientName       - [optional] a string value. Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iType               - [optional] an integer value (-1-5). Default is Null. The gradient type to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iIncrement          - [optional] an integer value (0, 3-256). Default is Null. The number of steps of color change. 0 = Automatic.
@@ -505,7 +510,7 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ; Name ..........: _LOImpress_SlideBackTransparency
 ; Description ...: Set or retrieve Transparency settings for a Slide.
 ; Syntax ........: _LOImpress_SlideBackTransparency(ByRef $oSlide[, $iTransparency = Null])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -571,7 +576,7 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ; Name ..........: _LOImpress_SlideBackTransparencyGradient
 ; Description ...: Set or retrieve the Slide's transparency gradient settings.
 ; Syntax ........: _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -778,7 +783,7 @@ EndFunc   ;==>_LOImpress_SlideBackTransparencyGradient
 ; Name ..........: _LOImpress_SlideCopy
 ; Description ...: Create a copy of a slide.
 ; Syntax ........: _LOImpress_SlideCopy(ByRef $oSlide[, $iPos = Null])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iPos                - [optional] an integer value. Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -881,7 +886,7 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ; Description ...: Set or Retrieve the currently active slide.
 ; Syntax ........: _LOImpress_SlideCurrent(ByRef $oDoc[, $oSlide = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oSlide              - [optional] an object. Default is Null. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+;                  $oSlide              - [optional] an object. Default is Null. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -976,7 +981,7 @@ EndFunc   ;==>_LOImpress_SlideDeleteByIndex
 ; Name ..........: _LOImpress_SlideDeleteByObj
 ; Description ...: Delete a slide using its Object.
 ; Syntax ........: _LOImpress_SlideDeleteByObj(ByRef $oSlide)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1016,6 +1021,43 @@ Func _LOImpress_SlideDeleteByObj(ByRef $oSlide)
 EndFunc   ;==>_LOImpress_SlideDeleteByObj
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideExists
+; Description ...: Check whether a slide with a certain name exists in a document.
+; Syntax ........: _LOImpress_SlideExists(ByRef $oDoc, $sName)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - a string value. The slide name to check for.
+; Return values .: Success: Boolean.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query for Slide name.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Document contains a Slide with the called name, else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideExists(ByRef $oDoc, $sName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $bExists
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$bExists = $oDoc.Links.getByName("Slide").Links.hasByName($sName)
+	If Not IsBool($bExists) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bExists)
+EndFunc   ;==>_LOImpress_SlideExists
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideGetByIndex
 ; Description ...: Retrieve a Slide's Object by index.
 ; Syntax ........: _LOImpress_SlideGetByIndex(ByRef $oDoc, $iSlide)
@@ -1053,10 +1095,98 @@ Func _LOImpress_SlideGetByIndex(ByRef $oDoc, $iSlide)
 EndFunc   ;==>_LOImpress_SlideGetByIndex
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideGetByName
+; Description ...: Retrieve a Slide's Object by name.
+; Syntax ........: _LOImpress_SlideGetByName(ByRef $oDoc, $sName)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - a string value. The Slide's name to retrieve the Object for.
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 3 Return 0 = Slide name called in $sName not found.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve requested Slide.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Slide's Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideGetByName(ByRef $oDoc, $sName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oSlide
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not $oDoc.Links.getByName("Slide").Links.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oSlide = $oDoc.Links.getByName("Slide").Links.getByName($sName)
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
+EndFunc   ;==>_LOImpress_SlideGetByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideLayout
+; Description ...: Set or Retrieve the current Slide's layout.
+; Syntax ........: _LOImpress_SlideLayout(ByRef $oSlide[, $iLayout = Null])
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
+;                  $iLayout             - [optional] an integer value (0-34). Default is Null. The layout format of the Slide. See Constants, $LOI_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: 1 or Integer.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iLayout not an Integer, less than 0 or greater than 34. See Constants, $LOI_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Slide's current layout.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iLayout
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current layout setting as an Integer.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideLayout(ByRef $oSlide, $iLayout = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $iCurrLayout
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iLayout) Then
+		$iCurrLayout = $oSlide.Layout()
+		If Not IsInt($iCurrLayout) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrLayout)
+	EndIf
+
+	If Not __LO_IntIsBetween($iLayout, $LOI_SLIDE_LAYOUT_TITLE, $LOI_SLIDE_LAYOUT_TITLE_6_CONTENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	$oSlide.Layout = $iLayout
+	$iError = ($oSlide.Layout() = $iLayout) ? ($iError) : (BitOR($iError, 64))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideLayout
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideMove
 ; Description ...: Move a slide in the collection of slides.
 ; Syntax ........: _LOImpress_SlideMove(ByRef $oSlide, $iPos)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iPos                - an integer value. The position to move the slide to in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1148,6 +1278,65 @@ Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
 EndFunc   ;==>_LOImpress_SlideMove
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideName
+; Description ...: Set or Retrieve a Slide's name.
+; Syntax ........: _LOImpress_SlideName(ByRef $oSlide[, $sName = Null])
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
+;                  $sName               - [optional] a string value. Default is Null. The new name to set the slide to. See Remarks.
+; Return values .: Success: 1 or String.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 3 Return 0 = Slide name called in $sName already exists in Document.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Slide name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sName
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current Slide name as a String.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If setting the slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideName(ByRef $oSlide, $sName = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $sCurrName
+	Local $oDoc
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($sName) Then
+		$sCurrName = $oSlide.LinkDisplayName()
+		If Not IsString($sCurrName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurrName)
+	EndIf
+
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	If $oDoc.Links.getByName("Slide").Links.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oSlide.name = $sName
+	$iError = ($oSlide.LinkDisplayName() = $sName) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideName
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlidesGetCount
 ; Description ...: Retrieve a count of slides.
 ; Syntax ........: _LOImpress_SlidesGetCount(ByRef $oDoc)
@@ -1182,10 +1371,44 @@ Func _LOImpress_SlidesGetCount(ByRef $oDoc)
 EndFunc   ;==>_LOImpress_SlidesGetCount
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlidesGetNames
+; Description ...: Retrieve an array of names for all Slides contained in the document.
+; Syntax ........: _LOImpress_SlidesGetNames(ByRef $oDoc)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Return values .: Success: Array
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve array of Slide names.
+;                  --Success--
+;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Slide names. @Extended is set to the number of slide names returned.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlidesGetNames(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $asSlides[0]
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$asSlides = $oDoc.Links.getByName("Slide").Links.getElementNames()
+	If Not IsArray($asSlides) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, UBound($asSlides), $asSlides)
+EndFunc   ;==>_LOImpress_SlidesGetNames
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideShapesGetList
 ; Description ...: Retrieve an array of Shapes (Text Boxes, smileys, images etc) contained in a Slide.
 ; Syntax ........: _LOImpress_SlideShapesGetList(ByRef $oSlide[, $iTypes = $LOI_SHAPE_TYPE_ALL])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
 ;                  $iTypes              - [optional] an integer value (0-511). Default is $LOI_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

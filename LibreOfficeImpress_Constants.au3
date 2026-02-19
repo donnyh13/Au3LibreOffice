@@ -452,12 +452,27 @@ Global Enum Step * 2 _
 		$LOI_SHAPE_TYPE_FORM_CONTROL, _                              ; 2 - Form Controls.
 		$LOI_SHAPE_TYPE_IMAGE, _                                     ; 4 - An Image, Barcode or QR code.
 		$LOI_SHAPE_TYPE_MEDIA, _                                     ; 8 - A Video or Audio shape.
-		$LOI_SHAPE_TYPE_OLE2, _                                      ; 16 - An OLE2 shape, such as a Chart, Formula, or Barcode etc.
+		$LOI_SHAPE_TYPE_OLE2, _                                      ; 16 - An OLE2 shape, such as a Chart, Formula etc.
 		$LOI_SHAPE_TYPE_TABLE, _                                     ; 32 - A Table.
 		$LOI_SHAPE_TYPE_TEXTBOX, _                                   ; 64 - A Text Box, including Hyperlinks, and most Fields.
 		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 128 - A Slide Subtitle Box.
 		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 256 - A Slide Title Text Box.
 		$LOI_SHAPE_TYPE_ALL = 511                                    ; All types above.
+
+; Slide layout arrangements.
+Global Const _
+		$LOI_SLIDE_LAYOUT_TITLE = 0, _                               ; The Slide will contain a Title textbox and a Subtitle textbox.
+		$LOI_SLIDE_LAYOUT_TITLE_CONTENT = 1, _                       ; The Slide will contain a Title textbox and a content textbox.
+		$LOI_SLIDE_LAYOUT_TITLE_2_CONTENT = 3, _                     ; The Slide will contain a Title textbox and two content textboxes.
+		$LOI_SLIDE_LAYOUT_TITLE_CONTENT_AND_2_CONTENT = 12, _        ; The Slide will contain a Title textbox and a content textbox beside the two smaller content boxes.
+		$LOI_SLIDE_LAYOUT_TITLE_CONTENT_OVER_CONTENT = 14, _         ; The Slide will contain a Title textbox two content textboxes one positioned over top the other.
+		$LOI_SLIDE_LAYOUT_TITLE_2_CONTENT_AND_CONTENT = 15, _        ; The Slide will contain a Title textbox with two smaller content textboxes beside a third content text box.
+		$LOI_SLIDE_LAYOUT_TITLE_2_CONTENT_OVER_CONTENT = 16, _       ; The Slide will contain a Title textbox with two smaller content textboxes over top of a third content text box.
+		$LOI_SLIDE_LAYOUT_TITLE_4_CONTENT = 18, _                    ; The Slide will contain a Title textbox with four smaller content textboxes.
+		$LOI_SLIDE_LAYOUT_TITLE_ONLY = 19, _                         ; The Slide will contain a Title textbox only.
+		$LOI_SLIDE_LAYOUT_BLANK = 20, _                              ; The Slide will contain no textbox.
+		$LOI_SLIDE_LAYOUT_CENTERED_TEXT = 32, _                      ; The Slide will contain a content textbox with centered text.
+		$LOI_SLIDE_LAYOUT_TITLE_6_CONTENT = 34                       ; The Slide will contain a Title textbox with six smaller content textboxes.
 
 ; Horizontal Text Alignment
 Global Const _                                                       ; com.sun.star.drawing.TextHorizontalAdjust
