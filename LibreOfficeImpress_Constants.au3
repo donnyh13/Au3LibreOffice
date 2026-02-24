@@ -471,6 +471,10 @@ Global Const _
 		$LOI_SLIDE_LAYOUT_TITLE_4_CONTENT = 18, _                    ; The Slide will contain a Title textbox with four smaller content textboxes.
 		$LOI_SLIDE_LAYOUT_TITLE_ONLY = 19, _                         ; The Slide will contain a Title textbox only.
 		$LOI_SLIDE_LAYOUT_BLANK = 20, _                              ; The Slide will contain no textbox.
+		$LOI_SLIDE_LAYOUT_VERT_TITLE_TEXT_CHART = 27, _              ; The Slide will contain a Vertical Title with a vertical textbox, a horizontal textbox and chart placeholders.
+		$LOI_SLIDE_LAYOUT_VERT_TITLE_VERT_TEXT = 28, _               ; The Slide will contain a Vertical Title with vertical textbox.
+		$LOI_SLIDE_LAYOUT_TITLE_VERT_TEXT = 29, _                    ; The Slide will contain a Horizontal Title with vertical textbox.
+		$LOI_SLIDE_LAYOUT_TITLE_2_VERT_TEXT_CLIPART = 30, _          ; The Slide will contain a Horizontal Title with two vertical textboxes and clipart placeholders.
 		$LOI_SLIDE_LAYOUT_CENTERED_TEXT = 32, _                      ; The Slide will contain a content textbox with centered text.
 		$LOI_SLIDE_LAYOUT_TITLE_6_CONTENT = 34                       ; The Slide will contain a Title textbox with six smaller content textboxes.
 
