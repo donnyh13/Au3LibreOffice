@@ -3832,7 +3832,6 @@ Func __LOImpress_Transition(ByRef $oSlide, $iTransition = Null)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iTransition) Then
-
 		$iEffect = $oSlide.Effect()
 		If Not IsInt($iEffect) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 

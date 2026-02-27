@@ -2630,7 +2630,6 @@ Func _LOImpress_SlideSoundsGetNames()
 
 			ExitLoop
 		EndIf
-
 	Next
 
 	ReDim $asFiles[$iCount]
@@ -2702,7 +2701,6 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iTransition, $nDuration, $sSound, $bLoopSound, $nSlideAdvance) Then
-
 		$iCurrTransition = __LOImpress_Transition($oSlide)
 		If Not IsInt($iCurrTransition) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -2759,6 +2757,7 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 		If __LO_VersionCheck(6.1) Then
 			$oSlide.TransitionDuration = $nDuration
 			$iError = ($oSlide.TransitionDuration() = $nDuration) ? ($iError) : (BitOR($iError, 2))
+
 		Else
 			Switch $nDuration
 				Case 0 - 1.99 ; Matches L.O. Behaviour.
@@ -2772,10 +2771,8 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 				Case Else
 					$oSlide.Speed = $__LOI_CONST_SPEED_SLOW
 					$iError = ($oSlide.Speed() = $__LOI_CONST_SPEED_SLOW) ? ($iError) : (BitOR($iError, 2))
-
 			EndSwitch
 		EndIf
-
 	EndIf
 
 	If ($sSound <> Null) Then
@@ -2797,7 +2794,6 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 
 			$oSlide.Sound = $sSound
 			$iError = ($oSlide.Sound() = $sSound) ? ($iError) : (BitOR($iError, 4))
-
 		EndIf
 	EndIf
 
