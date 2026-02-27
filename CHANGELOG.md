@@ -9,14 +9,14 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## Releases
 
-|    Version       |    Changes                         |    Download                 |     Released   |    Compare on GitHub       |
+|  Version     |  Changes             |  Download         |   Released   |  Compare on GitHub     |
 |:-----------------|:----------------------------------:|:---------------------------:|:--------------:|:---------------------------|
-|    **v0.10.0**   | [Change Log](#0100---2026)     | [v0.10.0][v0.10.0]          | _Unreleased_   | [Compare][v0.10.0-Compare] |
-|    **v0.9.1**    | [Change Log](#091---2023-10-28)    | [v0.9.1][v0.9.1]            | 2023-10-28     | [Compare][v0.9.1-Compare]  |
-|    **v0.9.0**    | [Change Log](#090---2023-10-28)    | [v0.9.0][v0.9.0]            | 2023-10-28     | [Compare][v0.9.0-Compare]  |
-|    **v0.0.0.3**  | [Change Log](#0003---2023-08-10)   | [v0.0.0.3][v0.0.0.3]        | 2023-08-10     | [Compare][v0.0.0.3-Compare]|
-|    **v0.0.0.2**  | [Change Log](#0002---2023-07-16)   | [v0.0.0.2][v0.0.0.2]        | 2023-07-16     | [Compare][v0.0.0.2-Compare]|
-|    **v0.0.0.1**  | [Change Log](#0001---2023-07-02)   | [v0.0.0.1][v0.0.0.1]        | 2023-07-02     |                            |
+|  **v0.10.0**   | [Change Log](#0100---2026)   | [v0.10.0][v0.10.0]      | _Unreleased_   | [Compare][v0.10.0-Compare] |
+|  **v0.9.1**  | [Change Log](#091---2023-10-28)  | [v0.9.1][v0.9.1]      | 2023-10-28   | [Compare][v0.9.1-Compare]  |
+|  **v0.9.0**  | [Change Log](#090---2023-10-28)  | [v0.9.0][v0.9.0]      | 2023-10-28   | [Compare][v0.9.0-Compare]  |
+|  **v0.0.0.3**  | [Change Log](#0003---2023-08-10)   | [v0.0.0.3][v0.0.0.3]    | 2023-08-10   | [Compare][v0.0.0.3-Compare]|
+|  **v0.0.0.2**  | [Change Log](#0002---2023-07-16)   | [v0.0.0.2][v0.0.0.2]    | 2023-07-16   | [Compare][v0.0.0.2-Compare]|
+|  **v0.0.0.1**  | [Change Log](#0001---2023-07-02)   | [v0.0.0.1][v0.0.0.1]    | 2023-07-02   |              |
 
 ## [0.10.0] - 2026
 
@@ -1133,6 +1133,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_ORIENT_HORI_*
   - $LOI_ORIENT_VERT_*
   - $LOI_SLIDE_LAYOUT_*
+  - $LOI_SLIDE_TRANSITION_*
   - $LOI_SLIDESHOW_VIEW_MODE_*
   - $LOI_SLIDESHOW_PEN_WIDTH_*
   - $LOI_SLIDESHOW_PRES_*
@@ -1240,6 +1241,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_GradientPresets
   - __LOImpress_InternalComErrorHandler
   - __LOImpress_ShapeGetType
+  - __LOImpress_Transition
   - __LOImpress_TransparencyGradientConvert
   - __LOImpress_TransparencyGradientNameInsert
 - Slide Functions
@@ -1275,6 +1277,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideshowSettingsRange
   - _LOImpress_SlideshowStart
   - _LOImpress_SlideshowStop
+  - _LOImpress_SlideSoundsGetNames
+  - _LOImpress_SlideTransition
 
 #### Changed
 

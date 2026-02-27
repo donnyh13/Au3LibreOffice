@@ -42,6 +42,7 @@
 ; __LOImpress_GradientPresets
 ; __LOImpress_InternalComErrorHandler
 ; __LOImpress_ShapeGetType
+; __LOImpress_Transition
 ; __LOImpress_TransparencyGradientConvert
 ; __LOImpress_TransparencyGradientNameInsert
 ; ===============================================================================================================================
@@ -3792,6 +3793,820 @@ Func __LOImpress_ShapeGetType(ByRef $oShape)
 
 	Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 EndFunc   ;==>__LOImpress_ShapeGetType
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_Transition
+; Description ...: Set or Retrieve the current transition effect of a Slide.
+; Syntax ........: __LOImpress_Transition(ByRef $oSlide[, $iTransition = Null])
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
+;                  $iTransition         - [optional] an integer value (0-78). Default is Null. The Transition effect. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: 1 or Integer
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iTransition not an Integer, less then 0 or greater than 78. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Effect value.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Transition Type value.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve current Transition SubType value.
+;                  @Error 3 @Extended 4 Return 0 = Failed to identify current Transition type.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iTransition
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Transition effect type.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_Transition(ByRef $oSlide, $iTransition = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0, $iEffect, $iTransitionType, $iTransitionSubType, $iCurrTransition
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iTransition) Then
+
+		$iEffect = $oSlide.Effect()
+		If Not IsInt($iEffect) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		$iTransitionType = $oSlide.TransitionType()
+		If Not IsInt($iTransitionType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$iTransitionSubType = $oSlide.TransitionSubType()
+		If Not IsInt($iTransitionSubType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		Switch $iEffect ; Determine current Transition Type
+			Case 0
+				Switch $iTransitionType
+					Case 0
+						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_NONE
+						; $iEffect = 0 $iTransitionType = 0 $iTransitionSubType = 0
+
+					Case 1
+						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_CUT_THROUGH_BLACK
+						; $iEffect = 0 $iTransitionType = 1 $iTransitionSubType = 104
+
+					Case 17
+						Switch $iTransitionSubType
+							Case 13
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_OVAL_VERT
+								; $iEffect = 0 $iTransitionType = 17 $iTransitionSubType = 13
+
+							Case 14
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_OVAL_HORI
+								; $iEffect = 0 $iTransitionType = 17 $iTransitionSubType = 14
+						EndSwitch
+
+					Case 21
+						Switch $iTransitionSubType
+							Case 1
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_FALL
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 1
+
+							Case 2
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_TURN_AROUND
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 2
+
+							Case 3
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_IRIS
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 3
+
+							Case 4
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_TURN_DOWN
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 4
+
+							Case 5
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_ROCHADE
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 5
+
+							Case 6
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 6
+
+							Case 7
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_3D_VENETIAN_HORI
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 7
+
+							Case 8
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_STATIC
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 8
+
+							Case 9
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_FINE_DISSOLVE
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 9
+
+							Case 11
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_CUBE_INSIDE
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 11
+
+							Case 12
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_CUBE_OUTSIDE
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 12
+
+							Case 13
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_VORTEX
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 13
+
+							Case 14
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_RIPPLE
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 14
+
+							Case 26
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_GLITTER
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 26
+
+							Case 27
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_CIRCLES
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 27
+
+							Case 31
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_HONEYCOMB
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 31
+
+							Case 55
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_HELIX
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 55
+
+							Case 108
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_TILES
+								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 108
+						EndSwitch
+
+					Case 37
+						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_FADE_THROUGH_WHITE
+						; $iEffect = 0 $iTransitionType = 37 $iTransitionSubType = 104
+				EndSwitch
+
+			Case 1
+				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT
+				; $iEffect = 1 $iTransitionType = 1 $iTransitionSubType = 1
+
+			Case 2
+				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM
+				; $iEffect = 2 $iTransitionType = 1 $iTransitionSubType = 2
+
+			Case 3
+				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT
+				; $iEffect = 3 $iTransitionType = 1 $iTransitionSubType = 1
+
+			Case 4
+				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP
+				; $iEffect = 4 $iTransitionType = 1 $iTransitionSubType = 2
+
+			Case 5
+				If ($iTransitionType = 12) And ($iTransitionSubType = 25) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_BOX_IN
+				; $iEffect = 5 $iTransitionType = 12 $iTransitionSubType = 25
+
+			Case 6
+				Switch $iTransitionType
+					Case 3
+						If ($iTransitionSubType = 12) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_PLUS
+						; $iEffect = 6 $iTransitionType = 3 $iTransitionSubType = 12
+
+					Case 12
+						Switch $iTransitionSubType
+							Case 25
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_BOX_OUT
+								; $iEffect = 6 $iTransitionType = 12 $iTransitionSubType = 25
+
+							Case 26
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_DIAMOND
+								; $iEffect = 6 $iTransitionType = 12 $iTransitionSubType = 26
+						EndSwitch
+
+					Case 17
+						If ($iTransitionSubType = 27) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_CIRCLE
+						; $iEffect = 6 $iTransitionType = 17 $iTransitionSubType = 27
+				EndSwitch
+
+			Case 7
+				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT
+				; $iEffect = 7 $iTransitionType = 36 $iTransitionSubType = 97
+
+			Case 8
+				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM
+				; $iEffect = 8 $iTransitionType = 36 $iTransitionSubType = 98
+
+			Case 9
+				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT
+				; $iEffect = 9 $iTransitionType = 36 $iTransitionSubType = 99
+
+			Case 10
+				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP
+				; $iEffect = 10 $iTransitionType = 36 $iTransitionSubType = 100
+
+			Case 11
+				If ($iTransitionType = 35) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT
+				; $iEffect = 11 $iTransitionType = 35 $iTransitionSubType = 97
+
+			Case 12
+				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM
+				; $iEffect = 12 $iTransitionType = 35 $iTransitionSubType = 98
+
+			Case 13
+				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT
+				; $iEffect = 13 $iTransitionType = 35 $iTransitionSubType = 99
+
+			Case 14
+				If ($iTransitionType = 35) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP
+				; $iEffect = 14 $iTransitionType = 35 $iTransitionSubType = 100
+
+			Case 15
+				If ($iTransitionType = 41) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_VENETIAN_VERT
+				; $iEffect = 15 $iTransitionType = 41 $iTransitionSubType = 13
+
+			Case 16
+				If ($iTransitionType = 41) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_VENETIAN_HORI
+				; $iEffect = 16 $iTransitionType = 41 $iTransitionSubType = 14
+
+			Case 17
+				Switch $iTransitionType
+					Case 23
+						Switch $iTransitionSubType
+							Case 37
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_2_SPOKE
+								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 37
+
+							Case 39
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_4_SPOKE
+								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 39
+
+							Case 105
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_3_SPOKE
+								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 105
+
+							Case 106
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_8_SPOKE
+								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 106
+
+							Case 107
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_1_SPOKE
+								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 107
+						EndSwitch
+
+					Case 25
+						If ($iTransitionSubType = 48) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WEDGE
+						; $iEffect = 17 $iTransitionType = 25 $iTransitionSubType = 48
+
+					Case 43
+						If ($iTransitionSubType = 114) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_NEWSFLASH
+						; $iEffect = 17 $iTransitionType = 43 $iTransitionSubType = 114
+				EndSwitch
+
+			Case 19
+				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
+				; $iEffect = 19 $iTransitionType = 34 $iTransitionSubType = 95
+
+			Case 20
+				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
+				; $iEffect = 20 $iTransitionType = 34 $iTransitionSubType = 96
+
+			Case 21
+				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
+				; $iEffect = 21 $iTransitionType = 34 $iTransitionSubType = 96
+
+			Case 22
+				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
+				; $iEffect = 22 $iTransitionType = 34 $iTransitionSubType = 95
+
+			Case 23
+				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SPLIT_HORI_IN
+				; $iEffect = 23 $iTransitionType = 4 $iTransitionSubType = 14
+
+			Case 24
+				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SPLIT_VERT_IN
+				; $iEffect = 24 $iTransitionType = 4 $iTransitionSubType = 13
+
+			Case 25
+				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SPLIT_HORI_OUT
+				; $iEffect = 25 $iTransitionType = 4 $iTransitionSubType = 14
+
+			Case 26
+				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SPLIT_VERT_OUT
+				; $iEffect = 26 $iTransitionType = 4 $iTransitionSubType = 13
+
+			Case 31
+				Switch $iTransitionType
+					Case 37
+						Switch $iTransitionSubType
+							Case 101
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_FADE_SMOOTHLY
+								; $iEffect = 31 $iTransitionType = 37 $iTransitionSubType = 101
+
+							Case 104
+								$iCurrTransition = $LOI_SLIDE_TRANSITION_FADE_THROUGH_BLACK
+								; $iEffect = 31 $iTransitionType = 37 $iTransitionSubType = 104
+						EndSwitch
+
+					Case 40
+						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DISSOLVE
+						; $iEffect = 31 $iTransitionType = 40 $iTransitionSubType = 0
+				EndSwitch
+
+			Case 36
+				If ($iTransitionType = 42) And ($iTransitionSubType = 0) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_RANDOM
+				; $iEffect = 36 $iTransitionType = 42 $iTransitionSubType = 0
+
+			Case 41
+				Switch $iTransitionType
+					Case 35
+						If ($iTransitionSubType = 111) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COMB_VERT
+						; $iEffect = 41 $iTransitionType = 35 $iTransitionSubType = 111
+
+					Case 38
+						If ($iTransitionSubType = 13) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_BARS_VERT
+						; $iEffect = 41 $iTransitionType = 38 $iTransitionSubType = 13
+				EndSwitch
+
+			Case 42
+				Switch $iTransitionType
+					Case 35
+						If ($iTransitionSubType = 110) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COMB_HORI
+						; $iEffect = 42 $iTransitionType = 35 $iTransitionSubType = 110
+
+					Case 38
+						If ($iTransitionSubType = 14) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_BARS_HORI
+						; $iEffect = 42 $iTransitionType = 38 $iTransitionSubType = 14
+				EndSwitch
+
+			Case 43
+				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
+				; $iEffect = 43 $iTransitionType = 36 $iTransitionSubType = 116
+
+			Case 44
+				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
+				; $iEffect = 44 $iTransitionType = 36 $iTransitionSubType = 117
+
+			Case 45
+				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
+				; $iEffect = 45 $iTransitionType = 36 $iTransitionSubType = 119
+
+			Case 46
+				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
+				; $iEffect = 46 $iTransitionType = 36 $iTransitionSubType = 118
+
+			Case 47
+				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
+				; $iEffect = 47 $iTransitionType = 36 $iTransitionSubType = 99
+
+			Case 48
+				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
+				; $iEffect = 48 $iTransitionType = 36 $iTransitionSubType = 119
+
+			Case 49
+				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
+				; $iEffect = 49 $iTransitionType = 36 $iTransitionSubType = 100
+
+			Case 50
+				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
+				; $iEffect = 50 $iTransitionType = 36 $iTransitionSubType = 118
+
+			Case 51
+				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
+				; $iEffect = 51 $iTransitionType = 36 $iTransitionSubType = 97
+
+			Case 52
+				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
+				; $iEffect = 52 $iTransitionType = 36 $iTransitionSubType = 116
+
+			Case 53
+				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
+				; $iEffect = 53 $iTransitionType = 36 $iTransitionSubType = 98
+
+			Case 54
+				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
+				; $iEffect = 54 $iTransitionType = 36 $iTransitionSubType = 117
+
+			Case 55
+				If ($iTransitionType = 39) And ($iTransitionSubType = 19) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_CHECKERS_DOWN
+				; $iEffect = 55 $iTransitionType = 39 $iTransitionSubType = 19
+
+			Case 56
+				If ($iTransitionType = 39) And ($iTransitionSubType = 108) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_CHECKERS_ACROSS
+				; $iEffect = 56 $iTransitionType = 39 $iTransitionSubType = 108
+		EndSwitch
+
+		If Not IsInt($iCurrTransition) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrTransition)
+	EndIf
+
+	If Not __LO_IntIsBetween($iTransition, $LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT, $LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	Switch $iTransition
+		Case $LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 6
+
+		Case $LOI_SLIDE_TRANSITION_3D_VENETIAN_HORI
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 7
+
+		Case $LOI_SLIDE_TRANSITION_BARS_VERT
+			$iEffect = 41
+			$iTransitionType = 38
+			$iTransitionSubType = 13
+
+		Case $LOI_SLIDE_TRANSITION_BARS_HORI
+			$iEffect = 42
+			$iTransitionType = 38
+			$iTransitionSubType = 14
+
+		Case $LOI_SLIDE_TRANSITION_BOX_OUT
+			$iEffect = 6
+			$iTransitionType = 12
+			$iTransitionSubType = 25
+
+		Case $LOI_SLIDE_TRANSITION_BOX_IN
+			$iEffect = 5
+			$iTransitionType = 12
+			$iTransitionSubType = 25
+
+		Case $LOI_SLIDE_TRANSITION_CHECKERS_DOWN
+			$iEffect = 55
+			$iTransitionType = 39
+			$iTransitionSubType = 19
+
+		Case $LOI_SLIDE_TRANSITION_CHECKERS_ACROSS
+			$iEffect = 56
+			$iTransitionType = 39
+			$iTransitionSubType = 108
+
+		Case $LOI_SLIDE_TRANSITION_CIRCLES
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 27
+
+		Case $LOI_SLIDE_TRANSITION_COMB_HORI
+			$iEffect = 42
+			$iTransitionType = 35
+			$iTransitionSubType = 110
+
+		Case $LOI_SLIDE_TRANSITION_COMB_VERT
+			$iEffect = 41
+			$iTransitionType = 35
+			$iTransitionSubType = 111
+
+		Case $LOI_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM
+			$iEffect = 8
+			$iTransitionType = 36
+			$iTransitionSubType = 98
+
+		Case $LOI_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT
+			$iEffect = 9
+			$iTransitionType = 36
+			$iTransitionSubType = 99
+
+		Case $LOI_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT
+			$iEffect = 7
+			$iTransitionType = 36
+			$iTransitionSubType = 97
+
+		Case $LOI_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP
+			$iEffect = 10
+			$iTransitionType = 36
+			$iTransitionSubType = 100
+
+		Case $LOI_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
+			$iEffect = 44
+			$iTransitionType = 36
+			$iTransitionSubType = 117
+
+		Case $LOI_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
+			$iEffect = 45
+			$iTransitionType = 36
+			$iTransitionSubType = 119
+
+		Case $LOI_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
+			$iEffect = 43
+			$iTransitionType = 36
+			$iTransitionSubType = 116
+
+		Case $LOI_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
+			$iEffect = 46
+			$iTransitionType = 36
+			$iTransitionSubType = 118
+
+		Case $LOI_SLIDE_TRANSITION_CUBE_OUTSIDE
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 12
+
+		Case $LOI_SLIDE_TRANSITION_CUBE_INSIDE
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 11
+
+		Case $LOI_SLIDE_TRANSITION_CUT_THROUGH_BLACK
+			$iEffect = 0
+			$iTransitionType = 1
+			$iTransitionSubType = 104
+
+		Case $LOI_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
+			$iEffect = 20
+			$iTransitionType = 34
+			$iTransitionSubType = 96
+
+		Case $LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
+			$iEffect = 22
+			$iTransitionType = 34
+			$iTransitionSubType = 95
+
+		Case $LOI_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
+			$iEffect = 19
+			$iTransitionType = 34
+			$iTransitionSubType = 95
+
+		Case $LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
+			$iEffect = 21
+			$iTransitionType = 34
+			$iTransitionSubType = 96
+
+		Case $LOI_SLIDE_TRANSITION_DISSOLVE
+			$iEffect = 31
+			$iTransitionType = 40
+			$iTransitionSubType = 0
+
+		Case $LOI_SLIDE_TRANSITION_FADE_THROUGH_BLACK
+			$iEffect = 31
+			$iTransitionType = 37
+			$iTransitionSubType = 104
+
+		Case $LOI_SLIDE_TRANSITION_FADE_THROUGH_WHITE
+			$iEffect = 0
+			$iTransitionType = 37
+			$iTransitionSubType = 104
+
+		Case $LOI_SLIDE_TRANSITION_FADE_SMOOTHLY
+			$iEffect = 31
+			$iTransitionType = 37
+			$iTransitionSubType = 101
+
+		Case $LOI_SLIDE_TRANSITION_FALL
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 1
+
+		Case $LOI_SLIDE_TRANSITION_FINE_DISSOLVE
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 9
+
+		Case $LOI_SLIDE_TRANSITION_GLITTER
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 26
+
+		Case $LOI_SLIDE_TRANSITION_HELIX
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 55
+
+		Case $LOI_SLIDE_TRANSITION_HONEYCOMB
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 31
+
+		Case $LOI_SLIDE_TRANSITION_IRIS
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 3
+
+		Case $LOI_SLIDE_TRANSITION_NEWSFLASH
+			$iEffect = 17
+			$iTransitionType = 43
+			$iTransitionSubType = 114
+
+		Case $LOI_SLIDE_TRANSITION_NONE
+			$iEffect = 0
+			$iTransitionType = 0
+			$iTransitionSubType = 0
+
+		Case $LOI_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM
+			$iEffect = 12
+			$iTransitionType = 35
+			$iTransitionSubType = 98
+
+		Case $LOI_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT
+			$iEffect = 13
+			$iTransitionType = 35
+			$iTransitionSubType = 99
+
+		Case $LOI_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT
+			$iEffect = 11
+			$iTransitionType = 35
+			$iTransitionSubType = 97
+
+		Case $LOI_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP
+			$iEffect = 14
+			$iTransitionType = 35
+			$iTransitionSubType = 100
+
+		Case $LOI_SLIDE_TRANSITION_RANDOM
+			$iEffect = 36
+			$iTransitionType = 42
+			$iTransitionSubType = 0
+
+		Case $LOI_SLIDE_TRANSITION_RIPPLE
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 14
+
+		Case $LOI_SLIDE_TRANSITION_ROCHADE
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 5
+
+		Case $LOI_SLIDE_TRANSITION_SHAPE_PLUS
+			$iEffect = 6
+			$iTransitionType = 3
+			$iTransitionSubType = 12
+
+		Case $LOI_SLIDE_TRANSITION_SHAPE_DIAMOND
+			$iEffect = 6
+			$iTransitionType = 12
+			$iTransitionSubType = 26
+
+		Case $LOI_SLIDE_TRANSITION_SHAPE_CIRCLE
+			$iEffect = 6
+			$iTransitionType = 17
+			$iTransitionSubType = 27
+
+		Case $LOI_SLIDE_TRANSITION_SHAPE_OVAL_HORI
+			$iEffect = 0
+			$iTransitionType = 17
+			$iTransitionSubType = 14
+
+		Case $LOI_SLIDE_TRANSITION_SHAPE_OVAL_VERT
+			$iEffect = 0
+			$iTransitionType = 17
+			$iTransitionSubType = 13
+
+		Case $LOI_SLIDE_TRANSITION_SPLIT_HORI_IN
+			$iEffect = 23
+			$iTransitionType = 4
+			$iTransitionSubType = 14
+
+		Case $LOI_SLIDE_TRANSITION_SPLIT_HORI_OUT
+			$iEffect = 25
+			$iTransitionType = 4
+			$iTransitionSubType = 14
+
+		Case $LOI_SLIDE_TRANSITION_SPLIT_VERT_IN
+			$iEffect = 24
+			$iTransitionType = 4
+			$iTransitionSubType = 13
+
+		Case $LOI_SLIDE_TRANSITION_SPLIT_VERT_OUT
+			$iEffect = 26
+			$iTransitionType = 4
+			$iTransitionSubType = 13
+
+		Case $LOI_SLIDE_TRANSITION_STATIC
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 8
+
+		Case $LOI_SLIDE_TRANSITION_TILES
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 108
+
+		Case $LOI_SLIDE_TRANSITION_TURN_AROUND
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 2
+
+		Case $LOI_SLIDE_TRANSITION_TURN_DOWN
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 4
+
+		Case $LOI_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
+			$iEffect = 53
+			$iTransitionType = 36
+			$iTransitionSubType = 98
+
+		Case $LOI_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
+			$iEffect = 47
+			$iTransitionType = 36
+			$iTransitionSubType = 99
+
+		Case $LOI_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
+			$iEffect = 51
+			$iTransitionType = 36
+			$iTransitionSubType = 97
+
+		Case $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
+			$iEffect = 49
+			$iTransitionType = 36
+			$iTransitionSubType = 100
+
+		Case $LOI_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
+			$iEffect = 54
+			$iTransitionType = 36
+			$iTransitionSubType = 117
+
+		Case $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
+			$iEffect = 48
+			$iTransitionType = 36
+			$iTransitionSubType = 119
+
+		Case $LOI_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
+			$iEffect = 52
+			$iTransitionType = 36
+			$iTransitionSubType = 116
+
+		Case $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
+			$iEffect = 50
+			$iTransitionType = 36
+			$iTransitionSubType = 118
+
+		Case $LOI_SLIDE_TRANSITION_VENETIAN_VERT
+			$iEffect = 15
+			$iTransitionType = 41
+			$iTransitionSubType = 13
+
+		Case $LOI_SLIDE_TRANSITION_VENETIAN_HORI
+			$iEffect = 16
+			$iTransitionType = 41
+			$iTransitionSubType = 14
+
+		Case $LOI_SLIDE_TRANSITION_VORTEX
+			$iEffect = 0
+			$iTransitionType = 21
+			$iTransitionSubType = 13
+
+		Case $LOI_SLIDE_TRANSITION_WEDGE
+			$iEffect = 17
+			$iTransitionType = 25
+			$iTransitionSubType = 48
+
+		Case $LOI_SLIDE_TRANSITION_WHEEL_1_SPOKE
+			$iEffect = 17
+			$iTransitionType = 23
+			$iTransitionSubType = 107
+
+		Case $LOI_SLIDE_TRANSITION_WHEEL_2_SPOKE
+			$iEffect = 17
+			$iTransitionType = 23
+			$iTransitionSubType = 37
+
+		Case $LOI_SLIDE_TRANSITION_WHEEL_3_SPOKE
+			$iEffect = 17
+			$iTransitionType = 23
+			$iTransitionSubType = 105
+
+		Case $LOI_SLIDE_TRANSITION_WHEEL_4_SPOKE
+			$iEffect = 17
+			$iTransitionType = 23
+			$iTransitionSubType = 39
+
+		Case $LOI_SLIDE_TRANSITION_WHEEL_8_SPOKE
+			$iEffect = 17
+			$iTransitionType = 23
+			$iTransitionSubType = 106
+
+		Case $LOI_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP
+			$iEffect = 4
+			$iTransitionType = 1
+			$iTransitionSubType = 2
+
+		Case $LOI_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT
+			$iEffect = 1
+			$iTransitionType = 1
+			$iTransitionSubType = 1
+
+		Case $LOI_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT
+			$iEffect = 3
+			$iTransitionType = 1
+			$iTransitionSubType = 1
+
+		Case $LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM
+			$iEffect = 2
+			$iTransitionType = 1
+			$iTransitionSubType = 2
+	EndSwitch
+
+	$oSlide.Effect = $iEffect
+	$oSlide.TransitionType = $iTransitionType
+	$oSlide.TransitionSubType = $iTransitionSubType
+
+	$iError = (($oSlide.Effect() = $iEffect) And _
+			($oSlide.TransitionType() = $iTransitionType) And _
+			($oSlide.TransitionSubType() = $iTransitionSubType)) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>__LOImpress_Transition
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_TransparencyGradientConvert

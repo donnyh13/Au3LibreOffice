@@ -56,6 +56,8 @@
 ; _LOImpress_SlideshowSettingsRange
 ; _LOImpress_SlideshowStart
 ; _LOImpress_SlideshowStop
+; _LOImpress_SlideSoundsGetNames
+; _LOImpress_SlideTransition
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
@@ -2567,3 +2569,259 @@ Func _LOImpress_SlideshowStop(ByRef $oDoc)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOImpress_SlideshowStop
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideSoundsGetNames
+; Description ...: Retrieve an array of Sound files that are included with LibreOffice Impress.
+; Syntax ........: _LOImpress_SlideSoundsGetNames()
+; Parameters ....: None
+; Return values .: Success: Array
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create the ServiceManager.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve the DefaultContext Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve the "/singletons/com.sun.star.util.thePathSettings" Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve the LibreOffice gallery path.
+;                  --Success--
+;                  @Error 0 @Extended ? Return Array = Success. Returning array of included Impress Sound files. @Extended will be set to number of results.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: An example path that may be returned is: "C:\Program Files\LibreOffice\program\..\share\gallery\curve.wav"
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideSoundsGetNames()
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oServiceManager, $oContext, $oPathSettings
+	Local $asGalleryPath[0], $asFiles[35]
+	Local $iCount = 0
+	Local $hSearch
+	Local $sFile
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oContext = $oServiceManager.DefaultContext()
+	If Not IsObj($oContext) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oPathSettings = $oContext.getValueByName("/singletons/com.sun.star.util.thePathSettings")
+	If Not IsObj($oPathSettings) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	; "file:///C:/Program%20Files/LibreOffice/program/../share/gallery"
+	$asGalleryPath = $oPathSettings.Gallery_internal()
+	If Not IsArray($asGalleryPath) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	For $i = 0 To UBound($asGalleryPath) - 1
+		$asGalleryPath[$i] = _LO_PathConvert($asGalleryPath[$i], $LO_PATHCONV_PCPATH_RETURN)
+
+		$hSearch = FileFindFirstFile($asGalleryPath[$i] & "\sounds\*.wav")
+		If ($hSearch <> -1) Then
+			While 1
+				$sFile = FileFindNextFile($hSearch)
+				If @error Then ExitLoop
+
+				If (UBound($asFiles) <= $iCount) Then ReDim $asFiles[UBound($asFiles) + 5]
+				$asFiles[$iCount] = $asGalleryPath[$i] & "\sounds\" & $sFile
+				$iCount += 1
+			WEnd
+
+			ExitLoop
+		EndIf
+
+	Next
+
+	ReDim $asFiles[$iCount]
+
+	Return SetError($__LO_STATUS_SUCCESS, UBound($asFiles), $asFiles)
+EndFunc   ;==>_LOImpress_SlideSoundsGetNames
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideTransition
+; Description ...: Set or Retrieve a Slide's Transition properties.
+; Syntax ........: _LOImpress_SlideTransition(ByRef $oSlide[, $iTransition = Null[, $nDuration = Null[, $sSound = Null[, $bLoopSound = Null[, $nSlideAdvance = Null]]]]])
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
+;                  $iTransition         - [optional] an integer value (0-78). Default is Null. The Transition effect. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $nDuration           - [optional] a general number value (0-1000). Default is Null. The duration of the slide's transition effect, in seconds. L.O. 6.1+. See remarks.
+;                  $sSound              - [optional] a string value. Default is Null. The path to the sound to play during slide transition. See remarks.
+;                  $bLoopSound          - [optional] a boolean value. Default is Null. If True, the sound is repeated.
+;                  $nSlideAdvance       - [optional] a general number value (-1-1000). Default is Null. The number of seconds before automatically advance the slide. Call with -1 to set to On Mouse Click.
+; Return values .: Success: 1 or Array
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iTransition not an Integer, less than 0 or greater than 78. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $nDuration not a Number, less than 0 or greater than 1000.
+;                  @Error 1 @Extended 4 Return 0 = $sSound not a String.
+;                  @Error 1 @Extended 5 Return 0 = File called in $sSound does not exist.
+;                  @Error 1 @Extended 6 Return 0 = $bLoopSound not a Boolean.
+;                  @Error 1 @Extended 7 Return 0 = $nSlideAdvance not a Number, less than -1 or greater than 1000.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve the current Transition type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Duration.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve current Sound value.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve current Slide advance value.
+;                  @Error 3 @Extended 5 Return 0 = Failed to set Transition type.
+;                  @Error 3 @Extended 6 Return 0 = Failed to convert Sound path to LibreOffice path.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iTransition
+;                  |                               2 = Error setting $nDuration
+;                  |                               4 = Error setting $sSound
+;                  |                               8 = Error setting $bLoopSound
+;                  |                               16 = Error setting $nSlideAdvance
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Previous to LibreOffice 6.1 $nDuration was simply a three option selection of Slow, Medium, and Fast. To make both these work with this UDF the following method has been adopted:
+;                  Previous to LibreOffice 6.1, if the Value called in $nDuration is from 0 to 1.99, the speed is set to Fast, if $nDuration is called with 2, Medium speed is set, and any value beyond 2.01 is considered Slow. This matches LibreOffice's internal behaviour.
+;                  When retrieving current property values previous to LibreOffice 6.1, if Speed is set to Fast, 1 is returned for $nDuration. If Speed is set to Medium, 2 is returned. And if Speed is set to Slow, 3 is returned.
+;                  $sSound can be called with an empty string to indicate that no sound should be played.
+;                  If $sSound is called with the string "stop", this equals "Stop Previous Sound" in the UI.
+;                  Otherwise call $sSound with a valid path to a sound file. See _LOImpress_SlideSoundsGetNames, to obtain a list of sound files included with Impress.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration = Null, $sSound = Null, $bLoopSound = Null, $nSlideAdvance = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__LOI_CONST_CHANGE_MANUAL = 0, $__LOI_CONST_CHANGE_AUTO = 1 ;,  $__LOI_CONST_CHANGE_SEMI_MANUAL = 2 ; com.sun.star.presentation.DrawPage:Change
+	Local Const $__LOI_CONST_SPEED_SLOW = 0, $__LOI_CONST_SPEED_MEDIUM = 1, $__LOI_CONST_SPEED_FAST = 2    ; com.sun.star.presentation:AnimationSpeed
+	Local $iError = 0, $iCurrTransition, $nCurrDuration, $nCurrSlideAdvance
+	Local $sCurrSound
+	Local $avTransition[5]
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iTransition, $nDuration, $sSound, $bLoopSound, $nSlideAdvance) Then
+
+		$iCurrTransition = __LOImpress_Transition($oSlide)
+		If Not IsInt($iCurrTransition) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		If __LO_VersionCheck(6.1) Then
+			$nCurrDuration = $oSlide.TransitionDuration()
+
+		Else
+			Switch $oSlide.Speed()
+				Case $__LOI_CONST_SPEED_FAST ; 0 - 1.99 ; Matches L.O. Behaviour.
+					$nCurrDuration = 1
+
+				Case $__LOI_CONST_SPEED_MEDIUM ; 2
+					$nCurrDuration = 2
+
+				Case Else ; $__LOI_CONST_SPEED_SLOW
+					$nCurrDuration = 3
+			EndSwitch
+		EndIf
+
+		If Not IsNumber($nCurrDuration) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$sCurrSound = $oSlide.Sound()
+		If IsBool($sCurrSound) And ($sCurrSound = True) Then $sCurrSound = "stop"
+		If Not IsString($sCurrSound) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$sCurrSound = _LO_PathConvert($sCurrSound, $LO_PATHCONV_PCPATH_RETURN)
+
+		If ($oSlide.Change() <> $__LOI_CONST_CHANGE_AUTO) Then
+			$nCurrSlideAdvance = -1
+
+		Else
+			$nCurrSlideAdvance = $oSlide.HighResDuration()
+		EndIf
+
+		If Not IsNumber($nCurrSlideAdvance) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		__LO_ArrayFill($avTransition, $iCurrTransition, $nCurrDuration, $sCurrSound, $oSlide.LoopSound(), $nCurrSlideAdvance)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avTransition)
+	EndIf
+
+	If ($iTransition <> Null) Then
+		If Not __LO_IntIsBetween($iTransition, $LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT, $LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		__LOImpress_Transition($oSlide, $iTransition)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+		$iError = (__LOImpress_Transition($oSlide) = $iTransition) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($nDuration <> Null) Then
+		If Not __LO_NumIsBetween($nDuration, 0, 1000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		If __LO_VersionCheck(6.1) Then
+			$oSlide.TransitionDuration = $nDuration
+			$iError = ($oSlide.TransitionDuration() = $nDuration) ? ($iError) : (BitOR($iError, 2))
+		Else
+			Switch $nDuration
+				Case 0 - 1.99 ; Matches L.O. Behaviour.
+					$oSlide.Speed = $__LOI_CONST_SPEED_FAST
+					$iError = ($oSlide.Speed() = $__LOI_CONST_SPEED_FAST) ? ($iError) : (BitOR($iError, 2))
+
+				Case 2
+					$oSlide.Speed = $__LOI_CONST_SPEED_MEDIUM
+					$iError = ($oSlide.Speed() = $__LOI_CONST_SPEED_MEDIUM) ? ($iError) : (BitOR($iError, 2))
+
+				Case Else
+					$oSlide.Speed = $__LOI_CONST_SPEED_SLOW
+					$iError = ($oSlide.Speed() = $__LOI_CONST_SPEED_SLOW) ? ($iError) : (BitOR($iError, 2))
+
+			EndSwitch
+		EndIf
+
+	EndIf
+
+	If ($sSound <> Null) Then
+		If Not IsString($sSound) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		If ($sSound = "") Then
+			$oSlide.Sound = $sSound
+			$iError = ($oSlide.Sound() = $sSound) ? ($iError) : (BitOR($iError, 4))
+
+		ElseIf ($sSound = "stop") Then
+			$oSlide.Sound = True
+			$iError = ($oSlide.Sound() = True) ? ($iError) : (BitOR($iError, 4))
+
+		Else
+			If Not FileExists($sSound) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+			$sSound = _LO_PathConvert($sSound, $LO_PATHCONV_OFFICE_RETURN)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+
+			$oSlide.Sound = $sSound
+			$iError = ($oSlide.Sound() = $sSound) ? ($iError) : (BitOR($iError, 4))
+
+		EndIf
+	EndIf
+
+	If ($bLoopSound <> Null) Then
+		If Not IsBool($bLoopSound) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+		$oSlide.LoopSound = $bLoopSound
+		$iError = ($oSlide.LoopSound() = $bLoopSound) ? ($iError) : (BitOR($iError, 8))
+	EndIf
+
+	If ($nSlideAdvance <> Null) Then
+		If Not __LO_NumIsBetween($nSlideAdvance, -1, 1000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+
+		If ($nSlideAdvance = -1) Then
+			$oSlide.Change = $__LOI_CONST_CHANGE_MANUAL
+			$iError = ($oSlide.Change() = $__LOI_CONST_CHANGE_MANUAL) ? ($iError) : (BitOR($iError, 16))
+
+		Else
+			If ($oSlide.Change() <> $__LOI_CONST_CHANGE_AUTO) Then $oSlide.Change = $__LOI_CONST_CHANGE_AUTO
+			$oSlide.Duration = $nSlideAdvance
+			$oSlide.HighResDuration = $nSlideAdvance
+			$iError = (($oSlide.Duration() = $nSlideAdvance) And ($oSlide.HighResDuration() = $nSlideAdvance)) ? ($iError) : (BitOR($iError, 16))
+		EndIf
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideTransition
