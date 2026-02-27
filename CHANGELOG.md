@@ -26,36 +26,36 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Added logo to ReadMe. @mLipok
 - Central Constants File
-	- LibreOffice_Constants.au3
-		- $__LOCONST_SLEEP_DIV
-		- $LO_COLOR_*
-		- $LO_CONVERT_UNIT_*
-		- $LO_PATHCONV_*
-		- $__LO_STATUS_*
-	- LibreOffice_Helper.au3
-		- _LO_ComError_UserFunction
-		- _LO_ConvertColorFromLong
-		- _LO_ConvertColorToLong
-		- _LO_InitializePortable
-		- _LO_PathConvert
-		- _LO_UnitConvert
-		- _LO_VersionGet
-	- LibreOffice_Internal.au3
-		- __LO_AddTo1DArray
-		- __LO_ArrayFill
-		- __LO_CreateStruct
-		- __LO_DeleteTempReg
-		- __LO_InternalComErrorHandler
-		- __LO_IntIsBetween
-		- __LO_NumIsBetween
-		- __LO_ServiceManager
-		- __LO_SetPortableServiceManager
-		- __LO_SetPropertyValue
-		- __LO_StylesGetNames
-		- __LO_VarsAreNull
-		- __LO_VersionCheck
+  - LibreOffice_Constants.au3
+    - $__LOCONST_SLEEP_DIV
+    - $LO_COLOR_*
+    - $LO_CONVERT_UNIT_*
+    - $LO_PATHCONV_*
+    - $__LO_STATUS_*
+  - LibreOffice_Helper.au3
+    - _LO_ComError_UserFunction
+    - _LO_ConvertColorFromLong
+    - _LO_ConvertColorToLong
+    - _LO_InitializePortable
+    - _LO_PathConvert
+    - _LO_UnitConvert
+    - _LO_VersionGet
+  - LibreOffice_Internal.au3
+    - __LO_AddTo1DArray
+    - __LO_ArrayFill
+    - __LO_CreateStruct
+    - __LO_DeleteTempReg
+    - __LO_InternalComErrorHandler
+    - __LO_IntIsBetween
+    - __LO_NumIsBetween
+    - __LO_ServiceManager
+    - __LO_SetPortableServiceManager
+    - __LO_SetPropertyValue
+    - __LO_StylesGetNames
+    - __LO_VarsAreNull
+    - __LO_VersionCheck
 - Central UDF File for all components (@mLipok)
-	- LibreOffice.au3
+  - LibreOffice.au3
 - Support for LibreOffice Portable usage. See `_LO_InitializePortable`.
 - $LO_CONVERT_* Constant.
 - `_LO_UnitConvert` Function for converting Inches, Centimeters, etc. Replacing `_LO_ConvertFromMicrometer` and `_LO_ConvertToMicrometer`.
@@ -64,10 +64,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Changed
 
 - `__LO_IntIsBetween` to accept only a minimum value.
-	- Modified function usage to match changes.
+  - Modified function usage to match changes.
 - All Internal Error Constants from `$__LOW_STATUS_` or `$__LOC_STATUS_` To `$__LO_STATUS_`
 - Attempted to standardize `$__LO_STATUS_INIT_ERROR` and `$__LO_STATUS_PROCESSING_ERROR` usage throughout functions:
-	- _LO_VersionGet
+  - _LO_VersionGet
 
 #### Documented
 
@@ -101,262 +101,262 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Added
 
 - Main Base File
-	- LibreOfficeBase.au3
+  - LibreOfficeBase.au3
 - Individual Base Element Files
-	- LibreOfficeBase_Constants.au3
-	- LibreOfficeBase_Database.au3
-	- LibreOfficeBase_Doc.au3
-	- LibreOfficeBase_Form.au3
-	- LibreOfficeBase_Helper.au3
-	- LibreOfficeBase_Internal.au3
-	- LibreOfficeBase_Query.au3
-	- LibreOfficeBase_Report.au3
-	- LibreOfficeBase_SQLStatement.au3
-	- LibreOfficeBase_Table.au3
+  - LibreOfficeBase_Constants.au3
+  - LibreOfficeBase_Database.au3
+  - LibreOfficeBase_Doc.au3
+  - LibreOfficeBase_Form.au3
+  - LibreOfficeBase_Helper.au3
+  - LibreOfficeBase_Internal.au3
+  - LibreOfficeBase_Query.au3
+  - LibreOfficeBase_Report.au3
+  - LibreOfficeBase_SQLStatement.au3
+  - LibreOfficeBase_Table.au3
 - Constants
-	- $LOB_ALIGN_VERT_*
-	- $LOB_CASEMAP_*
-	- $LOB_DATA_SET_TYPE_*
-	- $LOB_DATA_TYPE_*
-	- $LOB_DBASE_BEST_ROW_SCOPE_*
-	- $LOB_DBASE_META_*
-	- $LOB_DBASE_RESULT_SET_CONCURRENCY_*
-	- $LOB_DBASE_TRANSACTION_ISOLATION_*
-	- $LOB_FORMAT_KEYS_*
-	- $LOB_POSTURE_*
-	- $LOB_RELIEF_*
-	- $LOB_REP_CON_IMG_BTN_SCALE_*
-	- $LOB_REP_CON_LINE_*
-	- $LOB_REP_CON_TYPE_*
-	- $LOB_REP_CONTENT_TYPE_*
-	- $LOB_REP_FORCE_PAGE_*
-	- $LOB_REP_GROUP_ON_*
-	- $LOB_REP_KEEP_TOG_*
-	- $LOB_REP_OUTPUT_TYPE_*
-	- $LOB_REP_PAGE_PRINT_OPT_*
-	- $LOB_REP_SECTION_TYPE_*
-	- $LOB_RESULT_CURSOR_MOVE_*
-	- $LOB_RESULT_CURSOR_QUERY_*
-	- $LOB_RESULT_METADATA_COLUMN_*
-	- $LOB_RESULT_METADATA_QUERY_*
-	- $LOB_RESULT_ROW_MOD_*
-	- $LOB_RESULT_ROW_QUERY_IS_ROW_*
-	- $LOB_RESULT_ROW_READ_*
-	- $LOB_RESULT_ROW_UPDATE_*
-	- $LOB_RESULT_TYPE_*
-	- $LOB_STRIKEOUT_*
-	- $LOB_SUB_COMP_TYPE_*
-	- $LOB_TXT_ALIGN_HORI_*
-	- $LOB_UNDERLINE_*
-	- $LOB_WEIGHT_*
+  - $LOB_ALIGN_VERT_*
+  - $LOB_CASEMAP_*
+  - $LOB_DATA_SET_TYPE_*
+  - $LOB_DATA_TYPE_*
+  - $LOB_DBASE_BEST_ROW_SCOPE_*
+  - $LOB_DBASE_META_*
+  - $LOB_DBASE_RESULT_SET_CONCURRENCY_*
+  - $LOB_DBASE_TRANSACTION_ISOLATION_*
+  - $LOB_FORMAT_KEYS_*
+  - $LOB_POSTURE_*
+  - $LOB_RELIEF_*
+  - $LOB_REP_CON_IMG_BTN_SCALE_*
+  - $LOB_REP_CON_LINE_*
+  - $LOB_REP_CON_TYPE_*
+  - $LOB_REP_CONTENT_TYPE_*
+  - $LOB_REP_FORCE_PAGE_*
+  - $LOB_REP_GROUP_ON_*
+  - $LOB_REP_KEEP_TOG_*
+  - $LOB_REP_OUTPUT_TYPE_*
+  - $LOB_REP_PAGE_PRINT_OPT_*
+  - $LOB_REP_SECTION_TYPE_*
+  - $LOB_RESULT_CURSOR_MOVE_*
+  - $LOB_RESULT_CURSOR_QUERY_*
+  - $LOB_RESULT_METADATA_COLUMN_*
+  - $LOB_RESULT_METADATA_QUERY_*
+  - $LOB_RESULT_ROW_MOD_*
+  - $LOB_RESULT_ROW_QUERY_IS_ROW_*
+  - $LOB_RESULT_ROW_READ_*
+  - $LOB_RESULT_ROW_UPDATE_*
+  - $LOB_RESULT_TYPE_*
+  - $LOB_STRIKEOUT_*
+  - $LOB_SUB_COMP_TYPE_*
+  - $LOB_TXT_ALIGN_HORI_*
+  - $LOB_UNDERLINE_*
+  - $LOB_WEIGHT_*
 - Database functions
-	- _LOBase_DatabaseAutoCommit
-	- _LOBase_DatabaseCommit
-	- _LOBase_DatabaseConnectionClose
-	- _LOBase_DatabaseConnectionGet
-	- _LOBase_DatabaseGetDefaultQuote
-	- _LOBase_DatabaseGetObjByDoc
-	- _LOBase_DatabaseGetObjByURL
-	- _LOBase_DatabaseIsReadOnly
-	- _LOBase_DatabaseMetaDataQuery
-	- _LOBase_DatabaseName
-	- _LOBase_DatabaseRegisteredAdd
-	- _LOBase_DatabaseRegisteredExists
-	- _LOBase_DatabaseRegisteredGetNames
-	- _LOBase_DatabaseRegisteredRemoveByName
-	- _LOBase_DatabaseRequiresPassword
-	- _LOBase_DatabaseRollback
+  - _LOBase_DatabaseAutoCommit
+  - _LOBase_DatabaseCommit
+  - _LOBase_DatabaseConnectionClose
+  - _LOBase_DatabaseConnectionGet
+  - _LOBase_DatabaseGetDefaultQuote
+  - _LOBase_DatabaseGetObjByDoc
+  - _LOBase_DatabaseGetObjByURL
+  - _LOBase_DatabaseIsReadOnly
+  - _LOBase_DatabaseMetaDataQuery
+  - _LOBase_DatabaseName
+  - _LOBase_DatabaseRegisteredAdd
+  - _LOBase_DatabaseRegisteredExists
+  - _LOBase_DatabaseRegisteredGetNames
+  - _LOBase_DatabaseRegisteredRemoveByName
+  - _LOBase_DatabaseRequiresPassword
+  - _LOBase_DatabaseRollback
 - Doc functions
-	- _LOBase_DocClose
-	- _LOBase_DocConnect
-	- _LOBase_DocCreate
-	- _LOBase_DocDatabaseType
-	- _LOBase_DocGetName
-	- _LOBase_DocGetPath
-	- _LOBase_DocHasPath
-	- _LOBase_DocIsActive
-	- _LOBase_DocIsModified
-	- _LOBase_DocMaximize
-	- _LOBase_DocMinimize
-	- _LOBase_DocOpen
-	- _LOBase_DocSave
-	- _LOBase_DocSaveAs
-	- _LOBase_DocSaveCopy
-	- _LOBase_DocSubComponentsClose
-	- _LOBase_DocSubComponentsGetList
-	- _LOBase_DocVisible
+  - _LOBase_DocClose
+  - _LOBase_DocConnect
+  - _LOBase_DocCreate
+  - _LOBase_DocDatabaseType
+  - _LOBase_DocGetName
+  - _LOBase_DocGetPath
+  - _LOBase_DocHasPath
+  - _LOBase_DocIsActive
+  - _LOBase_DocIsModified
+  - _LOBase_DocMaximize
+  - _LOBase_DocMinimize
+  - _LOBase_DocOpen
+  - _LOBase_DocSave
+  - _LOBase_DocSaveAs
+  - _LOBase_DocSaveCopy
+  - _LOBase_DocSubComponentsClose
+  - _LOBase_DocSubComponentsGetList
+  - _LOBase_DocVisible
 - Form Functions
-	- _LOBase_FormClose
-	- _LOBase_FormConnect
-	- _LOBase_FormCopy
-	- _LOBase_FormCreate
-	- _LOBase_FormDelete
-	- _LOBase_FormDocVisible
-	- _LOBase_FormExists
-	- _LOBase_FormFolderCopy
-	- _LOBase_FormFolderCreate
-	- _LOBase_FormFolderDelete
-	- _LOBase_FormFolderExists
-	- _LOBase_FormFolderRename
-	- _LOBase_FormFoldersGetCount
-	- _LOBase_FormFoldersGetNames
-	- _LOBase_FormIsModified
-	- _LOBase_FormOpen
-	- _LOBase_FormRename
-	- _LOBase_FormSave
-	- _LOBase_FormsGetCount
-	- _LOBase_FormsGetNames
+  - _LOBase_FormClose
+  - _LOBase_FormConnect
+  - _LOBase_FormCopy
+  - _LOBase_FormCreate
+  - _LOBase_FormDelete
+  - _LOBase_FormDocVisible
+  - _LOBase_FormExists
+  - _LOBase_FormFolderCopy
+  - _LOBase_FormFolderCreate
+  - _LOBase_FormFolderDelete
+  - _LOBase_FormFolderExists
+  - _LOBase_FormFolderRename
+  - _LOBase_FormFoldersGetCount
+  - _LOBase_FormFoldersGetNames
+  - _LOBase_FormIsModified
+  - _LOBase_FormOpen
+  - _LOBase_FormRename
+  - _LOBase_FormSave
+  - _LOBase_FormsGetCount
+  - _LOBase_FormsGetNames
 - Helper functions
-	- _LOBase_ComError_UserFunction
-	- _LOBase_DateStructCreate
-	- _LOBase_DateStructModify
-	- _LOBase_FontDescCreate
-	- _LOBase_FontDescEdit
-	- _LOBase_FontExists
-	- _LOBase_FontsGetNames
-	- _LOBase_FormatKeyCreate
-	- _LOBase_FormatKeyDelete
-	- _LOBase_FormatKeyExists
-	- _LOBase_FormatKeyGetStandard
-	- _LOBase_FormatKeyGetString
-	- _LOBase_FormatKeyList
+  - _LOBase_ComError_UserFunction
+  - _LOBase_DateStructCreate
+  - _LOBase_DateStructModify
+  - _LOBase_FontDescCreate
+  - _LOBase_FontDescEdit
+  - _LOBase_FontExists
+  - _LOBase_FontsGetNames
+  - _LOBase_FormatKeyCreate
+  - _LOBase_FormatKeyDelete
+  - _LOBase_FormatKeyExists
+  - _LOBase_FormatKeyGetStandard
+  - _LOBase_FormatKeyGetString
+  - _LOBase_FormatKeyList
 - Internal functions
-	- __LOBase_ColTransferProps
-	- __LOBase_ColTypeName
-	- __LOBase_CreateStruct
-	- __LOBase_DatabaseMetaGetQuery
-	- __LOBase_InternalComErrorHandler
-	- __LOBase_ReportConIdentify
-	- __LOBase_ReportConSetGetFontDesc
+  - __LOBase_ColTransferProps
+  - __LOBase_ColTypeName
+  - __LOBase_CreateStruct
+  - __LOBase_DatabaseMetaGetQuery
+  - __LOBase_InternalComErrorHandler
+  - __LOBase_ReportConIdentify
+  - __LOBase_ReportConSetGetFontDesc
 - Query functions
-	- _LOBase_QueriesGetCount
-	- _LOBase_QueriesGetNames
-	- _LOBase_QueryAddByName
-	- _LOBase_QueryAddBySQL
-	- _LOBase_QueryDelete
-	- _LOBase_QueryExists
-	- _LOBase_QueryFieldGetObjByIndex
-	- _LOBase_QueryFieldGetObjByName
-	- _LOBase_QueryFieldModify
-	- _LOBase_QueryFieldsGetCount
-	- _LOBase_QueryFieldsGetNames
-	- _LOBase_QueryGetObjByIndex
-	- _LOBase_QueryGetObjByName
-	- _LOBase_QueryName
-	- _LOBase_QuerySQLCommand
-	- _LOBase_QueryUIClose
-	- _LOBase_QueryUIConnect
-	- _LOBase_QueryUIGetRowSet
-	- _LOBase_QueryUIOpenByName
-	- _LOBase_QueryUIOpenByObject
-	- _LOBase_QueryUIVisible
+  - _LOBase_QueriesGetCount
+  - _LOBase_QueriesGetNames
+  - _LOBase_QueryAddByName
+  - _LOBase_QueryAddBySQL
+  - _LOBase_QueryDelete
+  - _LOBase_QueryExists
+  - _LOBase_QueryFieldGetObjByIndex
+  - _LOBase_QueryFieldGetObjByName
+  - _LOBase_QueryFieldModify
+  - _LOBase_QueryFieldsGetCount
+  - _LOBase_QueryFieldsGetNames
+  - _LOBase_QueryGetObjByIndex
+  - _LOBase_QueryGetObjByName
+  - _LOBase_QueryName
+  - _LOBase_QuerySQLCommand
+  - _LOBase_QueryUIClose
+  - _LOBase_QueryUIConnect
+  - _LOBase_QueryUIGetRowSet
+  - _LOBase_QueryUIOpenByName
+  - _LOBase_QueryUIOpenByObject
+  - _LOBase_QueryUIVisible
 - Report functions
-	- _LOBase_ReportClose
-	- _LOBase_ReportConDelete
-	- _LOBase_ReportConFormattedFieldData
-	- _LOBase_ReportConFormattedFieldGeneral
-	- _LOBase_ReportConImageConData
-	- _LOBase_ReportConImageConGeneral
-	- _LOBase_ReportConInsert
-	- _LOBase_ReportConLabelGeneral
-	- _LOBase_ReportConLineGeneral
-	- _LOBase_ReportConnect
-	- _LOBase_ReportConPosition
-	- _LOBase_ReportConsGetList
-	- _LOBase_ReportConSize
-	- _LOBase_ReportCopy
-	- _LOBase_ReportCreate
-	- _LOBase_ReportData
-	- _LOBase_ReportDelete
-	- _LOBase_ReportDetail
-	- _LOBase_ReportDocVisible
-	- _LOBase_ReportExists
-	- _LOBase_ReportFolderCopy
-	- _LOBase_ReportFolderCreate
-	- _LOBase_ReportFolderDelete
-	- _LOBase_ReportFolderExists
-	- _LOBase_ReportFolderRename
-	- _LOBase_ReportFoldersGetCount
-	- _LOBase_ReportFoldersGetNames
-	- _LOBase_ReportFooter
-	- _LOBase_ReportGeneral
-	- _LOBase_ReportGroupAdd
-	- _LOBase_ReportGroupDeleteByIndex
-	- _LOBase_ReportGroupDeleteByObj
-	- _LOBase_ReportGroupFooter
-	- _LOBase_ReportGroupGetByIndex
-	- _LOBase_ReportGroupHeader
-	- _LOBase_ReportGroupPosition
-	- _LOBase_ReportGroupsGetCount
-	- _LOBase_ReportGroupSort
-	- _LOBase_ReportHeader
-	- _LOBase_ReportIsModified
-	- _LOBase_ReportOpen
-	- _LOBase_ReportPageFooter
-	- _LOBase_ReportPageHeader
-	- _LOBase_ReportRename
-	- _LOBase_ReportSave
-	- _LOBase_ReportSectionGetObj
-	- _LOBase_ReportsGetCount
-	- _LOBase_ReportsGetNames
+  - _LOBase_ReportClose
+  - _LOBase_ReportConDelete
+  - _LOBase_ReportConFormattedFieldData
+  - _LOBase_ReportConFormattedFieldGeneral
+  - _LOBase_ReportConImageConData
+  - _LOBase_ReportConImageConGeneral
+  - _LOBase_ReportConInsert
+  - _LOBase_ReportConLabelGeneral
+  - _LOBase_ReportConLineGeneral
+  - _LOBase_ReportConnect
+  - _LOBase_ReportConPosition
+  - _LOBase_ReportConsGetList
+  - _LOBase_ReportConSize
+  - _LOBase_ReportCopy
+  - _LOBase_ReportCreate
+  - _LOBase_ReportData
+  - _LOBase_ReportDelete
+  - _LOBase_ReportDetail
+  - _LOBase_ReportDocVisible
+  - _LOBase_ReportExists
+  - _LOBase_ReportFolderCopy
+  - _LOBase_ReportFolderCreate
+  - _LOBase_ReportFolderDelete
+  - _LOBase_ReportFolderExists
+  - _LOBase_ReportFolderRename
+  - _LOBase_ReportFoldersGetCount
+  - _LOBase_ReportFoldersGetNames
+  - _LOBase_ReportFooter
+  - _LOBase_ReportGeneral
+  - _LOBase_ReportGroupAdd
+  - _LOBase_ReportGroupDeleteByIndex
+  - _LOBase_ReportGroupDeleteByObj
+  - _LOBase_ReportGroupFooter
+  - _LOBase_ReportGroupGetByIndex
+  - _LOBase_ReportGroupHeader
+  - _LOBase_ReportGroupPosition
+  - _LOBase_ReportGroupsGetCount
+  - _LOBase_ReportGroupSort
+  - _LOBase_ReportHeader
+  - _LOBase_ReportIsModified
+  - _LOBase_ReportOpen
+  - _LOBase_ReportPageFooter
+  - _LOBase_ReportPageHeader
+  - _LOBase_ReportRename
+  - _LOBase_ReportSave
+  - _LOBase_ReportSectionGetObj
+  - _LOBase_ReportsGetCount
+  - _LOBase_ReportsGetNames
 - SQL Statement functions
-	- _LOBase_SQLResultColumnMetaDataQuery
-	- _LOBase_SQLResultColumnsGetCount
-	- _LOBase_SQLResultColumnsGetNames
-	- _LOBase_SQLResultCursorMove
-	- _LOBase_SQLResultCursorQuery
-	- _LOBase_SQLResultRowModify
-	- _LOBase_SQLResultRowQuery
-	- _LOBase_SQLResultRowRead
-	- _LOBase_SQLResultRowRefresh
-	- _LOBase_SQLResultRowUpdate
-	- _LOBase_SQLStatementCreate
-	- _LOBase_SQLStatementExecuteQuery
-	- _LOBase_SQLStatementExecuteUpdate
-	- _LOBase_SQLStatementPreparedSetData
+  - _LOBase_SQLResultColumnMetaDataQuery
+  - _LOBase_SQLResultColumnsGetCount
+  - _LOBase_SQLResultColumnsGetNames
+  - _LOBase_SQLResultCursorMove
+  - _LOBase_SQLResultCursorQuery
+  - _LOBase_SQLResultRowModify
+  - _LOBase_SQLResultRowQuery
+  - _LOBase_SQLResultRowRead
+  - _LOBase_SQLResultRowRefresh
+  - _LOBase_SQLResultRowUpdate
+  - _LOBase_SQLStatementCreate
+  - _LOBase_SQLStatementExecuteQuery
+  - _LOBase_SQLStatementExecuteUpdate
+  - _LOBase_SQLStatementPreparedSetData
 - Table functions
-	- _LOBase_TableAdd
-	- _LOBase_TableColAdd
-	- _LOBase_TableColDefinition
-	- _LOBase_TableColDelete
-	- _LOBase_TableColGetObjByIndex
-	- _LOBase_TableColGetObjByName
-	- _LOBase_TableColProperties
-	- _LOBase_TableColsGetCount
-	- _LOBase_TableColsGetNames
-	- _LOBase_TableDelete
-	- _LOBase_TableExists
-	- _LOBase_TableGetObjByIndex
-	- _LOBase_TableGetObjByName
-	- _LOBase_TableIndexAdd
-	- _LOBase_TableIndexDelete
-	- _LOBase_TableIndexesGetCount
-	- _LOBase_TableIndexesGetNames
-	- _LOBase_TableIndexModify
-	- _LOBase_TableName
-	- _LOBase_TablePrimaryKey
-	- _LOBase_TablesGetCount
-	- _LOBase_TablesGetNames
-	- _LOBase_TableUIClose
-	- _LOBase_TableUIConnect
-	- _LOBase_TableUIGetRowSet
-	- _LOBase_TableUIOpenByName
-	- _LOBase_TableUIOpenByObject
-	- _LOBase_TableUIVisible
+  - _LOBase_TableAdd
+  - _LOBase_TableColAdd
+  - _LOBase_TableColDefinition
+  - _LOBase_TableColDelete
+  - _LOBase_TableColGetObjByIndex
+  - _LOBase_TableColGetObjByName
+  - _LOBase_TableColProperties
+  - _LOBase_TableColsGetCount
+  - _LOBase_TableColsGetNames
+  - _LOBase_TableDelete
+  - _LOBase_TableExists
+  - _LOBase_TableGetObjByIndex
+  - _LOBase_TableGetObjByName
+  - _LOBase_TableIndexAdd
+  - _LOBase_TableIndexDelete
+  - _LOBase_TableIndexesGetCount
+  - _LOBase_TableIndexesGetNames
+  - _LOBase_TableIndexModify
+  - _LOBase_TableName
+  - _LOBase_TablePrimaryKey
+  - _LOBase_TablesGetCount
+  - _LOBase_TablesGetNames
+  - _LOBase_TableUIClose
+  - _LOBase_TableUIConnect
+  - _LOBase_TableUIGetRowSet
+  - _LOBase_TableUIOpenByName
+  - _LOBase_TableUIOpenByObject
+  - _LOBase_TableUIVisible
 
 #### Changed
 
 - Renamed `_LOBase_TableIndexesCount`-->`_LOBase_TableIndexesGetCount`
 - Added Private connection option to _LOBase_DatabaseConnectionGet.
 - Renamed Functions to be consistent when retrieving arrays of names or objects:
-	- `_LOBase_FormatKeyList`-->`_LOBase_FormatKeysGetList`
+  - `_LOBase_FormatKeyList`-->`_LOBase_FormatKeysGetList`
 - Removed requirement of $oDoc in _LOBase_FontsGetNames
 - Added optional $oDoc parameter to _LOBase_FontExists for potential quicker execution.
 - Changed Property Setting error values to other error type(s) for the following:
-	- _LOBase_DocSaveCopy
+  - _LOBase_DocSaveCopy
 - Fix inconsistent Initialization and Processing error usage:
-	- _LOBase_DocClose
-	- _LOBase_DocSaveAs
+  - _LOBase_DocClose
+  - _LOBase_DocSaveAs
 
 #### Documented
 
@@ -369,25 +369,25 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Removed
 
 - Centralized some internal functions. Thus removing the following individual Functions:
-	- __LOBase_ArrayFill
-	- __LOBase_AddTo1DArray
-	- __LOBase_CreateStruct
-	- __LOBase_IntIsBetween
-	- __LOBase_NumIsBetween
-	- __LOBase_SetPropertyValue
-	- __LOBase_UnitConvert
-	- __LOBase_VarsAreNull
-	- __LOBase_VersionCheck
+  - __LOBase_ArrayFill
+  - __LOBase_AddTo1DArray
+  - __LOBase_CreateStruct
+  - __LOBase_IntIsBetween
+  - __LOBase_NumIsBetween
+  - __LOBase_SetPropertyValue
+  - __LOBase_UnitConvert
+  - __LOBase_VarsAreNull
+  - __LOBase_VersionCheck
 - Centralized some Helper functions. Thus removing the following individual Functions:
-	- _LOBase_ConvertColorFromLong
-	- _LOBase_ConvertColorToLong
-	- _LOBase_ConvertFromMicrometer
-	- _LOBase_ConvertToMicrometer
-	- _LOBase_PathConvert
-	- _LOBase_VersionGet
+  - _LOBase_ConvertColorFromLong
+  - _LOBase_ConvertColorToLong
+  - _LOBase_ConvertFromMicrometer
+  - _LOBase_ConvertToMicrometer
+  - _LOBase_PathConvert
+  - _LOBase_VersionGet
 - Centralized some Constants. Thus removing the following individual Constants:
-	- $LOB_PATHCONV_*
-	- $LOB_COLOR_*
+  - $LOB_PATHCONV_*
+  - $LOB_COLOR_*
 - $__LO_STATUS_DOC_ERROR Error Constant and renumber all after errors.
 
 ### LibreOfficeCalc
@@ -395,472 +395,472 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Added
 
 - Main Calc File
-	- LibreOfficeCalc.au3
+  - LibreOfficeCalc.au3
 - Individual Calc Element Files
-	- LibreOfficeCalc_Cell.au3
-	- ~~LibreOfficeCalc_CellStyle.au3~~
-	- LibreOfficeCalc_Comments.au3
-	- LibreOfficeCalc_Constants.au3
-	- LibreOfficeCalc_Cursor.au3
-	- LibreOfficeCalc_Doc.au3
-	- LibreOfficeCalc_Field.au3
-	- LibreOfficeCalc_Helper.au3
-	- LibreOfficeCalc_Internal.au3
-	- LibreOfficeCalc_Page.au3
-	- LibreOfficeCalc_Range.au3
-	- LibreOfficeCalc_Sheet.au3
+  - LibreOfficeCalc_Cell.au3
+  - ~~LibreOfficeCalc_CellStyle.au3~~
+  - LibreOfficeCalc_Comments.au3
+  - LibreOfficeCalc_Constants.au3
+  - LibreOfficeCalc_Cursor.au3
+  - LibreOfficeCalc_Doc.au3
+  - LibreOfficeCalc_Field.au3
+  - LibreOfficeCalc_Helper.au3
+  - LibreOfficeCalc_Internal.au3
+  - LibreOfficeCalc_Page.au3
+  - LibreOfficeCalc_Range.au3
+  - LibreOfficeCalc_Sheet.au3
 - Cell/Cell Range Formatting Functions and Examples
-	- _LOCalc_CellBackColor
-	- _LOCalc_CellBorderColor
-	- _LOCalc_CellBorderPadding
-	- _LOCalc_CellBorderStyle
-	- _LOCalc_CellBorderWidth
-	- _LOCalc_CellCreateTextCursor
-	- _LOCalc_CellEffect
-	- _LOCalc_CellFont
-	- _LOCalc_CellFontColor
-	- _LOCalc_CellFormula
-	- _LOCalc_CellGetType
-	- _LOCalc_CellNumberFormat
-	- _LOCalc_CellOverline
-	- _LOCalc_CellProtection
-	- _LOCalc_CellShadow
-	- _LOCalc_CellStrikeOut
-	- _LOCalc_CellString
-	- _LOCalc_CellStyleBackColor
-	- _LOCalc_CellStyleBorderColor
-	- _LOCalc_CellStyleBorderPadding
-	- _LOCalc_CellStyleBorderStyle
-	- _LOCalc_CellStyleBorderWidth
-	- _LOCalc_CellStyleCreate
-	- _LOCalc_CellStyleDelete
-	- _LOCalc_CellStyleEffect
-	- _LOCalc_CellStyleExists
-	- _LOCalc_CellStyleFont
-	- _LOCalc_CellStyleFontColor
-	- _LOCalc_CellStyleGetObj
-	- _LOCalc_CellStyleNumberFormat
-	- _LOCalc_CellStyleOrganizer
-	- _LOCalc_CellStyleOverline
-	- _LOCalc_CellStyleProtection
-	- _LOCalc_CellStyleSet
-	- _LOCalc_CellStylesGetNames
-	- _LOCalc_CellStyleShadow
-	- _LOCalc_CellStyleStrikeOut
-	- _LOCalc_CellStyleTextAlign
-	- _LOCalc_CellStyleTextOrient
-	- _LOCalc_CellStyleTextProperties
-	- _LOCalc_CellStyleUnderline
-	- _LOCalc_CellTextAlign
-	- _LOCalc_CellTextOrient
-	- _LOCalc_CellTextProperties
-	- _LOCalc_CellUnderline
-	- _LOCalc_CellValue
+  - _LOCalc_CellBackColor
+  - _LOCalc_CellBorderColor
+  - _LOCalc_CellBorderPadding
+  - _LOCalc_CellBorderStyle
+  - _LOCalc_CellBorderWidth
+  - _LOCalc_CellCreateTextCursor
+  - _LOCalc_CellEffect
+  - _LOCalc_CellFont
+  - _LOCalc_CellFontColor
+  - _LOCalc_CellFormula
+  - _LOCalc_CellGetType
+  - _LOCalc_CellNumberFormat
+  - _LOCalc_CellOverline
+  - _LOCalc_CellProtection
+  - _LOCalc_CellShadow
+  - _LOCalc_CellStrikeOut
+  - _LOCalc_CellString
+  - _LOCalc_CellStyleBackColor
+  - _LOCalc_CellStyleBorderColor
+  - _LOCalc_CellStyleBorderPadding
+  - _LOCalc_CellStyleBorderStyle
+  - _LOCalc_CellStyleBorderWidth
+  - _LOCalc_CellStyleCreate
+  - _LOCalc_CellStyleDelete
+  - _LOCalc_CellStyleEffect
+  - _LOCalc_CellStyleExists
+  - _LOCalc_CellStyleFont
+  - _LOCalc_CellStyleFontColor
+  - _LOCalc_CellStyleGetObj
+  - _LOCalc_CellStyleNumberFormat
+  - _LOCalc_CellStyleOrganizer
+  - _LOCalc_CellStyleOverline
+  - _LOCalc_CellStyleProtection
+  - _LOCalc_CellStyleSet
+  - _LOCalc_CellStylesGetNames
+  - _LOCalc_CellStyleShadow
+  - _LOCalc_CellStyleStrikeOut
+  - _LOCalc_CellStyleTextAlign
+  - _LOCalc_CellStyleTextOrient
+  - _LOCalc_CellStyleTextProperties
+  - _LOCalc_CellStyleUnderline
+  - _LOCalc_CellTextAlign
+  - _LOCalc_CellTextOrient
+  - _LOCalc_CellTextProperties
+  - _LOCalc_CellUnderline
+  - _LOCalc_CellValue
 - Cell/Cell Range Functions and Examples
-	- _LOCalc_RangeAutoOutline
-	- _LOCalc_RangeClearContents
-	- _LOCalc_RangeColumnDelete
-	- _LOCalc_RangeColumnGetName
-	- _LOCalc_RangeColumnGetObjByName
-	- _LOCalc_RangeColumnGetObjByPosition
-	- _LOCalc_RangeColumnInsert
-	- _LOCalc_RangeColumnPageBreak
-	- _LOCalc_RangeColumnsGetCount
-	- _LOCalc_RangeColumnVisible
-	- _LOCalc_RangeColumnWidth
-	- _LOCalc_RangeCompute
-	- _LOCalc_RangeCopyMove
-	- _LOCalc_RangeCreateCursor
-	- _LOCalc_RangeData
-	- _LOCalc_RangeDatabaseAdd
-	- _LOCalc_RangeDatabaseDelete
-	- _LOCalc_RangeDatabaseGetNames
-	- _LOCalc_RangeDatabaseGetObjByName
-	- _LOCalc_RangeDatabaseHasByName
-	- _LOCalc_RangeDatabaseModify
-	- _LOCalc_RangeDelete
-	- _LOCalc_RangeDetail
-	- _LOCalc_RangeFill
-	- _LOCalc_RangeFillRandom
-	- _LOCalc_RangeFillSeries
-	- _LOCalc_RangeFilter
-	- _LOCalc_RangeFilterAdvanced
-	- _LOCalc_RangeFilterClear
-	- _LOCalc_RangeFindAll
-	- _LOCalc_RangeFindNext
-	- _LOCalc_RangeFormula
-	- _LOCalc_RangeGetAddressAsName
-	- _LOCalc_RangeGetAddressAsPosition
-	- _LOCalc_RangeGetCellByName
-	- _LOCalc_RangeGetCellByPosition
-	- _LOCalc_RangeGetSheet
-	- _LOCalc_RangeGroup
-	- _LOCalc_RangeInsert
-	- _LOCalc_RangeIsMerged
-	- _LOCalc_RangeMerge
-	- _LOCalc_RangeNamedAdd
-	- _LOCalc_RangeNamedChangeScope
-	- _LOCalc_RangeNamedDelete
-	- _LOCalc_RangeNamedGetNames
-	- _LOCalc_RangeNamedGetObjByName
-	- _LOCalc_RangeNamedHasByName
-	- _LOCalc_RangeNamedModify
-	- _LOCalc_RangeNumbers
-	- _LOCalc_RangeOutlineClearAll
-	- _LOCalc_RangeOutlineShow
-	- _LOCalc_RangePivotDelete
-	- _LOCalc_RangePivotDest
-	- _LOCalc_RangePivotExists
-	- _LOCalc_RangePivotFieldGetObjByName
-	- _LOCalc_RangePivotFieldItemsGetNames
-	- _LOCalc_RangePivotFieldsColumnsGetNames
-	- _LOCalc_RangePivotFieldsDataGetNames
-	- _LOCalc_RangePivotFieldSettings
-	- _LOCalc_RangePivotFieldsFiltersGetNames
-	- _LOCalc_RangePivotFieldsGetNames
-	- _LOCalc_RangePivotFieldsRowsGetNames
-	- _LOCalc_RangePivotFieldsUnusedGetNames
-	- _LOCalc_RangePivotFilter
-	- _LOCalc_RangePivotFilterClear
-	- _LOCalc_RangePivotGetObjByIndex
-	- _LOCalc_RangePivotGetObjByName
-	- _LOCalc_RangePivotInsert
-	- _LOCalc_RangePivotName
-	- _LOCalc_RangePivotRefresh
-	- _LOCalc_RangePivotSettings
-	- _LOCalc_RangePivotsGetCount
-	- _LOCalc_RangePivotsGetNames
-	- _LOCalc_RangePivotSource
-	- _LOCalc_RangeQueryColumnDiff
-	- _LOCalc_RangeQueryContents
-	- _LOCalc_RangeQueryDependents
-	- _LOCalc_RangeQueryEmpty
-	- _LOCalc_RangeQueryFormula
-	- _LOCalc_RangeQueryIntersection
-	- _LOCalc_RangeQueryPrecedents
-	- _LOCalc_RangeQueryRowDiff
-	- _LOCalc_RangeQueryVisible
-	- _LOCalc_RangeReplace
-	- _LOCalc_RangeReplaceAll
-	- _LOCalc_RangeRowDelete
-	- _LOCalc_RangeRowGetObjByPosition
-	- _LOCalc_RangeRowHeight
-	- _LOCalc_RangeRowInsert
-	- _LOCalc_RangeRowPageBreak
-	- _LOCalc_RangeRowsGetCount
-	- _LOCalc_RangeRowVisible
-	- _LOCalc_RangeSort
-	- _LOCalc_RangeSortAlt
-	- _LOCalc_RangeValidation
-	- _LOCalc_RangeValidationSettings
+  - _LOCalc_RangeAutoOutline
+  - _LOCalc_RangeClearContents
+  - _LOCalc_RangeColumnDelete
+  - _LOCalc_RangeColumnGetName
+  - _LOCalc_RangeColumnGetObjByName
+  - _LOCalc_RangeColumnGetObjByPosition
+  - _LOCalc_RangeColumnInsert
+  - _LOCalc_RangeColumnPageBreak
+  - _LOCalc_RangeColumnsGetCount
+  - _LOCalc_RangeColumnVisible
+  - _LOCalc_RangeColumnWidth
+  - _LOCalc_RangeCompute
+  - _LOCalc_RangeCopyMove
+  - _LOCalc_RangeCreateCursor
+  - _LOCalc_RangeData
+  - _LOCalc_RangeDatabaseAdd
+  - _LOCalc_RangeDatabaseDelete
+  - _LOCalc_RangeDatabaseGetNames
+  - _LOCalc_RangeDatabaseGetObjByName
+  - _LOCalc_RangeDatabaseHasByName
+  - _LOCalc_RangeDatabaseModify
+  - _LOCalc_RangeDelete
+  - _LOCalc_RangeDetail
+  - _LOCalc_RangeFill
+  - _LOCalc_RangeFillRandom
+  - _LOCalc_RangeFillSeries
+  - _LOCalc_RangeFilter
+  - _LOCalc_RangeFilterAdvanced
+  - _LOCalc_RangeFilterClear
+  - _LOCalc_RangeFindAll
+  - _LOCalc_RangeFindNext
+  - _LOCalc_RangeFormula
+  - _LOCalc_RangeGetAddressAsName
+  - _LOCalc_RangeGetAddressAsPosition
+  - _LOCalc_RangeGetCellByName
+  - _LOCalc_RangeGetCellByPosition
+  - _LOCalc_RangeGetSheet
+  - _LOCalc_RangeGroup
+  - _LOCalc_RangeInsert
+  - _LOCalc_RangeIsMerged
+  - _LOCalc_RangeMerge
+  - _LOCalc_RangeNamedAdd
+  - _LOCalc_RangeNamedChangeScope
+  - _LOCalc_RangeNamedDelete
+  - _LOCalc_RangeNamedGetNames
+  - _LOCalc_RangeNamedGetObjByName
+  - _LOCalc_RangeNamedHasByName
+  - _LOCalc_RangeNamedModify
+  - _LOCalc_RangeNumbers
+  - _LOCalc_RangeOutlineClearAll
+  - _LOCalc_RangeOutlineShow
+  - _LOCalc_RangePivotDelete
+  - _LOCalc_RangePivotDest
+  - _LOCalc_RangePivotExists
+  - _LOCalc_RangePivotFieldGetObjByName
+  - _LOCalc_RangePivotFieldItemsGetNames
+  - _LOCalc_RangePivotFieldsColumnsGetNames
+  - _LOCalc_RangePivotFieldsDataGetNames
+  - _LOCalc_RangePivotFieldSettings
+  - _LOCalc_RangePivotFieldsFiltersGetNames
+  - _LOCalc_RangePivotFieldsGetNames
+  - _LOCalc_RangePivotFieldsRowsGetNames
+  - _LOCalc_RangePivotFieldsUnusedGetNames
+  - _LOCalc_RangePivotFilter
+  - _LOCalc_RangePivotFilterClear
+  - _LOCalc_RangePivotGetObjByIndex
+  - _LOCalc_RangePivotGetObjByName
+  - _LOCalc_RangePivotInsert
+  - _LOCalc_RangePivotName
+  - _LOCalc_RangePivotRefresh
+  - _LOCalc_RangePivotSettings
+  - _LOCalc_RangePivotsGetCount
+  - _LOCalc_RangePivotsGetNames
+  - _LOCalc_RangePivotSource
+  - _LOCalc_RangeQueryColumnDiff
+  - _LOCalc_RangeQueryContents
+  - _LOCalc_RangeQueryDependents
+  - _LOCalc_RangeQueryEmpty
+  - _LOCalc_RangeQueryFormula
+  - _LOCalc_RangeQueryIntersection
+  - _LOCalc_RangeQueryPrecedents
+  - _LOCalc_RangeQueryRowDiff
+  - _LOCalc_RangeQueryVisible
+  - _LOCalc_RangeReplace
+  - _LOCalc_RangeReplaceAll
+  - _LOCalc_RangeRowDelete
+  - _LOCalc_RangeRowGetObjByPosition
+  - _LOCalc_RangeRowHeight
+  - _LOCalc_RangeRowInsert
+  - _LOCalc_RangeRowPageBreak
+  - _LOCalc_RangeRowsGetCount
+  - _LOCalc_RangeRowVisible
+  - _LOCalc_RangeSort
+  - _LOCalc_RangeSortAlt
+  - _LOCalc_RangeValidation
+  - _LOCalc_RangeValidationSettings
 - Comment Functions and Examples.
-	- _LOCalc_CommentAdd
-	- _LOCalc_CommentAreaColor
-	- _LOCalc_CommentAreaFillStyle
-	- _LOCalc_CommentAreaGradient
-	- _LOCalc_CommentAreaGradientMulticolor
-	- _LOCalc_CommentAreaShadow
-	- _LOCalc_CommentAreaTransparency
-	- _LOCalc_CommentAreaTransparencyGradient
-	- _LOCalc_CommentAreaTransparencyGradientMulti
-	- _LOCalc_CommentCallout
-	- _LOCalc_CommentCreateTextCursor
-	- _LOCalc_CommentDelete
-	- _LOCalc_CommentGetCell
-	- _LOCalc_CommentGetLastEdit
-	- _LOCalc_CommentGetObjByCell
-	- _LOCalc_CommentGetObjByIndex
-	- _LOCalc_CommentLineArrowStyles
-	- _LOCalc_CommentLineProperties
-	- _LOCalc_CommentPosition
-	- _LOCalc_CommentRotate
-	- _LOCalc_CommentsGetCount
-	- _LOCalc_CommentsGetList
-	- _LOCalc_CommentSize
-	- _LOCalc_CommentText
-	- _LOCalc_CommentTextAnchor
-	- _LOCalc_CommentTextAnimation
-	- _LOCalc_CommentTextColumns
-	- _LOCalc_CommentTextSettings
-	- _LOCalc_CommentVisible
+  - _LOCalc_CommentAdd
+  - _LOCalc_CommentAreaColor
+  - _LOCalc_CommentAreaFillStyle
+  - _LOCalc_CommentAreaGradient
+  - _LOCalc_CommentAreaGradientMulticolor
+  - _LOCalc_CommentAreaShadow
+  - _LOCalc_CommentAreaTransparency
+  - _LOCalc_CommentAreaTransparencyGradient
+  - _LOCalc_CommentAreaTransparencyGradientMulti
+  - _LOCalc_CommentCallout
+  - _LOCalc_CommentCreateTextCursor
+  - _LOCalc_CommentDelete
+  - _LOCalc_CommentGetCell
+  - _LOCalc_CommentGetLastEdit
+  - _LOCalc_CommentGetObjByCell
+  - _LOCalc_CommentGetObjByIndex
+  - _LOCalc_CommentLineArrowStyles
+  - _LOCalc_CommentLineProperties
+  - _LOCalc_CommentPosition
+  - _LOCalc_CommentRotate
+  - _LOCalc_CommentsGetCount
+  - _LOCalc_CommentsGetList
+  - _LOCalc_CommentSize
+  - _LOCalc_CommentText
+  - _LOCalc_CommentTextAnchor
+  - _LOCalc_CommentTextAnimation
+  - _LOCalc_CommentTextColumns
+  - _LOCalc_CommentTextSettings
+  - _LOCalc_CommentVisible
 - Cursor Functions and Examples
-	- _LOCalc_SheetCursorMove
-	- _LOCalc_TextCursorCharPosition
-	- _LOCalc_TextCursorCharSpacing
-	- _LOCalc_TextCursorEffect
-	- _LOCalc_TextCursorFont
-	- _LOCalc_TextCursorFontColor
-	- _LOCalc_TextCursorGetString
-	- _LOCalc_TextCursorGoToRange
-	- _LOCalc_TextCursorInsertString
-	- _LOCalc_TextCursorIsCollapsed
-	- _LOCalc_TextCursorMove
-	- _LOCalc_TextCursorOverline
-	- _LOCalc_TextCursorParObjCreateList
-	- _LOCalc_TextCursorParObjSectionsGet
-	- _LOCalc_TextCursorStrikeOut
-	- _LOCalc_TextCursorUnderline
+  - _LOCalc_SheetCursorMove
+  - _LOCalc_TextCursorCharPosition
+  - _LOCalc_TextCursorCharSpacing
+  - _LOCalc_TextCursorEffect
+  - _LOCalc_TextCursorFont
+  - _LOCalc_TextCursorFontColor
+  - _LOCalc_TextCursorGetString
+  - _LOCalc_TextCursorGoToRange
+  - _LOCalc_TextCursorInsertString
+  - _LOCalc_TextCursorIsCollapsed
+  - _LOCalc_TextCursorMove
+  - _LOCalc_TextCursorOverline
+  - _LOCalc_TextCursorParObjCreateList
+  - _LOCalc_TextCursorParObjSectionsGet
+  - _LOCalc_TextCursorStrikeOut
+  - _LOCalc_TextCursorUnderline
 - Document Functions and Examples
-	- _LOCalc_DocClose
-	- _LOCalc_DocColumnsRowsAreFrozen
-	- _LOCalc_DocColumnsRowsFreeze
-	- _LOCalc_DocConnect
-	- _LOCalc_DocCreate
-	- _LOCalc_DocExport
-	- _LOCalc_DocFormulaBarHeight
-	- _LOCalc_DocGetName
-	- _LOCalc_DocGetPath
-	- _LOCalc_DocHasPath
-	- _LOCalc_DocHasSheetName
-	- _LOCalc_DocIsActive
-	- _LOCalc_DocIsModified
-	- _LOCalc_DocIsReadOnly
-	- _LOCalc_DocMaximize
-	- _LOCalc_DocMinimize
-	- _LOCalc_DocOpen
-	- _LOCalc_DocPosAndSize
-	- _LOCalc_DocPrint
-	- _LOCalc_DocPrintersGetNames
-	- _LOCalc_DocPrintersAltGetNames
-	- _LOCalc_DocRedo
-	- _LOCalc_DocRedoClear
-	- _LOCalc_DocRedoCurActionTitle
-	- _LOCalc_DocRedoGetAllActionTitles
-	- _LOCalc_DocRedoIsPossible
-	- _LOCalc_DocSave
-	- _LOCalc_DocSaveAs
-	- _LOCalc_DocSelectionCopy
-	- _LOCalc_DocSelectionGet
-	- _LOCalc_DocSelectionPaste
-	- _LOCalc_DocSelectionSet
-	- _LOCalc_DocSelectionSetMulti
-	- _LOCalc_DocToFront
-	- _LOCalc_DocUndo
-	- _LOCalc_DocUndoActionBegin
-	- _LOCalc_DocUndoActionEnd
-	- _LOCalc_DocUndoClear
-	- _LOCalc_DocUndoCurActionTitle
-	- _LOCalc_DocUndoGetAllActionTitles
-	- _LOCalc_DocUndoIsPossible
-	- _LOCalc_DocUndoReset
-	- _LOCalc_DocViewDisplaySettings
-	- _LOCalc_DocViewWindowSettings
-	- _LOCalc_DocVisible
-	- _LOCalc_DocWindowFirstColumn
-	- _LOCalc_DocWindowFirstRow
-	- _LOCalc_DocWindowIsSplit
-	- _LOCalc_DocWindowSplit
-	- _LOCalc_DocWindowVisibleRange
-	- _LOCalc_DocZoom
+  - _LOCalc_DocClose
+  - _LOCalc_DocColumnsRowsAreFrozen
+  - _LOCalc_DocColumnsRowsFreeze
+  - _LOCalc_DocConnect
+  - _LOCalc_DocCreate
+  - _LOCalc_DocExport
+  - _LOCalc_DocFormulaBarHeight
+  - _LOCalc_DocGetName
+  - _LOCalc_DocGetPath
+  - _LOCalc_DocHasPath
+  - _LOCalc_DocHasSheetName
+  - _LOCalc_DocIsActive
+  - _LOCalc_DocIsModified
+  - _LOCalc_DocIsReadOnly
+  - _LOCalc_DocMaximize
+  - _LOCalc_DocMinimize
+  - _LOCalc_DocOpen
+  - _LOCalc_DocPosAndSize
+  - _LOCalc_DocPrint
+  - _LOCalc_DocPrintersGetNames
+  - _LOCalc_DocPrintersAltGetNames
+  - _LOCalc_DocRedo
+  - _LOCalc_DocRedoClear
+  - _LOCalc_DocRedoCurActionTitle
+  - _LOCalc_DocRedoGetAllActionTitles
+  - _LOCalc_DocRedoIsPossible
+  - _LOCalc_DocSave
+  - _LOCalc_DocSaveAs
+  - _LOCalc_DocSelectionCopy
+  - _LOCalc_DocSelectionGet
+  - _LOCalc_DocSelectionPaste
+  - _LOCalc_DocSelectionSet
+  - _LOCalc_DocSelectionSetMulti
+  - _LOCalc_DocToFront
+  - _LOCalc_DocUndo
+  - _LOCalc_DocUndoActionBegin
+  - _LOCalc_DocUndoActionEnd
+  - _LOCalc_DocUndoClear
+  - _LOCalc_DocUndoCurActionTitle
+  - _LOCalc_DocUndoGetAllActionTitles
+  - _LOCalc_DocUndoIsPossible
+  - _LOCalc_DocUndoReset
+  - _LOCalc_DocViewDisplaySettings
+  - _LOCalc_DocViewWindowSettings
+  - _LOCalc_DocVisible
+  - _LOCalc_DocWindowFirstColumn
+  - _LOCalc_DocWindowFirstRow
+  - _LOCalc_DocWindowIsSplit
+  - _LOCalc_DocWindowSplit
+  - _LOCalc_DocWindowVisibleRange
+  - _LOCalc_DocZoom
 - Field Functions
-	- _LOCalc_FieldCurrentDisplayGet
-	- _LOCalc_FieldDateTimeInsert
-	- _LOCalc_FieldDelete
-	- _LOCalc_FieldFileNameInsert
-	- _LOCalc_FieldGetAnchor
-	- _LOCalc_FieldHyperlinkInsert
-	- _LOCalc_FieldHyperlinkModify
-	- _LOCalc_FieldPageCountInsert
-	- _LOCalc_FieldPageNumberInsert
-	- _LOCalc_FieldsGetList
-	- _LOCalc_FieldSheetNameInsert
-	- _LOCalc_FieldTitleInsert
+  - _LOCalc_FieldCurrentDisplayGet
+  - _LOCalc_FieldDateTimeInsert
+  - _LOCalc_FieldDelete
+  - _LOCalc_FieldFileNameInsert
+  - _LOCalc_FieldGetAnchor
+  - _LOCalc_FieldHyperlinkInsert
+  - _LOCalc_FieldHyperlinkModify
+  - _LOCalc_FieldPageCountInsert
+  - _LOCalc_FieldPageNumberInsert
+  - _LOCalc_FieldsGetList
+  - _LOCalc_FieldSheetNameInsert
+  - _LOCalc_FieldTitleInsert
 - Helper Functions
-	- _LOCalc_ComError_UserFunction
-	- _LOCalc_FilterDescriptorCreate
-	- _LOCalc_FilterDescriptorModify
-	- _LOCalc_FilterFieldCreate
-	- _LOCalc_FilterFieldModify
-	- _LOCalc_FontExists
-	- _LOCalc_FontsGetNames
-	- _LOCalc_FormatKeyCreate
-	- _LOCalc_FormatKeyDelete
-	- _LOCalc_FormatKeyExists
-	- _LOCalc_FormatKeyGetStandard
-	- _LOCalc_FormatKeyGetString
-	- _LOCalc_FormatKeyList
-	- _LOCalc_GradientMulticolorAdd
-	- _LOCalc_GradientMulticolorDelete
-	- _LOCalc_GradientMulticolorModify
-	- _LOCalc_SearchDescriptorCreate
-	- _LOCalc_SearchDescriptorModify
-	- _LOCalc_SearchDescriptorSimilarityModify
-	- _LOCalc_SortFieldCreate
-	- _LOCalc_SortFieldModify
-	- _LOCalc_TransparencyGradientMultiAdd
-	- _LOCalc_TransparencyGradientMultiDelete
-	- _LOCalc_TransparencyGradientMultiModify
+  - _LOCalc_ComError_UserFunction
+  - _LOCalc_FilterDescriptorCreate
+  - _LOCalc_FilterDescriptorModify
+  - _LOCalc_FilterFieldCreate
+  - _LOCalc_FilterFieldModify
+  - _LOCalc_FontExists
+  - _LOCalc_FontsGetNames
+  - _LOCalc_FormatKeyCreate
+  - _LOCalc_FormatKeyDelete
+  - _LOCalc_FormatKeyExists
+  - _LOCalc_FormatKeyGetStandard
+  - _LOCalc_FormatKeyGetString
+  - _LOCalc_FormatKeyList
+  - _LOCalc_GradientMulticolorAdd
+  - _LOCalc_GradientMulticolorDelete
+  - _LOCalc_GradientMulticolorModify
+  - _LOCalc_SearchDescriptorCreate
+  - _LOCalc_SearchDescriptorModify
+  - _LOCalc_SearchDescriptorSimilarityModify
+  - _LOCalc_SortFieldCreate
+  - _LOCalc_SortFieldModify
+  - _LOCalc_TransparencyGradientMultiAdd
+  - _LOCalc_TransparencyGradientMultiDelete
+  - _LOCalc_TransparencyGradientMultiModify
 - Internal Functions
-	- __LOCalc_CellAddressIsSame
-	- __LOCalc_CellBackColor
-	- __LOCalc_CellBorder
-	- __LOCalc_CellBorderPadding
-	- __LOCalc_CellEffect
-	- __LOCalc_CellFont
-	- __LOCalc_CellFontColor
-	- __LOCalc_CellNumberFormat
-	- __LOCalc_CellOverLine
-	- __LOCalc_CellProtection
-	- __LOCalc_CellShadow
-	- __LOCalc_CellStrikeOut
-	- __LOCalc_CellStyleBorder
-	- __LOCalc_CellTextAlign
-	- __LOCalc_CellTextOrient
-	- __LOCalc_CellTextProperties
-	- __LOCalc_CellUnderLine
-	- __LOCalc_CharPosition
-	- __LOCalc_CharSpacing
-	- __LOCalc_CommentAreaShadowModify
-	- __LOCalc_CommentArrowStyleName
-	- __LOCalc_CommentGetObjByCell
-	- __LOCalc_CommentLineStyleName
-	- __LOCalc_FieldGetObj
-	- __LOCalc_FieldTypeServices
-	- __LOCalc_FilterNameGet
-	- __LOCalc_GradientNameInsert
-	- __LOCalc_GradientPresets
-	- __LOCalc_Internal_CursorGetType
-	- __LOCalc_InternalComErrorHandler
-	- __LOCalc_NamedRangeGetScopeObj
-	- __LOCalc_PageStyleBorder
-	- __LOCalc_PageStyleFooterBorder
-	- __LOCalc_PageStyleHeaderBorder
-	- __LOCalc_RangeAddressIsSame
-	- __LOCalc_SheetCursorMove
-	- __LOCalc_TextCursorMove
-	- __LOCalc_TransparencyGradientConvert
-	- __LOCalc_TransparencyGradientNameInsert
+  - __LOCalc_CellAddressIsSame
+  - __LOCalc_CellBackColor
+  - __LOCalc_CellBorder
+  - __LOCalc_CellBorderPadding
+  - __LOCalc_CellEffect
+  - __LOCalc_CellFont
+  - __LOCalc_CellFontColor
+  - __LOCalc_CellNumberFormat
+  - __LOCalc_CellOverLine
+  - __LOCalc_CellProtection
+  - __LOCalc_CellShadow
+  - __LOCalc_CellStrikeOut
+  - __LOCalc_CellStyleBorder
+  - __LOCalc_CellTextAlign
+  - __LOCalc_CellTextOrient
+  - __LOCalc_CellTextProperties
+  - __LOCalc_CellUnderLine
+  - __LOCalc_CharPosition
+  - __LOCalc_CharSpacing
+  - __LOCalc_CommentAreaShadowModify
+  - __LOCalc_CommentArrowStyleName
+  - __LOCalc_CommentGetObjByCell
+  - __LOCalc_CommentLineStyleName
+  - __LOCalc_FieldGetObj
+  - __LOCalc_FieldTypeServices
+  - __LOCalc_FilterNameGet
+  - __LOCalc_GradientNameInsert
+  - __LOCalc_GradientPresets
+  - __LOCalc_Internal_CursorGetType
+  - __LOCalc_InternalComErrorHandler
+  - __LOCalc_NamedRangeGetScopeObj
+  - __LOCalc_PageStyleBorder
+  - __LOCalc_PageStyleFooterBorder
+  - __LOCalc_PageStyleHeaderBorder
+  - __LOCalc_RangeAddressIsSame
+  - __LOCalc_SheetCursorMove
+  - __LOCalc_TextCursorMove
+  - __LOCalc_TransparencyGradientConvert
+  - __LOCalc_TransparencyGradientNameInsert
 - Page Style Functions and Examples
-	- _LOCalc_PageStyleAreaColor
-	- _LOCalc_PageStyleBorderColor
-	- _LOCalc_PageStyleBorderPadding
-	- _LOCalc_PageStyleBorderStyle
-	- _LOCalc_PageStyleBorderWidth
-	- _LOCalc_PageStyleCreate
-	- _LOCalc_PageStyleDelete
-	- _LOCalc_PageStyleExists
-	- _LOCalc_PageStyleFooter
-	- _LOCalc_PageStyleFooterAreaColor
-	- _LOCalc_PageStyleFooterBorderColor
-	- _LOCalc_PageStyleFooterBorderPadding
-	- _LOCalc_PageStyleFooterBorderStyle
-	- _LOCalc_PageStyleFooterBorderWidth
-	- _LOCalc_PageStyleFooterCreateTextCursor
-	- _LOCalc_PageStyleFooterObj
-	- _LOCalc_PageStyleFooterShadow
-	- _LOCalc_PageStyleGetObj
-	- _LOCalc_PageStyleHeader
-	- _LOCalc_PageStyleHeaderAreaColor
-	- _LOCalc_PageStyleHeaderBorderColor
-	- _LOCalc_PageStyleHeaderBorderPadding
-	- _LOCalc_PageStyleHeaderBorderStyle
-	- _LOCalc_PageStyleHeaderBorderWidth
-	- _LOCalc_PageStyleHeaderCreateTextCursor
-	- _LOCalc_PageStyleHeaderObj
-	- _LOCalc_PageStyleHeaderShadow
-	- _LOCalc_PageStyleLayout
-	- _LOCalc_PageStyleMargins
-	- _LOCalc_PageStyleOrganizer
-	- _LOCalc_PageStylePaperFormat
-	- _LOCalc_PageStyleSet
-	- _LOCalc_PageStylesGetNames
-	- _LOCalc_PageStyleShadow
-	- _LOCalc_PageStyleSheetPageOrder
-	- _LOCalc_PageStyleSheetPrint
-	- _LOCalc_PageStyleSheetScale
+  - _LOCalc_PageStyleAreaColor
+  - _LOCalc_PageStyleBorderColor
+  - _LOCalc_PageStyleBorderPadding
+  - _LOCalc_PageStyleBorderStyle
+  - _LOCalc_PageStyleBorderWidth
+  - _LOCalc_PageStyleCreate
+  - _LOCalc_PageStyleDelete
+  - _LOCalc_PageStyleExists
+  - _LOCalc_PageStyleFooter
+  - _LOCalc_PageStyleFooterAreaColor
+  - _LOCalc_PageStyleFooterBorderColor
+  - _LOCalc_PageStyleFooterBorderPadding
+  - _LOCalc_PageStyleFooterBorderStyle
+  - _LOCalc_PageStyleFooterBorderWidth
+  - _LOCalc_PageStyleFooterCreateTextCursor
+  - _LOCalc_PageStyleFooterObj
+  - _LOCalc_PageStyleFooterShadow
+  - _LOCalc_PageStyleGetObj
+  - _LOCalc_PageStyleHeader
+  - _LOCalc_PageStyleHeaderAreaColor
+  - _LOCalc_PageStyleHeaderBorderColor
+  - _LOCalc_PageStyleHeaderBorderPadding
+  - _LOCalc_PageStyleHeaderBorderStyle
+  - _LOCalc_PageStyleHeaderBorderWidth
+  - _LOCalc_PageStyleHeaderCreateTextCursor
+  - _LOCalc_PageStyleHeaderObj
+  - _LOCalc_PageStyleHeaderShadow
+  - _LOCalc_PageStyleLayout
+  - _LOCalc_PageStyleMargins
+  - _LOCalc_PageStyleOrganizer
+  - _LOCalc_PageStylePaperFormat
+  - _LOCalc_PageStyleSet
+  - _LOCalc_PageStylesGetNames
+  - _LOCalc_PageStyleShadow
+  - _LOCalc_PageStyleSheetPageOrder
+  - _LOCalc_PageStyleSheetPrint
+  - _LOCalc_PageStyleSheetScale
 - Sheet Functions and Examples
-	- _LOCalc_SheetActivate
-	- _LOCalc_SheetAdd
-	- _LOCalc_SheetCopy
-	- _LOCalc_SheetCreateCursor
-	- _LOCalc_SheetDetectiveClear
-	- _LOCalc_SheetDetectiveDependent
-	- _LOCalc_SheetDetectiveInvalidData
-	- _LOCalc_SheetDetectivePrecedent
-	- _LOCalc_SheetDetectiveTraceError
-	- _LOCalc_SheetGetActive
-	- _LOCalc_SheetGetObjByName
-	- _LOCalc_SheetGetObjByPosition
-	- _LOCalc_SheetImport
-	- _LOCalc_SheetIsActive
-	- _LOCalc_SheetIsProtected
-	- _LOCalc_SheetLink
-	- _LOCalc_SheetLinkModify
-	- _LOCalc_SheetMove
-	- _LOCalc_SheetName
-	- _LOCalc_SheetPrintColumnsRepeat
-	- _LOCalc_SheetPrintRangeModify
-	- _LOCalc_SheetPrintRowsRepeat
-	- _LOCalc_SheetProtect
-	- _LOCalc_SheetRemove
-	- _LOCalc_SheetsGetCount
-	- _LOCalc_SheetsGetNames
-	- _LOCalc_SheetTabColor
-	- _LOCalc_SheetUnprotect
-	- _LOCalc_SheetVisible
+  - _LOCalc_SheetActivate
+  - _LOCalc_SheetAdd
+  - _LOCalc_SheetCopy
+  - _LOCalc_SheetCreateCursor
+  - _LOCalc_SheetDetectiveClear
+  - _LOCalc_SheetDetectiveDependent
+  - _LOCalc_SheetDetectiveInvalidData
+  - _LOCalc_SheetDetectivePrecedent
+  - _LOCalc_SheetDetectiveTraceError
+  - _LOCalc_SheetGetActive
+  - _LOCalc_SheetGetObjByName
+  - _LOCalc_SheetGetObjByPosition
+  - _LOCalc_SheetImport
+  - _LOCalc_SheetIsActive
+  - _LOCalc_SheetIsProtected
+  - _LOCalc_SheetLink
+  - _LOCalc_SheetLinkModify
+  - _LOCalc_SheetMove
+  - _LOCalc_SheetName
+  - _LOCalc_SheetPrintColumnsRepeat
+  - _LOCalc_SheetPrintRangeModify
+  - _LOCalc_SheetPrintRowsRepeat
+  - _LOCalc_SheetProtect
+  - _LOCalc_SheetRemove
+  - _LOCalc_SheetsGetCount
+  - _LOCalc_SheetsGetNames
+  - _LOCalc_SheetTabColor
+  - _LOCalc_SheetUnprotect
+  - _LOCalc_SheetVisible
 - Calc Constants
-	- $__LOCCONST_FILL_STYLE_*
-	- $LOC_BORDERSTYLE_*
-	- $LOC_BORDERWIDTH_*
-	- $LOC_CELL_ALIGN_HORI_*
-	- $LOC_CELL_ALIGN_VERT_*
-	- $LOC_CELL_DELETE_MODE_*
-	- $LOC_CELL_FLAG_*
-	- $LOC_CELL_INSERT_MODE_*
-	- $LOC_CELL_ROTATE_REF_*
-	- $LOC_CELL_TYPE_*
-	- $LOC_COMMENT_ANCHOR_*
-	- $LOC_COMMENT_ANIMATION_DIR_*
-	- $LOC_COMMENT_ANIMATION_KIND_*
-	- $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*
-	- $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_*
-	- $LOC_COMMENT_CALLOUT_EXT_*
-	- $LOC_COMMENT_CALLOUT_STYLE_*
-	- $LOC_COMMENT_LINE_ARROW_TYPE_*
-	- $LOC_COMMENT_LINE_CAP_*
-	- $LOC_COMMENT_LINE_JOINT_*
-	- $LOC_COMMENT_LINE_STYLE_*
-	- $LOC_COMMENT_SHADOW_*
-	- $LOC_COMPUTE_FUNC_*
-	- $LOC_CURTYPE_*
-	- $LOC_DUPLEX_*
-	- $LOC_FIELD_TYPE_*
-	- $LOC_FILL_DATE_MODE_*
-	- $LOC_FILL_DIR_*
-	- $LOC_FILL_MODE_*
-	- $LOC_FILTER_CONDITION_*
-	- $LOC_FILTER_OPERATOR_*
-	- $LOC_FORMAT_KEYS_*
-	- $LOC_FORMULA_RESULT_TYPE_*
-	- $LOC_GRAD_NAME_*
-	- $LOC_GRAD_TYPE_*
-	- $LOC_GROUP_ORIENT_*
-	- $LOC_NAMED_RANGE_OPT_*
-	- $LOC_NUM_STYLE_*
-	- $LOC_PAGE_LAYOUT_*
-	- $LOC_PAPER_HEIGHT_*
-	- $LOC_PAPER_WIDTH_*
-	- $LOC_PIVOT_TBL_FIELD_BASE_*
-	- $LOC_PIVOT_TBL_FIELD_DISP_*
-	- $LOC_PIVOT_TBL_FIELD_TYPE_*
-	- $LOC_POSTURE_*
-	- $LOC_RELIEF_*
-	- $LOC_SCALE_*
-	- $LOC_SEARCH_IN_*
-	- $LOC_SHADOW_*
-	- $LOC_SHEET_LINK_MODE_*
-	- $LOC_SHEETCUR_*
-	- $LOC_SORT_DATA_TYPE_*
-	- $LOC_STRIKEOUT_*
-	- $LOC_TEXTCUR_*
-	- $LOC_TXT_DIR_*
-	- $LOC_UNDERLINE_*
-	- $LOC_VALIDATION_COND_*
-	- $LOC_VALIDATION_ERROR_*
-	- $LOC_VALIDATION_LIST_*
-	- $LOC_VALIDATION_TYPE_*
-	- $LOC_WEIGHT_*
-	- $LOC_ZOOMTYPE_*
+  - $__LOCCONST_FILL_STYLE_*
+  - $LOC_BORDERSTYLE_*
+  - $LOC_BORDERWIDTH_*
+  - $LOC_CELL_ALIGN_HORI_*
+  - $LOC_CELL_ALIGN_VERT_*
+  - $LOC_CELL_DELETE_MODE_*
+  - $LOC_CELL_FLAG_*
+  - $LOC_CELL_INSERT_MODE_*
+  - $LOC_CELL_ROTATE_REF_*
+  - $LOC_CELL_TYPE_*
+  - $LOC_COMMENT_ANCHOR_*
+  - $LOC_COMMENT_ANIMATION_DIR_*
+  - $LOC_COMMENT_ANIMATION_KIND_*
+  - $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*
+  - $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_*
+  - $LOC_COMMENT_CALLOUT_EXT_*
+  - $LOC_COMMENT_CALLOUT_STYLE_*
+  - $LOC_COMMENT_LINE_ARROW_TYPE_*
+  - $LOC_COMMENT_LINE_CAP_*
+  - $LOC_COMMENT_LINE_JOINT_*
+  - $LOC_COMMENT_LINE_STYLE_*
+  - $LOC_COMMENT_SHADOW_*
+  - $LOC_COMPUTE_FUNC_*
+  - $LOC_CURTYPE_*
+  - $LOC_DUPLEX_*
+  - $LOC_FIELD_TYPE_*
+  - $LOC_FILL_DATE_MODE_*
+  - $LOC_FILL_DIR_*
+  - $LOC_FILL_MODE_*
+  - $LOC_FILTER_CONDITION_*
+  - $LOC_FILTER_OPERATOR_*
+  - $LOC_FORMAT_KEYS_*
+  - $LOC_FORMULA_RESULT_TYPE_*
+  - $LOC_GRAD_NAME_*
+  - $LOC_GRAD_TYPE_*
+  - $LOC_GROUP_ORIENT_*
+  - $LOC_NAMED_RANGE_OPT_*
+  - $LOC_NUM_STYLE_*
+  - $LOC_PAGE_LAYOUT_*
+  - $LOC_PAPER_HEIGHT_*
+  - $LOC_PAPER_WIDTH_*
+  - $LOC_PIVOT_TBL_FIELD_BASE_*
+  - $LOC_PIVOT_TBL_FIELD_DISP_*
+  - $LOC_PIVOT_TBL_FIELD_TYPE_*
+  - $LOC_POSTURE_*
+  - $LOC_RELIEF_*
+  - $LOC_SCALE_*
+  - $LOC_SEARCH_IN_*
+  - $LOC_SHADOW_*
+  - $LOC_SHEET_LINK_MODE_*
+  - $LOC_SHEETCUR_*
+  - $LOC_SORT_DATA_TYPE_*
+  - $LOC_STRIKEOUT_*
+  - $LOC_TEXTCUR_*
+  - $LOC_TXT_DIR_*
+  - $LOC_UNDERLINE_*
+  - $LOC_VALIDATION_COND_*
+  - $LOC_VALIDATION_ERROR_*
+  - $LOC_VALIDATION_LIST_*
+  - $LOC_VALIDATION_TYPE_*
+  - $LOC_WEIGHT_*
+  - $LOC_ZOOMTYPE_*
 
 #### Changed
 
@@ -871,174 +871,174 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Constant `$__LOCCONST_FILL_STYLE_*` to `$LOC_AREA_FILL_STYLE_*`
 - Renamed Constant `$LOC_COMPUTE_*` to `$LOC_COMPUTE_FUNC_*`
 - Renamed Functions to be consistent when retrieving arrays of names or objects:
-	- `_LOCalc_DocEnumPrinters` --> `_LOCalc_DocPrintersGetNames`
-	- `_LOCalc_DocEnumPrintersAlt` --> `_LOCalc_DocPrintersAltGetNames`
-	- `_LOCalc_FontsList` --> `_LOCalc_FontsGetNames`
-	- `_LOCalc_FormatKeyList` --> `_LOCalc_FormatKeysGetList`
-	- `_LOCalc_RangePivotFieldItemsGetList` --> `_LOCalc_RangePivotFieldItemsGetNames`
-	- `_LOCalc_RangePivotFieldsColumnsGetList` --> `_LOCalc_RangePivotFieldsColumnsGetNames`
-	- `_LOCalc_RangePivotFieldsDataGetList` --> `_LOCalc_RangePivotFieldsDataGetNames`
-	- `_LOCalc_RangePivotFieldsFiltersGetList` --> `_LOCalc_RangePivotFieldsFiltersGetNames`
-	- `_LOCalc_RangePivotFieldsGetList` --> `_LOCalc_RangePivotFieldsGetNames`
-	- `_LOCalc_RangePivotFieldsRowsGetList` --> `_LOCalc_RangePivotFieldsRowsGetNames`
-	- `_LOCalc_RangePivotFieldsUnusedGetList` --> `_LOCalc_RangePivotFieldsUnusedGetNames`
-	- `_LOCalc_RangePivotsGetList` --> `_LOCalc_RangePivotsGetNames`
+  - `_LOCalc_DocEnumPrinters` --> `_LOCalc_DocPrintersGetNames`
+  - `_LOCalc_DocEnumPrintersAlt` --> `_LOCalc_DocPrintersAltGetNames`
+  - `_LOCalc_FontsList` --> `_LOCalc_FontsGetNames`
+  - `_LOCalc_FormatKeyList` --> `_LOCalc_FormatKeysGetList`
+  - `_LOCalc_RangePivotFieldItemsGetList` --> `_LOCalc_RangePivotFieldItemsGetNames`
+  - `_LOCalc_RangePivotFieldsColumnsGetList` --> `_LOCalc_RangePivotFieldsColumnsGetNames`
+  - `_LOCalc_RangePivotFieldsDataGetList` --> `_LOCalc_RangePivotFieldsDataGetNames`
+  - `_LOCalc_RangePivotFieldsFiltersGetList` --> `_LOCalc_RangePivotFieldsFiltersGetNames`
+  - `_LOCalc_RangePivotFieldsGetList` --> `_LOCalc_RangePivotFieldsGetNames`
+  - `_LOCalc_RangePivotFieldsRowsGetList` --> `_LOCalc_RangePivotFieldsRowsGetNames`
+  - `_LOCalc_RangePivotFieldsUnusedGetList` --> `_LOCalc_RangePivotFieldsUnusedGetNames`
+  - `_LOCalc_RangePivotsGetList` --> `_LOCalc_RangePivotsGetNames`
 - Renamed Functions to be consistent when testing if a thing exists:
-	- `_LOCalc_DocHasSheetName` --> `_LOCalc_SheetExists`
-	- `_LOCalc_RangeDatabaseHasByName` --> `_LOCalc_RangeDatabaseExists`
-	- `_LOCalc_RangeNamedHasByName` --> `_LOCalc_RangeNamedExists`
+  - `_LOCalc_DocHasSheetName` --> `_LOCalc_SheetExists`
+  - `_LOCalc_RangeDatabaseHasByName` --> `_LOCalc_RangeDatabaseExists`
+  - `_LOCalc_RangeNamedHasByName` --> `_LOCalc_RangeNamedExists`
 - Some functions would return an integer instead of an empty Array when no results were present when retrieving array of names or objects, this has been changed to return an empty array:
-	- _LOCalc_CellStylesGetNames
-	- _LOCalc_PageStylesGetNames
+  - _LOCalc_CellStylesGetNames
+  - _LOCalc_PageStylesGetNames
 - Modified `_LOCalc_DocPrintersAltGetNames` @Extended value when retrieving the default printer name, @Extended is now 1, instead of 2.
 - `_LOCalc_DocRedoGetAllActionTitles` now returns the number of results in @Extended value.
 - `_LOCalc_DocUndoGetAllActionTitles` now returns the number of results in @Extended value.
 - Made $oDoc parameter for `_LOCalc_FontExists` optional. This will affect the parameters and error return values of the following functions:
-	- __LOCalc_CellFont
-	- _LOCalc_CellFont
-	- _LOCalc_CellStyleFont
-	- _LOCalc_FontExists
-	- _LOCalc_TextCursorFont
+  - __LOCalc_CellFont
+  - _LOCalc_CellFont
+  - _LOCalc_CellStyleFont
+  - _LOCalc_FontExists
+  - _LOCalc_TextCursorFont
 - Made $oDoc Parameter optional for `_LOCalc_FontsGetNames`.
 - Added count of number of results for `_LOCalc_DocConnect`, connect-all and partial name search when more than one result is present.
 - Removed _ArrayDisplay from most examples.
 - Corrected wrong usage of `$__LO_STATUS_INIT_ERROR`, and renumbered `$__LO_STATUS_PROCESSING_ERROR`, the following functions were affected:
-	- _LOCalc_CommentAreaGradient
-	- _LOCalc_CommentAreaTransparencyGradient
-	- _LOCalc_CommentPosition
-	- _LOCalc_CommentSize
-	- _LOCalc_DocClose
-	- _LOCalc_DocSaveAs
+  - _LOCalc_CommentAreaGradient
+  - _LOCalc_CommentAreaTransparencyGradient
+  - _LOCalc_CommentPosition
+  - _LOCalc_CommentSize
+  - _LOCalc_DocClose
+  - _LOCalc_DocSaveAs
 - `_LOCalc_DocRedoCurActionTitle` to only have one Success return, either with an empty String or the Current Redo Action Title.
 - `_LOCalc_DocUndoCurActionTitle` to only have one Success return, either with an empty String or the Current Undo Action Title.
 - Merged LibreOfficeCalc_CellStyle into LibreOfficeCalc_Cell.
 - Renamed Page background color functions for consistency:
-	- `_LOCalc_PageStyleAreaColor` --> `_LOCalc_PageStyleBackColor`
-	- `_LOCalc_PageStyleFooterAreaColor` --> `_LOCalc_PageStyleFooterBackColor`
-	- `_LOCalc_PageStyleHeaderAreaColor` --> `_LOCalc_PageStyleHeaderBackColor`
+  - `_LOCalc_PageStyleAreaColor` --> `_LOCalc_PageStyleBackColor`
+  - `_LOCalc_PageStyleFooterAreaColor` --> `_LOCalc_PageStyleFooterBackColor`
+  - `_LOCalc_PageStyleHeaderAreaColor` --> `_LOCalc_PageStyleHeaderBackColor`
 - Removed $bBackTransparent/$bTransparent Parameter from the following functions, renumbering Return values also.
-	- __LOCalc_CellBackColor
-	- __LOCalc_CellShadow
-	- _LOCalc_CellBackColor
-	- _LOCalc_CellShadow
-	- _LOCalc_CellStyleBackColor
-	- _LOCalc_CellStyleShadow
-	- _LOCalc_PageStyleBackColor
-	- _LOCalc_PageStyleFooterBackColor
-	- _LOCalc_PageStyleFooterShadow
-	- _LOCalc_PageStyleHeaderBackColor
-	- _LOCalc_PageStyleHeaderShadow
-	- _LOCalc_PageStyleShadow
+  - __LOCalc_CellBackColor
+  - __LOCalc_CellShadow
+  - _LOCalc_CellBackColor
+  - _LOCalc_CellShadow
+  - _LOCalc_CellStyleBackColor
+  - _LOCalc_CellStyleShadow
+  - _LOCalc_PageStyleBackColor
+  - _LOCalc_PageStyleFooterBackColor
+  - _LOCalc_PageStyleFooterShadow
+  - _LOCalc_PageStyleHeaderBackColor
+  - _LOCalc_PageStyleHeaderShadow
+  - _LOCalc_PageStyleShadow
 - Renumbered some error values, after removing redundant error checking.
-	- __LOCalc_CellBorder
-	- __LOCalc_CellBorderPadding
-	- __LOCalc_CellEffect
-	- __LOCalc_CellFont
-	- __LOCalc_CellFontColor
-	- __LOCalc_CellNumberFormat
-	- __LOCalc_CellOverLine
-	- __LOCalc_CellProtection
-	- __LOCalc_CellShadow
-	- __LOCalc_CellStrikeOut
-	- __LOCalc_CellStyleBorder
-	- __LOCalc_CellTextAlign
-	- __LOCalc_CellTextOrient
-	- __LOCalc_CellTextProperties
-	- __LOCalc_CellUnderLine
-	- __LOCalc_PageStyleBorder
-	- __LOCalc_PageStyleFooterBorder
-	- __LOCalc_PageStyleHeaderBorder
-	- _LOCalc_CellBorderColor
-	- _LOCalc_CellBorderPadding
-	- _LOCalc_CellBorderStyle
-	- _LOCalc_CellBorderWidth
-	- _LOCalc_CellEffect
-	- _LOCalc_CellFont
-	- _LOCalc_CellFontColor
-	- _LOCalc_CellNumberFormat
-	- _LOCalc_CellOverline
-	- _LOCalc_CellProtection
-	- _LOCalc_CellShadow
-	- _LOCalc_CellStrikeOut
-	- _LOCalc_CellStyleBorderPadding
-	- _LOCalc_CellStyleEffect
-	- _LOCalc_CellStyleFont
-	- _LOCalc_CellStyleFontColor
-	- _LOCalc_CellStyleNumberFormat
-	- _LOCalc_CellStyleOverline
-	- _LOCalc_CellStyleProtection
-	- _LOCalc_CellStyleShadow
-	- _LOCalc_CellStyleStrikeOut
-	- _LOCalc_CellStyleBorderColor
-	- _LOCalc_CellStyleBorderStyle
-	- _LOCalc_CellStyleBorderWidth
-	- _LOCalc_CellStyleTextAlign
-	- _LOCalc_CellStyleTextOrient
-	- _LOCalc_CellStyleTextProperties
-	- _LOCalc_CellStyleUnderline
-	- _LOCalc_CellTextAlign
-	- _LOCalc_CellTextOrient
-	- _LOCalc_CellTextProperties
-	- _LOCalc_CellUnderline
-	- _LOCalc_PageStyleBorderColor
-	- _LOCalc_PageStyleBorderStyle
-	- _LOCalc_PageStyleBorderWidth
-	- _LOCalc_PageStyleFooterBorderColor
-	- _LOCalc_PageStyleFooterBorderStyle
-	- _LOCalc_PageStyleFooterBorderWidth
-	- _LOCalc_PageStyleHeaderBorderColor
-	- _LOCalc_PageStyleHeaderBorderStyle
-	- _LOCalc_PageStyleHeaderBorderWidth
-	- _LOCalc_TextCursorCharPosition
-	- _LOCalc_TextCursorCharSpacing
-	- _LOCalc_TextCursorEffect
-	- _LOCalc_TextCursorFont
-	- _LOCalc_TextCursorFontColor
-	- _LOCalc_TextCursorOverline
-	- _LOCalc_TextCursorStrikeOut
-	- _LOCalc_TextCursorUnderline
+  - __LOCalc_CellBorder
+  - __LOCalc_CellBorderPadding
+  - __LOCalc_CellEffect
+  - __LOCalc_CellFont
+  - __LOCalc_CellFontColor
+  - __LOCalc_CellNumberFormat
+  - __LOCalc_CellOverLine
+  - __LOCalc_CellProtection
+  - __LOCalc_CellShadow
+  - __LOCalc_CellStrikeOut
+  - __LOCalc_CellStyleBorder
+  - __LOCalc_CellTextAlign
+  - __LOCalc_CellTextOrient
+  - __LOCalc_CellTextProperties
+  - __LOCalc_CellUnderLine
+  - __LOCalc_PageStyleBorder
+  - __LOCalc_PageStyleFooterBorder
+  - __LOCalc_PageStyleHeaderBorder
+  - _LOCalc_CellBorderColor
+  - _LOCalc_CellBorderPadding
+  - _LOCalc_CellBorderStyle
+  - _LOCalc_CellBorderWidth
+  - _LOCalc_CellEffect
+  - _LOCalc_CellFont
+  - _LOCalc_CellFontColor
+  - _LOCalc_CellNumberFormat
+  - _LOCalc_CellOverline
+  - _LOCalc_CellProtection
+  - _LOCalc_CellShadow
+  - _LOCalc_CellStrikeOut
+  - _LOCalc_CellStyleBorderPadding
+  - _LOCalc_CellStyleEffect
+  - _LOCalc_CellStyleFont
+  - _LOCalc_CellStyleFontColor
+  - _LOCalc_CellStyleNumberFormat
+  - _LOCalc_CellStyleOverline
+  - _LOCalc_CellStyleProtection
+  - _LOCalc_CellStyleShadow
+  - _LOCalc_CellStyleStrikeOut
+  - _LOCalc_CellStyleBorderColor
+  - _LOCalc_CellStyleBorderStyle
+  - _LOCalc_CellStyleBorderWidth
+  - _LOCalc_CellStyleTextAlign
+  - _LOCalc_CellStyleTextOrient
+  - _LOCalc_CellStyleTextProperties
+  - _LOCalc_CellStyleUnderline
+  - _LOCalc_CellTextAlign
+  - _LOCalc_CellTextOrient
+  - _LOCalc_CellTextProperties
+  - _LOCalc_CellUnderline
+  - _LOCalc_PageStyleBorderColor
+  - _LOCalc_PageStyleBorderStyle
+  - _LOCalc_PageStyleBorderWidth
+  - _LOCalc_PageStyleFooterBorderColor
+  - _LOCalc_PageStyleFooterBorderStyle
+  - _LOCalc_PageStyleFooterBorderWidth
+  - _LOCalc_PageStyleHeaderBorderColor
+  - _LOCalc_PageStyleHeaderBorderStyle
+  - _LOCalc_PageStyleHeaderBorderWidth
+  - _LOCalc_TextCursorCharPosition
+  - _LOCalc_TextCursorCharSpacing
+  - _LOCalc_TextCursorEffect
+  - _LOCalc_TextCursorFont
+  - _LOCalc_TextCursorFontColor
+  - _LOCalc_TextCursorOverline
+  - _LOCalc_TextCursorStrikeOut
+  - _LOCalc_TextCursorUnderline
 - Changed error values for the following:
-	- __LOCalc_CellBorder
-	- __LOCalc_CellStyleBorder
-	- __LOCalc_PageStyleBorder
-	- __LOCalc_PageStyleFooterBorder
-	- __LOCalc_PageStyleHeaderBorder
-	- _LOCalc_CellBorderColor
-	- _LOCalc_CellBorderStyle
-	- _LOCalc_CellBorderWidth
-	- _LOCalc_CellStyleBorderColor
-	- _LOCalc_CellStyleBorderStyle
-	- _LOCalc_CellStyleBorderWidth
-	- _LOCalc_DocExport
-	- _LOCalc_DocPrint
-	- _LOCalc_PageStyleBorderColor
-	- _LOCalc_PageStyleBorderStyle
-	- _LOCalc_PageStyleBorderWidth
-	- _LOCalc_PageStyleFooterBorderColor
-	- _LOCalc_PageStyleFooterBorderStyle
-	- _LOCalc_PageStyleFooterBorderWidth
-	- _LOCalc_PageStyleHeaderBorderColor
-	- _LOCalc_PageStyleHeaderBorderStyle
-	- _LOCalc_PageStyleHeaderBorderWidth
+  - __LOCalc_CellBorder
+  - __LOCalc_CellStyleBorder
+  - __LOCalc_PageStyleBorder
+  - __LOCalc_PageStyleFooterBorder
+  - __LOCalc_PageStyleHeaderBorder
+  - _LOCalc_CellBorderColor
+  - _LOCalc_CellBorderStyle
+  - _LOCalc_CellBorderWidth
+  - _LOCalc_CellStyleBorderColor
+  - _LOCalc_CellStyleBorderStyle
+  - _LOCalc_CellStyleBorderWidth
+  - _LOCalc_DocExport
+  - _LOCalc_DocPrint
+  - _LOCalc_PageStyleBorderColor
+  - _LOCalc_PageStyleBorderStyle
+  - _LOCalc_PageStyleBorderWidth
+  - _LOCalc_PageStyleFooterBorderColor
+  - _LOCalc_PageStyleFooterBorderStyle
+  - _LOCalc_PageStyleFooterBorderWidth
+  - _LOCalc_PageStyleHeaderBorderColor
+  - _LOCalc_PageStyleHeaderBorderStyle
+  - _LOCalc_PageStyleHeaderBorderWidth
 - LibreOffice 25.2 fixed a "bug" where translated style names (Display Names) were accepted as well as programmatic style names for style management (Paragraph, Character, etc). Previously this UDF internally automatically switched between the Display Name to the internal name and vice versa, this however limited its usage to the English version of LibreOffice. This UDF has been modified to now return by default the internal programmatic style names. Up and until L.O. 25.2 the Display Name should still work in this UDF, though property setting errors may occur because L.O. switches all style names to use the internal name. All Style name retrieval functions now have an option to return the DisplayName also for convenience. Any functions the accept a Style name will now return the internal style name instead of the Display Name as before. The following functions were affected by these changes:
-	- _LOCalc_CellStylesGetNames
+  - _LOCalc_CellStylesGetNames
 - Changed Style setting functions to Set and Retrieve, also renamed them to reflect the change:
-	- `_LOCalc_CellStyleSet` --> `_LOCalc_CellStyleCurrent`
-	- `_LOCalc_PageStyleSet` --> `_LOCalc_PageStyleCurrent`
+  - `_LOCalc_CellStyleSet` --> `_LOCalc_CellStyleCurrent`
+  - `_LOCalc_PageStyleSet` --> `_LOCalc_PageStyleCurrent`
 
 #### Documented
 
 - Added LibreOffice SDK/API Constant names to constants.
 - Missing error values in the header and wrong error values in `_LOCalc_CommentAreaTransparencyGradient`.
 - Fixed some function header parameter descriptions that were out of order.
-	- __LOCalc_CellOverLine
-	- __LOCalc_CellUnderLine
+  - __LOCalc_CellOverLine
+  - __LOCalc_CellUnderLine
 
 #### Fixed
 
 - NamedRange names incorrectly reported as invalid in certain functions when the name began with an underscore.
-	- _LOCalc_RangeNamedModify
-	- _LOCalc_RangeNamedAdd
+  - _LOCalc_RangeNamedModify
+  - _LOCalc_RangeNamedAdd
 - `_LOCalc_DocOpen` now uses a different method for connecting to an already open document, as the previous method was causing errors.
 - `_LOCalc_DocCreate` would return if there was an error creating a property, instead of increasing the error count.
 - `LibreOfficeCalc_Cell.au3` was missing an Include file.
@@ -1047,25 +1047,25 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOCalc_DocViewWindowSettings`, returning values in wrong order. Thanks to user JALucena. <https://www.autoitscript.com/forum/topic/210514-libreoffice-udf-help-and-support/page/2/#findComment-1543326>
 - `_LOCalc_DocCreate` not finding a blank open document to connect to, if available, due to reversed logical operator, and non-existent method.
 - Certain functions would have Property setting errors triggered if there were CR, LF or CRLF present in them:
-	- _LOCalc_CellString
-	- _LOCalc_CommentText
+  - _LOCalc_CellString
+  - _LOCalc_CommentText
 
 #### Refactored
 
 - Made optional parameters in internal functions be set to Null.
 - Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.
 - Removed unused variables and parameters in some functions. Affected functions are as follows:
-	- `_LOCalc_FormatKeyDelete` -- removed internal variable.
+  - `_LOCalc_FormatKeyDelete` -- removed internal variable.
 - All calls to ObjCreate to create a com.sun.star.ServiceManager Object are routed through an internal Function which stores a reference to the Object rather than creating a new instance each time, this also allows the ability to automate Portable LO. Affected Functions are (and any functions using these functions):
-	- _LOCalc_RangeSortAlt
-	- __LOCalc_CreateStruct
-	- _LOCalc_DocConnect
-	- _LOCalc_DocCreate
-	- _LOCalc_DocOpen
-	- _LOCalc_DocPrintersGetNames
-	- _LOCalc_FontExists
-	- _LOCalc_FontsGetNames
-	- _LOCalc_VersionGet
+  - _LOCalc_RangeSortAlt
+  - __LOCalc_CreateStruct
+  - _LOCalc_DocConnect
+  - _LOCalc_DocCreate
+  - _LOCalc_DocOpen
+  - _LOCalc_DocPrintersGetNames
+  - _LOCalc_FontExists
+  - _LOCalc_FontsGetNames
+  - _LOCalc_VersionGet
 
 #### Removed
 
@@ -1073,217 +1073,217 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `LibreOfficeCalc_Font` file, combined functions into `LibreOfficeCalc_Helper`.
 - `$__LO_STATUS_DOC_ERROR` Error Constant and renumber all after errors.
 - Centralized some internal functions. Thus removing the following individual Functions:
-	- __LOCalc_ArrayFill
-	- __LOCalc_AddTo1DArray
-	- __LOCalc_CreateStruct
-	- __LOCalc_IntIsBetween
-	- __LOCalc_NumIsBetween
-	- __LOCalc_SetPropertyValue
-	- __LOCalc_UnitConvert
-	- __LOCalc_VarsAreNull
-	- __LOCalc_VersionCheck
+  - __LOCalc_ArrayFill
+  - __LOCalc_AddTo1DArray
+  - __LOCalc_CreateStruct
+  - __LOCalc_IntIsBetween
+  - __LOCalc_NumIsBetween
+  - __LOCalc_SetPropertyValue
+  - __LOCalc_UnitConvert
+  - __LOCalc_VarsAreNull
+  - __LOCalc_VersionCheck
 - Centralized some Helper functions. Thus removing the following individual Functions:
-	- _LOCalc_ConvertColorFromLong
-	- _LOCalc_ConvertColorToLong
-	- _LOCalc_ConvertFromMicrometer
-	- _LOCalc_ConvertToMicrometer
-	- _LOCalc_PathConvert
-	- _LOCalc_VersionGet
+  - _LOCalc_ConvertColorFromLong
+  - _LOCalc_ConvertColorToLong
+  - _LOCalc_ConvertFromMicrometer
+  - _LOCalc_ConvertToMicrometer
+  - _LOCalc_PathConvert
+  - _LOCalc_VersionGet
 - Centralized some Constants. Thus removing the following individual Constants:
-	- $LOC_PATHCONV_*
-	- $LOC_COLOR_*
+  - $LOC_PATHCONV_*
+  - $LOC_COLOR_*
 - Unnecessary internal functions:
-	- __LOCalc_CharPosition
-	- __LOCalc_CharSpacing
+  - __LOCalc_CharPosition
+  - __LOCalc_CharSpacing
 - Individual component Printer name retrieval functions:
-	- _LOCalc_DocPrintersGetNames
-	- _LOCalc_DocPrintersAltGetNames
+  - _LOCalc_DocPrintersGetNames
+  - _LOCalc_DocPrintersAltGetNames
 
 ### LibreOfficeImpress
 
 #### Added
 
 - Main Impress File
-	- LibreOfficeImpress.au3
+  - LibreOfficeImpress.au3
 - Individual Impress Element Files
-	- LibreOfficeImpress_Constants.au3
-	- LibreOfficeImpress_Doc.au3
-	- LibreOfficeImpress_DrawShapes.au3
-	- LibreOfficeImpress_Helper.au3
-	- LibreOfficeImpress_Internal.au3
-	- LibreOfficeImpress_Slides.au3
+  - LibreOfficeImpress_Constants.au3
+  - LibreOfficeImpress_Doc.au3
+  - LibreOfficeImpress_DrawShapes.au3
+  - LibreOfficeImpress_Helper.au3
+  - LibreOfficeImpress_Internal.au3
+  - LibreOfficeImpress_Slides.au3
 - Constants
-	- $LOI_ALIGN_VERT_*
-	- $LOI_ANCHOR_*
-	- $LOI_ANIMATION_DIR_*
-	- $LOI_ANIMATION_TYPE_*
-	- $LOI_AREA_FILL_STYLE_*
-	- $LOI_DRAWSHAPE_CONNECTOR_TYPE_*
-	- $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_*
-	- $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_*
-	- $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_*
-	- $LOI_DRAWSHAPE_LINE_ARROW_TYPE_*
-	- $LOI_DRAWSHAPE_LINE_CAP_*
-	- $LOI_DRAWSHAPE_LINE_JOINT_*
-	- $LOI_DRAWSHAPE_LINE_STYLE_*
-	- $LOI_DRAWSHAPE_POINT_TYPE_*
-	- $LOI_DRAWSHAPE_TYPE_*
-	- $LOI_GRAD_NAME_*
-	- $LOI_GRAD_TYPE_*
-	- $LOI_ORIENT_HORI_*
-	- $LOI_ORIENT_VERT_*
-	- $LOI_SLIDE_LAYOUT_*
-	- $LOI_SLIDESHOW_VIEW_MODE_*
-	- $LOI_SLIDESHOW_PEN_WIDTH_*
-	- $LOI_SLIDESHOW_PRES_*
-	- $LOI_SLIDESHOW_RANGE_*
-	- $LOI_RELATIVE_*
-	- $LOI_SHAPE_TYPE_*
-	- $LOI_TEXT_ALIGN_HORI_*
-	- $LOI_TEXT_ALIGN_VERT_*
-	- $LOI_TEXT_ANCHOR_*
-	- $LOI_ZOOMTYPE_*
+  - $LOI_ALIGN_VERT_*
+  - $LOI_ANCHOR_*
+  - $LOI_ANIMATION_DIR_*
+  - $LOI_ANIMATION_TYPE_*
+  - $LOI_AREA_FILL_STYLE_*
+  - $LOI_DRAWSHAPE_CONNECTOR_TYPE_*
+  - $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_*
+  - $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_*
+  - $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_*
+  - $LOI_DRAWSHAPE_LINE_ARROW_TYPE_*
+  - $LOI_DRAWSHAPE_LINE_CAP_*
+  - $LOI_DRAWSHAPE_LINE_JOINT_*
+  - $LOI_DRAWSHAPE_LINE_STYLE_*
+  - $LOI_DRAWSHAPE_POINT_TYPE_*
+  - $LOI_DRAWSHAPE_TYPE_*
+  - $LOI_GRAD_NAME_*
+  - $LOI_GRAD_TYPE_*
+  - $LOI_ORIENT_HORI_*
+  - $LOI_ORIENT_VERT_*
+  - $LOI_SLIDE_LAYOUT_*
+  - $LOI_SLIDESHOW_VIEW_MODE_*
+  - $LOI_SLIDESHOW_PEN_WIDTH_*
+  - $LOI_SLIDESHOW_PRES_*
+  - $LOI_SLIDESHOW_RANGE_*
+  - $LOI_RELATIVE_*
+  - $LOI_SHAPE_TYPE_*
+  - $LOI_TEXT_ALIGN_HORI_*
+  - $LOI_TEXT_ALIGN_VERT_*
+  - $LOI_TEXT_ANCHOR_*
+  - $LOI_ZOOMTYPE_*
 - Document Functions
-	- _LOImpress_DocClose
-	- _LOImpress_DocConnect
-	- _LOImpress_DocCreate
-	- _LOImpress_DocExecuteDispatch
-	- _LOImpress_DocExport
-	- _LOImpress_DocGetName
-	- _LOImpress_DocGetPath
-	- _LOImpress_DocHasPath
-	- _LOImpress_DocIsActive
-	- _LOImpress_DocIsModified
-	- _LOImpress_DocIsReadOnly
-	- _LOImpress_DocMaximize
-	- _LOImpress_DocMinimize
-	- _LOImpress_DocOpen
-	- _LOImpress_DocPosAndSize
-	- _LOImpress_DocRedo
-	- _LOImpress_DocRedoClear
-	- _LOImpress_DocRedoCurActionTitle
-	- _LOImpress_DocRedoGetAllActionTitles
-	- _LOImpress_DocRedoIsPossible
-	- _LOImpress_DocSave
-	- _LOImpress_DocSaveAs
-	- _LOImpress_DocToFront
-	- _LOImpress_DocUndo
-	- _LOImpress_DocUndoActionBegin
-	- _LOImpress_DocUndoActionEnd
-	- _LOImpress_DocUndoClear
-	- _LOImpress_DocUndoCurActionTitle
-	- _LOImpress_DocUndoGetAllActionTitles
-	- _LOImpress_DocUndoIsPossible
-	- _LOImpress_DocUndoReset
-	- _LOImpress_DocVisible
-	- _LOImpress_DocZoom
+  - _LOImpress_DocClose
+  - _LOImpress_DocConnect
+  - _LOImpress_DocCreate
+  - _LOImpress_DocExecuteDispatch
+  - _LOImpress_DocExport
+  - _LOImpress_DocGetName
+  - _LOImpress_DocGetPath
+  - _LOImpress_DocHasPath
+  - _LOImpress_DocIsActive
+  - _LOImpress_DocIsModified
+  - _LOImpress_DocIsReadOnly
+  - _LOImpress_DocMaximize
+  - _LOImpress_DocMinimize
+  - _LOImpress_DocOpen
+  - _LOImpress_DocPosAndSize
+  - _LOImpress_DocRedo
+  - _LOImpress_DocRedoClear
+  - _LOImpress_DocRedoCurActionTitle
+  - _LOImpress_DocRedoGetAllActionTitles
+  - _LOImpress_DocRedoIsPossible
+  - _LOImpress_DocSave
+  - _LOImpress_DocSaveAs
+  - _LOImpress_DocToFront
+  - _LOImpress_DocUndo
+  - _LOImpress_DocUndoActionBegin
+  - _LOImpress_DocUndoActionEnd
+  - _LOImpress_DocUndoClear
+  - _LOImpress_DocUndoCurActionTitle
+  - _LOImpress_DocUndoGetAllActionTitles
+  - _LOImpress_DocUndoIsPossible
+  - _LOImpress_DocUndoReset
+  - _LOImpress_DocVisible
+  - _LOImpress_DocZoom
 - Drawing Shape functions
-	- _LOImpress_DrawShapeAreaColor
-	- _LOImpress_DrawShapeAreaFillStyle
-	- _LOImpress_DrawShapeAreaGradient
-	- _LOImpress_DrawShapeAreaGradientMulticolor
-	- _LOImpress_DrawShapeAreaTransparency
-	- _LOImpress_DrawShapeAreaTransparencyGradient
-	- _LOImpress_DrawShapeAreaTransparencyGradientMulti
-	- _LOImpress_DrawShapeConnectorModify
-	- _LOImpress_DrawShapeConnectorSettings
-	- _LOImpress_DrawShapeDelete
-	- _LOImpress_DrawShapeDimensionSettings
-	- _LOImpress_DrawShapeDimensionTextAnimation
-	- _LOImpress_DrawShapeDimensionTextColumns
-	- _LOImpress_DrawShapeDimensionTextSettings
-	- _LOImpress_DrawShapeExists
-	- _LOImpress_DrawShapeGetType
-	- _LOImpress_DrawShapeInsert
-	- _LOImpress_DrawShapeLineArrowStyles
-	- _LOImpress_DrawShapeLineProperties
-	- _LOImpress_DrawShapeName
-	- _LOImpress_DrawShapePointsAdd
-	- _LOImpress_DrawShapePointsGetCount
-	- _LOImpress_DrawShapePointsModify
-	- _LOImpress_DrawShapePointsRemove
-	- _LOImpress_DrawShapePosition
-	- _LOImpress_DrawShapeRotateSlant
-	- _LOImpress_DrawShapeText
-	- _LOImpress_DrawShapeTextboxCreateTextCursor
-	- _LOImpress_DrawShapeTypePosition
-	- _LOImpress_DrawShapeTypeSize
+  - _LOImpress_DrawShapeAreaColor
+  - _LOImpress_DrawShapeAreaFillStyle
+  - _LOImpress_DrawShapeAreaGradient
+  - _LOImpress_DrawShapeAreaGradientMulticolor
+  - _LOImpress_DrawShapeAreaTransparency
+  - _LOImpress_DrawShapeAreaTransparencyGradient
+  - _LOImpress_DrawShapeAreaTransparencyGradientMulti
+  - _LOImpress_DrawShapeConnectorModify
+  - _LOImpress_DrawShapeConnectorSettings
+  - _LOImpress_DrawShapeDelete
+  - _LOImpress_DrawShapeDimensionSettings
+  - _LOImpress_DrawShapeDimensionTextAnimation
+  - _LOImpress_DrawShapeDimensionTextColumns
+  - _LOImpress_DrawShapeDimensionTextSettings
+  - _LOImpress_DrawShapeExists
+  - _LOImpress_DrawShapeGetType
+  - _LOImpress_DrawShapeInsert
+  - _LOImpress_DrawShapeLineArrowStyles
+  - _LOImpress_DrawShapeLineProperties
+  - _LOImpress_DrawShapeName
+  - _LOImpress_DrawShapePointsAdd
+  - _LOImpress_DrawShapePointsGetCount
+  - _LOImpress_DrawShapePointsModify
+  - _LOImpress_DrawShapePointsRemove
+  - _LOImpress_DrawShapePosition
+  - _LOImpress_DrawShapeRotateSlant
+  - _LOImpress_DrawShapeText
+  - _LOImpress_DrawShapeTextboxCreateTextCursor
+  - _LOImpress_DrawShapeTypePosition
+  - _LOImpress_DrawShapeTypeSize
 - Helper Functions
-	- _LOImpress_ComError_UserFunction
-	- _LOImpress_CursorInsertString
-	- _LOImpress_FontExists
-	- _LOImpress_FontsGetNames
-	- _LOImpress_GradientMulticolorAdd
-	- _LOImpress_GradientMulticolorDelete
-	- _LOImpress_GradientMulticolorModify
-	- _LOImpress_TransparencyGradientMultiAdd
-	- _LOImpress_TransparencyGradientMultiDelete
-	- _LOImpress_TransparencyGradientMultiModify
+  - _LOImpress_ComError_UserFunction
+  - _LOImpress_CursorInsertString
+  - _LOImpress_FontExists
+  - _LOImpress_FontsGetNames
+  - _LOImpress_GradientMulticolorAdd
+  - _LOImpress_GradientMulticolorDelete
+  - _LOImpress_GradientMulticolorModify
+  - _LOImpress_TransparencyGradientMultiAdd
+  - _LOImpress_TransparencyGradientMultiDelete
+  - _LOImpress_TransparencyGradientMultiModify
 - Internal Functions
-	- __LOImpress_ColorRemoveAlpha
-	- __LOImpress_CreatePoint
-	- __LOImpress_DrawShape_CreateArrow
-	- __LOImpress_DrawShape_CreateBasic
-	- __LOImpress_DrawShape_CreateCallout
-	- __LOImpress_DrawShape_CreateFlowchart
-	- __LOImpress_DrawShape_CreateLine
-	- __LOImpress_DrawShape_CreateStars
-	- __LOImpress_DrawShape_CreateSymbol
-	- __LOImpress_DrawShape_GetCustomType
-	- __LOImpress_DrawShapeArrowStyleName
-	- __LOImpress_DrawShapeLineStyleName
-	- __LOImpress_DrawShapePointGetSettings
-	- __LOImpress_DrawShapePointModify
-	- __LOImpress_FilterNameGet
-	- __LOImpress_GetShapeName
-	- __LOImpress_GradientNameInsert
-	- __LOImpress_GradientPresets
-	- __LOImpress_InternalComErrorHandler
-	- __LOImpress_ShapeGetType
-	- __LOImpress_TransparencyGradientConvert
-	- __LOImpress_TransparencyGradientNameInsert
+  - __LOImpress_ColorRemoveAlpha
+  - __LOImpress_CreatePoint
+  - __LOImpress_DrawShape_CreateArrow
+  - __LOImpress_DrawShape_CreateBasic
+  - __LOImpress_DrawShape_CreateCallout
+  - __LOImpress_DrawShape_CreateFlowchart
+  - __LOImpress_DrawShape_CreateLine
+  - __LOImpress_DrawShape_CreateStars
+  - __LOImpress_DrawShape_CreateSymbol
+  - __LOImpress_DrawShape_GetCustomType
+  - __LOImpress_DrawShapeArrowStyleName
+  - __LOImpress_DrawShapeLineStyleName
+  - __LOImpress_DrawShapePointGetSettings
+  - __LOImpress_DrawShapePointModify
+  - __LOImpress_FilterNameGet
+  - __LOImpress_GetShapeName
+  - __LOImpress_GradientNameInsert
+  - __LOImpress_GradientPresets
+  - __LOImpress_InternalComErrorHandler
+  - __LOImpress_ShapeGetType
+  - __LOImpress_TransparencyGradientConvert
+  - __LOImpress_TransparencyGradientNameInsert
 - Slide Functions
-	- _LOImpress_SlideAdd
-	- _LOImpress_SlideBackColor
-	- _LOImpress_SlideBackFillStyle
-	- _LOImpress_SlideBackGradient
-	- _LOImpress_SlideBackTransparency
-	- _LOImpress_SlideBackTransparencyGradient
-	- _LOImpress_SlideCopy
-	- _LOImpress_SlideCurrent
-	- _LOImpress_SlideDeleteByIndex
-	- _LOImpress_SlideExists
-	- _LOImpress_SlideDeleteByObj
-	- _LOImpress_SlideGetByIndex
-	- _LOImpress_SlideGetByName
-	- _LOImpress_SlideLayout
-	- _LOImpress_SlideMove
-	- _LOImpress_SlideName
-	- _LOImpress_SlidesGetCount
-	- _LOImpress_SlidesGetNames
-	- _LOImpress_SlideShapesGetList
-	- _LOImpress_SlideshowActiveSettings
-	- _LOImpress_SlideshowCustomCreate
-	- _LOImpress_SlideshowCustomDelete
-	- _LOImpress_SlideshowCustomModify
-	- _LOImpress_SlideshowCustomSetName
-	- _LOImpress_SlideshowIsRunning
-	- _LOImpress_SlideshowPresentationControl
-	- _LOImpress_SlideshowsCustomGetNames
-	- _LOImpress_SlideshowSettingsMode
-	- _LOImpress_SlideshowSettingsOptions
-	- _LOImpress_SlideshowSettingsRange
-	- _LOImpress_SlideshowStart
-	- _LOImpress_SlideshowStop
+  - _LOImpress_SlideAdd
+  - _LOImpress_SlideBackColor
+  - _LOImpress_SlideBackFillStyle
+  - _LOImpress_SlideBackGradient
+  - _LOImpress_SlideBackTransparency
+  - _LOImpress_SlideBackTransparencyGradient
+  - _LOImpress_SlideCopy
+  - _LOImpress_SlideCurrent
+  - _LOImpress_SlideDeleteByIndex
+  - _LOImpress_SlideExists
+  - _LOImpress_SlideDeleteByObj
+  - _LOImpress_SlideGetByIndex
+  - _LOImpress_SlideGetByName
+  - _LOImpress_SlideLayout
+  - _LOImpress_SlideMove
+  - _LOImpress_SlideName
+  - _LOImpress_SlidesGetCount
+  - _LOImpress_SlidesGetNames
+  - _LOImpress_SlideShapesGetList
+  - _LOImpress_SlideshowActiveSettings
+  - _LOImpress_SlideshowCustomCreate
+  - _LOImpress_SlideshowCustomDelete
+  - _LOImpress_SlideshowCustomModify
+  - _LOImpress_SlideshowCustomSetName
+  - _LOImpress_SlideshowIsRunning
+  - _LOImpress_SlideshowPresentationControl
+  - _LOImpress_SlideshowsCustomGetNames
+  - _LOImpress_SlideshowSettingsMode
+  - _LOImpress_SlideshowSettingsOptions
+  - _LOImpress_SlideshowSettingsRange
+  - _LOImpress_SlideshowStart
+  - _LOImpress_SlideshowStop
 
 #### Changed
 
 - Changed error values for the following:
-	- _LOImpress_DocExport
-	- _LOImpress_DrawShapePointsModify
+  - _LOImpress_DocExport
+  - _LOImpress_DrawShapePointsModify
 - Fix inconsistent Initialization and Processing error usage:
-	- _LOImpress_DocClose
-	- _LOImpress_DocSaveAs
+  - _LOImpress_DocClose
+  - _LOImpress_DocSaveAs
 
 #### Refactored
 
@@ -1292,76 +1292,76 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Removed
 
 - Centralized some internal functions. Thus removing the following individual Functions:
-	- __LOImpress_ArrayFill
-	- __LOImpress_AddTo1DArray
-	- __LOImpress_CreateStruct
-	- __LOImpress_IntIsBetween
-	- __LOImpress_NumIsBetween
-	- __LOImpress_SetPropertyValue
-	- __LOImpress_UnitConvert
-	- __LOImpress_VarsAreNull
-	- __LOImpress_VersionCheck
+  - __LOImpress_ArrayFill
+  - __LOImpress_AddTo1DArray
+  - __LOImpress_CreateStruct
+  - __LOImpress_IntIsBetween
+  - __LOImpress_NumIsBetween
+  - __LOImpress_SetPropertyValue
+  - __LOImpress_UnitConvert
+  - __LOImpress_VarsAreNull
+  - __LOImpress_VersionCheck
 - Centralized some Helper functions. Thus removing the following individual Functions:
-	- _LOImpress_ConvertColorFromLong
-	- _LOImpress_ConvertColorToLong
-	- _LOImpress_ConvertFromMicrometer
-	- _LOImpress_ConvertToMicrometer
-	- _LOImpress_PathConvert
-	- _LOImpress_VersionGet
+  - _LOImpress_ConvertColorFromLong
+  - _LOImpress_ConvertColorToLong
+  - _LOImpress_ConvertFromMicrometer
+  - _LOImpress_ConvertToMicrometer
+  - _LOImpress_PathConvert
+  - _LOImpress_VersionGet
 - Centralized some Constants. Thus removing the following individual Constants:
-	- $LOI_PATHCONV_*
-	- $LOI_COLOR_*
+  - $LOI_PATHCONV_*
+  - $LOI_COLOR_*
 
 ### LibreOfficeWriter
 
 #### Added
 
 - More Undo Functions and Examples
-	- _LOWriter_DocRedoClear
-	- _LOWriter_DocUndoActionBegin
-	- _LOWriter_DocUndoActionEnd
-	- _LOWriter_DocUndoClear
-	- _LOWriter_DocUndoReset
+  - _LOWriter_DocRedoClear
+  - _LOWriter_DocUndoActionBegin
+  - _LOWriter_DocUndoActionEnd
+  - _LOWriter_DocUndoClear
+  - _LOWriter_DocUndoReset
 - Shape Functions and Examples
-	- _LOWriter_DocHasShapeName
-	- _LOWriter_ShapeAreaColor
-	- _LOWriter_ShapeAreaGradient
-	- _LOWriter_ShapeDelete
-	- _LOWriter_ShapeGetAnchor
-	- _LOWriter_ShapeGetObjByName
-	- _LOWriter_ShapeGetType
-	- _LOWriter_ShapeInsert
-	- _LOWriter_ShapeLineArrowStyles
-	- _LOWriter_ShapeLineProperties
-	- _LOWriter_ShapeName
-	- _LOWriter_ShapePointsAdd
-	- _LOWriter_ShapePointsGetCount
-	- _LOWriter_ShapePointsModify
-	- _LOWriter_ShapePointsRemove
-	- _LOWriter_ShapePosition
-	- _LOWriter_ShapeRotateSlant
-	- _LOWriter_ShapesGetNames
-	- _LOWriter_ShapeTextBox
-	- _LOWriter_ShapeTransparency
-	- _LOWriter_ShapeTransparencyGradient
-	- _LOWriter_ShapeTypePosition
-	- _LOWriter_ShapeTypeSize
-	- _LOWriter_ShapeWrap
-	- _LOWriter_ShapeWrapOptions
-	- __LOWriter_CreatePoint
-	- __LOWriter_GetShapeName
-	- __LOWriter_Shape_CreateArrow
-	- __LOWriter_Shape_CreateBasic
-	- __LOWriter_Shape_CreateCallout
-	- __LOWriter_Shape_CreateFlowchart
-	- __LOWriter_Shape_CreateLine
-	- __LOWriter_Shape_CreateStars
-	- __LOWriter_Shape_CreateSymbol
-	- __LOWriter_Shape_GetCustomType
-	- __LOWriter_ShapeArrowStyleName
-	- __LOWriter_ShapeLineStyleName
-	- __LOWriter_ShapePointGetSettings
-	- __LOWriter_ShapePointModify
+  - _LOWriter_DocHasShapeName
+  - _LOWriter_ShapeAreaColor
+  - _LOWriter_ShapeAreaGradient
+  - _LOWriter_ShapeDelete
+  - _LOWriter_ShapeGetAnchor
+  - _LOWriter_ShapeGetObjByName
+  - _LOWriter_ShapeGetType
+  - _LOWriter_ShapeInsert
+  - _LOWriter_ShapeLineArrowStyles
+  - _LOWriter_ShapeLineProperties
+  - _LOWriter_ShapeName
+  - _LOWriter_ShapePointsAdd
+  - _LOWriter_ShapePointsGetCount
+  - _LOWriter_ShapePointsModify
+  - _LOWriter_ShapePointsRemove
+  - _LOWriter_ShapePosition
+  - _LOWriter_ShapeRotateSlant
+  - _LOWriter_ShapesGetNames
+  - _LOWriter_ShapeTextBox
+  - _LOWriter_ShapeTransparency
+  - _LOWriter_ShapeTransparencyGradient
+  - _LOWriter_ShapeTypePosition
+  - _LOWriter_ShapeTypeSize
+  - _LOWriter_ShapeWrap
+  - _LOWriter_ShapeWrapOptions
+  - __LOWriter_CreatePoint
+  - __LOWriter_GetShapeName
+  - __LOWriter_Shape_CreateArrow
+  - __LOWriter_Shape_CreateBasic
+  - __LOWriter_Shape_CreateCallout
+  - __LOWriter_Shape_CreateFlowchart
+  - __LOWriter_Shape_CreateLine
+  - __LOWriter_Shape_CreateStars
+  - __LOWriter_Shape_CreateSymbol
+  - __LOWriter_Shape_GetCustomType
+  - __LOWriter_ShapeArrowStyleName
+  - __LOWriter_ShapeLineStyleName
+  - __LOWriter_ShapePointGetSettings
+  - __LOWriter_ShapePointModify
 - Shape Point Constants in `LibreOfficeWriter_Constants`. `$LOW_SHAPE_POINT_TYPE_*`
 - Standard Format Key retrieval function `_LOWriter_FormatKeyGetStandard`
 - Alpha Removal function `__LOWriter_ColorRemoveAlpha`.
@@ -1373,267 +1373,267 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - _LOWriter_PageStyleHeaderAreaFillStyle
 - _LOWriter_ShapeAreaFillStyle
 - Selection set and get functions
-	- ~~_LOWriter_DocSelectionGet~~
-	- ~~_LOWriter_DocSelectionSet~~
-	- _LOWriter_DocSelection
+  - ~~_LOWriter_DocSelectionGet~~
+  - ~~_LOWriter_DocSelectionSet~~
+  - _LOWriter_DocSelection
 - `__LOWriter_NumRuleCreateMap` for modifying Numbering Rules more efficiently.
 - Form/Form Control Constants
-	- $LOW_FORM_CON_BORDER_*
-	- $LOW_FORM_CON_CHKBX_STATE_*
-	- $LOW_FORM_CON_DATE_FRMT_*
-	- $LOW_FORM_CON_IMG_ALIGN_*
-	- $LOW_FORM_CON_IMG_BTN_SCALE_*
-	- $LOW_FORM_CON_MOUSE_SCROLL_*
-	- $LOW_FORM_CON_PUSH_CMD_*
-	- $LOW_FORM_CON_SCROLL_*
-	- $LOW_FORM_CON_SOURCE_TYPE_*
-	- $LOW_FORM_CON_TIME_FRMT_*
-	- $LOW_FORM_CON_TXT_TYPE_*
-	- $LOW_FORM_CON_TYPE_*
-	- $LOW_FORM_CONTENT_TYPE_*
-	- $LOW_FORM_CYCLE_MODE_*
-	- $LOW_FORM_NAV_BAR_MODE_*
-	- $LOW_FORM_SUBMIT_ENCODING_*
-	- $LOW_FORM_SUBMIT_METHOD_*
+  - $LOW_FORM_CON_BORDER_*
+  - $LOW_FORM_CON_CHKBX_STATE_*
+  - $LOW_FORM_CON_DATE_FRMT_*
+  - $LOW_FORM_CON_IMG_ALIGN_*
+  - $LOW_FORM_CON_IMG_BTN_SCALE_*
+  - $LOW_FORM_CON_MOUSE_SCROLL_*
+  - $LOW_FORM_CON_PUSH_CMD_*
+  - $LOW_FORM_CON_SCROLL_*
+  - $LOW_FORM_CON_SOURCE_TYPE_*
+  - $LOW_FORM_CON_TIME_FRMT_*
+  - $LOW_FORM_CON_TXT_TYPE_*
+  - $LOW_FORM_CON_TYPE_*
+  - $LOW_FORM_CONTENT_TYPE_*
+  - $LOW_FORM_CYCLE_MODE_*
+  - $LOW_FORM_NAV_BAR_MODE_*
+  - $LOW_FORM_SUBMIT_ENCODING_*
+  - $LOW_FORM_SUBMIT_METHOD_*
 - Internal Form Functions
-	- __LOWriter_FormConIdentify
-	- __LOWriter_FormConGetObj
-	- __LOWriter_FormConSetGetFontDesc
+  - __LOWriter_FormConIdentify
+  - __LOWriter_FormConGetObj
+  - __LOWriter_FormConSetGetFontDesc
 - Form functions
-	- _LOWriter_DocFormSettings
-	- _LOWriter_FontDescCreate
-	- _LOWriter_FontDescEdit
-	- _LOWriter_FormAdd
-	- _LOWriter_FormConCheckBoxData
-	- _LOWriter_FormConCheckBoxGeneral
-	- _LOWriter_FormConCheckBoxState
-	- _LOWriter_FormConComboBoxData
-	- _LOWriter_FormConComboBoxGeneral
-	- _LOWriter_FormConComboBoxValue
-	- _LOWriter_FormConCurrencyFieldData
-	- _LOWriter_FormConCurrencyFieldGeneral
-	- _LOWriter_FormConCurrencyFieldValue
-	- _LOWriter_FormConDateFieldData
-	- _LOWriter_FormConDateFieldGeneral
-	- _LOWriter_FormConDateFieldValue
-	- _LOWriter_FormConDelete
-	- _LOWriter_FormConFileSelFieldGeneral
-	- _LOWriter_FormConFileSelFieldValue
-	- _LOWriter_FormConFormattedFieldData
-	- _LOWriter_FormConFormattedFieldGeneral
-	- _LOWriter_FormConFormattedFieldValue
-	- _LOWriter_FormConGetParent
-	- _LOWriter_FormConGroupBoxGeneral
-	- _LOWriter_FormConImageButtonGeneral
-	- _LOWriter_FormConImageControlData
-	- _LOWriter_FormConImageControlGeneral
-	- _LOWriter_FormConInsert
-	- _LOWriter_FormConLabelGeneral
-	- _LOWriter_FormConListBoxData
-	- _LOWriter_FormConListBoxGeneral
-	- _LOWriter_FormConListBoxGetCount
-	- _LOWriter_FormConListBoxSelection
-	- _LOWriter_FormConNavBarGeneral
-	- _LOWriter_FormConNumericFieldData
-	- _LOWriter_FormConNumericFieldGeneral
-	- _LOWriter_FormConNumericFieldValue
-	- _LOWriter_FormConOptionButtonData
-	- _LOWriter_FormConOptionButtonGeneral
-	- _LOWriter_FormConOptionButtonState
-	- _LOWriter_FormConPatternFieldData
-	- _LOWriter_FormConPatternFieldGeneral
-	- _LOWriter_FormConPatternFieldValue
-	- _LOWriter_FormConPosition
-	- _LOWriter_FormConPushButtonGeneral
-	- _LOWriter_FormConPushButtonState
-	- _LOWriter_FormConsGetList
-	- _LOWriter_FormConSize
-	- _LOWriter_FormConTableConCheckBoxData
-	- _LOWriter_FormConTableConCheckBoxGeneral
-	- _LOWriter_FormConTableConColumnAdd
-	- _LOWriter_FormConTableConColumnDelete
-	- _LOWriter_FormConTableConColumnsGetList
-	- _LOWriter_FormConTableConComboBoxData
-	- _LOWriter_FormConTableConComboBoxGeneral
-	- _LOWriter_FormConTableConCurrencyFieldData
-	- _LOWriter_FormConTableConCurrencyFieldGeneral
-	- _LOWriter_FormConTableConDateFieldData
-	- _LOWriter_FormConTableConDateFieldGeneral
-	- _LOWriter_FormConTableConFormattedFieldData
-	- _LOWriter_FormConTableConFormattedFieldGeneral
-	- _LOWriter_FormConTableConGeneral
-	- _LOWriter_FormConTableConListBoxData
-	- _LOWriter_FormConTableConListBoxGeneral
-	- _LOWriter_FormConTableConNumericFieldData
-	- _LOWriter_FormConTableConNumericFieldGeneral
-	- _LOWriter_FormConTableConPatternFieldData
-	- _LOWriter_FormConTableConPatternFieldGeneral
-	- _LOWriter_FormConTableConTextBoxData
-	- _LOWriter_FormConTableConTextBoxGeneral
-	- _LOWriter_FormConTableConTimeFieldData
-	- _LOWriter_FormConTableConTimeFieldGeneral
-	- _LOWriter_FormConTextBoxCreateTextCursor
-	- _LOWriter_FormConTextBoxData
-	- _LOWriter_FormConTextBoxGeneral
-	- _LOWriter_FormConTimeFieldData
-	- _LOWriter_FormConTimeFieldGeneral
-	- _LOWriter_FormConTimeFieldValue
-	- _LOWriter_FormDelete
-	- _LOWriter_FormGetObjByIndex
-	- _LOWriter_FormParent
-	- _LOWriter_FormPropertiesData
-	- _LOWriter_FormPropertiesGeneral
-	- _LOWriter_FormsGetCount
-	- _LOWriter_FormsGetList
+  - _LOWriter_DocFormSettings
+  - _LOWriter_FontDescCreate
+  - _LOWriter_FontDescEdit
+  - _LOWriter_FormAdd
+  - _LOWriter_FormConCheckBoxData
+  - _LOWriter_FormConCheckBoxGeneral
+  - _LOWriter_FormConCheckBoxState
+  - _LOWriter_FormConComboBoxData
+  - _LOWriter_FormConComboBoxGeneral
+  - _LOWriter_FormConComboBoxValue
+  - _LOWriter_FormConCurrencyFieldData
+  - _LOWriter_FormConCurrencyFieldGeneral
+  - _LOWriter_FormConCurrencyFieldValue
+  - _LOWriter_FormConDateFieldData
+  - _LOWriter_FormConDateFieldGeneral
+  - _LOWriter_FormConDateFieldValue
+  - _LOWriter_FormConDelete
+  - _LOWriter_FormConFileSelFieldGeneral
+  - _LOWriter_FormConFileSelFieldValue
+  - _LOWriter_FormConFormattedFieldData
+  - _LOWriter_FormConFormattedFieldGeneral
+  - _LOWriter_FormConFormattedFieldValue
+  - _LOWriter_FormConGetParent
+  - _LOWriter_FormConGroupBoxGeneral
+  - _LOWriter_FormConImageButtonGeneral
+  - _LOWriter_FormConImageControlData
+  - _LOWriter_FormConImageControlGeneral
+  - _LOWriter_FormConInsert
+  - _LOWriter_FormConLabelGeneral
+  - _LOWriter_FormConListBoxData
+  - _LOWriter_FormConListBoxGeneral
+  - _LOWriter_FormConListBoxGetCount
+  - _LOWriter_FormConListBoxSelection
+  - _LOWriter_FormConNavBarGeneral
+  - _LOWriter_FormConNumericFieldData
+  - _LOWriter_FormConNumericFieldGeneral
+  - _LOWriter_FormConNumericFieldValue
+  - _LOWriter_FormConOptionButtonData
+  - _LOWriter_FormConOptionButtonGeneral
+  - _LOWriter_FormConOptionButtonState
+  - _LOWriter_FormConPatternFieldData
+  - _LOWriter_FormConPatternFieldGeneral
+  - _LOWriter_FormConPatternFieldValue
+  - _LOWriter_FormConPosition
+  - _LOWriter_FormConPushButtonGeneral
+  - _LOWriter_FormConPushButtonState
+  - _LOWriter_FormConsGetList
+  - _LOWriter_FormConSize
+  - _LOWriter_FormConTableConCheckBoxData
+  - _LOWriter_FormConTableConCheckBoxGeneral
+  - _LOWriter_FormConTableConColumnAdd
+  - _LOWriter_FormConTableConColumnDelete
+  - _LOWriter_FormConTableConColumnsGetList
+  - _LOWriter_FormConTableConComboBoxData
+  - _LOWriter_FormConTableConComboBoxGeneral
+  - _LOWriter_FormConTableConCurrencyFieldData
+  - _LOWriter_FormConTableConCurrencyFieldGeneral
+  - _LOWriter_FormConTableConDateFieldData
+  - _LOWriter_FormConTableConDateFieldGeneral
+  - _LOWriter_FormConTableConFormattedFieldData
+  - _LOWriter_FormConTableConFormattedFieldGeneral
+  - _LOWriter_FormConTableConGeneral
+  - _LOWriter_FormConTableConListBoxData
+  - _LOWriter_FormConTableConListBoxGeneral
+  - _LOWriter_FormConTableConNumericFieldData
+  - _LOWriter_FormConTableConNumericFieldGeneral
+  - _LOWriter_FormConTableConPatternFieldData
+  - _LOWriter_FormConTableConPatternFieldGeneral
+  - _LOWriter_FormConTableConTextBoxData
+  - _LOWriter_FormConTableConTextBoxGeneral
+  - _LOWriter_FormConTableConTimeFieldData
+  - _LOWriter_FormConTableConTimeFieldGeneral
+  - _LOWriter_FormConTextBoxCreateTextCursor
+  - _LOWriter_FormConTextBoxData
+  - _LOWriter_FormConTextBoxGeneral
+  - _LOWriter_FormConTimeFieldData
+  - _LOWriter_FormConTimeFieldGeneral
+  - _LOWriter_FormConTimeFieldValue
+  - _LOWriter_FormDelete
+  - _LOWriter_FormGetObjByIndex
+  - _LOWriter_FormParent
+  - _LOWriter_FormPropertiesData
+  - _LOWriter_FormPropertiesGeneral
+  - _LOWriter_FormsGetCount
+  - _LOWriter_FormsGetList
 - Multicolor Gradient support, adding the following functions:
-	1. Helper Functions:
-		- _LOWriter_GradientMulticolorAdd
-		- _LOWriter_GradientMulticolorDelete
-		- _LOWriter_GradientMulticolorModify
-		- _LOWriter_TransparencyGradientMultiAdd
-		- _LOWriter_TransparencyGradientMultiDelete
-		- _LOWriter_TransparencyGradientMultiModify
-	2. Frame Functions:
-		- _LOWriter_FrameAreaGradientMulticolor
-		- _LOWriter_FrameAreaTransparencyGradientMulti
-		- _LOWriter_FrameStyleAreaGradientMulticolor
-		- _LOWriter_FrameStyleAreaTransparencyGradientMulti
-	3. Image Functions:
-		- _LOWriter_ImageAreaGradientMulticolor
-		- _LOWriter_ImageAreaTransparencyGradientMulti
-	4. PageStyle Functions:
-		- _LOWriter_PageStyleAreaGradientMulticolor
-		- _LOWriter_PageStyleAreaTransparencyGradientMulti
-		- _LOWriter_PageStyleFooterAreaGradientMulticolor
-		- _LOWriter_PageStyleFooterAreaTransparencyGradientMulti
-		- _LOWriter_PageStyleHeaderAreaGradientMulticolor
-		- _LOWriter_PageStyleHeaderAreaTransparencyGradientMulti
-	5. Shape Functions:
-		- _LOWriter_ShapeAreaGradientMulticolor
-		- _LOWriter_ShapeAreaTransparencyGradientMulti
+  - Helper Functions:
+    - _LOWriter_GradientMulticolorAdd
+    - _LOWriter_GradientMulticolorDelete
+    - _LOWriter_GradientMulticolorModify
+    - _LOWriter_TransparencyGradientMultiAdd
+    - _LOWriter_TransparencyGradientMultiDelete
+    - _LOWriter_TransparencyGradientMultiModify
+  - Frame Functions:
+    - _LOWriter_FrameAreaGradientMulticolor
+    - _LOWriter_FrameAreaTransparencyGradientMulti
+    - _LOWriter_FrameStyleAreaGradientMulticolor
+    - _LOWriter_FrameStyleAreaTransparencyGradientMulti
+  - Image Functions:
+    - _LOWriter_ImageAreaGradientMulticolor
+    - _LOWriter_ImageAreaTransparencyGradientMulti
+  - PageStyle Functions:
+    - _LOWriter_PageStyleAreaGradientMulticolor
+    - _LOWriter_PageStyleAreaTransparencyGradientMulti
+    - _LOWriter_PageStyleFooterAreaGradientMulticolor
+    - _LOWriter_PageStyleFooterAreaTransparencyGradientMulti
+    - _LOWriter_PageStyleHeaderAreaGradientMulticolor
+    - _LOWriter_PageStyleHeaderAreaTransparencyGradientMulti
+  - Shape Functions:
+    - _LOWriter_ShapeAreaGradientMulticolor
+    - _LOWriter_ShapeAreaTransparencyGradientMulti
 - Paragraph Style and Direct Formatting background Gradient and Transparency functions.
-	- _LOWriter_DirFrmtParAreaFillStyle
-	- _LOWriter_DirFrmtParAreaGradient
-	- _LOWriter_DirFrmtParAreaGradientMulticolor
-	- _LOWriter_DirFrmtParAreaTransparency
-	- _LOWriter_ParStyleAreaFillStyle
-	- _LOWriter_ParStyleAreaGradient
-	- _LOWriter_ParStyleAreaGradientMulticolor
-	- _LOWriter_ParStyleAreaTransparency
-	- _LOWriter_ParStyleAreaTransparencyGradient
-	- _LOWriter_ParStyleAreaTransparencyGradientMulti
+  - _LOWriter_DirFrmtParAreaFillStyle
+  - _LOWriter_DirFrmtParAreaGradient
+  - _LOWriter_DirFrmtParAreaGradientMulticolor
+  - _LOWriter_DirFrmtParAreaTransparency
+  - _LOWriter_ParStyleAreaFillStyle
+  - _LOWriter_ParStyleAreaGradient
+  - _LOWriter_ParStyleAreaGradientMulticolor
+  - _LOWriter_ParStyleAreaTransparency
+  - _LOWriter_ParStyleAreaTransparencyGradient
+  - _LOWriter_ParStyleAreaTransparencyGradientMulti
 - Table functions
-	- _LOWriter_TableStyleExists
-	- _LOWriter_TableStyleSet
-	- _LOWriter_TableStylesGetNames
-	- __LOWriter_TableStyleNameToggle
+  - _LOWriter_TableStyleExists
+  - _LOWriter_TableStyleSet
+  - _LOWriter_TableStylesGetNames
+  - __LOWriter_TableStyleNameToggle
 - Added functions for checking both Internal and Display names for certain Styles.
-	- __LOWriter_CharacterStyleCompare
-	- __LOWriter_NumberingStyleCompare
-	- __LOWriter_PageStyleCompare
-	- __LOWriter_ParStyleCompare
-	- __LOWriter_TableStyleCompare
+  - __LOWriter_CharacterStyleCompare
+  - __LOWriter_NumberingStyleCompare
+  - __LOWriter_PageStyleCompare
+  - __LOWriter_ParStyleCompare
+  - __LOWriter_TableStyleCompare
 - __LOWriter_GradientIsModified
 
 #### Changed
 
 - ReArranged Parameters in PageBreak functions to be more logically ordered. The previous order was:
 
-	> $iBreakType = Null, $iPgNumOffSet = Null, $sPageStyle = Null
+  > $iBreakType = Null, $iPgNumOffSet = Null, $sPageStyle = Null
 
-	However the functions stated:
+  However the functions stated:
 
-	> _Break Type_ must be set **before** _Page Style_ will be able to be set, and _page style_ needs set **before** _$iPgNumOffSet_ can be set.
+  > _Break Type_ must be set **before** _Page Style_ will be able to be set, and _page style_ needs set **before** _$iPgNumOffSet_ can be set.
 
-	Thus the parameters have been rearranged to:
+  Thus the parameters have been rearranged to:
 
-	> $iBreakType = Null, $sPageStyle = Null, $iPgNumOffSet
+  > $iBreakType = Null, $sPageStyle = Null, $iPgNumOffSet
 
-	Affected functions are:
-	- _LOWriter_DirFrmtParPageBreak
-	- _LOWriter_ParStylePageBreak
-	- __LOWriter_ParPageBreak
+  Affected functions are:
+  - _LOWriter_DirFrmtParPageBreak
+  - _LOWriter_ParStylePageBreak
+  - __LOWriter_ParPageBreak
 
 - Undo/Redo Action Title retrieval functions to no longer return an error when Undo/Redo Action Titles are unavailable, instead they  return an empty string or array, respectively.
-	- _LOWriter_DocRedoCurActionTitle;
-	- _LOWriter_DocRedoGetAllActionTitles;
-	- _LOWriter_DocUndoGetAllActionTitles;
-	- _LOWriter_DocUndoCurActionTitle.
+  - _LOWriter_DocRedoCurActionTitle;
+  - _LOWriter_DocRedoGetAllActionTitles;
+  - _LOWriter_DocUndoGetAllActionTitles;
+  - _LOWriter_DocUndoCurActionTitle.
 - Moved Search Descriptor functions from `LibreOfficeWriter.au3` to `LibreOfficeWriter_Helper.au3`.
-	- _LOWriter_SearchDescriptorCreate
-	- _LOWriter_SearchDescriptorModify
-	- _LOWriter_SearchDescriptorSimilarityModify
+  - _LOWriter_SearchDescriptorCreate
+  - _LOWriter_SearchDescriptorModify
+  - _LOWriter_SearchDescriptorSimilarityModify
 - Default value of `$__LOWCONST_SLEEP_DIV` from 15 to 0.
 - Renamed `$LOW_FIELDADV_TYPE_*` Constants to `$LOW_FIELD_ADV_TYPE_*` to match formatting of other Field Type Constants.
 - Renamed `$LibreOfficeWriter_DirectFormating.au3` to `LibreOfficeWriter_DirectFormatting.au3` (misspelling correction)
 - Renamed Parameter $iBorder for Gradient Functions to $iTransitionStart for clarity of which setting it corresponds to in the L.O. UI.
-	- _LOWriter_FrameAreaGradient
-	- _LOWriter_FrameTransparencyGradient
-	- _LOWriter_FrameStyleAreaGradient
-	- _LOWriter_FrameStyleTransparencyGradient
-	- _LOWriter_ImageAreaGradient
-	- _LOWriter_ImageAreaTransparencyGradient
-	- _LOWriter_PageStyleAreaGradient
-	- _LOWriter_PageStyleFooterAreaGradient
-	- _LOWriter_PageStyleFooterTransparencyGradient
-	- _LOWriter_PageStyleHeaderAreaGradient
-	- _LOWriter_PageStyleHeaderTransparencyGradient
-	- _LOWriter_PageStyleTransparencyGradient
-	- _LOWriter_ShapeAreaGradient
-	- _LOWriter_ShapeTransparencyGradient
+  - _LOWriter_FrameAreaGradient
+  - _LOWriter_FrameTransparencyGradient
+  - _LOWriter_FrameStyleAreaGradient
+  - _LOWriter_FrameStyleTransparencyGradient
+  - _LOWriter_ImageAreaGradient
+  - _LOWriter_ImageAreaTransparencyGradient
+  - _LOWriter_PageStyleAreaGradient
+  - _LOWriter_PageStyleFooterAreaGradient
+  - _LOWriter_PageStyleFooterTransparencyGradient
+  - _LOWriter_PageStyleHeaderAreaGradient
+  - _LOWriter_PageStyleHeaderTransparencyGradient
+  - _LOWriter_PageStyleTransparencyGradient
+  - _LOWriter_ShapeAreaGradient
+  - _LOWriter_ShapeTransparencyGradient
 - Renamed `$__LOWCONST_FILL_STYLE_*` Constant to `$LOW_AREA_FILL_STYLE_*`.
 - Improved the processing speed for modifying Numbering Rules by using Maps.
 - Renamed Functions to be consistent when retrieving arrays of names or objects:
-	- `_LOWriter_DocBookmarksList` --> `_LOWriter_DocBookmarksGetNames`
-	- `_LOWriter_DocEnumPrinters` --> `_LOWriter_DocPrintersGetNames`
-	- `_LOWriter_DocEnumPrintersAlt` --> `_LOWriter_DocPrintersAltGetNames`
-	- `_LOWriter_FieldSetVarMasterList` --> `_LOWriter_FieldSetVarMastersGetNames`
-	- `_LOWriter_FieldSetVarMasterListFields` --> `_LOWriter_FieldSetVarMasterFieldsGetList`
-	- `_LOWriter_FontsList` --> `_LOWriter_FontsGetNames`
-	- `_LOWriter_TableGetCellNames` --> `_LOWriter_TableCellsGetNames`
+  - `_LOWriter_DocBookmarksList` --> `_LOWriter_DocBookmarksGetNames`
+  - `_LOWriter_DocEnumPrinters` --> `_LOWriter_DocPrintersGetNames`
+  - `_LOWriter_DocEnumPrintersAlt` --> `_LOWriter_DocPrintersAltGetNames`
+  - `_LOWriter_FieldSetVarMasterList` --> `_LOWriter_FieldSetVarMastersGetNames`
+  - `_LOWriter_FieldSetVarMasterListFields` --> `_LOWriter_FieldSetVarMasterFieldsGetList`
+  - `_LOWriter_FontsList` --> `_LOWriter_FontsGetNames`
+  - `_LOWriter_TableGetCellNames` --> `_LOWriter_TableCellsGetNames`
 - Renamed Functions to be consistent when testing if a thing exists:
-	- `_LOWriter_DocBookmarksHasName` --> `_LOWriter_DocBookmarkExists`
-	- `_LOWriter_DocHasFrameName` --> `_LOWriter_FrameExists`
-	- `_LOWriter_DocHasImageName` --> `_LOWriter_ImageExists`
-	- `_LOWriter_DocHasShapeName` --> `_LOWriter_ShapeExists`
-	- `_LOWriter_DocHasTableName` --> `_LOWriter_TableExists`
+  - `_LOWriter_DocBookmarksHasName` --> `_LOWriter_DocBookmarkExists`
+  - `_LOWriter_DocHasFrameName` --> `_LOWriter_FrameExists`
+  - `_LOWriter_DocHasImageName` --> `_LOWriter_ImageExists`
+  - `_LOWriter_DocHasShapeName` --> `_LOWriter_ShapeExists`
+  - `_LOWriter_DocHasTableName` --> `_LOWriter_TableExists`
 - Some functions would return an integer instead of an empty Array when no results were present when retrieving array of names or objects, this has been changed to return an empty array:
-	- _LOWriter_CharStylesGetNames
-	- _LOWriter_DocBookmarksGetNames
-	- _LOWriter_EndnotesGetList
-	- _LOWriter_FieldRefMarkList
-	- _LOWriter_FieldSetVarMasterFieldsGetList
-	- _LOWriter_FootnotesGetList
-	- _LOWriter_FrameStylesGetNames
-	- _LOWriter_ImagesGetNames
-	- _LOWriter_NumStylesGetNames
-	- _LOWriter_PageStylesGetNames
-	- _LOWriter_ParStylesGetNames
-	- _LOWriter_TablesGetNames
+  - _LOWriter_CharStylesGetNames
+  - _LOWriter_DocBookmarksGetNames
+  - _LOWriter_EndnotesGetList
+  - _LOWriter_FieldRefMarkList
+  - _LOWriter_FieldSetVarMasterFieldsGetList
+  - _LOWriter_FootnotesGetList
+  - _LOWriter_FrameStylesGetNames
+  - _LOWriter_ImagesGetNames
+  - _LOWriter_NumStylesGetNames
+  - _LOWriter_PageStylesGetNames
+  - _LOWriter_ParStylesGetNames
+  - _LOWriter_TablesGetNames
 - Modified `_LOWriter_DocPrintersAltGetNames` @Extended value when retrieving the default printer name, @Extended is now 1, instead of 2.
 - `_LOWriter_DocRedoGetAllActionTitles` now returns the number of results in @Extended value.
 - `_LOWriter_DocUndoGetAllActionTitles` now returns the number of results in @Extended value.
 - Made $oDoc parameter for `_LOWriter_FontExists` optional. This will affect the parameters and error return values of the following functions:
-	- __LOWriter_CharFont
-	- _LOWriter_CharStyleFont
-	- _LOWriter_DirFrmtFont
-	- _LOWriter_FindFormatModifyFont
-	- _LOWriter_FontExists
-	- _LOWriter_FontDescCreate
-	- _LOWriter_FontDescEdit
-	- _LOWriter_ParStyleFont
+  - __LOWriter_CharFont
+  - _LOWriter_CharStyleFont
+  - _LOWriter_DirFrmtFont
+  - _LOWriter_FindFormatModifyFont
+  - _LOWriter_FontExists
+  - _LOWriter_FontDescCreate
+  - _LOWriter_FontDescEdit
+  - _LOWriter_ParStyleFont
 - Modified `_LOWriter_ShapesGetNames` to return Shape Type instead of Implementation name.
 - Renamed `__LOWriter_ControlSetGetFontDesc` --> `__LOWriter_FormConSetGetFontDesc` to match other Form control function names.
 - Renamed all internal and user `_LOWriter_FormControl*` functions to `_LOWriter_FormCon*` for brevity.
 - Renamed all `$LOW_FORM_CONTROL_*` constants to `$LOW_FORM_CON_*` for brevity.
 - Add $iBorderColor to `_LOWriter_FormTableConGeneral` parameters. Update function and example as necessary.
 - Renamed more Functions to be consistent when retrieving arrays of names or objects:
-	- `_LOWriter_DateFormatKeyList` --> `_LOWriter_DateFormatKeysGetList`
-	- `_LOWriter_DirFrmtParTabStopList` --> `_LOWriter_DirFrmtParTabStopsGetList`
-	- `_LOWriter_FieldRefMarkList` --> `_LOWriter_FieldRefMarksGetNames`
-	- `_LOWriter_FormatKeyList` --> `_LOWriter_FormatKeysGetList`
-	- `_LOWriter_ParStyleTabStopList` --> `_LOWriter_ParStyleTabStopsGetList`
-	- `__LOWriter_ParTabStopList` --> `__LOWriter_ParTabStopsGetList`
+  - `_LOWriter_DateFormatKeyList` --> `_LOWriter_DateFormatKeysGetList`
+  - `_LOWriter_DirFrmtParTabStopList` --> `_LOWriter_DirFrmtParTabStopsGetList`
+  - `_LOWriter_FieldRefMarkList` --> `_LOWriter_FieldRefMarksGetNames`
+  - `_LOWriter_FormatKeyList` --> `_LOWriter_FormatKeysGetList`
+  - `_LOWriter_ParStyleTabStopList` --> `_LOWriter_ParStyleTabStopsGetList`
+  - `__LOWriter_ParTabStopList` --> `__LOWriter_ParTabStopsGetList`
 - Made $oDoc Parameter optional for `_LOWriter_FontsGetNames`.
 - Added count of number of results for `_LOWriter_DocConnect`, connect-all and partial name search when more than one result is present.
 - Removed _ArrayDisplay from most examples.
@@ -1645,178 +1645,178 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Made `_LOWriter_DocReplaceAll` and `_LOWriter_DocReplaceAllInRange` return the number of replacements made, instead of setting @Extended.
 - Made `_LOWriter_DocFindAll` and `_LOWriter_DocFindAllInRange` always return an Array, instead of "1" when no results were found.
 - Renamed Transparency functions to be consistent and kept together with other background functions:
-	- `_LOWriter_FrameStyleTransparency` --> `_LOWriter_FrameStyleAreaTransparency`
-	- `_LOWriter_FrameStyleTransparencyGradient` --> `_LOWriter_FrameStyleAreaTransparencyGradient`
-	- `_LOWriter_FrameTransparency` --> `_LOWriter_FrameAreaTransparency`
-	- `_LOWriter_FrameTransparencyGradient` --> `_LOWriter_FrameAreaTransparencyGradient`
-	- `_LOWriter_PageStyleFooterTransparency` --> `_LOWriter_PageStyleFooterAreaTransparency`
-	- `_LOWriter_PageStyleFooterTransparencyGradient` --> `_LOWriter_PageStyleFooterAreaTransparencyGradient`
-	- `_LOWriter_PageStyleHeaderTransparency` --> `_LOWriter_PageStyleHeaderAreaTransparency`
-	- `_LOWriter_PageStyleHeaderTransparencyGradient` --> `_LOWriter_PageStyleHeaderAreaTransparencyGradient`
-	- `_LOWriter_PageStyleTransparency` --> `_LOWriter_PageStyleAreaTransparency`
-	- `_LOWriter_PageStyleTransparencyGradient` --> `_LOWriter_PageStyleAreaTransparencyGradient`
-	- `_LOWriter_ShapeTransparency` --> `_LOWriter_ShapeAreaTransparency`
-	- `_LOWriter_ShapeTransparencyGradient` --> `_LOWriter_ShapeAreaTransparencyGradient`
+  - `_LOWriter_FrameStyleTransparency` --> `_LOWriter_FrameStyleAreaTransparency`
+  - `_LOWriter_FrameStyleTransparencyGradient` --> `_LOWriter_FrameStyleAreaTransparencyGradient`
+  - `_LOWriter_FrameTransparency` --> `_LOWriter_FrameAreaTransparency`
+  - `_LOWriter_FrameTransparencyGradient` --> `_LOWriter_FrameAreaTransparencyGradient`
+  - `_LOWriter_PageStyleFooterTransparency` --> `_LOWriter_PageStyleFooterAreaTransparency`
+  - `_LOWriter_PageStyleFooterTransparencyGradient` --> `_LOWriter_PageStyleFooterAreaTransparencyGradient`
+  - `_LOWriter_PageStyleHeaderTransparency` --> `_LOWriter_PageStyleHeaderAreaTransparency`
+  - `_LOWriter_PageStyleHeaderTransparencyGradient` --> `_LOWriter_PageStyleHeaderAreaTransparencyGradient`
+  - `_LOWriter_PageStyleTransparency` --> `_LOWriter_PageStyleAreaTransparency`
+  - `_LOWriter_PageStyleTransparencyGradient` --> `_LOWriter_PageStyleAreaTransparencyGradient`
+  - `_LOWriter_ShapeTransparency` --> `_LOWriter_ShapeAreaTransparency`
+  - `_LOWriter_ShapeTransparencyGradient` --> `_LOWriter_ShapeAreaTransparencyGradient`
 - Renamed Shape line style constant `$LOW_SHAPE_LINE_STYLE_LINE_STYLE_9` to `$LOW_SHAPE_LINE_STYLE_SPARSE_DASH` to match changes in L.O. 24.2.
 - `_LOWriter_DocRedoCurActionTitle` to only have one Success return, either with an empty String or the Current Redo Action Title.
 - `_LOWriter_DocUndoCurActionTitle` to only have one Success return, either with an empty String or the Current Undo Action Title.
 - Combined several Gradient examples.
 - Made optional parameters in internal functions be set to Null.
 - Renamed Paragraph background color functions for consistency:
-	- `_LOWriter_DirFrmtParBackColor` --> `_LOWriter_DirFrmtParAreaColor`
-	- `__LOWriter_ParBackColor` --> `__LOWriter_ParAreaColor`
-	- `_LOWriter_ParStyleBackColor` --> `_LOWriter_ParStyleAreaColor`
+  - `_LOWriter_DirFrmtParBackColor` --> `_LOWriter_DirFrmtParAreaColor`
+  - `__LOWriter_ParBackColor` --> `__LOWriter_ParAreaColor`
+  - `_LOWriter_ParStyleBackColor` --> `_LOWriter_ParStyleAreaColor`
 - Rename Table background color functions for consistency:
-	- `_LOWriter_TableColor` --> `_LOWriter_TableBackColor`
-	- `_LOWriter_TableRowColor` --> `_LOWriter_TableRowBackColor`
+  - `_LOWriter_TableColor` --> `_LOWriter_TableBackColor`
+  - `_LOWriter_TableRowColor` --> `_LOWriter_TableRowBackColor`
 - Merged Selection Set/Get functions into one function, `_LOWriter_DocSelection`
 - Removed unused variables and parameters in some functions. Affected functions are as follows:
-	- `_LOWriter_DocBookmarkModify` -- removed $oDoc parameter.
-	- `_LOWriter_FieldDelete` -- removed $oDoc parameter.
-	- `_LOWriter_FieldDocInfoEditTimeModify` -- removed $oDoc parameter.
-	- `_LOWriter_FieldSetVarMasterFieldsGetList` -- removed $oDoc parameter.
-	- `_LOWriter_NumStyleSetLevel` -- removed $oDoc parameter.
+  - `_LOWriter_DocBookmarkModify` -- removed $oDoc parameter.
+  - `_LOWriter_FieldDelete` -- removed $oDoc parameter.
+  - `_LOWriter_FieldDocInfoEditTimeModify` -- removed $oDoc parameter.
+  - `_LOWriter_FieldSetVarMasterFieldsGetList` -- removed $oDoc parameter.
+  - `_LOWriter_NumStyleSetLevel` -- removed $oDoc parameter.
 - Removed $bBackTransparent/$bTransparent Parameter from the following functions, renumbering Return values also.
-	- __LOWriter_CharShadow
-	- __LOWriter_ParAreaColor
-	- __LOWriter_ParShadow
-	- _LOWriter_CellBackColor
-	- _LOWriter_CharStyleShadow
-	- _LOWriter_DirFrmtCharShadow
-	- _LOWriter_DirFrmtParAreaColor
-	- _LOWriter_DirFrmtParShadow
-	- _LOWriter_FrameAreaColor
-	- _LOWriter_FrameShadow
-	- _LOWriter_FrameStyleAreaColor
-	- _LOWriter_FrameStyleShadow
-	- _LOWriter_ImageAreaColor
-	- _LOWriter_ImageShadow
-	- _LOWriter_PageStyleAreaColor
-	- _LOWriter_PageStyleFooterAreaColor
-	- _LOWriter_PageStyleFooterShadow
-	- _LOWriter_PageStyleHeaderAreaColor
-	- _LOWriter_PageStyleHeaderShadow
-	- _LOWriter_PageStyleShadow
-	- _LOWriter_ParStyleAreaColor
-	- _LOWriter_ParStyleShadow
-	- _LOWriter_TableBackColor
-	- _LOWriter_TableRowBackColor
-	- _LOWriter_TableShadow
+  - __LOWriter_CharShadow
+  - __LOWriter_ParAreaColor
+  - __LOWriter_ParShadow
+  - _LOWriter_CellBackColor
+  - _LOWriter_CharStyleShadow
+  - _LOWriter_DirFrmtCharShadow
+  - _LOWriter_DirFrmtParAreaColor
+  - _LOWriter_DirFrmtParShadow
+  - _LOWriter_FrameAreaColor
+  - _LOWriter_FrameShadow
+  - _LOWriter_FrameStyleAreaColor
+  - _LOWriter_FrameStyleShadow
+  - _LOWriter_ImageAreaColor
+  - _LOWriter_ImageShadow
+  - _LOWriter_PageStyleAreaColor
+  - _LOWriter_PageStyleFooterAreaColor
+  - _LOWriter_PageStyleFooterShadow
+  - _LOWriter_PageStyleHeaderAreaColor
+  - _LOWriter_PageStyleHeaderShadow
+  - _LOWriter_PageStyleShadow
+  - _LOWriter_ParStyleAreaColor
+  - _LOWriter_ParStyleShadow
+  - _LOWriter_TableBackColor
+  - _LOWriter_TableRowBackColor
+  - _LOWriter_TableShadow
 - Renumbered some error values, after removing redundant error checking.
-	- __LOWriter_CharBorderPadding
-	- __LOWriter_CharEffect
-	- __LOWriter_CharFont
-	- __LOWriter_CharFontColor
-	- __LOWriter_CharOverLine
-	- __LOWriter_CharPosition
-	- __LOWriter_CharRotateScale
-	- __LOWriter_CharShadow
-	- __LOWriter_CharSpacing
-	- __LOWriter_CharStrikeOut
-	- __LOWriter_CharUnderLine
-	- __LOWriter_ParAlignment
-	- __LOWriter_ParAreaColor
-	- __LOWriter_ParBorderPadding
-	- __LOWriter_ParDropCaps
-	- __LOWriter_ParHyphenation
-	- __LOWriter_ParIndent
-	- __LOWriter_ParOutLineAndList
-	- __LOWriter_ParPageBreak
-	- __LOWriter_ParShadow
-	- __LOWriter_ParSpace
-	- __LOWriter_ParTabStopCreate
-	- __LOWriter_ParTabStopDelete
-	- __LOWriter_ParTabStopMod
-	- __LOWriter_ParTabStopsGetList
-	- __LOWriter_ParTxtFlowOpt
-	- _LOWriter_CellFormula
-	- _LOWriter_CellString
-	- _LOWriter_CellValue
-	- _LOWriter_CharStyleBorderPadding
-	- _LOWriter_CharStyleEffect
-	- _LOWriter_CharStyleFont
-	- _LOWriter_CharStyleFontColor
-	- _LOWriter_CharStyleOverLine
-	- _LOWriter_CharStylePosition
-	- _LOWriter_CharStyleRotateScale
-	- _LOWriter_CharStyleShadow
-	- _LOWriter_CharStyleSpacing
-	- _LOWriter_CharStyleStrikeOut
-	- _LOWriter_CharStyleUnderLine
-	- _LOWriter_DirFrmtCharBorderPadding
-	- _LOWriter_DirFrmtCharEffect
-	- _LOWriter_DirFrmtFont
-	- _LOWriter_DirFrmtFontColor
-	- _LOWriter_DirFrmtOverLine
-	- _LOWriter_DirFrmtCharPosition
-	- _LOWriter_DirFrmtCharRotateScale
-	- _LOWriter_DirFrmtCharShadow
-	- _LOWriter_DirFrmtCharSpacing
-	- _LOWriter_DirFrmtStrikeOut
-	- _LOWriter_DirFrmtUnderLine
-	- _LOWriter_DirFrmtParAlignment
-	- _LOWriter_DirFrmtParAreaColor
-	- _LOWriter_DirFrmtParBorderPadding
-	- _LOWriter_DirFrmtParDropCaps
-	- _LOWriter_DirFrmtParHyphenation
-	- _LOWriter_DirFrmtParIndent
-	- _LOWriter_DirFrmtParOutLineAndList
-	- _LOWriter_DirFrmtParPageBreak
-	- _LOWriter_DirFrmtParShadow
-	- _LOWriter_DirFrmtParSpace
-	- _LOWriter_DirFrmtParTabStopCreate
-	- _LOWriter_DirFrmtParTabStopDelete
-	- _LOWriter_DirFrmtParTabStopMod
-	- _LOWriter_DirFrmtParTabStopsGetList
-	- _LOWriter_DirFrmtParTxtFlowOpt
-	- _LOWriter_ParStyleAlignment
-	- _LOWriter_ParStyleAreaColor
-	- _LOWriter_ParStyleBorderPadding
-	- _LOWriter_ParStyleDropCaps
-	- _LOWriter_ParStyleEffect
-	- _LOWriter_ParStyleFont
-	- _LOWriter_ParStyleFontColor
-	- _LOWriter_ParStyleHyphenation
-	- _LOWriter_ParStyleIndent
-	- _LOWriter_ParStyleOutLineAndList
-	- _LOWriter_ParStyleOverLine
-	- _LOWriter_ParStylePageBreak
-	- _LOWriter_ParStylePageBreak
-	- _LOWriter_ParStylePosition
-	- _LOWriter_ParStyleRotateScale
-	- _LOWriter_ParStyleShadow
-	- _LOWriter_ParStyleSpace
-	- _LOWriter_ParStyleSpacing
-	- _LOWriter_ParStyleStrikeOut
-	- _LOWriter_ParStyleTabStopCreate
-	- _LOWriter_ParStyleTabStopDelete
-	- _LOWriter_ParStyleTabStopMod
-	- _LOWriter_ParStyleTabStopsGetList
-	- _LOWriter_ParStyleTxtFlowOpt
-	- _LOWriter_ParStyleUnderLine
+  - __LOWriter_CharBorderPadding
+  - __LOWriter_CharEffect
+  - __LOWriter_CharFont
+  - __LOWriter_CharFontColor
+  - __LOWriter_CharOverLine
+  - __LOWriter_CharPosition
+  - __LOWriter_CharRotateScale
+  - __LOWriter_CharShadow
+  - __LOWriter_CharSpacing
+  - __LOWriter_CharStrikeOut
+  - __LOWriter_CharUnderLine
+  - __LOWriter_ParAlignment
+  - __LOWriter_ParAreaColor
+  - __LOWriter_ParBorderPadding
+  - __LOWriter_ParDropCaps
+  - __LOWriter_ParHyphenation
+  - __LOWriter_ParIndent
+  - __LOWriter_ParOutLineAndList
+  - __LOWriter_ParPageBreak
+  - __LOWriter_ParShadow
+  - __LOWriter_ParSpace
+  - __LOWriter_ParTabStopCreate
+  - __LOWriter_ParTabStopDelete
+  - __LOWriter_ParTabStopMod
+  - __LOWriter_ParTabStopsGetList
+  - __LOWriter_ParTxtFlowOpt
+  - _LOWriter_CellFormula
+  - _LOWriter_CellString
+  - _LOWriter_CellValue
+  - _LOWriter_CharStyleBorderPadding
+  - _LOWriter_CharStyleEffect
+  - _LOWriter_CharStyleFont
+  - _LOWriter_CharStyleFontColor
+  - _LOWriter_CharStyleOverLine
+  - _LOWriter_CharStylePosition
+  - _LOWriter_CharStyleRotateScale
+  - _LOWriter_CharStyleShadow
+  - _LOWriter_CharStyleSpacing
+  - _LOWriter_CharStyleStrikeOut
+  - _LOWriter_CharStyleUnderLine
+  - _LOWriter_DirFrmtCharBorderPadding
+  - _LOWriter_DirFrmtCharEffect
+  - _LOWriter_DirFrmtFont
+  - _LOWriter_DirFrmtFontColor
+  - _LOWriter_DirFrmtOverLine
+  - _LOWriter_DirFrmtCharPosition
+  - _LOWriter_DirFrmtCharRotateScale
+  - _LOWriter_DirFrmtCharShadow
+  - _LOWriter_DirFrmtCharSpacing
+  - _LOWriter_DirFrmtStrikeOut
+  - _LOWriter_DirFrmtUnderLine
+  - _LOWriter_DirFrmtParAlignment
+  - _LOWriter_DirFrmtParAreaColor
+  - _LOWriter_DirFrmtParBorderPadding
+  - _LOWriter_DirFrmtParDropCaps
+  - _LOWriter_DirFrmtParHyphenation
+  - _LOWriter_DirFrmtParIndent
+  - _LOWriter_DirFrmtParOutLineAndList
+  - _LOWriter_DirFrmtParPageBreak
+  - _LOWriter_DirFrmtParShadow
+  - _LOWriter_DirFrmtParSpace
+  - _LOWriter_DirFrmtParTabStopCreate
+  - _LOWriter_DirFrmtParTabStopDelete
+  - _LOWriter_DirFrmtParTabStopMod
+  - _LOWriter_DirFrmtParTabStopsGetList
+  - _LOWriter_DirFrmtParTxtFlowOpt
+  - _LOWriter_ParStyleAlignment
+  - _LOWriter_ParStyleAreaColor
+  - _LOWriter_ParStyleBorderPadding
+  - _LOWriter_ParStyleDropCaps
+  - _LOWriter_ParStyleEffect
+  - _LOWriter_ParStyleFont
+  - _LOWriter_ParStyleFontColor
+  - _LOWriter_ParStyleHyphenation
+  - _LOWriter_ParStyleIndent
+  - _LOWriter_ParStyleOutLineAndList
+  - _LOWriter_ParStyleOverLine
+  - _LOWriter_ParStylePageBreak
+  - _LOWriter_ParStylePageBreak
+  - _LOWriter_ParStylePosition
+  - _LOWriter_ParStyleRotateScale
+  - _LOWriter_ParStyleShadow
+  - _LOWriter_ParStyleSpace
+  - _LOWriter_ParStyleSpacing
+  - _LOWriter_ParStyleStrikeOut
+  - _LOWriter_ParStyleTabStopCreate
+  - _LOWriter_ParStyleTabStopDelete
+  - _LOWriter_ParStyleTabStopMod
+  - _LOWriter_ParStyleTabStopsGetList
+  - _LOWriter_ParStyleTxtFlowOpt
+  - _LOWriter_ParStyleUnderLine
 - Removed check for Table being inserted in the document, changing error return values:
-	- _LOWriter_TableBorderColor
-	- _LOWriter_TableBorderPadding
-	- _LOWriter_TableBorderStyle
-	- _LOWriter_TableBorderWidth
-	- _LOWriter_TableColumnDelete
-	- _LOWriter_TableColumnGetCount
-	- _LOWriter_TableColumnInsert
-	- _LOWriter_TableDelete
-	- _LOWriter_TableGetCellObjByCursor
-	- _LOWriter_TableGetCellObjByName
-	- _LOWriter_TableGetCellObjByPosition
-	- _LOWriter_TableGetData
-	- _LOWriter_TableMargin
-	- _LOWriter_TableProperties
-	- _LOWriter_TableRowBackColor
-	- _LOWriter_TableRowDelete
-	- _LOWriter_TableRowGetCount
-	- _LOWriter_TableRowInsert
-	- _LOWriter_TableRowProperty
-	- _LOWriter_TableSetData
-	- _LOWriter_TableShadow
-	- _LOWriter_TableWidth
+  - _LOWriter_TableBorderColor
+  - _LOWriter_TableBorderPadding
+  - _LOWriter_TableBorderStyle
+  - _LOWriter_TableBorderWidth
+  - _LOWriter_TableColumnDelete
+  - _LOWriter_TableColumnGetCount
+  - _LOWriter_TableColumnInsert
+  - _LOWriter_TableDelete
+  - _LOWriter_TableGetCellObjByCursor
+  - _LOWriter_TableGetCellObjByName
+  - _LOWriter_TableGetCellObjByPosition
+  - _LOWriter_TableGetData
+  - _LOWriter_TableMargin
+  - _LOWriter_TableProperties
+  - _LOWriter_TableRowBackColor
+  - _LOWriter_TableRowDelete
+  - _LOWriter_TableRowGetCount
+  - _LOWriter_TableRowInsert
+  - _LOWriter_TableRowProperty
+  - _LOWriter_TableSetData
+  - _LOWriter_TableShadow
+  - _LOWriter_TableWidth
 - Added position parameters (X and Y) to `_LOWriter_ShapeInsert`.
 - Modified `_LOWriter_TableCreate` to eliminate the need for a separate insertion function. Also rearranged and added parameters.
 - Added $oDoc parameter to `_LOWriter_TableProperties`.
@@ -1824,109 +1824,109 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Switched order of parameters in `_LOWriter_TableGetData`, changing $iRow to come after $iColumn.
 - Removed replacement of CRLF with CR in `_LOWriter_TableGetData`.
 - Changed error values for the following:
-	- __LOWriter_Border
-	- __LOWriter_CharBorder
-	- __LOWriter_FooterBorder
-	- __LOWriter_HeaderBorder
-	- __LOWriter_TableBorder
-	- _LOWriter_CellBorderColor
-	- _LOWriter_CellBorderStyle
-	- _LOWriter_CellBorderWidth
-	- _LOWriter_CharStyleBorderColor
-	- _LOWriter_CharStyleBorderStyle
-	- _LOWriter_CharStyleBorderWidth
-	- _LOWriter_DirFrmtCharBorderColor
-	- _LOWriter_DirFrmtCharBorderStyle
-	- _LOWriter_DirFrmtCharBorderWidth
-	- _LOWriter_DirFrmtParBorderColor
-	- _LOWriter_DirFrmtParBorderStyle
-	- _LOWriter_DirFrmtParBorderWidth
-	- _LOWriter_DocExport
-	- _LOWriter_DocPrint
-	- _LOWriter_FrameBorderColor
-	- _LOWriter_FrameBorderStyle
-	- _LOWriter_FrameBorderWidth
-	- _LOWriter_FrameStyleBorderColor
-	- _LOWriter_FrameStyleBorderStyle
-	- _LOWriter_FrameStyleBorderWidth
-	- _LOWriter_ImageBorderColor
-	- _LOWriter_ImageBorderStyle
-	- _LOWriter_ImageBorderWidth
-	- _LOWriter_PageStyleBorderColor
-	- _LOWriter_PageStyleBorderStyle
-	- _LOWriter_PageStyleBorderWidth
-	- _LOWriter_PageStyleFooterBorderColor
-	- _LOWriter_PageStyleFooterBorderStyle
-	- _LOWriter_PageStyleFooterBorderWidth
-	- _LOWriter_PageStyleHeaderBorderColor
-	- _LOWriter_PageStyleHeaderBorderStyle
-	- _LOWriter_PageStyleHeaderBorderWidth
-	- _LOWriter_ParStyleBorderColor
-	- _LOWriter_ParStyleBorderStyle
-	- _LOWriter_ParStyleBorderWidth
-	- _LOWriter_ShapePointsModify
-	- _LOWriter_TableBorderColor
-	- _LOWriter_TableBorderStyle
-	- _LOWriter_TableBorderWidth
+  - __LOWriter_Border
+  - __LOWriter_CharBorder
+  - __LOWriter_FooterBorder
+  - __LOWriter_HeaderBorder
+  - __LOWriter_TableBorder
+  - _LOWriter_CellBorderColor
+  - _LOWriter_CellBorderStyle
+  - _LOWriter_CellBorderWidth
+  - _LOWriter_CharStyleBorderColor
+  - _LOWriter_CharStyleBorderStyle
+  - _LOWriter_CharStyleBorderWidth
+  - _LOWriter_DirFrmtCharBorderColor
+  - _LOWriter_DirFrmtCharBorderStyle
+  - _LOWriter_DirFrmtCharBorderWidth
+  - _LOWriter_DirFrmtParBorderColor
+  - _LOWriter_DirFrmtParBorderStyle
+  - _LOWriter_DirFrmtParBorderWidth
+  - _LOWriter_DocExport
+  - _LOWriter_DocPrint
+  - _LOWriter_FrameBorderColor
+  - _LOWriter_FrameBorderStyle
+  - _LOWriter_FrameBorderWidth
+  - _LOWriter_FrameStyleBorderColor
+  - _LOWriter_FrameStyleBorderStyle
+  - _LOWriter_FrameStyleBorderWidth
+  - _LOWriter_ImageBorderColor
+  - _LOWriter_ImageBorderStyle
+  - _LOWriter_ImageBorderWidth
+  - _LOWriter_PageStyleBorderColor
+  - _LOWriter_PageStyleBorderStyle
+  - _LOWriter_PageStyleBorderWidth
+  - _LOWriter_PageStyleFooterBorderColor
+  - _LOWriter_PageStyleFooterBorderStyle
+  - _LOWriter_PageStyleFooterBorderWidth
+  - _LOWriter_PageStyleHeaderBorderColor
+  - _LOWriter_PageStyleHeaderBorderStyle
+  - _LOWriter_PageStyleHeaderBorderWidth
+  - _LOWriter_ParStyleBorderColor
+  - _LOWriter_ParStyleBorderStyle
+  - _LOWriter_ParStyleBorderWidth
+  - _LOWriter_ShapePointsModify
+  - _LOWriter_TableBorderColor
+  - _LOWriter_TableBorderStyle
+  - _LOWriter_TableBorderWidth
 - LibreOffice 25.2 fixed a "bug" where translated style names (Display Names) were accepted as well as programmatic style names for style management (Paragraph, Character, etc). Previously this UDF internally automatically switched between the Display Name to the internal name and vice versa, this however limited its usage to the English version of LibreOffice. This UDF has been modified to now return by default the internal programmatic style names. Up and until L.O. 25.2 the Display Name should still work in this UDF, though property setting errors may occur because L.O. switches all style names to use the internal name. All Style name retrieval functions now have an option to return the DisplayName also for convenience. Any functions the accept a Style name will now return the internal style name instead of the Display Name as before. The following functions were affected by these changes:
-	- __LOWriter_ParDropCaps
-	- _LOWriter_CharStyleOrganizer
-	- _LOWriter_CharStyleSet
-	- _LOWriter_CharStylesGetNames
-	- _LOWriter_DirFrmtGetCurStyles
-	- _LOWriter_EndnoteSettingsStyles
-	- _LOWriter_FootnoteSettingsStyles
-	- _LOWriter_FrameStyleOrganizer
-	- _LOWriter_FrameStylesGetNames
-	- _LOWriter_NumStylesGetNames
-	- _LOWriter_PageStyleLayout
-	- _LOWriter_PageStyleOrganizer
-	- _LOWriter_PageStyleSet
-	- _LOWriter_PageStylesGetNames
-	- _LOWriter_ParStyleOrganizer
-	- _LOWriter_ParStyleSet
-	- _LOWriter_ParStylesGetNames
-	- _LOWriter_TableStyle
-	- _LOWriter_TableStylesGetNames
+  - __LOWriter_ParDropCaps
+  - _LOWriter_CharStyleOrganizer
+  - _LOWriter_CharStyleSet
+  - _LOWriter_CharStylesGetNames
+  - _LOWriter_DirFrmtGetCurStyles
+  - _LOWriter_EndnoteSettingsStyles
+  - _LOWriter_FootnoteSettingsStyles
+  - _LOWriter_FrameStyleOrganizer
+  - _LOWriter_FrameStylesGetNames
+  - _LOWriter_NumStylesGetNames
+  - _LOWriter_PageStyleLayout
+  - _LOWriter_PageStyleOrganizer
+  - _LOWriter_PageStyleSet
+  - _LOWriter_PageStylesGetNames
+  - _LOWriter_ParStyleOrganizer
+  - _LOWriter_ParStyleSet
+  - _LOWriter_ParStylesGetNames
+  - _LOWriter_TableStyle
+  - _LOWriter_TableStylesGetNames
 - Fix inconsistent Initialization and Processing error usage:
-	- __LOWriter_NumStyleListFormat
-	- _LOWriter_DocClose
-	- _LOWriter_DocSaveAs
-	- _LOWriter_DocSelection
-	- _LOWriter_FormConTableConColumnAdd
-	- _LOWriter_FormParent
-	- _LOWriter_ImageInsert
-	- _LOWriter_NumStyleCustomize
-	- _LOWriter_NumStylePosition
+  - __LOWriter_NumStyleListFormat
+  - _LOWriter_DocClose
+  - _LOWriter_DocSaveAs
+  - _LOWriter_DocSelection
+  - _LOWriter_FormConTableConColumnAdd
+  - _LOWriter_FormParent
+  - _LOWriter_ImageInsert
+  - _LOWriter_NumStyleCustomize
+  - _LOWriter_NumStylePosition
 - Added find and replace of CRLF to CR to certain functions, to prevent adding extra newlines accidentally (L.O. uses CR and LF separately):
-	- _LOWriter_CellString
-	- _LOWriter_DocInsertString
-	- _LOWriter_ShapeTextBox
-	- _LOWriter_TableSetData
+  - _LOWriter_CellString
+  - _LOWriter_DocInsertString
+  - _LOWriter_ShapeTextBox
+  - _LOWriter_TableSetData
 - Changed Style setting functions to Set and Retrieve, also renamed them to reflect the change:
-	- `_LOWriter_CharStyleSet` --> `_LOWriter_CharStyleCurrent`
-	- `_LOWriter_FrameStyleSet` --> `_LOWriter_FrameStyleCurrent`
-	- `_LOWriter_NumStyleSet` --> `_LOWriter_NumStyleCurrent`
-	- `_LOWriter_PageStyleSet` --> `_LOWriter_PageStyleCurrent`
-	- `_LOWriter_ParStyleSet` --> `_LOWriter_ParStyleCurrent`
-	- `_LOWriter_TableStyle` --> `_LOWriter_TableStyleCurrent`
+  - `_LOWriter_CharStyleSet` --> `_LOWriter_CharStyleCurrent`
+  - `_LOWriter_FrameStyleSet` --> `_LOWriter_FrameStyleCurrent`
+  - `_LOWriter_NumStyleSet` --> `_LOWriter_NumStyleCurrent`
+  - `_LOWriter_PageStyleSet` --> `_LOWriter_PageStyleCurrent`
+  - `_LOWriter_ParStyleSet` --> `_LOWriter_ParStyleCurrent`
+  - `_LOWriter_TableStyle` --> `_LOWriter_TableStyleCurrent`
 
 #### Documented
 
 - Minor documentation adjustments.
 - Spell Checked the comments and Headers.
 - Added missing error return value descriptions in:
-	- _LOWriter_FootnoteGetAnchor
-	- _LOWriter_EndnoteGetAnchor
-	- _LOWriter_FrameGetAnchor
-	- _LOWriter_ImageGetAnchor
+  - _LOWriter_FootnoteGetAnchor
+  - _LOWriter_EndnoteGetAnchor
+  - _LOWriter_FrameGetAnchor
+  - _LOWriter_ImageGetAnchor
 - Added missing Parameters in some headers or Syntax header.
 - Some function header parameter descriptions were out of order.
-	- __LOWriter_CharOverLine
-	- __LOWriter_ParSpace
+  - __LOWriter_CharOverLine
+  - __LOWriter_ParSpace
 - Wrong variables listed in header Syntax:
-	- _LOWriter_FormConComboBoxData
-	- _LOWriter_FormConTableConComboBoxData
+  - _LOWriter_FormConComboBoxData
+  - _LOWriter_FormConTableConComboBoxData
 - `_LOWriter_FormConPushButtonGeneral` Removed duplicated parameter in Header Parameter description.
 - Added LibreOffice SDK/API Constant names to constants.
 
@@ -1954,23 +1954,23 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `__LOWriter_GetShapeName` had an error where a COM Error would be triggered each time it was called.
 - Added missing example. `_LOWriter_ImageExists`
 - Backwards Parameters in VarsAreNull in the following functions:
-	- _LOWriter_FieldDateTimeModify
-	- _LOWriter_FieldFileNameModify
+  - _LOWriter_FieldDateTimeModify
+  - _LOWriter_FieldFileNameModify
 - Add missing parameter to VarsAreNull in `_LOWriter_DocFormSettings`.
 - `_LOWriter_DocCreate` not finding a blank open document to connect to, if available, due to reversed logical operator.
 - `__LOWriter_Shape_CreateLine` was not checking if a Struct was created appropriately.
 - One Shape line style (`$LOW_SHAPE_LINE_STYLE_LINE_STYLE_9`), was renamed in L.O. Version 24.2 to "Sparse Dash".
 - When modifying values of a Gradient from a pre-set Gradient the name would stay the same instead of being changed to "Gradient X":
-	- __LOWriter_ParAreaGradient
-	- _LOWriter_DirFrmtParAreaGradient
-	- _LOWriter_FrameAreaGradient
-	- _LOWriter_FrameStyleAreaGradient,
-	- _LOWriter_ImageAreaGradient
-	- _LOWriter_PageStyleAreaGradient
-	- _LOWriter_PageStyleFooterAreaGradient
-	- _LOWriter_PageStyleHeaderAreaGradient
-	- _LOWriter_ParStyleAreaGradient
-	- _LOWriter_ShapeAreaGradient
+  - __LOWriter_ParAreaGradient
+  - _LOWriter_DirFrmtParAreaGradient
+  - _LOWriter_FrameAreaGradient
+  - _LOWriter_FrameStyleAreaGradient,
+  - _LOWriter_ImageAreaGradient
+  - _LOWriter_PageStyleAreaGradient
+  - _LOWriter_PageStyleFooterAreaGradient
+  - _LOWriter_PageStyleHeaderAreaGradient
+  - _LOWriter_ParStyleAreaGradient
+  - _LOWriter_ShapeAreaGradient
 
 #### Refactored
 
@@ -1980,56 +1980,56 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Spell Checked Examples.
 - Made Shape insertion work better.
 - Removed unused variables and parameters in some functions. Affected functions are as follows:
-	- `_LOWriter_DateFormatKeyDelete` -- removed internal variable.
-	- `_LOWriter_FormatKeyDelete` -- removed internal variable.
-	- `_LOWriter_ImageInsert` -- removed internal variable, now uses ViewCursor directly to insert an Image.
+  - `_LOWriter_DateFormatKeyDelete` -- removed internal variable.
+  - `_LOWriter_FormatKeyDelete` -- removed internal variable.
+  - `_LOWriter_ImageInsert` -- removed internal variable, now uses ViewCursor directly to insert an Image.
 - All calls to ObjCreate to create a com.sun.star.ServiceManager Object are routed through an internal Function which stores a reference to the Object rather than creating a new instance each time, this also allows the ability to automate Portable LO. Affected Functions are (and any functions using these functions):
-	- __LOWriter_CreateStruct
-	- __LOWriter_NumStyleInitiateDocument
-	- _LOWriter_DirFrmtClear
-	- _LOWriter_DocConnect
-	- _LOWriter_DocConvertTableToText
-	- _LOWriter_DocConvertTextToTable
-	- _LOWriter_DocCreate
-	- _LOWriter_DocExecuteDispatch
-	- _LOWriter_DocOpen
-	- _LOWriter_DocPrintersGetNames
-	- _LOWriter_DocReplaceAllInRange
-	- _LOWriter_DocZoom
-	- _LOWriter_FontExists
-	- _LOWriter_FontsGetNames
-	- _LOWriter_FormPropertiesData
-	- _LOWriter_ImageInsert
-	- _LOWriter_VersionGet
+  - __LOWriter_CreateStruct
+  - __LOWriter_NumStyleInitiateDocument
+  - _LOWriter_DirFrmtClear
+  - _LOWriter_DocConnect
+  - _LOWriter_DocConvertTableToText
+  - _LOWriter_DocConvertTextToTable
+  - _LOWriter_DocCreate
+  - _LOWriter_DocExecuteDispatch
+  - _LOWriter_DocOpen
+  - _LOWriter_DocPrintersGetNames
+  - _LOWriter_DocReplaceAllInRange
+  - _LOWriter_DocZoom
+  - _LOWriter_FontExists
+  - _LOWriter_FontsGetNames
+  - _LOWriter_FormPropertiesData
+  - _LOWriter_ImageInsert
+  - _LOWriter_VersionGet
 - Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.
 - All `__LOWriter_Shape_Create*` functions did not use ByRef for one parameter.
 - Added internal function to check whether a Character Style was set, checking both internal and display names. Affected functions are:
-	- __LOWriter_ParDropCaps
-	- _LOWriter_CharStyleOrganizer
-	- _LOWriter_CharStyleSet
-	- _LOWriter_EndnoteSettingsStyles
-	- _LOWriter_FootnoteSettingsStyles
-	- _LOWriter_NumStyleCustomize
+  - __LOWriter_ParDropCaps
+  - _LOWriter_CharStyleOrganizer
+  - _LOWriter_CharStyleSet
+  - _LOWriter_EndnoteSettingsStyles
+  - _LOWriter_FootnoteSettingsStyles
+  - _LOWriter_NumStyleCustomize
 - Added internal function to check whether a Numbering Style was set, checking both internal and display names. Affected functions are:
-	- __LOWriter_ParOutLineAndList
-	- _LOWriter_NumStyleOrganizer
-	- _LOWriter_NumStyleSet
+  - __LOWriter_ParOutLineAndList
+  - _LOWriter_NumStyleOrganizer
+  - _LOWriter_NumStyleSet
 - Added internal function to check whether a Page Style was set, checking both internal and display names. Affected functions are:
-	- __LOWriter_ParPageBreak
-	- _LOWriter_EndnoteSettingsStyles
-	- _LOWriter_FootnoteSettingsStyles
-	- _LOWriter_PageStyleOrganizer
-	- _LOWriter_PageStyleSet
-	- _LOWriter_TableBreak
+  - __LOWriter_ParPageBreak
+  - _LOWriter_EndnoteSettingsStyles
+  - _LOWriter_FootnoteSettingsStyles
+  - _LOWriter_PageStyleOrganizer
+  - _LOWriter_PageStyleSet
+  - _LOWriter_TableBreak
 - Added internal function to check whether a Paragraph Style was set, checking both internal and display names. Affected functions are:
-	- _LOWriter_EndnoteSettingsStyles
-	- _LOWriter_FootnoteSettingsStyles
-	- _LOWriter_PageStyleLayout
-	- _LOWriter_ParStyleOrganizer
-	- _LOWriter_ParStyleSet
+  - _LOWriter_EndnoteSettingsStyles
+  - _LOWriter_FootnoteSettingsStyles
+  - _LOWriter_PageStyleLayout
+  - _LOWriter_ParStyleOrganizer
+  - _LOWriter_ParStyleSet
 - Added internal function to check whether a Table Style was set, checking both internal and display names. Affected functions are:
-	- _LOWriter_TableCreate
-	- _LOWriter_TableStyle
+  - _LOWriter_TableCreate
+  - _LOWriter_TableStyle
 
 #### Removed
 
@@ -2041,25 +2041,25 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - __LOWriter_AddTo2DArray.
 - __LOWriter_VarsAreDefault
 - Centralized some internal functions. Thus removing the following individual Functions:
-	- __LOWriter_ArrayFill
-	- __LOWriter_AddTo1DArray
-	- __LOWriter_CreateStruct
-	- __LOWriter_IntIsBetween
-	- __LOWriter_NumIsBetween
-	- __LOWriter_SetPropertyValue
-	- __LOWriter_UnitConvert
-	- __LOWriter_VarsAreNull
-	- __LOWriter_VersionCheck
+  - __LOWriter_ArrayFill
+  - __LOWriter_AddTo1DArray
+  - __LOWriter_CreateStruct
+  - __LOWriter_IntIsBetween
+  - __LOWriter_NumIsBetween
+  - __LOWriter_SetPropertyValue
+  - __LOWriter_UnitConvert
+  - __LOWriter_VarsAreNull
+  - __LOWriter_VersionCheck
 - Centralized some Helper functions. Thus removing the following individual Functions:
-	- _LOWriter_ConvertColorFromLong
-	- _LOWriter_ConvertColorToLong
-	- _LOWriter_ConvertFromMicrometer
-	- _LOWriter_ConvertToMicrometer
-	- _LOWriter_PathConvert
-	- _LOWriter_VersionGet
+  - _LOWriter_ConvertColorFromLong
+  - _LOWriter_ConvertColorToLong
+  - _LOWriter_ConvertFromMicrometer
+  - _LOWriter_ConvertToMicrometer
+  - _LOWriter_PathConvert
+  - _LOWriter_VersionGet
 - Centralized some Constants. Thus removing the following individual Constants:
-	- $LOW_PATHCONV_*
-	- $LOW_COLOR_*
+  - $LOW_PATHCONV_*
+  - $LOW_COLOR_*
 - _LOWriter_DocSelectionGet
 - _LOWriter_DocSelectionSet
 - _LOWriter_TableInsert
@@ -2067,13 +2067,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - __LOWriter_TableHasColumnRange
 - __LOWriter_TableHasRowRange
 - Style Toggles:
-	- __LOWriter_CharStyleNameToggle
-	- __LOWriter_PageStyleNameToggle
-	- __LOWriter_ParStyleNameToggle
-	- __LOWriter_TableStyleNameToggle
+  - __LOWriter_CharStyleNameToggle
+  - __LOWriter_PageStyleNameToggle
+  - __LOWriter_ParStyleNameToggle
+  - __LOWriter_TableStyleNameToggle
 - Individual component Printer name retrieval functions:
-	- _LOWriter_DocPrintersGetNames
-	- _LOWriter_DocPrintersAltGetNames
+  - _LOWriter_DocPrintersGetNames
+  - _LOWriter_DocPrintersAltGetNames
 
 [To Top](#releases)
 
@@ -2095,58 +2095,58 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Directive for Au3Check to each UDF file branch. (@mLipok)
 - Image functions.
-	- _ImageAreaColor,
-	- _ImageAreaGradient,
-	- _ImageAreaTransparency,
-	- _ImageAreaTransparencyGradient,
-	- _ImageBorderColor,
-	- _ImageBorderPadding,
-	- _ImageBorderStyle,
-	- _ImageBorderWidth,
-	- _ImageColorAdjust,
-	- _ImageCrop,
-	- _ImageDelete,
-	- _ImageGetAnchor,
-	- _ImageGetObjByName,
-	- _ImageHyperlink,
-	- _ImageInsert,
-	- _ImageModify,
-	- _ImageOptions,
-	- _ImageOptionsName,
-	- _ImageReplace,
-	- _ImagesGetNames,
-	- _ImageShadow,
-	- _ImageSize,
-	- _ImageTransparency,
-	- _ImageTypePosition,
-	- _ImageTypeSize,
-	- _ImageWrap,
-	- _ImageWrapOptions
+  - _ImageAreaColor,
+  - _ImageAreaGradient,
+  - _ImageAreaTransparency,
+  - _ImageAreaTransparencyGradient,
+  - _ImageBorderColor,
+  - _ImageBorderPadding,
+  - _ImageBorderStyle,
+  - _ImageBorderWidth,
+  - _ImageColorAdjust,
+  - _ImageCrop,
+  - _ImageDelete,
+  - _ImageGetAnchor,
+  - _ImageGetObjByName,
+  - _ImageHyperlink,
+  - _ImageInsert,
+  - _ImageModify,
+  - _ImageOptions,
+  - _ImageOptionsName,
+  - _ImageReplace,
+  - _ImagesGetNames,
+  - _ImageShadow,
+  - _ImageSize,
+  - _ImageTransparency,
+  - _ImageTypePosition,
+  - _ImageTypeSize,
+  - _ImageWrap,
+  - _ImageWrapOptions
 
 #### Changed
 
 - Original LibreOffice UDF file split into individual elements, per specific usages. (@mLipok.)
-	- LibreOfficeWriter_Cell,
-	- LibreOfficeWriter_Char,
-	- LibreOfficeWriter_Constants,
-	- LibreOfficeWriter_Cursor,
-	- LibreOfficeWriter_DirectFormatting,
-	- LibreOfficeWriter_Doc,
-	- LibreOfficeWriter_Field,
-	- LibreOfficeWriter_Font,
-	- LibreOfficeWriter_FootEndNotes,
-	- LibreOfficeWriter_Frame,
-	- LibreOfficeWriter_Helper,
-	- LibreOfficeWriter_Images,
-	- LibreOfficeWriter_Internal,
-	- LibreOfficeWriter_Num,
-	- LibreOfficeWriter_Page,
-	- LibreOfficeWriter_Par,
-	- LibreOfficeWriter_Shapes,
-	- LibreOfficeWriter_Table.
+  - LibreOfficeWriter_Cell,
+  - LibreOfficeWriter_Char,
+  - LibreOfficeWriter_Constants,
+  - LibreOfficeWriter_Cursor,
+  - LibreOfficeWriter_DirectFormatting,
+  - LibreOfficeWriter_Doc,
+  - LibreOfficeWriter_Field,
+  - LibreOfficeWriter_Font,
+  - LibreOfficeWriter_FootEndNotes,
+  - LibreOfficeWriter_Frame,
+  - LibreOfficeWriter_Helper,
+  - LibreOfficeWriter_Images,
+  - LibreOfficeWriter_Internal,
+  - LibreOfficeWriter_Num,
+  - LibreOfficeWriter_Page,
+  - LibreOfficeWriter_Par,
+  - LibreOfficeWriter_Shapes,
+  - LibreOfficeWriter_Table.
 - Renamed Constants:
-	- `$LOW_PAPER_PORTRAIT` --> `$LOW_PAPER_ORIENT_PORTRAIT`
-	- `$LOW_PAPER_LANDSCAPE` --> `$LOW_PAPER_ORIENT_LANDSCAPE`
+  - `$LOW_PAPER_PORTRAIT` --> `$LOW_PAPER_ORIENT_PORTRAIT`
+  - `$LOW_PAPER_LANDSCAPE` --> `$LOW_PAPER_ORIENT_LANDSCAPE`
 - Examples now work from their separate folder. (@mLipok.)
 - Constants are now all located in the separate Constants files. (@mLipok.)
 
@@ -2165,8 +2165,8 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 #### Fixed
 
 - Errors caused by residual function calls from filling in "Related" section of the header. (@mLipok.)
-	- _LOWriter_DocFindAllInRange,
-	- _LOWriter_DocGenPropTemplate.
+  - _LOWriter_DocFindAllInRange,
+  - _LOWriter_DocGenPropTemplate.
 
 #### Refactored
 
@@ -2182,31 +2182,31 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 #### Added
 
 - Paragraph Object functions which allows the ability to copy and paste content without using the clipboard quickly. Thanks to user @Heiko for inspiration.
-	- _ParObjSelect,
-	- _ParObjCopy,
-	- _ParObjPaste,
-	- _ParObjDelete.
+  - _ParObjSelect,
+  - _ParObjCopy,
+  - _ParObjPaste,
+  - _ParObjDelete.
 - _DocExecuteDispatch function, adding some shortcuts to certain commands, such as select all, copy/paste content to/from clipboard.
 - _DocConvertTextToTable.
 - _DocConvertTableToText.
 - Examples for the new functions.
 - Processing error check.
-	- _DocInsertString,
-	- _DocInsertControlChar.
+  - _DocInsertString,
+  - _DocInsertControlChar.
 
 #### Changed
 
 - Renamed GetName functions and examples for consistency.
-	- `_DocListTableNames` --> `_TablesGetNames`
-	- `_FramesListNames` --> `_FramesGetNames`
-	- `_ShapesListNames` --> `_ShapesGetNames` 	
-	- `_ParGetObjects` --> `_ParObjCreateList`.
-	- `_ParSectionsGet` --> `_ParObjSectionsGet`.
-	- `_TableGetByCursor` --> `_TableGetObjByCursor`.
-	- `_TableGetByName` --> `_TableGetObjByName`.
-	- `_TableGetCellByCursor` --> `_TableGetCellObjByCursor`.
-	- `_TableGetCellByName` --> `_TableGetCellObjByName`.
-	- `_TableGetCellByPosition` --> `_TableGetCellObjByPosition`.
+  - `_DocListTableNames` --> `_TablesGetNames`
+  - `_FramesListNames` --> `_FramesGetNames`
+  - `_ShapesListNames` --> `_ShapesGetNames`
+  - `_ParGetObjects` --> `_ParObjCreateList`.
+  - `_ParSectionsGet` --> `_ParObjSectionsGet`.
+  - `_TableGetByCursor` --> `_TableGetObjByCursor`.
+  - `_TableGetByName` --> `_TableGetObjByName`.
+  - `_TableGetCellByCursor` --> `_TableGetCellObjByCursor`.
+  - `_TableGetCellByName` --> `_TableGetCellObjByName`.
+  - `_TableGetCellByPosition` --> `_TableGetCellObjByPosition`.
 - Removed "IsCollapsed" check and error from _DocGetString.
 - `_FramesListNames` to have an option to search for Frames listed under shapes.
 - `_ShapesGetNames`, Corrected an error that could occur if images are present.
@@ -2219,14 +2219,14 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 #### Fixed
 
 - Added missing Datatype for possible Cursor data position types, `$LOW_CURDATA_HEADER_FOOTER`, previously attempting to insert a content while the insertion point was located in a Header/Footer would have failed. — Thanks to user @Heiko for helping me locate this error. The affected functions are:
-	- _CursorGetDataType
-	- _DocCreateTextCursor
-	- _EndnoteInsert
-	- _FootnoteInsert
-	- _TableInsert
+  - _CursorGetDataType
+  - _DocCreateTextCursor
+  - _EndnoteInsert
+  - _FootnoteInsert
+  - _TableInsert
 - An error where a COM error would be produced when attempting to insert a string or control character in certain data types. — Thanks to user @Heiko for helping me locate this error.
-	- _DocInsertControlChar,
-	- _DocInsertString.
+  - _DocInsertControlChar,
+  - _DocInsertString.
 
 [To Top](#releases)
 
@@ -2238,8 +2238,8 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 
 - `_DocReplaceAllInRange` to have two methods of performing a Regular Expression find and replace.
 - Method for skipping $atFindFormat and $atReplaceFormat, now uses an empty array called in each parameter to skip.
-	- _DocReplaceAll,
-	- _DocReplaceAllInRange.
+  - _DocReplaceAll,
+  - _DocReplaceAllInRange.
 
 #### Documented
 
@@ -2249,11 +2249,11 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 #### Refactored
 
 - Removed the if/else block in $atFindFormat parameter checking.
-	- _DocReplaceAll,
-	- _DocReplaceAllInRange,
-	- _DocFindNext,
-	- _DocFindAll,
-	- _DocFindAllInRange.
+  - _DocReplaceAll,
+  - _DocReplaceAllInRange,
+  - _DocFindNext,
+  - _DocFindAll,
+  - _DocFindAllInRange.
 
 [To Top](#releases)
 
@@ -2285,15 +2285,15 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 
 ---
 
-[v0.10.0-Compare]:	https://github.com/mlipok/Au3LibreOffice/compare/0.9.1...main
-[v0.9.1-Compare]:	https://github.com/mlipok/Au3LibreOffice/compare/v0.9.0...0.9.1
-[v0.9.0-Compare]:	https://github.com/mlipok/Au3LibreOffice/compare/v0.0.0.3...v0.9.0
-[v0.0.0.3-Compare]:	https://github.com/donnyh13/Au3LibreOffice/compare/v0.0.0.2...v0.0.0.3
-[v0.0.0.2-Compare]:	https://github.com/donnyh13/Au3LibreOffice/compare/v0.0.0.1...v0.0.0.2
+[v0.10.0-Compare]: https://github.com/mlipok/Au3LibreOffice/compare/0.9.1...main
+[v0.9.1-Compare]: https://github.com/mlipok/Au3LibreOffice/compare/v0.9.0...0.9.1
+[v0.9.0-Compare]: https://github.com/mlipok/Au3LibreOffice/compare/v0.0.0.3...v0.9.0
+[v0.0.0.3-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/v0.0.0.2...v0.0.0.3
+[v0.0.0.2-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/v0.0.0.1...v0.0.0.2
 
-[v0.10.0]:	https://github.com/mlipok/Au3LibreOffice
-[v0.9.1]:	https://github.com/mlipok/Au3LibreOffice/releases/tag/0.9.1
-[v0.9.0]:	https://github.com/mlipok/Au3LibreOffice/releases/tag/v0.9.0
-[v0.0.0.3]:	https://github.com/mlipok/Au3LibreOffice/releases/tag/v0.0.0.3
-[v0.0.0.2]:	https://github.com/donnyh13/Au3LibreOffice/releases/tag/v0.0.0.2
-[v0.0.0.1]:	https://github.com/donnyh13/Au3LibreOffice/releases/tag/v0.0.0.1
+[v0.10.0]: https://github.com/mlipok/Au3LibreOffice
+[v0.9.1]: https://github.com/mlipok/Au3LibreOffice/releases/tag/0.9.1
+[v0.9.0]: https://github.com/mlipok/Au3LibreOffice/releases/tag/v0.9.0
+[v0.0.0.3]: https://github.com/mlipok/Au3LibreOffice/releases/tag/v0.0.0.3
+[v0.0.0.2]: https://github.com/donnyh13/Au3LibreOffice/releases/tag/v0.0.0.2
+[v0.0.0.1]: https://github.com/donnyh13/Au3LibreOffice/releases/tag/v0.0.0.1
