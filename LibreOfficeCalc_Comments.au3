@@ -539,37 +539,37 @@ EndFunc   ;==>_LOCalc_CommentAreaGradientMulticolor
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CommentAreaShadow
 ; Description ...: Set or Retrieve the shadow settings for a Comment.
-; Syntax ........: _LOCalc_CommentAreaShadow(ByRef $oComment[, $bShadow = Null[, $iColor = Null[, $iDistance = Null[, $iTransparency = Null[, $iBlur = Null[, $iLocation = Null]]]]]])
+; Syntax ........: _LOCalc_CommentAreaShadow(ByRef $oComment[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
 ; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, a Shadow is present for the Comment.
+;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow, must be one of the Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3..
 ;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iDistance           - [optional] an integer value. Default is Null. The distance of the Shadow from the Comment box, set in Hundredths of a Millimeter (HMM).
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
 ;                  $iBlur               - [optional] an integer value (0-150). Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
-;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow, must be one of the Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3..
+;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oComment not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bShadow not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iDistance not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 3 Return 0 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 Return 0 = $iDistance not an Integer, or less than 0.
 ;                  @Error 1 @Extended 6 Return 0 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
-;                  @Error 1 @Extended 7 Return 0 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 7 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Annotation Shape Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Distance and Location Values.
-;                  @Error 3 @Extended 3 Return 0 = Failed to modify Distance property.
-;                  @Error 3 @Extended 4 Return 0 = Failed to modify Location property.
+;                  @Error 3 @Extended 3 Return 0 = Failed to modify Location property.
+;                  @Error 3 @Extended 4 Return 0 = Failed to modify Distance property.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bShadow
-;                  |                               2 = Error setting $iColor
-;                  |                               4 = Error setting $iDistance
-;                  |                               8 = Error setting $iTransparency
+;                  |                               2 = Error setting $iLocation
+;                  |                               4 = Error setting $iColor
+;                  |                               8 = Error setting $iDistance
 ;                  |                               16 = Error setting $iBlur
-;                  |                               32 = Error setting $iLocation
+;                  |                               32 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -583,7 +583,7 @@ EndFunc   ;==>_LOCalc_CommentAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null, $iDistance = Null, $iTransparency = Null, $iBlur = Null, $iLocation = Null)
+Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iLocation = Null, $iColor = Null, $iDistance = Null, $iBlur = Null, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -596,13 +596,14 @@ Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null,
 	$oAnnotationShape = $oComment.AnnotationShape()
 	If Not IsObj($oAnnotationShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bShadow, $iColor, $iDistance, $iTransparency, $iBlur, $iLocation) Then
+	If __LO_VarsAreNull($bShadow, $iLocation, $iColor, $iDistance, $iBlur, $iTransparency) Then
 		$iInternalDistance = __LOCalc_CommentAreaShadowModify($oAnnotationShape)
 		$iInternalLocation = @extended
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		__LO_ArrayFill($avShadow, $oAnnotationShape.Shadow(), $oAnnotationShape.ShadowColor(), $iInternalDistance, $oAnnotationShape.ShadowTransparence(), _
-				_LO_UnitConvert($oAnnotationShape.ShadowBlur(), $LO_CONVERT_UNIT_HMM_PT), $iInternalLocation)
+		__LO_ArrayFill($avShadow, $oAnnotationShape.Shadow(), $iInternalLocation, $oAnnotationShape.ShadowColor(), $iInternalDistance, _
+				_LO_UnitConvert($oAnnotationShape.ShadowBlur(), $LO_CONVERT_UNIT_HMM_PT), _
+				$oAnnotationShape.ShadowTransparence())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avShadow)
 	EndIf
@@ -614,19 +615,12 @@ Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null,
 		$iError = ($oAnnotationShape.Shadow() = $bShadow) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
-	If ($iColor <> Null) Then
-		If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iLocation <> Null) Then
+		If Not __LO_IntIsBetween($iLocation, $LOC_COMMENT_SHADOW_TOP_LEFT, $LOC_COMMENT_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$oAnnotationShape.ShadowColor = $iColor
-		$iError = ($oAnnotationShape.ShadowColor() = $iColor) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iDistance <> Null) Then
-		If Not __LO_IntIsBetween($iDistance, 0, $iDistance) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		__LOCalc_CommentAreaShadowModify($oAnnotationShape, Null, $iDistance)
+		__LOCalc_CommentAreaShadowModify($oAnnotationShape, $iLocation)
 		If (@error = $__LO_STATUS_PROP_SETTING_ERROR) Then
-			$iError = BitOR($iError, 4)
+			$iError = BitOR($iError, 2)
 
 		ElseIf @error Then
 
@@ -634,11 +628,24 @@ Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null,
 		EndIf
 	EndIf
 
-	If ($iTransparency <> Null) Then
-		If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($iColor <> Null) Then
+		If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		$oAnnotationShape.ShadowTransparence = $iTransparency
-		$iError = ($oAnnotationShape.ShadowTransparence = $iTransparency) ? ($iError) : (BitOR($iError, 8))
+		$oAnnotationShape.ShadowColor = $iColor
+		$iError = ($oAnnotationShape.ShadowColor() = $iColor) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($iDistance <> Null) Then
+		If Not __LO_IntIsBetween($iDistance, 0, $iDistance) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		__LOCalc_CommentAreaShadowModify($oAnnotationShape, Null, $iDistance)
+		If (@error = $__LO_STATUS_PROP_SETTING_ERROR) Then
+			$iError = BitOR($iError, 8)
+
+		ElseIf @error Then
+
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+		EndIf
 	EndIf
 
 	If ($iBlur <> Null) Then
@@ -648,17 +655,11 @@ Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null,
 		$iError = ($oAnnotationShape.ShadowBlur() = _LO_UnitConvert($iBlur, $LO_CONVERT_UNIT_PT_HMM)) ? ($iError) : (BitOR($iError, 16))
 	EndIf
 
-	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOC_COMMENT_SHADOW_TOP_LEFT, $LOC_COMMENT_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If ($iTransparency <> Null) Then
+		If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-		__LOCalc_CommentAreaShadowModify($oAnnotationShape, $iLocation)
-		If (@error = $__LO_STATUS_PROP_SETTING_ERROR) Then
-			$iError = BitOR($iError, 32)
-
-		ElseIf @error Then
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-		EndIf
+		$oAnnotationShape.ShadowTransparence = $iTransparency
+		$iError = ($oAnnotationShape.ShadowTransparence = $iTransparency) ? ($iError) : (BitOR($iError, 32))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

@@ -1575,31 +1575,31 @@ Func __LOCalc_CommentAreaShadowModify($oAnnotationShape, $iLocation = Null, $iDi
 		$iError = 2
 		Select
 			Case (($oAnnotationShape.ShadowXDistance() < 0) And ($oAnnotationShape.ShadowYDistance() < 0)) ; Top Left.
-				$iLocation = $LOC_COMMENT_ANCHOR_TOP_LEFT
+				$iLocation = $LOC_COMMENT_SHADOW_TOP_LEFT
 
 			Case (($oAnnotationShape.ShadowXDistance() = 0) And ($oAnnotationShape.ShadowYDistance() < 0)) ; Top Center
-				$iLocation = $LOC_COMMENT_ANCHOR_TOP_CENTER
+				$iLocation = $LOC_COMMENT_SHADOW_TOP_CENTER
 
 			Case (($oAnnotationShape.ShadowXDistance() > 0) And ($oAnnotationShape.ShadowYDistance() < 0)) ; Top Right
-				$iLocation = $LOC_COMMENT_ANCHOR_TOP_RIGHT
+				$iLocation = $LOC_COMMENT_SHADOW_TOP_RIGHT
 
 			Case (($oAnnotationShape.ShadowXDistance() < 0) And ($oAnnotationShape.ShadowYDistance() = 0)) ; Middle Left
-				$iLocation = $LOC_COMMENT_ANCHOR_MIDDLE_LEFT
+				$iLocation = $LOC_COMMENT_SHADOW_MIDDLE_LEFT
 
 			Case (($oAnnotationShape.ShadowXDistance() = 0) And ($oAnnotationShape.ShadowYDistance() = 0)) ; Middle Center
-				$iLocation = $LOC_COMMENT_ANCHOR_MIDDLE_CENTER
+				$iLocation = $LOC_COMMENT_SHADOW_MIDDLE_CENTER
 
 			Case (($oAnnotationShape.ShadowXDistance() > 0) And ($oAnnotationShape.ShadowYDistance() = 0)) ; Middle Right
-				$iLocation = $LOC_COMMENT_ANCHOR_MIDDLE_RIGHT
+				$iLocation = $LOC_COMMENT_SHADOW_MIDDLE_RIGHT
 
 			Case (($oAnnotationShape.ShadowXDistance() < 0) And ($oAnnotationShape.ShadowYDistance() > 0)) ; Bottom Left
-				$iLocation = $LOC_COMMENT_ANCHOR_BOTTOM_LEFT
+				$iLocation = $LOC_COMMENT_SHADOW_BOTTOM_LEFT
 
 			Case (($oAnnotationShape.ShadowXDistance() = 0) And ($oAnnotationShape.ShadowYDistance() > 0)) ; Bottom Center
-				$iLocation = $LOC_COMMENT_ANCHOR_BOTTOM_CENTER
+				$iLocation = $LOC_COMMENT_SHADOW_BOTTOM_CENTER
 
 			Case (($oAnnotationShape.ShadowXDistance() > 0) And ($oAnnotationShape.ShadowYDistance() > 0)) ; Bottom Right
-				$iLocation = $LOC_COMMENT_ANCHOR_BOTTOM_RIGHT
+				$iLocation = $LOC_COMMENT_SHADOW_BOTTOM_RIGHT
 		EndSelect
 	EndIf
 

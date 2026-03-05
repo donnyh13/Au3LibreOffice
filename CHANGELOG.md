@@ -1029,6 +1029,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Changed Style setting functions to Set and Retrieve, also renamed them to reflect the change:
   - `_LOCalc_CellStyleSet` --> `_LOCalc_CellStyleCurrent`
   - `_LOCalc_PageStyleSet` --> `_LOCalc_PageStyleCurrent`
+- Rearranged `_LOCalc_CommentAreaShadow` parameter order to match L.O. UI order.
+  - Previous order:
+  > `_LOCalc_CommentAreaShadow`(ByRef $oComment, $bShadow, $iColor, $iDistance, _$iTransparency_, _$iBlur_, _$iLocation_)
+  - New order:
+  > `_LOCalc_CommentAreaShadow`(ByRef $oComment, $bShadow, _$iLocation_, $iColor, $iDistance, _$iBlur_, _$iTransparency_)
 
 #### Documented
 
@@ -1070,6 +1075,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_FontExists
   - _LOCalc_FontsGetNames
   - _LOCalc_VersionGet
+- Changed incorrect variable used in `__LOCalc_CommentAreaShadowModify` from `$LOC_COMMENT_ANCHOR_` to `$LOC_COMMENT_SHADOW_`. Both are Enumerated the same, so no material difference was made.
 
 #### Removed
 
