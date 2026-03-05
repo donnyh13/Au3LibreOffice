@@ -1193,7 +1193,7 @@ Func _LOImpress_SlideLayout(ByRef $oSlide, $iLayout = Null)
 	If Not __LO_IntIsBetween($iLayout, $LOI_SLIDE_LAYOUT_TITLE, $LOI_SLIDE_LAYOUT_TITLE_6_CONTENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oSlide.Layout = $iLayout
-	$iError = ($oSlide.Layout() = $iLayout) ? ($iError) : (BitOR($iError, 64))
+	$iError = ($oSlide.Layout() = $iLayout) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOImpress_SlideLayout
