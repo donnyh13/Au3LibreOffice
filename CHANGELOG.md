@@ -1773,6 +1773,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_PageStyleHeaderAreaGradient
   - _LOWriter_ParStyleAreaGradient
   - _LOWriter_ShapeAreaGradient
+- `_LOWriter_FieldFileNameModify` had backwards Bit values for property setting errors.
+- `_LOWriter_FormConTableConListBoxGeneral` had several wrong bit values for property setting errors when returning an invalid property to default.
+- `_LOWriter_FormConTableConPatternFieldGeneral` had a wrong bit value for property setting errors when returning an invalid property to default.
 
 #### Refactored
 

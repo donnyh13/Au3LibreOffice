@@ -10823,7 +10823,7 @@ Func _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox, $sName = Null, $sL
 	EndIf
 
 	If ($asList = Default) Then
-		$iError = BitOR($iError, 1024) ; Can't Default StringItemList.
+		$iError = BitOR($iError, 128) ; Can't Default StringItemList.
 
 	ElseIf ($asList <> Null) Then
 		If Not IsArray($asList) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
@@ -10858,7 +10858,7 @@ Func _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox, $sName = Null, $sL
 	EndIf
 
 	If ($aiDefaultSel = Default) Then
-		$iError = BitOR($iError, 2048) ; Can't Default Name.
+		$iError = BitOR($iError, 1024) ; Can't Default Name.
 
 	ElseIf ($aiDefaultSel <> Null) Then
 		If Not IsArray($aiDefaultSel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 14, 0)
@@ -10874,7 +10874,7 @@ Func _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox, $sName = Null, $sL
 	EndIf
 
 	If ($sAddInfo = Default) Then
-		$iError = BitOR($iError, 4096) ; Can't Default Tag.
+		$iError = BitOR($iError, 2048) ; Can't Default Tag.
 
 	ElseIf ($sAddInfo <> Null) Then
 		If Not IsString($sAddInfo) Then Return SetError($__LO_STATUS_INPUT_ERROR, 17, 0)
@@ -11617,7 +11617,7 @@ Func _LOWriter_FormConTableConPatternFieldGeneral(ByRef $oPatternField, $sName =
 	EndIf
 
 	If ($sDefaultTxt = Default) Then
-		$iError = BitOR($iError, 16384) ; Can't Default DefaultText.
+		$iError = BitOR($iError, 2048) ; Can't Default DefaultText.
 
 	ElseIf ($sDefaultTxt <> Null) Then
 		If Not IsString($sDefaultTxt) Then Return SetError($__LO_STATUS_INPUT_ERROR, 14, 0)
