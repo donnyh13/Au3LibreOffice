@@ -1129,6 +1129,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_GRAD_TYPE_*
   - $LOI_ORIENT_HORI_*
   - $LOI_ORIENT_VERT_*
+  - $LOI_POSTURE_*
   - $LOI_RELATIVE_*
   - $LOI_SHAPE_LINE_ARROW_TYPE_*
   - $LOI_SHAPE_LINE_CAP_*
@@ -1145,6 +1146,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_TEXT_ALIGN_HORI_*
   - $LOI_TEXT_ALIGN_VERT_*
   - $LOI_TEXT_ANCHOR_*
+  - $LOI_WEIGHT_*
   - $LOI_ZOOMTYPE_*
 - Document Functions
   - _LOImpress_DocClose

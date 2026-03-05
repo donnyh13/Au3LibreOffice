@@ -345,6 +345,15 @@ Global Const _                                                       ; com.sun.s
 		$LOI_ORIENT_VERT_LINE_CENTER = 8, _                          ; Aligned at the center of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 		$LOI_ORIENT_VERT_LINE_BOTTOM = 9                             ; Aligned at the bottom of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 
+; Posture/Italic
+Global Const _                                                       ; com.sun.star.awt.FontSlant
+		$LOI_POSTURE_NONE = 0, _                                     ; Specifies a font without slant.
+		$LOI_POSTURE_OBLIQUE = 1, _                                  ; Specifies an oblique font (slant not designed into the font).
+		$LOI_POSTURE_ITALIC = 2, _                                   ; Specifies an italic font (slant designed into the font).
+		$LOI_POSTURE_DontKnow = 3, _                                 ; Specifies a font with an unknown slant. For Read Only.
+		$LOI_POSTURE_REV_OBLIQUE = 4, _                              ; Specifies a reverse oblique font (slant not designed into the font).
+		$LOI_POSTURE_REV_ITALIC = 5                                  ; Specifies a reverse italic font (slant designed into the font).
+
 ; Relative to
 Global Const _                                                       ; com.sun.star.text.RelOrientation
 		$LOI_RELATIVE_ROW = -1, _                                    ; Position an object considering the row height.
@@ -646,6 +655,19 @@ Global Enum _
 		$LOI_TEXT_ANCHOR_BOTTOM_LEFT, _                              ; The text is positioned in the Lower-Left corner of the Shape.
 		$LOI_TEXT_ANCHOR_BOTTOM_CENTER, _                            ; The text is positioned in the Lower-Center of the Shape.
 		$LOI_TEXT_ANCHOR_BOTTOM_RIGHT                                ; The text is positioned in the Lower-Right of the Shape.
+
+; Weight/Bold
+Global Const _                                                       ; com.sun.star.awt.FontWeight
+		$LOI_WEIGHT_DONT_KNOW = 0, _                                 ; The font weight is not specified/unknown. For Read Only.
+		$LOI_WEIGHT_THIN = 50, _                                     ; A 50% (Thin) font weight.
+		$LOI_WEIGHT_ULTRA_LIGHT = 60, _                              ; A 60% (Ultra Light) font weight.
+		$LOI_WEIGHT_LIGHT = 75, _                                    ; A 75% (Light) font weight.
+		$LOI_WEIGHT_SEMI_LIGHT = 90, _                               ; A 90% (Semi-Light) font weight.
+		$LOI_WEIGHT_NORMAL = 100, _                                  ; A 100% (Normal) font weight.
+		$LOI_WEIGHT_SEMI_BOLD = 110, _                               ; A 110% (Semi-Bold) font weight.
+		$LOI_WEIGHT_BOLD = 150, _                                    ; A 150% (Bold) font weight.
+		$LOI_WEIGHT_ULTRA_BOLD = 175, _                              ; A 175% (Ultra-Bold) font weight.
+		$LOI_WEIGHT_BLACK = 200                                      ; A 200% (Black) font weight.
 
 ; Zoom Type Constants
 Global Const _                                                       ; com.sun.star.view.DocumentZoomType
