@@ -22,11 +22,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape Gradient settings to: Preset Gradient name = $LOI_GRAD_NAME_SUNDOWN
-	_LOImpress_DrawShapeAreaGradient($oShape, $LOI_GRAD_NAME_SUNDOWN)
+	_LOImpress_ShapeAreaGradient($oShape, $LOI_GRAD_NAME_SUNDOWN)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Multicolor Gradient ColorStops.
-	$avStops = _LOImpress_DrawShapeAreaGradientMulticolor($oShape)
+	$avStops = _LOImpress_ShapeAreaGradientMulticolor($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Multicolor Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To UBound($avStops) - 1
@@ -37,7 +37,7 @@ Func Example()
 			$sStops & @CRLF & "Press ok to add a couple ColorStops.")
 
 	; Retrieve an array of Multicolor Gradient ColorStops.
-	$avStops = _LOImpress_DrawShapeAreaGradientMulticolor($oShape)
+	$avStops = _LOImpress_ShapeAreaGradientMulticolor($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Multicolor Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add a new ColorStop in the middle.
@@ -49,11 +49,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new ColorStops.
-	_LOImpress_DrawShapeAreaGradientMulticolor($oShape, $avStops)
+	_LOImpress_ShapeAreaGradientMulticolor($oShape, $avStops)
 	If @error Then _ERROR($oDoc, "Failed to modify Multicolor Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Multicolor Gradient ColorStops.
-	$avStops = _LOImpress_DrawShapeAreaGradientMulticolor($oShape)
+	$avStops = _LOImpress_ShapeAreaGradientMulticolor($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Multicolor Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$sStops = ""

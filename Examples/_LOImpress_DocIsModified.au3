@@ -31,7 +31,7 @@ Func Example()
 	$oTextBox = $avShapes[0][0]
 
 	; Create a Text Cursor in the Textbox.
-	$oTextCursor = _LOImpress_DrawShapeTextboxCreateTextCursor($oTextBox)
+	$oTextCursor = _LOImpress_ShapeCreateTextCursor($oTextBox)
 	If @error Then _ERROR($oDoc, "Failed to create a Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.

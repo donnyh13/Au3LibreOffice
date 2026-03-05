@@ -22,16 +22,16 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape  Background Color settings. Background color = $LO_COLOR_TEAL.
-	_LOImpress_DrawShapeAreaColor($oShape, $LO_COLOR_TEAL)
+	_LOImpress_ShapeAreaColor($oShape, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape Transparency Gradient settings to: Gradient Type = $LOI_GRAD_TYPE_RADIAL, XCenter to 50%, YCenter to 50%, Angle to 0 degrees
 	; Border to 0%, Start transparency to 100%, End Transparency to 0%
-	_LOImpress_DrawShapeAreaTransparencyGradient($oShape, $LOI_GRAD_TYPE_RADIAL, 50, 50, 0, 0, 100, 0)
+	_LOImpress_ShapeAreaTransparencyGradient($oShape, $LOI_GRAD_TYPE_RADIAL, 50, 50, 0, 0, 100, 0)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Transparency Multi Gradient ColorStops.
-	$avStops = _LOImpress_DrawShapeAreaTransparencyGradientMulti($oShape)
+	$avStops = _LOImpress_ShapeAreaTransparencyGradientMulti($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add a new ColorStop in the middle.
@@ -43,11 +43,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new ColorStops.
-	_LOImpress_DrawShapeAreaTransparencyGradientMulti($oShape, $avStops)
+	_LOImpress_ShapeAreaTransparencyGradientMulti($oShape, $avStops)
 	If @error Then _ERROR($oDoc, "Failed to modify Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Transparency Multi Gradient ColorStops.
-	$avStops = _LOImpress_DrawShapeAreaTransparencyGradientMulti($oShape)
+	$avStops = _LOImpress_ShapeAreaTransparencyGradientMulti($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To UBound($avStops) - 1
@@ -66,11 +66,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to delete a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new ColorStops.
-	_LOImpress_DrawShapeAreaTransparencyGradientMulti($oShape, $avStops)
+	_LOImpress_ShapeAreaTransparencyGradientMulti($oShape, $avStops)
 	If @error Then _ERROR($oDoc, "Failed to modify Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Transparency Multi Gradient ColorStops.
-	$avStops = _LOImpress_DrawShapeAreaTransparencyGradientMulti($oShape)
+	$avStops = _LOImpress_ShapeAreaTransparencyGradientMulti($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$sStops = ""

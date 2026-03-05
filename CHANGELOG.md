@@ -1105,12 +1105,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Main Impress File
   - LibreOfficeImpress.au3
-- Individual Impress Element Files
+- Individual Impress Module Files
   - LibreOfficeImpress_Constants.au3
   - LibreOfficeImpress_Doc.au3
   - LibreOfficeImpress_DrawShapes.au3
   - LibreOfficeImpress_Helper.au3
   - LibreOfficeImpress_Internal.au3
+  - LibreOfficeImpress_Shapes.au3
   - LibreOfficeImpress_Slides.au3
 - Constants
   - $LOI_ALIGN_VERT_*
@@ -1122,24 +1123,25 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_*
   - $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_*
   - $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_*
-  - $LOI_DRAWSHAPE_LINE_ARROW_TYPE_*
-  - $LOI_DRAWSHAPE_LINE_CAP_*
-  - $LOI_DRAWSHAPE_LINE_JOINT_*
-  - $LOI_DRAWSHAPE_LINE_STYLE_*
   - $LOI_DRAWSHAPE_POINT_TYPE_*
   - $LOI_DRAWSHAPE_TYPE_*
   - $LOI_GRAD_NAME_*
   - $LOI_GRAD_TYPE_*
   - $LOI_ORIENT_HORI_*
   - $LOI_ORIENT_VERT_*
+  - $LOI_RELATIVE_*
+  - $LOI_SHAPE_LINE_ARROW_TYPE_*
+  - $LOI_SHAPE_LINE_CAP_*
+  - $LOI_SHAPE_LINE_JOINT_*
+  - $LOI_SHAPE_LINE_STYLE_*
+  - $LOI_SHAPE_SHADOW_*
+  - $LOI_SHAPE_TYPE_*
   - $LOI_SLIDE_LAYOUT_*
   - $LOI_SLIDE_TRANSITION_*
   - $LOI_SLIDESHOW_VIEW_MODE_*
   - $LOI_SLIDESHOW_PEN_WIDTH_*
   - $LOI_SLIDESHOW_PRES_*
   - $LOI_SLIDESHOW_RANGE_*
-  - $LOI_RELATIVE_*
-  - $LOI_SHAPE_TYPE_*
   - $LOI_TEXT_ALIGN_HORI_*
   - $LOI_TEXT_ALIGN_VERT_*
   - $LOI_TEXT_ANCHOR_*
@@ -1179,36 +1181,19 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_DocVisible
   - _LOImpress_DocZoom
 - Drawing Shape functions
-  - _LOImpress_DrawShapeAreaColor
-  - _LOImpress_DrawShapeAreaFillStyle
-  - _LOImpress_DrawShapeAreaGradient
-  - _LOImpress_DrawShapeAreaGradientMulticolor
-  - _LOImpress_DrawShapeAreaTransparency
-  - _LOImpress_DrawShapeAreaTransparencyGradient
-  - _LOImpress_DrawShapeAreaTransparencyGradientMulti
   - _LOImpress_DrawShapeConnectorModify
   - _LOImpress_DrawShapeConnectorSettings
   - _LOImpress_DrawShapeDelete
   - _LOImpress_DrawShapeDimensionSettings
-  - _LOImpress_DrawShapeDimensionTextAnimation
-  - _LOImpress_DrawShapeDimensionTextColumns
-  - _LOImpress_DrawShapeDimensionTextSettings
   - _LOImpress_DrawShapeExists
   - _LOImpress_DrawShapeGetType
   - _LOImpress_DrawShapeInsert
-  - _LOImpress_DrawShapeLineArrowStyles
-  - _LOImpress_DrawShapeLineProperties
   - _LOImpress_DrawShapeName
   - _LOImpress_DrawShapePointsAdd
   - _LOImpress_DrawShapePointsGetCount
   - _LOImpress_DrawShapePointsModify
   - _LOImpress_DrawShapePointsRemove
-  - _LOImpress_DrawShapePosition
-  - _LOImpress_DrawShapeRotateSlant
   - _LOImpress_DrawShapeText
-  - _LOImpress_DrawShapeTextboxCreateTextCursor
-  - _LOImpress_DrawShapeTypePosition
-  - _LOImpress_DrawShapeTypeSize
 - Helper Functions
   - _LOImpress_ComError_UserFunction
   - _LOImpress_CursorInsertString
@@ -1231,8 +1216,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_DrawShape_CreateStars
   - __LOImpress_DrawShape_CreateSymbol
   - __LOImpress_DrawShape_GetCustomType
-  - __LOImpress_DrawShapeArrowStyleName
-  - __LOImpress_DrawShapeLineStyleName
   - __LOImpress_DrawShapePointGetSettings
   - __LOImpress_DrawShapePointModify
   - __LOImpress_FilterNameGet
@@ -1240,10 +1223,32 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_GradientNameInsert
   - __LOImpress_GradientPresets
   - __LOImpress_InternalComErrorHandler
+  - __LOImpress_ShapeAreaShadowModify
+  - __LOImpress_ShapeArrowStyleName
   - __LOImpress_ShapeGetType
+  - __LOImpress_ShapeLineStyleName
   - __LOImpress_Transition
   - __LOImpress_TransparencyGradientConvert
   - __LOImpress_TransparencyGradientNameInsert
+- Shape Functions
+  - _LOImpress_ShapeAreaColor
+  - _LOImpress_ShapeAreaFillStyle
+  - _LOImpress_ShapeAreaGradient
+  - _LOImpress_ShapeAreaGradientMulticolor
+  - _LOImpress_ShapeAreaShadow
+  - _LOImpress_ShapeAreaTransparency
+  - _LOImpress_ShapeAreaTransparencyGradient
+  - _LOImpress_ShapeAreaTransparencyGradientMulti
+  - _LOImpress_ShapeCreateTextCursor
+  - _LOImpress_ShapeLineArrowStyles
+  - _LOImpress_ShapeLineProperties
+  - _LOImpress_ShapePosition
+  - _LOImpress_ShapeRotateSlant
+  - _LOImpress_ShapeSize
+  - _LOImpress_ShapeTextAttrAnimation
+  - _LOImpress_ShapeTextAttrColumns
+  - _LOImpress_ShapeTextAttrFit
+  - _LOImpress_ShapeTextAttrSettings
 - Slide Functions
   - _LOImpress_SlideAdd
   - _LOImpress_SlideBackColor

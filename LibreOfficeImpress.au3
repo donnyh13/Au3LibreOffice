@@ -10,6 +10,7 @@
 ; Other includes for Impress
 #include "LibreOfficeImpress_Doc.au3"
 #include "LibreOfficeImpress_DrawShapes.au3"
+#include "LibreOfficeImpress_Shapes.au3"
 #include "LibreOfficeImpress_Slides.au3"
 
 ; #INDEX# =======================================================================================================================

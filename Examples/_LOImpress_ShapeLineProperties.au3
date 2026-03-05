@@ -17,31 +17,30 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Line Shape into the document, 4000 Wide by 0 High, 12000X, 4300Y.
-	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_LINE_LINE, 4000, 0, 12000, 4300)
+	; Insert a Folded Corner Shape into the document, 3000 Wide by 6000 High, 12000X, 4300Y.
+	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_FOLDED_CORNER, 3000, 6000, 12000, 4300)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Convert 1/4" to Hundredths of a Millimeter (HMM)
-	$iHMM = _LO_UnitConvert(.25, $LO_CONVERT_UNIT_INCH_HMM)
+	; Convert 1/8" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(.125, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Shape Arrow Style settings to: Set the Start Arrowhead to $LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED, Start width = 1/4",
-	; Start Center = True, Synchronize Start and End = True.
-	_LOImpress_DrawShapeLineArrowStyles($oShape, $LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED, $iHMM, True, True)
+	; Modify the Shape Line Properties settings to: Set the Line Style to $LOI_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, Line Color to $LO_COLOR_MAGENTA,
+	; Width = 1/8", Transparency = 50%, Corner Style = $LOI_SHAPE_LINE_JOINT_BEVEL, Cap Style = $LOI_SHAPE_LINE_CAP_SQUARE
+	_LOImpress_ShapeLineProperties($oShape, $LOI_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, $LO_COLOR_MAGENTA, $iHMM, 50, $LOI_SHAPE_LINE_JOINT_BEVEL, $LOI_SHAPE_LINE_CAP_SQUARE)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
-	$avSettings = _LOImpress_DrawShapeLineArrowStyles($oShape)
+	$avSettings = _LOImpress_ShapeLineProperties($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Arrow Style settings are as follows: " & @CRLF & _
-			"The Start Arrowhead Style is (See UDF Constants): " & $avSettings[0] & @CRLF & _
-			"The Start Arrowhead Width is, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
-			"Is the Start Arrowhead centered on the line end? True/False: " & $avSettings[2] & @CRLF & _
-			"Is the Starting and Ending Arrowhead settings synchronized? True/False: " & $avSettings[3] & @CRLF & _
-			"The End Arrowhead Style is (See UDF Constants): " & $avSettings[4] & @CRLF & _
-			"The End Arrowhead Width is, in Hundredths of a Millimeter (HMM): " & $avSettings[5] & @CRLF & _
-			"Is the Start Arrowhead centered on the line end? True/False: " & $avSettings[6])
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Line Properties settings are as follows: " & @CRLF & _
+			"The Line Style is (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"The Line color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"The Line's Width is, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
+			"The Line's transparency percentage is: " & $avSettings[3] & @CRLF & _
+			"The Line Corner Style is, (See UDF Constants): " & $avSettings[4] & @CRLF & _
+			"The Line Cap Style is, (See UDF Constants): " & $avSettings[5])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

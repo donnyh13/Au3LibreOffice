@@ -17,15 +17,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve current active slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Rectangle Shape into the Slide, 3000 Wide by 6000 High.
-	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
+	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000, 2000, 3500)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape Background Color settings. Background color = $LO_COLOR_TEAL.
-	_LOImpress_DrawShapeAreaColor($oShape, $LO_COLOR_TEAL)
+	_LOImpress_ShapeAreaColor($oShape, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape Fill Style
-	$iFillStyle = _LOImpress_DrawShapeAreaFillStyle($oShape)
+	$iFillStyle = _LOImpress_ShapeAreaFillStyle($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape Fill Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's current Fill Style is: " & $iFillStyle & @CRLF & _
@@ -37,11 +37,11 @@ Func Example()
 			"$LOI_AREA_FILL_STYLE_BITMAP, 4 Fill Style is a Bitmap.")
 
 	; Modify the Shape Gradient settings to: Preset Gradient name = $LOI_GRAD_NAME_BLUE_TOUCH
-	_LOImpress_DrawShapeAreaGradient($oShape, $LOI_GRAD_NAME_BLUE_TOUCH)
+	_LOImpress_ShapeAreaGradient($oShape, $LOI_GRAD_NAME_BLUE_TOUCH)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape Fill Style
-	$iFillStyle = _LOImpress_DrawShapeAreaFillStyle($oShape)
+	$iFillStyle = _LOImpress_ShapeAreaFillStyle($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape Fill Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's current Fill Style is: " & $iFillStyle & @CRLF & _

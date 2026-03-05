@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSlide, $oShape
-	Local $avSettings
+	Local $avSettings, $avShapes
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOImpress_DocCreate(True, False)
@@ -16,16 +16,20 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current active slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Change the Slide's layout to $LOI_SLIDE_LAYOUT_TITLE_ONLY
+	_LOImpress_SlideLayout($oSlide, $LOI_SLIDE_LAYOUT_TITLE_ONLY)
+	If @error Then _ERROR($oDoc, "Failed to modify Slide layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	; Insert a Rectangle Shape into the Slide, 3000 Wide by 6000 High.
-	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
+	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000, 2000, 3500)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape Gradient settings to: Preset Gradient name = $LOI_GRAD_NAME_BLUE_TOUCH
-	_LOImpress_DrawShapeAreaGradient($oShape, $LOI_GRAD_NAME_BLUE_TOUCH)
+	_LOImpress_ShapeAreaGradient($oShape, $LOI_GRAD_NAME_BLUE_TOUCH)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
-	$avSettings = _LOImpress_DrawShapeAreaGradient($oShape)
+	$avSettings = _LOImpress_ShapeAreaGradient($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Gradient settings are as follows: " & @CRLF & _
@@ -41,17 +45,21 @@ Func Example()
 			"The starting color intensity percentage is: " & $avSettings[9] & @CRLF & _
 			"The ending color intensity percentage is: " & $avSettings[10])
 
-	; Modify the Shape Gradient settings to: skip pre-set gradient name, Gradient type = $LOI_GRAD_TYPE_SQUARE, increment steps = 150,
+	; Retrieve an Array of Textboxes in the slide.
+	$avShapes = _LOImpress_SlideShapesGetList($oSlide, BitOR($LOI_SHAPE_TYPE_TEXTBOX, $LOI_SHAPE_TYPE_TEXTBOX_TITLE, $LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE))
+	If @error Or (@extended = 0) Then _ERROR($oDoc, "Failed to retrieve Shapes, or no Shapes present in Slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Modify the Title Text Box's Gradient settings to: skip pre-set gradient name, Gradient type = $LOI_GRAD_TYPE_SQUARE, increment steps = 150,
 	; horizontal (X) offset = 25%, vertical offset (Y) = 56%, rotational angle = 135 degrees, percentage not covered by "From" color = 50%
 	; Starting color = $LO_COLOR_ORANGE, Ending color = $LO_COLOR_TEAL, Starting color intensity = 100%, ending color intensity = 68%
-	_LOImpress_DrawShapeAreaGradient($oShape, Null, $LOI_GRAD_TYPE_SQUARE, 150, 25, 56, 135, 50, $LO_COLOR_ORANGE, $LO_COLOR_TEAL, 100, 68)
+	_LOImpress_ShapeAreaGradient($avShapes[0][0], Null, $LOI_GRAD_TYPE_SQUARE, 150, 25, 56, 135, 50, $LO_COLOR_ORANGE, $LO_COLOR_TEAL, 100, 68)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
-	$avSettings = _LOImpress_DrawShapeAreaGradient($oShape)
+	; Retrieve the current Text Box's settings. Return will be an array in order of function parameters.
+	$avSettings = _LOImpress_ShapeAreaGradient($avShapes[0][0])
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Gradient settings are as follows: " & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Text Box's Gradient settings are as follows: " & @CRLF & _
 			"The Gradient name is: " & $avSettings[0] & @CRLF & _
 			"The type of Gradient is, (see UDF constants): " & $avSettings[1] & @CRLF & _
 			"The number of steps to increment color is: " & $avSettings[2] & @CRLF & _

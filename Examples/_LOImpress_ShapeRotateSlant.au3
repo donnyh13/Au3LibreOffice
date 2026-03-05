@@ -16,16 +16,20 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Change the Slide's layout to $LOI_SLIDE_LAYOUT_TITLE_ONLY
+	_LOImpress_SlideLayout($oSlide, $LOI_SLIDE_LAYOUT_TITLE_ONLY)
+	If @error Then _ERROR($oDoc, "Failed to modify Slide layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	; Insert a Rectangle Shape into the document, 3000 Wide by 6000 High, 12000X, 4300Y.
 	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000, 12000, 4300)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Rotate the Shape 45 degrees.
-	_LOImpress_DrawShapeRotateSlant($oShape, 45)
+	_LOImpress_ShapeRotateSlant($oShape, 45)
 	If @error Then _ERROR($oDoc, "Failed to Rotate the Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
-	$avSettings = _LOImpress_DrawShapeRotateSlant($oShape)
+	$avSettings = _LOImpress_ShapeRotateSlant($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Rotation and Slant settings are as follows: " & @CRLF & _
@@ -33,11 +37,11 @@ Func Example()
 			"The Shape has a " & $avSettings[1] & " degree slant applied to it")
 
 	; Rotate the Shape back to 0 degrees and apply a 23 degree slant to it.
-	_LOImpress_DrawShapeRotateSlant($oShape, 0, 23)
+	_LOImpress_ShapeRotateSlant($oShape, 0, 23)
 	If @error Then _ERROR($oDoc, "Failed to Rotate the Shape and apply a slant. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
-	$avSettings = _LOImpress_DrawShapeRotateSlant($oShape)
+	$avSettings = _LOImpress_ShapeRotateSlant($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Rotation and Slant settings are as follows: " & @CRLF & _

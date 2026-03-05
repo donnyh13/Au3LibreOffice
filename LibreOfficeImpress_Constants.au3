@@ -97,91 +97,6 @@ Global Const _                                                       ; ?
 		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_CHAR = 14, _              ; Measurement units are in Characters.
 		$LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_LINE = 15                 ; Measurement units are in Lines.
 
-; Arrowhead Type Constants
-Global Enum _
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_NONE, _                       ; 0 -- No Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW_SHORT, _                ; 1 --Short Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CONCAVE_SHORT, _              ; 2 -- Short Concave Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW, _                      ; 3 -- Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_TRIANGLE, _                   ; 4 -- Triangle Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CONCAVE, _                    ; 5 -- Concave Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW_LARGE, _                ; 6 -- Large Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CIRCLE, _                     ; 7 -- Circle Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE, _                     ; 8 -- Square Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_45, _                  ; 9 -- Square Arrow head rotated 45 degrees.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIAMOND, _                    ; 10 -- Diamond Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_CIRCLE, _                ; 11 -- Half Circle Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINES, _          ; 12 -- Dimension Lines head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINE_ARROW, _     ; 13 -- Dimension Line Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSION_LINE, _             ; 14 -- Dimension Line head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_LINE_SHORT, _                 ; 15 -- Short Line head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_LINE, _                       ; 16 -- Line head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_TRIANGLE_UNFILLED, _          ; 17 -- Unfilled Triangle Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIAMOND_UNFILLED, _           ; 18 -- Unfilled Diamond Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CIRCLE_UNFILLED, _            ; 19 -- Unfilled Circle Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED, _         ; 20 -- Unfilled Square Arrow head, rotated 45 degrees.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_UNFILLED, _            ; 21 -- Unfilled Square Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_CIRCLE_UNFILLED, _       ; 22 -- Unfilled Half Circle Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_ARROW_LEFT, _            ; 23 -- Half Arrow left Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_ARROW_RIGHT, _           ; 24 -- Half Arrow right Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_REVERSED_ARROW, _             ; 25 -- Reversed Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DOUBLE_ARROW, _               ; 26 -- Double Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ONE, _                     ; 27 -- CF One Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ONLY_ONE, _                ; 28 -- CF Only One Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_MANY, _                    ; 29 -- CF Many Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_MANY_ONE, _                ; 30 -- CF Many One Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ZERO_ONE, _                ; 31 -- CF Zero One Arrow head.
-		$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY                  ; 32 -- CF Zero Many Arrow head.
-
-; Shape Line End Cap Constants.
-Global Const _                                                       ; com.sun.star.drawing.LineCap
-		$LOI_DRAWSHAPE_LINE_CAP_FLAT = 0, _                          ; Also called Butt, the line will end without any additional shape.
-		$LOI_DRAWSHAPE_LINE_CAP_ROUND = 1, _                         ; The line will get a half circle as additional cap.
-		$LOI_DRAWSHAPE_LINE_CAP_SQUARE = 2                           ; The line uses a square for the line end.
-
-; Shape Line Joint Constants.
-Global Const _                                                       ; com.sun.star.drawing.LineJoint
-		$LOI_DRAWSHAPE_LINE_JOINT_NONE = 0, _                        ; The joint between lines will not be connected.
-		$LOI_DRAWSHAPE_LINE_JOINT_MIDDLE = 1, _                      ; The middle value between the joints is used. ## Note used?
-		$LOI_DRAWSHAPE_LINE_JOINT_BEVEL = 2, _                       ; The edges of the thick lines will be joined by lines.
-		$LOI_DRAWSHAPE_LINE_JOINT_MITER = 3, _                       ; The lines join at intersections.
-		$LOI_DRAWSHAPE_LINE_JOINT_ROUND = 4                          ; The lines join with an arc.
-
-; Shape Line Style Constants.
-Global Enum _
-		$LOI_DRAWSHAPE_LINE_STYLE_NONE, _                            ; 0 -- No Line is applied.
-		$LOI_DRAWSHAPE_LINE_STYLE_CONTINUOUS, _                      ; 1 -- A Solid Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DOT, _                             ; 2 -- A Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DOT_ROUNDED, _                     ; 3 -- A Rounded Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_LONG_DOT, _                        ; 4 -- A Long Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_LONG_DOT_ROUNDED, _                ; 5 -- A Rounded Long Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DASH, _                            ; 6 -- A Dashed Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DASH_ROUNDED, _                    ; 7 -- A Rounded Dashed Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH, _                       ; 8 -- A Long Dashed Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH_ROUNDED, _               ; 9 -- A Rounded Long Dashed Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH, _                     ; 10 -- A Double Dashed Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_ROUNDED, _             ; 11 -- A Rounded Double Dash.
-		$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT, _                        ; 12 -- A Dashed and Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT_ROUNDED, _                ; 13 -- A Rounded Dashed and Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH_DOT, _                   ; 14 -- A Long Dashed and Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH_DOT_ROUNDED, _           ; 15 -- A Rounded Long Dashed and Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT, _                 ; 16 -- A Double Dash Dot Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT_ROUNDED, _         ; 17 -- A Rounded Double Dash Dot Line
-		$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT_DOT, _                    ; 18 -- A Dash Dot Dot Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT_DOT_ROUNDED, _            ; 19 -- A Rounded Dash Dot Dot Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT, _             ; 20 -- A Double Dash Dot Dot Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT_ROUNDED, _     ; 21 -- A Rounded Double Dash Dot Dot Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_ULTRAFINE_DOTTED, _                ; 22 -- A Ultrafine Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_FINE_DOTTED, _                     ; 23 -- A Fine Dotted Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_ULTRAFINE_DASHED, _                ; 24 -- A Ultrafine Dashed Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_FINE_DASHED, _                     ; 25 -- A Fine Dashed Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_DASHED, _                          ; 26 -- A Dashed Line.
-		$LOI_DRAWSHAPE_LINE_STYLE_SPARSE_DASH, _                     ; 27 -- A Sparse Dash. Before version 24.2 this was called Line Style 9.
-		$LOI_DRAWSHAPE_LINE_STYLE_3_DASHES_3_DOTS, _                 ; 28 -- A Line consisting of 3 Dashes and 3 Dots.
-		$LOI_DRAWSHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES, _       ; 29 -- A Ultrafine Line consisting of 2 Dots and 3 Dashes.
-		$LOI_DRAWSHAPE_LINE_STYLE_2_DOTS_1_DASH, _                   ; 30 -- A Line consisting of 2 Dots and 1 Dash.
-		$LOI_DRAWSHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS                ; 31 -- A Line with Fine Dots.
-
 ; Polygon Flags
 Global Const _                                                       ; com.sun.star.drawing.PolygonFlags
 		$LOI_DRAWSHAPE_POINT_TYPE_NORMAL = 0, _                      ; the point is normal, from the curve discussion view.
@@ -446,6 +361,103 @@ Global Const _                                                       ; com.sun.s
 		$LOI_RELATIVE_PAGE_PRINT_BOTTOM = 10, _                      ; The Object is placed considering the space available in the page footer(?)
 		$LOI_RELATIVE_PAGE_PRINT_TOP = 11                            ; The Object is placed considering the space available in the page header(?)
 
+; Shape Shadow Position
+Global Enum _
+		$LOI_SHAPE_SHADOW_TOP_LEFT, _                                ; The Shadow is positioned in the Upper-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_TOP_CENTER, _                              ; The Shadow is positioned in the Upper-Center of the shape.
+		$LOI_SHAPE_SHADOW_TOP_RIGHT, _                               ; The Shadow is positioned in the Upper-Right corner of the shape.
+		$LOI_SHAPE_SHADOW_MIDDLE_LEFT, _                             ; The Shadow is positioned in the Middle-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_MIDDLE_CENTER, _                           ; The Shadow is positioned in the Middle-Center of the shape.
+		$LOI_SHAPE_SHADOW_MIDDLE_RIGHT, _                            ; The Shadow is positioned in the Middle-Right of the shape.
+		$LOI_SHAPE_SHADOW_BOTTOM_LEFT, _                             ; The Shadow is positioned in the Lower-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_BOTTOM_CENTER, _                           ; The Shadow is positioned in the Lower-Center of the shape.
+		$LOI_SHAPE_SHADOW_BOTTOM_RIGHT                               ; The Shadow is positioned in the Lower-Right corner of the shape.
+
+; Arrowhead Type Constants
+Global Enum _
+		$LOI_SHAPE_LINE_ARROW_TYPE_NONE, _                           ; 0 -- No Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_ARROW_SHORT, _                    ; 1 --Short Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CONCAVE_SHORT, _                  ; 2 -- Short Concave Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_ARROW, _                          ; 3 -- Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_TRIANGLE, _                       ; 4 -- Triangle Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CONCAVE, _                        ; 5 -- Concave Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_ARROW_LARGE, _                    ; 6 -- Large Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CIRCLE, _                         ; 7 -- Circle Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE, _                         ; 8 -- Square Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45, _                      ; 9 -- Square Arrow head rotated 45 degrees.
+		$LOI_SHAPE_LINE_ARROW_TYPE_DIAMOND, _                        ; 10 -- Diamond Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE, _                    ; 11 -- Half Circle Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINES, _              ; 12 -- Dimension Lines head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINE_ARROW, _         ; 13 -- Dimension Line Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_DIMENSION_LINE, _                 ; 14 -- Dimension Line head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_LINE_SHORT, _                     ; 15 -- Short Line head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_LINE, _                           ; 16 -- Line head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_TRIANGLE_UNFILLED, _              ; 17 -- Unfilled Triangle Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_DIAMOND_UNFILLED, _               ; 18 -- Unfilled Diamond Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CIRCLE_UNFILLED, _                ; 19 -- Unfilled Circle Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED, _             ; 20 -- Unfilled Square Arrow head, rotated 45 degrees.
+		$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_UNFILLED, _                ; 21 -- Unfilled Square Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE_UNFILLED, _           ; 22 -- Unfilled Half Circle Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_LEFT, _                ; 23 -- Half Arrow left Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_RIGHT, _               ; 24 -- Half Arrow right Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_REVERSED_ARROW, _                 ; 25 -- Reversed Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_DOUBLE_ARROW, _                   ; 26 -- Double Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CF_ONE, _                         ; 27 -- CF One Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CF_ONLY_ONE, _                    ; 28 -- CF Only One Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CF_MANY, _                        ; 29 -- CF Many Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CF_MANY_ONE, _                    ; 30 -- CF Many One Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_ONE, _                    ; 31 -- CF Zero One Arrow head.
+		$LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY                      ; 32 -- CF Zero Many Arrow head.
+
+; Shape Line End Cap Constants.
+Global Const _                                                       ; com.sun.star.drawing.LineCap
+		$LOI_SHAPE_LINE_CAP_FLAT = 0, _                              ; Also called Butt, the line will end without any additional shape.
+		$LOI_SHAPE_LINE_CAP_ROUND = 1, _                             ; The line will get a half circle as additional cap.
+		$LOI_SHAPE_LINE_CAP_SQUARE = 2                               ; The line uses a square for the line end.
+
+; Shape Line Joint Constants.
+Global Const _                                                       ; com.sun.star.drawing.LineJoint
+		$LOI_SHAPE_LINE_JOINT_NONE = 0, _                            ; The joint between lines will not be connected.
+		$LOI_SHAPE_LINE_JOINT_MIDDLE = 1, _                          ; The middle value between the joints is used. ## Note used?
+		$LOI_SHAPE_LINE_JOINT_BEVEL = 2, _                           ; The edges of the thick lines will be joined by lines.
+		$LOI_SHAPE_LINE_JOINT_MITER = 3, _                           ; The lines join at intersections.
+		$LOI_SHAPE_LINE_JOINT_ROUND = 4                              ; The lines join with an arc.
+
+; Shape Line Style Constants.
+Global Enum _
+		$LOI_SHAPE_LINE_STYLE_NONE, _                                ; 0 -- No Line is applied.
+		$LOI_SHAPE_LINE_STYLE_CONTINUOUS, _                          ; 1 -- A Solid Line.
+		$LOI_SHAPE_LINE_STYLE_DOT, _                                 ; 2 -- A Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_DOT_ROUNDED, _                         ; 3 -- A Rounded Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_LONG_DOT, _                            ; 4 -- A Long Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_LONG_DOT_ROUNDED, _                    ; 5 -- A Rounded Long Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_DASH, _                                ; 6 -- A Dashed Line.
+		$LOI_SHAPE_LINE_STYLE_DASH_ROUNDED, _                        ; 7 -- A Rounded Dashed Line.
+		$LOI_SHAPE_LINE_STYLE_LONG_DASH, _                           ; 8 -- A Long Dashed Line.
+		$LOI_SHAPE_LINE_STYLE_LONG_DASH_ROUNDED, _                   ; 9 -- A Rounded Long Dashed Line.
+		$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH, _                         ; 10 -- A Double Dashed Line.
+		$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_ROUNDED, _                 ; 11 -- A Rounded Double Dash.
+		$LOI_SHAPE_LINE_STYLE_DASH_DOT, _                            ; 12 -- A Dashed and Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_DASH_DOT_ROUNDED, _                    ; 13 -- A Rounded Dashed and Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_LONG_DASH_DOT, _                       ; 14 -- A Long Dashed and Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_LONG_DASH_DOT_ROUNDED, _               ; 15 -- A Rounded Long Dashed and Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT, _                     ; 16 -- A Double Dash Dot Line.
+		$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_ROUNDED, _             ; 17 -- A Rounded Double Dash Dot Line
+		$LOI_SHAPE_LINE_STYLE_DASH_DOT_DOT, _                        ; 18 -- A Dash Dot Dot Line.
+		$LOI_SHAPE_LINE_STYLE_DASH_DOT_DOT_ROUNDED, _                ; 19 -- A Rounded Dash Dot Dot Line.
+		$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT, _                 ; 20 -- A Double Dash Dot Dot Line.
+		$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT_ROUNDED, _         ; 21 -- A Rounded Double Dash Dot Dot Line.
+		$LOI_SHAPE_LINE_STYLE_ULTRAFINE_DOTTED, _                    ; 22 -- A Ultrafine Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_FINE_DOTTED, _                         ; 23 -- A Fine Dotted Line.
+		$LOI_SHAPE_LINE_STYLE_ULTRAFINE_DASHED, _                    ; 24 -- A Ultrafine Dashed Line.
+		$LOI_SHAPE_LINE_STYLE_FINE_DASHED, _                         ; 25 -- A Fine Dashed Line.
+		$LOI_SHAPE_LINE_STYLE_DASHED, _                              ; 26 -- A Dashed Line.
+		$LOI_SHAPE_LINE_STYLE_SPARSE_DASH, _                         ; 27 -- A Sparse Dash. Before version 24.2 this was called Line Style 9.
+		$LOI_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, _                     ; 28 -- A Line consisting of 3 Dashes and 3 Dots.
+		$LOI_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES, _           ; 29 -- A Ultrafine Line consisting of 2 Dots and 3 Dashes.
+		$LOI_SHAPE_LINE_STYLE_2_DOTS_1_DASH, _                       ; 30 -- A Line consisting of 2 Dots and 1 Dash.
+		$LOI_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS                    ; 31 -- A Line with Fine Dots.
+
 ; Shape Type Constants.
 Global Enum Step * 2 _
 		$LOI_SHAPE_TYPE_DRAWING_SHAPE = 1, _                         ; 1 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
@@ -455,9 +467,10 @@ Global Enum Step * 2 _
 		$LOI_SHAPE_TYPE_OLE2, _                                      ; 16 - An OLE2 shape, such as a Chart, Formula etc.
 		$LOI_SHAPE_TYPE_TABLE, _                                     ; 32 - A Table.
 		$LOI_SHAPE_TYPE_TEXTBOX, _                                   ; 64 - A Text Box, including Hyperlinks, and most Fields.
-		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 128 - A Slide Subtitle Box.
+		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 128 - A Slide Subtitle Text Box.
 		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 256 - A Slide Title Text Box.
-		$LOI_SHAPE_TYPE_ALL = 511                                    ; All types above.
+		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINER, _                          ; 512 - A Slide Outliner Text Box.
+		$LOI_SHAPE_TYPE_ALL = 1023                                   ; All types above.
 
 ; Slide layout arrangements.
 Global Const _

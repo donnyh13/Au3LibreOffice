@@ -25,7 +25,7 @@ Func Example()
 	If @error Or (@extended = 0) Then _ERROR($oDoc, "Failed to retrieve Shapes, or no Shapes present in Slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Text Cursor in the Textbox.
-	$oTextCursor = _LOImpress_DrawShapeTextboxCreateTextCursor($avShapes[0][0])
+	$oTextCursor = _LOImpress_ShapeCreateTextCursor($avShapes[0][0])
 	If @error Then _ERROR($oDoc, "Failed to create a Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert the Slide's number.
@@ -51,7 +51,7 @@ Func Example()
 		If @error Or (@extended = 0) Then _ERROR($oDoc, "Failed to retrieve Shapes, or no Shapes present in Slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Create a Text Cursor in the Textbox.
-		$oTextCursor = _LOImpress_DrawShapeTextboxCreateTextCursor($avShapes[0][0])
+		$oTextCursor = _LOImpress_ShapeCreateTextCursor($avShapes[0][0])
 		If @error Then _ERROR($oDoc, "Failed to create a Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Insert the Slide's number.

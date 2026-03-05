@@ -1424,12 +1424,12 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ; Description ...: Retrieve an array of Shapes (Text Boxes, smileys, images etc) contained in a Slide.
 ; Syntax ........: _LOImpress_SlideShapesGetList(ByRef $oSlide[, $iTypes = $LOI_SHAPE_TYPE_ALL])
 ; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
-;                  $iTypes              - [optional] an integer value (0-511). Default is $LOI_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iTypes              - [optional] an integer value (0-1023). Default is $LOI_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTypes not an Integer, less than 1 or greater than 511. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iTypes not an Integer, less than 1 or greater than 1023. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to identify Shape Type.

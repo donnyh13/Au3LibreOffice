@@ -6,7 +6,8 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSlide, $oShape
-	Local $iColor
+	Local $avStops
+	Local $sStops = ""
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOImpress_DocCreate(True, False)
@@ -17,19 +18,32 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve current active slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Rectangle Shape into the Slide, 3000 Wide by 6000 High.
-	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
+	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000, 2000, 3500)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Shape Background Color settings. Background color = $LO_COLOR_TEAL.
-	_LOImpress_DrawShapeAreaColor($oShape, $LO_COLOR_TEAL)
+	; Modify the Shape Gradient settings to: Preset Gradient name = $LOI_GRAD_NAME_SUNDOWN
+	_LOImpress_ShapeAreaGradient($oShape, $LOI_GRAD_NAME_SUNDOWN)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current Shape settings. Return will be an Integer.
-	$iColor = _LOImpress_DrawShapeAreaColor($oShape)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve an array of Multicolor Gradient ColorStops.
+	$avStops = _LOImpress_ShapeAreaGradientMulticolor($oShape)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Multicolor Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Background color settings are as follows: " & @CRLF & _
-			"The Shape's Background color is (as a RGB Color Integer): " & $iColor)
+	For $i = 0 To UBound($avStops) - 1
+		$sStops &= "ColorStop offset: " & $avStops[$i][0] & " | " & @TAB & "ColorStop Color: " & $avStops[$i][1] & @CRLF
+	Next
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Gradient ColorStops are as follows: " & @CRLF & _
+			$sStops & @CRLF & @CRLF & _
+			"Press ok to add a new ColorStop.")
+
+	; Add a new ColorStop in the middle.
+	_LOImpress_GradientMulticolorAdd($avStops, 3, 0.6, 1234567)
+	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Apply the new ColorStops.
+	_LOImpress_ShapeAreaGradientMulticolor($oShape, $avStops)
+	If @error Then _ERROR($oDoc, "Failed to modify Multicolor Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

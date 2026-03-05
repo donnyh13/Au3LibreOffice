@@ -32,8 +32,6 @@
 ; __LOImpress_DrawShape_CreateStars
 ; __LOImpress_DrawShape_CreateSymbol
 ; __LOImpress_DrawShape_GetCustomType
-; __LOImpress_DrawShapeArrowStyleName
-; __LOImpress_DrawShapeLineStyleName
 ; __LOImpress_DrawShapePointGetSettings
 ; __LOImpress_DrawShapePointModify
 ; __LOImpress_FilterNameGet
@@ -41,7 +39,10 @@
 ; __LOImpress_GradientNameInsert
 ; __LOImpress_GradientPresets
 ; __LOImpress_InternalComErrorHandler
+; __LOImpress_ShapeAreaShadowModify
+; __LOImpress_ShapeArrowStyleName
 ; __LOImpress_ShapeGetType
+; __LOImpress_ShapeLineStyleName
 ; __LOImpress_Transition
 ; __LOImpress_TransparencyGradientConvert
 ; __LOImpress_TransparencyGradientNameInsert
@@ -846,7 +847,7 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 	$oDoc = $oSlide.MasterPage.Forms.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If ($iShapeType <> $LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSION_LINE) Then
+	If ($iShapeType <> $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION) Then
 		$tPolyCoords = __LO_CreateStruct("com.sun.star.drawing.PolyPolygonBezierCoords")
 		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 	EndIf
@@ -2052,172 +2053,6 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 			Return SetError($__LO_STATUS_SUCCESS, 0, -1)
 	EndSwitch
 EndFunc   ;==>__LOImpress_DrawShape_GetCustomType
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShapeArrowStyleName
-; Description ...: Convert a Arrow head Constant to the corresponding name or reverse.
-; Syntax ........: __LOImpress_DrawShapeArrowStyleName([$iArrowStyle = Null[, $sArrowStyle = Null]])
-; Parameters ....: $iArrowStyle         - [optional] an integer value (0-32). Default is Null. The Arrow Style Constant to convert to its corresponding name. See $LOI_DRAWSHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  $sArrowStyle         - [optional] a string value. Default is Null. The Arrow Style Name to convert to the corresponding constant if found.
-; Return values .: Success: String or Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOI_DRAWSHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 1 @Extended 2 Return 0 = $sArrowStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = Both $iArrowStyle and $sArrowStyle called with Null.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iArrowStyle was successfully converted to its corresponding Arrow Type Name.
-;                  @Error 0 @Extended 1 Return Integer = Success. Arrow Type Name called in $sArrowStyle was successfully converted to its corresponding Constant value.
-;                  @Error 0 @Extended 2 Return String = Success. Arrow Type Name called in $sArrowStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOImpress_DrawShapeArrowStyleName($iArrowStyle = Null, $sArrowStyle = Null)
-	Local $asArrowStyles[33]
-
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_NONE] = ""
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW_SHORT] = "Arrow short"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CONCAVE_SHORT] = "Concave short"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW] = "Arrow"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_TRIANGLE] = "Triangle"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CONCAVE] = "Concave"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW_LARGE] = "Arrow large"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CIRCLE] = "Circle"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE] = "Square"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_45] = "Square 45"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIAMOND] = "Diamond"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_CIRCLE] = "Half Circle"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINES] = "Dimension Lines"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINE_ARROW] = "Dimension Line Arrow"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIMENSION_LINE] = "Dimension Line"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_LINE_SHORT] = "Line short"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_LINE] = "Line"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_TRIANGLE_UNFILLED] = "Triangle unfilled"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DIAMOND_UNFILLED] = "Diamond unfilled"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CIRCLE_UNFILLED] = "Circle unfilled"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED] = "Square 45 unfilled"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_SQUARE_UNFILLED] = "Square unfilled"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_CIRCLE_UNFILLED] = "Half Circle unfilled"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_ARROW_LEFT] = "Half Arrow left"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_HALF_ARROW_RIGHT] = "Half Arrow right"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_REVERSED_ARROW] = "Reversed Arrow"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_DOUBLE_ARROW] = "Double Arrow"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ONE] = "CF One"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ONLY_ONE] = "CF Only One"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_MANY] = "CF Many"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_MANY_ONE] = "CF Many One"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ZERO_ONE] = "CF Zero One"
-	$asArrowStyles[$LOI_DRAWSHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY] = "CF Zero Many"
-
-	If ($iArrowStyle <> Null) Then
-		If Not __LO_IntIsBetween($iArrowStyle, 0, UBound($asArrowStyles) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 0, $asArrowStyles[$iArrowStyle]) ; Return the requested Arrow Style name.
-
-	ElseIf ($sArrowStyle <> Null) Then
-		If Not IsString($sArrowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		For $i = 0 To UBound($asArrowStyles) - 1
-			If ($asArrowStyles[$i] = $sArrowStyle) Then Return SetError($__LO_STATUS_SUCCESS, 1, $i) ; Return the array element where the matching Arrow Style was found.
-
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
-		Next
-
-		Return SetError($__LO_STATUS_SUCCESS, 2, $sArrowStyle) ; If no matches, just return the name, as it could be a custom value.
-
-	Else
-
-		Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; No values called.
-	EndIf
-EndFunc   ;==>__LOImpress_DrawShapeArrowStyleName
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShapeLineStyleName
-; Description ...: Convert a Line Style Constant to the corresponding name or reverse.
-; Syntax ........: __LOImpress_DrawShapeLineStyleName([$iLineStyle = Null[, $sLineStyle = Null]])
-; Parameters ....: $iLineStyle          - [optional] an integer value (0-31). Default is Null. The Line Style Constant to convert to its corresponding name. See $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
-;                  $sLineStyle          - [optional] a string value. Default is Null. The Line Style Name to convert to the corresponding constant if found.
-; Return values .: Success: String or Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOI_DRAWSHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 1 @Extended 2 Return 0 = $sLineStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = Both $iLineStyle and $sLineStyle called with Null.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iLineStyle was successfully converted to its corresponding Line Style Name.
-;                  @Error 0 @Extended 1 Return Integer = Success. Line Style Name called in $sLineStyle was successfully converted to its corresponding Constant value.
-;                  @Error 0 @Extended 2 Return String = Success. Line Style Name called in $sLineStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOImpress_DrawShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null)
-	Local $asLineStyles[32]
-
-	; $LOI_DRAWSHAPE_LINE_STYLE_NONE, $LOI_DRAWSHAPE_LINE_STYLE_CONTINUOUS, don't have a name, so to keep things symmetrical I created my own, but those two won't be used.
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_NONE] = "NONE"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_CONTINUOUS] = "CONTINUOUS"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOT] = "Dot"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOT_ROUNDED] = "Dot (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DOT] = "Long Dot"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DOT_ROUNDED] = "Long Dot (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH] = "Dash"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_ROUNDED] = "Dash (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH] = "Long Dash"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH_ROUNDED] = "Long Dash (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH] = "Double Dash"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_ROUNDED] = "Double Dash (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT] = "Dash Dot"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT_ROUNDED] = "Dash Dot (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH_DOT] = "Long Dash Dot"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LONG_DASH_DOT_ROUNDED] = "Long Dash Dot (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT] = "Double Dash Dot"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT_ROUNDED] = "Double Dash Dot (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT_DOT] = "Dash Dot Dot"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASH_DOT_DOT_ROUNDED] = "Dash Dot Dot (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT] = "Double Dash Dot Dot"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT_ROUNDED] = "Double Dash Dot Dot (Rounded)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_ULTRAFINE_DOTTED] = "Ultrafine Dotted (var)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_FINE_DOTTED] = "Fine Dotted"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_ULTRAFINE_DASHED] = "Ultrafine Dashed"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_FINE_DASHED] = "Fine Dashed"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_DASHED] = "Dashed (var)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_SPARSE_DASH] = "Sparse Dash"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_3_DASHES_3_DOTS] = "3 Dashes 3 Dots (var)"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES] = "Ultrafine 2 Dots 3 Dashes"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_2_DOTS_1_DASH] = "2 Dots 1 Dash"
-	$asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS] = "Line with Fine Dots"
-
-	If Not __LO_VersionCheck(24.2) Then $asLineStyles[$LOI_DRAWSHAPE_LINE_STYLE_SPARSE_DASH] = "Line Style 9"
-
-	If ($iLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iLineStyle, 0, UBound($asLineStyles) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 0, $asLineStyles[$iLineStyle]) ; Return the requested Line Style name.
-
-	ElseIf ($sLineStyle <> Null) Then
-		If Not IsString($sLineStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		For $i = 0 To UBound($asLineStyles) - 1
-			If ($asLineStyles[$i] = $sLineStyle) Then Return SetError($__LO_STATUS_SUCCESS, 1, $i) ; Return the array element where the matching Line Style was found.
-
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
-		Next
-
-		Return SetError($__LO_STATUS_SUCCESS, 2, $sLineStyle) ; If no matches, just return the name, as it could be a custom value.
-
-	Else
-
-		Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; No values called.
-	EndIf
-EndFunc   ;==>__LOImpress_DrawShapeLineStyleName
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShapePointGetSettings
@@ -3747,6 +3582,234 @@ Func __LOImpress_InternalComErrorHandler(ByRef $oComError)
 EndFunc   ;==>__LOImpress_InternalComErrorHandler
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_ShapeAreaShadowModify
+; Description ...: Internal function for setting or retrieving Shape Shadow Location and Distance settings.
+; Syntax ........: __LOImpress_ShapeAreaShadowModify($oShape[, $iLocation = Null[, $iDistance = Null]])
+; Parameters ....: $oShape              - an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
+;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDistance           - [optional] an integer value. Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
+; Return values .: Success: 1 or Integer
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iLocation
+;                  |                               2 = Error setting $iDistance
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully set the settings.
+;                  @Error 0 @Extended ? Return Integer = Success. $iLocation and $iDistance called with Null, returning current Values. Return will be current distance, and @Extended will be the current Location.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_SlideShapesGetList.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_ShapeAreaShadowModify($oShape, $iLocation = Null, $iDistance = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $bReturn = False, $bModifyLocation = True
+	Local $iError = 1
+
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iLocation, $iDistance) Then $bReturn = True
+
+	If ($iLocation = Null) Then ; Determine current location)
+		$bModifyLocation = False
+		$iError = 2
+		Select
+			Case (($oShape.ShadowXDistance() < 0) And ($oShape.ShadowYDistance() < 0)) ; Top Left.
+				$iLocation = $LOI_SHAPE_SHADOW_TOP_LEFT
+
+			Case (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() < 0)) ; Top Center
+				$iLocation = $LOI_SHAPE_SHADOW_TOP_CENTER
+
+			Case (($oShape.ShadowXDistance() > 0) And ($oShape.ShadowYDistance() < 0)) ; Top Right
+				$iLocation = $LOI_SHAPE_SHADOW_TOP_RIGHT
+
+			Case (($oShape.ShadowXDistance() < 0) And ($oShape.ShadowYDistance() = 0)) ; Middle Left
+				$iLocation = $LOI_SHAPE_SHADOW_MIDDLE_LEFT
+
+			Case (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() = 0)) ; Middle Center
+				$iLocation = $LOI_SHAPE_SHADOW_MIDDLE_CENTER
+
+			Case (($oShape.ShadowXDistance() > 0) And ($oShape.ShadowYDistance() = 0)) ; Middle Right
+				$iLocation = $LOI_SHAPE_SHADOW_MIDDLE_RIGHT
+
+			Case (($oShape.ShadowXDistance() < 0) And ($oShape.ShadowYDistance() > 0)) ; Bottom Left
+				$iLocation = $LOI_SHAPE_SHADOW_BOTTOM_LEFT
+
+			Case (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() > 0)) ; Bottom Center
+				$iLocation = $LOI_SHAPE_SHADOW_BOTTOM_CENTER
+
+			Case (($oShape.ShadowXDistance() > 0) And ($oShape.ShadowYDistance() > 0)) ; Bottom Right
+				$iLocation = $LOI_SHAPE_SHADOW_BOTTOM_RIGHT
+		EndSelect
+	EndIf
+
+	If ($iDistance = Null) Then
+		; Retrieve the current Distance setting
+		If ($oShape.ShadowXDistance() <> 0) Then
+			$iDistance = $oShape.ShadowXDistance()
+
+		ElseIf ($oShape.ShadowYDistance() <> 0) Then
+			$iDistance = $oShape.ShadowYDistance()
+
+		Else
+			$iDistance = 0
+		EndIf
+
+		If $bModifyLocation And ($iDistance = 0) Then $iDistance = 100 ; Set a non 0 value so location can be set.
+
+		; If negative, make it positive for easier processing.
+		$iDistance = ($iDistance < 0) ? ($iDistance * -1) : ($iDistance)
+	EndIf
+
+	If $bReturn Then Return SetError($__LO_STATUS_SUCCESS, $iLocation, $iDistance)
+
+	Switch $iLocation
+		Case $LOI_SHAPE_SHADOW_TOP_LEFT
+			$oShape.ShadowXDistance = ($iDistance * -1)
+			$oShape.ShadowYDistance = ($iDistance * -1)
+
+			Return (($oShape.ShadowXDistance() = ($iDistance * -1)) And ($oShape.ShadowYDistance() = ($iDistance * -1))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+
+		Case $LOI_SHAPE_SHADOW_TOP_CENTER
+			$oShape.ShadowXDistance = 0
+			$oShape.ShadowYDistance = ($iDistance * -1)
+
+			Return (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() = ($iDistance * -1))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+
+		Case $LOI_SHAPE_SHADOW_TOP_RIGHT
+			$oShape.ShadowXDistance = $iDistance
+			$oShape.ShadowYDistance = ($iDistance * -1)
+
+			Return (($oShape.ShadowXDistance() = $iDistance) And ($oShape.ShadowYDistance() = ($iDistance * -1))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+
+		Case $LOI_SHAPE_SHADOW_MIDDLE_LEFT
+			$oShape.ShadowXDistance = ($iDistance * -1)
+			$oShape.ShadowYDistance = 0
+
+			Return (($oShape.ShadowXDistance() = ($iDistance * -1)) And ($oShape.ShadowYDistance() = 0)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+
+		Case $LOI_SHAPE_SHADOW_MIDDLE_CENTER
+			$oShape.ShadowXDistance = ($bModifyLocation) ? (0) : ($iDistance)
+			$oShape.ShadowYDistance = ($bModifyLocation) ? (0) : ($iDistance)
+
+			Return (($oShape.ShadowXDistance() = (($bModifyLocation) ? (0) : ($iDistance))) And ($oShape.ShadowYDistance() = (($bModifyLocation) ? (0) : ($iDistance)))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+
+		Case $LOI_SHAPE_SHADOW_MIDDLE_RIGHT
+			$oShape.ShadowXDistance = $iDistance
+			$oShape.ShadowYDistance = 0
+
+			Return (($oShape.ShadowXDistance() = $iDistance) And ($oShape.ShadowYDistance() = 0)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+
+		Case $LOI_SHAPE_SHADOW_BOTTOM_LEFT
+			$oShape.ShadowXDistance = ($iDistance * -1)
+			$oShape.ShadowYDistance = $iDistance
+
+			Return (($oShape.ShadowXDistance() = ($iDistance * -1)) And ($oShape.ShadowYDistance() = $iDistance)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+
+		Case $LOI_SHAPE_SHADOW_BOTTOM_CENTER
+			$oShape.ShadowXDistance = 0
+			$oShape.ShadowYDistance = $iDistance
+
+			Return (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() = $iDistance)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+
+		Case $LOI_SHAPE_SHADOW_BOTTOM_RIGHT
+			$oShape.ShadowXDistance = $iDistance
+			$oShape.ShadowYDistance = $iDistance
+
+			Return (($oShape.ShadowXDistance() = $iDistance) And ($oShape.ShadowYDistance() = $iDistance)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	EndSwitch
+EndFunc   ;==>__LOImpress_ShapeAreaShadowModify
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_ShapeArrowStyleName
+; Description ...: Convert a Arrow head Constant to the corresponding name or reverse.
+; Syntax ........: __LOImpress_ShapeArrowStyleName([$iArrowStyle = Null[, $sArrowStyle = Null]])
+; Parameters ....: $iArrowStyle         - [optional] an integer value (0-32). Default is Null. The Arrow Style Constant to convert to its corresponding name. See $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $sArrowStyle         - [optional] a string value. Default is Null. The Arrow Style Name to convert to the corresponding constant if found.
+; Return values .: Success: String or Integer
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error 1 @Extended 2 Return 0 = $sArrowStyle not a String.
+;                  @Error 1 @Extended 3 Return 0 = Both $iArrowStyle and $sArrowStyle called with Null.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iArrowStyle was successfully converted to its corresponding Arrow Type Name.
+;                  @Error 0 @Extended 1 Return Integer = Success. Arrow Type Name called in $sArrowStyle was successfully converted to its corresponding Constant value.
+;                  @Error 0 @Extended 2 Return String = Success. Arrow Type Name called in $sArrowStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_SlideShapesGetList.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_ShapeArrowStyleName($iArrowStyle = Null, $sArrowStyle = Null)
+	Local $asArrowStyles[33]
+
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_NONE] = ""
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_ARROW_SHORT] = "Arrow short"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CONCAVE_SHORT] = "Concave short"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_ARROW] = "Arrow"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_TRIANGLE] = "Triangle"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CONCAVE] = "Concave"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_ARROW_LARGE] = "Arrow large"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CIRCLE] = "Circle"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE] = "Square"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45] = "Square 45"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIAMOND] = "Diamond"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE] = "Half Circle"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINES] = "Dimension Lines"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINE_ARROW] = "Dimension Line Arrow"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIMENSION_LINE] = "Dimension Line"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_LINE_SHORT] = "Line short"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_LINE] = "Line"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_TRIANGLE_UNFILLED] = "Triangle unfilled"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIAMOND_UNFILLED] = "Diamond unfilled"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CIRCLE_UNFILLED] = "Circle unfilled"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED] = "Square 45 unfilled"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_UNFILLED] = "Square unfilled"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE_UNFILLED] = "Half Circle unfilled"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_LEFT] = "Half Arrow left"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_RIGHT] = "Half Arrow right"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_REVERSED_ARROW] = "Reversed Arrow"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DOUBLE_ARROW] = "Double Arrow"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_ONE] = "CF One"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_ONLY_ONE] = "CF Only One"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_MANY] = "CF Many"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_MANY_ONE] = "CF Many One"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_ONE] = "CF Zero One"
+	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY] = "CF Zero Many"
+
+	If ($iArrowStyle <> Null) Then
+		If Not __LO_IntIsBetween($iArrowStyle, 0, UBound($asArrowStyles) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, $asArrowStyles[$iArrowStyle]) ; Return the requested Arrow Style name.
+
+	ElseIf ($sArrowStyle <> Null) Then
+		If Not IsString($sArrowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		For $i = 0 To UBound($asArrowStyles) - 1
+			If ($asArrowStyles[$i] = $sArrowStyle) Then Return SetError($__LO_STATUS_SUCCESS, 1, $i) ; Return the array element where the matching Arrow Style was found.
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, 2, $sArrowStyle) ; If no matches, just return the name, as it could be a custom value.
+
+	Else
+
+		Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; No values called.
+	EndIf
+EndFunc   ;==>__LOImpress_ShapeArrowStyleName
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_ShapeGetType
 ; Description ...: Identify a Shape's type.
 ; Syntax ........: __LOImpress_ShapeGetType(ByRef $oShape)
@@ -3771,7 +3834,7 @@ Func __LOImpress_ShapeGetType(ByRef $oShape)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $avShapeTypes[20][2] = [[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.Shape3DSceneObject"], _
+	Local $avShapeTypes[21][2] = [[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.Shape3DSceneObject"], _
 			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.CustomShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.MeasureShape"], _
 			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.EllipseShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedBezierShape"], _
 			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenBezierShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyPolygonShape"], _
@@ -3781,7 +3844,7 @@ Func __LOImpress_ShapeGetType(ByRef $oShape)
 			[$LOI_SHAPE_TYPE_IMAGE, "com.sun.star.drawing.GraphicObjectShape"], [$LOI_SHAPE_TYPE_MEDIA, "com.sun.star.drawing.MediaShape"], _
 			[$LOI_SHAPE_TYPE_OLE2, "com.sun.star.drawing.OLE2Shape"], [$LOI_SHAPE_TYPE_TABLE, "com.sun.star.drawing.TableShape"], _
 			[$LOI_SHAPE_TYPE_TEXTBOX, "com.sun.star.drawing.TextShape"], [$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, "com.sun.star.presentation.SubtitleShape"], _
-			[$LOI_SHAPE_TYPE_TEXTBOX_TITLE, "com.sun.star.presentation.TitleTextShape"]]
+			[$LOI_SHAPE_TYPE_TEXTBOX_TITLE, "com.sun.star.presentation.TitleTextShape"], [$LOI_SHAPE_TYPE_TEXTBOX_OUTLINER, "com.sun.star.presentation.OutlinerShape"]]
 	Local $sShapeType
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -3795,6 +3858,90 @@ Func __LOImpress_ShapeGetType(ByRef $oShape)
 
 	Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 EndFunc   ;==>__LOImpress_ShapeGetType
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_ShapeLineStyleName
+; Description ...: Convert a Line Style Constant to the corresponding name or reverse.
+; Syntax ........: __LOImpress_ShapeLineStyleName([$iLineStyle = Null[, $sLineStyle = Null]])
+; Parameters ....: $iLineStyle          - [optional] an integer value (0-31). Default is Null. The Line Style Constant to convert to its corresponding name. See $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $sLineStyle          - [optional] a string value. Default is Null. The Line Style Name to convert to the corresponding constant if found.
+; Return values .: Success: String or Integer
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error 1 @Extended 2 Return 0 = $sLineStyle not a String.
+;                  @Error 1 @Extended 3 Return 0 = Both $iLineStyle and $sLineStyle called with Null.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iLineStyle was successfully converted to its corresponding Line Style Name.
+;                  @Error 0 @Extended 1 Return Integer = Success. Line Style Name called in $sLineStyle was successfully converted to its corresponding Constant value.
+;                  @Error 0 @Extended 2 Return String = Success. Line Style Name called in $sLineStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_SlideShapesGetList.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null)
+	Local $asLineStyles[32]
+
+	; $LOI_SHAPE_LINE_STYLE_NONE, $LOI_SHAPE_LINE_STYLE_CONTINUOUS, don't have a name, so to keep things symmetrical I created my own, but those two won't be used.
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_NONE] = "NONE"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_CONTINUOUS] = "CONTINUOUS"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOT] = "Dot"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOT_ROUNDED] = "Dot (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DOT] = "Long Dot"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DOT_ROUNDED] = "Long Dot (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH] = "Dash"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_ROUNDED] = "Dash (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DASH] = "Long Dash"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DASH_ROUNDED] = "Long Dash (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH] = "Double Dash"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_ROUNDED] = "Double Dash (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_DOT] = "Dash Dot"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_DOT_ROUNDED] = "Dash Dot (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DASH_DOT] = "Long Dash Dot"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DASH_DOT_ROUNDED] = "Long Dash Dot (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT] = "Double Dash Dot"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_ROUNDED] = "Double Dash Dot (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_DOT_DOT] = "Dash Dot Dot"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_DOT_DOT_ROUNDED] = "Dash Dot Dot (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT] = "Double Dash Dot Dot"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT_ROUNDED] = "Double Dash Dot Dot (Rounded)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_ULTRAFINE_DOTTED] = "Ultrafine Dotted (var)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_FINE_DOTTED] = "Fine Dotted"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_ULTRAFINE_DASHED] = "Ultrafine Dashed"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_FINE_DASHED] = "Fine Dashed"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASHED] = "Dashed (var)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_SPARSE_DASH] = "Sparse Dash"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_3_DASHES_3_DOTS] = "3 Dashes 3 Dots (var)"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES] = "Ultrafine 2 Dots 3 Dashes"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_2_DOTS_1_DASH] = "2 Dots 1 Dash"
+	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS] = "Line with Fine Dots"
+
+	If Not __LO_VersionCheck(24.2) Then $asLineStyles[$LOI_SHAPE_LINE_STYLE_SPARSE_DASH] = "Line Style 9"
+
+	If ($iLineStyle <> Null) Then
+		If Not __LO_IntIsBetween($iLineStyle, 0, UBound($asLineStyles) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, $asLineStyles[$iLineStyle]) ; Return the requested Line Style name.
+
+	ElseIf ($sLineStyle <> Null) Then
+		If Not IsString($sLineStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		For $i = 0 To UBound($asLineStyles) - 1
+			If ($asLineStyles[$i] = $sLineStyle) Then Return SetError($__LO_STATUS_SUCCESS, 1, $i) ; Return the array element where the matching Line Style was found.
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, 2, $sLineStyle) ; If no matches, just return the name, as it could be a custom value.
+
+	Else
+
+		Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; No values called.
+	EndIf
+EndFunc   ;==>__LOImpress_ShapeLineStyleName
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_Transition
