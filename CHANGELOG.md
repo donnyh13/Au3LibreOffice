@@ -365,6 +365,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - `_LOBase_DocOpen` Header Syntax contained one incorrect parameter.
 
+#### Fixed
+
+- Removed left behind ConsoleWrite debugging.
+
 #### Refactored
 
 - Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.

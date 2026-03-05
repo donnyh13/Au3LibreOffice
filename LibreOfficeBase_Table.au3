@@ -689,8 +689,6 @@ Func _LOBase_TableColProperties(ByRef $oConnection, ByRef $oTable, ByRef $oColum
 		$iError = ($oColumn.Align() = $iAlign) ? ($iError) : (BitOR($iError, 64))
 	EndIf
 
-	ConsoleWrite($oNewCol.Align() & @CRLF)
-
 	$iError = (__LO_VarsAreNull($iLength)) ? ($iError) : (($oColumn.Precision() = $iLength) ? ($iError) : (BitOR($iError, 1)))
 	$iError = (__LO_VarsAreNull($bRequired)) ? ($iError) : (($oColumn.IsNullable() = (($bRequired) ? ($__LOB_IS_REQUIRED_YES) : ($__LOB_IS_REQUIRED_NO))) ? ($iError) : (BitOR($iError, 4)))
 	$iError = (__LO_VarsAreNull($iDecimalPlace)) ? ($iError) : (($oColumn.Scale() = $iDecimalPlace) ? ($iError) : (BitOR($iError, 8)))

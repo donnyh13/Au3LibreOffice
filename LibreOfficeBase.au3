@@ -16,8 +16,6 @@
 #include "LibreOfficeBase_SQLStatement.au3"
 #include "LibreOfficeBase_Table.au3"
 
-;~ _LOBase_ComError_UserFunction(ConsoleWrite)
-
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
