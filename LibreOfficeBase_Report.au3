@@ -465,7 +465,7 @@ EndFunc   ;==>_LOBase_ReportConImageConData
 ;                  @Error 1 @Extended 8 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 9 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 10 Return 0 = $sGraphics not a String.
-;                  @Error 1 @Extended 11 Return 0 = $iScale not an Integer, less than 0 or greater than 2. See Constants $LOB_FORM_CONTROL_IMG_BTN_SCALE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 11 Return 0 = $iScale not an Integer, less than 0 or greater than 2. See Constants $LOB_REP_CON_IMG_BTN_SCALE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
 ;                  --Property Setting Errors--
