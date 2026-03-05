@@ -60,6 +60,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - $LO_CONVERT_* Constant.
 - `_LO_UnitConvert` Function for converting Inches, Centimeters, etc. Replacing `_LO_ConvertFromMicrometer` and `_LO_ConvertToMicrometer`.
 - `_LO_PrintersGetNames` and `_LO_PrintersGetNamesAlt` central functions for retrieving Printer names instead of individual component functions.
+- Added Au3 LibreOffice Inspector tools to UDF files.
 
 #### Changed
 
