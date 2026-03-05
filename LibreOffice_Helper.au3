@@ -589,7 +589,7 @@ EndFunc   ;==>_LO_PathConvert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function works for LibreOffice 4.1 and Up.
-; Related .......: _LO_DocPrintersAltGetNames
+; Related .......: _LO_PrintersAltGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -649,7 +649,7 @@ EndFunc   ;==>_LO_PrintersGetNames
 ; Remarks .......: When $bReturnDefault is False, The function returns all installed printers for the user running the script in an array.
 ;                  If $sPrinterName is set, the name must be exact, or no results will be found, unless you use an asterisk (*) for partial name searches, either prefixed (*Canon), suffixed (Canon*), or both (*Canon*).
 ;                  When $bReturnDefault is True, The function returns only the default printer's name or sets an error if no default printer is found.
-; Related .......: _LO_DocPrintersGetNames
+; Related .......: _LO_PrintersGetNames
 ; Link ..........: https://www.autoitscript.com/forum/topic/155485-printers-management-udf/
 ; UDF title......: Printmgr.au3
 ; Example .......: Yes

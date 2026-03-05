@@ -297,7 +297,7 @@ Func _LOBase_FormCreate(ByRef $oConnection, $sForm, $bOpen = False, $bDesign = T
 	Local $oServiceManager, $oDesktop, $oSource, $oFormDoc, $oDocDef
 	Local Const $iURLFrameCreate = 8 ; frame will be created if not found
 	Local $aArgs[1]
-	Local $iError = 0, $iCount = 0
+	Local $iCount = 0
 	Local $sPath = @TempDir & "AutoIt_Form_Temp_Doc_", $sFormName
 
 	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -316,7 +316,6 @@ Func _LOBase_FormCreate(ByRef $oConnection, $sForm, $bOpen = False, $bDesign = T
 	If Not IsString($sFormName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	$aArgs[0] = __LO_SetPropertyValue("Hidden", True)
-	If Not IsObj($aArgs[0]) Then $iError = BitOR($iError, 1)
 
 	$oServiceManager = __LO_ServiceManager()
 	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)

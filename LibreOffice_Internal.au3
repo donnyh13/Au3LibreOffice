@@ -254,7 +254,7 @@ Func __LO_InternalComErrorHandler(ByRef $oComError)
 						"!--COM-Error-End--" & @CRLF)
 
 			Case MsgBox
-				MsgBox(0, "COM Error",  "Module: LibreOffice Main" & @CRLF & _
+				MsgBox(0, "COM Error", "Module: LibreOffice Main" & @CRLF & _
 						"Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
 						"WinDescription: " & $oComError.windescription & @CRLF & _
 						"Source: " & $oComError.source & @CRLF & _

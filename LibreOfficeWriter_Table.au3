@@ -934,7 +934,7 @@ Func _LOWriter_TableCursor(ByRef $oCursor, $sGoToCellByName = Null, $bSelect = F
 		If Not IsBool($bSplitRangeHori) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$vReturn = $oCursor.splitRange($iSplitRangeInto, $bSplitRangeHori)
-		$iError = ($vReturn = True) ? ($iError) : (BitOR($iError, 4, 0))
+		$iError = ($vReturn = True) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROCESSING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
