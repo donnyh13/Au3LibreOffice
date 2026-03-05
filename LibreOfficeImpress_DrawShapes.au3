@@ -627,7 +627,7 @@ EndFunc   ;==>_LOImpress_DrawShapeExists
 ;                  - $LOI_DRAWSHAPE_TYPE_3D_* (The Value of $LOI_DRAWSHAPE_TYPE_3D_CONE is returned for any of these.)
 ;                  #6 The following shapes are customizable one to another, they may be identified, or may return a general shape type:
 ;                  When the arrowhead type "Arrow" is set in the LO UI, or upon creation of a line with arrows, the internal name of the arrowhead is set to an incrementing name of "Arrowheads x", where x is an Integer value. Since I have no way to determine if the head is a custom arrowhead or supposed to be the "Arrow" type, I cannot necessarily identify the right connector or Line.
-;                  When setting an Arrowhead to be $LOI_DRAWSHAPE_LINE_ARROW_TYPE_ARROW, the head is set correctly, but the LibreOffice UI will show "None". The return for Arrowhead type will be the correct name however, and will allow me to identify the shape.
+;                  When setting an Arrowhead to be $LOI_SHAPE_LINE_ARROW_TYPE_ARROW, the head is set correctly, but the LibreOffice UI will show "None". The return for Arrowhead type will be the correct name however, and will allow me to identify the shape.
 ;                  - If I fail to identify, or it is customized differently, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_* Connector, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT will be returned.
 ;                  - If I fail to identify, or it is customized differently, $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE_* Connector, $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE will be returned.
 ;                  - If I fail to identify, or it is customized differently, $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED_* Connector, $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED will be returned.
