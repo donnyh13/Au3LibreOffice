@@ -1927,7 +1927,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 #### Changed
 
-- Original LibreOffice UDF file split into individual elements, per specific usages. (@mLipok.)
+- Original LibreOffice UDF file split into individual modules, per specific usages. (@mLipok.)
   - LibreOfficeWriter_Cell,
   - LibreOfficeWriter_Char,
   - LibreOfficeWriter_Constants,
@@ -2087,9 +2087,9 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 
 ---
 
-[v0.10.0-Compare]: https://github.com/mlipok/Au3LibreOffice/compare/0.9.1...main
-[v0.9.1-Compare]: https://github.com/mlipok/Au3LibreOffice/compare/v0.9.0...0.9.1
+[v0.10.0-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/0.9.1...main
+[v0.9.1-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/v0.9.0...0.9.1
 
-[v0.10.0]: https://github.com/mlipok/Au3LibreOffice
-[v0.9.1]: https://github.com/mlipok/Au3LibreOffice/releases/tag/0.9.1
-[v0.9.0]: https://github.com/mlipok/Au3LibreOffice/releases/tag/v0.9.0
+[v0.10.0]: https://github.com/donnyh13/Au3LibreOffice
+[v0.9.1]: https://github.com/donnyh13/Au3LibreOffice/releases/tag/0.9.1
+[v0.9.0]: https://github.com/donnyh13/Au3LibreOffice/releases/tag/v0.9.0
