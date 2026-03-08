@@ -1,5 +1,5 @@
 #include <MsgBoxConstants.au3>
-#include "AU3_LibreOffice_Inspector.au3"
+#include "..\AU3_LibreOffice_Inspector.au3"
 
 _Example()
 
