@@ -523,7 +523,7 @@ Func _LO_PathConvert($sFilePath, $iReturnMode = $LO_PATHCONV_AUTO_RETURN)
 
 	$sFilePath = StringStripWS($sFilePath, $__STR_STRIPLEADING)
 
-	$iPathSearch = StringRegExp($sFilePath, "[A-Z]\:\\") ; Search For a Computer Path, as in C:\ etc.
+	$iPathSearch = StringRegExp($sFilePath, "(?i)\b[A-Z]:\\") ; Search For a Computer Path, as in C:\ etc.
 	$iPartialPCPath = StringInStr($sFilePath, "\") ; Search for partial computer Path containing a backslash.
 	$iFileSearch = StringInStr($sFilePath, "file:///", 0, 1, 1, 9) ; Search for a full Libre path, which begins with File:///
 	$iPartialFilePath = StringInStr($sFilePath, "/") ; Search For a Partial Libre path containing forward slash
