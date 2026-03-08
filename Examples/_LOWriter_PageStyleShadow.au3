@@ -21,8 +21,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(.125, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Shadow settings to: Width = 1/8", Color = $LO_COLOR_RED, Location = $LOW_SHADOW_TOP_LEFT
-	_LOWriter_PageStyleShadow($oPageStyle, $iHMM, $LO_COLOR_RED, $LOW_SHADOW_TOP_LEFT)
+	; Set Page style Shadow settings to: Location = $LOW_SHADOW_TOP_LEFT, Color = $LO_COLOR_RED, Width = 1/8"
+	_LOWriter_PageStyleShadow($oPageStyle, $LOW_SHADOW_TOP_LEFT, $LO_COLOR_RED, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.
@@ -30,9 +30,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Page style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Shadow settings are as follows: " & @CRLF & _
-			"The shadow width is, in Hundredths of a Millimeter (HMM): " & $avPageStyleSettings[0] & @CRLF & _
+			"The Shadow location is, (see UDF Constants): " & $avPageStyleSettings[0] & @CRLF & _
 			"The Shadow color is (as a RGB Color Integer): " & $avPageStyleSettings[1] & @CRLF & _
-			"The Shadow location is, (see UDF Constants): " & $avPageStyleSettings[2])
+			"The shadow width is, in Hundredths of a Millimeter (HMM): " & $avPageStyleSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
