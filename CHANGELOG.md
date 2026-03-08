@@ -79,9 +79,14 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Reworded Color terminology.
 - Reworded measurement terminology.
 
+#### Fixed
+
+- RegExp pattern in `_LO_PathConvert` didn't take into account lowercase drive letters. Thanks to user @SirWayN3.
+
 #### Refactored
 
 - Optimized `__LO_IntIsBetween`.
+- Increased readability of `_LO_PathConvert` example.
 
 #### Removed
 
