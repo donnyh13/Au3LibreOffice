@@ -1210,28 +1210,28 @@ EndFunc   ;==>_LOCalc_PageStyleFooterObj
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleFooterShadow
 ; Description ...: Set or Retrieve the shadow settings for a Page Style Footer.
-; Syntax ........: _LOCalc_PageStyleFooterShadow(ByRef $oPageStyle[, $iWidth = Null[, $iColor = Null[, $iLocation = Null]]])
+; Syntax ........: _LOCalc_PageStyleFooterShadow(ByRef $oPageStyle[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the footer, set in Hundredths of a Millimeter (HMM).
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Color of the Footer shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Footer Shadow. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Color of the Footer shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the footer, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oPageStyle not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 4 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Footers are not enabled for this Page Style.
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving ShadowFormat Object.
 ;                  @Error 3 @Extended 3 Return 0 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iWidth
+;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
-;                  |                               4 = Error setting $iLocation
+;                  |                               4 = Error setting $iWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1244,7 +1244,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_PageStyleFooterShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = Null, $iLocation = Null)
+Func _LOCalc_PageStyleFooterShadow(ByRef $oPageStyle, $iLocation = Null, $iColor = Null, $iWidth = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1259,16 +1259,16 @@ Func _LOCalc_PageStyleFooterShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = 
 	$tShdwFrmt = $oPageStyle.FooterShadowFormat()
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($iWidth, $iColor, $iLocation) Then
-		__LO_ArrayFill($avShadow, $tShdwFrmt.ShadowWidth(), $tShdwFrmt.Color(), $tShdwFrmt.Location())
+	If __LO_VarsAreNull($iLocation, $iColor, $iWidth) Then
+		__LO_ArrayFill($avShadow, $tShdwFrmt.Location(), $tShdwFrmt.Color(), $tShdwFrmt.ShadowWidth())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avShadow)
 	EndIf
 
-	If ($iWidth <> Null) Then
-		If Not IsInt($iWidth) Or ($iWidth < 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iLocation <> Null) Then
+		If Not __LO_IntIsBetween($iLocation, $LOC_SHADOW_NONE, $LOC_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$tShdwFrmt.ShadowWidth = $iWidth
+		$tShdwFrmt.Location = $iLocation
 	EndIf
 
 	If ($iColor <> Null) Then
@@ -1277,10 +1277,10 @@ Func _LOCalc_PageStyleFooterShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = 
 		$tShdwFrmt.Color = $iColor
 	EndIf
 
-	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOC_SHADOW_NONE, $LOC_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If ($iWidth <> Null) Then
+		If Not IsInt($iWidth) Or ($iWidth < 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-		$tShdwFrmt.Location = $iLocation
+		$tShdwFrmt.ShadowWidth = $iWidth
 	EndIf
 
 	$oPageStyle.FooterShadowFormat = $tShdwFrmt
@@ -1288,9 +1288,9 @@ Func _LOCalc_PageStyleFooterShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = 
 	$tShdwFrmt = $oPageStyle.FooterShadowFormat
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($tShdwFrmt.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($tShdwFrmt.Location() = $iLocation) ? ($iError) : (BitOR($iError, 1)))
 	$iError = (__LO_VarsAreNull($iColor)) ? ($iError) : (($tShdwFrmt.Color() = $iColor) ? ($iError) : (BitOR($iError, 2)))
-	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($tShdwFrmt.Location() = $iLocation) ? ($iError) : (BitOR($iError, 4)))
+	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($tShdwFrmt.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 4)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_PageStyleFooterShadow
@@ -1956,28 +1956,28 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderObj
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleHeaderShadow
 ; Description ...: Set or Retrieve the shadow settings for a Page Style Header.
-; Syntax ........: _LOCalc_PageStyleHeaderShadow(ByRef $oPageStyle[, $iWidth = Null[, $iColor = Null[, $iLocation = Null]]])
+; Syntax ........: _LOCalc_PageStyleHeaderShadow(ByRef $oPageStyle[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the Header, set in Hundredths of a Millimeter (HMM).
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Color of the Header shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Header Shadow. See constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Color of the Header shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the Header, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oPageStyle not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 4 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Headers are not enabled for this Page Style.
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving ShadowFormat Object.
 ;                  @Error 3 @Extended 3 Return 0 = Error retrieving ShadowFormat Object for Error Checking.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iWidth
+;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
-;                  |                               4 = Error setting $iLocation
+;                  |                               4 = Error setting $iWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1990,7 +1990,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_PageStyleHeaderShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = Null, $iLocation = Null)
+Func _LOCalc_PageStyleHeaderShadow(ByRef $oPageStyle, $iLocation = Null, $iColor = Null, $iWidth = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2005,16 +2005,16 @@ Func _LOCalc_PageStyleHeaderShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = 
 	$tShdwFrmt = $oPageStyle.HeaderShadowFormat()
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($iWidth, $iColor, $iLocation) Then
-		__LO_ArrayFill($avShadow, $tShdwFrmt.ShadowWidth(), $tShdwFrmt.Color(), $tShdwFrmt.Location())
+	If __LO_VarsAreNull($iLocation, $iColor, $iWidth) Then
+		__LO_ArrayFill($avShadow, $tShdwFrmt.Location(), $tShdwFrmt.Color(), $tShdwFrmt.ShadowWidth())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avShadow)
 	EndIf
 
-	If ($iWidth <> Null) Then
-		If Not IsInt($iWidth) Or ($iWidth < 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iLocation <> Null) Then
+		If Not __LO_IntIsBetween($iLocation, $LOC_SHADOW_NONE, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$tShdwFrmt.ShadowWidth = $iWidth
+		$tShdwFrmt.Location = $iLocation
 	EndIf
 
 	If ($iColor <> Null) Then
@@ -2023,10 +2023,10 @@ Func _LOCalc_PageStyleHeaderShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = 
 		$tShdwFrmt.Color = $iColor
 	EndIf
 
-	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOC_SHADOW_NONE, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($iWidth <> Null) Then
+		If Not IsInt($iWidth) Or ($iWidth < 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-		$tShdwFrmt.Location = $iLocation
+		$tShdwFrmt.ShadowWidth = $iWidth
 	EndIf
 
 	$oPageStyle.HeaderShadowFormat = $tShdwFrmt
@@ -2034,9 +2034,9 @@ Func _LOCalc_PageStyleHeaderShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = 
 	$tShdwFrmt = $oPageStyle.HeaderShadowFormat
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($tShdwFrmt.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($tShdwFrmt.Location() = $iLocation) ? ($iError) : (BitOR($iError, 1)))
 	$iError = (__LO_VarsAreNull($iColor)) ? ($iError) : (($tShdwFrmt.Color() = $iColor) ? ($iError) : (BitOR($iError, 2)))
-	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($tShdwFrmt.Location() = $iLocation) ? ($iError) : (BitOR($iError, 4)))
+	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($tShdwFrmt.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 4)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_PageStyleHeaderShadow
@@ -2451,27 +2451,27 @@ EndFunc   ;==>_LOCalc_PageStylesGetNames
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleShadow
 ; Description ...: Set or Retrieve the shadow settings for a Page Style.
-; Syntax ........: _LOCalc_PageStyleShadow(ByRef $oPageStyle[, $iWidth = Null[, $iColor = Null[, $iLocation = Null]]])
+; Syntax ........: _LOCalc_PageStyleShadow(ByRef $oPageStyle[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the Page, set in Hundredths of a Millimeter (HMM).
-;                  $iColor              - [optional] an integer value. Default is Null (0-16777215). The shadow Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Page Shadow. See constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColor              - [optional] an integer value. Default is Null (0-16777215). The shadow Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the Page, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oPageStyle not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 4 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving ShadowFormat Object.
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iWidth
+;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
-;                  |                               4 = Error setting $iLocation
+;                  |                               4 = Error setting $iWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -2484,7 +2484,7 @@ EndFunc   ;==>_LOCalc_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_PageStyleShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = Null, $iLocation = Null)
+Func _LOCalc_PageStyleShadow(ByRef $oPageStyle, $iLocation = Null, $iColor = Null, $iWidth = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2498,16 +2498,16 @@ Func _LOCalc_PageStyleShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = Null, 
 	$tShdwFrmt = $oPageStyle.ShadowFormat()
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iWidth, $iColor, $iLocation) Then
-		__LO_ArrayFill($avShadow, $tShdwFrmt.ShadowWidth(), $tShdwFrmt.Color(), $tShdwFrmt.Location())
+	If __LO_VarsAreNull($iLocation, $iColor, $iWidth) Then
+		__LO_ArrayFill($avShadow, $tShdwFrmt.Location(), $tShdwFrmt.Color(), $tShdwFrmt.ShadowWidth())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avShadow)
 	EndIf
 
-	If ($iWidth <> Null) Then
-		If Not IsInt($iWidth) Or ($iWidth < 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iLocation <> Null) Then
+		If Not __LO_IntIsBetween($iLocation, $LOC_SHADOW_NONE, $LOC_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$tShdwFrmt.ShadowWidth = $iWidth
+		$tShdwFrmt.Location = $iLocation
 	EndIf
 
 	If ($iColor <> Null) Then
@@ -2516,10 +2516,10 @@ Func _LOCalc_PageStyleShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = Null, 
 		$tShdwFrmt.Color = $iColor
 	EndIf
 
-	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOC_SHADOW_NONE, $LOC_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($iWidth <> Null) Then
+		If Not IsInt($iWidth) Or ($iWidth < 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-		$tShdwFrmt.Location = $iLocation
+		$tShdwFrmt.ShadowWidth = $iWidth
 	EndIf
 
 	$oPageStyle.ShadowFormat = $tShdwFrmt
@@ -2527,9 +2527,9 @@ Func _LOCalc_PageStyleShadow(ByRef $oPageStyle, $iWidth = Null, $iColor = Null, 
 	$tShdwFrmt = $oPageStyle.ShadowFormat
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($tShdwFrmt.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($tShdwFrmt.Location() = $iLocation) ? ($iError) : (BitOR($iError, 1)))
 	$iError = (__LO_VarsAreNull($iColor)) ? ($iError) : (($tShdwFrmt.Color() = $iColor) ? ($iError) : (BitOR($iError, 2)))
-	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($tShdwFrmt.Location() = $iLocation) ? ($iError) : (BitOR($iError, 4)))
+	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($tShdwFrmt.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 4)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_PageStyleShadow

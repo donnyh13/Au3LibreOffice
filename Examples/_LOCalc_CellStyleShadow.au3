@@ -41,7 +41,7 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Shadow to 1/4" wide, Color to $LO_COLOR_PURPLE, and location to $LOC_SHADOW_TOP_LEFT
+	; Set the Cell Style's Shadow location to $LOC_SHADOW_TOP_LEFT, Color to $LO_COLOR_PURPLE, and 1/4" wide
 	_LOCalc_CellStyleShadow($oCellStyle, $LOC_SHADOW_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

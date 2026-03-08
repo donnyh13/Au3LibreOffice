@@ -1044,11 +1044,15 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   > `_LOCalc_CommentAreaShadow`(ByRef $oComment, $bShadow, $iColor, $iDistance, _$iTransparency_, _$iBlur_, _$iLocation_)
   - New order:
   > `_LOCalc_CommentAreaShadow`(ByRef $oComment, $bShadow, _$iLocation_, $iColor, $iDistance, _$iBlur_, _$iTransparency_)
-- Rearranged `__LOCalc_CellShadow`, `_LOCalc_CellShadow,`, `_LOCalc_CellStyleShadow` parameter order to match L.O. UI order.
-  - Previous order:
-  > (*, _$iWidth_, $iColor, _$iLocation_)
-  - New order:
-  > (*, _$iLocation_, $iColor, _$iWidth_)
+- Rearranged Calc Cell and Page Shadow parameter order to match L.O. UI order.
+  > Previous order:(_$iWidth_, $iColor, _$iLocation_) --> New order:(_$iLocation_, $iColor, _$iWidth_)
+  - Affected functions:
+  - __LOCalc_CellShadow
+  - _LOCalc_CellShadow
+  - _LOCalc_CellStyleShadow
+  - _LOCalc_PageStyleShadow
+  - _LOCalc_PageStyleHeaderShadow
+  - _LOCalc_PageStyleFooterShadow
 
 #### Documented
 
