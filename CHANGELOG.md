@@ -1727,6 +1727,22 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_PageStyleSet` --> `_LOWriter_PageStyleCurrent`
   - `_LOWriter_ParStyleSet` --> `_LOWriter_ParStyleCurrent`
   - `_LOWriter_TableStyle` --> `_LOWriter_TableStyleCurrent`
+- Rearranged Writer Character, Frame, Image, Page, Paragraph, and Table Shadow parameter order to match L.O. UI order.
+  > Previous order:(_$iWidth_, $iColor, _$iLocation_) --> New order:(_$iLocation_, $iColor, _$iWidth_)
+  - Affected functions:
+  - __LOWriter_CharShadow
+  - __LOWriter_ParShadow
+  - _LOWriter_CharStyleShadow
+  - _LOWriter_DirFrmtCharShadow
+  - _LOWriter_DirFrmtParShadow
+  - _LOWriter_FrameShadow
+  - _LOWriter_FrameStyleShadow
+  - _LOWriter_ImageShadow
+  - _LOWriter_PageStyleFooterShadow
+  - _LOWriter_PageStyleHeaderShadow
+  - _LOWriter_PageStyleShadow
+  - _LOWriter_ParStyleShadow
+  - _LOWriter_TableShadow
 
 #### Documented
 
