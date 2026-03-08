@@ -35,7 +35,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Table shadow values are as follows: " & @CRLF & _
 			"The Shadow location is, (see UDF Constants): " & $avShadow[0] & @CRLF & _
-			"The Shadow color is (as a RGB Color Integer): "  & $avShadow[1] & @CRLF & _
+			"The Shadow color is (as a RGB Color Integer): " & $avShadow[1] & @CRLF & _
 			"The shadow width is, in Hundredths of a Millimeter (HMM): " & $avShadow[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
