@@ -946,7 +946,7 @@ Func __LOCalc_CellShadow(ByRef $oObj, $iLocation = Null, $iColor = Null, $iWidth
 
 	$oObj.ShadowFormat = $tShdwFrmt
 
-		$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($oObj.ShadowFormat.Location() = $iLocation) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($oObj.ShadowFormat.Location() = $iLocation) ? ($iError) : (BitOR($iError, 1)))
 	$iError = (__LO_VarsAreNull($iColor)) ? ($iError) : (($oObj.ShadowFormat.Color() = $iColor) ? ($iError) : (BitOR($iError, 2)))
 	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($oObj.ShadowFormat.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 4)))
 
