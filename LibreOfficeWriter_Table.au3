@@ -1921,25 +1921,25 @@ EndFunc   ;==>_LOWriter_TablesGetNames
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableShadow
 ; Description ...: Set or Retrieve the shadow settings for a Table Border.
-; Syntax ........: _LOWriter_TableShadow(ByRef $oTable[, $iWidth = Null[, $iColor = Null[, $iLocation = Null]]])
+; Syntax ........: _LOWriter_TableShadow(ByRef $oTable[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
 ; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the Table, set in Hundredths of a Millimeter (HMM).
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Table shadow Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Table Shadow. See constants, $LOW_SHADOW_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Table shadow Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the Table, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving ShadowFormat Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iWidth
+;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
-;                  |                               4 = Error setting $iLocation
+;                  |                               4 = Error setting $iWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1952,7 +1952,7 @@ EndFunc   ;==>_LOWriter_TablesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_TableShadow(ByRef $oTable, $iWidth = Null, $iColor = Null, $iLocation = Null)
+Func _LOWriter_TableShadow(ByRef $oTable, $iLocation = Null, $iColor = Null, $iWidth = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1965,16 +1965,16 @@ Func _LOWriter_TableShadow(ByRef $oTable, $iWidth = Null, $iColor = Null, $iLoca
 	$tShdwFrmt = $oTable.ShadowFormat()
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iWidth, $iColor, $iLocation) Then
-		__LO_ArrayFill($avShadow, $tShdwFrmt.ShadowWidth(), $tShdwFrmt.Color(), $tShdwFrmt.Location())
+	If __LO_VarsAreNull($iLocation, $iColor, $iWidth) Then
+		__LO_ArrayFill($avShadow, $tShdwFrmt.Location(), $tShdwFrmt.Color(), $tShdwFrmt.ShadowWidth())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avShadow)
 	EndIf
 
-	If ($iWidth <> Null) Then
-		If Not __LO_IntIsBetween($iWidth, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If ($iLocation <> Null) Then
+		If Not __LO_IntIsBetween($iLocation, $LOW_SHADOW_NONE, $LOW_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-		$tShdwFrmt.ShadowWidth = $iWidth
+		$tShdwFrmt.Location = $iLocation
 	EndIf
 
 	If ($iColor <> Null) Then
@@ -1983,17 +1983,17 @@ Func _LOWriter_TableShadow(ByRef $oTable, $iWidth = Null, $iColor = Null, $iLoca
 		$tShdwFrmt.Color = $iColor
 	EndIf
 
-	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOW_SHADOW_NONE, $LOW_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($iWidth <> Null) Then
+		If Not __LO_IntIsBetween($iWidth, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		$tShdwFrmt.Location = $iLocation
+		$tShdwFrmt.ShadowWidth = $iWidth
 	EndIf
 
 	$oTable.ShadowFormat = $tShdwFrmt
 
-	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($oTable.ShadowFormat.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($oTable.ShadowFormat.Location() = $iLocation) ? ($iError) : (BitOR($iError, 1)))
 	$iError = (__LO_VarsAreNull($iColor)) ? ($iError) : (($oTable.ShadowFormat.Color() = $iColor) ? ($iError) : (BitOR($iError, 2)))
-	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($oTable.ShadowFormat.Location() = $iLocation) ? ($iError) : (BitOR($iError, 4)))
+	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($oTable.ShadowFormat.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 4)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_TableShadow
