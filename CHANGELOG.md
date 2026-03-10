@@ -1867,6 +1867,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added internal function to check whether a Table Style was set, checking both internal and display names. Affected functions are:
   - _LOWriter_TableCreate
   - _LOWriter_TableStyle
+- Corrected wrong `__LO_NumIsBetween` usage in `__LOWriter_ParIndent`, `__LOWriter_ParSpace`, and `__LOWriter_ParTabStopCreate`.
 
 #### Removed
 

@@ -6316,14 +6316,14 @@ Func __LOWriter_ParIndent(ByRef $oObj, $iBeforeTxt = Null, $iAfterTxt = Null, $i
 		If Not __LO_IntIsBetween($iBeforeTxt, -9998989, 17094) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.ParaLeftMargin = $iBeforeTxt
-		$iError = (__LO_NumIsBetween(($oObj.ParaLeftMargin()), ($iBeforeTxt - 1), ($iBeforeTxt + 1))) ? ($iError) : (BitOR($iError, 1))
+		$iError = (__LO_IntIsBetween(($oObj.ParaLeftMargin()), ($iBeforeTxt - 1), ($iBeforeTxt + 1))) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iAfterTxt <> Null) Then
 		If Not __LO_IntIsBetween($iAfterTxt, -9998989, 17094) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oObj.ParaRightMargin = $iAfterTxt
-		$iError = (__LO_NumIsBetween(($oObj.ParaRightMargin()), ($iAfterTxt - 1), ($iAfterTxt + 1))) ? ($iError) : (BitOR($iError, 2))
+		$iError = (__LO_IntIsBetween(($oObj.ParaRightMargin()), ($iAfterTxt - 1), ($iAfterTxt + 1))) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	; max 17094; min;-57785
@@ -6331,7 +6331,7 @@ Func __LOWriter_ParIndent(ByRef $oObj, $iBeforeTxt = Null, $iAfterTxt = Null, $i
 		If Not __LO_IntIsBetween($iFirstLine, -57785, 17094) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oObj.ParaFirstLineIndent = $iFirstLine
-		$iError = (__LO_NumIsBetween(($oObj.ParaFirstLineIndent()), ($iFirstLine - 1), ($iFirstLine + 1))) ? ($iError) : (BitOR($iError, 4))
+		$iError = (__LO_IntIsBetween(($oObj.ParaFirstLineIndent()), ($iFirstLine - 1), ($iFirstLine + 1))) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($bAutoFirstLine <> Null) Then
@@ -6669,14 +6669,14 @@ Func __LOWriter_ParSpace(ByRef $oObj, $iAbovePar = Null, $iBelowPar = Null, $bAd
 		If Not __LO_IntIsBetween($iAbovePar, 0, 10008) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.ParaTopMargin = $iAbovePar
-		$iError = (__LO_NumIsBetween(($oObj.ParaTopMargin()), ($iAbovePar - 1), ($iAbovePar + 1))) ? ($iError) : (BitOR($iError, 1))
+		$iError = (__LO_IntIsBetween(($oObj.ParaTopMargin()), ($iAbovePar - 1), ($iAbovePar + 1))) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iBelowPar <> Null) Then
 		If Not __LO_IntIsBetween($iBelowPar, 0, 10008) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oObj.ParaBottomMargin = $iBelowPar
-		$iError = (__LO_NumIsBetween(($oObj.ParaBottomMargin()), ($iBelowPar - 1), ($iBelowPar + 1))) ? ($iError) : (BitOR($iError, 2))
+		$iError = (__LO_IntIsBetween(($oObj.ParaBottomMargin()), ($iBelowPar - 1), ($iBelowPar + 1))) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($bAddSpace <> Null) Then
@@ -6716,7 +6716,7 @@ Func __LOWriter_ParSpace(ByRef $oObj, $iAbovePar = Null, $iBelowPar = Null, $bAd
 		EndSwitch
 		$tLine.Height = $iLineSpcHeight
 		$oObj.ParaLineSpacing = $tLine
-		$iError = (__LO_NumIsBetween(($oObj.ParaLineSpacing.Height()), ($iLineSpcHeight - 1), ($iLineSpcHeight + 1))) ? ($iError) : (BitOR($iError, 16))
+		$iError = (__LO_IntIsBetween(($oObj.ParaLineSpacing.Height()), ($iLineSpcHeight - 1), ($iLineSpcHeight + 1))) ? ($iError) : (BitOR($iError, 16))
 	EndIf
 
 	If ($bPageLineSpc <> Null) Then
@@ -6893,7 +6893,7 @@ Func __LOWriter_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment, $iFillCha
 		If Not $bFound Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Didn't find the new TabStop
 	EndIf
 
-	$iError = (__LO_NumIsBetween(($tFoundTabStop.Position()), ($iPosition - 1), ($iPosition + 1))) ? ($iError) : (BitOR($iError, 1))
+	$iError = (__LO_IntIsBetween(($tFoundTabStop.Position()), ($iPosition - 1), ($iPosition + 1))) ? ($iError) : (BitOR($iError, 1))
 	$iError = (__LO_VarsAreNull($iFillChar)) ? ($iError) : (($tFoundTabStop.FillChar = $iFillChar) ? ($iError) : (BitOR($iError, 2)))
 	$iError = (__LO_VarsAreNull($iAlignment)) ? ($iError) : (($tFoundTabStop.Alignment = $iAlignment) ? ($iError) : (BitOR($iError, 4)))
 	$iError = (__LO_VarsAreNull($iDecChar)) ? ($iError) : (($tFoundTabStop.DecimalChar = $iDecChar) ? ($iError) : (BitOR($iError, 8)))
