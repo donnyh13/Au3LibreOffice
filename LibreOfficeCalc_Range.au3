@@ -1383,7 +1383,7 @@ Func _LOCalc_RangeFillRandom(ByRef $oRange, $nMin = 0.0000, $nMax = 1.0000, $iDe
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_NumIsBetween($nMin, -2 ^ 31, 2 ^ 31) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_NumIsBetween($nMax, -2 ^ 31, 2 ^ 31) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_NumIsBetween($iDecPlc, 0, 255) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iDecPlc, 0, 255) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If ($nSeed <> Null) And Not __LO_NumIsBetween($nSeed, -2 ^ 31, 2 ^ 31) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsBool($bFillByRows) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 

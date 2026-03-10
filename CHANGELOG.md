@@ -1095,6 +1095,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_FontsGetNames
   - _LOCalc_VersionGet
 - Changed incorrect variable used in `__LOCalc_CommentAreaShadowModify` from `$LOC_COMMENT_ANCHOR_` to `$LOC_COMMENT_SHADOW_`. Both are Enumerated the same, so no material difference was made.
+- Changed `_LOCalc_RangeFillRandom` to use IntIsBetween instead of NumIsBetween for $iDecPlc parameter.
 
 #### Removed
 
