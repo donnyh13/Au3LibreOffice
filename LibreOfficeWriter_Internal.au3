@@ -868,7 +868,7 @@ Func __LOWriter_CharOverLine(ByRef $oObj, $iOverLineStyle = Null, $iOLColor = Nu
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iOverLineStyle, $iOLColor,$bWordOnly) Then
+	If __LO_VarsAreNull($iOverLineStyle, $iOLColor, $bWordOnly) Then
 		__LO_ArrayFill($avOverLine, $oObj.CharOverline(), $oObj.CharOverlineColor(), $oObj.CharWordMode())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOverLine)

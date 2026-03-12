@@ -105,7 +105,6 @@ Func _LOCalc_SheetCursorMove(ByRef $oCursor, $iMove, $iColumns = 0, $iRows = 0, 
 
 	$iCursorType = __LOCalc_Internal_CursorGetType($oCursor)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
 	If ($iCursorType <> $LOC_CURTYPE_SHEET_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 	Switch $iMove
@@ -777,7 +776,6 @@ Func _LOCalc_TextCursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = Fals
 
 	$iCursorType = __LOCalc_Internal_CursorGetType($oCursor)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
 	If ($iCursorType <> $LOC_CURTYPE_TEXT_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	Switch $iMove
