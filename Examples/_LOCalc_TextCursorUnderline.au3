@@ -28,7 +28,7 @@ Func Example()
 	_LOCalc_TextCursorInsertString($oTextCursor, "Hi! Testing.")
 	If @error Then _ERROR($oDoc, "Failed to insert String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now select all the words, and set underline only words to True, underline style, Dash Dot, and underline in the color Gold.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now select all the words, and set underline style, Dash Dot, underline in the color Gold, and underline only words to True.")
 
 	; Go to the Start.
 	_LOCalc_TextCursorMove($oTextCursor, $LOC_TEXTCUR_GOTO_START, 1, False)
@@ -38,8 +38,8 @@ Func Example()
 	_LOCalc_TextCursorMove($oTextCursor, $LOC_TEXTCUR_GOTO_END, 1, True)
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the underline settings to, Underline words only, Underline style $LOC_UNDERLINE_BOLD_DASH_DOT, and underline color = Gold.
-	_LOCalc_TextCursorUnderline($oTextCursor, True, $LOC_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_GOLD)
+	; Set the underline settings to, Underline style $LOC_UNDERLINE_BOLD_DASH_DOT, underline color = Gold, and Underline words only.
+	_LOCalc_TextCursorUnderline($oTextCursor, $LOC_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_GOLD, True)
 	If @error Then _ERROR($oDoc, "Failed to set text formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array in order of function parameters.
@@ -47,9 +47,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve current format settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Underline settings at the Cursor's current position are as follows: " & @CRLF & _
-			"Are words only underlined? True/False: " & $avSettings[0] & @CRLF & _
-			"The Underline style is (See UDF Constants): " & $avSettings[1] & @CRLF & _
-			"The underline color is (as a RGB Color Integer): " & $avSettings[2])
+			"The Underline style is (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"The underline color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"Are words only underlined? True/False: " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -1057,13 +1057,29 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Combined internal `__LOCalc_SheetCursorMove` into `_LOCalc_SheetCursorMove`, slightly modifying error values.
 - Removed $bULHasColor from Underline functions as it added unnecessary complexity.
   - __LOCalc_CellUnderLine
-  - _LOCalc_CellUnderline
   - _LOCalc_CellStyleUnderline
+  - _LOCalc_CellUnderline
   - _LOCalc_TextCursorUnderline
 - Removed $bOLHasColor from Overline functions as it added unnecessary complexity.
   - __LOCalc_CellOverLine
-  - _LOCalc_CellStyleOverline
   - _LOCalc_CellOverline
+  - _LOCalc_CellStyleOverline
+  - _LOCalc_TextCursorOverline
+- Rearranged Underline parameters to match LibreOffice UI.
+  > Previous order:(_$bWordOnly_, $iUnderLineStyle, $iULColor)
+  >
+  > New order:($iUnderLineStyle, $iULColor, _$bWordOnly_)
+  - __LOCalc_CellUnderLine
+  - _LOCalc_CellStyleUnderline
+  - _LOCalc_CellUnderline
+  - _LOCalc_TextCursorUnderline
+- Rearranged Overline parameters to match LibreOffice UI.
+  > Previous order:(_$bWordOnly_, $iOverLineStyle, $iOLColor)
+  >
+  > New order:($iOverLineStyle, $iOLColor, _$bWordOnly_)
+  - __LOCalc_CellOverLine
+  - _LOCalc_CellOverline
+  - _LOCalc_CellStyleOverline
   - _LOCalc_TextCursorOverline
 
 #### Documented

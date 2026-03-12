@@ -36,8 +36,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Overline settings to Words only = True, Overline style $LOC_UNDERLINE_BOLD_DASH_DOT, and Color to $LO_COLOR_BROWN
-	_LOCalc_CellStyleOverLine($oCellStyle, True, $LOC_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN)
+	; Set the Cell Style's Overline settings to Overline style $LOC_UNDERLINE_BOLD_DASH_DOT, Color to $LO_COLOR_BROWN, and Words only = True
+	_LOCalc_CellStyleOverLine($oCellStyle, $LOC_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -45,9 +45,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell Style's current Overline settings are as follows: " & @CRLF & _
-			"Overline words only? True/False: " & $avSettings[0] & @CRLF & _
-			"Overline style (See UDF constants): " & $avSettings[1] & @CRLF & _
-			"Overline color is (as a RGB Color Integer): " & $avSettings[2])
+			"Overline style (See UDF constants): " & $avSettings[0] & @CRLF & _
+			"Overline color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"Overline words only? True/False: " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
