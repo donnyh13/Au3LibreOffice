@@ -589,7 +589,7 @@ EndFunc   ;==>_LO_PathConvert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function works for LibreOffice 4.1 and Up.
-; Related .......: _LO_PrintersAltGetNames
+; Related .......: _LO_PrintersGetNamesAlt
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
