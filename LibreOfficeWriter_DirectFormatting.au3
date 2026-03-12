@@ -2568,21 +2568,21 @@ EndFunc   ;==>_LOWriter_DirFrmtParTxtFlowOpt
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtStrikeOut
 ; Description ...: Set or Retrieve the StrikeOut settings by Direct Formatting.
-; Syntax ........: _LOWriter_DirFrmtStrikeOut(ByRef $oSelection[, $bWordOnly = Null[, $iStrikeLineStyle = Null]])
+; Syntax ........: _LOWriter_DirFrmtStrikeOut(ByRef $oSelection[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strikes out words only and skip whitespaces.
 ;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strikes out words only and skip whitespaces.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iStrikeLineStyle
+;                  |                               1 = Error setting $iStrikeLineStyle
+;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
@@ -2599,7 +2599,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTxtFlowOpt
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DirFrmtStrikeOut(ByRef $oSelection, $bWordOnly = Null, $iStrikeLineStyle = Null)
+Func _LOWriter_DirFrmtStrikeOut(ByRef $oSelection, $iStrikeLineStyle = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2608,22 +2608,22 @@ Func _LOWriter_DirFrmtStrikeOut(ByRef $oSelection, $bWordOnly = Null, $iStrikeLi
 	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-	If __LOWriter_AnyAreDefault($bWordOnly, $iStrikeLineStyle) Then
-		If ($bWordOnly = Default) Then
-			$oSelection.setPropertyToDefault("CharWordMode")
-			$bWordOnly = Null
-		EndIf
-
+	If __LOWriter_AnyAreDefault($iStrikeLineStyle, $bWordOnly) Then
 		If ($iStrikeLineStyle = Default) Then
 			$oSelection.setPropertyToDefault("CharCrossedOut")
 			$oSelection.setPropertyToDefault("CharStrikeout")
 			$iStrikeLineStyle = Null
 		EndIf
 
+		If ($bWordOnly = Default) Then
+			$oSelection.setPropertyToDefault("CharWordMode")
+			$bWordOnly = Null
+		EndIf
+
 		If __LO_VarsAreNull($bWordOnly, $iStrikeLineStyle) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 	EndIf
 
-	$vReturn = __LOWriter_CharStrikeOut($oSelection, $bWordOnly, $iStrikeLineStyle)
+	$vReturn = __LOWriter_CharStrikeOut($oSelection, $iStrikeLineStyle, $bWordOnly)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_DirFrmtStrikeOut

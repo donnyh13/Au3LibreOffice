@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Default Paragraph Style Strikeout settings to, Words only = True, Line style = $LOW_STRIKEOUT_X
-	_LOWriter_ParStyleStrikeOut($oParStyle, True, $LOW_STRIKEOUT_X)
+	_LOWriter_ParStyleStrikeOut($oParStyle, $LOW_STRIKEOUT_X, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -33,8 +33,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's current Strikeout settings are as follows: " & @CRLF & _
-			"Strikeout words only? True/False: " & $avParStyleSettings[0] & @CRLF & _
-			"Strikeout line style, (See UDF Constants): " & $avParStyleSettings[1])
+			"Strikeout line style, (See UDF Constants): " & $avParStyleSettings[0] & @CRLF & _
+			"Strikeout words only? True/False: " & $avParStyleSettings[1])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

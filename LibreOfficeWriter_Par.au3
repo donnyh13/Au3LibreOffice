@@ -2197,21 +2197,21 @@ EndFunc   ;==>_LOWriter_ParStyleSpacing
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ParStyleStrikeOut
 ; Description ...: Set or Retrieve the StrikeOut settings for a Paragraph style.
-; Syntax ........: _LOWriter_ParStyleStrikeOut(ByRef $oParStyle[, $bWordOnly = Null[, $iStrikeLineStyle = Null]])
+; Syntax ........: _LOWriter_ParStyleStrikeOut(ByRef $oParStyle[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObj function.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oParStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $oParStyle not a Paragraph Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iStrikeLineStyle
+;                  |                               1 = Error setting $iStrikeLineStyle
+;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
@@ -2224,7 +2224,7 @@ EndFunc   ;==>_LOWriter_ParStyleSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ParStyleStrikeOut(ByRef $oParStyle, $bWordOnly = Null, $iStrikeLineStyle = Null)
+Func _LOWriter_ParStyleStrikeOut(ByRef $oParStyle, $iStrikeLineStyle = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2233,7 +2233,7 @@ Func _LOWriter_ParStyleStrikeOut(ByRef $oParStyle, $bWordOnly = Null, $iStrikeLi
 	If Not IsObj($oParStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oParStyle.supportsService("com.sun.star.style.ParagraphStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-	$vReturn = __LOWriter_CharStrikeOut($oParStyle, $bWordOnly, $iStrikeLineStyle)
+	$vReturn = __LOWriter_CharStrikeOut($oParStyle, $iStrikeLineStyle, $bWordOnly)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_ParStyleStrikeOut

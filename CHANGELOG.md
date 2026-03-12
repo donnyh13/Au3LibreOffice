@@ -1792,6 +1792,15 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_DirFrmtStrikeOut
   - _LOWriter_FindFormatModifyStrikeout
   - _LOWriter_ParStyleStrikeOut
+- Rearranged Strikeout parameters to match LibreOffice UI and Overline/Underline functions.
+  > Previous order:(_$bWordOnly_, _$iStrikeLineStyle_)
+  >
+  > New order:(_$iStrikeLineStyle_, _$bWordOnly_)
+  - __LOWriter_CharStrikeOut
+  - _LOWriter_CharStyleStrikeOut
+  - _LOWriter_DirFrmtStrikeOut
+  - _LOWriter_FindFormatModifyStrikeout
+  - _LOWriter_ParStyleStrikeOut
 
 #### Documented
 

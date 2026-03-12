@@ -41,7 +41,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Example" Character style Strikeout settings to, Words only = True, Line style = $LOW_STRIKEOUT_X
-	_LOWriter_CharStyleStrikeOut($oCharStyle, True, $LOW_STRIKEOUT_X)
+	_LOWriter_CharStyleStrikeOut($oCharStyle, $LOW_STRIKEOUT_X, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -49,8 +49,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's current Strikeout settings are as follows: " & @CRLF & _
-			"Strikeout words only? True/False: " & $avCharStyleSettings[0] & @CRLF & _
-			"Strikeout line style, (See UDF Constants): " & $avCharStyleSettings[1])
+			"Strikeout line style, (See UDF Constants): " & $avCharStyleSettings[0] & @CRLF & _
+			"Strikeout words only? True/False: " & $avCharStyleSettings[1])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
