@@ -1187,7 +1187,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyIndent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FindFormatModifyOverline(ByRef $atFormat, $iOverLineStyle = Null, $bWordOnly = Null, $iOLColor = Null)
+Func _LOWriter_FindFormatModifyOverline(ByRef $atFormat, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
 	Local Const $UBOUND_COLUMNS = 2
 
 	If Not IsArray($atFormat) Or (UBound($atFormat, $UBOUND_COLUMNS) > 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -1665,6 +1665,7 @@ Func _LOWriter_FindFormatModifyStrikeout(ByRef $atFormat, $iStrikelineStyle = Nu
 			If ($iStrikelineStyle = $LOW_STRIKEOUT_NONE) Then
 				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharStrikeout", $iStrikelineStyle))
 				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharCrossedOut", False))
+
 			Else
 				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharStrikeout", $iStrikelineStyle))
 				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharCrossedOut", True))
