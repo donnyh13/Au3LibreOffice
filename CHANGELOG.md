@@ -1054,6 +1054,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_PageStyleHeaderShadow
   - _LOCalc_PageStyleFooterShadow
 - Combined internal `__LOCalc_TextCursorMove` into `_LOCalc_TextCursorMove`, slightly modifying error values.
+- Combined internal `__LOCalc_SheetCursorMove` into `_LOCalc_SheetCursorMove`, slightly modifying error values.
 
 #### Documented
 
@@ -1131,6 +1132,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_DocPrintersGetNames
   - _LOCalc_DocPrintersAltGetNames
 - __LOCalc_TextCursorMove
+- __LOCalc_SheetCursorMove
 
 ### LibreOfficeWriter
 

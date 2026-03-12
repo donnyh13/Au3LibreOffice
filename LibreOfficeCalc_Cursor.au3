@@ -46,7 +46,7 @@
 ; Description ...: Move a Sheet Cursor object in a document. Also for creating/Expanding selections.
 ; Syntax ........: _LOCalc_SheetCursorMove(ByRef $oCursor, $iMove[, $iColumns = 0[, $iRows = 0[, $iCount = 1[, $bSelect = False]]]])
 ; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions.
-;                  $iMove               - an integer value. The movement command. See remarks and Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iMove               - an integer value (0-12). The movement command. See remarks and Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iColumns            - [optional] an integer value. Default is 0. The Number of Columns either to contain in the Range, or to move, depending on the called move command.
 ;                  $iRows               - [optional] an integer value. Default is 0. The Number of Rows either to contain in the Range, or to move, depending on the called move command.
 ;                  $iCount              - [optional] an integer value. Default is 1. Number of movements to make. See remarks.
@@ -55,16 +55,15 @@
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iMove less than 0 or greater than highest move Constant. See Move Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iColumns not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iRows not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iCount not an Integer or is a negative.
-;                  @Error 1 @Extended 7 Return 0 = $bSelect not a Boolean.
+;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer, less than 0 or greater than 12. See Move Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iColumns not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iRows not an Integer.
+;                  @Error 1 @Extended 5 Return 0 = $iCount not an Integer or is a negative.
+;                  @Error 1 @Extended 6 Return 0 = $bSelect not a Boolean.
+;                  @Error 1 @Extended 7 Return 0 = Cursor called in $oCursor not a Sheet Cursor.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error determining cursor type.
 ;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
-;                  @Error 3 @Extended 3 Return 0 = $oCursor Object unknown cursor type.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return 1 = Success, Cursor object movement was processed successfully. See Remarks
 ; Author ........: donnyh13
@@ -92,24 +91,90 @@
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOCalc_SheetCursorMove(ByRef $oCursor, $iMove, $iColumns = 0, $iRows = 0, $iCount = 1, $bSelect = False)
-	Local $iCursorType
-	Local $bMoved = False
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCounted = 0, $iCursorType
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iMove, $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY, $LOC_SHEETCUR_GOTO_USED_AREA_END) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iColumns) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iRows) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iCount, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not IsBool($bSelect) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 	$iCursorType = __LOCalc_Internal_CursorGetType($oCursor)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Switch $iCursorType
-		Case $LOC_CURTYPE_SHEET_CURSOR
-			$bMoved = __LOCalc_SheetCursorMove($oCursor, $iMove, $iColumns, $iRows, $iCount, $bSelect)
+	If ($iCursorType <> $LOC_CURTYPE_SHEET_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-			Return SetError(@error, @extended, $bMoved)
+	Switch $iMove
+		Case $LOC_SHEETCUR_COLLAPSE_TO_SIZE
+			$oCursor.collapseToSize($iColumns, $iRows)
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_GOTO_OFFSET
+			$oCursor.gotoOffset($iColumns, $iRows)
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_GOTO_NEXT
+			Do
+				$oCursor.gotoNext()
+				$iCounted += 1
+
+				Sleep((IsInt($iCounted / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
+			Until ($iCounted >= $iCount)
+
+		Case $LOC_SHEETCUR_GOTO_PREV
+			Do
+				$oCursor.gotoPrevious()
+				$iCounted += 1
+
+				Sleep((IsInt($iCounted / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
+			Until ($iCounted >= $iCount)
+
+		Case $LOC_SHEETCUR_GOTO_USED_AREA_START
+			$oCursor.gotoStartOfUsedArea($bSelect)
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_GOTO_USED_AREA_END
+			$oCursor.gotoEndOfUsedArea($bSelect)
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY
+			$oCursor.collapseToCurrentArray()
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION
+			$oCursor.collapseToCurrentRegion()
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA
+			$oCursor.collapseToMergedArea()
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN
+			$oCursor.expandToEntireColumns()
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW
+			$oCursor.expandToEntireRows()
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_GOTO_START
+			$oCursor.gotoStart()
+			$iCounted += 1
+
+		Case $LOC_SHEETCUR_GOTO_END
+			$oCursor.gotoEnd()
+			$iCounted += 1
 
 		Case Else
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; unknown or wrong cursor type.
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	EndSwitch
+
+	Return SetError($__LO_STATUS_SUCCESS, $iCounted, 1)
 EndFunc   ;==>_LOCalc_SheetCursorMove
 
 ; #FUNCTION# ====================================================================================================================

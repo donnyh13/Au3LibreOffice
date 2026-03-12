@@ -53,7 +53,6 @@
 ; __LOCalc_PageStyleFooterBorder
 ; __LOCalc_PageStyleHeaderBorder
 ; __LOCalc_RangeAddressIsSame
-; __LOCalc_SheetCursorMove
 ; __LOCalc_TransparencyGradientConvert
 ; __LOCalc_TransparencyGradientNameInsert
 ; ===============================================================================================================================
@@ -2760,116 +2759,6 @@ Func __LOCalc_RangeAddressIsSame($tRange1, $tRange2)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False)
 EndFunc   ;==>__LOCalc_RangeAddressIsSame
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOCalc_SheetCursorMove
-; Description ...: For Sheet Cursor related movements.
-; Syntax ........: __LOCalc_SheetCursorMove(ByRef $oCursor, $iMove, $iColumns, $iRows, $iCount, $bSelect)
-; Parameters ....: $oCursor             - [in/out] an object. A Sheet Cursor Object returned from any Sheet Cursor creation functions.
-;                  $iMove               - an Integer value. The movement command constant. See remarks and Constants, $LOC_SHEETCUR* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iColumns            - an integer value. The Number of Columns either to contain in the Range, or to move, depending on the called move command.
-;                  $iRows               - an integer value. The Number of Rows either to contain in the Range, or to move, depending on the called move command.
-;                  $iCount              - an integer value. Number of movements to make.
-;                  $bSelect             - [optional] a boolean value. Default is False. If True, select data during this cursor movement.
-; Return values .: Success: 1.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iMove less than 0 or greater than highest move Constant. See Constants, $LOC_SHEETCUR* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iColumns not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iRows not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iCount not an Integer or is a negative.
-;                  @Error 1 @Extended 7 Return 0 = $bSelect not a Boolean.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
-;                  --Success--
-;                  @Error 0 @Extended ? Return 1 = Success, Cursor object movement was processed successfully.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Only some movements accept Column and Row Values, creating/ extending a selection of cells, etc. They will be specified below.
-;                  #Cursor Movement Constants which accept Column and Row values:
-;                  $LOC_SHEETCUR_COLLAPSE_TO_SIZE,
-;                  $LOC_SHEETCUR_GOTO_OFFSET
-;                  #Cursor Movements which accept Selecting Only:
-;                  $LOC_SHEETCUR_GOTO_USED_AREA_START,
-;                  $LOC_SHEETCUR_GOTO_USED_AREA_END
-;                  #Cursor Movements which accept nothing and are done once per call:
-;                  $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY,
-;                  $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION,
-;                  $LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA,
-;                  $LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN,
-;                  $LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW,
-;                  $LOC_SHEETCUR_GOTO_START,
-;                  $LOC_SHEETCUR_GOTO_END
-;                  #Cursor Movements which accept only number of moves ($iCount):
-;                  $LOC_SHEETCUR_GOTO_NEXT,
-;                  $LOC_SHEETCUR_GOTO_PREV
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOCalc_SheetCursorMove(ByRef $oCursor, $iMove, $iColumns, $iRows, $iCount, $bSelect)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iCounted = 0
-	Local $asMoves[13]
-
-	$asMoves[$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY] = "collapseToCurrentArray"
-	$asMoves[$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION] = "collapseToCurrentRegion"
-	$asMoves[$LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA] = "collapseToMergedArea"
-	$asMoves[$LOC_SHEETCUR_COLLAPSE_TO_SIZE] = "collapseToSize"
-	$asMoves[$LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN] = "expandToEntireColumns"
-	$asMoves[$LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW] = "expandToEntireRows"
-	$asMoves[$LOC_SHEETCUR_GOTO_OFFSET] = "gotoOffset"
-	$asMoves[$LOC_SHEETCUR_GOTO_START] = "gotoStart"
-	$asMoves[$LOC_SHEETCUR_GOTO_END] = "gotoEnd"
-	$asMoves[$LOC_SHEETCUR_GOTO_NEXT] = "gotoNext"
-	$asMoves[$LOC_SHEETCUR_GOTO_PREV] = "gotoPrevious"
-	$asMoves[$LOC_SHEETCUR_GOTO_USED_AREA_START] = "gotoStartOfUsedArea"
-	$asMoves[$LOC_SHEETCUR_GOTO_USED_AREA_END] = "gotoEndOfUsedArea"
-
-	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsInt($iMove) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iMove, 0, UBound($asMoves) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsInt($iColumns) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsInt($iRows) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not IsBool($bSelect) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-
-	Switch $iMove
-		Case $LOC_SHEETCUR_COLLAPSE_TO_SIZE, $LOC_SHEETCUR_GOTO_OFFSET
-			Execute("$oCursor." & $asMoves[$iMove] & "(" & $iColumns & "," & $iRows & ")")
-
-			Return SetError($__LO_STATUS_SUCCESS, 1, 1)
-
-		Case $LOC_SHEETCUR_GOTO_NEXT, $LOC_SHEETCUR_GOTO_PREV
-			Do
-				Execute("$oCursor." & $asMoves[$iMove] & "()")
-				$iCounted += 1
-
-				Sleep((IsInt($iCounted / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
-			Until ($iCounted >= $iCount)
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCounted, 1)
-
-		Case $LOC_SHEETCUR_GOTO_USED_AREA_START, $LOC_SHEETCUR_GOTO_USED_AREA_END
-			Execute("$oCursor." & $asMoves[$iMove] & "(" & $bSelect & ")")
-
-			Return SetError($__LO_STATUS_SUCCESS, 1, 1)
-
-		Case $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY, $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION, $LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA, _
-				$LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN, $LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW, $LOC_SHEETCUR_GOTO_START, $LOC_SHEETCUR_GOTO_END
-			Execute("$oCursor." & $asMoves[$iMove] & "()")
-
-			Return SetError($__LO_STATUS_SUCCESS, 1, 1)
-
-		Case Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-	EndSwitch
-EndFunc   ;==>__LOCalc_SheetCursorMove
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_TransparencyGradientConvert
