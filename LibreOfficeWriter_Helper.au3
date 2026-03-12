@@ -1627,18 +1627,16 @@ EndFunc   ;==>_LOWriter_FindFormatModifySpacing
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FindFormatModifyStrikeout
 ; Description ...: Modify or Add Find Format Strikeout Settings.
-; Syntax ........: _LOWriter_FindFormatModifyStrikeout(ByRef $atFormat[, $bWordOnly = Null[, $bStrikeOut = Null[, $iStrikeLineStyle = Null]]])
+; Syntax ........: _LOWriter_FindFormatModifyStrikeout(ByRef $atFormat[, $bWordOnly = Null[, $iStrikeLineStyle = Null]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined. See remarks.
-;                  $bStrikeOut          - [optional] a boolean value. Default is Null. If True, a strikeout is applied to characters.
 ;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
 ;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bStrikeOut not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See Constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error 1 @Extended 3 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See Constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
@@ -1651,7 +1649,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifySpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FindFormatModifyStrikeout(ByRef $atFormat, $bWordOnly = Null, $bStrikeOut = Null, $iStrikelineStyle = Null)
+Func _LOWriter_FindFormatModifyStrikeout(ByRef $atFormat, $bWordOnly = Null, $iStrikelineStyle = Null)
 	Local Const $UBOUND_COLUMNS = 2
 
 	If Not IsArray($atFormat) Or (UBound($atFormat, $UBOUND_COLUMNS) > 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -1667,25 +1665,21 @@ Func _LOWriter_FindFormatModifyStrikeout(ByRef $atFormat, $bWordOnly = Null, $bS
 		EndIf
 	EndIf
 
-	If ($bStrikeOut <> Null) Then
-		If ($bStrikeOut = Default) Then
-			__LOWriter_FindFormatDeleteSetting($atFormat, "CharCrossedOut")
-
-		Else
-			If Not IsBool($bStrikeOut) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharCrossedOut", $bStrikeOut))
-		EndIf
-	EndIf
-
 	If ($iStrikelineStyle <> Null) Then
 		If ($iStrikelineStyle = Default) Then
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharStrikeout")
+			__LOWriter_FindFormatDeleteSetting($atFormat, "CharCrossedOut")
 
 		Else
-			If Not __LO_IntIsBetween($iStrikelineStyle, $LOW_STRIKEOUT_NONE, $LOW_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+			If Not __LO_IntIsBetween($iStrikelineStyle, $LOW_STRIKEOUT_NONE, $LOW_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharStrikeout", $iStrikelineStyle))
+			If ($iStrikelineStyle = $LOW_STRIKEOUT_NONE) Then
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharStrikeout", $iStrikelineStyle))
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharCrossedOut", False))
+			Else
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharStrikeout", $iStrikelineStyle))
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharCrossedOut", True))
+			EndIf
 		EndIf
 	EndIf
 

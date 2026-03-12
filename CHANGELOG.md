@@ -1786,6 +1786,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   > Previous order:($atFormat, $sFontName, $iFontSize, _$iFontWeight_, _$iFontPosture_, $iFontColor, $iTransparency, $iHighlight)
   >
   > New order:($atFormat, $sFontName, $iFontSize, _$iFontPosture_, _$iFontWeight_, $iFontColor, $iTransparency, $iHighlight)
+- Removed $bStrikeOut from Strike out functions, as it was not needed.
+  - __LOWriter_CharStrikeOut
+  - _LOWriter_CharStyleStrikeOut
+  - _LOWriter_DirFrmtStrikeOut
+  - _LOWriter_FindFormatModifyStrikeout
+  - _LOWriter_ParStyleStrikeOut
 
 #### Documented
 
