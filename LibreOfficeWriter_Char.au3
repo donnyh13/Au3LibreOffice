@@ -783,24 +783,24 @@ EndFunc   ;==>_LOWriter_CharStyleOrganizer
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CharStyleOverLine
 ; Description ...: Set and retrieve the Overline settings for a Character style.
-; Syntax ........: _LOWriter_CharStyleOverLine(ByRef $oCharStyle[, $bWordOnly = Null[, $iOverLineStyle = Null[, $iOLColor = Null]]])
+; Syntax ........: _LOWriter_CharStyleOverLine(ByRef $oCharStyle[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObj, function.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
 ;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iOverLineStyle
-;                  |                               4 = Error setting $iOLColor
+;                  |                               1 = Error setting $iOverLineStyle
+;                  |                               2 = Error setting $iOLColor
+;                  |                               4 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -813,7 +813,7 @@ EndFunc   ;==>_LOWriter_CharStyleOrganizer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_CharStyleOverLine(ByRef $oCharStyle, $bWordOnly = Null, $iOverLineStyle = Null, $iOLColor = Null)
+Func _LOWriter_CharStyleOverLine(ByRef $oCharStyle, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -822,7 +822,7 @@ Func _LOWriter_CharStyleOverLine(ByRef $oCharStyle, $bWordOnly = Null, $iOverLin
 	If Not IsObj($oCharStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCharStyle.supportsService("com.sun.star.style.CharacterStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$vReturn = __LOWriter_CharOverLine($oCharStyle, $bWordOnly, $iOverLineStyle, $iOLColor)
+	$vReturn = __LOWriter_CharOverLine($oCharStyle, $iOverLineStyle, $iOLColor, $bWordOnly)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_CharStyleOverLine
@@ -1129,24 +1129,24 @@ EndFunc   ;==>_LOWriter_CharStyleStrikeOut
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CharStyleUnderLine
 ; Description ...: Set and retrieve the Underline settings for a Character style.
-; Syntax ........: _LOWriter_CharStyleUnderLine(ByRef $oCharStyle[, $bWordOnly = Null[, $iUnderLineStyle = Null[, $iULColor = Null]]])
+; Syntax ........: _LOWriter_CharStyleUnderLine(ByRef $oCharStyle[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObj, function.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
 ;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The style of the Underline line, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iUnderLineStyle
-;                  |                               4 = Error setting $iULColor
+;                  |                               1 = Error setting $iUnderLineStyle
+;                  |                               2 = Error setting $iULColor
+;                  |                               4 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1158,7 +1158,7 @@ EndFunc   ;==>_LOWriter_CharStyleStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_CharStyleUnderLine(ByRef $oCharStyle, $bWordOnly = Null, $iUnderLineStyle = Null, $iULColor = Null)
+Func _LOWriter_CharStyleUnderLine(ByRef $oCharStyle, $iUnderLineStyle = Null, $iULColor = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1167,7 +1167,7 @@ Func _LOWriter_CharStyleUnderLine(ByRef $oCharStyle, $bWordOnly = Null, $iUnderL
 	If Not IsObj($oCharStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCharStyle.supportsService("com.sun.star.style.CharacterStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$vReturn = __LOWriter_CharUnderLine($oCharStyle, $bWordOnly, $iUnderLineStyle, $iULColor)
+	$vReturn = __LOWriter_CharUnderLine($oCharStyle, $iUnderLineStyle, $iULColor, $bWordOnly)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_CharStyleUnderLine

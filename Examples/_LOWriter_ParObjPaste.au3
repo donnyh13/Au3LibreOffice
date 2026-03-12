@@ -42,7 +42,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to move the View Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Underline the selected portion in red.
-	_LOWriter_DirFrmtUnderLine($oViewCursor, True, $LOW_UNDERLINE_BOLD_DASH_DOT_DOT, $LO_COLOR_RED)
+	_LOWriter_DirFrmtUnderLine($oViewCursor, $LOW_UNDERLINE_BOLD_DASH_DOT_DOT, $LO_COLOR_RED, True)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to set underline settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a list of Paragraph Objects

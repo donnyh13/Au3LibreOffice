@@ -1762,6 +1762,18 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_DirFrmtOverLine
   - _LOWriter_FindFormatModifyOverline
   - _LOWriter_ParStyleOverLine
+- Rearranged Underline parameters to match LibreOffice UI.
+  - __LOWriter_CharUnderLine
+  - _LOWriter_CharStyleUnderLine
+  - _LOWriter_DirFrmtUnderLine
+  - _LOWriter_FindFormatModifyUnderline
+  - _LOWriter_ParStyleUnderLine
+- Rearranged Overline parameters to match LibreOffice UI.
+  - __LOWriter_CharOverLine
+  - _LOWriter_CharStyleOverLine
+  - _LOWriter_DirFrmtOverLine
+  - _LOWriter_FindFormatModifyOverline
+  - _LOWriter_ParStyleOverLine
 
 #### Documented
 

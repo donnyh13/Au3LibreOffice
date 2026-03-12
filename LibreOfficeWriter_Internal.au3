@@ -830,23 +830,23 @@ EndFunc   ;==>__LOWriter_CharFontColor
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_CharOverLine
 ; Description ...: Set and retrieve the OverLine settings.
-; Syntax ........: __LOWriter_CharOverLine(ByRef $oObj[, $bWordOnly = Null[, $iOverLineStyle = Null[, $iOLColor = Null]]])
+; Syntax ........: __LOWriter_CharOverLine(ByRef $oObj[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oObj                - [in/out] an object. An Object that supports "com.sun.star.text.Paragraph" Or "com.sun.star.text.TextPortion" services, such as a Cursor with data selected or paragraph section.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
 ;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The line style of the Overline, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iOverLineStyle
-;                  |                               4 = Error setting $iOLColor
+;                  |                               1 = Error setting $iOverLineStyle
+;                  |                               2 = Error setting $iOLColor
+;                  |                               4 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -859,7 +859,7 @@ EndFunc   ;==>__LOWriter_CharFontColor
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_CharOverLine(ByRef $oObj, $bWordOnly = Null, $iOverLineStyle = Null, $iOLColor = Null)
+Func __LOWriter_CharOverLine(ByRef $oObj, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -868,28 +868,21 @@ Func __LOWriter_CharOverLine(ByRef $oObj, $bWordOnly = Null, $iOverLineStyle = N
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bWordOnly, $iOverLineStyle, $iOLColor) Then
-		__LO_ArrayFill($avOverLine, $oObj.CharWordMode(), $oObj.CharOverline(), $oObj.CharOverlineColor())
+	If __LO_VarsAreNull($iOverLineStyle, $iOLColor,$bWordOnly) Then
+		__LO_ArrayFill($avOverLine, $oObj.CharOverline(), $oObj.CharOverlineColor(), $oObj.CharWordMode())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOverLine)
 	EndIf
 
-	If ($bWordOnly <> Null) Then
-		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oObj.CharWordMode = $bWordOnly
-		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
 	If ($iOverLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iOverLineStyle, $LOW_UNDERLINE_NONE, $LOW_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iOverLineStyle, $LOW_UNDERLINE_NONE, $LOW_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharOverline = $iOverLineStyle
-		$iError = ($oObj.CharOverline() = $iOverLineStyle) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($oObj.CharOverline() = $iOverLineStyle) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iOLColor <> Null) Then
-		If Not __LO_IntIsBetween($iOLColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iOLColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		If ($iOLColor = $LO_COLOR_OFF) Then
 			If ($oObj.CharOverlineHasColor() = True) Then $oObj.CharOverlineHasColor = False
@@ -900,7 +893,14 @@ Func __LOWriter_CharOverLine(ByRef $oObj, $bWordOnly = Null, $iOverLineStyle = N
 			$oObj.CharOverlineColor = $iOLColor
 		EndIf
 
-		$iError = ($oObj.CharOverlineColor() = $iOLColor) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($oObj.CharOverlineColor() = $iOLColor) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bWordOnly <> Null) Then
+		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oObj.CharWordMode = $bWordOnly
+		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -1300,23 +1300,23 @@ EndFunc   ;==>__LOWriter_CharStrikeOut
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_CharUnderLine
 ; Description ...: Set and retrieve the Underline settings.
-; Syntax ........: __LOWriter_CharUnderLine(ByRef $oObj[, $bWordOnly = Null[, $iUnderLineStyle = Null[, $iULColor = Null]]])
+; Syntax ........: __LOWriter_CharUnderLine(ByRef $oObj[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oObj                - [in/out] an object. An Object that supports "com.sun.star.text.Paragraph" Or "com.sun.star.text.TextPortion" services, such as a Cursor with data selected or paragraph section.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
 ;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The line style of the Underline, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iUnderLineStyle
-;                  |                               4 = Error setting $iULColor
+;                  |                               1 = Error setting $iUnderLineStyle
+;                  |                               2 = Error setting $iULColor
+;                  |                               4 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1327,7 +1327,7 @@ EndFunc   ;==>__LOWriter_CharStrikeOut
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_CharUnderLine(ByRef $oObj, $bWordOnly = Null, $iUnderLineStyle = Null, $iULColor = Null)
+Func __LOWriter_CharUnderLine(ByRef $oObj, $iUnderLineStyle = Null, $iULColor = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1336,28 +1336,21 @@ Func __LOWriter_CharUnderLine(ByRef $oObj, $bWordOnly = Null, $iUnderLineStyle =
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bWordOnly, $iUnderLineStyle, $iULColor) Then
-		__LO_ArrayFill($avUnderLine, $oObj.CharWordMode(), $oObj.CharUnderline(), $oObj.CharUnderlineColor())
+	If __LO_VarsAreNull($iUnderLineStyle, $iULColor, $bWordOnly) Then
+		__LO_ArrayFill($avUnderLine, $oObj.CharUnderline(), $oObj.CharUnderlineColor(), $oObj.CharWordMode())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avUnderLine)
 	EndIf
 
-	If ($bWordOnly <> Null) Then
-		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oObj.CharWordMode = $bWordOnly
-		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
 	If ($iUnderLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iUnderLineStyle, $LOW_UNDERLINE_NONE, $LOW_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iUnderLineStyle, $LOW_UNDERLINE_NONE, $LOW_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharUnderline = $iUnderLineStyle
-		$iError = ($oObj.CharUnderline() = $iUnderLineStyle) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($oObj.CharUnderline() = $iUnderLineStyle) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iULColor <> Null) Then
-		If Not __LO_IntIsBetween($iULColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iULColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		If ($iULColor = $LO_COLOR_OFF) Then
 			If ($oObj.CharUnderlineHasColor = True) Then $oObj.CharUnderlineHasColor = False
@@ -1368,7 +1361,14 @@ Func __LOWriter_CharUnderLine(ByRef $oObj, $bWordOnly = Null, $iUnderLineStyle =
 			$oObj.CharUnderlineColor = $iULColor
 		EndIf
 
-		$iError = ($oObj.CharUnderlineColor() = $iULColor) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($oObj.CharUnderlineColor() = $iULColor) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bWordOnly <> Null) Then
+		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oObj.CharWordMode = $bWordOnly
+		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

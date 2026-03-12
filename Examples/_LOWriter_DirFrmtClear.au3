@@ -31,8 +31,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 4, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Underline settings to Words only = True, Underline style $LOW_UNDERLINE_BOLD_DASH_DOT, and Color to $LO_COLOR_BROWN
-	_LOWriter_DirFrmtUnderLine($oViewCursor, True, $LOW_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN)
+	; Set the selected text's Underline settings to Underline style $LOW_UNDERLINE_BOLD_DASH_DOT, Color to $LO_COLOR_BROWN, and Words only = True
+	_LOWriter_DirFrmtUnderLine($oViewCursor, $LOW_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 4 spaces

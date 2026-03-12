@@ -977,24 +977,24 @@ EndFunc   ;==>_LOWriter_DirFrmtGetCurStyles
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtOverLine
 ; Description ...: Set and retrieve the OverLine settings by Direct Formatting.
-; Syntax ........: _LOWriter_DirFrmtOverLine(ByRef $oSelection[, $bWordOnly = Null[, $iOverLineStyle = Null[, $iOLColor = Null]]])
+; Syntax ........: _LOWriter_DirFrmtOverLine(ByRef $oSelection[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
 ;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iOverLineStyle
-;                  |                               4 = Error setting $iOLColor
+;                  |                               1 = Error setting $iOverLineStyle
+;                  |                               2 = Error setting $iOLColor
+;                  |                               4 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1010,7 +1010,7 @@ EndFunc   ;==>_LOWriter_DirFrmtGetCurStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DirFrmtOverLine(ByRef $oSelection, $bWordOnly = Null, $iOverLineStyle = Null, $iOLColor = Null)
+Func _LOWriter_DirFrmtOverLine(ByRef $oSelection, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1019,12 +1019,7 @@ Func _LOWriter_DirFrmtOverLine(ByRef $oSelection, $bWordOnly = Null, $iOverLineS
 	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	If __LOWriter_AnyAreDefault($bWordOnly, $iOverLineStyle, $iOLColor) Then
-		If ($bWordOnly = Default) Then
-			$oSelection.setPropertyToDefault("CharWordMode")
-			$bWordOnly = Null
-		EndIf
-
+	If __LOWriter_AnyAreDefault($iOverLineStyle, $iOLColor, $bWordOnly) Then
 		If ($iOverLineStyle = Default) Then
 			$oSelection.setPropertyToDefault("CharOverline")
 			$iOverLineStyle = Null
@@ -1036,10 +1031,15 @@ Func _LOWriter_DirFrmtOverLine(ByRef $oSelection, $bWordOnly = Null, $iOverLineS
 			$iOLColor = Null
 		EndIf
 
-		If __LO_VarsAreNull($bWordOnly, $iOverLineStyle, $iOLColor) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
+		If ($bWordOnly = Default) Then
+			$oSelection.setPropertyToDefault("CharWordMode")
+			$bWordOnly = Null
+		EndIf
+
+		If __LO_VarsAreNull($iOverLineStyle, $iOLColor, $bWordOnly) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 	EndIf
 
-	$vReturn = __LOWriter_CharOverLine($oSelection, $bWordOnly, $iOverLineStyle, $iOLColor)
+	$vReturn = __LOWriter_CharOverLine($oSelection, $iOverLineStyle, $iOLColor, $bWordOnly)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_DirFrmtOverLine
@@ -2638,24 +2638,24 @@ EndFunc   ;==>_LOWriter_DirFrmtStrikeOut
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtUnderLine
 ; Description ...: Set and retrieve the Underline settings by Direct Formatting.
-; Syntax ........: _LOWriter_DirFrmtUnderLine(ByRef $oSelection[, $bWordOnly = Null[, $iUnderLineStyle = Null[, $iULColor = Null]]])
+; Syntax ........: _LOWriter_DirFrmtUnderLine(ByRef $oSelection[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
 ;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The style of the Underline line, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iUnderLineStyle
-;                  |                               4 = Error setting $iULColor
+;                  |                               1 = Error setting $iUnderLineStyle
+;                  |                               2 = Error setting $iULColor
+;                  |                               4 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -2671,7 +2671,7 @@ EndFunc   ;==>_LOWriter_DirFrmtStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DirFrmtUnderLine(ByRef $oSelection, $bWordOnly = Null, $iUnderLineStyle = Null, $iULColor = Null)
+Func _LOWriter_DirFrmtUnderLine(ByRef $oSelection, $iUnderLineStyle = Null, $iULColor = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2680,12 +2680,7 @@ Func _LOWriter_DirFrmtUnderLine(ByRef $oSelection, $bWordOnly = Null, $iUnderLin
 	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	If __LOWriter_AnyAreDefault($bWordOnly, $iUnderLineStyle, $iULColor) Then
-		If ($bWordOnly = Default) Then
-			$oSelection.setPropertyToDefault("CharWordMode")
-			$bWordOnly = Null
-		EndIf
-
+	If __LOWriter_AnyAreDefault($iUnderLineStyle, $iULColor, $bWordOnly) Then
 		If ($iUnderLineStyle = Default) Then
 			$oSelection.setPropertyToDefault("CharUnderline")
 			$iUnderLineStyle = Null
@@ -2697,10 +2692,15 @@ Func _LOWriter_DirFrmtUnderLine(ByRef $oSelection, $bWordOnly = Null, $iUnderLin
 			$iULColor = Null
 		EndIf
 
-		If __LO_VarsAreNull($bWordOnly, $iUnderLineStyle, $iULColor) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
+		If ($bWordOnly = Default) Then
+			$oSelection.setPropertyToDefault("CharWordMode")
+			$bWordOnly = Null
+		EndIf
+
+		If __LO_VarsAreNull($iUnderLineStyle, $iULColor, $bWordOnly) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 	EndIf
 
-	$vReturn = __LOWriter_CharUnderLine($oSelection, $bWordOnly, $iUnderLineStyle, $iULColor)
+	$vReturn = __LOWriter_CharUnderLine($oSelection, $iUnderLineStyle, $iULColor, $bWordOnly)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_DirFrmtUnderLine
