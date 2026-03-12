@@ -40,9 +40,8 @@ Func Example()
 	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style Overline settings to Words only = True, Overline style $LOW_UNDERLINE_BOLD_DASH_DOT, Overline has
-	; Color = True, and Color to $LO_COLOR_BROWN
-	_LOWriter_CharStyleOverLine($oCharStyle, True, $LOW_UNDERLINE_BOLD_DASH_DOT, True, $LO_COLOR_BROWN)
+	; Set "Example" Character style Overline settings to Words only = True, Overline style $LOW_UNDERLINE_BOLD_DASH_DOT, and Color to $LO_COLOR_BROWN
+	_LOWriter_CharStyleOverLine($oCharStyle, True, $LOW_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -52,8 +51,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's current Overline settings are as follows: " & @CRLF & _
 			"Overline words only? True/False: " & $avCharStyleSettings[0] & @CRLF & _
 			"Overline style (See UDF constants): " & $avCharStyleSettings[1] & @CRLF & _
-			"Overline has color? True/False: " & $avCharStyleSettings[2] & @CRLF & _
-			"Overline color is (as a RGB Color Integer): " & $avCharStyleSettings[3])
+			"Overline color is (as a RGB Color Integer): " & $avCharStyleSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

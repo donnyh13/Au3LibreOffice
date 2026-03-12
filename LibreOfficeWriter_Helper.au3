@@ -1162,11 +1162,10 @@ EndFunc   ;==>_LOWriter_FindFormatModifyIndent
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FindFormatModifyOverline
 ; Description ...: Modify or Add Find Format Overline Settings.
-; Syntax ........: _LOWriter_FindFormatModifyOverline(ByRef $atFormat[, $iOverLineStyle = Null[, $bWordOnly = Null[, $bOLHasColor = Null[, $iOLColor = Null]]]])
+; Syntax ........: _LOWriter_FindFormatModifyOverline(ByRef $atFormat[, $iOverLineStyle = Null[, $bWordOnly = Null[, $iOLColor = Null]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See remarks. Overline style must be set before any of the other parameters can be searched for.
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined. See remarks.
-;                  $bOLHasColor         - [optional] a boolean value. Default is Null. If True, the Overline is colored, must be set to True in order to set the Overline color.
 ;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1174,8 +1173,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyIndent
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
 ;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bOLHasColor not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
@@ -1189,7 +1187,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyIndent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FindFormatModifyOverline(ByRef $atFormat, $iOverLineStyle = Null, $bWordOnly = Null, $bOLHasColor = Null, $iOLColor = Null)
+Func _LOWriter_FindFormatModifyOverline(ByRef $atFormat, $iOverLineStyle = Null, $bWordOnly = Null, $iOLColor = Null)
 	Local Const $UBOUND_COLUMNS = 2
 
 	If Not IsArray($atFormat) Or (UBound($atFormat, $UBOUND_COLUMNS) > 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -1216,25 +1214,22 @@ Func _LOWriter_FindFormatModifyOverline(ByRef $atFormat, $iOverLineStyle = Null,
 		EndIf
 	EndIf
 
-	If ($bOLHasColor <> Null) Then
-		If ($bOLHasColor = Default) Then
-			__LOWriter_FindFormatDeleteSetting($atFormat, "CharOverlineHasColor")
-
-		Else
-			If Not IsBool($bOLHasColor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharOverlineHasColor", $bOLHasColor))
-		EndIf
-	EndIf
-
 	If ($iOLColor <> Null) Then
 		If ($iOLColor = Default) Then
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharOverlineColor")
+			__LOWriter_FindFormatDeleteSetting($atFormat, "CharOverlineHasColor")
 
 		Else
-			If Not __LO_IntIsBetween($iOLColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+			If Not __LO_IntIsBetween($iOLColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharOverlineColor", $iOLColor))
+			If ($iOLColor = $LO_COLOR_OFF) Then
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharOverlineHasColor", False))
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharOverlineColor", $iOLColor))
+
+			Else
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharOverlineHasColor", True))
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharOverlineColor", $iOLColor))
+			EndIf
 		EndIf
 	EndIf
 
@@ -1782,11 +1777,10 @@ EndFunc   ;==>_LOWriter_FindFormatModifyTxtFlowOpt
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FindFormatModifyUnderline
 ; Description ...: Modify or Add Find Format Underline Settings.
-; Syntax ........: _LOWriter_FindFormatModifyUnderline(ByRef $atFormat[, $iUnderLineStyle = Null[, $bWordOnly = Null[, $bULHasColor = Null[, $iULColor = Null]]]])
+; Syntax ........: _LOWriter_FindFormatModifyUnderline(ByRef $atFormat[, $iUnderLineStyle = Null[, $bWordOnly = Null[, $iULColor = Null]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The line style of the Underline, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. Underline style must be set before any of the other parameters can be searched for.
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined. See remarks.
-;                  $bULHasColor         - [optional] a boolean value. Default is Null. If True, the underline is colored, must be set to True in order to set the underline color.
 ;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.. $LO_COLOR_OFF(-1) is automatic color mode.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1794,8 +1788,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyTxtFlowOpt
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
 ;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See Constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bULHasColor not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
@@ -1808,7 +1801,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyTxtFlowOpt
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FindFormatModifyUnderline(ByRef $atFormat, $iUnderlineStyle = Null, $bWordOnly = Null, $bULHasColor = Null, $iULColor = Null)
+Func _LOWriter_FindFormatModifyUnderline(ByRef $atFormat, $iUnderlineStyle = Null, $bWordOnly = Null, $iULColor = Null)
 	Local Const $UBOUND_COLUMNS = 2
 
 	If Not IsArray($atFormat) Or (UBound($atFormat, $UBOUND_COLUMNS) > 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -1835,25 +1828,22 @@ Func _LOWriter_FindFormatModifyUnderline(ByRef $atFormat, $iUnderlineStyle = Nul
 		EndIf
 	EndIf
 
-	If ($bULHasColor <> Null) Then
-		If ($bULHasColor = Default) Then
-			__LOWriter_FindFormatDeleteSetting($atFormat, "CharUnderlineHasColor")
-
-		Else
-			If Not IsBool($bULHasColor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharUnderlineHasColor", $bULHasColor))
-		EndIf
-	EndIf
-
 	If ($iULColor <> Null) Then
 		If ($iULColor = Default) Then
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharUnderlineColor")
+			__LOWriter_FindFormatDeleteSetting($atFormat, "CharUnderlineHasColor")
 
 		Else
-			If Not __LO_IntIsBetween($iULColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+			If Not __LO_IntIsBetween($iULColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharUnderlineColor", $iULColor))
+			If ($iULColor = $LO_COLOR_OFF) Then
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharUnderlineColor", $iULColor))
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharUnderlineHasColor", False))
+
+			Else
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharUnderlineColor", $iULColor))
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharUnderlineHasColor", True))
+			EndIf
 		EndIf
 	EndIf
 
