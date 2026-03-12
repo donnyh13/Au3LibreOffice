@@ -2198,7 +2198,7 @@ Func _LOWriter_FrameShadow(ByRef $oFrame, $iLocation = Null, $iColor = Null, $iW
 	EndIf
 
 	If ($iWidth <> Null) Then
-		If Not IsInt($iWidth) Or ($iWidth < 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iWidth, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$tShdwFrmt.ShadowWidth = $iWidth
 	EndIf
@@ -4175,7 +4175,7 @@ Func _LOWriter_FrameStyleShadow(ByRef $oFrameStyle, $iLocation = Null, $iColor =
 	EndIf
 
 	If ($iWidth <> Null) Then
-		If Not IsInt($iWidth) Or ($iWidth < 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iWidth, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$tShdwFrmt.ShadowWidth = $iWidth
 	EndIf

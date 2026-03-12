@@ -1876,6 +1876,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_TableCreate
   - _LOWriter_TableStyle
 - Corrected wrong `__LO_NumIsBetween` usage in `__LOWriter_ParIndent`, `__LOWriter_ParSpace`, and `__LOWriter_ParTabStopCreate`.
+- Made certain Input checks use `__LO_IntIsBetween`.
 
 #### Removed
 
