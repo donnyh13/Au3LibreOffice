@@ -24,9 +24,8 @@ Func Example()
 	_LOCalc_CellString($oCell, "Some Text")
 	If @error Then _ERROR($oDoc, "Failed to set Cell Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell's Overline settings to Words only = True, Overline style $LOC_UNDERLINE_BOLD_DASH_DOT, Overline has
-	; Color = True, and Color to $LO_COLOR_BROWN
-	_LOCalc_CellOverLine($oCell, True, $LOC_UNDERLINE_BOLD_DASH_DOT, True, $LO_COLOR_BROWN)
+	; Set the Cell's Overline settings to Words only = True, Overline style $LOC_UNDERLINE_BOLD_DASH_DOT, and Color to $LO_COLOR_BROWN
+	_LOCalc_CellOverLine($oCell, True, $LOC_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -36,8 +35,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell's current Overline settings are as follows: " & @CRLF & _
 			"Overline words only? True/False: " & $avSettings[0] & @CRLF & _
 			"Overline style (See UDF constants): " & $avSettings[1] & @CRLF & _
-			"Overline has color? True/False: " & $avSettings[2] & @CRLF & _
-			"Overline color (as a RGB Color Integer): " & $avSettings[3])
+			"Overline color (as a RGB Color Integer): " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

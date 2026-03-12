@@ -38,8 +38,8 @@ Func Example()
 	_LOCalc_TextCursorMove($oTextCursor, $LOC_TEXTCUR_GOTO_END, 1, True)
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Overline settings to, Underline words only, Underline style $LOC_UNDERLINE_BOLD_DASH_DOT, has color = True, and underline color = Gold.
-	_LOCalc_TextCursorOverline($oTextCursor, True, $LOC_UNDERLINE_BOLD_DASH_DOT, True, $LO_COLOR_GOLD)
+	; Set the Overline settings to, Underline words only, Underline style $LOC_UNDERLINE_BOLD_DASH_DOT, and underline color = Gold.
+	_LOCalc_TextCursorOverline($oTextCursor, True, $LOC_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_GOLD)
 	If @error Then _ERROR($oDoc, "Failed to set text formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array in order of function parameters.
@@ -49,8 +49,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Overline settings at the Cursor's current position are as follows: " & @CRLF & _
 			"Are words only Overlined? True/False: " & $avSettings[0] & @CRLF & _
 			"The Overline style is (See UDF Constants): " & $avSettings[1] & @CRLF & _
-			"Is the Overline colored? True/False: " & $avSettings[2] & @CRLF & _
-			"The Overline color is (as a RGB Color Integer): " & $avSettings[3])
+			"The Overline color is (as a RGB Color Integer): " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

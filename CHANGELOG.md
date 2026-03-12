@@ -1055,6 +1055,16 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_PageStyleFooterShadow
 - Combined internal `__LOCalc_TextCursorMove` into `_LOCalc_TextCursorMove`, slightly modifying error values.
 - Combined internal `__LOCalc_SheetCursorMove` into `_LOCalc_SheetCursorMove`, slightly modifying error values.
+- Removed $bULHasColor from Underline functions as it added unnecessary complexity.
+  - __LOCalc_CellUnderLine
+  - _LOCalc_CellUnderline
+  - _LOCalc_CellStyleUnderline
+  - _LOCalc_TextCursorUnderline
+- Removed $bOLHasColor from Overline functions as it added unnecessary complexity.
+  - __LOCalc_CellOverLine
+  - _LOCalc_CellStyleOverline
+  - _LOCalc_CellOverline
+  - _LOCalc_TextCursorOverline
 
 #### Documented
 
