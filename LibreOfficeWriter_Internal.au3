@@ -6863,7 +6863,7 @@ Func __LOWriter_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment, $iFillCha
 		$tTabStruct.DecimalChar = $iDecChar
 	EndIf
 
-	If ($atTabStops[0].Alignment() = $LOW_TAB_ALIGN_DEFAULT) And (UBound($atTabStops) = 1) Then ; if inserting a  Tabstop for the first time, overwrite the "Default blank TabStop.
+	If (UBound($atTabStops) = 1) And ($atTabStops[0].Alignment() = $LOW_TAB_ALIGN_DEFAULT) Then ; if inserting a Tabstop for the first time, overwrite the "Default blank TabStop.
 		$atTabStops[0] = $tTabStruct
 		$oObj.ParaTabStops = $atTabStops ; Insert the new TabStop
 		$atNewTabStops = $oObj.ParaTabStops()
