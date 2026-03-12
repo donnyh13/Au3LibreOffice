@@ -1081,6 +1081,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_CellOverline
   - _LOCalc_CellStyleOverline
   - _LOCalc_TextCursorOverline
+- Removed $bStrikeOut from Strike out functions, as it was not needed.
+  - __LOCalc_CellStrikeOut
+  - _LOCalc_CellStrikeOut
+  - _LOCalc_CellStyleStrikeOut
+  - _LOCalc_TextCursorStrikeOut
 
 #### Documented
 

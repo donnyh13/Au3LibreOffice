@@ -28,7 +28,7 @@ Func Example()
 	_LOCalc_TextCursorInsertString($oTextCursor, "Hi! Testing.")
 	If @error Then _ERROR($oDoc, "Failed to insert String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now select all the words, and set the strikeout settings to: Strike out words only, Turn Strikeout on, and use slashes to strike the characters out with.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now select all the words, and set the strikeout settings to: Strike out words only, and use slashes to strike the characters out with.")
 
 	; Go to the Start.
 	_LOCalc_TextCursorMove($oTextCursor, $LOC_TEXTCUR_GOTO_START, 1, False)
@@ -38,8 +38,8 @@ Func Example()
 	_LOCalc_TextCursorMove($oTextCursor, $LOC_TEXTCUR_GOTO_END, 1, True)
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Strikeout settings to: Strike out words only, Strike out the characters, and use slashes to strike the characters out with.
-	_LOCalc_TextCursorStrikeOut($oTextCursor, True, True, $LOC_STRIKEOUT_SLASH)
+	; Set the Strikeout settings to: Strike out words only, and use slashes to strike the characters out with.
+	_LOCalc_TextCursorStrikeOut($oTextCursor, True, $LOC_STRIKEOUT_SLASH)
 	If @error Then _ERROR($oDoc, "Failed to set text formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array in order of function parameters.
@@ -48,8 +48,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Strikeout settings at the Cursor's current position are as follows: " & @CRLF & _
 			"Are words only struck-out? True/False: " & $avSettings[0] & @CRLF & _
-			"Is character strikeout currently active? True/False: " & $avSettings[1] & @CRLF & _
-			"The Strikeout style is (See UDF Constants): " & $avSettings[2])
+			"The Strikeout style is (See UDF Constants): " & $avSettings[1])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
