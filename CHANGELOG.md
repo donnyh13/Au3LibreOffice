@@ -1814,6 +1814,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_FormConTableConListBoxGeneral` had several wrong bit values for property setting errors when returning an invalid property to default.
 - `_LOWriter_FormConTableConPatternFieldGeneral` had a wrong bit value for property setting errors when returning an invalid property to default.
 - Potential crash from accessing Array with wrong number of elements. `__LOWriter_ParTabStopCreate`
+- Property Setting Error was incorrectly returned in `__LOWriter_ParHasTabStop` instead of Success.
 
 #### Refactored
 

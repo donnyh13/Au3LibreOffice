@@ -6157,7 +6157,7 @@ Func __LOWriter_ParHasTabStop(ByRef $oObj, $iTabStop)
 		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
-	Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 0, False)
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
 EndFunc   ;==>__LOWriter_ParHasTabStop
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
