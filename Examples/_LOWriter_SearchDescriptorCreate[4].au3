@@ -71,7 +71,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Find Format Search Array for Bold font.
-	_LOWriter_FindFormatModifyFont($atFindFormat, Null, Null, $LOW_WEIGHT_BOLD)
+	_LOWriter_FindFormatModifyFont($atFindFormat, Null, Null, Null, $LOW_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the word "search", I am using a FindFormat Array with the Bold attribute, however I still have $bSearchPropValues set to false,

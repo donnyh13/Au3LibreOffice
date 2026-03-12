@@ -43,11 +43,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Find Format Search Array for Bold font.
-	_LOWriter_FindFormatModifyFont($atFindFormat, Null, Null, $LOW_WEIGHT_BOLD)
+	_LOWriter_FindFormatModifyFont($atFindFormat, Null, Null, Null, $LOW_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Replace Format Search Array for Italic font.
-	_LOWriter_FindFormatModifyFont($atReplaceFormat, Null, Null, Null, $LOW_POSTURE_ITALIC)
+	_LOWriter_FindFormatModifyFont($atReplaceFormat, Null, Null, $LOW_POSTURE_ITALIC)
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search and replace all bold letter "a"'s with Italic "@" that are selected by the view cursor.

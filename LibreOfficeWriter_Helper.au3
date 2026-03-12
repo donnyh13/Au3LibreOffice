@@ -852,12 +852,12 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FindFormatModifyFont
 ; Description ...: Modify or Add Find Format Font Settings.
-; Syntax ........: _LOWriter_FindFormatModifyFont(ByRef $atFormat[, $sFontName = Null[, $iFontSize = Null[, $iFontWeight = Null[, $iFontPosture = Null[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]]]]]])
+; Syntax ........: _LOWriter_FindFormatModifyFont(ByRef $atFormat[, $sFontName = Null[, $iFontSize = Null[, $iFontPosture = Null[, $iFontWeight = Null[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]]]]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified. See Remarks.
 ;                  $sFontName           - [optional] a string value. Default is Null. The Font name to search for.
 ;                  $iFontSize           - [optional] an integer value. Default is Null. The Font size to search for.
-;                  $iFontWeight         - [optional] an integer value(0,50-200). Default is Null. The Font weight to search for. See Constants, $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iFontPosture        - [optional] an integer value (0-5). Default is Null. The Font Posture(Italic etc.,) See Constants, $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iFontWeight         - [optional] an integer value(0,50-200). Default is Null. The Font weight to search for. See Constants, $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Transparency. 0 is visible, 100 is invisible. Seems to require a color entered in $iFontColor before transparency can be searched for. Libre Office 7.0 and Up.
 ;                  $iHighlight          - [optional] an integer value (-1-16777215). Default is Null. The Highlight color to search for, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -868,8 +868,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not found in current Document.
 ;                  @Error 1 @Extended 4 Return 0 = $iFontSize not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iFontWeight not an Integer, less than 50 but not 0, or more than 200. See Constants, $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iFontPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iFontPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iFontWeight not an Integer, less than 50 but not 0, or more than 200. See Constants, $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $iFontColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 8 Return 0 = $iTransparency not an Integer, Less than 0 or greater than 100.
 ;                  @Error 1 @Extended 9 Return 0 = $iHighlight not an Integer, less than -1 or greater than 16777215.
@@ -886,7 +886,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FindFormatModifyFont(ByRef $atFormat, $sFontName = Null, $iFontSize = Null, $iFontWeight = Null, $iFontPosture = Null, $iFontColor = Null, $iTransparency = Null, $iHighlight = Null)
+Func _LOWriter_FindFormatModifyFont(ByRef $atFormat, $sFontName = Null, $iFontSize = Null, $iFontPosture = Null, $iFontWeight = Null, $iFontColor = Null, $iTransparency = Null, $iHighlight = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -917,25 +917,25 @@ Func _LOWriter_FindFormatModifyFont(ByRef $atFormat, $sFontName = Null, $iFontSi
 		EndIf
 	EndIf
 
-	If ($iFontWeight <> Null) Then
-		If ($iFontWeight = Default) Then
-			__LOWriter_FindFormatDeleteSetting($atFormat, "CharWeight")
-
-		Else
-			If Not __LO_IntIsBetween($iFontWeight, $LOW_WEIGHT_THIN, $LOW_WEIGHT_BLACK, "", $LOW_WEIGHT_DONT_KNOW) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharWeight", $iFontWeight))
-		EndIf
-	EndIf
-
 	If ($iFontPosture <> Null) Then
 		If ($iFontPosture = Default) Then
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharPosture")
 
 		Else
-			If Not __LO_IntIsBetween($iFontPosture, $LOW_POSTURE_NONE, $LOW_POSTURE_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+			If Not __LO_IntIsBetween($iFontPosture, $LOW_POSTURE_NONE, $LOW_POSTURE_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharPosture", $iFontPosture))
+		EndIf
+	EndIf
+
+	If ($iFontWeight <> Null) Then
+		If ($iFontWeight = Default) Then
+			__LOWriter_FindFormatDeleteSetting($atFormat, "CharWeight")
+
+		Else
+			If Not __LO_IntIsBetween($iFontWeight, $LOW_WEIGHT_THIN, $LOW_WEIGHT_BLACK, "", $LOW_WEIGHT_DONT_KNOW) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharWeight", $iFontWeight))
 		EndIf
 	EndIf
 

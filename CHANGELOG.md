@@ -1735,7 +1735,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_ParStyleSet` --> `_LOWriter_ParStyleCurrent`
   - `_LOWriter_TableStyle` --> `_LOWriter_TableStyleCurrent`
 - Rearranged Writer Character, Frame, Image, Page, Paragraph, and Table Shadow parameter order to match L.O. UI order.
-  > Previous order:(_$iWidth_, $iColor, _$iLocation_) --> New order:(_$iLocation_, $iColor, _$iWidth_)
+  > Previous order:(_$iWidth_, $iColor, _$iLocation_)
+  >
+  > New order:(_$iLocation_, $iColor, _$iWidth_)
   - Affected functions:
   - __LOWriter_CharShadow
   - __LOWriter_ParShadow
@@ -1763,17 +1765,27 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FindFormatModifyOverline
   - _LOWriter_ParStyleOverLine
 - Rearranged Underline parameters to match LibreOffice UI.
+  > Previous order:(_$bWordOnly_, $iUnderLineStyle, $iULColor)
+  >
+  > New order:($iUnderLineStyle, $iULColor, _$bWordOnly_)
   - __LOWriter_CharUnderLine
   - _LOWriter_CharStyleUnderLine
   - _LOWriter_DirFrmtUnderLine
   - _LOWriter_FindFormatModifyUnderline
   - _LOWriter_ParStyleUnderLine
 - Rearranged Overline parameters to match LibreOffice UI.
+  > Previous order:(_$bWordOnly_, $iOverLineStyle, $iOLColor)
+  >
+  > New order:($iOverLineStyle, $iOLColor, _$bWordOnly_)
   - __LOWriter_CharOverLine
   - _LOWriter_CharStyleOverLine
   - _LOWriter_DirFrmtOverLine
   - _LOWriter_FindFormatModifyOverline
   - _LOWriter_ParStyleOverLine
+- Rearranged `_LOWriter_FindFormatModifyFont` parameters to match `_LOWriter_CharStyleFont` order.
+  > Previous order:($atFormat, $sFontName, $iFontSize, _$iFontWeight_, _$iFontPosture_, $iFontColor, $iTransparency, $iHighlight)
+  >
+  > New order:($atFormat, $sFontName, $iFontSize, _$iFontPosture_, _$iFontWeight_, $iFontColor, $iTransparency, $iHighlight)
 
 #### Documented
 
