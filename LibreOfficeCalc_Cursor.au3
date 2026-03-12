@@ -665,21 +665,20 @@ EndFunc   ;==>_LOCalc_TextCursorIsCollapsed
 ; Description ...: Move a Text Cursor object in a document. Also for creating/Expanding selections.
 ; Syntax ........: _LOCalc_TextCursorMove(ByRef $oCursor, $iMove[, $iCount = 1[, $bSelect = False]])
 ; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions.
-;                  $iMove               - an integer value. The movement command. See remarks and Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iMove               - an integer value (0-5). The movement command. See remarks and Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iCount              - [optional] an integer value. Default is 1. Number of movements to make. See remarks.
 ;                  $bSelect             - [optional] a boolean value. Default is False. Whether to select data during this cursor movement. See remarks.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iMove less than 0 or greater than highest move Constant. See Move Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iCount not an Integer or is a negative.
-;                  @Error 1 @Extended 5 Return 0 = $bSelect not a Boolean.
+;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer, less than 0 or greater than 5. See Move Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer or is a negative.
+;                  @Error 1 @Extended 4 Return 0 = $bSelect not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = Cursor called in $oCursor not a Text Cursor.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error determining cursor type.
 ;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
-;                  @Error 3 @Extended 3 Return 0 = $oCursor Object unknown cursor type.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. See Remarks
 ; Author ........: donnyh13
@@ -700,24 +699,57 @@ EndFunc   ;==>_LOCalc_TextCursorIsCollapsed
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOCalc_TextCursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
-	Local $iCursorType
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCursorType, $iCounted = 0
 	Local $bMoved = False
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iMove, $LOC_TEXTCUR_COLLAPSE_TO_START, $LOC_TEXTCUR_GOTO_END) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iCount, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bSelect) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$iCursorType = __LOCalc_Internal_CursorGetType($oCursor)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Switch $iCursorType
-		Case $LOC_CURTYPE_TEXT_CURSOR
-			$bMoved = __LOCalc_TextCursorMove($oCursor, $iMove, $iCount, $bSelect)
+	If ($iCursorType <> $LOC_CURTYPE_TEXT_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-			Return SetError(@error, @extended, $bMoved)
+	Switch $iMove
+		Case $LOC_TEXTCUR_GO_LEFT
+			$bMoved = $oCursor.goLeft($iCount, $bSelect)
+			$iCounted = ($bMoved) ? ($iCount) : (0)
+
+		Case $LOC_TEXTCUR_GO_RIGHT
+			$bMoved = $oCursor.goRight($iCount, $bSelect)
+			$iCounted = ($bMoved) ? ($iCount) : (0)
+
+		Case $LOC_TEXTCUR_GOTO_START
+			$oCursor.gotoStart($bSelect)
+			$bMoved = (($oCursor.compareRegionStarts($oCursor.getStart(), $oCursor.Text.getStart()) = 0) ? (True) : (False))
+			$iCounted = ($bMoved) ? ($iCount) : (0)
+
+		Case $LOC_TEXTCUR_GOTO_END
+			$oCursor.gotoEnd($bSelect)
+			$bMoved = (($oCursor.compareRegionEnds($oCursor.getEnd(), $oCursor.Text.getEnd()) = 0) ? (True) : (False))
+			$iCounted = ($bMoved) ? ($iCount) : (0)
+
+		Case $LOC_TEXTCUR_COLLAPSE_TO_START
+			$oCursor.collapseToStart()
+			$bMoved = (($oCursor.compareRegionEnds($oCursor.getStart(), $oCursor.getEnd()) = 0) ? (True) : (False))
+			$iCounted = ($bMoved) ? ($iCount) : (0)
+
+		Case $LOC_TEXTCUR_COLLAPSE_TO_END
+			$oCursor.collapseToEnd()
+			$bMoved = (($oCursor.compareRegionStarts($oCursor.getStart(), $oCursor.getEnd()) = 0) ? (True) : (False))
+			$iCounted = ($bMoved) ? ($iCount) : (0)
 
 		Case Else
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; unknown or wrong cursor type.
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	EndSwitch
+
+	Return SetError($__LO_STATUS_SUCCESS, $iCounted, $bMoved)
 EndFunc   ;==>_LOCalc_TextCursorMove
 
 ; #FUNCTION# ====================================================================================================================

@@ -1053,6 +1053,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_PageStyleShadow
   - _LOCalc_PageStyleHeaderShadow
   - _LOCalc_PageStyleFooterShadow
+- Combined internal `__LOCalc_TextCursorMove` into `_LOCalc_TextCursorMove`, slightly modifying error values.
 
 #### Documented
 
@@ -1077,6 +1078,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Certain functions would have Property setting errors triggered if there were CR, LF or CRLF present in them:
   - _LOCalc_CellString
   - _LOCalc_CommentText
+- `_LOCalc_TextCursorMove` wouldn't return a Boolean when using `$LOC_TEXTCUR_GOTO_START`, `$LOC_TEXTCUR_COLLAPSE_TO_END` etc.
 
 #### Refactored
 
@@ -1128,6 +1130,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Individual component Printer name retrieval functions:
   - _LOCalc_DocPrintersGetNames
   - _LOCalc_DocPrintersAltGetNames
+- __LOCalc_TextCursorMove
 
 ### LibreOfficeWriter
 
