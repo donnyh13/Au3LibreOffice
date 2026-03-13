@@ -590,7 +590,7 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ;                  $iLevel              - an integer value (0-10). The Numbering Level to modify; enter 0 to modify all of them.
 ;                  $iAlignedAt          - [optional] an integer value. Default is Null. Specifies the first line indent. Set in Hundredths of a Millimeter (HMM).
 ;                  $iNumAlign           - [optional] an integer value (1-3). Default is Null. The alignment of the numbering symbols, in comparison to the "Aligned at" position. See Constants. $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iFollowedBy         - [optional] an integer value (0-2). Default is Null. Select the element that will follow the numbering: a tab stop, a space, or nothing; See Constants, $LOW_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iFollowedBy         - [optional] an integer value (0-2). Default is Null. Select the element that will follow the numbering: a tab stop, a space, or nothing; See Constants, $LOW_NUM_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iTabstop            - [optional] an integer value. Default is Null. If you select a tab stop to follow the numbering, you can enter a positive value as the tab stop position. Set in Hundredths of a Millimeter (HMM).
 ;                  $iIndent             - [optional] an integer value. Default is Null. Enter the distance from the left page margin to the start of all lines in the numbered paragraph that follow the first line. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
@@ -602,7 +602,7 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ;                  @Error 1 @Extended 4 Return 0 = $iLevel not between 0 - 10.
 ;                  @Error 1 @Extended 5 Return 0 = $iAlignedAt not an Integer.
 ;                  @Error 1 @Extended 6 Return 0 = $iNumAlign not an Integer, less than 1 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $iFollowedBy not an Integer, less than 0 or greater than 2. See Constants, $LOW_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 Return 0 = $iFollowedBy not an Integer, less than 0 or greater than 2. See Constants, $LOW_NUM_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 8 Return 0 = $iTabstop not an Integer.
 ;                  @Error 1 @Extended 9 Return 0 = $iIndent not an Integer.
 ;                  --Initialization Errors--
@@ -691,7 +691,7 @@ Func _LOWriter_NumStylePosition(ByRef $oDoc, $oNumStyle, $iLevel, $iAlignedAt = 
 		EndIf
 
 		If ($iFollowedBy <> Null) Then
-			If Not __LO_IntIsBetween($iFollowedBy, $LOW_FOLLOW_BY_TABSTOP, $LOW_FOLLOW_BY_NEWLINE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+			If Not __LO_IntIsBetween($iFollowedBy, $LOW_NUM_FOLLOW_BY_TABSTOP, $LOW_NUM_FOLLOW_BY_NEWLINE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 			$atNumLevel[$mNumLevel["LabelFollowedBy"]].Value = $iFollowedBy
 		EndIf

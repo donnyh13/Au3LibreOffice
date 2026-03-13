@@ -359,13 +359,6 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_FIELD_USER_DATA_EMAIL = 13, _                      ; The field shows the e-Mail.
 		$LOW_FIELD_USER_DATA_STATE = 14                         ; The field shows the state.
 
-; Follow By
-Global Const _                                                  ; com.sun.star.text.LabelFollow
-		$LOW_FOLLOW_BY_TABSTOP = 0, _                           ; A Tab will follow the Numbering Style Number.
-		$LOW_FOLLOW_BY_SPACE = 1, _                             ; A Space will follow the Numbering Style Number.
-		$LOW_FOLLOW_BY_NOTHING = 2, _                           ; Nothing will follow the Numbering Style Number.
-		$LOW_FOLLOW_BY_NEWLINE = 3                              ; A Newline will follow the Numbering Style Number.
-
 ; Form Content Type.
 Global Const _                                                  ; com.sun.star.sdb.CommandType
 		$LOW_FORM_CONTENT_TYPE_TABLE = 0, _                     ; The Data source is a Table.
@@ -591,6 +584,13 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_LINE_STYLE_DOTTED = 2, _                           ; A dotted line.
 		$LOW_LINE_STYLE_DASHED = 3                              ; A Dashed line.
 
+; Follow By
+Global Const _                                                  ; com.sun.star.text.LabelFollow
+		$LOW_NUM_FOLLOW_BY_TABSTOP = 0, _                           ; A Tab will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_SPACE = 1, _                             ; A Space will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_NOTHING = 2, _                           ; Nothing will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_NEWLINE = 3                              ; A Newline will follow the Numbering Style Number.
+
 ; Numbering Style Type
 Global Const _                                                  ; com.sun.star.style.NumberingType
 		$LOW_NUM_STYLE_CHARS_UPPER_LETTER = 0, _                ; Numbering is put in upper case letters. ("A, B, C, D)
@@ -687,20 +687,6 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_ORIENT_VERT_LINE_TOP = 7, _                        ; Aligned at the top of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Top, and "To" = Row.
 		$LOW_ORIENT_VERT_LINE_CENTER = 8, _                     ; Aligned at the center of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 		$LOW_ORIENT_VERT_LINE_BOTTOM = 9                        ; Aligned at the bottom of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
-
-; Outline
-Global Const _
-		$LOW_OUTLINE_BODY = 0, _                                ; The paragraph belongs to the body text.
-		$LOW_OUTLINE_LEVEL_1 = 1, _                             ; The paragraph belongs to the level 1 outline level.
-		$LOW_OUTLINE_LEVEL_2 = 2, _                             ; The paragraph belongs to the level 2 outline level.
-		$LOW_OUTLINE_LEVEL_3 = 3, _                             ; The paragraph belongs to the level 3 outline level.
-		$LOW_OUTLINE_LEVEL_4 = 4, _                             ; The paragraph belongs to the level 4 outline level.
-		$LOW_OUTLINE_LEVEL_5 = 5, _                             ; The paragraph belongs to the level 5 outline level.
-		$LOW_OUTLINE_LEVEL_6 = 6, _                             ; The paragraph belongs to the level 6 outline level.
-		$LOW_OUTLINE_LEVEL_7 = 7, _                             ; The paragraph belongs to the level 7 outline level.
-		$LOW_OUTLINE_LEVEL_8 = 8, _                             ; The paragraph belongs to the level 8 outline level.
-		$LOW_OUTLINE_LEVEL_9 = 9, _                             ; The paragraph belongs to the level 9 outline level.
-		$LOW_OUTLINE_LEVEL_10 = 10                              ; The paragraph belongs to the level 10 outline level.
 
 ; Page Layout
 Global Const _                                                  ; com.sun.star.style.PageStyleLayout
@@ -825,6 +811,20 @@ Global Const _                                                  ; com.sun.star.s
 		$LOW_PAR_LINE_SPC_MODE_LEADING = 2, _                       ; Specifies the height value as the distance to the previous line. Min 0, Max 10008 Hundredths of a Millimeter (HMM).
 		$LOW_PAR_LINE_SPC_MODE_FIX = 3                              ; Specifies the height value as a fixed line height. Min 51, Max 10008 Hundredths of a Millimeter (HMM).
 
+; Outline
+Global Const _
+		$LOW_PAR_OUTLINE_BODY = 0, _                                ; The paragraph belongs to the body text.
+		$LOW_PAR_OUTLINE_LEVEL_1 = 1, _                             ; The paragraph belongs to the level 1 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_2 = 2, _                             ; The paragraph belongs to the level 2 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_3 = 3, _                             ; The paragraph belongs to the level 3 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_4 = 4, _                             ; The paragraph belongs to the level 4 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_5 = 5, _                             ; The paragraph belongs to the level 5 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_6 = 6, _                             ; The paragraph belongs to the level 6 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_7 = 7, _                             ; The paragraph belongs to the level 7 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_8 = 8, _                             ; The paragraph belongs to the level 8 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_9 = 9, _                             ; The paragraph belongs to the level 9 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_10 = 10                              ; The paragraph belongs to the level 10 outline level.
+
 ; Tab Alignment
 Global Const _                                                  ; com.sun.star.style.TabAlign
 		$LOW_PAR_TAB_ALIGN_LEFT = 0, _                              ; Aligns the left edge of the text to the tab stop and extends the text to the right.
@@ -832,6 +832,13 @@ Global Const _                                                  ; com.sun.star.s
 		$LOW_PAR_TAB_ALIGN_RIGHT = 2, _                             ; Aligns the right edge of the text to the tab stop and extends the text to the left of the tab stop.
 		$LOW_PAR_TAB_ALIGN_DECIMAL = 3, _                           ; Aligns the decimal separator of a number to the center of the tab stop and text to the left of the tab.
 		$LOW_PAR_TAB_ALIGN_DEFAULT = 4                              ; This setting is the default setting when no TabStops are present. Setting any Tabstop to this constant will make it disappear from the TabStop list. It is therefore only listed here for property reading purposes.
+
+; Text Adjust
+Global Const _                                                  ; com.sun.star.drawing.TextVerticalAdjust
+		$LOW_PAR_TXT_ADJ_VERT_TOP = 0, _                            ; The top edge of the text is adjusted to the top edge of the object.
+		$LOW_PAR_TXT_ADJ_VERT_CENTER = 1, _                         ; The text is centered inside the object.
+		$LOW_PAR_TXT_ADJ_VERT_BOTTOM = 2, _                         ; The bottom edge of the text is adjusted to the bottom edge of the object.
+		$LOW_PAR_TXT_ADJ_VERT_BLOCK = 3                             ;
 
 ; Text Direction
 Global Const _                                                  ; com.sun.star.text.WritingMode2
@@ -1120,13 +1127,6 @@ Global Enum _
 		$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH, _                     ; Move to the End of the previous paragraph.
 		$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, _                   ; Move to the end of the current paragraph.
 		$LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH                    ; Move to the start of the current paragraph.
-
-; Text Adjust
-Global Const _                                                  ; com.sun.star.drawing.TextVerticalAdjust
-		$LOW_TXT_ADJ_VERT_TOP = 0, _                            ; The top edge of the text is adjusted to the top edge of the object.
-		$LOW_TXT_ADJ_VERT_CENTER = 1, _                         ; The text is centered inside the object.
-		$LOW_TXT_ADJ_VERT_BOTTOM = 2, _                         ; The bottom edge of the text is adjusted to the bottom edge of the object.
-		$LOW_TXT_ADJ_VERT_BLOCK = 3                             ;
 
 ; LO ViewCursor Movement Constants.
 Global Enum _

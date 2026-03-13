@@ -1863,7 +1863,7 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ;                  $bProtectContent     - [optional] a boolean value. Default is Null. If True, Prevents changes to the contents of the frame.
 ;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, Locks the position of the frame in the current document.
 ;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the frame.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEditInRead         - [optional] a boolean value. Default is Null. If True, Allows you to edit the contents of a frame in a document that is read-only.
 ;                  $bPrint              - [optional] a boolean value. Default is Null. If True, Includes the frame when you print the document.
 ;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1874,7 +1874,7 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ;                  @Error 1 @Extended 2 Return 0 = $bProtectContent not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $bProtectPos not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bProtectSize not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bEditInRead not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bPrint not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1936,7 +1936,7 @@ Func _LOWriter_FrameOptions(ByRef $oFrame, $bProtectContent = Null, $bProtectPos
 	EndIf
 
 	If ($iVertAlign <> Null) Then
-		If Not __LO_IntIsBetween($iVertAlign, $LOW_TXT_ADJ_VERT_TOP, $LOW_TXT_ADJ_VERT_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iVertAlign, $LOW_PAR_TXT_ADJ_VERT_TOP, $LOW_PAR_TXT_ADJ_VERT_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oFrame.TextVerticalAdjust = $iVertAlign
 		$iError = ($oFrame.TextVerticalAdjust() = $iVertAlign) ? ($iError) : (BitOR($iError, 8))
@@ -3857,7 +3857,7 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObj
 ;                  $bProtectContent     - [optional] a boolean value. Default is Null. If True, Prevents changes to the contents of the frame.
 ;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, Locks the position of the frame in the current document.
 ;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the frame.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEditInRead         - [optional] a boolean value. Default is Null. If True, Allows you to edit the contents of a frame in a document that is read-only.
 ;                  $bPrint              - [optional] a boolean value. Default is Null. If True, Includes the Frame when you print the document.
 ;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
@@ -3869,7 +3869,7 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObj
 ;                  @Error 1 @Extended 3 Return 0 = $bProtectContent not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bProtectPos not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $bProtectSize not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $bEditInRead not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bPrint not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
@@ -3932,7 +3932,7 @@ Func _LOWriter_FrameStyleOptions(ByRef $oFrameStyle, $bProtectContent = Null, $b
 	EndIf
 
 	If ($iVertAlign <> Null) Then
-		If Not __LO_IntIsBetween($iVertAlign, $LOW_TXT_ADJ_VERT_TOP, $LOW_TXT_ADJ_VERT_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iVertAlign, $LOW_PAR_TXT_ADJ_VERT_TOP, $LOW_PAR_TXT_ADJ_VERT_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oFrameStyle.TextVerticalAdjust = $iVertAlign
 		$iError = ($oFrameStyle.TextVerticalAdjust() = $iVertAlign) ? ($iError) : (BitOR($iError, 8))
