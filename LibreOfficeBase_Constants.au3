@@ -31,11 +31,71 @@ Global Const _                                                                  
 
 ; Case Constants
 Global Const _                                                                           ; com.sun.star.style.CaseMap
-		$LOB_CASEMAP_NONE = 0, _                                                         ; The case of the characters is unchanged.
-		$LOB_CASEMAP_UPPER = 1, _                                                        ; All characters are put in upper case.
-		$LOB_CASEMAP_LOWER = 2, _                                                        ; All characters are put in lower case.
-		$LOB_CASEMAP_TITLE = 3, _                                                        ; The first character of each word is put in upper case.
-		$LOB_CASEMAP_SM_CAPS = 4                                                         ; All characters are put in upper case, but with a smaller font height.
+		$LOB_CHAR_CASEMAP_NONE = 0, _                                                         ; The case of the characters is unchanged.
+		$LOB_CHAR_CASEMAP_UPPER = 1, _                                                        ; All characters are put in upper case.
+		$LOB_CHAR_CASEMAP_LOWER = 2, _                                                        ; All characters are put in lower case.
+		$LOB_CHAR_CASEMAP_TITLE = 3, _                                                        ; The first character of each word is put in upper case.
+		$LOB_CHAR_CASEMAP_SM_CAPS = 4                                                         ; All characters are put in upper case, but with a smaller font height.
+
+; Posture/Italic
+Global Const _                                                                           ; com.sun.star.awt.FontSlant
+		$LOB_CHAR_POSTURE_NONE = 0, _                                                         ; Specifies a font without slant.
+		$LOB_CHAR_POSTURE_OBLIQUE = 1, _                                                      ; Specifies an oblique font (slant not designed into the font).
+		$LOB_CHAR_POSTURE_ITALIC = 2, _                                                       ; Specifies an italic font (slant designed into the font).
+		$LOB_CHAR_POSTURE_DONTKNOW = 3, _                                                     ; Specifies a font with an unknown slant. For Read Only.
+		$LOB_CHAR_POSTURE_REV_OBLIQUE = 4, _                                                  ; Specifies a reverse oblique font (slant not designed into the font).
+		$LOB_CHAR_POSTURE_REV_ITALIC = 5                                                      ; Specifies a reverse italic font (slant designed into the font).
+
+; Relief
+Global Const _                                                                           ; com.sun.star.text.FontRelief
+		$LOB_CHAR_RELIEF_NONE = 0, _                                                          ; No relief is applied.
+		$LOB_CHAR_RELIEF_EMBOSSED = 1, _                                                      ; The font relief is embossed.
+		$LOB_CHAR_RELIEF_ENGRAVED = 2                                                         ; The font relief is engraved.
+
+; Strikeout
+Global Const _                                                                           ; com.sun.star.awt.FontStrikeout
+		$LOB_CHAR_STRIKEOUT_NONE = 0, _                                                       ; No strike out.
+		$LOB_CHAR_STRIKEOUT_SINGLE = 1, _                                                     ; Strike out the characters with a single line.
+		$LOB_CHAR_STRIKEOUT_DOUBLE = 2, _                                                     ; Strike out the characters with a double line.
+		$LOB_CHAR_STRIKEOUT_DONT_KNOW = 3, _                                                  ; The strikeout mode is not specified. For Read Only.
+		$LOB_CHAR_STRIKEOUT_BOLD = 4, _                                                       ; Strike out the characters with a bold line.
+		$LOB_CHAR_STRIKEOUT_SLASH = 5, _                                                      ; Strike out the characters with slashes.
+		$LOB_CHAR_STRIKEOUT_X = 6                                                             ; Strike out the characters with X's.
+
+; Underline/Overline
+Global Const _                                                                           ; com.sun.star.awt.FontUnderline
+		$LOB_CHAR_UNDERLINE_NONE = 0, _                                                       ; No Underline or Overline style.
+		$LOB_CHAR_UNDERLINE_SINGLE = 1, _                                                     ; Single line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_DOUBLE = 2, _                                                     ; Double line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_DOTTED = 3, _                                                     ; Dotted line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_DONT_KNOW = 4, _                                                  ; Unknown Underline/Overline style, for read only.
+		$LOB_CHAR_UNDERLINE_DASH = 5, _                                                       ; Dashed line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_LONG_DASH = 6, _                                                  ; Long Dashed line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_DASH_DOT = 7, _                                                   ; Dash Dot line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_DASH_DOT_DOT = 8, _                                               ; Dash Dot Dot line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_SML_WAVE = 9, _                                                   ; Small Wave line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_WAVE = 10, _                                                      ; Wave line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_DBL_WAVE = 11, _                                                  ; Double Wave line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_BOLD = 12, _                                                      ; Bold line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_BOLD_DOTTED = 13, _                                               ; Bold Dotted line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_BOLD_DASH = 14, _                                                 ; Bold Dashed line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_BOLD_LONG_DASH = 15, _                                            ; Bold Long Dash line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_BOLD_DASH_DOT = 16, _                                             ; Bold Dash Dot line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _                                         ; Bold Dash Dot Dot line Underline/Overline style.
+		$LOB_CHAR_UNDERLINE_BOLD_WAVE = 18                                                    ; Bold Wave line Underline/Overline style.
+
+; Weight/Bold
+Global Const _                                                                           ; com.sun.star.awt.FontWeight
+		$LOB_CHAR_WEIGHT_DONT_KNOW = 0, _                                                     ; The font weight is not specified/unknown. For Read Only.
+		$LOB_CHAR_WEIGHT_THIN = 50, _                                                         ; A 50% (Thin) font weight.
+		$LOB_CHAR_WEIGHT_ULTRA_LIGHT = 60, _                                                  ; A 60% (Ultra Light) font weight.
+		$LOB_CHAR_WEIGHT_LIGHT = 75, _                                                        ; A 75% (Light) font weight.
+		$LOB_CHAR_WEIGHT_SEMI_LIGHT = 90, _                                                   ; A 90% (Semi-Light) font weight.
+		$LOB_CHAR_WEIGHT_NORMAL = 100, _                                                      ; A 100% (Normal) font weight.
+		$LOB_CHAR_WEIGHT_SEMI_BOLD = 110, _                                                   ; A 110% (Semi-Bold) font weight.
+		$LOB_CHAR_WEIGHT_BOLD = 150, _                                                        ; A 150% (Bold) font weight.
+		$LOB_CHAR_WEIGHT_ULTRA_BOLD = 175, _                                                  ; A 175% (Ultra-Bold) font weight.
+		$LOB_CHAR_WEIGHT_BLACK = 200                                                          ; A 200% (Black) font weight.
 
 ; Table Column Text Alignment
 Global Const _                                                                           ; com.sun.star.sdb.Align
@@ -292,21 +352,6 @@ Global Const _                                                                  
 		$LOB_FORMAT_KEYS_EMPTY = 4096, _                                                 ; Returns Empty Number formats (?)
 		$LOB_FORMAT_KEYS_DURATION = 8196                                                 ; Returns Duration number formats.
 
-; Posture/Italic
-Global Const _                                                                           ; com.sun.star.awt.FontSlant
-		$LOB_POSTURE_NONE = 0, _                                                         ; Specifies a font without slant.
-		$LOB_POSTURE_OBLIQUE = 1, _                                                      ; Specifies an oblique font (slant not designed into the font).
-		$LOB_POSTURE_ITALIC = 2, _                                                       ; Specifies an italic font (slant designed into the font).
-		$LOB_POSTURE_DONTKNOW = 3, _                                                     ; Specifies a font with an unknown slant. For Read Only.
-		$LOB_POSTURE_REV_OBLIQUE = 4, _                                                  ; Specifies a reverse oblique font (slant not designed into the font).
-		$LOB_POSTURE_REV_ITALIC = 5                                                      ; Specifies a reverse italic font (slant designed into the font).
-
-; Relief
-Global Const _                                                                           ; com.sun.star.text.FontRelief
-		$LOB_RELIEF_NONE = 0, _                                                          ; No relief is applied.
-		$LOB_RELIEF_EMBOSSED = 1, _                                                      ; The font relief is embossed.
-		$LOB_RELIEF_ENGRAVED = 2                                                         ; The font relief is engraved.
-
 ; Report Control Image Scale.
 Global Const _                                                                           ; "com.sun.star.awt.ImageScaleMode"
 		$LOB_REP_CON_IMG_BTN_SCALE_NONE = 0, _                                           ; No scaling should happen at all.
@@ -481,16 +526,6 @@ Global Const _                                                                  
 		$LOB_RESULT_TYPE_SCROLL_INSENSITIVE = 1004, _                                    ; The Result Set is scrollable but generally not sensitive to changes made by others.
 		$LOB_RESULT_TYPE_SCROLL_SENSITIVE = 1005                                         ; The Result Set is scrollable and generally sensitive to changes made by others.
 
-; Strikeout
-Global Const _                                                                           ; com.sun.star.awt.FontStrikeout
-		$LOB_STRIKEOUT_NONE = 0, _                                                       ; No strike out.
-		$LOB_STRIKEOUT_SINGLE = 1, _                                                     ; Strike out the characters with a single line.
-		$LOB_STRIKEOUT_DOUBLE = 2, _                                                     ; Strike out the characters with a double line.
-		$LOB_STRIKEOUT_DONT_KNOW = 3, _                                                  ; The strikeout mode is not specified. For Read Only.
-		$LOB_STRIKEOUT_BOLD = 4, _                                                       ; Strike out the characters with a bold line.
-		$LOB_STRIKEOUT_SLASH = 5, _                                                      ; Strike out the characters with slashes.
-		$LOB_STRIKEOUT_X = 6                                                             ; Strike out the characters with X's.
-
 ; Database SubComponent type.
 Global Const _                                                                           ; com.sun.star.sdb.application.DatabaseObject
 		$LOB_SUB_COMP_TYPE_TABLE = 0, _                                                  ; A Database Table.
@@ -505,38 +540,3 @@ Global Const _                                                                  
 		$LOB_TXT_ALIGN_HORI_BLOCK = 2, _                                                 ; Text is adjusted to both borders / stretched, except for last line.
 		$LOB_TXT_ALIGN_HORI_CENTER = 3, _                                                ; Text is adjusted to the center.
 		$LOB_TXT_ALIGN_HORI_STRETCH = 4                                                  ; Text is adjusted to both borders / stretched, including last line.
-
-; Underline/Overline
-Global Const _                                                                           ; com.sun.star.awt.FontUnderline
-		$LOB_UNDERLINE_NONE = 0, _                                                       ; No Underline or Overline style.
-		$LOB_UNDERLINE_SINGLE = 1, _                                                     ; Single line Underline/Overline style.
-		$LOB_UNDERLINE_DOUBLE = 2, _                                                     ; Double line Underline/Overline style.
-		$LOB_UNDERLINE_DOTTED = 3, _                                                     ; Dotted line Underline/Overline style.
-		$LOB_UNDERLINE_DONT_KNOW = 4, _                                                  ; Unknown Underline/Overline style, for read only.
-		$LOB_UNDERLINE_DASH = 5, _                                                       ; Dashed line Underline/Overline style.
-		$LOB_UNDERLINE_LONG_DASH = 6, _                                                  ; Long Dashed line Underline/Overline style.
-		$LOB_UNDERLINE_DASH_DOT = 7, _                                                   ; Dash Dot line Underline/Overline style.
-		$LOB_UNDERLINE_DASH_DOT_DOT = 8, _                                               ; Dash Dot Dot line Underline/Overline style.
-		$LOB_UNDERLINE_SML_WAVE = 9, _                                                   ; Small Wave line Underline/Overline style.
-		$LOB_UNDERLINE_WAVE = 10, _                                                      ; Wave line Underline/Overline style.
-		$LOB_UNDERLINE_DBL_WAVE = 11, _                                                  ; Double Wave line Underline/Overline style.
-		$LOB_UNDERLINE_BOLD = 12, _                                                      ; Bold line Underline/Overline style.
-		$LOB_UNDERLINE_BOLD_DOTTED = 13, _                                               ; Bold Dotted line Underline/Overline style.
-		$LOB_UNDERLINE_BOLD_DASH = 14, _                                                 ; Bold Dashed line Underline/Overline style.
-		$LOB_UNDERLINE_BOLD_LONG_DASH = 15, _                                            ; Bold Long Dash line Underline/Overline style.
-		$LOB_UNDERLINE_BOLD_DASH_DOT = 16, _                                             ; Bold Dash Dot line Underline/Overline style.
-		$LOB_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _                                         ; Bold Dash Dot Dot line Underline/Overline style.
-		$LOB_UNDERLINE_BOLD_WAVE = 18                                                    ; Bold Wave line Underline/Overline style.
-
-; Weight/Bold
-Global Const _                                                                           ; com.sun.star.awt.FontWeight
-		$LOB_WEIGHT_DONT_KNOW = 0, _                                                     ; The font weight is not specified/unknown. For Read Only.
-		$LOB_WEIGHT_THIN = 50, _                                                         ; A 50% (Thin) font weight.
-		$LOB_WEIGHT_ULTRA_LIGHT = 60, _                                                  ; A 60% (Ultra Light) font weight.
-		$LOB_WEIGHT_LIGHT = 75, _                                                        ; A 75% (Light) font weight.
-		$LOB_WEIGHT_SEMI_LIGHT = 90, _                                                   ; A 90% (Semi-Light) font weight.
-		$LOB_WEIGHT_NORMAL = 100, _                                                      ; A 100% (Normal) font weight.
-		$LOB_WEIGHT_SEMI_BOLD = 110, _                                                   ; A 110% (Semi-Bold) font weight.
-		$LOB_WEIGHT_BOLD = 150, _                                                        ; A 150% (Bold) font weight.
-		$LOB_WEIGHT_ULTRA_BOLD = 175, _                                                  ; A 175% (Ultra-Bold) font weight.
-		$LOB_WEIGHT_BLACK = 200                                                          ; A 200% (Black) font weight.

@@ -378,18 +378,18 @@ EndFunc   ;==>_LOBase_DateStructModify
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_FontDescCreate
 ; Description ...: Create a Font Descriptor Map.
-; Syntax ........: _LOBase_FontDescCreate([$sFontName = ""[, $iWeight = $LOB_WEIGHT_DONT_KNOW[, $iSlant = $LOB_POSTURE_DONTKNOW[, $nSize = 0[, $iColor = $LO_COLOR_OFF[, $iUnderlineStyle = $LOB_UNDERLINE_DONT_KNOW[, $iUnderlineColor = $LO_COLOR_OFF[, $iStrikelineStyle = $LOB_STRIKEOUT_DONT_KNOW[, $bIndividualWords = False[, $iRelief = $LOB_RELIEF_NONE[, $iCase = $LOB_CASEMAP_NONE[, $bHidden = False[, $bOutline = False[, $bShadow = False]]]]]]]]]]]]]])
+; Syntax ........: _LOBase_FontDescCreate([$sFontName = ""[, $iWeight = $LOB_CHAR_WEIGHT_DONT_KNOW[, $iSlant = $LOB_CHAR_POSTURE_DONTKNOW[, $nSize = 0[, $iColor = $LO_COLOR_OFF[, $iUnderlineStyle = $LOB_CHAR_UNDERLINE_DONT_KNOW[, $iUnderlineColor = $LO_COLOR_OFF[, $iStrikelineStyle = $LOB_CHAR_STRIKEOUT_DONT_KNOW[, $bIndividualWords = False[, $iRelief = $LOB_CHAR_RELIEF_NONE[, $iCase = $LOB_CHAR_CASEMAP_NONE[, $bHidden = False[, $bOutline = False[, $bShadow = False]]]]]]]]]]]]]])
 ; Parameters ....: $sFontName           - [optional] a string value. Default is "". The Font name.
-;                  $iWeight             - [optional] an integer value (0-200). Default is $LOB_WEIGHT_DONT_KNOW. The Font weight. See Constants $LOB_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iSlant              - [optional] an integer value (0-5). Default is $LOB_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOB_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iWeight             - [optional] an integer value (0-200). Default is $LOB_CHAR_WEIGHT_DONT_KNOW. The Font weight. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iSlant              - [optional] an integer value (0-5). Default is $LOB_CHAR_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $nSize               - [optional] a general number value. Default is 0. The Font size.
 ;                  $iColor              - [optional] an integer value (-1-16777215). Default is $LO_COLOR_OFF. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is $LOB_UNDERLINE_DONT_KNOW. The Font underline Style. See Constants $LOB_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is $LOB_CHAR_UNDERLINE_DONT_KNOW. The Font underline Style. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iUnderlineColor     - [optional] an integer value (-1-16777215). Default is $LO_COLOR_OFF. The Font Underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is $LOB_STRIKEOUT_DONT_KNOW. The Strikeout line style. See Constants $LOB_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is $LOB_CHAR_STRIKEOUT_DONT_KNOW. The Strikeout line style. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $bIndividualWords    - [optional] a boolean value. Default is False. If True, only individual words are underlined.
-;                  $iRelief             - [optional] an integer value (0-2). Default is $LOB_RELIEF_NONE. The Font relief style. See Constants $LOB_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iCase               - [optional] an integer value (0-4). Default is $LOB_CASEMAP_NONE. The Character Case Style. See Constants, $LOB_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iRelief             - [optional] an integer value (0-2). Default is $LOB_CHAR_RELIEF_NONE. The Font relief style. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iCase               - [optional] an integer value (0-4). Default is $LOB_CHAR_CASEMAP_NONE. The Character Case Style. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Characters are hidden.
 ;                  $bOutline            - [optional] a boolean value. Default is False. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is False. If True, the characters have a shadow.
@@ -398,16 +398,16 @@ EndFunc   ;==>_LOBase_DateStructModify
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 2 Return 0 = Font called in $sFontName not found.
-;                  @Error 1 @Extended 3 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOB_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOB_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $nSize not a number.
 ;                  @Error 1 @Extended 6 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 7 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOB_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 7 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 8 Return 0 = $iUnderlineColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 9 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOB_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 9 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 10 Return 0 = $bIndividualWords not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOB_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 12 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOB_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 11 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 12 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 13 Return 0 = $bHidden not a Boolean.
 ;                  @Error 1 @Extended 14 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 15 Return 0 = $bShadow not a Boolean.
@@ -420,7 +420,7 @@ EndFunc   ;==>_LOBase_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOBase_FontDescCreate($sFontName = "", $iWeight = $LOB_WEIGHT_DONT_KNOW, $iSlant = $LOB_POSTURE_DONTKNOW, $nSize = 0, $iColor = $LO_COLOR_OFF, $iUnderlineStyle = $LOB_UNDERLINE_DONT_KNOW, $iUnderlineColor = $LO_COLOR_OFF, $iStrikelineStyle = $LOB_STRIKEOUT_DONT_KNOW, $bIndividualWords = False, $iRelief = $LOB_RELIEF_NONE, $iCase = $LOB_CASEMAP_NONE, $bHidden = False, $bOutline = False, $bShadow = False)
+Func _LOBase_FontDescCreate($sFontName = "", $iWeight = $LOB_CHAR_WEIGHT_DONT_KNOW, $iSlant = $LOB_CHAR_POSTURE_DONTKNOW, $nSize = 0, $iColor = $LO_COLOR_OFF, $iUnderlineStyle = $LOB_CHAR_UNDERLINE_DONT_KNOW, $iUnderlineColor = $LO_COLOR_OFF, $iStrikelineStyle = $LOB_CHAR_STRIKEOUT_DONT_KNOW, $bIndividualWords = False, $iRelief = $LOB_CHAR_RELIEF_NONE, $iCase = $LOB_CHAR_CASEMAP_NONE, $bHidden = False, $bOutline = False, $bShadow = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -428,16 +428,16 @@ Func _LOBase_FontDescCreate($sFontName = "", $iWeight = $LOB_WEIGHT_DONT_KNOW, $
 
 	If Not IsString($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not _LOBase_FontExists($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iWeight, $LOB_WEIGHT_DONT_KNOW, $LOB_WEIGHT_BLACK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_IntIsBetween($iSlant, $LOB_POSTURE_NONE, $LOB_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iWeight, $LOB_CHAR_WEIGHT_DONT_KNOW, $LOB_CHAR_WEIGHT_BLACK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_IntIsBetween($iSlant, $LOB_CHAR_POSTURE_NONE, $LOB_CHAR_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsNumber($nSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not __LO_IntIsBetween($iUnderlineStyle, $LOB_UNDERLINE_NONE, $LOB_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If Not __LO_IntIsBetween($iUnderlineStyle, $LOB_CHAR_UNDERLINE_NONE, $LOB_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 	If Not __LO_IntIsBetween($iUnderlineColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-	If Not __LO_IntIsBetween($iStrikelineStyle, $LOB_STRIKEOUT_NONE, $LOB_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+	If Not __LO_IntIsBetween($iStrikelineStyle, $LOB_CHAR_STRIKEOUT_NONE, $LOB_CHAR_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 	If Not IsBool($bIndividualWords) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
-	If Not __LO_IntIsBetween($iRelief, $LOB_RELIEF_NONE, $LOB_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
-	If Not __LO_IntIsBetween($iCase, $LOB_CASEMAP_NONE, $LOB_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
+	If Not __LO_IntIsBetween($iRelief, $LOB_CHAR_RELIEF_NONE, $LOB_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
+	If Not __LO_IntIsBetween($iCase, $LOB_CHAR_CASEMAP_NONE, $LOB_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
 	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 13, 0)
 	If Not IsBool($bOutline) Then Return SetError($__LO_STATUS_INPUT_ERROR, 14, 0)
 	If Not IsBool($bShadow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 15, 0)
@@ -466,16 +466,16 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ; Syntax ........: _LOBase_FontDescEdit(ByRef $mFontDesc[, $sFontName = Null[, $iWeight = Null[, $iSlant = Null[, $nSize = Null[, $iColor = Null[, $iUnderlineStyle = Null[, $iUnderlineColor = Null[, $iStrikelineStyle = Null[, $bIndividualWords = Null[, $iRelief = Null[, $iCase = Null[, $bHidden = Null[, $bOutline = Null[, $bShadow = Null]]]]]]]]]]]]]])
 ; Parameters ....: $mFontDesc           - [in/out] a map. A Font descriptor Map as returned from a _LOBase_FontDescCreate, or control property return function.
 ;                  $sFontName           - [optional] a string value. Default is Null. The Font name.
-;                  $iWeight             - [optional] an integer value (0-200). Default is Null. The Font weight. See Constants $LOB_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iSlant              - [optional] an integer value (0-5). Default is Null. The Font italic setting. See Constants $LOB_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iWeight             - [optional] an integer value (0-200). Default is Null. The Font weight. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iSlant              - [optional] an integer value (0-5). Default is Null. The Font italic setting. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $nSize               - [optional] a general number value. Default is Null. The Font size.
 ;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is Null. The Font underline Style. See Constants $LOB_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is Null. The Font underline Style. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iUnderlineColor     - [optional] an integer value (-1-16777215). Default is Null.
-;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout line style. See Constants $LOB_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout line style. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $bIndividualWords    - [optional] a boolean value. Default is Null. If True, only individual words are underlined.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Font relief style. See Constants $LOB_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOB_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Font relief style. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the Characters are hidden.
 ;                  $bOutline            - [optional] a boolean value. Default is False. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is False. If True, the characters have a shadow.
@@ -485,16 +485,16 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ;                  @Error 1 @Extended 1 Return 0 = $mFontDesc not a Map.
 ;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not found.
-;                  @Error 1 @Extended 4 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOB_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOB_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $nSize not a number.
 ;                  @Error 1 @Extended 7 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 8 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOB_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 8 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 9 Return 0 = $iUnderlineColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 10 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOB_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 10 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 11 Return 0 = $bIndividualWords not a Boolean.
-;                  @Error 1 @Extended 12 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOB_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 13 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOB_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 12 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 13 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 14 Return 0 = $bHidden not a Boolean.
 ;                  @Error 1 @Extended 15 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 16 Return 0 = $bShadow not a Boolean.
@@ -533,13 +533,13 @@ Func _LOBase_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null, 
 	EndIf
 
 	If ($iWeight <> Null) Then
-		If Not __LO_IntIsBetween($iWeight, $LOB_WEIGHT_DONT_KNOW, $LOB_WEIGHT_BLACK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iWeight, $LOB_CHAR_WEIGHT_DONT_KNOW, $LOB_CHAR_WEIGHT_BLACK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$mFontDesc.CharWeight = $iWeight
 	EndIf
 
 	If ($iSlant <> Null) Then
-		If Not __LO_IntIsBetween($iSlant, $LOB_POSTURE_NONE, $LOB_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iSlant, $LOB_CHAR_POSTURE_NONE, $LOB_CHAR_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$mFontDesc.CharPosture = $iSlant
 	EndIf
@@ -557,7 +557,7 @@ Func _LOBase_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null, 
 	EndIf
 
 	If ($iUnderlineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iUnderlineStyle, $LOB_UNDERLINE_NONE, $LOB_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not __LO_IntIsBetween($iUnderlineStyle, $LOB_CHAR_UNDERLINE_NONE, $LOB_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$mFontDesc.CharUnderline = $iUnderlineStyle
 	EndIf
@@ -569,7 +569,7 @@ Func _LOBase_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null, 
 	EndIf
 
 	If ($iStrikelineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iStrikelineStyle, $LOB_STRIKEOUT_NONE, $LOB_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
+		If Not __LO_IntIsBetween($iStrikelineStyle, $LOB_CHAR_STRIKEOUT_NONE, $LOB_CHAR_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 
 		$mFontDesc.CharStrikeout = $iStrikelineStyle
 	EndIf
@@ -581,13 +581,13 @@ Func _LOBase_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null, 
 	EndIf
 
 	If ($iRelief <> Null) Then
-		If Not __LO_IntIsBetween($iRelief, $LOB_RELIEF_NONE, $LOB_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
+		If Not __LO_IntIsBetween($iRelief, $LOB_CHAR_RELIEF_NONE, $LOB_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
 
 		$mFontDesc.CharRelief = $iRelief
 	EndIf
 
 	If ($iCase <> Null) Then
-		If Not __LO_IntIsBetween($iCase, $LOB_CASEMAP_NONE, $LOB_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 13, 0)
+		If Not __LO_IntIsBetween($iCase, $LOB_CHAR_CASEMAP_NONE, $LOB_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 13, 0)
 
 		$mFontDesc.CharCaseMap = $iCase
 	EndIf
@@ -714,8 +714,8 @@ EndFunc   ;==>_LOBase_FontExists
 ;                  The returned array will be as follows:
 ;                  The first column (Array[1][0]) contains the Font Name.
 ;                  The Second column (Array [1][1] contains the style name (Such as Bold Italic etc.)
-;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOB_WEIGHT_* as defined in LibreOfficeBase_Constants.au3;
-;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOB_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
+;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3;
+;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

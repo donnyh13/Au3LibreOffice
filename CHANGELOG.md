@@ -365,6 +365,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Fix inconsistent Initialization and Processing error usage:
   - _LOBase_DocClose
   - _LOBase_DocSaveAs
+- Renamed Text related constants to group them together.
+  - `$LOB_CASEMAP_` --> `$LOB_CHAR_CASEMAP_`
+  - `$LOB_POSTURE_` --> `$LOB_CHAR_POSTURE_`
+  - `$LOB_RELIEF_` --> `$LOB_CHAR_RELIEF_`
+  - `$LOB_STRIKEOUT_` --> `$LOB_CHAR_STRIKEOUT_`
+  - `$LOB_UNDERLINE_` --> `$LOB_CHAR_UNDERLINE_`
+  - `$LOB_WEIGHT_` --> `$LOB_CHAR_WEIGHT_`
 
 #### Documented
 
