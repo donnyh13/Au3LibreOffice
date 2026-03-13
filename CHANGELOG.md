@@ -1109,6 +1109,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `$LOC_UNDERLINE_` --> `$LOC_CHAR_UNDERLINE_`
   - `$LOC_WEIGHT_` --> `$LOC_CHAR_WEIGHT_`
   - `$LOC_TXT_DIR_` --> `$LOC_PAR_TXT_DIR_`
+- Renamed various constants to be more logical and for better grouping.
+  - `$LOC_BORDERSTYLE_` --> `$LOC_BORDER_STYLE_`
+  - `$LOC_BORDERWIDTH_` --> `$LOC_BORDER_WIDTH_`
+  - `$LOC_DUPLEX_` --> `$LOC_PRINT_DUPLEX_`
+  - `$LOC_SHADOW_` --> `$LOC_SHADOW_LOCATION_`
 
 #### Documented
 

@@ -33,34 +33,34 @@ Global Enum _                                                   ; com.sun.star.d
 
 ; Border Style
 Global Const _                                                  ; com.sun.star.table.BorderLineStyle
-		$LOC_BORDERSTYLE_NONE = 0x7FFF, _                       ; No border line.
-		$LOC_BORDERSTYLE_SOLID = 0, _                           ; Solid border line.
-		$LOC_BORDERSTYLE_DOTTED = 1, _                          ; Dotted border line.
-		$LOC_BORDERSTYLE_DASHED = 2, _                          ; Dashed border line.
-		$LOC_BORDERSTYLE_DOUBLE = 3, _                          ; Double border line.
-		$LOC_BORDERSTYLE_THINTHICK_SMALLGAP = 4, _              ; Double border line with a thin line outside and a thick line inside separated by a small gap.
-		$LOC_BORDERSTYLE_THINTHICK_MEDIUMGAP = 5, _             ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
-		$LOC_BORDERSTYLE_THINTHICK_LARGEGAP = 6, _              ; Double border line with a thin line outside and a thick line inside separated by a large gap.
-		$LOC_BORDERSTYLE_THICKTHIN_SMALLGAP = 7, _              ; Double border line with a thick line outside and a thin line inside separated by a small gap.
-		$LOC_BORDERSTYLE_THICKTHIN_MEDIUMGAP = 8, _             ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
-		$LOC_BORDERSTYLE_THICKTHIN_LARGEGAP = 9, _              ; Double border line with a thick line outside and a thin line inside separated by a large gap.
-		$LOC_BORDERSTYLE_EMBOSSED = 10, _                       ; 3D embossed border line.
-		$LOC_BORDERSTYLE_ENGRAVED = 11, _                       ; 3D engraved border line.
-		$LOC_BORDERSTYLE_OUTSET = 12, _                         ; Outset border line.
-		$LOC_BORDERSTYLE_INSET = 13, _                          ; Inset border line.
-		$LOC_BORDERSTYLE_FINE_DASHED = 14, _                    ; Finely dashed border line.
-		$LOC_BORDERSTYLE_DOUBLE_THIN = 15, _                    ; Double border line consisting of two fixed thin lines separated by a variable gap.
-		$LOC_BORDERSTYLE_DASH_DOT = 16, _                       ; Line consisting of a repetition of one dash and one dot.
-		$LOC_BORDERSTYLE_DASH_DOT_DOT = 17                      ; Line consisting of a repetition of one dash and 2 dots.
+		$LOC_BORDER_STYLE_NONE = 0x7FFF, _                       ; No border line.
+		$LOC_BORDER_STYLE_SOLID = 0, _                           ; Solid border line.
+		$LOC_BORDER_STYLE_DOTTED = 1, _                          ; Dotted border line.
+		$LOC_BORDER_STYLE_DASHED = 2, _                          ; Dashed border line.
+		$LOC_BORDER_STYLE_DOUBLE = 3, _                          ; Double border line.
+		$LOC_BORDER_STYLE_THINTHICK_SMALLGAP = 4, _              ; Double border line with a thin line outside and a thick line inside separated by a small gap.
+		$LOC_BORDER_STYLE_THINTHICK_MEDIUMGAP = 5, _             ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
+		$LOC_BORDER_STYLE_THINTHICK_LARGEGAP = 6, _              ; Double border line with a thin line outside and a thick line inside separated by a large gap.
+		$LOC_BORDER_STYLE_THICKTHIN_SMALLGAP = 7, _              ; Double border line with a thick line outside and a thin line inside separated by a small gap.
+		$LOC_BORDER_STYLE_THICKTHIN_MEDIUMGAP = 8, _             ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
+		$LOC_BORDER_STYLE_THICKTHIN_LARGEGAP = 9, _              ; Double border line with a thick line outside and a thin line inside separated by a large gap.
+		$LOC_BORDER_STYLE_EMBOSSED = 10, _                       ; 3D embossed border line.
+		$LOC_BORDER_STYLE_ENGRAVED = 11, _                       ; 3D engraved border line.
+		$LOC_BORDER_STYLE_OUTSET = 12, _                         ; Outset border line.
+		$LOC_BORDER_STYLE_INSET = 13, _                          ; Inset border line.
+		$LOC_BORDER_STYLE_FINE_DASHED = 14, _                    ; Finely dashed border line.
+		$LOC_BORDER_STYLE_DOUBLE_THIN = 15, _                    ; Double border line consisting of two fixed thin lines separated by a variable gap.
+		$LOC_BORDER_STYLE_DASH_DOT = 16, _                       ; Line consisting of a repetition of one dash and one dot.
+		$LOC_BORDER_STYLE_DASH_DOT_DOT = 17                      ; Line consisting of a repetition of one dash and 2 dots.
 
 ; Border Width
 Global Const _
-		$LOC_BORDERWIDTH_HAIRLINE = 2, _                        ; Hairline Border line width.
-		$LOC_BORDERWIDTH_VERY_THIN = 18, _                      ; Very Thin Border line width.
-		$LOC_BORDERWIDTH_THIN = 26, _                           ; Thin Border line width.
-		$LOC_BORDERWIDTH_MEDIUM = 53, _                         ; Medium Border line width.
-		$LOC_BORDERWIDTH_THICK = 79, _                          ; Thick Border line width.
-		$LOC_BORDERWIDTH_EXTRA_THICK = 159                      ; Extra Thick Border line width.
+		$LOC_BORDER_WIDTH_HAIRLINE = 2, _                        ; Hairline Border line width.
+		$LOC_BORDER_WIDTH_VERY_THIN = 18, _                      ; Very Thin Border line width.
+		$LOC_BORDER_WIDTH_THIN = 26, _                           ; Thin Border line width.
+		$LOC_BORDER_WIDTH_MEDIUM = 53, _                         ; Medium Border line width.
+		$LOC_BORDER_WIDTH_THICK = 79, _                          ; Thick Border line width.
+		$LOC_BORDER_WIDTH_EXTRA_THICK = 159                      ; Extra Thick Border line width.
 
 ; Cell Content Horizontal Alignment
 Global Const _                                                  ; com.sun.star.table.CellHoriJustify
@@ -356,13 +356,6 @@ Global Const _
 		$LOC_CURTYPE_SHEET_CURSOR = 2, _                        ; Cursor is a Sheet Cursor type.
 		$LOC_CURTYPE_PARAGRAPH = 3, _                           ; Object is a Paragraph Object.
 		$LOC_CURTYPE_TEXT_PORTION = 4                           ; Object is a Paragraph Text Portion Object.
-
-; Printer Duplex Constants.
-Global Const _                                                  ; com.sun.star.view.DuplexMode
-		$LOC_DUPLEX_UNKNOWN = 0, _                              ; Duplex mode setting is unknown.
-		$LOC_DUPLEX_OFF = 1, _                                  ; Duplex mode is off.
-		$LOC_DUPLEX_LONG = 2, _                                 ; Duplex mode is on, flip on Long edge.
-		$LOC_DUPLEX_SHORT = 3                                   ; Duplex mode is on, flip on Short edge.
 
 ; Field Types
 Global Enum Step *2 _
@@ -667,6 +660,13 @@ Global Const _                                                  ; com.sun.star.s
 		$LOC_PIVOT_TBL_FIELD_TYPE_FILTER = 3, _                 ; The field is used as a filter field. Also called "Page" in the constants.
 		$LOC_PIVOT_TBL_FIELD_TYPE_DATA = 4                      ; The field is used as a data field.
 
+; Printer Duplex Constants.
+Global Const _                                                  ; com.sun.star.view.DuplexMode
+		$LOC_PRINT_DUPLEX_UNKNOWN = 0, _                              ; Duplex mode setting is unknown.
+		$LOC_PRINT_DUPLEX_OFF = 1, _                                  ; Duplex mode is off.
+		$LOC_PRINT_DUPLEX_LONG = 2, _                                 ; Duplex mode is on, flip on Long edge.
+		$LOC_PRINT_DUPLEX_SHORT = 3                                   ; Duplex mode is on, flip on Short edge.
+
 ; Page Print Scale Mode
 Global Enum _
 		$LOC_SCALE_REDUCE_ENLARGE = 1, _                        ; Specifies a scaling factor to scale all printed pages.
@@ -681,11 +681,11 @@ Global Const _
 
 ; Shadow Location
 Global Const _                                                  ; com.sun.star.table.ShadowLocation
-		$LOC_SHADOW_NONE = 0, _                                 ; No shadow is applied.
-		$LOC_SHADOW_TOP_LEFT = 1, _                             ; Shadow is located along the upper and left sides.
-		$LOC_SHADOW_TOP_RIGHT = 2, _                            ; Shadow is located along the upper and right sides.
-		$LOC_SHADOW_BOTTOM_LEFT = 3, _                          ; Shadow is located along the lower and left sides.
-		$LOC_SHADOW_BOTTOM_RIGHT = 4                            ; Shadow is located along the lower and right sides.
+		$LOC_SHADOW_LOCATION_NONE = 0, _                                 ; No shadow is applied.
+		$LOC_SHADOW_LOCATION_TOP_LEFT = 1, _                             ; Shadow is located along the upper and left sides.
+		$LOC_SHADOW_LOCATION_TOP_RIGHT = 2, _                            ; Shadow is located along the upper and right sides.
+		$LOC_SHADOW_LOCATION_BOTTOM_LEFT = 3, _                          ; Shadow is located along the lower and left sides.
+		$LOC_SHADOW_LOCATION_BOTTOM_RIGHT = 4                            ; Shadow is located along the lower and right sides.
 
 ; Sheet Link Mode
 Global Const _                                                  ; com.sun.star.sheet.SheetLinkMode
