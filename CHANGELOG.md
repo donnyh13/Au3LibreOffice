@@ -122,7 +122,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - LibreOfficeBase_Table.au3
 - Constants
   - $LOB_ALIGN_VERT_*
-  - $LOB_CASEMAP_*
+  - $LOB_CHAR_CASEMAP_*
+  - $LOB_CHAR_POSTURE_*
+  - $LOB_CHAR_RELIEF_*
+  - $LOB_CHAR_STRIKEOUT_*
+  - $LOB_CHAR_UNDERLINE_*
+  - $LOB_CHAR_WEIGHT_*
   - $LOB_DATA_SET_TYPE_*
   - $LOB_DATA_TYPE_*
   - $LOB_DBASE_BEST_ROW_SCOPE_*
@@ -130,8 +135,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOB_DBASE_RESULT_SET_CONCURRENCY_*
   - $LOB_DBASE_TRANSACTION_ISOLATION_*
   - $LOB_FORMAT_KEYS_*
-  - $LOB_POSTURE_*
-  - $LOB_RELIEF_*
+  - $LOB_PAR_TXT_ALIGN_HORI_*
   - $LOB_REP_CON_IMG_BTN_SCALE_*
   - $LOB_REP_CON_LINE_*
   - $LOB_REP_CON_TYPE_*
@@ -151,11 +155,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOB_RESULT_ROW_READ_*
   - $LOB_RESULT_ROW_UPDATE_*
   - $LOB_RESULT_TYPE_*
-  - $LOB_STRIKEOUT_*
   - $LOB_SUB_COMP_TYPE_*
-  - $LOB_TXT_ALIGN_HORI_*
-  - $LOB_UNDERLINE_*
-  - $LOB_WEIGHT_*
 - Database functions
   - _LOBase_DatabaseAutoCommit
   - _LOBase_DatabaseCommit
@@ -821,8 +821,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_SheetVisible
 - Calc Constants
   - $__LOCCONST_FILL_STYLE_*
-  - $LOC_BORDERSTYLE_*
-  - $LOC_BORDERWIDTH_*
+  - $LOC_BORDER_STYLE_*
+  - $LOC_BORDER_WIDTH_*
   - $LOC_CELL_ALIGN_HORI_*
   - $LOC_CELL_ALIGN_VERT_*
   - $LOC_CELL_DELETE_MODE_*
@@ -830,6 +830,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOC_CELL_INSERT_MODE_*
   - $LOC_CELL_ROTATE_REF_*
   - $LOC_CELL_TYPE_*
+  - $LOC_CHAR_POSTURE_*
+  - $LOC_CHAR_RELIEF_*
+  - $LOC_CHAR_STRIKEOUT_*
+  - $LOC_CHAR_UNDERLINE_*
+  - $LOC_CHAR_WEIGHT_*
   - $LOC_COMMENT_ANCHOR_*
   - $LOC_COMMENT_ANIMATION_DIR_*
   - $LOC_COMMENT_ANIMATION_KIND_*
@@ -844,7 +849,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOC_COMMENT_SHADOW_*
   - $LOC_COMPUTE_FUNC_*
   - $LOC_CURTYPE_*
-  - $LOC_DUPLEX_*
   - $LOC_FIELD_TYPE_*
   - $LOC_FILL_DATE_MODE_*
   - $LOC_FILL_DIR_*
@@ -861,26 +865,22 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOC_PAGE_LAYOUT_*
   - $LOC_PAPER_HEIGHT_*
   - $LOC_PAPER_WIDTH_*
+  - $LOC_PAR_TXT_DIR_*
   - $LOC_PIVOT_TBL_FIELD_BASE_*
   - $LOC_PIVOT_TBL_FIELD_DISP_*
   - $LOC_PIVOT_TBL_FIELD_TYPE_*
-  - $LOC_POSTURE_*
-  - $LOC_RELIEF_*
+  - $LOC_PRINT_DUPLEX_*
   - $LOC_SCALE_*
   - $LOC_SEARCH_IN_*
-  - $LOC_SHADOW_*
+  - $LOC_SHADOW_LOCATION_*
   - $LOC_SHEET_LINK_MODE_*
   - $LOC_SHEETCUR_*
   - $LOC_SORT_DATA_TYPE_*
-  - $LOC_STRIKEOUT_*
   - $LOC_TEXTCUR_*
-  - $LOC_TXT_DIR_*
-  - $LOC_UNDERLINE_*
   - $LOC_VALIDATION_COND_*
   - $LOC_VALIDATION_ERROR_*
   - $LOC_VALIDATION_LIST_*
   - $LOC_VALIDATION_TYPE_*
-  - $LOC_WEIGHT_*
   - $LOC_ZOOMTYPE_*
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
 
