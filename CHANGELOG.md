@@ -1873,6 +1873,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `$LOW_TAB_ALIGN_` --> `$LOW_PAR_TAB_ALIGN_`
   - `$LOW_TXT_ADJ_VERT_` --> `$LOW_PAR_TXT_ADJ_VERT_`
   - `$LOW_TXT_DIR_` --> `$LOW_PAR_TXT_DIR_`
+- Renamed various constants to be more logical and for better grouping.
+  - `$LOW_BORDERSTYLE_` --> `$LOW_BORDER_STYLE_`
+  - `$LOW_BORDERWIDTH_` --> `$LOW_BORDER_WIDTH_`
+  - `$LOW_DUPLEX_` --> `$LOW_PRINT_DUPLEX_`
+  - `$LOW_PAPER_` --> `$LOW_PAPER_FORMAT_`
+  - `$LOW_SHADOW_` --> `$LOW_SHADOW_LOCATION_`
 
 #### Documented
 

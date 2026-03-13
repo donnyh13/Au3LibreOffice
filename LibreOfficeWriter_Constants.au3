@@ -63,34 +63,34 @@ Global Const _                                                  ; com.sun.star.s
 
 ; Border Style
 Global Const _                                                  ; com.sun.star.table.BorderLineStyle
-		$LOW_BORDERSTYLE_NONE = 0x7FFF, _                       ; No border line.
-		$LOW_BORDERSTYLE_SOLID = 0, _                           ; Solid border line.
-		$LOW_BORDERSTYLE_DOTTED = 1, _                          ; Dotted border line.
-		$LOW_BORDERSTYLE_DASHED = 2, _                          ; Dashed border line.
-		$LOW_BORDERSTYLE_DOUBLE = 3, _                          ; Double border line.
-		$LOW_BORDERSTYLE_THINTHICK_SMALLGAP = 4, _              ; Double border line with a thin line outside and a thick line inside separated by a small gap.
-		$LOW_BORDERSTYLE_THINTHICK_MEDIUMGAP = 5, _             ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
-		$LOW_BORDERSTYLE_THINTHICK_LARGEGAP = 6, _              ; Double border line with a thin line outside and a thick line inside separated by a large gap.
-		$LOW_BORDERSTYLE_THICKTHIN_SMALLGAP = 7, _              ; Double border line with a thick line outside and a thin line inside separated by a small gap.
-		$LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP = 8, _             ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
-		$LOW_BORDERSTYLE_THICKTHIN_LARGEGAP = 9, _              ; Double border line with a thick line outside and a thin line inside separated by a large gap.
-		$LOW_BORDERSTYLE_EMBOSSED = 10, _                       ; 3D embossed border line.
-		$LOW_BORDERSTYLE_ENGRAVED = 11, _                       ; 3D engraved border line.
-		$LOW_BORDERSTYLE_OUTSET = 12, _                         ; Outset border line.
-		$LOW_BORDERSTYLE_INSET = 13, _                          ; Inset border line.
-		$LOW_BORDERSTYLE_FINE_DASHED = 14, _                    ; Finely dashed border line.
-		$LOW_BORDERSTYLE_DOUBLE_THIN = 15, _                    ; Double border line consisting of two fixed thin lines separated by a variable gap.
-		$LOW_BORDERSTYLE_DASH_DOT = 16, _                       ; Line consisting of a repetition of one dash and one dot.
-		$LOW_BORDERSTYLE_DASH_DOT_DOT = 17                      ; Line consisting of a repetition of one dash and 2 dots.
+		$LOW_BORDER_STYLE_NONE = 0x7FFF, _                       ; No border line.
+		$LOW_BORDER_STYLE_SOLID = 0, _                           ; Solid border line.
+		$LOW_BORDER_STYLE_DOTTED = 1, _                          ; Dotted border line.
+		$LOW_BORDER_STYLE_DASHED = 2, _                          ; Dashed border line.
+		$LOW_BORDER_STYLE_DOUBLE = 3, _                          ; Double border line.
+		$LOW_BORDER_STYLE_THINTHICK_SMALLGAP = 4, _              ; Double border line with a thin line outside and a thick line inside separated by a small gap.
+		$LOW_BORDER_STYLE_THINTHICK_MEDIUMGAP = 5, _             ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
+		$LOW_BORDER_STYLE_THINTHICK_LARGEGAP = 6, _              ; Double border line with a thin line outside and a thick line inside separated by a large gap.
+		$LOW_BORDER_STYLE_THICKTHIN_SMALLGAP = 7, _              ; Double border line with a thick line outside and a thin line inside separated by a small gap.
+		$LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP = 8, _             ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
+		$LOW_BORDER_STYLE_THICKTHIN_LARGEGAP = 9, _              ; Double border line with a thick line outside and a thin line inside separated by a large gap.
+		$LOW_BORDER_STYLE_EMBOSSED = 10, _                       ; 3D embossed border line.
+		$LOW_BORDER_STYLE_ENGRAVED = 11, _                       ; 3D engraved border line.
+		$LOW_BORDER_STYLE_OUTSET = 12, _                         ; Outset border line.
+		$LOW_BORDER_STYLE_INSET = 13, _                          ; Inset border line.
+		$LOW_BORDER_STYLE_FINE_DASHED = 14, _                    ; Finely dashed border line.
+		$LOW_BORDER_STYLE_DOUBLE_THIN = 15, _                    ; Double border line consisting of two fixed thin lines separated by a variable gap.
+		$LOW_BORDER_STYLE_DASH_DOT = 16, _                       ; Line consisting of a repetition of one dash and one dot.
+		$LOW_BORDER_STYLE_DASH_DOT_DOT = 17                      ; Line consisting of a repetition of one dash and 2 dots.
 
 ; Border Width
 Global Const _
-		$LOW_BORDERWIDTH_HAIRLINE = 2, _                        ; Hairline Border line width.
-		$LOW_BORDERWIDTH_VERY_THIN = 18, _                      ; Very Thin Border line width.
-		$LOW_BORDERWIDTH_THIN = 26, _                           ; Thin Border line width.
-		$LOW_BORDERWIDTH_MEDIUM = 53, _                         ; Medium Border line width.
-		$LOW_BORDERWIDTH_THICK = 79, _                          ; Thick Border line width.
-		$LOW_BORDERWIDTH_EXTRA_THICK = 159                      ; Extra Thick Border line width.
+		$LOW_BORDER_WIDTH_HAIRLINE = 2, _                        ; Hairline Border line width.
+		$LOW_BORDER_WIDTH_VERY_THIN = 18, _                      ; Very Thin Border line width.
+		$LOW_BORDER_WIDTH_THIN = 26, _                           ; Thin Border line width.
+		$LOW_BORDER_WIDTH_MEDIUM = 53, _                         ; Medium Border line width.
+		$LOW_BORDER_WIDTH_THICK = 79, _                          ; Thick Border line width.
+		$LOW_BORDER_WIDTH_EXTRA_THICK = 159                      ; Extra Thick Border line width.
 
 ; Cell Type
 Global Const _                                                  ; com.sun.star.table.CellContentType
@@ -213,13 +213,6 @@ Global Const _
 		$LOW_CURTYPE_VIEW_CURSOR = 3, _                         ; Cursor is a View Cursor type.
 		$LOW_CURTYPE_PARAGRAPH = 4, _                           ; Object is a Paragraph Object.
 		$LOW_CURTYPE_TEXT_PORTION = 5                           ; Object is a Paragraph Text Portion Object.
-
-; Printer Duplex Constants.
-Global Const _                                                  ; com.sun.star.view.DuplexMode
-		$LOW_DUPLEX_UNKNOWN = 0, _                              ; Duplex mode setting is unknown.
-		$LOW_DUPLEX_OFF = 1, _                                  ; Duplex mode is off.
-		$LOW_DUPLEX_LONG = 2, _                                 ; Duplex mode is on, flip on Long edge.
-		$LOW_DUPLEX_SHORT = 3                                   ; Duplex mode is on, flip on Short edge.
 
 ; Advanced Field Types
 Global Enum Step *2 _
@@ -703,15 +696,15 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Paper Size Constants.
 Global Const _                                                  ; com.sun.star.view.PaperFormat
-		$LOW_PAPER_A3 = 0, _                                    ; A3 Paper size.
-		$LOW_PAPER_A4 = 1, _                                    ; A4 Paper size.
-		$LOW_PAPER_A5 = 2, _                                    ; A5 Paper size.
-		$LOW_PAPER_B4 = 3, _                                    ; B4 Paper size.
-		$LOW_PAPER_B5 = 4, _                                    ; B5 Paper size.
-		$LOW_PAPER_LETTER = 5, _                                ; Letter Paper size.
-		$LOW_PAPER_LEGAL = 6, _                                 ; Legal Paper size.
-		$LOW_PAPER_TABLOID = 7, _                               ; Tabloid Paper size.
-		$LOW_PAPER_USER_DEFINED = 8                             ; Paper size is User-Defined.
+		$LOW_PAPER_FORMAT_A3 = 0, _                                    ; A3 Paper size.
+		$LOW_PAPER_FORMAT_A4 = 1, _                                    ; A4 Paper size.
+		$LOW_PAPER_FORMAT_A5 = 2, _                                    ; A5 Paper size.
+		$LOW_PAPER_FORMAT_B4 = 3, _                                    ; B4 Paper size.
+		$LOW_PAPER_FORMAT_B5 = 4, _                                    ; B5 Paper size.
+		$LOW_PAPER_FORMAT_LETTER = 5, _                                ; Letter Paper size.
+		$LOW_PAPER_FORMAT_LEGAL = 6, _                                 ; Legal Paper size.
+		$LOW_PAPER_FORMAT_TABLOID = 7, _                               ; Tabloid Paper size.
+		$LOW_PAPER_FORMAT_USER_DEFINED = 8                             ; Paper size is User-Defined.
 
 ; Paper Height in Hundredths of a Millimeter (HMM)
 Global Const _
@@ -849,6 +842,13 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_PAR_TXT_DIR_CONTEXT = 4, _                             ; Obtain actual writing mode from the context of the object.
 		$LOW_PAR_TXT_DIR_BT_LR = 5                                  ; Text within a line is written bottom-to-top. Lines and blocks are placed left-to-right. (LibreOffice 6.3).
 
+; Printer Duplex Constants.
+Global Const _                                                  ; com.sun.star.view.DuplexMode
+		$LOW_PRINT_DUPLEX_UNKNOWN = 0, _                              ; Duplex mode setting is unknown.
+		$LOW_PRINT_DUPLEX_OFF = 1, _                                  ; Duplex mode is off.
+		$LOW_PRINT_DUPLEX_LONG = 2, _                                 ; Duplex mode is on, flip on Long edge.
+		$LOW_PRINT_DUPLEX_SHORT = 3                                   ; Duplex mode is on, flip on Short edge.
+
 ; LO Print Comments Constants.
 Global Const _                                                  ; com.sun.star.text.NotePrintMode
 		$LOW_PRINT_NOTES_NONE = 0, _                            ; Document contents are printed, without printing any Comments.
@@ -874,11 +874,11 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Shadow Location
 Global Const _                                                  ; com.sun.star.table.ShadowLocation
-		$LOW_SHADOW_NONE = 0, _                                 ; No shadow is applied.
-		$LOW_SHADOW_TOP_LEFT = 1, _                             ; Shadow is located along the upper and left sides.
-		$LOW_SHADOW_TOP_RIGHT = 2, _                            ; Shadow is located along the upper and right sides.
-		$LOW_SHADOW_BOTTOM_LEFT = 3, _                          ; Shadow is located along the lower and left sides.
-		$LOW_SHADOW_BOTTOM_RIGHT = 4                            ; Shadow is located along the lower and right sides.
+		$LOW_SHADOW_LOCATION_NONE = 0, _                                 ; No shadow is applied.
+		$LOW_SHADOW_LOCATION_TOP_LEFT = 1, _                             ; Shadow is located along the upper and left sides.
+		$LOW_SHADOW_LOCATION_TOP_RIGHT = 2, _                            ; Shadow is located along the upper and right sides.
+		$LOW_SHADOW_LOCATION_BOTTOM_LEFT = 3, _                          ; Shadow is located along the lower and left sides.
+		$LOW_SHADOW_LOCATION_BOTTOM_RIGHT = 4                            ; Shadow is located along the lower and right sides.
 
 ; Arrowhead Type Constants
 Global Enum _
