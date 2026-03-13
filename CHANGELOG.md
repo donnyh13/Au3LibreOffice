@@ -370,6 +370,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `$LOB_POSTURE_` --> `$LOB_CHAR_POSTURE_`
   - `$LOB_RELIEF_` --> `$LOB_CHAR_RELIEF_`
   - `$LOB_STRIKEOUT_` --> `$LOB_CHAR_STRIKEOUT_`
+  - `$LOB_TXT_ALIGN_HORI_` --> `$LOB_PAR_TXT_ALIGN_HORI_`
   - `$LOB_UNDERLINE_` --> `$LOB_CHAR_UNDERLINE_`
   - `$LOB_WEIGHT_` --> `$LOB_CHAR_WEIGHT_`
 

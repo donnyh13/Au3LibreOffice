@@ -242,7 +242,7 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldData
 ;                  $bPrintRepOnGroup    - [optional] a boolean value. Default is Null. If True, repeated values will be printed on group change.
 ;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ;                  $mFont               - [optional] a map. Default is Null. A Font descriptor Map returned by a previous _LOBase_FontDescCreate or _LOBase_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOB_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iFormat             - [optional] an integer value. Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOBase_FormatKeysGetList call, or created by _LOBase_FormatKeyCreate function.
 ; Return values .: Success: 1 or Array
@@ -256,7 +256,7 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldData
 ;                  @Error 1 @Extended 6 Return 0 = $bPrintRepOnGroup not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 8 Return 0 = $mFont not a Map.
-;                  @Error 1 @Extended 9 Return 0 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 9 Return 0 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 10 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 11 Return 0 = $iFormat not an Integer.
 ;                  @Error 1 @Extended 12 Return 0 = Format key called in $iFormat not found in document.
@@ -351,7 +351,7 @@ Func _LOBase_ReportConFormattedFieldGeneral(ByRef $oFormatField, $sName = Null, 
 	EndIf
 
 	If ($iAlign <> Null) Then
-		If Not __LO_IntIsBetween($iAlign, $LOB_TXT_ALIGN_HORI_LEFT, $LOB_TXT_ALIGN_HORI_CENTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not __LO_IntIsBetween($iAlign, $LOB_PAR_TXT_ALIGN_HORI_LEFT, $LOB_PAR_TXT_ALIGN_HORI_CENTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
 		$oFormatField.ParaAdjust = $iAlign
 		$iError = ($oFormatField.ParaAdjust() = $iAlign) ? ($iError) : (BitOR($iError, 64))
@@ -697,7 +697,7 @@ EndFunc   ;==>_LOBase_ReportConInsert
 ;                  $bPrintRepOnGroup    - [optional] a boolean value. Default is Null. If True, repeated values will be printed on group change.
 ;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ;                  $mFont               - [optional] a map. Default is Null. A Font descriptor Map returned by a previous _LOBase_FontDescCreate or _LOBase_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOB_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -711,7 +711,7 @@ EndFunc   ;==>_LOBase_ReportConInsert
 ;                  @Error 1 @Extended 7 Return 0 = $bPrintRepOnGroup not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 9 Return 0 = $mFont not a Map.
-;                  @Error 1 @Extended 10 Return 0 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 10 Return 0 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 11 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
@@ -808,7 +808,7 @@ Func _LOBase_ReportConLabelGeneral(ByRef $oLabel, $sName = Null, $sLabel = Null,
 	EndIf
 
 	If ($iAlign <> Null) Then
-		If Not __LO_IntIsBetween($iAlign, $LOB_TXT_ALIGN_HORI_LEFT, $LOB_TXT_ALIGN_HORI_CENTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
+		If Not __LO_IntIsBetween($iAlign, $LOB_PAR_TXT_ALIGN_HORI_LEFT, $LOB_PAR_TXT_ALIGN_HORI_CENTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 
 		$oLabel.ParaAdjust = $iAlign
 		$iError = ($oLabel.ParaAdjust() = $iAlign) ? ($iError) : (BitOR($iError, 128))

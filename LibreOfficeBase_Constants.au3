@@ -352,6 +352,14 @@ Global Const _                                                                  
 		$LOB_FORMAT_KEYS_EMPTY = 4096, _                                                 ; Returns Empty Number formats (?)
 		$LOB_FORMAT_KEYS_DURATION = 8196                                                 ; Returns Duration number formats.
 
+; Text Horizontal Alignment
+Global Const _                                                                           ; com.sun.star.style.ParagraphAdjust
+		$LOB_PAR_TXT_ALIGN_HORI_LEFT = 0, _                                                  ; Text is adjusted to the left border.
+		$LOB_PAR_TXT_ALIGN_HORI_RIGHT = 1, _                                                 ; Text is adjusted to the right border.
+		$LOB_PAR_TXT_ALIGN_HORI_BLOCK = 2, _                                                 ; Text is adjusted to both borders / stretched, except for last line.
+		$LOB_PAR_TXT_ALIGN_HORI_CENTER = 3, _                                                ; Text is adjusted to the center.
+		$LOB_PAR_TXT_ALIGN_HORI_STRETCH = 4                                                  ; Text is adjusted to both borders / stretched, including last line.
+
 ; Report Control Image Scale.
 Global Const _                                                                           ; "com.sun.star.awt.ImageScaleMode"
 		$LOB_REP_CON_IMG_BTN_SCALE_NONE = 0, _                                           ; No scaling should happen at all.
@@ -532,11 +540,3 @@ Global Const _                                                                  
 		$LOB_SUB_COMP_TYPE_QUERY = 1, _                                                  ; A Database Query.
 		$LOB_SUB_COMP_TYPE_FORM = 2, _                                                   ; A Database Form.
 		$LOB_SUB_COMP_TYPE_REPORT = 3                                                    ; A Database Report.
-
-; Text Horizontal Alignment
-Global Const _                                                                           ; com.sun.star.style.ParagraphAdjust
-		$LOB_TXT_ALIGN_HORI_LEFT = 0, _                                                  ; Text is adjusted to the left border.
-		$LOB_TXT_ALIGN_HORI_RIGHT = 1, _                                                 ; Text is adjusted to the right border.
-		$LOB_TXT_ALIGN_HORI_BLOCK = 2, _                                                 ; Text is adjusted to both borders / stretched, except for last line.
-		$LOB_TXT_ALIGN_HORI_CENTER = 3, _                                                ; Text is adjusted to the center.
-		$LOB_TXT_ALIGN_HORI_STRETCH = 4                                                  ; Text is adjusted to both borders / stretched, including last line.
