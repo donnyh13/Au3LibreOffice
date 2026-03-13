@@ -39,7 +39,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Word Hi to Engraved relief style.
-	_LOCalc_TextCursorEffect($oTextCursor, $LOC_RELIEF_ENGRAVED)
+	_LOCalc_TextCursorEffect($oTextCursor, $LOC_CHAR_RELIEF_ENGRAVED)
 	If @error Then _ERROR($oDoc, "Failed to set text formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now select the word ""Testing"" and set it to .")

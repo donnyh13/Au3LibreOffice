@@ -31,8 +31,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 4, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Underline settings to Underline style $LOW_UNDERLINE_BOLD_DASH_DOT, Color to $LO_COLOR_BROWN, and Words only = True
-	_LOWriter_DirFrmtUnderLine($oViewCursor, $LOW_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
+	; Set the selected text's Underline settings to Underline style $LOW_CHAR_UNDERLINE_BOLD_DASH_DOT, Color to $LO_COLOR_BROWN, and Words only = True
+	_LOWriter_DirFrmtUnderLine($oViewCursor, $LOW_CHAR_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 4 spaces
@@ -55,8 +55,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 10, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Border Width to $LOW_BORDERWIDTH_THICK.
-	_LOWriter_DirFrmtCharBorderWidth($oViewCursor, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK)
+	; Set the selected text's Border Width to $LOW_BORDER_WIDTH_THICK.
+	_LOWriter_DirFrmtCharBorderWidth($oViewCursor, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor to the end.
@@ -67,9 +67,9 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_Left, 5, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Font to "Arial", Font size to 18, Posture (Italic) to $LOW_POSTURE_ITALIC, and weight (Bold)
-	; to $LOW_WEIGHT_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, "Arial", 18, $LOW_POSTURE_ITALIC, $LOW_WEIGHT_BOLD)
+	; Set the selected text's Font to "Arial", Font size to 18, Posture (Italic) to $LOW_CHAR_POSTURE_ITALIC, and weight (Bold)
+	; to $LOW_CHAR_WEIGHT_BOLD
+	_LOWriter_DirFrmtFont($oViewCursor, "Arial", 18, $LOW_CHAR_POSTURE_ITALIC, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor to the start again

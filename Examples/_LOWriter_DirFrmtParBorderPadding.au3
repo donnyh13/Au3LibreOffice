@@ -25,8 +25,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GOTO_START)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the paragraph at the current cursor's location Border Width to $LOW_BORDERWIDTH_THICK.
-	_LOWriter_DirFrmtParBorderWidth($oViewCursor, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK)
+	; Set the paragraph at the current cursor's location Border Width to $LOW_BORDER_WIDTH_THICK.
+	_LOWriter_DirFrmtParBorderWidth($oViewCursor, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Hundredths of a Millimeter (HMM)

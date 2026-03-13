@@ -16,8 +16,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Object for Cell Style named ""Default"". Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Border Width to $LOC_BORDERWIDTH_THICK for all four sides, and $LOC_BORDERWIDTH_THIN for the diagonal borders.
-	_LOCalc_CellStyleBorderWidth($oCellStyle, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THIN, $LOC_BORDERWIDTH_THIN)
+	; Set the Cell Style's Border Width to $LOC_BORDER_WIDTH_THICK for all four sides, and $LOC_BORDER_WIDTH_THIN for the diagonal borders.
+	_LOCalc_CellStyleBorderWidth($oCellStyle, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THIN, $LOC_BORDER_WIDTH_THIN)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell Style's Border color to $LO_COLOR_BRICK for all four sides, and $LO_COLOR_BLUE for the diagonal borders.

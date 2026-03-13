@@ -24,8 +24,8 @@ Func Example()
 	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style Strikeout settings to, Words only = True, Line style = $LOW_STRIKEOUT_X
-	_LOWriter_ParStyleStrikeOut($oParStyle, $LOW_STRIKEOUT_X, True)
+	; Set Default Paragraph Style Strikeout settings to, Words only = True, Line style = $LOW_CHAR_STRIKEOUT_X
+	_LOWriter_ParStyleStrikeOut($oParStyle, $LOW_CHAR_STRIKEOUT_X, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

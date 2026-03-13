@@ -15,7 +15,7 @@ Func Example()
 			"the print job without wasting paper.")
 
 	; Print the document, 1 copy, Collate = True, "ALL" Pages, Wait = True, Duplex  = Off
-	_LOWriter_DocPrint($oDoc, 1, True, "ALL", True, $LOW_DUPLEX_OFF)
+	_LOWriter_DocPrint($oDoc, 1, True, "ALL", True, $LOW_PRINT_DUPLEX_OFF)
 	If @error Then _ERROR($oDoc, "Failed to print the L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the document.

@@ -24,8 +24,8 @@ Func Example()
 	_LOCalc_CellString($oCell, "Some Text in a long sentence")
 	If @error Then _ERROR($oDoc, "Failed to set Cell Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell's Text properties to, Wrap Text Automatically = True, Auto Hyphenate = True, Skip Shrink to fit, Text direction = $LOC_TXT_DIR_RL .
-	_LOCalc_CellTextProperties($oCell, True, True, Null, $LOC_TXT_DIR_RL)
+	; Set the Cell's Text properties to, Wrap Text Automatically = True, Auto Hyphenate = True, Skip Shrink to fit, Text direction = $LOC_PAR_TXT_DIR_RL .
+	_LOCalc_CellTextProperties($oCell, True, True, Null, $LOC_PAR_TXT_DIR_RL)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

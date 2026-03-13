@@ -28,13 +28,13 @@ Func Example()
 	_LOWriter_FrameStyleCurrent($oDoc, $oFrame, "Test Style")
 	If @error Then _ERROR($oDoc, "Failed to set Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Frame style Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.
-	_LOWriter_FrameStyleBorderWidth($oFrameStyle, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
+	; Set Frame style Border Width settings to: $LOW_BORDER_WIDTH_MEDIUM on all four sides.
+	_LOWriter_FrameStyleBorderWidth($oFrameStyle, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Frame Style Border Style settings to: Top = $LOW_BORDERSTYLE_DASH_DOT_DOT, Bottom = $LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP
-	; Left = $LOW_BORDERSTYLE_DOUBLE, Right = $LOW_BORDERSTYLE_DASHED
-	_LOWriter_FrameStyleBorderStyle($oFrameStyle, $LOW_BORDERSTYLE_DASH_DOT_DOT, $LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP, $LOW_BORDERSTYLE_DOUBLE, $LOW_BORDERSTYLE_DASHED)
+	; Modify the Frame Style Border Style settings to: Top = $LOW_BORDER_STYLE_DASH_DOT_DOT, Bottom = $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP
+	; Left = $LOW_BORDER_STYLE_DOUBLE, Right = $LOW_BORDER_STYLE_DASHED
+	_LOWriter_FrameStyleBorderStyle($oFrameStyle, $LOW_BORDER_STYLE_DASH_DOT_DOT, $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP, $LOW_BORDER_STYLE_DOUBLE, $LOW_BORDER_STYLE_DASHED)
 	If @error Then _ERROR($oDoc, "Failed to set Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame Style settings. Return will be an array in order of function parameters.

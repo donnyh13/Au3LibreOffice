@@ -29,8 +29,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_Down, 1)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the paragraph to Line Space Mode $LOW_LINE_SPC_MODE_PROP, Height to 115%
-	_LOWriter_DirFrmtParSpace($oViewCursor, Null, Null, Null, $LOW_LINE_SPC_MODE_PROP, 115)
+	; Set the paragraph to Line Space Mode $LOW_PAR_LINE_SPC_MODE_PROP, Height to 115%
+	_LOWriter_DirFrmtParSpace($oViewCursor, Null, Null, Null, $LOW_PAR_LINE_SPC_MODE_PROP, 115)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a search descriptor for searching with. Set Backward, Match Case, Whole word, Regular Expression, and Search Styles to false, and
@@ -39,7 +39,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Find Format Search Array for proportional line spacing, at 115%
-	_LOWriter_FindFormatModifySpacing($atFindFormat, Null, Null, Null, $LOW_LINE_SPC_MODE_PROP, 115)
+	_LOWriter_FindFormatModifySpacing($atFindFormat, Null, Null, Null, $LOW_PAR_LINE_SPC_MODE_PROP, 115)
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the word "search".

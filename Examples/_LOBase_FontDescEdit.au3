@@ -56,7 +56,7 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify Control properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOBase_FontDescCreate("Times New Roman", $LOB_WEIGHT_BOLD, $LOB_POSTURE_ITALIC, 18, $LO_COLOR_BRICK, $LOB_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOB_STRIKEOUT_NONE, True, $LOB_RELIEF_NONE, $LOB_CASEMAP_TITLE, False, True, True)
+	$mFont = _LOBase_FontDescCreate("Times New Roman", $LOB_CHAR_WEIGHT_BOLD, $LOB_CHAR_POSTURE_ITALIC, 18, $LO_COLOR_BRICK, $LOB_CHAR_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOB_CHAR_STRIKEOUT_NONE, True, $LOB_CHAR_RELIEF_NONE, $LOB_CHAR_CASEMAP_TITLE, False, True, True)
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
@@ -89,7 +89,7 @@ Func Example()
 			"Press ok to modify the Font for this Label control.")
 
 	; Modify the Font Descriptor.
-	_LOBase_FontDescEdit($avControl[6], "Arial", $LOB_WEIGHT_NORMAL, $LOB_POSTURE_NONE, 16, $LO_COLOR_LIME, $LOB_UNDERLINE_DBL_WAVE, $LO_COLOR_PURPLE, Null, False, $LOB_RELIEF_ENGRAVED)
+	_LOBase_FontDescEdit($avControl[6], "Arial", $LOB_CHAR_WEIGHT_NORMAL, $LOB_CHAR_POSTURE_NONE, 16, $LO_COLOR_LIME, $LOB_CHAR_UNDERLINE_DBL_WAVE, $LO_COLOR_PURPLE, Null, False, $LOB_CHAR_RELIEF_ENGRAVED)
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to modify the Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new Font descriptor to the Label.

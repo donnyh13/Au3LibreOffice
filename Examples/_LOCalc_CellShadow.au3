@@ -29,8 +29,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell's Shadow to location: $LOC_SHADOW_TOP_LEFT , Color to $LO_COLOR_PURPLE, and 1/4" wide
-	_LOCalc_CellShadow($oCell, $LOC_SHADOW_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
+	; Set the Cell's Shadow to location: $LOC_SHADOW_LOCATION_TOP_LEFT , Color to $LO_COLOR_PURPLE, and 1/4" wide
+	_LOCalc_CellShadow($oCell, $LOC_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

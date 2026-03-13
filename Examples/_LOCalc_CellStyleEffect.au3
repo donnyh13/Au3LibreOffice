@@ -36,8 +36,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Font effects to $LOC_RELIEF_EMBOSSED relief type.
-	_LOCalc_CellStyleEffect($oCellStyle, $LOC_RELIEF_EMBOSSED)
+	; Set the Cell Style's Font effects to $LOC_CHAR_RELIEF_EMBOSSED relief type.
+	_LOCalc_CellStyleEffect($oCellStyle, $LOC_CHAR_RELIEF_EMBOSSED)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -49,8 +49,8 @@ Func Example()
 			"Are the words outlined? True/False: " & $avSettings[1] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avSettings[2])
 
-	; Set the Cell Style's Font effects to $LOC_RELIEF_NONE relief type, Outline and Shadowed to True.
-	_LOCalc_CellStyleEffect($oCellStyle, $LOC_RELIEF_NONE, True, True)
+	; Set the Cell Style's Font effects to $LOC_CHAR_RELIEF_NONE relief type, Outline and Shadowed to True.
+	_LOCalc_CellStyleEffect($oCellStyle, $LOC_CHAR_RELIEF_NONE, True, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

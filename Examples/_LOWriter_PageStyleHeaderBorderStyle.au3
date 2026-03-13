@@ -20,13 +20,13 @@ Func Example()
 	_LOWriter_PageStyleHeader($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style headers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Header Border Width (all four sides) to $LOW_BORDERWIDTH_MEDIUM
-	_LOWriter_PageStyleHeaderBorderWidth($oPageStyle, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
+	; Set Header Border Width (all four sides) to $LOW_BORDER_WIDTH_MEDIUM
+	_LOWriter_PageStyleHeaderBorderWidth($oPageStyle, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Header Border Style settings to: Top = $LOW_BORDERSTYLE_DASH_DOT_DOT, Bottom = $LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP
-	; Left = $LOW_BORDERSTYLE_DOUBLE, Right = $LOW_BORDERSTYLE_DASHED
-	_LOWriter_PageStyleHeaderBorderStyle($oPageStyle, $LOW_BORDERSTYLE_DASH_DOT_DOT, $LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP, $LOW_BORDERSTYLE_DOUBLE, $LOW_BORDERSTYLE_DASHED)
+	; Set Page style Header Border Style settings to: Top = $LOW_BORDER_STYLE_DASH_DOT_DOT, Bottom = $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP
+	; Left = $LOW_BORDER_STYLE_DOUBLE, Right = $LOW_BORDER_STYLE_DASHED
+	_LOWriter_PageStyleHeaderBorderStyle($oPageStyle, $LOW_BORDER_STYLE_DASH_DOT_DOT, $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP, $LOW_BORDER_STYLE_DOUBLE, $LOW_BORDER_STYLE_DASHED)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.

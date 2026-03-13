@@ -21,8 +21,8 @@ Func Example()
 	_LOWriter_PageStyleFooter($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style footers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Footer Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.
-	_LOWriter_PageStyleFooterBorderWidth($oPageStyle, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
+	; Set Page style Footer Border Width settings to: $LOW_BORDER_WIDTH_MEDIUM on all four sides.
+	_LOWriter_PageStyleFooterBorderWidth($oPageStyle, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/8" to Hundredths of a Millimeter (HMM)

@@ -24,9 +24,9 @@ Func Example()
 	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style Outline and List settings to, Outline level $LOW_OUTLINE_LEVEL_1, Numbering style,"Numbering 123",
+	; Set Default Paragraph Style Outline and List settings to, Outline level $LOW_PAR_OUTLINE_LEVEL_1, Numbering style,"Numbering 123",
 	; Include line in paragraph count? True, Line count value = 1.
-	_LOWriter_ParStyleOutLineAndList($oDoc, $oParStyle, $LOW_OUTLINE_LEVEL_1, "Numbering 123", True, 1)
+	_LOWriter_ParStyleOutLineAndList($oDoc, $oParStyle, $LOW_PAR_OUTLINE_LEVEL_1, "Numbering 123", True, 1)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

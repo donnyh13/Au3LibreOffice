@@ -21,8 +21,8 @@ Func Example()
 	_LOCalc_PageStyleHeader($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style headers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Header Border Width settings to: $LOC_BORDERWIDTH_MEDIUM on all four sides.
-	_LOCalc_PageStyleHeaderBorderWidth($oPageStyle, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM)
+	; Set Page style Header Border Width settings to: $LOC_BORDER_WIDTH_MEDIUM on all four sides.
+	_LOCalc_PageStyleHeaderBorderWidth($oPageStyle, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/8" to Hundredths of a Millimeter (HMM)

@@ -25,8 +25,8 @@ Func Example()
 	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style Border Width to $LOW_BORDERWIDTH_THICK.
-	_LOWriter_ParStyleBorderWidth($oParStyle, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK)
+	; Set Default Paragraph Style Border Width to $LOW_BORDER_WIDTH_THICK.
+	_LOWriter_ParStyleBorderWidth($oParStyle, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Hundredths of a Millimeter (HMM)

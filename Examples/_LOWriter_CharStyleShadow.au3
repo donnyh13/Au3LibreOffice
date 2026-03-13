@@ -45,8 +45,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style Shadow location to $LOW_SHADOW_TOP_LEFT, Color to $LO_COLOR_PURPLE, and 1/4" wide
-	_LOWriter_CharStyleShadow($oCharStyle, $LOW_SHADOW_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
+	; Set "Example" Character style Shadow location to $LOW_SHADOW_LOCATION_TOP_LEFT, Color to $LO_COLOR_PURPLE, and 1/4" wide
+	_LOWriter_CharStyleShadow($oCharStyle, $LOW_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

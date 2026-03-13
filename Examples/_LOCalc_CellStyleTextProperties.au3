@@ -36,8 +36,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Text properties to, Wrap Text Automatically = True, Auto Hyphenate = True, Skip Shrink to fit, Text direction = $LOC_TXT_DIR_RL .
-	_LOCalc_CellStyleTextProperties($oCellStyle, True, True, Null, $LOC_TXT_DIR_RL)
+	; Set the Cell Style's Text properties to, Wrap Text Automatically = True, Auto Hyphenate = True, Skip Shrink to fit, Text direction = $LOC_PAR_TXT_DIR_RL .
+	_LOCalc_CellStyleTextProperties($oCellStyle, True, True, Null, $LOC_PAR_TXT_DIR_RL)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

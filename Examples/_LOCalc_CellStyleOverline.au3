@@ -36,8 +36,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Overline settings to Overline style $LOC_UNDERLINE_BOLD_DASH_DOT, Color to $LO_COLOR_BROWN, and Words only = True
-	_LOCalc_CellStyleOverLine($oCellStyle, $LOC_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
+	; Set the Cell Style's Overline settings to Overline style $LOC_CHAR_UNDERLINE_BOLD_DASH_DOT, Color to $LO_COLOR_BROWN, and Words only = True
+	_LOCalc_CellStyleOverLine($oCellStyle, $LOC_CHAR_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

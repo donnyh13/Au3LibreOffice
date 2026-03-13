@@ -57,7 +57,7 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to insert a Control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOBase_FontDescCreate("Times New Roman", $LOB_WEIGHT_BOLD, $LOB_POSTURE_ITALIC, 16, $LO_COLOR_INDIGO, $LOB_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOB_STRIKEOUT_NONE, False, $LOB_RELIEF_NONE)
+	$mFont = _LOBase_FontDescCreate("Times New Roman", $LOB_CHAR_WEIGHT_BOLD, $LOB_CHAR_POSTURE_ITALIC, 16, $LO_COLOR_INDIGO, $LOB_CHAR_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOB_CHAR_STRIKEOUT_NONE, False, $LOB_CHAR_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve a Format key value for "#,###.00"
@@ -65,7 +65,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to retrieve a Format key. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
-	_LOBase_ReportConFormattedFieldGeneral($oControl, "Renamed_AutoIt_Control", 'rpt:COUNT(1;1)=VALUE("2")', True, True, $LO_COLOR_GRAY, $mFont, $LOB_TXT_ALIGN_HORI_CENTER, $LOB_ALIGN_VERT_BOTTOM, $iFormat)
+	_LOBase_ReportConFormattedFieldGeneral($oControl, "Renamed_AutoIt_Control", 'rpt:COUNT(1;1)=VALUE("2")', True, True, $LO_COLOR_GRAY, $mFont, $LOB_PAR_TXT_ALIGN_HORI_CENTER, $LOB_ALIGN_VERT_BOTTOM, $iFormat)
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to modify the Control's properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings for the control. Return will be an Array in order of function parameters.

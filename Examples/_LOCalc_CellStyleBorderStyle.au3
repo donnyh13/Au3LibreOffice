@@ -16,12 +16,12 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Object for Cell Style named ""Default"". Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Border Width to $LOC_BORDERWIDTH_THICK for all four sides, and $LOC_BORDERWIDTH_THIN for the diagonal borders.
-	_LOCalc_CellStyleBorderWidth($oCellStyle, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THIN, $LOC_BORDERWIDTH_THIN)
+	; Set the Cell Style's Border Width to $LOC_BORDER_WIDTH_THICK for all four sides, and $LOC_BORDER_WIDTH_THIN for the diagonal borders.
+	_LOCalc_CellStyleBorderWidth($oCellStyle, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THIN, $LOC_BORDER_WIDTH_THIN)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Border Style to $LO_COLOR_BRICK for all four sides, and $LOC_BORDERSTYLE_SOLID for the diagonal borders.
-	_LOCalc_CellStyleBorderStyle($oCellStyle, $LOC_BORDERSTYLE_DASH_DOT_DOT, $LOC_BORDERSTYLE_DASH_DOT_DOT, $LOC_BORDERSTYLE_DASH_DOT_DOT, $LOC_BORDERSTYLE_DASH_DOT_DOT, $LOC_BORDERSTYLE_SOLID, $LOC_BORDERSTYLE_SOLID)
+	; Set the Cell Style's Border Style to $LO_COLOR_BRICK for all four sides, and $LOC_BORDER_STYLE_SOLID for the diagonal borders.
+	_LOCalc_CellStyleBorderStyle($oCellStyle, $LOC_BORDER_STYLE_DASH_DOT_DOT, $LOC_BORDER_STYLE_DASH_DOT_DOT, $LOC_BORDER_STYLE_DASH_DOT_DOT, $LOC_BORDER_STYLE_DASH_DOT_DOT, $LOC_BORDER_STYLE_SOLID, $LOC_BORDER_STYLE_SOLID)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

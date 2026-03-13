@@ -26,7 +26,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Default Paragraph Style font weight to bold.
-	_LOWriter_ParStyleFont($oParStyle, Null, Null, Null, $LOW_WEIGHT_BOLD)
+	_LOWriter_ParStyleFont($oParStyle, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

@@ -32,8 +32,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 11, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Font effects to $LOW_RELIEF_EMBOSSED relief type.
-	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_RELIEF_EMBOSSED)
+	; Set the selected text's Font effects to $LOW_CHAR_RELIEF_EMBOSSED relief type.
+	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_CHAR_RELIEF_EMBOSSED)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -46,10 +46,10 @@ Func Example()
 			"Are the words hidden? True/False: " & $avSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avSettings[4] & @CRLF & @CRLF & _
-			"I will now set Case to $LOW_CASEMAP_SM_CAPS, and Relief to $LOW_RELIEF_NONE.")
+			"I will now set Case to $LOW_CHAR_CASEMAP_SM_CAPS, and Relief to $LOW_CHAR_RELIEF_NONE.")
 
-	; Set the selected text's Font effects to $LOW_RELIEF_NONE relief type, Case to $LOW_CASEMAP_SM_CAPS
-	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_RELIEF_NONE, $LOW_CASEMAP_SM_CAPS)
+	; Set the selected text's Font effects to $LOW_CHAR_RELIEF_NONE relief type, Case to $LOW_CHAR_CASEMAP_SM_CAPS
+	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_CASEMAP_SM_CAPS)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

@@ -40,8 +40,8 @@ Func Example()
 	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style Font effects to $LOW_RELIEF_EMBOSSED relief type.
-	_LOWriter_CharStyleEffect($oCharStyle, $LOW_RELIEF_EMBOSSED)
+	; Set "Example" Character style Font effects to $LOW_CHAR_RELIEF_EMBOSSED relief type.
+	_LOWriter_CharStyleEffect($oCharStyle, $LOW_CHAR_RELIEF_EMBOSSED)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -54,10 +54,10 @@ Func Example()
 			"Are the words hidden? True/False: " & $avCharStyleSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avCharStyleSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avCharStyleSettings[4] & @CRLF & @CRLF & _
-			"I will now set Case to $LOW_CASEMAP_SM_CAPS, and Relief to $LOW_RELIEF_NONE.")
+			"I will now set Case to $LOW_CHAR_CASEMAP_SM_CAPS, and Relief to $LOW_CHAR_RELIEF_NONE.")
 
-	; Set "Example" Character style Font effects to $LOW_RELIEF_NONE relief type, Case to $LOW_CASEMAP_SM_CAPS
-	_LOWriter_CharStyleEffect($oCharStyle, $LOW_RELIEF_NONE, $LOW_CASEMAP_SM_CAPS)
+	; Set "Example" Character style Font effects to $LOW_CHAR_RELIEF_NONE relief type, Case to $LOW_CHAR_CASEMAP_SM_CAPS
+	_LOWriter_CharStyleEffect($oCharStyle, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_CASEMAP_SM_CAPS)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

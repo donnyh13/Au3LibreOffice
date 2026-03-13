@@ -49,7 +49,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now print the new Calc Document. I suggest turning off your printer so you can cancel the print job without wasting paper.")
 
 	; Print the document, 1 copy, Collate = True, "ALL" Pages, Wait = True, Duplex  = Off
-	_LOCalc_DocPrint($oDoc, 1, True, "ALL", True, $LOC_DUPLEX_OFF)
+	_LOCalc_DocPrint($oDoc, 1, True, "ALL", True, $LOC_PRINT_DUPLEX_OFF)
 	If @error Then _ERROR($oDoc, "Failed to print the L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the document.

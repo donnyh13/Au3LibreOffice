@@ -40,7 +40,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to select text using the Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the text to Bold.
-	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_WEIGHT_BOLD)
+	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set Text Cursor font settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

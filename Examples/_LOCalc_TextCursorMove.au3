@@ -34,7 +34,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have selected the word ""Text"". You won't be able to see anything selected, but to show it is selected, I will use the cursor to set the text to Bold.")
 
 	; Set the selected text to Bold.
-	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_WEIGHT_BOLD)
+	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set font weight. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the Text Cursor to the Start.
@@ -56,7 +56,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text to Bold.
-	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_WEIGHT_BOLD)
+	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set font weight. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have moved the cursor to, and selected the word ""This"", setting it to Bold font weight. " & _

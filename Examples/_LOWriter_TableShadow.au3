@@ -25,8 +25,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.5, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Table shadow location to $LOW_SHADOW_BOTTOM_LEFT, the color to $LO_COLOR_DKGRAY, and 1/2 an inch wide
-	_LOWriter_TableShadow($oTable, $LOW_SHADOW_BOTTOM_LEFT, $LO_COLOR_DKGRAY, $iHMM)
+	; Set the Table shadow location to $LOW_SHADOW_LOCATION_BOTTOM_LEFT, the color to $LO_COLOR_DKGRAY, and 1/2 an inch wide
+	_LOWriter_TableShadow($oTable, $LOW_SHADOW_LOCATION_BOTTOM_LEFT, $LO_COLOR_DKGRAY, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set Table shadow settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Table shadow settings. Return will be an Array, with values in order of function parameters.

@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a form control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 16, $LO_COLOR_INDIGO, $LOW_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOW_STRIKEOUT_NONE, False, $LOW_RELIEF_NONE)
+	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_CHAR_WEIGHT_BOLD, $LOW_CHAR_POSTURE_ITALIC, 16, $LO_COLOR_INDIGO, $LOW_CHAR_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOW_CHAR_STRIKEOUT_NONE, False, $LOW_CHAR_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.

@@ -36,8 +36,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Strikeout settings to, Line style = $LOC_STRIKEOUT_X, Words only = True
-	_LOCalc_CellStyleStrikeOut($oCellStyle, $LOC_STRIKEOUT_X, True)
+	; Set the Cell Style's Strikeout settings to, Line style = $LOC_CHAR_STRIKEOUT_X, Words only = True
+	_LOCalc_CellStyleStrikeOut($oCellStyle, $LOC_CHAR_STRIKEOUT_X, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

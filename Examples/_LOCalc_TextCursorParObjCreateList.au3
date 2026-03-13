@@ -41,7 +41,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the font weight to Bold.
-	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_WEIGHT_BOLD)
+	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set text formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Paragraph objects

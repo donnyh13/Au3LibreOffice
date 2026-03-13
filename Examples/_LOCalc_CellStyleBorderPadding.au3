@@ -17,8 +17,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Object for Cell Style named ""Default"". Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Border Width to $LOC_BORDERWIDTH_THICK for all four sides.
-	_LOCalc_CellStyleBorderWidth($oCellStyle, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK)
+	; Set the Cell Style's Border Width to $LOC_BORDER_WIDTH_THICK for all four sides.
+	_LOCalc_CellStyleBorderWidth($oCellStyle, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Hundredths of a Millimeter (HMM)

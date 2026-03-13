@@ -21,11 +21,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Border width so I can set the Border Style.
-	_LOWriter_TableBorderWidth($oTable, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK)
+	_LOWriter_TableBorderWidth($oTable, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set Text Table cell Border width settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Border Style, a different style on each side.
-	_LOWriter_TableBorderStyle($oTable, $LOW_BORDERSTYLE_DOTTED, $LOW_BORDERSTYLE_DASHED, $LOW_BORDERSTYLE_DASH_DOT_DOT, $LOW_BORDERSTYLE_THICKTHIN_SMALLGAP, $LOW_BORDERSTYLE_EMBOSSED, $LOW_BORDERSTYLE_DOUBLE_THIN)
+	_LOWriter_TableBorderStyle($oTable, $LOW_BORDER_STYLE_DOTTED, $LOW_BORDER_STYLE_DASHED, $LOW_BORDER_STYLE_DASH_DOT_DOT, $LOW_BORDER_STYLE_THICKTHIN_SMALLGAP, $LOW_BORDER_STYLE_EMBOSSED, $LOW_BORDER_STYLE_DOUBLE_THIN)
 	If @error Then _ERROR($oDoc, "Failed to set Text Table cell Border Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve current Border Style settings.Array will be 6 elements, in order of function parameters.

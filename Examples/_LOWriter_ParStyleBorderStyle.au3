@@ -24,13 +24,13 @@ Func Example()
 	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style Border Width to $LOW_BORDERWIDTH_THICK.
-	_LOWriter_ParStyleBorderWidth($oParStyle, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK)
+	; Set Default Paragraph Style Border Width to $LOW_BORDER_WIDTH_THICK.
+	_LOWriter_ParStyleBorderWidth($oParStyle, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style Border Style to, Top =  $LOW_BORDERSTYLE_DASH_DOT_DOT. Bottom = $LOW_BORDERSTYLE_FINE_DASHED,
-	; Left = $LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP Right = $LOW_BORDERSTYLE_SOLID
-	_LOWriter_ParStyleBorderStyle($oParStyle, $LOW_BORDERSTYLE_DASH_DOT_DOT, $LOW_BORDERSTYLE_FINE_DASHED, $LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP, $LOW_BORDERSTYLE_SOLID)
+	; Set Default Paragraph Style Border Style to, Top =  $LOW_BORDER_STYLE_DASH_DOT_DOT. Bottom = $LOW_BORDER_STYLE_FINE_DASHED,
+	; Left = $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP Right = $LOW_BORDER_STYLE_SOLID
+	_LOWriter_ParStyleBorderStyle($oParStyle, $LOW_BORDER_STYLE_DASH_DOT_DOT, $LOW_BORDER_STYLE_FINE_DASHED, $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP, $LOW_BORDER_STYLE_SOLID)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

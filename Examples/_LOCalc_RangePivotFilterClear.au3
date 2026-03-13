@@ -119,7 +119,7 @@ Func _PrepareRange($oDoc, $oSheet)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Bold the Titles.
-	_LOCalc_CellFont($oCellRange, Null, Null, Null, $LOC_WEIGHT_BOLD)
+	_LOCalc_CellFont($oCellRange, Null, Null, Null, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Range weight. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 

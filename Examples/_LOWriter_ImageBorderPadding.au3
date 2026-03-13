@@ -22,8 +22,8 @@ Func Example()
 	$oImage = _LOWriter_ImageInsert($oDoc, $sImage, $oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to insert an Image. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Image Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.
-	_LOWriter_ImageBorderWidth($oImage, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
+	; Set Image Border Width settings to: $LOW_BORDER_WIDTH_MEDIUM on all four sides.
+	_LOWriter_ImageBorderWidth($oImage, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/8" to Hundredths of a Millimeter (HMM)

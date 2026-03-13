@@ -21,8 +21,8 @@ Func Example()
 	$oFrame = _LOWriter_FrameCreate($oDoc, $oViewCursor, Null, 3000, 3000)
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Frame Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.
-	_LOWriter_FrameBorderWidth($oFrame, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
+	; Set Frame Border Width settings to: $LOW_BORDER_WIDTH_MEDIUM on all four sides.
+	_LOWriter_FrameBorderWidth($oFrame, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/8" to Hundredths of a Millimeter (HMM)

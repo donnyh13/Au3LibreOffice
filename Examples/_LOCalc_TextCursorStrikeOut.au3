@@ -39,7 +39,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Strikeout settings to: Use slashes to strike the characters out with and Strike out words only
-	_LOCalc_TextCursorStrikeOut($oTextCursor, $LOC_STRIKEOUT_SLASH, True)
+	_LOCalc_TextCursorStrikeOut($oTextCursor, $LOC_CHAR_STRIKEOUT_SLASH, True)
 	If @error Then _ERROR($oDoc, "Failed to set text formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array in order of function parameters.

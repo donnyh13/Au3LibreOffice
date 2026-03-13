@@ -25,8 +25,8 @@ Func Example()
 	_LOCalc_PageStyleFooter($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style footers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Footer Shadow settings to: Location = $LOC_SHADOW_TOP_LEFT, Color = $LO_COLOR_RED, Width = 1/8"
-	_LOCalc_PageStyleFooterShadow($oPageStyle, $LOC_SHADOW_TOP_LEFT, $LO_COLOR_RED, $iHMM)
+	; Set Page style Footer Shadow settings to: Location = $LOC_SHADOW_LOCATION_TOP_LEFT, Color = $LO_COLOR_RED, Width = 1/8"
+	_LOCalc_PageStyleFooterShadow($oPageStyle, $LOC_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_RED, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.

@@ -28,8 +28,8 @@ Func Example()
 	_LOWriter_FrameStyleCurrent($oDoc, $oFrame, "Test Style")
 	If @error Then _ERROR($oDoc, "Failed to set Frame style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Frame style Border Width settings to: $LOW_BORDERWIDTH_MEDIUM on all four sides.
-	_LOWriter_FrameStyleBorderWidth($oFrameStyle, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
+	; Set Frame style Border Width settings to: $LOW_BORDER_WIDTH_MEDIUM on all four sides.
+	_LOWriter_FrameStyleBorderWidth($oFrameStyle, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to set Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame Style settings. Return will be an array in order of function parameters.

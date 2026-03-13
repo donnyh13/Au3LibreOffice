@@ -25,9 +25,9 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GOTO_START)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the paragraph at the current cursor's location Outline and List settings to, Outline level $LOW_OUTLINE_LEVEL_1, Numbering style,"Numbering 123",
+	; Set the paragraph at the current cursor's location Outline and List settings to, Outline level $LOW_PAR_OUTLINE_LEVEL_1, Numbering style,"Numbering 123",
 	; Include line in paragraph count? True, Line count value = 1.
-	_LOWriter_DirFrmtParOutLineAndList($oDoc, $oViewCursor, $LOW_OUTLINE_LEVEL_1, "Numbering 123", True, 1)
+	_LOWriter_DirFrmtParOutLineAndList($oDoc, $oViewCursor, $LOW_PAR_OUTLINE_LEVEL_1, "Numbering 123", True, 1)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

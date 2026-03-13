@@ -16,8 +16,8 @@ Func Example()
 	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Border Width (all four sides) to $LOW_BORDERWIDTH_MEDIUM
-	_LOWriter_PageStyleBorderWidth($oPageStyle, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM, $LOW_BORDERWIDTH_MEDIUM)
+	; Set Border Width (all four sides) to $LOW_BORDER_WIDTH_MEDIUM
+	_LOWriter_PageStyleBorderWidth($oPageStyle, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM, $LOW_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Page style Border Color settings to: Top, $LO_COLOR_ORANGE, Bottom $LO_COLOR_BLUE, Left, $LO_COLOR_LGRAY, Right $LO_COLOR_BLACK

@@ -24,8 +24,8 @@ Func Example()
 	_LOCalc_CellString($oCell, "Some Text")
 	If @error Then _ERROR($oDoc, "Failed to set Cell Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell's Strikeout settings to, Line style = $LOC_STRIKEOUT_X, Words only = True
-	_LOCalc_CellStrikeOut($oCell, $LOC_STRIKEOUT_X, True)
+	; Set the Cell's Strikeout settings to, Line style = $LOC_CHAR_STRIKEOUT_X, Words only = True
+	_LOCalc_CellStrikeOut($oCell, $LOC_CHAR_STRIKEOUT_X, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

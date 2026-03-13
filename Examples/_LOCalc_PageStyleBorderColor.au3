@@ -16,8 +16,8 @@ Func Example()
 	$oPageStyle = _LOCalc_PageStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Border Width (all four sides) to $LOC_BORDERWIDTH_MEDIUM
-	_LOCalc_PageStyleBorderWidth($oPageStyle, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM)
+	; Set Border Width (all four sides) to $LOC_BORDER_WIDTH_MEDIUM
+	_LOCalc_PageStyleBorderWidth($oPageStyle, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Page style Border Color settings to: Top, $LO_COLOR_ORANGE, Bottom $LO_COLOR_BLUE, Left, $LO_COLOR_LGRAY, Right $LO_COLOR_BLACK

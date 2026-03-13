@@ -38,8 +38,8 @@ Func Example()
 	_LOCalc_TextCursorMove($oTextCursor, $LOC_TEXTCUR_GOTO_END, 1, True)
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the underline settings to, Underline style $LOC_UNDERLINE_BOLD_DASH_DOT, underline color = Gold, and Underline words only.
-	_LOCalc_TextCursorUnderline($oTextCursor, $LOC_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_GOLD, True)
+	; Set the underline settings to, Underline style $LOC_CHAR_UNDERLINE_BOLD_DASH_DOT, underline color = Gold, and Underline words only.
+	_LOCalc_TextCursorUnderline($oTextCursor, $LOC_CHAR_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_GOLD, True)
 	If @error Then _ERROR($oDoc, "Failed to set text formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array in order of function parameters.

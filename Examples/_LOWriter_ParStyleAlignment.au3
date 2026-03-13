@@ -26,8 +26,8 @@ Func Example()
 
 	; Set Default Paragraph Style Alignment settings to, Horizontal alignment = $LOW_PAR_ALIGN_HOR_JUSTIFIED,
 	; Vertical alignment = $LOW_PAR_ALIGN_VERT_CENTER, Last line alignment = $LOW_PAR_LAST_LINE_JUSTIFIED,
-	; Expand single word = True, Snap to grid = False, Text direction = $LOW_TXT_DIR_LR_TB
-	_LOWriter_ParStyleAlignment($oParStyle, $LOW_PAR_ALIGN_HOR_JUSTIFIED, $LOW_PAR_ALIGN_VERT_CENTER, $LOW_PAR_LAST_LINE_JUSTIFIED, True, False, $LOW_TXT_DIR_LR_TB)
+	; Expand single word = True, Snap to grid = False, Text direction = $LOW_PAR_TXT_DIR_LR_TB
+	_LOWriter_ParStyleAlignment($oParStyle, $LOW_PAR_ALIGN_HOR_JUSTIFIED, $LOW_PAR_ALIGN_VERT_CENTER, $LOW_PAR_LAST_LINE_JUSTIFIED, True, False, $LOW_PAR_TXT_DIR_LR_TB)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

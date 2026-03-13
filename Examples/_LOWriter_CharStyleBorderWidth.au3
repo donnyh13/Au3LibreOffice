@@ -40,8 +40,8 @@ Func Example()
 	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style Border Width to $LOW_BORDERWIDTH_THICK.
-	_LOWriter_CharStyleBorderWidth($oCharStyle, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK)
+	; Set "Example" Character style Border Width to $LOW_BORDER_WIDTH_THICK.
+	_LOWriter_CharStyleBorderWidth($oCharStyle, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

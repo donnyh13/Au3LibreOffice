@@ -20,8 +20,8 @@ Func Example()
 	_LOCalc_PageStyleFooter($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style footers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Footer Border Width (all four sides) to $LOC_BORDERWIDTH_MEDIUM
-	_LOCalc_PageStyleFooterBorderWidth($oPageStyle, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM)
+	; Set Footer Border Width (all four sides) to $LOC_BORDER_WIDTH_MEDIUM
+	_LOCalc_PageStyleFooterBorderWidth($oPageStyle, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Page style Footer Border Color settings to: Top, $LO_COLOR_ORANGE, Bottom $LO_COLOR_BLUE, Left, $LO_COLOR_LGRAY, Right $LO_COLOR_BLACK

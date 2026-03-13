@@ -32,7 +32,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move text cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text to Bold.
-	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_WEIGHT_BOLD)
+	_LOCalc_TextCursorFont($oTextCursor, Null, Null, Null, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set Text format. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the modified Header Object to the Page Style, Apply it to both First Page and Right Page, which will apply it to Both Left and Right because Same content on Left and Right option is True.

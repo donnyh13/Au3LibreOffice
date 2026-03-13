@@ -33,8 +33,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 6, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's underline style to $LOW_UNDERLINE_WAVE
-	_LOWriter_DirFrmtOverLine($oViewCursor, Null, $LOW_UNDERLINE_WAVE)
+	; Set the selected text's underline style to $LOW_CHAR_UNDERLINE_WAVE
+	_LOWriter_DirFrmtOverLine($oViewCursor, Null, $LOW_CHAR_UNDERLINE_WAVE)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 10 spaces, without selecting
@@ -45,8 +45,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 9, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's underline style to $LOW_UNDERLINE_BOLD_DASH
-	_LOWriter_DirFrmtOverLine($oViewCursor, Null, $LOW_UNDERLINE_BOLD_DASH)
+	; Set the selected text's underline style to $LOW_CHAR_UNDERLINE_BOLD_DASH
+	_LOWriter_DirFrmtOverLine($oViewCursor, Null, $LOW_CHAR_UNDERLINE_BOLD_DASH)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a search descriptor for searching with. Set Backward, Match Case, Whole word, Regular Expression, and Search Styles to false, and
@@ -54,11 +54,11 @@ Func Example()
 	$oSrchDesc = _LOWriter_SearchDescriptorCreate($oDoc, False, False, False, False, False, True)
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Find Format Search Array for $LOW_UNDERLINE_BOLD_DASH overline style.
-	_LOWriter_FindFormatModifyOverline($atFindFormat, $LOW_UNDERLINE_BOLD_DASH)
+	; Create a Find Format Search Array for $LOW_CHAR_UNDERLINE_BOLD_DASH overline style.
+	_LOWriter_FindFormatModifyOverline($atFindFormat, $LOW_CHAR_UNDERLINE_BOLD_DASH)
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Search for the word "search" that is overlined using $LOW_UNDERLINE_BOLD_DASH line style.
+	; Search for the word "search" that is overlined using $LOW_CHAR_UNDERLINE_BOLD_DASH line style.
 	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc, "search", $atFindFormat)
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

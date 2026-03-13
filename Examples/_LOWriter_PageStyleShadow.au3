@@ -21,8 +21,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(.125, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Shadow settings to: Location = $LOW_SHADOW_TOP_LEFT, Color = $LO_COLOR_RED, Width = 1/8"
-	_LOWriter_PageStyleShadow($oPageStyle, $LOW_SHADOW_TOP_LEFT, $LO_COLOR_RED, $iHMM)
+	; Set Page style Shadow settings to: Location = $LOW_SHADOW_LOCATION_TOP_LEFT, Color = $LO_COLOR_RED, Width = 1/8"
+	_LOWriter_PageStyleShadow($oPageStyle, $LOW_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_RED, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.

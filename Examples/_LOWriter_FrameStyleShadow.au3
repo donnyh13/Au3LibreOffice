@@ -33,8 +33,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(.125, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Frame Style Shadow settings to: Location = $LOW_SHADOW_TOP_LEFT, Color = $LO_COLOR_RED, Width = 1/8"
-	_LOWriter_FrameStyleShadow($oFrameStyle, $LOW_SHADOW_TOP_LEFT, $LO_COLOR_RED, $iHMM)
+	; Set the Frame Style Shadow settings to: Location = $LOW_SHADOW_LOCATION_TOP_LEFT, Color = $LO_COLOR_RED, Width = 1/8"
+	_LOWriter_FrameStyleShadow($oFrameStyle, $LOW_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_RED, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame Style settings. Return will be an array in order of function parameters.

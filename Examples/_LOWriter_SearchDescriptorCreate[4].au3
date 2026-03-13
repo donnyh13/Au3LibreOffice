@@ -54,8 +54,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 6, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Font to  and weight (Bold) to $LOW_WEIGHT_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, Null, Null, Null, $LOW_WEIGHT_BOLD)
+	; Set the selected text's Font to  and weight (Bold) to $LOW_CHAR_WEIGHT_BOLD
+	_LOWriter_DirFrmtFont($oViewCursor, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 10 spaces, without selecting
@@ -66,12 +66,12 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 9, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Font weight to $LOW_WEIGHT_SEMI_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, Null, Null, Null, $LOW_WEIGHT_SEMI_BOLD)
+	; Set the selected text's Font weight to $LOW_CHAR_WEIGHT_SEMI_BOLD
+	_LOWriter_DirFrmtFont($oViewCursor, Null, Null, Null, $LOW_CHAR_WEIGHT_SEMI_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Find Format Search Array for Bold font.
-	_LOWriter_FindFormatModifyFont($atFindFormat, Null, Null, Null, $LOW_WEIGHT_BOLD)
+	_LOWriter_FindFormatModifyFont($atFindFormat, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the word "search", I am using a FindFormat Array with the Bold attribute, however I still have $bSearchPropValues set to false,

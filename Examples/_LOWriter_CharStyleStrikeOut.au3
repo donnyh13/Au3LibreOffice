@@ -40,8 +40,8 @@ Func Example()
 	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style Strikeout settings to, Words only = True, Line style = $LOW_STRIKEOUT_X
-	_LOWriter_CharStyleStrikeOut($oCharStyle, $LOW_STRIKEOUT_X, True)
+	; Set "Example" Character style Strikeout settings to, Words only = True, Line style = $LOW_CHAR_STRIKEOUT_X
+	_LOWriter_CharStyleStrikeOut($oCharStyle, $LOW_CHAR_STRIKEOUT_X, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

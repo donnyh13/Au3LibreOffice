@@ -40,13 +40,13 @@ Func Example()
 	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style Border Width to $LOW_BORDERWIDTH_THICK.
-	_LOWriter_CharStyleBorderWidth($oCharStyle, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK)
+	; Set "Example" Character style Border Width to $LOW_BORDER_WIDTH_THICK.
+	_LOWriter_CharStyleBorderWidth($oCharStyle, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style Border Style to, Top =  $LOW_BORDERSTYLE_DASH_DOT_DOT, Bottom = $LOW_BORDERSTYLE_FINE_DASHED,
-	; Left = $LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP, Right = $LOW_BORDERSTYLE_SOLID
-	_LOWriter_CharStyleBorderStyle($oCharStyle, $LOW_BORDERSTYLE_DASH_DOT_DOT, $LOW_BORDERSTYLE_FINE_DASHED, $LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP, $LOW_BORDERSTYLE_SOLID)
+	; Set "Example" Character style Border Style to, Top =  $LOW_BORDER_STYLE_DASH_DOT_DOT, Bottom = $LOW_BORDER_STYLE_FINE_DASHED,
+	; Left = $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP, Right = $LOW_BORDER_STYLE_SOLID
+	_LOWriter_CharStyleBorderStyle($oCharStyle, $LOW_BORDER_STYLE_DASH_DOT_DOT, $LOW_BORDER_STYLE_FINE_DASHED, $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP, $LOW_BORDER_STYLE_SOLID)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

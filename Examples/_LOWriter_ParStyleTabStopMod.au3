@@ -30,9 +30,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the TabStop from 1/4" to 1/2" Tab Stop position, Set the fill character to Asc(~) the Tilde key ASCII Value 126.
-	; Set alignment To  $LOW_TAB_ALIGN_DECIMAL, and the decimal character to ASC(.) a period, ASCII value 46.
+	; Set alignment To  $LOW_PAR_TAB_ALIGN_DECIMAL, and the decimal character to ASC(.) a period, ASCII value 46.
 	; Since I am modifying the TabStop position, @Extended will be my new Tab Stop position.
-	_LOWriter_ParStyleTabStopMod($oParStyle, $iTabStop, $iHMM, Asc("~"), $LOW_TAB_ALIGN_DECIMAL, Asc("."))
+	_LOWriter_ParStyleTabStopMod($oParStyle, $iTabStop, $iHMM, Asc("~"), $LOW_PAR_TAB_ALIGN_DECIMAL, Asc("."))
 	$iTabStop = @extended
 	If @error Then _ERROR($oDoc, "Failed to modify Paragraph Tab stop settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

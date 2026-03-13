@@ -42,7 +42,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Example" character style font weight to bold.
-	_LOWriter_CharStyleFont($oCharStyle, Null, Null, Null, $LOW_WEIGHT_BOLD)
+	_LOWriter_CharStyleFont($oCharStyle, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

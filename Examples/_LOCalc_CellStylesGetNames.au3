@@ -35,7 +35,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Text to Bold
-	_LOCalc_CellFont($oCell, Null, Null, Null, $LOC_WEIGHT_BOLD)
+	_LOCalc_CellFont($oCell, Null, Null, Null, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to Cell Font formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To (UBound($asCellStyles) - 1)
@@ -74,7 +74,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Text to Bold
-	_LOCalc_CellFont($oCell, Null, Null, Null, $LOC_WEIGHT_BOLD)
+	_LOCalc_CellFont($oCell, Null, Null, Null, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to Cell Font formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To (UBound($asCellStyles) - 1)

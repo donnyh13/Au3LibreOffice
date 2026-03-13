@@ -43,8 +43,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Numbering Style position settings: Modify all Levels (0), Aligned at = 1/2", Numbering Align = $LOW_ORIENT_HORI_CENTER,
-	; Followed by = $LOW_FOLLOW_BY_TABSTOP, TabStop = 3/4", Indent = 1"
-	_LOWriter_NumStylePosition($oDoc, $oNumStyle, 0, $iHMM, $LOW_ORIENT_HORI_CENTER, $LOW_FOLLOW_BY_TABSTOP, $iHMM2, $iHMM3)
+	; Followed by = $LOW_NUM_FOLLOW_BY_TABSTOP, TabStop = 3/4", Indent = 1"
+	_LOWriter_NumStylePosition($oDoc, $oNumStyle, 0, $iHMM, $LOW_ORIENT_HORI_CENTER, $LOW_NUM_FOLLOW_BY_TABSTOP, $iHMM2, $iHMM3)
 	If @error Then _ERROR($oDoc, "Failed to set Numbering Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Numbering Style settings for all levels. Return will be an array containing arrays with values in order of function parameters.

@@ -32,9 +32,9 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 11, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Font to "Arial", Font size to 18, Posture (Italic) to $LOW_POSTURE_ITALIC, and weight (Bold)
-	; to $LOW_WEIGHT_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, "Arial", 18, $LOW_POSTURE_ITALIC, $LOW_WEIGHT_BOLD)
+	; Set the selected text's Font to "Arial", Font size to 18, Posture (Italic) to $LOW_CHAR_POSTURE_ITALIC, and weight (Bold)
+	; to $LOW_CHAR_WEIGHT_BOLD
+	_LOWriter_DirFrmtFont($oViewCursor, "Arial", 18, $LOW_CHAR_POSTURE_ITALIC, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

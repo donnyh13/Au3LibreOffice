@@ -29,8 +29,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the paragraph at the current cursor's location Shadow location to $LOW_SHADOW_TOP_LEFT, Color to $LO_COLOR_PURPLE, and 1/4" wide
-	_LOWriter_DirFrmtParShadow($oViewCursor, $LOW_SHADOW_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
+	; Set the paragraph at the current cursor's location Shadow location to $LOW_SHADOW_LOCATION_TOP_LEFT, Color to $LO_COLOR_PURPLE, and 1/4" wide
+	_LOWriter_DirFrmtParShadow($oViewCursor, $LOW_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

@@ -56,8 +56,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 6, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Font weight to (Bold) $LOW_WEIGHT_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, Null, Null, Null, $LOW_WEIGHT_BOLD)
+	; Set the selected text's Font weight to (Bold) $LOW_CHAR_WEIGHT_BOLD
+	_LOWriter_DirFrmtFont($oViewCursor, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a new search descriptor for searching with. Set Backward, Match Case, Whole word, Regular Expression, and Search Styles to false, and
@@ -68,7 +68,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Find Format Search Array for Bold font.
-	_LOWriter_FindFormatModifyFont($atFindFormat, Null, Null, Null, $LOW_WEIGHT_BOLD)
+	_LOWriter_FindFormatModifyFont($atFindFormat, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the word "search" that is bold.

@@ -20,13 +20,13 @@ Func Example()
 	_LOCalc_PageStyleHeader($oPageStyle, True)
 	If @error Then _ERROR($oDoc, "Failed to turn Page Style headers on. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Header Border Width (all four sides) to $LOC_BORDERWIDTH_MEDIUM
-	_LOCalc_PageStyleHeaderBorderWidth($oPageStyle, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM, $LOC_BORDERWIDTH_MEDIUM)
+	; Set Header Border Width (all four sides) to $LOC_BORDER_WIDTH_MEDIUM
+	_LOCalc_PageStyleHeaderBorderWidth($oPageStyle, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM, $LOC_BORDER_WIDTH_MEDIUM)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Page style Header Border Style settings to: Top = $LOC_BORDERSTYLE_DASH_DOT_DOT, Bottom = $LOC_BORDERSTYLE_THICKTHIN_MEDIUMGAP
-	; Left = $LOC_BORDERSTYLE_DOUBLE, Right = $LOC_BORDERSTYLE_DASHED
-	_LOCalc_PageStyleHeaderBorderStyle($oPageStyle, $LOC_BORDERSTYLE_DASH_DOT_DOT, $LOC_BORDERSTYLE_THICKTHIN_MEDIUMGAP, $LOC_BORDERSTYLE_DOUBLE, $LOC_BORDERSTYLE_DASHED)
+	; Set Page style Header Border Style settings to: Top = $LOC_BORDER_STYLE_DASH_DOT_DOT, Bottom = $LOC_BORDER_STYLE_THICKTHIN_MEDIUMGAP
+	; Left = $LOC_BORDER_STYLE_DOUBLE, Right = $LOC_BORDER_STYLE_DASHED
+	_LOCalc_PageStyleHeaderBorderStyle($oPageStyle, $LOC_BORDER_STYLE_DASH_DOT_DOT, $LOC_BORDER_STYLE_THICKTHIN_MEDIUMGAP, $LOC_BORDER_STYLE_DOUBLE, $LOC_BORDER_STYLE_DASHED)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with elements in order of function parameters.

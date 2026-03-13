@@ -20,8 +20,8 @@ Func Example()
 	$oCell = _LOCalc_RangeGetCellByName($oSheet, "B2")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell's Border Width to $LOC_BORDERWIDTH_THICK for all four sides.
-	_LOCalc_CellBorderWidth($oCell, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK)
+	; Set the Cell's Border Width to $LOC_BORDER_WIDTH_THICK for all four sides.
+	_LOCalc_CellBorderWidth($oCell, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -43,8 +43,8 @@ Func Example()
 	$oCellRange = _LOCalc_RangeGetCellByName($oSheet, "D2", "E5")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell's Border Width to $LOC_BORDERWIDTH_THICK for all four sides, and $LOC_BORDERWIDTH_THIN for the vertical and diagonal borders.
-	_LOCalc_CellBorderWidth($oCellRange, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THICK, $LOC_BORDERWIDTH_THIN, $LOC_BORDERWIDTH_THIN, $LOC_BORDERWIDTH_THIN, $LOC_BORDERWIDTH_THIN)
+	; Set the Cell's Border Width to $LOC_BORDER_WIDTH_THICK for all four sides, and $LOC_BORDER_WIDTH_THIN for the vertical and diagonal borders.
+	_LOCalc_CellBorderWidth($oCellRange, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THICK, $LOC_BORDER_WIDTH_THIN, $LOC_BORDER_WIDTH_THIN, $LOC_BORDER_WIDTH_THIN, $LOC_BORDER_WIDTH_THIN)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Range's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

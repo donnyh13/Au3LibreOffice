@@ -24,8 +24,8 @@ Func Example()
 	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style Font effects to $LOW_RELIEF_EMBOSSED relief type.
-	_LOWriter_ParStyleEffect($oParStyle, $LOW_RELIEF_EMBOSSED)
+	; Set Default Paragraph Style Font effects to $LOW_CHAR_RELIEF_EMBOSSED relief type.
+	_LOWriter_ParStyleEffect($oParStyle, $LOW_CHAR_RELIEF_EMBOSSED)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -38,10 +38,10 @@ Func Example()
 			"Are the words hidden? True/False: " & $avParStyleSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avParStyleSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avParStyleSettings[4] & @CRLF & @CRLF & _
-			"I will now set Case to $LOW_CASEMAP_SM_CAPS, and Relief to $LOW_RELIEF_NONE.")
+			"I will now set Case to $LOW_CHAR_CASEMAP_SM_CAPS, and Relief to $LOW_CHAR_RELIEF_NONE.")
 
-	; Set Default Paragraph Style Font effects to $LOW_RELIEF_NONE relief type, Case to $LOW_CASEMAP_SM_CAPS
-	_LOWriter_ParStyleEffect($oParStyle, $LOW_RELIEF_NONE, $LOW_CASEMAP_SM_CAPS)
+	; Set Default Paragraph Style Font effects to $LOW_CHAR_RELIEF_NONE relief type, Case to $LOW_CHAR_CASEMAP_SM_CAPS
+	_LOWriter_ParStyleEffect($oParStyle, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_CASEMAP_SM_CAPS)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

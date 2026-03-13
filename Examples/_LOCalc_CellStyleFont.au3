@@ -36,8 +36,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Font to "Arial", Font size to 18, Posture (Italic) to $LOC_POSTURE_ITALIC, and weight (Bold) to $LOC_WEIGHT_BOLD
-	_LOCalc_CellStyleFont($oCellStyle, "Arial", 18, $LOC_POSTURE_ITALIC, $LOC_WEIGHT_BOLD)
+	; Set the Cell Style's Font to "Arial", Font size to 18, Posture (Italic) to $LOC_CHAR_POSTURE_ITALIC, and weight (Bold) to $LOC_CHAR_WEIGHT_BOLD
+	_LOCalc_CellStyleFont($oCellStyle, "Arial", 18, $LOC_CHAR_POSTURE_ITALIC, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

@@ -24,8 +24,8 @@ Func Example()
 	_LOCalc_CellString($oCell, "Some Text")
 	If @error Then _ERROR($oDoc, "Failed to set Cell Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell's Font effects to $LOC_RELIEF_EMBOSSED relief type.
-	_LOCalc_CellEffect($oCell, $LOC_RELIEF_EMBOSSED)
+	; Set the Cell's Font effects to $LOC_CHAR_RELIEF_EMBOSSED relief type.
+	_LOCalc_CellEffect($oCell, $LOC_CHAR_RELIEF_EMBOSSED)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -37,8 +37,8 @@ Func Example()
 			"Are the words outlined? True/False: " & $avSettings[1] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avSettings[2])
 
-	; Set the Cell's Font effects to $LOC_RELIEF_NONE relief type, Outline and Shadowed to True.
-	_LOCalc_CellEffect($oCell, $LOC_RELIEF_NONE, True, True)
+	; Set the Cell's Font effects to $LOC_CHAR_RELIEF_NONE relief type, Outline and Shadowed to True.
+	_LOCalc_CellEffect($oCell, $LOC_CHAR_RELIEF_NONE, True, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.

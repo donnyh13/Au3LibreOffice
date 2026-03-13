@@ -17,8 +17,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Frame Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Frame Style options. Set Protect content to True, Protect Position to True, Protect size to True, Vertical alignment to
-	; $LOW_TXT_ADJ_VERT_CENTER, Edit in Read-Only to True, Print to False, Text direction to $LOW_TXT_DIR_TB_LR
-	_LOWriter_FrameStyleOptions($oFrameStyle, True, True, True, $LOW_TXT_ADJ_VERT_CENTER, True, False, $LOW_TXT_DIR_TB_LR)
+	; $LOW_PAR_TXT_ADJ_VERT_CENTER, Edit in Read-Only to True, Print to False, Text direction to $LOW_PAR_TXT_DIR_TB_LR
+	_LOWriter_FrameStyleOptions($oFrameStyle, True, True, True, $LOW_PAR_TXT_ADJ_VERT_CENTER, True, False, $LOW_PAR_TXT_DIR_TB_LR)
 	If @error Then _ERROR($oDoc, "Failed to set Frame Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame Style settings. Return will be an array in order of function parameters.
