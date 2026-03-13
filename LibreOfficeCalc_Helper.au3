@@ -606,8 +606,8 @@ EndFunc   ;==>_LOCalc_FontExists
 ;                  The returned array will be as follows:
 ;                  The first column (Array[1][0]) contains the Font Name.
 ;                  The Second column (Array [1][1] contains the style name (Such as Bold Italic etc.)
-;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOC_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3;
-;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOC_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3;
+;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Related .......: _LOCalc_FontExists
 ; Link ..........:
 ; Example .......: Yes

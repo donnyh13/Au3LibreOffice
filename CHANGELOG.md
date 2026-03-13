@@ -1094,6 +1094,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_CellStrikeOut
   - _LOCalc_CellStyleStrikeOut
   - _LOCalc_TextCursorStrikeOut
+- Renamed Text related constants to group them together.
+  - `$LOC_POSTURE_` --> `$LOC_CHAR_POSTURE_`
+  - `$LOC_RELIEF_` --> `$LOC_CHAR_RELIEF_`
+  - `$LOC_STRIKEOUT_` --> `$LOC_CHAR_STRIKEOUT_`
+  - `$LOC_UNDERLINE_` --> `$LOC_CHAR_UNDERLINE_`
+  - `$LOC_WEIGHT_` --> `$LOC_CHAR_WEIGHT_`
+  - `$LOC_TXT_DIR_` --> `$LOC_PAR_TXT_DIR_`
 
 #### Documented
 

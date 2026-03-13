@@ -124,6 +124,66 @@ Global Const _                                                  ; com.sun.star.t
 		$LOC_CELL_TYPE_TEXT = 2, _                              ; Cell contains text.
 		$LOC_CELL_TYPE_FORMULA = 3                              ; Cell contains a formula.
 
+; Posture/Italic
+Global Const _                                                  ; com.sun.star.awt.FontSlant
+		$LOC_CHAR_POSTURE_NONE = 0, _                                ; Specifies a font without slant.
+		$LOC_CHAR_POSTURE_OBLIQUE = 1, _                             ; Specifies an oblique font (slant not designed into the font).
+		$LOC_CHAR_POSTURE_ITALIC = 2, _                              ; Specifies an italic font (slant designed into the font).
+		$LOC_CHAR_POSTURE_DontKnow = 3, _                            ; Specifies a font with an unknown slant. For Read Only.
+		$LOC_CHAR_POSTURE_REV_OBLIQUE = 4, _                         ; Specifies a reverse oblique font (slant not designed into the font).
+		$LOC_CHAR_POSTURE_REV_ITALIC = 5                             ; Specifies a reverse italic font (slant designed into the font).
+
+; Relief
+Global Const _                                                  ; com.sun.star.text.FontRelief
+		$LOC_CHAR_RELIEF_NONE = 0, _                                 ; No relief is applied.
+		$LOC_CHAR_RELIEF_EMBOSSED = 1, _                             ; The font relief is embossed.
+		$LOC_CHAR_RELIEF_ENGRAVED = 2                                ; The font relief is engraved.
+
+; Strikeout
+Global Const _                                                  ; com.sun.star.awt.FontStrikeout
+		$LOC_CHAR_STRIKEOUT_NONE = 0, _                              ; No strike out.
+		$LOC_CHAR_STRIKEOUT_SINGLE = 1, _                            ; Strike out the characters with a single line.
+		$LOC_CHAR_STRIKEOUT_DOUBLE = 2, _                            ; Strike out the characters with a double line.
+		$LOC_CHAR_STRIKEOUT_DONT_KNOW = 3, _                         ; The strikeout mode is not specified. For Read Only.
+		$LOC_CHAR_STRIKEOUT_BOLD = 4, _                              ; Strike out the characters with a bold line.
+		$LOC_CHAR_STRIKEOUT_SLASH = 5, _                             ; Strike out the characters with slashes.
+		$LOC_CHAR_STRIKEOUT_X = 6                                    ; Strike out the characters with X's.
+
+; Underline/Overline
+Global Const _                                                  ; com.sun.star.awt.FontUnderline
+		$LOC_CHAR_UNDERLINE_NONE = 0, _                              ; No Underline or Overline style.
+		$LOC_CHAR_UNDERLINE_SINGLE = 1, _                            ; Single line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DOUBLE = 2, _                            ; Double line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DOTTED = 3, _                            ; Dotted line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DONT_KNOW = 4, _                         ; Unknown Underline/Overline style, for read only.
+		$LOC_CHAR_UNDERLINE_DASH = 5, _                              ; Dashed line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_LONG_DASH = 6, _                         ; Long Dashed line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DASH_DOT = 7, _                          ; Dash Dot line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DASH_DOT_DOT = 8, _                      ; Dash Dot Dot line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_SML_WAVE = 9, _                          ; Small Wave line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_WAVE = 10, _                             ; Wave line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DBL_WAVE = 11, _                         ; Double Wave line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD = 12, _                             ; Bold line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_DOTTED = 13, _                      ; Bold Dotted line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_DASH = 14, _                        ; Bold Dashed line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_LONG_DASH = 15, _                   ; Bold Long Dash line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_DASH_DOT = 16, _                    ; Bold Dash Dot line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _                ; Bold Dash Dot Dot line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_WAVE = 18                           ; Bold Wave line Underline/Overline style.
+
+; Weight/Bold
+Global Const _                                                  ; com.sun.star.awt.FontWeight
+		$LOC_CHAR_WEIGHT_DONT_KNOW = 0, _                            ; The font weight is not specified/unknown. For Read Only.
+		$LOC_CHAR_WEIGHT_THIN = 50, _                                ; A 50% (Thin) font weight.
+		$LOC_CHAR_WEIGHT_ULTRA_LIGHT = 60, _                         ; A 60% (Ultra Light) font weight.
+		$LOC_CHAR_WEIGHT_LIGHT = 75, _                               ; A 75% (Light) font weight.
+		$LOC_CHAR_WEIGHT_SEMI_LIGHT = 90, _                          ; A 90% (Semi-Light) font weight.
+		$LOC_CHAR_WEIGHT_NORMAL = 100, _                             ; A 100% (Normal) font weight.
+		$LOC_CHAR_WEIGHT_SEMI_BOLD = 110, _                          ; A 110% (Semi-Bold) font weight.
+		$LOC_CHAR_WEIGHT_BOLD = 150, _                               ; A 150% (Bold) font weight.
+		$LOC_CHAR_WEIGHT_ULTRA_BOLD = 175, _                         ; A 175% (Ultra-Bold) font weight.
+		$LOC_CHAR_WEIGHT_BLACK = 200                                 ; A 200% (Black) font weight.
+
 ; Comment Text Anchor Position
 Global Enum _
 		$LOC_COMMENT_ANCHOR_TOP_LEFT, _                         ; The comment text is anchored in the Upper-Left corner of the comment box.
@@ -575,6 +635,12 @@ Global Const _
 		$LOC_PAPER_WIDTH_12ENVELOPE = 12065, _                  ; 12 Pound Envelope paper width in Hundredths of a Millimeter (HMM).
 		$LOC_PAPER_WIDTH_JAP_POSTCARD = 10008                   ; Japanese Postcard paper width in Hundredths of a Millimeter (HMM).
 
+; Text Direction
+Global Const _                                                  ; com.sun.star.text.WritingMode2
+		$LOC_PAR_TXT_DIR_LR = 0, _                                  ; Text within lines is written left-to-right. Typically, this is the writing mode for normal "alphabetic" text.
+		$LOC_PAR_TXT_DIR_RL = 1, _                                  ; Text within a line are written right-to-left. Typically, this writing mode is used in Arabic and Hebrew text.
+		$LOC_PAR_TXT_DIR_CONTEXT = 4                                ; Obtain actual writing mode from the context of the object.
+
 ; Pivot Table Field Base Item Type
 Global Const _                                                  ; com.sun.star.sheet.DataPilotFieldReferenceItemType
 		$LOC_PIVOT_TBL_FIELD_BASE_ITEM_NAMED = 0, _             ; The reference item is given by a name.
@@ -600,21 +666,6 @@ Global Const _                                                  ; com.sun.star.s
 		$LOC_PIVOT_TBL_FIELD_TYPE_ROW = 2, _                    ; The field is used as a row field.
 		$LOC_PIVOT_TBL_FIELD_TYPE_FILTER = 3, _                 ; The field is used as a filter field. Also called "Page" in the constants.
 		$LOC_PIVOT_TBL_FIELD_TYPE_DATA = 4                      ; The field is used as a data field.
-
-; Posture/Italic
-Global Const _                                                  ; com.sun.star.awt.FontSlant
-		$LOC_POSTURE_NONE = 0, _                                ; Specifies a font without slant.
-		$LOC_POSTURE_OBLIQUE = 1, _                             ; Specifies an oblique font (slant not designed into the font).
-		$LOC_POSTURE_ITALIC = 2, _                              ; Specifies an italic font (slant designed into the font).
-		$LOC_POSTURE_DontKnow = 3, _                            ; Specifies a font with an unknown slant. For Read Only.
-		$LOC_POSTURE_REV_OBLIQUE = 4, _                         ; Specifies a reverse oblique font (slant not designed into the font).
-		$LOC_POSTURE_REV_ITALIC = 5                             ; Specifies a reverse italic font (slant designed into the font).
-
-; Relief
-Global Const _                                                  ; com.sun.star.text.FontRelief
-		$LOC_RELIEF_NONE = 0, _                                 ; No relief is applied.
-		$LOC_RELIEF_EMBOSSED = 1, _                             ; The font relief is embossed.
-		$LOC_RELIEF_ENGRAVED = 2                                ; The font relief is engraved.
 
 ; Page Print Scale Mode
 Global Enum _
@@ -664,16 +715,6 @@ Global Const _                                                  ; com.sun.star.t
 		$LOC_SORT_DATA_TYPE_NUMERIC = 1, _                      ; Sort Data type is Numerical.
 		$LOC_SORT_DATA_TYPE_ALPHANUMERIC = 2                    ; Sort Data type is Text.
 
-; Strikeout
-Global Const _                                                  ; com.sun.star.awt.FontStrikeout
-		$LOC_STRIKEOUT_NONE = 0, _                              ; No strike out.
-		$LOC_STRIKEOUT_SINGLE = 1, _                            ; Strike out the characters with a single line.
-		$LOC_STRIKEOUT_DOUBLE = 2, _                            ; Strike out the characters with a double line.
-		$LOC_STRIKEOUT_DONT_KNOW = 3, _                         ; The strikeout mode is not specified. For Read Only.
-		$LOC_STRIKEOUT_BOLD = 4, _                              ; Strike out the characters with a bold line.
-		$LOC_STRIKEOUT_SLASH = 5, _                             ; Strike out the characters with slashes.
-		$LOC_STRIKEOUT_X = 6                                    ; Strike out the characters with X's.
-
 ; Text Cursor Movement Constants.
 Global Enum _
 		$LOC_TEXTCUR_COLLAPSE_TO_START, _                       ; Collapses the current selection to the start of the selection.
@@ -682,34 +723,6 @@ Global Enum _
 		$LOC_TEXTCUR_GO_RIGHT, _                                ; Move the cursor right by n characters.
 		$LOC_TEXTCUR_GOTO_START, _                              ; Move the cursor to the start of the text.
 		$LOC_TEXTCUR_GOTO_END                                   ; Move the cursor to the end of the text.
-
-; Text Direction
-Global Const _                                                  ; com.sun.star.text.WritingMode2
-		$LOC_TXT_DIR_LR = 0, _                                  ; Text within lines is written left-to-right. Typically, this is the writing mode for normal "alphabetic" text.
-		$LOC_TXT_DIR_RL = 1, _                                  ; Text within a line are written right-to-left. Typically, this writing mode is used in Arabic and Hebrew text.
-		$LOC_TXT_DIR_CONTEXT = 4                                ; Obtain actual writing mode from the context of the object.
-
-; Underline/Overline
-Global Const _                                                  ; com.sun.star.awt.FontUnderline
-		$LOC_UNDERLINE_NONE = 0, _                              ; No Underline or Overline style.
-		$LOC_UNDERLINE_SINGLE = 1, _                            ; Single line Underline/Overline style.
-		$LOC_UNDERLINE_DOUBLE = 2, _                            ; Double line Underline/Overline style.
-		$LOC_UNDERLINE_DOTTED = 3, _                            ; Dotted line Underline/Overline style.
-		$LOC_UNDERLINE_DONT_KNOW = 4, _                         ; Unknown Underline/Overline style, for read only.
-		$LOC_UNDERLINE_DASH = 5, _                              ; Dashed line Underline/Overline style.
-		$LOC_UNDERLINE_LONG_DASH = 6, _                         ; Long Dashed line Underline/Overline style.
-		$LOC_UNDERLINE_DASH_DOT = 7, _                          ; Dash Dot line Underline/Overline style.
-		$LOC_UNDERLINE_DASH_DOT_DOT = 8, _                      ; Dash Dot Dot line Underline/Overline style.
-		$LOC_UNDERLINE_SML_WAVE = 9, _                          ; Small Wave line Underline/Overline style.
-		$LOC_UNDERLINE_WAVE = 10, _                             ; Wave line Underline/Overline style.
-		$LOC_UNDERLINE_DBL_WAVE = 11, _                         ; Double Wave line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD = 12, _                             ; Bold line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_DOTTED = 13, _                      ; Bold Dotted line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_DASH = 14, _                        ; Bold Dashed line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_LONG_DASH = 15, _                   ; Bold Long Dash line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_DASH_DOT = 16, _                    ; Bold Dash Dot line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _                ; Bold Dash Dot Dot line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_WAVE = 18                           ; Bold Wave line Underline/Overline style.
 
 ; Validation Conditions.
 Global Const _                                                  ; com.sun.star.sheet.ConditionOperator
@@ -747,19 +760,6 @@ Global Const _                                                  ; com.sun.star.s
 		$LOC_VALIDATION_TYPE_TEXT_LEN = 5, _                    ; String is valid if its length matches the specified condition.
 		$LOC_VALIDATION_TYPE_LIST = 6, _                        ; Only strings from a specified list are valid.
 		$LOC_VALIDATION_TYPE_CUSTOM = 7                         ; The specified formula determines which contents are valid.
-
-; Weight/Bold
-Global Const _                                                  ; com.sun.star.awt.FontWeight
-		$LOC_WEIGHT_DONT_KNOW = 0, _                            ; The font weight is not specified/unknown. For Read Only.
-		$LOC_WEIGHT_THIN = 50, _                                ; A 50% (Thin) font weight.
-		$LOC_WEIGHT_ULTRA_LIGHT = 60, _                         ; A 60% (Ultra Light) font weight.
-		$LOC_WEIGHT_LIGHT = 75, _                               ; A 75% (Light) font weight.
-		$LOC_WEIGHT_SEMI_LIGHT = 90, _                          ; A 90% (Semi-Light) font weight.
-		$LOC_WEIGHT_NORMAL = 100, _                             ; A 100% (Normal) font weight.
-		$LOC_WEIGHT_SEMI_BOLD = 110, _                          ; A 110% (Semi-Bold) font weight.
-		$LOC_WEIGHT_BOLD = 150, _                               ; A 150% (Bold) font weight.
-		$LOC_WEIGHT_ULTRA_BOLD = 175, _                         ; A 175% (Ultra-Bold) font weight.
-		$LOC_WEIGHT_BLACK = 200                                 ; A 200% (Black) font weight.
 
 ; Zoom Type Constants
 Global Const _                                                  ; com.sun.star.view.DocumentZoomType
