@@ -672,7 +672,7 @@ EndFunc   ;==>_LOWriter_DateStructModify
 ;                  $iLastLineAlign      - [optional] an integer value (0-3). Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bExpandSingleWord   - [optional] a boolean value. Default is Null. If True, and the last line of a justified paragraph consists of one word, the word is stretched to the width of the paragraph.
 ;                  $bSnapToGrid         - [optional] a boolean value. Default is Null. If True, Aligns the paragraph to a text grid (if one is active).
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [Libre Office Default is 4] In my personal testing, searching for the Text Direction setting using this parameter alone, without using other parameters, causes any results matching the searched for string to be replaced, whether they contain the Text Direction format or not, this is supposed to be fixed in L.O. 7.6.
+;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [Libre Office Default is 4] In my personal testing, searching for the Text Direction setting using this parameter alone, without using other parameters, causes any results matching the searched for string to be replaced, whether they contain the Text Direction format or not, this is supposed to be fixed in L.O. 7.6.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -682,7 +682,7 @@ EndFunc   ;==>_LOWriter_DateStructModify
 ;                  @Error 1 @Extended 4 Return 0 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $bExpandSingleWord not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bSnapToGrid not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
@@ -760,7 +760,7 @@ Func _LOWriter_FindFormatModifyAlignment(ByRef $atFormat, $iHorAlign = Null, $iV
 			__LOWriter_FindFormatDeleteSetting($atFormat, "WritingMode")
 
 		Else
-			If Not __LO_IntIsBetween($iTxtDirection, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+			If Not __LO_IntIsBetween($iTxtDirection, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("WritingMode", $iTxtDirection))
 		EndIf
@@ -774,16 +774,16 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ; Description ...: Modify or Add Find Format Effects Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyEffects(ByRef $atFormat[,$iRelief = Null[, $iCase = Null[, $bOutline = Null[, $bShadow = Null]]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_RELIEF_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Relief setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Relief format or not, this is supposed to be fixed in L.O. 7.6.
-;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOW_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Relief setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Relief format or not, this is supposed to be fixed in L.O. 7.6.
+;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
 ;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 4 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $bShadow not a Boolean.
 ;                  --Success--
@@ -807,7 +807,7 @@ Func _LOWriter_FindFormatModifyEffects(ByRef $atFormat, $iRelief = Null, $iCase 
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharRelief")
 
 		Else
-			If Not __LO_IntIsBetween($iRelief, $LOW_RELIEF_NONE, $LOW_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+			If Not __LO_IntIsBetween($iRelief, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharRelief", $iRelief))
 		EndIf
@@ -818,7 +818,7 @@ Func _LOWriter_FindFormatModifyEffects(ByRef $atFormat, $iRelief = Null, $iCase 
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharCaseMap")
 
 		Else
-			If Not __LO_IntIsBetween($iCase, $LOW_CASEMAP_NONE, $LOW_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+			If Not __LO_IntIsBetween($iCase, $LOW_CHAR_CASEMAP_NONE, $LOW_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharCaseMap", $iCase))
 		EndIf
@@ -856,8 +856,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified. See Remarks.
 ;                  $sFontName           - [optional] a string value. Default is Null. The Font name to search for.
 ;                  $iFontSize           - [optional] an integer value. Default is Null. The Font size to search for.
-;                  $iFontPosture        - [optional] an integer value (0-5). Default is Null. The Font Posture(Italic etc.,) See Constants, $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iFontWeight         - [optional] an integer value(0,50-200). Default is Null. The Font weight to search for. See Constants, $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iFontPosture        - [optional] an integer value (0-5). Default is Null. The Font Posture(Italic etc.,) See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iFontWeight         - [optional] an integer value(0,50-200). Default is Null. The Font weight to search for. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Transparency. 0 is visible, 100 is invisible. Seems to require a color entered in $iFontColor before transparency can be searched for. Libre Office 7.0 and Up.
 ;                  $iHighlight          - [optional] an integer value (-1-16777215). Default is Null. The Highlight color to search for, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -868,8 +868,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not found in current Document.
 ;                  @Error 1 @Extended 4 Return 0 = $iFontSize not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iFontPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iFontWeight not an Integer, less than 50 but not 0, or more than 200. See Constants, $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iFontPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iFontWeight not an Integer, less than 50 but not 0, or more than 200. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $iFontColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 8 Return 0 = $iTransparency not an Integer, Less than 0 or greater than 100.
 ;                  @Error 1 @Extended 9 Return 0 = $iHighlight not an Integer, less than -1 or greater than 16777215.
@@ -922,7 +922,7 @@ Func _LOWriter_FindFormatModifyFont(ByRef $atFormat, $sFontName = Null, $iFontSi
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharPosture")
 
 		Else
-			If Not __LO_IntIsBetween($iFontPosture, $LOW_POSTURE_NONE, $LOW_POSTURE_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+			If Not __LO_IntIsBetween($iFontPosture, $LOW_CHAR_POSTURE_NONE, $LOW_CHAR_POSTURE_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharPosture", $iFontPosture))
 		EndIf
@@ -933,7 +933,7 @@ Func _LOWriter_FindFormatModifyFont(ByRef $atFormat, $sFontName = Null, $iFontSi
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharWeight")
 
 		Else
-			If Not __LO_IntIsBetween($iFontWeight, $LOW_WEIGHT_THIN, $LOW_WEIGHT_BLACK, "", $LOW_WEIGHT_DONT_KNOW) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+			If Not __LO_IntIsBetween($iFontWeight, $LOW_CHAR_WEIGHT_THIN, $LOW_CHAR_WEIGHT_BLACK, "", $LOW_CHAR_WEIGHT_DONT_KNOW) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharWeight", $iFontWeight))
 		EndIf
@@ -1164,14 +1164,14 @@ EndFunc   ;==>_LOWriter_FindFormatModifyIndent
 ; Description ...: Modify or Add Find Format Overline Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyOverline(ByRef $atFormat[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See remarks. Overline style must be set before any of the other parameters can be searched for.
+;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See remarks. Overline style must be set before any of the other parameters can be searched for.
 ;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
-;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  --Success--
@@ -1197,7 +1197,7 @@ Func _LOWriter_FindFormatModifyOverline(ByRef $atFormat, $iOverLineStyle = Null,
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharOverline")
 
 		Else
-			If Not __LO_IntIsBetween($iOverLineStyle, $LOW_UNDERLINE_NONE, $LOW_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+			If Not __LO_IntIsBetween($iOverLineStyle, $LOW_CHAR_UNDERLINE_NONE, $LOW_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharOverline", $iOverLineStyle))
 		EndIf
@@ -1510,7 +1510,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ;                  $iAbovePar           - [optional] an integer value (0-10008). Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] an integer value (0-10008). Default is Null. The Space below a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. Libre Office version 3.6 and up.
-;                  $iLineSpcMode        - [optional] an integer value (0-3). Default is Null. The type of line spacing of a paragraph. See Constants, $LOW_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3, also notice min and max values for each. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
+;                  $iLineSpcMode        - [optional] an integer value (0-3). Default is Null. The type of line spacing of a paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3, also notice min and max values for each. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
 ;                  $iLineSpcHeight      - [optional] an integer value. Default is Null. This value specifies the spacing of the lines. See Remarks for Minimum and Max values. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1519,7 +1519,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ;                  @Error 1 @Extended 2 Return 0 = $iAbovePar not an Integer, less than 0 or greater than 10008.
 ;                  @Error 1 @Extended 3 Return 0 = $iBelowPar not an Integer, less than 0 or greater than 10008.
 ;                  @Error 1 @Extended 4 Return 0 = $bAddSpace not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOW_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error 1 @Extended 5 Return 0 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  @Error 1 @Extended 6 Return 0 = $iLineSpcHeight not an Integer.
 ;                  @Error 1 @Extended 7 Return 0 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
 ;                  @Error 1 @Extended 8 Return 0 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 10008.
@@ -1596,7 +1596,7 @@ Func _LOWriter_FindFormatModifySpacing(ByRef $atFormat, $iAbovePar = Null, $iBel
 			If Not IsObj($tLine) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 			If ($iLineSpcMode <> Default) And ($iLineSpcMode <> Null) Then
-				If Not __LO_IntIsBetween($iLineSpcMode, $LOW_LINE_SPC_MODE_PROP, $LOW_LINE_SPC_MODE_FIX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+				If Not __LO_IntIsBetween($iLineSpcMode, $LOW_PAR_LINE_SPC_MODE_PROP, $LOW_PAR_LINE_SPC_MODE_FIX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 				$tLine.Mode = $iLineSpcMode
 			EndIf
@@ -1605,13 +1605,13 @@ Func _LOWriter_FindFormatModifySpacing(ByRef $atFormat, $iAbovePar = Null, $iBel
 				If Not IsInt($iLineSpcHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 				Switch $tLine.Mode()
-					Case $LOW_LINE_SPC_MODE_PROP ; Proportional
+					Case $LOW_PAR_LINE_SPC_MODE_PROP ; Proportional
 						If Not __LO_IntIsBetween($iLineSpcHeight, 6, 65535) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0) ; Min setting on Proportional is 6%
 
-					Case $LOW_LINE_SPC_MODE_MIN, $LOW_LINE_SPC_MODE_LEADING ; Minimum and Leading Modes
+					Case $LOW_PAR_LINE_SPC_MODE_MIN, $LOW_PAR_LINE_SPC_MODE_LEADING ; Minimum and Leading Modes
 						If Not __LO_IntIsBetween($iLineSpcHeight, 0, 10008) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-					Case $LOW_LINE_SPC_MODE_FIX ; Fixed Line Spacing Mode
+					Case $LOW_PAR_LINE_SPC_MODE_FIX ; Fixed Line Spacing Mode
 						If Not __LO_IntIsBetween($iLineSpcHeight, 51, 10008) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0) ; Min spacing is 51 when Fixed Mode
 				EndSwitch
 				$tLine.Height = $iLineSpcHeight
@@ -1629,13 +1629,13 @@ EndFunc   ;==>_LOWriter_FindFormatModifySpacing
 ; Description ...: Modify or Add Find Format Strikeout Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyStrikeout(ByRef $atFormat[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
+;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
-;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See Constants, $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See Constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
@@ -1660,9 +1660,9 @@ Func _LOWriter_FindFormatModifyStrikeout(ByRef $atFormat, $iStrikelineStyle = Nu
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharCrossedOut")
 
 		Else
-			If Not __LO_IntIsBetween($iStrikelineStyle, $LOW_STRIKEOUT_NONE, $LOW_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+			If Not __LO_IntIsBetween($iStrikelineStyle, $LOW_CHAR_STRIKEOUT_NONE, $LOW_CHAR_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-			If ($iStrikelineStyle = $LOW_STRIKEOUT_NONE) Then
+			If ($iStrikelineStyle = $LOW_CHAR_STRIKEOUT_NONE) Then
 				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharStrikeout", $iStrikelineStyle))
 				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharCrossedOut", False))
 
@@ -1774,14 +1774,14 @@ EndFunc   ;==>_LOWriter_FindFormatModifyTxtFlowOpt
 ; Description ...: Modify or Add Find Format Underline Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyUnderline(ByRef $atFormat[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The line style of the Underline, see constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. Underline style must be set before any of the other parameters can be searched for.
+;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The line style of the Underline, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. Underline style must be set before any of the other parameters can be searched for.
 ;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.. $LO_COLOR_OFF(-1) is automatic color mode.
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
-;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See Constants, $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See Constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  @Error 1 @Extended 3 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  --Success--
@@ -1806,7 +1806,7 @@ Func _LOWriter_FindFormatModifyUnderline(ByRef $atFormat, $iUnderlineStyle = Nul
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharUnderline")
 
 		Else
-			If Not __LO_IntIsBetween($iUnderlineStyle, $LOW_UNDERLINE_NONE, $LOW_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+			If Not __LO_IntIsBetween($iUnderlineStyle, $LOW_CHAR_UNDERLINE_NONE, $LOW_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharUnderline", $iUnderlineStyle))
 		EndIf
@@ -1848,31 +1848,31 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FontDescCreate
 ; Description ...: Create a Font Descriptor Map.
-; Syntax ........: _LOWriter_FontDescCreate([$sFontName = ""[, $iWeight = $LOW_WEIGHT_DONT_KNOW[, $iSlant = $LOW_POSTURE_DONTKNOW[, $nSize = 0[, $iColor = $LO_COLOR_OFF[, $iUnderlineStyle = $LOW_UNDERLINE_DONT_KNOW[, $iUnderlineColor = $LO_COLOR_OFF[, $iStrikelineStyle = $LOW_STRIKEOUT_DONT_KNOW[, $bIndividualWords = False[, $iRelief = $LOW_RELIEF_NONE]]]]]]]]]])
+; Syntax ........: _LOWriter_FontDescCreate([$sFontName = ""[, $iWeight = $LOW_CHAR_WEIGHT_DONT_KNOW[, $iSlant = $LOW_CHAR_POSTURE_DONTKNOW[, $nSize = 0[, $iColor = $LO_COLOR_OFF[, $iUnderlineStyle = $LOW_CHAR_UNDERLINE_DONT_KNOW[, $iUnderlineColor = $LO_COLOR_OFF[, $iStrikelineStyle = $LOW_CHAR_STRIKEOUT_DONT_KNOW[, $bIndividualWords = False[, $iRelief = $LOW_CHAR_RELIEF_NONE]]]]]]]]]])
 ; Parameters ....: $sFontName           - [optional] a string value. Default is "". The Font name.
-;                  $iWeight             - [optional] an integer value (0-200). Default is $LOW_WEIGHT_DONT_KNOW. The Font weight. See Constants $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iSlant              - [optional] an integer value (0-5). Default is $LOW_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iWeight             - [optional] an integer value (0-200). Default is $LOW_CHAR_WEIGHT_DONT_KNOW. The Font weight. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iSlant              - [optional] an integer value (0-5). Default is $LOW_CHAR_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $nSize               - [optional] a general number value. Default is 0. The Font size.
 ;                  $iColor              - [optional] an integer value (-1-16777215). Default is $LO_COLOR_OFF. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is $LOW_UNDERLINE_DONT_KNOW. The Font underline Style. See Constants $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is $LOW_CHAR_UNDERLINE_DONT_KNOW. The Font underline Style. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iUnderlineColor     - [optional] an integer value (-1-16777215). Default is $LO_COLOR_OFF. The Font Underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is $LOW_STRIKEOUT_DONT_KNOW. The Strikeout line style. See Constants $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is $LOW_CHAR_STRIKEOUT_DONT_KNOW. The Strikeout line style. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bIndividualWords    - [optional] a boolean value. Default is False. If True, only individual words are underlined.
-;                  $iRelief             - [optional] an integer value (0-2). Default is $LOW_RELIEF_NONE. The Font relief style. See Constants $LOW_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRelief             - [optional] an integer value (0-2). Default is $LOW_CHAR_RELIEF_NONE. The Font relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 2 Return 0 = Font called in $sFontName not found.
-;                  @Error 1 @Extended 3 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $nSize not a number.
 ;                  @Error 1 @Extended 6 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 7 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 8 Return 0 = $iUnderlineColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 9 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 9 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 10 Return 0 = $bIndividualWords not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOW_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 11 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Returning the created Map Font Descriptor.
 ; Author ........: donnyh13
@@ -1882,7 +1882,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FontDescCreate($sFontName = "", $iWeight = $LOW_WEIGHT_DONT_KNOW, $iSlant = $LOW_POSTURE_DONTKNOW, $nSize = 0, $iColor = $LO_COLOR_OFF, $iUnderlineStyle = $LOW_UNDERLINE_DONT_KNOW, $iUnderlineColor = $LO_COLOR_OFF, $iStrikelineStyle = $LOW_STRIKEOUT_DONT_KNOW, $bIndividualWords = False, $iRelief = $LOW_RELIEF_NONE)
+Func _LOWriter_FontDescCreate($sFontName = "", $iWeight = $LOW_CHAR_WEIGHT_DONT_KNOW, $iSlant = $LOW_CHAR_POSTURE_DONTKNOW, $nSize = 0, $iColor = $LO_COLOR_OFF, $iUnderlineStyle = $LOW_CHAR_UNDERLINE_DONT_KNOW, $iUnderlineColor = $LO_COLOR_OFF, $iStrikelineStyle = $LOW_CHAR_STRIKEOUT_DONT_KNOW, $bIndividualWords = False, $iRelief = $LOW_CHAR_RELIEF_NONE)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1890,15 +1890,15 @@ Func _LOWriter_FontDescCreate($sFontName = "", $iWeight = $LOW_WEIGHT_DONT_KNOW,
 
 	If Not IsString($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not _LOWriter_FontExists($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iWeight, $LOW_WEIGHT_DONT_KNOW, $LOW_WEIGHT_BLACK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_IntIsBetween($iSlant, $LOW_POSTURE_NONE, $LOW_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iWeight, $LOW_CHAR_WEIGHT_DONT_KNOW, $LOW_CHAR_WEIGHT_BLACK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_IntIsBetween($iSlant, $LOW_CHAR_POSTURE_NONE, $LOW_CHAR_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsNumber($nSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not __LO_IntIsBetween($iUnderlineStyle, $LOW_UNDERLINE_NONE, $LOW_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If Not __LO_IntIsBetween($iUnderlineStyle, $LOW_CHAR_UNDERLINE_NONE, $LOW_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 	If Not __LO_IntIsBetween($iUnderlineColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-	If Not __LO_IntIsBetween($iStrikelineStyle, $LOW_STRIKEOUT_NONE, $LOW_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+	If Not __LO_IntIsBetween($iStrikelineStyle, $LOW_CHAR_STRIKEOUT_NONE, $LOW_CHAR_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 	If Not IsBool($bIndividualWords) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
-	If Not __LO_IntIsBetween($iRelief, $LOW_RELIEF_NONE, $LOW_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
+	If Not __LO_IntIsBetween($iRelief, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
 
 	$mFontDesc.CharFontName = $sFontName
 	$mFontDesc.CharWeight = $iWeight
@@ -1920,30 +1920,30 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ; Syntax ........: _LOWriter_FontDescEdit(ByRef $mFontDesc[, $sFontName = Null[, $iWeight = Null[, $iSlant = Null[, $nSize = Null[, $iColor = Null[, $iUnderlineStyle = Null[, $iUnderlineColor = Null[, $iStrikelineStyle = Null[, $bIndividualWords = Null[, $iRelief = Null]]]]]]]]]])
 ; Parameters ....: $mFontDesc           - [in/out] a map. A Font descriptor Map as returned from a _LOWriter_FontDescCreate, or control property return function.
 ;                  $sFontName           - [optional] a string value. Default is Null. The Font name.
-;                  $iWeight             - [optional] an integer value (0-200). Default is Null. The Font weight. See Constants $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iSlant              - [optional] an integer value (0-5). Default is Null. The Font italic setting. See Constants $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iWeight             - [optional] an integer value (0-200). Default is Null. The Font weight. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iSlant              - [optional] an integer value (0-5). Default is Null. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $nSize               - [optional] a general number value. Default is Null. The Font size.
 ;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is Null. The Font underline Style. See Constants $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is Null. The Font underline Style. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iUnderlineColor     - [optional] an integer value (-1-16777215). Default is Null.
-;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout line style. See Constants $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout line style. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bIndividualWords    - [optional] a boolean value. Default is Null. If True, only individual words are underlined.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Font relief style. See Constants $LOW_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Font relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $mFontDesc not a Map.
 ;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not found.
-;                  @Error 1 @Extended 4 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $nSize not a number.
 ;                  @Error 1 @Extended 7 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 8 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 8 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 9 Return 0 = $iUnderlineColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 10 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOW_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 10 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 11 Return 0 = $bIndividualWords not a Boolean.
-;                  @Error 1 @Extended 12 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOW_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 12 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
@@ -1978,13 +1978,13 @@ Func _LOWriter_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null
 	EndIf
 
 	If ($iWeight <> Null) Then
-		If Not __LO_IntIsBetween($iWeight, $LOW_WEIGHT_DONT_KNOW, $LOW_WEIGHT_BLACK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iWeight, $LOW_CHAR_WEIGHT_DONT_KNOW, $LOW_CHAR_WEIGHT_BLACK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$mFontDesc.CharWeight = $iWeight
 	EndIf
 
 	If ($iSlant <> Null) Then
-		If Not __LO_IntIsBetween($iSlant, $LOW_POSTURE_NONE, $LOW_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iSlant, $LOW_CHAR_POSTURE_NONE, $LOW_CHAR_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$mFontDesc.CharPosture = $iSlant
 	EndIf
@@ -2002,7 +2002,7 @@ Func _LOWriter_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null
 	EndIf
 
 	If ($iUnderlineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iUnderlineStyle, $LOW_UNDERLINE_NONE, $LOW_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not __LO_IntIsBetween($iUnderlineStyle, $LOW_CHAR_UNDERLINE_NONE, $LOW_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$mFontDesc.CharUnderline = $iUnderlineStyle
 	EndIf
@@ -2014,7 +2014,7 @@ Func _LOWriter_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null
 	EndIf
 
 	If ($iStrikelineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iStrikelineStyle, $LOW_STRIKEOUT_NONE, $LOW_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
+		If Not __LO_IntIsBetween($iStrikelineStyle, $LOW_CHAR_STRIKEOUT_NONE, $LOW_CHAR_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 
 		$mFontDesc.CharStrikeout = $iStrikelineStyle
 	EndIf
@@ -2026,7 +2026,7 @@ Func _LOWriter_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null
 	EndIf
 
 	If ($iRelief <> Null) Then
-		If Not __LO_IntIsBetween($iRelief, $LOW_RELIEF_NONE, $LOW_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
+		If Not __LO_IntIsBetween($iRelief, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
 
 		$mFontDesc.CharRelief = $iRelief
 	EndIf
@@ -2135,8 +2135,8 @@ EndFunc   ;==>_LOWriter_FontExists
 ;                  The returned array will be as follows:
 ;                  The first column (Array[1][0]) contains the Font Name.
 ;                  The Second column (Array [1][1] contains the style name (Such as Bold Italic etc.)
-;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOW_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3;
-;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOW_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3;
+;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

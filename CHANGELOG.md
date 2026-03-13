@@ -1840,6 +1840,16 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_DirFrmtStrikeOut
   - _LOWriter_FindFormatModifyStrikeout
   - _LOWriter_ParStyleStrikeOut
+- Renamed Text related constants to group them together.
+  - `$LOW_CASEMAP_` --> `$LOW_CHAR_CASEMAP_`
+  - `$LOW_POSTURE_` --> `$LOW_CHAR_POSTURE_`
+  - `$LOW_RELIEF_` --> `$LOW_CHAR_RELIEF_`
+  - `$LOW_STRIKEOUT_` --> `$LOW_CHAR_STRIKEOUT_`
+  - `$LOW_UNDERLINE_` --> `$LOW_CHAR_UNDERLINE_`
+  - `$LOW_WEIGHT_` --> `$LOW_CHAR_WEIGHT_`
+  - `$LOW_LINE_SPC_MODE_` --> `$LOW_PAR_LINE_SPC_MODE_`
+  - `$LOW_TAB_ALIGN_` --> `$LOW_PAR_TAB_ALIGN_`
+  - `$LOW_TXT_DIR_` --> `$LOW_PAR_TXT_DIR_`
 
 #### Documented
 

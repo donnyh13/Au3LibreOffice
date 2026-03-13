@@ -1866,7 +1866,7 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEditInRead         - [optional] a boolean value. Default is Null. If True, Allows you to edit the contents of a frame in a document that is read-only.
 ;                  $bPrint              - [optional] a boolean value. Default is Null. If True, Includes the frame when you print the document.
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1877,7 +1877,7 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ;                  @Error 1 @Extended 5 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bEditInRead not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bPrint not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 8 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bProtectContent
@@ -1957,7 +1957,7 @@ Func _LOWriter_FrameOptions(ByRef $oFrame, $bProtectContent = Null, $bProtectPos
 	EndIf
 
 	If ($iTxtDirection <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDirection, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not __LO_IntIsBetween($iTxtDirection, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$oFrame.WritingMode = $iTxtDirection
 		$iError = ($oFrame.WritingMode() = $iTxtDirection) ? ($iError) : (BitOR($iError, 64))
@@ -3860,7 +3860,7 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObj
 ;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEditInRead         - [optional] a boolean value. Default is Null. If True, Allows you to edit the contents of a frame in a document that is read-only.
 ;                  $bPrint              - [optional] a boolean value. Default is Null. If True, Includes the Frame when you print the document.
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3872,7 +3872,7 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObj
 ;                  @Error 1 @Extended 6 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $bEditInRead not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bPrint not a Boolean.
-;                  @Error 1 @Extended 9 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 9 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bProtectContent
@@ -3953,7 +3953,7 @@ Func _LOWriter_FrameStyleOptions(ByRef $oFrameStyle, $bProtectContent = Null, $b
 	EndIf
 
 	If ($iTxtDirection <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDirection, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not __LO_IntIsBetween($iTxtDirection, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
 		$oFrameStyle.WritingMode = $iTxtDirection
 		$iError = ($oFrameStyle.WritingMode() = $iTxtDirection) ? ($iError) : (BitOR($iError, 64))
