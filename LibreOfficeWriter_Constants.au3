@@ -63,34 +63,34 @@ Global Const _                                                  ; com.sun.star.s
 
 ; Border Style
 Global Const _                                                  ; com.sun.star.table.BorderLineStyle
-		$LOW_BORDER_STYLE_NONE = 0x7FFF, _                       ; No border line.
-		$LOW_BORDER_STYLE_SOLID = 0, _                           ; Solid border line.
-		$LOW_BORDER_STYLE_DOTTED = 1, _                          ; Dotted border line.
-		$LOW_BORDER_STYLE_DASHED = 2, _                          ; Dashed border line.
-		$LOW_BORDER_STYLE_DOUBLE = 3, _                          ; Double border line.
-		$LOW_BORDER_STYLE_THINTHICK_SMALLGAP = 4, _              ; Double border line with a thin line outside and a thick line inside separated by a small gap.
-		$LOW_BORDER_STYLE_THINTHICK_MEDIUMGAP = 5, _             ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
-		$LOW_BORDER_STYLE_THINTHICK_LARGEGAP = 6, _              ; Double border line with a thin line outside and a thick line inside separated by a large gap.
-		$LOW_BORDER_STYLE_THICKTHIN_SMALLGAP = 7, _              ; Double border line with a thick line outside and a thin line inside separated by a small gap.
-		$LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP = 8, _             ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
-		$LOW_BORDER_STYLE_THICKTHIN_LARGEGAP = 9, _              ; Double border line with a thick line outside and a thin line inside separated by a large gap.
-		$LOW_BORDER_STYLE_EMBOSSED = 10, _                       ; 3D embossed border line.
-		$LOW_BORDER_STYLE_ENGRAVED = 11, _                       ; 3D engraved border line.
-		$LOW_BORDER_STYLE_OUTSET = 12, _                         ; Outset border line.
-		$LOW_BORDER_STYLE_INSET = 13, _                          ; Inset border line.
-		$LOW_BORDER_STYLE_FINE_DASHED = 14, _                    ; Finely dashed border line.
-		$LOW_BORDER_STYLE_DOUBLE_THIN = 15, _                    ; Double border line consisting of two fixed thin lines separated by a variable gap.
-		$LOW_BORDER_STYLE_DASH_DOT = 16, _                       ; Line consisting of a repetition of one dash and one dot.
-		$LOW_BORDER_STYLE_DASH_DOT_DOT = 17                      ; Line consisting of a repetition of one dash and 2 dots.
+		$LOW_BORDER_STYLE_NONE = 0x7FFF, _                      ; No border line.
+		$LOW_BORDER_STYLE_SOLID = 0, _                          ; Solid border line.
+		$LOW_BORDER_STYLE_DOTTED = 1, _                         ; Dotted border line.
+		$LOW_BORDER_STYLE_DASHED = 2, _                         ; Dashed border line.
+		$LOW_BORDER_STYLE_DOUBLE = 3, _                         ; Double border line.
+		$LOW_BORDER_STYLE_THINTHICK_SMALLGAP = 4, _             ; Double border line with a thin line outside and a thick line inside separated by a small gap.
+		$LOW_BORDER_STYLE_THINTHICK_MEDIUMGAP = 5, _            ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
+		$LOW_BORDER_STYLE_THINTHICK_LARGEGAP = 6, _             ; Double border line with a thin line outside and a thick line inside separated by a large gap.
+		$LOW_BORDER_STYLE_THICKTHIN_SMALLGAP = 7, _             ; Double border line with a thick line outside and a thin line inside separated by a small gap.
+		$LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP = 8, _            ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
+		$LOW_BORDER_STYLE_THICKTHIN_LARGEGAP = 9, _             ; Double border line with a thick line outside and a thin line inside separated by a large gap.
+		$LOW_BORDER_STYLE_EMBOSSED = 10, _                      ; 3D embossed border line.
+		$LOW_BORDER_STYLE_ENGRAVED = 11, _                      ; 3D engraved border line.
+		$LOW_BORDER_STYLE_OUTSET = 12, _                        ; Outset border line.
+		$LOW_BORDER_STYLE_INSET = 13, _                         ; Inset border line.
+		$LOW_BORDER_STYLE_FINE_DASHED = 14, _                   ; Finely dashed border line.
+		$LOW_BORDER_STYLE_DOUBLE_THIN = 15, _                   ; Double border line consisting of two fixed thin lines separated by a variable gap.
+		$LOW_BORDER_STYLE_DASH_DOT = 16, _                      ; Line consisting of a repetition of one dash and one dot.
+		$LOW_BORDER_STYLE_DASH_DOT_DOT = 17                     ; Line consisting of a repetition of one dash and 2 dots.
 
 ; Border Width
 Global Const _
-		$LOW_BORDER_WIDTH_HAIRLINE = 2, _                        ; Hairline Border line width.
-		$LOW_BORDER_WIDTH_VERY_THIN = 18, _                      ; Very Thin Border line width.
-		$LOW_BORDER_WIDTH_THIN = 26, _                           ; Thin Border line width.
-		$LOW_BORDER_WIDTH_MEDIUM = 53, _                         ; Medium Border line width.
-		$LOW_BORDER_WIDTH_THICK = 79, _                          ; Thick Border line width.
-		$LOW_BORDER_WIDTH_EXTRA_THICK = 159                      ; Extra Thick Border line width.
+		$LOW_BORDER_WIDTH_HAIRLINE = 2, _                       ; Hairline Border line width.
+		$LOW_BORDER_WIDTH_VERY_THIN = 18, _                     ; Very Thin Border line width.
+		$LOW_BORDER_WIDTH_THIN = 26, _                          ; Thin Border line width.
+		$LOW_BORDER_WIDTH_MEDIUM = 53, _                        ; Medium Border line width.
+		$LOW_BORDER_WIDTH_THICK = 79, _                         ; Thick Border line width.
+		$LOW_BORDER_WIDTH_EXTRA_THICK = 159                     ; Extra Thick Border line width.
 
 ; Cell Type
 Global Const _                                                  ; com.sun.star.table.CellContentType
@@ -101,71 +101,71 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Case Constants
 Global Const _                                                  ; com.sun.star.style.CaseMap
-		$LOW_CHAR_CASEMAP_NONE = 0, _                                ; The case of the characters is unchanged.
-		$LOW_CHAR_CASEMAP_UPPER = 1, _                               ; All characters are put in upper case.
-		$LOW_CHAR_CASEMAP_LOWER = 2, _                               ; All characters are put in lower case.
-		$LOW_CHAR_CASEMAP_TITLE = 3, _                               ; The first character of each word is put in upper case.
-		$LOW_CHAR_CASEMAP_SM_CAPS = 4                                ; All characters are put in upper case, but with a smaller font height.
+		$LOW_CHAR_CASEMAP_NONE = 0, _                           ; The case of the characters is unchanged.
+		$LOW_CHAR_CASEMAP_UPPER = 1, _                          ; All characters are put in upper case.
+		$LOW_CHAR_CASEMAP_LOWER = 2, _                          ; All characters are put in lower case.
+		$LOW_CHAR_CASEMAP_TITLE = 3, _                          ; The first character of each word is put in upper case.
+		$LOW_CHAR_CASEMAP_SM_CAPS = 4                           ; All characters are put in upper case, but with a smaller font height.
 
 ; Posture/Italic
 Global Const _                                                  ; com.sun.star.awt.FontSlant
-		$LOW_CHAR_POSTURE_NONE = 0, _                                ; Specifies a font without slant.
-		$LOW_CHAR_POSTURE_OBLIQUE = 1, _                             ; Specifies an oblique font (slant not designed into the font).
-		$LOW_CHAR_POSTURE_ITALIC = 2, _                              ; Specifies an italic font (slant designed into the font).
-		$LOW_CHAR_POSTURE_DONTKNOW = 3, _                            ; Specifies a font with an unknown slant. For Read Only.
-		$LOW_CHAR_POSTURE_REV_OBLIQUE = 4, _                         ; Specifies a reverse oblique font (slant not designed into the font).
-		$LOW_CHAR_POSTURE_REV_ITALIC = 5                             ; Specifies a reverse italic font (slant designed into the font).
+		$LOW_CHAR_POSTURE_NONE = 0, _                           ; Specifies a font without slant.
+		$LOW_CHAR_POSTURE_OBLIQUE = 1, _                        ; Specifies an oblique font (slant not designed into the font).
+		$LOW_CHAR_POSTURE_ITALIC = 2, _                         ; Specifies an italic font (slant designed into the font).
+		$LOW_CHAR_POSTURE_DONTKNOW = 3, _                       ; Specifies a font with an unknown slant. For Read Only.
+		$LOW_CHAR_POSTURE_REV_OBLIQUE = 4, _                    ; Specifies a reverse oblique font (slant not designed into the font).
+		$LOW_CHAR_POSTURE_REV_ITALIC = 5                        ; Specifies a reverse italic font (slant designed into the font).
 
 ; Relief
 Global Const _                                                  ; com.sun.star.text.FontRelief
-		$LOW_CHAR_RELIEF_NONE = 0, _                                 ; No relief is applied.
-		$LOW_CHAR_RELIEF_EMBOSSED = 1, _                             ; The font relief is embossed.
-		$LOW_CHAR_RELIEF_ENGRAVED = 2                                ; The font relief is engraved.
+		$LOW_CHAR_RELIEF_NONE = 0, _                            ; No relief is applied.
+		$LOW_CHAR_RELIEF_EMBOSSED = 1, _                        ; The font relief is embossed.
+		$LOW_CHAR_RELIEF_ENGRAVED = 2                           ; The font relief is engraved.
 
 ; Strikeout
 Global Const _                                                  ; com.sun.star.awt.FontStrikeout
-		$LOW_CHAR_STRIKEOUT_NONE = 0, _                              ; No strike out.
-		$LOW_CHAR_STRIKEOUT_SINGLE = 1, _                            ; Strike out the characters with a single line.
-		$LOW_CHAR_STRIKEOUT_DOUBLE = 2, _                            ; Strike out the characters with a double line.
-		$LOW_CHAR_STRIKEOUT_DONT_KNOW = 3, _                         ; The strikeout mode is not specified. For Read Only.
-		$LOW_CHAR_STRIKEOUT_BOLD = 4, _                              ; Strike out the characters with a bold line.
-		$LOW_CHAR_STRIKEOUT_SLASH = 5, _                             ; Strike out the characters with slashes.
-		$LOW_CHAR_STRIKEOUT_X = 6                                    ; Strike out the characters with X's.
+		$LOW_CHAR_STRIKEOUT_NONE = 0, _                         ; No strike out.
+		$LOW_CHAR_STRIKEOUT_SINGLE = 1, _                       ; Strike out the characters with a single line.
+		$LOW_CHAR_STRIKEOUT_DOUBLE = 2, _                       ; Strike out the characters with a double line.
+		$LOW_CHAR_STRIKEOUT_DONT_KNOW = 3, _                    ; The strikeout mode is not specified. For Read Only.
+		$LOW_CHAR_STRIKEOUT_BOLD = 4, _                         ; Strike out the characters with a bold line.
+		$LOW_CHAR_STRIKEOUT_SLASH = 5, _                        ; Strike out the characters with slashes.
+		$LOW_CHAR_STRIKEOUT_X = 6                               ; Strike out the characters with X's.
 
 ; Underline/Overline
 Global Const _                                                  ; com.sun.star.awt.FontUnderline
-		$LOW_CHAR_UNDERLINE_NONE = 0, _                              ; No Underline or Overline style.
-		$LOW_CHAR_UNDERLINE_SINGLE = 1, _                            ; Single line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_DOUBLE = 2, _                            ; Double line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_DOTTED = 3, _                            ; Dotted line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_DONT_KNOW = 4, _                         ; Unknown Underline/Overline style, for read only.
-		$LOW_CHAR_UNDERLINE_DASH = 5, _                              ; Dashed line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_LONG_DASH = 6, _                         ; Long Dashed line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_DASH_DOT = 7, _                          ; Dash Dot line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_DASH_DOT_DOT = 8, _                      ; Dash Dot Dot line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_SML_WAVE = 9, _                          ; Small Wave line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_WAVE = 10, _                             ; Wave line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_DBL_WAVE = 11, _                         ; Double Wave line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_BOLD = 12, _                             ; Bold line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_BOLD_DOTTED = 13, _                      ; Bold Dotted line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_BOLD_DASH = 14, _                        ; Bold Dashed line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_BOLD_LONG_DASH = 15, _                   ; Bold Long Dash line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_BOLD_DASH_DOT = 16, _                    ; Bold Dash Dot line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _                ; Bold Dash Dot Dot line Underline/Overline style.
-		$LOW_CHAR_UNDERLINE_BOLD_WAVE = 18                           ; Bold Wave line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_NONE = 0, _                         ; No Underline or Overline style.
+		$LOW_CHAR_UNDERLINE_SINGLE = 1, _                       ; Single line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DOUBLE = 2, _                       ; Double line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DOTTED = 3, _                       ; Dotted line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DONT_KNOW = 4, _                    ; Unknown Underline/Overline style, for read only.
+		$LOW_CHAR_UNDERLINE_DASH = 5, _                         ; Dashed line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_LONG_DASH = 6, _                    ; Long Dashed line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DASH_DOT = 7, _                     ; Dash Dot line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DASH_DOT_DOT = 8, _                 ; Dash Dot Dot line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_SML_WAVE = 9, _                     ; Small Wave line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_WAVE = 10, _                        ; Wave line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DBL_WAVE = 11, _                    ; Double Wave line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD = 12, _                        ; Bold line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_DOTTED = 13, _                 ; Bold Dotted line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_DASH = 14, _                   ; Bold Dashed line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_LONG_DASH = 15, _              ; Bold Long Dash line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_DASH_DOT = 16, _               ; Bold Dash Dot line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _           ; Bold Dash Dot Dot line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_WAVE = 18                      ; Bold Wave line Underline/Overline style.
 
 ; Weight/Bold
 Global Const _                                                  ; com.sun.star.awt.FontWeight
-		$LOW_CHAR_WEIGHT_DONT_KNOW = 0, _                            ; The font weight is not specified/unknown. For Read Only.
-		$LOW_CHAR_WEIGHT_THIN = 50, _                                ; A 50% (Thin) font weight.
-		$LOW_CHAR_WEIGHT_ULTRA_LIGHT = 60, _                         ; A 60% (Ultra Light) font weight.
-		$LOW_CHAR_WEIGHT_LIGHT = 75, _                               ; A 75% (Light) font weight.
-		$LOW_CHAR_WEIGHT_SEMI_LIGHT = 90, _                          ; A 90% (Semi-Light) font weight.
-		$LOW_CHAR_WEIGHT_NORMAL = 100, _                             ; A 100% (Normal) font weight.
-		$LOW_CHAR_WEIGHT_SEMI_BOLD = 110, _                          ; A 110% (Semi-Bold) font weight.
-		$LOW_CHAR_WEIGHT_BOLD = 150, _                               ; A 150% (Bold) font weight.
-		$LOW_CHAR_WEIGHT_ULTRA_BOLD = 175, _                         ; A 175% (Ultra-Bold) font weight.
-		$LOW_CHAR_WEIGHT_BLACK = 200                                 ; A 200% (Black) font weight.
+		$LOW_CHAR_WEIGHT_DONT_KNOW = 0, _                       ; The font weight is not specified/unknown. For Read Only.
+		$LOW_CHAR_WEIGHT_THIN = 50, _                           ; A 50% (Thin) font weight.
+		$LOW_CHAR_WEIGHT_ULTRA_LIGHT = 60, _                    ; A 60% (Ultra Light) font weight.
+		$LOW_CHAR_WEIGHT_LIGHT = 75, _                          ; A 75% (Light) font weight.
+		$LOW_CHAR_WEIGHT_SEMI_LIGHT = 90, _                     ; A 90% (Semi-Light) font weight.
+		$LOW_CHAR_WEIGHT_NORMAL = 100, _                        ; A 100% (Normal) font weight.
+		$LOW_CHAR_WEIGHT_SEMI_BOLD = 110, _                     ; A 110% (Semi-Bold) font weight.
+		$LOW_CHAR_WEIGHT_BOLD = 150, _                          ; A 150% (Bold) font weight.
+		$LOW_CHAR_WEIGHT_ULTRA_BOLD = 175, _                    ; A 175% (Ultra-Bold) font weight.
+		$LOW_CHAR_WEIGHT_BLACK = 200                            ; A 200% (Black) font weight.
 
 ; Color Mode Constants.
 Global Const _                                                  ; com.sun.star.drawing.ColorMode
@@ -579,10 +579,10 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Follow By
 Global Const _                                                  ; com.sun.star.text.LabelFollow
-		$LOW_NUM_FOLLOW_BY_TABSTOP = 0, _                           ; A Tab will follow the Numbering Style Number.
-		$LOW_NUM_FOLLOW_BY_SPACE = 1, _                             ; A Space will follow the Numbering Style Number.
-		$LOW_NUM_FOLLOW_BY_NOTHING = 2, _                           ; Nothing will follow the Numbering Style Number.
-		$LOW_NUM_FOLLOW_BY_NEWLINE = 3                              ; A Newline will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_TABSTOP = 0, _                       ; A Tab will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_SPACE = 1, _                         ; A Space will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_NOTHING = 2, _                       ; Nothing will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_NEWLINE = 3                          ; A Newline will follow the Numbering Style Number.
 
 ; Numbering Style Type
 Global Const _                                                  ; com.sun.star.style.NumberingType
@@ -696,15 +696,15 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Paper Size Constants.
 Global Const _                                                  ; com.sun.star.view.PaperFormat
-		$LOW_PAPER_FORMAT_A3 = 0, _                                    ; A3 Paper size.
-		$LOW_PAPER_FORMAT_A4 = 1, _                                    ; A4 Paper size.
-		$LOW_PAPER_FORMAT_A5 = 2, _                                    ; A5 Paper size.
-		$LOW_PAPER_FORMAT_B4 = 3, _                                    ; B4 Paper size.
-		$LOW_PAPER_FORMAT_B5 = 4, _                                    ; B5 Paper size.
-		$LOW_PAPER_FORMAT_LETTER = 5, _                                ; Letter Paper size.
-		$LOW_PAPER_FORMAT_LEGAL = 6, _                                 ; Legal Paper size.
-		$LOW_PAPER_FORMAT_TABLOID = 7, _                               ; Tabloid Paper size.
-		$LOW_PAPER_FORMAT_USER_DEFINED = 8                             ; Paper size is User-Defined.
+		$LOW_PAPER_FORMAT_A3 = 0, _                             ; A3 Paper size.
+		$LOW_PAPER_FORMAT_A4 = 1, _                             ; A4 Paper size.
+		$LOW_PAPER_FORMAT_A5 = 2, _                             ; A5 Paper size.
+		$LOW_PAPER_FORMAT_B4 = 3, _                             ; B4 Paper size.
+		$LOW_PAPER_FORMAT_B5 = 4, _                             ; B5 Paper size.
+		$LOW_PAPER_FORMAT_LETTER = 5, _                         ; Letter Paper size.
+		$LOW_PAPER_FORMAT_LEGAL = 6, _                          ; Legal Paper size.
+		$LOW_PAPER_FORMAT_TABLOID = 7, _                        ; Tabloid Paper size.
+		$LOW_PAPER_FORMAT_USER_DEFINED = 8                      ; Paper size is User-Defined.
 
 ; Paper Height in Hundredths of a Millimeter (HMM)
 Global Const _
@@ -799,55 +799,55 @@ Global Const _
 
 ; Line Spacing
 Global Const _                                                  ; com.sun.star.style.LineSpacingMode
-		$LOW_PAR_LINE_SPC_MODE_PROP = 0, _                          ; Specifies the height value as a proportional value. Min 6% Max 65,535%. (without percentage sign)
-		$LOW_PAR_LINE_SPC_MODE_MIN = 1, _                           ; Specifies the height as the minimum line height. [Minimum/At least in L.O. U.I.] Min 0, Max 10008 (HMM)
-		$LOW_PAR_LINE_SPC_MODE_LEADING = 2, _                       ; Specifies the height value as the distance to the previous line. Min 0, Max 10008 Hundredths of a Millimeter (HMM).
-		$LOW_PAR_LINE_SPC_MODE_FIX = 3                              ; Specifies the height value as a fixed line height. Min 51, Max 10008 Hundredths of a Millimeter (HMM).
+		$LOW_PAR_LINE_SPC_MODE_PROP = 0, _                      ; Specifies the height value as a proportional value. Min 6% Max 65,535%. (without percentage sign)
+		$LOW_PAR_LINE_SPC_MODE_MIN = 1, _                       ; Specifies the height as the minimum line height. [Minimum/At least in L.O. U.I.] Min 0, Max 10008 (HMM)
+		$LOW_PAR_LINE_SPC_MODE_LEADING = 2, _                   ; Specifies the height value as the distance to the previous line. Min 0, Max 10008 Hundredths of a Millimeter (HMM).
+		$LOW_PAR_LINE_SPC_MODE_FIX = 3                          ; Specifies the height value as a fixed line height. Min 51, Max 10008 Hundredths of a Millimeter (HMM).
 
 ; Outline
 Global Const _
-		$LOW_PAR_OUTLINE_BODY = 0, _                                ; The paragraph belongs to the body text.
-		$LOW_PAR_OUTLINE_LEVEL_1 = 1, _                             ; The paragraph belongs to the level 1 outline level.
-		$LOW_PAR_OUTLINE_LEVEL_2 = 2, _                             ; The paragraph belongs to the level 2 outline level.
-		$LOW_PAR_OUTLINE_LEVEL_3 = 3, _                             ; The paragraph belongs to the level 3 outline level.
-		$LOW_PAR_OUTLINE_LEVEL_4 = 4, _                             ; The paragraph belongs to the level 4 outline level.
-		$LOW_PAR_OUTLINE_LEVEL_5 = 5, _                             ; The paragraph belongs to the level 5 outline level.
-		$LOW_PAR_OUTLINE_LEVEL_6 = 6, _                             ; The paragraph belongs to the level 6 outline level.
-		$LOW_PAR_OUTLINE_LEVEL_7 = 7, _                             ; The paragraph belongs to the level 7 outline level.
-		$LOW_PAR_OUTLINE_LEVEL_8 = 8, _                             ; The paragraph belongs to the level 8 outline level.
-		$LOW_PAR_OUTLINE_LEVEL_9 = 9, _                             ; The paragraph belongs to the level 9 outline level.
-		$LOW_PAR_OUTLINE_LEVEL_10 = 10                              ; The paragraph belongs to the level 10 outline level.
+		$LOW_PAR_OUTLINE_BODY = 0, _                            ; The paragraph belongs to the body text.
+		$LOW_PAR_OUTLINE_LEVEL_1 = 1, _                         ; The paragraph belongs to the level 1 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_2 = 2, _                         ; The paragraph belongs to the level 2 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_3 = 3, _                         ; The paragraph belongs to the level 3 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_4 = 4, _                         ; The paragraph belongs to the level 4 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_5 = 5, _                         ; The paragraph belongs to the level 5 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_6 = 6, _                         ; The paragraph belongs to the level 6 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_7 = 7, _                         ; The paragraph belongs to the level 7 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_8 = 8, _                         ; The paragraph belongs to the level 8 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_9 = 9, _                         ; The paragraph belongs to the level 9 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_10 = 10                          ; The paragraph belongs to the level 10 outline level.
 
 ; Tab Alignment
 Global Const _                                                  ; com.sun.star.style.TabAlign
-		$LOW_PAR_TAB_ALIGN_LEFT = 0, _                              ; Aligns the left edge of the text to the tab stop and extends the text to the right.
-		$LOW_PAR_TAB_ALIGN_CENTER = 1, _                            ; Aligns the center of the text to the tab stop.
-		$LOW_PAR_TAB_ALIGN_RIGHT = 2, _                             ; Aligns the right edge of the text to the tab stop and extends the text to the left of the tab stop.
-		$LOW_PAR_TAB_ALIGN_DECIMAL = 3, _                           ; Aligns the decimal separator of a number to the center of the tab stop and text to the left of the tab.
-		$LOW_PAR_TAB_ALIGN_DEFAULT = 4                              ; This setting is the default setting when no TabStops are present. Setting any Tabstop to this constant will make it disappear from the TabStop list. It is therefore only listed here for property reading purposes.
+		$LOW_PAR_TAB_ALIGN_LEFT = 0, _                          ; Aligns the left edge of the text to the tab stop and extends the text to the right.
+		$LOW_PAR_TAB_ALIGN_CENTER = 1, _                        ; Aligns the center of the text to the tab stop.
+		$LOW_PAR_TAB_ALIGN_RIGHT = 2, _                         ; Aligns the right edge of the text to the tab stop and extends the text to the left of the tab stop.
+		$LOW_PAR_TAB_ALIGN_DECIMAL = 3, _                       ; Aligns the decimal separator of a number to the center of the tab stop and text to the left of the tab.
+		$LOW_PAR_TAB_ALIGN_DEFAULT = 4                          ; This setting is the default setting when no TabStops are present. Setting any Tabstop to this constant will make it disappear from the TabStop list. It is therefore only listed here for property reading purposes.
 
 ; Text Adjust
 Global Const _                                                  ; com.sun.star.drawing.TextVerticalAdjust
-		$LOW_PAR_TXT_ADJ_VERT_TOP = 0, _                            ; The top edge of the text is adjusted to the top edge of the object.
-		$LOW_PAR_TXT_ADJ_VERT_CENTER = 1, _                         ; The text is centered inside the object.
-		$LOW_PAR_TXT_ADJ_VERT_BOTTOM = 2, _                         ; The bottom edge of the text is adjusted to the bottom edge of the object.
-		$LOW_PAR_TXT_ADJ_VERT_BLOCK = 3                             ;
+		$LOW_PAR_TXT_ADJ_VERT_TOP = 0, _                        ; The top edge of the text is adjusted to the top edge of the object.
+		$LOW_PAR_TXT_ADJ_VERT_CENTER = 1, _                     ; The text is centered inside the object.
+		$LOW_PAR_TXT_ADJ_VERT_BOTTOM = 2, _                     ; The bottom edge of the text is adjusted to the bottom edge of the object.
+		$LOW_PAR_TXT_ADJ_VERT_BLOCK = 3                         ;
 
 ; Text Direction
 Global Const _                                                  ; com.sun.star.text.WritingMode2
-		$LOW_PAR_TXT_DIR_LR_TB = 0, _                               ; Text within lines is written left-to-right. Lines and blocks are placed top-to-bottom. Typically, this is the writing mode for normal "alphabetic" text.
-		$LOW_PAR_TXT_DIR_RL_TB = 1, _                               ; Text within a line are written right-to-left. Lines and blocks are placed top-to-bottom. Typically, this writing mode is used in Arabic and Hebrew text.
-		$LOW_PAR_TXT_DIR_TB_RL = 2, _                               ; Text within a line is written top-to-bottom. Lines and blocks are placed right-to-left. Typically, this writing mode is used in Chinese and Japanese text.
-		$LOW_PAR_TXT_DIR_TB_LR = 3, _                               ; Text within a line is written top-to-bottom. Lines and blocks are placed left-to-right. Typically, this writing mode is used in Mongolian text.
-		$LOW_PAR_TXT_DIR_CONTEXT = 4, _                             ; Obtain actual writing mode from the context of the object.
-		$LOW_PAR_TXT_DIR_BT_LR = 5                                  ; Text within a line is written bottom-to-top. Lines and blocks are placed left-to-right. (LibreOffice 6.3).
+		$LOW_PAR_TXT_DIR_LR_TB = 0, _                           ; Text within lines is written left-to-right. Lines and blocks are placed top-to-bottom. Typically, this is the writing mode for normal "alphabetic" text.
+		$LOW_PAR_TXT_DIR_RL_TB = 1, _                           ; Text within a line are written right-to-left. Lines and blocks are placed top-to-bottom. Typically, this writing mode is used in Arabic and Hebrew text.
+		$LOW_PAR_TXT_DIR_TB_RL = 2, _                           ; Text within a line is written top-to-bottom. Lines and blocks are placed right-to-left. Typically, this writing mode is used in Chinese and Japanese text.
+		$LOW_PAR_TXT_DIR_TB_LR = 3, _                           ; Text within a line is written top-to-bottom. Lines and blocks are placed left-to-right. Typically, this writing mode is used in Mongolian text.
+		$LOW_PAR_TXT_DIR_CONTEXT = 4, _                         ; Obtain actual writing mode from the context of the object.
+		$LOW_PAR_TXT_DIR_BT_LR = 5                              ; Text within a line is written bottom-to-top. Lines and blocks are placed left-to-right. (LibreOffice 6.3).
 
 ; Printer Duplex Constants.
 Global Const _                                                  ; com.sun.star.view.DuplexMode
-		$LOW_PRINT_DUPLEX_UNKNOWN = 0, _                              ; Duplex mode setting is unknown.
-		$LOW_PRINT_DUPLEX_OFF = 1, _                                  ; Duplex mode is off.
-		$LOW_PRINT_DUPLEX_LONG = 2, _                                 ; Duplex mode is on, flip on Long edge.
-		$LOW_PRINT_DUPLEX_SHORT = 3                                   ; Duplex mode is on, flip on Short edge.
+		$LOW_PRINT_DUPLEX_UNKNOWN = 0, _                        ; Duplex mode setting is unknown.
+		$LOW_PRINT_DUPLEX_OFF = 1, _                            ; Duplex mode is off.
+		$LOW_PRINT_DUPLEX_LONG = 2, _                           ; Duplex mode is on, flip on Long edge.
+		$LOW_PRINT_DUPLEX_SHORT = 3                             ; Duplex mode is on, flip on Short edge.
 
 ; LO Print Comments Constants.
 Global Const _                                                  ; com.sun.star.text.NotePrintMode
@@ -874,11 +874,11 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Shadow Location
 Global Const _                                                  ; com.sun.star.table.ShadowLocation
-		$LOW_SHADOW_LOCATION_NONE = 0, _                                 ; No shadow is applied.
-		$LOW_SHADOW_LOCATION_TOP_LEFT = 1, _                             ; Shadow is located along the upper and left sides.
-		$LOW_SHADOW_LOCATION_TOP_RIGHT = 2, _                            ; Shadow is located along the upper and right sides.
-		$LOW_SHADOW_LOCATION_BOTTOM_LEFT = 3, _                          ; Shadow is located along the lower and left sides.
-		$LOW_SHADOW_LOCATION_BOTTOM_RIGHT = 4                            ; Shadow is located along the lower and right sides.
+		$LOW_SHADOW_LOCATION_NONE = 0, _                        ; No shadow is applied.
+		$LOW_SHADOW_LOCATION_TOP_LEFT = 1, _                    ; Shadow is located along the upper and left sides.
+		$LOW_SHADOW_LOCATION_TOP_RIGHT = 2, _                   ; Shadow is located along the upper and right sides.
+		$LOW_SHADOW_LOCATION_BOTTOM_LEFT = 3, _                 ; Shadow is located along the lower and left sides.
+		$LOW_SHADOW_LOCATION_BOTTOM_RIGHT = 4                   ; Shadow is located along the lower and right sides.
 
 ; Arrowhead Type Constants
 Global Enum _
