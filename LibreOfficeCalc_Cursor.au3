@@ -994,23 +994,23 @@ EndFunc   ;==>_LOCalc_TextCursorParObjSectionsGet
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_TextCursorStrikeOut
 ; Description ...: Set or Retrieve the Strikeout settings for a Text Cursor.
-; Syntax ........: _LOCalc_TextCursorStrikeOut(ByRef $oTextCursor[, $bWordOnly = Null[, $iStrikeLineStyle = Null]])
+; Syntax ........: _LOCalc_TextCursorStrikeOut(ByRef $oTextCursor[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $oTextCursor does not support Character properties.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iStrikeLineStyle
+;                  |                               1 = Error setting $iStrikeLineStyle
+;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
@@ -1023,7 +1023,7 @@ EndFunc   ;==>_LOCalc_TextCursorParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_TextCursorStrikeOut(ByRef $oTextCursor, $bWordOnly = Null, $iStrikeLineStyle = Null)
+Func _LOCalc_TextCursorStrikeOut(ByRef $oTextCursor, $iStrikeLineStyle = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1044,7 +1044,7 @@ Func _LOCalc_TextCursorStrikeOut(ByRef $oTextCursor, $bWordOnly = Null, $iStrike
 			$oCursor = $oTextCursor
 	EndSwitch
 
-	$vReturn = __LOCalc_CellStrikeOut($oCursor, $bWordOnly, $iStrikeLineStyle)
+	$vReturn = __LOCalc_CellStrikeOut($oCursor, $iStrikeLineStyle, $bWordOnly)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOCalc_TextCursorStrikeOut

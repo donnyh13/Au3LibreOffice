@@ -36,8 +36,8 @@ Func Example()
 	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Strikeout settings to, Words only = True, Line style = $LOC_STRIKEOUT_X
-	_LOCalc_CellStyleStrikeOut($oCellStyle, True, $LOC_STRIKEOUT_X)
+	; Set the Cell Style's Strikeout settings to, Line style = $LOC_STRIKEOUT_X, Words only = True
+	_LOCalc_CellStyleStrikeOut($oCellStyle, $LOC_STRIKEOUT_X, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -45,8 +45,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell Style's current Strikeout settings are as follows: " & @CRLF & _
-			"Strikeout words only? True/False: " & $avSettings[0] & @CRLF & _
-			"Strikeout line style, (See UDF Constants): " & $avSettings[1])
+			"Strikeout line style, (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"Strikeout words only? True/False: " & $avSettings[1])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

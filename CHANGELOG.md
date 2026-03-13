@@ -1086,6 +1086,14 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_CellStrikeOut
   - _LOCalc_CellStyleStrikeOut
   - _LOCalc_TextCursorStrikeOut
+- Rearranged Strikeout parameters to match LibreOffice UI and Overline/Underline functions.
+  > Previous order:(_$bWordOnly_, _$iStrikeLineStyle_)
+  >
+  > New order:(_$iStrikeLineStyle_, _$bWordOnly_)
+  - __LOCalc_CellStrikeOut
+  - _LOCalc_CellStrikeOut
+  - _LOCalc_CellStyleStrikeOut
+  - _LOCalc_TextCursorStrikeOut
 
 #### Documented
 

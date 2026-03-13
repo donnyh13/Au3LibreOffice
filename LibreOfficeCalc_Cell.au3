@@ -894,21 +894,21 @@ EndFunc   ;==>_LOCalc_CellShadow
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CellStrikeOut
 ; Description ...: Set or Retrieve the Strikeout settings for a Cell or Cell Range.
-; Syntax ........: _LOCalc_CellStrikeOut(ByRef $oCell[, $bWordOnly = Null[, $iStrikeLineStyle = Null]])
+; Syntax ........: _LOCalc_CellStrikeOut(ByRef $oCell[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oCell               - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $oCell does not support Character properties, or Table Column, or Table Row service.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iStrikeLineStyle
+;                  |                               1 = Error setting $iStrikeLineStyle
+;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
@@ -920,7 +920,7 @@ EndFunc   ;==>_LOCalc_CellShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_CellStrikeOut(ByRef $oCell, $bWordOnly = Null, $iStrikeLineStyle = Null)
+Func _LOCalc_CellStrikeOut(ByRef $oCell, $iStrikeLineStyle = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -931,7 +931,7 @@ Func _LOCalc_CellStrikeOut(ByRef $oCell, $bWordOnly = Null, $iStrikeLineStyle = 
 			And Not $oCell.supportsService("com.sun.star.table.TableColumn") _ ; Column Obj
 			And Not $oCell.supportsService("com.sun.star.table.TableRow") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Row Obj
 
-	$vReturn = __LOCalc_CellStrikeOut($oCell, $bWordOnly, $iStrikeLineStyle)
+	$vReturn = __LOCalc_CellStrikeOut($oCell, $iStrikeLineStyle, $bWordOnly)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOCalc_CellStrikeOut
@@ -1994,21 +1994,21 @@ EndFunc   ;==>_LOCalc_CellStyleShadow
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CellStyleStrikeOut
 ; Description ...: Set or Retrieve the Strikeout settings for a Cell style.
-; Syntax ........: _LOCalc_CellStyleStrikeOut(ByRef $oCellStyle[, $bWordOnly = Null[, $iStrikeLineStyle = Null]])
+; Syntax ........: _LOCalc_CellStyleStrikeOut(ByRef $oCellStyle[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCellStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $oCellStyle is not a Cell Style object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iStrikeLineStyle
+;                  |                               1 = Error setting $iStrikeLineStyle
+;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
@@ -2020,7 +2020,7 @@ EndFunc   ;==>_LOCalc_CellStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_CellStyleStrikeOut(ByRef $oCellStyle, $bWordOnly = Null, $iStrikeLineStyle = Null)
+Func _LOCalc_CellStyleStrikeOut(ByRef $oCellStyle, $iStrikeLineStyle = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2029,7 +2029,7 @@ Func _LOCalc_CellStyleStrikeOut(ByRef $oCellStyle, $bWordOnly = Null, $iStrikeLi
 	If Not IsObj($oCellStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-	$vReturn = __LOCalc_CellStrikeOut($oCellStyle, $bWordOnly, $iStrikeLineStyle)
+	$vReturn = __LOCalc_CellStrikeOut($oCellStyle, $iStrikeLineStyle, $bWordOnly)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOCalc_CellStyleStrikeOut
