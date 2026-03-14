@@ -1848,10 +1848,10 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FontDescCreate
 ; Description ...: Create a Font Descriptor Map.
-; Syntax ........: _LOWriter_FontDescCreate([$sFontName = ""[, $iWeight = $LOW_CHAR_WEIGHT_DONT_KNOW[, $iSlant = $LOW_CHAR_POSTURE_DONTKNOW[, $nSize = 0[, $iColor = $LO_COLOR_OFF[, $iUnderlineStyle = $LOW_CHAR_UNDERLINE_DONT_KNOW[, $iUnderlineColor = $LO_COLOR_OFF[, $iStrikelineStyle = $LOW_CHAR_STRIKEOUT_DONT_KNOW[, $bIndividualWords = False[, $iRelief = $LOW_CHAR_RELIEF_NONE]]]]]]]]]])
+; Syntax ........: _LOWriter_FontDescCreate([$sFontName = ""[, $iWeight = $LOW_CHAR_WEIGHT_DONT_KNOW[, $iPosture = $LOW_CHAR_POSTURE_DONTKNOW[, $nSize = 0[, $iColor = $LO_COLOR_OFF[, $iUnderlineStyle = $LOW_CHAR_UNDERLINE_DONT_KNOW[, $iUnderlineColor = $LO_COLOR_OFF[, $iStrikelineStyle = $LOW_CHAR_STRIKEOUT_DONT_KNOW[, $bIndividualWords = False[, $iRelief = $LOW_CHAR_RELIEF_NONE]]]]]]]]]])
 ; Parameters ....: $sFontName           - [optional] a string value. Default is "". The Font name.
 ;                  $iWeight             - [optional] an integer value (0-200). Default is $LOW_CHAR_WEIGHT_DONT_KNOW. The Font weight. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iSlant              - [optional] an integer value (0-5). Default is $LOW_CHAR_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iPosture            - [optional] an integer value (0-5). Default is $LOW_CHAR_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $nSize               - [optional] a general number value. Default is 0. The Font size.
 ;                  $iColor              - [optional] an integer value (-1-16777215). Default is $LO_COLOR_OFF. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is $LOW_CHAR_UNDERLINE_DONT_KNOW. The Font underline Style. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1865,7 +1865,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ;                  @Error 1 @Extended 1 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 2 Return 0 = Font called in $sFontName not found.
 ;                  @Error 1 @Extended 3 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $nSize not a number.
 ;                  @Error 1 @Extended 6 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 7 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1882,7 +1882,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FontDescCreate($sFontName = "", $iWeight = $LOW_CHAR_WEIGHT_DONT_KNOW, $iSlant = $LOW_CHAR_POSTURE_DONTKNOW, $nSize = 0, $iColor = $LO_COLOR_OFF, $iUnderlineStyle = $LOW_CHAR_UNDERLINE_DONT_KNOW, $iUnderlineColor = $LO_COLOR_OFF, $iStrikelineStyle = $LOW_CHAR_STRIKEOUT_DONT_KNOW, $bIndividualWords = False, $iRelief = $LOW_CHAR_RELIEF_NONE)
+Func _LOWriter_FontDescCreate($sFontName = "", $iWeight = $LOW_CHAR_WEIGHT_DONT_KNOW, $iPosture = $LOW_CHAR_POSTURE_DONTKNOW, $nSize = 0, $iColor = $LO_COLOR_OFF, $iUnderlineStyle = $LOW_CHAR_UNDERLINE_DONT_KNOW, $iUnderlineColor = $LO_COLOR_OFF, $iStrikelineStyle = $LOW_CHAR_STRIKEOUT_DONT_KNOW, $bIndividualWords = False, $iRelief = $LOW_CHAR_RELIEF_NONE)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1891,7 +1891,7 @@ Func _LOWriter_FontDescCreate($sFontName = "", $iWeight = $LOW_CHAR_WEIGHT_DONT_
 	If Not IsString($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not _LOWriter_FontExists($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_IntIsBetween($iWeight, $LOW_CHAR_WEIGHT_DONT_KNOW, $LOW_CHAR_WEIGHT_BLACK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_IntIsBetween($iSlant, $LOW_CHAR_POSTURE_NONE, $LOW_CHAR_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iPosture, $LOW_CHAR_POSTURE_NONE, $LOW_CHAR_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsNumber($nSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 	If Not __LO_IntIsBetween($iUnderlineStyle, $LOW_CHAR_UNDERLINE_NONE, $LOW_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
@@ -1902,7 +1902,7 @@ Func _LOWriter_FontDescCreate($sFontName = "", $iWeight = $LOW_CHAR_WEIGHT_DONT_
 
 	$mFontDesc.CharFontName = $sFontName
 	$mFontDesc.CharWeight = $iWeight
-	$mFontDesc.CharPosture = $iSlant
+	$mFontDesc.CharPosture = $iPosture
 	$mFontDesc.CharHeight = $nSize
 	$mFontDesc.CharColor = $iColor
 	$mFontDesc.CharUnderline = $iUnderlineStyle
@@ -1917,11 +1917,11 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FontDescEdit
 ; Description ...: Set or Retrieve Font Descriptor settings.
-; Syntax ........: _LOWriter_FontDescEdit(ByRef $mFontDesc[, $sFontName = Null[, $iWeight = Null[, $iSlant = Null[, $nSize = Null[, $iColor = Null[, $iUnderlineStyle = Null[, $iUnderlineColor = Null[, $iStrikelineStyle = Null[, $bIndividualWords = Null[, $iRelief = Null]]]]]]]]]])
+; Syntax ........: _LOWriter_FontDescEdit(ByRef $mFontDesc[, $sFontName = Null[, $iWeight = Null[, $iPosture = Null[, $nSize = Null[, $iColor = Null[, $iUnderlineStyle = Null[, $iUnderlineColor = Null[, $iStrikelineStyle = Null[, $bIndividualWords = Null[, $iRelief = Null]]]]]]]]]])
 ; Parameters ....: $mFontDesc           - [in/out] a map. A Font descriptor Map as returned from a _LOWriter_FontDescCreate, or control property return function.
 ;                  $sFontName           - [optional] a string value. Default is Null. The Font name.
 ;                  $iWeight             - [optional] an integer value (0-200). Default is Null. The Font weight. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iSlant              - [optional] an integer value (0-5). Default is Null. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iPosture            - [optional] an integer value (0-5). Default is Null. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $nSize               - [optional] a general number value. Default is Null. The Font size.
 ;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is Null. The Font underline Style. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1936,7 +1936,7 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not found.
 ;                  @Error 1 @Extended 4 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iSlant not an Integer, less than 0 or greater than 5. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $nSize not a number.
 ;                  @Error 1 @Extended 7 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 8 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1955,7 +1955,7 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null, $iSlant = Null, $nSize = Null, $iColor = Null, $iUnderlineStyle = Null, $iUnderlineColor = Null, $iStrikelineStyle = Null, $bIndividualWords = Null, $iRelief = Null)
+Func _LOWriter_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null, $iPosture = Null, $nSize = Null, $iColor = Null, $iUnderlineStyle = Null, $iUnderlineColor = Null, $iStrikelineStyle = Null, $bIndividualWords = Null, $iRelief = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1963,7 +1963,7 @@ Func _LOWriter_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null
 
 	If Not IsMap($mFontDesc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($sFontName, $iWeight, $iSlant, $nSize, $iColor, $iUnderlineStyle, $iUnderlineColor, $iStrikelineStyle, $bIndividualWords, $iRelief) Then
+	If __LO_VarsAreNull($sFontName, $iWeight, $iPosture, $nSize, $iColor, $iUnderlineStyle, $iUnderlineColor, $iStrikelineStyle, $bIndividualWords, $iRelief) Then
 		__LO_ArrayFill($avFont, $mFontDesc.CharFontName, $mFontDesc.CharWeight, $mFontDesc.CharPosture, $mFontDesc.CharHeight, $mFontDesc.CharColor, $mFontDesc.CharUnderline, _
 				$mFontDesc.CharUnderlineColor, $mFontDesc.CharStrikeout, $mFontDesc.CharWordMode, $mFontDesc.CharRelief)
 
@@ -1983,10 +1983,10 @@ Func _LOWriter_FontDescEdit(ByRef $mFontDesc, $sFontName = Null, $iWeight = Null
 		$mFontDesc.CharWeight = $iWeight
 	EndIf
 
-	If ($iSlant <> Null) Then
-		If Not __LO_IntIsBetween($iSlant, $LOW_CHAR_POSTURE_NONE, $LOW_CHAR_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($iPosture <> Null) Then
+		If Not __LO_IntIsBetween($iPosture, $LOW_CHAR_POSTURE_NONE, $LOW_CHAR_POSTURE_REV_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-		$mFontDesc.CharPosture = $iSlant
+		$mFontDesc.CharPosture = $iPosture
 	EndIf
 
 	If ($nSize <> Null) Then
