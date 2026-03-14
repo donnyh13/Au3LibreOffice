@@ -386,6 +386,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Refactored
 
 - Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.
+- Renamed $iSlant parameter to $iPosture in `_LOBase_FontDescCreate` and `_LOBase_FontDescEdit` for consistency.
 
 #### Removed
 
