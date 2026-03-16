@@ -450,24 +450,20 @@ EndFunc   ;==>_LOWriter_DirFrmtCharEffect
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtCharPosition
 ; Description ...: Set and retrieve settings related to Sub/Super Script and relative size by Direct Formatting.
-; Syntax ........: _LOWriter_DirFrmtCharPosition(ByRef $oSelection[, $bAutoSuper = Null[, $iSuperScript = Null[, $bAutoSub = Null[, $iSubScript = Null[, $iRelativeSize = Null[, $bClearDirFrmt = False]]]]]])
+; Syntax ........: _LOWriter_DirFrmtCharPosition(ByRef $oSelection[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null[, $bClearDirFrmt = False]]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $bAutoSuper          - [optional] a boolean value. Default is Null. If True, automatic sizing for Superscript is active.
-;                  $iSuperScript        - [optional] an integer value (0-100,14000). Default is Null. The Superscript percentage value. See Remarks.
-;                  $bAutoSub            - [optional] a boolean value. Default is Null. If True, automatic sizing for Subscript is active.
-;                  $iSubScript          - [optional] an integer value (-100-100,14000,-14000). Default is Null. Subscript percentage value. See Remarks.
+;                  $iSuperScript        - [optional] an integer value (-1-100). Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
+;                  $iSubScript          - [optional] an integer value (-1-100). Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
 ;                  $iRelativeSize       - [optional] an integer value (1-100). Default is Null. The size percentage relative to current font size.
 ;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Super/Sub Script settings.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bAutoSuper not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bAutoSub not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iSuperScript not an Integer, less than 0 or greater than 100, but not 14000.
-;                  @Error 1 @Extended 5 Return 0 = $iSubScript not an Integer, less than -100 or greater than 100, but not 14000 or -14000.
-;                  @Error 1 @Extended 6 Return 0 = $iRelativeSize not an Integer, less than 1 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 2 Return 0 = $iSuperScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 3 Return 0 = $iSubScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 4 Return 0 = $iRelativeSize not an Integer, less than 1 or greater than 100.
+;                  @Error 1 @Extended 5 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iSuperScript
@@ -475,7 +471,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharEffect
 ;                  |                               4 = Error setting $iRelativeSize.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  @Error 0 @Extended 0 Return 2 = Success. $bClearDirFrmt was called with True, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -484,29 +480,28 @@ EndFunc   ;==>_LOWriter_DirFrmtCharEffect
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Set either $iSubScript or $iSuperScript to 0 to return it to Normal setting.
-;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage.
-;                  For the user's convenience this function accepts both positive and negative numbers for Subscript, if a positive number is called for Subscript, it is automatically changed to a negative.
-;                  Automatic Superscript has a Integer value of 14000, Auto Subscript has a Integer value of -14000. There is no settable setting of Automatic Super/Sub Script, though one exists, it is read-only in LibreOffice, consequently I have made two separate parameters to be able to determine if the user wants to automatically set Superscript or Subscript.
-;                  If you set both Auto Superscript to True and Auto Subscript to True, or $iSuperScript to an Integer and $iSubScript to an Integer, Subscript will be set as it is the last in the line to be set in this function, and thus will over-write any Superscript settings.
+;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrievine subscript values.
+;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
+;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
 ; Related .......: _LOWriter_DirFrmtClear, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParObjCreateList, _LOWriter_ParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DirFrmtCharPosition(ByRef $oSelection, $bAutoSuper = Null, $iSuperScript = Null, $bAutoSub = Null, $iSubScript = Null, $iRelativeSize = Null, $bClearDirFrmt = False)
+Func _LOWriter_DirFrmtCharPosition(ByRef $oSelection, $iSuperScript = Null, $iSubScript = Null, $iRelativeSize = Null, $bClearDirFrmt = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn
 
 	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	If $bClearDirFrmt Then
 		$oSelection.setPropertyToDefault("CharEscapement")
-		If __LO_VarsAreNull($bAutoSuper, $iSuperScript, $bAutoSub, $iSubScript, $iRelativeSize) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
+		If __LO_VarsAreNull($iSuperScript, $iSubScript, $iRelativeSize) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 	EndIf
 
-	$vReturn = __LOWriter_CharPosition($oSelection, $bAutoSuper, $iSuperScript, $bAutoSub, $iSubScript, $iRelativeSize)
+	$vReturn = __LOWriter_CharPosition($oSelection, $iSuperScript, $iSubScript, $iRelativeSize)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_DirFrmtCharPosition

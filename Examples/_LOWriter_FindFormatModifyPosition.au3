@@ -34,7 +34,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text to Subscript, 50%, and Relative size to 85%
-	_LOWriter_DirFrmtCharPosition($oViewCursor, Null, Null, Null, 50, 85)
+	_LOWriter_DirFrmtCharPosition($oViewCursor, Null, 50, 85)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a search descriptor for searching with. Set Backward, Match Case, Whole word, Regular Expression, and Search Styles to false, and
@@ -43,7 +43,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Find Format Search Array for any 50% Subscript, at 85% relative font
-	_LOWriter_FindFormatModifyPosition($atFindFormat, Null, Null, Null, 50, 85)
+	_LOWriter_FindFormatModifyPosition($atFindFormat, Null, 50, 85)
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the word "search".

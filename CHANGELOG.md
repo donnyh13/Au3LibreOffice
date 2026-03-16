@@ -84,6 +84,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Fixed
 
 - RegExp pattern in `_LO_PathConvert` didn't take into account lowercase drive letters. Thanks to user @SirWayN3.
+- `__LO_IntIsBetween` and `__LO_NumIsBetween` would fail if testing negative min/max values.
 
 #### Refactored
 
@@ -1115,7 +1116,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `$LOC_BORDERWIDTH_` --> `$LOC_BORDER_WIDTH_`
   - `$LOC_DUPLEX_` --> `$LOC_PRINT_DUPLEX_`
   - `$LOC_SHADOW_` --> `$LOC_SHADOW_LOCATION_`
-- Simplified Super/SubScript settings in `_LOCalc_TextCursorCharPosition`.
+- Simplified Super/SubScript setting method in `_LOCalc_TextCursorCharPosition`.
 
 #### Documented
 
@@ -1141,7 +1142,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_CellString
   - _LOCalc_CommentText
 - `_LOCalc_TextCursorMove` wouldn't return a Boolean when using `$LOC_TEXTCUR_GOTO_START`, `$LOC_TEXTCUR_COLLAPSE_TO_END` etc.
-- `__LO_IntIsBetween` and `__LO_NumIsBetween` would fail if testing negative min/max values.
 
 #### Refactored
 
@@ -1882,6 +1882,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `$LOW_DUPLEX_` --> `$LOW_PRINT_DUPLEX_`
   - `$LOW_PAPER_` --> `$LOW_PAPER_FORMAT_`
   - `$LOW_SHADOW_` --> `$LOW_SHADOW_LOCATION_`
+- Simplified Super/SubScript setting method:
+  - __LOWriter_CharPosition
+  - _LOWriter_CharStylePosition
+  - _LOWriter_DirFrmtCharPosition
+  - _LOWriter_FindFormatModifyPosition
+  - _LOWriter_ParStylePosition
 
 #### Documented
 

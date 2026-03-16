@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Default Paragraph Style font position to 75% Superscript, and relative size to 50%.
-	_LOWriter_ParStylePosition($oParStyle, Null, 75, Null, Null, 50)
+	_LOWriter_ParStylePosition($oParStyle, 75, Null, 50)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -33,15 +33,13 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's current position settings are as follows: " & @CRLF & _
-			"Is Auto-Superscript? True/False: " & $avParStyleSettings[0] & @CRLF & _
-			"Current Superscript percentage (If Auto, then it will be 14000): " & $avParStyleSettings[1] & @CRLF & _
-			"Is Auto-Subscript? True/False: " & $avParStyleSettings[2] & @CRLF & _
-			"Current Subscript percentage (If Auto, then it will be -14000): " & $avParStyleSettings[3] & @CRLF & _
-			"Relative size percentage: " & $avParStyleSettings[4] & @CRLF & @CRLF & _
+			"Current Superscript percentage (If Auto, then it will be -1): " & $avParStyleSettings[0] & @CRLF & _
+			"Current Subscript percentage (If Auto, then it will be -1): " & $avParStyleSettings[1] & @CRLF & _
+			"Relative size percentage: " & $avParStyleSettings[2] & @CRLF & @CRLF & _
 			"Press ok and I will set Subscript next.")
 
 	; Set Default Paragraph Style font position to 75% Subscript
-	_LOWriter_ParStylePosition($oParStyle, Null, Null, Null, 75)
+	_LOWriter_ParStylePosition($oParStyle, Null, 75)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -49,11 +47,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's new position settings are as follows: " & @CRLF & _
-			"Is Auto-Superscript? True/False: " & $avParStyleSettings[0] & @CRLF & _
-			"Current Superscript percentage (If Auto, then it will be 14000): " & $avParStyleSettings[1] & @CRLF & _
-			"Is Auto-Subscript? True/False: " & $avParStyleSettings[2] & @CRLF & _
-			"Current Subscript percentage (If Auto, then it will be -14000): " & $avParStyleSettings[3] & @CRLF & _
-			"Relative size percentage: " & $avParStyleSettings[4])
+			"Current Superscript percentage (If Auto, then it will be -1): " & $avParStyleSettings[0] & @CRLF & _
+			"Current Subscript percentage (If Auto, then it will be -1): " & $avParStyleSettings[1] & @CRLF & _
+			"Relative size percentage: " & $avParStyleSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

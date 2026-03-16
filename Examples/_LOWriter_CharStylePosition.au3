@@ -41,7 +41,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Example" Character style font position to auto Superscript, and relative size to 50%.
-	_LOWriter_CharStylePosition($oCharStyle, True, Null, Null, Null, 50)
+	_LOWriter_CharStylePosition($oCharStyle, -1, Null, 50)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -49,15 +49,13 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's current position settings are as follows: " & @CRLF & _
-			"Is Auto-Superscript? True/False: " & $avCharStyleSettings[0] & @CRLF & _
-			"Current Superscript percentage (If Auto, then it will be 14000): " & $avCharStyleSettings[1] & @CRLF & _
-			"Is Auto-Subscript? True/False: " & $avCharStyleSettings[2] & @CRLF & _
-			"Current Subscript percentage (If Auto, then it will be -14000): " & $avCharStyleSettings[3] & @CRLF & _
-			"Relative size percentage: " & $avCharStyleSettings[4] & @CRLF & @CRLF & _
+			"Current Superscript percentage (If Auto, then it will be -1): " & $avCharStyleSettings[0] & @CRLF & _
+			"Current Subscript percentage (If Auto, then it will be -1): " & $avCharStyleSettings[1] & @CRLF & _
+			"Relative size percentage: " & $avCharStyleSettings[2] & @CRLF & @CRLF & _
 			"Press ok and I will set it to auto Subscript next.")
 
 	; Set "Example" Character style font position to auto Subscript
-	_LOWriter_CharStylePosition($oCharStyle, Null, Null, True)
+	_LOWriter_CharStylePosition($oCharStyle, Null, -1)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -65,11 +63,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's new position settings are as follows: " & @CRLF & _
-			"Is Auto-Superscript? True/False: " & $avCharStyleSettings[0] & @CRLF & _
-			"Current Superscript percentage (If Auto, then it will be 14000): " & $avCharStyleSettings[1] & @CRLF & _
-			"Is Auto-Subscript? True/False: " & $avCharStyleSettings[2] & @CRLF & _
-			"Current Subscript percentage (If Auto, then it will be -14000): " & $avCharStyleSettings[3] & @CRLF & _
-			"Relative size percentage: " & $avCharStyleSettings[4])
+			"Current Superscript percentage (If Auto, then it will be -1): " & $avCharStyleSettings[0] & @CRLF & _
+			"Current Subscript percentage (If Auto, then it will be -1): " & $avCharStyleSettings[1] & @CRLF & _
+			"Relative size percentage: " & $avCharStyleSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

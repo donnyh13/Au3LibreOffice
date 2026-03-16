@@ -1313,22 +1313,18 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPageBreak
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FindFormatModifyPosition
 ; Description ...: Modify or Add Find Format Position Settings.
-; Syntax ........: _LOWriter_FindFormatModifyPosition(ByRef $atFormat[, $bAutoSuper = Null[, $iSuperScript = Null[, $bAutoSub = Null[, $iSubScript = Null[, $iRelativeSize = Null]]]]])
+; Syntax ........: _LOWriter_FindFormatModifyPosition(ByRef $atFormat[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $bAutoSuper          - [optional] a boolean value. Default is Null. If True, automatic sizing for Superscript is active. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
-;                  $iSuperScript        - [optional] an integer value (0-100,14000) Default is Null. The Superscript percentage value. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
-;                  $bAutoSub            - [optional] a boolean value. Default is Null. If True, automatic sizing for Subscript is active. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
-;                  $iSubScript          - [optional] an integer value (-100-100,-14000,14000) Default is Null. The Subscript percentage value. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
+;                  $iSuperScript        - [optional] an integer value (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
+;                  $iSubScript          - [optional] an integer value (-1-100) Default is Null. The Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
 ;                  $iRelativeSize       - [optional] an integer value (1-100). Default is Null. The size percentage relative to current font size.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
-;                  @Error 1 @Extended 2 Return 0 = $bAutoSuper not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bAutoSub not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iSuperScript not an Integer, less than 0 or greater than 100, but not 14000.
-;                  @Error 1 @Extended 5 Return 0 = $iSubScript not an Integer, less than -100 or greater than 100, but not (-)14000.
-;                  @Error 1 @Extended 6 Return 0 = $iRelativeSize not an Integer, less than 1 or greater than 100.
+;                  @Error 1 @Extended 2 Return 0 = $iSuperScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 3 Return 0 = $iSubScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 4 Return 0 = $iRelativeSize not an Integer, less than 1 or greater than 100.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
@@ -1337,54 +1333,31 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPageBreak
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  0 is the normal $iSubScript or $iSuperScript setting.
-;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage.
-;                  For the user's convenience this function accepts both positive and negative numbers for Subscript, if a positive number is called for Subscript, it is automatically changed to a negative.
-;                  Automatic Superscript has a Integer value of 14000, Auto Subscript has a Integer value of -14000. There is no settable setting of Automatic Super/Sub Script, though one exists, it is read-only in LibreOffice, consequently I have made two separate parameters to be able to determine if the user wants to automatically set Superscript or Subscript.
-;                  If you set both Auto Superscript to True and Auto Subscript to True, or $iSuperScript to an Integer and $iSubScript to an Integer, Subscript will be set as it is the last in the line to be set in this function, and thus will over-write any Superscript settings.
+;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrievine subscript values.
+;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
+;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
 ; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FindFormatModifyPosition(ByRef $atFormat, $bAutoSuper = Null, $iSuperScript = Null, $bAutoSub = Null, $iSubScript = Null, $iRelativeSize = Null)
+Func _LOWriter_FindFormatModifyPosition(ByRef $atFormat, $iSuperScript = Null, $iSubScript = Null, $iRelativeSize = Null)
 	Local Const $UBOUND_COLUMNS = 2
 
 	If Not IsArray($atFormat) Or (UBound($atFormat, $UBOUND_COLUMNS) > 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	If ($bAutoSuper <> Null) Then
-		If ($bAutoSuper = Default) Then
-			__LOWriter_FindFormatDeleteSetting($atFormat, "CharEscapement")
-
-		Else
-			If Not IsBool($bAutoSuper) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-			; If $bAutoSuper = True set it to 14000 (automatic Superscript) else if $iSuperScript is set, let that overwrite
-			;	the current setting, else if subscript is true or set to an integer, it will overwrite the setting. If nothing
-			; else set Subscript to 1
-			$iSuperScript = ($bAutoSuper) ? (14000) : ((IsInt($iSuperScript)) ? $iSuperScript : ((IsInt($iSubScript) Or ($bAutoSub = True)) ? ($iSuperScript) : (1)))
-		EndIf
-	EndIf
-
-	If ($bAutoSub <> Null) Then
-		If ($bAutoSub = Default) Then
-			__LOWriter_FindFormatDeleteSetting($atFormat, "CharEscapement")
-
-		Else
-			If Not IsBool($bAutoSub) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-			; If $bAutoSub = True set it to -14000 (automatic Subscript) else if $iSubScript is set, let that overwrite
-			;	the current setting, else if superscript is true or set to an integer, it will overwrite the setting.
-			$iSubScript = ($bAutoSub) ? (-14000) : ((IsInt($iSubScript)) ? ($iSubScript) : ((IsInt($iSuperScript)) ? ($iSubScript) : (1)))
-		EndIf
-	EndIf
 
 	If ($iSuperScript <> Null) Then
 		If ($iSuperScript = Default) Then
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharEscapement")
 
 		Else
-			If Not __LO_IntIsBetween($iSuperScript, 0, 100, "", 14000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+			If Not __LO_IntIsBetween($iSuperScript, -1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
+			If ($iSuperScript = -1) Then
+			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", 14000))
+
+			Else
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", $iSuperScript))
+			EndIf
 		EndIf
 	EndIf
 
@@ -1393,10 +1366,15 @@ Func _LOWriter_FindFormatModifyPosition(ByRef $atFormat, $bAutoSuper = Null, $iS
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharEscapement")
 
 		Else
-			If Not __LO_IntIsBetween($iSubScript, -100, 100, "", "-14000:14000") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+			If Not __LO_IntIsBetween($iSubScript, -1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-			$iSubScript = ($iSubScript > 0) ? (Int("-" & $iSubScript)) : ($iSubScript)
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", $iSubScript))
+			If ($iSubScript = -1) Then
+			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", -14000))
+
+			Else
+				$iSubScript = ($iSubScript * -1); Change to negative value, as SubScript is set in negative integers.
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", $iSubScript))
+			EndIf
 		EndIf
 	EndIf
 
@@ -1405,7 +1383,7 @@ Func _LOWriter_FindFormatModifyPosition(ByRef $atFormat, $bAutoSuper = Null, $iS
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharEscapementHeight")
 
 		Else
-			If Not __LO_IntIsBetween($iRelativeSize, 1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+			If Not __LO_IntIsBetween($iRelativeSize, 1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapementHeight", $iRelativeSize))
 		EndIf
