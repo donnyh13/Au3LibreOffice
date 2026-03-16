@@ -1353,10 +1353,10 @@ Func _LOWriter_FindFormatModifyPosition(ByRef $atFormat, $iSuperScript = Null, $
 			If Not __LO_IntIsBetween($iSuperScript, -1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 			If ($iSuperScript = -1) Then
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", 14000))
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", 14000))
 
 			Else
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", $iSuperScript))
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", $iSuperScript))
 			EndIf
 		EndIf
 	EndIf
@@ -1369,10 +1369,10 @@ Func _LOWriter_FindFormatModifyPosition(ByRef $atFormat, $iSuperScript = Null, $
 			If Not __LO_IntIsBetween($iSubScript, -1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 			If ($iSubScript = -1) Then
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", -14000))
+				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", -14000))
 
 			Else
-				$iSubScript = ($iSubScript * -1); Change to negative value, as SubScript is set in negative integers.
+				$iSubScript = ($iSubScript * -1) ; Change to negative value, as SubScript is set in negative integers.
 				__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharEscapement", $iSubScript))
 			EndIf
 		EndIf

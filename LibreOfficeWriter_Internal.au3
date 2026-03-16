@@ -951,7 +951,7 @@ Func __LOWriter_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = Nu
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iSuperScript, $iSubScript, $iRelativeSize) Then
-		__LO_ArrayFill($avPosition,($oObj.CharEscapement() <= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), 1, 100)) ? ($oObj.CharEscapement()) : (-1)) , _
+		__LO_ArrayFill($avPosition, ($oObj.CharEscapement() <= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), 1, 100)) ? ($oObj.CharEscapement()) : (-1)), _
 				($oObj.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), -1, -100)) ? (($oObj.CharEscapement() * -1)) : (-1)), _
 				$oObj.CharEscapementHeight())
 
@@ -964,6 +964,7 @@ Func __LOWriter_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = Nu
 		If ($iSuperScript = -1) Then
 			$oObj.CharEscapement = 14000
 			$iError = ($oObj.CharEscapement() = 14000) ? ($iError) : (BitOR($iError, 1))
+
 		Else
 			$oObj.CharEscapement = $iSuperScript
 			$iError = ($oObj.CharEscapement() = $iSuperScript) ? ($iError) : (BitOR($iError, 1))
@@ -978,7 +979,7 @@ Func __LOWriter_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = Nu
 			$iError = ($oObj.CharEscapement() = -14000) ? ($iError) : (BitOR($iError, 1))
 
 		Else
-			$iSubScript = ($iSubScript * -1); Change to negative value, as SubScript is set in negative integers.
+			$iSubScript = ($iSubScript * -1) ; Change to negative value, as SubScript is set in negative integers.
 			$oObj.CharEscapement = $iSubScript
 			$iError = ($oObj.CharEscapement() = $iSubScript) ? ($iError) : (BitOR($iError, 2))
 		EndIf
