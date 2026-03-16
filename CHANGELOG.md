@@ -1115,6 +1115,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `$LOC_BORDERWIDTH_` --> `$LOC_BORDER_WIDTH_`
   - `$LOC_DUPLEX_` --> `$LOC_PRINT_DUPLEX_`
   - `$LOC_SHADOW_` --> `$LOC_SHADOW_LOCATION_`
+- Simplified Super/SubScript settings in `_LOCalc_TextCursorCharPosition`.
 
 #### Documented
 

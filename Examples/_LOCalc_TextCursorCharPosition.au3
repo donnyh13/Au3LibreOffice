@@ -39,7 +39,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Word Hi to Auto Superscript, and 65% Relative size.
-	_LOCalc_TextCursorCharPosition($oTextCursor, True, Null, Null, Null, 65)
+	_LOCalc_TextCursorCharPosition($oTextCursor, -1, Null, 65)
 	If @error Then _ERROR($oDoc, "Failed to set text Position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now select the word ""Testing"" and set it to Subscript 75%, and 85% relative size.")
@@ -53,7 +53,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Word Testing to 75% Subscript, and 85% Relative size.
-	_LOCalc_TextCursorCharPosition($oTextCursor, Null, Null, Null, 75, 85)
+	_LOCalc_TextCursorCharPosition($oTextCursor, Null, 75, 85)
 	If @error Then _ERROR($oDoc, "Failed to set text Position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Position settings. Return will be an array in order of function parameters.
@@ -61,11 +61,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve current format settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Character Position settings at the Cursor's current position are as follows: " & @CRLF & _
-			"Is auto Superscript currently active? True/False: " & $avSettings[0] & @CRLF & _
-			"The Superscript percentage is: " & $avSettings[1] & @CRLF & _
-			"Is auto Subscript currently active? True/False: " & $avSettings[2] & @CRLF & _
-			"The Subscript percentage is: " & $avSettings[3] & @CRLF & _
-			"The relative percentage is: " & $avSettings[4])
+			"The Superscript percentage is: " & $avSettings[0] & @CRLF & _
+			"The Subscript percentage is: " & $avSettings[1] & @CRLF & _
+			"The relative percentage is: " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
