@@ -265,7 +265,7 @@ Func _LOCalc_TextCursorCharPosition(ByRef $oTextCursor, $iSuperScript = Null, $i
 
 		If ($iSubScript = -1) Then
 			$oCursor.CharEscapement = -14000
-			$iError = ($oCursor.CharEscapement() = -14000) ? ($iError) : (BitOR($iError, 1))
+			$iError = ($oCursor.CharEscapement() = -14000) ? ($iError) : (BitOR($iError, 2))
 
 		Else
 			$iSubScript = ($iSubScript * -1) ; Change to negative value, as SubScript is set in negative integers.
