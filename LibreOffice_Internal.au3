@@ -293,52 +293,54 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ; Example .......: No
 ; ===============================================================================================================================
 Func __LO_IntIsBetween($iTest, $iMin, $iMax = 0, $vNot = "", $vIncl = "")
+	Local $iRealMin, $iRealMax
+
 	If Not IsInt($iTest) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, False)
 
-	Switch @NumParams
-		Case 2
+	If ($vNot <> "") Then
+		If IsString($vNot) Then
+			If StringInStr(":" & $vNot & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+
+		ElseIf IsInt($vNot) Then
+			If ($iTest = $vNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		EndIf
+	EndIf
+
+	If ($vIncl <> "") Then
+		If IsString($vIncl) Then
+			If StringInStr(":" & $vIncl & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+		ElseIf IsInt($vIncl) Then
+			If ($iTest = $vIncl) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+		EndIf
+	EndIf
+
+	If (@NumParams = 2) Then
+		If ($iMin < 0) Then ; If Min is a negative, switch the check.
+			Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest > $iMin) ? (False) : (True))
+		Else
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest < $iMin) ? (False) : (True))
+		EndIf
+	Else
+		$iRealMin = ($iMin < $iMax) ? ($iMin) : ($iMax) ; Switch values if dealing with negatives.
+		$iRealMax = ($iMin < $iMax) ? ($iMax) : ($iMin)
 
-		Case 3
+		Return SetError($__LO_STATUS_SUCCESS, 0, (($iTest < $iRealMin) Or ($iTest > $iRealMax)) ? (False) : (True))
+	EndIf
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, (($iTest < $iMin) Or ($iTest > $iMax)) ? (False) : (True))
-
-		Case 4, 5
-			If IsString($vNot) Then
-				If StringInStr(":" & $vNot & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
-
-			ElseIf IsInt($vNot) Then
-				If ($iTest = $vNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
-			EndIf
-
-			If (($iTest >= $iMin) And ($iTest <= $iMax)) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
-
-			If @NumParams = 5 Then ContinueCase
-
-			Return SetError($__LO_STATUS_SUCCESS, 0, False)
-
-		Case Else
-			If IsString($vIncl) Then
-				If StringInStr(":" & $vIncl & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
-
-			ElseIf IsInt($vIncl) Then
-				If ($iTest = $vIncl) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
-			EndIf
-
-			Return SetError($__LO_STATUS_SUCCESS, 0, False)
-	EndSwitch
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
 EndFunc   ;==>__LO_IntIsBetween
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_NumIsBetween
 ; Description ...: Test whether an input is a Number and is between two Numbers.
-; Syntax ........: __LO_NumIsBetween($nTest, $nMin, $nMax[, $snNot = ""[, $snIncl = Default]])
+; Syntax ........: __LO_NumIsBetween($nTest, $nMin[, $nMax = 0[, $vNot = ""[, $vIncl = ""]]])
 ; Parameters ....: $nTest               - a general number value. The Value to test.
-;                  $nMin                - a general number value. The minimum $iTest can be.
-;                  $nMax                - a general number value. The maximum $iTest can be.
-;                  $snNot               - [optional] a string value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
-;                  $snIncl              - [optional] a string value. Default is Default. Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
+;                  $nMin                - a general number value. The minimum $nTest can be.
+;                  $nMax                - [optional] a general number value. Default is 0. The maximum $nTest can be.
+;                  $vNot                - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
+;                  $vIncl               - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
 ;                  Failure: False
 ;                  --Success--
@@ -350,39 +352,44 @@ EndFunc   ;==>__LO_IntIsBetween
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LO_NumIsBetween($nTest, $nMin, $nMax, $snNot = "", $snIncl = Default)
-	Local $bMatch = False
-	Local $anNot, $anIncl
+Func __LO_NumIsBetween($nTest, $nMin, $nMax = 0, $vNot = "", $vIncl = "")
+	Local $nRealMin, $nRealMax
 
 	If Not IsNumber($nTest) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
-	If (@NumParams = 3) Then Return (($nTest < $nMin) Or ($nTest > $nMax)) ? (SetError($__LO_STATUS_SUCCESS, 0, False)) : (SetError($__LO_STATUS_SUCCESS, 0, True))
 
-	If ($snNot <> "") Then
-		If IsString($snNot) And StringInStr($snNot, ":") Then
-			$anNot = StringSplit($snNot, ":")
-			For $i = 1 To $anNot[0]
-				If ($anNot[$i] = $nTest) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
-			Next
+	If ($vNot <> "") Then
+		If IsString($vNot) Then
+			If StringInStr(":" & $vNot & ":", ":" & $nTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
 
-		Else
-			If ($nTest = $snNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		ElseIf IsNumber($vNot) Then
+			If ($nTest = $vNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
 		EndIf
 	EndIf
 
-	If (($nTest >= $nMin) And ($nTest <= $nMax)) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+	If ($vIncl <> "") Then
+		If IsString($vIncl) Then
+			If StringInStr(":" & $vIncl & ":", ":" & $nTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
 
-	If IsString($snIncl) And StringInStr($snIncl, ":") Then
-		$anIncl = StringSplit($snIncl, ":")
-		For $j = 1 To $anIncl[0]
-			$bMatch = ($anIncl[$j] = $nTest) ? (True) : (False)
-			If $bMatch Then ExitLoop
-		Next
-
-	ElseIf IsNumber($snIncl) Then
-		$bMatch = ($nTest = $snIncl) ? (True) : (False)
+		ElseIf IsNumber($vIncl) Then
+			If ($nTest = $vIncl) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+		EndIf
 	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $bMatch)
+	If (@NumParams = 2) Then
+		If ($nMin < 0) Then ; If Min is a negative, switch the check.
+			Return SetError($__LO_STATUS_SUCCESS, 0, ($nTest > $nMin) ? (False) : (True))
+		Else
+
+			Return SetError($__LO_STATUS_SUCCESS, 0, ($nTest < $nMin) ? (False) : (True))
+		EndIf
+	Else
+		$nRealMin = ($nMin < $nMax) ? ($nMin) : ($nMax) ; Switch values if dealing with negatives.
+		$nRealMax = ($nMin < $nMax) ? ($nMax) : ($nMin)
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, (($nTest < $nRealMin) Or ($nTest > $nRealMax)) ? (False) : (True))
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
 EndFunc   ;==>__LO_NumIsBetween
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
