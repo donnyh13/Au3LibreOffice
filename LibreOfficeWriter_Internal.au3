@@ -976,7 +976,7 @@ Func __LOWriter_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = Nu
 
 		If ($iSubScript = -1) Then
 			$oObj.CharEscapement = -14000
-			$iError = ($oObj.CharEscapement() = -14000) ? ($iError) : (BitOR($iError, 1))
+			$iError = ($oObj.CharEscapement() = -14000) ? ($iError) : (BitOR($iError, 2))
 
 		Else
 			$iSubScript = ($iSubScript * -1) ; Change to negative value, as SubScript is set in negative integers.
