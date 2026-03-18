@@ -3727,7 +3727,7 @@ EndFunc   ;==>_LOWriter_FieldPageNumberModify
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $sBookmarkName       - a string value. The Bookmark name to Reference.
 ;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the bookmark, see $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the bookmark. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3737,7 +3737,7 @@ EndFunc   ;==>_LOWriter_FieldPageNumberModify
 ;                  @Error 1 @Extended 4 Return 0 = $sBookmarkName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = Document does not contain a Bookmark by the same name as called in $sBookmarkName.
-;                  @Error 1 @Extended 7 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 7 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ;                  --Success--
@@ -3788,7 +3788,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkInsert
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oBookmarkRefField   - [in/out] an object. A Bookmark Reference field Object from a previous _LOWriter_FieldRefBookMarkInsert, or _LOWriter_FieldsGetList function.
 ;                  $sBookmarkName       - [optional] a string value. Default is Null. The Bookmark name to Reference.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the bookmark, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the bookmark. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3796,7 +3796,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkInsert
 ;                  @Error 1 @Extended 2 Return 0 = $oBookmarkRefField not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sBookmarkName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = Document does not contain a Bookmark by the same name as called in $sBookmarkName.
-;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sBookmarkName
@@ -3857,7 +3857,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkModify
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $oEndNote            - [in/out] an object. A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
 ;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Endnote, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Endnote. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3866,7 +3866,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkModify
 ;                  @Error 1 @Extended 3 Return 0 = $oCursor is a Table Cursor, and is not supported.
 ;                  @Error 1 @Extended 4 Return 0 = $oEndNote not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 6 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ;                  --Success--
@@ -3917,7 +3917,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteInsert
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oEndNoteRefField    - [in/out] an object. A Endnote Reference field Object from a previous _LOWriter_FieldRefEndnoteInsert, or _LOWriter_FieldsGetList function.
 ;                  $oEndNote            - [optional] an object. Default is Null. A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Endnote, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Endnote. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3925,7 +3925,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteInsert
 ;                  @Error 1 @Extended 2 Return 0 = $oEndNoteRefField not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = Optional Parameters called with Null, but object called in $oEndNoteRefField not set as an Endnote Reference type field.
 ;                  @Error 1 @Extended 4 Return 0 = $oEndNote not an Object.
-;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Endnote Object for setting return.
 ;                  --Property Setting Errors--
@@ -4000,7 +4000,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteModify
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $oFootNote           - [in/out] an object. A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
 ;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Footnote, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Footnote See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4009,7 +4009,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteModify
 ;                  @Error 1 @Extended 3 Return 0 = $oCursor is a Table Cursor, and is not supported.
 ;                  @Error 1 @Extended 4 Return 0 = $oFootNote not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 6 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ;                  --Success--
@@ -4060,7 +4060,7 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteInsert
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oFootNoteRefField   - [in/out] an object. A Footnote Reference field Object from a previous _LOWriter_FieldRefFootnoteInsert, or _LOWriter_FieldsGetList function.
 ;                  $oFootNote           - [optional] an object. Default is Null. A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Footnote, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Footnote. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4068,7 +4068,7 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteInsert
 ;                  @Error 1 @Extended 2 Return 0 = $oFootNoteRefField not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = Optional Parameters called with Null, but object called in $oFootNoteRefField not set as a Footnote Reference type field.
 ;                  @Error 1 @Extended 4 Return 0 = $oFootNote not an Object.
-;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Footnote Object for setting return.
 ;                  --Property Setting Errors--
@@ -4170,7 +4170,7 @@ EndFunc   ;==>_LOWriter_FieldRefGetType
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $sRefMarkName        - a string value. The Reference Mark Name to reference.
 ;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to insert, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to insert. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4180,7 +4180,7 @@ EndFunc   ;==>_LOWriter_FieldRefGetType
 ;                  @Error 1 @Extended 4 Return 0 = $sRefMarkName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = Document does not contain a Reference Mark by the same name as called in $sRefMarkName.
-;                  @Error 1 @Extended 7 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 7 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ;                  --Processing Errors--
@@ -4420,7 +4420,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarksGetNames
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oRefField           - [in/out] an object. A Reference field Object from a previous _LOWriter_FieldRefInsert or _LOWriter_FieldsGetList function.
 ;                  $sRefMarkName        - [optional] a string value. Default is Null. The Reference Mark Name to Reference.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to insert, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to insert. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4428,7 +4428,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarksGetNames
 ;                  @Error 1 @Extended 2 Return 0 = $oRefField not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sRefMarkName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = Document does not contain a Reference Mark by the same name as called in $sRefMarkName.
-;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Reference Marks Object.
 ;                  --Property Setting Errors--

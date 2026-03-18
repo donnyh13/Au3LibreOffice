@@ -1932,6 +1932,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FormConTableConComboBoxData
 - `_LOWriter_FormConPushButtonGeneral` Removed duplicated parameter in Header Parameter description.
 - Added LibreOffice SDK/API Constant names to constants.
+- Added missing "See Constants" to applicable variables in headers.
 
 #### Fixed
 

@@ -232,18 +232,18 @@ EndFunc   ;==>_LOWriter_CellBorderPadding
 ; Description ...: Set or Retrieve the Cell or Cell Range Border Line style. Libre Office Version 3.4 and Up.
 ; Syntax ........: _LOWriter_CellBorderStyle(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3
-;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3
-;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3
-;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
+;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--

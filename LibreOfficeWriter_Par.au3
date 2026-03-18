@@ -918,10 +918,10 @@ EndFunc   ;==>_LOWriter_ParStyleBorderPadding
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oParStyle not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oParStyle not a Paragraph Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
+;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
@@ -1380,7 +1380,7 @@ EndFunc   ;==>_LOWriter_ParStyleExists
 ;                  $sFontName           - [optional] a string value. Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] a general number value. Default is Null. The new Font size.
 ;                  $iPosture            - [optional] an integer value (0-5). Default is Null. The Font Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] an integer value (0,50-200). Default is Null. The Font Bold settings see Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] an integer value (0,50-200). Default is Null. The Font Bold settings. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1388,8 +1388,8 @@ EndFunc   ;==>_LOWriter_ParStyleExists
 ;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not available in current document.
 ;                  @Error 1 @Extended 4 Return 0 = $nFontSize not a Number.
-;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants.
-;                  @Error 1 @Extended 6 Return 0 = $iWeight less than 50 and not 0, or more than 200. See Constants.
+;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iWeight less than 50 and not 0, or more than 200. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $oParStyle not a Paragraph Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:

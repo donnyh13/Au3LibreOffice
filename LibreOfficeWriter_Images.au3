@@ -995,10 +995,10 @@ EndFunc   ;==>_LOWriter_ImageBorderPadding
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oImage not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
+;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
@@ -2490,10 +2490,10 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  @Error 1 @Extended 2 Return 0 = $oImage not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $iWidth Not an Integer, or less than 51.
 ;                  @Error 1 @Extended 4 Return 0 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 5 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0, and not equal to 7. See Constants.
+;                  @Error 1 @Extended 5 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0, and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
 ;                  @Error 1 @Extended 6 Return 0 = $iHeight Not an Integer, or less than 51.
 ;                  @Error 1 @Extended 7 Return 0 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 8 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants.
+;                  @Error 1 @Extended 8 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
 ;                  @Error 1 @Extended 9 Return 0 = $bKeepRatio not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -2616,7 +2616,7 @@ EndFunc   ;==>_LOWriter_ImageTypeSize
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oImage not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants.
+;                  @Error 1 @Extended 2 Return 0 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = $iLeft not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $iRight not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iTop not an Integer.

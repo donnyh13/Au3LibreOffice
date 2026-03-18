@@ -7219,7 +7219,7 @@ EndFunc   ;==>__LOWriter_ParTxtFlowOpt
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (0-25). The Type of shape to create. See $LOW_SHAPE_TYPE_ARROWS_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iShapeType          - an integer value (0-25). The Type of shape to create. See Constants, $LOW_SHAPE_TYPE_ARROWS_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -7229,7 +7229,7 @@ EndFunc   ;==>__LOWriter_ParTxtFlowOpt
 ;                  @Error 1 @Extended 4 Return 0 = $iHeight not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iX not an Integer.
 ;                  @Error 1 @Extended 6 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iShapeType not an Integer
+;                  @Error 1 @Extended 7 Return 0 = $iShapeType not an Integer.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
@@ -7404,7 +7404,7 @@ EndFunc   ;==>__LOWriter_Shape_CreateArrow
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (26-49). The Type of shape to create. See $LOW_SHAPE_TYPE_BASIC_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iShapeType          - an integer value (26-49). The Type of shape to create. See Constants, $LOW_SHAPE_TYPE_BASIC_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -7589,7 +7589,7 @@ EndFunc   ;==>__LOWriter_Shape_CreateBasic
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (50-56). The Type of shape to create. See $LOW_SHAPE_TYPE_CALLOUT_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iShapeType          - an integer value (50-56). The Type of shape to create. See Constants, $LOW_SHAPE_TYPE_CALLOUT_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -7708,7 +7708,7 @@ EndFunc   ;==>__LOWriter_Shape_CreateCallout
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (57-84). The Type of shape to create. See $LOW_SHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iShapeType          - an integer value (57-84). The Type of shape to create. See Constants, $LOW_SHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

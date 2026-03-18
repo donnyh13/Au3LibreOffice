@@ -807,7 +807,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  @Error 1 @Extended 19 Return 0 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 20 Return 0 = $iBackColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error 1 @Extended 21 Return 0 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 22 Return 0 = $iBorderColor not an Integer, less than 0 or greater than 16777215. $bDropdown not a Boolean.
+;                  @Error 1 @Extended 22 Return 0 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error 1 @Extended 23 Return 0 = $bDropdown not a Boolean.
 ;                  @Error 1 @Extended 24 Return 0 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
 ;                  @Error 1 @Extended 25 Return 0 = $bAutoFill not an Boolean.

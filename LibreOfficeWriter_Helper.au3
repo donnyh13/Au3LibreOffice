@@ -2274,7 +2274,7 @@ EndFunc   ;==>_LOWriter_FormatKeyDelete
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFormatKey not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iFormatType not an Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iFormatType not an Integer, less than 0 or greater than 15881. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to Create "com.sun.star.lang.Locale" Object.
 ;                  --Processing Errors--
@@ -2299,7 +2299,7 @@ Func _LOWriter_FormatKeyExists(ByRef $oDoc, $iFormatKey, $iFormatType = $LOW_FOR
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsInt($iFormatType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_IntIsBetween($iFormatType, $LOW_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0); 15881 is all keys BitOR'd together.
 
 	$tLocale = __LO_CreateStruct("com.sun.star.lang.Locale")
 	If Not IsObj($tLocale) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -2419,7 +2419,7 @@ EndFunc   ;==>_LOWriter_FormatKeyGetString
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bIsUser not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iFormatKeyType not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iFormatKeyType not an Integer, less than 0 or greater than 15881. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.lang.Locale" Object.
 ;                  --Processing Errors--
@@ -2452,7 +2452,7 @@ Func _LOWriter_FormatKeysGetList(ByRef $oDoc, $bIsUser = False, $bUserOnly = Fal
 
 	$iColumns = ($bIsUser = True) ? ($iColumns) : (2)
 
-	If Not IsInt($iFormatKeyType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iFormatKeyType, $LOW_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0); 15881 is all keys BitOR'd together.
 
 	$tLocale = __LO_CreateStruct("com.sun.star.lang.Locale")
 	If Not IsObj($tLocale) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
