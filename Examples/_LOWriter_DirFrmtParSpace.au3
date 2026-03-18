@@ -52,7 +52,8 @@ Func Example()
 			"Spacing below the paragraph, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
 			"Do not apply spacing if above and/or below paragraph are the same style? True/False: " & $avSettings[2] & @CRLF & _
 			"Line spacing mode, (See UDF constants): " & $avSettings[3] & @CRLF & _
-			"Line spacing distance, in Hundredths of a Millimeter (HMM) except for $LOW_PAR_LINE_SPC_MODE_PROP(0), which is a percentage: " & $avSettings[4] & @CRLF & @CRLF & _
+			"Line spacing distance, in Hundredths of a Millimeter (HMM) except for $LOW_PAR_LINE_SPC_MODE_PROP(0), which is a percentage: " & $avSettings[4] & @CRLF & _
+			"Is Register mode enabled for the paragraph? True/False: " & $avSettings[5] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")
 
 	; Remove direct formatting

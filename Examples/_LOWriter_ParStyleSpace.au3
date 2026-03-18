@@ -47,7 +47,8 @@ Func Example()
 			"Spacing below the paragraph, in Hundredths of a Millimeter (HMM): " & $avParStyleSettings[1] & @CRLF & _
 			"Do not apply spacing if above and/or below paragraph are the same style? True/False: " & $avParStyleSettings[2] & @CRLF & _
 			"Line spacing mode, (See UDF constants): " & $avParStyleSettings[3] & @CRLF & _
-			"Line spacing distance, in Hundredths of a Millimeter (HMM) except for $LOW_PAR_LINE_SPC_MODE_PROP(0), which is a percentage: " & $avParStyleSettings[4])
+			"Line spacing distance, in Hundredths of a Millimeter (HMM) except for $LOW_PAR_LINE_SPC_MODE_PROP(0), which is a percentage: " & $avParStyleSettings[4] & @CRLF & _
+			"Is Register mode enabled for the paragraph? True/False: " & $avParStyleSettings[5])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
