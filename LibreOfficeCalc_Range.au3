@@ -2935,6 +2935,7 @@ Func _LOCalc_RangePivotDest(ByRef $oDoc, ByRef $oPivotTable, $oDestRange = Null)
 	Local $oSheet, $oOrigRange, $oNewPivotTable, $oPivotDesc, $oPivotField
 	Local $tCellAddr
 	Local $sName
+	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPivotTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -3050,12 +3051,11 @@ Func _LOCalc_RangePivotDest(ByRef $oDoc, ByRef $oPivotTable, $oDestRange = Null)
 	$oPivotTable = $oNewPivotTable
 
 	If ($oPivotTable.Name() <> $sName) Then $oPivotTable.Name = $sName
-
-	If Not (($oPivotTable.OutputRange.Sheet() = $oDestRange.RangeAddress.Sheet()) And _
+	$iError = (($oPivotTable.OutputRange.Sheet() = $oDestRange.RangeAddress.Sheet()) And _
 			($oPivotTable.OutputRange.StartColumn() = $oDestRange.RangeAddress.StartColumn()) And _
-			($oPivotTable.OutputRange.StartRow() = $oDestRange.RangeAddress.StartRow())) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+			($oPivotTable.OutputRange.StartRow() = $oDestRange.RangeAddress.StartRow())) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_RangePivotDest
 
 ; #FUNCTION# ====================================================================================================================
@@ -3926,6 +3926,7 @@ Func _LOCalc_RangePivotName(ByRef $oDoc, ByRef $oPivotTable, $sName = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSheet
+	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPivotTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -3940,10 +3941,9 @@ Func _LOCalc_RangePivotName(ByRef $oDoc, ByRef $oPivotTable, $sName = Null)
 	If $oSheet.DataPilotTables.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$oPivotTable.Name = $sName
+	$iError = ($oPivotTable.Name() = $sName) ? ($iError) : (BitOR($iError, 1))
 
-	If Not ($oPivotTable.Name() = $sName) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_RangePivotName
 
 ; #FUNCTION# ====================================================================================================================

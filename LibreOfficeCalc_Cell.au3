@@ -642,6 +642,8 @@ Func _LOCalc_CellFormula(ByRef $oCell, $sFormula = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not ($oCell.supportsService("com.sun.star.sheet.SheetCell")) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Only single cells supported.
 
@@ -650,9 +652,9 @@ Func _LOCalc_CellFormula(ByRef $oCell, $sFormula = Null)
 	If Not IsString($sFormula) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oCell.setFormula($sFormula)
-	If ($oCell.getFormula() <> $sFormula) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ($oCell.getFormula() = $sFormula) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_CellFormula
 
 ; #FUNCTION# ====================================================================================================================
@@ -966,6 +968,8 @@ Func _LOCalc_CellString(ByRef $oCell, $sText = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not ($oCell.supportsService("com.sun.star.sheet.SheetCell")) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Only single cells supported.
 
@@ -976,9 +980,9 @@ Func _LOCalc_CellString(ByRef $oCell, $sText = Null)
 	$oCell.setString($sText)
 
 	; Strip @CR / @LF from both to compare, otherwise they don't match.
-	If (StringRegExpReplace($oCell.getString(), @CR & "|" & @LF, "") <> StringRegExpReplace($sText, @CR & "|" & @LF, "")) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0) ; Calc Automatically converts @CR etc to @LF
+	$iError = ((StringRegExpReplace($oCell.getString(), @CR & "|" & @LF, "") = StringRegExpReplace($sText, @CR & "|" & @LF, ""))) ? ($iError) : (BitOR($iError, 1)) ; Calc Automatically converts @CR etc to @LF
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_CellString
 
 ; #FUNCTION# ====================================================================================================================
@@ -2452,6 +2456,8 @@ Func _LOCalc_CellValue(ByRef $oCell, $nValue = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not ($oCell.supportsService("com.sun.star.sheet.SheetCell")) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Only single cells supported.
 
@@ -2460,7 +2466,7 @@ Func _LOCalc_CellValue(ByRef $oCell, $nValue = Null)
 	If Not IsNumber($nValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oCell.setValue($nValue)
-	If ($oCell.getValue() <> $nValue) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ($oCell.getValue() = $nValue) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_CellValue

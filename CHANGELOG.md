@@ -1164,6 +1164,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Changed incorrect variable used in `__LOCalc_CommentAreaShadowModify` from `$LOC_COMMENT_ANCHOR_` to `$LOC_COMMENT_SHADOW_`. Both are Enumerated the same, so no material difference was made.
 - Changed `_LOCalc_RangeFillRandom` to use IntIsBetween instead of NumIsBetween for $iDecPlc parameter.
 - Made certain Input checks use `__LO_IntIsBetween`.
+- Changed some functions to not return a Property setting error instantly, but made it match other functionsby using an error variable.
 
 #### Removed
 

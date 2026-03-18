@@ -1184,6 +1184,8 @@ Func _LOCalc_SheetPrintRangeModify(ByRef $oSheet, $aoRange = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($aoRange) Then
@@ -1208,8 +1210,9 @@ Func _LOCalc_SheetPrintRangeModify(ByRef $oSheet, $aoRange = Null)
 	Next
 
 	$oSheet.setPrintAreas($aoRange)
+	$iError = (UBound($oSheet.getPrintAreas()) = UBound($aoRange)) ? ($iError) : (BitOR($iError, 1))
 
-	Return (UBound($oSheet.getPrintAreas()) = UBound($aoRange)) ? SetError($__LO_STATUS_SUCCESS, 0, 1) : SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_SheetPrintRangeModify
 
 ; #FUNCTION# ====================================================================================================================
@@ -1539,6 +1542,8 @@ Func _LOCalc_SheetTabColor(ByRef $oSheet, $iColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iColor) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.TabColor())
@@ -1546,9 +1551,9 @@ Func _LOCalc_SheetTabColor(ByRef $oSheet, $iColor = Null)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oSheet.TabColor = $iColor
-	If Not ($oSheet.TabColor() = $iColor) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ($oSheet.TabColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_SheetTabColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -1618,6 +1623,8 @@ Func _LOCalc_SheetVisible(ByRef $oSheet, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.IsVisible())
@@ -1625,6 +1632,7 @@ Func _LOCalc_SheetVisible(ByRef $oSheet, $bVisible = Null)
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oSheet.IsVisible = $bVisible
+	$iError = ($oSheet.IsVisible = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($oSheet.IsVisible = $bVisible) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_SheetVisible

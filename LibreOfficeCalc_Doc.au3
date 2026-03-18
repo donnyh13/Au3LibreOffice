@@ -2254,9 +2254,9 @@ Func _LOCalc_DocVisible(ByRef $oDoc, $bVisible = Null)
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oDoc.CurrentController.Frame.ContainerWindow.Visible = $bVisible
-	$iError = ($oDoc.CurrentController.Frame.ContainerWindow.isVisible() = $bVisible) ? (0) : (1)
+	$iError = ($oDoc.CurrentController.Frame.ContainerWindow.isVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_DocVisible
 
 ; #FUNCTION# ====================================================================================================================
@@ -2288,6 +2288,8 @@ Func _LOCalc_DocWindowFirstColumn(ByRef $oDoc, $iColumn = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iColumn) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.getFirstVisibleColumn())
@@ -2295,8 +2297,9 @@ Func _LOCalc_DocWindowFirstColumn(ByRef $oDoc, $iColumn = Null)
 	If Not __LO_IntIsBetween($iColumn, 0, $oDoc.CurrentController.getActiveSheet().Columns.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oDoc.CurrentController.setFirstVisibleColumn($iColumn)
+	$iError = ($oDoc.CurrentController.getFirstVisibleColumn() = $iColumn) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($oDoc.CurrentController.getFirstVisibleColumn() = $iColumn) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_DocWindowFirstColumn
 
 ; #FUNCTION# ====================================================================================================================
@@ -2328,6 +2331,8 @@ Func _LOCalc_DocWindowFirstRow(ByRef $oDoc, $iRow = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iRow) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.getFirstVisibleRow())
@@ -2335,8 +2340,9 @@ Func _LOCalc_DocWindowFirstRow(ByRef $oDoc, $iRow = Null)
 	If Not __LO_IntIsBetween($iRow, 0, $oDoc.CurrentController.getActiveSheet().Rows.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oDoc.CurrentController.setFirstVisibleRow($iRow)
+	$iError = ($oDoc.CurrentController.getFirstVisibleRow() = $iRow) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($oDoc.CurrentController.getFirstVisibleRow() = $iRow) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_DocWindowFirstRow
 
 ; #FUNCTION# ====================================================================================================================

@@ -136,6 +136,7 @@ Func _LOCalc_CommentAreaColor(ByRef $oComment, $iColor = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oAnnotationShape
+	Local $iError = 0
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -148,10 +149,9 @@ Func _LOCalc_CommentAreaColor(ByRef $oComment, $iColor = Null)
 
 	$oAnnotationShape.FillStyle = $LOC_AREA_FILL_STYLE_SOLID
 	$oAnnotationShape.FillColor = $iColor
+	$iError = ($oAnnotationShape.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
-	If ($oAnnotationShape.FillColor() <> $iColor) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_CommentAreaColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -1842,6 +1842,7 @@ Func _LOCalc_CommentRotate(ByRef $oComment, $nRotate = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oAnnotationShape
+	Local $iError = 0
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -1853,9 +1854,9 @@ Func _LOCalc_CommentRotate(ByRef $oComment, $nRotate = Null)
 	If Not __LO_NumIsBetween($nRotate, 0, 359.99) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oAnnotationShape.RotateAngle = ($nRotate * 100)     ; * 100 to match L.O. Values.
-	If (($oAnnotationShape.RotateAngle() / 100) <> $nRotate) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = (($oAnnotationShape.RotateAngle() / 100) = $nRotate) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_CommentRotate
 
 ; #FUNCTION# ====================================================================================================================
@@ -2062,6 +2063,7 @@ Func _LOCalc_CommentText(ByRef $oComment, $sText = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $sString
+	Local $iError = 0
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -2077,9 +2079,9 @@ Func _LOCalc_CommentText(ByRef $oComment, $sText = Null)
 	$oComment.String = $sText
 
 	; Strip @CR / @LF from both to compare, otherwise they don't match.
-	If (StringRegExpReplace($oComment.String(), @CR & "|" & @LF, "") <> StringRegExpReplace($sText, @CR & "|" & @LF, "")) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ((StringRegExpReplace($oComment.String(), @CR & "|" & @LF, "") = StringRegExpReplace($sText, @CR & "|" & @LF, ""))) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_CommentText
 
 ; #FUNCTION# ====================================================================================================================
@@ -2645,6 +2647,8 @@ Func _LOCalc_CommentVisible(ByRef $oComment, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oComment.IsVisible())
@@ -2652,8 +2656,7 @@ Func _LOCalc_CommentVisible(ByRef $oComment, $bVisible = Null)
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oComment.IsVisible = $bVisible
+	$iError = ($oComment.IsVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	If ($oComment.IsVisible() <> $bVisible) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOCalc_CommentVisible
