@@ -72,6 +72,8 @@ Func _LOBase_DatabaseAutoCommit(ByRef $oConnection, $bAutoCommit = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oConnection.supportsService("com.sun.star.sdbc.Connection") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -80,9 +82,9 @@ Func _LOBase_DatabaseAutoCommit(ByRef $oConnection, $bAutoCommit = Null)
 	If Not IsBool($bAutoCommit) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oConnection.setAutoCommit($bAutoCommit)
-	If Not ($oConnection.getAutoCommit() = $bAutoCommit) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ($oConnection.getAutoCommit() = $bAutoCommit) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_DatabaseAutoCommit
 
 ; #FUNCTION# ====================================================================================================================
