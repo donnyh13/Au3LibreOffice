@@ -25,6 +25,10 @@ Support for other components will be provided as time permits.
 
 Please see the [Changelog](CHANGELOG.md)
 
+## Wiki
+
+Thanks to user @water, this UDF now has a wiki page, found here: <https://www.autoitscript.com/wiki/LibreOffice>
+
 ## License
 
 Distributed under the MIT License. See the [LICENSE](LICENSE) for more information.
@@ -57,6 +61,7 @@ Distributed under the MIT License. See the [LICENSE](LICENSE) for more informati
   - Andrew Pitonyak's website: <https://www.pitonyak.org/oo.php>
 - Thanks to the following maintainers and contributors:
   - [@mLipok](https://github.com/mLipok) for hosting this project on his GitHub. As well as his tireless energy during the long hours of development, code review and clean-up.
+  - [@water](https://www.autoitscript.com/forum/profile/7903-water/) for extensive documentation work and support, as well as CHM creation.
   - [@donnyh13](https://github.com/donnyh13) for the initial project creation and further development.
 
 ## Links

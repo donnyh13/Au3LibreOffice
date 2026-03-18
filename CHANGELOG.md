@@ -62,6 +62,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LO_PrintersGetNames` and `_LO_PrintersGetNamesAlt` central functions for retrieving Printer names instead of individual component functions.
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
 - Added Au3 LibreOffice Inspector tools to UDF files.
+- Added wiki article on the AutoIt Wiki. Thanks to user @water.
 
 #### Changed
 
