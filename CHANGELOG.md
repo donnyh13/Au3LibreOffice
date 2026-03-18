@@ -390,6 +390,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.
 - Renamed $iSlant parameter to $iPosture in `_LOBase_FontDescCreate` and `_LOBase_FontDescEdit` for consistency.
 - Changed some functions to not return a Property setting error instantly, but made it match other functionsby using an error variable.
+- Standardize Property setting error check method.
 
 #### Removed
 

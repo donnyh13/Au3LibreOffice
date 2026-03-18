@@ -1352,7 +1352,7 @@ Func _LOBase_TableName(ByRef $oTable, $sName = Null)
 	$oTable.rename($sName)
 	$iError = ($oTable.Name() = $sName) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_TableName
 
 ; #FUNCTION# ====================================================================================================================
@@ -1878,5 +1878,5 @@ Func _LOBase_TableUIVisible(ByRef $oTableUI, $bVisible = Null)
 	$oTableUI.Frame.ContainerWindow.Visible = $bVisible
 	$iError = ($oTableUI.Frame.ContainerWindow.IsVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_TableUIVisible

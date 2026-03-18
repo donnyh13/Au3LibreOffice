@@ -727,7 +727,7 @@ Func _LOBase_QueryName(ByRef $oQuery, $sName = Null)
 	$oQuery.rename($sName)
 	$iError = ($oQuery.Name() = $sName) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_QueryName
 
 ; #FUNCTION# ====================================================================================================================
@@ -769,7 +769,7 @@ Func _LOBase_QuerySQLCommand(ByRef $oQuery, $sSQL_Command = Null)
 	$oQuery.Command = $sSQL_Command
 	$iError = ($oQuery.Command() = $sSQL_Command) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_QuerySQLCommand
 
 ; #FUNCTION# ====================================================================================================================
@@ -1116,5 +1116,5 @@ Func _LOBase_QueryUIVisible(ByRef $oQueryUI, $bVisible = Null)
 	$oQueryUI.Frame.ContainerWindow.Visible = $bVisible
 	$iError = ($oQueryUI.Frame.ContainerWindow.IsVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_QueryUIVisible

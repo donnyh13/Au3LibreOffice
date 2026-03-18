@@ -428,7 +428,7 @@ Func _LOBase_DocDatabaseType(ByRef $oDoc, $sType = Default, $bOverwrite = False)
 	$oDoc.DataSource.URL = $sType
 	$iError = ($oDoc.DataSource.URL() = $sType) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_DocDatabaseType
 
 ; #FUNCTION# ====================================================================================================================
@@ -1094,5 +1094,5 @@ Func _LOBase_DocVisible(ByRef $oDoc, $bVisible = Null)
 	$oDoc.CurrentController.Frame.ContainerWindow.Visible = $bVisible
 	$iError = ($oDoc.CurrentController.Frame.ContainerWindow.isVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_DocVisible

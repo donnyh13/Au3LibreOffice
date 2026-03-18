@@ -1671,7 +1671,7 @@ Func _LOBase_ReportDocVisible(ByRef $oReportDoc, $bVisible = Null)
 	$oReportDoc.CurrentController.Frame.ContainerWindow.Visible = $bVisible
 	$iError = ($oReportDoc.CurrentController.Frame.ContainerWindow.isVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_ReportDocVisible
 
 ; #FUNCTION# ====================================================================================================================
