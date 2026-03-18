@@ -70,7 +70,7 @@
 ;                  @Error 1 @Extended 2 Return 0 = $oConnection not a Connection Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sColName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iColType not an Integer, less than -16 or greater than 2014
+;                  @Error 1 @Extended 5 Return 0 = $iColType not an Integer, less than -16 or greater than 2014. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $sColTypeName not a String.
 ;                  @Error 1 @Extended 7 Return 0 = $sColDesc not a String.
 ;                  @Error 1 @Extended 8 Return 0 = Table name called in $sName already used as a Table name.

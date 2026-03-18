@@ -893,7 +893,7 @@ EndFunc   ;==>_LOBase_FormatKeyDelete
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
 ;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iFormatType not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iFormatType not an Integer, less than 0 or greater than 15881. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to Create "com.sun.star.lang.Locale" Object.
 ;                  --Processing Errors--
@@ -919,7 +919,7 @@ Func _LOBase_FormatKeyExists(ByRef $oObj, $iFormatKey, $iFormatType = $LOB_FORMA
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oObj.supportsService("com.sun.star.sdbc.Connection") And Not $oObj.supportsService("com.sun.star.report.ReportDefinition") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsInt($iFormatType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iFormatType, $LOB_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0); 15881 = All keys BitOR'd together.
 
 	$tLocale = __LO_CreateStruct("com.sun.star.lang.Locale")
 	If Not IsObj($tLocale) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -1058,7 +1058,7 @@ EndFunc   ;==>_LOBase_FormatKeyGetString
 ; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportConnect, or _LOBase_ReportOpen function.
 ;                  $bIsUser             - [optional] a boolean value. Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
 ;                  $bUserOnly           - [optional] a boolean value. Default is False. If True, only user-created Format Keys are returned.
-;                  $iFormatKeyType      - [optional] an integer value (0-15881). Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3..
+;                  $iFormatKeyType      - [optional] an integer value (0-15881). Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1066,7 +1066,7 @@ EndFunc   ;==>_LOBase_FormatKeyGetString
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
 ;                  @Error 1 @Extended 3 Return 0 = $bIsUser not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iFormatKeyType not an Integer.
+;                  @Error 1 @Extended 5 Return 0 = $iFormatKeyType not an Integer, less than 0 or greater than 15881. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.lang.Locale" Object.
 ;                  --Processing Errors--
@@ -1097,7 +1097,7 @@ Func _LOBase_FormatKeysGetList(ByRef $oObj, $bIsUser = False, $bUserOnly = False
 	If Not $oObj.supportsService("com.sun.star.sdbc.Connection") And Not $oObj.supportsService("com.sun.star.report.ReportDefinition") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bIsUser) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsBool($bUserOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsInt($iFormatKeyType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not __LO_IntIsBetween($iFormatKeyType, $LOB_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0); 15881 = all key s BitOR'd together.
 
 	$iColumns = ($bIsUser = True) ? ($iColumns) : (2)
 

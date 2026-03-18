@@ -381,6 +381,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - `_LOBase_DocOpen` Header Syntax contained one incorrect parameter.
 - Fix incorrect Constant name in `_LOBase_ReportConImageConData` header.
+- Added missing "See Constants" to applicable variables in headers.
 
 #### Fixed
 

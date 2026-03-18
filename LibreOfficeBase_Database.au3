@@ -408,12 +408,12 @@ EndFunc   ;==>_LOBase_DatabaseIsReadOnly
 ; Syntax ........: _LOBase_DatabaseMetaDataQuery(ByRef $oConnection, $iQuery[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null[, $vParam6 = Null]]]]]])
 ; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ;                  $iQuery              - an integer value (0-148). The query to perform. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
-;                  $vParam1             - [optional] a variant value. Default is Null. The first Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam2             - [optional] a variant value. Default is Null. The second Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam3             - [optional] a variant value. Default is Null. The third Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam4             - [optional] a variant value. Default is Null. The fourth Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam5             - [optional] a variant value. Default is Null. The fifth Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam6             - [optional] a variant value. Default is Null. The sixth Parameter required by the Query. See remarks for the queries that have parameters.
+;                  $vParam1             - [optional] a variant value. Default is Null. The first Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam2             - [optional] a variant value. Default is Null. The second Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam3             - [optional] a variant value. Default is Null. The third Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam4             - [optional] a variant value. Default is Null. The fourth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam5             - [optional] a variant value. Default is Null. The fifth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam6             - [optional] a variant value. Default is Null. The sixth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Variable
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
