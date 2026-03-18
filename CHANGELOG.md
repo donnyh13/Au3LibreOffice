@@ -1131,6 +1131,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Fixed some function header parameter descriptions that were out of order.
   - __LOCalc_CellOverLine
   - __LOCalc_CellUnderLine
+- Added missing "See Constants" to applicable variables in headers.
 
 #### Fixed
 
