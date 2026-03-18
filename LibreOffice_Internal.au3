@@ -317,11 +317,14 @@ Func __LO_IntIsBetween($iTest, $iMin, $iMax = 0, $vNot = "", $vIncl = "")
 
 	If (@NumParams = 2) Then
 		If ($iMin < 0) Then ; If Min is a negative, switch the check.
+
 			Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest > $iMin) ? (False) : (True))
+
 		Else
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest < $iMin) ? (False) : (True))
 		EndIf
+
 	Else
 		$iRealMin = ($iMin < $iMax) ? ($iMin) : ($iMax) ; Switch values if dealing with negatives.
 		$iRealMax = ($iMin < $iMax) ? ($iMax) : ($iMin)
@@ -377,11 +380,14 @@ Func __LO_NumIsBetween($nTest, $nMin, $nMax = 0, $vNot = "", $vIncl = "")
 
 	If (@NumParams = 2) Then
 		If ($nMin < 0) Then ; If Min is a negative, switch the check.
+
 			Return SetError($__LO_STATUS_SUCCESS, 0, ($nTest > $nMin) ? (False) : (True))
+
 		Else
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, ($nTest < $nMin) ? (False) : (True))
 		EndIf
+
 	Else
 		$nRealMin = ($nMin < $nMax) ? ($nMin) : ($nMax) ; Switch values if dealing with negatives.
 		$nRealMax = ($nMin < $nMax) ? ($nMax) : ($nMin)
