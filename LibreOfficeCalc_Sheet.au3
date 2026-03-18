@@ -1212,7 +1212,7 @@ Func _LOCalc_SheetPrintRangeModify(ByRef $oSheet, $aoRange = Null)
 	$oSheet.setPrintAreas($aoRange)
 	$iError = (UBound($oSheet.getPrintAreas()) = UBound($aoRange)) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_SheetPrintRangeModify
 
 ; #FUNCTION# ====================================================================================================================
@@ -1553,7 +1553,7 @@ Func _LOCalc_SheetTabColor(ByRef $oSheet, $iColor = Null)
 	$oSheet.TabColor = $iColor
 	$iError = ($oSheet.TabColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_SheetTabColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -1634,5 +1634,5 @@ Func _LOCalc_SheetVisible(ByRef $oSheet, $bVisible = Null)
 	$oSheet.IsVisible = $bVisible
 	$iError = ($oSheet.IsVisible = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_SheetVisible

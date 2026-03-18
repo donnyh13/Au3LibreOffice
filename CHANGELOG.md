@@ -1166,6 +1166,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Changed `_LOCalc_RangeFillRandom` to use IntIsBetween instead of NumIsBetween for $iDecPlc parameter.
 - Made certain Input checks use `__LO_IntIsBetween`.
 - Changed some functions to not return a Property setting error instantly, but made it match other functionsby using an error variable.
+- Standardize Property setting error check method.
 
 #### Removed
 

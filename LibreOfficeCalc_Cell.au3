@@ -654,7 +654,7 @@ Func _LOCalc_CellFormula(ByRef $oCell, $sFormula = Null)
 	$oCell.setFormula($sFormula)
 	$iError = ($oCell.getFormula() = $sFormula) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CellFormula
 
 ; #FUNCTION# ====================================================================================================================
@@ -982,7 +982,7 @@ Func _LOCalc_CellString(ByRef $oCell, $sText = Null)
 	; Strip @CR / @LF from both to compare, otherwise they don't match.
 	$iError = ((StringRegExpReplace($oCell.getString(), @CR & "|" & @LF, "") = StringRegExpReplace($sText, @CR & "|" & @LF, ""))) ? ($iError) : (BitOR($iError, 1)) ; Calc Automatically converts @CR etc to @LF
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CellString
 
 ; #FUNCTION# ====================================================================================================================
@@ -1398,7 +1398,7 @@ Func _LOCalc_CellStyleCurrent(ByRef $oDoc, ByRef $oRange, $sCellStyle = Null)
 	$oRange.CellStyle = $sCellStyle
 	$iError = ($oRange.CellStyle() = $sCellStyle) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CellStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================
@@ -2468,5 +2468,5 @@ Func _LOCalc_CellValue(ByRef $oCell, $nValue = Null)
 	$oCell.setValue($nValue)
 	$iError = ($oCell.getValue() = $nValue) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CellValue

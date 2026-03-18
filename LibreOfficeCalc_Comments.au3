@@ -151,7 +151,7 @@ Func _LOCalc_CommentAreaColor(ByRef $oComment, $iColor = Null)
 	$oAnnotationShape.FillColor = $iColor
 	$iError = ($oAnnotationShape.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CommentAreaColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -1856,7 +1856,7 @@ Func _LOCalc_CommentRotate(ByRef $oComment, $nRotate = Null)
 	$oAnnotationShape.RotateAngle = ($nRotate * 100)     ; * 100 to match L.O. Values.
 	$iError = (($oAnnotationShape.RotateAngle() / 100) = $nRotate) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CommentRotate
 
 ; #FUNCTION# ====================================================================================================================
@@ -2081,7 +2081,7 @@ Func _LOCalc_CommentText(ByRef $oComment, $sText = Null)
 	; Strip @CR / @LF from both to compare, otherwise they don't match.
 	$iError = ((StringRegExpReplace($oComment.String(), @CR & "|" & @LF, "") = StringRegExpReplace($sText, @CR & "|" & @LF, ""))) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CommentText
 
 ; #FUNCTION# ====================================================================================================================
@@ -2658,5 +2658,5 @@ Func _LOCalc_CommentVisible(ByRef $oComment, $bVisible = Null)
 	$oComment.IsVisible = $bVisible
 	$iError = ($oComment.IsVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CommentVisible

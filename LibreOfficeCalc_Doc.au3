@@ -592,7 +592,7 @@ Func _LOCalc_DocFormulaBarHeight(ByRef $oDoc, $iHeight = Null)
 	$oDoc.CurrentController.FormulaBarHeight = $iHeight
 	$iError = ($oDoc.CurrentController.FormulaBarHeight() = $iHeight) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_DocFormulaBarHeight
 
 ; #FUNCTION# ====================================================================================================================
@@ -1064,7 +1064,7 @@ Func _LOCalc_DocPosAndSize(ByRef $oDoc, $iX = Null, $iY = Null, $iWidth = Null, 
 	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : (($tWindowSize.Width() = $iWidth) ? ($iError) : (BitOR($iError, 4)))
 	$iError = (__LO_VarsAreNull($iHeight)) ? ($iError) : (($tWindowSize.Height() = $iHeight) ? ($iError) : (BitOR($iError, 8)))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_DocPosAndSize
 
 ; #FUNCTION# ====================================================================================================================
@@ -2256,7 +2256,7 @@ Func _LOCalc_DocVisible(ByRef $oDoc, $bVisible = Null)
 	$oDoc.CurrentController.Frame.ContainerWindow.Visible = $bVisible
 	$iError = ($oDoc.CurrentController.Frame.ContainerWindow.isVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_DocVisible
 
 ; #FUNCTION# ====================================================================================================================
@@ -2299,7 +2299,7 @@ Func _LOCalc_DocWindowFirstColumn(ByRef $oDoc, $iColumn = Null)
 	$oDoc.CurrentController.setFirstVisibleColumn($iColumn)
 	$iError = ($oDoc.CurrentController.getFirstVisibleColumn() = $iColumn) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_DocWindowFirstColumn
 
 ; #FUNCTION# ====================================================================================================================
@@ -2342,7 +2342,7 @@ Func _LOCalc_DocWindowFirstRow(ByRef $oDoc, $iRow = Null)
 	$oDoc.CurrentController.setFirstVisibleRow($iRow)
 	$iError = ($oDoc.CurrentController.getFirstVisibleRow() = $iRow) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_DocWindowFirstRow
 
 ; #FUNCTION# ====================================================================================================================

@@ -502,7 +502,7 @@ Func _LOCalc_PageStyleCurrent(ByRef $oDoc, ByRef $oSheet, $sPageStyle = Null)
 	$oSheet.PageStyle = $sPageStyle
 	$iError = ($oSheet.PageStyle() = $sPageStyle) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_PageStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================
