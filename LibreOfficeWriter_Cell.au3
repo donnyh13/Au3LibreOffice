@@ -530,6 +530,8 @@ Func _LOWriter_CellProtect(ByRef $oCell, $bProtect = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only set individual cell protect property.
 
@@ -538,8 +540,9 @@ Func _LOWriter_CellProtect(ByRef $oCell, $bProtect = Null)
 	If Not IsBool($bProtect) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oCell.IsProtected = $bProtect
+	$iError = ($oCell.IsProtected() = $bProtect) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($oCell.IsProtected() = $bProtect) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOWriter_CellProtect
 
 ; #FUNCTION# ====================================================================================================================
@@ -655,6 +658,8 @@ Func _LOWriter_CellVertOrient(ByRef $oCell, $iVertOrient = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	; 3 = Vert Orient Bottom, 1 = Vert orient Top
@@ -664,6 +669,7 @@ Func _LOWriter_CellVertOrient(ByRef $oCell, $iVertOrient = Null)
 	If Not __LO_IntIsBetween($iVertOrient, $LOW_ORIENT_VERT_NONE, $LOW_ORIENT_VERT_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oCell.VertOrient = $iVertOrient
+	$iError = ($oCell.VertOrient() = $iVertOrient) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($oCell.VertOrient() = $iVertOrient) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOWriter_CellVertOrient

@@ -757,6 +757,8 @@ Func _LOWriter_NumStyleSetLevel(ByRef $oObj, $iLevel = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oObj.supportsService("com.sun.star.style.ParagraphProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_IntIsBetween($iLevel, 1, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -766,8 +768,9 @@ Func _LOWriter_NumStyleSetLevel(ByRef $oObj, $iLevel = Null)
 	$iLevel -= 1 ; Level is 0 Based, minus one to compensate.
 
 	$oObj.NumberingLevel = $iLevel
+	$iError = ($oObj.NumberingLevel() = $iLevel) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($oObj.NumberingLevel() = $iLevel) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOWriter_NumStyleSetLevel
 
 ; #FUNCTION# ====================================================================================================================

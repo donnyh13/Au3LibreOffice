@@ -2216,6 +2216,8 @@ Func _LOWriter_ImageTransparency(ByRef $oImage, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oImage.Transparency())
@@ -2223,8 +2225,9 @@ Func _LOWriter_ImageTransparency(ByRef $oImage, $iTransparency = Null)
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oImage.Transparency = $iTransparency
+	$iError = ($oImage.Transparency() = $iTransparency) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($oImage.Transparency() = $iTransparency) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOWriter_ImageTransparency
 
 ; #FUNCTION# ====================================================================================================================
