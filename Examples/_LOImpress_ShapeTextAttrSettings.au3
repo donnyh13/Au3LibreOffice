@@ -34,7 +34,7 @@ Func Example()
 
 	; Set 375 distance left and right, 148 distance at the top, 130 distance at the bottom,
 	; Position the text at the top-left, and do not fit the text to the full width.
-	_LOImpress_ShapeTextAttrSettings($oShape, 375, 375, 148, 130, $LOI_TEXT_ANCHOR_TOP_LEFT, False)
+	_LOImpress_ShapeTextAttrSettings($oShape, 375, 375, 148, 130, $LOI_PAR_TEXT_ANCHOR_TOP_LEFT, False)
 	If @error Then _ERROR($oDoc, "Failed to modify Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape settings. Return will be an array in order of function parameters.

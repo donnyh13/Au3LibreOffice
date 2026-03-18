@@ -25,7 +25,6 @@
 
 ; #CURRENT# =====================================================================================================================
 ; _LOImpress_ComError_UserFunction
-; _LOImpress_CursorInsertString
 ; _LOImpress_FontExists
 ; _LOImpress_FontsGetNames
 ; _LOImpress_GradientMulticolorAdd
@@ -116,41 +115,6 @@ Func _LOImpress_ComError_UserFunction($vUserFunction = Default, $vParam1 = Null,
 		Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	EndIf
 EndFunc   ;==>_LOImpress_ComError_UserFunction
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_CursorInsertString
-; Description ...: Insert a string at a cursor position.
-; Syntax ........: _LOImpress_CursorInsertString(ByRef $oCursor, $sString[, $bOverwrite = False])
-; Parameters ....: $oCursor             - [in/out] an object. A Text Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $sString             - a string value. A String to insert.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, and the cursor object has text selected, the selection is overwritten, else if False, the string is inserted to the left of the selection. If there are multiple selections, the string is inserted to the left of the last selection, and none are overwritten.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sString not a string..
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. String was successfully inserted.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Warning! For some reason this function doesn't seem to set the modified status to True. Changes could be inadvertently lost due to this, if the user closes without saving.
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOImpress_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($sString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	$oCursor.Text.insertString($oCursor, $sString, $bOverwrite)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_CursorInsertString
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_FontExists
@@ -250,8 +214,8 @@ EndFunc   ;==>_LOImpress_FontExists
 ;                  The returned array will be as follows:
 ;                  The first column (Array[1][0]) contains the Font Name.
 ;                  The Second column (Array [1][1] contains the style name (Such as Bold Italic etc.)
-;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOI_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3;
-;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOI_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3;
+;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Related .......: _LOImpress_FontExists
 ; Link ..........:
 ; Example .......: Yes

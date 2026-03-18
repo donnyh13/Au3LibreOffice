@@ -24,6 +24,7 @@
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; __LOImpress_ColorRemoveAlpha
 ; __LOImpress_CreatePoint
+; __LOImpress_CursorParHasTabStop
 ; __LOImpress_DrawShape_CreateArrow
 ; __LOImpress_DrawShape_CreateBasic
 ; __LOImpress_DrawShape_CreateCallout
@@ -122,6 +123,48 @@ Func __LOImpress_CreatePoint($iX, $iY)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $tPoint)
 EndFunc   ;==>__LOImpress_CreatePoint
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_CursorParHasTabStop
+; Description ...: Check whether a Paragraph has a requested TabStop.
+; Syntax ........: __LOImpress_CursorParHasTabStop(ByRef $oTextCursor, $iTabStop)
+; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+;                  $iTabStop            - an integer value. The Tab Stop to look for.
+; Return values .: Success: Boolean
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iTabStop not an Integer.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve ParaTabStops Object.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = True if Paragraph has the requested TabStop. Else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_CursorParHasTabStop(ByRef $oTextCursor, $iTabStop)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $atTabStops
+
+	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$atTabStops = $oTextCursor.ParaTabStops()
+	If Not IsArray($atTabStops) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	For $i = 0 To UBound($atTabStops) - 1
+		If ($atTabStops[$i].Position() = $iTabStop) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
+EndFunc   ;==>__LOImpress_CursorParHasTabStop
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_CreateArrow
@@ -3586,7 +3629,7 @@ EndFunc   ;==>__LOImpress_InternalComErrorHandler
 ; Description ...: Internal function for setting or retrieving Shape Shadow Location and Distance settings.
 ; Syntax ........: __LOImpress_ShapeAreaShadowModify($oShape[, $iLocation = Null[, $iDistance = Null]])
 ; Parameters ....: $oShape              - an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
-;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iDistance           - [optional] an integer value. Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -3622,31 +3665,31 @@ Func __LOImpress_ShapeAreaShadowModify($oShape, $iLocation = Null, $iDistance = 
 		$iError = 2
 		Select
 			Case (($oShape.ShadowXDistance() < 0) And ($oShape.ShadowYDistance() < 0)) ; Top Left.
-				$iLocation = $LOI_SHAPE_SHADOW_TOP_LEFT
+				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT
 
 			Case (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() < 0)) ; Top Center
-				$iLocation = $LOI_SHAPE_SHADOW_TOP_CENTER
+				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_TOP_CENTER
 
 			Case (($oShape.ShadowXDistance() > 0) And ($oShape.ShadowYDistance() < 0)) ; Top Right
-				$iLocation = $LOI_SHAPE_SHADOW_TOP_RIGHT
+				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_TOP_RIGHT
 
 			Case (($oShape.ShadowXDistance() < 0) And ($oShape.ShadowYDistance() = 0)) ; Middle Left
-				$iLocation = $LOI_SHAPE_SHADOW_MIDDLE_LEFT
+				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT
 
 			Case (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() = 0)) ; Middle Center
-				$iLocation = $LOI_SHAPE_SHADOW_MIDDLE_CENTER
+				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER
 
 			Case (($oShape.ShadowXDistance() > 0) And ($oShape.ShadowYDistance() = 0)) ; Middle Right
-				$iLocation = $LOI_SHAPE_SHADOW_MIDDLE_RIGHT
+				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT
 
 			Case (($oShape.ShadowXDistance() < 0) And ($oShape.ShadowYDistance() > 0)) ; Bottom Left
-				$iLocation = $LOI_SHAPE_SHADOW_BOTTOM_LEFT
+				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT
 
 			Case (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() > 0)) ; Bottom Center
-				$iLocation = $LOI_SHAPE_SHADOW_BOTTOM_CENTER
+				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER
 
 			Case (($oShape.ShadowXDistance() > 0) And ($oShape.ShadowYDistance() > 0)) ; Bottom Right
-				$iLocation = $LOI_SHAPE_SHADOW_BOTTOM_RIGHT
+				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT
 		EndSelect
 	EndIf
 
@@ -3671,55 +3714,55 @@ Func __LOImpress_ShapeAreaShadowModify($oShape, $iLocation = Null, $iDistance = 
 	If $bReturn Then Return SetError($__LO_STATUS_SUCCESS, $iLocation, $iDistance)
 
 	Switch $iLocation
-		Case $LOI_SHAPE_SHADOW_TOP_LEFT
+		Case $LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT
 			$oShape.ShadowXDistance = ($iDistance * -1)
 			$oShape.ShadowYDistance = ($iDistance * -1)
 
 			Return (($oShape.ShadowXDistance() = ($iDistance * -1)) And ($oShape.ShadowYDistance() = ($iDistance * -1))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_TOP_CENTER
+		Case $LOI_SHAPE_SHADOW_LOCATION_TOP_CENTER
 			$oShape.ShadowXDistance = 0
 			$oShape.ShadowYDistance = ($iDistance * -1)
 
 			Return (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() = ($iDistance * -1))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_TOP_RIGHT
+		Case $LOI_SHAPE_SHADOW_LOCATION_TOP_RIGHT
 			$oShape.ShadowXDistance = $iDistance
 			$oShape.ShadowYDistance = ($iDistance * -1)
 
 			Return (($oShape.ShadowXDistance() = $iDistance) And ($oShape.ShadowYDistance() = ($iDistance * -1))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_MIDDLE_LEFT
+		Case $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT
 			$oShape.ShadowXDistance = ($iDistance * -1)
 			$oShape.ShadowYDistance = 0
 
 			Return (($oShape.ShadowXDistance() = ($iDistance * -1)) And ($oShape.ShadowYDistance() = 0)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_MIDDLE_CENTER
+		Case $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER
 			$oShape.ShadowXDistance = ($bModifyLocation) ? (0) : ($iDistance)
 			$oShape.ShadowYDistance = ($bModifyLocation) ? (0) : ($iDistance)
 
 			Return (($oShape.ShadowXDistance() = (($bModifyLocation) ? (0) : ($iDistance))) And ($oShape.ShadowYDistance() = (($bModifyLocation) ? (0) : ($iDistance)))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_MIDDLE_RIGHT
+		Case $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT
 			$oShape.ShadowXDistance = $iDistance
 			$oShape.ShadowYDistance = 0
 
 			Return (($oShape.ShadowXDistance() = $iDistance) And ($oShape.ShadowYDistance() = 0)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_BOTTOM_LEFT
+		Case $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT
 			$oShape.ShadowXDistance = ($iDistance * -1)
 			$oShape.ShadowYDistance = $iDistance
 
 			Return (($oShape.ShadowXDistance() = ($iDistance * -1)) And ($oShape.ShadowYDistance() = $iDistance)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_BOTTOM_CENTER
+		Case $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER
 			$oShape.ShadowXDistance = 0
 			$oShape.ShadowYDistance = $iDistance
 
 			Return (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() = $iDistance)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_BOTTOM_RIGHT
+		Case $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT
 			$oShape.ShadowXDistance = $iDistance
 			$oShape.ShadowYDistance = $iDistance
 

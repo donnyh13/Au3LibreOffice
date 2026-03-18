@@ -8,6 +8,7 @@
 #include "LibreOfficeImpress_Internal.au3"
 
 ; Other includes for Impress
+#include "LibreOfficeImpress_Cursor.au3"
 #include "LibreOfficeImpress_Doc.au3"
 #include "LibreOfficeImpress_DrawShapes.au3"
 #include "LibreOfficeImpress_Shapes.au3"

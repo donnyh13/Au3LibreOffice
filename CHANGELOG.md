@@ -1107,6 +1107,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - LibreOfficeImpress.au3
 - Individual Impress Module Files
   - LibreOfficeImpress_Constants.au3
+  - LibreOfficeImpress_Cursor.au3
   - LibreOfficeImpress_Doc.au3
   - LibreOfficeImpress_DrawShapes.au3
   - LibreOfficeImpress_Helper.au3
@@ -1119,6 +1120,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_ANIMATION_DIR_*
   - $LOI_ANIMATION_TYPE_*
   - $LOI_AREA_FILL_STYLE_*
+  - $LOI_CHAR_CASEMAP_*
+  - $LOI_CHAR_POSTURE_*
+  - $LOI_CHAR_RELIEF_*
+  - $LOI_CHAR_STRIKEOUT_*
+  - $LOI_CHAR_UNDERLINE_*
+  - $LOI_CHAR_WEIGHT_*
   - $LOI_DRAWSHAPE_CONNECTOR_TYPE_*
   - $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_*
   - $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_*
@@ -1129,13 +1136,21 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_GRAD_TYPE_*
   - $LOI_ORIENT_HORI_*
   - $LOI_ORIENT_VERT_*
-  - $LOI_POSTURE_*
+  - $LOI_PAR_ALIGN_HOR_*
+  - $LOI_PAR_ALIGN_VERT_*
+  - $LOI_PAR_LAST_LINE_*
+  - $LOI_PAR_LINE_SPC_MODE_*
+  - $LOI_PAR_TAB_ALIGN_*
+  - $LOI_PAR_TEXT_ALIGN_HORI_*
+  - $LOI_PAR_TEXT_ALIGN_VERT_*
+  - $LOI_PAR_TEXT_ANCHOR_*
+  - $LOI_PAR_TXT_DIR_*
   - $LOI_RELATIVE_*
   - $LOI_SHAPE_LINE_ARROW_TYPE_*
   - $LOI_SHAPE_LINE_CAP_*
   - $LOI_SHAPE_LINE_JOINT_*
   - $LOI_SHAPE_LINE_STYLE_*
-  - $LOI_SHAPE_SHADOW_*
+  - $LOI_SHAPE_SHADOW_LOCATION_*
   - $LOI_SHAPE_TYPE_*
   - $LOI_SLIDE_LAYOUT_*
   - $LOI_SLIDE_TRANSITION_*
@@ -1143,11 +1158,30 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_SLIDESHOW_PEN_WIDTH_*
   - $LOI_SLIDESHOW_PRES_*
   - $LOI_SLIDESHOW_RANGE_*
-  - $LOI_TEXT_ALIGN_HORI_*
-  - $LOI_TEXT_ALIGN_VERT_*
-  - $LOI_TEXT_ANCHOR_*
-  - $LOI_WEIGHT_*
+  - $LOI_TEXTCUR_*
   - $LOI_ZOOMTYPE_*
+- Cursor Functions
+  - _LOImpress_CursorCharEffect
+  - _LOImpress_CursorCharFont
+  - _LOImpress_CursorCharFontColor
+  - _LOImpress_CursorCharOverLine
+  - _LOImpress_CursorCharPosition
+  - _LOImpress_CursorCharScaling
+  - _LOImpress_CursorCharSpacing
+  - _LOImpress_CursorCharStrikeOut
+  - _LOImpress_CursorCharUnderLine
+  - _LOImpress_CursorGetString
+  - _LOImpress_CursorGoToRange
+  - _LOImpress_CursorInsertString
+  - _LOImpress_CursorIsCollapsed
+  - _LOImpress_CursorMove
+  - _LOImpress_CursorParAlignment
+  - _LOImpress_CursorParIndent
+  - _LOImpress_CursorParSpacing
+  - _LOImpress_CursorParTabStopCreate
+  - _LOImpress_CursorParTabStopDelete
+  - _LOImpress_CursorParTabStopMod
+  - _LOImpress_CursorParTabStopsGetList
 - Document Functions
   - _LOImpress_DocClose
   - _LOImpress_DocConnect
@@ -1198,7 +1232,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_DrawShapeText
 - Helper Functions
   - _LOImpress_ComError_UserFunction
-  - _LOImpress_CursorInsertString
   - _LOImpress_FontExists
   - _LOImpress_FontsGetNames
   - _LOImpress_GradientMulticolorAdd
@@ -1210,6 +1243,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Internal Functions
   - __LOImpress_ColorRemoveAlpha
   - __LOImpress_CreatePoint
+  - __LOImpress_CursorParHasTabStop
   - __LOImpress_DrawShape_CreateArrow
   - __LOImpress_DrawShape_CreateBasic
   - __LOImpress_DrawShape_CreateCallout

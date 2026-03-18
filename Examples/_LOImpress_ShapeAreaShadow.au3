@@ -29,7 +29,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Shape's Shadow settings.
-	_LOImpress_ShapeAreaShadow($oShape, True, $LOI_SHAPE_SHADOW_BOTTOM_CENTER, $LO_COLOR_GOLD, 600, 25, 35)
+	_LOImpress_ShapeAreaShadow($oShape, True, $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, $LO_COLOR_GOLD, 600, 25, 35)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Shape's current settings. Return will be an array in order of function parameters.

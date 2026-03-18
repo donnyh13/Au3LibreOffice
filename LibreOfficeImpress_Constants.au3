@@ -29,6 +29,14 @@ Global Const _                                                       ; com.sun.s
 		$LOI_ALIGN_VERT_MIDDLE = 1, _                                ; Vertically Align the object to the Middle.
 		$LOI_ALIGN_VERT_BOTTOM = 2                                   ; Vertically Align the object to the Bottom.
 
+; Anchor Type
+Global Const _                                                       ; com.sun.star.text.TextContentAnchorType
+		$LOI_ANCHOR_AT_PARAGRAPH = 0, _                              ; Anchors the object to the current paragraph.
+		$LOI_ANCHOR_AS_CHARACTER = 1, _                              ; Anchors the Object as character. The height of the current line is resized to match the height of the selection.
+		$LOI_ANCHOR_AT_PAGE = 2, _                                   ; Anchors the Object to the current page.
+		$LOI_ANCHOR_AT_FRAME = 3, _                                  ; Anchors the object to the surrounding frame.
+		$LOI_ANCHOR_AT_CHARACTER = 4                                 ; Anchors the Object to a character.
+
 ; Animation Direction
 Global Const _                                                       ; com.sun.star.drawing.TextAnimationDirection
 		$LOI_ANIMATION_DIR_LEFT = 0, _                               ; The Animation begins at the Right and goes to the Left.
@@ -44,14 +52,6 @@ Global Const _                                                       ; com.sun.s
 		$LOI_ANIMATION_TYPE_SCROLL_ALTERNATE = 3, _                  ; The text scrolls from one side to the other and back.
 		$LOI_ANIMATION_TYPE_SCROLL_IN = 4                            ; The text Scrolls from one side to the final position and stops there.
 
-; Anchor Type
-Global Const _                                                       ; com.sun.star.text.TextContentAnchorType
-		$LOI_ANCHOR_AT_PARAGRAPH = 0, _                              ; Anchors the object to the current paragraph.
-		$LOI_ANCHOR_AS_CHARACTER = 1, _                              ; Anchors the Object as character. The height of the current line is resized to match the height of the selection.
-		$LOI_ANCHOR_AT_PAGE = 2, _                                   ; Anchors the Object to the current page.
-		$LOI_ANCHOR_AT_FRAME = 3, _                                  ; Anchors the object to the surrounding frame.
-		$LOI_ANCHOR_AT_CHARACTER = 4                                 ; Anchors the Object to a character.
-
 ; Fill Style Type Constants
 Global Enum _                                                        ; com.sun.star.drawing.FillStyle
 		$LOI_AREA_FILL_STYLE_OFF, _                                  ; 0 Fill Style is off.
@@ -59,6 +59,74 @@ Global Enum _                                                        ; com.sun.s
 		$LOI_AREA_FILL_STYLE_GRADIENT, _                             ; 2 Fill Style is a gradient color.
 		$LOI_AREA_FILL_STYLE_HATCH, _                                ; 3 Fill Style is a Hatch style color.
 		$LOI_AREA_FILL_STYLE_BITMAP                                  ; 4 Fill Style is a Bitmap.
+
+; Case Constants
+Global Const _                                                       ; com.sun.star.style.CaseMap
+		$LOI_CHAR_CASEMAP_NONE = 0, _                                ; The case of the characters is unchanged.
+		$LOI_CHAR_CASEMAP_UPPER = 1, _                               ; All characters are put in upper case.
+		$LOI_CHAR_CASEMAP_LOWER = 2, _                               ; All characters are put in lower case.
+		$LOI_CHAR_CASEMAP_TITLE = 3, _                               ; The first character of each word is put in upper case.
+		$LOI_CHAR_CASEMAP_SM_CAPS = 4                                ; All characters are put in upper case, but with a smaller font height.
+
+; Posture/Italic
+Global Const _                                                       ; com.sun.star.awt.FontSlant
+		$LOI_CHAR_POSTURE_NONE = 0, _                                ; Specifies a font without slant.
+		$LOI_CHAR_POSTURE_OBLIQUE = 1, _                             ; Specifies an oblique font (slant not designed into the font).
+		$LOI_CHAR_POSTURE_ITALIC = 2, _                              ; Specifies an italic font (slant designed into the font).
+		$LOI_CHAR_POSTURE_DONTKNOW = 3, _                            ; Specifies a font with an unknown slant. For Read Only.
+		$LOI_CHAR_POSTURE_REV_OBLIQUE = 4, _                         ; Specifies a reverse oblique font (slant not designed into the font).
+		$LOI_CHAR_POSTURE_REV_ITALIC = 5                             ; Specifies a reverse italic font (slant designed into the font).
+
+; Relief
+Global Const _                                                       ; com.sun.star.text.FontRelief
+		$LOI_CHAR_RELIEF_NONE = 0, _                                 ; No relief is applied.
+		$LOI_CHAR_RELIEF_EMBOSSED = 1, _                             ; The font relief is embossed.
+		$LOI_CHAR_RELIEF_ENGRAVED = 2                                ; The font relief is engraved.
+
+; Strikeout
+Global Const _                                                       ; com.sun.star.awt.FontStrikeout
+		$LOI_CHAR_STRIKEOUT_NONE = 0, _                              ; No strike out.
+		$LOI_CHAR_STRIKEOUT_SINGLE = 1, _                            ; Strike out the characters with a single line.
+		$LOI_CHAR_STRIKEOUT_DOUBLE = 2, _                            ; Strike out the characters with a double line.
+		$LOI_CHAR_STRIKEOUT_DONT_KNOW = 3, _                         ; The strikeout mode is not specified. For Read Only.
+		$LOI_CHAR_STRIKEOUT_BOLD = 4, _                              ; Strike out the characters with a bold line.
+		$LOI_CHAR_STRIKEOUT_SLASH = 5, _                             ; Strike out the characters with slashes.
+		$LOI_CHAR_STRIKEOUT_X = 6                                    ; Strike out the characters with X's.
+
+; Underline/Overline
+Global Const _                                                       ; com.sun.star.awt.FontUnderline
+		$LOI_CHAR_UNDERLINE_NONE = 0, _                              ; No Underline or Overline style.
+		$LOI_CHAR_UNDERLINE_SINGLE = 1, _                            ; Single line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_DOUBLE = 2, _                            ; Double line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_DOTTED = 3, _                            ; Dotted line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_DONT_KNOW = 4, _                         ; Unknown Underline/Overline style, for read only.
+		$LOI_CHAR_UNDERLINE_DASH = 5, _                              ; Dashed line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_LONG_DASH = 6, _                         ; Long Dashed line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_DASH_DOT = 7, _                          ; Dash Dot line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_DASH_DOT_DOT = 8, _                      ; Dash Dot Dot line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_SML_WAVE = 9, _                          ; Small Wave line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_WAVE = 10, _                             ; Wave line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_DBL_WAVE = 11, _                         ; Double Wave line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_BOLD = 12, _                             ; Bold line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_BOLD_DOTTED = 13, _                      ; Bold Dotted line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_BOLD_DASH = 14, _                        ; Bold Dashed line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_BOLD_LONG_DASH = 15, _                   ; Bold Long Dash line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_BOLD_DASH_DOT = 16, _                    ; Bold Dash Dot line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _                ; Bold Dash Dot Dot line Underline/Overline style.
+		$LOI_CHAR_UNDERLINE_BOLD_WAVE = 18                           ; Bold Wave line Underline/Overline style.
+
+; Weight/Bold
+Global Const _                                                       ; com.sun.star.awt.FontWeight
+		$LOI_CHAR_WEIGHT_DONT_KNOW = 0, _                            ; The font weight is not specified/unknown. For Read Only.
+		$LOI_CHAR_WEIGHT_THIN = 50, _                                ; A 50% (Thin) font weight.
+		$LOI_CHAR_WEIGHT_ULTRA_LIGHT = 60, _                         ; A 60% (Ultra Light) font weight.
+		$LOI_CHAR_WEIGHT_LIGHT = 75, _                               ; A 75% (Light) font weight.
+		$LOI_CHAR_WEIGHT_SEMI_LIGHT = 90, _                          ; A 90% (Semi-Light) font weight.
+		$LOI_CHAR_WEIGHT_NORMAL = 100, _                             ; A 100% (Normal) font weight.
+		$LOI_CHAR_WEIGHT_SEMI_BOLD = 110, _                          ; A 110% (Semi-Bold) font weight.
+		$LOI_CHAR_WEIGHT_BOLD = 150, _                               ; A 150% (Bold) font weight.
+		$LOI_CHAR_WEIGHT_ULTRA_BOLD = 175, _                         ; A 175% (Ultra-Bold) font weight.
+		$LOI_CHAR_WEIGHT_BLACK = 200                                 ; A 200% (Black) font weight.
 
 ; Shape Connector type
 Global Const _                                                       ; com.sun.star.drawing.ConnectorType
@@ -345,14 +413,77 @@ Global Const _                                                       ; com.sun.s
 		$LOI_ORIENT_VERT_LINE_CENTER = 8, _                          ; Aligned at the center of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 		$LOI_ORIENT_VERT_LINE_BOTTOM = 9                             ; Aligned at the bottom of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 
-; Posture/Italic
-Global Const _                                                       ; com.sun.star.awt.FontSlant
-		$LOI_POSTURE_NONE = 0, _                                     ; Specifies a font without slant.
-		$LOI_POSTURE_OBLIQUE = 1, _                                  ; Specifies an oblique font (slant not designed into the font).
-		$LOI_POSTURE_ITALIC = 2, _                                   ; Specifies an italic font (slant designed into the font).
-		$LOI_POSTURE_DontKnow = 3, _                                 ; Specifies a font with an unknown slant. For Read Only.
-		$LOI_POSTURE_REV_OBLIQUE = 4, _                              ; Specifies a reverse oblique font (slant not designed into the font).
-		$LOI_POSTURE_REV_ITALIC = 5                                  ; Specifies a reverse italic font (slant designed into the font).
+; Paragraph Horizontal Align
+Global Const _                                                       ; com.sun.star.style.ParagraphAdjust
+		$LOI_PAR_ALIGN_HOR_LEFT = 0, _                               ; The Paragraph is left-aligned between the borders.
+		$LOI_PAR_ALIGN_HOR_RIGHT = 1, _                              ; The Paragraph is right-aligned between the borders.
+		$LOI_PAR_ALIGN_HOR_JUSTIFIED = 2, _                          ; The Paragraph is adjusted / stretched to both borders.
+		$LOI_PAR_ALIGN_HOR_CENTER = 3, _                             ; The Paragraph is centered between the left and right borders.
+		$LOI_PAR_ALIGN_HOR_STRETCH = 4                               ; HoriAlign 4 does nothing??
+
+; Paragraph Vertical Align
+Global Const _                                                       ; com.sun.star.text.ParagraphVertAlign
+		$LOI_PAR_ALIGN_VERT_AUTO = 0, _                              ; Automatic vertical alignment mode. In automatic mode, horizontal text is aligned to the baseline. The same applies to text that is rotated 90°. Text that is rotated 270 ° is aligned to the center.
+		$LOI_PAR_ALIGN_VERT_BASELINE = 1, _                          ; The text is aligned to the baseline.
+		$LOI_PAR_ALIGN_VERT_TOP = 2, _                               ; The text is aligned to the top.
+		$LOI_PAR_ALIGN_VERT_CENTER = 3, _                            ; The text is aligned to the center.
+		$LOI_PAR_ALIGN_VERT_BOTTOM = 4                               ; The text is aligned to bottom.
+
+; Paragraph Last Line Alignment
+Global Const _
+		$LOI_PAR_LAST_LINE_START = 0, _                              ; The Paragraph is aligned either to the Left border or the right, depending on the current text direction.
+		$LOI_PAR_LAST_LINE_JUSTIFIED = 2, _                          ; The Paragraph is adjusted to both borders / stretched.
+		$LOI_PAR_LAST_LINE_CENTER = 3                                ; The Paragraph is centered between the left and right borders.
+
+; Line Spacing
+Global Const _                                                       ; com.sun.star.style.LineSpacingMode
+		$LOI_PAR_LINE_SPC_MODE_PROP = 0, _                           ; Specifies the height value as a proportional value. Min 6% Max 65,535%. (without percentage sign)
+		$LOI_PAR_LINE_SPC_MODE_MIN = 1, _                            ; Specifies the height as the minimum line height. [Minimum/At least in L.O. U.I.] Min 0, Max 10008 (HMM)
+		$LOI_PAR_LINE_SPC_MODE_LEADING = 2, _                        ; Specifies the height value as the distance to the previous line. Min 0, Max 10008 Hundredths of a Millimeter (HMM).
+		$LOI_PAR_LINE_SPC_MODE_FIX = 3                               ; Specifies the height value as a fixed line height. Min 51, Max 10008 Hundredths of a Millimeter (HMM).
+
+; Tab Alignment
+Global Const _                                                       ; com.sun.star.style.TabAlign
+		$LOI_PAR_TAB_ALIGN_LEFT = 0, _                               ; Aligns the left edge of the text to the tab stop and extends the text to the right.
+		$LOI_PAR_TAB_ALIGN_CENTER = 1, _                             ; Aligns the center of the text to the tab stop.
+		$LOI_PAR_TAB_ALIGN_RIGHT = 2, _                              ; Aligns the right edge of the text to the tab stop and extends the text to the left of the tab stop.
+		$LOI_PAR_TAB_ALIGN_DECIMAL = 3, _                            ; Aligns the decimal separator of a number to the center of the tab stop and text to the left of the tab.
+		$LOI_PAR_TAB_ALIGN_DEFAULT = 4                               ; This setting is the default setting when no TabStops are present. Setting any Tabstop to this constant will make it disappear from the TabStop list. It is therefore only listed here for property reading purposes.
+
+; Horizontal Text Alignment
+Global Const _                                                       ; com.sun.star.drawing.TextHorizontalAdjust
+		$LOI_PAR_TEXT_ALIGN_HORI_LEFT = 0, _                             ; The left edge of the text is adjusted to the left edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_HORI_CENTER = 1, _                           ; The text is centered horizontally inside the shape.
+		$LOI_PAR_TEXT_ALIGN_HORI_RIGHT = 2, _                            ; The right edge of the text is adjusted to the right edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_HORI_BLOCK = 3                               ; The text extends from the left to the right edge of the shape.
+
+; Vertical Text Alignment
+Global Const _                                                       ; com.sun.star.drawing.TextVerticalAdjust
+		$LOI_PAR_TEXT_ALIGN_VERT_TOP = 0, _                              ; The top edge of the text is adjusted to the top edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_VERT_CENTER = 1, _                           ; The text is centered vertically inside the shape.
+		$LOI_PAR_TEXT_ALIGN_VERT_BOTTOM = 2, _                           ; The bottom edge of the text is adjusted to the bottom edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_VERT_BLOCK = 3                               ; The text extends from the top to the bottom edge of the shape.
+
+; Text Anchor Position
+Global Enum _
+		$LOI_PAR_TEXT_ANCHOR_TOP_LEFT, _                                 ; The text is positioned in the Upper-Left corner of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_TOP_CENTER, _                               ; The text is positioned in the Upper-Center of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_TOP_RIGHT, _                                ; The text is positioned in the Upper-Right of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_MIDDLE_LEFT, _                              ; The text is positioned in the Middle-Left corner of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_MIDDLE_CENTER, _                            ; The text is positioned in the Middle-Center of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_MIDDLE_RIGHT, _                             ; The text is positioned in the Middle-Right of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_BOTTOM_LEFT, _                              ; The text is positioned in the Lower-Left corner of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_BOTTOM_CENTER, _                            ; The text is positioned in the Lower-Center of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT                                ; The text is positioned in the Lower-Right of the Shape.
+
+; Text Direction
+Global Const _                                                       ; com.sun.star.text.WritingMode2
+		$LOI_PAR_TXT_DIR_LR_TB = 0, _                                ; Text within lines is written left-to-right. Lines and blocks are placed top-to-bottom. Typically, this is the writing mode for normal "alphabetic" text.
+		$LOI_PAR_TXT_DIR_RL_TB = 1, _                                ; Text within a line are written right-to-left. Lines and blocks are placed top-to-bottom. Typically, this writing mode is used in Arabic and Hebrew text.
+		$LOI_PAR_TXT_DIR_TB_RL = 2, _                                ; Text within a line is written top-to-bottom. Lines and blocks are placed right-to-left. Typically, this writing mode is used in Chinese and Japanese text.
+		$LOI_PAR_TXT_DIR_TB_LR = 3, _                                ; Text within a line is written top-to-bottom. Lines and blocks are placed left-to-right. Typically, this writing mode is used in Mongolian text.
+		$LOI_PAR_TXT_DIR_CONTEXT = 4, _                              ; Obtain actual writing mode from the context of the object.
+		$LOI_PAR_TXT_DIR_BT_LR = 5                                   ; Text within a line is written bottom-to-top. Lines and blocks are placed left-to-right. (LibreOffice 6.3).
 
 ; Relative to
 Global Const _                                                       ; com.sun.star.text.RelOrientation
@@ -369,18 +500,6 @@ Global Const _                                                       ; com.sun.s
 		$LOI_RELATIVE_TEXT_LINE = 9, _                               ; The Object is placed considering the height of the line.
 		$LOI_RELATIVE_PAGE_PRINT_BOTTOM = 10, _                      ; The Object is placed considering the space available in the page footer(?)
 		$LOI_RELATIVE_PAGE_PRINT_TOP = 11                            ; The Object is placed considering the space available in the page header(?)
-
-; Shape Shadow Position
-Global Enum _
-		$LOI_SHAPE_SHADOW_TOP_LEFT, _                                ; The Shadow is positioned in the Upper-Left corner of the shape.
-		$LOI_SHAPE_SHADOW_TOP_CENTER, _                              ; The Shadow is positioned in the Upper-Center of the shape.
-		$LOI_SHAPE_SHADOW_TOP_RIGHT, _                               ; The Shadow is positioned in the Upper-Right corner of the shape.
-		$LOI_SHAPE_SHADOW_MIDDLE_LEFT, _                             ; The Shadow is positioned in the Middle-Left corner of the shape.
-		$LOI_SHAPE_SHADOW_MIDDLE_CENTER, _                           ; The Shadow is positioned in the Middle-Center of the shape.
-		$LOI_SHAPE_SHADOW_MIDDLE_RIGHT, _                            ; The Shadow is positioned in the Middle-Right of the shape.
-		$LOI_SHAPE_SHADOW_BOTTOM_LEFT, _                             ; The Shadow is positioned in the Lower-Left corner of the shape.
-		$LOI_SHAPE_SHADOW_BOTTOM_CENTER, _                           ; The Shadow is positioned in the Lower-Center of the shape.
-		$LOI_SHAPE_SHADOW_BOTTOM_RIGHT                               ; The Shadow is positioned in the Lower-Right corner of the shape.
 
 ; Arrowhead Type Constants
 Global Enum _
@@ -466,6 +585,18 @@ Global Enum _
 		$LOI_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES, _           ; 29 -- A Ultrafine Line consisting of 2 Dots and 3 Dashes.
 		$LOI_SHAPE_LINE_STYLE_2_DOTS_1_DASH, _                       ; 30 -- A Line consisting of 2 Dots and 1 Dash.
 		$LOI_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS                    ; 31 -- A Line with Fine Dots.
+
+; Shape Shadow Position
+Global Enum _
+		$LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT, _                                ; The Shadow is positioned in the Upper-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_TOP_CENTER, _                              ; The Shadow is positioned in the Upper-Center of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_TOP_RIGHT, _                               ; The Shadow is positioned in the Upper-Right corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT, _                             ; The Shadow is positioned in the Middle-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER, _                           ; The Shadow is positioned in the Middle-Center of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT, _                            ; The Shadow is positioned in the Middle-Right of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT, _                             ; The Shadow is positioned in the Lower-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, _                           ; The Shadow is positioned in the Lower-Center of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT                               ; The Shadow is positioned in the Lower-Right corner of the shape.
 
 ; Shape Type Constants.
 Global Enum Step * 2 _
@@ -630,44 +761,14 @@ Global Enum _
 		$LOI_SLIDESHOW_RANGE_FROM, _                                 ; The Slideshow begins at the defined slide.
 		$LOI_SLIDESHOW_RANGE_CUSTOM                                  ; A custom Slideshow order is followed.
 
-; Horizontal Text Alignment
-Global Const _                                                       ; com.sun.star.drawing.TextHorizontalAdjust
-		$LOI_TEXT_ALIGN_HORI_LEFT = 0, _                             ; The left edge of the text is adjusted to the left edge of the shape.
-		$LOI_TEXT_ALIGN_HORI_CENTER = 1, _                           ; The text is centered horizontally inside the shape.
-		$LOI_TEXT_ALIGN_HORI_RIGHT = 2, _                            ; The right edge of the text is adjusted to the right edge of the shape.
-		$LOI_TEXT_ALIGN_HORI_BLOCK = 3                               ; The text extends from the left to the right edge of the shape.
-
-; Vertical Text Alignment
-Global Const _                                                       ; com.sun.star.drawing.TextVerticalAdjust
-		$LOI_TEXT_ALIGN_VERT_TOP = 0, _                              ; The top edge of the text is adjusted to the top edge of the shape.
-		$LOI_TEXT_ALIGN_VERT_CENTER = 1, _                           ; The text is centered vertically inside the shape.
-		$LOI_TEXT_ALIGN_VERT_BOTTOM = 2, _                           ; The bottom edge of the text is adjusted to the bottom edge of the shape.
-		$LOI_TEXT_ALIGN_VERT_BLOCK = 3                               ; The text extends from the top to the bottom edge of the shape.
-
-; Text Anchor Position
+; Text Cursor Movement Constants.
 Global Enum _
-		$LOI_TEXT_ANCHOR_TOP_LEFT, _                                 ; The text is positioned in the Upper-Left corner of the Shape.
-		$LOI_TEXT_ANCHOR_TOP_CENTER, _                               ; The text is positioned in the Upper-Center of the Shape.
-		$LOI_TEXT_ANCHOR_TOP_RIGHT, _                                ; The text is positioned in the Upper-Right of the Shape.
-		$LOI_TEXT_ANCHOR_MIDDLE_LEFT, _                              ; The text is positioned in the Middle-Left corner of the Shape.
-		$LOI_TEXT_ANCHOR_MIDDLE_CENTER, _                            ; The text is positioned in the Middle-Center of the Shape.
-		$LOI_TEXT_ANCHOR_MIDDLE_RIGHT, _                             ; The text is positioned in the Middle-Right of the Shape.
-		$LOI_TEXT_ANCHOR_BOTTOM_LEFT, _                              ; The text is positioned in the Lower-Left corner of the Shape.
-		$LOI_TEXT_ANCHOR_BOTTOM_CENTER, _                            ; The text is positioned in the Lower-Center of the Shape.
-		$LOI_TEXT_ANCHOR_BOTTOM_RIGHT                                ; The text is positioned in the Lower-Right of the Shape.
-
-; Weight/Bold
-Global Const _                                                       ; com.sun.star.awt.FontWeight
-		$LOI_WEIGHT_DONT_KNOW = 0, _                                 ; The font weight is not specified/unknown. For Read Only.
-		$LOI_WEIGHT_THIN = 50, _                                     ; A 50% (Thin) font weight.
-		$LOI_WEIGHT_ULTRA_LIGHT = 60, _                              ; A 60% (Ultra Light) font weight.
-		$LOI_WEIGHT_LIGHT = 75, _                                    ; A 75% (Light) font weight.
-		$LOI_WEIGHT_SEMI_LIGHT = 90, _                               ; A 90% (Semi-Light) font weight.
-		$LOI_WEIGHT_NORMAL = 100, _                                  ; A 100% (Normal) font weight.
-		$LOI_WEIGHT_SEMI_BOLD = 110, _                               ; A 110% (Semi-Bold) font weight.
-		$LOI_WEIGHT_BOLD = 150, _                                    ; A 150% (Bold) font weight.
-		$LOI_WEIGHT_ULTRA_BOLD = 175, _                              ; A 175% (Ultra-Bold) font weight.
-		$LOI_WEIGHT_BLACK = 200                                      ; A 200% (Black) font weight.
+		$LOI_TEXTCUR_COLLAPSE_TO_START, _                            ; Collapses the current selection to the start of the selection.
+		$LOI_TEXTCUR_COLLAPSE_TO_END, _                              ; Collapses the current selection the to end of the selection.
+		$LOI_TEXTCUR_GO_LEFT, _                                      ; Move the cursor left by n characters.
+		$LOI_TEXTCUR_GO_RIGHT, _                                     ; Move the cursor right by n characters.
+		$LOI_TEXTCUR_GOTO_START, _                                   ; Move the cursor to the start of the text.
+		$LOI_TEXTCUR_GOTO_END                                        ; Move the cursor to the end of the text.
 
 ; Zoom Type Constants
 Global Const _                                                       ; com.sun.star.view.DocumentZoomType
