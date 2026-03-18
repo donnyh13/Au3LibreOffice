@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the formatting settings directly.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying formatting settings directly.")
+	_LOWriter_DocInsertString($oDoc, $oViewCursor, @TAB & @TAB & "Some text to demonstrate modifying formatting settings directly.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -28,9 +28,9 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a TabStop at 1/4" Tab Stop position, Set the fill character to Asc(~) the Tilde key ASCII Value 126.
-	; Set alignment To  $LOW_PAR_TAB_ALIGN_DECIMAL, and the decimal character to ASC(.) a period, ASCII value 46.
-	$iTabStop = _LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iHMM, Asc("~"), $LOW_PAR_TAB_ALIGN_DECIMAL, Asc("."))
+	; Create a TabStop at 1/4" Tab Stop position, Set alignment To  $LOW_PAR_TAB_ALIGN_DECIMAL,
+	;  and the decimal character to ASC(.) a period, ASCII value 46, Set the fill character to Asc(~) the Tilde key ASCII Value 126.
+	$iTabStop = _LOWriter_DirFrmtParTabStopCreate($oViewCursor, $iHMM, $LOW_PAR_TAB_ALIGN_DECIMAL, Asc("."), Asc("~"))
 	If @error Then _ERROR($oDoc, "Failed to Create a Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The new Tab stop has the position of " & $iTabStop)

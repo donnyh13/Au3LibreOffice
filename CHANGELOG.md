@@ -1051,13 +1051,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOCalc_CellStyleSet` --> `_LOCalc_CellStyleCurrent`
   - `_LOCalc_PageStyleSet` --> `_LOCalc_PageStyleCurrent`
 - Rearranged `_LOCalc_CommentAreaShadow` parameter order to match L.O. UI order.
-  - Previous order:
-  > `_LOCalc_CommentAreaShadow`(ByRef $oComment, $bShadow, $iColor, $iDistance, _$iTransparency_, _$iBlur_, _$iLocation_)
-  - New order:
-  > `_LOCalc_CommentAreaShadow`(ByRef $oComment, $bShadow, _$iLocation_, $iColor, $iDistance, _$iBlur_, _$iTransparency_)
+  > Previous order: `_LOCalc_CommentAreaShadow`($oComment, $bShadow, $iColor, $iDistance, ***$iTransparency***, ***$iBlur***, ***$iLocation***)
+  >
+  > New order: `_LOCalc_CommentAreaShadow`($oComment, $bShadow, ***$iLocation***, $iColor, $iDistance, ***$iBlur***, ***$iTransparency***)
 - Rearranged Calc Cell and Page Shadow parameter order to match L.O. UI order.
-  > Previous order:(_$iWidth_, $iColor, _$iLocation_) --> New order:(_$iLocation_, $iColor, _$iWidth_)
-  - Affected functions:
+  > Previous order: (***$iWidth***, $iColor, ***$iLocation***)
+  >
+  > New order: (***$iLocation***, $iColor, ***$iWidth***)
   - __LOCalc_CellShadow
   - _LOCalc_CellShadow
   - _LOCalc_CellStyleShadow
@@ -1077,17 +1077,17 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_CellStyleOverline
   - _LOCalc_TextCursorOverline
 - Rearranged Underline parameters to match LibreOffice UI.
-  > Previous order:(_$bWordOnly_, $iUnderLineStyle, $iULColor)
+  > Previous order:(***$bWordOnly***, $iUnderLineStyle, $iULColor)
   >
-  > New order:($iUnderLineStyle, $iULColor, _$bWordOnly_)
+  > New order:($iUnderLineStyle, $iULColor, ***$bWordOnly***)
   - __LOCalc_CellUnderLine
   - _LOCalc_CellStyleUnderline
   - _LOCalc_CellUnderline
   - _LOCalc_TextCursorUnderline
 - Rearranged Overline parameters to match LibreOffice UI.
-  > Previous order:(_$bWordOnly_, $iOverLineStyle, $iOLColor)
+  > Previous order:(***$bWordOnly***, $iOverLineStyle, $iOLColor)
   >
-  > New order:($iOverLineStyle, $iOLColor, _$bWordOnly_)
+  > New order:($iOverLineStyle, $iOLColor, ***$bWordOnly***)
   - __LOCalc_CellOverLine
   - _LOCalc_CellOverline
   - _LOCalc_CellStyleOverline
@@ -1098,9 +1098,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_CellStyleStrikeOut
   - _LOCalc_TextCursorStrikeOut
 - Rearranged Strikeout parameters to match LibreOffice UI and Overline/Underline functions.
-  > Previous order:(_$bWordOnly_, _$iStrikeLineStyle_)
+  > Previous order:(***$bWordOnly***, ***$iStrikeLineStyle***)
   >
-  > New order:(_$iStrikeLineStyle_, _$bWordOnly_)
+  > New order:(***$iStrikeLineStyle***, ***$bWordOnly***)
   - __LOCalc_CellStrikeOut
   - _LOCalc_CellStrikeOut
   - _LOCalc_CellStyleStrikeOut
@@ -1798,9 +1798,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_ParStyleSet` --> `_LOWriter_ParStyleCurrent`
   - `_LOWriter_TableStyle` --> `_LOWriter_TableStyleCurrent`
 - Rearranged Writer Character, Frame, Image, Page, Paragraph, and Table Shadow parameter order to match L.O. UI order.
-  > Previous order:(_$iWidth_, $iColor, _$iLocation_)
+  > Previous order:(***$iWidth***, $iColor, ***$iLocation***)
   >
-  > New order:(_$iLocation_, $iColor, _$iWidth_)
+  > New order:(***$iLocation***, $iColor, ***$iWidth***)
   - Affected functions:
   - __LOWriter_CharShadow
   - __LOWriter_ParShadow
@@ -1828,27 +1828,27 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FindFormatModifyOverline
   - _LOWriter_ParStyleOverLine
 - Rearranged Underline parameters to match LibreOffice UI.
-  > Previous order:(_$bWordOnly_, $iUnderLineStyle, $iULColor)
+  > Previous order:(***$bWordOnly***, $iUnderLineStyle, $iULColor)
   >
-  > New order:($iUnderLineStyle, $iULColor, _$bWordOnly_)
+  > New order:($iUnderLineStyle, $iULColor, ***$bWordOnly***)
   - __LOWriter_CharUnderLine
   - _LOWriter_CharStyleUnderLine
   - _LOWriter_DirFrmtUnderLine
   - _LOWriter_FindFormatModifyUnderline
   - _LOWriter_ParStyleUnderLine
 - Rearranged Overline parameters to match LibreOffice UI.
-  > Previous order:(_$bWordOnly_, $iOverLineStyle, $iOLColor)
+  > Previous order:(***$bWordOnly***, $iOverLineStyle, $iOLColor)
   >
-  > New order:($iOverLineStyle, $iOLColor, _$bWordOnly_)
+  > New order:($iOverLineStyle, $iOLColor, ***$bWordOnly***)
   - __LOWriter_CharOverLine
   - _LOWriter_CharStyleOverLine
   - _LOWriter_DirFrmtOverLine
   - _LOWriter_FindFormatModifyOverline
   - _LOWriter_ParStyleOverLine
 - Rearranged `_LOWriter_FindFormatModifyFont` parameters to match `_LOWriter_CharStyleFont` order.
-  > Previous order:($atFormat, $sFontName, $iFontSize, _$iFontWeight_, _$iFontPosture_, $iFontColor, $iTransparency, $iHighlight)
+  > Previous order:($atFormat, $sFontName, $iFontSize, ***$iFontWeight***, ***$iFontPosture***, $iFontColor, $iTransparency, $iHighlight)
   >
-  > New order:($atFormat, $sFontName, $iFontSize, _$iFontPosture_, _$iFontWeight_, $iFontColor, $iTransparency, $iHighlight)
+  > New order:($atFormat, $sFontName, $iFontSize, ***$iFontPosture***, ***$iFontWeight***, $iFontColor, $iTransparency, $iHighlight)
 - Removed $bStrikeOut from Strike out functions, as it was not needed.
   - __LOWriter_CharStrikeOut
   - _LOWriter_CharStyleStrikeOut
@@ -1856,9 +1856,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FindFormatModifyStrikeout
   - _LOWriter_ParStyleStrikeOut
 - Rearranged Strikeout parameters to match LibreOffice UI and Overline/Underline functions.
-  > Previous order:(_$bWordOnly_, _$iStrikeLineStyle_)
+  > Previous order:(***$bWordOnly***, ***$iStrikeLineStyle***)
   >
-  > New order:(_$iStrikeLineStyle_, _$bWordOnly_)
+  > New order:(***$iStrikeLineStyle***, ***$bWordOnly***)
   - __LOWriter_CharStrikeOut
   - _LOWriter_CharStyleStrikeOut
   - _LOWriter_DirFrmtStrikeOut
@@ -1889,6 +1889,16 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_DirFrmtCharPosition
   - _LOWriter_FindFormatModifyPosition
   - _LOWriter_ParStylePosition
+- Rearranged Parameter order for TabStop creation and modification.
+  > Previous order:($iTabStop, $iPosition, ***$iFillChar***, $iAlignment, $iDecChar)
+  >
+  > New order:($iPosition, $iAlignment, $iDecChar, ***$iFillChar***)
+  - __LOWriter_ParTabStopCreate
+  - __LOWriter_ParTabStopMod
+  - _LOWriter_DirFrmtParTabStopCreate
+  - _LOWriter_DirFrmtParTabStopMod
+  - _LOWriter_ParStyleTabStopCreate
+  - _LOWriter_ParStyleTabStopMod
 
 #### Documented
 
