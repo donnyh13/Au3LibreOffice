@@ -25,12 +25,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The table cells names are:" & @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "The table cells names are:" & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To (UBound($asNames) - 1)
 		; Insert the Table cell names.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asNames[$i] & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $asNames[$i] & @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a Bookmark at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a Bookmark at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Bookmark at the ViewCursor, named "New Bookmark".
@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Bookmark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR & "I have inserted a field at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR & "I have inserted a field at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Bookmark Reference Field. "New Bookmark" Bookmark, do not overwrite any content selected by the cursor, and refer using
@@ -33,7 +33,7 @@ Func Example()
 	$oField = _LOWriter_FieldRefBookMarkInsert($oDoc, $oViewCursor, "New Bookmark", False, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED)
 
 	; Insert some more text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR & "I have inserted a Bookmark at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR & "I have inserted a Bookmark at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Book Mark at the ViewCursor, named "Second Bookmark".

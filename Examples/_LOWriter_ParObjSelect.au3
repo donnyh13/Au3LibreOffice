@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "First Paragraph" & @CR & "Second Paragraph" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "First Paragraph" & @CR & "Second Paragraph" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Table, 2 columns, 3 rows.

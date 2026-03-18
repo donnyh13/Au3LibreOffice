@@ -88,7 +88,7 @@ EndFunc   ;==>_LOWriter_EndnoteDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Anchor cursor returned is just a Text Cursor placed at the anchor's position.
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorMove, _LOWriter_DocGetString, _LOWriter_DocInsertString
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorMove, _LOWriter_CursorGetString, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -122,7 +122,7 @@ EndFunc   ;==>_LOWriter_EndnoteGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_DocInsertString
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -553,7 +553,7 @@ EndFunc   ;==>_LOWriter_FootnoteGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CursorMove, _LOWriter_DocInsertString
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

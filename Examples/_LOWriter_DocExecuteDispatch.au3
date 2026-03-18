@@ -19,7 +19,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "This is to demonstrate using _LOWriter_DocExecuteDispatch. Try clicking ""Execute"" on the small GUI " & _
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "This is to demonstrate using _LOWriter_DocExecuteDispatch. Try clicking ""Execute"" on the small GUI " & _
 			"window present on your screen. You can also click the drop down and try any other command. If you press ""Execute"" with ""uno:SwBackspace"" selected " & _
 			"this smiley face will be backspaced.☻")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

@@ -16,7 +16,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted an Endnote at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted an Endnote at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Endnote at the ViewCursor.
@@ -24,7 +24,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert an Endnote. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR & "I have inserted a field at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR & "I have inserted a field at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Endnote Reference Field. Reference the Endnote I inserted using its Object, do not overwrite any content selected by the cursor,

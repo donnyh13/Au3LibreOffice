@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a field at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a field at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Conditional text Field at the View Cursor. The Condition will be if (1+1) > [is greater than] 2 If so display "Yes", If not, Display "NO!"
@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "I have inserted a field at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "I have inserted a field at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Author Field at the View Cursor. Fixed = True, Set the Author to "Auto It", Full name = True.
@@ -33,7 +33,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "I have inserted a field at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "I have inserted a field at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$sMasterFieldName = "TestMaster"
@@ -47,7 +47,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a text field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "I have inserted a field at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "I have inserted a field at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Show Variable Field and use the new SetVar name, which is also the MasterField's name.

@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "A Line of text to Test Direct Formatting with.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "A Line of text to Test Direct Formatting with.")
 	If @error Then _ERROR($oDoc, "Failed to insert text into the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the ViewCursor back to the beginning of the page.

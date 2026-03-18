@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a field at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a field at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Set Variable Field and use the new MasterField's name., set the Value to 2300
@@ -43,12 +43,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve an array of Set Variable Masters. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	$iResults = @extended
 
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "Field Master Names currently in this Document: (Notice my newly created Master Field is not listed." & @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "Field Master Names currently in this Document: (Notice my newly created Master Field is not listed." & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To $iResults - 1
 		; Write each Master Field name in the document.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asMasters[$i] & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $asMasters[$i] & @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

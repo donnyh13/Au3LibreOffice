@@ -16,7 +16,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve ViewCursor object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text at the View Cursor's position.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I inserted text where the ViewCursor was.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I inserted text where the ViewCursor was.")
 	If @error Then _ERROR($oDoc, "Failed to insert text at the ViewCursor's position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

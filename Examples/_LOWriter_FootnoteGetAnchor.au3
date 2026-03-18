@@ -16,7 +16,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a Footnote at the end of this line. ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a Footnote at the end of this line. ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Footnote at the ViewCursor.
@@ -24,7 +24,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Footnote. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some more text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, " More text after the Footnote.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, " More text after the Footnote.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Text Cursor at the Anchor location.
@@ -32,7 +32,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before the Footnote anchor location.
-	_LOWriter_DocInsertString($oDoc, $oAnchorTextCursor, "(NEW TEXT INSERTED USING THE ANCHOR CURSOR.) ")
+	_LOWriter_CursorInsertString($oDoc, $oAnchorTextCursor, "(NEW TEXT INSERTED USING THE ANCHOR CURSOR.) ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

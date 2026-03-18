@@ -16,7 +16,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "First Line of text." & @CR & _
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "First Line of text." & @CR & _
 			"Second line of text." & @CR & _
 			"Third line of text." & @CR & _
 			"Fourth Line of Text.")
@@ -46,7 +46,7 @@ Func Example()
 	$oSelection = _LOWriter_DocSelection($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current selection. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The currently selected text is: " & _LOWriter_DocGetString($oSelection))
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The currently selected text is: " & _LOWriter_CursorGetString($oSelection))
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

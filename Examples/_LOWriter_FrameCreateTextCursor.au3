@@ -24,7 +24,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a text Cursor Object for the Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text
-	_LOWriter_DocInsertString($oDoc, $oTextCursor, "First Line of text." & @CR & _
+	_LOWriter_CursorInsertString($oDoc, $oTextCursor, "First Line of text." & @CR & _
 			"Second line of text.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

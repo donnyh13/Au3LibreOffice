@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text at the Image anchor location.
-	_LOWriter_DocInsertString($oDoc, $oAnchorTextCursor, "(NEW TEXT INSERTED USING THE ANCHOR CURSOR.) ")
+	_LOWriter_CursorInsertString($oDoc, $oAnchorTextCursor, "(NEW TEXT INSERTED USING THE ANCHOR CURSOR.) ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

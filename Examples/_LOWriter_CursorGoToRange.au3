@@ -16,7 +16,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text using the View Cursor.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text." & @CR & @CR & "Some different text" & @CR & "Another Line.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text." & @CR & @CR & "Some different text" & @CR & "Another Line.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a new Text Cursor.
@@ -24,7 +24,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text using the Text Cursor
-	_LOWriter_DocInsertString($oDoc, $oTextCursor, ">[This is where the Text Cursor currently is.]< ")
+	_LOWriter_CursorInsertString($oDoc, $oTextCursor, ">[This is where the Text Cursor currently is.]< ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the TextCursor to where the View Cursor is, do not select text on the way.
@@ -32,7 +32,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert more text using the Text Cursor
-	_LOWriter_DocInsertString($oDoc, $oTextCursor, " >[This is where the Text Cursor now is, after moving it to the ViewCursor's position.]<")
+	_LOWriter_CursorInsertString($oDoc, $oTextCursor, " >[This is where the Text Cursor now is, after moving it to the ViewCursor's position.]<")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

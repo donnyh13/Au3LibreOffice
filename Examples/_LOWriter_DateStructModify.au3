@@ -31,7 +31,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert 2 newlines.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Date Structure, Year = 2023, Month = 06, Day = 16, Hour = 8, Minute = 45, Second = 55, Nanoseconds = 75, UTC = False

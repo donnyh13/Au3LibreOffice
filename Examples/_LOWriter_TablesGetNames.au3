@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a paragraph break to separate the tables.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create another Table, 3 columns, 2 rows.
@@ -33,12 +33,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve list of Text Tables. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The document contains the following Table names:" & @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "The document contains the following Table names:" & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To (UBound($asTables) - 1)
 		; Insert the Frame names.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asTables[$i] & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $asTables[$i] & @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

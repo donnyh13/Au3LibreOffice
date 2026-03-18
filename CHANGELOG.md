@@ -1899,6 +1899,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_DirFrmtParTabStopMod
   - _LOWriter_ParStyleTabStopCreate
   - _LOWriter_ParStyleTabStopMod
+- Renamed some string manipulation functions to be more logical.
+  - `_LOWriter_DocGetString` --> `_LOWriter_CursorGetString`
+  - `_LOWriter_DocHyperlinkInsert` --> `_LOWriter_CursorHyperlinkInsert`
+  - `_LOWriter_DocInsertControlChar` --> `_LOWriter_CursorInsertControlChar`
+  - `_LOWriter_DocInsertString` --> `_LOWriter_CursorInsertString`
 
 #### Documented
 

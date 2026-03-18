@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oTextCursor, "Some text." & @CR & @CR & "Some different text" & @CR & "Another Line.")
+	_LOWriter_CursorInsertString($oDoc, $oTextCursor, "Some text." & @CR & @CR & "Some different text" & @CR & "Another Line.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Check if the TextCursor is currently at the end of a word.

@@ -19,7 +19,7 @@ Func Example()
 
 	; Insert 150 New lines
 	For $i = 1 To 150
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, "Line " & $i & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Line " & $i & @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text into the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 		Sleep(10)
 	Next

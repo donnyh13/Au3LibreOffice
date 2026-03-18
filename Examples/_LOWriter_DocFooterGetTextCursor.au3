@@ -16,7 +16,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text at the ViewCursor.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text for demonstration purposes. Scroll down and look in the footer." & @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text for demonstration purposes. Scroll down and look in the footer." & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Page Style's Object, to modify its settings.
@@ -32,7 +32,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a TextCursor in the Page Style's Footer. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text in the Text Cursor.
-	_LOWriter_DocInsertString($oDoc, $oFooterTextCursor, "Some text in the Page's Footer." & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oFooterTextCursor, "Some text in the Page's Footer." & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

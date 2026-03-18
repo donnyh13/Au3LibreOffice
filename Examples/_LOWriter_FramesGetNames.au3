@@ -25,12 +25,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve a list of Frames. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The document's Frame names are:" & @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "The document's Frame names are:" & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To (UBound($asFrames) - 1)
 		; Insert the Frame names.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asFrames[$i] & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $asFrames[$i] & @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

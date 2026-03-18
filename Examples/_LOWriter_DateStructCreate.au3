@@ -35,7 +35,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert 2 newlines.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert another Date and Time text Field at the View Cursor. Fixed = True, Set the Date to the Second DateStruct I created, and set DateTime Format

@@ -26,12 +26,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve a list of Images. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The document's Image names are:" & @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "The document's Image names are:" & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To (UBound($asImages) - 1)
 		; Insert the Image names.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asImages[$i] & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $asImages[$i] & @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

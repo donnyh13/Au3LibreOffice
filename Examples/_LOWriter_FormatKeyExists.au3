@@ -53,12 +53,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Format Key" & Chr(9) & Chr(9) & "Format Key String" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Format Key" & Chr(9) & Chr(9) & "Format Key String" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To $iResults - 1
 		; List the keys in the document, separate each column by tabs.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $avKeys[$i][0] & Chr(9) & Chr(9) & Chr(9) & $avKeys[$i][1] & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $avKeys[$i][0] & Chr(9) & Chr(9) & Chr(9) & $avKeys[$i][1] & @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

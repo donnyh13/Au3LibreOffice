@@ -22,7 +22,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to insert 5 lines and set each to a different level of Numbering.")
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Level 1" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Level 1" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 2.
@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Level 2" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Level 2" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 3.
@@ -38,7 +38,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Level 3" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Level 3" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 4.
@@ -46,7 +46,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Level 4" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Level 4" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 5.
@@ -54,13 +54,13 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Level 5" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Level 5" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I could also insert the text first and then set the level.")
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Level 6")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Level 6")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 6.
@@ -68,7 +68,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "Level 7")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "Level 7")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 7.
@@ -76,7 +76,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "Level 8")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "Level 8")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 8.
@@ -84,7 +84,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "Level 9")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "Level 9")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 9.
@@ -92,7 +92,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "Level 10")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "Level 10")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 10.
@@ -100,7 +100,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "Level 3 again")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "Level 3 again")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 3.

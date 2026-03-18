@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some @CR's to move the ViewCursor down a few lines.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR & @CR & @CR & @CR & @CR & @CR & @CR & @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR & @CR & @CR & @CR & @CR & @CR & @CR & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Return the cursor back to the start.

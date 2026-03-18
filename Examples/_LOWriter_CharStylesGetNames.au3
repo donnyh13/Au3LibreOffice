@@ -28,7 +28,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now insert a list of available Character styles. There are " & @extended & " results.")
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The Character Styles available in this document are:" & @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "The Character Styles available in this document are:" & @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To (UBound($asCharStyles) - 1)
@@ -41,7 +41,7 @@ Func Example()
 	Next
 
 	; Insert the Style names.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, $sStyles)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, $sStyles)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Character Style names that are applied to the document
@@ -63,7 +63,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The Character Styles currently in use in this document are:" & @CR & @CR, True)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "The Character Styles currently in use in this document are:" & @CR & @CR, True)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$sStyles = ""
@@ -78,7 +78,7 @@ Func Example()
 	Next
 
 	; Insert the Style names.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, $sStyles)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, $sStyles)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

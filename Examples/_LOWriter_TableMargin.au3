@@ -34,7 +34,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Text Table settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "The Margins are set to 1""")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "The Margins are set to 1""")
 	If @error Then _ERROR($oDoc, "Failed to insert Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve current settings.

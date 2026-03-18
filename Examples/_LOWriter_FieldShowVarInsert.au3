@@ -24,7 +24,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a field at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a field at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Set Variable Field and use the new MasterField's name., set the Value to 2300
@@ -32,7 +32,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a text field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a new line mark.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert 3 Show Variable Fields and use the new SetVar name, which is also the MasterField's name.
@@ -40,7 +40,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a text field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a new line mark.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Make this field show the Master Field's name instead of its value.
@@ -48,7 +48,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a text field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a new line mark.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve this Number Format key, #,##0

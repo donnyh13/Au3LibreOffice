@@ -16,7 +16,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the Default Paragraph style.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate getting the paragraph style object.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate getting the paragraph style object.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now retrieve the default paragraph style object, and modify some of its settings.")

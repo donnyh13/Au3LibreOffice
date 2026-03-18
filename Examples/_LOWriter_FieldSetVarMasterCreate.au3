@@ -28,7 +28,7 @@ Func Example()
 
 	For $i = 0 To $iResults - 1
 		; Write each Master Field name in the document.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asMasters[$i] & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $asMasters[$i] & @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

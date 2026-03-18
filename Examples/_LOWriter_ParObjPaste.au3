@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "This Paragraph Contains some direct formatting that would normally be lost when copying it, unless" & _
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "This Paragraph Contains some direct formatting that would normally be lost when copying it, unless" & _
 			" I used the clipboard." & @CR)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -75,7 +75,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert 3 new paragraphs.
-	_LOWriter_DocInsertString($oDoc2, $oViewCursor2, @CR & @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc2, $oViewCursor2, @CR & @CR & @CR)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; "Paste" the paragraph object into the new document.

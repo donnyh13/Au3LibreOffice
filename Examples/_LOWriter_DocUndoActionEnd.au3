@@ -22,15 +22,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to begin an Undo Group record. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text at the ViewCursor.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some more text at the ViewCursor.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "Some more text")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "Some more text")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some more text at the ViewCursor.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "One more line of text")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "One more line of text")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of available undo action titles.
@@ -52,7 +52,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to end an Undo Group record. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some more text at the ViewCursor.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & "New text")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "New text")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of available undo action titles again.

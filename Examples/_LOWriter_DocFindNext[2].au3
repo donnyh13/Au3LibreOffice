@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text, to use for searching later.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to Search, SeArCh, SEArch, SEARCH, SearcHing, seaRched, search." & @CR & "A New Line to searCh.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to Search, SeArCh, SEArch, SEARCH, SearcHing, seaRched, search." & @CR & "A New Line to searCh.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a search descriptor with all set to False.
@@ -41,7 +41,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a footnote Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text in the footnote.
-	_LOWriter_DocInsertString($oDoc, $oFootTextCursor, "Some text to in the footnote with the word SEarCH.")
+	_LOWriter_CursorInsertString($oDoc, $oFootTextCursor, "Some text to in the footnote with the word SEarCH.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -64,7 +64,7 @@ Func Example()
 
 	; Retrieve the string for the result.
 	If IsObj($oResult) Then
-		$sResultString = _LOWriter_DocGetString($oResult) & @CRLF
+		$sResultString = _LOWriter_CursorGetString($oResult) & @CRLF
 		If @error Then _ERROR($oDoc, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	EndIf
 
@@ -76,7 +76,7 @@ Func Example()
 
 		; Retrieve the Result's string.
 		If IsObj($oResult) Then
-			$sResultString &= _LOWriter_DocGetString($oResult) & @CRLF
+			$sResultString &= _LOWriter_CursorGetString($oResult) & @CRLF
 			If @error Then _ERROR($oDoc, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 		EndIf
 	WEnd
@@ -90,7 +90,7 @@ Func Example()
 
 	; Retrieve the string for the result.
 	If IsObj($oResult) Then
-		$sResultString = _LOWriter_DocGetString($oResult) & @CRLF
+		$sResultString = _LOWriter_CursorGetString($oResult) & @CRLF
 		If @error Then _ERROR($oDoc, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	EndIf
 
@@ -102,7 +102,7 @@ Func Example()
 
 		; Retrieve the Result's string.
 		If IsObj($oResult) Then
-			$sResultString &= _LOWriter_DocGetString($oResult) & @CRLF
+			$sResultString &= _LOWriter_CursorGetString($oResult) & @CRLF
 			If @error Then _ERROR($oDoc, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 		EndIf
 	WEnd

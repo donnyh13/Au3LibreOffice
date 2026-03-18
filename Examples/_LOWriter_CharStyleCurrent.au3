@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I set the character style.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text before I set the Character Style to ""Emphasis"". ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text before I set the Character Style to ""Emphasis"". ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now set the current character style to ""Emphasis.""")
@@ -33,7 +33,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Character Style used by this selection is: " & $sStyle)
 
 	; Insert some text after I set the character style.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some emphasized text.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some emphasized text.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

@@ -48,7 +48,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text using the Text Cursor.
-	_LOWriter_DocInsertString($oDoc, $oTextCursor, @CR & "This is some new text.")
+	_LOWriter_CursorInsertString($oDoc, $oTextCursor, @CR & "This is some new text.")
 	If @error Then _ERROR($oDoc, "Failed to insert Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

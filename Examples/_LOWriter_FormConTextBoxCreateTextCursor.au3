@@ -38,7 +38,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert the some text, overwriting the selected text.
-	_LOWriter_DocInsertString($oDoc, $oCursor, "Some text, inserted using AutoIt!", True)
+	_LOWriter_CursorInsertString($oDoc, $oCursor, "Some text, inserted using AutoIt!", True)
 	If @error Then _ERROR($oDoc, "Failed to insert text at the Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

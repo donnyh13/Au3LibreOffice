@@ -29,7 +29,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve View Cursor for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "This is some text to test saving a document.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "This is some text to test saving a document.")
 	If @error Then _ERROR($oDoc, "Failed to insert a String into the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Save the changes to the document.

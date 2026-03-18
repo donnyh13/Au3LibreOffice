@@ -19,12 +19,12 @@ Func Example()
 	; Insert a 50 Paragraphs to create a second page.
 	For $i = 0 To 50
 		; Insert some more text.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a field at the end of this line. ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a field at the end of this line. ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Page Number Field at the View Cursor.
@@ -32,7 +32,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some more text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, " <--- This is a Page Number Field.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, " <--- This is a Page Number Field.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to modify the Page Number Field.")

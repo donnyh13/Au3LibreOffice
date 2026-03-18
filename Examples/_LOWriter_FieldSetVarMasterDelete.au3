@@ -31,7 +31,7 @@ Func Example()
 
 	For $i = 0 To $iResults - 1
 		; Write each Master Field name in the document.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asMasters[$i] & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $asMasters[$i] & @CR)
 	Next
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to delete the newly created Set Variable Master Field.")

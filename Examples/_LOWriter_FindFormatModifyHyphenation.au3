@@ -19,7 +19,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text, to use for searching later.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to Search." & @CR & "A New Line to SEARCH.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to Search." & @CR & "A New Line to SEARCH.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -55,7 +55,7 @@ Func Example()
 	; Retrieve the Result's string.
 	If IsArray($aoResults) Then
 		For $i = 0 To UBound($aoResults) - 1
-			$sResultString = _LOWriter_DocGetString($aoResults[$i])
+			$sResultString = _LOWriter_CursorGetString($aoResults[$i])
 			If (@error > 0) Then MsgBox($MB_OK + $MB_TOPMOST, Default, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended)
 		Next
 

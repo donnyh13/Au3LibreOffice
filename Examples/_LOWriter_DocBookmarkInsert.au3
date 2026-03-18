@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a Bookmark at the end of this line.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a Bookmark at the end of this line.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Bookmark at the ViewCursor, named "New Bookmark".
@@ -29,12 +29,12 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve an array of Bookmarks. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR & "The Bookmark names currently contained in this document are:" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR & "The Bookmark names currently contained in this document are:" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To UBound($asBookmarks) - 1
 		; Insert some text.
-		_LOWriter_DocInsertString($oDoc, $oViewCursor, $asBookmarks[$i] & @CR)
+		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $asBookmarks[$i] & @CR)
 		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 
