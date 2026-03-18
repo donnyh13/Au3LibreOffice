@@ -486,7 +486,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaGradientMulticolor
 ; Syntax ........: _LOImpress_ShapeAreaShadow(ByRef $oShape[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
 ; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, a Shadow is present for the Shape.
-;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iDistance           - [optional] an integer value. Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
 ;                  $iBlur               - [optional] an integer value (0-150). Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
@@ -496,7 +496,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaGradientMulticolor
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bShadow not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOI_SHAPE_SHADOW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error 1 @Extended 4 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error 1 @Extended 5 Return 0 = $iDistance not an Integer, or less than 0.
 ;                  @Error 1 @Extended 6 Return 0 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
@@ -556,7 +556,7 @@ Func _LOImpress_ShapeAreaShadow(ByRef $oShape, $bShadow = Null, $iLocation = Nul
 	EndIf
 
 	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOI_SHAPE_SHADOW_TOP_LEFT, $LOI_SHAPE_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iLocation, $LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT, $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		__LOImpress_ShapeAreaShadowModify($oShape, $iLocation)
 		If (@error = $__LO_STATUS_PROP_SETTING_ERROR) Then
@@ -1864,7 +1864,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrFit
 ;                  $iRight              - [optional] an integer value (-100,000-100,000). Default is Null. The space between the right edge of the drawing object and the right border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] an integer value (-100,000-100,000). Default is Null. The space between the top edge of the drawing object and the top border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] an integer value (-100,000-100,000). Default is Null. The space between the bottom edge of the drawing object and the bottom border of the text, in Hundredths of a Millimeter (HMM).
-;                  $iAnchor             - [optional] an integer value (0-8). Default is Null. The text anchor position. See Constants, $LOI_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAnchor             - [optional] an integer value (0-8). Default is Null. The text anchor position. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bFullWidth          - [optional] a boolean value. Default is Null. If True, Anchors the text to the full width of the drawing object.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1874,7 +1874,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrFit
 ;                  @Error 1 @Extended 3 Return 0 = $iRight not an Integer, less than -100,000 or greater than 100,000.
 ;                  @Error 1 @Extended 4 Return 0 = $iTop not an Integer, less than -100,000 or greater than 100,000.
 ;                  @Error 1 @Extended 5 Return 0 = $iBottom not an Integer, less than -100,000 or greater than 100,000.
-;                  @Error 1 @Extended 6 Return 0 = $iAnchor  not an Integer, less than 0 or greater than 8. See Constants, $LOI_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iAnchor  not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $bFullWidth not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -1907,36 +1907,36 @@ Func _LOImpress_ShapeTextAttrSettings(ByRef $oShape, $iLeft = Null, $iRight = Nu
 
 	If __LO_VarsAreNull($iLeft, $iRight, $iTop, $iBottom, $iAnchor, $bFullWidth) Then
 		Select
-			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_TOP) And ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_LEFT)
-				$iCurAnchor = $LOI_TEXT_ANCHOR_TOP_LEFT
+			Case ($oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP) And ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT)
+				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_TOP_LEFT
 
-			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_TOP) And (($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_CENTER) Or ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_BLOCK))
-				$iCurAnchor = $LOI_TEXT_ANCHOR_TOP_CENTER
+			Case ($oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP) And (($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) Or ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK))
+				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_TOP_CENTER
 
-			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_TOP) And ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_RIGHT)
-				$iCurAnchor = $LOI_TEXT_ANCHOR_TOP_RIGHT
+			Case ($oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP) And ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT)
+				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_TOP_RIGHT
 
-			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_CENTER) And ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_LEFT)
-				$iCurAnchor = $LOI_TEXT_ANCHOR_MIDDLE_LEFT
+			Case ($oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) And ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT)
+				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_MIDDLE_LEFT
 
-			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_CENTER) And (($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_CENTER) Or ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_BLOCK))
-				$iCurAnchor = $LOI_TEXT_ANCHOR_MIDDLE_CENTER
+			Case ($oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) And (($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) Or ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK))
+				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_MIDDLE_CENTER
 
-			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_CENTER) And ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_RIGHT)
-				$iCurAnchor = $LOI_TEXT_ANCHOR_MIDDLE_RIGHT
+			Case ($oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) And ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT)
+				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_MIDDLE_RIGHT
 
-			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_BOTTOM) And ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_LEFT)
-				$iCurAnchor = $LOI_TEXT_ANCHOR_BOTTOM_LEFT
+			Case ($oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) And ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT)
+				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_BOTTOM_LEFT
 
-			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_BOTTOM) And (($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_CENTER) Or ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_BLOCK))
-				$iCurAnchor = $LOI_TEXT_ANCHOR_BOTTOM_CENTER
+			Case ($oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) And (($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) Or ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK))
+				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_BOTTOM_CENTER
 
-			Case ($oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_BOTTOM) And ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_RIGHT)
-				$iCurAnchor = $LOI_TEXT_ANCHOR_BOTTOM_RIGHT
+			Case ($oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) And ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT)
+				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT
 		EndSelect
 
 		__LO_ArrayFill($avTextAttr, $oShape.TextLeftDistance(), $oShape.TextRightDistance(), $oShape.TextUpperDistance(), $oShape.TextLowerDistance(), _
-				$iCurAnchor, ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_BLOCK) ? (True) : (False))
+				$iCurAnchor, ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK) ? (True) : (False))
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avTextAttr)
 	EndIf
@@ -1970,62 +1970,62 @@ Func _LOImpress_ShapeTextAttrSettings(ByRef $oShape, $iLeft = Null, $iRight = Nu
 	EndIf
 
 	If ($iAnchor <> Null) Then
-		If Not __LO_IntIsBetween($iAnchor, $LOI_TEXT_ANCHOR_TOP_LEFT, $LOI_TEXT_ANCHOR_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iAnchor, $LOI_PAR_TEXT_ANCHOR_TOP_LEFT, $LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		Switch $iAnchor
-			Case $LOI_TEXT_ANCHOR_TOP_LEFT
-				$oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_TOP
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_LEFT
-				$iError = ($oShape.TextVerticalAdjust() = $LOI_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOI_PAR_TEXT_ANCHOR_TOP_LEFT
+				$oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT
+				$iError = ($oShape.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_TEXT_ANCHOR_TOP_CENTER
-				$oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_TOP
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_CENTER
-				$iError = ($oShape.TextVerticalAdjust() = $LOI_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
+			Case $LOI_PAR_TEXT_ANCHOR_TOP_CENTER
+				$oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER
+				$iError = ($oShape.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_TEXT_ANCHOR_TOP_RIGHT
-				$oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_TOP
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_RIGHT
-				$iError = ($oShape.TextVerticalAdjust() = $LOI_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOI_PAR_TEXT_ANCHOR_TOP_RIGHT
+				$oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT
+				$iError = ($oShape.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_TEXT_ANCHOR_MIDDLE_LEFT
-				$oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_CENTER
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_LEFT
-				$iError = ($oShape.TextVerticalAdjust() = $LOI_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOI_PAR_TEXT_ANCHOR_MIDDLE_LEFT
+				$oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT
+				$iError = ($oShape.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_TEXT_ANCHOR_MIDDLE_CENTER
-				$oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_CENTER
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_CENTER
-				$iError = ($oShape.TextVerticalAdjust() = $LOI_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
+			Case $LOI_PAR_TEXT_ANCHOR_MIDDLE_CENTER
+				$oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER
+				$iError = ($oShape.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_TEXT_ANCHOR_MIDDLE_RIGHT
-				$oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_CENTER
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_RIGHT
-				$iError = ($oShape.TextVerticalAdjust() = $LOI_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOI_PAR_TEXT_ANCHOR_MIDDLE_RIGHT
+				$oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT
+				$iError = ($oShape.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_TEXT_ANCHOR_BOTTOM_LEFT
-				$oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_BOTTOM
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_LEFT
-				$iError = ($oShape.TextVerticalAdjust() = $LOI_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOI_PAR_TEXT_ANCHOR_BOTTOM_LEFT
+				$oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT
+				$iError = ($oShape.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_TEXT_ANCHOR_BOTTOM_CENTER
-				$oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_BOTTOM
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_CENTER
-				$iError = ($oShape.TextVerticalAdjust() = $LOI_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
+			Case $LOI_PAR_TEXT_ANCHOR_BOTTOM_CENTER
+				$oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER
+				$iError = ($oShape.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_TEXT_ANCHOR_BOTTOM_RIGHT
-				$oShape.TextVerticalAdjust = $LOI_TEXT_ALIGN_VERT_BOTTOM
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_RIGHT
-				$iError = ($oShape.TextVerticalAdjust() = $LOI_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT
+				$oShape.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT
+				$iError = ($oShape.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
 		EndSwitch
 	EndIf
 
@@ -2033,13 +2033,13 @@ Func _LOImpress_ShapeTextAttrSettings(ByRef $oShape, $iLeft = Null, $iRight = Nu
 		If Not IsBool($bFullWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		If $bFullWidth Then
-			$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_BLOCK
-			$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_BLOCK) ? ($iError) : (BitOR($iError, 32))
+			$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK
+			$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK) ? ($iError) : (BitOR($iError, 32))
 
 		Else
-			If ($oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_BLOCK) Then ; Only set Horizontal Adjust to Center if it was set to Block already when setting $bFullWidth to False.
-				$oShape.TextHorizontalAdjust = $LOI_TEXT_ALIGN_HORI_CENTER
-				$iError = ($oShape.TextHorizontalAdjust() = $LOI_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 32))
+			If ($oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK) Then ; Only set Horizontal Adjust to Center if it was set to Block already when setting $bFullWidth to False.
+				$oShape.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER
+				$iError = ($oShape.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 32))
 			EndIf
 		EndIf
 	EndIf
