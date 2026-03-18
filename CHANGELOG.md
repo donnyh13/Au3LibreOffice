@@ -353,6 +353,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOBase_TableUIOpenByObject
   - _LOBase_TableUIVisible
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
+- Added Enumeration values to comments after enumerated Constants.
 
 #### Changed
 
@@ -888,6 +889,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOC_VALIDATION_TYPE_*
   - $LOC_ZOOMTYPE_*
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
+- Added Enumeration values to comments after enumerated Constants.
 
 #### Changed
 
@@ -1425,6 +1427,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOWriter_TableStyleCompare
 - __LOWriter_GradientIsModified
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
+- Added Enumeration values to comments after enumerated Constants.
 
 #### Changed
 

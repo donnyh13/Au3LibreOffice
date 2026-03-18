@@ -186,15 +186,15 @@ Global Const _                                                  ; com.sun.star.a
 
 ; Comment Text Anchor Position
 Global Enum _
-		$LOC_COMMENT_ANCHOR_TOP_LEFT, _                         ; The comment text is anchored in the Upper-Left corner of the comment box.
-		$LOC_COMMENT_ANCHOR_TOP_CENTER, _                       ; The comment text is anchored in the Upper-Center of the comment box.
-		$LOC_COMMENT_ANCHOR_TOP_RIGHT, _                        ; The comment text is anchored in the Upper-Right of the comment box.
-		$LOC_COMMENT_ANCHOR_MIDDLE_LEFT, _                      ; The comment text is anchored in the Middle-Left corner of the comment box.
-		$LOC_COMMENT_ANCHOR_MIDDLE_CENTER, _                    ; The comment text is anchored in the Middle-Center of the comment box.
-		$LOC_COMMENT_ANCHOR_MIDDLE_RIGHT, _                     ; The comment text is anchored in the Middle-Right of the comment box.
-		$LOC_COMMENT_ANCHOR_BOTTOM_LEFT, _                      ; The comment text is anchored in the Lower-Left corner of the comment box.
-		$LOC_COMMENT_ANCHOR_BOTTOM_CENTER, _                    ; The comment text is anchored in the Lower-Center of the comment box.
-		$LOC_COMMENT_ANCHOR_BOTTOM_RIGHT                        ; The comment text is anchored in the Lower-Right of the comment box.
+		$LOC_COMMENT_ANCHOR_TOP_LEFT, _                         ; 0 The comment text is anchored in the Upper-Left corner of the comment box.
+		$LOC_COMMENT_ANCHOR_TOP_CENTER, _                       ; 1 The comment text is anchored in the Upper-Center of the comment box.
+		$LOC_COMMENT_ANCHOR_TOP_RIGHT, _                        ; 2 The comment text is anchored in the Upper-Right of the comment box.
+		$LOC_COMMENT_ANCHOR_MIDDLE_LEFT, _                      ; 3 The comment text is anchored in the Middle-Left corner of the comment box.
+		$LOC_COMMENT_ANCHOR_MIDDLE_CENTER, _                    ; 4 The comment text is anchored in the Middle-Center of the comment box.
+		$LOC_COMMENT_ANCHOR_MIDDLE_RIGHT, _                     ; 5 The comment text is anchored in the Middle-Right of the comment box.
+		$LOC_COMMENT_ANCHOR_BOTTOM_LEFT, _                      ; 6 The comment text is anchored in the Lower-Left corner of the comment box.
+		$LOC_COMMENT_ANCHOR_BOTTOM_CENTER, _                    ; 7 The comment text is anchored in the Lower-Center of the comment box.
+		$LOC_COMMENT_ANCHOR_BOTTOM_RIGHT                        ; 8 The comment text is anchored in the Lower-Right of the comment box.
 
 ; Comment Animation Direction
 Global Const _                                                  ; com.sun.star.drawing.TextAnimationDirection
@@ -324,15 +324,15 @@ Global Enum _
 
 ; Comment Shadow Position
 Global Enum _
-		$LOC_COMMENT_SHADOW_TOP_LEFT, _                         ; The comment Shadow is positioned in the Upper-Left corner of the comment box.
-		$LOC_COMMENT_SHADOW_TOP_CENTER, _                       ; The comment Shadow is positioned in the Upper-Center of the comment box.
-		$LOC_COMMENT_SHADOW_TOP_RIGHT, _                        ; The comment Shadow is positioned in the Upper-Right corner of the comment box.
-		$LOC_COMMENT_SHADOW_MIDDLE_LEFT, _                      ; The comment Shadow is positioned in the Middle-Left corner of the comment box.
-		$LOC_COMMENT_SHADOW_MIDDLE_CENTER, _                    ; The comment Shadow is positioned in the Middle-Center of the comment box.
-		$LOC_COMMENT_SHADOW_MIDDLE_RIGHT, _                     ; The comment Shadow is positioned in the Middle-Right of the comment box.
-		$LOC_COMMENT_SHADOW_BOTTOM_LEFT, _                      ; The comment Shadow is positioned in the Lower-Left corner of the comment box.
-		$LOC_COMMENT_SHADOW_BOTTOM_CENTER, _                    ; The comment Shadow is positioned in the Lower-Center of the comment box.
-		$LOC_COMMENT_SHADOW_BOTTOM_RIGHT                        ; The comment Shadow is positioned in the Lower-Right corner of the comment box.
+		$LOC_COMMENT_SHADOW_TOP_LEFT, _                         ; 0 The comment Shadow is positioned in the Upper-Left corner of the comment box.
+		$LOC_COMMENT_SHADOW_TOP_CENTER, _                       ; 1 The comment Shadow is positioned in the Upper-Center of the comment box.
+		$LOC_COMMENT_SHADOW_TOP_RIGHT, _                        ; 2 The comment Shadow is positioned in the Upper-Right corner of the comment box.
+		$LOC_COMMENT_SHADOW_MIDDLE_LEFT, _                      ; 3 The comment Shadow is positioned in the Middle-Left corner of the comment box.
+		$LOC_COMMENT_SHADOW_MIDDLE_CENTER, _                    ; 4 The comment Shadow is positioned in the Middle-Center of the comment box.
+		$LOC_COMMENT_SHADOW_MIDDLE_RIGHT, _                     ; 5 The comment Shadow is positioned in the Middle-Right of the comment box.
+		$LOC_COMMENT_SHADOW_BOTTOM_LEFT, _                      ; 6 The comment Shadow is positioned in the Lower-Left corner of the comment box.
+		$LOC_COMMENT_SHADOW_BOTTOM_CENTER, _                    ; 7 The comment Shadow is positioned in the Lower-Center of the comment box.
+		$LOC_COMMENT_SHADOW_BOTTOM_RIGHT                        ; 8 The comment Shadow is positioned in the Lower-Right corner of the comment box.
 
 ; General Computation Functions
 Global Const _                                                  ; com.sun.star.sheet.GeneralFunction
@@ -359,14 +359,14 @@ Global Const _
 
 ; Field Types
 Global Enum Step *2 _
-		$LOC_FIELD_TYPE_ALL = 1, _                              ; Returns an array of all field types listed below.
-		$LOC_FIELD_TYPE_DATE_TIME, _                            ; A Date or Time field. {Cell & Header.}
-		$LOC_FIELD_TYPE_DOC_TITLE, _                            ; A Document Title field. {Cell & Header.}
-		$LOC_FIELD_TYPE_FILE_NAME, _                            ; A File Name or Path and File Name field. {Header.}
-		$LOC_FIELD_TYPE_PAGE_NUM, _                             ; A Page Number field. {Header.}
-		$LOC_FIELD_TYPE_PAGE_COUNT, _                           ; A total Page Count field. {Header.}
-		$LOC_FIELD_TYPE_SHEET_NAME, _                           ; A Sheet Name field. {Cell & Header.}
-		$LOC_FIELD_TYPE_URL                                     ; A Hyperlink/URL field. {Cell.}
+		$LOC_FIELD_TYPE_ALL = 1, _                              ; 1 Returns an array of all field types listed below.
+		$LOC_FIELD_TYPE_DATE_TIME, _                            ; 2 A Date or Time field. {Cell & Header.}
+		$LOC_FIELD_TYPE_DOC_TITLE, _                            ; 4 A Document Title field. {Cell & Header.}
+		$LOC_FIELD_TYPE_FILE_NAME, _                            ; 8 A File Name or Path and File Name field. {Header.}
+		$LOC_FIELD_TYPE_PAGE_NUM, _                             ; 16 A Page Number field. {Header.}
+		$LOC_FIELD_TYPE_PAGE_COUNT, _                           ; 32 A total Page Count field. {Header.}
+		$LOC_FIELD_TYPE_SHEET_NAME, _                           ; 64 A Sheet Name field. {Cell & Header.}
+		$LOC_FIELD_TYPE_URL                                     ; 128 A Hyperlink/URL field. {Cell.}
 
 ; Fill Date Mode
 Global Const _                                                  ; com.sun.star.sheet.FillDateMode
@@ -669,9 +669,9 @@ Global Const _                                                  ; com.sun.star.v
 
 ; Page Print Scale Mode
 Global Enum _
-		$LOC_SCALE_REDUCE_ENLARGE = 1, _                        ; Specifies a scaling factor to scale all printed pages.
-		$LOC_SCALE_FIT_WIDTH_HEIGHT, _                          ; Specifies the maximum number of pages horizontally (width) and vertically (height) on which every sheet is to be printed.
-		$LOC_SCALE_FIT_PAGES                                    ; Specifies the maximum number of pages on which every sheet is to be printed. The scale will be reduced as necessary to fit the defined number of pages.
+		$LOC_SCALE_REDUCE_ENLARGE = 1, _                        ; 1 Specifies a scaling factor to scale all printed pages.
+		$LOC_SCALE_FIT_WIDTH_HEIGHT, _                          ; 2 Specifies the maximum number of pages horizontally (width) and vertically (height) on which every sheet is to be printed.
+		$LOC_SCALE_FIT_PAGES                                    ; 3 Specifies the maximum number of pages on which every sheet is to be printed. The scale will be reduced as necessary to fit the defined number of pages.
 
 ; Search In
 Global Const _
@@ -695,19 +695,19 @@ Global Const _                                                  ; com.sun.star.s
 
 ; Sheet Cursor Movement Constants.
 Global Enum _
-		$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY, _              ; Collapses or Expands the range to contain the current array formula.
-		$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION, _             ; Collapses or Expands the range to contain all contiguous nonempty cells.
-		$LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA, _                ; Collapses or Expand the range to contain merged cells that intersect the range.
-		$LOC_SHEETCUR_COLLAPSE_TO_SIZE, _                       ; Beginning with the upper-left corner or the current range, set the cursor range size.
-		$LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN, _                ; Expands the range to contain all columns that intersect the range.
-		$LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW, _                   ; Expands the range to contain all rows that intersect the range.
-		$LOC_SHEETCUR_GOTO_OFFSET, _                            ; Shift the cursor’s range relative to the current position. Negative numbers shift left/up; positive numbers shift right/down.
-		$LOC_SHEETCUR_GOTO_START, _                             ; Move the cursor to the first filled cell at the beginning of a contiguous series of filled cells. This cell may be outside the cursor’s range.
-		$LOC_SHEETCUR_GOTO_END, _                               ; Move the cursor to the last filled cell at the end of a contiguous series of filled cells. This cell may be outside the cursor’s range.
-		$LOC_SHEETCUR_GOTO_NEXT, _                              ; Move the cursor to the next (right) unprotected cell.
-		$LOC_SHEETCUR_GOTO_PREV, _                              ; Move the cursor to the previous (left) unprotected cell.
-		$LOC_SHEETCUR_GOTO_USED_AREA_START, _                   ; Set the cursor to the start of the used area.
-		$LOC_SHEETCUR_GOTO_USED_AREA_END                        ; Set the cursor to the end of the used area.
+		$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY, _              ; 0 Collapses or Expands the range to contain the current array formula.
+		$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION, _             ; 1 Collapses or Expands the range to contain all contiguous nonempty cells.
+		$LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA, _                ; 2 Collapses or Expand the range to contain merged cells that intersect the range.
+		$LOC_SHEETCUR_COLLAPSE_TO_SIZE, _                       ; 3 Beginning with the upper-left corner or the current range, set the cursor range size.
+		$LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN, _                ; 4 Expands the range to contain all columns that intersect the range.
+		$LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW, _                   ; 5 Expands the range to contain all rows that intersect the range.
+		$LOC_SHEETCUR_GOTO_OFFSET, _                            ; 6 Shift the cursor’s range relative to the current position. Negative numbers shift left/up; positive numbers shift right/down.
+		$LOC_SHEETCUR_GOTO_START, _                             ; 7 Move the cursor to the first filled cell at the beginning of a contiguous series of filled cells. This cell may be outside the cursor’s range.
+		$LOC_SHEETCUR_GOTO_END, _                               ; 8 Move the cursor to the last filled cell at the end of a contiguous series of filled cells. This cell may be outside the cursor’s range.
+		$LOC_SHEETCUR_GOTO_NEXT, _                              ; 9 Move the cursor to the next (right) unprotected cell.
+		$LOC_SHEETCUR_GOTO_PREV, _                              ; 10 Move the cursor to the previous (left) unprotected cell.
+		$LOC_SHEETCUR_GOTO_USED_AREA_START, _                   ; 11 Set the cursor to the start of the used area.
+		$LOC_SHEETCUR_GOTO_USED_AREA_END                        ; 12 Set the cursor to the end of the used area.
 
 ; Sort Data Type
 Global Const _                                                  ; com.sun.star.table.TableSortFieldType
@@ -717,12 +717,12 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Text Cursor Movement Constants.
 Global Enum _
-		$LOC_TEXTCUR_COLLAPSE_TO_START, _                       ; Collapses the current selection to the start of the selection.
-		$LOC_TEXTCUR_COLLAPSE_TO_END, _                         ; Collapses the current selection the to end of the selection.
-		$LOC_TEXTCUR_GO_LEFT, _                                 ; Move the cursor left by n characters.
-		$LOC_TEXTCUR_GO_RIGHT, _                                ; Move the cursor right by n characters.
-		$LOC_TEXTCUR_GOTO_START, _                              ; Move the cursor to the start of the text.
-		$LOC_TEXTCUR_GOTO_END                                   ; Move the cursor to the end of the text.
+		$LOC_TEXTCUR_COLLAPSE_TO_START, _                       ; 0 Collapses the current selection to the start of the selection.
+		$LOC_TEXTCUR_COLLAPSE_TO_END, _                         ; 1 Collapses the current selection the to end of the selection.
+		$LOC_TEXTCUR_GO_LEFT, _                                 ; 2 Move the cursor left by n characters.
+		$LOC_TEXTCUR_GO_RIGHT, _                                ; 3 Move the cursor right by n characters.
+		$LOC_TEXTCUR_GOTO_START, _                              ; 4 Move the cursor to the start of the text.
+		$LOC_TEXTCUR_GOTO_END                                   ; 5 Move the cursor to the end of the text.
 
 ; Validation Conditions.
 Global Const _                                                  ; com.sun.star.sheet.ConditionOperator
