@@ -165,6 +165,7 @@ Func _LOImpress_SlideBackColor(ByRef $oSlide, $iColor = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oBackground, $oDoc
+	Local $iError = 0
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -190,10 +191,9 @@ Func _LOImpress_SlideBackColor(ByRef $oSlide, $iColor = Null)
 	$oBackground.FillColor = $iColor
 
 	$oSlide.Background = $oBackground
+	$iError = ($oSlide.Background.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
-	If ($oSlide.Background.FillColor() <> $iColor) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 EndFunc   ;==>_LOImpress_SlideBackColor
 
 ; #FUNCTION# ====================================================================================================================
