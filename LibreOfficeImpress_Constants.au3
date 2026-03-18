@@ -466,15 +466,15 @@ Global Const _                                                       ; com.sun.s
 
 ; Text Anchor Position
 Global Enum _
-		$LOI_PAR_TEXT_ANCHOR_TOP_LEFT, _                             ; The text is positioned in the Upper-Left corner of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_TOP_CENTER, _                           ; The text is positioned in the Upper-Center of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_TOP_RIGHT, _                            ; The text is positioned in the Upper-Right of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_MIDDLE_LEFT, _                          ; The text is positioned in the Middle-Left corner of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_MIDDLE_CENTER, _                        ; The text is positioned in the Middle-Center of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_MIDDLE_RIGHT, _                         ; The text is positioned in the Middle-Right of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_BOTTOM_LEFT, _                          ; The text is positioned in the Lower-Left corner of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_BOTTOM_CENTER, _                        ; The text is positioned in the Lower-Center of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT                            ; The text is positioned in the Lower-Right of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_TOP_LEFT, _                             ; 0 The text is positioned in the Upper-Left corner of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_TOP_CENTER, _                           ; 1 The text is positioned in the Upper-Center of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_TOP_RIGHT, _                            ; 2 The text is positioned in the Upper-Right of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_MIDDLE_LEFT, _                          ; 3 The text is positioned in the Middle-Left corner of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_MIDDLE_CENTER, _                        ; 4 The text is positioned in the Middle-Center of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_MIDDLE_RIGHT, _                         ; 5 The text is positioned in the Middle-Right of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_BOTTOM_LEFT, _                          ; 6 The text is positioned in the Lower-Left corner of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_BOTTOM_CENTER, _                        ; 7 The text is positioned in the Lower-Center of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT                            ; 8 The text is positioned in the Lower-Right of the Shape.
 
 ; Text Direction
 Global Const _                                                       ; com.sun.star.text.WritingMode2
@@ -588,15 +588,15 @@ Global Enum _
 
 ; Shape Shadow Position
 Global Enum _
-		$LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT, _                       ; The Shadow is positioned in the Upper-Left corner of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_TOP_CENTER, _                     ; The Shadow is positioned in the Upper-Center of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_TOP_RIGHT, _                      ; The Shadow is positioned in the Upper-Right corner of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT, _                    ; The Shadow is positioned in the Middle-Left corner of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER, _                  ; The Shadow is positioned in the Middle-Center of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT, _                   ; The Shadow is positioned in the Middle-Right of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT, _                    ; The Shadow is positioned in the Lower-Left corner of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, _                  ; The Shadow is positioned in the Lower-Center of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT                      ; The Shadow is positioned in the Lower-Right corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT, _                       ; 0 The Shadow is positioned in the Upper-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_TOP_CENTER, _                     ; 1 The Shadow is positioned in the Upper-Center of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_TOP_RIGHT, _                      ; 2 The Shadow is positioned in the Upper-Right corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT, _                    ; 3 The Shadow is positioned in the Middle-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER, _                  ; 4 The Shadow is positioned in the Middle-Center of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT, _                   ; 5 The Shadow is positioned in the Middle-Right of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT, _                    ; 6 The Shadow is positioned in the Lower-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, _                  ; 7 The Shadow is positioned in the Lower-Center of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT                      ; 8 The Shadow is positioned in the Lower-Right corner of the shape.
 
 ; Shape Type Constants.
 Global Enum Step * 2 _
@@ -610,7 +610,7 @@ Global Enum Step * 2 _
 		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 128 - A Slide Subtitle Text Box.
 		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 256 - A Slide Title Text Box.
 		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINER, _                          ; 512 - A Slide Outliner Text Box.
-		$LOI_SHAPE_TYPE_ALL = 1023                                   ; All types above.
+		$LOI_SHAPE_TYPE_ALL = 1023                                   ; 1023 All types above.
 
 ; Slide layout arrangements.
 Global Const _
@@ -633,91 +633,91 @@ Global Const _
 
 ; Slide Transition Effects
 Global Enum _
-		$LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT, _                    ; The slide will transition with the 3D Venetian effect Vertically.
-		$LOI_SLIDE_TRANSITION_3D_VENETIAN_HORI, _                    ; The slide will transition with the 3D Venetian effect Horizontally.
-		$LOI_SLIDE_TRANSITION_BARS_VERT, _                           ; The slide will transition with the Bars effect Vertically.
-		$LOI_SLIDE_TRANSITION_BARS_HORI, _                           ; The slide will transition with the Bars effect Horizontally.
-		$LOI_SLIDE_TRANSITION_BOX_OUT, _                             ; The slide will transition with the Box effect expanding Out.
-		$LOI_SLIDE_TRANSITION_BOX_IN, _                              ; The slide will transition with the Box effect shrinking In.
-		$LOI_SLIDE_TRANSITION_CHECKERS_DOWN, _                       ; The slide will transition with the Checkers effect Down.
-		$LOI_SLIDE_TRANSITION_CHECKERS_ACROSS, _                     ; The slide will transition with the Checkers effect Across.
-		$LOI_SLIDE_TRANSITION_CIRCLES, _                             ; The slide will transition with the Circles effect.
-		$LOI_SLIDE_TRANSITION_COMB_HORI, _                           ; The slide will transition with the Comb effect Horizontally.
-		$LOI_SLIDE_TRANSITION_COMB_VERT, _                           ; The slide will transition with the Comb effect Vertically.
-		$LOI_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM, _                 ; The slide will transition with the Cover effect from Top to Bottom.
-		$LOI_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT, _                 ; The slide will transition with the Cover effect from Right to Left.
-		$LOI_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT, _                 ; The slide will transition with the Cover effect from Left to Right.
-		$LOI_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP, _                 ; The slide will transition with the Cover effect from Bottom to Top.
-		$LOI_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT, _      ; The slide will transition with the Cover effect from Top Right to Bottom Left.
-		$LOI_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT, _      ; The slide will transition with the Cover effect from Bottom Right to Top Left.
-		$LOI_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT, _      ; The slide will transition with the Cover effect from Top Left to Bottom Right.
-		$LOI_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT, _      ; The slide will transition with the Cover effect from Bottom Left to Top Right.
-		$LOI_SLIDE_TRANSITION_CUBE_OUTSIDE, _                        ; The slide will transition with the Cube effect from the Outside.
-		$LOI_SLIDE_TRANSITION_CUBE_INSIDE, _                         ; The slide will transition with the Cube effect from the Inside.
-		$LOI_SLIDE_TRANSITION_CUT_THROUGH_BLACK, _                   ; The slide will transition with the Cut effect through the Back.
-		$LOI_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT, _   ; The slide will transition with the Diagonal effect from Top Right to Bottom Left.
-		$LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT, _   ; The slide will transition with the Diagonal effect from Bottom Right to Top Left.
-		$LOI_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT, _   ; The slide will transition with the Diagonal effect from Top Left to Bottom Right.
-		$LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT, _   ; The slide will transition with the Diagonal effect from Bottom Left to Top Right.
-		$LOI_SLIDE_TRANSITION_DISSOLVE, _                            ; The slide will transition with the Dissolve effect.
-		$LOI_SLIDE_TRANSITION_FADE_THROUGH_BLACK, _                  ; The slide will transition with the Fade effect through Black.
-		$LOI_SLIDE_TRANSITION_FADE_THROUGH_WHITE, _                  ; The slide will transition with the Fade effect through White.
-		$LOI_SLIDE_TRANSITION_FADE_SMOOTHLY, _                       ; The slide will transition with the Fade effect Smoothly.
-		$LOI_SLIDE_TRANSITION_FALL, _                                ; The slide will transition with the Fall effect.
-		$LOI_SLIDE_TRANSITION_FINE_DISSOLVE, _                       ; The slide will transition with the Fine Dissolve effect.
-		$LOI_SLIDE_TRANSITION_GLITTER, _                             ; The slide will transition with the Glitter effect.
-		$LOI_SLIDE_TRANSITION_HELIX, _                               ; The slide will transition with the Helix effect.
-		$LOI_SLIDE_TRANSITION_HONEYCOMB, _                           ; The slide will transition with the Honeycomb effect.
-		$LOI_SLIDE_TRANSITION_IRIS, _                                ; The slide will transition with the Iris effect.
-		$LOI_SLIDE_TRANSITION_NEWSFLASH, _                           ; The slide will transition with the Newsflash effect.
-		$LOI_SLIDE_TRANSITION_NONE, _                                ; The slide will transition with no effect.
-		$LOI_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM, _                  ; The slide will transition with the Push effect from Top to Bottom.
-		$LOI_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT, _                  ; The slide will transition with the Push effect from Right to Left.
-		$LOI_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT, _                  ; The slide will transition with the Push effect from Left to Right.
-		$LOI_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP, _                  ; The slide will transition with the Push effect from Bottom to Top.
-		$LOI_SLIDE_TRANSITION_RANDOM, _                              ; The slide will transition with a Random effect.
-		$LOI_SLIDE_TRANSITION_RIPPLE, _                              ; The slide will transition with the Ripple effect.
-		$LOI_SLIDE_TRANSITION_ROCHADE, _                             ; The slide will transition with the Rochade effect.
-		$LOI_SLIDE_TRANSITION_SHAPE_PLUS, _                          ; The slide will transition with the Plus Shape effect.
-		$LOI_SLIDE_TRANSITION_SHAPE_DIAMOND, _                       ; The slide will transition with the Diamond Shape effect.
-		$LOI_SLIDE_TRANSITION_SHAPE_CIRCLE, _                        ; The slide will transition with the Circle Shape effect.
-		$LOI_SLIDE_TRANSITION_SHAPE_OVAL_HORI, _                     ; The slide will transition with the Horizontal Oval Shape effect.
-		$LOI_SLIDE_TRANSITION_SHAPE_OVAL_VERT, _                     ; The slide will transition with the Vertical Oval Shape effect.
-		$LOI_SLIDE_TRANSITION_SPLIT_HORI_IN, _                       ; The slide will transition with the Split effect Horizontally Inward.
-		$LOI_SLIDE_TRANSITION_SPLIT_HORI_OUT, _                      ; The slide will transition with the Split effect Horizontally Outward.
-		$LOI_SLIDE_TRANSITION_SPLIT_VERT_IN, _                       ; The slide will transition with the Split effect Vertically Inward.
-		$LOI_SLIDE_TRANSITION_SPLIT_VERT_OUT, _                      ; The slide will transition with the Split effect Vertically Outward.
-		$LOI_SLIDE_TRANSITION_STATIC, _                              ; The slide will transition with the Static effect.
-		$LOI_SLIDE_TRANSITION_TILES, _                               ; The slide will transition with the Tiles effect.
-		$LOI_SLIDE_TRANSITION_TURN_AROUND, _                         ; The slide will transition with the Turn Around effect.
-		$LOI_SLIDE_TRANSITION_TURN_DOWN, _                           ; The slide will transition with the Turn Downward effect.
-		$LOI_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM, _               ; The slide will transition with the Uncover effect from Top to Bottom.
-		$LOI_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT, _               ; The slide will transition with the Uncover effect from Right to Left.
-		$LOI_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT, _               ; The slide will transition with the Uncover effect from Left to Right.
-		$LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP, _               ; The slide will transition with the Uncover effect from Bottom to Top.
-		$LOI_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT, _    ; The slide will transition with the Uncover effect from Top Right to Bottom Left.
-		$LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT, _    ; The slide will transition with the Uncover effect from Bottom Right to Top Left.
-		$LOI_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT, _    ; The slide will transition with the Uncover effect from Top Left to Bottom Right.
-		$LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT, _    ; The slide will transition with the Uncover effect from Bottom Left to Top Right.
-		$LOI_SLIDE_TRANSITION_VENETIAN_VERT, _                       ; The slide will transition with the Venetian effect Vertically.
-		$LOI_SLIDE_TRANSITION_VENETIAN_HORI, _                       ; The slide will transition with the Venetian effect Horizontally.
-		$LOI_SLIDE_TRANSITION_VORTEX, _                              ; The slide will transition with the Vortex effect.
-		$LOI_SLIDE_TRANSITION_WEDGE, _                               ; The slide will transition with the Wedge effect.
-		$LOI_SLIDE_TRANSITION_WHEEL_1_SPOKE, _                       ; The slide will transition with the Wheel effect with One Spoke.
-		$LOI_SLIDE_TRANSITION_WHEEL_2_SPOKE, _                       ; The slide will transition with the Wheel effect with Two Spokes.
-		$LOI_SLIDE_TRANSITION_WHEEL_3_SPOKE, _                       ; The slide will transition with the Wheel effect with Three Spokes.
-		$LOI_SLIDE_TRANSITION_WHEEL_4_SPOKE, _                       ; The slide will transition with the Wheel effect with Four Spokes.
-		$LOI_SLIDE_TRANSITION_WHEEL_8_SPOKE, _                       ; The slide will transition with the Wheel effect with Eight Spokes.
-		$LOI_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP, _                  ; The slide will transition with the Wipe effect from Bottom to Top.
-		$LOI_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT, _                  ; The slide will transition with the Wipe effect from Left to Right.
-		$LOI_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT, _                  ; The slide will transition with the Wipe effect from Right to Left.
-		$LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM                     ; The slide will transition with the Wipe effect from Top to Bottom.
+		$LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT, _                    ; 0 The slide will transition with the 3D Venetian effect Vertically.
+		$LOI_SLIDE_TRANSITION_3D_VENETIAN_HORI, _                    ; 1 The slide will transition with the 3D Venetian effect Horizontally.
+		$LOI_SLIDE_TRANSITION_BARS_VERT, _                           ; 2 The slide will transition with the Bars effect Vertically.
+		$LOI_SLIDE_TRANSITION_BARS_HORI, _                           ; 3 The slide will transition with the Bars effect Horizontally.
+		$LOI_SLIDE_TRANSITION_BOX_OUT, _                             ; 4 The slide will transition with the Box effect expanding Out.
+		$LOI_SLIDE_TRANSITION_BOX_IN, _                              ; 5 The slide will transition with the Box effect shrinking In.
+		$LOI_SLIDE_TRANSITION_CHECKERS_DOWN, _                       ; 6 The slide will transition with the Checkers effect Down.
+		$LOI_SLIDE_TRANSITION_CHECKERS_ACROSS, _                     ; 7 The slide will transition with the Checkers effect Across.
+		$LOI_SLIDE_TRANSITION_CIRCLES, _                             ; 8 The slide will transition with the Circles effect.
+		$LOI_SLIDE_TRANSITION_COMB_HORI, _                           ; 9 The slide will transition with the Comb effect Horizontally.
+		$LOI_SLIDE_TRANSITION_COMB_VERT, _                           ; 10 The slide will transition with the Comb effect Vertically.
+		$LOI_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM, _                 ; 11 The slide will transition with the Cover effect from Top to Bottom.
+		$LOI_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT, _                 ; 12 The slide will transition with the Cover effect from Right to Left.
+		$LOI_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT, _                 ; 13 The slide will transition with the Cover effect from Left to Right.
+		$LOI_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP, _                 ; 14 The slide will transition with the Cover effect from Bottom to Top.
+		$LOI_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT, _      ; 15 The slide will transition with the Cover effect from Top Right to Bottom Left.
+		$LOI_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT, _      ; 16 The slide will transition with the Cover effect from Bottom Right to Top Left.
+		$LOI_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT, _      ; 17 The slide will transition with the Cover effect from Top Left to Bottom Right.
+		$LOI_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT, _      ; 18 The slide will transition with the Cover effect from Bottom Left to Top Right.
+		$LOI_SLIDE_TRANSITION_CUBE_OUTSIDE, _                        ; 19 The slide will transition with the Cube effect from the Outside.
+		$LOI_SLIDE_TRANSITION_CUBE_INSIDE, _                         ; 20 The slide will transition with the Cube effect from the Inside.
+		$LOI_SLIDE_TRANSITION_CUT_THROUGH_BLACK, _                   ; 21 The slide will transition with the Cut effect through the Back.
+		$LOI_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT, _   ; 22 The slide will transition with the Diagonal effect from Top Right to Bottom Left.
+		$LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT, _   ; 23 The slide will transition with the Diagonal effect from Bottom Right to Top Left.
+		$LOI_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT, _   ; 24 The slide will transition with the Diagonal effect from Top Left to Bottom Right.
+		$LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT, _   ; 25 The slide will transition with the Diagonal effect from Bottom Left to Top Right.
+		$LOI_SLIDE_TRANSITION_DISSOLVE, _                            ; 26 The slide will transition with the Dissolve effect.
+		$LOI_SLIDE_TRANSITION_FADE_THROUGH_BLACK, _                  ; 27 The slide will transition with the Fade effect through Black.
+		$LOI_SLIDE_TRANSITION_FADE_THROUGH_WHITE, _                  ; 28 The slide will transition with the Fade effect through White.
+		$LOI_SLIDE_TRANSITION_FADE_SMOOTHLY, _                       ; 29 The slide will transition with the Fade effect Smoothly.
+		$LOI_SLIDE_TRANSITION_FALL, _                                ; 30 The slide will transition with the Fall effect.
+		$LOI_SLIDE_TRANSITION_FINE_DISSOLVE, _                       ; 31 The slide will transition with the Fine Dissolve effect.
+		$LOI_SLIDE_TRANSITION_GLITTER, _                             ; 32 The slide will transition with the Glitter effect.
+		$LOI_SLIDE_TRANSITION_HELIX, _                               ; 33 The slide will transition with the Helix effect.
+		$LOI_SLIDE_TRANSITION_HONEYCOMB, _                           ; 34 The slide will transition with the Honeycomb effect.
+		$LOI_SLIDE_TRANSITION_IRIS, _                                ; 35 The slide will transition with the Iris effect.
+		$LOI_SLIDE_TRANSITION_NEWSFLASH, _                           ; 36 The slide will transition with the Newsflash effect.
+		$LOI_SLIDE_TRANSITION_NONE, _                                ; 37 The slide will transition with no effect.
+		$LOI_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM, _                  ; 38 The slide will transition with the Push effect from Top to Bottom.
+		$LOI_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT, _                  ; 39 The slide will transition with the Push effect from Right to Left.
+		$LOI_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT, _                  ; 40 The slide will transition with the Push effect from Left to Right.
+		$LOI_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP, _                  ; 41 The slide will transition with the Push effect from Bottom to Top.
+		$LOI_SLIDE_TRANSITION_RANDOM, _                              ; 42 The slide will transition with a Random effect.
+		$LOI_SLIDE_TRANSITION_RIPPLE, _                              ; 43 The slide will transition with the Ripple effect.
+		$LOI_SLIDE_TRANSITION_ROCHADE, _                             ; 44 The slide will transition with the Rochade effect.
+		$LOI_SLIDE_TRANSITION_SHAPE_PLUS, _                          ; 45 The slide will transition with the Plus Shape effect.
+		$LOI_SLIDE_TRANSITION_SHAPE_DIAMOND, _                       ; 46 The slide will transition with the Diamond Shape effect.
+		$LOI_SLIDE_TRANSITION_SHAPE_CIRCLE, _                        ; 47 The slide will transition with the Circle Shape effect.
+		$LOI_SLIDE_TRANSITION_SHAPE_OVAL_HORI, _                     ; 48 The slide will transition with the Horizontal Oval Shape effect.
+		$LOI_SLIDE_TRANSITION_SHAPE_OVAL_VERT, _                     ; 49 The slide will transition with the Vertical Oval Shape effect.
+		$LOI_SLIDE_TRANSITION_SPLIT_HORI_IN, _                       ; 50 The slide will transition with the Split effect Horizontally Inward.
+		$LOI_SLIDE_TRANSITION_SPLIT_HORI_OUT, _                      ; 51 The slide will transition with the Split effect Horizontally Outward.
+		$LOI_SLIDE_TRANSITION_SPLIT_VERT_IN, _                       ; 52 The slide will transition with the Split effect Vertically Inward.
+		$LOI_SLIDE_TRANSITION_SPLIT_VERT_OUT, _                      ; 53 The slide will transition with the Split effect Vertically Outward.
+		$LOI_SLIDE_TRANSITION_STATIC, _                              ; 54 The slide will transition with the Static effect.
+		$LOI_SLIDE_TRANSITION_TILES, _                               ; 55 The slide will transition with the Tiles effect.
+		$LOI_SLIDE_TRANSITION_TURN_AROUND, _                         ; 56 The slide will transition with the Turn Around effect.
+		$LOI_SLIDE_TRANSITION_TURN_DOWN, _                           ; 57 The slide will transition with the Turn Downward effect.
+		$LOI_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM, _               ; 58 The slide will transition with the Uncover effect from Top to Bottom.
+		$LOI_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT, _               ; 59 The slide will transition with the Uncover effect from Right to Left.
+		$LOI_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT, _               ; 60 The slide will transition with the Uncover effect from Left to Right.
+		$LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP, _               ; 61 The slide will transition with the Uncover effect from Bottom to Top.
+		$LOI_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT, _    ; 62 The slide will transition with the Uncover effect from Top Right to Bottom Left.
+		$LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT, _    ; 63 The slide will transition with the Uncover effect from Bottom Right to Top Left.
+		$LOI_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT, _    ; 64 The slide will transition with the Uncover effect from Top Left to Bottom Right.
+		$LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT, _    ; 65 The slide will transition with the Uncover effect from Bottom Left to Top Right.
+		$LOI_SLIDE_TRANSITION_VENETIAN_VERT, _                       ; 66 The slide will transition with the Venetian effect Vertically.
+		$LOI_SLIDE_TRANSITION_VENETIAN_HORI, _                       ; 67 The slide will transition with the Venetian effect Horizontally.
+		$LOI_SLIDE_TRANSITION_VORTEX, _                              ; 68 The slide will transition with the Vortex effect.
+		$LOI_SLIDE_TRANSITION_WEDGE, _                               ; 69 The slide will transition with the Wedge effect.
+		$LOI_SLIDE_TRANSITION_WHEEL_1_SPOKE, _                       ; 70 The slide will transition with the Wheel effect with One Spoke.
+		$LOI_SLIDE_TRANSITION_WHEEL_2_SPOKE, _                       ; 71 The slide will transition with the Wheel effect with Two Spokes.
+		$LOI_SLIDE_TRANSITION_WHEEL_3_SPOKE, _                       ; 72 The slide will transition with the Wheel effect with Three Spokes.
+		$LOI_SLIDE_TRANSITION_WHEEL_4_SPOKE, _                       ; 73 The slide will transition with the Wheel effect with Four Spokes.
+		$LOI_SLIDE_TRANSITION_WHEEL_8_SPOKE, _                       ; 74 The slide will transition with the Wheel effect with Eight Spokes.
+		$LOI_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP, _                  ; 75 The slide will transition with the Wipe effect from Bottom to Top.
+		$LOI_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT, _                  ; 76 The slide will transition with the Wipe effect from Left to Right.
+		$LOI_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT, _                  ; 77 The slide will transition with the Wipe effect from Right to Left.
+		$LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM                     ; 78 The slide will transition with the Wipe effect from Top to Bottom.
 
 ; Slideshow Presentation Mode.
 Global Enum _
-		$LOI_SLIDESHOW_VIEW_MODE_FULL_SCREEN, _                      ; The Slideshow is Full Screen.
-		$LOI_SLIDESHOW_VIEW_MODE_IN_WINDOW, _                        ; The Slideshow is displayed in the LibreOffice program window.
-		$LOI_SLIDESHOW_VIEW_MODE_LOOP                                ; The Slideshow is looped after a set pause.
+		$LOI_SLIDESHOW_VIEW_MODE_FULL_SCREEN, _                      ; 0 The Slideshow is Full Screen.
+		$LOI_SLIDESHOW_VIEW_MODE_IN_WINDOW, _                        ; 1 The Slideshow is displayed in the LibreOffice program window.
+		$LOI_SLIDESHOW_VIEW_MODE_LOOP                                ; 2 The Slideshow is looped after a set pause.
 
 ; Slideshow Pen Width
 Global Const _
@@ -729,46 +729,46 @@ Global Const _
 
 ; Slideshow active Presentation commands and queries.
 Global Enum _
-		$LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE, _               ; Returns the Object for the slide that is currently displayed.
-		$LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE_INDEX, _         ; Returns the index of the current slide. Index is 0 based.
-		$LOI_SLIDESHOW_PRES_QUERY_GET_NEXT_SLIDE_INDEX, _            ; Returns the index for the slide that is displayed next. Index is 0 based.
-		$LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX, _              ; Returns the Object for the slide at the index. Index is 0 based. Slides are in the order they will be displayed in the presentation which can be different than the orders of slides in the document. Not all slides must be present and each slide can be used more than once.
-		$LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_COUNT, _                 ; Returns the number of slides in this slide show.
-		$LOI_SLIDESHOW_PRES_QUERY_IS_ACTIVE, _                       ; Determines if the slide show is active. Returns TRUE for UI active slide show, FALSE otherwise.
-		$LOI_SLIDESHOW_PRES_QUERY_IS_ENDLESS, _                      ; Returns TRUE if the slide show was started to run endlessly.
-		$LOI_SLIDESHOW_PRES_QUERY_IS_FULLSCREEN, _                   ; Returns TRUE if the slide show was started in full-screen mode.
-		$LOI_SLIDESHOW_PRES_QUERY_IS_PAUSED, _                       ; Returns TRUE if the slide show is currently paused.
-		$LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE, _                      ; Activates the user interface of this slide show.
-		$LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN, _         ; >Expects Parameter: Pause Screen Color as a RGB Color Integer.< Pauses the slide show and blanks the screen in the given color. Call Resume to unpause the slide show.
-		$LOI_SLIDESHOW_PRES_COMMAND_DEACTIVATE, _                    ; Can be called to deactivate the user interface of this slide show. (Doesn't seem to set IsActive to False!)
-		$LOI_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK, _                 ; Clears ink drawing from the slideshow being played. L.O. 7.2+
-		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_FIRST_SLIDE, _              ; Goto and display the first slide.
-		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_LAST_SLIDE, _               ; Goto and display last slide. Remaining effects on the current slide will be skipped.
-		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_EFFECT, _              ; Start next effects that wait on a generic trigger. If no generic triggers are waiting the next slide will be displayed.
-		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_SLIDE, _               ; Goto and display next slide. Remaining effects on the current slide will be skipped.
-		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_EFFECT, _              ; Undo the last effects that were triggered by a generic trigger. If there is no previous effect that can be undone then the previous slide will be displayed.
-		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_SLIDE, _               ; Goto and display previous slide. Remaining effects on the current slide will be skipped.
-		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE, _                    ; >Expects Parameter: Slide Object to jump to.< Jumps to the given slide. The slide can also be a slide that would normally not be shown during the current slide show.
-		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_INDEX, _           ; >Expects Parameter: Slide's index to jump to.< Jumps to the slide at the given index. 0 based.
-		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME, _            ; >Expects Parameter: Slide's name to jump to.< Jumps to the slide with the given name.
-		$LOI_SLIDESHOW_PRES_COMMAND_PAUSE, _                         ; Pauses the slide show. All effects are paused. The slide show continues on next user input or if resume is called.
-		$LOI_SLIDESHOW_PRES_COMMAND_RESUME, _                        ; Resumes a paused slide show.
-		$LOI_SLIDESHOW_PRES_COMMAND_STOP_SOUND                       ; Stop all currently played sounds
+		$LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE, _               ; 0 Returns the Object for the slide that is currently displayed.
+		$LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE_INDEX, _         ; 1 Returns the index of the current slide. Index is 0 based.
+		$LOI_SLIDESHOW_PRES_QUERY_GET_NEXT_SLIDE_INDEX, _            ; 2 Returns the index for the slide that is displayed next. Index is 0 based.
+		$LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX, _              ; 3 Returns the Object for the slide at the index. Index is 0 based. Slides are in the order they will be displayed in the presentation which can be different than the orders of slides in the document. Not all slides must be present and each slide can be used more than once.
+		$LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_COUNT, _                 ; 4 Returns the number of slides in this slide show.
+		$LOI_SLIDESHOW_PRES_QUERY_IS_ACTIVE, _                       ; 5 Determines if the slide show is active. Returns TRUE for UI active slide show, FALSE otherwise.
+		$LOI_SLIDESHOW_PRES_QUERY_IS_ENDLESS, _                      ; 6 Returns TRUE if the slide show was started to run endlessly.
+		$LOI_SLIDESHOW_PRES_QUERY_IS_FULLSCREEN, _                   ; 7 Returns TRUE if the slide show was started in full-screen mode.
+		$LOI_SLIDESHOW_PRES_QUERY_IS_PAUSED, _                       ; 8 Returns TRUE if the slide show is currently paused.
+		$LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE, _                      ; 9 Activates the user interface of this slide show.
+		$LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN, _         ; 10 >Expects Parameter: Pause Screen Color as a RGB Color Integer.< Pauses the slide show and blanks the screen in the given color. Call Resume to unpause the slide show.
+		$LOI_SLIDESHOW_PRES_COMMAND_DEACTIVATE, _                    ; 11 Can be called to deactivate the user interface of this slide show. (Doesn't seem to set IsActive to False!)
+		$LOI_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK, _                 ; 12 Clears ink drawing from the slideshow being played. L.O. 7.2+
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_FIRST_SLIDE, _              ; 13 Goto and display the first slide.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_LAST_SLIDE, _               ; 14 Goto and display last slide. Remaining effects on the current slide will be skipped.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_EFFECT, _              ; 15 Start next effects that wait on a generic trigger. If no generic triggers are waiting the next slide will be displayed.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_SLIDE, _               ; 16 Goto and display next slide. Remaining effects on the current slide will be skipped.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_EFFECT, _              ; 17 Undo the last effects that were triggered by a generic trigger. If there is no previous effect that can be undone then the previous slide will be displayed.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_SLIDE, _               ; 18 Goto and display previous slide. Remaining effects on the current slide will be skipped.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE, _                    ; 19 >Expects Parameter: Slide Object to jump to.< Jumps to the given slide. The slide can also be a slide that would normally not be shown during the current slide show.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_INDEX, _           ; 20 >Expects Parameter: Slide's index to jump to.< Jumps to the slide at the given index. 0 based.
+		$LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME, _            ; 21 >Expects Parameter: Slide's name to jump to.< Jumps to the slide with the given name.
+		$LOI_SLIDESHOW_PRES_COMMAND_PAUSE, _                         ; 22 Pauses the slide show. All effects are paused. The slide show continues on next user input or if resume is called.
+		$LOI_SLIDESHOW_PRES_COMMAND_RESUME, _                        ; 23 Resumes a paused slide show.
+		$LOI_SLIDESHOW_PRES_COMMAND_STOP_SOUND                       ; 24 Stop all currently played sounds
 
 ; Slideshow Presentation Range
 Global Enum _
-		$LOI_SLIDESHOW_RANGE_ALL, _                                  ; All the slides in the presentation are included in the Slideshow.
-		$LOI_SLIDESHOW_RANGE_FROM, _                                 ; The Slideshow begins at the defined slide.
-		$LOI_SLIDESHOW_RANGE_CUSTOM                                  ; A custom Slideshow order is followed.
+		$LOI_SLIDESHOW_RANGE_ALL, _                                  ; 0 All the slides in the presentation are included in the Slideshow.
+		$LOI_SLIDESHOW_RANGE_FROM, _                                 ; 1 The Slideshow begins at the defined slide.
+		$LOI_SLIDESHOW_RANGE_CUSTOM                                  ; 2 A custom Slideshow order is followed.
 
 ; Text Cursor Movement Constants.
 Global Enum _
-		$LOI_TEXTCUR_COLLAPSE_TO_START, _                            ; Collapses the current selection to the start of the selection.
-		$LOI_TEXTCUR_COLLAPSE_TO_END, _                              ; Collapses the current selection the to end of the selection.
-		$LOI_TEXTCUR_GO_LEFT, _                                      ; Move the cursor left by n characters.
-		$LOI_TEXTCUR_GO_RIGHT, _                                     ; Move the cursor right by n characters.
-		$LOI_TEXTCUR_GOTO_START, _                                   ; Move the cursor to the start of the text.
-		$LOI_TEXTCUR_GOTO_END                                        ; Move the cursor to the end of the text.
+		$LOI_TEXTCUR_COLLAPSE_TO_START, _                            ; 0 Collapses the current selection to the start of the selection.
+		$LOI_TEXTCUR_COLLAPSE_TO_END, _                              ; 1 Collapses the current selection the to end of the selection.
+		$LOI_TEXTCUR_GO_LEFT, _                                      ; 2 Move the cursor left by n characters.
+		$LOI_TEXTCUR_GO_RIGHT, _                                     ; 3 Move the cursor right by n characters.
+		$LOI_TEXTCUR_GOTO_START, _                                   ; 4 Move the cursor to the start of the text.
+		$LOI_TEXTCUR_GOTO_END                                        ; 5 Move the cursor to the end of the text.
 
 ; Zoom Type Constants
 Global Const _                                                       ; com.sun.star.view.DocumentZoomType
