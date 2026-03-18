@@ -1163,7 +1163,7 @@ Func _LOWriter_ParStyleCurrent(ByRef $oDoc, ByRef $oObj, $sParStyle = Null)
 	$oObj.ParaStyleName = $sParStyle
 	$iError = (__LOWriter_ParStyleCompare($oDoc, $oObj.ParaStyleName(), $sParStyle)) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_ParStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================

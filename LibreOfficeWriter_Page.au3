@@ -1580,7 +1580,7 @@ Func _LOWriter_PageStyleCurrent(ByRef $oDoc, ByRef $oObj, $sPageStyle = Null)
 	$oObj.PageDescName = $sPageStyle
 	$iError = (__LOWriter_PageStyleCompare($oDoc, $oObj.PageStyleName(), $sPageStyle)) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_PageStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================

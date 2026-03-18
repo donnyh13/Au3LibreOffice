@@ -403,7 +403,7 @@ Func _LOWriter_CharStyleCurrent(ByRef $oDoc, ByRef $oObj, $sCharStyle = Null)
 	$oObj.CharStyleName = $sCharStyle
 	$iError = (__LOWriter_CharacterStyleCompare($oDoc, $oObj.CharStyleName(), $sCharStyle)) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_CharStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================

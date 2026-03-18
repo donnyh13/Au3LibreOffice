@@ -485,7 +485,7 @@ Func _LOWriter_TableBreak(ByRef $oDoc, ByRef $oTable, $iBreakType = Null, $sPage
 		$iError = ($oTable.PageNumberOffset() = $iPgNumOffSet) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) ; error setting Properties.
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_TableBreak
 
 ; #FUNCTION# ====================================================================================================================
@@ -800,7 +800,7 @@ Func _LOWriter_TableCreate(ByRef $oDoc, ByRef $oCursor, $iColumns = 2, $iRows = 
 		$iError = ($oTable.HeaderRowCount() = $iHeadingRows) ? ($iError) : (BitOR($iError, 64))
 	EndIf
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, $oTable)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oTable)) ; error setting Properties.
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oTable)) : (SetError($__LO_STATUS_SUCCESS, 0, $oTable))
 EndFunc   ;==>_LOWriter_TableCreate
 
 ; #FUNCTION# ====================================================================================================================
@@ -1554,7 +1554,7 @@ Func _LOWriter_TableProperties(ByRef $oDoc, ByRef $oTable, $iTableAlign = Null, 
 		$iError = ($oTable.HeaderRowCount() = $iHeaderRows) ? ($iError) : (BitOR($iError, 64))
 	EndIf
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) ; error setting Properties.
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_TableProperties
 
 ; #FUNCTION# ====================================================================================================================
@@ -1614,7 +1614,7 @@ Func _LOWriter_TableRowBackColor(ByRef $oTable, $iRow, $iBackColor = Null)
 	$oRow.BackColor = $iBackColor
 	$iError = ($oRow.BackColor() = $iBackColor) ? ($iError) : (BitOR($iError, 1)) ; Error setting color.
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_TableRowBackColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -1824,7 +1824,7 @@ Func _LOWriter_TableRowProperty(ByRef $oTable, $iRow, $iHeight = Null, $bIsAutoH
 		$iError = ($oRow.IsSplitAllowed() = $bIsSplitAllowed) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_TableRowProperty
 
 ; #FUNCTION# ====================================================================================================================
@@ -2050,7 +2050,7 @@ Func _LOWriter_TableStyleCurrent(ByRef $oDoc, ByRef $oTable, $sTableStyle = Null
 	$oTable.TableTemplateName = $sTableStyle
 	$iError = (__LOWriter_TableStyleCompare($oDoc, $oTable.TableTemplateName(), $sTableStyle)) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_TableStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================

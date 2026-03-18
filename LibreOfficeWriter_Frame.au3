@@ -3713,7 +3713,7 @@ Func _LOWriter_FrameStyleCurrent(ByRef $oDoc, ByRef $oFrameObj, $sFrameStyle = N
 	$oFrameObj.FrameStyleName = $sFrameStyle
 	$iError = ($oFrameObj.FrameStyleName() = $sFrameStyle) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_FrameStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================

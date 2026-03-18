@@ -145,7 +145,7 @@ Func _LOWriter_NumStyleCurrent(ByRef $oDoc, ByRef $oObj, $sNumStyle = Null)
 	$oObj.NumberingStyleName = $sNumStyle
 	$iError = (__LOWriter_NumberingStyleCompare($oDoc, $oObj.NumberingStyleName(), $sNumStyle)) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_NumStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================
@@ -770,7 +770,7 @@ Func _LOWriter_NumStyleSetLevel(ByRef $oObj, $iLevel = Null)
 	$oObj.NumberingLevel = $iLevel
 	$iError = ($oObj.NumberingLevel() = $iLevel) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_NumStyleSetLevel
 
 ; #FUNCTION# ====================================================================================================================
