@@ -1973,6 +1973,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Potential crash from accessing Array with wrong number of elements. `__LOWriter_ParTabStopCreate`
 - Property Setting Error was incorrectly returned in `__LOWriter_ParHasTabStop` instead of Success.
 - Add missing property in examples for `_LOWriter_DirFrmtParSpace` and `_LOWriter_ParStyleSpace`.
+- Corrected wrong error return types in `__LOWriter_TableBorder`.
 
 #### Refactored
 
