@@ -452,29 +452,29 @@ Global Const _                                                       ; com.sun.s
 
 ; Horizontal Text Alignment
 Global Const _                                                       ; com.sun.star.drawing.TextHorizontalAdjust
-		$LOI_PAR_TEXT_ALIGN_HORI_LEFT = 0, _                             ; The left edge of the text is adjusted to the left edge of the shape.
-		$LOI_PAR_TEXT_ALIGN_HORI_CENTER = 1, _                           ; The text is centered horizontally inside the shape.
-		$LOI_PAR_TEXT_ALIGN_HORI_RIGHT = 2, _                            ; The right edge of the text is adjusted to the right edge of the shape.
-		$LOI_PAR_TEXT_ALIGN_HORI_BLOCK = 3                               ; The text extends from the left to the right edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_HORI_LEFT = 0, _                         ; The left edge of the text is adjusted to the left edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_HORI_CENTER = 1, _                       ; The text is centered horizontally inside the shape.
+		$LOI_PAR_TEXT_ALIGN_HORI_RIGHT = 2, _                        ; The right edge of the text is adjusted to the right edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_HORI_BLOCK = 3                           ; The text extends from the left to the right edge of the shape.
 
 ; Vertical Text Alignment
 Global Const _                                                       ; com.sun.star.drawing.TextVerticalAdjust
-		$LOI_PAR_TEXT_ALIGN_VERT_TOP = 0, _                              ; The top edge of the text is adjusted to the top edge of the shape.
-		$LOI_PAR_TEXT_ALIGN_VERT_CENTER = 1, _                           ; The text is centered vertically inside the shape.
-		$LOI_PAR_TEXT_ALIGN_VERT_BOTTOM = 2, _                           ; The bottom edge of the text is adjusted to the bottom edge of the shape.
-		$LOI_PAR_TEXT_ALIGN_VERT_BLOCK = 3                               ; The text extends from the top to the bottom edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_VERT_TOP = 0, _                          ; The top edge of the text is adjusted to the top edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_VERT_CENTER = 1, _                       ; The text is centered vertically inside the shape.
+		$LOI_PAR_TEXT_ALIGN_VERT_BOTTOM = 2, _                       ; The bottom edge of the text is adjusted to the bottom edge of the shape.
+		$LOI_PAR_TEXT_ALIGN_VERT_BLOCK = 3                           ; The text extends from the top to the bottom edge of the shape.
 
 ; Text Anchor Position
 Global Enum _
-		$LOI_PAR_TEXT_ANCHOR_TOP_LEFT, _                                 ; The text is positioned in the Upper-Left corner of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_TOP_CENTER, _                               ; The text is positioned in the Upper-Center of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_TOP_RIGHT, _                                ; The text is positioned in the Upper-Right of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_MIDDLE_LEFT, _                              ; The text is positioned in the Middle-Left corner of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_MIDDLE_CENTER, _                            ; The text is positioned in the Middle-Center of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_MIDDLE_RIGHT, _                             ; The text is positioned in the Middle-Right of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_BOTTOM_LEFT, _                              ; The text is positioned in the Lower-Left corner of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_BOTTOM_CENTER, _                            ; The text is positioned in the Lower-Center of the Shape.
-		$LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT                                ; The text is positioned in the Lower-Right of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_TOP_LEFT, _                             ; The text is positioned in the Upper-Left corner of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_TOP_CENTER, _                           ; The text is positioned in the Upper-Center of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_TOP_RIGHT, _                            ; The text is positioned in the Upper-Right of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_MIDDLE_LEFT, _                          ; The text is positioned in the Middle-Left corner of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_MIDDLE_CENTER, _                        ; The text is positioned in the Middle-Center of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_MIDDLE_RIGHT, _                         ; The text is positioned in the Middle-Right of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_BOTTOM_LEFT, _                          ; The text is positioned in the Lower-Left corner of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_BOTTOM_CENTER, _                        ; The text is positioned in the Lower-Center of the Shape.
+		$LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT                            ; The text is positioned in the Lower-Right of the Shape.
 
 ; Text Direction
 Global Const _                                                       ; com.sun.star.text.WritingMode2
@@ -588,15 +588,15 @@ Global Enum _
 
 ; Shape Shadow Position
 Global Enum _
-		$LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT, _                                ; The Shadow is positioned in the Upper-Left corner of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_TOP_CENTER, _                              ; The Shadow is positioned in the Upper-Center of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_TOP_RIGHT, _                               ; The Shadow is positioned in the Upper-Right corner of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT, _                             ; The Shadow is positioned in the Middle-Left corner of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER, _                           ; The Shadow is positioned in the Middle-Center of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT, _                            ; The Shadow is positioned in the Middle-Right of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT, _                             ; The Shadow is positioned in the Lower-Left corner of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, _                           ; The Shadow is positioned in the Lower-Center of the shape.
-		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT                               ; The Shadow is positioned in the Lower-Right corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT, _                       ; The Shadow is positioned in the Upper-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_TOP_CENTER, _                     ; The Shadow is positioned in the Upper-Center of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_TOP_RIGHT, _                      ; The Shadow is positioned in the Upper-Right corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT, _                    ; The Shadow is positioned in the Middle-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER, _                  ; The Shadow is positioned in the Middle-Center of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT, _                   ; The Shadow is positioned in the Middle-Right of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT, _                    ; The Shadow is positioned in the Lower-Left corner of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, _                  ; The Shadow is positioned in the Lower-Center of the shape.
+		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT                      ; The Shadow is positioned in the Lower-Right corner of the shape.
 
 ; Shape Type Constants.
 Global Enum Step * 2 _
