@@ -2090,6 +2090,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Individual component Printer name retrieval functions:
   - _LOWriter_DocPrintersGetNames
   - _LOWriter_DocPrintersAltGetNames
+- Individual Multi-Color Gradient and Multi-Step Transparency Gradient functions.
+  - _LOWriter_GradientMulticolorAdd
+  - _LOWriter_GradientMulticolorDelete
+  - _LOWriter_GradientMulticolorModify
+  - _LOWriter_TransparencyGradientMultiAdd
+  - _LOWriter_TransparencyGradientMultiDelete
+  - _LOWriter_TransparencyGradientMultiModify
 
 [To Top](#releases)
 
