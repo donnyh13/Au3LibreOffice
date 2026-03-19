@@ -1,6 +1,6 @@
 
-#include "LibreOfficeWriter.au3"
-#include "LibreOfficeWriterConstants.au3"
+#include "..\LibreOfficeWriter.au3"
+#include "..\LibreOfficeWriterConstants.au3"
 #include <MsgBoxConstants.au3>
 #include <File.au3>
 
