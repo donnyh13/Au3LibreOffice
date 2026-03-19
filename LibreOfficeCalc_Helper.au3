@@ -786,7 +786,7 @@ Func _LOCalc_FormatKeyExists(ByRef $oDoc, $iFormatKey, $iFormatType = $LOC_FORMA
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iFormatType, $LOC_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0); 15881 = All keys BitOR'd together.
+	If Not __LO_IntIsBetween($iFormatType, $LOC_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; 15881 = All keys BitOR'd together.
 
 	$tLocale = __LO_CreateStruct("com.sun.star.lang.Locale")
 	If Not IsObj($tLocale) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -939,7 +939,7 @@ Func _LOCalc_FormatKeysGetList(ByRef $oDoc, $bIsUser = False, $bUserOnly = False
 
 	$iColumns = ($bIsUser = True) ? ($iColumns) : (2)
 
-	If Not __LO_IntIsBetween($iFormatKeyType, $LOC_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0); 15881 = all keys BitOR'd together.
+	If Not __LO_IntIsBetween($iFormatKeyType, $LOC_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; 15881 = all keys BitOR'd together.
 
 	$tLocale = __LO_CreateStruct("com.sun.star.lang.Locale")
 	If Not IsObj($tLocale) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)

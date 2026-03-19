@@ -20,10 +20,16 @@
 ; _LO_ComError_UserFunction
 ; _LO_ConvertColorFromLong
 ; _LO_ConvertColorToLong
+; _LO_GradientMulticolorAdd
+; _LO_GradientMulticolorDelete
+; _LO_GradientMulticolorModify
 ; _LO_InitializePortable
 ; _LO_PathConvert
 ; _LO_PrintersGetNames
 ; _LO_PrintersGetNamesAlt
+; _LO_TransparencyGradientMultiAdd
+; _LO_TransparencyGradientMultiDelete
+; _LO_TransparencyGradientMultiModify
 ; _LO_UnitConvert
 ; _LO_VersionGet
 ; ===============================================================================================================================
@@ -427,6 +433,158 @@ Func _LO_ConvertColorToLong($vVal1 = Null, $vVal2 = Null, $vVal3 = Null, $vVal4 
 EndFunc   ;==>_LO_ConvertColorToLong
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_GradientMulticolorAdd
+; Description ...: Add a ColorStop to a Gradient ColorStop Array.
+; Syntax ........: _LO_GradientMulticolorAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
+;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
+;                  $iColor              - an integer value (0-16777215). The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully added to array.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_GradientMulticolorAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	ReDim $avColorStops[UBound($avColorStops) + 1][2]
+
+	For $iToWrite = (UBound($avColorStops) - 1) To 0 Step -1
+		If $iToWrite = $iIndex Then
+			$avColorStops[$iToWrite][0] = $nStopOffset
+			$avColorStops[$iToWrite][1] = $iColor
+			ExitLoop
+
+		Else
+			$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite - 1][0]
+			$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite - 1][1]
+		EndIf
+
+		Sleep((IsInt($iToWrite / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LO_GradientMulticolorAdd
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_GradientMulticolorDelete
+; Description ...: Delete a ColorStop from a Gradient ColorStop Array.
+; Syntax ........: _LO_GradientMulticolorDelete(ByRef $avColorStops, $iIndex)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to delete. 0 Based.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully removed from array.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_GradientMulticolorDelete(ByRef $avColorStops, $iIndex)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $iToRead = 0
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	For $iToWrite = 0 To UBound($avColorStops) - 2
+		If $iToWrite = $iIndex Then $iToRead += 1
+
+		$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite + $iToRead][0]
+		$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite + $iToRead][1]
+
+		Sleep((IsInt($iToWrite / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	ReDim $avColorStops[UBound($avColorStops) - 1][2]
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LO_GradientMulticolorDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_GradientMulticolorModify
+; Description ...: Modify a ColorStop in a Gradient ColorStop Array.
+; Syntax ........: _LO_GradientMulticolorModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to modify. 0 Based.
+;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
+;                  $iColor              - an integer value (0-16777215). The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element.
+;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully modified.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_GradientMulticolorModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	For $iToWrite = 0 To UBound($avColorStops) - 1
+		If $iToWrite = $iIndex Then
+			$avColorStops[$iToWrite][0] = $nStopOffset
+			$avColorStops[$iToWrite][1] = $iColor
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($iToWrite / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LO_GradientMulticolorModify
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_InitializePortable
 ; Description ...: Setup Portable LibreOffice (Or Open Office) for use in this UDF. See remarks.
 ; Syntax ........: _LO_InitializePortable($sOfficePortablePath)
@@ -691,6 +849,158 @@ Func _LO_PrintersGetNamesAlt($sPrinterName = "", $bReturnDefault = False)
 
 	Return SetError($__LO_STATUS_SUCCESS, $iCount, $asPrinterNames)
 EndFunc   ;==>_LO_PrintersGetNamesAlt
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_TransparencyGradientMultiAdd
+; Description ...: Add a ColorStop to a Gradient ColorStop Array.
+; Syntax ........: _LO_TransparencyGradientMultiAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
+;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
+;                  $iTransparency       - an integer value (0-100). The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully added to array.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_TransparencyGradientMultiAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	ReDim $avColorStops[UBound($avColorStops) + 1][2]
+
+	For $iToWrite = (UBound($avColorStops) - 1) To 0 Step -1
+		If $iToWrite = $iIndex Then
+			$avColorStops[$iToWrite][0] = $nStopOffset
+			$avColorStops[$iToWrite][1] = $iTransparency
+			ExitLoop
+
+		Else
+			$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite - 1][0]
+			$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite - 1][1]
+		EndIf
+
+		Sleep((IsInt($iToWrite / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LO_TransparencyGradientMultiAdd
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_TransparencyGradientMultiDelete
+; Description ...: Delete a ColorStop from a Gradient ColorStop Array.
+; Syntax ........: _LO_TransparencyGradientMultiDelete(ByRef $avColorStops, $iIndex)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to delete. 0 Based.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully removed from array.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_TransparencyGradientMultiDelete(ByRef $avColorStops, $iIndex)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $iToRead = 0
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	For $iToWrite = 0 To UBound($avColorStops) - 2
+		If $iToWrite = $iIndex Then $iToRead += 1
+
+		$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite + $iToRead][0]
+		$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite + $iToRead][1]
+
+		Sleep((IsInt($iToWrite / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	ReDim $avColorStops[UBound($avColorStops) - 1][2]
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LO_TransparencyGradientMultiDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_TransparencyGradientMultiModify
+; Description ...: Modify a ColorStop in a Gradient ColorStop Array.
+; Syntax ........: _LO_TransparencyGradientMultiModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
+; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - an integer value. The array index to modify. 0 Based.
+;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
+;                  $iTransparency       - an integer value (0-100). The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element.
+;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully modified.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_TransparencyGradientMultiModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+
+	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	For $iToWrite = 0 To UBound($avColorStops) - 1
+		If $iToWrite = $iIndex Then
+			$avColorStops[$iToWrite][0] = $nStopOffset
+			$avColorStops[$iToWrite][1] = $iTransparency
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($iToWrite / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LO_TransparencyGradientMultiModify
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_UnitConvert

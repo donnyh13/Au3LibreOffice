@@ -1,5 +1,6 @@
 #include <MsgBoxConstants.au3>
 
+#include "..\LibreOffice_Helper.au3"
 #include "..\LibreOfficeCalc.au3"
 
 Example()
@@ -42,17 +43,37 @@ Func Example()
 	$avStops = _LOCalc_CommentAreaTransparencyGradientMulti($oComment)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Add a new ColorStop in the middle.
+	_LO_TransparencyGradientMultiAdd($avStops, 1, 0.5, 76)
+	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Add a new ColorStop in the middle.
+	_LO_TransparencyGradientMultiAdd($avStops, 1, 0.1, 5)
+	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Apply the new ColorStops.
+	_LOCalc_CommentAreaTransparencyGradientMulti($oComment, $avStops)
+	If @error Then _ERROR($oDoc, "Failed to modify Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve an array of Transparency Multi Gradient ColorStops.
+	$avStops = _LOCalc_CommentAreaTransparencyGradientMulti($oComment)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Transparency Multi Gradient settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	For $i = 0 To UBound($avStops) - 1
 		$sStops &= "ColorStop offset: " & $avStops[$i][0] & " | " & @TAB & "ColorStop Transparency percentage: " & $avStops[$i][1] & @CRLF
 	Next
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Comment's Transparency Gradient ColorStops are as follows: " & @CRLF & _
 			$sStops & @CRLF & @CRLF & _
-			"Press ok to add a new ColorStop.")
+			"Press ok to delete the first and last ColorStop.")
 
-	; Add a new ColorStop in the middle.
-	_LO_TransparencyGradientMultiAdd($avStops, 1, 0.5, 76)
-	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Delete the first ColorStop.
+	_LO_TransparencyGradientMultiDelete($avStops, 0)
+	If @error Then _ERROR($oDoc, "Failed to delete a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Delete the last ColorStop.
+	_LO_TransparencyGradientMultiDelete($avStops, UBound($avStops) - 1)
+	If @error Then _ERROR($oDoc, "Failed to delete a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new ColorStops.
 	_LOCalc_CommentAreaTransparencyGradientMulti($oComment, $avStops)

@@ -63,6 +63,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
 - Added Au3 LibreOffice Inspector tools to UDF files.
 - Added wiki article on the AutoIt Wiki. Thanks to user @water.
+- Central Gradient and Transparency Gradient functions.
+  - _LO_GradientMulticolorAdd
+  - _LO_GradientMulticolorDelete
+  - _LO_GradientMulticolorModify
+  - _LO_TransparencyGradientMultiAdd
+  - _LO_TransparencyGradientMultiDelete
+  - _LO_TransparencyGradientMultiModify
 
 #### Changed
 

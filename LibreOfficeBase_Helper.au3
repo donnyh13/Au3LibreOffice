@@ -919,7 +919,7 @@ Func _LOBase_FormatKeyExists(ByRef $oObj, $iFormatKey, $iFormatType = $LOB_FORMA
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oObj.supportsService("com.sun.star.sdbc.Connection") And Not $oObj.supportsService("com.sun.star.report.ReportDefinition") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_IntIsBetween($iFormatType, $LOB_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0); 15881 = All keys BitOR'd together.
+	If Not __LO_IntIsBetween($iFormatType, $LOB_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; 15881 = All keys BitOR'd together.
 
 	$tLocale = __LO_CreateStruct("com.sun.star.lang.Locale")
 	If Not IsObj($tLocale) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -1097,7 +1097,7 @@ Func _LOBase_FormatKeysGetList(ByRef $oObj, $bIsUser = False, $bUserOnly = False
 	If Not $oObj.supportsService("com.sun.star.sdbc.Connection") And Not $oObj.supportsService("com.sun.star.report.ReportDefinition") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bIsUser) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsBool($bUserOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not __LO_IntIsBetween($iFormatKeyType, $LOB_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0); 15881 = all key s BitOR'd together.
+	If Not __LO_IntIsBetween($iFormatKeyType, $LOB_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; 15881 = all key s BitOR'd together.
 
 	$iColumns = ($bIsUser = True) ? ($iColumns) : (2)
 

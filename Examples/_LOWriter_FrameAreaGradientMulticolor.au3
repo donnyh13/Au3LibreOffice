@@ -38,7 +38,7 @@ Func Example()
 			"Press ok to add a new ColorStop.")
 
 	; Add a new ColorStop in the middle.
-	_LOWriter_GradientMulticolorAdd($avStops, 3, 0.6, 1234567)
+	_LO_GradientMulticolorAdd($avStops, 3, 0.6, 1234567)
 	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new ColorStops.

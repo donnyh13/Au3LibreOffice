@@ -1,5 +1,6 @@
 #include <MsgBoxConstants.au3>
 
+#include "..\LibreOffice_Helper.au3"
 #include "..\LibreOfficeCalc.au3"
 
 Example()
@@ -43,10 +44,14 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Comment's Gradient ColorStops are as follows: " & @CRLF & _
 			$sStops & @CRLF & @CRLF & _
-			"Press ok to add a new ColorStop.")
+			"Press ok to add a few new ColorStops.")
 
 	; Add a new ColorStop in the middle.
 	_LO_GradientMulticolorAdd($avStops, 3, 0.6, 1234567)
+	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Add a new ColorStop in the middle.
+	_LO_GradientMulticolorAdd($avStops, 1, 0.1, 6587755)
 	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new ColorStops.

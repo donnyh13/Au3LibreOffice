@@ -1370,7 +1370,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaGradient
 ;                  Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
 ;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
 ;                  If an entire Paragraph is not selected in the selection, a wrong value may also result, and setting may not apply correctly.
-; Related .......: _LOWriter_GradientMulticolorAdd, _LOWriter_GradientMulticolorDelete, _LOWriter_GradientMulticolorModify, _LOWriter_DirFrmtParAreaGradient
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_DirFrmtParAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
