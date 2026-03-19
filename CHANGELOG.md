@@ -1205,6 +1205,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_DocPrintersAltGetNames
 - __LOCalc_TextCursorMove
 - __LOCalc_SheetCursorMove
+- Individual Multi-Color Gradient and Multi-Step Transparency Gradient functions.
+  - _LOCalc_GradientMulticolorAdd
+  - _LOCalc_GradientMulticolorDelete
+  - _LOCalc_GradientMulticolorModify
+  - _LOCalc_TransparencyGradientMultiAdd
+  - _LOCalc_TransparencyGradientMultiDelete
+  - _LOCalc_TransparencyGradientMultiModify
 
 ### LibreOfficeWriter
 
