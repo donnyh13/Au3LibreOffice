@@ -6,6 +6,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: Libre Office Writer (LOWriter)
 ; AutoIt Version : v3.3.16.1
+; UDF Version    : 0.0.0.2
 ; Description ...: Provides basic functionality through Autoit for interacting with Libre Office Writer.
 ; Author(s) .....: donnyh13
 ; Sources . . . .:  jguinch -- Printmgr.au3, used (_PrintMgr_EnumPrinter);
@@ -14,7 +15,7 @@
 ;					Andrew Pitonyak & Laurent Godard (VersionGet);
 ;					Leagnus & GMK -- OOoCalc.au3, used (SetPropertyValue)
 ; Dll ...........:
-; Note...........:  Tips/templates taken from OOoCalc UDF written by user GMK; also from Word UDF by user water.
+; Note...........: Tips/templates taken from OOoCalc UDF written by user GMK; also from Word UDF by user water.
 ;					I found the The book by Andrew Pitonyak very helpful also, titled, "OpenOffice.org Macros Explained;
 ;						OOME Third Edition".
 ;					Of course, this UDF is written using the English version of LibreOffice, and may work for the English
@@ -23,552 +24,553 @@
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
-; _LOWriter_CellBackColor
-; _LOWriter_CellBorderColor
-; _LOWriter_CellBorderPadding
-; _LOWriter_CellBorderStyle
-; _LOWriter_CellBorderWidth
-; _LOWriter_CellCreateTextCursor
-; _LOWriter_CellFormula
-; _LOWriter_CellGetDataType
-; _LOWriter_CellGetError
-; _LOWriter_CellGetName
-; _LOWriter_CellProtect
-; _LOWriter_CellString
-; _LOWriter_CellValue
-; _LOWriter_CellVertOrient
-; _LOWriter_CharStyleBorderColor
-; _LOWriter_CharStyleBorderPadding
-; _LOWriter_CharStyleBorderStyle
-; _LOWriter_CharStyleBorderWidth
-; _LOWriter_CharStyleCreate
-; _LOWriter_CharStyleDelete
-; _LOWriter_CharStyleEffect
-; _LOWriter_CharStyleExists
-; _LOWriter_CharStyleFont
-; _LOWriter_CharStyleFontColor
-; _LOWriter_CharStyleGetObj
-; _LOWriter_CharStyleOrganizer
-; _LOWriter_CharStyleOverLine
-; _LOWriter_CharStylePosition
-; _LOWriter_CharStyleRotateScale
-; _LOWriter_CharStyleSet
-; _LOWriter_CharStylesGetNames
-; _LOWriter_CharStyleShadow
-; _LOWriter_CharStyleSpacing
-; _LOWriter_CharStyleStrikeOut
-; _LOWriter_CharStyleUnderLine
-; _LOWriter_ComError_UserFunction
-; _LOWriter_ConvertColorFromLong
-; _LOWriter_ConvertColorToLong
-; _LOWriter_ConvertFromMicrometer
-; _LOWriter_ConvertToMicrometer
-; _LOWriter_CursorGetDataType
-; _LOWriter_CursorGetStatus
-; _LOWriter_CursorGetType
-; _LOWriter_CursorGoToRange
-; _LOWriter_CursorMove
-; _LOWriter_DateFormatKeyCreate
-; _LOWriter_DateFormatKeyDelete
-; _LOWriter_DateFormatKeyExists
-; _LOWriter_DateFormatKeyGetString
-; _LOWriter_DateFormatKeyList
-; _LOWriter_DateStructCreate
-; _LOWriter_DateStructModify
-; _LOWriter_DirFrmtCharBorderColor
-; _LOWriter_DirFrmtCharBorderPadding
-; _LOWriter_DirFrmtCharBorderStyle
-; _LOWriter_DirFrmtCharBorderWidth
-; _LOWriter_DirFrmtCharEffect
-; _LOWriter_DirFrmtCharPosition
-; _LOWriter_DirFrmtCharRotateScale
-; _LOWriter_DirFrmtCharShadow
-; _LOWriter_DirFrmtCharSpacing
-; _LOWriter_DirFrmtClear
-; _LOWriter_DirFrmtFont
-; _LOWriter_DirFrmtFontColor
-; _LOWriter_DirFrmtGetCurStyles
-; _LOWriter_DirFrmtOverLine
-; _LOWriter_DirFrmtParAlignment
-; _LOWriter_DirFrmtParBackColor
-; _LOWriter_DirFrmtParBorderColor
-; _LOWriter_DirFrmtParBorderPadding
-; _LOWriter_DirFrmtParBorderStyle
-; _LOWriter_DirFrmtParBorderWidth
-; _LOWriter_DirFrmtParDropCaps
-; _LOWriter_DirFrmtParHyphenation
-; _LOWriter_DirFrmtParIndent
-; _LOWriter_DirFrmtParOutLineAndList
-; _LOWriter_DirFrmtParPageBreak
-; _LOWriter_DirFrmtParShadow
-; _LOWriter_DirFrmtParSpace
-; _LOWriter_DirFrmtParTabStopCreate
-; _LOWriter_DirFrmtParTabStopDelete
-; _LOWriter_DirFrmtParTabStopList
-; _LOWriter_DirFrmtParTabStopMod
-; _LOWriter_DirFrmtParTxtFlowOpt
-; _LOWriter_DirFrmtStrikeOut
-; _LOWriter_DirFrmtUnderLine
-; _LOWriter_DocBookmarkDelete
-; _LOWriter_DocBookmarkGetAnchor
-; _LOWriter_DocBookmarkGetObj
-; _LOWriter_DocBookmarkInsert
-; _LOWriter_DocBookmarkModify
-; _LOWriter_DocBookmarksHasName
-; _LOWriter_DocBookmarksList
-; _LOWriter_DocClose
-; _LOWriter_DocConnect
-; _LOWriter_DocCreate
-; _LOWriter_DocCreateTextCursor
-; _LOWriter_DocDescription
-; _LOWriter_DocEnumPrinters
-; _LOWriter_DocEnumPrintersAlt
-; _LOWriter_DocExport
-; _LOWriter_DocFindAll
-; _LOWriter_DocFindAllInRange
-; _LOWriter_DocFindNext
-; _LOWriter_DocFooterGetTextCursor
-; _LOWriter_DocGenProp
-; _LOWriter_DocGenPropCreation
-; _LOWriter_DocGenPropModification
-; _LOWriter_DocGenPropPrint
-; _LOWriter_DocGenPropTemplate
-; _LOWriter_DocGetCounts
-; _LOWriter_DocGetName
-; _LOWriter_DocGetPath
-; _LOWriter_DocGetString
-; _LOWriter_DocGetViewCursor
-; _LOWriter_DocHasFrameName
-; _LOWriter_DocHasPath
-; _LOWriter_DocHasTableName
-; _LOWriter_DocHeaderGetTextCursor
-; _LOWriter_DocHyperlinkInsert
-; _LOWriter_DocInsertControlChar
-; _LOWriter_DocInsertString
-; _LOWriter_DocIsActive
-; _LOWriter_DocIsModified
-; _LOWriter_DocIsReadOnly
-; _LOWriter_DocListTableNames
-; _LOWriter_DocMaximize
-; _LOWriter_DocMinimize
-; _LOWriter_DocOpen
-; _LOWriter_DocPosAndSize
-; _LOWriter_DocPrint
-; _LOWriter_DocPrintIncludedSettings
-; _LOWriter_DocPrintMiscSettings
-; _LOWriter_DocPrintPageSettings
-; _LOWriter_DocPrintSizeSettings
-; _LOWriter_DocRedo
-; _LOWriter_DocRedoCurActionTitle
-; _LOWriter_DocRedoGetAllActionTitles
-; _LOWriter_DocRedoIsPossible
-; _LOWriter_DocReplaceAll
-; _LOWriter_DocReplaceAllInRange
-; _LOWriter_DocSave
-; _LOWriter_DocSaveAs
-; _LOWriter_DocToFront
-; _LOWriter_DocUndo
-; _LOWriter_DocUndoCurActionTitle
-; _LOWriter_DocUndoGetAllActionTitles
-; _LOWriter_DocUndoIsPossible
-; _LOWriter_DocViewCursorGetPosition
-; _LOWriter_DocVisible
-; _LOWriter_DocZoom
-; _LOWriter_EndnoteDelete
-; _LOWriter_EndnoteGetAnchor
-; _LOWriter_EndnoteGetTextCursor
-; _LOWriter_EndnoteInsert
-; _LOWriter_EndnoteModifyAnchor
-; _LOWriter_EndnoteSettingsAutoNumber
-; _LOWriter_EndnoteSettingsStyles
-; _LOWriter_EndnotesGetList
-; _LOWriter_FieldAuthorInsert
-; _LOWriter_FieldAuthorModify
-; _LOWriter_FieldChapterInsert
-; _LOWriter_FieldChapterModify
-; _LOWriter_FieldCombCharInsert
-; _LOWriter_FieldCombCharModify
-; _LOWriter_FieldCommentInsert
-; _LOWriter_FieldCommentModify
-; _LOWriter_FieldCondTextInsert
-; _LOWriter_FieldCondTextModify
-; _LOWriter_FieldCurrentDisplayGet
-; _LOWriter_FieldDateTimeInsert
-; _LOWriter_FieldDateTimeModify
-; _LOWriter_FieldDelete
-; _LOWriter_FieldDocInfoCommentsInsert
-; _LOWriter_FieldDocInfoCommentsModify
-; _LOWriter_FieldDocInfoCreateAuthInsert
-; _LOWriter_FieldDocInfoCreateAuthModify
-; _LOWriter_FieldDocInfoCreateDateTimeInsert
-; _LOWriter_FieldDocInfoCreateDateTimeModify
-; _LOWriter_FieldDocInfoEditTimeInsert
-; _LOWriter_FieldDocInfoEditTimeModify
-; _LOWriter_FieldDocInfoKeywordsInsert
-; _LOWriter_FieldDocInfoKeywordsModify
-; _LOWriter_FieldDocInfoModAuthInsert
-; _LOWriter_FieldDocInfoModAuthModify
-; _LOWriter_FieldDocInfoModDateTimeInsert
-; _LOWriter_FieldDocInfoModDateTimeModify
-; _LOWriter_FieldDocInfoPrintAuthInsert
-; _LOWriter_FieldDocInfoPrintAuthModify
-; _LOWriter_FieldDocInfoPrintDateTimeInsert
-; _LOWriter_FieldDocInfoPrintDateTimeModify
-; _LOWriter_FieldDocInfoRevNumInsert
-; _LOWriter_FieldDocInfoRevNumModify
-; _LOWriter_FieldDocInfoSubjectInsert
-; _LOWriter_FieldDocInfoSubjectModify
-; _LOWriter_FieldDocInfoTitleInsert
-; _LOWriter_FieldDocInfoTitleModify
-; _LOWriter_FieldFileNameInsert
-; _LOWriter_FieldFileNameModify
-; _LOWriter_FieldFuncHiddenParInsert
-; _LOWriter_FieldFuncHiddenParModify
-; _LOWriter_FieldFuncHiddenTextInsert
-; _LOWriter_FieldFuncHiddenTextModify
-; _LOWriter_FieldFuncInputInsert
-; _LOWriter_FieldFuncInputModify
-; _LOWriter_FieldFuncPlaceholderInsert
-; _LOWriter_FieldFuncPlaceholderModify
-; _LOWriter_FieldGetAnchor
-; _LOWriter_FieldInputListInsert
-; _LOWriter_FieldInputListModify
-; _LOWriter_FieldPageNumberInsert
-; _LOWriter_FieldPageNumberModify
-; _LOWriter_FieldRefBookMarkInsert
-; _LOWriter_FieldRefBookMarkModify
-; _LOWriter_FieldRefEndnoteInsert
-; _LOWriter_FieldRefEndnoteModify
-; _LOWriter_FieldRefFootnoteInsert
-; _LOWriter_FieldRefFootnoteModify
-; _LOWriter_FieldRefGetType
-; _LOWriter_FieldRefInsert
-; _LOWriter_FieldRefMarkDelete
-; _LOWriter_FieldRefMarkGetAnchor
-; _LOWriter_FieldRefMarkList
-; _LOWriter_FieldRefMarkSet
-; _LOWriter_FieldRefModify
-; _LOWriter_FieldsAdvGetList
-; _LOWriter_FieldsDocInfoGetList
-; _LOWriter_FieldSenderInsert
-; _LOWriter_FieldSenderModify
-; _LOWriter_FieldSetVarInsert
-; _LOWriter_FieldSetVarMasterCreate
-; _LOWriter_FieldSetVarMasterDelete
-; _LOWriter_FieldSetVarMasterExists
-; _LOWriter_FieldSetVarMasterGetObj
-; _LOWriter_FieldSetVarMasterList
-; _LOWriter_FieldSetVarMasterListFields
-; _LOWriter_FieldSetVarModify
-; _LOWriter_FieldsGetList
-; _LOWriter_FieldShowVarInsert
-; _LOWriter_FieldShowVarModify
-; _LOWriter_FieldStatCountInsert
-; _LOWriter_FieldStatCountModify
-; _LOWriter_FieldStatTemplateInsert
-; _LOWriter_FieldStatTemplateModify
-; _LOWriter_FieldUpdate
-; _LOWriter_FieldVarSetPageInsert
-; _LOWriter_FieldVarSetPageModify
-; _LOWriter_FieldVarShowPageInsert
-; _LOWriter_FieldVarShowPageModify
-; _LOWriter_FindFormatModifyAlignment
-; _LOWriter_FindFormatModifyEffects
-; _LOWriter_FindFormatModifyFont
-; _LOWriter_FindFormatModifyHyphenation
-; _LOWriter_FindFormatModifyIndent
-; _LOWriter_FindFormatModifyOverline
-; _LOWriter_FindFormatModifyPageBreak
-; _LOWriter_FindFormatModifyPosition
-; _LOWriter_FindFormatModifyRotateScaleSpace
-; _LOWriter_FindFormatModifySpacing
-; _LOWriter_FindFormatModifyStrikeout
-; _LOWriter_FindFormatModifyTxtFlowOpt
-; _LOWriter_FindFormatModifyUnderline
-; _LOWriter_FontExists
-; _LOWriter_FontsList
-; _LOWriter_FootnoteDelete
-; _LOWriter_FootnoteGetAnchor
-; _LOWriter_FootnoteGetTextCursor
-; _LOWriter_FootnoteInsert
-; _LOWriter_FootnoteModifyAnchor
-; _LOWriter_FootnoteSettingsAutoNumber
-; _LOWriter_FootnoteSettingsContinuation
-; _LOWriter_FootnoteSettingsStyles
-; _LOWriter_FootnotesGetList
-; _LOWriter_FormatKeyCreate
-; _LOWriter_FormatKeyDelete
-; _LOWriter_FormatKeyExists
-; _LOWriter_FormatKeyGetString
-; _LOWriter_FormatKeyList
-; _LOWriter_FrameAreaColor
-; _LOWriter_FrameAreaGradient
-; _LOWriter_FrameBorderColor
-; _LOWriter_FrameBorderPadding
-; _LOWriter_FrameBorderStyle
-; _LOWriter_FrameBorderWidth
-; _LOWriter_FrameColumnSeparator
-; _LOWriter_FrameColumnSettings
-; _LOWriter_FrameColumnSize
-; _LOWriter_FrameCreate
-; _LOWriter_FrameCreateTextCursor
-; _LOWriter_FrameDelete
-; _LOWriter_FrameGetAnchor
-; _LOWriter_FrameGetObjByCursor
-; _LOWriter_FrameGetObjByName
-; _LOWriter_FrameHyperlink
-; _LOWriter_FrameOptions
-; _LOWriter_FrameOptionsName
-; _LOWriter_FrameShadow
-; _LOWriter_FramesListNames
-; _LOWriter_FrameStyleAreaColor
-; _LOWriter_FrameStyleAreaGradient
-; _LOWriter_FrameStyleBorderColor
-; _LOWriter_FrameStyleBorderPadding
-; _LOWriter_FrameStyleBorderStyle
-; _LOWriter_FrameStyleBorderWidth
-; _LOWriter_FrameStyleColumnSeparator
-; _LOWriter_FrameStyleColumnSettings
-; _LOWriter_FrameStyleColumnSize
-; _LOWriter_FrameStyleCreate
-; _LOWriter_FrameStyleDelete
-; _LOWriter_FrameStyleExists
-; _LOWriter_FrameStyleGetObj
-; _LOWriter_FrameStyleOptions
-; _LOWriter_FrameStyleOrganizer
-; _LOWriter_FrameStyleSet
-; _LOWriter_FrameStylesGetNames
-; _LOWriter_FrameStyleShadow
-; _LOWriter_FrameStyleTransparency
-; _LOWriter_FrameStyleTransparencyGradient
-; _LOWriter_FrameStyleTypePosition
-; _LOWriter_FrameStyleTypeSize
-; _LOWriter_FrameStyleWrap
-; _LOWriter_FrameStyleWrapOptions
-; _LOWriter_FrameTransparency
-; _LOWriter_FrameTransparencyGradient
-; _LOWriter_FrameTypePosition
-; _LOWriter_FrameTypeSize
-; _LOWriter_FrameWrap
-; _LOWriter_FrameWrapOptions
-; _LOWriter_NumStyleCreate
-; _LOWriter_NumStyleCustomize
-; _LOWriter_NumStyleDelete
-; _LOWriter_NumStyleExists
-; _LOWriter_NumStyleGetObj
-; _LOWriter_NumStyleOrganizer
-; _LOWriter_NumStylePosition
-; _LOWriter_NumStyleSet
-; _LOWriter_NumStyleSetLevel
-; _LOWriter_NumStylesGetNames
-; _LOWriter_PageStyleAreaColor
-; _LOWriter_PageStyleAreaGradient
-; _LOWriter_PageStyleBorderColor
-; _LOWriter_PageStyleBorderPadding
-; _LOWriter_PageStyleBorderStyle
-; _LOWriter_PageStyleBorderWidth
-; _LOWriter_PageStyleColumnSeparator
-; _LOWriter_PageStyleColumnSettings
-; _LOWriter_PageStyleColumnSize
-; _LOWriter_PageStyleCreate
-; _LOWriter_PageStyleDelete
-; _LOWriter_PageStyleExists
-; _LOWriter_PageStyleFooter
-; _LOWriter_PageStyleFooterAreaColor
-; _LOWriter_PageStyleFooterAreaGradient
-; _LOWriter_PageStyleFooterBorderColor
-; _LOWriter_PageStyleFooterBorderPadding
-; _LOWriter_PageStyleFooterBorderStyle
-; _LOWriter_PageStyleFooterBorderWidth
-; _LOWriter_PageStyleFooterShadow
-; _LOWriter_PageStyleFooterTransparency
-; _LOWriter_PageStyleFooterTransparencyGradient
-; _LOWriter_PageStyleFootnoteArea
-; _LOWriter_PageStyleFootnoteLine
-; _LOWriter_PageStyleGetObj
-; _LOWriter_PageStyleHeader
-; _LOWriter_PageStyleHeaderAreaColor
-; _LOWriter_PageStyleHeaderAreaGradient
-; _LOWriter_PageStyleHeaderBorderColor
-; _LOWriter_PageStyleHeaderBorderPadding
-; _LOWriter_PageStyleHeaderBorderStyle
-; _LOWriter_PageStyleHeaderBorderWidth
-; _LOWriter_PageStyleHeaderShadow
-; _LOWriter_PageStyleHeaderTransparency
-; _LOWriter_PageStyleHeaderTransparencyGradient
-; _LOWriter_PageStyleLayout
-; _LOWriter_PageStyleMargins
-; _LOWriter_PageStyleOrganizer
-; _LOWriter_PageStylePaperFormat
-; _LOWriter_PageStyleSet
-; _LOWriter_PageStylesGetNames
-; _LOWriter_PageStyleShadow
-; _LOWriter_PageStyleTransparency
-; _LOWriter_PageStyleTransparencyGradient
-; _LOWriter_ParGetObjects
-; _LOWriter_ParSectionsGet
-; _LOWriter_ParStyleAlignment
-; _LOWriter_ParStyleBackColor
-; _LOWriter_ParStyleBorderColor
-; _LOWriter_ParStyleBorderPadding
-; _LOWriter_ParStyleBorderStyle
-; _LOWriter_ParStyleBorderWidth
-; _LOWriter_ParStyleCreate
-; _LOWriter_ParStyleDelete
-; _LOWriter_ParStyleDropCaps
-; _LOWriter_ParStyleEffect
-; _LOWriter_ParStyleExists
-; _LOWriter_ParStyleFont
-; _LOWriter_ParStyleFontColor
-; _LOWriter_ParStyleGetObj
-; _LOWriter_ParStyleHyphenation
-; _LOWriter_ParStyleIndent
-; _LOWriter_ParStyleOrganizer
-; _LOWriter_ParStyleOutLineAndList
-; _LOWriter_ParStyleOverLine
-; _LOWriter_ParStylePageBreak
-; _LOWriter_ParStylePosition
-; _LOWriter_ParStyleRotateScale
-; _LOWriter_ParStyleSet
-; _LOWriter_ParStylesGetNames
-; _LOWriter_ParStyleShadow
-; _LOWriter_ParStyleSpace
-; _LOWriter_ParStyleSpacing
-; _LOWriter_ParStyleStrikeOut
-; _LOWriter_ParStyleTabStopCreate
-; _LOWriter_ParStyleTabStopDelete
-; _LOWriter_ParStyleTabStopList
-; _LOWriter_ParStyleTabStopMod
-; _LOWriter_ParStyleTxtFlowOpt
-; _LOWriter_ParStyleUnderLine
-; _LOWriter_PathConvert
-; _LOWriter_SearchDescriptorCreate
-; _LOWriter_SearchDescriptorModify
-; _LOWriter_SearchDescriptorSimilarityModify
-; _LOWriter_ShapesListNames
-; _LOWriter_TableBorderColor
-; _LOWriter_TableBorderPadding
-; _LOWriter_TableBorderStyle
-; _LOWriter_TableBorderWidth
-; _LOWriter_TableBreak
-; _LOWriter_TableColor
-; _LOWriter_TableColumnDelete
-; _LOWriter_TableColumnGetCount
-; _LOWriter_TableColumnInsert
-; _LOWriter_TableCreate
-; _LOWriter_TableCreateCursor
-; _LOWriter_TableCursor
-; _LOWriter_TableDelete
-; _LOWriter_TableGetByCursor
-; _LOWriter_TableGetByName
-; _LOWriter_TableGetCellByCursor
-; _LOWriter_TableGetCellByName
-; _LOWriter_TableGetCellByPosition
-; _LOWriter_TableGetCellNames
-; _LOWriter_TableGetData
-; _LOWriter_TableInsert
-; _LOWriter_TableMargin
-; _LOWriter_TableProperties
-; _LOWriter_TableRowColor
-; _LOWriter_TableRowDelete
-; _LOWriter_TableRowGetCount
-; _LOWriter_TableRowInsert
-; _LOWriter_TableRowProperty
-; _LOWriter_TableSetData
-; _LOWriter_TableShadow
-; _LOWriter_TableWidth
-; _LOWriter_VersionGet
+;_LOWriter_CellBackColor
+;_LOWriter_CellBorderColor
+;_LOWriter_CellBorderPadding
+;_LOWriter_CellBorderStyle
+;_LOWriter_CellBorderWidth
+;_LOWriter_CellCreateTextCursor
+;_LOWriter_CellFormula
+;_LOWriter_CellGetDataType
+;_LOWriter_CellGetError
+;_LOWriter_CellGetName
+;_LOWriter_CellProtect
+;_LOWriter_CellString
+;_LOWriter_CellValue
+;_LOWriter_CellVertOrient
+;_LOWriter_CharStyleBorderColor
+;_LOWriter_CharStyleBorderPadding
+;_LOWriter_CharStyleBorderStyle
+;_LOWriter_CharStyleBorderWidth
+;_LOWriter_CharStyleCreate
+;_LOWriter_CharStyleDelete
+;_LOWriter_CharStyleEffect
+;_LOWriter_CharStyleExists
+;_LOWriter_CharStyleFont
+;_LOWriter_CharStyleFontColor
+;_LOWriter_CharStyleGetObj
+;_LOWriter_CharStyleOrganizer
+;_LOWriter_CharStyleOverLine
+;_LOWriter_CharStylePosition
+;_LOWriter_CharStyleRotateScale
+;_LOWriter_CharStyleSet
+;_LOWriter_CharStylesGetNames
+;_LOWriter_CharStyleShadow
+;_LOWriter_CharStyleSpacing
+;_LOWriter_CharStyleStrikeOut
+;_LOWriter_CharStyleUnderLine
+;_LOWriter_ComError_UserFunction
+;_LOWriter_ConvertColorFromLong
+;_LOWriter_ConvertColorToLong
+;_LOWriter_ConvertFromMicrometer
+;_LOWriter_ConvertToMicrometer
+;_LOWriter_CursorGetDataType
+;_LOWriter_CursorGetStatus
+;_LOWriter_CursorGetType
+;_LOWriter_CursorGoToRange
+;_LOWriter_CursorMove
+;_LOWriter_DateFormatKeyCreate
+;_LOWriter_DateFormatKeyDelete
+;_LOWriter_DateFormatKeyExists
+;_LOWriter_DateFormatKeyGetString
+;_LOWriter_DateFormatKeyList
+;_LOWriter_DateStructCreate
+;_LOWriter_DateStructModify
+;_LOWriter_DirFrmtCharBorderColor
+;_LOWriter_DirFrmtCharBorderPadding
+;_LOWriter_DirFrmtCharBorderStyle
+;_LOWriter_DirFrmtCharBorderWidth
+;_LOWriter_DirFrmtCharEffect
+;_LOWriter_DirFrmtCharPosition
+;_LOWriter_DirFrmtCharRotateScale
+;_LOWriter_DirFrmtCharShadow
+;_LOWriter_DirFrmtCharSpacing
+;_LOWriter_DirFrmtClear
+;_LOWriter_DirFrmtFont
+;_LOWriter_DirFrmtFontColor
+;_LOWriter_DirFrmtGetCurStyles
+;_LOWriter_DirFrmtOverLine
+;_LOWriter_DirFrmtParAlignment
+;_LOWriter_DirFrmtParBackColor
+;_LOWriter_DirFrmtParBorderColor
+;_LOWriter_DirFrmtParBorderPadding
+;_LOWriter_DirFrmtParBorderStyle
+;_LOWriter_DirFrmtParBorderWidth
+;_LOWriter_DirFrmtParDropCaps
+;_LOWriter_DirFrmtParHyphenation
+;_LOWriter_DirFrmtParIndent
+;_LOWriter_DirFrmtParOutLineAndList
+;_LOWriter_DirFrmtParPageBreak
+;_LOWriter_DirFrmtParShadow
+;_LOWriter_DirFrmtParSpace
+;_LOWriter_DirFrmtParTabStopCreate
+;_LOWriter_DirFrmtParTabStopDelete
+;_LOWriter_DirFrmtParTabStopList
+;_LOWriter_DirFrmtParTabStopMod
+;_LOWriter_DirFrmtParTxtFlowOpt
+;_LOWriter_DirFrmtStrikeOut
+;_LOWriter_DirFrmtUnderLine
+;_LOWriter_DocBookmarkDelete
+;_LOWriter_DocBookmarkGetAnchor
+;_LOWriter_DocBookmarkGetObj
+;_LOWriter_DocBookmarkInsert
+;_LOWriter_DocBookmarkModify
+;_LOWriter_DocBookmarksHasName
+;_LOWriter_DocBookmarksList
+;_LOWriter_DocClose
+;_LOWriter_DocConnect
+;_LOWriter_DocCreate
+;_LOWriter_DocCreateTextCursor
+;_LOWriter_DocDescription
+;_LOWriter_DocEnumPrinters
+;_LOWriter_DocEnumPrintersAlt
+;_LOWriter_DocExport
+;_LOWriter_DocFindAll
+;_LOWriter_DocFindAllInRange
+;_LOWriter_DocFindNext
+;_LOWriter_DocFooterGetTextCursor
+;_LOWriter_DocGenProp
+;_LOWriter_DocGenPropCreation
+;_LOWriter_DocGenPropModification
+;_LOWriter_DocGenPropPrint
+;_LOWriter_DocGenPropTemplate
+;_LOWriter_DocGetCounts
+;_LOWriter_DocGetName
+;_LOWriter_DocGetPath
+;_LOWriter_DocGetString
+;_LOWriter_DocGetViewCursor
+;_LOWriter_DocHasFrameName
+;_LOWriter_DocHasPath
+;_LOWriter_DocHasTableName
+;_LOWriter_DocHeaderGetTextCursor
+;_LOWriter_DocHyperlinkInsert
+;_LOWriter_DocInsertControlChar
+;_LOWriter_DocInsertString
+;_LOWriter_DocIsActive
+;_LOWriter_DocIsModified
+;_LOWriter_DocIsReadOnly
+;_LOWriter_DocListTableNames
+;_LOWriter_DocMaximize
+;_LOWriter_DocMinimize
+;_LOWriter_DocOpen
+;_LOWriter_DocPosAndSize
+;_LOWriter_DocPrint
+;_LOWriter_DocPrintIncludedSettings
+;_LOWriter_DocPrintMiscSettings
+;_LOWriter_DocPrintPageSettings
+;_LOWriter_DocPrintSizeSettings
+;_LOWriter_DocRedo
+;_LOWriter_DocRedoCurActionTitle
+;_LOWriter_DocRedoGetAllActionTitles
+;_LOWriter_DocRedoIsPossible
+;_LOWriter_DocReplaceAll
+;_LOWriter_DocReplaceAllInRange
+;_LOWriter_DocSave
+;_LOWriter_DocSaveAs
+;_LOWriter_DocToFront
+;_LOWriter_DocUndo
+;_LOWriter_DocUndoCurActionTitle
+;_LOWriter_DocUndoGetAllActionTitles
+;_LOWriter_DocUndoIsPossible
+;_LOWriter_DocViewCursorGetPosition
+;_LOWriter_DocVisible
+;_LOWriter_DocZoom
+;_LOWriter_EndnoteDelete
+;_LOWriter_EndnoteGetAnchor
+;_LOWriter_EndnoteGetTextCursor
+;_LOWriter_EndnoteInsert
+;_LOWriter_EndnoteModifyAnchor
+;_LOWriter_EndnoteSettingsAutoNumber
+;_LOWriter_EndnoteSettingsStyles
+;_LOWriter_EndnotesGetList
+;_LOWriter_FieldAuthorInsert
+;_LOWriter_FieldAuthorModify
+;_LOWriter_FieldChapterInsert
+;_LOWriter_FieldChapterModify
+;_LOWriter_FieldCombCharInsert
+;_LOWriter_FieldCombCharModify
+;_LOWriter_FieldCommentInsert
+;_LOWriter_FieldCommentModify
+;_LOWriter_FieldCondTextInsert
+;_LOWriter_FieldCondTextModify
+;_LOWriter_FieldCurrentDisplayGet
+;_LOWriter_FieldDateTimeInsert
+;_LOWriter_FieldDateTimeModify
+;_LOWriter_FieldDelete
+;_LOWriter_FieldDocInfoCommentsInsert
+;_LOWriter_FieldDocInfoCommentsModify
+;_LOWriter_FieldDocInfoCreateAuthInsert
+;_LOWriter_FieldDocInfoCreateAuthModify
+;_LOWriter_FieldDocInfoCreateDateTimeInsert
+;_LOWriter_FieldDocInfoCreateDateTimeModify
+;_LOWriter_FieldDocInfoEditTimeInsert
+;_LOWriter_FieldDocInfoEditTimeModify
+;_LOWriter_FieldDocInfoKeywordsInsert
+;_LOWriter_FieldDocInfoKeywordsModify
+;_LOWriter_FieldDocInfoModAuthInsert
+;_LOWriter_FieldDocInfoModAuthModify
+;_LOWriter_FieldDocInfoModDateTimeInsert
+;_LOWriter_FieldDocInfoModDateTimeModify
+;_LOWriter_FieldDocInfoPrintAuthInsert
+;_LOWriter_FieldDocInfoPrintAuthModify
+;_LOWriter_FieldDocInfoPrintDateTimeInsert
+;_LOWriter_FieldDocInfoPrintDateTimeModify
+;_LOWriter_FieldDocInfoRevNumInsert
+;_LOWriter_FieldDocInfoRevNumModify
+;_LOWriter_FieldDocInfoSubjectInsert
+;_LOWriter_FieldDocInfoSubjectModify
+;_LOWriter_FieldDocInfoTitleInsert
+;_LOWriter_FieldDocInfoTitleModify
+;_LOWriter_FieldFileNameInsert
+;_LOWriter_FieldFileNameModify
+;_LOWriter_FieldFuncHiddenParInsert
+;_LOWriter_FieldFuncHiddenParModify
+;_LOWriter_FieldFuncHiddenTextInsert
+;_LOWriter_FieldFuncHiddenTextModify
+;_LOWriter_FieldFuncInputInsert
+;_LOWriter_FieldFuncInputModify
+;_LOWriter_FieldFuncPlaceholderInsert
+;_LOWriter_FieldFuncPlaceholderModify
+;_LOWriter_FieldGetAnchor
+;_LOWriter_FieldInputListInsert
+;_LOWriter_FieldInputListModify
+;_LOWriter_FieldPageNumberInsert
+;_LOWriter_FieldPageNumberModify
+;_LOWriter_FieldRefBookMarkInsert
+;_LOWriter_FieldRefBookMarkModify
+;_LOWriter_FieldRefEndnoteInsert
+;_LOWriter_FieldRefEndnoteModify
+;_LOWriter_FieldRefFootnoteInsert
+;_LOWriter_FieldRefFootnoteModify
+;_LOWriter_FieldRefGetType
+;_LOWriter_FieldRefInsert
+;_LOWriter_FieldRefMarkDelete
+;_LOWriter_FieldRefMarkGetAnchor
+;_LOWriter_FieldRefMarkList
+;_LOWriter_FieldRefMarkSet
+;_LOWriter_FieldRefModify
+;_LOWriter_FieldsAdvGetList
+;_LOWriter_FieldsDocInfoGetList
+;_LOWriter_FieldSenderInsert
+;_LOWriter_FieldSenderModify
+;_LOWriter_FieldSetVarInsert
+;_LOWriter_FieldSetVarMasterCreate
+;_LOWriter_FieldSetVarMasterDelete
+;_LOWriter_FieldSetVarMasterExists
+;_LOWriter_FieldSetVarMasterGetObj
+;_LOWriter_FieldSetVarMasterList
+;_LOWriter_FieldSetVarMasterListFields
+;_LOWriter_FieldSetVarModify
+;_LOWriter_FieldsGetList
+;_LOWriter_FieldShowVarInsert
+;_LOWriter_FieldShowVarModify
+;_LOWriter_FieldStatCountInsert
+;_LOWriter_FieldStatCountModify
+;_LOWriter_FieldStatTemplateInsert
+;_LOWriter_FieldStatTemplateModify
+;_LOWriter_FieldUpdate
+;_LOWriter_FieldVarSetPageInsert
+;_LOWriter_FieldVarSetPageModify
+;_LOWriter_FieldVarShowPageInsert
+;_LOWriter_FieldVarShowPageModify
+;_LOWriter_FindFormatModifyAlignment
+;_LOWriter_FindFormatModifyEffects
+;_LOWriter_FindFormatModifyFont
+;_LOWriter_FindFormatModifyHyphenation
+;_LOWriter_FindFormatModifyIndent
+;_LOWriter_FindFormatModifyOverline
+;_LOWriter_FindFormatModifyPageBreak
+;_LOWriter_FindFormatModifyPosition
+;_LOWriter_FindFormatModifyRotateScaleSpace
+;_LOWriter_FindFormatModifySpacing
+;_LOWriter_FindFormatModifyStrikeout
+;_LOWriter_FindFormatModifyTxtFlowOpt
+;_LOWriter_FindFormatModifyUnderline
+;_LOWriter_FontExists
+;_LOWriter_FontsList
+;_LOWriter_FootnoteDelete
+;_LOWriter_FootnoteGetAnchor
+;_LOWriter_FootnoteGetTextCursor
+;_LOWriter_FootnoteInsert
+;_LOWriter_FootnoteModifyAnchor
+;_LOWriter_FootnoteSettingsAutoNumber
+;_LOWriter_FootnoteSettingsContinuation
+;_LOWriter_FootnoteSettingsStyles
+;_LOWriter_FootnotesGetList
+;_LOWriter_FormatKeyCreate
+;_LOWriter_FormatKeyDelete
+;_LOWriter_FormatKeyExists
+;_LOWriter_FormatKeyGetString
+;_LOWriter_FormatKeyList
+;_LOWriter_FrameAreaColor
+;_LOWriter_FrameAreaGradient
+;_LOWriter_FrameBorderColor
+;_LOWriter_FrameBorderPadding
+;_LOWriter_FrameBorderStyle
+;_LOWriter_FrameBorderWidth
+;_LOWriter_FrameColumnSeparator
+;_LOWriter_FrameColumnSettings
+;_LOWriter_FrameColumnSize
+;_LOWriter_FrameCreate
+;_LOWriter_FrameCreateTextCursor
+;_LOWriter_FrameDelete
+;_LOWriter_FrameGetAnchor
+;_LOWriter_FrameGetObjByCursor
+;_LOWriter_FrameGetObjByName
+;_LOWriter_FrameHyperlink
+;_LOWriter_FrameOptions
+;_LOWriter_FrameOptionsName
+;_LOWriter_FrameShadow
+;_LOWriter_FramesListNames
+;_LOWriter_FrameStyleAreaColor
+;_LOWriter_FrameStyleAreaGradient
+;_LOWriter_FrameStyleBorderColor
+;_LOWriter_FrameStyleBorderPadding
+;_LOWriter_FrameStyleBorderStyle
+;_LOWriter_FrameStyleBorderWidth
+;_LOWriter_FrameStyleColumnSeparator
+;_LOWriter_FrameStyleColumnSettings
+;_LOWriter_FrameStyleColumnSize
+;_LOWriter_FrameStyleCreate
+;_LOWriter_FrameStyleDelete
+;_LOWriter_FrameStyleExists
+;_LOWriter_FrameStyleGetObj
+;_LOWriter_FrameStyleOptions
+;_LOWriter_FrameStyleOrganizer
+;_LOWriter_FrameStyleSet
+;_LOWriter_FrameStylesGetNames
+;_LOWriter_FrameStyleShadow
+;_LOWriter_FrameStyleTransparency
+;_LOWriter_FrameStyleTransparencyGradient
+;_LOWriter_FrameStyleTypePosition
+;_LOWriter_FrameStyleTypeSize
+;_LOWriter_FrameStyleWrap
+;_LOWriter_FrameStyleWrapOptions
+;_LOWriter_FrameTransparency
+;_LOWriter_FrameTransparencyGradient
+;_LOWriter_FrameTypePosition
+;_LOWriter_FrameTypeSize
+;_LOWriter_FrameWrap
+;_LOWriter_FrameWrapOptions
+;_LOWriter_NumStyleCreate
+;_LOWriter_NumStyleCustomize
+;_LOWriter_NumStyleDelete
+;_LOWriter_NumStyleExists
+;_LOWriter_NumStyleGetObj
+;_LOWriter_NumStyleOrganizer
+;_LOWriter_NumStylePosition
+;_LOWriter_NumStyleSet
+;_LOWriter_NumStyleSetLevel
+;_LOWriter_NumStylesGetNames
+;_LOWriter_PageStyleAreaColor
+;_LOWriter_PageStyleAreaGradient
+;_LOWriter_PageStyleBorderColor
+;_LOWriter_PageStyleBorderPadding
+;_LOWriter_PageStyleBorderStyle
+;_LOWriter_PageStyleBorderWidth
+;_LOWriter_PageStyleColumnSeparator
+;_LOWriter_PageStyleColumnSettings
+;_LOWriter_PageStyleColumnSize
+;_LOWriter_PageStyleCreate
+;_LOWriter_PageStyleDelete
+;_LOWriter_PageStyleExists
+;_LOWriter_PageStyleFooter
+;_LOWriter_PageStyleFooterAreaColor
+;_LOWriter_PageStyleFooterAreaGradient
+;_LOWriter_PageStyleFooterBorderColor
+;_LOWriter_PageStyleFooterBorderPadding
+;_LOWriter_PageStyleFooterBorderStyle
+;_LOWriter_PageStyleFooterBorderWidth
+;_LOWriter_PageStyleFooterShadow
+;_LOWriter_PageStyleFooterTransparency
+;_LOWriter_PageStyleFooterTransparencyGradient
+;_LOWriter_PageStyleFootnoteArea
+;_LOWriter_PageStyleFootnoteLine
+;_LOWriter_PageStyleGetObj
+;_LOWriter_PageStyleHeader
+;_LOWriter_PageStyleHeaderAreaColor
+;_LOWriter_PageStyleHeaderAreaGradient
+;_LOWriter_PageStyleHeaderBorderColor
+;_LOWriter_PageStyleHeaderBorderPadding
+;_LOWriter_PageStyleHeaderBorderStyle
+;_LOWriter_PageStyleHeaderBorderWidth
+;_LOWriter_PageStyleHeaderShadow
+;_LOWriter_PageStyleHeaderTransparency
+;_LOWriter_PageStyleHeaderTransparencyGradient
+;_LOWriter_PageStyleLayout
+;_LOWriter_PageStyleMargins
+;_LOWriter_PageStyleOrganizer
+;_LOWriter_PageStylePaperFormat
+;_LOWriter_PageStyleSet
+;_LOWriter_PageStylesGetNames
+;_LOWriter_PageStyleShadow
+;_LOWriter_PageStyleTransparency
+;_LOWriter_PageStyleTransparencyGradient
+;_LOWriter_ParGetObjects
+;_LOWriter_ParSectionsGet
+;_LOWriter_ParStyleAlignment
+;_LOWriter_ParStyleBackColor
+;_LOWriter_ParStyleBorderColor
+;_LOWriter_ParStyleBorderPadding
+;_LOWriter_ParStyleBorderStyle
+;_LOWriter_ParStyleBorderWidth
+;_LOWriter_ParStyleCreate
+;_LOWriter_ParStyleDelete
+;_LOWriter_ParStyleDropCaps
+;_LOWriter_ParStyleEffect
+;_LOWriter_ParStyleExists
+;_LOWriter_ParStyleFont
+;_LOWriter_ParStyleFontColor
+;_LOWriter_ParStyleGetObj
+;_LOWriter_ParStyleHyphenation
+;_LOWriter_ParStyleIndent
+;_LOWriter_ParStyleOrganizer
+;_LOWriter_ParStyleOutLineAndList
+;_LOWriter_ParStyleOverLine
+;_LOWriter_ParStylePageBreak
+;_LOWriter_ParStylePosition
+;_LOWriter_ParStyleRotateScale
+;_LOWriter_ParStyleSet
+;_LOWriter_ParStylesGetNames
+;_LOWriter_ParStyleShadow
+;_LOWriter_ParStyleSpace
+;_LOWriter_ParStyleSpacing
+;_LOWriter_ParStyleStrikeOut
+;_LOWriter_ParStyleTabStopCreate
+;_LOWriter_ParStyleTabStopDelete
+;_LOWriter_ParStyleTabStopList
+;_LOWriter_ParStyleTabStopMod
+;_LOWriter_ParStyleTxtFlowOpt
+;_LOWriter_ParStyleUnderLine
+;_LOWriter_PathConvert
+;_LOWriter_SearchDescriptorCreate
+;_LOWriter_SearchDescriptorModify
+;_LOWriter_SearchDescriptorSimilarityModify
+;_LOWriter_ShapesListNames
+;_LOWriter_TableBorderColor
+;_LOWriter_TableBorderPadding
+;_LOWriter_TableBorderStyle
+;_LOWriter_TableBorderWidth
+;_LOWriter_TableBreak
+;_LOWriter_TableColor
+;_LOWriter_TableColumnDelete
+;_LOWriter_TableColumnGetCount
+;_LOWriter_TableColumnInsert
+;_LOWriter_TableCreate
+;_LOWriter_TableCreateCursor
+;_LOWriter_TableCursor
+;_LOWriter_TableDelete
+;_LOWriter_TableGetByCursor
+;_LOWriter_TableGetByName
+;_LOWriter_TableGetCellByCursor
+;_LOWriter_TableGetCellByName
+;_LOWriter_TableGetCellByPosition
+;_LOWriter_TableGetCellNames
+;_LOWriter_TableGetData
+;_LOWriter_TableInsert
+;_LOWriter_TableMargin
+;_LOWriter_TableProperties
+;_LOWriter_TableRowColor
+;_LOWriter_TableRowDelete
+;_LOWriter_TableRowGetCount
+;_LOWriter_TableRowInsert
+;_LOWriter_TableRowProperty
+;_LOWriter_TableSetData
+;_LOWriter_TableShadow
+;_LOWriter_TableWidth
+;_LOWriter_VersionGet
 ; ===============================================================================================================================
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; __LOWriter_AddTo1DArray
-; __LOWriter_AddTo2DArray
-; __LOWriter_AnyAreDefault
-; __LOWriter_ArrayFill
-; __LOWriter_Border
-; __LOWriter_CharBorder
-; __LOWriter_CharBorderPadding
-; __LOWriter_CharEffect
-; __LOWriter_CharFont
-; __LOWriter_CharFontColor
-; __LOWriter_CharOverLine
-; __LOWriter_CharPosition
-; __LOWriter_CharRotateScale
-; __LOWriter_CharShadow
-; __LOWriter_CharSpacing
-; __LOWriter_CharStrikeOut
-; __LOWriter_CharStyleNameToggle
-; __LOWriter_CharUnderLine
-; __LOWriter_CreateStruct
-; __LOWriter_CursorGetText
-; __LOWriter_DateStructCompare
-; __LOWriter_DirFrmtCheck
-; __LOWriter_FieldCountType
-; __LOWriter_FieldsGetList
-; __LOWriter_FieldTypeServices
-; __LOWriter_FilterNameGet
-; __LOWriter_FindFormatAddSetting
-; __LOWriter_FindFormatDeleteSetting
-; __LOWriter_FindFormatRetrieveSetting
-; __LOWriter_FooterBorder
-; __LOWriter_FrameRelativeSize
-; __LOWriter_GetPrinterSetting
-; __LOWriter_GradientNameInsert
-; __LOWriter_GradientPresets
-; __LOWriter_HeaderBorder
-; __LOWriter_Internal_CursorGetDataType
-; __LOWriter_Internal_CursorGetType
-; __LOWriter_InternalComErrorHandler
-; __LOWriter_IntIsBetween
-; __LOWriter_IsCellRange
-; __LOWriter_IsTableInDoc
-; __LOWriter_NumIsBetween
-; __LOWriter_NumStyleCreateScript
-; __LOWriter_NumStyleDeleteScript
-; __LOWriter_NumStyleInitiateDocument
-; __LOWriter_NumStyleListFormat
-; __LOWriter_NumStyleModify
-; __LOWriter_NumStyleRetrieve
-; __LOWriter_PageStyleNameToggle
-; __LOWriter_ParAlignment
-; __LOWriter_ParBackColor
-; __LOWriter_ParBorderPadding
-; __LOWriter_ParDropCaps
-; __LOWriter_ParHasTabStop
-; __LOWriter_ParHyphenation
-; __LOWriter_ParIndent
-; __LOWriter_ParOutLineAndList
-; __LOWriter_ParPageBreak
-; __LOWriter_ParShadow
-; __LOWriter_ParSpace
-; __LOWriter_ParStyleNameToggle
-; __LOWriter_ParTabStopCreate
-; __LOWriter_ParTabStopDelete
-; __LOWriter_ParTabStopList
-; __LOWriter_ParTabStopMod
-; __LOWriter_ParTxtFlowOpt
-; __LOWriter_RegExpConvert
-; __LOWriter_SetPropertyValue
-; __LOWriter_TableBorder
-; __LOWriter_TableCursorMove
-; __LOWriter_TableHasCellName
-; __LOWriter_TableHasColumnRange
-; __LOWriter_TableHasRowRange
-; __LOWriter_TableRowSplitToggle
-; __LOWriter_TextCursorMove
-; __LOWriter_TransparencyGradientConvert
-; __LOWriter_TransparencyGradientNameInsert
-; __LOWriter_UnitConvert
-; __LOWriter_VarsAreDefault
-; __LOWriter_VarsAreNull
-; __LOWriter_VersionCheck
-; __LOWriter_ViewCursorMove
+;__LOWriter_AddTo1DArray
+;__LOWriter_AddTo2DArray
+;__LOWriter_AnyAreDefault
+;__LOWriter_ArrayFill
+;__LOWriter_Border
+;__LOWriter_CharBorder
+;__LOWriter_CharBorderPadding
+;__LOWriter_CharEffect
+;__LOWriter_CharFont
+;__LOWriter_CharFontColor
+;__LOWriter_CharOverLine
+;__LOWriter_CharPosition
+;__LOWriter_CharRotateScale
+;__LOWriter_CharShadow
+;__LOWriter_CharSpacing
+;__LOWriter_CharStrikeOut
+;__LOWriter_CharStyleNameToggle
+;__LOWriter_CharUnderLine
+;__LOWriter_CreateStruct
+;__LOWriter_CursorGetText
+;__LOWriter_DateStructCompare
+;__LOWriter_DirFrmtCheck
+;__LOWriter_FieldCountType
+;__LOWriter_FieldsGetList
+;__LOwriter_FieldTypeServices
+;__LOWriter_FilterNameGet
+;__LOWriter_FindFormatAddSetting
+;__LOWriter_FindFormatDeleteSetting
+;__LOWriter_FindFormatRetrieveSetting
+;__LOWriter_FooterBorder
+;__LOWriter_FrameRelativeSize
+;__LOWriter_GetPrinterSetting
+;__LOWriter_GradientNameInsert
+;__LOWriter_GradientPresets
+;__LOWriter_HeaderBorder
+;__LOWriter_Internal_CursorGetDataType
+;__LOWriter_Internal_CursorGetType
+;__LOWriter_InternalComErrorHandler
+;__LOWriter_IntIsBetween
+;__LOWriter_IsCellRange
+;__LOWriter_IsTableInDoc
+;__LOWriter_NumIsBetween
+;__LOWriter_NumStyleCreateScript
+;__LOWriter_NumStyleDeleteScript
+;__LOWriter_NumStyleInitiateDocument
+;__LOWriter_NumStyleListFormat
+;__LOWriter_NumStyleModify
+;__LOWriter_NumStyleRetrieve
+;__LOWriter_PageStyleNameToggle
+;__LOWriter_ParAlignment
+;__LOWriter_ParBackColor
+;__LOWriter_ParBorderPadding
+;__LOWriter_ParDropCaps
+;__LOWriter_ParHasTabStop
+;__LOWriter_ParHyphenation
+;__LOWriter_ParIndent
+;__LOWriter_ParOutLineAndList
+;__LOWriter_ParPageBreak
+;__LOWriter_ParShadow
+;__LOWriter_ParSpace
+;__LOWriter_ParStyleNameToggle
+;__LOWriter_ParTabStopCreate
+;__LOWriter_ParTabStopDelete
+;__LOWriter_ParTabStopList
+;__LOWriter_ParTabStopMod
+;__LOWriter_ParTxtFlowOpt
+;__LOWriter_RegExpConvert
+;__LOWriter_SetPropertyValue
+;__LOWriter_TableBorder
+;__LOWriter_TableCursorMove
+;__LOWriter_TableHasCellName
+;__LOWriter_TableHasColumnRange
+;__LOWriter_TableHasRowRange
+;__LOWriter_TableRowSplitToggle
+;__LOWriter_TextCursorMove
+;__LOWriter_TransparencyGradientConvert
+;__LOWriter_TransparencyGradientNameInsert
+;__LOWriter_UnitConvert
+;__LOWriter_VarsAreDefault
+;__LOWriter_VarsAreNull
+;__LOWriter_VersionCheck
+;__LOWriter_ViewCursorMove
 ; ===============================================================================================================================
 
 ; #CONSTANTS# ===================================================================================================================
+
 ;Sleep Divisor
 Global Const $__LOWCONST_SLEEP_DIV = 15 ; Lower this number for more frequent sleeps in applicable functions, raise it for less.
-;Set to 0 for never pause in a loop.
+;Set to 0 for no pause in a loop.
 
 ;Error Codes
 Global Enum $__LOW_STATUS_SUCCESS = 0, _ ; 0
@@ -588,6 +590,24 @@ Global Enum $__LOWCONST_CONVERT_TWIPS_CM, $__LOWCONST_CONVERT_TWIPS_INCH, $__LOW
 ;Fill Style Constants
 Global Const $__LOWCONST__FILL_STYLE_OFF = 0, $__LOWCONST__FILL_STYLE_SOLID = 1, $__LOWCONST__FILL_STYLE_GRADIENT = 2, _
 		$__LOWCONST__FILL_STYLE_HATCH = 3, $__LOWCONST__FILL_STYLE_BITMAP = 4
+
+; ===============================================================================================================================
+
+; #CHANGES ======================================================================================================================
+; #
+; # 2023/07/16
+; # ♦ Modified _LOWriter_DocFindNext; _LOWriter_DocFindAll; _LOWriter_DocFindAllInRange, $atFindFormat parameter checking to not
+; # 	have an if/else block.
+; # ♦ Fixed _LOWriter_DocReplaceAll; _LOWriter_DocReplaceAllInRange, changed the way you skip $atFindFormat and
+; # 	$atReplaceFormat, you can no longer use Null keyword to skip the parameter (which due to an oversight on my part, didn't
+; # 	work anyway). You now use an empty array (Local $aArray[0]) called in each parameter to skip them. Also removed the
+; # 	if/else block in parameter checking.
+; # ♦ Modified _LOWriter_DocReplaceAllInRange, to have two methods of performing a Regular Expression find and replace, as the
+; #		original one was not performing replacements correctly, this function still doesn't work the best.
+; # ♦ Updated function documentation to reflect the changes.
+; # ♦ Added a UDF version number in the UDF Header.
+; #
+; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CellBackColor
@@ -2947,7 +2967,7 @@ EndFunc   ;==>_LOWriter_ComError_UserFunction
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ConvertColorFromLong($iHex = Null, $iRGB = Null, $iHSB = Null, $iCMYK = Null) ;RGB, CMYK, HSB, Hex.
+Func _LOWriter_ConvertColorFromLong($iHex = Null, $iRGB = Null, $iHSB = Null, $iCMYK = Null)
 	Local $nRed, $nGreen, $nBlue, $nResult, $nMaxRGB, $nMinRGB, $nHue, $nSaturation, $nBrightness, $nCyan, $nMagenta, $nYellow, $nBlack
 	Local $dHex
 	Local $aiReturn[0]
@@ -3096,7 +3116,7 @@ EndFunc   ;==>_LOWriter_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ConvertColorToLong($vVal1 = Null, $vVal2 = Null, $vVal3 = Null, $vVal4 = Null) ;RGB, CMYK, HSB, Hex.
+Func _LOWriter_ConvertColorToLong($vVal1 = Null, $vVal2 = Null, $vVal3 = Null, $vVal4 = Null) ;RGB = Int, CMYK = Int, HSB = String, Hex = String.
 	Local Const $STR_STRIPALL = 8
 	Local $iRed, $iGreen, $iBlue, $iLong, $iHue, $iSaturation, $iBrightness
 	Local $dHex
@@ -3133,6 +3153,7 @@ Func _LOWriter_ConvertColorToLong($vVal1 = Null, $vVal2 = Null, $vVal3 = Null, $
 				;RGB to Long
 				$iLong = BitShift($iRed, -16) + BitShift($iGreen, -8) + $iBlue
 				Return SetError($__LOW_STATUS_SUCCESS, 2, $iLong) ;Long from RGB
+
 			ElseIf IsString($vVal1) And IsString($vVal2) And IsString($vVal3) Then ;Hue Saturation and Brightness (HSB)
 
 				;HSB to RGB
@@ -3626,8 +3647,7 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 ;						$LOW_TEXTCUR_GOTO_NEXT_WORD, Move to the start of the next word.
 ;						$LOW_TEXTCUR_GOTO_PREV_WORD, Move to the end of the previous word.
 ;						$LOW_TEXTCUR_GOTO_NEXT_SENTENCE,Move to the start of the next sentence.
-;						$LOW_TEXTCUR_GOTO_PREV_SENTENCE, Move to the end of the
-;							previous sentence.
+;						$LOW_TEXTCUR_GOTO_PREV_SENTENCE, Move to the end of the previous sentence.
 ;						$LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, Move to the start of the next paragraph.
 ;						$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH, Move to the End of the previous paragraph.
 ;					-TableCursor
@@ -3651,8 +3671,7 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 ;						$LOW_TEXTCUR_GOTO_START, Move the cursor to the start of the text.
 ;						$LOW_TEXTCUR_GOTO_END, Move the cursor to the end of the text.
 ;						$LOW_TEXTCUR_GOTO_END_OF_WORD, Move to the end of the current
-;						$LOW_TEXTCUR_GOTO_START_OF_WORD, Move to the start of the current
-;							word.
+;						$LOW_TEXTCUR_GOTO_START_OF_WORD, Move to the start of the current word.
 ;						$LOW_TEXTCUR_GOTO_END_OF_SENTENCE, Move to the end of the current sentence.
 ;						$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, Move to the start of the current sentence.
 ;						$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, Move to the end of the current paragraph.
@@ -3667,9 +3686,10 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 ;						$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, Move the cursor to the end of the current page.
 ;						$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, Move the cursor to the start of the current page.
 ;					-TextCursor
-;						$LOW_TEXTCUR_COLLAPSE_TO_START,
-;						$LOW_TEXTCUR_COLLAPSE_TO_END (Collapses the current selection and moves
-;						the cursor  to start or End of selection.
+;						$LOW_TEXTCUR_COLLAPSE_TO_START,(Collapses the current selection and moves the cursor to start of
+;						 the selection.
+;						$LOW_TEXTCUR_COLLAPSE_TO_END (Collapses the current selection and moves the cursor  to End of
+;						the selection.
 ;					#Misc. Cursor Movements:
 ;					-ViewCursor
 ;						$LOW_VIEWCUR_JUMP_TO_PAGE (accepts page number to jump to in $iCount, Returns what page was successfully
@@ -7202,15 +7222,15 @@ Func _LOWriter_DirFrmtParTabStopMod(ByRef $oSelection, $iTabStop, $iPosition = N
 	If Not IsObj($oSelection) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 
-	If ($iTabstop = Default) Then
+	If ($iTabStop = Default) Then
 		$oSelection.setPropertyToDefault("ParaTabStops")
 		Return SetError($__LOW_STATUS_SUCCESS, 0, 3)
 	EndIf
 
-	If Not IsInt($iTabstop) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LOWriter_ParHasTabStop($oSelection, $iTabstop) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsInt($iTabStop) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LOWriter_ParHasTabStop($oSelection, $iTabStop) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 
-	$vReturn = __LOWriter_ParTabStopMod($oSelection, $iTabstop, $iPosition, $iFillChar, $iAlignment, $iDecChar)
+	$vReturn = __LOWriter_ParTabStopMod($oSelection, $iTabStop, $iPosition, $iFillChar, $iAlignment, $iDecChar)
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_DirFrmtParTabStopMod
 
@@ -8104,7 +8124,6 @@ Func _LOWriter_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False
 	EndIf
 
 EndFunc   ;==>_LOWriter_DocConnect
-; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocCreate
@@ -8636,13 +8655,9 @@ Func _LOWriter_DocFindAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, ByR
 	If Not IsString($sSearchString) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsArray($atFindFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	If (UBound($atFindFormat) > 0) Then
-		If Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
-		$oSrchDescript.setSearchAttributes($atFindFormat)
-	Else
-		$oSrchDescript.setSearchAttributes($atFindFormat)
-	EndIf
+	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
 
+	$oSrchDescript.setSearchAttributes($atFindFormat)
 	$oSrchDescript.SearchString = $sSearchString
 
 	$oResults = $oDoc.findAll($oSrchDescript)
@@ -8711,12 +8726,8 @@ Func _LOWriter_DocFindAllInRange(ByRef $oDoc, ByRef $oSrchDescript, $sSearchStri
 	If Not IsString($sSearchString) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsArray($atFindFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	If (UBound($atFindFormat) > 0) Then
-		If Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
-		$oSrchDescript.setSearchAttributes($atFindFormat)
-	Else
-		$oSrchDescript.setSearchAttributes($atFindFormat)
-	EndIf
+	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
+	$oSrchDescript.setSearchAttributes($atFindFormat)
 
 	If Not IsObj($oRange) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 7, 0)
 	If ($oRange.IsCollapsed()) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
@@ -8779,9 +8790,9 @@ Func _LOWriter_DocFindAllInRange(ByRef $oDoc, ByRef $oSrchDescript, $sSearchStri
 EndFunc   ;==>_LOWriter_DocFindAllInRange
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriterDocFindNext
+; Name ..........: _LOWriter_DocFindNext
 ; Description ...: Find a Search String in a Document once or one at a time.
-; Syntax ........: _LOWriterDocFindNext(Byref $oDoc, Byref $oSrchDescript, $sSearchString, Byref $atFindFormat[, $oRange = Null[, $oLastFind = Null[, $bExhaustive = False]]])
+; Syntax ........: _LOWriter_DocFindNext(Byref $oDoc, Byref $oSrchDescript, $sSearchString, Byref $atFindFormat[, $oRange = Null[, $oLastFind = Null[, $bExhaustive = False]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by previous DocOpen, DocConnect, or
 ;				   +					DocCreate function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from
@@ -8841,12 +8852,8 @@ Func _LOWriter_DocFindNext(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, By
 	If Not IsString($sSearchString) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsArray($atFindFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	If (UBound($atFindFormat) > 0) Then
-		If Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
-		$oSrchDescript.setSearchAttributes($atFindFormat)
-	Else ;An Empty Array
-		$oSrchDescript.setSearchAttributes($atFindFormat)
-	EndIf
+	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
+	$oSrchDescript.setSearchAttributes($atFindFormat)
 
 	If ($oRange <> Null) And Not IsObj($oRange) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 7, 0)
 
@@ -9533,8 +9540,8 @@ EndFunc   ;==>_LOWriter_DocGetPath
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocGetString
 ; Description ...: Retrieve the string of text currently selected or contained in a paragraph object.
-; Syntax ........: _LOWriter_DocGetString(Byref $oCursor)
-; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
+; Syntax ........: _LOWriter_DocGetString(Byref $oObj)
+; Parameters ....: $oObj             - [in/out] an object. A Cursor Object returned from any Cursor Object creation
 ;				   +						or retrieval functions with Data selected, Or A Paragraph Object returned from
 ;				   +						_LOWriter_ParGetObjects function.
 ; Return values .:  Success: String
@@ -11211,10 +11218,10 @@ EndFunc   ;==>_LOWriter_DocRedoIsPossible
 ;				   +						_LOWriter_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or a Regular Expression to Search for.
 ;                  $sReplaceString      - a string value. A String of text or a Regular Expression to replace any results with.
-;                  $atFindFormat        - [in/out] an array of structs. Set to Null keyword to skip. An Array of Formatting
+;                  $atFindFormat        - [in/out] an array of structs. Set to an empty array[0] to skip. An Array of Formatting
 ;				   +						properties to search for, either by value or simply by existence, depending on the
 ;				   +						current setting of "Value Search". Array will not be modified.
-;                  $atReplaceFormat     - [in/out] an array of structs. Set to Null keyword to skip. An Array of Formatting
+;                  $atReplaceFormat     - [in/out] an array of structs. Set to an empty array[0] to skip. An Array of Formatting
 ;				   +						property values to replace any results with. Array will not be modified.
 ; Return values .: Success: 1
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -11224,9 +11231,9 @@ EndFunc   ;==>_LOWriter_DocRedoIsPossible
 ;				   @Error 1 @Extended 3 Return 0 = $oSrchDescript not a Search Descriptor Object.
 ;				   @Error 1 @Extended 4 Return 0 = $sSearchString not a String.
 ;				   @Error 1 @Extended 5 Return 0 = $sReplaceString not a String.
-;				   @Error 1 @Extended 6 Return 0 = $atFindFormat not set to Null and not an Array.
-;				   @Error 1 @Extended 7 Return 0 = First Element of $atFindFormat not an Object.
-;				   @Error 1 @Extended 8 Return 0 = $atReplaceFormat not set to Null and not an Array.
+;				   @Error 1 @Extended 6 Return 0 = $atFindFormat not an Array.
+;				   @Error 1 @Extended 7 Return 0 = $atReplaceFormat not an Array.
+;				   @Error 1 @Extended 8 Return 0 = First Element of $atFindFormat not an Object.
 ;				   @Error 1 @Extended 9 Return 0 = First Element of $atReplaceFormat not an Object.
 ;				   --Success--
 ;				   @Error 0 @Extended ? Return 1 = Success. Search and Replace was successful, @Extended set to number of
@@ -11240,7 +11247,6 @@ EndFunc   ;==>_LOWriter_DocRedoIsPossible
 ; ===============================================================================================================================
 Func _LOWriter_DocReplaceAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, $sReplaceString, ByRef $atFindFormat, ByRef $atReplaceFormat)
 	Local $iReplacements
-	Local $aEmptyArray[0]
 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
 	#forceref $oCOM_ErrorHandler
@@ -11250,22 +11256,14 @@ Func _LOWriter_DocReplaceAll(ByRef $oDoc, ByRef $oSrchDescript, $sSearchString, 
 	If Not $oSrchDescript.supportsService("com.sun.star.util.SearchDescriptor") Then Return SetError($__LOW_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsString($sSearchString) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsString($sReplaceString) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
+	If Not IsArray($atFindFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
+	If Not IsArray($atReplaceFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 7, 0)
 
-	If ($atFindFormat <> Null) Then
-		If Not IsArray($atFindFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
-		If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 7, 0)
-		$oSrchDescript.setSearchAttributes($atFindFormat)
-	Else
-		$oSrchDescript.setSearchAttributes($aEmptyArray)
-	EndIf
+	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
+	$oSrchDescript.setSearchAttributes($atFindFormat)
 
-	If ($atReplaceFormat <> Null) Then
-		If Not IsArray($atReplaceFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
-		If (UBound($atReplaceFormat) > 0) And Not IsObj($atReplaceFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 9, 0)
-		$oSrchDescript.setReplaceAttributes($atReplaceFormat)
-	Else
-		$oSrchDescript.setReplaceAttributes($aEmptyArray)
-	EndIf
+	If (UBound($atReplaceFormat) > 0) And Not IsObj($atReplaceFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 9, 0)
+	$oSrchDescript.setReplaceAttributes($atReplaceFormat)
 
 	$oSrchDescript.SearchString = $sSearchString
 	$oSrchDescript.ReplaceString = $sReplaceString
@@ -11290,9 +11288,10 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 ;                  $sReplaceString      - a string value. A String of text or a regular expression to replace any results with.
 ;                  $atFindFormat        - [in/out] an array of structs. An Array of Formatting properties to search for, either
 ;				   +						by value or simply by existence, depending on the current setting of "Value Search".
-;				   +						 Array will not be modified.
+;				   +						Set to an empty array[0] to skip. Array will not be modified.
 ;                  $atReplaceFormat     - [in/out] an array of structs. An Array of Formatting property values to replace any
-;				   +						results with. Array will not be modified.
+;				   +						results with. Set to an empty array[0] to skip. Array will not be modified. Not
+;				   +						recommended for use with regular expressions, see remarks.
 ; Return values .:  Success: 1
 ;				   Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;				   --Input Errors--
@@ -11303,13 +11302,18 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 ;				   @Error 1 @Extended 5 Return 0 = $oRange contains no selected Data.
 ;				   @Error 1 @Extended 6 Return 0 = $sSearchString not a String.
 ;				   @Error 1 @Extended 7 Return 0 = $sReplaceString not a String.
-;				   @Error 1 @Extended 8 Return 0 = $atFindFormat not set to Null and not an Array.
-;				   @Error 1 @Extended 9 Return 0 = $atFindFormat is an Array but the First Element is not a Property Object.
-;				   @Error 1 @Extended 10 Return 0 = $atReplaceFormat not set to Null and not an Array.
+;				   @Error 1 @Extended 8 Return 0 = $atFindFormat not an Array.
+;				   @Error 1 @Extended 9 Return 0 = $atReplaceFormat not an Array.
+;				   @Error 1 @Extended 10 Return 0 = $atFindFormat is an Array but the First Element is not a Property Object.
 ;				   @Error 1 @Extended 11 Return 0 = $atReplaceFormat is an Array but the First Element is not a Property Object.
-;				   @Error 1 @Extended 12 Return 0 = Search Styles is True, $atFindFormat and $atReplaceFormat = Null (Thus
-;				   +								searching for Paragraph Styles by Name contained in the document) but
+;				   @Error 1 @Extended 12 Return 0 = Search Styles is True, $atFindFormat and $atReplaceFormat arrays are empty,
+;				   +								(Thus searching for Paragraph Styles by Name contained in the document) but
 ;				   +								$sReplaceString is set to a Paragraph Style that does not exist.
+;				   --Initialization Errors--
+;				   @Error 2 @Extended 1 Return 0 = Error retrieving ViewCursor object.
+;				   @Error 2 @Extended 2 Return 0 = Error creating backup of ViewCursor location and selection.
+;				   @Error 2 @Extended 3 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
+;				   @Error 2 @Extended 4 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;				   --Processing Errors--
 ;				   @Error 3 @Extended 1 Return 0 = Error converting Regular Expression String.
 ;				   @Error 3 @Extended 2 Return 0 = Error performing FindAllInRange Function.
@@ -11320,26 +11324,37 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 ; Modified ......:
 ; Remarks .......: Note: Libre Office does not offer a Function to call to replace only results within a selection, consequently
 ;						I have had to create my own. This function uses the "FindAllInRange" function, so any errors with Find/
-;						Replace formatting causing deletions will cause problems here. How I created this function to still
-;						accept Regular Expressions is I Use Libre's FindAll command, modified by my FindAllInRange function, and
-;						then I use AutoIt's RegExpReplace function to "Search" the resulting matched Strings and replace it,
-;						then I set the new string to that result. The Consequence is that I have had to create a separate
-;						function to convert the ReplaceString (if RegularExpressions is set to True), to be compatible
-;						with AutoIt's Regular Expression formatting. A BackSlash (\) must be doubled(\\) in order to be
-;						literally inserted, at the beginning of the conversion process all double Backslashes are replaced
-;						with a specific flag to aid in identifying commented and non-commented keywords (\n, \t, & etc.),
-;						after the  conversion process the special flag is replaced again with the double Backslashes, this
-;						should not cause any issues, \n (new Paragraph) in L.O. RegExp. formatting is replaced with @CR, unless
-;						the Backslash is doubled (\\n), then \n becomes literal, \t (Tab) in L.O. format is replaced with @Tab,
-;						and &(Find Result/BackReference) is replaced with $0 which means insert the entire found string at
-;						that position, To insert a regular "&" character, comment it with a Backslash, \&. As with
-;						LibreOffice, this function should still accept BackReferences ($0-9 or \0-9).
+;						Replace formatting causing deletions will cause problems here. As best as I can tell all options for find
+;						and replace should be available, Formatting, Paragraph styles etc. How I created this function to still
+;						accept Regular Expressions is I use Libre's FindAll command, modified by my FindAllInRange function.
+; 						I then ran into another problem, as my next step was to use AutoIt's RegExpReplace function to perform
+;						the replacement, but some replacements don't work as expected. To Fix this I have created two versions
+;						of Regular Expression replacement, the first way is only implemented if $atReplaceFormat is skipped using
+;						an empty array. I use an ExecutionHelper to execute the Find and replace command, however this method
+;						doesn't accept formatting for find and replace. So I developed my second method, which accepts formatting,
+;						and uses AutoIt's RegExpReplace function to "Search" the resulting matched Strings and replace it, then I
+;						set the new string to that result. However I have had to create a separate function to convert the
+;						ReplaceString to be compatible with AutoIt's Regular Expression formatting. A BackSlash (\) must be
+;						doubled(\\) in order to be literally inserted, at the beginning of the conversion process all double
+;						Backslashes are replaced with a specific flag to aid in identifying commented and non-commented keywords
+;						(\n, \t, & etc.), after the  conversion process the special flag is replaced again with the double
+;						Backslashes, this should not cause any issues, \n (new Paragraph) in L.O. RegExp. formatting is replaced
+;						with @CR, unless the Backslash is doubled (\\n), then \n becomes literal, \t (Tab) in L.O. format is
+;						replaced with @Tab, and &(Find Result/BackReference) is replaced with $0 which means insert the entire
+;						found string at that position, To insert a regular "&" character, comment it with a Backslash, \&. As
+;						with LibreOffice, this function should still accept BackReferences ($0-9 or \0-9). However I have found
+;						certain problems with some of the expressions still not working, such as $ (end of paragraph mark) not
+;						replacing correctly because Autoit uses @CRLF for it's newline marks, and Libre uses @CR for a paragraph
+;						and @LF for a soft newline.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oRange, $sSearchString, $sReplaceString, ByRef $atFindFormat, ByRef $atReplaceFormat)
 	Local $aoResults[0]
+	Local $atArgs[7]
+	Local Const $LOW_SEARCHFLAG_ABSOLUTE = 1, $LOW_SEARCHFLAG_REGEXP = 2, $LOW_SEARCHFLAG_REPLACE_ALL = 3, $LOW_SEARCHFLAG_SELECTION = 2048
+	Local $oViewCursor, $oViewCursorBackup, $oServiceManager, $oDispatcher
 	Local $iResults
 	Local $bFormat = False
 
@@ -11353,19 +11368,15 @@ Func _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oR
 	If ($oRange.IsCollapsed()) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsString($sSearchString) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
 	If Not IsString($sReplaceString) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 7, 0)
+	If Not IsArray($atFindFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
+	If Not IsArray($atReplaceFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 9, 0)
 
-	If ($atFindFormat <> Null) Then
-		If Not IsArray($atFindFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
-		If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 9, 0)
-	EndIf
+	If (UBound($atFindFormat) > 0) And Not IsObj($atFindFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 10, 0)
+	If (UBound($atReplaceFormat) > 0) And Not IsObj($atReplaceFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 11, 0)
+	If (UBound($atReplaceFormat) > 0) Then $bFormat = True
 
-	If ($atReplaceFormat <> Null) Then
-		If Not IsArray($atReplaceFormat) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 10, 0)
-		If (UBound($atReplaceFormat) > 0) And Not IsObj($atReplaceFormat[0]) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 11, 0)
-		$bFormat = True
-	EndIf
-
-	If ($oSrchDescript.SearchRegularExpression() = True) Then __LOWriter_RegExpConvert($sReplaceString)
+	;If Find/Replace using a Regular expression is True, and replace formatting is set, convert the regular expressions for my alternate replacement function to use.
+	If ($oSrchDescript.SearchRegularExpression() = True) And ($bFormat = True) Then __LOWriter_RegExpConvert($sReplaceString)
 	If (@error > 0) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$aoResults = _LOWriter_DocFindAllInRange($oDoc, $oSrchDescript, $sSearchString, $atFindFormat, $oRange)
@@ -11373,17 +11384,54 @@ Func _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oR
 	If (@error > 0) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 2, 0) ; Error performing search
 
 	If ($oSrchDescript.SearchRegularExpression() = True) Then
-		For $i = 0 To $iResults - 1
-			$aoResults[$i].setString(StringRegExpReplace($aoResults[$i].getString(), $sSearchString, $sReplaceString))
-			If ($bFormat = True) Then
-				For $j = 0 To UBound($atReplaceFormat) - 1
-					$aoResults[$i].setPropertyValue($atReplaceFormat[$j].Name(), $atReplaceFormat[$j].Value())
-				Next
-			EndIf
 
-			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
-		Next
-	ElseIf ($oSrchDescript.SearchStyles() = True) And ($atFindFormat = Null And $atReplaceFormat = Null) Then ;If Style Search is active and no formatting is set, then search and replace Paragraph style.
+		If ($bFormat = True) Then
+
+			For $i = 0 To $iResults - 1
+				$aoResults[$i].setString(StringRegExpReplace($aoResults[$i].getString(), $sSearchString, $sReplaceString))
+				If ($bFormat = True) Then
+					For $j = 0 To UBound($atReplaceFormat) - 1
+						$aoResults[$i].setPropertyValue($atReplaceFormat[$j].Name(), $atReplaceFormat[$j].Value())
+					Next
+				EndIf
+
+				Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
+			Next
+
+		Else ;No Replacement formatting, use UNO Execute method instead.
+
+			$oViewCursor = $oDoc.CurrentController.getViewCursor()
+			If Not IsObj($oViewCursor) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
+
+			;Backup the ViewCursor location and selection.
+			$oViewCursorBackup = $oDoc.Text.createTextCursorByRange($oViewCursor)
+			If Not IsObj($oViewCursorBackup) Then Return SetError($__LOW_STATUS_INIT_ERROR, 2, 0)
+
+			;Move the View Cursor to the input range.
+			$oViewCursor.gotoRange($oRange, False)
+
+			$oServiceManager = ObjCreate("com.sun.star.ServiceManager")
+			If Not IsObj($oServiceManager) Then Return SetError($__LOW_STATUS_INIT_ERROR, 3, 0)
+
+			$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+			If Not IsObj($oDispatcher) Then Return SetError($__LOW_STATUS_INIT_ERROR, 4, 0)
+
+			$atArgs[0] = __LOWriter_SetPropertyValue("SearchItem.Backward", $oSrchDescript.SearchBackwards())
+			$atArgs[1] = __LOWriter_SetPropertyValue("SearchItem.AlgorithmType", $LOW_SEARCHFLAG_ABSOLUTE)
+			$atArgs[2] = __LOWriter_SetPropertyValue("SearchItem.SearchFlags", $LOW_SEARCHFLAG_SELECTION)
+			$atArgs[3] = __LOWriter_SetPropertyValue("SearchItem.SearchString", $sSearchString)
+			$atArgs[4] = __LOWriter_SetPropertyValue("SearchItem.ReplaceString", $sReplaceString)
+			$atArgs[5] = __LOWriter_SetPropertyValue("SearchItem.Command", $LOW_SEARCHFLAG_REPLACE_ALL)
+			$atArgs[6] = __LOWriter_SetPropertyValue("SearchItem.AlgorithmType2", $LOW_SEARCHFLAG_REGEXP)
+
+			$oDispatcher.executeDispatch($oDoc.CurrentController, ".uno:ExecuteSearch", "", 0, $atArgs)
+
+			;Restore the ViewCursor to its previous location.
+			$oViewCursor.gotoRange($oViewCursorBackup, False)
+
+		EndIf
+
+	ElseIf ($oSrchDescript.SearchStyles() = True) And ((UBound($atFindFormat) = 0) And (UBound($atReplaceFormat) = 0)) Then ;If Style Search is active and no formatting is set, then search and replace Paragraph style.
 		If Not _LOWriter_ParStyleExists($oDoc, $sReplaceString) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 12, 0)
 		For $i = 0 To $iResults - 1
 			$aoResults[$i].ParaStyleName = $sReplaceString
@@ -13258,8 +13306,8 @@ Func _LOWriter_FieldDateTimeInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = Fa
 	If ($iOffset <> Null) Then
 		If Not IsInt($iOffset) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
 		$oDateTimeField.Adjust = ($oDateTimeField.IsDate() = True) ? Int((1440 * $iOffset)) : $iOffset
-		;If IsDate = True, Then Calculate number of minutes in a day (1440) times number of days to off set the Date/ Value, else,
-		;just set it to Number of minutes called.
+		;If IsDate = True, Then Calculate number of minutes in a day (1440) times number of days to off set the Date/ Value,
+		;else, just set it to Number of minutes called.
 	EndIf
 
 	If ($iDateFormatKey <> Null) Then
@@ -13350,8 +13398,8 @@ Func _LOWriter_FieldDateTimeModify(ByRef $oDoc, ByRef $oDateTimeField, $bIsFixed
 
 		__LOWriter_ArrayFill($avDateTime, $oDateTimeField.IsFixed(), $oDateTimeField.DateTimeValue(), $oDateTimeField.IsDate(), _
 				($oDateTimeField.IsDate() = True) ? Int(($oDateTimeField.Adjust() / 1440)) : $oDateTimeField.Adjust(), $iNumberFormat)
-		;If IsDate = True, Then Calculate number of minutes in a day (1440) divided by number of days of off set. Otherwise return Number
-		;of minutes.
+		;If IsDate = True, Then Calculate number of minutes in a day (1440) divided by number of days of off set. Otherwise
+		;return Number of minutes.
 		Return SetError($__LOW_STATUS_SUCCESS, 1, $avDateTime)
 	EndIf
 
@@ -13376,8 +13424,8 @@ Func _LOWriter_FieldDateTimeModify(ByRef $oDoc, ByRef $oDateTimeField, $bIsFixed
 	If ($iOffset <> Null) Then
 		If Not IsInt($iOffset) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 		$iOffset = ($oDateTimeField.IsDate() = True) ? Int((1440 * $iOffset)) : $iOffset
-		;If IsDate = True, Then Calculate number of minutes in a day (1440) times number of days to off set the Date/ Value, else, just
-		;set it to Number of minutes called.
+		;If IsDate = True, Then Calculate number of minutes in a day (1440) times number of days to off set the Date/ Value,
+		;else, just set it to Number of minutes called.
 
 		$oDateTimeField.Adjust = $iOffset
 		$iError = ($oDateTimeField.Adjust() = $iOffset) ? $iError : BitOR($iError, 8)
@@ -16314,8 +16362,8 @@ Func _LOWriter_FieldPageNumberModify(ByRef $oDoc, ByRef $oPageNumField, $iNumFor
 		$oNewPageNumField = $oDoc.createInstance("com.sun.star.text.TextField.PageNumber")
 		If Not IsObj($oNewPageNumField) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
-		;It doesn't work to just set a new Numbering type for an already inserted Page Number, so I have to create a new one and then
-		;insert it.
+		;It doesn't work to just set a new Numbering type for an already inserted Page Number, so I have to create a new one and
+		;then insert it.
 		With $oNewPageNumField
 			.NumberingType = $iNumFormat
 			.Offset = $oPageNumField.Offset()
@@ -17321,7 +17369,7 @@ Func _LOWriter_FieldsAdvGetList(ByRef $oDoc, $iType = $LOW_FIELDADV_TYPE_ALL, $b
 	If Not IsBool($bFieldType) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	$avFieldTypes = __LOWriter_FieldTypeServices($iType, True, False)
+	$avFieldTypes = __LOwriter_FieldTypeServices($iType, True, False)
 	If @error > 0 Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
 	$vReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
@@ -17419,7 +17467,7 @@ Func _LOWriter_FieldsDocInfoGetList(ByRef $oDoc, $iType = $LOW_FIELD_DOCINFO_TYP
 	If Not IsBool($bFieldType) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	$avFieldTypes = __LOWriter_FieldTypeServices($iType, False, True)
+	$avFieldTypes = __LOwriter_FieldTypeServices($iType, False, True)
 	If @error > 0 Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
 	$vReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
@@ -18197,7 +18245,7 @@ Func _LOWriter_FieldsGetList(ByRef $oDoc, $iType = $LOW_FIELD_TYPE_ALL, $bSuppor
 	If Not IsBool($bFieldType) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 5, 0)
 
-	$avFieldTypes = __LOWriter_FieldTypeServices($iType)
+	$avFieldTypes = __LOwriter_FieldTypeServices($iType)
 	If (@error > 0) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
 	$vReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
@@ -25684,14 +25732,15 @@ Func _LOWriter_FrameStyleTypePosition(ByRef $oFrameStyle, $iHorAlign = Null, $iH
 		If Not __LOWriter_IntIsBetween($iVertRelation, $LOW_RELATIVE_ROW, $LOW_RELATIVE_TEXT_LINE) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 9, 0)
 		$iCurrentAnchor = (($iAnchorPos <> Null) ? $iAnchorPos : $oFrameStyle.AnchorType())
 
-		;Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting values for
-		;"Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or "$LOW_RELATIVE_PARAGRAPH", For
-		;"Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the L.O. UI the furthest left drop
-		;down box)  is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1), $LOW_ORIENT_VERT_CHAR_CENTER(2),
-		;$LOW_ORIENT_VERT_CHAR_BOTTOM(3), depending on the current value of Top, Bottom and Center, or "From Bottom"/ "From Top", of
-		;"VertOrient". The same is true For "Row", which means when the anchor is set to "As Character", I need to first determine
-		;the desired user setting, $LOW_RELATIVE_ROW(-1), $LOW_RELATIVE_PARAGRAPH(0), or $LOW_RELATIVE_CHARACTER(2), and then determine
-		;the current "VertOrient" setting, and then manually set the value to the correct setting. Such as Line_Top, Line_Bottom etc.
+		;Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting values
+		;for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or "$LOW_RELATIVE_PARAGRAPH",
+		;For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the L.O. UI the furthest left
+		;drop down box) is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1), $LOW_ORIENT_VERT_CHAR_CENTER(2),
+		;$LOW_ORIENT_VERT_CHAR_BOTTOM(3), depending on the current value of Top, Bottom and Center, or "From Bottom"/
+		;"From Top", of "VertOrient". The same is true For "Row", which means when the anchor is set to "As Character", I need
+		;to first determine the desired user setting, $LOW_RELATIVE_ROW(-1), $LOW_RELATIVE_PARAGRAPH(0), or
+		;$LOW_RELATIVE_CHARACTER(2), and then determine the current "VertOrient" setting, and then manually set the value to the
+		;correct setting. Such as Line_Top, Line_Bottom etc.
 
 		If ($iCurrentAnchor = $LOW_ANCHOR_AS_CHARACTER) Then
 
@@ -26578,14 +26627,15 @@ Func _LOWriter_FrameTypePosition(ByRef $oFrame, $iHorAlign = Null, $iHorPos = Nu
 		If Not __LOWriter_IntIsBetween($iVertRelation, $LOW_RELATIVE_ROW, $LOW_RELATIVE_TEXT_LINE) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
 		$iCurrentAnchor = (($iAnchorPos <> Null) ? $iAnchorPos : $oFrame.AnchorType())
 
-		;Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting values
-		;for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or "$LOW_RELATIVE_PARAGRAPH", For
-		;"Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the L.O. UI the furthest left drop down
-		;box)  is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1), $LOW_ORIENT_VERT_CHAR_CENTER(2),
-		;$LOW_ORIENT_VERT_CHAR_BOTTOM(3), depending on the current value of Top, Bottom and Center, or "From Bottom"/ "From Top", of
-		;"VertOrient". The same is true For "Row", which means when the anchor is set to "As Character", I need to first determine the
-		;the desired user setting, $LOW_RELATIVE_ROW(-1), $LOW_RELATIVE_PARAGRAPH(0), or $LOW_RELATIVE_CHARACTER(2), and then determine
-		;the current "VertOrient" setting, and then manually set the value to the correct setting. Such as Line_Top, Line_Bottom etc.
+		;Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting
+		;		values for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or
+		;"$LOW_RELATIVE_PARAGRAPH", For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the
+		;L.O. UI the furthest left drop down box)  is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1),
+		;$LOW_ORIENT_VERT_CHAR_CENTER(2), $LOW_ORIENT_VERT_CHAR_BOTTOM(3), depending on the current value of Top, Bottom and
+		;Center, or "From Bottom"/ "From Top", of "VertOrient". The same is true For "Row", which means when the anchor is set
+		;to "As Character", I need to first determine the the desired user setting, $LOW_RELATIVE_ROW(-1),
+		;$LOW_RELATIVE_PARAGRAPH(0), or $LOW_RELATIVE_CHARACTER(2), and then determine the current "VertOrient" setting, and
+		;then manually set the value to the correct setting. Such as Line_Top, Line_Bottom etc.
 
 		If ($iCurrentAnchor = $LOW_ANCHOR_AS_CHARACTER) Then
 
@@ -27677,7 +27727,7 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOWriter_NumStylePosition(ByRef $oDoc, $oNumStyle, $iLevel, $iAlignedAt = Null, $iNumAlign = Null, $iFollowedBy = Null, _
-		$iTabstop = Null, $iIndent = Null)
+		$iTabStop = Null, $iIndent = Null)
 	Local $oNumRules
 	Local $iError = 0
 	Local $aNumSettings[5][2]
@@ -27696,7 +27746,7 @@ Func _LOWriter_NumStylePosition(ByRef $oDoc, $oNumStyle, $iLevel, $iAlignedAt = 
 	$oNumRules = $oNumStyle.NumberingRules()
 	If Not IsObj($oNumRules) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
-	If __LOWriter_VarsAreNull($iAlignedAt, $iNumAlign, $iFollowedBy, $iTabstop, $iIndent) Then
+	If __LOWriter_VarsAreNull($iAlignedAt, $iNumAlign, $iFollowedBy, $iTabStop, $iIndent) Then
 		If ($iLevel = -1) Then Return SetError($__LOW_STATUS_PROCESSING_ERROR, 1, 0) ; only get settings for one level at a time.
 		__LOWriter_ArrayFill($avPosition, __LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "FirstLineIndent"), _
 				__LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "Adjust"), _
@@ -27728,10 +27778,10 @@ Func _LOWriter_NumStylePosition(ByRef $oDoc, $oNumStyle, $iLevel, $iAlignedAt = 
 		$iRowCount += 1
 	EndIf
 
-	If ($iTabstop <> Null) Then
-		If Not IsInt($iTabstop) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
+	If ($iTabStop <> Null) Then
+		If Not IsInt($iTabStop) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 8, 0)
 		$aNumSettings[$iRowCount][0] = "ListtabStopPosition"
-		$aNumSettings[$iRowCount][1] = $iTabstop
+		$aNumSettings[$iRowCount][1] = $iTabStop
 		$iRowCount += 1
 	EndIf
 
@@ -27756,7 +27806,7 @@ Func _LOWriter_NumStylePosition(ByRef $oDoc, $oNumStyle, $iLevel, $iAlignedAt = 
 	$iError = ($iAlignedAt = Null) ? $iError : (__LOWriter_IntIsBetween(__LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "FirstLineIndent"), $iAlignedAt - 1, $iAlignedAt + 1)) ? $iError : BitOR($iError, 1)
 	$iError = ($iNumAlign = Null) ? $iError : (__LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "Adjust") = $iNumAlign) ? $iError : BitOR($iError, 2)
 	$iError = ($iFollowedBy = Null) ? $iError : (__LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "LabelFollowedBy") = $iFollowedBy) ? $iError : BitOR($iError, 4)
-	$iError = ($iTabstop = Null) ? $iError : (__LOWriter_IntIsBetween(__LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "ListtabStopPosition"), $iTabstop - 1, $iTabstop + 1)) ? $iError : BitOR($iError, 8)
+	$iError = ($iTabStop = Null) ? $iError : (__LOWriter_IntIsBetween(__LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "ListtabStopPosition"), $iTabStop - 1, $iTabStop + 1)) ? $iError : BitOR($iError, 8)
 	$iError = ($iIndent = Null) ? $iError : (__LOWriter_IntIsBetween(__LOWriter_NumStyleRetrieve($oNumRules, $iLevel, "IndentAt"), $iIndent - 1, $iIndent + 1)) ? $iError : BitOR($iError, 16)
 
 	Return ($iError > 0) ? SetError($__LOW_STATUS_PROP_SETTING_ERROR, $iError, 0) : SetError($__LOW_STATUS_SUCCESS, 0, 1)
@@ -37110,8 +37160,8 @@ Func _LOWriter_TableGetData(ByRef $oTable, $iRow = -1, $iColumn = -1)
 	$avTableData = $oTable.getDataArray() ;Will fail if Columns are joined
 	If Not IsArray($avTableData) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
-	;LibreOffice uses @CR and @LF, whereas Autoit uses @CRLF, I need to convert @CRLF back to @CR. So cycle through all Table Data
-	;and replace @CRLF with @CR
+	;LibreOffice uses @CR and @LF, whereas Autoit uses @CRLF, I need to convert @CRLF back to @CR. So cycle through all Table
+	;Data and replace @CRLF with @CR
 	For $k = 0 To UBound($avTableData) - 1
 		$avTempArray = $avTableData[$k]
 		For $j = 0 To UBound($avTempArray) - 1
@@ -38098,7 +38148,6 @@ Func _LOWriter_VersionGet($bSimpleVersion = False, $bReturnName = False)
 EndFunc   ;==>_LOWriter_VersionGet
 
 
-
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_AddTo1DArray
 ; Description ...: Add data to a 1 Dimensional array.
@@ -38863,7 +38912,8 @@ Func __LOWriter_CharFontColor(ByRef $oObj, $iFontColor, $iTransparency, $iHighli
 
 	If ($iHighlight <> Null) Then
 		If Not __LOWriter_IntIsBetween($iHighlight, $LOW_COLOR_OFF, $LOW_COLOR_WHITE) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 6, 0)
-		;CharHighlight; same as CharBackColor---Libre seems to use back color for highlighting however, so using that for setting.
+		;CharHighlight; same as CharBackColor---Libre seems to use back color for highlighting however, so using that for
+		;setting.
 ;~ If Not __LOWriter_VersionCheck(4.2) Then Return SetError($__LOW_STATUS_VER_ERROR,2,0)
 ;~ $oObj.CharHighlight = $iHighlight ;-- keeping old method in case.
 ;~ $iError = ($oObj.CharHighlight() = $iHighlight) ? $iError : BitOR($iError,4)
@@ -39792,8 +39842,8 @@ Func __LOWriter_DirFrmtCheck(ByRef $oSelection, $bCheckSelection = False)
 	If $oSelection.supportsService("com.sun.star.text.Paragraph") Or _
 			$oSelection.supportsService("com.sun.star.text.TextPortion") Then Return SetError($__LOW_STATUS_SUCCESS, 0, True)
 
-	;If Object is a cursor then return true if $bcheckSelection is false. Else test if cursor selection is collapsed, return false
-	;if it is.
+	;If Object is a cursor then return true if $bcheckSelection is false. Else test if cursor selection is collapsed, return
+	;false if it is.
 	If $oSelection.supportsService("com.sun.star.text.TextCursor") Or _
 			$oSelection.supportsService("com.sun.star.text.TextViewCursor") Then
 		If $bCheckSelection Then Return SetError($__LOW_STATUS_SUCCESS, 0, ($oSelection.IsCollapsed()) ? False : True) ;If collapsed return false meaning fail.
@@ -39963,9 +40013,9 @@ Func __LOWriter_FieldsGetList(ByRef $oDoc, $bSupportedServices, $bFieldType, $bF
 EndFunc   ;==>__LOWriter_FieldsGetList
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOWriter_FieldTypeServices
+; Name ..........: __LOwriter_FieldTypeServices
 ; Description ...: Retrieve an Array of Supported Service Names and Integer Constants to search for Fields.
-; Syntax ........: __LOWriter_FieldTypeServices($iFieldType[, $bAdvancedServices = False[, $bDocInfoServices = False]])
+; Syntax ........: __LOwriter_FieldTypeServices($iFieldType[, $bAdvancedServices = False[, $bDocInfoServices = False]])
 ; Parameters ....: $iFieldType          - an integer value. The Integer Constant Field type.
 ;                  $bAdvancedServices   - [optional] a boolean value. Default is False. If True, search in Advanced Field Type
 ;				   +						Array.
@@ -39999,7 +40049,7 @@ EndFunc   ;==>__LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_FieldTypeServices($iFieldType, $bAdvancedServices = False, $bDocInfoServices = False)
+Func __LOwriter_FieldTypeServices($iFieldType, $bAdvancedServices = False, $bDocInfoServices = False)
 	Local $avFieldTypes[30][2] = [[$LOW_FIELD_TYPE_COMMENT, "com.sun.star.text.TextField.Annotation"], _
 			[$LOW_FIELD_TYPE_AUTHOR, "com.sun.star.text.TextField.Author"], [$LOW_FIELD_TYPE_CHAPTER, "com.sun.star.text.TextField.Chapter"], _
 			[$LOW_FIELD_TYPE_CHAR_COUNT, "com.sun.star.text.TextField.CharacterCount"], [$LOW_FIELD_TYPE_COMBINED_CHAR, "com.sun.star.text.TextField.CombinedCharacters"], _
@@ -40067,7 +40117,7 @@ Func __LOWriter_FieldTypeServices($iFieldType, $bAdvancedServices = False, $bDoc
 	ReDim $avFieldResults[$iCount][2]
 
 	Return SetError($__LOW_STATUS_SUCCESS, 3, $avFieldResults)
-EndFunc   ;==>__LOWriter_FieldTypeServices
+EndFunc   ;==>__LOwriter_FieldTypeServices
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_FilterNameGet
@@ -42275,20 +42325,20 @@ EndFunc   ;==>__LOWriter_ParDropCaps
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_ParHasTabStop(ByRef $oObj, $iTabstop)
+Func __LOWriter_ParHasTabStop(ByRef $oObj, $iTabStop)
 	Local $atTabStops
 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", "__LOWriter_InternalComErrorHandler")
 	#forceref $oCOM_ErrorHandler
 
 	If Not IsObj($oObj) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsInt($iTabstop) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iTabStop) Then Return SetError($__LOW_STATUS_INPUT_ERROR, 2, 0)
 
 	$atTabStops = $oObj.ParaTabStops()
 	If Not IsArray($atTabStops) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
 	For $i = 0 To UBound($atTabStops) - 1
-		If ($atTabStops[$i].Position() = $iTabstop) Then Return SetError($__LOW_STATUS_SUCCESS, 0, True)
+		If ($atTabStops[$i].Position() = $iTabStop) Then Return SetError($__LOW_STATUS_SUCCESS, 0, True)
 		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
 	Next
 
@@ -43139,7 +43189,7 @@ EndFunc   ;==>__LOWriter_ParTabStopCreate
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_ParTabStopDelete(ByRef $oObj, ByRef $oDoc, $iTabstop)
+Func __LOWriter_ParTabStopDelete(ByRef $oObj, ByRef $oDoc, $iTabStop)
 	Local $oDefaults
 	Local $tTabStruct
 	Local $atOldTabStops[0], $atNewTabStops[0]
@@ -43167,7 +43217,7 @@ Func __LOWriter_ParTabStopDelete(ByRef $oObj, ByRef $oDoc, $iTabstop)
 		$bDeleted = True
 	Else
 		For $i = 0 To UBound($atOldTabStops) - 1
-			If ($atOldTabStops[$i].Position() = $iTabstop) Then
+			If ($atOldTabStops[$i].Position() = $iTabStop) Then
 				$bDeleted = True
 			Else
 				$atNewTabStops[$iCount] = $atOldTabStops[$i]
@@ -43296,7 +43346,7 @@ EndFunc   ;==>__LOWriter_ParTabStopList
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_ParTabStopMod(ByRef $oObj, $iTabstop, $iPosition, $iFillChar, $iAlignment, $iDecChar)
+Func __LOWriter_ParTabStopMod(ByRef $oObj, $iTabStop, $iPosition, $iFillChar, $iAlignment, $iDecChar)
 	Local $atTabStops, $atNewTabStops
 	Local $iError = 0, $iNewPosition = 0
 	Local $tTabStruct
@@ -43312,7 +43362,7 @@ Func __LOWriter_ParTabStopMod(ByRef $oObj, $iTabstop, $iPosition, $iFillChar, $i
 	If Not IsArray($atTabStops) Then Return SetError($__LOW_STATUS_INIT_ERROR, 1, 0)
 
 	For $i = 0 To UBound($atTabStops) - 1
-		$tTabStruct = ($atTabStops[$i].Position() = $iTabstop) ? $atTabStops[$i] : Null
+		$tTabStruct = ($atTabStops[$i].Position() = $iTabStop) ? $atTabStops[$i] : Null
 		If IsObj($tTabStruct) Then ExitLoop
 		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? 10 : 0))
 	Next

@@ -1,10 +1,9 @@
-#AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 #include-once
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: Libre Office Writer (LOWriter) Constants for the Libre Office Writer UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: COnstants for various functions in the Libre Office Writer UDF.
+; Description ...: Constants for various functions in the Libre Office Writer UDF.
 ; Author(s) .....: donnyh13
 ; Dll ...........:
 ; ===============================================================================================================================
@@ -56,18 +55,20 @@ Global Const $LOW_PRINT_NOTES_NONE = 0, _
 		$LOW_PRINT_NOTES_END = 2, _
 		$LOW_PRINT_NOTES_NEXT_PAGE = 3
 
-;LO Cursor Constants.
+;LO ViewCursor Movement Constants.
 Global Enum $LOW_VIEWCUR_GO_DOWN, $LOW_VIEWCUR_GO_UP, $LOW_VIEWCUR_GO_LEFT, $LOW_VIEWCUR_GO_RIGHT, $LOW_VIEWCUR_GOTO_END_OF_LINE, _
 		$LOW_VIEWCUR_GOTO_START_OF_LINE, $LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, $LOW_VIEWCUR_JUMP_TO_LAST_PAGE, $LOW_VIEWCUR_JUMP_TO_PAGE, _
 		$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, $LOW_VIEWCUR_JUMP_TO_PREV_PAGE, $LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, $LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, _
 		$LOW_VIEWCUR_SCREEN_DOWN, $LOW_VIEWCUR_SCREEN_UP, $LOW_VIEWCUR_GOTO_START, $LOW_VIEWCUR_GOTO_END
 
+;LO TextCursor Movement Constants.
 Global Enum $LOW_TEXTCUR_COLLAPSE_TO_START, $LOW_TEXTCUR_COLLAPSE_TO_END, $LOW_TEXTCUR_GO_LEFT, $LOW_TEXTCUR_GO_RIGHT, _
 		$LOW_TEXTCUR_GOTO_START, $LOW_TEXTCUR_GOTO_END, $LOW_TEXTCUR_GOTO_NEXT_WORD, $LOW_TEXTCUR_GOTO_PREV_WORD, $LOW_TEXTCUR_GOTO_END_OF_WORD, _
 		$LOW_TEXTCUR_GOTO_START_OF_WORD, $LOW_TEXTCUR_GOTO_NEXT_SENTENCE, $LOW_TEXTCUR_GOTO_PREV_SENTENCE, $LOW_TEXTCUR_GOTO_END_OF_SENTENCE, _
 		$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, $LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, $LOW_TEXTCUR_GOTO_PREV_PARAGRAPH, _
 		$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, $LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH
 
+;LO TableCursor Movement Constants.
 Global Enum $LOW_TABLECUR_GO_LEFT, $LOW_TABLECUR_GO_RIGHT, $LOW_TABLECUR_GO_UP, $LOW_TABLECUR_GO_DOWN, $LOW_TABLECUR_GOTO_START, _
 		$LOW_TABLECUR_GOTO_END
 
