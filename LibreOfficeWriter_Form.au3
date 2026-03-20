@@ -2447,6 +2447,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldValue
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Control's parent Object.
 ;                  @Error 3 @Extended 2 Return 0 = Cannot delete the last control in a Grouped control.
+;                  @Error 3 @Extended 3 Return 0 = Failed to delete the Control.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Control was successfully deleted.
 ; Author ........: donnyh13
@@ -2470,7 +2471,9 @@ Func _LOWriter_FormConDelete(ByRef $oControl)
 
 	$oParent.remove($oControl)
 
-	If Not IsObj($oControl.Parent()) Then $oControl = Null ; Parent will be Null when the control is deleted.
+	If IsObj($oControl.Parent()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Parent will be Null when the control is deleted.
+
+	$oControl = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormConDelete

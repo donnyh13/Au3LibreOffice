@@ -1114,6 +1114,7 @@ EndFunc   ;==>_LOWriter_FieldDateTimeModify
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving TextFieldMaster Object.
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving Field Master Array of dependent fields.
+;                  @Error 3 @Extended 3 Return 0 = Failed to delete field.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted the field with the Text Master Field.
 ;                  @Error 0 @Extended 1 Return 1 = Success. Successfully deleted the field.
@@ -1150,14 +1151,18 @@ Func _LOWriter_FieldDelete(ByRef $oField, $bDeleteMaster = False)
 
 		$oFieldMaster.dispose()
 
-		If __LO_IsObjInvalid($oField, "TextFieldMaster") Then $oField = Null
+		If Not __LO_IsObjInvalid($oField, "TextFieldMaster") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$oField = Null
 
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
 	$oField.Anchor.Text.removeTextContent($oField)
 
-	If __LO_IsObjInvalid($oField, "TextFieldMaster") Then $oField = Null
+	If Not __LO_IsObjInvalid($oField, "TextFieldMaster") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$oField = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, 1)
 EndFunc   ;==>_LOWriter_FieldDelete

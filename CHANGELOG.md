@@ -1974,6 +1974,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_DocInsertControlChar` --> `_LOWriter_CursorInsertControlChar`
   - `_LOWriter_DocInsertString` --> `_LOWriter_CursorInsertString`
 - Added Error check for failing to close a Document to `_LOWriter_DocClose`.
+- Added Error check for failing to delete a called Object.
+  - _LOWriter_FieldDelete
+  - _LOWriter_EndnoteDelete
+  - _LOWriter_FootnoteDelete
+  - _LOWriter_FormConDelete
 
 #### Documented
 

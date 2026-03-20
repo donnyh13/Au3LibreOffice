@@ -866,6 +866,8 @@ EndFunc   ;==>__LO_StylesGetNames
 ; Example .......: No
 ; ===============================================================================================================================
 Func __LO_TestObjCOM($oLOError)
+	#forceref $oLOError
+
 ;~ 	ConsoleWrite("!--COM Error-Begin--" & @CRLF & _
 ;~ 			"Module: LibreOffice Main" & @CRLF & _
 ;~ 			"Number: 0x" & Hex($oLOError.number, 8) & @CRLF & _

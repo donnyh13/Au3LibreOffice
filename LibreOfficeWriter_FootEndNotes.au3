@@ -51,6 +51,8 @@
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oEndNote not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to delete Endnote.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Endnote successfully deleted.
 ; Author ........: donnyh13
@@ -68,7 +70,9 @@ Func _LOWriter_EndnoteDelete(ByRef $oEndNote)
 
 	$oEndNote.dispose()
 
-	If __LO_IsObjInvalid($oEndNote, "Anchor") Then $oEndNote = Null
+	If Not __LO_IsObjInvalid($oEndNote, "Anchor") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oEndNote = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_EndnoteDelete
@@ -484,6 +488,8 @@ EndFunc   ;==>_LOWriter_EndnotesGetList
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oFootNote not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to delete Footnote.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Footnote successfully deleted.
 ; Author ........: donnyh13
@@ -501,7 +507,9 @@ Func _LOWriter_FootnoteDelete(ByRef $oFootNote)
 
 	$oFootNote.dispose()
 
-	If __LO_IsObjInvalid($oFootNote, "Anchor") Then $oFootNote = Null
+	If Not __LO_IsObjInvalid($oFootNote, "Anchor") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oFootNote = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FootnoteDelete
