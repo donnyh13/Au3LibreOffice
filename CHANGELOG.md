@@ -2107,6 +2107,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Made Objects be Nulled in functions that close or delete the Object:
   - _LOWriter_CharStyleDelete
   - _LOWriter_DocBookmarkDelete
+  - _LOWriter_DocClose
+  - _LOWriter_FieldDelete
+  - _LOWriter_EndnoteDelete
+  - _LOWriter_FootnoteDelete
+  - _LOWriter_FormConDelete
   - _LOWriter_FormConTableConColumnDelete
   - _LOWriter_FormDelete
   - _LOWriter_FrameDelete

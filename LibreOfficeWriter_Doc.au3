@@ -452,18 +452,25 @@ Func _LOWriter_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDe
 			$sDocPath = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
 			$oDoc.Close($bDeliverOwnership)
 
+			If __LO_IsObjInvalid($oDoc) Then $oDoc = Null
+
 			Return SetError($__LO_STATUS_SUCCESS, 2, $sDocPath)
 
 		Else
 			$oDoc.storeAsURL($sSavePath, $aArgs)
 			$oDoc.Close($bDeliverOwnership)
 
+			If __LO_IsObjInvalid($oDoc) Then $oDoc = Null
+
 			Return SetError($__LO_STATUS_SUCCESS, 1, _LO_PathConvert($sSavePath, $LO_PATHCONV_PCPATH_RETURN))
 		EndIf
 	EndIf
 
 	If $oDoc.hasLocation() Then $sDocPath = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
+
 	$oDoc.Close($bDeliverOwnership)
+
+	If __LO_IsObjInvalid($oDoc) Then $oDoc = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 3, $sDocPath)
 EndFunc   ;==>_LOWriter_DocClose

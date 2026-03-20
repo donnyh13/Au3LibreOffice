@@ -68,6 +68,8 @@ Func _LOWriter_EndnoteDelete(ByRef $oEndNote)
 
 	$oEndNote.dispose()
 
+	If __LO_IsObjInvalid($oEndNote, "Anchor") Then $oEndNote = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_EndnoteDelete
 
@@ -498,6 +500,8 @@ Func _LOWriter_FootnoteDelete(ByRef $oFootNote)
 	If Not IsObj($oFootNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oFootNote.dispose()
+
+	If __LO_IsObjInvalid($oFootNote, "Anchor") Then $oFootNote = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FootnoteDelete

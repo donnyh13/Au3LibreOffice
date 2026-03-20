@@ -1150,10 +1150,14 @@ Func _LOWriter_FieldDelete(ByRef $oField, $bDeleteMaster = False)
 
 		$oFieldMaster.dispose()
 
+		If __LO_IsObjInvalid($oField, "TextFieldMaster") Then $oField = Null
+
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
 	$oField.Anchor.Text.removeTextContent($oField)
+
+	If __LO_IsObjInvalid($oField, "TextFieldMaster") Then $oField = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, 1)
 EndFunc   ;==>_LOWriter_FieldDelete

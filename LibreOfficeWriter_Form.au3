@@ -2470,6 +2470,8 @@ Func _LOWriter_FormConDelete(ByRef $oControl)
 
 	$oParent.remove($oControl)
 
+	If Not IsObj($oControl.Parent()) Then $oControl = Null ; Parent will be Null when the control is deleted.
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormConDelete
 
