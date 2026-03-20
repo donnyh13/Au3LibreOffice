@@ -429,8 +429,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Standardize Property setting error check method.
 - Made Objects be Nulled in functions that close or delete the Object:
   - _LOBase_DatabaseConnectionClose
+  - _LOBase_DocClose
   - _LOBase_FormDocClose
   - _LOBase_QueryDelete
+  - _LOBase_ReportDocClose
   - _LOBase_ReportDocGroupDeleteByObj
   - _LOBase_TableColDelete
   - _LOBase_TableDelete

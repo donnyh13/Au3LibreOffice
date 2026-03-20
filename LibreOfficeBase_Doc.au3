@@ -97,6 +97,8 @@ Func _LOBase_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDeli
 			$sDocPath = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
 			$oDoc.Close($bDeliverOwnership)
 
+			If __LO_IsObjInvalid($oDoc) Then $oDoc = Null
+
 			Return SetError($__LO_STATUS_SUCCESS, 2, $sDocPath)
 
 		Else
@@ -117,13 +119,18 @@ Func _LOBase_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDeli
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 			$oDoc.storeAsURL($sSavePath, $aArgs)
+
 			$oDoc.Close($bDeliverOwnership)
+
+			If __LO_IsObjInvalid($oDoc) Then $oDoc = Null
 
 			Return SetError($__LO_STATUS_SUCCESS, 1, _LO_PathConvert($sSavePath, $LO_PATHCONV_PCPATH_RETURN))
 		EndIf
 	EndIf
 
 	$oDoc.Close($bDeliverOwnership)
+
+	If __LO_IsObjInvalid($oDoc) Then $oDoc = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 3, 1)
 EndFunc   ;==>_LOBase_DocClose

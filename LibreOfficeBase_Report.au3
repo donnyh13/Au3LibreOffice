@@ -1295,7 +1295,7 @@ Func _LOBase_ReportDocClose(ByRef $oReportDoc, $bForceClose = False)
 
 	If $oReportDoc.supportsService("com.sun.star.text.TextDocument") Then ; Report Doc is in viewing/Read-Only mode.
 		$oReportDoc.close(True)
-		$bReturn = True
+		$bReturn = __LO_IsObjInvalid($oReportDoc)
 
 	ElseIf $oReportDoc.supportsService("com.sun.star.report.ReportDefinition") Then  ; Report is in Design mode.
 		$oSource = $oReportDoc.Parent.ReportDocuments()
@@ -1315,6 +1315,8 @@ Func _LOBase_ReportDocClose(ByRef $oReportDoc, $bForceClose = False)
 
 		Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 	EndIf
+
+	If $bReturn Then $oReportDoc = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bReturn)
 EndFunc   ;==>_LOBase_ReportDocClose
