@@ -2,6 +2,7 @@
 #include <MsgBoxConstants.au3>
 
 #include "..\LibreOfficeBase.au3"
+#include "..\LibreOfficeWriter.au3"
 
 Global $sPath
 
@@ -11,7 +12,7 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oFormDoc, $oDBase, $oConnection
+	Local $oDoc, $oFormDoc, $oDBase, $oConnection, $oViewCursor
 	Local $sSavePath
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -37,36 +38,36 @@ Func Example()
 	$oConnection = _LOBase_DatabaseConnectionGet($oDBase)
 	If @error Then Return _ERROR($oDoc, "Failed to create a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a new form.
-	$oFormDoc = _LOBase_FormCreate($oConnection, "frmAutoIt_Form", False)
+	; Create a new form and open it.
+	$oFormDoc = _LOBase_FormCreate($oConnection, "frmAutoIt_Form", True)
 	If @error Then Return _ERROR($oDoc, "Failed to create a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Folder
-	_LOBase_FormFolderCreate($oDoc, "AutoIt_Folder")
-	If @error Then Return _ERROR($oDoc, "Failed to create a form folder. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve the ViewCursor for the document.
+	$oViewCursor = _LOWriter_DocGetViewCursor($oFormDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to retrieve the ViewCursor Object for the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a new form in the Folder.
-	$oFormDoc = _LOBase_FormCreate($oConnection, "AutoIt_Folder/frmAutoIt_Form2", False)
-	If @error Then Return _ERROR($oDoc, "Failed to create a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Insert some text at the ViewCursor.
+	_LOWriter_DocInsertString($oFormDoc, $oViewCursor, "Hi!")
+	If @error Then Return _ERROR($oDoc, "Failed to insert text into the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the new Form in Design Mode.
-	$oFormDoc = _LOBase_FormOpen($oConnection, "frmAutoIt_Form", True)
-	If @error Then Return _ERROR($oDoc, "Failed to open a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Save the changes to the form document.
+	_LOBase_FormDocSave($oFormDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to save the form document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the form called ""frmAutoIt_Form"" in Design Mode. Press ok to close it.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have entered text in the form and saved it. I will now close the form and re-open it.")
 
 	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
+	_LOBase_FormDocClose($oFormDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the new Form that is located in a Folder, in Form Mode.
-	$oFormDoc = _LOBase_FormOpen($oConnection, "AutoIt_Folder/frmAutoIt_Form2", False)
-	If @error Then Return _ERROR($oDoc, "Failed to open a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Re-open the form document.
+	$oFormDoc = _LOBase_FormDocOpen($oConnection, "frmAutoIt_Form")
+	If @error Then Return _ERROR($oDoc, "Failed to open the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the form called ""frmAutoIt_Form2"" located in the folder ""AutoIt_Folder"" in non-Design Mode. Press ok to close it.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have re-opened the form document. Press ok to close it.")
 
 	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
+	_LOBase_FormDocClose($oFormDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.

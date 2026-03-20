@@ -44,7 +44,7 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, "Failed to create a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; See if the form has been modified or not.
-	$bReturn = _LOBase_FormIsModified($oFormDoc)
+	$bReturn = _LOBase_FormDocIsModified($oFormDoc)
 	If @error Then Return _ERROR($oDoc, "Failed to query Document modified status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Has the form been modified? True/False: " & $bReturn)
@@ -58,13 +58,13 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, "Failed to insert text into the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; See if the form has been modified or not.
-	$bReturn = _LOBase_FormIsModified($oFormDoc)
+	$bReturn = _LOBase_FormDocIsModified($oFormDoc)
 	If @error Then Return _ERROR($oDoc, "Failed to query Document modified status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now has the form been modified? True/False: " & $bReturn)
 
 	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
+	_LOBase_FormDocClose($oFormDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.

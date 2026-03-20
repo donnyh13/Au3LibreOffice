@@ -12,8 +12,7 @@ If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
 	Local $oDoc, $oFormDoc, $oDBase, $oConnection
-	Local $sSavePath, $sForms = ""
-	Local $avForms[0]
+	Local $sSavePath
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOBase_DocCreate(True, False)
@@ -38,30 +37,36 @@ Func Example()
 	$oConnection = _LOBase_DatabaseConnectionGet($oDBase)
 	If @error Then Return _ERROR($oDoc, "Failed to create a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a new form and open it.
-	_LOBase_FormCreate($oConnection, "frmAutoIt_Form", True)
+	; Create a new form.
+	$oFormDoc = _LOBase_FormCreate($oConnection, "frmAutoIt_Form", False)
 	If @error Then Return _ERROR($oDoc, "Failed to create a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve an array of open forms.
-	$avForms = _LOBase_FormConnect(False)
-	If @error Then Return _ERROR($oDoc, "Failed to retrieve array of open form Documents. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Create a Folder
+	_LOBase_FormFolderCreate($oDoc, "AutoIt_Folder")
+	If @error Then Return _ERROR($oDoc, "Failed to create a form folder. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	For $i = 0 To @extended - 1
-		$sForms &= (IsObj($avForms[$i][0]) ? ("[Object]") : ("[Not an Object]")) & @TAB
-		$sForms &= $avForms[$i][1] & @CRLF
-	Next
+	; Create a new form in the Folder.
+	$oFormDoc = _LOBase_FormCreate($oConnection, "AutoIt_Folder/frmAutoIt_Form2", False)
+	If @error Then Return _ERROR($oDoc, "Failed to create a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The following Forms are open:" & @CRLF & $sForms & @CRLF & _
-			"I will now connect to the currently open form and close it.")
+	; Open the new Form in Design Mode.
+	$oFormDoc = _LOBase_FormDocOpen($oConnection, "frmAutoIt_Form", True)
+	If @error Then Return _ERROR($oDoc, "Failed to open a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Connect to the currently open form.
-	$oFormDoc = _LOBase_FormConnect(True)
-	If @error Then Return _ERROR($oDoc, "Failed to connect to the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have connected to the Form Document. Press ok to close it.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the form called ""frmAutoIt_Form"" in Design Mode. Press ok to close it.")
 
 	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
+	_LOBase_FormDocClose($oFormDoc, True)
+	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Open the new Form that is located in a Folder, in Form Mode.
+	$oFormDoc = _LOBase_FormDocOpen($oConnection, "AutoIt_Folder/frmAutoIt_Form2", False)
+	If @error Then Return _ERROR($oDoc, "Failed to open a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the form called ""frmAutoIt_Form2"" located in the folder ""AutoIt_Folder"" in non-Design Mode. Press ok to close it.")
+
+	; Close the Form Document.
+	_LOBase_FormDocClose($oFormDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.

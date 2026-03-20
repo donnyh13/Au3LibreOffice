@@ -2,7 +2,6 @@
 #include <MsgBoxConstants.au3>
 
 #include "..\LibreOfficeBase.au3"
-#include "..\LibreOfficeWriter.au3"
 
 Global $sPath
 
@@ -12,8 +11,9 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oFormDoc, $oDBase, $oConnection, $oViewCursor
-	Local $sSavePath
+	Local $oDoc, $oFormDoc, $oDBase, $oConnection
+	Local $sSavePath, $sForms = ""
+	Local $avForms[0]
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOBase_DocCreate(True, False)
@@ -39,35 +39,29 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, "Failed to create a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a new form and open it.
-	$oFormDoc = _LOBase_FormCreate($oConnection, "frmAutoIt_Form", True)
+	_LOBase_FormCreate($oConnection, "frmAutoIt_Form", True)
 	If @error Then Return _ERROR($oDoc, "Failed to create a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the ViewCursor for the document.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oFormDoc)
-	If @error Then Return _ERROR($oDoc, "Failed to retrieve the ViewCursor Object for the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve an array of open forms.
+	$avForms = _LOBase_FormDocConnect(False)
+	If @error Then Return _ERROR($oDoc, "Failed to retrieve array of open form Documents. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert some text at the ViewCursor.
-	_LOWriter_DocInsertString($oFormDoc, $oViewCursor, "Hi!")
-	If @error Then Return _ERROR($oDoc, "Failed to insert text into the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	For $i = 0 To @extended - 1
+		$sForms &= (IsObj($avForms[$i][0]) ? ("[Object]") : ("[Not an Object]")) & @TAB
+		$sForms &= $avForms[$i][1] & @CRLF
+	Next
 
-	; Save the changes to the form document.
-	_LOBase_FormSave($oFormDoc)
-	If @error Then Return _ERROR($oDoc, "Failed to save the form document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The following Forms are open:" & @CRLF & $sForms & @CRLF & _
+			"I will now connect to the currently open form and close it.")
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have entered text in the form and saved it. I will now close the form and re-open it.")
+	; Connect to the currently open form.
+	$oFormDoc = _LOBase_FormDocConnect(True)
+	If @error Then Return _ERROR($oDoc, "Failed to connect to the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
-	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Re-open the form document.
-	$oFormDoc = _LOBase_FormOpen($oConnection, "frmAutoIt_Form")
-	If @error Then Return _ERROR($oDoc, "Failed to open the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have re-opened the form document. Press ok to close it.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have connected to the Form Document. Press ok to close it.")
 
 	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
+	_LOBase_FormDocClose($oFormDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.

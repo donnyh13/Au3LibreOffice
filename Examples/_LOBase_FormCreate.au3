@@ -45,7 +45,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have created a form and opened it. Press ok to close it.")
 
 	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
+	_LOBase_FormDocClose($oFormDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now demonstrate creating a form in a folder. Click on the ""Forms"" button to view the new folder and forms.")

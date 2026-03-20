@@ -44,7 +44,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have created and saved a Form Document to this Database, and then opened it. Press ok to close it.")
 
 	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
+	_LOBase_FormDocClose($oFormDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.

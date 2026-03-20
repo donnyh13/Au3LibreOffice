@@ -383,6 +383,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `$LOB_TXT_ALIGN_HORI_` --> `$LOB_PAR_TXT_ALIGN_HORI_`
   - `$LOB_UNDERLINE_` --> `$LOB_CHAR_UNDERLINE_`
   - `$LOB_WEIGHT_` --> `$LOB_CHAR_WEIGHT_`
+- Renamed some Form functions to be grouped together logically:
+  - `_LOBase_FormClose` --> `_LOBase_FormDocClose`
+  - `_LOBase_FormConnect` --> `_LOBase_FormDocConnect`
+  - `_LOBase_FormIsModified` --> `_LOBase_FormDocIsModified`
+  - `_LOBase_FormOpen` --> `_LOBase_FormDocOpen`
+  - `_LOBase_FormSave` --> `_LOBase_FormDocSave`
 
 #### Documented
 
