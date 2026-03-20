@@ -1973,6 +1973,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_DocHyperlinkInsert` --> `_LOWriter_CursorHyperlinkInsert`
   - `_LOWriter_DocInsertControlChar` --> `_LOWriter_CursorInsertControlChar`
   - `_LOWriter_DocInsertString` --> `_LOWriter_CursorInsertString`
+- Added Error check for failing to close a Document to `_LOWriter_DocClose`.
 
 #### Documented
 
