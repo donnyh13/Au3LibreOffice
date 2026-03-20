@@ -1167,6 +1167,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `$LOC_DUPLEX_` --> `$LOC_PRINT_DUPLEX_`
   - `$LOC_SHADOW_` --> `$LOC_SHADOW_LOCATION_`
 - Simplified Super/SubScript setting method in `_LOCalc_TextCursorCharPosition`.
+- Added Error check for failing to close a Document to `_LOCalc_DocClose`.
 
 #### Documented
 
