@@ -1217,6 +1217,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Made Objects be Nulled in functions that close or delete the Object:
   - _LOCalc_CellStyleDelete
   - _LOCalc_CommentDelete
+  - _LOCalc_DocClose
   - _LOCalc_PageStyleDelete
   - _LOCalc_RangeDatabaseDelete
   - _LOCalc_RangePivotDelete
