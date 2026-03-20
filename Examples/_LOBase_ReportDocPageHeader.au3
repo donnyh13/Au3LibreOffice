@@ -11,8 +11,8 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oReportDoc, $oGroup, $oTable
-	Local $iCount
+	Local $oDoc, $oReportDoc, $oDBase, $oConnection
+	Local $avReport
 	Local $sSavePath
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -38,42 +38,30 @@ Func Example()
 	$oConnection = _LOBase_DatabaseConnectionGet($oDBase)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to create a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Add a Table to the Database.
-	$oTable = _LOBase_TableAdd($oConnection, "tblNew_Table", "ID")
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a table to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Add a Column to the Table.
-	_LOBase_TableColAdd($oTable, "Value_Col", $LOB_DATA_TYPE_INTEGER, "", "A New Integer Column.")
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a Column to the Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
 	; Create a new Report and open it.
 	$oReportDoc = _LOBase_ReportCreate($oConnection, "rptAutoIt_Report", True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to create a Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to add some Groups.")
+	; Modify the settings for the Section.
+	_LOBase_ReportDocPageHeader($oReportDoc, True, "AutoIt_Section", True, 4500, Null, $LO_COLOR_TEAL)
+	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to modify Section's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Add a Group
-	$oGroup = _LOBase_ReportGroupAdd($oReportDoc)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a new Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve the current settings for the Section. Return will be an Array in order of function parameters.
+	$avReport = _LOBase_ReportDocPageHeader($oReportDoc)
+	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to retrieve Section's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Groups properties.
-	_LOBase_ReportGroupSort($oGroup, "Value_Col")
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify the Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Add another Group
-	_LOBase_ReportGroupAdd($oReportDoc, 0)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a new Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Get a count of Groups
-	$iCount = _LOBase_ReportGroupsGetCount($oReportDoc)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to get a count of Groups. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Report now contains " & $iCount & " Groups.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Section's current settings are: " & @CRLF & _
+			"Is the Page Header enabled? True/False: " & $avReport[0] & @CRLF & _
+			"The Section's name is: " & $avReport[1] & @CRLF & _
+			"Is the section visible? True/False: " & $avReport[2] & @CRLF & _
+			"The Height of the section is, in Hundredths of a Millimeter (HMM): " & $avReport[3] & @CRLF & _
+			"The Conditional Print statement is: " & $avReport[4] & @CRLF & _
+			"The Background color is (as a RGB Color Integer): " & $avReport[5])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to close the document.")
 
 	; Close the Report Document.
-	_LOBase_ReportClose($oReportDoc, True)
+	_LOBase_ReportDocClose($oReportDoc, True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
@@ -87,7 +75,7 @@ EndFunc
 
 Func _ERROR($oDoc, $oReportDoc, $sErrorText)
 	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
-	If IsObj($oReportDoc) Then _LOBase_ReportClose($oReportDoc, True)
+	If IsObj($oReportDoc) Then _LOBase_ReportDocClose($oReportDoc, True)
 	If IsObj($oDoc) Then _LOBase_DocClose($oDoc, False)
 	Exit
 EndFunc

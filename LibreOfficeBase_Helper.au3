@@ -618,7 +618,7 @@ EndFunc   ;==>_LOBase_FontDescEdit
 ; Description ...: Tests whether a specific font exists by name.
 ; Syntax ........: _LOBase_FontExists($sFontName[, $oDoc = Null])
 ; Parameters ....: $sFontName           - a string value. The Font name to search for.
-;                  $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOBase_ReportConnect, _LOBase_ReportOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -693,7 +693,7 @@ EndFunc   ;==>_LOBase_FontExists
 ; Name ..........: _LOBase_FontsGetNames
 ; Description ...: Retrieve an array of currently available fonts.
 ; Syntax ........: _LOBase_FontsGetNames([$oDoc = Null])
-; Parameters ....: $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOBase_ReportConnect, _LOBase_ReportOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
@@ -772,7 +772,7 @@ EndFunc   ;==>_LOBase_FontsGetNames
 ; Name ..........: _LOBase_FormatKeyCreate
 ; Description ...: Create a Format Key.
 ; Syntax ........: _LOBase_FormatKeyCreate(ByRef $oObj, $sFormat)
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportConnect, or _LOBase_ReportOpen function.
+; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $sFormat             - a string value. The format key String to create.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -832,7 +832,7 @@ EndFunc   ;==>_LOBase_FormatKeyCreate
 ; Name ..........: _LOBase_FormatKeyDelete
 ; Description ...: Delete a User-Created Format Key.
 ; Syntax ........: _LOBase_FormatKeyDelete(ByRef $oObj, $iFormatKey)
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportConnect, or _LOBase_ReportOpen function.
+; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $iFormatKey          - an Integer value. The User-Created format Key to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -884,7 +884,7 @@ EndFunc   ;==>_LOBase_FormatKeyDelete
 ; Name ..........: _LOBase_FormatKeyExists
 ; Description ...: Check if a Document contains a certain Format Key.
 ; Syntax ........: _LOBase_FormatKeyExists(ByRef $oObj, $iFormatKey[, $iFormatType = $LOB_FORMAT_KEYS_ALL])
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportConnect, or _LOBase_ReportOpen function.
+; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $iFormatKey          - an Integer value. The Format Key to look for.
 ;                  $iFormatType         - [optional] an integer value (0-15881). Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Boolean
@@ -948,7 +948,7 @@ EndFunc   ;==>_LOBase_FormatKeyExists
 ; Name ..........: _LOBase_FormatKeyGetStandard
 ; Description ...: Retrieve the Standard Format for a specific Format Key Type.
 ; Syntax ........: _LOBase_FormatKeyGetStandard(ByRef $oObj, $iFormatKeyType)
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportConnect, or _LOBase_ReportOpen function.
+; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $iFormatKeyType      - an Integer value (1-8196). The Format Key type to retrieve the standard Format for. See Constants $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1004,7 +1004,7 @@ EndFunc   ;==>_LOBase_FormatKeyGetStandard
 ; Name ..........: _LOBase_FormatKeyGetString
 ; Description ...: Retrieve a Format Key String.
 ; Syntax ........: _LOBase_FormatKeyGetString(ByRef $oObj, $iFormatKey)
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportConnect, or _LOBase_ReportOpen function.
+; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $iFormatKey          - an Integer value. The Format Key to retrieve the string for.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1055,7 +1055,7 @@ EndFunc   ;==>_LOBase_FormatKeyGetString
 ; Name ..........: _LOBase_FormatKeysGetList
 ; Description ...: Retrieve an Array of Format Keys.
 ; Syntax ........: _LOBase_FormatKeysGetList(ByRef $oObj[, $bIsUser = False[, $bUserOnly = False[, $iFormatKeyType = $LOB_FORMAT_KEYS_ALL]]])
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportConnect, or _LOBase_ReportOpen function.
+; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $bIsUser             - [optional] a boolean value. Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
 ;                  $bUserOnly           - [optional] a boolean value. Default is False. If True, only user-created Format Keys are returned.
 ;                  $iFormatKeyType      - [optional] an integer value (0-15881). Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.

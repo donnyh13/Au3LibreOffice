@@ -11,8 +11,8 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oReportDoc, $oDBase, $oConnection
-	Local $avReport
+	Local $oDoc, $oDBase, $oConnection, $oReportDoc, $oGroup, $oTable
+	Local $iCount
 	Local $sSavePath
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -39,33 +39,62 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to create a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add a Table to the Database.
-	_LOBase_TableAdd($oConnection, "tblNew_Table", "ID")
+	$oTable = _LOBase_TableAdd($oConnection, "tblNew_Table", "ID")
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a table to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Add a Column to the Table.
+	_LOBase_TableColAdd($oTable, "Value_Col", $LOB_DATA_TYPE_INTEGER, "", "A New Integer Column.")
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a Column to the Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Add a Column to the Table.
+	_LOBase_TableColAdd($oTable, "Third_Col", $LOB_DATA_TYPE_VARCHAR, "", "A New String Column.")
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a Column to the Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a new Report and open it.
 	$oReportDoc = _LOBase_ReportCreate($oConnection, "rptAutoIt_Report", True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to create a Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Data settings for the Report.
-	_LOBase_ReportData($oReportDoc, $LOB_REP_CONTENT_TYPE_TABLE, "tblNew_Table", True, "SELECT * FROM ""tblNew_Table""", $LOB_REP_OUTPUT_TYPE_SPREADSHEET, True)
-	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to modify Report's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Get a count of Groups
+	$iCount = _LOBase_ReportDocGroupsGetCount($oReportDoc)
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to get a count of Groups. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current settings for the Report. Return will be an Array in order of function parameters.
-	$avReport = _LOBase_ReportData($oReportDoc)
-	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to retrieve Report's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Report currently contains " & $iCount & " Groups." & @CRLF & @CRLF & _
+			"Press ok to add some Groups.")
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Report's current settings are: " & @CRLF & _
-			"The Report's Data source type is (See UDF Constants): " & $avReport[0] & @CRLF & _
-			"The Data source name is: " & $avReport[1] & @CRLF & _
-			"Is SQL statements analyzed? True/False: " & $avReport[2] & @CRLF & _
-			"The filter statement is: " & $avReport[3] & @CRLF & _
-			"The Report Output document type is (See UDF Constants): " & $avReport[4] & @CRLF & _
-			"Is the ""Add a Field"" dialog suppressed? True/False: " & $avReport[5])
+	; Add a Group
+	$oGroup = _LOBase_ReportDocGroupAdd($oReportDoc, 0)
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a new Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Modify the Groups properties.
+	_LOBase_ReportGroupSort($oGroup, "ID")
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify the Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Add another Group
+	$oGroup = _LOBase_ReportDocGroupAdd($oReportDoc)
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a new Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Modify the Groups properties.
+	_LOBase_ReportGroupSort($oGroup, "Value_Col")
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify the Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Add a third Group
+	$oGroup = _LOBase_ReportDocGroupAdd($oReportDoc, 1)
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a new Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Modify the Groups properties.
+	_LOBase_ReportGroupSort($oGroup, "Third_Col")
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify the Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Get a count of Groups
+	$iCount = _LOBase_ReportDocGroupsGetCount($oReportDoc)
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to get a count of Groups. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Report now contains " & $iCount & " Groups.")
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to close the document.")
 
 	; Close the Report Document.
-	_LOBase_ReportClose($oReportDoc, True)
+	_LOBase_ReportDocClose($oReportDoc, True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
@@ -79,7 +108,7 @@ EndFunc
 
 Func _ERROR($oDoc, $oReportDoc, $sErrorText)
 	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
-	If IsObj($oReportDoc) Then _LOBase_ReportClose($oReportDoc, True)
+	If IsObj($oReportDoc) Then _LOBase_ReportDocClose($oReportDoc, True)
 	If IsObj($oDoc) Then _LOBase_DocClose($oDoc, False)
 	Exit
 EndFunc

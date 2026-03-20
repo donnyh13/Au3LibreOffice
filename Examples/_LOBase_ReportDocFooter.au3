@@ -42,25 +42,28 @@ Func Example()
 	$oReportDoc = _LOBase_ReportCreate($oConnection, "rptAutoIt_Report", True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to create a Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the General settings for the Report.
-	_LOBase_ReportGeneral($oReportDoc, "AutoIt_Report", $LOB_REP_PAGE_PRINT_OPT_NOT_WITH_REP_HEADER_FOOTER, $LOB_REP_PAGE_PRINT_OPT_ALL_PAGES, True, False)
-	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to modify Report's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Modify the settings for the Section.
+	_LOBase_ReportDocFooter($oReportDoc, True, "AutoIt_Section", $LOB_REP_FORCE_PAGE_AFTER_SECTION, False, True, 4500, Null, $LO_COLOR_TEAL)
+	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to modify Section's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current settings for the Report. Return will be an Array in order of function parameters.
-	$avReport = _LOBase_ReportGeneral($oReportDoc)
-	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to retrieve Report's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve the current settings for the Section. Return will be an Array in order of function parameters.
+	$avReport = _LOBase_ReportDocFooter($oReportDoc)
+	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to retrieve Section's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Report's current settings are: " & @CRLF & _
-			"The Report's name is: " & $avReport[0] & @CRLF & _
-			"Will a Page Header be printed on a Page that also contains a Report Header/Footer? (See UDF Constants): " & $avReport[1] & @CRLF & _
-			"Will a Page Footer be printed on a Page that also contains a Report Header/Footer? (See UDF Constants): " & $avReport[2] & @CRLF & _
-			"Will the size of the Report grow to fit content? True/False: " & $avReport[3] & @CRLF & _
-			"Is repeated content printed? True/False: " & $avReport[4])
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Section's current settings are: " & @CRLF & _
+			"Is the Report Footer enabled? True/False: " & $avReport[0] & @CRLF & _
+			"The Section's name is: " & $avReport[1] & @CRLF & _
+			"Will a new page be created before/after this section? If so, when? (See UDF Constants): " & $avReport[2] & @CRLF & _
+			"Will the content be prevented from spreading across more than one page? True/False: " & $avReport[3] & @CRLF & _
+			"Is the section visible? True/False: " & $avReport[4] & @CRLF & _
+			"The Height of the section is, in Hundredths of a Millimeter (HMM): " & $avReport[5] & @CRLF & _
+			"The Conditional Print statement is: " & $avReport[6] & @CRLF & _
+			"The Background color is (as a RGB Color Integer): " & $avReport[7])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to close the document.")
 
 	; Close the Report Document.
-	_LOBase_ReportClose($oReportDoc, True)
+	_LOBase_ReportDocClose($oReportDoc, True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
@@ -74,7 +77,7 @@ EndFunc
 
 Func _ERROR($oDoc, $oReportDoc, $sErrorText)
 	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
-	If IsObj($oReportDoc) Then _LOBase_ReportClose($oReportDoc, True)
+	If IsObj($oReportDoc) Then _LOBase_ReportDocClose($oReportDoc, True)
 	If IsObj($oDoc) Then _LOBase_DocClose($oDoc, False)
 	Exit
 EndFunc

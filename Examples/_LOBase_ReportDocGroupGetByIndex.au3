@@ -11,7 +11,7 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oReportDoc, $oGroup
+	Local $oDoc, $oDBase, $oConnection, $oReportDoc, $oGroup, $oTable
 	Local $sSavePath
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -38,15 +38,23 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to create a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add a Table to the Database.
-	_LOBase_TableAdd($oConnection, "tblNew_Table", "ID")
+	$oTable = _LOBase_TableAdd($oConnection, "tblNew_Table", "ID")
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a table to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Add a Column to the Table.
+	_LOBase_TableColAdd($oTable, "Value_Col", $LOB_DATA_TYPE_INTEGER, "", "A New Integer Column.")
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a Column to the Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Add a Column to the Table.
+	_LOBase_TableColAdd($oTable, "Third_Col", $LOB_DATA_TYPE_VARCHAR, "", "A New String Column.")
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a Column to the Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a new Report and open it.
 	$oReportDoc = _LOBase_ReportCreate($oConnection, "rptAutoIt_Report", True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to create a Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add a Group
-	$oGroup = _LOBase_ReportGroupAdd($oReportDoc, 0)
+	$oGroup = _LOBase_ReportDocGroupAdd($oReportDoc, 0)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a new Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Groups properties.
@@ -54,31 +62,35 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify the Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add another Group
-	$oGroup = _LOBase_ReportGroupAdd($oReportDoc)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a new Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Modify the Groups properties.
-	_LOBase_ReportGroupSort($oGroup, "Value_Col")
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify the Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Add a third Group
-	$oGroup = _LOBase_ReportGroupAdd($oReportDoc, 1)
+	$oGroup = _LOBase_ReportDocGroupAdd($oReportDoc, 1)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a new Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Groups properties.
 	_LOBase_ReportGroupSort($oGroup, "Third_Col")
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify the Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Add a third Group
+	$oGroup = _LOBase_ReportDocGroupAdd($oReportDoc)
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to add a new Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Modify the Groups properties.
+	_LOBase_ReportGroupSort($oGroup, "Value_Col")
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify the Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to delete the middle Group, ""Third_Col"".")
 
+	; Retrieve the Group's Object
+	$oGroup = _LOBase_ReportDocGroupGetByIndex($oReportDoc, 1)
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to retrieve Group Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	; Delete a Group by Object
-	_LOBase_ReportGroupDeleteByObj($oGroup)
+	_LOBase_ReportDocGroupDeleteByObj($oGroup)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to delete a Group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to close the document.")
 
 	; Close the Report Document.
-	_LOBase_ReportClose($oReportDoc, True)
+	_LOBase_ReportDocClose($oReportDoc, True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
@@ -92,7 +104,7 @@ EndFunc
 
 Func _ERROR($oDoc, $oReportDoc, $sErrorText)
 	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
-	If IsObj($oReportDoc) Then _LOBase_ReportClose($oReportDoc, True)
+	If IsObj($oReportDoc) Then _LOBase_ReportDocClose($oReportDoc, True)
 	If IsObj($oDoc) Then _LOBase_DocClose($oDoc, False)
 	Exit
 EndFunc

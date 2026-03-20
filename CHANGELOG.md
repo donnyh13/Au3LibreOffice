@@ -389,6 +389,25 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOBase_FormIsModified` --> `_LOBase_FormDocIsModified`
   - `_LOBase_FormOpen` --> `_LOBase_FormDocOpen`
   - `_LOBase_FormSave` --> `_LOBase_FormDocSave`
+- Renamed several Report functions to be grouped together logically:
+  - `_LOBase_ReportClose` --> `_LOBase_ReportDocClose`
+  - `_LOBase_ReportConnect` --> `_LOBase_ReportDocConnect`
+  - `_LOBase_ReportData` --> `_LOBase_ReportDocData`
+  - `_LOBase_ReportDetail` --> `_LOBase_ReportDocDetail`
+  - `_LOBase_ReportFooter` --> `_LOBase_ReportDocFooter`
+  - `_LOBase_ReportGeneral` --> `_LOBase_ReportDocGeneral`
+  - `_LOBase_ReportGroupAdd` --> `_LOBase_ReportDocGroupAdd`
+  - `_LOBase_ReportGroupDeleteByIndex` --> `_LOBase_ReportDocGroupDeleteByIndex`
+  - `_LOBase_ReportGroupDeleteByObj` --> `_LOBase_ReportDocGroupDeleteByObj`
+  - `_LOBase_ReportGroupGetByIndex` --> `_LOBase_ReportDocGroupGetByIndex`
+  - `_LOBase_ReportGroupsGetCount` --> `_LOBase_ReportDocGroupsGetCount`
+  - `_LOBase_ReportHeader` --> `_LOBase_ReportDocHeader`
+  - `_LOBase_ReportIsModified` --> `_LOBase_ReportDocIsModified`
+  - `_LOBase_ReportOpen` --> `_LOBase_ReportDocOpen`
+  - `_LOBase_ReportPageFooter` --> `_LOBase_ReportDocPageFooter`
+  - `_LOBase_ReportPageHeader` --> `_LOBase_ReportDocPageHeader`
+  - `_LOBase_ReportSave` --> `_LOBase_ReportDocSave`
+  - `_LOBase_ReportSectionGetObj` --> `_LOBase_ReportDocSectionGetObj`
 
 #### Documented
 

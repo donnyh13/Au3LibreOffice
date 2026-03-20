@@ -11,7 +11,8 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oReportDoc, $oSection
+	Local $oDoc, $oReportDoc, $oDBase, $oConnection
+	Local $avReport
 	Local $sSavePath
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -41,48 +42,41 @@ Func Example()
 	$oReportDoc = _LOBase_ReportCreate($oConnection, "rptAutoIt_Report", True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to create a Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the Detail Section of the Report.
-	$oSection = _LOBase_ReportSectionGetObj($oReportDoc, $LOB_REP_SECTION_TYPE_DETAIL)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to retrieve Section Object of Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Modify the settings for the Section.
+	_LOBase_ReportDocDetail($oReportDoc, "AutoIt_Detail_Section", $LOB_REP_FORCE_PAGE_AFTER_SECTION, False, True, 4500, Null, $LO_COLOR_TEAL)
+	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to modify Section's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a control in the Detail Section.
-	_LOBase_ReportConInsert($oSection, $LOB_REP_CON_TYPE_TEXT_BOX, 2500, 800, 2500, 3000)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to insert a Control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve the current settings for the Section. Return will be an Array in order of function parameters.
+	$avReport = _LOBase_ReportDocDetail($oReportDoc)
+	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to retrieve Section's property values. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Save any changes made to the report.
-	_LOBase_ReportSave($oReportDoc)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to save changes to a Report. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Section's current settings are: " & @CRLF & _
+			"The Section's name is: " & $avReport[0] & @CRLF & _
+			"Will a new page be created before/after this section? If so, when? (See UDF Constants): " & $avReport[1] & @CRLF & _
+			"Will the content be prevented from spreading across more than one page? True/False: " & $avReport[2] & @CRLF & _
+			"Is the section visible? True/False: " & $avReport[3] & @CRLF & _
+			"The Height of the section is, in Hundredths of a Millimeter (HMM): " & $avReport[4] & @CRLF & _
+			"The Conditional Print statement is: " & $avReport[5] & @CRLF & _
+			"The Background color is (as a RGB Color Integer): " & $avReport[6])
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have created a Control in the Report and saved it. I will now close the Report and re-open it.")
-
-	; Close the Report Document.
-	_LOBase_ReportClose($oReportDoc, True)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Re-open the Report document.
-	$oReportDoc = _LOBase_ReportOpen($oConnection, "rptAutoIt_Report")
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to open the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have re-opened the Report document. Press ok to close it.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to close the document.")
 
 	; Close the Report Document.
-	_LOBase_ReportClose($oReportDoc, True)
+	_LOBase_ReportDocClose($oReportDoc, True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the Base document.")
-
 	; Close the document.
 	_LOBase_DocClose($oDoc, False)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $oReportDoc, $sErrorText)
 	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
-	If IsObj($oReportDoc) Then _LOBase_ReportClose($oReportDoc, True)
+	If IsObj($oReportDoc) Then _LOBase_ReportDocClose($oReportDoc, True)
 	If IsObj($oDoc) Then _LOBase_DocClose($oDoc, False)
 	Exit
 EndFunc

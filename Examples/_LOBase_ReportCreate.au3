@@ -46,7 +46,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have created a Report and opened it. Press ok to close it.")
 
 	; Close the Report Document.
-	_LOBase_ReportClose($oReportDoc, True)
+	_LOBase_ReportDocClose($oReportDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now demonstrate creating a Report in a folder. Click on the ""Reports"" button to view the new folder and Reports.")
