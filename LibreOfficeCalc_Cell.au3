@@ -1459,8 +1459,11 @@ Func _LOCalc_CellStyleDelete(ByRef $oDoc, ByRef $oCellStyle, $bForceDelete = Fal
 	; If Parent style is blank set it to "Default", Or if not but User has called a specific style set it to that.
 
 	$oCellStyles.removeByName($sCellStyle)
+	If $oCellStyles.hasByName($sCellStyle) Then SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-	Return ($oCellStyles.hasByName($sCellStyle)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	$oCellStyle = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_CellStyleDelete
 
 ; #FUNCTION# ====================================================================================================================

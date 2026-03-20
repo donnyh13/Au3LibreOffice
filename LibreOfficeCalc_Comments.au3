@@ -1262,6 +1262,8 @@ Func _LOCalc_CommentDelete(ByRef $oComment)
 	__LOCalc_CommentGetObjByCell($oCell, True)
 	If (@error = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Comment still exists.
 
+	$oComment = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_CommentDelete
 

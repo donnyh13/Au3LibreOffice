@@ -1395,6 +1395,8 @@ Func _LOCalc_SheetRemove(ByRef $oDoc, ByRef $oSheet)
 
 	If $oSheets.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
+	$oSheet = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_SheetRemove
 

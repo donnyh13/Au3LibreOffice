@@ -961,6 +961,8 @@ Func _LOCalc_RangeDatabaseDelete(ByRef $oDoc, $oDatabaseRange)
 
 	If $oDatabaseRanges.hasByName($sDatabaseRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
+	$oDatabaseRange = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_RangeDatabaseDelete
 
@@ -2882,6 +2884,8 @@ Func _LOCalc_RangePivotDelete(ByRef $oDoc, ByRef $oPivotTable)
 
 	$oSheet.DataPilotTables.removeByName($sName)
 	If $oSheet.DataPilotTables.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$oPivotTable = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_RangePivotDelete

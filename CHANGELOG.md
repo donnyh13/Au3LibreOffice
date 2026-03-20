@@ -1210,6 +1210,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Made certain Input checks use `__LO_IntIsBetween`.
 - Changed some functions to not return a Property setting error instantly, but made it match other functionsby using an error variable.
 - Standardize Property setting error check method.
+- Made Objects be Nulled in functions that close or delete the Object:
+  - _LOCalc_CellStyleDelete
+  - _LOCalc_CommentDelete
+  - _LOCalc_PageStyleDelete
+  - _LOCalc_RangeDatabaseDelete
+  - _LOCalc_RangePivotDelete
+  - _LOCalc_SheetRemove
 
 #### Removed
 
