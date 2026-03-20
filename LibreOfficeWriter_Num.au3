@@ -411,7 +411,7 @@ EndFunc   ;==>_LOWriter_NumStyleCustomize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_NumStyleDelete(ByRef $oDoc, $oNumStyle)
+Func _LOWriter_NumStyleDelete(ByRef $oDoc, ByRef $oNumStyle)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -431,8 +431,11 @@ Func _LOWriter_NumStyleDelete(ByRef $oDoc, $oNumStyle)
 	If $oNumStyle.isInUse() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; If Style is in use return an error unless force delete is true.
 
 	$oNumStyles.removeByName($sNumStyle)
+	If $oNumStyles.hasByName($sNumStyle) Then SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-	Return ($oNumStyles.hasByName($sNumStyle)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	$oNumStyle = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_NumStyleDelete
 
 ; #FUNCTION# ====================================================================================================================

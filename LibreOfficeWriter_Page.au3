@@ -1630,8 +1630,11 @@ Func _LOWriter_PageStyleDelete(ByRef $oDoc, ByRef $oPageStyle)
 	If $oPageStyle.isInUse() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; If Style is in use return an error.
 
 	$oPageStyles.removeByName($sPageStyle)
+	If $oPageStyles.hasByName($sPageStyle) Then SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-	Return ($oPageStyles.hasByName($sPageStyle)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	$oPageStyle = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_PageStyleDelete
 
 ; #FUNCTION# ====================================================================================================================

@@ -2099,6 +2099,19 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Renamed $iSlant parameter to $iPosture in `_LOWriter_FontDescCreate` and `_LOWriter_FontDescEdit` for consistency.
 - Changed some functions to not return a Property setting error instantly, but made it match other functions by using an error variable.
 - Standardize Property setting error check method.
+- Made Objects be Nulled in functions that close or delete the Object:
+  - _LOWriter_CharStyleDelete
+  - _LOWriter_DocBookmarkDelete
+  - _LOWriter_FormConTableConColumnDelete
+  - _LOWriter_FormDelete
+  - _LOWriter_FrameDelete
+  - _LOWriter_FrameStyleDelete
+  - _LOWriter_ImageDelete
+  - _LOWriter_NumStyleDelete
+  - _LOWriter_PageStyleDelete
+  - _LOWriter_ParStyleDelete
+  - _LOWriter_ShapeDelete
+  - _LOWriter_TableDelete
 
 #### Removed
 

@@ -978,6 +978,8 @@ Func _LOWriter_TableDelete(ByRef $oDoc, ByRef $oTable)
 	$oTable.dispose()
 	If ($oDoc.TextTables.hasByName($sTableName)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Document still contains Table named the same.
 
+	$oTable = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_TableDelete
 

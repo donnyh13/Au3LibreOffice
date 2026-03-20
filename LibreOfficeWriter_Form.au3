@@ -8560,6 +8560,8 @@ Func _LOWriter_FormConTableConColumnDelete(ByRef $oColumn)
 		If ($oParent.getByIndex($i) = $oColumn) Then
 			$oParent.removeByIndex($i) ; The name can be the same as another control, so I have to remove by Index.
 
+			$oColumn = Null
+
 			Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 		EndIf
 
@@ -13732,6 +13734,8 @@ Func _LOWriter_FormDelete(ByRef $oForm)
 	$oParent.removeByName($sTempName & $iCount)
 
 	If $oParent.hasByName($sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+
+	$oForm = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormDelete

@@ -127,8 +127,11 @@ Func _LOWriter_DocBookmarkDelete(ByRef $oDoc, ByRef $oBookmark)
 	$sBookmarkName = $oBookmark.Name()
 
 	$oBookmark.dispose()
+	If _LOWriter_DocBookmarkExists($oDoc, $sBookmarkName) Then SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return (_LOWriter_DocBookmarkExists($oDoc, $sBookmarkName)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	$oBookmark = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_DocBookmarkDelete
 
 ; #FUNCTION# ====================================================================================================================

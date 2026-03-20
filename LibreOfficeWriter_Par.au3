@@ -1224,8 +1224,11 @@ Func _LOWriter_ParStyleDelete(ByRef $oDoc, ByRef $oParStyle, $bForceDelete = Fal
 	; If Parent style is blank set it to "Default Paragraph Style" (Standard), Or if not but User has called a specific style set it to that.
 
 	$oParStyles.removeByName($sParStyle)
+	If $oParStyles.hasByName($sParStyle) Then SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-	Return ($oParStyles.hasByName($sParStyle)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	$oParStyle = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_ParStyleDelete
 
 ; #FUNCTION# ====================================================================================================================

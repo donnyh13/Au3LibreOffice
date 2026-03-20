@@ -1368,6 +1368,8 @@ Func _LOWriter_ImageDelete(ByRef $oDoc, ByRef $oImage)
 	$oImage.dispose()
 	If ($oDoc.GraphicObjects().hasByName($sImageName)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Document still contains Image named the same.
 
+	$oImage = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_ImageDelete
 

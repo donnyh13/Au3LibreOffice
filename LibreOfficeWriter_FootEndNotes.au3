@@ -67,7 +67,6 @@ Func _LOWriter_EndnoteDelete(ByRef $oEndNote)
 	If Not IsObj($oEndNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oEndNote.dispose()
-	$oEndNote = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_EndnoteDelete
