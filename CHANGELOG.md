@@ -410,6 +410,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOBase_ReportPageHeader` --> `_LOBase_ReportDocPageHeader`
   - `_LOBase_ReportSave` --> `_LOBase_ReportDocSave`
   - `_LOBase_ReportSectionGetObj` --> `_LOBase_ReportDocSectionGetObj`
+- Added Error check for failing to close a Document to `_LOBase_DocClose`.
 
 #### Documented
 
