@@ -47,11 +47,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
     - __LO_DeleteTempReg
     - __LO_InternalComErrorHandler
     - __LO_IntIsBetween
+    - __LO_IsObjInvalid
     - __LO_NumIsBetween
     - __LO_ServiceManager
     - __LO_SetPortableServiceManager
     - __LO_SetPropertyValue
     - __LO_StylesGetNames
+    - __LO_TestObjCOM
     - __LO_VarsAreNull
     - __LO_VersionCheck
 - Central UDF File for all components (@mLipok)

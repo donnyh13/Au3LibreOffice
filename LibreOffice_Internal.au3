@@ -23,11 +23,13 @@
 ; __LO_DeleteTempReg
 ; __LO_InternalComErrorHandler
 ; __LO_IntIsBetween
+; __LO_IsObjInvalid
 ; __LO_NumIsBetween
 ; __LO_ServiceManager
 ; __LO_SetPortableServiceManager
 ; __LO_SetPropertyValue
 ; __LO_StylesGetNames
+; __LO_TestObjCOM
 ; __LO_VarsAreNull
 ; __LO_VersionCheck
 ; ===============================================================================================================================
@@ -334,6 +336,37 @@ Func __LO_IntIsBetween($iTest, $iMin, $iMax = 0, $vNot = "", $vIncl = "")
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False)
 EndFunc   ;==>__LO_IntIsBetween
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_IsObjInvalid
+; Description ...: Test if an Object has been deleted or closed definitely.
+; Syntax ........: __LO_IsObjInvalid(ByRef $oObject[, $sTestMethod = "getCurrentController"])
+; Parameters ....: $oObject             - [in/out] an object. Any Object.
+;                  $sTestMethod         - [optional] a string value. Default is "getCurrentController". The Method or Property to try calling.
+; Return values .: Success: Boolean
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Object is not invalid. Else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function tries to call a method or property for an object, if it fails the Object has been closed or deleted successfully, if not, it has not.
+; Related .......: __LO_TestObjCOM
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_IsObjInvalid(ByRef $oObject, $sTestMethod = "getCurrentController")
+	Local $oLOError = ObjEvent("AutoIt.Error", __LO_TestObjCOM)
+	#forceref $oLOError
+
+	If Not IsObj($oObject) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+	; Try calling a method/property to see if the object is still active.
+	Execute("$oObject." & $sTestMethod & "()")
+
+	; If calling method/property above triggers a COM error, __LOTestObjCOM will be called, and @error will be set.
+	If @error Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
+EndFunc   ;==>__LO_IsObjInvalid
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_NumIsBetween
@@ -818,6 +851,35 @@ Func __LO_StylesGetNames(ByRef $oDoc, $sStyleFamily, $bUserOnly = False, $bAppli
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, $asStyles)
 EndFunc   ;==>__LO_StylesGetNames
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_TestObjCOM
+; Description ...: Catches the intentionally created COM error and does nothing.
+; Syntax ........: __LO_TestObjCOM($oLOError)
+; Parameters ....: $oLOError            - an object. The COM error Object.
+; Return values .: None
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: __LO_IsObjInvalid
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_TestObjCOM($oLOError)
+;~ 	ConsoleWrite("!--COM Error-Begin--" & @CRLF & _
+;~ 			"Module: LibreOffice Main" & @CRLF & _
+;~ 			"Number: 0x" & Hex($oLOError.number, 8) & @CRLF & _
+;~ 			"WinDescription: " & $oLOError.windescription & @CRLF & _
+;~ 			"Source: " & $oLOError.source & @CRLF & _
+;~ 			"Error Description: " & $oLOError.description & @CRLF & _
+;~ 			"HelpFile: " & $oLOError.helpfile & @CRLF & _
+;~ 			"HelpContext: " & $oLOError.helpcontext & @CRLF & _
+;~ 			"LastDLLError: " & $oLOError.lastdllerror & @CRLF & _
+;~ 			"At line: " & $oLOError.scriptline & @CRLF & _
+;~ 			"!--COM-Error-End--" & @CRLF)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>__LO_TestObjCOM
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_VarsAreNull
