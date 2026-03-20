@@ -453,6 +453,8 @@ Func _LOBase_TableColDelete(ByRef $oTable, ByRef $oColumn)
 
 	If $oColumns.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
+	$oColumn = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOBase_TableColDelete
 
@@ -822,6 +824,8 @@ Func _LOBase_TableDelete(ByRef $oConnection, ByRef $oTable)
 	$oTables.dropByName($sName)
 
 	If $oTables.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$oTable = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOBase_TableDelete

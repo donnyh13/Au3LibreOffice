@@ -2036,6 +2036,8 @@ Func _LOBase_ReportDocGroupDeleteByObj(ByRef $oGroup)
 
 	If (($iCount - 1) <> $oParent.Count()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
+	$oGroup = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOBase_ReportDocGroupDeleteByObj
 

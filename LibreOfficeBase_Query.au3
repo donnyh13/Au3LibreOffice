@@ -331,6 +331,8 @@ Func _LOBase_QueryDelete(ByRef $oConnection, ByRef $oQuery)
 
 	If $oQueries.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
+	$oQuery = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOBase_QueryDelete
 

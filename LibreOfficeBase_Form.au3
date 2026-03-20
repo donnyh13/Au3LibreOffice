@@ -341,6 +341,8 @@ Func _LOBase_FormDocClose(ByRef $oFormDoc, $bForceClose = False)
 
 	$bReturn = $oForm.Close()
 
+	If $bReturn Then $oFormDoc = Null ; Only Null if Form was closed successfully.
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bReturn)
 EndFunc   ;==>_LOBase_FormDocClose
 
