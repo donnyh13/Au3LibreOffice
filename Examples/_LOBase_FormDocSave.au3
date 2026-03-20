@@ -47,7 +47,7 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, "Failed to retrieve the ViewCursor Object for the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text at the ViewCursor.
-	_LOWriter_DocInsertString($oFormDoc, $oViewCursor, "Hi!")
+	_LOWriter_CursorInsertString($oFormDoc, $oViewCursor, "Hi!")
 	If @error Then Return _ERROR($oDoc, "Failed to insert text into the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Save the changes to the form document.
