@@ -4070,6 +4070,17 @@ Func _LOWriter_DocSelection(ByRef $oDoc, $oObj = Null, $bReturnMultiAsObj = Fals
 
 	$bSelect = $oDoc.CurrentController.Select($oObj)
 
+	If ($oObj.supportsService("com.sun.star.text.TextTable")) Then
+		$oCursor = _LOWriter_DocGetViewCursor($oDoc)
+		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		_LOWriter_CursorMove($oCursor, $LOW_VIEWCUR_GOTO_END, 1, True) ; Move and select to End of cell
+		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		_LOWriter_CursorMove($oCursor, $LOW_VIEWCUR_GOTO_END, 1, True) ; Move and select to End of Table
+		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	EndIf
+
 	Return ($bSelect) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0))
 EndFunc   ;==>_LOWriter_DocSelection
 

@@ -2054,6 +2054,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Property Setting Error was incorrectly returned in `__LOWriter_ParHasTabStop` instead of Success.
 - Add missing property in examples for `_LOWriter_DirFrmtParSpace` and `_LOWriter_ParStyleSpace`.
 - Corrected wrong error return types in `__LOWriter_TableBorder`.
+- `_LOWriter_DocSelection` would fail to select a Table.
 
 #### Refactored
 
