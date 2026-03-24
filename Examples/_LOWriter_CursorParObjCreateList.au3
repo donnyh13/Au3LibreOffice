@@ -7,7 +7,6 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor
 	Local $aoParagraphs
-	Local $asStyles
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -18,24 +17,22 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text
-	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "A Line of text to Test Direct Formatting with.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "First Line of text" & @CR & _
+			"Second line of text." & @CR & _
+			"Third line of text." & @CR & _
+			"Fourth Line of Text.")
 	If @error Then _ERROR($oDoc, "Failed to insert text into the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Paragraphs for the document
 	$aoParagraphs = _LOWriter_CursorParObjCreateList($oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to retrieve array of Paragraph Objects for Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve current styles contained in the first Paragraph. Will return a 4 element Array in the following order: current paragraph style,
-	; current Character style, current Page style, current Numbering Style (if one is active).
-	$asStyles = _LOWriter_DirFrmtGetCurStyles($aoParagraphs[0])
-	If @error Then _ERROR($oDoc, "Failed to retrieve current styles in the text selection. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "There were " & @extended & " paragraph objects returned." & _
+			" As an example of what a paragraph Object can be used for, I will change the font size of the first paragraph to 22 point.")
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "These styles are currently set for the Paragraph. Some may be blank, indicating no style is set for that style " & _
-			"type: " & @CRLF & _
-			"Paragraph Style: " & $asStyles[0] & @CRLF & _
-			"Character Style: " & $asStyles[1] & @CRLF & _
-			"Page Style: " & $asStyles[2] & @CRLF & _
-			"Numbering Style: " & $asStyles[3])
+	; An example of what I can do with a paragraph Object. Set the first paragraph's font size to 22 point.
+	_LOWriter_DirFrmtFont($aoParagraphs[0], Null, 22)
+	If @error Then _ERROR($oDoc, "Failed to direct format Paragraph Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

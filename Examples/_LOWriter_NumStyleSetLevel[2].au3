@@ -63,7 +63,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now I will retrieve Paragraph Objects for all of these paragraphs and set the Numbering level using a For Next loop.")
 
 	; Retrieve Array of Paragraph Objects.
-	$aoPars = _LOWriter_ParObjCreateList($oViewCursor)
+	$aoPars = _LOWriter_CursorParObjCreateList($oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph Objects. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To UBound($aoPars) - 1

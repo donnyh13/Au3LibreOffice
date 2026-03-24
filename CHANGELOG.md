@@ -1999,6 +1999,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_FormConPushButtonGeneral` Removed duplicated parameter in Header Parameter description.
 - Added LibreOffice SDK/API Constant names to constants.
 - Added missing "See Constants" to applicable variables in headers.
+- Renamed ParObj functions to group them more logically.
+  - `_LOWriter_ParObjCopy` --> `_LOWriter_CursorParObjCopy`
+  - `_LOWriter_ParObjCreateList` --> `_LOWriter_CursorParObjCreateList`
+  - `_LOWriter_ParObjDelete` --> `_LOWriter_CursorParObjDelete`
+  - `_LOWriter_ParObjPaste` --> `_LOWriter_CursorParObjPaste`
+  - `_LOWriter_ParObjSectionsGet` --> `_LOWriter_CursorParObjSectionsGet`
 
 #### Fixed
 
@@ -2181,6 +2187,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_TransparencyGradientMultiAdd
   - _LOWriter_TransparencyGradientMultiDelete
   - _LOWriter_TransparencyGradientMultiModify
+- _LOWriter_ParObjSelect was unneeded as _LOWriter_DocSelection does the same.
 
 [To Top](#releases)
 
