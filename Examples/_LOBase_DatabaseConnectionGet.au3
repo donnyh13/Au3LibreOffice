@@ -20,6 +20,10 @@ Func Example()
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)
 	If @error Then Return _ERROR($oConnection, "Failed to close a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+If @error Then Return _ERROR($oConnection, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oConnection, $sErrorText)
