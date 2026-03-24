@@ -22,6 +22,10 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Your current full Libre Office version, including the name is: " & $sVersionAndName & @CRLF & _
 			"Your current full Libre Office version is: " & $sFullVersion & @CRLF & _
 			"Your current simple Libre Office version is: " & $sSimpleVersion)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+If @error Then Return _ERROR("Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($sErrorText)

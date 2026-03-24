@@ -49,6 +49,10 @@ Func Example()
 			"2540 HMM (100th Millimeters) to CM = " & $iCM_From_HMM & @CRLF & _
 			"2540 HMM (100th Millimeters) to MM = " & $iMM_From_HMM & @CRLF & _
 			"2540 HMM (100th Millimeters) to Printer's Points = " & $iPt_From_HMM)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+If @error Then Return _ERROR("Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($sErrorText)
