@@ -32,6 +32,10 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Base Document was successfully saved to the following path: " & $sSavepath & @CRLF & _
 			"Press OK to Delete it.")
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)
