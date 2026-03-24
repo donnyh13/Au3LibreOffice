@@ -24,6 +24,10 @@ Func Example()
 			"Press OK to Delete it.")
 
 	FileDelete($sSavepath)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)
