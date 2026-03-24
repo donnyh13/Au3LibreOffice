@@ -33,6 +33,10 @@ Func Example()
 	Else
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "All LibreOffice documents are closed, and also the ""soffice.bin"" process. Press ok to exit the script.")
 	EndIf
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)
