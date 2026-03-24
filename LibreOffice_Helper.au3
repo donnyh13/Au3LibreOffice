@@ -27,6 +27,7 @@
 ; _LO_PathConvert
 ; _LO_PrintersGetNames
 ; _LO_PrintersGetNamesAlt
+; _LO_Terminate
 ; _LO_TransparencyGradientMultiAdd
 ; _LO_TransparencyGradientMultiDelete
 ; _LO_TransparencyGradientMultiModify
@@ -55,7 +56,7 @@
 ; Author ........: mLipok
 ; Modified ......: donnyh13 - Added a clear UserFunction without error option. Also added parameters option.
 ; Remarks .......: The first parameter passed to the User function will always be the COM Error object. See below.
-;                  Every COM Error will be passed to that function. The user can then read the following properties. (As Found in the COM Reference section in Autoit HelpFile.) Using the first parameter in the UserFunction.
+;                  Every COM Error will be passed to that function. The user can then read the following properties. (As Found in the COM Reference section in AutoIt Help File.) Using the first parameter in the UserFunction.
 ;                  For Example MyFunc($oMyError)
 ;                  - $oMyError.number The Windows HRESULT value from a COM call
 ;                  - $oMyError.windescription The FormatWinError() text derived from .number
@@ -137,7 +138,7 @@ EndFunc   ;==>_LO_ComError_UserFunction
 ; Modified ......:
 ; Remarks .......: To retrieve a Hexadecimal color value, call the RGB Color Integer in $iHex, To retrieve a R(ed)G(reen)B(lue) color value, call Null in $iHex, and call the RGB Color Integer into $iRGB, etc. for the other color types.
 ;                  Hex returns as a string variable, all others (RGB, HSB, CMYK) return an array.
-;                  The Hexadecimal figure returned doesn't contain the usual "0x", as LibeOffice does not implement it in its numbering system.
+;                  The Hexadecimal figure returned doesn't contain the usual "0x", as LibreOffice does not implement it in its numbering system.
 ; Related .......: _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -293,7 +294,7 @@ EndFunc   ;==>_LO_ConvertColorFromLong
 ;                  To convert a R(ed) G(reen) B(lue color, call R value in $vVal1 as an Integer, G in $vVal2 as an Integer, and B in $vVal3 as an Integer.
 ;                  To convert a H(ue) S(aturation) B(rightness) color, call H in $vVal1 as a String, S in $vVal2 as a String, and B in $vVal3 as a string.
 ;                  To convert C(yan) M(agenta) Y(ellow) Blac(k) call C in $vVal1 as an Integer, M in $vVal2 as an Integer, Y in $vVal3 as an Integer, and K in $vVal4 as an Integer.
-;                  The Hexadecimal figure entered cannot contain the usual "0x", as LibeOffice does not implement it in its numbering system.
+;                  The Hexadecimal figure entered cannot contain the usual "0x", as LibreOffice does not implement it in its numbering system.
 ; Related .......: _LO_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
@@ -849,6 +850,55 @@ Func _LO_PrintersGetNamesAlt($sPrinterName = "", $bReturnDefault = False)
 
 	Return SetError($__LO_STATUS_SUCCESS, $iCount, $asPrinterNames)
 EndFunc   ;==>_LO_PrintersGetNamesAlt
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_Terminate
+; Description ...: Closes the background instance of LibreOffice. See Remarks.
+; Syntax ........: _LO_Terminate([$bForceClose = False[, $iSleep = 500]])
+; Parameters ....: $bForceClose         - [optional] a boolean value. Default is False. If True, any opened documents will be closed. See remarks.
+;                  $iSleep              - [optional] an integer value. Default is 500. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $bForceClose not a Boolean.
+;                  @Error 1 @Extended 2 Return 0 = $iSleep not an Integer or less than 0.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create a ServiceManager Object.
+;                  @Error 2 @Extended 2 Return 0 = Failed to create a com.sun.star.frame.Desktop Object.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Terminate command was successfuly processed.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If $bForceClose is called with False, and there are no open Documents, the background instance of soffice.bin will be terminated.
+;                  If $bForceClose is called with True, all opened documents are closed, any documents with unsaved changes will have a save dialog initiated for the user to interact with.
+;                  If this function was not used, a left-over instance of soffice.bin would remain running after automating LibreOffice.
+;                  It is recommended to allow a minimum of 500ms sleep before terminating the LibreOffice instance to allow it finish closing any documents etc., otherwise the "Document Recovery" mode will be triggered upon next startup.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_Terminate($bForceClose = False, $iSleep = 500)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oServiceManager, $oDesktop
+
+	If Not IsBool($bForceClose) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iSleep, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
+	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	If Not $oDesktop.getComponents.hasElements() Or $bForceClose Then ; no L.O open, or force it to close.
+		Sleep($iSleep) ; Sleep to make sure LO has time to finish any processes it may be doing, otherwise a document recovery will be triggered the next startup.
+		$oDesktop.Terminate()
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LO_Terminate
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_TransparencyGradientMultiAdd

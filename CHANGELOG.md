@@ -38,6 +38,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
     - _LO_ConvertColorToLong
     - _LO_InitializePortable
     - _LO_PathConvert
+    - _LO_Terminate
     - _LO_UnitConvert
     - _LO_VersionGet
   - LibreOffice_Internal.au3
