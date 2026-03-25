@@ -97,6 +97,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - RegExp pattern in `_LO_PathConvert` didn't take into account lowercase drive letters. Thanks to user @SirWayN3.
 - `__LO_IntIsBetween` and `__LO_NumIsBetween` would fail if testing negative min/max values.
+- Wrong logic for testing a value against a negative minimum value with no max in `__LO_IntIsBetween` and `__LO_NumIsBetween`.
 
 #### Refactored
 

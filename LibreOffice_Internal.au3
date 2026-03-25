@@ -289,7 +289,7 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ;                  @Error 0 @Extended 0 Return Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: If Minimum is a negative, and there is no max defined, it is treated as such that if a value is more negative, it is outside the range. e.g., min = -2, -3 is outside of the range, but -1 is inside.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -318,14 +318,8 @@ Func __LO_IntIsBetween($iTest, $iMin, $iMax = 0, $vNot = "", $vIncl = "")
 	EndIf
 
 	If (@NumParams = 2) Then
-		If ($iMin < 0) Then ; If Min is a negative, switch the check.
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest > $iMin) ? (False) : (True))
-
-		Else
-
-			Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest < $iMin) ? (False) : (True))
-		EndIf
+		Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest < $iMin) ? (False) : (True))
 
 	Else
 		$iRealMin = ($iMin < $iMax) ? ($iMin) : ($iMax) ; Switch values if dealing with negatives.
@@ -383,7 +377,7 @@ EndFunc   ;==>__LO_IsObjInvalid
 ;                  @Error 0 @Extended 0 Return Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: If Minimum is a negative, and there is no max defined, it is treated as such that if a value is more negative, it is outside the range. e.g., min = -2, -3 is outside of the range, but -1 is inside.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -412,14 +406,8 @@ Func __LO_NumIsBetween($nTest, $nMin, $nMax = 0, $vNot = "", $vIncl = "")
 	EndIf
 
 	If (@NumParams = 2) Then
-		If ($nMin < 0) Then ; If Min is a negative, switch the check.
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, ($nTest > $nMin) ? (False) : (True))
-
-		Else
-
-			Return SetError($__LO_STATUS_SUCCESS, 0, ($nTest < $nMin) ? (False) : (True))
-		EndIf
+		Return SetError($__LO_STATUS_SUCCESS, 0, ($nTest < $nMin) ? (False) : (True))
 
 	Else
 		$nRealMin = ($nMin < $nMax) ? ($nMin) : ($nMax) ; Switch values if dealing with negatives.
