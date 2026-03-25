@@ -81,6 +81,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - All Internal Error Constants from `$__LOW_STATUS_` or `$__LOC_STATUS_` To `$__LO_STATUS_`
 - Attempted to standardize `$__LO_STATUS_INIT_ERROR` and `$__LO_STATUS_PROCESSING_ERROR` usage throughout functions:
   - _LO_VersionGet
+- Added _LO_Terminate to all examples for clean-up.
 
 #### Documented
 
@@ -412,6 +413,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOBase_ReportSave` --> `_LOBase_ReportDocSave`
   - `_LOBase_ReportSectionGetObj` --> `_LOBase_ReportDocSectionGetObj`
 - Added Error check for failing to close a Document to `_LOBase_DocClose`.
+- Added _LO_Terminate to all examples for clean-up.
 
 #### Documented
 
@@ -1170,6 +1172,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `$LOC_SHADOW_` --> `$LOC_SHADOW_LOCATION_`
 - Simplified Super/SubScript setting method in `_LOCalc_TextCursorCharPosition`.
 - Added Error check for failing to close a Document to `_LOCalc_DocClose`.
+- Added _LO_Terminate to all examples for clean-up.
 
 #### Documented
 
@@ -1982,6 +1985,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_EndnoteDelete
   - _LOWriter_FootnoteDelete
   - _LOWriter_FormConDelete
+- Added _LO_Terminate to all examples for clean-up.
 
 #### Documented
 
