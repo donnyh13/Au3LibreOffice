@@ -43,7 +43,7 @@ Func Example()
 			"Press ok to add a new ColorStop.")
 
 	; Add a new ColorStop in the middle.
-	_LOImpress_TransparencyGradientMultiAdd($avStops, 1, 0.5, 76)
+	_LO_TransparencyGradientMultiAdd($avStops, 1, 0.5, 76)
 	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new ColorStops.
