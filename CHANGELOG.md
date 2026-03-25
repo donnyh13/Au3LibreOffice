@@ -1226,6 +1226,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_RangeDatabaseDelete
   - _LOCalc_RangePivotDelete
   - _LOCalc_SheetRemove
+- Standardized error check in Examples to "If @error Then".
 
 #### Removed
 
