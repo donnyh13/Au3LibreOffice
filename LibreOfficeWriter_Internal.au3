@@ -269,22 +269,22 @@ Func __LOWriter_Border(ByRef $oObj, $bWid, $bSty, $bCol, $iTop = Null, $iBottom 
 	EndIf
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.TopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.BottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.LeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.RightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (__LO_IntIsBetween($oObj.TopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : (__LO_IntIsBetween($oObj.BottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : (__LO_IntIsBetween($oObj.LeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : (__LO_IntIsBetween($oObj.RightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oObj.TopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oObj.BottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oObj.LeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oObj.RightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ($oObj.TopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oObj.BottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oObj.LeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oObj.RightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oObj.TopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oObj.BottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oObj.LeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oObj.RightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ($oObj.TopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oObj.BottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oObj.LeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oObj.RightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -450,22 +450,22 @@ Func __LOWriter_CharBorder(ByRef $oObj, $bWid, $bSty, $bCol, $iTop = Null, $iBot
 	EndIf
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.CharTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.CharBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.CharLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.CharRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (__LO_IntIsBetween($oObj.CharTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : (__LO_IntIsBetween($oObj.CharBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : (__LO_IntIsBetween($oObj.CharLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : (__LO_IntIsBetween($oObj.CharRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oObj.CharTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oObj.CharBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oObj.CharLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oObj.CharRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ($oObj.CharTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oObj.CharBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oObj.CharLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oObj.CharRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oObj.CharTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oObj.CharBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oObj.CharLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oObj.CharRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ($oObj.CharTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oObj.CharBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oObj.CharLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oObj.CharRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -2181,22 +2181,22 @@ Func __LOWriter_FooterBorder(ByRef $oObj, $bWid, $bSty, $bCol, $iTop = Null, $iB
 	EndIf
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.FooterTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.FooterBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.FooterLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.FooterRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (__LO_IntIsBetween($oObj.FooterTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : (__LO_IntIsBetween($oObj.FooterBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : (__LO_IntIsBetween($oObj.FooterLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : (__LO_IntIsBetween($oObj.FooterRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oObj.FooterTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oObj.FooterBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oObj.FooterLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oObj.FooterRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ($oObj.FooterTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oObj.FooterBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oObj.FooterLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oObj.FooterRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oObj.FooterTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oObj.FooterBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oObj.FooterLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oObj.FooterRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ($oObj.FooterTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oObj.FooterBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oObj.FooterLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oObj.FooterRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -4225,22 +4225,22 @@ Func __LOWriter_HeaderBorder(ByRef $oObj, $bWid, $bSty, $bCol, $iTop = Null, $iB
 	EndIf
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.HeaderTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.HeaderBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.HeaderLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oObj.HeaderRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (__LO_IntIsBetween($oObj.HeaderTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : (__LO_IntIsBetween($oObj.HeaderBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : (__LO_IntIsBetween($oObj.HeaderLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : (__LO_IntIsBetween($oObj.HeaderRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oObj.HeaderTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oObj.HeaderBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oObj.HeaderLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oObj.HeaderRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ($oObj.HeaderTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oObj.HeaderBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oObj.HeaderLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oObj.HeaderRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oObj.HeaderTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oObj.HeaderBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oObj.HeaderLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oObj.HeaderRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ($oObj.HeaderTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oObj.HeaderBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oObj.HeaderLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oObj.HeaderRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -9929,28 +9929,28 @@ Func __LOWriter_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $i
 	$oTable.TableBorder2 = $tTB2
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.TopLine.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.BottomLine.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.LeftLine.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.RightLine.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
-		$iError = ($iVert <> Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.VerticalLine.LineWidth(), $iVert - 1, $iVert + 1)) ? ($iError) : (BitOR($iError, 16))
-		$iError = ($iHori <> Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.HorizontalLine.LineWidth(), $iHori - 1, $iHori + 1)) ? ($iError) : (BitOR($iError, 32))
+		$iError = ($iTop = Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.TopLine.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.BottomLine.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.LeftLine.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.RightLine.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iVert = Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.VerticalLine.LineWidth(), $iVert - 1, $iVert + 1)) ? ($iError) : (BitOR($iError, 16))
+		$iError = ($iHori = Null) ? ($iError) : (__LO_IntIsBetween($oTable.TableBorder2.HorizontalLine.LineWidth(), $iHori - 1, $iHori + 1)) ? ($iError) : (BitOR($iError, 32))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oTable.TableBorder2.TopLine.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oTable.TableBorder2.BottomLine.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oTable.TableBorder2.LeftLine.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oTable.TableBorder2.RightLine.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
-		$iError = ($iVert <> Null) ? ($iError) : ($oTable.TableBorder2.VerticalLine.LineStyle() = $iVert) ? ($iError) : (BitOR($iError, 16))
-		$iError = ($iHori <> Null) ? ($iError) : ($oTable.TableBorder2.HorizontalLine.LineStyle() = $iHori) ? ($iError) : (BitOR($iError, 32))
+		$iError = ($iTop = Null) ? ($iError) : ($oTable.TableBorder2.TopLine.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oTable.TableBorder2.BottomLine.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oTable.TableBorder2.LeftLine.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oTable.TableBorder2.RightLine.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iVert = Null) ? ($iError) : ($oTable.TableBorder2.VerticalLine.LineStyle() = $iVert) ? ($iError) : (BitOR($iError, 16))
+		$iError = ($iHori = Null) ? ($iError) : ($oTable.TableBorder2.HorizontalLine.LineStyle() = $iHori) ? ($iError) : (BitOR($iError, 32))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oTable.TableBorder2.TopLine.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oTable.TableBorder2.BottomLine.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oTable.TableBorder2.LeftLine.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oTable.TableBorder2.RightLine.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
-		$iError = ($iVert <> Null) ? ($iError) : ($oTable.TableBorder2.VerticalLine.Color() = $iVert) ? ($iError) : (BitOR($iError, 16))
-		$iError = ($iHori <> Null) ? ($iError) : ($oTable.TableBorder2.HorizontalLine.Color() = $iHori) ? ($iError) : (BitOR($iError, 32))
+		$iError = ($iTop = Null) ? ($iError) : ($oTable.TableBorder2.TopLine.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($iBottom = Null) ? ($iError) : ($oTable.TableBorder2.BottomLine.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($iLeft = Null) ? ($iError) : ($oTable.TableBorder2.LeftLine.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($iRight = Null) ? ($iError) : ($oTable.TableBorder2.RightLine.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iVert = Null) ? ($iError) : ($oTable.TableBorder2.VerticalLine.Color() = $iVert) ? ($iError) : (BitOR($iError, 16))
+		$iError = ($iHori = Null) ? ($iError) : ($oTable.TableBorder2.HorizontalLine.Color() = $iHori) ? ($iError) : (BitOR($iError, 32))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

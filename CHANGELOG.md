@@ -2064,6 +2064,48 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Add missing property in examples for `_LOWriter_DirFrmtParSpace` and `_LOWriter_ParStyleSpace`.
 - Corrected wrong error return types in `__LOWriter_TableBorder`.
 - `_LOWriter_DocSelection` would fail to select a Table.
+- Fixed bug from commit (6a6fb17d131da6d80a4f174b4664b40cb8fd1831), backwards property error checks causing false property setting errors in:
+  - __LOWriter_Border
+  - __LOWriter_CharBorder
+  - __LOWriter_FooterBorder
+  - __LOWriter_HeaderBorder
+  - __LOWriter_TableBorder
+  - _LOWriter_CellBorderColor
+  - _LOWriter_CellBorderStyle
+  - _LOWriter_CellBorderWidth
+  - _LOWriter_CharStyleBorderColor
+  - _LOWriter_CharStyleBorderStyle
+  - _LOWriter_CharStyleBorderWidth
+  - _LOWriter_DirFrmtCharBorderColor
+  - _LOWriter_DirFrmtCharBorderStyle
+  - _LOWriter_DirFrmtCharBorderWidth
+  - _LOWriter_DirFrmtParBorderColor
+  - _LOWriter_DirFrmtParBorderStyle
+  - _LOWriter_DirFrmtParBorderWidth
+  - _LOWriter_FrameBorderColor
+  - _LOWriter_FrameBorderStyle
+  - _LOWriter_FrameBorderWidth
+  - _LOWriter_FrameStyleBorderColor
+  - _LOWriter_FrameStyleBorderStyle
+  - _LOWriter_FrameStyleBorderWidth
+  - _LOWriter_ImageBorderColor
+  - _LOWriter_ImageBorderStyle
+  - _LOWriter_ImageBorderWidth
+  - _LOWriter_PageStyleBorderColor
+  - _LOWriter_PageStyleBorderStyle
+  - _LOWriter_PageStyleBorderWidth
+  - _LOWriter_PageStyleFooterBorderColor
+  - _LOWriter_PageStyleFooterBorderStyle
+  - _LOWriter_PageStyleFooterBorderWidth
+  - _LOWriter_PageStyleHeaderBorderColor
+  - _LOWriter_PageStyleHeaderBorderStyle
+  - _LOWriter_PageStyleHeaderBorderWidth
+  - _LOWriter_ParStyleBorderColor
+  - _LOWriter_ParStyleBorderStyle
+  - _LOWriter_ParStyleBorderWidth
+  - _LOWriter_TableBorderColor
+  - _LOWriter_TableBorderStyle
+  - _LOWriter_TableBorderWidth
 
 #### Refactored
 
