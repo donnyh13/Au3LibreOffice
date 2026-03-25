@@ -438,6 +438,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOBase_ReportDocGroupDeleteByObj
   - _LOBase_TableColDelete
   - _LOBase_TableDelete
+- Standardized error check in Examples to "If @error Then".
 
 #### Removed
 

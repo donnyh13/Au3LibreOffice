@@ -54,7 +54,7 @@ Func Example()
 
 	; Make the Query UI Window invisible by setting visible to False
 	_LOBase_QueryUIVisible($oQueryUI, False)
-	If (@error > 0) Then _ERROR($oDoc, "Failed to change Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to change Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Test if the document is Visible
 	$bReturn = _LOBase_QueryUIVisible($oQueryUI)
@@ -65,7 +65,7 @@ Func Example()
 
 	; Make the window visible by setting visible to True
 	_LOBase_QueryUIVisible($oQueryUI, True)
-	If (@error > 0) Then _ERROR($oDoc, "Failed to change Query Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to change Query Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Test if the document is Visible
 	$bReturn = _LOBase_QueryUIVisible($oQueryUI)

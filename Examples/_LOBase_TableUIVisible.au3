@@ -50,7 +50,7 @@ Func Example()
 
 	; Make the Table UI Window invisible by setting visible to False
 	_LOBase_TableUIVisible($oTableUI, False)
-	If (@error > 0) Then _ERROR($oDoc, "Failed to change Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to change Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Test if the document is Visible
 	$bReturn = _LOBase_TableUIVisible($oTableUI)
@@ -61,7 +61,7 @@ Func Example()
 
 	; Make the window visible by setting visible to True
 	_LOBase_TableUIVisible($oTableUI, True)
-	If (@error > 0) Then _ERROR($oDoc, "Failed to change Table Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to change Table Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Test if the document is Visible
 	$bReturn = _LOBase_TableUIVisible($oTableUI)
