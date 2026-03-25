@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oCellStyle
-	Local $avColor[0]
+	Local $iColor
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
@@ -20,13 +20,12 @@ Func Example()
 	_LOCalc_CellStyleBackColor($oCellStyle, $LO_COLOR_BLUE)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Style Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve Cell Style's current background color setting, Return will be an array in order of function parameters.
-	$avColor = _LOCalc_CellStyleBackColor($oCellStyle)
+	; Retrieve Cell Style's current background color setting, Return will be an Integer.
+	$iColor = _LOCalc_CellStyleBackColor($oCellStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style's Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, """Default"" Cell Style's Background color settings are: " & @CRLF & _
-			"The Cell Style's Background color is (as a RGB Color Integer): " & $avColor[0] & @CRLF & _
-			"Is the Cell Style's Background color transparent? True/False: " & $avColor[1])
+			"The Cell Style's Background color is (as a RGB Color Integer): " & $iColor)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
