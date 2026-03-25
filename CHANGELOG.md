@@ -1200,6 +1200,27 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_CellString
   - _LOCalc_CommentText
 - `_LOCalc_TextCursorMove` wouldn't return a Boolean when using `$LOC_TEXTCUR_GOTO_START`, `$LOC_TEXTCUR_COLLAPSE_TO_END` etc.
+- Fixed bug from commit (d1d992dcf850319ce8af7b4728045bc3050dc566), backwards property error checks causing false property setting errors in:
+   __LOCalc_CellBorder
+  - __LOCalc_CellStyleBorder
+  - __LOCalc_PageStyleBorder
+  - __LOCalc_PageStyleFooterBorder
+  - __LOCalc_PageStyleHeaderBorder
+  - _LOCalc_CellBorderColor
+  - _LOCalc_CellBorderStyle
+  - _LOCalc_CellBorderWidth
+  - _LOCalc_CellStyleBorderColor
+  - _LOCalc_CellStyleBorderStyle
+  - _LOCalc_CellStyleBorderWidth
+  - _LOCalc_PageStyleBorderColor
+  - _LOCalc_PageStyleBorderStyle
+  - _LOCalc_PageStyleBorderWidth
+  - _LOCalc_PageStyleFooterBorderColor
+  - _LOCalc_PageStyleFooterBorderStyle
+  - _LOCalc_PageStyleFooterBorderWidth
+  - _LOCalc_PageStyleHeaderBorderColor
+  - _LOCalc_PageStyleHeaderBorderStyle
+  - _LOCalc_PageStyleHeaderBorderWidth
 
 #### Refactored
 
