@@ -2140,6 +2140,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_ParStyleDelete
   - _LOWriter_ShapeDelete
   - _LOWriter_TableDelete
+- Standardized error check in Examples to "If @error Then".
 
 #### Removed
 

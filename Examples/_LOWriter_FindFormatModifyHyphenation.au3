@@ -56,7 +56,7 @@ Func Example()
 	If IsArray($aoResults) Then
 		For $i = 0 To UBound($aoResults) - 1
 			$sResultString = _LOWriter_CursorGetString($aoResults[$i])
-			If (@error > 0) Then MsgBox($MB_OK + $MB_TOPMOST, Default, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended)
+			If @error Then MsgBox($MB_OK + $MB_TOPMOST, Default, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended)
 		Next
 
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "The search was successful, I searched using a Find Format, looking for any paragraphs that are hyphenated, " & _

@@ -14,7 +14,7 @@ Func Example()
 
 	; Close the document, don't save changes.
 	_LOWriter_DocClose($oDoc, False)
-	If (@error > 0) Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the background LibreOffice instance if all Documents are closed.
 	_LO_Terminate()

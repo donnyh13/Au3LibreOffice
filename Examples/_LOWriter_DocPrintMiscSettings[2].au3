@@ -23,7 +23,7 @@ Func Example()
 
 	; Retrieve Array of Printers
 	$aPrinters = _LO_PrintersGetNamesAlt()
-	If (@error > 0) Then _ERROR($oDoc, "Error retrieving Array of Printers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Error retrieving Array of Printers. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	If (@extended <= 1) Then _ERROR($oDoc, "one or no Printers found. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
