@@ -1221,6 +1221,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_PageStyleHeaderBorderColor
   - _LOCalc_PageStyleHeaderBorderStyle
   - _LOCalc_PageStyleHeaderBorderWidth
+- Fixed bad parameter default value from commit (156b76db87168b27c742b4dae94b77ea353e3d6f) in `__LOCalc_CellBorder`.
 
 #### Refactored
 
