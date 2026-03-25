@@ -175,7 +175,7 @@ EndFunc   ;==>__LOImpress_CursorParHasTabStop
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (0-25). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iShapeType          - an integer value (0-25). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -184,7 +184,7 @@ EndFunc   ;==>__LOImpress_CursorParHasTabStop
 ;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer.
+;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
@@ -358,7 +358,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (26-49). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iShapeType          - an integer value (26-49). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -367,7 +367,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer.
+;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
@@ -546,7 +546,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (50-56). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iShapeType          - an integer value (50-56). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -555,7 +555,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer.
+;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
@@ -663,7 +663,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (57-84). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iShapeType          - an integer value (57-84). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -672,7 +672,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer.
+;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
@@ -843,7 +843,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (85-92). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iShapeType          - an integer value (85-92). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -852,7 +852,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer.
+;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create the requested Line type Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a Position structure.
@@ -1301,7 +1301,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (93-104). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iShapeType          - an integer value (93-104). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1310,7 +1310,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer.
+;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
@@ -1434,7 +1434,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - an integer value. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - an integer value (105-122). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iShapeType          - an integer value (105-122). The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1443,7 +1443,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer.
+;                  @Error 1 @Extended 6 Return 0 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a property structure.
