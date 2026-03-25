@@ -425,6 +425,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Fixed
 
 - Removed left behind ConsoleWrite debugging.
+- Example `_LOBase_DocConnect[2].au3` was reading the Document title using the wrong variable.
 
 #### Refactored
 
