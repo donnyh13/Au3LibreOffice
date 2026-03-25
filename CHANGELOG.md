@@ -1224,6 +1224,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_PageStyleHeaderBorderStyle
   - _LOCalc_PageStyleHeaderBorderWidth
 - Fixed bad parameter default value from commit (156b76db87168b27c742b4dae94b77ea353e3d6f) in `__LOCalc_CellBorder`.
+- Example `_LOCalc_DocConnect[2].au3` was reading the Document title using the wrong variable.
 
 #### Refactored
 
