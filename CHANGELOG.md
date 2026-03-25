@@ -441,6 +441,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOBase_TableColDelete
   - _LOBase_TableDelete
 - Standardized error check in Examples to "If @error Then".
+- Reworded some example's error messages.
 
 #### Removed
 
@@ -1230,6 +1231,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_RangePivotDelete
   - _LOCalc_SheetRemove
 - Standardized error check in Examples to "If @error Then".
+- Reworded some example's error messages.
 
 #### Removed
 
@@ -2145,6 +2147,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_ShapeDelete
   - _LOWriter_TableDelete
 - Standardized error check in Examples to "If @error Then".
+- Reworded some example's error messages.
 
 #### Removed
 
