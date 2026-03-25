@@ -54,7 +54,7 @@ Func Example()
 
 	; Close the document.
 	_LOCalc_DocClose($oDoc, False)
-	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Following Error codes returned: Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Delete the file.
 	FileDelete($sPath)
