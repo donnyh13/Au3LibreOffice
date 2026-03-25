@@ -20,7 +20,7 @@ Func Example()
 	If (@error > 0) Or Not IsObj($oDoc2) Then _ERROR($oDoc, $oDoc2, "Failed to Connect to Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Doc Name.
-	$sDocName = _LOWriter_DocGetName($oDoc, False)
+	$sDocName = _LOWriter_DocGetName($oDoc2, False)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to retrieve Writer Document name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$iUserChoice = MsgBox($MB_YESNO, "Close?", "I have connected to the Document with the following title: " & $sDocName & _
