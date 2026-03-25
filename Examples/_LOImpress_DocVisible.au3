@@ -16,7 +16,7 @@ Func Example()
 
 	; Make the document invisible by setting visible to False
 	_LOImpress_DocVisible($oDoc, False)
-	If (@error > 0) Then _ERROR($oDoc, "Failed to change Document visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to change Document visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Test if the document is Visible
 	$bReturn = _LOImpress_DocVisible($oDoc)
@@ -27,7 +27,7 @@ Func Example()
 
 	; Make the document visible by setting visible to True
 	_LOImpress_DocVisible($oDoc, True)
-	If (@error > 0) Then _ERROR($oDoc, "Failed to change Document visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to change Document visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Test if the document is Visible
 	$bReturn = _LOImpress_DocVisible($oDoc)
