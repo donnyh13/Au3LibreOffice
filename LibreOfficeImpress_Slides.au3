@@ -1030,7 +1030,9 @@ Func _LOImpress_SlideDeleteByObj(ByRef $oSlide)
 	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oDoc.DrawPages.Remove($oSlide)
-	If ($iCount = $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to delete because the count is the same.
+	If ($oDoc.DrawPages.getCount() = $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to delete because the count is the same.
+
+	$oSlide = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOImpress_SlideDeleteByObj

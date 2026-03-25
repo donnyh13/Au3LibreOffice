@@ -349,8 +349,11 @@ Func _LOImpress_DrawShapeDelete(ByRef $oShape)
 	If Not IsInt($iShapes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oDrawPage.remove($oShape)
+	If ($oDrawPage.getCount() = $iShapes) Then SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Count of shapes the same, shape wasn't deleted.
 
-	Return ($oDrawPage.getCount() = $iShapes) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	$oShape = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOImpress_DrawShapeDelete
 
 ; #FUNCTION# ====================================================================================================================
