@@ -2014,6 +2014,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FootnoteDelete
   - _LOWriter_FormConDelete
 - Added _LO_Terminate to all examples for clean-up.
+- `_LOWriter_TableColumnInsert` now uses Null keyword instead of -1 to indicate the insertion point as the end of the table.
+- `_LOWriter_TableRowInsert` now uses Null keyword instead of -1 to indicate the insertion point as the bottom of the table.
 
 #### Documented
 
