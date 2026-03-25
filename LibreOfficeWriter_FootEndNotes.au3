@@ -257,7 +257,7 @@ Func _LOWriter_EndnoteModifyAnchor(ByRef $oEndNote, $sLabel = Null)
 	If Not IsString($sLabel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oEndNote.Label = $sLabel
-	$iError = ($oEndNote.Label() <> $sLabel) ? ($iError) : (BitOR($iError, 1))
+	$iError = ($oEndNote.Label() = $sLabel) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
@@ -694,7 +694,7 @@ Func _LOWriter_FootnoteModifyAnchor(ByRef $oFootNote, $sLabel = Null)
 	If Not IsString($sLabel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oFootNote.Label = $sLabel
-	$iError = ($oFootNote.Label() <> $sLabel) ? ($iError) : (BitOR($iError, 1))
+	$iError = ($oFootNote.Label() = $sLabel) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_FootnoteModifyAnchor

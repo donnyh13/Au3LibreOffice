@@ -2135,6 +2135,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_TableBorderStyle
   - _LOWriter_TableBorderWidth
 - Example `_LOWriter_DocConnect[2].au3` was reading the Document title using the wrong variable.
+- Fixed reversed error checking logic, triggering false positive property setting errors:
+  - _LOWriter_EndnoteModifyAnchor
+  - _LOWriter_FootnoteModifyAnchor
 
 #### Refactored
 
