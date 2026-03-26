@@ -785,6 +785,8 @@ EndFunc   ;==>_LOBase_QuerySQLCommand
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oQueryUI not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bDeliverOwnership not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to close the Query User Interface window.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully closed the Query User Interface window.
 ; Author ........: donnyh13
@@ -802,6 +804,10 @@ Func _LOBase_QueryUIClose(ByRef $oQueryUI, $bDeliverOwnership = True)
 	If Not IsBool($bDeliverOwnership) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oQueryUI.Frame.close($bDeliverOwnership)
+
+	If Not __LO_IsObjInvalid($oQueryUI, "ComponentWindow.Windows") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oQueryUI = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOBase_QueryUIClose

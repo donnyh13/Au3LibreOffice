@@ -1546,6 +1546,8 @@ EndFunc   ;==>_LOBase_TablesGetNames
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oTableUI not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bDeliverOwnership not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to close the Table Interface window.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully closed the Table User Interface window.
 ; Author ........: donnyh13
@@ -1563,6 +1565,10 @@ Func _LOBase_TableUIClose(ByRef $oTableUI, $bDeliverOwnership = True)
 	If Not IsBool($bDeliverOwnership) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oTableUI.Frame.close($bDeliverOwnership)
+
+	If Not __LO_IsObjInvalid($oTableUI, "ComponentWindow.Windows") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oTableUI = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOBase_TableUIClose
