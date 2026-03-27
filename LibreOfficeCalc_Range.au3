@@ -2211,7 +2211,7 @@ EndFunc   ;==>_LOCalc_RangeMerge
 ;                  $oRefCell "acts as the base address for cells referenced in a relative way. If the cell range is not specified as an absolute address, the referenced range will be different based on where in the spreadsheet the range is used."
 ;                  Or in the case of a formula, an example would if we created a "named range 'AddLeft', which refers to the equation A3+B3 with C3 as the reference cell. The cells A3 and B3 are the two cells directly to the left of C3, so, the equation =AddLeft calculates the sum of the two cells directly to the left of the cell that contains the equation. Changing the reference cell to C4, which is below A3 and B3, causes the AddLeft equation to calculate the sum of the two cells that are to the left on the previous row."
 ;                  [Both quotations above are adapted from Andrew Pitonyak's book OOME 4.1, pdf Page 523, book page 519]
-; Related .......: _LOCalc_RangeNamedDelete, _LOCalc_RangeNamedExists
+; Related .......: _LOCalc_RangeNamedDeleteByName, _LOCalc_RangeNamedDeleteByObj, _LOCalc_RangeNamedExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
