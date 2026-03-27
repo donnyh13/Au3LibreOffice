@@ -427,7 +427,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Removed left behind ConsoleWrite debugging.
 - Example `_LOBase_DocConnect[2].au3` was reading the Document title using the wrong variable.
 - COM Error being triggered when calling $bSuppress in `_LOBase_ReportDocData` using a "Hidden" Report Document.
-- COM Error and failure when setting or retrieving visibility settings for a Report Document opened "Hidden".
+- COM Error and crash when setting or retrieving visibility settings for a Report or Form Document opened "Hidden".
 
 #### Refactored
 

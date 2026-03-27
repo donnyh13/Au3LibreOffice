@@ -473,6 +473,7 @@ EndFunc   ;==>_LOBase_FormDocIsModified
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To open a form located inside a folder, the form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to open FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FormXYZ.
+;                  Once a Form Document has been opened "Hidden", it cannot be made visible without re-opening the Form Document.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -564,6 +565,8 @@ EndFunc   ;==>_LOBase_FormDocSave
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Form Document called in $oFormDoc was opened "Hidden", document must be re-opened.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -573,6 +576,7 @@ EndFunc   ;==>_LOBase_FormDocSave
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $bVisible with Null to return the current visibility setting.
+;                  If a Form Document has been opened "Hidden", visibility cannot be set or retrieved.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -584,6 +588,7 @@ Func _LOBase_FormDocVisible(ByRef $oFormDoc, $bVisible = Null)
 	Local $iError = 0
 
 	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oFormDoc.CurrentController()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; If CurrentController is not an Object, Form Doc was opened "Hidden", can't set/retrieve visibility.
 
 	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oFormDoc.CurrentController.Frame.ContainerWindow.isVisible())
 
