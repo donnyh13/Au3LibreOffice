@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oSheet, $oCellRange, $oNamedRange
+	Local $oDoc, $oSheet, $oCellRange, $oGlobalNamedRange, $oLocalNamedRange
 	Local $asNamedRanges[0]
 	Local $sRanges
 
@@ -22,7 +22,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the range A1:A5 as a Named Range in the Document (Global) Scope.
-	$oNamedRange = _LOCalc_RangeNamedAdd($oDoc, $oCellRange, "My_Global_Named_Range")
+	$oGlobalNamedRange = _LOCalc_RangeNamedAdd($oDoc, $oCellRange, "My_Global_Named_Range")
 	If @error Then _ERROR($oDoc, "Failed to add Cell Range to list of Named Ranges. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell range C3 to E3
@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the range C3:E3 as a Named Range for the Sheet (local) scope.
-	_LOCalc_RangeNamedAdd($oSheet, $oCellRange, "A_Local_Named_Range")
+	$oLocalNamedRange = _LOCalc_RangeNamedAdd($oSheet, $oCellRange, "A_Local_Named_Range")
 	If @error Then _ERROR($oDoc, "Failed to add Cell Range to list of Named Ranges. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve a list of Global Named ranges for this document.
@@ -46,7 +46,7 @@ Func Example()
 			"I will now delete this Named Range using its Object.")
 
 	; Delete the named  Range "My_Global_Named_Range" using its Object.
-	_LOCalc_RangeNamedDelete($oDoc, $oNamedRange)
+	_LOCalc_RangeNamedDeleteByObj($oDoc, $oGlobalNamedRange)
 	If @error Then _ERROR($oDoc, "Failed to delete named Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve a list of Global Named ranges for this document.
@@ -74,10 +74,10 @@ Func Example()
 	Next
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Local Named Range names currently set for this Sheet are: " & @CRLF & $sRanges & @CRLF & @CRLF & _
-			"I will now delete this Named Range using its Name.")
+			"I will now delete this Named Range using its Object.")
 
-	; Delete the named  Range "A_Local_Named_Range" using its name.
-	_LOCalc_RangeNamedDelete($oSheet, "A_Local_Named_Range")
+	; Delete the named  Range "A_Local_Named_Range" using its Object.
+	_LOCalc_RangeNamedDeleteByObj($oSheet, $oLocalNamedRange)
 	If @error Then _ERROR($oDoc, "Failed to delete named Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve a list of Local Named ranges for this Sheet.

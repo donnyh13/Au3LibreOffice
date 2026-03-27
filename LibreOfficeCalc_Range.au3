@@ -66,7 +66,8 @@
 ; _LOCalc_RangeMerge
 ; _LOCalc_RangeNamedAdd
 ; _LOCalc_RangeNamedChangeScope
-; _LOCalc_RangeNamedDelete
+; _LOCalc_RangeNamedDeleteByName
+; _LOCalc_RangeNamedDeleteByObj
 ; _LOCalc_RangeNamedExists
 ; _LOCalc_RangeNamedGetNames
 ; _LOCalc_RangeNamedGetObjByName
@@ -2356,17 +2357,62 @@ Func _LOCalc_RangeNamedChangeScope(ByRef $oDoc, ByRef $oNamedRange, ByRef $oNewS
 EndFunc   ;==>_LOCalc_RangeNamedChangeScope
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_RangeNamedDelete
-; Description ...: Delete a Named Range from a particular scope.
-; Syntax ........: _LOCalc_RangeNamedDelete(ByRef $oObj, $vNamedRange)
+; Name ..........: _LOCalc_RangeNamedDeleteByName
+; Description ...: Delete a Named Range from a particular scope using its Name.
+; Syntax ........: _LOCalc_RangeNamedDeleteByName(ByRef $oObj, $sNamedRange)
 ; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $vNamedRange         - a variant value. The name of the Named Range to delete, as a string, or the NamedRange Object as returned from _LOCalc_RangeNamedAdd or _LOCalc_RangeNamedGetObjByName.
+;                  $sNamedRange         - a string value. The name of the Named Range to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $vNamedRange not an Object and not a String.
-;                  @Error 1 @Extended 3 Return 0 = Scope called in $oObj does not contain a Named Range as called in $vNamedRange.
+;                  @Error 1 @Extended 2 Return 0 = $sNamedRange not a String.
+;                  @Error 1 @Extended 3 Return 0 = Scope called in $oObj does not contain a Named Range as called in $sNamedRange.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Named Ranges Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to delete requested Named Range.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted the requested Named Range.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The Object called in $oObj must be the scope the Named Range is present in, either Globally (Document Object), or locally (Sheet Object).
+; Related .......: _LOCalc_RangeNamedAdd, _LOCalc_RangeNamedExists
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOCalc_RangeNamedDeleteByName(ByRef $oObj, $sNamedRange)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oNamedRanges
+
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oNamedRanges = $oObj.NamedRanges()
+	If Not IsObj($oNamedRanges) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If Not $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oNamedRanges.removeByName($sNamedRange)
+
+	If $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOCalc_RangeNamedDeleteByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOCalc_RangeNamedDeleteByObj
+; Description ...: Delete a Named Range from a particular scope using its Object.
+; Syntax ........: _LOCalc_RangeNamedDeleteByObj(ByRef $oObj, ByRef $oNamedRange)
+; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $oNamedRange         - [in/out] an object. The Named Range Object to delete as returned from _LOCalc_RangeNamedAdd or _LOCalc_RangeNamedGetObjByName.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oNamedRange not an Object.
+;                  @Error 1 @Extended 3 Return 0 = Scope called in $oObj does not contain a Named Range as called in $oNamedRange.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Named Ranges Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Named Range's name.
@@ -2380,7 +2426,7 @@ EndFunc   ;==>_LOCalc_RangeNamedChangeScope
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_RangeNamedDelete(ByRef $oObj, $vNamedRange)
+Func _LOCalc_RangeNamedDeleteByObj(ByRef $oObj, ByRef $oNamedRange)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2388,18 +2434,13 @@ Func _LOCalc_RangeNamedDelete(ByRef $oObj, $vNamedRange)
 	Local $sNamedRange
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($vNamedRange) And Not IsObj($vNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsObj($oNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oNamedRanges = $oObj.NamedRanges()
 	If Not IsObj($oNamedRanges) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If IsObj($vNamedRange) Then
-		$sNamedRange = $vNamedRange.Name()
-		If Not IsString($sNamedRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	Else
-		$sNamedRange = $vNamedRange
-	EndIf
+	$sNamedRange = $oNamedRange.Name()
+	If Not IsString($sNamedRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -2407,8 +2448,10 @@ Func _LOCalc_RangeNamedDelete(ByRef $oObj, $vNamedRange)
 
 	If $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
+	$oNamedRange = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOCalc_RangeNamedDelete
+EndFunc   ;==>_LOCalc_RangeNamedDeleteByObj
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_RangeNamedExists

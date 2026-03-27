@@ -581,7 +581,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_RangeMerge
   - _LOCalc_RangeNamedAdd
   - _LOCalc_RangeNamedChangeScope
-  - _LOCalc_RangeNamedDelete
+  - ~~_LOCalc_RangeNamedDelete~~
   - _LOCalc_RangeNamedGetNames
   - _LOCalc_RangeNamedGetObjByName
   - _LOCalc_RangeNamedHasByName
@@ -1178,6 +1178,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Simplified Super/SubScript setting method in `_LOCalc_TextCursorCharPosition`.
 - Added Error check for failing to close a Document to `_LOCalc_DocClose`.
 - Added _LO_Terminate to all examples for clean-up.
+- Split `_LOCalc_RangeNamedDelete` into `_LOCalc_RangeNamedDeleteByName` and `_LOCalc_RangeNamedDeleteByObj`
 
 #### Documented
 
@@ -1301,6 +1302,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_TransparencyGradientMultiAdd
   - _LOCalc_TransparencyGradientMultiDelete
   - _LOCalc_TransparencyGradientMultiModify
+- `_LOCalc_RangeNamedDelete`, split into separate functions.
 
 ### LibreOfficeWriter
 
