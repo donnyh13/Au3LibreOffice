@@ -1449,6 +1449,8 @@ EndFunc   ;==>_LOBase_ReportDocConnect
 ;                  Modifying $iContentType and $sContent  will open the "Add a Field" dialog unless it is suppressed.
 ;                  When $bSuppress is True, changing $iContentType and $sContent, either in the UI or via AutoIt, will not activate the "Add a Field" dialog, until the report is re-opened again, or $bSuppress is called with False again.
 ;                  Setting $bSuppress to False will activate the "Add a Field" dialog, regardless if any settings are changed.
+;                  $bSuppress is not needed when a Report Document has been opened "Hidden".
+;                  If a Report Document has been opened "Hidden", $bSuppress will always return True.
 ; Related .......: _LOBase_ReportDocGeneral
 ; Link ..........:
 ; Example .......: Yes
@@ -1467,7 +1469,7 @@ Func _LOBase_ReportDocData(ByRef $oReportDoc, $iContentType = Null, $sContent = 
 	If __LO_VarsAreNull($iContentType, $sContent, $bAnalyzeSQL, $sFilter, $iReportOutput, $bSuppress) Then
 		__LO_ArrayFill($avReport, $oReportDoc.CommandType(), $oReportDoc.Command(), $oReportDoc.EscapeProcessing(), $oReportDoc.Filter(), _
 				($oReportDoc.MimeType() = $__LOB_REP_OUTPUT_TEXT_DOC) ? ($LOB_REP_OUTPUT_TYPE_TEXT) : (($oReportDoc.MimeType() = $__LOB_REP_OUTPUT_SPREADSHEET_DOC) ? ($LOB_REP_OUTPUT_TYPE_SPREADSHEET) : ($LOB_REP_OUTPUT_TYPE_UNKNOWN)), _
-				($oReportDoc.CurrentController.Mode() = "normal") ? (False) : (True))
+				(($oReportDoc.ViewData.Count() = 0)) ? (True) : (($oReportDoc.CurrentController.Mode() = "normal") ? (False) : (True))) ; If ViewData count is 0, no CurrentController is present, and this will trigger a COM Error.
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avReport)
 	EndIf
@@ -1475,7 +1477,7 @@ Func _LOBase_ReportDocData(ByRef $oReportDoc, $iContentType = Null, $sContent = 
 	If ($iContentType <> Null) Then
 		If Not __LO_IntIsBetween($iContentType, $LOB_REP_CONTENT_TYPE_TABLE, $LOB_REP_CONTENT_TYPE_SQL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		If ($bSuppress = True) Then $oReportDoc.CurrentController.Mode = "remote"
+		If ($bSuppress = True) And ($oReportDoc.ViewData.Count() > 0) Then $oReportDoc.CurrentController.Mode = "remote" ; If ViewData count is 0, no CurrentController is present, and this will trigger a COM Error.
 		$oReportDoc.CommandType = $iContentType
 		$iError = ($oReportDoc.CommandType() = $iContentType) ? ($iError) : (BitOR($iError, 1))
 	EndIf
@@ -1483,7 +1485,7 @@ Func _LOBase_ReportDocData(ByRef $oReportDoc, $iContentType = Null, $sContent = 
 	If ($sContent <> Null) Then
 		If Not IsString($sContent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		If ($bSuppress = True) Then $oReportDoc.CurrentController.Mode = "remote"
+		If ($bSuppress = True) And ($oReportDoc.ViewData.Count() > 0) Then $oReportDoc.CurrentController.Mode = "remote" ; If ViewData count is 0, no CurrentController is present, and this will trigger a COM Error.
 		$oReportDoc.Command = $sContent
 		$iError = ($oReportDoc.Command() = $sContent) ? ($iError) : (BitOR($iError, 2))
 	EndIf
@@ -1512,8 +1514,10 @@ Func _LOBase_ReportDocData(ByRef $oReportDoc, $iContentType = Null, $sContent = 
 	If ($bSuppress <> Null) Then
 		If Not IsBool($bSuppress) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-		$oReportDoc.CurrentController.Mode = ($bSuppress) ? ("remote") : ("normal") ; Remote prevents the Add Field dialog from coming up when changing "Command" and "CommandType". Normal behaves as normal.
-		$iError = ($oReportDoc.CurrentController.Mode = ($bSuppress) ? ("remote") : ("normal")) ? ($iError) : (BitOR($iError, 32)) ; Method found in "ReportBuilderImplementation.java" file, line 160, function "switchOffAddFieldWindow"
+		If ($oReportDoc.ViewData.Count() > 0) Then ; If ViewData count is 0, no CurrentController is present, and this will trigger a COM Error.
+			$oReportDoc.CurrentController.Mode = ($bSuppress) ? ("remote") : ("normal") ; Remote prevents the Add Field dialog from coming up when changing "Command" and "CommandType". Normal behaves as normal.
+			$iError = ($oReportDoc.CurrentController.Mode = ($bSuppress) ? ("remote") : ("normal")) ? ($iError) : (BitOR($iError, 32)) ; Method found in "ReportBuilderImplementation.java" file, line 160, function "switchOffAddFieldWindow"
+		EndIf
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -2338,6 +2342,7 @@ EndFunc   ;==>_LOBase_ReportDocIsModified
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To open a Report located inside a folder, the Report name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to open ReportXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/ReportXYZ.
+;                  Once a Report Document has been opened "Hidden", it cannot be made visible without re-opening the Report Document.
 ; Related .......: _LOBase_ReportDocClose, _LOBase_ReportDocConnect, _LOBase_ReportsGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -2764,6 +2769,8 @@ EndFunc   ;==>_LOBase_ReportDocSectionGetObj
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Report Document called in $oReportDoc was opened "Hidden", document must be re-opened.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -2773,6 +2780,7 @@ EndFunc   ;==>_LOBase_ReportDocSectionGetObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $bVisible with Null to return the current visibility setting.
+;                  If a Report Document has been opened "Hidden", visibility cannot be set or retrieved.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -2784,6 +2792,7 @@ Func _LOBase_ReportDocVisible(ByRef $oReportDoc, $bVisible = Null)
 	Local $iError = 0
 
 	If Not IsObj($oReportDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If ($oReportDoc.ViewData.Count() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oReportDoc.CurrentController.Frame.ContainerWindow.isVisible())
 

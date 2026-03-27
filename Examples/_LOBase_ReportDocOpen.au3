@@ -68,7 +68,7 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to open a Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the DataSource of the Report.
-	_LOBase_ReportDocData($oReportDoc, $LOB_REP_CONTENT_TYPE_TABLE, "tblNew_Table", Null, Null, Null, True)
+	_LOBase_ReportDocData($oReportDoc, $LOB_REP_CONTENT_TYPE_TABLE, "tblNew_Table")
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify Report Document's Data properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Save the Report
