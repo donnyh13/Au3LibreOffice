@@ -50,7 +50,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve named Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Delete the Named Range
-	_LOCalc_RangeNamedDelete($oDoc, $oNamedRange)
+	_LOCalc_RangeNamedDeleteByObj($oDoc, $oNamedRange)
 	If @error Then _ERROR($oDoc, "Failed to delete named Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve a list of Global Named ranges for this document.
@@ -86,7 +86,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve named Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Delete the Named Range
-	_LOCalc_RangeNamedDelete($oSheet, $oNamedRange)
+	_LOCalc_RangeNamedDeleteByObj($oSheet, $oNamedRange)
 	If @error Then _ERROR($oDoc, "Failed to delete named Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve a list of Local Named ranges for this Sheet.

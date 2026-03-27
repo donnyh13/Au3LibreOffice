@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oSheet, $oCellRange, $oNamedRange
+	Local $oDoc, $oSheet, $oCellRange
 	Local $asNamedRanges[0]
 	Local $sRanges
 
