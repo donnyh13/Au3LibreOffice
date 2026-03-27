@@ -1229,6 +1229,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Fixed bad parameter default value from commit (156b76db87168b27c742b4dae94b77ea353e3d6f) in `__LOCalc_CellBorder`.
 - Example `_LOCalc_DocConnect[2].au3` was reading the Document title using the wrong variable.
 - Example `_LOCalc_CellStyleBackColor.au3` was not updated to use new number of parameters.
+- Some functions not returning on error due to missing Return SetError combination:
+  - _LOCalc_CellStyleDelete
+  - _LOCalc_PageStyleDelete
 
 #### Refactored
 
