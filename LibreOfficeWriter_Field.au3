@@ -98,7 +98,8 @@
 ; _LOWriter_FieldSenderModify
 ; _LOWriter_FieldSetVarInsert
 ; _LOWriter_FieldSetVarMasterCreate
-; _LOWriter_FieldSetVarMasterDelete
+; _LOWriter_FieldSetVarMasterDeleteByName
+; _LOWriter_FieldSetVarMasterDeleteByObj
 ; _LOWriter_FieldSetVarMasterExists
 ; _LOWriter_FieldSetVarMasterFieldsGetList
 ; _LOWriter_FieldSetVarMasterGetObj
@@ -4893,21 +4894,21 @@ Func _LOWriter_FieldSetVarMasterCreate(ByRef $oDoc, $sMasterFieldName)
 EndFunc   ;==>_LOWriter_FieldSetVarMasterCreate
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FieldSetVarMasterDelete
-; Description ...: Delete a Set Variable Master Field.
-; Syntax ........: _LOWriter_FieldSetVarMasterDelete(ByRef $oDoc, $vMasterField)
+; Name ..........: _LOWriter_FieldSetVarMasterDeleteByName
+; Description ...: Delete a Set Variable Master Field using its name.
+; Syntax ........: _LOWriter_FieldSetVarMasterDeleteByName(ByRef $oDoc, $sMasterField)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $vMasterField        - a variant value. The Set Variable Master Field name or object from _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObj, or _LOWriter_FieldSetVarMastersGetNames to delete.
+;                  $sMasterField        - a string value. The Set Variable Master Field name to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $vMasterField not a String and not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $vMasterField is a String, but document does not contain a Masterfield by that name.
+;                  @Error 1 @Extended 2 Return 0 = $sMasterField not a String.
+;                  @Error 1 @Extended 3 Return 0 = Document does not contain a Masterfield with the name called in $sMasterField.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve MasterFields Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve MasterField object called in $vMasterField.
-;                  @Error 3 @Extended 3 Return 0 = Attempted to delete MasterField, but document still contains a MasterField by that name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve MasterField object called in $sMasterField.
+;                  @Error 3 @Extended 3 Return 0 = Failed to delete MasterField.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted requested MasterField.
 ; Author ........: donnyh13
@@ -4917,7 +4918,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FieldSetVarMasterDelete(ByRef $oDoc, $vMasterField)
+Func _LOWriter_FieldSetVarMasterDeleteByName(ByRef $oDoc, $sMasterField)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4926,28 +4927,69 @@ Func _LOWriter_FieldSetVarMasterDelete(ByRef $oDoc, $vMasterField)
 	Local $sField = "com.sun.star.text.fieldmaster.SetExpression"
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($vMasterField) And Not IsObj($vMasterField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsString($sMasterField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oMasterFields = $oDoc.getTextFieldMasters()
 	If Not IsObj($oMasterFields) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If IsObj($vMasterField) Then
-		$sFullFieldName = $sField & "." & $vMasterField.Name()
-		$oMasterfield = $vMasterField
+	$sFullFieldName = $sField & "." & $sMasterField
+	If Not $oMasterFields.hasByName($sFullFieldName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	Else
-		$sFullFieldName = $sField & "." & $vMasterField
-		If Not $oMasterFields.hasByName($sFullFieldName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oMasterfield = $oMasterFields.getByName($sFullFieldName)
-	EndIf
-
+	$oMasterfield = $oMasterFields.getByName($sFullFieldName)
 	If Not IsObj($oMasterfield) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oMasterfield.dispose()
+	If $oMasterFields.hasByName($sFullFieldName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	Return ($oMasterFields.hasByName($sFullFieldName)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOWriter_FieldSetVarMasterDelete
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldSetVarMasterDeleteByObj
+; Description ...: Delete a Set Variable Master Field using its Object.
+; Syntax ........: _LOWriter_FieldSetVarMasterDeleteByObj(ByRef $oDoc, ByRef $oMasterField)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oMasterField        - [in/out] an object. The Set Variable Master Field Object to delete as returned by a previous _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObj, or _LOWriter_FieldSetVarMastersGetNames function.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oMasterField not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve MasterFields Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to delete MasterField.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted requested MasterField.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMastersGetNames
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldSetVarMasterDeleteByObj(ByRef $oDoc, ByRef $oMasterfield)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oMasterFields
+	Local $sFullFieldName
+	Local $sField = "com.sun.star.text.fieldmaster.SetExpression"
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oMasterfield) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oMasterFields = $oDoc.getTextFieldMasters()
+	If Not IsObj($oMasterFields) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$sFullFieldName = $sField & "." & $oMasterfield.Name()
+
+	$oMasterfield.dispose()
+	If $oMasterFields.hasByName($sFullFieldName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oMasterfield = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByObj
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FieldSetVarMasterExists
