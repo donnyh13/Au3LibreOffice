@@ -2391,7 +2391,6 @@ Func _LOCalc_RangeNamedDeleteByName(ByRef $oObj, $sNamedRange)
 
 	$oNamedRanges = $oObj.NamedRanges()
 	If Not IsObj($oNamedRanges) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
 	If Not $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oNamedRanges.removeByName($sNamedRange)
@@ -2441,7 +2440,6 @@ Func _LOCalc_RangeNamedDeleteByObj(ByRef $oObj, ByRef $oNamedRange)
 
 	$sNamedRange = $oNamedRange.Name()
 	If Not IsString($sNamedRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
 	If Not $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oNamedRanges.removeByName($sNamedRange)
