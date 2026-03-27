@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oMaster, $oViewCursor
+	Local $oDoc, $oViewCursor
 	Local $iResults
 	Local $sMasterFieldName
 	Local $asMasters
@@ -17,7 +17,7 @@ Func Example()
 	$sMasterFieldName = "TestMaster"
 
 	; Create a new Set Variable Master Field named "TestMaster".
-	$oMaster = _LOWriter_FieldSetVarMasterCreate($oDoc, $sMasterFieldName)
+	_LOWriter_FieldSetVarMasterCreate($oDoc, $sMasterFieldName)
 	If @error Then _ERROR($oDoc, "Failed to create a Set Variable Master. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Set Variable Master Field names.

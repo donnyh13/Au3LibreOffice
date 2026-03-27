@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve a Set Variable Master Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Delete the Set Var. MasterField.
-	_LOWriter_FieldSetVarMasterDelete($oDoc, $oMaster)
+	_LOWriter_FieldSetVarMasterDeleteByObj($oDoc, $oMaster)
 	If @error Then _ERROR($oDoc, "Failed to delete Master Field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does the Set Var Master Field still exist? True/False: " & _LOWriter_FieldSetVarMasterExists($oDoc, $sMasterFieldName))
