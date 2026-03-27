@@ -2150,6 +2150,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_CharStyleDelete
   - _LOWriter_DocBookmarkDelete
   - _LOWriter_FrameStyleDelete
+  - _LOWriter_NumStyleCustomize
   - _LOWriter_NumStyleDelete
   - _LOWriter_PageStyleDelete
   - _LOWriter_ParStyleDelete
