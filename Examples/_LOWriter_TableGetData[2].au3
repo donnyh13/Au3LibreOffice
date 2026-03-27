@@ -46,13 +46,15 @@ Func Example()
 	$avData = _LOWriter_TableGetData($oTable, 1)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_ArrayDisplay($avData, "Column 1")
+	; Display Column 1
+	_ArrayDisplay($avData)
 
 	; Retrieve Table data, second down Row (row 1).
 	$avData = _LOWriter_TableGetData($oTable, Null, 1)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_ArrayDisplay($avData, "Row 1")
+	; Display Row 1
+	_ArrayDisplay($avData)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

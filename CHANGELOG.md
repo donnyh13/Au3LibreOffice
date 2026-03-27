@@ -2241,6 +2241,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_TableDelete
 - Standardized error check in Examples to "If @error Then".
 - Reworded some example's error messages.
+- Removed _ArrayDisplay titles from `_LOWriter_TableGetData` and `_LOWriter_TableGetData[2]` examples.
 
 #### Removed
 

@@ -49,15 +49,15 @@ Func Example()
 	; The array is an array of arrays, Each Row is contained in an array.
 
 	; Display the first Row; Row 0
-	_ArrayDisplay($avData[0], "Row 0")
+	_ArrayDisplay($avData[0])
 	; Display the second Row; Row 1
-	_ArrayDisplay($avData[1], "Row 1")
+	_ArrayDisplay($avData[1])
 	; Display the Third Row; Row 2
-	_ArrayDisplay($avData[2], "Row 2")
+	_ArrayDisplay($avData[2])
 	; Display the Fourth Row; Row 3
-	_ArrayDisplay($avData[3], "Row 3")
+	_ArrayDisplay($avData[3])
 	; Display the fifth Row; Row 4
-	_ArrayDisplay($avData[4], "Row 4")
+	_ArrayDisplay($avData[4])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
