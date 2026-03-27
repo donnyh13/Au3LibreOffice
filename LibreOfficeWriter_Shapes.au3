@@ -857,7 +857,7 @@ Func _LOWriter_ShapeDelete(ByRef $oDoc, $oShape)
 	If Not IsString($sShapeName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oDoc.getDrawPage().remove($oShape)
-	If _LOWriter_ShapeExists($oDoc, $sShapeName) Then SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	If _LOWriter_ShapeExists($oDoc, $sShapeName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oShape = Null
 

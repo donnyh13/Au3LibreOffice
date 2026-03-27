@@ -2146,6 +2146,14 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Fixed reversed error checking logic, triggering false positive property setting errors:
   - _LOWriter_EndnoteModifyAnchor
   - _LOWriter_FootnoteModifyAnchor
+- Some functions not returning on error due to missing Return SetError combination:
+  - _LOWriter_CharStyleDelete
+  - _LOWriter_DocBookmarkDelete
+  - _LOWriter_FrameStyleDelete
+  - _LOWriter_NumStyleDelete
+  - _LOWriter_PageStyleDelete
+  - _LOWriter_ParStyleDelete
+  - _LOWriter_ShapeDelete
 
 #### Refactored
 

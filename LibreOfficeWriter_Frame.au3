@@ -3776,7 +3776,7 @@ Func _LOWriter_FrameStyleDelete(ByRef $oDoc, $oFrameStyle, $bForceDelete = False
 	; If Parent style is blank set it to "Frame" style, Or if not but User has called a specific style set it to that.
 
 	$oFrameStyles.removeByName($sFrameStyle)
-	If $oFrameStyles.hasByName($sFrameStyle) Then SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	If $oFrameStyles.hasByName($sFrameStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 	$oFrameStyle = Null
 

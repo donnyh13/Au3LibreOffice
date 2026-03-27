@@ -431,7 +431,7 @@ Func _LOWriter_NumStyleDelete(ByRef $oDoc, ByRef $oNumStyle)
 	If $oNumStyle.isInUse() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; If Style is in use return an error unless force delete is true.
 
 	$oNumStyles.removeByName($sNumStyle)
-	If $oNumStyles.hasByName($sNumStyle) Then SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	If $oNumStyles.hasByName($sNumStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 	$oNumStyle = Null
 

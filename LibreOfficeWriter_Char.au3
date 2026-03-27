@@ -464,7 +464,7 @@ Func _LOWriter_CharStyleDelete(ByRef $oDoc, ByRef $oCharStyle, $bForceDelete = F
 	; If User has called a specific style to replace this style, set it to that.
 
 	$oCharStyles.removeByName($sCharStyle)
-	If $oCharStyles.hasByName($sCharStyle) Then SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	If $oCharStyles.hasByName($sCharStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 	$oCharStyle = Null
 
