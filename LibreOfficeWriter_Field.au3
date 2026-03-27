@@ -4865,7 +4865,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarMasterDelete, _LOWriter_FieldSetVarInsert
+; Related .......: _LOWriter_FieldSetVarMasterDeleteByName, _LOWriter_FieldSetVarMasterDeleteByObj, _LOWriter_FieldSetVarInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5130,7 +5130,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function includes in the list about 5 built-in Master Fields from Libre Office, namely: Illustration, Table, Text, Drawing, and Figure.
-; Related .......: _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMasterDelete
+; Related .......: _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMasterDeleteByName, _LOWriter_FieldSetVarMasterDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
