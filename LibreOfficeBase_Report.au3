@@ -44,6 +44,7 @@
 ; _LOBase_ReportDocDetail
 ; _LOBase_ReportDocFooter
 ; _LOBase_ReportDocGeneral
+; _LOBase_ReportDocGetName
 ; _LOBase_ReportDocGroupAdd
 ; _LOBase_ReportDocGroupDeleteByIndex
 ; _LOBase_ReportDocGroupDeleteByObj
@@ -1896,6 +1897,49 @@ Func _LOBase_ReportDocGeneral(ByRef $oReportDoc, $sName = Null, $iPageHeader = N
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_ReportDocGeneral
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_ReportDocGetName
+; Description ...: Retrieve the Report document's name.
+; Syntax ........: _LOBase_ReportDocGetName(ByRef $oReportDoc[, $bReturnFull = False])
+; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Return values .: Success: String
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Report Document called in $oReportDoc was opened "Hidden", can't return full document name. Document must be re-opened.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
+;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "— LibreOffice Base: Report Builder" or " — LibreOffice Calc|Writer".
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If $bReturnFull is True, the return value will be one of the following:
+;                  If the Report Document is in Design mode: "<Database Doc name>.<extension> : <Report name> — LibreOffice Base: Report Builder" e.g. "Testing.odb : RptReport1 — LibreOffice Base: Report Builder".
+;                  If the Report Document is in Viewing mode: "<Report name>.<extension> (read-only) — LibreOffice <Calc|Writer>" e.g. "RptReport1.docx (read-only) — LibreOffice Writer"
+;                  Else if $bReturnFull is False, the return value will be one of the following:
+;                  If the Report Document is in Design mode: "<Database Doc name>.<extension> : <Report name>", e.g. "Testing.odb : RptReport1"
+;                  If the Report Document is in Viewing mode: "<Report name>.<extension> (read-only)", e.g. "RptReport1.docx (read-only)"
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_ReportDocGetName(ByRef $oReportDoc, $bReturnFull = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sName
+
+	If Not IsObj($oReportDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If $bReturnFull And Not IsObj($oReportDoc.CurrentController()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; If CurrentController is not an Object, Report Doc was opened "Hidden", can't retrieve Full Doc name.
+
+	$sName = ($bReturnFull = True) ? ($oReportDoc.CurrentController.Frame.Title()) : ($oReportDoc.Title())
+
+	Return ($bReturnFull = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sName)) : (SetError($__LO_STATUS_SUCCESS, 0, $sName))
+EndFunc   ;==>_LOBase_ReportDocGetName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_ReportDocGroupAdd

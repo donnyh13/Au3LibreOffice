@@ -47,6 +47,7 @@
 ; _LOBase_TablesGetNames
 ; _LOBase_TableUIClose
 ; _LOBase_TableUIConnect
+; _LOBase_TableUIGetName
 ; _LOBase_TableUIGetRowSet
 ; _LOBase_TableUIOpenByName
 ; _LOBase_TableUIOpenByObject
@@ -1661,7 +1662,45 @@ Func _LOBase_TableUIConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT)
 	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; No matches
 EndFunc   ;==>_LOBase_TableUIConnect
 
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_TableUIGetName
+; Description ...: Retrieve the Table document's name.
+; Syntax ........: _LOBase_TableUIGetName(ByRef $oTableUI[, $bReturnFull = False])
+; Parameters ....: $oTableUI            - [in/out] an object. A Table User Interface Object from a previous _LOBase_TableUIOpenByName, _LOBase_TableUIOpenByObject or _LOBase_TableUIConnect function.
+;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Return values .: Success: String
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oTableUI not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
+;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "— LibreOffice Base: Table Design" or "— LibreOffice Base: Table Data View".
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If $bReturnFull is True, the return value will be one of the following:
+;                  If the Table UI is in Design mode: "<Database Doc name>.<extension> : <Table name> — LibreOffice Base: Table Design" e.g. "Testing.odb : tblTable1 — LibreOffice Base: Table Design".
+;                  If the Table UI is in Viewing mode: "<Table name> - <Database Doc name> — LibreOffice Base: Table Data View" e.g. "tblTable1 - Testing — LibreOffice Base: Table Data View"
+;                  Else if $bReturnFull is False, the return value will be one of the following:
+;                  If the Table UI is in Design mode: "<Database Doc name>.<extension> : <Table name>", e.g. "Testing.odb : tblTable1"
+;                  If the Table UI is in Viewing mode: "<Table name> - <Database Doc name>", e.g. "tblTable1 - Testing"
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_TableUIGetName(ByRef $oTableUI, $bReturnFull = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
 
+	Local $sName
+
+	If Not IsObj($oTableUI) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$sName = ($bReturnFull = True) ? ($oTableUI.Frame.Title()) : ($oTableUI.Title())
+
+	Return ($bReturnFull = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sName)) : (SetError($__LO_STATUS_SUCCESS, 0, $sName))
+EndFunc   ;==>_LOBase_TableUIGetName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_TableUIGetRowSet

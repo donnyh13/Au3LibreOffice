@@ -29,6 +29,7 @@
 ; _LOBase_FormDelete
 ; _LOBase_FormDocClose
 ; _LOBase_FormDocConnect
+; _LOBase_FormDocGetName
 ; _LOBase_FormDocIsModified
 ; _LOBase_FormDocOpen
 ; _LOBase_FormDocSave
@@ -433,6 +434,45 @@ Func _LOBase_FormDocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT)
 
 	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; No matches
 EndFunc   ;==>_LOBase_FormDocConnect
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_FormDocGetName
+; Description ...: Retrieve the Form document's name.
+; Syntax ........: _LOBase_FormDocGetName(ByRef $oFormDoc[, $bReturnFull = False])
+; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Return values .: Success: String
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Form Document called in $oFormDoc was opened "Hidden", can't return full document name. Document must be re-opened.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
+;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "— LibreOffice Base: Database Form".
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If $bReturnFull is True, the return value will be like: "<Database Doc name>.<extension> : <Form name> — LibreOffice Base: Database Form" e.g. "Testing.odb : frmForm2 — LibreOffice Base: Database Form".
+;                  Else the return value will be like: "<Database Doc name>.<extension> : <Form name>", e.g. "Testing.odb : frmForm2"
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_FormDocGetName(ByRef $oFormDoc, $bReturnFull = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sName
+
+	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If $bReturnFull And Not IsObj($oFormDoc.CurrentController()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; If CurrentController is not an Object, Form Doc was opened "Hidden", can't retrieve full Doc name.
+
+	$sName = ($bReturnFull = True) ? ($oFormDoc.CurrentController.Frame.Title()) : ($oFormDoc.Title())
+
+	Return ($bReturnFull = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sName)) : (SetError($__LO_STATUS_SUCCESS, 0, $sName))
+EndFunc   ;==>_LOBase_FormDocGetName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_FormDocIsModified

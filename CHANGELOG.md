@@ -370,6 +370,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOBase_TableUIVisible
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
 - Added Enumeration values to comments after enumerated Constants.
+- Added Sub-Component name retrieval functions:
+  - _LOBase_FormDocGetName
+  - _LOBase_QueryUIGetName
+  - _LOBase_ReportDocGetName
+  - _LOBase_TableUIGetName
 
 #### Changed
 
@@ -2309,6 +2314,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_TransparencyGradientMultiModify
 - _LOWriter_ParObjSelect was unneeded as _LOWriter_DocSelection does the same.
 - `_LOWriter_FieldSetVarMasterDelete`, split into separate files.
+- Second _LOWriter_DocConnect example.
 
 [To Top](#releases)
 

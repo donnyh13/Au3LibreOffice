@@ -40,6 +40,7 @@
 ; _LOBase_QuerySQLCommand
 ; _LOBase_QueryUIClose
 ; _LOBase_QueryUIConnect
+; _LOBase_QueryUIGetName
 ; _LOBase_QueryUIGetRowSet
 ; _LOBase_QueryUIOpenByName
 ; _LOBase_QueryUIOpenByObject
@@ -899,6 +900,46 @@ Func _LOBase_QueryUIConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT)
 
 	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; No matches
 EndFunc   ;==>_LOBase_QueryUIConnect
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_QueryUIGetName
+; Description ...: Retrieve the Query document's name.
+; Syntax ........: _LOBase_QueryUIGetName(ByRef $oQueryUI[, $bReturnFull = False])
+; Parameters ....: $oQueryUI            - [in/out] an object. A Query User Interface Object from a previous _LOBase_QueryUIOpenByName, _LOBase_QueryUIOpenByObject or _LOBase_QueryUIConnect function.
+;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Return values .: Success: String
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oQueryUI not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
+;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "— LibreOffice Base: Query Design" or "— LibreOffice Base: Table Data View".
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If $bReturnFull is True, the return value will be one of the following:
+;                  If the Query UI is in Design mode: "<Database Doc name>.<extension> : <Query name> — LibreOffice Base: Query Design" e.g. "Testing.odb : QryAutoIt — LibreOffice Base: Query Design".
+;                  If the Query UI is in Viewing mode: "<Query name> - <Database Doc name> — LibreOffice Base: Table Data View" e.g. "QryAutoIt - Testing — LibreOffice Base: Table Data View"
+;                  Else if $bReturnFull is False, the return value will be one of the following:
+;                  If the Query UI is in Design mode: "<Database Doc name>.<extension> : <Query name>", e.g. "Testing.odb : QryAutoIt"
+;                  If the Query UI is in Viewing mode: "<Query name> - <Database Doc name>", e.g. "QryAutoIt - Testing"
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_QueryUIGetName(ByRef $oQueryUI, $bReturnFull = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sName
+
+	If Not IsObj($oQueryUI) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$sName = ($bReturnFull = True) ? ($oQueryUI.Frame.Title()) : ($oQueryUI.Title())
+
+	Return ($bReturnFull = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sName)) : (SetError($__LO_STATUS_SUCCESS, 0, $sName))
+EndFunc   ;==>_LOBase_QueryUIGetName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_QueryUIGetRowSet
