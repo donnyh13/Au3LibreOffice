@@ -30,6 +30,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
     - $__LOCONST_SLEEP_DIV
     - $LO_COLOR_*
     - $LO_CONVERT_UNIT_*
+    - $LO_DOC_CONNECT_MODE_*
+    - $LO_DOC_TYPE_*
     - $LO_PATHCONV_*
     - $__LO_STATUS_*
   - LibreOffice_Helper.au3
@@ -73,6 +75,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LO_TransparencyGradientMultiAdd
   - _LO_TransparencyGradientMultiDelete
   - _LO_TransparencyGradientMultiModify
+- _LO_DocConnect for connecting to any opened LibreOffice document.
+- _LO_DocGetType
 
 #### Changed
 

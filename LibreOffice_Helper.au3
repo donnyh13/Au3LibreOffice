@@ -20,6 +20,8 @@
 ; _LO_ComError_UserFunction
 ; _LO_ConvertColorFromLong
 ; _LO_ConvertColorToLong
+; _LO_DocConnect
+; _LO_DocGetType
 ; _LO_GradientMulticolorAdd
 ; _LO_GradientMulticolorDelete
 ; _LO_GradientMulticolorModify
@@ -432,6 +434,338 @@ Func _LO_ConvertColorToLong($vVal1 = Null, $vVal2 = Null, $vVal3 = Null, $vVal4 
 			Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0) ; wrong number of Parameters
 	EndSwitch
 EndFunc   ;==>_LO_ConvertColorToLong
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_DocConnect
+; Description ...: Connect to an already opened instance of LibreOffice.
+; Syntax ........: _LO_DocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT[, $sSearch = ""[, $bCaseless = False]]])
+; Parameters ....: $iMode               - [optional] an integer value (0-4). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  $sSearch             - [optional] a string value. Default is "". The Name, Title or Path of the Document to search for. See remarks.
+;                  $bCaseless           - [optional] a boolean value. Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
+; Return values .: Success: Object or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $sSearch not a String.
+;                  @Error 1 @Extended 3 Return 0 = $bCaseless not a Boolean.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 Return 0 = Error converting path to Libre Office URL.
+;                  @Error 3 @Extended 5 Return 0 = No matches found.
+;                  --Success--
+;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 0 @Extended ? Return Object = Success, The Object for the found Document with matching Name, Title or Path. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Documents. @Extended is set to number of results. See remarks.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The value used for $sSearch depends on the flag called in $iMode. It is ignored except for the $LO_DOC_CONNECT_MODE_SEARCH_* flags.
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $sSearch must be the full Title with Office and Component name; e.g: "Test.odt — LibreOffice Writer". This will be the same Title AutoIt would match or return from functions like WinGetTitle.
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME, $sSearch must be the Document's full name, without the extension; e.g: "Test".
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $sSearch must be the Document's name, with the extension; e.g: "Test.odt". If the Document hasn't been saved, just the name will work, e.g., "Untitled 1".
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_PATH, $sSearch must be the full Path of the document (Name and extension included); e.g: "C:\file\Test.odt."
+;                  The Connect All option returns an array with two columns per result. ($aArray[0][2]), each result is stored in a separate row.
+;                  -Row 1, Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
+;                  -Row 1, Column 1 contains the Document's Type as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3. e.g. $aArray[0][1] = $LO_DOC_TYPE_CALC
+;                  -Row 2, Column 0 contains the Object for the next document. e.g. $aArray[1][0] = $oDoc2. And so on.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $bCaseless = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount = 0, $iDocType
+	Local $aoConnectAll[0][2]
+	Local $sCaseless = ""
+	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
+
+	If Not __LO_IntIsBetween($iMode, $LO_DOC_CONNECT_MODE_ALL, $LO_DOC_CONNECT_MODE_SEARCH_PATH) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sSearch) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bCaseless) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
+	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+	If Not $oDesktop.getComponents.hasElements() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; no L.O open
+
+	Switch $iMode
+		Case $LO_DOC_CONNECT_MODE_ALL
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+			While $oEnumDoc.hasMoreElements()
+				$oDoc = $oEnumDoc.nextElement()
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				If (UBound($aoConnectAll) <= $iCount) Then ReDim $aoConnectAll[$iCount + 1][2]
+				$aoConnectAll[$iCount][0] = $oDoc
+				$aoConnectAll[$iCount][1] = _LO_DocGetType($oDoc)
+				$iCount += 1
+				Sleep((IsInt($iCount / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+			WEnd
+
+			Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
+
+		Case $LO_DOC_CONNECT_MODE_CURRENT
+			$oDoc = $oDesktop.currentComponent()
+			If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$iDocType = _LO_DocGetType($oDoc)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+			Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
+
+		Case $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $LO_DOC_CONNECT_MODE_SEARCH_NAME, $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $LO_DOC_CONNECT_MODE_SEARCH_PATH
+
+			$sSearch = StringRegExpReplace($sSearch, "(^\s*|\s*$)", "")     ; Strip leading and trailing spaces
+
+			If $bCaseless Then $sCaseless = "(?i)"
+
+			If ($iMode = $LO_DOC_CONNECT_MODE_SEARCH_PATH) Then
+				$sSearch = _LO_PathConvert($sSearch, $LO_PATHCONV_OFFICE_RETURN) ; Convert to L.O File path.
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			EndIf
+
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+			While $oEnumDoc.hasMoreElements()
+				$oDoc = $oEnumDoc.nextElement()
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				Switch $iMode
+					Case $LO_DOC_CONNECT_MODE_SEARCH_TITLE
+						; First make sure Current Controller is available (It wont be if Document is opened Hidden, in some Components.).
+						If IsObj($oDoc.CurrentController()) And StringRegExp($oDoc.CurrentController.Frame.Title(), $sCaseless & "\Q" & $sSearch & "\E") Then
+							$iDocType = _LO_DocGetType($oDoc)
+							If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+							Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
+
+						EndIf
+
+					Case $LO_DOC_CONNECT_MODE_SEARCH_NAME
+						; Add spaces after name in case user put some in the Document name.
+						; Add additional capture for Extension to just match the name the user put in, else force match at end of String for unsaved Documents.
+						If StringRegExp($oDoc.Title(), $sCaseless & "\Q" & $sSearch & "\E\s*(\.\w+)?$") Then
+							$iDocType = _LO_DocGetType($oDoc)
+							If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+							Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
+
+						EndIf
+
+					Case $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT
+						If StringRegExp($oDoc.Title(), $sCaseless & "\Q" & $sSearch & "\E") Then
+							$iDocType = _LO_DocGetType($oDoc)
+							If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+							Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
+
+						EndIf
+
+					Case $LO_DOC_CONNECT_MODE_SEARCH_PATH
+						If StringRegExp($oDoc.getURL(), $sCaseless & "\Q" & $sSearch & "\E") Then
+							$iDocType = _LO_DocGetType($oDoc)
+							If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+							Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
+
+						EndIf
+				EndSwitch
+			WEnd
+	EndSwitch
+
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; No matches
+EndFunc   ;==>_LO_DocConnect
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_DocGetType
+; Description ...: Identify the document's type.
+; Syntax ........: _LO_DocGetType(ByRef $oDoc)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous Document Open, Connect, or Create function.
+; Return values .: Success: Integer
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve a Form Cursor.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Table or Query name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Active Connection Object.
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Document Creation Arguments Array.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning the document's type as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_DocGetType(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iDocType = $LO_DOC_TYPE_UNKNOWN
+	Local $atArgs
+	Local $asMatch
+	Local $oRowSet, $oActiveConn
+	Local $sName, $sDocumentBaseURL, $sDocTitle = ""
+	Local Const $__STR_REGEXPARRAYMATCH = 1
+	Local Const $sBaseServiceName = "com.sun.star.sdb.OfficeDatabaseDocument", _ ; Base
+			$sBaseQueryDesignServiceName = "com.sun.star.sdb.QueryDesign", _ ; Base Query UI in Design mode.
+			$sBaseTableDesignServiceName = "com.sun.star.sdb.TableDesign", _ ; Base Table UI in Design mode.
+			$sBaseReportDesignServiceName = "com.sun.star.report.ReportDefinition", _ ; Base Report Doc in Design mode.
+			$sBaseSubServiceName = "com.sun.star.sdb.DataSourceBrowser", _ ; Could be a Query or a Table UI in Viewing mode.
+			$sBasicIDEServiceName = "com.sun.star.script.BasicIDE", _ ; Basic IDE
+			$sCalcServiceName = "com.sun.star.sheet.SpreadsheetDocument", _ ; Calc or Report (View)
+			$sDrawServiceName = "com.sun.star.drawing.DrawingDocument", _ ; Draw
+			$sImpressServiceName = "com.sun.star.presentation.PresentationDocument", _ ; Impress
+			$sMathServiceName = "com.sun.star.formula.FormulaProperties", _ ; Math
+			$sWriterWebServiceName = "com.sun.star.text.WebDocument", _ ; Writer Web/HTML
+			$sTextDocServiceName = "com.sun.star.text.TextDocument" ; Could be a Writer Doc, or Form (View and Design), or Report (View)
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If $oDoc.supportsService($sBaseServiceName) Then
+		$iDocType = $LO_DOC_TYPE_BASE
+
+	ElseIf $oDoc.supportsService($sBaseQueryDesignServiceName) Then
+		$iDocType = $LO_DOC_TYPE_BASE_QUERY_DESIGN
+
+	ElseIf $oDoc.supportsService($sBaseTableDesignServiceName) Then
+		$iDocType = $LO_DOC_TYPE_BASE_TABLE_DESIGN
+
+	ElseIf $oDoc.supportsService($sBaseReportDesignServiceName) Then
+		$iDocType = $LO_DOC_TYPE_BASE_REPORT_DESIGN
+
+	ElseIf $oDoc.supportsService($sBaseSubServiceName) Then
+		$oRowSet = $oDoc.FormOperations.Cursor()
+		If Not IsObj($oRowSet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		$sName = $oRowSet.Command()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oActiveConn = $oRowSet.ActiveConnection()
+		If Not IsObj($oActiveConn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		If $oActiveConn.Queries.hasByName($sName) Then
+			$iDocType = $LO_DOC_TYPE_BASE_QUERY_VIEW
+
+		ElseIf $oActiveConn.Tables.hasByName($sName) Then
+			$iDocType = $LO_DOC_TYPE_BASE_TABLE_VIEW
+		EndIf
+
+	ElseIf $oDoc.supportsService($sTextDocServiceName) Then
+		; For Form Doc, check if it has a parent, then check if parent is a Base Doc.
+		; Form documents have DocumentBaseURL also, URL matches Base file URL.
+		; If Form is read-Only, then View mode, else Design.
+
+		If IsObj($oDoc.Parent()) And $oDoc.Parent.supportsService($sBaseServiceName) Then         ; A Form, View or Design.
+			$atArgs = $oDoc.Args()
+			If Not IsArray($atArgs) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			For $i = 0 To UBound($atArgs) - 1
+				If ($atArgs[$i].Name() = "DocumentBaseURL") Then
+					$sDocumentBaseURL = $atArgs[$i].Value()
+					ExitLoop
+				EndIf
+				Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+			Next
+
+			If IsString($sDocumentBaseURL) And ($oDoc.Parent.URL() = $sDocumentBaseURL) Then
+				If $oDoc.isReadOnly() Then         ; Form in View mode.
+					$iDocType = $LO_DOC_TYPE_BASE_FORM_VIEW
+
+				Else         ; Form in Design mode.
+					$iDocType = $LO_DOC_TYPE_BASE_FORM_DESIGN
+				EndIf
+			EndIf
+
+		ElseIf $oDoc.isReadOnly() Then         ; Could be a Writer Doc or Report in View mode, as both have no parent.
+			$atArgs = $oDoc.Args()
+			If Not IsArray($atArgs) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			For $i = 0 To UBound($atArgs) - 1
+				If ($atArgs[$i].Name() = "DocumentBaseURL") Then
+					$sDocumentBaseURL = $atArgs[$i].Value()
+					ExitLoop
+				EndIf
+				Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+			Next
+
+			If IsString($sDocumentBaseURL) Then         ; Probably a Report in View mode.
+				; Title: "QryAutoIt.docx (read-only)" (Need to cut it at the space.)
+				$asMatch = StringRegExp($oDoc.Title(), "^(.+\.\w+)", $__STR_REGEXPARRAYMATCH)
+
+				If Not @error Then $sDocTitle = $asMatch[0]
+
+				; Report doc in view mode has URL: file:///C:/Users/Owner/AppData/Local/Temp/lu1376bt3zd.tmp/QryAutoIt.docx
+				; Can search for .tmp/ + Report name.
+				If StringRegExp($sDocumentBaseURL, "\/\w+\.(?i)tmp\/\Q" & $sDocTitle & "\E") Then $iDocType = $LO_DOC_TYPE_BASE_REPORT_VIEW
+
+			Else         ; Assuming, and most probably, a Writer Document.
+				$iDocType = $LO_DOC_TYPE_WRITER
+			EndIf
+
+		Else         ; Not Read Only, most likely a Writer Doc.
+			$iDocType = $LO_DOC_TYPE_WRITER
+		EndIf
+
+	ElseIf $oDoc.supportsService($sBasicIDEServiceName) Then
+		$iDocType = $LO_DOC_TYPE_BASIC_IDE
+
+	ElseIf $oDoc.supportsService($sCalcServiceName) Then
+		If $oDoc.isReadOnly() Then         ; Could be a Calc Doc or Report in View mode.
+			$atArgs = $oDoc.Args()
+			If Not IsArray($atArgs) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			For $i = 0 To UBound($atArgs) - 1
+				If ($atArgs[$i].Name() = "DocumentBaseURL") Then
+					$sDocumentBaseURL = $atArgs[$i].Value()
+					ExitLoop
+				EndIf
+				Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+			Next
+
+			If IsString($sDocumentBaseURL) Then         ; Probably a Report in View mode.
+				; Title: "QryAutoIt1.ods (read-only)" (Need to cut it at the space.)
+				$asMatch = StringRegExp($oDoc.Title(), "^(.+\.\w+)", $__STR_REGEXPARRAYMATCH)
+
+				If Not @error Then $sDocTitle = $asMatch[0]
+
+				; Report doc in view mode has URL: file:///C:/Users/Owner/AppData/Local/Temp/lu20921b6g.tmp/QryAutoIt1.ods
+				; Can search for .tmp/ + Report name.
+				If StringRegExp($sDocumentBaseURL, "\/\w+\.(?i)tmp\/\Q" & $sDocTitle & "\E") Then $iDocType = $LO_DOC_TYPE_BASE_REPORT_VIEW
+
+			Else         ; Assuming, and most probably, a Calc Document.
+				$iDocType = $LO_DOC_TYPE_CALC
+			EndIf
+		Else         ; Not Read Only, most probably a Calc Document.
+			$iDocType = $LO_DOC_TYPE_CALC
+		EndIf
+
+	ElseIf $oDoc.supportsService($sImpressServiceName) Then         ; ALWAYS need to check for Impress before Draw, as Draw has all same services as Impress.
+		$iDocType = $LO_DOC_TYPE_IMPRESS
+
+	ElseIf $oDoc.supportsService($sDrawServiceName) Then
+		$iDocType = $LO_DOC_TYPE_DRAW
+
+	ElseIf $oDoc.supportsService($sMathServiceName) Then
+		$iDocType = $LO_DOC_TYPE_MATH
+
+	ElseIf $oDoc.supportsService($sWriterWebServiceName) Then
+		$iDocType = $LO_DOC_TYPE_WRITER_WEB
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iDocType)
+EndFunc   ;==>_LO_DocGetType
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_GradientMulticolorAdd
