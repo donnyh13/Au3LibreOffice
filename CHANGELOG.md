@@ -415,6 +415,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOBase_ReportSectionGetObj` --> `_LOBase_ReportDocSectionGetObj`
 - Added Error check for failing to close a Document to `_LOBase_DocClose`.
 - Added _LO_Terminate to all examples for clean-up.
+- Changed the parameters in Document connection functions to be more logical, and made the functions (hopefully) work better:
+  - _LOBase_DocConnect
+  - _LOBase_FormDocConnect
+  - _LOBase_QueryUIConnect
+  - _LOBase_ReportDocConnect
+  - _LOBase_TableUIConnect
 
 #### Documented
 

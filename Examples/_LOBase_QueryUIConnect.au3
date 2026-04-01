@@ -52,7 +52,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have just opened the Query UI, press Ok to connect to it and close it.")
 
 	; Connect to the Query UI.
-	$oQueryUI = _LOBase_QueryUIConnect(True)
+	$oQueryUI = _LOBase_QueryUIConnect($LO_DOC_CONNECT_MODE_CURRENT)
 	If @error Then Return _ERROR($oDoc, "Failed to connect to Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close Query UI.

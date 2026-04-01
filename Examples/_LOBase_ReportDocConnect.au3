@@ -44,7 +44,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the Report called ""rptAutoIt_Report"" in Design Mode. Press ok to connect to it, and close it.")
 
 	; Connect to the open Report.
-	$oReportDoc = _LOBase_ReportDocConnect(True)
+	$oReportDoc = _LOBase_ReportDocConnect($LO_DOC_CONNECT_MODE_CURRENT)
 	If @error Then Return _ERROR($oDoc, "Failed to connect to a Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the Report Document.

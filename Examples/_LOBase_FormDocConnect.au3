@@ -43,19 +43,19 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, "Failed to create a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of open forms.
-	$avForms = _LOBase_FormDocConnect(False)
+	$avForms = _LOBase_FormDocConnect($LO_DOC_CONNECT_MODE_ALL)
 	If @error Then Return _ERROR($oDoc, "Failed to retrieve array of open form Documents. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To @extended - 1
 		$sForms &= (IsObj($avForms[$i][0]) ? ("[Object]") : ("[Not an Object]")) & @TAB
-		$sForms &= $avForms[$i][1] & @CRLF
+		$sForms &= "Form Doc Type (See UDF Constants): " & $avForms[$i][1] & @CRLF
 	Next
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The following Forms are open:" & @CRLF & $sForms & @CRLF & _
 			"I will now connect to the currently open form and close it.")
 
 	; Connect to the currently open form.
-	$oFormDoc = _LOBase_FormDocConnect(True)
+	$oFormDoc = _LOBase_FormDocConnect($LO_DOC_CONNECT_MODE_CURRENT)
 	If @error Then Return _ERROR($oDoc, "Failed to connect to the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have connected to the Form Document. Press ok to close it.")

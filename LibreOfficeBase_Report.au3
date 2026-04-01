@@ -1324,44 +1324,45 @@ EndFunc   ;==>_LOBase_ReportDocClose
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_ReportDocConnect
 ; Description ...: Retrieve an Object for the currently open Report or Reports.
-; Syntax ........: _LOBase_ReportDocConnect([$bConnectCurrent = True])
-; Parameters ....: $bConnectCurrent     - [optional] a boolean value. Default is True. If True, Returns an Object for the last active Report. Else an array of all Open Reports. See Remarks.
-; Return values .: Success: Object or Array
+; Syntax ........: _LOBase_ReportDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
+; Parameters ....: $iMode               - [optional] an integer value (0-1). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bConnectCurrent not a Boolean.
+;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.ServiceManager Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create com.sun.star.frame.Desktop Object.
-;                  @Error 2 @Extended 3 Return 0 = Failed to create enumeration of open Documents.
+;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No LibreOffice windows are open.
-;                  @Error 3 @Extended 2 Return 0 = Current LibreOffice window is not a Report Document.
+;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 Return 0 = Current Document not a Base Report Document.
+;                  @Error 3 @Extended 5 Return 0 = No matches found.
 ;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Success. Connected to the currently active window, returning the Report Document Object. Report is in Read-Only viewing mode.
-;                  @Error 0 @Extended 2 Return Object = Success. Connected to the currently active window, returning the Report Document Object. Report is in Design mode.
-;                  @Error 0 @Extended ? Return Array = Success. Returning a Three columned Array with all open Report Documents. @Extended is set to the number of results. See Remarks.
+;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Report document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Report Documents. @Extended is set to number of results. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: The Returned array when connecting to all open Report Documents returns an array with Three columns per result. ($aArray[0][3]). Each result is stored in a separate row;
-;                  Row 1, Column 0 contain the Object for that document. e.g. $aArray[0][0] = $oDoc
-;                  Row 1, Column 1 contains the Document's full title with extension and the Report Name, separated by a colon. e.g. $aArray[0][1] = "Testing.odb : Report1"
-;                  Row 1, Column 2 contains a Boolean value whether the Report is in Design mode (True) or not.
-;                  Row 2, Column 0 contain the Object for the next document. And so on. e.g. $aArray[1][0] = $oDoc2
+; Remarks .......: Only Base Report documents are returned using either of the flags.
+;                  The Connect All option returns a two columned array. ($aArray[0][2]), each result is stored in a separate row.
+;                  -Row 1 Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
+;                  -Row 1 Column 1 contains the Document's type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3. e.g.: $aArray[0][1] = $LO_DOC_TYPE_BASE_FORM_VIEW.
+;                  -Row 2 contains the Object for the next document. e.g. $aArray[1][0] = $oDoc2. And so on.
 ; Related .......: _LOBase_ReportDocOpen, _LOBase_ReportDocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOBase_ReportDocConnect($bConnectCurrent = True)
+Func _LOBase_ReportDocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iCount = 0
-	Local $aoConnectAll[0][3]
+	Local $iCount = 0, $iDocType
+	Local $aoConnectAll[0][2]
 	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
-	Local $sReportViewServiceName = "com.sun.star.text.TextDocument", $sReportDesignServiceName = "com.sun.star.report.ReportDefinition"
 
-	If Not IsBool($bConnectCurrent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iMode, $LO_DOC_CONNECT_MODE_ALL, $LO_DOC_CONNECT_MODE_CURRENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oServiceManager = __LO_ServiceManager()
 	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -1370,43 +1371,42 @@ Func _LOBase_ReportDocConnect($bConnectCurrent = True)
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 	If Not $oDesktop.getComponents.hasElements() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; no L.O open
 
-	$oEnumDoc = $oDesktop.getComponents.createEnumeration()
-	If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+	Switch $iMode
+		Case $LO_DOC_CONNECT_MODE_ALL
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-	If $bConnectCurrent Then
-		$oDoc = $oDesktop.currentComponent()
-		If ($oDoc.supportsService($sReportViewServiceName) And $oDoc.isReadOnly() And Not (IsObj($oDoc.Parent()))) Then ; View only Report Doc.
+			While $oEnumDoc.hasMoreElements()
+				$oDoc = $oEnumDoc.nextElement()
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+				$iDocType = _LO_DocGetType($oDoc)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
-		ElseIf $oDoc.supportsService($sReportDesignServiceName) Then ; Report Doc in Design mode.
+				If __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_REPORT_DESIGN, $LO_DOC_TYPE_BASE_REPORT_VIEW) Then
+					If (UBound($aoConnectAll) <= $iCount) Then ReDim $aoConnectAll[$iCount + 1][2]
+					$aoConnectAll[$iCount][0] = $oDoc
+					$aoConnectAll[$iCount][1] = $iDocType
+					$iCount += 1
+				EndIf
+				Sleep((IsInt($iCount / $__LOBCONST_SLEEP_DIV) ? (10) : (0)))
+			WEnd
 
-			Return SetError($__LO_STATUS_SUCCESS, 2, $oDoc)
+			Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
 
-		Else
+		Case $LO_DOC_CONNECT_MODE_CURRENT
+			$oDoc = $oDesktop.currentComponent()
+			If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-		EndIf
+			$iDocType = _LO_DocGetType($oDoc)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
-	Else
-		ReDim $aoConnectAll[1][3]
-		$iCount = 0
-		While $oEnumDoc.hasMoreElements()
-			$oDoc = $oEnumDoc.nextElement()
-			If $oDoc.supportsService($sReportDesignServiceName) _ ; Report Doc in Design mode.
-					Or ($oDoc.supportsService($sReportViewServiceName) And $oDoc.isReadOnly() And Not (IsObj($oDoc.Parent()))) Then ; If Parent is not present and document is Read-Only, it should be a Database Report.
+			If Not __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_REPORT_DESIGN, $LO_DOC_TYPE_BASE_REPORT_VIEW) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Not a Base Form Doc.
 
-				ReDim $aoConnectAll[$iCount + 1][3]
-				$aoConnectAll[$iCount][0] = $oDoc
-				$aoConnectAll[$iCount][1] = $oDoc.Title()
-				$aoConnectAll[$iCount][2] = ($oDoc.supportsService($sReportDesignServiceName)) ? (True) : (False)
-				$iCount += 1
-			EndIf
-			Sleep(10)
-		WEnd
+			Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
+	EndSwitch
 
-		Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
-	EndIf
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; No matches
 EndFunc   ;==>_LOBase_ReportDocConnect
 
 ; #FUNCTION# ====================================================================================================================

@@ -1576,47 +1576,45 @@ EndFunc   ;==>_LOBase_TableUIClose
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_TableUIConnect
 ; Description ...: Connect to an open instance of a Database Table User Interface.
-; Syntax ........: _LOBase_TableUIConnect([$bConnectCurrent = True])
-; Parameters ....: $bConnectCurrent     - [optional] a boolean value. Default is True. If True, returns the currently active, or last active Document, unless it is not a TableUI Document.
+; Syntax ........: _LOBase_TableUIConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
+; Parameters ....: $iMode               - [optional] an integer value (0-1). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bConnectCurrent not a Boolean.
+;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
 ;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
 ;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents found.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Row Set Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Table name.
-;                  @Error 3 @Extended 4 Return 0 = Current Component not a TableUI Document.
+;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 Return 0 = Current Document not a Base Table Document.
+;                  @Error 3 @Extended 5 Return 0 = No matches found.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success, The Object for the current, or last active TableUI document is returned. The Table is open in Viewing/Data entry mode.
-;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active document is returned. The Table is open in Design mode.
-;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice TableUI documents is returned. See remarks. @Extended is set to number of results.
+;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Table document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Table Documents. @Extended is set to number of results. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: The Connect all option returns an array with three columns per result. ($aArray[0][3]).
-;                  Row 1, Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
-;                  Row 1, Column 1 contains the Document's full title. e.g. $aArray[0][1] = "Table1 - DBaseName" [Viewing mode] OR "DBaseName.odb : Table1" [Design Mode]
-;                  Row 1, Column 2 contains a Boolean of whether the TableUI is in Design mode [True] or not.. e.g. $aArray[0][2] = True
-;                  Row 2, Column 0 contains the Object for the next document. And so on. e.g. $aArray[1][0] = $oDoc2
+; Remarks .......: Only Base Table documents are returned using either of the flags.
+;                  The Connect All option returns a two columned array. ($aArray[0][2]), each result is stored in a separate row.
+;                  -Row 1 Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
+;                  -Row 1 Column 1 contains the Document's type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3. e.g.: $aArray[0][1] = $LO_DOC_TYPE_BASE_FORM_VIEW.
+;                  -Row 2 contains the Object for the next document. e.g. $aArray[1][0] = $oDoc2. And so on.
 ; Related .......: _LOBase_TableUIOpenByObject, _LOBase_TableUIOpenByName,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOBase_TableUIConnect($bConnectCurrent = True)
+Func _LOBase_TableUIConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iCount = 0
-	Local $aoConnectAll[1][3]
-	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop, $oRowSet
-	Local $sTableName
-	Local Const $sTableDesignServ = "com.sun.star.sdb.TableDesign", $sTableViewServ = "com.sun.star.sdb.DataSourceBrowser"
+	Local $iCount = 0, $iDocType
+	Local $aoConnectAll[0][2]
+	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
 
-	If Not IsBool($bConnectCurrent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iMode, $LO_DOC_CONNECT_MODE_ALL, $LO_DOC_CONNECT_MODE_CURRENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oServiceManager = __LO_ServiceManager()
 	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -1625,64 +1623,45 @@ Func _LOBase_TableUIConnect($bConnectCurrent = True)
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 	If Not $oDesktop.getComponents.hasElements() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; no L.O open
 
-	$oEnumDoc = $oDesktop.getComponents.createEnumeration()
-	If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+	Switch $iMode
+		Case $LO_DOC_CONNECT_MODE_ALL
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-	If $bConnectCurrent Then
-		$oDoc = $oDesktop.currentComponent()
+			While $oEnumDoc.hasMoreElements()
+				$oDoc = $oEnumDoc.nextElement()
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		If $oDoc.supportsService($sTableDesignServ) Then
+				$iDocType = _LO_DocGetType($oDoc)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
-			Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+				If __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_TABLE_DESIGN, $LO_DOC_TYPE_BASE_TABLE_VIEW) Then
+					If (UBound($aoConnectAll) <= $iCount) Then ReDim $aoConnectAll[$iCount + 1][2]
+					$aoConnectAll[$iCount][0] = $oDoc
+					$aoConnectAll[$iCount][1] = $iDocType
+					$iCount += 1
+				EndIf
+				Sleep((IsInt($iCount / $__LOBCONST_SLEEP_DIV) ? (10) : (0)))
+			WEnd
 
-		ElseIf $oDoc.supportsService($sTableViewServ) Then
-			$oRowSet = $oDoc.FormOperations.Cursor
-			If Not IsObj($oRowSet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+			Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
 
-			$sTableName = $oRowSet.Command()
-			If Not IsString($sTableName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-			If Not $oRowSet.ActiveConnection.Tables.hasByName($sTableName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Not a Table UI, but perhaps a Query.
+		Case $LO_DOC_CONNECT_MODE_CURRENT
+			$oDoc = $oDesktop.currentComponent()
+			If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $oDoc)
+			$iDocType = _LO_DocGetType($oDoc)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
-		Else
+			If Not __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_TABLE_DESIGN, $LO_DOC_TYPE_BASE_TABLE_VIEW) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Not a Base Form Doc.
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-		EndIf
-	EndIf
+			Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
+	EndSwitch
 
-	; Else Connect All.
-	$iCount = 0
-	While $oEnumDoc.hasMoreElements()
-		$oDoc = $oEnumDoc.nextElement()
-		If $oDoc.supportsService($sTableDesignServ) Then
-			ReDim $aoConnectAll[$iCount + 1][3]
-			$aoConnectAll[$iCount][0] = $oDoc
-			$aoConnectAll[$iCount][1] = $oDoc.Title()
-			$aoConnectAll[$iCount][2] = True    ; True = In Design mode.
-			$iCount += 1
-
-		ElseIf $oDoc.supportsService($sTableViewServ) Then
-			$oRowSet = $oDoc.FormOperations.Cursor
-			If Not IsObj($oRowSet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-			$sTableName = $oRowSet.Command()
-			If Not IsString($sTableName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-			If $oRowSet.ActiveConnection.Tables.hasByName($sTableName) Then
-				ReDim $aoConnectAll[$iCount + 1][3]
-				$aoConnectAll[$iCount][0] = $oDoc
-				$aoConnectAll[$iCount][1] = $oDoc.Title()
-				$aoConnectAll[$iCount][2] = False ; False = In Viewing mode.
-				$iCount += 1
-			EndIf
-		EndIf
-
-		Sleep(10)
-	WEnd
-
-	Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; No matches
 EndFunc   ;==>_LOBase_TableUIConnect
+
+
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_TableUIGetRowSet
