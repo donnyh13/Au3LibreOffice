@@ -3673,7 +3673,7 @@ EndFunc   ;==>_LOWriter_FrameStyleCreate
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oFrameObj not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameObj does not support Base Frame Service, not a Frame Object.
+;                  @Error 1 @Extended 3 Return 0 = Object called in $oFrameObj not a Frame Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sFrameStyle not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Frame Style called in $sFrameStyle doesn't exist in Document.
 ;                  --Processing Errors--

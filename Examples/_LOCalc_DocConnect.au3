@@ -6,6 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oDoc2, $oDoc3
+	Local $iUserChoice
 	Local $sDocName
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -24,13 +25,13 @@ Func Example()
 			"Would you like to connect again to the Document using this same name and close it?")
 
 	If ($iUserChoice = $IDYES) Then
-	; Connect to the document using its name.
-	$oDoc3 = _LOCalc_DocConnect($LO_DOC_CONNECT_MODE_SEARCH_NAME, $sDocName)
-	If (@error > 0) Or Not IsObj($oDoc3) Then _ERROR($oDoc, $oDoc2, $oDoc3, "Failed to Connect to Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+		; Connect to the document using its name.
+		$oDoc3 = _LOCalc_DocConnect($LO_DOC_CONNECT_MODE_SEARCH_NAME, $sDocName)
+		If (@error > 0) Or Not IsObj($oDoc3) Then _ERROR($oDoc, $oDoc2, $oDoc3, "Failed to Connect to Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Close the document, don't save changes.
-	_LOCalc_DocClose($oDoc3, False)
-	If @error Then _ERROR($oDoc, $oDoc2, $oDoc3, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+		; Close the document, don't save changes.
+		_LOCalc_DocClose($oDoc3, False)
+		If @error Then _ERROR($oDoc, $oDoc2, $oDoc3, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	EndIf
 
 	; Close the background LibreOffice instance if all Documents are closed.

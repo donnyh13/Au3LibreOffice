@@ -573,13 +573,11 @@ Func _LOWriter_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", 
 
 			$iDocType = _LO_DocGetType($oDoc)
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
-
 			If ($iDocType <> $LO_DOC_TYPE_WRITER) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Not a Writer Doc.
 
 			Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
 
 		Case $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $LO_DOC_CONNECT_MODE_SEARCH_NAME, $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $LO_DOC_CONNECT_MODE_SEARCH_PATH
-
 			$sSearch = StringRegExpReplace($sSearch, "(^\s*|\s*$)", "") ; Strip leading and trailing spaces
 
 			If $bCaseless Then $sCaseless = "(?i)"
@@ -606,7 +604,6 @@ Func _LOWriter_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", 
 							If IsObj($oDoc.CurrentController()) And StringRegExp($oDoc.CurrentController.Frame.Title(), $sCaseless & "\Q" & $sSearch & "\E") Then
 
 								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
-
 							EndIf
 
 						Case $LO_DOC_CONNECT_MODE_SEARCH_NAME
@@ -615,21 +612,18 @@ Func _LOWriter_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", 
 							If StringRegExp($oDoc.Title(), $sCaseless & "\Q" & $sSearch & "\E\s*(\.\w+)?$") Then
 
 								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
-
 							EndIf
 
 						Case $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT
 							If StringRegExp($oDoc.Title(), $sCaseless & "\Q" & $sSearch & "\E") Then
 
 								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
-
 							EndIf
 
 						Case $LO_DOC_CONNECT_MODE_SEARCH_PATH
 							If StringRegExp($oDoc.getURL(), $sCaseless & "\Q" & $sSearch & "\E") Then
 
 								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
-
 							EndIf
 					EndSwitch
 				EndIf

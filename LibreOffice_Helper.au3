@@ -525,7 +525,6 @@ Func _LO_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $bCase
 			Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
 
 		Case $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $LO_DOC_CONNECT_MODE_SEARCH_NAME, $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $LO_DOC_CONNECT_MODE_SEARCH_PATH
-
 			$sSearch = StringRegExpReplace($sSearch, "(^\s*|\s*$)", "")     ; Strip leading and trailing spaces
 
 			If $bCaseless Then $sCaseless = "(?i)"
@@ -550,7 +549,6 @@ Func _LO_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $bCase
 							If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
 							Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
-
 						EndIf
 
 					Case $LO_DOC_CONNECT_MODE_SEARCH_NAME
@@ -561,7 +559,6 @@ Func _LO_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $bCase
 							If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
 							Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
-
 						EndIf
 
 					Case $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT
@@ -570,7 +567,6 @@ Func _LO_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $bCase
 							If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
 							Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
-
 						EndIf
 
 					Case $LO_DOC_CONNECT_MODE_SEARCH_PATH
@@ -579,7 +575,6 @@ Func _LO_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $bCase
 							If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
 							Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
-
 						EndIf
 				EndSwitch
 			WEnd
@@ -633,7 +628,6 @@ Func _LO_DocGetType(ByRef $oDoc)
 			$sMathServiceName = "com.sun.star.formula.FormulaProperties", _ ; Math
 			$sWriterWebServiceName = "com.sun.star.text.WebDocument", _ ; Writer Web/HTML
 			$sTextDocServiceName = "com.sun.star.text.TextDocument" ; Could be a Writer Doc, or Form (View and Design), or Report (View)
-
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If $oDoc.supportsService($sBaseServiceName) Then
@@ -673,6 +667,7 @@ Func _LO_DocGetType(ByRef $oDoc)
 		If IsObj($oDoc.Parent()) And $oDoc.Parent.supportsService($sBaseServiceName) Then         ; A Form, View or Design.
 			$atArgs = $oDoc.Args()
 			If Not IsArray($atArgs) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
 			For $i = 0 To UBound($atArgs) - 1
 				If ($atArgs[$i].Name() = "DocumentBaseURL") Then
 					$sDocumentBaseURL = $atArgs[$i].Value()
@@ -693,6 +688,7 @@ Func _LO_DocGetType(ByRef $oDoc)
 		ElseIf $oDoc.isReadOnly() Then         ; Could be a Writer Doc or Report in View mode, as both have no parent.
 			$atArgs = $oDoc.Args()
 			If Not IsArray($atArgs) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
 			For $i = 0 To UBound($atArgs) - 1
 				If ($atArgs[$i].Name() = "DocumentBaseURL") Then
 					$sDocumentBaseURL = $atArgs[$i].Value()
@@ -726,6 +722,7 @@ Func _LO_DocGetType(ByRef $oDoc)
 		If $oDoc.isReadOnly() Then         ; Could be a Calc Doc or Report in View mode.
 			$atArgs = $oDoc.Args()
 			If Not IsArray($atArgs) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
 			For $i = 0 To UBound($atArgs) - 1
 				If ($atArgs[$i].Name() = "DocumentBaseURL") Then
 					$sDocumentBaseURL = $atArgs[$i].Value()
@@ -747,6 +744,7 @@ Func _LO_DocGetType(ByRef $oDoc)
 			Else         ; Assuming, and most probably, a Calc Document.
 				$iDocType = $LO_DOC_TYPE_CALC
 			EndIf
+
 		Else         ; Not Read Only, most probably a Calc Document.
 			$iDocType = $LO_DOC_TYPE_CALC
 		EndIf

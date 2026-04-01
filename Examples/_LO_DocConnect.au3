@@ -7,10 +7,16 @@
 #include "..\LibreOfficeCalc.au3"
 #include "..\LibreOfficeBase.au3"
 
+Global $sPath
+
 Example()
+
+; Delete the file.
+If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
 	Local $oWriterDoc, $oCalcDoc, $oBaseDoc, $oDBase, $oConnection, $oTable, $oQuery
+	Local $sSavePath
 	Local $avDocs
 
 	; Create a new Calc Document.

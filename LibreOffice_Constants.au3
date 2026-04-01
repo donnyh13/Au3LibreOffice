@@ -60,32 +60,32 @@ Global Enum _
 
 ; Document Connect flags.
 Global Enum _
-		$LO_DOC_CONNECT_MODE_ALL, _                   ; Return an array of all opened Documents.
-		$LO_DOC_CONNECT_MODE_CURRENT, _               ; Return the Object of the last active Document.
-		$LO_DOC_CONNECT_MODE_SEARCH_TITLE, _          ; Search for a Document with a matching Title, this is the Document name plus the Component and Office name. e.g.: "Test.docx — LibreOffice Calc". This should be the same as Window Title in AutoIt.
-		$LO_DOC_CONNECT_MODE_SEARCH_NAME, _           ; Search for a Document with a full matching Name, without an extension, e.g.: "Test".
-		$LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, _  ; Search for a Document with a matching Name, with extension, e.g.: "Test.docx". If the Document is unsaved, just the name will work, e.g. "Untitled1".
-		$LO_DOC_CONNECT_MODE_SEARCH_PATH              ; Search for a Document with a matching save path, e.g.: "C:\Folder1\Folder2\Test.docx".
+		$LO_DOC_CONNECT_MODE_ALL, _                   ; 0 Return an array of all opened Documents.
+		$LO_DOC_CONNECT_MODE_CURRENT, _               ; 1 Return the Object of the last active Document.
+		$LO_DOC_CONNECT_MODE_SEARCH_TITLE, _          ; 2 Search for a Document with a matching Title, this is the Document name plus the Component and Office name. e.g.: "Test.docx — LibreOffice Calc". This should be the same as Window Title in AutoIt.
+		$LO_DOC_CONNECT_MODE_SEARCH_NAME, _           ; 3 Search for a Document with a full matching Name, without an extension, e.g.: "Test".
+		$LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, _  ; 4 Search for a Document with a matching Name, with extension, e.g.: "Test.docx". If the Document is unsaved, just the name will work, e.g. "Untitled1".
+		$LO_DOC_CONNECT_MODE_SEARCH_PATH              ; 5 Search for a Document with a matching save path, e.g.: "C:\Folder1\Folder2\Test.docx".
 
 ; LibreOffice Document Types
 Global Enum _
-		$LO_DOC_TYPE_BASE = 1, _                      ; A LibreOffice Base Document.
-		$LO_DOC_TYPE_BASE_FORM_DESIGN, _              ; A LibreOffice Base Form Document opened in Design mode.
-		$LO_DOC_TYPE_BASE_FORM_VIEW, _                ; A LibreOffice Base Form Document opened in Viewing mode.
-		$LO_DOC_TYPE_BASE_QUERY_DESIGN, _             ; A LibreOffice Base Query Document opened in Design mode.
-		$LO_DOC_TYPE_BASE_QUERY_VIEW, _               ; A LibreOffice Base Query Document opened in Viewing mode.
-		$LO_DOC_TYPE_BASE_REPORT_DESIGN, _            ; A LibreOffice Base Report Document opened in Design mode.
-		$LO_DOC_TYPE_BASE_REPORT_VIEW, _              ; A LibreOffice Base Report Document opened in Viewing mode.
-		$LO_DOC_TYPE_BASE_TABLE_DESIGN, _             ; A LibreOffice Base Table Document opened in Design mode.
-		$LO_DOC_TYPE_BASE_TABLE_VIEW, _               ; A LibreOffice Base Table Document opened in Viewing mode.
-		$LO_DOC_TYPE_BASIC_IDE, _                     ; A LibreOffice Basic IDE windows.
-		$LO_DOC_TYPE_CALC, _                          ; A LibreOffice Calc Document.
-		$LO_DOC_TYPE_DRAW, _                          ; A LibreOffice Draw Document.
-		$LO_DOC_TYPE_IMPRESS, _                       ; A LibreOffice Impress Document.
-		$LO_DOC_TYPE_MATH, _                          ; A LibreOffice Math Document.
-		$LO_DOC_TYPE_UNKNOWN, _                       ; An Unknown LibreOffice Document type, use with caution!
-		$LO_DOC_TYPE_WRITER, _                        ; A LibreOffice Writer Document.
-		$LO_DOC_TYPE_WRITER_WEB                       ; A LibreOffice Writer Web/HTML Document.
+		$LO_DOC_TYPE_BASE = 1, _                      ; 1 A LibreOffice Base Document.
+		$LO_DOC_TYPE_BASE_FORM_DESIGN, _              ; 2 A LibreOffice Base Form Document opened in Design mode.
+		$LO_DOC_TYPE_BASE_FORM_VIEW, _                ; 3 A LibreOffice Base Form Document opened in Viewing mode.
+		$LO_DOC_TYPE_BASE_QUERY_DESIGN, _             ; 4 A LibreOffice Base Query Document opened in Design mode.
+		$LO_DOC_TYPE_BASE_QUERY_VIEW, _               ; 5 A LibreOffice Base Query Document opened in Viewing mode.
+		$LO_DOC_TYPE_BASE_REPORT_DESIGN, _            ; 6 A LibreOffice Base Report Document opened in Design mode.
+		$LO_DOC_TYPE_BASE_REPORT_VIEW, _              ; 7 A LibreOffice Base Report Document opened in Viewing mode.
+		$LO_DOC_TYPE_BASE_TABLE_DESIGN, _             ; 8 A LibreOffice Base Table Document opened in Design mode.
+		$LO_DOC_TYPE_BASE_TABLE_VIEW, _               ; 9 A LibreOffice Base Table Document opened in Viewing mode.
+		$LO_DOC_TYPE_BASIC_IDE, _                     ; 10 A LibreOffice Basic IDE windows.
+		$LO_DOC_TYPE_CALC, _                          ; 11 A LibreOffice Calc Document.
+		$LO_DOC_TYPE_DRAW, _                          ; 12 A LibreOffice Draw Document.
+		$LO_DOC_TYPE_IMPRESS, _                       ; 13 A LibreOffice Impress Document.
+		$LO_DOC_TYPE_MATH, _                          ; 14 A LibreOffice Math Document.
+		$LO_DOC_TYPE_UNKNOWN, _                       ; 15 An Unknown LibreOffice Document type, use with caution!
+		$LO_DOC_TYPE_WRITER, _                        ; 16 A LibreOffice Writer Document.
+		$LO_DOC_TYPE_WRITER_WEB                       ; 17 A LibreOffice Writer Web/HTML Document.
 
 ; Path Convert Constants.
 Global Const _

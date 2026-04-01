@@ -892,7 +892,6 @@ Func _LOBase_QueryUIConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT)
 
 			$iDocType = _LO_DocGetType($oDoc)
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
-
 			If Not __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_QUERY_DESIGN, $LO_DOC_TYPE_BASE_QUERY_VIEW) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Not a Base Form Doc.
 
 			Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
