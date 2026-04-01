@@ -10,7 +10,7 @@ Func Example()
 	Local $atFindFormat[0] ; Create an Empty Array to fill.
 	Local $aoResults
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -44,7 +44,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "As of May 27th 2023, searching for any of these attribute will fail. If you watch closely, once you click ok, and I perform the " & _
-			"search, all instances of ""Search"" will disappear. Libre Office is aware of the bug, but haven't decided how to fix it yet.")
+			"search, all instances of ""Search"" will disappear. LibreOffice is aware of the bug, but haven't decided how to fix it yet.")
 
 	; Search for the word "search".
 	$aoResults = _LOWriter_DocFindAll($oDoc, $oSrchDesc, "search", $atFindFormat)

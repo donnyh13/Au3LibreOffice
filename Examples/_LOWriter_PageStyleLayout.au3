@@ -8,7 +8,7 @@ Func Example()
 	Local $oDoc, $oPageStyle
 	Local $avPageStyleSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -16,7 +16,7 @@ Func Example()
 	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; If Libre Office version is higher or equal to 7.2 then set Gutter settings.
+	; If LibreOffice version is higher or equal to 7.2 then set Gutter settings.
 	If (_LO_VersionGet(True) >= 7.2) Then
 		; Set Page layout to, $LOW_PAGE_LAYOUT_MIRRORED, Numbering format to $LOW_NUM_STYLE_CHARS_UPPER_LETTER_N, Reference Paragraph style to
 		; "Standard", Gutter on Right to False, Gutter At top to False, Background covers margins to True.
@@ -34,7 +34,7 @@ Func Example()
 	$avPageStyleSettings = _LOWriter_PageStyleLayout($oDoc, $oPageStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Page style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; If Libre Office version is higher or equal to 7.2 then display the Gutter margin setting.
+	; If LibreOffice version is higher or equal to 7.2 then display the Gutter margin setting.
 	If (_LO_VersionGet(True) >= 7.2) Then
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Layout settings are as follows: " & @CRLF & _
 				"The current Page Layout is, (see UDF constants): " & $avPageStyleSettings[0] & @CRLF & _

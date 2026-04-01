@@ -10,7 +10,7 @@ Func Example()
 	Local $asListEntries[6] = ["Jon", "Jos", "MLipok", "donnyh13", "Argumentum", "GMK"] ; An array of entries, one entry per element.
 	Local $aiSelected[2] = [2, 4] ; Set entry 3 (element 2 in the array), and entry 5 (element 4 in the Array) to be selected by default.
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

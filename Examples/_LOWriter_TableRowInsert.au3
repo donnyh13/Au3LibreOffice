@@ -8,7 +8,7 @@ Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
 	Local $iRows, $iColumns
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -49,7 +49,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I am going to add 2 rows at the bottom of the table.")
 
 	; Add 2 Rows at the end, or below the last row 5 (last row), I add one row number to the last row number, (Row 5) to add a row at the very
-	; bottom of the table, because Libre Office Tables are 0 based.
+	; bottom of the table, because LibreOffice Tables are 0 based.
 	_LOWriter_TableRowInsert($oTable, 2, 6)
 	If @error Then _ERROR($oDoc, "Failed to add a row to Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

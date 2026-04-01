@@ -9,7 +9,7 @@ Func Example()
 	Local $atFindFormat[0], $atReplaceFormat[0] ; Create two Empty Arrays to fill.
 	Local $iResults
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

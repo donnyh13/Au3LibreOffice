@@ -9,7 +9,7 @@ Func Example()
 	Local $asValues[3] = ["Test1", "Test2", "Test3"]
 	Local $asTables[1] = ["Table_Name"]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

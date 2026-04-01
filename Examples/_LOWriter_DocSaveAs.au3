@@ -12,7 +12,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will Create and Save a new Writer Doc to begin this example, a screen will flash up and disappear after " _
 			& "pressing OK.")
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

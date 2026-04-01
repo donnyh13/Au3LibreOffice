@@ -8,7 +8,7 @@ Func Example()
 	Local $oDoc, $oDoc2, $oViewCursor, $oViewCursor2, $oPar
 	Local $aoPars[0]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -60,7 +60,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have now copied the paragraph, and the object pointing to this copy is stored in $oPar." & _
 			" I will now open a second document and paste the paragraph in there, and it will have preserved its formatting.")
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc2 = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
