@@ -115,7 +115,7 @@ EndFunc   ;==>_LOWriter_TableBackColor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableBorderColor
-; Description ...: Set or Retrieve the Table Border Line Color. Libre Office Version 3.6 and Up.
+; Description ...: Set or Retrieve the Table Border Line Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOWriter_TableBorderColor(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
 ; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -154,7 +154,7 @@ EndFunc   ;==>_LOWriter_TableBackColor
 ;                  |                               16 = Error setting $iVert
 ;                  |                               32 = Error setting $iHori
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -279,7 +279,7 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableBorderStyle
-; Description ...: Set or Retrieve the Table Border Line style. Libre Office Version 3.6 and Up.
+; Description ...: Set or Retrieve the Table Border Line style. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOWriter_TableBorderStyle(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
 ; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Table. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -318,7 +318,7 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 ;                  |                               16 = Error setting $iVert
 ;                  |                               32 = Error setting $iHori
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -349,7 +349,7 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableBorderWidth
-; Description ...: Set or Retrieve the Table Border Line Width. Libre Office Version 3.6 and Up.
+; Description ...: Set or Retrieve the Table Border Line Width. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOWriter_TableBorderWidth(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
 ; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
@@ -382,7 +382,7 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 ;                  |                               16 = Error setting $iVert
 ;                  |                               32 = Error setting $iHori
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1448,7 +1448,7 @@ EndFunc   ;==>_LOWriter_TableMargin
 ; Syntax ........: _LOWriter_TableProperties(ByRef $oDoc, ByRef $oTable[, $iTableAlign = Null[, $bKeepTogether = Null[, $sTableName = Null[, $bSplit = Null[, $bSplitRows = Null[, $bRepeatHeading = Null[, $iHeaderRows = Null]]]]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iTableAlign         - [optional] an integer value (0-7). Default is Null. The horizontal alignment of the Table. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. Libre Office Default is $LOW_ORIENT_HORI_FULL.
+;                  $iTableAlign         - [optional] an integer value (0-7). Default is Null. The horizontal alignment of the Table. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Default is $LOW_ORIENT_HORI_FULL.
 ;                  $bKeepTogether       - [optional] a boolean value. Default is Null. If True, prevents page or column breaks between this table and the following paragraph or text table.
 ;                  $sTableName          - [optional] a string value. Default is Null. The new table name. See Remarks.
 ;                  $bSplit              - [optional] a boolean value. Default is Null. If False, the table will not split across two pages.
@@ -2161,7 +2161,7 @@ EndFunc   ;==>_LOWriter_TableStylesGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Relative Width and Width cannot be set until the Table Horizontal orientation is set to other than $LOW_ORIENT_HORI_FULL(6), which is LibeOffice's default setting.
-;                  Width may change +/- a Hundredth of a Millimeter (HMM) once set due to Libre Office.
+;                  Width may change +/- a Hundredth of a Millimeter (HMM) once set due to LibreOffice.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert

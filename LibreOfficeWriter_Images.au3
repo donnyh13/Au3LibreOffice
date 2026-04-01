@@ -831,7 +831,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradientMulti
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageBorderColor
-; Description ...: Set or retrieve the Image Border Line Color. Libre Office Version 3.4 and Up.
+; Description ...: Set or retrieve the Image Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_ImageBorderColor(ByRef $oImage[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Image, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -861,7 +861,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradientMulti
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -984,7 +984,7 @@ EndFunc   ;==>_LOWriter_ImageBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageBorderStyle
-; Description ...: Set or Retrieve the Image Border Line style. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Image Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_ImageBorderStyle(ByRef $oImage[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Image. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1014,7 +1014,7 @@ EndFunc   ;==>_LOWriter_ImageBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1046,7 +1046,7 @@ EndFunc   ;==>_LOWriter_ImageBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageBorderWidth
-; Description ...: Set or Retrieve the Image Border Line Width. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Image Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_ImageBorderWidth(ByRef $oImage[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1072,7 +1072,7 @@ EndFunc   ;==>_LOWriter_ImageBorderStyle
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1258,7 +1258,7 @@ EndFunc   ;==>_LOWriter_ImageColorAdjust
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: There is no literal setting for $bKeepScale in Libre Office's settings, so I have made an internal static setting in this function to behave the same as Libre Office. When you retrieve the current settings for an image, the return for $bKeepScale will be my internal static value, and NOT the current LibreOffice setting.
+; Remarks .......: There is no literal setting for $bKeepScale in LibreOffice's settings, so I have made an internal static setting in this function to behave the same as LibreOffice. When you retrieve the current settings for an image, the return for $bKeepScale will be my internal static value, and NOT the current LibreOffice setting.
 ;                  Maximum crop values are based on page width. You cannot exceed the size of the page, nor crop too much of the image away.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
@@ -1596,7 +1596,7 @@ EndFunc   ;==>_LOWriter_ImageHyperlink
 ;                  @Error 2 @Extended 4 Return 0 = Error creating a property value for retrieving the Image's size.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error getting Cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Error converting Image Path to Libre Office URL.
+;                  @Error 3 @Extended 2 Return 0 = Error converting Image Path to LibreOffice URL.
 ;                  @Error 3 @Extended 3 Return 0 = Error retrieving current Page Style name at insertion point.
 ;                  @Error 3 @Extended 4 Return 0 = Error retrieving Page Style Object.
 ;                  @Error 3 @Extended 5 Return 0 = Error calculating suggested image size.
@@ -1917,7 +1917,7 @@ EndFunc   ;==>_LOWriter_ImageOptionsName
 ;                  @Error 1 @Extended 2 Return 0 = $sNewImage not a string.
 ;                  @Error 1 @Extended 3 Return 0 = File called in $sNewImage doesn't exist.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to convert $sNewImage Path to Libre Office URL.
+;                  @Error 3 @Extended 1 Return 0 = Failed to convert $sNewImage Path to LibreOffice URL.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Image was successfully replaced.
 ; Author ........: donnyh13
@@ -2391,7 +2391,7 @@ Func _LOWriter_ImageTypePosition(ByRef $oImage, $iHorAlign = Null, $iHorPos = Nu
 
 		$iCurrentAnchor = (($iAnchorPos <> Null) ? ($iAnchorPos) : ($oImage.AnchorType()))
 
-		; Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting values
+		; LibreOffice is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting values
 		; for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or "$LOW_RELATIVE_PARAGRAPH",
 		; For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the L.O. UI the furthest left
 		; drop down box) is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1), $LOW_ORIENT_VERT_CHAR_CENTER(2),
@@ -2480,10 +2480,10 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Image, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeWidth      - [optional] an integer value (0-254). Default is Null. Calculates the width of the Image as a percentage of the width of the page text area. 0 = off.
-;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. Decides what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. Decides what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Image, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeHeight     - [optional] an integer value (0-254). Default is Null. Calculates the Height of the Image as a percentage of the Height of the page text area. 0 = off.
-;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. Decides what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. Decides what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $bKeepRatio          - [optional] a boolean value. Default is Null. Maintains the height and width ratio when you change the width or the height setting.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2492,10 +2492,10 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  @Error 1 @Extended 2 Return 0 = $oImage not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $iWidth Not an Integer, or less than 51.
 ;                  @Error 1 @Extended 4 Return 0 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 5 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0, and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  @Error 1 @Extended 5 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0, and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  @Error 1 @Extended 6 Return 0 = $iHeight Not an Integer, or less than 51.
 ;                  @Error 1 @Extended 7 Return 0 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 8 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  @Error 1 @Extended 8 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  @Error 1 @Extended 9 Return 0 = $bKeepRatio not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -2507,10 +2507,10 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  |                               32 = Error setting $iHeightRelativeTo
 ;                  |                               64 = Error setting $bKeepRatio
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.3.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 7 Element Array depending on current Libre Office Version, If the current Libre Office version is greater than or equal to 4.3, then a 7 element Array is returned, else 5 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 7 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater than or equal to 4.3, then a 7 element Array is returned, else 5 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.

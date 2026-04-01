@@ -91,7 +91,7 @@ EndFunc   ;==>_LOWriter_CellBackColor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CellBorderColor
-; Description ...: Set the Cell or Cell Range Border Line Color. Libre Office Version 3.4 and Up.
+; Description ...: Set the Cell or Cell Range Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_CellBorderColor(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -119,7 +119,7 @@ EndFunc   ;==>_LOWriter_CellBackColor
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -229,7 +229,7 @@ EndFunc   ;==>_LOWriter_CellBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CellBorderStyle
-; Description ...: Set or Retrieve the Cell or Cell Range Border Line style. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Cell or Cell Range Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_CellBorderStyle(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -259,7 +259,7 @@ EndFunc   ;==>_LOWriter_CellBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -289,7 +289,7 @@ EndFunc   ;==>_LOWriter_CellBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CellBorderWidth
-; Description ...: Set or Retrieve the Cell or Cell Range Border Line Width. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Cell or Cell Range Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_CellBorderWidth(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
@@ -315,7 +315,7 @@ EndFunc   ;==>_LOWriter_CellBorderStyle
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.

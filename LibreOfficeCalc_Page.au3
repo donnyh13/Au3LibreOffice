@@ -116,7 +116,7 @@ EndFunc   ;==>_LOCalc_PageStyleBackColor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleBorderColor
-; Description ...: Set the Page Style Border Line Color. Libre Office Version 3.6 and Up.
+; Description ...: Set the Page Style Border Line Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_PageStyleBorderColor(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -147,7 +147,7 @@ EndFunc   ;==>_LOCalc_PageStyleBackColor
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -273,7 +273,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleBorderStyle
-; Description ...: Set or Retrieve the Page Style Border Line style. Libre Office Version 3.6 and Up.
+; Description ...: Set or Retrieve the Page Style Border Line style. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_PageStyleBorderStyle(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Page. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -304,7 +304,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -337,7 +337,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleBorderWidth
-; Description ...: Set or Retrieve the Page Style Border Line Width. Libre Office Version 3.6 and Up.
+; Description ...: Set or Retrieve the Page Style Border Line Width. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_PageStyleBorderWidth(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
@@ -364,7 +364,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderStyle
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -628,10 +628,10 @@ EndFunc   ;==>_LOCalc_PageStyleExists
 ;                  |                               64 = Error setting $iHeight
 ;                  |                               128 = Error setting $bAutoHeight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If Libre Office version is less than 4.0, then the Array returned will contain 7 elements, because $bSameOnFirst will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, then the Array returned will contain 7 elements, because $bSameOnFirst will not be available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1152,7 +1152,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterCreateTextCursor
 ;                  @Error 0 @Extended 1 Return Object = Success. One of the three parameters ($oFirstPage, $oRightPage, $oLeftPage) was called with Default keyword, returning the specified Footer Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office Calc Footers are set up in a way that you must retrieve the Object for the one you wish to modify the content of, modify it, and then re-insert the modified object.
+; Remarks .......: LibreOffice Calc Footers are set up in a way that you must retrieve the Object for the one you wish to modify the content of, modify it, and then re-insert the modified object.
 ;                  To modify the Header/Footer content, retrieve the desired Page (First, Left/Right) by calling the respective parameter with Default keyword, then create a text cursor in the desired area by calling _LOCalc_PageStyleFooterCreateTextCursor with the Header/Footer Object, insert, delete, etc. the content, then call this function again with the Object you retrieved from it earlier, in the appropriate parameter.
 ;                  The Object returned is interchangeable among the others. i.e. if you want identical content on all pages, you can set all three using the same Object. You can also use this method to copy header/footer content from one page Style to another, even in other documents.
 ;                  Only one Object can be retrieved at once. But you could set and retrieve another object at one time, such as set First page and retrieve Left Page. If more than one parameter is called with Default, the first parameter called with Default is retrieved.
@@ -1374,10 +1374,10 @@ EndFunc   ;==>_LOCalc_PageStyleGetObj
 ;                  |                               64 = Error setting $iHeight
 ;                  |                               128 = Error setting $bAutoHeight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If Libre Office version is less than 4.0, then the Array returned will contain 7 elements, because $bSameOnFirst will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, then the Array returned will contain 7 elements, because $bSameOnFirst will not be available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1898,7 +1898,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderCreateTextCursor
 ;                  @Error 0 @Extended 1 Return Object = Success. One of the three parameters ($oFirstPage, $oRightPage, $oLeftPage) was called with Default keyword, returning the specified Header Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office Calc Headers are set up in a way that you must retrieve the Object for the one you wish to modify the content of, modify it, and then re-insert the modified object.
+; Remarks .......: LibreOffice Calc Headers are set up in a way that you must retrieve the Object for the one you wish to modify the content of, modify it, and then re-insert the modified object.
 ;                  To modify the Header/Footer content, retrieve the desired Page (First, Left/Right) by calling the respective parameter with Default keyword, then create a text cursor in the desired area by calling _LOCalc_PageStyleHeaderCreateTextCursor with the Header/Footer Object, insert, delete, etc. the content, then call this function again with the Object you retrieved from it earlier, in the appropriate parameter.
 ;                  The Object returned is interchangeable among the others. i.e. if you want identical content on all pages, you can set all three using the same Object. You can also use this method to copy header/footer content from one page Style to another, even in other documents.
 ;                  Only one Object can be retrieved at once. But you could set and retrieve another object at one time, such as set First page and retrieve Left Page. If more than one parameter is called with Default, the first parameter called with Default is retrieved.
@@ -2229,7 +2229,7 @@ EndFunc   ;==>_LOCalc_PageStyleMargins
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
 ;                  $sNewPageStyleName   - [optional] a string value. Default is Null. The new name to set the Page Style called in $oPageStyle to.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the style is hidden in L.O. UI. Libre Office 4.0 and Up.
+;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the style is hidden in L.O. UI. LibreOffice 4.0 and Up.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2244,10 +2244,10 @@ EndFunc   ;==>_LOCalc_PageStyleMargins
 ;                  |                               1 = Error setting $sNewParStyleName
 ;                  |                               2 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 1 or 2 Element Array with values in order of function parameters. If the Libre Office version is below 4.0, the Array will contain 1 element because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 1 or 2 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 1 element because $bHidden is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.

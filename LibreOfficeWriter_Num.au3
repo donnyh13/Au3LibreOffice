@@ -531,10 +531,10 @@ EndFunc   ;==>_LOWriter_NumStyleGetObj
 ;                  |                               1 = Error setting $sNewParStyleName
 ;                  |                               2 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 1 or 2 Element Array with values in order of function parameters. If the Libre Office version is below 4.0, the Array will contain 1 element because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 1 or 2 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 1 element because $bHidden is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.

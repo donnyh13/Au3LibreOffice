@@ -290,7 +290,7 @@ EndFunc   ;==>_LOCalc_TextCursorCharPosition
 ; Syntax ........: _LOCalc_TextCursorCharSpacing(ByRef $oTextCursor[, $bAutoKerning = Null[, $nKerning = Null]])
 ; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
 ;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
-;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the Libre Office UI.
+;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -564,7 +564,7 @@ EndFunc   ;==>_LOCalc_TextCursorFontColor
 ;                  @Error 0 @Extended 0 Return String = Success. The selected text in String format.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office documentation states that when used in Libre Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
+; Remarks .......: LibreOffice documentation states that when used in Libre Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

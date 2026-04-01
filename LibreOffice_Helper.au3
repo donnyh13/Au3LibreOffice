@@ -453,10 +453,10 @@ EndFunc   ;==>_LO_ConvertColorToLong
 ;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
 ;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents.
+;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Error converting path to Libre Office URL.
+;                  @Error 3 @Extended 4 Return 0 = Error converting path to LibreOffice URL.
 ;                  @Error 3 @Extended 5 Return 0 = No matches found.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
@@ -993,13 +993,13 @@ EndFunc   ;==>_LO_InitializePortable
 ;                  @Error 1 @Extended 1 Return 0 = $sFilePath is not a string
 ;                  @Error 1 @Extended 2 Return 0 = $iReturnMode not a Integer, less than 0 or greater than 2. See constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3..
 ;                  --Success--
-;                  @Error 0 @Extended 1 Return String = Returning converted File Path from Libre Office URL.
-;                  @Error 0 @Extended 2 Return String = Returning converted path from File Path to Libre Office URL.
+;                  @Error 0 @Extended 1 Return String = Returning converted File Path from LibreOffice URL.
+;                  @Error 0 @Extended 2 Return String = Returning converted path from File Path to LibreOffice URL.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: LibreOffice URL notation is based on the Internet Standard RFC 1738, which means only [0-9],[a-zA-Z] are allowed in paths, most other characters need to be converted into ISO 8859-1 (ISO Latin) such as is found in internet URL's (spaces become %20).
 ;                  See: StarOfficeTM 6.0 Office SuiteA SunTM ONE Software Offering, Basic Programmer's Guide; Page 74
-;                  The user generally should not even need this function, as I have endeavored to convert any URLs to the appropriate computer path format and any input computer paths to a Libre Office URL.
+;                  The user generally should not even need this function, as I have endeavored to convert any URLs to the appropriate computer path format and any input computer paths to a LibreOffice URL.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1072,8 +1072,8 @@ EndFunc   ;==>_LO_PathConvert
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Default printer name.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Array of printer names.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.1.
-;                  @Error 6 @Extended 2 Return 0 = Current Libre Office version lower than 6.3.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
+;                  @Error 6 @Extended 2 Return 0 = Current LibreOffice version lower than 6.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Returning the default printer's name.
 ;                  @Error 0 @Extended ? Return Array = Returning an array of strings of all installed printers' names. @Extended set to number of results.

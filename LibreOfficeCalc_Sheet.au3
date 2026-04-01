@@ -643,7 +643,7 @@ EndFunc   ;==>_LOCalc_SheetGetObjByPosition
 ;                  @Error 3 @Extended 2 Return 0 = Failed to import the Sheet.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve new Sheet's Object.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office Version less than 3.5.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice Version less than 3.5.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully imported the requested Sheet, returning the new Sheet's Object.
 ; Author ........: donnyh13
@@ -1602,7 +1602,7 @@ EndFunc   ;==>_LOCalc_SheetUnprotect
 ; Description ...: Set or Retrieve a Sheet's current visibility setting.
 ; Syntax ........: _LOCalc_SheetVisible(ByRef $oSheet[, $bVisible = Null])
 ; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the Sheet is visible in the Libre Office UI.
+;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the Sheet is visible in the LibreOffice UI.
 ; Return values .: Success: 1 or Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

@@ -10,7 +10,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Internal functions for interacting with Libre Office.
+; Description ...: Internal functions for interacting with LibreOffice.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;

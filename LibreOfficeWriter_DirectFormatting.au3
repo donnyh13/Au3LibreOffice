@@ -69,7 +69,7 @@
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtCharBorderColor
-; Description ...: Set and Retrieve the Character Style Border Line Color by Direct Formatting. Libre Office 4.2 and Up.
+; Description ...: Set and Retrieve the Character Style Border Line Color by Direct Formatting. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_DirFrmtCharBorderColor(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Character Style as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -101,7 +101,7 @@
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.2.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -174,7 +174,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderColor
 ;                  |                               8 = Error setting $iLeft border distance
 ;                  |                               16 = Error setting $iRight border distance
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.2.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
@@ -212,7 +212,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtCharBorderStyle
-; Description ...: Set or Retrieve the Character Style Border Line style by Direct Format. Libre Office 4.2 and Up.
+; Description ...: Set or Retrieve the Character Style Border Line style by Direct Format. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_DirFrmtCharBorderStyle(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Characters. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -244,7 +244,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.2.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -290,7 +290,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtCharBorderWidth
-; Description ...: Set and Retrieve the Character Style Border Line Width by Direct Formatting. Libre Office 4.2 and Up.
+; Description ...: Set and Retrieve the Character Style Border Line Width by Direct Formatting. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_DirFrmtCharBorderWidth(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of these constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
@@ -318,7 +318,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderStyle
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.2.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -584,7 +584,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharRotateScale
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtCharShadow
-; Description ...: Set and retrieve the Shadow for a Character Style by Direct Formatting. Libre Office 4.2 and Up.
+; Description ...: Set and retrieve the Shadow for a Character Style by Direct Formatting. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_DirFrmtCharShadow(ByRef $oSelection[, $iLocation = Null[, $iColor = Null[, $iWidth = Null[, $bClearDirFrmt = False]]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
 ;                  $iLocation           - [optional] an integer value (0-4). Default is Null. Location of the shadow compared to the characters. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
@@ -608,7 +608,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharRotateScale
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.2.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -650,7 +650,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharShadow
 ; Syntax ........: _LOWriter_DirFrmtCharSpacing(ByRef $oSelection[, $bAutoKerning = Null[, $nKerning = Null]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
 ;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
-;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the Libre Office UI.
+;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -864,7 +864,7 @@ EndFunc   ;==>_LOWriter_DirFrmtFont
 ; Syntax ........: _LOWriter_DirFrmtFontColor(ByRef $oSelection[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
 ;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Font color, as a RGB Color Integer, Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for Libre Office 7.0 and up.
+;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
 ;                  $iHighlight          - [optional] an integer value (-1-16777215). Default is Null. The highlight color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -882,10 +882,10 @@ EndFunc   ;==>_LOWriter_DirFrmtFont
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 7.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current Libre Office version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
 ;                  @Error 0 @Extended 0 Return 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1049,7 +1049,7 @@ EndFunc   ;==>_LOWriter_DirFrmtOverLine
 ;                  $iLastLineAlign      - [optional] an integer value (0-3). Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
 ;                  $bExpandSingleWord   - [optional] a boolean value. Default is Null. If True, and the last line of a justified paragraph consists of one word, the word is stretched to the width of the paragraph.
 ;                  $bSnapToGrid         - [optional] a boolean value. Default is Null. If True, Aligns the paragraph to a text grid (if one is active).
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [Libre Office Default is 4]
+;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1450,7 +1450,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaTransparency
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtParBorderColor
-; Description ...: Set and Retrieve the Paragraph Style Border Line Color. Libre Office Version 3.4 and Up.
+; Description ...: Set and Retrieve the Paragraph Style Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_DirFrmtParBorderColor(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -1482,7 +1482,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaTransparency
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1589,7 +1589,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtParBorderStyle
-; Description ...: Set and retrieve the Paragraph Border Line style by Direct Formatting. Libre Office Version 3.4 and Up.
+; Description ...: Set and retrieve the Paragraph Border Line style by Direct Formatting. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_DirFrmtParBorderStyle(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1621,7 +1621,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1670,11 +1670,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderStyle
 ; Description ...: Set and retrieve the Paragraph Border Line Width, or the Paragraph Connect Border option by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParBorderWidth(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bConnectBorder = Null[, $bClearDirFrmt = False]]]]]])
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. Libre Office Version 3.4 and Up.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. Libre Office Version 3.4 and Up.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. Libre Office Version 3.4 and Up.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. Libre Office Version 3.4 and Up.
-;                  $bConnectBorder      - [optional] a boolean value. Default is Null. If True, borders set for a paragraph are merged with the next paragraph. Note: Borders are only merged if they are identical. Libre Office Version 3.4 and Up.
+;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $bConnectBorder      - [optional] a boolean value. Default is Null. If True, borders set for a paragraph are merged with the next paragraph. Note: Borders are only merged if they are identical. LibreOffice Version 3.4 and Up.
 ;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of the Paragraph Border, Width, Style and Color. Doesn't clear $bConnectBorder. See Remarks.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1698,7 +1698,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderStyle
 ;                  |                               8 = Error setting $iRight
 ;                  |                               16 = Error setting $bConnectBorder
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
@@ -1871,10 +1871,10 @@ EndFunc   ;==>_LOWriter_DirFrmtParDropCaps
 ;                  |                               8 = Error setting $iMinLeadingChar
 ;                  |                               16 = Error setting $iMinTrailingChar
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 6.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 6.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current Libre Office Version is below 6.4, then the Array returned will contain 4 elements because $bHyphenNoCaps is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current LibreOffice Version is below 6.4, then the Array returned will contain 4 elements because $bHyphenNoCaps is not available.
 ;                  @Error 0 @Extended 0 Return 2 = Success. $bClearDirFrmt was called with True, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2184,7 +2184,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParShadow
 ; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ;                  $iAbovePar           - [optional] an integer value (0-10008). Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] an integer value (0-10008). Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. Libre Office 3.6 and Up.
+;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. LibreOffice 3.6 and Up.
 ;                  $iLineSpcMode        - [optional] an integer value (0-3). Default is Null. The type of the line spacing of a paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3. Also notice min and max values for each.
 ;                  $iLineSpcHeight      - [optional] an integer value. Default is Null. This value specifies the spacing of the lines. See Remarks for Minimum and Max values.
 ;                  $bPageLineSpc        - [optional] a boolean value. Default is Null. If True, register mode is applied to the paragraph. See Remarks.
@@ -2213,10 +2213,10 @@ EndFunc   ;==>_LOWriter_DirFrmtParShadow
 ;                  |                               16 = Error setting $iLineSpcHeight
 ;                  |                               32 = Error setting bPageLineSpc
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 6 Element Array with values in order of function parameters. If the current Libre Office version is less than 3.6, the returned Array will contain 5 elements, because $bAddSpace is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 6 Element Array with values in order of function parameters. If the current LibreOffice version is less than 3.6, the returned Array will contain 5 elements, because $bAddSpace is not available.
 ;                  @Error 0 @Extended 0 Return 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
 ; Author ........: donnyh13
 ; Modified ......:

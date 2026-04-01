@@ -863,7 +863,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradientMulti
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleBorderColor
-; Description ...: Set the Page Style Border Line Color. Libre Office Version 3.4 and Up.
+; Description ...: Set the Page Style Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_PageStyleBorderColor(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -894,7 +894,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradientMulti
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1020,7 +1020,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleBorderStyle
-; Description ...: Set or Retrieve the Page Style Border Line style. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Page Style Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_PageStyleBorderStyle(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Page. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1051,7 +1051,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1084,7 +1084,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleBorderWidth
-; Description ...: Set or Retrieve the Page Style Border Line Width. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Page Style Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_PageStyleBorderWidth(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObj function.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1111,7 +1111,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderStyle
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1709,10 +1709,10 @@ EndFunc   ;==>_LOWriter_PageStyleExists
 ;                  |                               128 = Error setting $iHeight
 ;                  |                               256 = Error setting $bAutoHeight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 or 9 Element Array with values in order of function parameters. If Libre Office version is less than 4.0, then the Array returned will contain 8 elements, because $bSameOnFirst will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 or 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, then the Array returned will contain 8 elements, because $bSameOnFirst will not be available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -3221,10 +3221,10 @@ EndFunc   ;==>_LOWriter_PageStyleGetObj
 ;                  |                               128 = Error setting $iHeight
 ;                  |                               256 = Error setting $bAutoHeight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 or 9 Element Array with values in order of function parameters. If Libre Office version is less than 4.0, then the Array returned will contain 8 elements, because $bSameOnFirst will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 or 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, then the Array returned will contain 8 elements, because $bSameOnFirst will not be available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4522,10 +4522,10 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 ;                  |                               32 = Error setting $bBackCoversMargins
 ;                  |                               64 = Error setting $sPaperTray
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 7.2.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 7 Element Array with values in order of function parameters. If the current Libre Office version is less than 7.2, the Array will be a 4 element Array, because $bGutterOnRight, $bGutterAtTop, and $bBackCoversMargins will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 7 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the Array will be a 4 element Array, because $bGutterOnRight, $bGutterAtTop, and $bBackCoversMargins will not be available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4646,10 +4646,10 @@ EndFunc   ;==>_LOWriter_PageStyleLayout
 ;                  |                               8 = Error setting $iBottom
 ;                  |                               16 = Error setting $iGutter
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 7.2.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current Libre Office version is less than 7.2, then the array will have 4 elements as Gutter Margin will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, then the array will have 4 elements as Gutter Margin will not be available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4726,7 +4726,7 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObj function.
 ;                  $sNewPageStyleName   - [optional] a string value. Default is Null. The new name to set the Page Style called in $oPageStyle to.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the style is hidden in L.O. UI. Libre Office 4.0 and Up.
+;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the style is hidden in L.O. UI. LibreOffice 4.0 and Up.
 ;                  $sFollowStyle        - [optional] a string value. Default is Null. The name of the Page style that is applied After this Page Style.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4745,10 +4745,10 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ;                  |                               2 = Error setting $bHidden
 ;                  |                               4 = Error setting $sFollowStyle
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the Libre Office version is below 4.0, the Array will contain 2 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 2 elements because $bHidden is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.

@@ -1373,7 +1373,7 @@ EndFunc   ;==>_LOCalc_RangeFill
 ;                  @Error 0 @Extended 0 Return 1 = Success. Range successfully filled with random values.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function is a homemade version of Calc's Fill Random, as there is no built in method for calling Libre Office's built-in one. The results of this function may not be similar to the results of Libre Office's random number generator.
+; Remarks .......: This function is a homemade version of Calc's Fill Random, as there is no built in method for calling LibreOffice's built-in one. The results of this function may not be similar to the results of LibreOffice's random number generator.
 ;                  Any values in the range will be overwritten.
 ; Related .......:
 ; Link ..........:
@@ -1949,7 +1949,7 @@ EndFunc   ;==>_LOCalc_RangeGetCellByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: According to the wiki (https://wiki.documentfoundation.org/Faq/Calc/022), the maximum Columns contained in a sheet is 1024 until version 7.3, or 16384 from 7.3. and up..
-;                  According to Andrew Pitonyak, (OOME. 4.1 Page 492), the maximum number of rows contained in a sheet is 65,536 as of OOo Calc 3.0, but according to the wiki (https://wiki.documentfoundation.org/Faq/Calc/022), the maximum or Rows for Libre Office Calc is 1,048,576.
+;                  According to Andrew Pitonyak, (OOME. 4.1 Page 492), the maximum number of rows contained in a sheet is 65,536 as of OOo Calc 3.0, but according to the wiki (https://wiki.documentfoundation.org/Faq/Calc/022), the maximum or Rows for LibreOffice Calc is 1,048,576.
 ; Related .......: _LOCalc_RangeGetCellByName
 ; Link ..........:
 ; Example .......: Yes
@@ -4746,7 +4746,7 @@ EndFunc   ;==>_LOCalc_RangeQueryVisible
 ;                  @Error 0 @Extended 1 Return Object = Success. Search and Replace was successful, returning Object for Cell that the find and replace was performed upon.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office does not offer a Function to call to replace only one result within a Range, consequently I have had to create my own, which means this may not work exactly as expected.
+; Remarks .......: LibreOffice does not offer a Function to call to replace only one result within a Range, consequently I have had to create my own, which means this may not work exactly as expected.
 ; Related .......: _LOCalc_SearchDescriptorCreate, _LOCalc_RangeFindAll, _LOCalc_RangeFindNext, _LOCalc_RangeReplaceAll,
 ; Link ..........:
 ; Example .......: Yes

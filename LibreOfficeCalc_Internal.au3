@@ -143,7 +143,7 @@ EndFunc   ;==>__LOCalc_CellBackColor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_CellBorder
-; Description ...: Internal function to Set and Retrieve the Cell, or Cell Range Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Cell, or Cell Range Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_CellBorder(ByRef $oRange, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]]]])
 ; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
@@ -185,7 +185,7 @@ EndFunc   ;==>__LOCalc_CellBackColor
 ;                  |                               64 = Error setting $iTLBRDiag
 ;                  |                               128 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
@@ -1011,7 +1011,7 @@ EndFunc   ;==>__LOCalc_CellStrikeOut
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_CellStyleBorder
-; Description ...: Internal function to Set and Retrieve the Cell Style Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Cell Style Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_CellStyleBorder(ByRef $oCellStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]])
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
@@ -1046,7 +1046,7 @@ EndFunc   ;==>__LOCalc_CellStrikeOut
 ;                  |                               16 = Error setting $iTLBRDiag
 ;                  |                               32 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1276,8 +1276,8 @@ EndFunc   ;==>__LOCalc_CellTextAlign
 ; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
 ;                  $iRotate             - [optional] an integer value (0-359). Default is Null. The rotation angle of the text.
 ;                  $iReference          - [optional] an integer value (0,1,3). Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bVerticalStack      - [optional] a boolean value. Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in Libre Office settings.
-;                  $bAsianLayout        - [optional] a boolean value. Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in Libre Office settings, and enable vertical text.
+;                  $bVerticalStack      - [optional] a boolean value. Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in LibreOffice settings.
+;                  $bAsianLayout        - [optional] a boolean value. Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in LibreOffice settings, and enable vertical text.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1338,7 +1338,7 @@ Func __LOCalc_CellTextOrient(ByRef $oObj, $iRotate = Null, $iReference = Null, $
 	If ($bVerticalStack <> Null) Then
 		If Not IsBool($bVerticalStack) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		; According to Libre Office IDL Vertical Stack (Orientation set to 3) is only taken into account when RotateAngle is set to 0.
+		; According to LibreOffice IDL Vertical Stack (Orientation set to 3) is only taken into account when RotateAngle is set to 0.
 		If ($bVerticalStack = True) Then
 			$oObj.RotateAngle = 0
 			$oObj.Orientation = $__iIsStacked
@@ -1368,7 +1368,7 @@ EndFunc   ;==>__LOCalc_CellTextOrient
 ;                  $bAutoWrapText       - [optional] a boolean value. Default is Null. If True, Wraps text onto another line at the cell border.
 ;                  $bHyphen             - [optional] a boolean value. Default is Null. If True, Enables word hyphenation for text wrapping to the next line.
 ;                  $bShrinkToFit        - [optional] a boolean value. Default is Null. If True, Reduces the apparent size of the font so that the contents of the cell fit into the current cell width.
-;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [Libre Office Default is 4]
+;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1376,7 +1376,7 @@ EndFunc   ;==>__LOCalc_CellTextOrient
 ;                  @Error 1 @Extended 2 Return 0 = $bAutoWrapText not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $bHyphen not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bShrinkToFitnot a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [Libre Office Default is 4]
+;                  @Error 1 @Extended 5 Return 0 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bAutoWrapText
@@ -2306,7 +2306,7 @@ EndFunc   ;==>__LOCalc_NamedRangeGetScopeObj
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_PageStyleBorder
-; Description ...: Internal function to Set and Retrieve the Page Style Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Page Style Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
@@ -2335,7 +2335,7 @@ EndFunc   ;==>__LOCalc_NamedRangeGetScopeObj
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2440,7 +2440,7 @@ EndFunc   ;==>__LOCalc_PageStyleBorder
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_PageStyleFooterBorder
-; Description ...: Internal function to Set and Retrieve the Page Style Footer Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Page Style Footer Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleFooterBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
@@ -2470,7 +2470,7 @@ EndFunc   ;==>__LOCalc_PageStyleBorder
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2576,7 +2576,7 @@ EndFunc   ;==>__LOCalc_PageStyleFooterBorder
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_PageStyleHeaderBorder
-; Description ...: Internal function to Set and Retrieve the Page Style Header Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Page Style Header Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleHeaderBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
@@ -2606,7 +2606,7 @@ EndFunc   ;==>__LOCalc_PageStyleFooterBorder
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.

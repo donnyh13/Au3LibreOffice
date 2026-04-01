@@ -160,10 +160,10 @@ EndFunc   ;==>_LOBase_DocClose
 ;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
 ;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents.
+;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Error converting path to Libre Office URL.
+;                  @Error 3 @Extended 4 Return 0 = Error converting path to LibreOffice URL.
 ;                  @Error 3 @Extended 5 Return 0 = Current Document not a Base Document.
 ;                  @Error 3 @Extended 6 Return 0 = No matches found.
 ;                  --Success--
@@ -295,7 +295,7 @@ EndFunc   ;==>_LOBase_DocConnect
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_DocCreate
-; Description ...: Open a new Libre Office Base Document.
+; Description ...: Open a new LibreOffice Base Document.
 ; Syntax ........: _LOBase_DocCreate([$bForceNew = True[, $bHidden = False[, $bWizard = False]]])
 ; Parameters ....: $bForceNew           - [optional] a boolean value. Default is True. If True, force opening a new Base Document instead of checking for a usable blank.
 ;                  $bHidden             - [optional] a boolean value. Default is False. If True opens the new document invisible or changes the existing document to invisible.
@@ -490,7 +490,7 @@ EndFunc   ;==>_LOBase_DocGetName
 ; Description ...: Returns a Document's current save path.
 ; Syntax ........: _LOBase_DocGetPath(ByRef $oDoc[, $bReturnLibreURL = False])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in Libre Office URL format, else False returns a regular Windows path.
+;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in LibreOffice URL format, else False returns a regular Windows path.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -501,7 +501,7 @@ EndFunc   ;==>_LOBase_DocGetName
 ;                  @Error 3 @Extended 1 Return 0 = Error converting Libre URL to Computer path format.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the P.C. path to the current document's save path.
-;                  @Error 0 @Extended 1 Return String = Success. Returning the Libre Office URL to the current document's save path.
+;                  @Error 0 @Extended 1 Return String = Success. Returning the LibreOffice URL to the current document's save path.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -569,7 +569,7 @@ EndFunc   ;==>_LOBase_DocHasPath
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active Libre window. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other Libre Office documents.
+; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

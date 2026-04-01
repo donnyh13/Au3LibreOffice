@@ -856,7 +856,7 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradientMulti
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameBorderColor
-; Description ...: Set or retrieve the Frame Border Line Color. Libre Office Version 3.4 and Up.
+; Description ...: Set or retrieve the Frame Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameBorderColor(ByRef $oFrame[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -886,7 +886,7 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradientMulti
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1009,7 +1009,7 @@ EndFunc   ;==>_LOWriter_FrameBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameBorderStyle
-; Description ...: Set or Retrieve the Frame Border Line style. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Frame Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameBorderStyle(ByRef $oFrame[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1039,7 +1039,7 @@ EndFunc   ;==>_LOWriter_FrameBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1071,7 +1071,7 @@ EndFunc   ;==>_LOWriter_FrameBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameBorderWidth
-; Description ...: Set or Retrieve the Frame Border Line Width. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Frame Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameBorderWidth(ByRef $oFrame[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1097,7 +1097,7 @@ EndFunc   ;==>_LOWriter_FrameBorderStyle
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -3000,7 +3000,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradientMulti
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleBorderColor
-; Description ...: Set or retrieve the Frame Style Border Line Color. Libre Office Version 3.4 and Up.
+; Description ...: Set or retrieve the Frame Style Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameStyleBorderColor(ByRef $oFrameStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -3031,7 +3031,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradientMulti
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -3157,7 +3157,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleBorderStyle
-; Description ...: Set or Retrieve the Frame Style Border Line style. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Frame Style Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameStyleBorderStyle(ByRef $oFrameStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0x7FFF-17). Default is Null. The Top Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -3188,7 +3188,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -3221,7 +3221,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleBorderWidth
-; Description ...: Set or Retrieve the Frame Style Border Line Width. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Frame Style Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameStyleBorderWidth(ByRef $oFrameStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObj function.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
@@ -3248,7 +3248,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderStyle
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -3996,10 +3996,10 @@ EndFunc   ;==>_LOWriter_FrameStyleOptions
 ;                  |                               4 = Error setting $bAutoUpdate
 ;                  |                               8 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 or 4 Element Array with values in order of function parameters. If the Libre Office version is below 4.0, the Array will contain 3 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 or 4 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 3 elements because $bHidden is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4376,7 +4376,7 @@ Func _LOWriter_FrameStyleTypePosition(ByRef $oFrameStyle, $iHorAlign = Null, $iH
 
 		$iCurrentAnchor = (($iAnchorPos <> Null) ? $iAnchorPos : $oFrameStyle.AnchorType())
 
-		; Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting values
+		; LibreOffice is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting values
 		; for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or "$LOW_RELATIVE_PARAGRAPH",
 		; For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the L.O. UI the furthest left
 		; drop down box) is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1), $LOW_ORIENT_VERT_CHAR_CENTER(2),
@@ -4465,11 +4465,11 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ;                  $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObj function.
 ;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeWidth      - [optional] an integer value (0-254). Default is Null. Calculates the width of the frame as a percentage of the width of the page text area. 0 = (off).
-;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. Determines what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. Determines what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $bAutoWidth          - [optional] a boolean value. Default is Null. Automatically adjusts the width of a frame to match the contents of the frame. $iWidth becomes the minimum width the frame must be.
 ;                  $iHeight             - [optional] an integer value. Default is Null. The height that you want for the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeHeight     - [optional] an integer value (0-254). Default is Null. Calculates the Height of the frame as a percentage of the Height of the page text area. 0 = (off).
-;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. Determines what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. Determines what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $bAutoHeight         - [optional] a boolean value. Default is Null. Automatically adjusts the height of a frame to match the contents of the frame. $iHeight becomes the minimum height the frame must be.
 ;                  $bKeepRatio          - [optional] a boolean value. Default is Null. Maintains the height and width ratio when you change the width or the height setting.
 ; Return values .: Success: 1 or Array.
@@ -4499,10 +4499,10 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ;                  |                               128 = Error setting $bAutoHeight
 ;                  |                               256 = Error setting $bKeepRatio
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.3.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array depending on current Libre Office Version, If the current Libre Office version is greater or equal to than 4.3, then a 9 element Array is returned, else 7 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater or equal to than 4.3, then a 9 element Array is returned, else 7 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4981,7 +4981,7 @@ Func _LOWriter_FrameTypePosition(ByRef $oFrame, $iHorAlign = Null, $iHorPos = Nu
 
 		$iCurrentAnchor = (($iAnchorPos <> Null) ? $iAnchorPos : $oFrame.AnchorType())
 
-		; Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting
+		; LibreOffice is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting
 		;		values for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or
 		; "$LOW_RELATIVE_PARAGRAPH", For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the
 		; L.O. UI the furthest left drop down box)  is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1),
@@ -5070,11 +5070,11 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ;                  $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeWidth      - [optional] an integer value (0-254). Default is Null. Calculates the width of the frame as a percentage of the width of the page text area. Min. 0 (off). Max 254.
-;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. determines what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. determines what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $bAutoWidth          - [optional] a boolean value. Default is Null. Automatically adjusts the width of a frame to match the contents of the frame. $iWidth becomes the minimum width the frame must be.
 ;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeHeight     - [optional] an integer value (0-254). Default is Null. Calculates the Height of the frame as a percentage of the Height of the page text area. Min. 0 (off). Max 254.
-;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. determines what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. determines what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $bAutoHeight         - [optional] a boolean value. Default is Null. Automatically adjusts the height of a frame to match the contents of the frame. $iHeight becomes the minimum height the frame must be.
 ;                  $bKeepRatio          - [optional] a boolean value. Default is Null. Maintains the height and width ratio when you change the width or the height setting.
 ; Return values .: Success: 1 or Array.
@@ -5103,10 +5103,10 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ;                  |                               128 = Error setting $bAutoHeight
 ;                  |                               256 = Error setting $bKeepRatio
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.3.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array depending on current Libre Office Version, If the current Libre Office version is greater or equal to than 4.3, then a 9 element Array is returned, else 7 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater or equal to than 4.3, then a 9 element Array is returned, else 7 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.

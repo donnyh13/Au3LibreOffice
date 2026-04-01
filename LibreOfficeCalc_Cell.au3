@@ -116,7 +116,7 @@ EndFunc   ;==>_LOCalc_CellBackColor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CellBorderColor
-; Description ...: Set and Retrieve the Cell or Cell Range Border Line Color. Libre Office Version 3.6 and Up.
+; Description ...: Set and Retrieve the Cell or Cell Range Border Line Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_CellBorderColor(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]]]])
 ; Parameters ....: $oCell               - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Cell Range, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -164,7 +164,7 @@ EndFunc   ;==>_LOCalc_CellBackColor
 ;                  |                               64 = Error setting $iTLBRDiag
 ;                  |                               128 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
@@ -257,7 +257,7 @@ EndFunc   ;==>_LOCalc_CellBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CellBorderStyle
-; Description ...: Set and retrieve the Cell or Cell Range Border Line style. Libre Office Version 3.6 and Up.
+; Description ...: Set and retrieve the Cell or Cell Range Border Line style. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_CellBorderStyle(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]]]])
 ; Parameters ....: $oCell               - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -305,7 +305,7 @@ EndFunc   ;==>_LOCalc_CellBorderPadding
 ;                  |                               64 = Error setting $iTLBRDiag
 ;                  |                               128 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
@@ -344,7 +344,7 @@ EndFunc   ;==>_LOCalc_CellBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CellBorderWidth
-; Description ...: Set and retrieve the Cell or Cell Range Border Line Width settings. Libre Office Version 3.6 and Up.
+; Description ...: Set and retrieve the Cell or Cell Range Border Line Width settings. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_CellBorderWidth(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]]]])
 ; Parameters ....: $oCell               - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Cell Range in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
@@ -384,7 +384,7 @@ EndFunc   ;==>_LOCalc_CellBorderStyle
 ;                  |                               64 = Error setting $iTLBRDiag
 ;                  |                               128 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
@@ -1028,7 +1028,7 @@ EndFunc   ;==>_LOCalc_CellStyleBackColor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CellStyleBorderColor
-; Description ...: Set and Retrieve the Cell Style Border Line Color. Libre Office Version 3.6 and Up.
+; Description ...: Set and Retrieve the Cell Style Border Line Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_CellStyleBorderColor(ByRef $oCellStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]])
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Cell Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -1067,7 +1067,7 @@ EndFunc   ;==>_LOCalc_CellStyleBackColor
 ;                  |                               16 = Error setting $iTLBRDiag
 ;                  |                               32 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1153,7 +1153,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CellStyleBorderStyle
-; Description ...: Set and retrieve the Cell Style Border Line style. Libre Office Version 3.6 and Up.
+; Description ...: Set and retrieve the Cell Style Border Line style. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_CellStyleBorderStyle(ByRef $oCellStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]])
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -1192,7 +1192,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderPadding
 ;                  |                               16 = Error setting $iTLBRDiag
 ;                  |                               32 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1226,7 +1226,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CellStyleBorderWidth
-; Description ...: Set and retrieve the Cell Style Border Line Width settings. Libre Office Version 3.6 and Up.
+; Description ...: Set and retrieve the Cell Style Border Line Width settings. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_CellStyleBorderWidth(ByRef $oCellStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]])
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Cell Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
@@ -1259,7 +1259,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderStyle
 ;                  |                               16 = Error setting $iTLBRDiag
 ;                  |                               32 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1745,10 +1745,10 @@ EndFunc   ;==>_LOCalc_CellStyleNumberFormat
 ;                  |                               2 = Error setting $sParentStyle
 ;                  |                               4 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the Libre Office version is below 4.0, the Array will contain 2 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 2 elements because $bHidden is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2094,8 +2094,8 @@ EndFunc   ;==>_LOCalc_CellStyleTextAlign
 ; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
 ;                  $iRotate             - [optional] an integer value (0-359). Default is Null. The rotation angle of the text in all cells using this Cell Style.
 ;                  $iReference          - [optional] an integer value (0,1,3). Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bVerticalStack      - [optional] a boolean value. Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in Libre Office settings.
-;                  $bAsianLayout        - [optional] a boolean value. Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in Libre Office settings, and enable vertical text.
+;                  $bVerticalStack      - [optional] a boolean value. Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in LibreOffice settings.
+;                  $bAsianLayout        - [optional] a boolean value. Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in LibreOffice settings, and enable vertical text.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2144,7 +2144,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextOrient
 ;                  $bAutoWrapText       - [optional] a boolean value. Default is Null. If True, Wraps text onto another line at the cell border.
 ;                  $bHyphen             - [optional] a boolean value. Default is Null. If True, Enables word hyphenation for text wrapping to the next line.
 ;                  $bShrinkToFit        - [optional] a boolean value. Default is Null. If True, Reduces the apparent size of the font so that the contents of the cell fit into the current cell width.
-;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [Libre Office Default is 4]
+;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2152,7 +2152,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextOrient
 ;                  @Error 1 @Extended 2 Return 0 = $bAutoWrapText not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $bHyphen not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bShrinkToFitnot a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [Libre Office Default is 4]
+;                  @Error 1 @Extended 5 Return 0 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ;                  @Error 1 @Extended 6 Return 0 = $oCellStyle is not a Cell Style object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -2286,8 +2286,8 @@ EndFunc   ;==>_LOCalc_CellTextAlign
 ; Parameters ....: $oCell               - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
 ;                  $iRotate             - [optional] an integer value (0-359). Default is Null. The rotation angle of the text in the cell.
 ;                  $iReference          - [optional] an integer value (0,1,3). Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bVerticalStack      - [optional] a boolean value. Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in Libre Office settings.
-;                  $bAsianLayout        - [optional] a boolean value. Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in Libre Office settings, and enable vertical text.
+;                  $bVerticalStack      - [optional] a boolean value. Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in LibreOffice settings.
+;                  $bAsianLayout        - [optional] a boolean value. Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in LibreOffice settings, and enable vertical text.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2338,7 +2338,7 @@ EndFunc   ;==>_LOCalc_CellTextOrient
 ;                  $bAutoWrapText       - [optional] a boolean value. Default is Null. If True, Wraps text onto another line at the cell border.
 ;                  $bHyphen             - [optional] a boolean value. Default is Null. If True, Enables word hyphenation for text wrapping to the next line.
 ;                  $bShrinkToFit        - [optional] a boolean value. Default is Null. If True, Reduces the apparent size of the font so that the contents of the cell fit into the current cell width.
-;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [Libre Office Default is 4]
+;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2346,7 +2346,7 @@ EndFunc   ;==>_LOCalc_CellTextOrient
 ;                  @Error 1 @Extended 2 Return 0 = $bAutoWrapText not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $bHyphen not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bShrinkToFitnot a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [Libre Office Default is 4]
+;                  @Error 1 @Extended 5 Return 0 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ;                  @Error 1 @Extended 6 Return 0 = $oCell does not support Character properties, or Table Column, or Table Row service.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:

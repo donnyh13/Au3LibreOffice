@@ -1468,7 +1468,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
+; Remarks .......: LibreOffice has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
 ;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
 ;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -1833,7 +1833,7 @@ EndFunc   ;==>_LOCalc_CommentPosition
 ;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current setting as a Number.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function uses the deprecated Libre Office method RotateAngle and may stop working in future Libre Office versions, after 7.3.4.2.
+; Remarks .......: This function uses the deprecated LibreOffice method RotateAngle and may stop working in future LibreOffice versions, after 7.3.4.2.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOCalc_CommentPosition, _LOCalc_CommentSize
 ; Link ..........:

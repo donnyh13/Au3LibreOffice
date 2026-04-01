@@ -1260,7 +1260,7 @@ EndFunc   ;==>_LOWriter_ShapeInsert
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
+; Remarks .......: LibreOffice has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
 ;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
 ;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1595,7 +1595,7 @@ EndFunc   ;==>_LOWriter_ShapeName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only $LOW_SHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
-;                  This is a homemade function as LibreOffice doesn't offer an easy way for adding points to a shape. Consequently this will not produce similar results as when working with Libre office manually, and may wreck your shape's shape. Use with caution.
+;                  This is a homemade function as LibreOffice doesn't offer an easy way for adding points to a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you call a new point with "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
 ;                  Calling any Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as with the last point in a shape, as they are already a curve, or not supported in the case of the last point.
@@ -2086,7 +2086,7 @@ EndFunc   ;==>_LOWriter_ShapePointsGetCount
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings for the Array Element called in $iArrayElement.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Only $LOW_SHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
-;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with Libre office manually, and may wreck your shape's shape. Use with caution.
+;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you modify a point to "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
 ;                  Calling and Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
@@ -2206,7 +2206,7 @@ EndFunc   ;==>_LOWriter_ShapePointsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only $LOW_SHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
-;                  This is a homemade function as LibreOffice doesn't offer an easy way for removing points in a shape. Consequently this will not produce similar results as when working with Libre office manually, and may wreck your shape's shape. Use with caution.
+;                  This is a homemade function as LibreOffice doesn't offer an easy way for removing points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon deletion that were already present in the shape. Some symmetrical points may revert also.
 ; Related .......: _LOWriter_ShapePointsAdd, _LOWriter_ShapePointsModify, _LOWriter_ShapePointsGetCount
 ; Link ..........:
@@ -2611,7 +2611,7 @@ EndFunc   ;==>_LOWriter_ShapePosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you attempt to apply rotation to an already slanted Shape, or vice versa, a property setting error will occur, and the values will be very inaccurately applied.
-;                  This function uses the deprecated Libre Office methods RotateAngle, and ShearAngle, and may stop working in future Libre Office versions, after 7.3.4.2.
+;                  This function uses the deprecated LibreOffice methods RotateAngle, and ShearAngle, and may stop working in future LibreOffice versions, after 7.3.4.2.
 ;                  At the present time Control Point settings are not included as they are too complex to manipulate.
 ;                  At the present time Corner Radius setting is not included, as I was unable to identify a shape that utilized this setting.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2943,7 +2943,7 @@ Func _LOWriter_ShapeTypePosition(ByRef $oShape, $iHorAlign = Null, $iHorPos = Nu
 
 		$iCurrentAnchor = (($iAnchorPos <> Null) ? $iAnchorPos : $oShape.AnchorType())
 
-		; Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting
+		; LibreOffice is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting
 		;		values for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or
 		; "$LOW_RELATIVE_PARAGRAPH", For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the
 		; L.O. UI the furthest left drop down box)  is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1),

@@ -1336,7 +1336,7 @@ EndFunc   ;==>_LOBase_ReportDocClose
 ;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
 ;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents.
+;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
 ;                  @Error 3 @Extended 4 Return 0 = Current Document not a Base Report Document.

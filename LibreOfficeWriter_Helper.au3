@@ -412,7 +412,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeysGetList
 ;                  $iMinutes            - [optional] an integer value (0-59). Default is Null. Minutes, as a 2 digit Integer.
 ;                  $iSeconds            - [optional] an integer value (0-59). Default is Null. Seconds, as a 2 digit Integer.
 ;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
-;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. Libre Office version 4.1 and up.
+;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -428,7 +428,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeysGetList
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.util.DateTime" Object.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.1.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Structure = Success. Successfully created the Date/Time Structure, Returning its Object.
 ; Author ........: donnyh13
@@ -536,7 +536,7 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ;                  $iMinutes            - [optional] an integer value (0-59). Default is Null. Minutes, as a 2 digit Integer.
 ;                  $iSeconds            - [optional] an integer value (0-59). Default is Null. Seconds, as a 2 digit Integer.
 ;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
-;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. Libre Office version 4.1 and up.
+;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -561,10 +561,10 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ;                  |                               64 = Error setting $iNanoSeconds
 ;                  |                               128 = Error setting $bIsUTC
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.1.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If current Libre Office version is less than 4.1, the Array will contain 7 elements, as $bIsUTC will be eliminated.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the Array will contain 7 elements, as $bIsUTC will be eliminated.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -666,7 +666,7 @@ EndFunc   ;==>_LOWriter_DateStructModify
 ;                  $iLastLineAlign      - [optional] an integer value (0-3). Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bExpandSingleWord   - [optional] a boolean value. Default is Null. If True, and the last line of a justified paragraph consists of one word, the word is stretched to the width of the paragraph.
 ;                  $bSnapToGrid         - [optional] a boolean value. Default is Null. If True, Aligns the paragraph to a text grid (if one is active).
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [Libre Office Default is 4] In my personal testing, searching for the Text Direction setting using this parameter alone, without using other parameters, causes any results matching the searched for string to be replaced, whether they contain the Text Direction format or not, this is supposed to be fixed in L.O. 7.6.
+;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [LibreOffice Default is 4] In my personal testing, searching for the Text Direction setting using this parameter alone, without using other parameters, causes any results matching the searched for string to be replaced, whether they contain the Text Direction format or not, this is supposed to be fixed in L.O. 7.6.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -853,7 +853,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ;                  $iFontPosture        - [optional] an integer value (0-5). Default is Null. The Font Posture(Italic etc.,) See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iFontWeight         - [optional] an integer value(0,50-200). Default is Null. The Font weight to search for. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Transparency. 0 is visible, 100 is invisible. Seems to require a color entered in $iFontColor before transparency can be searched for. Libre Office 7.0 and Up.
+;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Transparency. 0 is visible, 100 is invisible. Seems to require a color entered in $iFontColor before transparency can be searched for. LibreOffice 7.0 and Up.
 ;                  $iHighlight          - [optional] an integer value (-1-16777215). Default is Null. The Highlight color to search for, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -868,7 +868,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ;                  @Error 1 @Extended 8 Return 0 = $iTransparency not an Integer, Less than 0 or greater than 100.
 ;                  @Error 1 @Extended 9 Return 0 = $iHighlight not an Integer, less than -1 or greater than 16777215.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 7.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
@@ -993,12 +993,12 @@ EndFunc   ;==>_LOWriter_FindFormatModifyFont
 ;                  @Error 1 @Extended 5 Return 0 = $iMinLeadingChar not an Integer, less than 2 or greater than 9.
 ;                  @Error 1 @Extended 6 Return 0 = $iMinTrailingChar not an Integer, less than 2 or greater than 9.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 6.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 6.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: In my personal testing, searching for any of these hyphenation formatting settings causes any results matching the searched for string to be replaced, whether they contain these formatting settings or not. This is a bug in Libre Office.
+; Remarks .......: In my personal testing, searching for any of these hyphenation formatting settings causes any results matching the searched for string to be replaced, whether they contain these formatting settings or not. This is a bug in LibreOffice.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
@@ -1394,7 +1394,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ;                  $iRotation           - [optional] an integer value (0,90,270). Default is Null. Degrees to rotate the text. See remarks.
 ;                  $iScaleWidth         - [optional] an integer value (1-100). Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing. See remarks.
 ;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
-;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the Libre Office UI.
+;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1410,8 +1410,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
-;                  There is a bug in Libre Office, where searching for the Rotate setting using the $iRotation parameter causes any results matching the searched for string to be replaced, whether they contain the Rotate format or not, this is supposed to be fixed in L.O. 7.6.
-;                  There is a bug in Libre Office, where searching for the Scale Width setting using the $iScaleWidth parameter causes any results matching the searched for string to be replaced, whether they contain the Scale Width format or not, this is supposed to be fixed in L.O. 7.6.
+;                  There is a bug in LibreOffice, where searching for the Rotate setting using the $iRotation parameter causes any results matching the searched for string to be replaced, whether they contain the Rotate format or not, this is supposed to be fixed in L.O. 7.6.
+;                  There is a bug in LibreOffice, where searching for the Scale Width setting using the $iScaleWidth parameter causes any results matching the searched for string to be replaced, whether they contain the Scale Width format or not, this is supposed to be fixed in L.O. 7.6.
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values for $nKerning are from -2 Pt to 928.8 Pt. the figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: ;928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258.
@@ -1481,7 +1481,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $iAbovePar           - [optional] an integer value (0-10008). Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] an integer value (0-10008). Default is Null. The Space below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. Libre Office version 3.6 and up.
+;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. LibreOffice version 3.6 and up.
 ;                  $iLineSpcMode        - [optional] an integer value (0-3). Default is Null. The type of line spacing of a paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3, also notice min and max values for each. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
 ;                  $iLineSpcHeight      - [optional] an integer value. Default is Null. This value specifies the spacing of the lines. See Remarks for Minimum and Max values. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
 ; Return values .: Success: 1
@@ -1499,7 +1499,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating LineSpacing Object.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
@@ -1507,7 +1507,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
-;                  The settings in Libre Office, (Single,1.15, 1.5, Double,) Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
+;                  The settings in LibreOffice, (Single,1.15, 1.5, Double,) Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
 ;                  The values accepted by $iLineSpcHeight depends on the $iLineSpcMode used, see constants for accepted Input values.
 ;                  $iAbovePar, $iBelowPar, $iLineSpcHeight may change +/- a Hundredth of a Millimeter (HMM) once set.
 ; Related .......: _LO_UnitConvert, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange
@@ -1683,8 +1683,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyStrikeout
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
-;                  In my personal testing, searching for the Orphan setting using the $iParOrphans parameter causes any results matching the searched for string to be replaced, whether they contain the Orphan format or not. This is a Libre Office bug.
-;                  In my personal testing, searching for the Widow setting using the $iParWidows parameter causes any results matching the searched for string to be replaced, whether they contain the Widow format or not. This is a Libre Office bug.
+;                  In my personal testing, searching for the Orphan setting using the $iParOrphans parameter causes any results matching the searched for string to be replaced, whether they contain the Orphan format or not. This is a LibreOffice bug.
+;                  In my personal testing, searching for the Widow setting using the $iParWidows parameter causes any results matching the searched for string to be replaced, whether they contain the Widow format or not. This is a LibreOffice bug.
 ; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
@@ -2508,7 +2508,7 @@ EndFunc   ;==>_LOWriter_FormatKeysGetList
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning a Search Descriptor Object for setting Search options.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $bSearchPropValues is equivalent to the difference in selecting "Format" options in Libre Office's search box and "Attributes".
+; Remarks .......: $bSearchPropValues is equivalent to the difference in selecting "Format" options in LibreOffice's search box and "Attributes".
 ;                  Calling $bSearchPropValues with True, means that the search will look for matches using the specified property AND having the specified value, such as Character Weight, Bold, only matches that have Character weight of Bold will be returned, whereas if $bSearchPropValues is called with False, the search only looks for matches that have the specified property, regardless of its value. Such as Character weight, would match Bold, Semi-Bold, etc. From my understanding, the search is based on anything directly formatted unless $bStyles is also True.
 ;                  The returned Search Descriptor is only good for the Document it was created by, it WILL NOT work for other documents.
 ; Related .......: _LOWriter_SearchDescriptorModify, _LOWriter_SearchDescriptorSimilarityModify
@@ -2573,7 +2573,7 @@ EndFunc   ;==>_LOWriter_SearchDescriptorCreate
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $bSearchPropValues is equivalent to the difference in selecting "Format" options in Libre Office's search box and "Attributes".
+; Remarks .......: $bSearchPropValues is equivalent to the difference in selecting "Format" options in LibreOffice's search box and "Attributes".
 ;                  Calling $bSearchPropValues with True, means that the search will look for matches using the specified property AND having the specified value, such as Character Weight, Bold, only matches that have Character weight of Bold will be returned, whereas if $bSearchPropValues is called with False, the search only looks for matches that have the specified property, regardless of its value. Such as Character weight, would match Bold, Semi-Bold, etc. From my understanding, the search is based on anything directly formatted unless $bStyles is also True.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.

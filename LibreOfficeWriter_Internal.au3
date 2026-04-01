@@ -155,7 +155,7 @@ EndFunc   ;==>__LOWriter_AnyAreDefault
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_Border
-; Description ...: Border Setting Internal function. Libre Office Version 3.4 and Up.
+; Description ...: Border Setting Internal function. LibreOffice Version 3.4 and Up.
 ; Syntax ........: __LOWriter_Border(ByRef $oObj, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oObj                - [in/out] an object. An Object that implements BorderLine2 service for border properties.
 ;                  $bWid                - a boolean value. If True, the calling function is for setting Border Line Width.
@@ -184,7 +184,7 @@ EndFunc   ;==>__LOWriter_AnyAreDefault
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -743,7 +743,7 @@ EndFunc   ;==>__LOWriter_CharFont
 ; Syntax ........: __LOWriter_CharFontColor(ByRef $oObj[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
 ; Parameters ....: $oObj                - [in/out] an object. An Object that supports "com.sun.star.text.Paragraph" Or "com.sun.star.text.TextPortion" services, such as a Cursor with data selected or paragraph section.
 ;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The font Color value, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for Libre Office 7.0 and up.
+;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
 ;                  $iHighlight          - [optional] an integer value (-1-16777215). Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -760,10 +760,10 @@ EndFunc   ;==>__LOWriter_CharFont
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 7.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current Libre Office version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1156,7 +1156,7 @@ EndFunc   ;==>__LOWriter_CharShadow
 ; Syntax ........: __LOWriter_CharSpacing(ByRef $oObj[, $bAutoKerning = Null[, $nKerning = Null]])
 ; Parameters ....: $oObj                - [in/out] an object. An Object that supports "com.sun.star.text.Paragraph" Or "com.sun.star.text.TextPortion" services, such as a Cursor with data selected or paragraph section.
 ;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
-;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the Libre Office UI.
+;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1645,7 +1645,7 @@ EndFunc   ;==>__LOWriter_FieldCountType
 ; Syntax ........: __LOWriter_FieldsGetList(ByRef $oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, ByRef $avFieldTypes)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $bSupportedServices  - a boolean value. If True, adds a column to the array that has the supported service String for that particular Field, To assist in identifying the Field type.
-;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by Libre Office. To assist in identifying the Field type.
+;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type Constant for that particular Field, to assist in identifying the Field type. See remarks.
 ;                  $avFieldTypes        - [in/out] an array of variants. An Array of Field types to search for to return. Array will not be modified.
 ; Return values .: Success: Array
@@ -1941,7 +1941,7 @@ EndFunc   ;==>__LOWriter_FilterNameGet
 ; Description ...: Add or Update a setting in a Find Format Array.
 ; Syntax ........: __LOWriter_FindFormatAddSetting(ByRef $atArray, $tSetting)
 ; Parameters ....: $atArray             - [in/out] an array of structs. A Find Format Array of Settings to Search. Array will be directly modified.
-;                  $tSetting            - a struct value. A Libre Office Structure setting.
+;                  $tSetting            - a struct value. A LibreOffice Structure setting.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -5039,7 +5039,7 @@ EndFunc   ;==>__LOWriter_PageStyleCompare
 ;                  $iLastLineAlign      - [optional] an integer value (0-3). Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
 ;                  $bExpandSingleWord   - [optional] a boolean value. Default is Null. If True, and the last line of a justified paragraph consists of one word, the word is stretched to the width of the paragraph.
 ;                  $bSnapToGrid         - [optional] a boolean value. Default is Null. If True, Aligns the paragraph to a text grid (if one is active).
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [Libre Office Default is 4]
+;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -6164,10 +6164,10 @@ EndFunc   ;==>__LOWriter_ParHasTabStop
 ;                  |                               8 = Error setting $iMinLeadingChar
 ;                  |                               16 = Error setting $iMinTrailingChar
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 6.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 6.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current Libre Office Version is below 6.4, then the Array returned will contain 4 elements because $bHyphenNoCaps is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current LibreOffice Version is below 6.4, then the Array returned will contain 4 elements because $bHyphenNoCaps is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bAutoHyphen needs to be set to True for the rest of the settings to be activated, but they will be still successfully be set regardless.
@@ -6575,7 +6575,7 @@ EndFunc   ;==>__LOWriter_ParShadow
 ; Parameters ....: $oObj                - [in/out] an object. Paragraph Style Object or a Cursor or Paragraph Object.
 ;                  $iAbovePar           - [optional] an integer value (0-10008). Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] an integer value (0-10008). Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. Libre Office Version 3.6 and Up.
+;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. LibreOffice Version 3.6 and Up.
 ;                  $iLineSpcMode        - [optional] an integer value (0-3). Default is Null. The line spacing type of the paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3, also notice min and max values for each.
 ;                  $iLineSpcHeight      - [optional] an integer value. Default is Null. This value specifies the height in regard to Mode. See Remarks.
 ;                  $bPageLineSpc        - [optional] a boolean value. Default is Null. If True, register mode is applied to a paragraph. See Remarks.
@@ -6603,14 +6603,14 @@ EndFunc   ;==>__LOWriter_ParShadow
 ;                  |                               16 = Error setting $iLineSpcHeight
 ;                  |                               32 = Error setting $bPageLineSpc
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bPageLineSpc(Register mode) is only used if the register mode property of the page style is switched on. $bPageLineSpc(Register Mode) Aligns the baseline of each line of text to a vertical document grid, so that each line is the same height.
-;                  The settings in Libre Office, (Single, 1.15, 1.5, Double), Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
+;                  The settings in LibreOffice, (Single, 1.15, 1.5, Double), Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
 ;                  $iLineSpcHeight depends on the $iLineSpcMode used, see constants for accepted Input values.
 ;                  $iAbovePar, $iBelowPar, $iLineSpcHeight may change +/- a Hundredth of a Millimeter (HMM) once set.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -9255,7 +9255,7 @@ EndFunc   ;==>__LOWriter_ShapePointGetSettings
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
 ;                  Only $LOW_SHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
-;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with Libre office manually, and may wreck your shape's shape. Use with caution.
+;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you modify a point to "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
 ;                  Calling and Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
@@ -9780,7 +9780,7 @@ EndFunc   ;==>__LOWriter_ShapePointModify
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_TableBorder
-; Description ...: Set or Retrieve Table Border settings -- internal function. Libre Office 3.6 and Up.
+; Description ...: Set or Retrieve Table Border settings -- internal function. LibreOffice 3.6 and Up.
 ; Syntax ........: __LOWriter_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
 ; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ;                  $bWid                - a boolean value. If True the calling function is for setting Border Line Width.
@@ -9816,7 +9816,7 @@ EndFunc   ;==>__LOWriter_ShapePointModify
 ;                  |                               16 = Error setting $iVert
 ;                  |                               32 = Error setting $iHori
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.

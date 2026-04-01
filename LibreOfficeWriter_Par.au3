@@ -81,7 +81,7 @@
 ;                  $iLastLineAlign      - [optional] an integer value (0-3). Default is Null. The last line alignment for the paragraph. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
 ;                  $bExpandSingleWord   - [optional] a boolean value. Default is Null. If True, and the last line of a justified paragraph consists of one word, the word is stretched to the width of the paragraph.
 ;                  $bSnapToGrid         - [optional] a boolean value. Default is Null. If True, aligns the paragraph to a text grid (if one is active).
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [Libre Office Default is 4]
+;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -496,7 +496,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaTransparencyGradientMulti
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ParStyleBorderColor
-; Description ...: Set and Retrieve the Paragraph Style Border Line Color. Libre Office Version 3.4 and Up.
+; Description ...: Set and Retrieve the Paragraph Style Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_ParStyleBorderColor(ByRef $oParStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -527,7 +527,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaTransparencyGradientMulti
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -613,7 +613,7 @@ EndFunc   ;==>_LOWriter_ParStyleBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ParStyleBorderStyle
-; Description ...: Set and retrieve the Paragraph Style Border Line style. Libre Office Version 3.4 and Up.
+; Description ...: Set and retrieve the Paragraph Style Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_ParStyleBorderStyle(ByRef $oParStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObj function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -644,7 +644,7 @@ EndFunc   ;==>_LOWriter_ParStyleBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -681,11 +681,11 @@ EndFunc   ;==>_LOWriter_ParStyleBorderStyle
 ; Description ...: Set and retrieve the Paragraph Style Border Line Width, or the Paragraph Style Connect Border option.
 ; Syntax ........: _LOWriter_ParStyleBorderWidth(ByRef $oParStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bConnectBorder = Null]]]]])
 ; Parameters ....: $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObj function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Paragraph Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. Libre Office Version 3.4 and Up.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Paragraph Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. Libre Office Version 3.4 and Up.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Paragraph Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. Libre Office Version 3.4 and Up.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Paragraph Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. Libre Office Version 3.4 and Up.
-;                  $bConnectBorder      - [optional] a boolean value. Default is Null. If True, borders set for a paragraph are merged with the next paragraph. Note: Borders are only merged if they are identical. Libre Office Version 3.4 and Up.
+;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Paragraph Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Paragraph Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Paragraph Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Paragraph Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $bConnectBorder      - [optional] a boolean value. Default is Null. If True, borders set for a paragraph are merged with the next paragraph. Note: Borders are only merged if they are identical. LibreOffice Version 3.4 and Up.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -708,7 +708,7 @@ EndFunc   ;==>_LOWriter_ParStyleBorderStyle
 ;                  |                               8 = Error setting $iRight
 ;                  |                               16 = Error setting $bConnectBorder
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
@@ -1140,7 +1140,7 @@ EndFunc   ;==>_LOWriter_ParStyleFont
 ; Syntax ........: _LOWriter_ParStyleFontColor(ByRef $oParStyle[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
 ; Parameters ....: $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObj function.
 ;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for Libre Office 7.0 and up.
+;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
 ;                  $iHighlight          - [optional] an integer value (-1-16777215). Default is Null. The highlight color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1158,10 +1158,10 @@ EndFunc   ;==>_LOWriter_ParStyleFont
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 7.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current Libre Office version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1251,10 +1251,10 @@ EndFunc   ;==>_LOWriter_ParStyleGetObj
 ;                  |                               8 = Error setting $iMinLeadingChar
 ;                  |                               16 = Error setting $iMinTrailingChar
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 6.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 6.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current Libre Office Version is below 6.4, then the Array returned will contain 4 elements because $bHyphenNoCaps is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current LibreOffice Version is below 6.4, then the Array returned will contain 4 elements because $bHyphenNoCaps is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bAutoHyphen needs to be set to True for the rest of the settings to be activated, but they will be still successfully be set regardless.
@@ -1361,10 +1361,10 @@ EndFunc   ;==>_LOWriter_ParStyleIndent
 ;                  |                               8 = Error setting $bAutoUpdate
 ;                  |                               16 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the Libre Office version is below 4.0, the Array will contain 4 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 4 elements because $bHidden is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1792,7 +1792,7 @@ EndFunc   ;==>_LOWriter_ParStyleShadow
 ; Parameters ....: $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObj function.
 ;                  $iAbovePar           - [optional] an integer value (0-10008). Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] an integer value (0-10008). Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. Libre Office Version 3.6 and Up.
+;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. LibreOffice Version 3.6 and Up.
 ;                  $iLineSpcMode        - [optional] an integer value (0-3). Default is Null. The line spacing type for the paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3, also notice min and max values for each.
 ;                  $iLineSpcHeight      - [optional] an integer value. Default is Null. This value specifies the spacing of the lines. See Remarks for Minimum and Max values.
 ;                  $bPageLineSpc        - [optional] a boolean value. Default is Null. If True, register mode is applied to the paragraph. See Remarks.
@@ -1821,15 +1821,15 @@ EndFunc   ;==>_LOWriter_ParStyleShadow
 ;                  |                               16 = Error setting $iLineSpcHeight
 ;                  |                               32 = Error setting bPageLineSpc
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 6 Element Array with values in order of function parameters. If the current Libre Office version is less than 3.6, the returned Array will contain 5 elements, because $bAddSpace is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 6 Element Array with values in order of function parameters. If the current LibreOffice version is less than 3.6, the returned Array will contain 5 elements, because $bAddSpace is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bPageLineSpc(Register mode) is only used if the register mode property of the page style is switched on.
 ;                  $bPageLineSpc(Register Mode) Aligns the baseline of each line of text to a vertical document grid, so that each line is the same height.
-;                  The settings in Libre Office, (Single,1.15, 1.5, Double,) Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
+;                  The settings in LibreOffice, (Single,1.15, 1.5, Double,) Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
 ;                  $iLineSpcHeight depends on the $iLineSpcMode used, see constants for accepted Input values.
 ;                  $iAbovePar, $iBelowPar, $iLineSpcHeight may change +/- a Hundredth of a Millimeter (HMM) once set.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1858,7 +1858,7 @@ EndFunc   ;==>_LOWriter_ParStyleSpace
 ; Syntax ........: _LOWriter_ParStyleSpacing(ByRef $oParStyle[, $bAutoKerning = Null[, $nKerning = Null]])
 ; Parameters ....: $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObj function.
 ;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
-;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the Libre Office UI.
+;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

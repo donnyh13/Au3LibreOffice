@@ -131,7 +131,7 @@ EndFunc   ;==>_LOBase_ComError_UserFunction
 ;                  $iMinutes            - [optional] an integer value (0-59). Default is Null. Minutes, as a 2 digit Integer.
 ;                  $iSeconds            - [optional] an integer value (0-59). Default is Null. Seconds, as a 2 digit Integer.
 ;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
-;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. Libre Office version 4.1 and up.
+;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -147,7 +147,7 @@ EndFunc   ;==>_LOBase_ComError_UserFunction
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.util.DateTime" Object.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.1.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Structure = Success. Successfully created the Date/Time Structure, Returning its Object.
 ; Author ........: donnyh13
@@ -255,7 +255,7 @@ EndFunc   ;==>_LOBase_DateStructCreate
 ;                  $iMinutes            - [optional] an integer value (0-59). Default is Null. Minutes, as a 2 digit Integer.
 ;                  $iSeconds            - [optional] an integer value (0-59). Default is Null. Seconds, as a 2 digit Integer.
 ;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
-;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. Libre Office version 4.1 and up.
+;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -280,10 +280,10 @@ EndFunc   ;==>_LOBase_DateStructCreate
 ;                  |                               64 = Error setting $iNanoSeconds
 ;                  |                               128 = Error setting $bIsUTC
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.1.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If current Libre Office version is less than 4.1, the Array will contain 7 elements, as $bIsUTC will be eliminated.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the Array will contain 7 elements, as $bIsUTC will be eliminated.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.

@@ -4,9 +4,9 @@
 #include-once
 
 ; #INDEX# =======================================================================================================================
-; Title .........: Libre Office Writer Constants for the Libre Office UDF.
+; Title .........: LibreOffice Writer Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the Libre Office UDF.
+; Description ...: Constants for various functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -982,28 +982,28 @@ Global Enum _
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_RIGHT, _           ; 5 -- A Right hand Callout Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP, _              ; 6 -- A Upward Callout Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN, _         ; 7 -- A Upward and Downward Callout Arrow.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, _        ; 8 -- Upward and Right hand Callout Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, _        ; 8 -- Upward and Right hand Callout Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_CIRCULAR, _                ; 9 -- A Circular Arrow.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, _            ; 10 -- A Right hand Corner Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, _            ; 10 -- A Right hand Corner Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_DOWN, _                    ; 11 -- A Downward Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_LEFT, _                    ; 12 -- A Left hand Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_LEFT_RIGHT, _              ; 13 -- A Left and Right Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_NOTCHED_RIGHT, _           ; 14 -- A Notched Right Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_RIGHT, _                   ; 15 -- A Right hand Arrow.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, _           ; 16 -- A Right or Left Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_S_SHAPED, _                ; 17 -- A "S"-Shaped Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_SPLIT, _                   ; 18 -- A Split Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, _           ; 16 -- A Right or Left Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_S_SHAPED, _                ; 17 -- A "S"-Shaped Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_SPLIT, _                   ; 18 -- A Split Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT, _           ; 19 -- A Striped Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP, _                      ; 20 -- A Upward Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP_DOWN, _                 ; 21 -- A Up and Down Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP_RIGHT, _                ; 22 -- A Upward and Right hand Arrow.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, _           ; 23 -- A Upward, Right hand and Downward Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, _           ; 23 -- A Upward, Right hand and Downward Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_ARROWS_CHEVRON, _                       ; 24 -- A Chevron Shape Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_PENTAGON, _                      ; 25 -- A Pentagon Shape Arrow.
 		$LOW_SHAPE_TYPE_BASIC_ARC, _                            ; 26 -- An Arc Shape.
 		$LOW_SHAPE_TYPE_BASIC_ARC_BLOCK, _                      ; 27 -- A Block Arc Shape.
 		$LOW_SHAPE_TYPE_BASIC_CIRCLE, _                         ; 28 -- A Circle.
-		$LOW_SHAPE_TYPE_BASIC_CIRCLE_PIE, _                     ; 29 -- A Pie Circle. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_BASIC_CIRCLE_PIE, _                     ; 29 -- A Pie Circle. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_BASIC_CIRCLE_SEGMENT, _                 ; 30 -- A Segment Circle.
 		$LOW_SHAPE_TYPE_BASIC_CROSS, _                          ; 31 -- A Cross Shape.
 		$LOW_SHAPE_TYPE_BASIC_CUBE, _                           ; 32 -- A Cube Shape.
@@ -1011,7 +1011,7 @@ Global Enum _
 		$LOW_SHAPE_TYPE_BASIC_DIAMOND, _                        ; 34 -- A Diamond Shape.
 		$LOW_SHAPE_TYPE_BASIC_ELLIPSE, _                        ; 35 -- An Ellipse Shape.
 		$LOW_SHAPE_TYPE_BASIC_FOLDED_CORNER, _                  ; 36 -- A Paper Shape with a Folded Corner.
-		$LOW_SHAPE_TYPE_BASIC_FRAME, _                          ; 37 -- A Frame Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_BASIC_FRAME, _                          ; 37 -- A Frame Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_BASIC_HEXAGON, _                        ; 38 -- A Hexagon Shape.
 		$LOW_SHAPE_TYPE_BASIC_OCTAGON, _                        ; 39 -- A Octagon Shape.
 		$LOW_SHAPE_TYPE_BASIC_PARALLELOGRAM, _                  ; 40 -- A Parallelogram Shape.
@@ -1069,18 +1069,18 @@ Global Enum _
 		$LOW_SHAPE_TYPE_LINE_POLYGON_45_FILLED, _               ; 92 -- A Filled 45 degree Polygon.
 		$LOW_SHAPE_TYPE_STARS_4_POINT, _                        ; 93 -- A 4 Pointed Star.
 		$LOW_SHAPE_TYPE_STARS_5_POINT, _                        ; 94 -- A 5 Pointed Star.
-		$LOW_SHAPE_TYPE_STARS_6_POINT, _                        ; 95 -- A 6 Pointed Star. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_STARS_6_POINT_CONCAVE, _                ; 96 -- A Concave 6 Pointed Star. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_STARS_6_POINT, _                        ; 95 -- A 6 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_STARS_6_POINT_CONCAVE, _                ; 96 -- A Concave 6 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_STARS_8_POINT, _                        ; 97 -- A 8 Pointed Star.
-		$LOW_SHAPE_TYPE_STARS_12_POINT, _                       ; 98 -- A 12 Pointed Star. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_STARS_12_POINT, _                       ; 98 -- A 12 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_STARS_24_POINT, _                       ; 99 -- A 24 Pointed Star.
 		$LOW_SHAPE_TYPE_STARS_DOORPLATE, _                      ; 100 -- A Doorplate Shape.
 		$LOW_SHAPE_TYPE_STARS_EXPLOSION, _                      ; 101 -- A Explosion Shape.
 		$LOW_SHAPE_TYPE_STARS_SCROLL_HORIZONTAL, _              ; 102 -- A Horizontal Scroll.
 		$LOW_SHAPE_TYPE_STARS_SCROLL_VERTICAL, _                ; 103 -- A Vertical Scroll.
-		$LOW_SHAPE_TYPE_STARS_SIGNET, _                         ; 104 -- A Signet Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, _                 ; 105 -- A Diamond Bevel. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, _                 ; 106 -- A Octagon Bevel. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_STARS_SIGNET, _                         ; 104 -- A Signet Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, _                 ; 105 -- A Diamond Bevel. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, _                 ; 106 -- A Octagon Bevel. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_SQUARE, _                  ; 107 -- A Square Bevel.
 		$LOW_SHAPE_TYPE_SYMBOL_BRACE_DOUBLE, _                  ; 108 -- A Double Brace.
 		$LOW_SHAPE_TYPE_SYMBOL_BRACE_LEFT, _                    ; 109 -- A Left hand Brace.
@@ -1088,15 +1088,15 @@ Global Enum _
 		$LOW_SHAPE_TYPE_SYMBOL_BRACKET_DOUBLE, _                ; 111 -- A Double Bracket.
 		$LOW_SHAPE_TYPE_SYMBOL_BRACKET_LEFT, _                  ; 112 -- A Left hand Bracket.
 		$LOW_SHAPE_TYPE_SYMBOL_BRACKET_RIGHT, _                 ; 113 -- A Right hand Bracket.
-		$LOW_SHAPE_TYPE_SYMBOL_CLOUD, _                         ; 114 -- A Cloud Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_SYMBOL_FLOWER, _                        ; 115 -- A Flower Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_SYMBOL_CLOUD, _                         ; 114 -- A Cloud Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_SYMBOL_FLOWER, _                        ; 115 -- A Flower Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_SYMBOL_HEART, _                         ; 116 -- A Heart Shape.
 		$LOW_SHAPE_TYPE_SYMBOL_LIGHTNING, _                     ; 117 -- A Lightning Shape. ## Note: Lightning is visually different than the one available in L.O. Shapes U.I.
 		$LOW_SHAPE_TYPE_SYMBOL_MOON, _                          ; 118 -- A Moon Shape.
 		$LOW_SHAPE_TYPE_SYMBOL_SMILEY, _                        ; 119 -- A Smiley Shape.
 		$LOW_SHAPE_TYPE_SYMBOL_SUN, _                           ; 120 -- A Sun Shape.
 		$LOW_SHAPE_TYPE_SYMBOL_PROHIBITED, _                    ; 121 -- A Prohibited Shape.
-		$LOW_SHAPE_TYPE_SYMBOL_PUZZLE                           ; 122 -- A Puzzle Piece Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_SYMBOL_PUZZLE                           ; 122 -- A Puzzle Piece Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 
 ; LO TableCursor Movement Constants.
 Global Enum _

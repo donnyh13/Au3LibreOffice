@@ -269,7 +269,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkGetObj
 ; Modified ......:
 ; Remarks .......: If the cursor used to insert a Bookmark has text selected, the Bookmark will envelope the text, else the Bookmark will be inserted at a single point.
 ;                  A Bookmark name cannot contain the following characters: / \ @ : * ? " ; , . #
-;                  If the document already contains a Bookmark by the same name, Libre Office adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
+;                  If the document already contains a Bookmark by the same name, LibreOffice adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
 ; Related .......: _LOWriter_DocBookmarkModify, _LOWriter_DocBookmarkDelete
 ; Link ..........:
 ; Example .......: Yes
@@ -326,7 +326,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkInsert
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  A Bookmark name cannot contain the following characters: / \ @ : * ? " ; , . #
-;                  If the document already contains a Bookmark by the same name, Libre Office adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
+;                  If the document already contains a Bookmark by the same name, LibreOffice adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
 ; Related .......: _LOWriter_DocBookmarkGetObj, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarkDelete
 ; Link ..........:
 ; Example .......: Yes
@@ -500,10 +500,10 @@ EndFunc   ;==>_LOWriter_DocClose
 ;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
 ;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents.
+;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Error converting path to Libre Office URL.
+;                  @Error 3 @Extended 4 Return 0 = Error converting path to LibreOffice URL.
 ;                  @Error 3 @Extended 5 Return 0 = Current Document not a Writer Document.
 ;                  @Error 3 @Extended 6 Return 0 = No matches found.
 ;                  --Success--
@@ -820,7 +820,7 @@ EndFunc   ;==>_LOWriter_DocConvertTextToTable
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocCreate
-; Description ...: Open a new Libre Office Writer Document or Connect to an existing blank, unsaved, writable document.
+; Description ...: Open a new LibreOffice Writer Document or Connect to an existing blank, unsaved, writable document.
 ; Syntax ........: _LOWriter_DocCreate([$bForceNew = True[, $bHidden = False]])
 ; Parameters ....: $bForceNew           - [optional] a boolean value. Default is True. If True, force opening a new Writer Document instead of checking for a usable blank.
 ;                  $bHidden             - [optional] a boolean value. Default is False. If True opens the new document invisible or changes the existing document to invisible.
@@ -2208,7 +2208,7 @@ EndFunc   ;==>_LOWriter_DocGenPropPrint
 ;                  @Error 1 @Extended 4 Return 0 = $tDateStruct not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Document Properties Object.
-;                  @Error 3 @Extended 2 Return 0 = Error converting Computer path to Libre Office URL.
+;                  @Error 3 @Extended 2 Return 0 = Error converting Computer path to LibreOffice URL.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sTemplateName
@@ -2366,7 +2366,7 @@ EndFunc   ;==>_LOWriter_DocGetName
 ; Description ...: Returns a Document's current save path.
 ; Syntax ........: _LOWriter_DocGetPath(ByRef $oDoc[, $bReturnLibreURL = False])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in Libre Office URL format, else False returns a regular Windows path.
+;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in LibreOffice URL format, else False returns a regular Windows path.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2377,7 +2377,7 @@ EndFunc   ;==>_LOWriter_DocGetName
 ;                  @Error 3 @Extended 1 Return 0 = Error converting Libre URL to Computer path format.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the P.C. path to the current document's save path.
-;                  @Error 0 @Extended 1 Return String = Success. Returning the Libre Office URL to the current document's save path.
+;                  @Error 0 @Extended 1 Return String = Success. Returning the LibreOffice URL to the current document's save path.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2543,7 +2543,7 @@ EndFunc   ;==>_LOWriter_DocHeaderGetTextCursor
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active Libre window. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other Libre Office documents.
+; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -3692,7 +3692,7 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 ;                  @Error 0 @Extended 0 Return Integer = Success. Search and Replace was successful, returning number of replacements.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office does not offer a method to replace only results within a selection, consequently I have had to create my own. This function sometimes uses the "FindAllInRange" function, so any errors with Find/Replace formatting causing deletions will cause problems here. As best as I can tell all options for find and replace should be available, Formatting, Paragraph styles etc.
+; Remarks .......: LibreOffice does not offer a method to replace only results within a selection, consequently I have had to create my own. This function sometimes uses the "FindAllInRange" function, so any errors with Find/Replace formatting causing deletions will cause problems here. As best as I can tell all options for find and replace should be available, Formatting, Paragraph styles etc.
 ;                  If formatting is not being search or applied, I use a dispatch command to Find and Replace. However if formatting is being searched or added, A second method is used, which begins with the "FindAllInRange" function to find all matching results, then temporarily applies a normally unused property to the applicable results (CharFlash or CharShadingValue), and then add that temporary property to the Formatting array to search for, then Replace all results. And finally removing the temporary property value again.
 ;                  Replacing Paragraph Styles doesn't work with a dispatch command, so I use the "FindAllInRange" function, and then manually apply the new Paragraph Style.
 ;                  In order for $atReplaceFormat to be applied to replacements, $bSearchPropValues must be True in the Search descriptor. I'm not sure why.
@@ -4102,7 +4102,7 @@ EndFunc   ;==>_LOWriter_DocSelection
 ;                  @Error 0 @Extended 0 Return 1 = Success. Window was successfully brought to the front of the open windows.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If minimized, the document is restored and brought to the front of the visible pages. Generally only brings the document to the front of other Libre Office windows.
+; Remarks .......: If minimized, the document is restored and brought to the front of the visible pages. Generally only brings the document to the front of other LibreOffice windows.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

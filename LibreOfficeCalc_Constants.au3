@@ -4,9 +4,9 @@
 #include-once
 
 ; #INDEX# =======================================================================================================================
-; Title .........: Libre Office Calc Constants for the Libre Office UDF.
+; Title .........: LibreOffice Calc Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the Libre Office UDF.
+; Description ...: Constants for various functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.

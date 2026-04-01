@@ -502,8 +502,8 @@ EndFunc   ;==>_LOWriter_FieldCombCharModify
 ;                  $sContent            - [optional] a string value. Default is Null. The content of the comment.
 ;                  $sAuthor             - [optional] a string value. Default is Null. The author of the comment.
 ;                  $tDateStruct         - [optional] a dll struct value. Default is Null. The date to display for the comment, created previously by _LOWriter_DateStructCreate. If left as Null, the current date is used.
-;                  $sInitials           - [optional] a string value. Default is Null. The Initials of the creator. Libre Office version 4.0 and up only.
-;                  $sName               - [optional] a string value. Default is Null. The name of the creator. Libre Office version 4.0 and up only.
+;                  $sInitials           - [optional] a string value. Default is Null. The Initials of the creator. LibreOffice version 4.0 and up only.
+;                  $sName               - [optional] a string value. Default is Null. The name of the creator. LibreOffice version 4.0 and up only.
 ;                  $bResolved           - [optional] a boolean value. Default is Null. If True, the comment is marked as resolved.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -521,7 +521,7 @@ EndFunc   ;==>_LOWriter_FieldCombCharModify
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.text.TextField.Annotation" Object.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office Version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice Version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted comment field, returning Comment Object.
 ; Author ........: donnyh13
@@ -605,8 +605,8 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ;                  $sContent            - [optional] a string value. Default is Null. The content of the comment.
 ;                  $sAuthor             - [optional] a string value. Default is Null. The author of the comment.
 ;                  $tDateStruct         - [optional] a dll struct value. Default is Null. The date to display for the comment, created previously by _LOWriter_DateStructCreate.
-;                  $sInitials           - [optional] a string value. Default is Null. The Initials of the creator. Libre Office version 4.0 and up only.
-;                  $sName               - [optional] a string value. Default is Null. The name of the creator. Libre Office version 4.0 and up only.
+;                  $sInitials           - [optional] a string value. Default is Null. The Initials of the creator. LibreOffice version 4.0 and up only.
+;                  $sName               - [optional] a string value. Default is Null. The name of the creator. LibreOffice version 4.0 and up only.
 ;                  $bResolved           - [optional] a boolean value. Default is Null. If True, the comment is marked as resolved.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -620,7 +620,7 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ;                  @Error 1 @Extended 7 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 8 Return 0 = $bResolved not a Boolean.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office Version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice Version lower than 4.0.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sContent
@@ -1043,7 +1043,7 @@ Func _LOWriter_FieldDateTimeModify(ByRef $oDoc, ByRef $oDateTimeField, $bIsFixed
 	If Not IsObj($oDateTimeField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $tDateStruct, $bIsDate, $iOffset, $iDateFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDateTimeField.NumberFormat()
@@ -1530,7 +1530,7 @@ Func _LOWriter_FieldDocInfoCreateDateTimeModify(ByRef $oDoc, ByRef $oDocInfoCrea
 	If Not IsObj($oDocInfoCreateDtTm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $iDateFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000 from
 		; the value.
 		$iNumberFormat = $oDocInfoCreateDtTm.NumberFormat()
@@ -1664,7 +1664,7 @@ Func _LOWriter_FieldDocInfoEditTimeModify(ByRef $oDocInfoEditTime, $bIsFixed = N
 	If Not IsObj($oDocInfoEditTime) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $iTimeFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDocInfoEditTime.NumberFormat()
@@ -2057,7 +2057,7 @@ Func _LOWriter_FieldDocInfoModDateTimeModify(ByRef $oDoc, ByRef $oDocInfoModDtTm
 	If Not IsObj($oDocInfoModDtTm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $iDateFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDocInfoModDtTm.NumberFormat()
@@ -2322,7 +2322,7 @@ Func _LOWriter_FieldDocInfoPrintDateTimeModify(ByRef $oDoc, ByRef $oDocInfoPrint
 	If Not IsObj($oDocInfoPrintDtTm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $iDateFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDocInfoPrintDtTm.NumberFormat()
@@ -4504,7 +4504,7 @@ EndFunc   ;==>_LOWriter_FieldRefModify
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iType               - [optional] an integer value (1-1023). Default is $LOW_FIELD_ADV_TYPE_ALL. The type of Field to search for. See Constants, $LOW_FIELD_ADV_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Can be BitOr'd together.
 ;                  $bSupportedServices  - [optional] a boolean value. Default is True. If True, adds a column to the array that has the supported service String for that particular Field, To assist in identifying the Field type.
-;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by Libre Office. To assist in identifying the Field type.
+;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOW_FIELD_ADV_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4560,7 +4560,7 @@ EndFunc   ;==>_LOWriter_FieldsAdvGetList
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iType               - [optional] an integer value (1-16383). Default is $LOW_FIELD_DOCINFO_TYPE_ALL. The type of Field to search for. See Constants, $LOW_FIELD_DOCINFO_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Can be BitOr'd together.
 ;                  $bSupportedServices  - [optional] a boolean value. Default is True. If True, adds a column to the array that has the supported service String for that particular Field, To assist in identifying the Field type.
-;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by Libre Office. To assist in identifying the Field type.
+;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOW_FIELD_DOCINFO_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -5129,7 +5129,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObj
 ;                  @Error 0 @Extended ? Return Array = Success. Successfully retrieved Array of Set Variable MasterField Names, returning Array of Set Variable MasterField Names with @Extended set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function includes in the list about 5 built-in Master Fields from Libre Office, namely: Illustration, Table, Text, Drawing, and Figure.
+; Remarks .......: This function includes in the list about 5 built-in Master Fields from LibreOffice, namely: Illustration, Table, Text, Drawing, and Figure.
 ; Related .......: _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMasterDeleteByName, _LOWriter_FieldSetVarMasterDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
@@ -5212,7 +5212,7 @@ Func _LOWriter_FieldSetVarModify(ByRef $oDoc, ByRef $oSetVarField, $sValue = Nul
 	If Not IsObj($oSetVarField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($sValue, $iNumFormatKey, $bIsVisible) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oSetVarField.NumberFormat()
@@ -5257,7 +5257,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarModify
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iType               - [optional] an integer value (1-2147483647). Default is $LOW_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOW_FIELD_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Can be BitOr'd together.
 ;                  $bSupportedServices  - [optional] a boolean value. Default is True. If True, adds a column to the array that has the supported service String for that particular Field, To assist in identifying the Field type.
-;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by Libre Office. To assist in identifying the Field type.
+;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOW_FIELD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -5425,7 +5425,7 @@ Func _LOWriter_FieldShowVarModify(ByRef $oDoc, ByRef $oShowVarField, $sSetVarNam
 	If Not IsObj($oShowVarField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($sSetVarName, $iNumFormatKey, $bShowName) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oShowVarField.NumberFormat()
