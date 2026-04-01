@@ -478,6 +478,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOB_PATHCONV_*
   - $LOB_COLOR_*
 - $__LO_STATUS_DOC_ERROR Error Constant and renumber all after errors.
+- Second _LOBase_DocConnect example.
 
 ### LibreOfficeCalc
 
@@ -1187,6 +1188,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Error check for failing to close a Document to `_LOCalc_DocClose`.
 - Added _LO_Terminate to all examples for clean-up.
 - Split `_LOCalc_RangeNamedDelete` into `_LOCalc_RangeNamedDeleteByName` and `_LOCalc_RangeNamedDeleteByObj`
+- Changed the parameters in `_LOCalc_DocConnect` to be more logical, and made the function (hopefully) work better.
 
 #### Documented
 
