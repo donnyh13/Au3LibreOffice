@@ -11,9 +11,8 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oQueryUI
+	Local $oDoc, $oDBase, $oConnection, $oQueryDoc
 	Local $sSavePath
-	Local $bReturn
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOBase_DocCreate(True, False)
@@ -46,36 +45,19 @@ Func Example()
 	_LOBase_QueryAddByName($oConnection, "qryAutoIt_Query", "tblNew_Table", "*")
 	If @error Then Return _ERROR($oDoc, "Failed to add a Query to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Query UI.
-	$oQueryUI = _LOBase_QueryUIOpenByName($oConnection, "qryAutoIt_Query")
-	If @error Then Return _ERROR($oDoc, "Failed to open Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Query Document.
+	_LOBase_QueryDocOpenByName($oConnection, "qryAutoIt_Query")
+	If @error Then Return _ERROR($oDoc, "Failed to open Query Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have just opened the Query UI, press Ok to make the window invisible.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have just opened the Query Document, press Ok to connect to it and close it.")
 
-	; Make the Query UI Window invisible by setting visible to False
-	_LOBase_QueryUIVisible($oQueryUI, False)
-	If @error Then _ERROR($oDoc, "Failed to change Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Connect to the Query Document.
+	$oQueryDoc = _LOBase_QueryDocConnect($LO_DOC_CONNECT_MODE_CURRENT)
+	If @error Then Return _ERROR($oDoc, "Failed to connect to Query Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Test if the document is Visible
-	$bReturn = _LOBase_QueryUIVisible($oQueryUI)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Window visibility status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Is the Query window currently visible? True/False: " & $bReturn & @CRLF & @CRLF & _
-			"Press Ok to make the window visible again.")
-
-	; Make the window visible by setting visible to True
-	_LOBase_QueryUIVisible($oQueryUI, True)
-	If @error Then _ERROR($oDoc, "Failed to change Query Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Test if the document is Visible
-	$bReturn = _LOBase_QueryUIVisible($oQueryUI)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Window visibility status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Is the Query window now visible? True/False: " & $bReturn)
-
-	; Close Query UI.
-	_LOBase_QueryUIClose($oQueryUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close Query Document.
+	_LOBase_QueryDocClose($oQueryDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Query Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)

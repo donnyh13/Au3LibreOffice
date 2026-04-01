@@ -11,7 +11,7 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oQueryUI
+	Local $oDoc, $oDBase, $oConnection, $oQueryDoc
 	Local $sSavePath
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -45,30 +45,16 @@ Func Example()
 	_LOBase_QueryAddByName($oConnection, "qryAutoIt_Query", "tblNew_Table", "*")
 	If @error Then Return _ERROR($oDoc, "Failed to add a Query to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have added a Query named ""qryAutoIt_Query""." & @CRLF & _
-			"Press OK to open the Query UI in Viewing/ Data editing mode.")
-
-	; Open the Query UI.
-	$oQueryUI = _LOBase_QueryUIOpenByName($oConnection, "qryAutoIt_Query")
-	If @error Then Return _ERROR($oDoc, "Failed to open Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Query Document.
+	$oQueryDoc = _LOBase_QueryDocOpenByName($oConnection, "qryAutoIt_Query")
+	If @error Then Return _ERROR($oDoc, "Failed to open Query Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the Query named ""qryAutoIt_Query"" in Viewing/ Data editing mode." & @CRLF & _
-			"Press OK to close the window reopen the Query in editing mode.")
-
-	; Close Query UI.
-	_LOBase_QueryUIClose($oQueryUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Open the Query UI.
-	$oQueryUI = _LOBase_QueryUIOpenByName($oConnection, "qryAutoIt_Query", True)
-	If @error Then Return _ERROR($oDoc, "Failed to open Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the Query named ""qryAutoIt_Query"" in Editing mode." & @CRLF & _
 			"Press OK to close the window and document and delete the document.")
 
-	; Close Query UI.
-	_LOBase_QueryUIClose($oQueryUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close Query Document.
+	_LOBase_QueryDocClose($oQueryDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Query Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)

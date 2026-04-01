@@ -11,7 +11,7 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oQueryUI
+	Local $oDoc, $oDBase, $oConnection, $oTable, $oTableDoc
 	Local $sSavePath
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -38,23 +38,23 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, "Failed to create a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add a Table to the Database.
-	_LOBase_TableAdd($oConnection, "tblNew_Table", "Col1")
+	$oTable = _LOBase_TableAdd($oConnection, "tblNew_Table", "Col1")
 	If @error Then Return _ERROR($oDoc, "Failed to add a table to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Add a Query to the Document.
-	_LOBase_QueryAddByName($oConnection, "qryAutoIt_Query", "tblNew_Table", "*")
-	If @error Then Return _ERROR($oDoc, "Failed to add a Query to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Add a Column to the Table.
+	_LOBase_TableColAdd($oTable, "AutoIt Col", $LOB_DATA_TYPE_BOOLEAN, "", "A New Boolean Column.")
+	If @error Then Return _ERROR($oDoc, "Failed to add a Column to the Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Query UI.
-	$oQueryUI = _LOBase_QueryUIOpenByName($oConnection, "qryAutoIt_Query")
-	If @error Then Return _ERROR($oDoc, "Failed to open Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByObject($oDoc, $oConnection, $oTable)
+	If @error Then Return _ERROR($oDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the Query named ""qryAutoIt_Query"" in Viewing/ Data editing mode." & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have added a Column to the table named ""tblNew_Table"", and have opened the Table." & @CRLF & _
 			"Press OK to close the window and document and delete the document.")
 
-	; Close Query UI.
-	_LOBase_QueryUIClose($oQueryUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close Table Document.
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)

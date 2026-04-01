@@ -11,7 +11,7 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oQueryUI, $oTable, $oRowSet
+	Local $oDoc, $oDBase, $oConnection, $oTable, $oTableDoc, $oRowSet
 	Local $sSavePath
 
 	; Create a New, visible, Blank Libre Office Document.
@@ -45,19 +45,15 @@ Func Example()
 	_LOBase_TableColAdd($oTable, "AutoIt Col", $LOB_DATA_TYPE_VARCHAR, "")
 	If @error Then Return _ERROR($oDoc, "Failed to add a Column to the Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Add a Query to the Document.
-	_LOBase_QueryAddByName($oConnection, "qryAutoIt_Query", "tblNew_Table", "*")
-	If @error Then Return _ERROR($oDoc, "Failed to add a Query to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByName($oConnection, "tblNew_Table")
+	If @error Then Return _ERROR($oDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Query UI.
-	$oQueryUI = _LOBase_QueryUIOpenByName($oConnection, "qryAutoIt_Query")
-	If @error Then Return _ERROR($oDoc, "Failed to open Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have just opened the Query UI in Data entry mode, press Ok to add some Data.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have just opened the Table Document in Data entry mode, press Ok to add some Data.")
 
 	; Retrieve the Row Set.
-	$oRowSet = _LOBase_QueryUIGetRowSet($oQueryUI)
-	If @error Then Return _ERROR($oDoc, "Failed to retrieve Query UI Row Set. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	$oRowSet = _LOBase_TableDocGetRowSet($oTableDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to retrieve Table Document Row Set. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a couple rows of Data.
 	For $i = 1 To 5
@@ -80,9 +76,9 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have finished entering Data, press ok to close the Document.")
 
-	; Close Query UI.
-	_LOBase_QueryUIClose($oQueryUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close Table Document.
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)

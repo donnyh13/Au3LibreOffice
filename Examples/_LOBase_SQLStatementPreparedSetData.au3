@@ -11,7 +11,7 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oConnection, $oPrepStatement, $oTable, $oTableUI
+	Local $oDoc, $oConnection, $oPrepStatement, $oTable, $oTableDoc
 	Local $tDate
 	Local $sSavePath
 
@@ -109,16 +109,16 @@ Func Example()
 	_LOBase_SQLStatementExecuteUpdate($oPrepStatement)
 	If @error Then Return _ERROR($oDoc, "Failed to Execute Prepared Statement. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Table UI.
-	$oTableUI = _LOBase_TableUIOpenByObject($oDoc, $oConnection, $oTable)
-	If @error Then Return _ERROR($oDoc, "Failed to open Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByObject($oDoc, $oConnection, $oTable)
+	If @error Then Return _ERROR($oDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have added Data to the Table using a Prepared Statement. I have also just opened the Table User Interface to show that it worked." & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have added Data to the Table using a Prepared Statement. I have also just opened the Table Document to show that it worked." & @CRLF & _
 			"Press Ok to Close and Delete the Document.")
 
-	; Close the Table UI
-	_LOBase_TableUIClose($oTableUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close the Table Document
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)

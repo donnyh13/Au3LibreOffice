@@ -1,5 +1,5 @@
-#include <MsgBoxConstants.au3>
 #include <File.au3>
+#include <MsgBoxConstants.au3>
 
 #include "..\LibreOfficeBase.au3"
 
@@ -11,9 +11,8 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oTable, $oTableUI
+	Local $oDoc, $oDBase, $oConnection, $oTableDoc
 	Local $sSavePath
-	Local $bReturn
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOBase_DocCreate(True, False)
@@ -39,39 +38,33 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, "Failed to create a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add a Table to the Database.
-	$oTable = _LOBase_TableAdd($oConnection, "tblNew_Table", "Col1")
+	_LOBase_TableAdd($oConnection, "tblNew_Table", "Col1")
 	If @error Then Return _ERROR($oDoc, "Failed to add a table to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Table UI.
-	$oTableUI = _LOBase_TableUIOpenByObject($oDoc, $oConnection, $oTable)
-	If @error Then Return _ERROR($oDoc, "Failed to open Table UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have added a table named ""tblNew_Table""." & @CRLF & _
+			"Press OK to open the Table Document in Viewing/ Data editing mode.")
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have just opened the Table UI, press Ok to make the window invisible.")
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByName($oConnection, "tblNew_Table")
+	If @error Then Return _ERROR($oDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Make the Table UI Window invisible by setting visible to False
-	_LOBase_TableUIVisible($oTableUI, False)
-	If @error Then _ERROR($oDoc, "Failed to change Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the table named ""tblNew_Table"" in Viewing/ Data editing mode." & @CRLF & _
+			"Press OK to close the window reopen the table in editing mode.")
 
-	; Test if the document is Visible
-	$bReturn = _LOBase_TableUIVisible($oTableUI)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Window visibility status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close Table Document.
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Is the Table window currently visible? True/False: " & $bReturn & @CRLF & @CRLF & _
-			"Press Ok to make the window visible again.")
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByName($oConnection, "tblNew_Table", True)
+	If @error Then Return _ERROR($oDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Make the window visible by setting visible to True
-	_LOBase_TableUIVisible($oTableUI, True)
-	If @error Then _ERROR($oDoc, "Failed to change Table Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the table named ""tblNew_Table"" in Editing mode." & @CRLF & _
+			"Press OK to close the window and document and delete the document.")
 
-	; Test if the document is Visible
-	$bReturn = _LOBase_TableUIVisible($oTableUI)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Window visibility status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Is the Table window now visible? True/False: " & $bReturn)
-
-	; Close Table UI.
-	_LOBase_TableUIClose($oTableUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Table UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close Table Document.
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)
@@ -89,5 +82,5 @@ EndFunc
 Func _ERROR($oDoc, $sErrorText)
 	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
 	If IsObj($oDoc) Then _LOBase_DocClose($oDoc, False)
-	Exit
+	If IsString($sPath) Then FileDelete($sPath)
 EndFunc

@@ -11,187 +11,187 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oConnection, $oTable, $oTableUI, $oStatement, $oResult
+	Local $oDoc, $oConnection, $oTable, $oTableDoc, $oStatement, $oResult
 	Local $sSavePath
 	Local $iValue
 	Local $tDate
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOBase_DocCreate(True, False)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a unique file name
 	$sSavePath = _TempFile(@TempDir & "\", "DocTestFile_", ".odb")
 
 	; Set the Database type.
 	_LOBase_DocDatabaseType($oDoc)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to Set Base Document Database type. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to Set Base Document Database type. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Save The New Blank Doc To Temp Directory.
 	$sPath = _LOBase_DocSaveAs($oDoc, $sSavePath, True)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to save the Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to save the Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Fill the Database with data.
 	If Not _FillDatabase($oDoc, $oConnection, $oTable) Then Return
 
-	; Open the Table UI.
-	$oTableUI = _LOBase_TableUIOpenByObject($oDoc, $oConnection, $oTable)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to open Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByObject($oDoc, $oConnection, $oTable)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to Query the Table for all entries, and then modify some of them.")
 
-	; Close the Table UI
-	_LOBase_TableUIClose($oTableUI)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to close Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close the Table Document
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Statement Object
 	$oStatement = _LOBase_SQLStatementCreate($oConnection)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to create a SQL Statement Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to create a SQL Statement Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Execute a query, returning all columns and all entries.
 	$oResult = _LOBase_SQLStatementExecuteQuery($oStatement, "SELECT * FROM ""tblNew_Table""", True)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to Execute a SQL Statement Query. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to Execute a SQL Statement Query. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the Cursor to the first record.
 	_LOBase_SQLResultCursorMove($oResult, $LOB_RESULT_CURSOR_MOVE_NEXT)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; My first entry is for pens, I wish to increase the price from 1.99 to 2.50.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_FLOAT, 5, 2.50)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; I change my mind, and will not increase the price until my current stock runs out. I cancel the changes.
 	_LOBase_SQLResultRowUpdate($oResult, $LOB_RESULT_ROW_UPDATE_CANCEL_UPDATE)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the Cursor to the second record.
 	_LOBase_SQLResultCursorMove($oResult, $LOB_RESULT_CURSOR_MOVE_NEXT)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; My Second entry is for Notebooks, I received my order, so I will change On_Order to 0, and increase my stock by the amount I had ordered.
 	; Read my order value.
 	$iValue = _LOBase_SQLResultRowRead($oResult, $LOB_RESULT_ROW_MOD_INT, 4)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to Read Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to Read Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Read my current stock and add it to my order value.
 	$iValue += _LOBase_SQLResultRowRead($oResult, $LOB_RESULT_ROW_MOD_INT, 3)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to Read Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to Read Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set on order to 0.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_INT, 4, 0)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert my new stock value.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_INT, 3, $iValue)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Update the Row.
 	_LOBase_SQLResultRowUpdate($oResult, $LOB_RESULT_ROW_UPDATE_UPDATE)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the Cursor to the Third record.
 	_LOBase_SQLResultCursorMove($oResult, $LOB_RESULT_CURSOR_MOVE_NEXT)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; My Third entry is for Tape, my stock is low and I have just placed an order for 20 rolls. I will update On Order and the date accordingly.
 	; Set on order to 20.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_INT, 4, 20)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set last order to today's date.
 	; Create a Date Structure
 	$tDate = _LOBase_DateStructCreate(Int(@YEAR), Int(@MON), Int(@MDAY))
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to create a Date Struct. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to create a Date Struct. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Change the date to today's date.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_DATE, 6, $tDate)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to set Row data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to set Row data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Update the Row.
 	_LOBase_SQLResultRowUpdate($oResult, $LOB_RESULT_ROW_UPDATE_UPDATE)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the Cursor to the Fourth record.
 	_LOBase_SQLResultCursorMove($oResult, $LOB_RESULT_CURSOR_MOVE_NEXT)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; My Fourth entry is for glitter, I have decided to stop carrying glitter, so I will set discontinued to True.
 	; Change the Boolean to True.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_BOOL, 7, True)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to set Row data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to set Row data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Update the Row.
 	_LOBase_SQLResultRowUpdate($oResult, $LOB_RESULT_ROW_UPDATE_UPDATE)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the Cursor to the Fifth record.
 	_LOBase_SQLResultCursorMove($oResult, $LOB_RESULT_CURSOR_MOVE_NEXT)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move Result Row Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; My fifth entry is for balloons, I have decided to stop carrying balloons, so I will Delete the row.
 	; Delete the Row.
 	_LOBase_SQLResultRowUpdate($oResult, $LOB_RESULT_ROW_UPDATE_DELETE)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; I wish to insert a new product I will carry, which is Staplers, so I will move to a new row to insert my new product.
 	_LOBase_SQLResultRowUpdate($oResult, $LOB_RESULT_ROW_UPDATE_MOVE_TO_INSERT)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Item to "Staplers".
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_STRING, 2, "Stapler")
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set In Stock to 0.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_INT, 3, 0)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set On Order to 15.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_INT, 4, 15)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Price to 24.99.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_FLOAT, 5, 24.99)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set last order to today's date.
 	; Create a Date Structure
 	$tDate = _LOBase_DateStructCreate(Int(@YEAR), Int(@MON), Int(@MDAY))
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to create a Date Struct. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to create a Date Struct. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the date to today's date.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_DATE, 6, $tDate)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to set Row data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to set Row data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Discontinued to False.
 	_LOBase_SQLResultRowModify($oResult, $LOB_RESULT_ROW_MOD_BOOL, 7, False)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert the new row.
 	_LOBase_SQLResultRowUpdate($oResult, $LOB_RESULT_ROW_UPDATE_INSERT)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Table UI.
-	$oTableUI = _LOBase_TableUIOpenByObject($oDoc, $oConnection, $oTable)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to open Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByObject($oDoc, $oConnection, $oTable)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Here is the updated table." & @CRLF & _
 			"Press Ok to Close and Delete the Document.")
 
-	; Close the Table UI
-	_LOBase_TableUIClose($oTableUI)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to close Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close the Table Document
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to close a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to close a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the document.
 	_LOBase_DocClose($oDoc, False)
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the background LibreOffice instance if all Documents are closed.
 	_LO_Terminate()
-	If @error Then Return _ERROR($oDoc, $oTableUI, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _FillDatabase(ByRef $oDoc, ByRef $oConnection, ByRef $oTable)
@@ -409,9 +409,9 @@ Func _FillDatabase(ByRef $oDoc, ByRef $oConnection, ByRef $oTable)
 	Return True
 EndFunc
 
-Func _ERROR($oDoc, $oTableUI, $sErrorText)
+Func _ERROR($oDoc, $oTableDoc, $sErrorText)
 	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
-	If IsObj($oTableUI) Then _LOBase_TableUIClose($oTableUI)
+	If IsObj($oTableDoc) Then _LOBase_TableDocClose($oTableDoc)
 	If IsObj($oDoc) Then _LOBase_DocClose($oDoc, False)
 	If IsString($sPath) Then FileDelete($sPath)
 

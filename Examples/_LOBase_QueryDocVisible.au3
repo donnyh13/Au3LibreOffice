@@ -11,8 +11,9 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oTable, $oTableUI, $oRowSet
+	Local $oDoc, $oDBase, $oConnection, $oQueryDoc
 	Local $sSavePath
+	Local $bReturn
 
 	; Create a New, visible, Blank Libre Office Document.
 	$oDoc = _LOBase_DocCreate(True, False)
@@ -38,47 +39,43 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, "Failed to create a connection to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add a Table to the Database.
-	$oTable = _LOBase_TableAdd($oConnection, "tblNew_Table", "Col1", $LOB_DATA_TYPE_INTEGER)
+	_LOBase_TableAdd($oConnection, "tblNew_Table", "Col1")
 	If @error Then Return _ERROR($oDoc, "Failed to add a table to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Add a Column to the Table.
-	_LOBase_TableColAdd($oTable, "AutoIt Col", $LOB_DATA_TYPE_VARCHAR, "")
-	If @error Then Return _ERROR($oDoc, "Failed to add a Column to the Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Add a Query to the Document.
+	_LOBase_QueryAddByName($oConnection, "qryAutoIt_Query", "tblNew_Table", "*")
+	If @error Then Return _ERROR($oDoc, "Failed to add a Query to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Table UI.
-	$oTableUI = _LOBase_TableUIOpenByName($oConnection, "tblNew_Table")
-	If @error Then Return _ERROR($oDoc, "Failed to open Table UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Query Document.
+	$oQueryDoc = _LOBase_QueryDocOpenByName($oConnection, "qryAutoIt_Query")
+	If @error Then Return _ERROR($oDoc, "Failed to open Query Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have just opened the Table UI in Data entry mode, press Ok to add some Data.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have just opened the Query Document, press Ok to make the window invisible.")
 
-	; Retrieve the Row Set.
-	$oRowSet = _LOBase_TableUIGetRowSet($oTableUI)
-	If @error Then Return _ERROR($oDoc, "Failed to retrieve Table UI Row Set. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Make the Query Document Window invisible by setting visible to False
+	_LOBase_QueryDocVisible($oQueryDoc, False)
+	If @error Then _ERROR($oDoc, "Failed to change Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a couple rows of Data.
-	For $i = 1 To 5
-		; Move to a new row to insert some Data.
-		_LOBase_SQLResultRowUpdate($oRowSet, $LOB_RESULT_ROW_UPDATE_MOVE_TO_INSERT)
-		If @error Then Return _ERROR($oDoc, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Test if the document is Visible
+	$bReturn = _LOBase_QueryDocVisible($oQueryDoc)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Window visibility status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-		; Set first Column to an Integer.
-		_LOBase_SQLResultRowModify($oRowSet, $LOB_RESULT_ROW_MOD_INT, 1, $i)
-		If @error Then Return _ERROR($oDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Is the Query window currently visible? True/False: " & $bReturn & @CRLF & @CRLF & _
+			"Press Ok to make the window visible again.")
 
-		; Set second Column to some Text.
-		_LOBase_SQLResultRowModify($oRowSet, $LOB_RESULT_ROW_MOD_STRING, 2, "Row " & $i)
-		If @error Then Return _ERROR($oDoc, "Failed to modify Result Row Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Make the window visible by setting visible to True
+	_LOBase_QueryDocVisible($oQueryDoc, True)
+	If @error Then _ERROR($oDoc, "Failed to change Query Window visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-		; Insert the new row.
-		_LOBase_SQLResultRowUpdate($oRowSet, $LOB_RESULT_ROW_UPDATE_INSERT)
-		If @error Then Return _ERROR($oDoc, "Failed to move to Insert Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-	Next
+	; Test if the document is Visible
+	$bReturn = _LOBase_QueryDocVisible($oQueryDoc)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Window visibility status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have finished entering Data, press ok to close the Document.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Is the Query window now visible? True/False: " & $bReturn)
 
-	; Close Table UI.
-	_LOBase_TableUIClose($oTableUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Table UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close Query Document.
+	_LOBase_QueryDocClose($oQueryDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Query Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)
