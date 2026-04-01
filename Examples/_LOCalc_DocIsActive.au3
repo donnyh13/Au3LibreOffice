@@ -8,11 +8,11 @@ Func Example()
 	Local $oDoc, $oDoc2
 	Local $bReturn
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create another New, visible, Blank Libre Office Document.
+	; Create another New, visible, Blank LibreOffice Document.
 	$oDoc2 = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

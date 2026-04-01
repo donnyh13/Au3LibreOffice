@@ -10,7 +10,7 @@ Func Example()
 	Local $avRowData[2]
 	Local $atFilterFields[2]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -52,7 +52,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create my first Filter Field, I will insert it directly into my Array.
-	; Make this Filter Field apply to Column A (0, because Columns are 0 based internally in Libre Office Calc.)
+	; Make this Filter Field apply to Column A (0, because Columns are 0 based internally in LibreOffice Calc.)
 	; Set Numeric to False, and my value to 0 to skip it, String = \d (any Number Value), Condition to "Contains" my value. (I don't need to worry about Operator, because this is the first Field in my Array.)
 	$atFilterFields[0] = _LOCalc_FilterFieldCreate(0, False, 0, "\d", $LOC_FILTER_CONDITION_CONTAINS)
 	If @error Then _ERROR($oDoc, "Failed to create a Filter Field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

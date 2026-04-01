@@ -9,7 +9,7 @@ Func Example()
 	Local $oDoc
 	Local $sSavePath, $sPath, $sReturn
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -26,11 +26,11 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The document's save location/Path is: " & $sReturn)
 
-	; Retrieve the Document's Save Path again, the return will be a string, and the path will be a Libre Office URL.
+	; Retrieve the Document's Save Path again, the return will be a string, and the path will be a LibreOffice URL.
 	$sReturn = _LOCalc_DocGetPath($oDoc, True)
 	If (@error > 0) Or ($sReturn = "") Then _ERROR($oDoc, "Failed to retrieve document information. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The document's save location/Path, in Libre Office URL format, is: " & $sReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The document's save location/Path, in LibreOffice URL format, is: " & $sReturn)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

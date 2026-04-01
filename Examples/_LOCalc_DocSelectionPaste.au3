@@ -9,7 +9,7 @@ Func Example()
 	Local $aavData[3]
 	Local $avRowData[1]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, $oNewDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -81,7 +81,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "And I can also paste the data into a new document.")
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oNewDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, $oNewDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

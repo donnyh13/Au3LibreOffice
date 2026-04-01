@@ -10,7 +10,7 @@ Func Example()
 	Local $avRowData[2]
 	Local $sFilePathName, $sPath
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, $oDoc2, $sPath, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -51,7 +51,7 @@ Func Example()
 	$sPath = _LOCalc_DocSaveAs($oDoc, $sFilePathName)
 	If @error Then _ERROR($oDoc, $oDoc2, $sPath, "Failed to Save the Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc2 = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, $oDoc2, $sPath, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

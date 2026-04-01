@@ -10,7 +10,7 @@ Func Example()
 	Local $aavData[5]
 	Local $avRowData[2]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -48,7 +48,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to fill Cell Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create The Sort Field.
-	; Make this Sort Field apply to Row Column B (1, because Columns are 0 based internally in Libre Office Calc.)
+	; Make this Sort Field apply to Row Column B (1, because Columns are 0 based internally in LibreOffice Calc.)
 	; Set Data type to ALPHANUMERIC, and Ascending sort to True.
 	$tSortField = _LOCalc_SortFieldCreate(1, $LOC_SORT_DATA_TYPE_ALPHANUMERIC, True)
 	If @error Then _ERROR($oDoc, "Failed to create a Sort Field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

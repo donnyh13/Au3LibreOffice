@@ -8,7 +8,7 @@ Func Example()
 	Local $oDoc, $oSheet, $oCellRange, $oDestination, $oPivot, $oField
 	Local $atFilterFields[1]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -51,7 +51,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Pivot Table Field settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create my first Filter Field, I will insert it directly into my Array.
-	; Make this Filter Field apply to the fourth column (3, because Columns are 0 based internally in Libre Office Calc.)
+	; Make this Filter Field apply to the fourth column (3, because Columns are 0 based internally in LibreOffice Calc.)
 	; Set Numeric to True, and my value to 15,000, Skip String, set Condition to "Greater" than my value (15,000).
 	$atFilterFields[0] = _LOCalc_FilterFieldCreate(3, True, 15000, "", $LOC_FILTER_CONDITION_GREATER)
 	If @error Then _ERROR($oDoc, "Failed to create a Filter Field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
