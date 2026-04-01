@@ -436,6 +436,22 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOBase_QueryUIGetName
   - _LOBase_ReportDocGetName
   - _LOBase_TableUIGetName
+- Renamed QueryUI functions to QueryDoc for consistency.
+  - `_LOBase_QueryUIClose` --> `_LOBase_QueryDocClose`
+  - `_LOBase_QueryUIConnect` --> `_LOBase_QueryDocConnect`
+  - `_LOBase_QueryUIGetName` --> `_LOBase_QueryDocGetName`
+  - `_LOBase_QueryUIGetRowSet` --> `_LOBase_QueryDocGetRowSet`
+  - `_LOBase_QueryUIOpenByName` --> `_LOBase_QueryDocOpenByName`
+  - `_LOBase_QueryUIOpenByObject` --> `_LOBase_QueryDocOpenByObject`
+  - `_LOBase_QueryUIVisible` --> `_LOBase_QueryDocVisible`
+- Renamed TableUI functions to TableDoc for consistency.
+  - `_LOBase_TableUIClose` --> `_LOBase_TableDocClose`
+  - `_LOBase_TableUIConnect` --> `_LOBase_TableDocConnect`
+  - `_LOBase_TableUIGetName` --> `_LOBase_TableDocGetName`
+  - `_LOBase_TableUIGetRowSet` --> `_LOBase_TableDocGetRowSet`
+  - `_LOBase_TableUIOpenByName` --> `_LOBase_TableDocOpenByName`
+  - `_LOBase_TableUIOpenByObject` --> `_LOBase_TableDocOpenByObject`
+  - `_LOBase_TableUIVisible` --> `_LOBase_TableDocVisible`
 
 #### Documented
 

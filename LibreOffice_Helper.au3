@@ -617,10 +617,10 @@ Func _LO_DocGetType(ByRef $oDoc)
 	Local $sName, $sDocumentBaseURL, $sDocTitle = ""
 	Local Const $__STR_REGEXPARRAYMATCH = 1
 	Local Const $sBaseServiceName = "com.sun.star.sdb.OfficeDatabaseDocument", _ ; Base
-			$sBaseQueryDesignServiceName = "com.sun.star.sdb.QueryDesign", _ ; Base Query UI in Design mode.
-			$sBaseTableDesignServiceName = "com.sun.star.sdb.TableDesign", _ ; Base Table UI in Design mode.
+			$sBaseQueryDesignServiceName = "com.sun.star.sdb.QueryDesign", _ ; Base Query Document in Design mode.
+			$sBaseTableDesignServiceName = "com.sun.star.sdb.TableDesign", _ ; Base Table Document in Design mode.
 			$sBaseReportDesignServiceName = "com.sun.star.report.ReportDefinition", _ ; Base Report Doc in Design mode.
-			$sBaseSubServiceName = "com.sun.star.sdb.DataSourceBrowser", _ ; Could be a Query or a Table UI in Viewing mode.
+			$sBaseSubServiceName = "com.sun.star.sdb.DataSourceBrowser", _ ; Could be a Query or a Table Document in Viewing mode.
 			$sBasicIDEServiceName = "com.sun.star.script.BasicIDE", _ ; Basic IDE
 			$sCalcServiceName = "com.sun.star.sheet.SpreadsheetDocument", _ ; Calc or Report (View)
 			$sDrawServiceName = "com.sun.star.drawing.DrawingDocument", _ ; Draw

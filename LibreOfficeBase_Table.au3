@@ -33,6 +33,13 @@
 ; _LOBase_TableColsGetCount
 ; _LOBase_TableColsGetNames
 ; _LOBase_TableDelete
+; _LOBase_TableDocClose
+; _LOBase_TableDocConnect
+; _LOBase_TableDocGetName
+; _LOBase_TableDocGetRowSet
+; _LOBase_TableDocOpenByName
+; _LOBase_TableDocOpenByObject
+; _LOBase_TableDocVisible
 ; _LOBase_TableExists
 ; _LOBase_TableGetObjByIndex
 ; _LOBase_TableGetObjByName
@@ -45,13 +52,6 @@
 ; _LOBase_TablePrimaryKey
 ; _LOBase_TablesGetCount
 ; _LOBase_TablesGetNames
-; _LOBase_TableUIClose
-; _LOBase_TableUIConnect
-; _LOBase_TableUIGetName
-; _LOBase_TableUIGetRowSet
-; _LOBase_TableUIOpenByName
-; _LOBase_TableUIOpenByObject
-; _LOBase_TableUIVisible
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
@@ -832,6 +832,386 @@ Func _LOBase_TableDelete(ByRef $oConnection, ByRef $oTable)
 EndFunc   ;==>_LOBase_TableDelete
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_TableDocClose
+; Description ...: Close a Table Document.
+; Syntax ........: _LOBase_TableDocClose(ByRef $oTableDoc[, $bDeliverOwnership = True])
+; Parameters ....: $oTableDoc            - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+;                  $bDeliverOwnership   - [optional] a boolean value. Default is True. If True, deliver ownership of the Table Document Object from the script to LibreOffice, recommended is True.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oTableDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bDeliverOwnership not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to close the Table Document.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully closed the Table Document.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOBase_TableDocOpenByObject, _LOBase_TableDocOpenByName, _LOBase_TableDocConnect
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_TableDocClose(ByRef $oTableDoc, $bDeliverOwnership = True)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($oTableDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bDeliverOwnership) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oTableDoc.Frame.close($bDeliverOwnership)
+
+	If Not __LO_IsObjInvalid($oTableDoc, "ComponentWindow.Windows") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oTableDoc = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOBase_TableDocClose
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_TableDocConnect
+; Description ...: Connect to an open instance of a Database Table Document.
+; Syntax ........: _LOBase_TableDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
+; Parameters ....: $iMode               - [optional] an integer value (0-1). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+; Return values .: Success: Object or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 Return 0 = Current Document not a Base Table Document.
+;                  @Error 3 @Extended 5 Return 0 = No matches found.
+;                  --Success--
+;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Table document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Table Documents. @Extended is set to number of results. See remarks.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Only Base Table documents are returned using either of the flags.
+;                  The Connect All option returns a two columned array. ($aArray[0][2]), each result is stored in a separate row.
+;                  -Row 1 Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
+;                  -Row 1 Column 1 contains the Document's type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3. e.g.: $aArray[0][1] = $LO_DOC_TYPE_BASE_FORM_VIEW.
+;                  -Row 2 contains the Object for the next document. e.g. $aArray[1][0] = $oDoc2. And so on.
+; Related .......: _LOBase_TableDocOpenByObject, _LOBase_TableDocOpenByName,
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_TableDocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount = 0, $iDocType
+	Local $aoConnectAll[0][2]
+	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
+
+	If Not __LO_IntIsBetween($iMode, $LO_DOC_CONNECT_MODE_ALL, $LO_DOC_CONNECT_MODE_CURRENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
+	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+	If Not $oDesktop.getComponents.hasElements() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; no L.O open
+
+	Switch $iMode
+		Case $LO_DOC_CONNECT_MODE_ALL
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+			While $oEnumDoc.hasMoreElements()
+				$oDoc = $oEnumDoc.nextElement()
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				$iDocType = _LO_DocGetType($oDoc)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+				If __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_TABLE_DESIGN, $LO_DOC_TYPE_BASE_TABLE_VIEW) Then
+					If (UBound($aoConnectAll) <= $iCount) Then ReDim $aoConnectAll[$iCount + 1][2]
+					$aoConnectAll[$iCount][0] = $oDoc
+					$aoConnectAll[$iCount][1] = $iDocType
+					$iCount += 1
+				EndIf
+				Sleep((IsInt($iCount / $__LOBCONST_SLEEP_DIV) ? (10) : (0)))
+			WEnd
+
+			Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
+
+		Case $LO_DOC_CONNECT_MODE_CURRENT
+			$oDoc = $oDesktop.currentComponent()
+			If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$iDocType = _LO_DocGetType($oDoc)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+			If Not __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_TABLE_DESIGN, $LO_DOC_TYPE_BASE_TABLE_VIEW) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Not a Base Form Doc.
+
+			Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
+	EndSwitch
+
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; No matches
+EndFunc   ;==>_LOBase_TableDocConnect
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_TableDocGetName
+; Description ...: Retrieve the Table document's name.
+; Syntax ........: _LOBase_TableDocGetName(ByRef $oTableDoc[, $bReturnFull = False])
+; Parameters ....: $oTableDoc            - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Return values .: Success: String
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oTableDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Document's name.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If $bReturnFull is True, the return value will be one of the following:
+;                  If the Table Document is in Design mode: "<Database Doc name>.<extension> : <Table name> — LibreOffice Base: Table Design" e.g. "Testing.odb : tblTable1 — LibreOffice Base: Table Design".
+;                  If the Table Document is in Viewing mode: "<Table name> - <Database Doc name> — LibreOffice Base: Table Data View" e.g. "tblTable1 - Testing — LibreOffice Base: Table Data View"
+;                  Else if $bReturnFull is False, the return value will be one of the following:
+;                  If the Table Document is in Design mode: "<Database Doc name>.<extension> : <Table name>", e.g. "Testing.odb : tblTable1"
+;                  If the Table Document is in Viewing mode: "<Table name> - <Database Doc name>", e.g. "tblTable1 - Testing"
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_TableDocGetName(ByRef $oTableDoc, $bReturnFull = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sName
+
+	If Not IsObj($oTableDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If $bReturnFull Then
+		$sName = $oTableDoc.Frame.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Else
+		$sName = $oTableDoc.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sName)
+EndFunc   ;==>_LOBase_TableDocGetName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_TableDocGetRowSet
+; Description ...: Retrieve a Row Set for a Table opened for Data entry/Viewing. See remarks.
+; Syntax ........: _LOBase_TableDocGetRowSet(ByRef $oTableDoc)
+; Parameters ....: $oTableDoc            - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oTableDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = Object called in $oTableDoc not Table opened in viewing/data entry mode.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve RowSet Object.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning Table's RowSet Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Retrieving the RowSet for the table allows you to manipulate data contained in the Table using _LOBase_SQLResultRowUpdate, etc. functions.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_TableDocGetRowSet(ByRef $oTableDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oResultSet
+
+	If Not IsObj($oTableDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oTableDoc.supportsService("com.sun.star.sdb.DataSourceBrowser") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oResultSet = $oTableDoc.FormOperations.Cursor()
+	If Not IsObj($oResultSet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oResultSet)
+EndFunc   ;==>_LOBase_TableDocGetRowSet
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_TableDocOpenByName
+; Description ...: Open a Table Document either in design mode or viewing mode.
+; Syntax ........: _LOBase_TableDocOpenByName(ByRef $oConnection, $sTable[, $bEdit = False[, $bHidden = False]])
+; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sTable              - a string value. The Table's name.
+;                  $bEdit               - [optional] a boolean value. Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
+;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Document will be invisible.
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 Return 0 = $sTable not a String.
+;                  @Error 1 @Extended 4 Return 0 = $bEdit not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = No Table with name called in $sTable found.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Tables Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to create a Connection to Database.
+;                  @Error 3 @Extended 4 Return 0 = Failed to open Table Document.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened Table Document, returning its object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOBase_TableDocOpenByObject, _LOBase_TableDocConnect, _LOBase_TableDocClose, _LOBase_TableDocVisible
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_TableDocOpenByName(ByRef $oConnection, $sTable, $bEdit = False, $bHidden = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oTables, $oTableDoc
+	Local $aArgs[1]
+
+	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oConnection.supportsService("com.sun.star.sdbc.Connection") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsString($sTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bEdit) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If $oConnection.isClosed() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oTables = $oConnection.getTables()
+	If Not IsObj($oTables) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	If Not $oTables.hasByName($sTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+	If Not $oConnection.Parent.DatabaseDocument.CurrentController.isConnected() Then $oConnection.Parent.DatabaseDocument.CurrentController.connect()
+	If Not $oConnection.Parent.DatabaseDocument.CurrentController.isConnected() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$aArgs[0] = __LO_SetPropertyValue("Hidden", $bHidden)
+
+	$oTableDoc = $oConnection.Parent.DatabaseDocument.CurrentController.loadComponentWithArguments($LOB_SUB_COMP_TYPE_TABLE, $sTable, $bEdit, $aArgs)
+	If Not IsObj($oTableDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oTableDoc)
+EndFunc   ;==>_LOBase_TableDocOpenByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_TableDocOpenByObject
+; Description ...: Open a Table Document either in design mode or viewing mode.
+; Syntax ........: _LOBase_TableDocOpenByObject(ByRef $oDoc, ByRef $oConnection, ByRef $oTable[, $bEdit = False[, $bHidden = False]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+;                  $bEdit               - [optional] a boolean value. Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
+;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Document will be invisible.
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oConnection not an Object.
+;                  @Error 1 @Extended 3 Return 0 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 4 Return 0 = $oTable not an Object.
+;                  @Error 1 @Extended 5 Return 0 = $bEdit not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = $bHidden not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Table Name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to create a Connection to Database.
+;                  @Error 3 @Extended 4 Return 0 = Failed to open Table Document.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened Table's Document, returning its object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOBase_TableDocOpenByName, _LOBase_TableDocConnect, _LOBase_TableDocClose, _LOBase_TableDocVisible
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_TableDocOpenByObject(ByRef $oDoc, ByRef $oConnection, ByRef $oTable, $bEdit = False, $bHidden = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oTableDoc
+	Local $sTable
+	Local $aArgs[1]
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not $oConnection.supportsService("com.sun.star.sdbc.Connection") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsBool($bEdit) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If $oConnection.isClosed() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$sTable = $oTable.Name()
+	If Not IsString($sTable) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	If Not $oDoc.CurrentController.isConnected() Then $oDoc.CurrentController.connect()
+	If Not $oDoc.CurrentController.isConnected() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$aArgs[0] = __LO_SetPropertyValue("Hidden", $bHidden)
+
+	$oTableDoc = $oDoc.CurrentController.loadComponentWithArguments($LOB_SUB_COMP_TYPE_TABLE, $sTable, $bEdit, $aArgs)
+	If Not IsObj($oTableDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oTableDoc)
+EndFunc   ;==>_LOBase_TableDocOpenByObject
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_TableDocVisible
+; Description ...: Set or Retrieve Table Document Visibility.
+; Syntax ........: _LOBase_TableDocVisible(ByRef $oTableDoc[, $bVisible = Null])
+; Parameters ....: $oTableDoc            - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the Table Document will be visible.
+; Return values .: Success: 1 or Boolean.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oTableDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current visibility setting.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $bVisible
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning current visibility setting.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_TableDocVisible(ByRef $oTableDoc, $bVisible = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+
+	If Not IsObj($oTableDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($bVisible) Then
+		$bVisible = $oTableDoc.Frame.ContainerWindow.IsVisible()
+		If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bVisible)
+	EndIf
+
+	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oTableDoc.Frame.ContainerWindow.Visible = $bVisible
+	$iError = ($oTableDoc.Frame.ContainerWindow.IsVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOBase_TableDocVisible
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_TableExists
 ; Description ...: Check whether a Database contains a Table by name.
 ; Syntax ........: _LOBase_TableExists(ByRef $oConnection, $sName)
@@ -1535,383 +1915,3 @@ Func _LOBase_TablesGetNames(ByRef $oConnection)
 
 	Return SetError($__LO_STATUS_SUCCESS, UBound($asNames), $asNames)
 EndFunc   ;==>_LOBase_TablesGetNames
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_TableUIClose
-; Description ...: Close a Table User Interface window.
-; Syntax ........: _LOBase_TableUIClose(ByRef $oTableUI[, $bDeliverOwnership = True])
-; Parameters ....: $oTableUI            - [in/out] an object. A Table User Interface Object from a previous _LOBase_TableUIOpenByName, _LOBase_TableUIOpenByObject or _LOBase_TableUIConnect function.
-;                  $bDeliverOwnership   - [optional] a boolean value. Default is True. If True, deliver ownership of the Table UI Object from the script to LibreOffice, recommended is True.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTableUI not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bDeliverOwnership not a Boolean.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to close the Table Interface window.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully closed the Table User Interface window.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LOBase_TableUIOpenByObject, _LOBase_TableUIOpenByName, _LOBase_TableUIConnect
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_TableUIClose(ByRef $oTableUI, $bDeliverOwnership = True)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	If Not IsObj($oTableUI) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bDeliverOwnership) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$oTableUI.Frame.close($bDeliverOwnership)
-
-	If Not __LO_IsObjInvalid($oTableUI, "ComponentWindow.Windows") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	$oTableUI = Null
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOBase_TableUIClose
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_TableUIConnect
-; Description ...: Connect to an open instance of a Database Table User Interface.
-; Syntax ........: _LOBase_TableUIConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
-; Parameters ....: $iMode               - [optional] an integer value (0-1). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
-; Return values .: Success: Object or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
-;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Current Document not a Base Table Document.
-;                  @Error 3 @Extended 5 Return 0 = No matches found.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Table document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
-;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Table Documents. @Extended is set to number of results. See remarks.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Only Base Table documents are returned using either of the flags.
-;                  The Connect All option returns a two columned array. ($aArray[0][2]), each result is stored in a separate row.
-;                  -Row 1 Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
-;                  -Row 1 Column 1 contains the Document's type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3. e.g.: $aArray[0][1] = $LO_DOC_TYPE_BASE_FORM_VIEW.
-;                  -Row 2 contains the Object for the next document. e.g. $aArray[1][0] = $oDoc2. And so on.
-; Related .......: _LOBase_TableUIOpenByObject, _LOBase_TableUIOpenByName,
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_TableUIConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iCount = 0, $iDocType
-	Local $aoConnectAll[0][2]
-	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
-
-	If Not __LO_IntIsBetween($iMode, $LO_DOC_CONNECT_MODE_ALL, $LO_DOC_CONNECT_MODE_CURRENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$oServiceManager = __LO_ServiceManager()
-	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
-	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-	If Not $oDesktop.getComponents.hasElements() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; no L.O open
-
-	Switch $iMode
-		Case $LO_DOC_CONNECT_MODE_ALL
-			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
-			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
-
-			While $oEnumDoc.hasMoreElements()
-				$oDoc = $oEnumDoc.nextElement()
-				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-				$iDocType = _LO_DocGetType($oDoc)
-				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
-
-				If __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_TABLE_DESIGN, $LO_DOC_TYPE_BASE_TABLE_VIEW) Then
-					If (UBound($aoConnectAll) <= $iCount) Then ReDim $aoConnectAll[$iCount + 1][2]
-					$aoConnectAll[$iCount][0] = $oDoc
-					$aoConnectAll[$iCount][1] = $iDocType
-					$iCount += 1
-				EndIf
-				Sleep((IsInt($iCount / $__LOBCONST_SLEEP_DIV) ? (10) : (0)))
-			WEnd
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
-
-		Case $LO_DOC_CONNECT_MODE_CURRENT
-			$oDoc = $oDesktop.currentComponent()
-			If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-			$iDocType = _LO_DocGetType($oDoc)
-			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
-			If Not __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_TABLE_DESIGN, $LO_DOC_TYPE_BASE_TABLE_VIEW) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Not a Base Form Doc.
-
-			Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
-	EndSwitch
-
-	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; No matches
-EndFunc   ;==>_LOBase_TableUIConnect
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_TableUIGetName
-; Description ...: Retrieve the Table document's name.
-; Syntax ........: _LOBase_TableUIGetName(ByRef $oTableUI[, $bReturnFull = False])
-; Parameters ....: $oTableUI            - [in/out] an object. A Table User Interface Object from a previous _LOBase_TableUIOpenByName, _LOBase_TableUIOpenByObject or _LOBase_TableUIConnect function.
-;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
-; Return values .: Success: String
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTableUI not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Document's name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: If $bReturnFull is True, the return value will be one of the following:
-;                  If the Table UI is in Design mode: "<Database Doc name>.<extension> : <Table name> — LibreOffice Base: Table Design" e.g. "Testing.odb : tblTable1 — LibreOffice Base: Table Design".
-;                  If the Table UI is in Viewing mode: "<Table name> - <Database Doc name> — LibreOffice Base: Table Data View" e.g. "tblTable1 - Testing — LibreOffice Base: Table Data View"
-;                  Else if $bReturnFull is False, the return value will be one of the following:
-;                  If the Table UI is in Design mode: "<Database Doc name>.<extension> : <Table name>", e.g. "Testing.odb : tblTable1"
-;                  If the Table UI is in Viewing mode: "<Table name> - <Database Doc name>", e.g. "tblTable1 - Testing"
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_TableUIGetName(ByRef $oTableUI, $bReturnFull = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $sName
-
-	If Not IsObj($oTableUI) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	If $bReturnFull Then
-		$sName = $oTableUI.Frame.Title()
-		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	Else
-		$sName = $oTableUI.Title()
-		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-	EndIf
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $sName)
-EndFunc   ;==>_LOBase_TableUIGetName
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_TableUIGetRowSet
-; Description ...: Retrieve a Row Set for a Table opened for Data entry/Viewing. See remarks.
-; Syntax ........: _LOBase_TableUIGetRowSet(ByRef $oTableUI)
-; Parameters ....: $oTableUI            - [in/out] an object. A Table User Interface Object from a previous _LOBase_TableUIOpenByName, _LOBase_TableUIOpenByObject or _LOBase_TableUIConnect function.
-; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTableUI not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oTableUI not Table opened in viewing/data entry mode.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve RowSet Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning Table's RowSet Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Retrieving the RowSet for the table allows you to manipulate data contained in the Table using _LOBase_SQLResultRowUpdate, etc. functions.
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_TableUIGetRowSet(ByRef $oTableUI)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oResultSet
-
-	If Not IsObj($oTableUI) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oTableUI.supportsService("com.sun.star.sdb.DataSourceBrowser") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$oResultSet = $oTableUI.FormOperations.Cursor()
-	If Not IsObj($oResultSet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oResultSet)
-EndFunc   ;==>_LOBase_TableUIGetRowSet
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_TableUIOpenByName
-; Description ...: Open a Table's User Interface window either in design mode or viewing mode.
-; Syntax ........: _LOBase_TableUIOpenByName(ByRef $oConnection, $sTable[, $bEdit = False[, $bHidden = False]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sTable              - a string value. The Table's name.
-;                  $bEdit               - [optional] a boolean value. Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the UI window will be invisible.
-; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $sTable not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bEdit not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = No Table with name called in $sTable found.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Tables Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to create a Connection to Database.
-;                  @Error 3 @Extended 4 Return 0 = Failed to open Table UI.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened Table's User Interface, returning its object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LOBase_TableUIOpenByObject, _LOBase_TableUIConnect, _LOBase_TableUIClose, _LOBase_TableUIVisible
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_TableUIOpenByName(ByRef $oConnection, $sTable, $bEdit = False, $bHidden = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oTables, $oTableUI
-	Local $aArgs[1]
-
-	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oConnection.supportsService("com.sun.star.sdbc.Connection") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsString($sTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsBool($bEdit) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If $oConnection.isClosed() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	$oTables = $oConnection.getTables()
-	If Not IsObj($oTables) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-	If Not $oTables.hasByName($sTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-	If Not $oConnection.Parent.DatabaseDocument.CurrentController.isConnected() Then $oConnection.Parent.DatabaseDocument.CurrentController.connect()
-	If Not $oConnection.Parent.DatabaseDocument.CurrentController.isConnected() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	$aArgs[0] = __LO_SetPropertyValue("Hidden", $bHidden)
-
-	$oTableUI = $oConnection.Parent.DatabaseDocument.CurrentController.loadComponentWithArguments($LOB_SUB_COMP_TYPE_TABLE, $sTable, $bEdit, $aArgs)
-	If Not IsObj($oTableUI) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oTableUI)
-EndFunc   ;==>_LOBase_TableUIOpenByName
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_TableUIOpenByObject
-; Description ...: Open a Table's User Interface window either in design mode or viewing mode.
-; Syntax ........: _LOBase_TableUIOpenByObject(ByRef $oDoc, ByRef $oConnection, ByRef $oTable[, $bEdit = False[, $bHidden = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
-;                  $bEdit               - [optional] a boolean value. Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the UI window will be invisible.
-; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 3 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 4 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 5 Return 0 = $bEdit not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bHidden not a Boolean.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Table Name.
-;                  @Error 3 @Extended 3 Return 0 = Failed to create a Connection to Database.
-;                  @Error 3 @Extended 4 Return 0 = Failed to open Table UI.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened Table's User Interface, returning its object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LOBase_TableUIOpenByName, _LOBase_TableUIConnect, _LOBase_TableUIClose, _LOBase_TableUIVisible
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_TableUIOpenByObject(ByRef $oDoc, ByRef $oConnection, ByRef $oTable, $bEdit = False, $bHidden = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oTableUI
-	Local $sTable
-	Local $aArgs[1]
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not $oConnection.supportsService("com.sun.star.sdbc.Connection") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsBool($bEdit) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If $oConnection.isClosed() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	$sTable = $oTable.Name()
-	If Not IsString($sTable) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	If Not $oDoc.CurrentController.isConnected() Then $oDoc.CurrentController.connect()
-	If Not $oDoc.CurrentController.isConnected() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	$aArgs[0] = __LO_SetPropertyValue("Hidden", $bHidden)
-
-	$oTableUI = $oDoc.CurrentController.loadComponentWithArguments($LOB_SUB_COMP_TYPE_TABLE, $sTable, $bEdit, $aArgs)
-	If Not IsObj($oTableUI) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oTableUI)
-EndFunc   ;==>_LOBase_TableUIOpenByObject
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_TableUIVisible
-; Description ...: Set or Retrieve Table UI Visibility.
-; Syntax ........: _LOBase_TableUIVisible(ByRef $oTableUI[, $bVisible = Null])
-; Parameters ....: $oTableUI            - [in/out] an object. A Table User Interface Object from a previous _LOBase_TableUIOpenByName, _LOBase_TableUIOpenByObject or _LOBase_TableUIConnect function.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the Table UI Window is visible.
-; Return values .: Success: 1 or Boolean.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTableUI not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current visibility setting.
-;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $bVisible
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning current visibility setting.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_TableUIVisible(ByRef $oTableUI, $bVisible = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iError = 0
-
-	If Not IsObj($oTableUI) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	If __LO_VarsAreNull($bVisible) Then
-		$bVisible = $oTableUI.Frame.ContainerWindow.IsVisible()
-		If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $bVisible)
-	EndIf
-
-	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$oTableUI.Frame.ContainerWindow.Visible = $bVisible
-	$iError = ($oTableUI.Frame.ContainerWindow.IsVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOBase_TableUIVisible
