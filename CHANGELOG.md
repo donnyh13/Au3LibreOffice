@@ -1316,6 +1316,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_TransparencyGradientMultiDelete
   - _LOCalc_TransparencyGradientMultiModify
 - `_LOCalc_RangeNamedDelete`, split into separate functions.
+- Second _LOCalc_DocConnect example.
 
 ### LibreOfficeWriter
 
