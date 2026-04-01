@@ -98,7 +98,7 @@ Func _FunctionForErrors($oObjectError)
 			"helpfile: " & $oObjectError.helpfile & @CRLF & _
 			"Help content: " & $oObjectError.helpcontent & @CRLF & _
 			"LastdllError: " & $oObjectError.lastdllerror & @CRLF & @CRLF & _
-			"Some of the above are, as best I know, almost always blank for Libre Office errors.")
+			"Some of the above are, as best I know, almost always blank for LibreOffice errors.")
 EndFunc
 
 Func _FunctionForErrors2($oObjectError, $vParam1 = Null, $vParam2 = Null, $vParam3 = Null, $vParam4 = Null, $vParam5 = Null)
@@ -111,7 +111,7 @@ Func _FunctionForErrors2($oObjectError, $vParam1 = Null, $vParam2 = Null, $vPara
 			"helpfile: " & $oObjectError.helpfile & @CRLF & _
 			"Help content: " & $oObjectError.helpcontent & @CRLF & _
 			"LastdllError: " & $oObjectError.lastdllerror & @CRLF & @CRLF & _
-			"Some of the above are, as best I know, almost always blank for Libre Office errors." & @CRLF & @CRLF & _
+			"Some of the above are, as best I know, almost always blank for LibreOffice errors." & @CRLF & @CRLF & _
 			"The Following User set parameters were also passed: " & @CRLF & _
 			"Parameter 1: " & $vParam1 & @CRLF & _
 			"Parameter 2: " & $vParam2 & @CRLF & _

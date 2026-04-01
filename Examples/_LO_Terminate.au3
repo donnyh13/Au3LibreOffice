@@ -10,7 +10,7 @@ Func Example()
 
 	If ProcessExists("soffice.bin") Then Exit MsgBox($MB_OK + $MB_TOPMOST, Default, "This example will only work if all LibreOffice instances are closed first.")
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

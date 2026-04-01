@@ -18,7 +18,7 @@ Func Example()
 	$oWriterDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oBaseDoc, $oCalcDoc, $oWriterDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a New, visible, Blank Libre Office Base Document.
+	; Create a New, visible, Blank LibreOffice Base Document.
 	$oBaseDoc = _LOBase_DocCreate(True, False)
 	If @error Then Return _ERROR($oBaseDoc, $oCalcDoc, $oWriterDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
