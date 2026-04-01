@@ -447,9 +447,9 @@ EndFunc   ;==>_LOBase_FormDocConnect
 ;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Form Document called in $oFormDoc was opened "Hidden", can't return full document name. Document must be re-opened.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document's name.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
-;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "— LibreOffice Base: Database Form".
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be like: "<Database Doc name>.<extension> : <Form name> — LibreOffice Base: Database Form" e.g. "Testing.odb : frmForm2 — LibreOffice Base: Database Form".
@@ -468,9 +468,16 @@ Func _LOBase_FormDocGetName(ByRef $oFormDoc, $bReturnFull = False)
 	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If $bReturnFull And Not IsObj($oFormDoc.CurrentController()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; If CurrentController is not an Object, Form Doc was opened "Hidden", can't retrieve full Doc name.
 
-	$sName = ($bReturnFull = True) ? ($oFormDoc.CurrentController.Frame.Title()) : ($oFormDoc.Title())
+	If $bReturnFull Then
+		$sName = $oFormDoc.CurrentController.Frame.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return ($bReturnFull = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sName)) : (SetError($__LO_STATUS_SUCCESS, 0, $sName))
+	Else
+		$sName = $oFormDoc.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sName)
 EndFunc   ;==>_LOBase_FormDocGetName
 
 ; #FUNCTION# ====================================================================================================================

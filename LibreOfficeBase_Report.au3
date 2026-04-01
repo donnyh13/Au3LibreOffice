@@ -1910,9 +1910,9 @@ EndFunc   ;==>_LOBase_ReportDocGeneral
 ;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Report Document called in $oReportDoc was opened "Hidden", can't return full document name. Document must be re-opened.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document's name.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
-;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "— LibreOffice Base: Report Builder" or " — LibreOffice Calc|Writer".
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be one of the following:
@@ -1935,9 +1935,16 @@ Func _LOBase_ReportDocGetName(ByRef $oReportDoc, $bReturnFull = False)
 	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If $bReturnFull And Not IsObj($oReportDoc.CurrentController()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; If CurrentController is not an Object, Report Doc was opened "Hidden", can't retrieve Full Doc name.
 
-	$sName = ($bReturnFull = True) ? ($oReportDoc.CurrentController.Frame.Title()) : ($oReportDoc.Title())
+	If $bReturnFull Then
+		$sName = $oReportDoc.CurrentController.Frame.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return ($bReturnFull = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sName)) : (SetError($__LO_STATUS_SUCCESS, 0, $sName))
+	Else
+		$sName = $oReportDoc.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sName)
 EndFunc   ;==>_LOBase_ReportDocGetName
 
 ; #FUNCTION# ====================================================================================================================

@@ -430,6 +430,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOBase_QueryUIConnect
   - _LOBase_ReportDocConnect
   - _LOBase_TableUIConnect
+- Modified Document name retrieval functions to have more error checking and different success @extended values:
+  - _LOBase_DocGetName
+  - _LOBase_FormDocGetNam
+  - _LOBase_QueryUIGetName
+  - _LOBase_ReportDocGetName
+  - _LOBase_TableUIGetName
 
 #### Documented
 
