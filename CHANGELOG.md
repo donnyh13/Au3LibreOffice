@@ -1204,6 +1204,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added _LO_Terminate to all examples for clean-up.
 - Split `_LOCalc_RangeNamedDelete` into `_LOCalc_RangeNamedDeleteByName` and `_LOCalc_RangeNamedDeleteByObj`
 - Changed the parameters in `_LOCalc_DocConnect` to be more logical, and made the function (hopefully) work better.
+- Modified `_LOCalc_DocGetName` to have more error checking and different success @extended values.
 
 #### Documented
 

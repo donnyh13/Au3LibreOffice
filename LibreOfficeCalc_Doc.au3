@@ -617,12 +617,14 @@ EndFunc   ;==>_LOCalc_DocFormulaBarHeight
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Document's name. See remarks.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
-;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "-LibreOffice Calc".
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: If $bReturnFull is True, the return value will be like: "<Calc Doc name>.<extension> — LibreOffice Calc" e.g. "Testing.ods — LibreOffice Calc".
+;                  Else the return value will be like: "<Calc Doc name>.<extension>", e.g. "Testing.ods"
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -636,9 +638,16 @@ Func _LOCalc_DocGetName(ByRef $oDoc, $bReturnFull = False)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$sName = ($bReturnFull = True) ? ($oDoc.CurrentController.Frame.Title()) : ($oDoc.Title())
+	If $bReturnFull Then
+		$sName = $oDoc.CurrentController.Frame.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($bReturnFull = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sName)) : (SetError($__LO_STATUS_SUCCESS, 0, $sName))
+	Else
+		$sName = $oDoc.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sName)
 EndFunc   ;==>_LOCalc_DocGetName
 
 ; #FUNCTION# ====================================================================================================================
