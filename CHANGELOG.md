@@ -2034,6 +2034,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_TableColumnInsert` now uses Null keyword instead of -1 to indicate the insertion point as the end of the table.
 - `_LOWriter_TableRowInsert` now uses Null keyword instead of -1 to indicate the insertion point as the bottom of the table.
 - Split `_LOWriter_FieldSetVarMasterDelete` into `_LOWriter_FieldSetVarMasterDeleteByName` and `_LOWriter_FieldSetVarMasterDeleteByObj`.
+- Changed the parameters in `_LOWriter_DocConnect` to be more logical, and made the function (hopefully) work better.
 
 #### Documented
 
