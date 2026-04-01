@@ -341,7 +341,7 @@ EndFunc   ;==>_LOBase_QueryDelete
 ; Name ..........: _LOBase_QueryDocClose
 ; Description ...: Close a Query Document.
 ; Syntax ........: _LOBase_QueryDocClose(ByRef $oQueryDoc[, $bDeliverOwnership = True])
-; Parameters ....: $oQueryDoc            - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
+; Parameters ....: $oQueryDoc           - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
 ;                  $bDeliverOwnership   - [optional] a boolean value. Default is True. If True, deliver ownership of the Query Document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -466,7 +466,7 @@ EndFunc   ;==>_LOBase_QueryDocConnect
 ; Name ..........: _LOBase_QueryDocGetName
 ; Description ...: Retrieve the Query document's name.
 ; Syntax ........: _LOBase_QueryDocGetName(ByRef $oQueryDoc[, $bReturnFull = False])
-; Parameters ....: $oQueryDoc            - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
+; Parameters ....: $oQueryDoc           - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
 ;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -514,7 +514,7 @@ EndFunc   ;==>_LOBase_QueryDocGetName
 ; Name ..........: _LOBase_QueryDocGetRowSet
 ; Description ...: Retrieve a Row Set for a Query opened for Data entry/Viewing. See remarks.
 ; Syntax ........: _LOBase_QueryDocGetRowSet(ByRef $oQueryDoc)
-; Parameters ....: $oQueryDoc            - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
+; Parameters ....: $oQueryDoc           - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -669,7 +669,7 @@ EndFunc   ;==>_LOBase_QueryDocOpenByObject
 ; Name ..........: _LOBase_QueryDocVisible
 ; Description ...: Set or Retrieve Query Document Visibility.
 ; Syntax ........: _LOBase_QueryDocVisible(ByRef $oQueryDoc[, $bVisible = Null])
-; Parameters ....: $oQueryDoc            - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
+; Parameters ....: $oQueryDoc           - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the Query Document will be visible.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

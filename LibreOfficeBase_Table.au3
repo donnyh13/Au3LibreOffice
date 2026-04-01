@@ -835,7 +835,7 @@ EndFunc   ;==>_LOBase_TableDelete
 ; Name ..........: _LOBase_TableDocClose
 ; Description ...: Close a Table Document.
 ; Syntax ........: _LOBase_TableDocClose(ByRef $oTableDoc[, $bDeliverOwnership = True])
-; Parameters ....: $oTableDoc            - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+; Parameters ....: $oTableDoc           - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ;                  $bDeliverOwnership   - [optional] a boolean value. Default is True. If True, deliver ownership of the Table Document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -960,7 +960,7 @@ EndFunc   ;==>_LOBase_TableDocConnect
 ; Name ..........: _LOBase_TableDocGetName
 ; Description ...: Retrieve the Table document's name.
 ; Syntax ........: _LOBase_TableDocGetName(ByRef $oTableDoc[, $bReturnFull = False])
-; Parameters ....: $oTableDoc            - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+; Parameters ....: $oTableDoc           - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1008,7 +1008,7 @@ EndFunc   ;==>_LOBase_TableDocGetName
 ; Name ..........: _LOBase_TableDocGetRowSet
 ; Description ...: Retrieve a Row Set for a Table opened for Data entry/Viewing. See remarks.
 ; Syntax ........: _LOBase_TableDocGetRowSet(ByRef $oTableDoc)
-; Parameters ....: $oTableDoc            - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+; Parameters ....: $oTableDoc           - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1166,7 +1166,7 @@ EndFunc   ;==>_LOBase_TableDocOpenByObject
 ; Name ..........: _LOBase_TableDocVisible
 ; Description ...: Set or Retrieve Table Document Visibility.
 ; Syntax ........: _LOBase_TableDocVisible(ByRef $oTableDoc[, $bVisible = Null])
-; Parameters ....: $oTableDoc            - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+; Parameters ....: $oTableDoc           - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the Table Document will be visible.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
