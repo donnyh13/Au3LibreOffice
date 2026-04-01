@@ -158,57 +158,58 @@ EndFunc   ;==>_LOImpress_DocClose
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DocConnect
 ; Description ...: Connect to an already opened instance of LibreOffice Impress.
-; Syntax ........: _LOImpress_DocConnect($sFile[, $bConnectCurrent = False[, $bConnectAll = False]])
-; Parameters ....: $sFile               - a string value. A Full or partial file path, or a full or partial file name. See remarks. Can be an empty string if $bConnectAll or $bConnectCurrent is True.
-;                  $bConnectCurrent     - [optional] a boolean value. Default is False. If True, returns the currently active, or last active Document, unless it is not an Impress Document.
-;                  $bConnectAll         - [optional] a boolean value. Default is False. If True, returns an array containing all open LibreOffice Impress Documents. See remarks.
+; Syntax ........: _LOImpress_DocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT[, $sSearch = ""[, $bCaseless = False]]])
+; Parameters ....: $iMode               - [optional] an integer value (0-4). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  $sSearch             - [optional] a string value. Default is "". The Name, Title or Path of the Document to search for. See remarks.
+;                  $bCaseless           - [optional] a boolean value. Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sFile not a string.
-;                  @Error 1 @Extended 2 Return 0 = $bConnectCurrent not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bConnectAll not a Boolean.
+;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $sSearch not a String.
+;                  @Error 1 @Extended 3 Return 0 = $bCaseless not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
 ;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
 ;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents found.
-;                  @Error 3 @Extended 2 Return 0 = Current Component not an Impress Document.
-;                  @Error 3 @Extended 3 Return 0 = Error converting path to Libre Office URL.
-;                  @Error 3 @Extended 4 Return 0 = No matches found.
+;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 Return 0 = Error converting path to Libre Office URL.
+;                  @Error 3 @Extended 5 Return 0 = Current Document not a Impress Document.
+;                  @Error 3 @Extended 6 Return 0 = No matches found.
 ;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active document is returned.
-;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Impress documents is returned. See remarks. @Extended is set to number of results.
-;                  @Error 0 @Extended 3 Return Object = Success, The Object for the document with matching URL is returned.
-;                  @Error 0 @Extended 4 Return Object = Success, The Object for the document with matching Title is returned.
-;                  @Error 0 @Extended 5 Return Object = Success, A partial Title or Path search found only one match, returning the Object for the found document.
-;                  @Error 0 @Extended ? Return Array = Success, An Array of all matching LibreOffice documents from a partial Title or Path search. See remarks. @Extended is set to number of results.
+;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active Impress document is returned.
+;                  @Error 0 @Extended 1 Return Object = Success, The Object for the found Document with matching Name, Title or Path.
+;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Impress Documents. @Extended is set to number of results. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $sFile can be either the full Path (Name and extension included; e.g: C:\file\Test.odp Or file:///C:/file/Test.odp) of the document, or the full Title with extension, (e.g: Test.odp), or a partial file path (e.g: file1\file2\Test Or file1\file2 Or file1/file2/ etc.), or a partial name (e.g: test, would match Test1.odp, Test2.ppt etc.).
-;                  Partial file path searches and file name searches, as well as the connect all option, return arrays with three columns per result. ($aArray[0][3]). each result is stored in a separate row;
-;                  Row 1, Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
-;                  Row 1, Column 1 contains the Document's full title and extension. e.g. $aArray[0][1] = This Test File.odp
-;                  Row 1, Column 2 contains the document's full file path. e.g. $aArray[0][2] = C:\Folder1\Folder2\This Test File.odp
-;                  Row 2, Column 0 contains the Object for the next document. And so on. e.g. $aArray[1][0] = $oDoc2
+; Remarks .......: Only Impress documents are searched or returned using any of the flags.
+;                  The value used for $sSearch depends on the flag called in $iMode. It is ignored except for the $LO_DOC_CONNECT_MODE_SEARCH_* flags.
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $sSearch must be the full Title with Office and Component name; e.g: "Test.odp — LibreOffice Impress". This will be the same Title AutoIt would match or return from functions like WinGetTitle.
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME, $sSearch must be the Document's full name, without the extension; e.g: "Test".
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $sSearch must be the Document's name, with the extension; e.g: "Test.odp". If the Document hasn't been saved, just the name will work, e.g., "Untitled 1".
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_PATH, $sSearch must be the full Path of the document (Name and extension included); e.g: "C:\file\Test.odp."
+;                  The Connect All option returns a single columned array. ($aArray[0]), each result is stored in a separate row.
+;                  -Row 1 contains the Object for that document. e.g. $aArray[0] = $oDoc
+;                  -Row 2 contains the Object for the next document. e.g. $aArray[1] = $oDoc2. And so on.
 ; Related .......: _LOImpress_DocOpen, _LOImpress_DocClose, _LOImpress_DocCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False)
+Func _LOImpress_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $bCaseless = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iCount = 0
-	Local Const $__STR_STRIPLEADING = 1
-	Local $aoConnectAll[1], $aoPartNameSearch[1]
+	Local $iCount = 0, $iDocType
+	Local $aoConnectAll[0]
+	Local $sCaseless = ""
 	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
-	Local $sServiceName = "com.sun.star.presentation.PresentationDocument"
 
-	If Not IsString($sFile) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bConnectCurrent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bConnectAll) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_IntIsBetween($iMode, $LO_DOC_CONNECT_MODE_ALL, $LO_DOC_CONNECT_MODE_SEARCH_PATH) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sSearch) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bCaseless) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oServiceManager = __LO_ServiceManager()
 	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -217,96 +218,92 @@ Func _LOImpress_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = Fals
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 	If Not $oDesktop.getComponents.hasElements() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; no L.O open
 
-	$oEnumDoc = $oDesktop.getComponents.createEnumeration()
-	If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+	Switch $iMode
+		Case $LO_DOC_CONNECT_MODE_ALL
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-	If $bConnectCurrent Then
-		$oDoc = $oDesktop.currentComponent()
-
-		Return ($oDoc.supportsService($sServiceName)) ? (SetError($__LO_STATUS_SUCCESS, 1, $oDoc)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0))
-	EndIf
-
-	If $bConnectAll Then
-		ReDim $aoConnectAll[1][3]
-		$iCount = 0
-		While $oEnumDoc.hasMoreElements()
-			$oDoc = $oEnumDoc.nextElement()
-			If $oDoc.supportsService($sServiceName) Then
-				ReDim $aoConnectAll[$iCount + 1][3]
-				$aoConnectAll[$iCount][0] = $oDoc
-				$aoConnectAll[$iCount][1] = $oDoc.Title()
-				$aoConnectAll[$iCount][2] = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
-				$iCount += 1
-			EndIf
-			Sleep(10)
-		WEnd
-
-		Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
-	EndIf
-
-	$sFile = StringStripWS($sFile, $__STR_STRIPLEADING)
-	If StringInStr($sFile, "\") Then $sFile = _LO_PathConvert($sFile, $LO_PATHCONV_OFFICE_RETURN) ; Convert to L.O File path.
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	If StringInStr($sFile, "file:///") Then ; URL/Path and Name search
-
-		While $oEnumDoc.hasMoreElements()
-			$oDoc = $oEnumDoc.nextElement()
-
-			If ($oDoc.getURL() == $sFile) Then Return SetError($__LO_STATUS_SUCCESS, 3, $oDoc) ; Match
-		WEnd
-
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; no match
-
-	Else
-		If Not StringInStr($sFile, "/") And StringInStr($sFile, ".") Then ; Name with extension only search
 			While $oEnumDoc.hasMoreElements()
 				$oDoc = $oEnumDoc.nextElement()
-				If StringInStr($oDoc.Title, $sFile) Then Return SetError($__LO_STATUS_SUCCESS, 4, $oDoc) ; Match
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				$iDocType = _LO_DocGetType($oDoc)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+				If ($iDocType = $LO_DOC_TYPE_IMPRESS) Then
+					If (UBound($aoConnectAll) <= $iCount) Then ReDim $aoConnectAll[$iCount + 1]
+					$aoConnectAll[$iCount] = $oDoc
+					$iCount += 1
+				EndIf
+				Sleep((IsInt($iCount / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
 			WEnd
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; no match
-		EndIf
+			Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
 
-		$iCount = 0 ; partial name or partial URL search
-		ReDim $aoPartNameSearch[$iCount + 1][3]
+		Case $LO_DOC_CONNECT_MODE_CURRENT
+			$oDoc = $oDesktop.currentComponent()
+			If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		While $oEnumDoc.hasMoreElements()
-			$oDoc = $oEnumDoc.nextElement()
-			If StringInStr($sFile, "/") Then
-				If StringInStr($oDoc.getURL(), $sFile) Then
-					ReDim $aoPartNameSearch[$iCount + 1][3]
-					$aoPartNameSearch[$iCount][0] = $oDoc
-					$aoPartNameSearch[$iCount][1] = $oDoc.Title
-					$aoPartNameSearch[$iCount][2] = _LO_PathConvert($oDoc.getURL, $LO_PATHCONV_PCPATH_RETURN)
-					$iCount += 1
-				EndIf
+			$iDocType = _LO_DocGetType($oDoc)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+			If ($iDocType <> $LO_DOC_TYPE_IMPRESS) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Not an Impress Doc.
 
-			Else
-				If StringInStr($oDoc.Title, $sFile) Then
-					ReDim $aoPartNameSearch[$iCount + 1][3]
-					$aoPartNameSearch[$iCount][0] = $oDoc
-					$aoPartNameSearch[$iCount][1] = $oDoc.Title
-					$aoPartNameSearch[$iCount][2] = _LO_PathConvert($oDoc.getURL, $LO_PATHCONV_PCPATH_RETURN)
-					$iCount += 1
-				EndIf
-			EndIf
-		WEnd
-		If IsString($aoPartNameSearch[0][1]) Then
-			If (UBound($aoPartNameSearch) = 1) Then
+			Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
 
-				Return SetError($__LO_STATUS_SUCCESS, 5, $aoPartNameSearch[0][0]) ; matches
+		Case $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $LO_DOC_CONNECT_MODE_SEARCH_NAME, $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $LO_DOC_CONNECT_MODE_SEARCH_PATH
+			$sSearch = StringRegExpReplace($sSearch, "(^\s*|\s*$)", "") ; Strip leading and trailing spaces
 
-			Else
+			If $bCaseless Then $sCaseless = "(?i)"
 
-				Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoPartNameSearch) ; matches
+			If ($iMode = $LO_DOC_CONNECT_MODE_SEARCH_PATH) Then
+				$sSearch = _LO_PathConvert($sSearch, $LO_PATHCONV_OFFICE_RETURN) ; Convert to L.O File path.
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 			EndIf
 
-		Else
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; no match
-		EndIf
-	EndIf
+			While $oEnumDoc.hasMoreElements()
+				$oDoc = $oEnumDoc.nextElement()
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				$iDocType = _LO_DocGetType($oDoc)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+				If ($iDocType = $LO_DOC_TYPE_IMPRESS) Then
+					Switch $iMode
+						Case $LO_DOC_CONNECT_MODE_SEARCH_TITLE
+							; First make sure Current Controller is available (It wont be if Document is opened Hidden, in some Components.).
+							If IsObj($oDoc.CurrentController()) And StringRegExp($oDoc.CurrentController.Frame.Title(), $sCaseless & "\Q" & $sSearch & "\E") Then
+
+								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+							EndIf
+
+						Case $LO_DOC_CONNECT_MODE_SEARCH_NAME
+							; Allow space(s) after name in case user put some in the Document name.
+							; Add additional capture for Extension to just match the name the user put in, else force match at end of String for unsaved Documents.
+							If StringRegExp($oDoc.Title(), $sCaseless & "\Q" & $sSearch & "\E\s*(\.\w+)?$") Then
+
+								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+							EndIf
+
+						Case $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT
+							If StringRegExp($oDoc.Title(), $sCaseless & "\Q" & $sSearch & "\E") Then
+
+								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+							EndIf
+
+						Case $LO_DOC_CONNECT_MODE_SEARCH_PATH
+							If StringRegExp($oDoc.getURL(), $sCaseless & "\Q" & $sSearch & "\E") Then
+
+								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+							EndIf
+					EndSwitch
+				EndIf
+			WEnd
+	EndSwitch
+
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0) ; No matches
 EndFunc   ;==>_LOImpress_DocConnect
 
 ; #FUNCTION# ====================================================================================================================
@@ -570,12 +567,14 @@ EndFunc   ;==>_LOImpress_DocExport
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Document's name.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
-;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "-LibreOffice Impress".
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: If $bReturnFull is True, the return value will be like: "<Impress Doc name>.<extension> — LibreOffice Impress" e.g. "Testing.odp — LibreOffice Impress".
+;                  Else the return value will be like: "<Impress Doc name>.<extension>", e.g. "Testing.odp"
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -589,9 +588,16 @@ Func _LOImpress_DocGetName(ByRef $oDoc, $bReturnFull = False)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$sName = ($bReturnFull = True) ? ($oDoc.CurrentController.Frame.Title()) : ($oDoc.Title())
+	If $bReturnFull Then
+		$sName = $oDoc.CurrentController.Frame.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($bReturnFull = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sName)) : (SetError($__LO_STATUS_SUCCESS, 0, $sName))
+	Else
+		$sName = $oDoc.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sName)
 EndFunc   ;==>_LOImpress_DocGetName
 
 ; #FUNCTION# ====================================================================================================================
