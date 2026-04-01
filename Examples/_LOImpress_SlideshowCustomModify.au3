@@ -10,7 +10,7 @@ Func Example()
 	Local $sSlides = ""
 	Local $asCustomShow[3] = ["Slide 1", "Slide 2", "Slide 1"]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOImpress_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Impress Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

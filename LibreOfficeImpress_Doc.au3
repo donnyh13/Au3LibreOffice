@@ -176,7 +176,7 @@ EndFunc   ;==>_LOImpress_DocClose
 ;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Error converting path to Libre Office URL.
+;                  @Error 3 @Extended 4 Return 0 = Error converting path to LibreOffice URL.
 ;                  @Error 3 @Extended 5 Return 0 = Current Document not a Impress Document.
 ;                  @Error 3 @Extended 6 Return 0 = No matches found.
 ;                  --Success--
@@ -308,7 +308,7 @@ EndFunc   ;==>_LOImpress_DocConnect
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DocCreate
-; Description ...: Open a new Libre Office Impress Document or Connect to an existing blank, unsaved, writable document.
+; Description ...: Open a new LibreOffice Impress Document or Connect to an existing blank, unsaved, writable document.
 ; Syntax ........: _LOImpress_DocCreate([$bForceNew = True[, $bHidden = False]])
 ; Parameters ....: $bForceNew           - [optional] a boolean value. Default is True. If True, force opening a new Impress Document instead of checking for a usable blank.
 ;                  $bHidden             - [optional] a boolean value. Default is False. If True opens the new document invisible or changes the existing document to invisible.
@@ -605,7 +605,7 @@ EndFunc   ;==>_LOImpress_DocGetName
 ; Description ...: Returns a Document's current save path.
 ; Syntax ........: _LOImpress_DocGetPath(ByRef $oDoc[, $bReturnLibreURL = False])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in Libre Office URL format, else False returns a regular Windows path.
+;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in LibreOffice URL format, else False returns a regular Windows path.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -616,7 +616,7 @@ EndFunc   ;==>_LOImpress_DocGetName
 ;                  @Error 3 @Extended 1 Return 0 = Error converting Libre URL to Computer path format.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the P.C. path to the current document's save path.
-;                  @Error 0 @Extended 1 Return String = Success. Returning the Libre Office URL to the current document's save path.
+;                  @Error 0 @Extended 1 Return String = Success. Returning the LibreOffice URL to the current document's save path.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -684,7 +684,7 @@ EndFunc   ;==>_LOImpress_DocHasPath
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active Libre window. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other Libre Office documents.
+; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1321,7 +1321,7 @@ EndFunc   ;==>_LOImpress_DocSaveAs
 ;                  @Error 0 @Extended 0 Return 1 = Success. Window was successfully brought to the front of the open windows.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If minimized, the document is restored and brought to the front of the visible pages. Generally only brings the document to the front of other Libre Office windows.
+; Remarks .......: If minimized, the document is restored and brought to the front of the visible pages. Generally only brings the document to the front of other LibreOffice windows.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

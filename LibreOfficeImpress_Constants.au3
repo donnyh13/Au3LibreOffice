@@ -4,9 +4,9 @@
 #include-once
 
 ; #INDEX# =======================================================================================================================
-; Title .........: Libre Office Impress Constants for the Libre Office UDF.
+; Title .........: LibreOffice Impress Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the Libre Office UDF.
+; Description ...: Constants for various functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -190,28 +190,28 @@ Global Enum _
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_RIGHT, _            ; 13 -- A Right hand Callout Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP, _               ; 14 -- A Upward Callout Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN, _          ; 15 -- A Upward and Downward Callout Arrow.
-		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, _         ; 16 -- Upward and Right hand Callout Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, _         ; 16 -- Upward and Right hand Callout Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CIRCULAR, _                 ; 17 -- A Circular Arrow.
-		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, _             ; 18 -- A Right hand Corner Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, _             ; 18 -- A Right hand Corner Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_DOWN, _                     ; 19 -- A Downward Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT, _                     ; 20 -- A Left hand Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT_RIGHT, _               ; 21 -- A Left and Right Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_NOTCHED_RIGHT, _            ; 22 -- A Notched Right Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT, _                    ; 23 -- A Right hand Arrow.
-		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, _            ; 24 -- A Right or Left Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, _                 ; 25 -- A "S"-Shaped Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, _                    ; 26 -- A Split Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, _            ; 24 -- A Right or Left Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, _                 ; 25 -- A "S"-Shaped Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, _                    ; 26 -- A Split Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT, _            ; 27 -- A Striped Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP, _                       ; 28 -- A Upward Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_DOWN, _                  ; 29 -- A Up and Down Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT, _                 ; 30 -- A Upward and Right hand Arrow.
-		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, _            ; 31 -- A Upward, Right hand and Downward Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, _            ; 31 -- A Upward, Right hand and Downward Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_CHEVRON, _                        ; 32 -- A Chevron Shape Arrow.
 		$LOI_DRAWSHAPE_TYPE_ARROWS_PENTAGON, _                       ; 33 -- A Pentagon Shape Arrow.
 		$LOI_DRAWSHAPE_TYPE_BASIC_ARC, _                             ; 34 -- An Arc Shape.
 		$LOI_DRAWSHAPE_TYPE_BASIC_ARC_BLOCK, _                       ; 35 -- A Block Arc Shape.
 		$LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE, _                          ; 36 -- A Circle.
-		$LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, _                      ; 37 -- A Pie Circle. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, _                      ; 37 -- A Pie Circle. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT, _                  ; 38 -- A Segment Circle.
 		$LOI_DRAWSHAPE_TYPE_BASIC_CROSS, _                           ; 39 -- A Cross Shape.
 		$LOI_DRAWSHAPE_TYPE_BASIC_CUBE, _                            ; 40 -- A Cube Shape.
@@ -219,7 +219,7 @@ Global Enum _
 		$LOI_DRAWSHAPE_TYPE_BASIC_DIAMOND, _                         ; 42 -- A Diamond Shape.
 		$LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE, _                         ; 43 -- An Ellipse Shape.
 		$LOI_DRAWSHAPE_TYPE_BASIC_FOLDED_CORNER, _                   ; 44 -- A Paper Shape with a Folded Corner.
-		$LOI_DRAWSHAPE_TYPE_BASIC_FRAME, _                           ; 45 -- A Frame Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_BASIC_FRAME, _                           ; 45 -- A Frame Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_BASIC_HEXAGON, _                         ; 46 -- A Hexagon Shape.
 		$LOI_DRAWSHAPE_TYPE_BASIC_OCTAGON, _                         ; 47 -- A Octagon Shape.
 		$LOI_DRAWSHAPE_TYPE_BASIC_PARALLELOGRAM, _                   ; 48 -- A Parallelogram Shape.
@@ -334,18 +334,18 @@ Global Enum _
 		$LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED, _                   ; 157 --  A Filled Polygon.
 		$LOI_DRAWSHAPE_TYPE_STARS_4_POINT, _                         ; 158 -- A 4 Pointed Star.
 		$LOI_DRAWSHAPE_TYPE_STARS_5_POINT, _                         ; 159 -- A 5 Pointed Star.
-		$LOI_DRAWSHAPE_TYPE_STARS_6_POINT, _                         ; 160 -- A 6 Pointed Star. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE, _                 ; 161 -- A Concave 6 Pointed Star. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_STARS_6_POINT, _                         ; 160 -- A 6 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE, _                 ; 161 -- A Concave 6 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_STARS_8_POINT, _                         ; 162 -- A 8 Pointed Star.
-		$LOI_DRAWSHAPE_TYPE_STARS_12_POINT, _                        ; 163 -- A 12 Pointed Star. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_STARS_12_POINT, _                        ; 163 -- A 12 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_STARS_24_POINT, _                        ; 164 -- A 24 Pointed Star.
 		$LOI_DRAWSHAPE_TYPE_STARS_DOORPLATE, _                       ; 165 -- A Doorplate Shape.
 		$LOI_DRAWSHAPE_TYPE_STARS_EXPLOSION, _                       ; 166 -- A Explosion Shape.
 		$LOI_DRAWSHAPE_TYPE_STARS_SCROLL_HORIZONTAL, _               ; 167 -- A Horizontal Scroll.
 		$LOI_DRAWSHAPE_TYPE_STARS_SCROLL_VERTICAL, _                 ; 168 -- A Vertical Scroll.
-		$LOI_DRAWSHAPE_TYPE_STARS_SIGNET, _                          ; 169 -- A Signet Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, _                  ; 170 -- A Diamond Bevel. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, _                  ; 171 -- A Octagon Bevel. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_STARS_SIGNET, _                          ; 169 -- A Signet Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, _                  ; 170 -- A Diamond Bevel. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, _                  ; 171 -- A Octagon Bevel. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_SQUARE, _                   ; 172 -- A Square Bevel.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_DOUBLE, _                   ; 173 -- A Double Brace.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_LEFT, _                     ; 174 -- A Left hand Brace.
@@ -353,15 +353,15 @@ Global Enum _
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_DOUBLE, _                 ; 176 -- A Double Bracket.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_LEFT, _                   ; 177 -- A Left hand Bracket.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_RIGHT, _                  ; 178 -- A Right hand Bracket.
-		$LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD, _                          ; 179 -- A Cloud Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER, _                         ; 180 -- A Flower Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD, _                          ; 179 -- A Cloud Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER, _                         ; 180 -- A Flower Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_HEART, _                          ; 181 -- A Heart Shape.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING, _                      ; 182 -- A Lightning Shape. ## Note: Lightning is visually different than the one available in L.O. Shapes U.I.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_MOON, _                           ; 183 -- A Moon Shape.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_SMILEY, _                         ; 184 -- A Smiley Shape.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_SUN, _                            ; 185 -- A Sun Shape.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_PROHIBITED, _                     ; 186 -- A Prohibited Shape.
-		$LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE                            ; 187 -- A Puzzle Piece Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE                            ; 187 -- A Puzzle Piece Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 
 ; Gradient Names
 Global Const _

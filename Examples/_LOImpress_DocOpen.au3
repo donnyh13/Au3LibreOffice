@@ -11,7 +11,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will Create and Save a new Impress Doc to begin this example, a screen will flash up and disappear after pressing OK.")
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOImpress_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Impress Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

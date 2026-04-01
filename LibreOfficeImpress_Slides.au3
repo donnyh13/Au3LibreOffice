@@ -1512,7 +1512,7 @@ EndFunc   ;==>_LOImpress_SlideShapesGetList
 ;                  |                               16 = Error setting $iPenWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the Libre Office version is below 4.2, the Array will contain 4 elements because $iPenWidth is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the LibreOffice version is below 4.2, the Array will contain 4 elements because $iPenWidth is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
