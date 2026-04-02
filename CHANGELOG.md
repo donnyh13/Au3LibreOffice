@@ -2203,6 +2203,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_ParStyleDelete
   - _LOWriter_ShapeDelete
 - `_LOWriter_DocConnect` usage not updated in `_LOWriter_DocOpen`.
+- `_LOWriter_NumStyleCustomize` not testing Level vs Sub-Level correctly in error checking.
 
 #### Refactored
 
