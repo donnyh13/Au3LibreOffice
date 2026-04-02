@@ -779,7 +779,7 @@ Func _LOBase_DocOpen($sFilePath, $bConnectIfOpen = True, $bHidden = Null, $bRead
 		EndIf
 	EndIf
 
-	If $bConnectIfOpen Then $oDoc = _LOBase_DocConnect($LO_DOC_CONNECT_MODE_SEARCH_PATH, $sFilePath)
+	If $bConnectIfOpen Then $oDoc = _LOBase_DocConnect($LO_DOC_CONNECT_MODE_SEARCH_PATH, $sFilePath, True)
 	If IsObj($oDoc) Then Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oDoc)) : (SetError($__LO_STATUS_SUCCESS, 1, $oDoc))
 
 	$oDoc = $oDesktop.loadComponentFromURL($sFileURL, "_default", $iURLFrameCreate, $aoProperties)
