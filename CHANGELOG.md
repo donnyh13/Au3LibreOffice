@@ -465,6 +465,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Example `_LOBase_DocConnect[2].au3` was reading the Document title using the wrong variable.
 - COM Error being triggered when calling $bSuppress in `_LOBase_ReportDocData` using a "Hidden" Report Document.
 - COM Error and crash when setting or retrieving visibility settings for a Report or Form Document opened "Hidden".
+- `_LOBase_DocConnect` usage not updated in `_LOBase_DocOpen`.
 
 #### Refactored
 
@@ -1274,6 +1275,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Some functions not returning on error due to missing Return SetError combination:
   - _LOCalc_CellStyleDelete
   - _LOCalc_PageStyleDelete
+- `_LOCalc_DocConnect` usage not updated in `_LOCalc_DocOpen`.
 
 #### Refactored
 
@@ -2200,6 +2202,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_PageStyleDelete
   - _LOWriter_ParStyleDelete
   - _LOWriter_ShapeDelete
+- `_LOWriter_DocConnect` usage not updated in `_LOWriter_DocOpen`.
 
 #### Refactored
 
