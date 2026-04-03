@@ -25,7 +25,7 @@ Func Example()
 			& $sPath & @CRLF & "Press Ok to write some data to it and then save the changes and close the document.")
 
 	; Retrieve the presently active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the top left most cell, 0, 0, or A1.

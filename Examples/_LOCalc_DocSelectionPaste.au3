@@ -14,7 +14,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oNewDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, $oNewDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Fill my arrays with the desired Values.
@@ -64,7 +64,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oNewDoc, "Failed to create a new Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the new sheet to active.
-	_LOCalc_SheetActivate($oDoc, $oNewSheet)
+	_LOCalc_SheetActive($oDoc, $oNewSheet)
 	If @error Then _ERROR($oDoc, $oNewDoc, "Failed to activate a new Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Cell B1 in the new sheet.
@@ -86,7 +86,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oNewDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oNewDoc)
+	$oSheet = _LOCalc_SheetActive($oNewDoc)
 	If @error Then _ERROR($oDoc, $oNewDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Cell D5 in the new Document.

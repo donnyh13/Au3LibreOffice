@@ -20,7 +20,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oDoc2, $sPath, "Failed to create a new Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Activate the new Sheet
-	_LOCalc_SheetActivate($oDoc, $oSheet)
+	_LOCalc_SheetActive($oDoc, $oSheet)
 	If @error Then _ERROR($oDoc, $oDoc2, $sPath, "Failed to activate the Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Fill my arrays with the desired Number and String Values I want in Column A to B.

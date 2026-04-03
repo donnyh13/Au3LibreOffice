@@ -23,7 +23,7 @@ Func Example()
 	$iResults = @extended
 
 	; Retrieve the object for the currently active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell A1

@@ -453,7 +453,7 @@ EndFunc   ;==>_LOCalc_PageStyleCreate
 ; Description ...: Set or Retrieve the current Page style for a Sheet.
 ; Syntax ........: _LOCalc_PageStyleCurrent(ByRef $oDoc, ByRef $oSheet[, $sPageStyle = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $sPageStyle          - [optional] a string value. Default is Null. The Page Style name to set the Page to.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

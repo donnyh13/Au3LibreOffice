@@ -23,7 +23,7 @@ Func Example()
 			"-the fourth column contains the font slant (Italic), (See constants).")
 
 	; Retrieve the currently active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve currently active sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$oCell = _LOCalc_RangeGetCellByPosition($oSheet, 0, 0)

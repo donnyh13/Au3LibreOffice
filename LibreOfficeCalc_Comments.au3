@@ -1382,7 +1382,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByCell
 ; Name ..........: _LOCalc_CommentGetObjByIndex
 ; Description ...: Retrieve a comment object by Index.
 ; Syntax ........: _LOCalc_CommentGetObjByIndex(ByRef $oSheet, $iComment)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $iComment            - an integer value. The Index number of the comment to retrieve. 0 based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1865,7 +1865,7 @@ EndFunc   ;==>_LOCalc_CommentRotate
 ; Name ..........: _LOCalc_CommentsGetCount
 ; Description ...: Retrieve a count of Comments contained in the Sheet.
 ; Syntax ........: _LOCalc_CommentsGetCount(ByRef $oSheet)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1904,7 +1904,7 @@ EndFunc   ;==>_LOCalc_CommentsGetCount
 ; Name ..........: _LOCalc_CommentsGetList
 ; Description ...: Retrieve an array of all comments contained in a Sheet.
 ; Syntax ........: _LOCalc_CommentsGetList(ByRef $oSheet)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

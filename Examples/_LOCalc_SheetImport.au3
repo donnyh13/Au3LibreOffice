@@ -18,7 +18,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to create a new Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Activate the new Sheet
-	_LOCalc_SheetActivate($oDoc, $oSheet)
+	_LOCalc_SheetActive($oDoc, $oSheet)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to activate the Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Fill my arrays with the desired Number and String Values I want in Column A to B.
@@ -54,7 +54,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to import Calc Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Activate the new Sheet
-	_LOCalc_SheetActivate($oDoc2, $oSheet2)
+	_LOCalc_SheetActive($oDoc2, $oSheet2)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to activate Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have imported the Sheet from Document 1 into Document 2, the new sheet is called: " & _LOCalc_SheetName($oDoc2, $oSheet2))

@@ -145,7 +145,7 @@ EndFunc   ;==>__LOCalc_CellBackColor
 ; Name ..........: __LOCalc_CellBorder
 ; Description ...: Internal function to Set and Retrieve the Cell, or Cell Range Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_CellBorder(ByRef $oRange, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.

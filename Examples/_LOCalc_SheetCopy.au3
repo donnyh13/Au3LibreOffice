@@ -12,7 +12,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the presently active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the top left most cell, 0, 0, or A1.
@@ -44,7 +44,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to copy the sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Activate the new Sheet
-	_LOCalc_SheetActivate($oDoc, $oSheet2)
+	_LOCalc_SheetActive($oDoc, $oSheet2)
 	If @error Then _ERROR($oDoc, "Failed to Activate the new sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
