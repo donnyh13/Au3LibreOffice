@@ -26,21 +26,21 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve current Background Color and Back Transparent settings. Return will be an Array with elements in order of function parameters.
-	$iColor = _LOWriter_CellBackColor($oCell)
+	$iColor = _LOWriter_TableCellBackColor($oCell)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current Text Table Cell Background settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now demonstrate modifying a cell's background color settings. The current Background color value is: " & $iColor)
 
 	; Set the cell Background color to a random number.
-	_LOWriter_CellBackColor($oCell, Random(0, 16777215, $iIntegerFlag))
+	_LOWriter_TableCellBackColor($oCell, Random(0, 16777215, $iIntegerFlag))
 	If @error Then _ERROR($oDoc, "Failed to set Text Table Cell Background settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Table Cell's Text.
-	_LOWriter_CellString($oCell, "Text with a random colorful background.")
+	_LOWriter_TableCellString($oCell, "Text with a random colorful background.")
 	If @error Then _ERROR($oDoc, "Failed to set Text Table cell text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve current Background Color.
-	$iColor = _LOWriter_CellBackColor($oCell)
+	$iColor = _LOWriter_TableCellBackColor($oCell)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current Text Table Cell Background settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have set the cell's background color to a random number." & @CRLF & _

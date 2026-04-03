@@ -1271,8 +1271,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_PageStyleHeaderBorderStyle
   - _LOCalc_PageStyleHeaderBorderWidth
 - Fixed bad parameter default value from commit (156b76db87168b27c742b4dae94b77ea353e3d6f) in `__LOCalc_CellBorder`.
-- Example `_LOCalc_DocConnect[2].au3` was reading the Document title using the wrong variable.
-- Example `_LOCalc_CellStyleBackColor.au3` was not updated to use new number of parameters.
+- Example `_LOCalc_DocConnect[2]` was reading the Document title using the wrong variable.
+- Example `_LOCalc_CellStyleBackColor` was not updated to use new number of parameters.
 - Some functions not returning on error due to missing Return SetError combination:
   - _LOCalc_CellStyleDelete
   - _LOCalc_PageStyleDelete
@@ -2071,9 +2071,31 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added _LO_Terminate to all examples for clean-up.
 - `_LOWriter_TableColumnInsert` now uses Null keyword instead of -1 to indicate the insertion point as the end of the table.
 - `_LOWriter_TableRowInsert` now uses Null keyword instead of -1 to indicate the insertion point as the bottom of the table.
+- Renamed ParObj functions to group them more logically.
+  - `_LOWriter_ParObjCopy` --> `_LOWriter_CursorParObjCopy`
+  - `_LOWriter_ParObjCreateList` --> `_LOWriter_CursorParObjCreateList`
+  - `_LOWriter_ParObjDelete` --> `_LOWriter_CursorParObjDelete`
+  - `_LOWriter_ParObjPaste` --> `_LOWriter_CursorParObjPaste`
+  - `_LOWriter_ParObjSectionsGet` --> `_LOWriter_CursorParObjSectionsGet`
 - Split `_LOWriter_FieldSetVarMasterDelete` into `_LOWriter_FieldSetVarMasterDeleteByName` and `_LOWriter_FieldSetVarMasterDeleteByObj`.
 - Changed the parameters in `_LOWriter_DocConnect` to be more logical, and made the function (hopefully) work better.
 - Modified `_LOWriter_DocGetName` to have more error checking and different success @extended values.
+- Combined functions from `LibreOfficeWriter_Cell.au3` into `LibreOfficeWriter_Table.au`3.
+- Renamed Cell functions to TableCell to combine them into `LibreOffice_Table.au3`:
+  - `_LOWriter_CellBackColor` --> `_LOWriter_TableCellBackColor`
+  - `_LOWriter_CellBorderColor` --> `_LOWriter_TableCellBorderColor`
+  - `_LOWriter_CellBorderPadding` --> `_LOWriter_TableCellBorderPadding`
+  - `_LOWriter_CellBorderStyle` --> `_LOWriter_TableCellBorderStyle`
+  - `_LOWriter_CellBorderWidth` --> `_LOWriter_TableCellBorderWidth`
+  - `_LOWriter_CellCreateTextCursor` --> `_LOWriter_TableCellCreateTextCursor`
+  - `_LOWriter_CellFormula` --> `_LOWriter_TableCellFormula`
+  - `_LOWriter_CellGetDataType` --> `_LOWriter_TableCellGetDataType`
+  - `_LOWriter_CellGetError` --> `_LOWriter_TableCellGetError`
+  - `_LOWriter_CellGetName` --> `_LOWriter_TableCellGetName`
+  - `_LOWriter_CellProtect` --> `_LOWriter_TableCellProtect`
+  - `_LOWriter_CellString` --> `_LOWriter_TableCellString`
+  - `_LOWriter_CellValue` --> `_LOWriter_TableCellValue`
+  - `_LOWriter_CellVertOrient` --> `_LOWriter_TableCellVertOrient`
 
 #### Documented
 
@@ -2094,12 +2116,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_FormConPushButtonGeneral` Removed duplicated parameter in Header Parameter description.
 - Added LibreOffice SDK/API Constant names to constants.
 - Added missing "See Constants" to applicable variables in headers.
-- Renamed ParObj functions to group them more logically.
-  - `_LOWriter_ParObjCopy` --> `_LOWriter_CursorParObjCopy`
-  - `_LOWriter_ParObjCreateList` --> `_LOWriter_CursorParObjCreateList`
-  - `_LOWriter_ParObjDelete` --> `_LOWriter_CursorParObjDelete`
-  - `_LOWriter_ParObjPaste` --> `_LOWriter_CursorParObjPaste`
-  - `_LOWriter_ParObjSectionsGet` --> `_LOWriter_CursorParObjSectionsGet`
 
 #### Fixed
 
@@ -2346,6 +2362,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - _LOWriter_ParObjSelect was unneeded as _LOWriter_DocSelection does the same.
 - `_LOWriter_FieldSetVarMasterDelete`, split into separate files.
 - Second _LOWriter_DocConnect example.
+- LibreOfficeWriter_Cell.au3.
 
 [To Top](#releases)
 

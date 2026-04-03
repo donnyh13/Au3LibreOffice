@@ -5,9 +5,10 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oViewCursor, $oTable, $oTableCursor, $oCell
-	Local $sReturn
+	Local $oDoc, $oViewCursor, $oTable, $oCell
 	Local $asCellNames
+	Local $aCellBorder
+	Local $iHMM
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -17,45 +18,49 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 5 columns, 4 rows.
-	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 5, 3)
+	; Create the Table, 3 columns, 5 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Create a Table Cursor. -- Cursor will be created in the first cell ("A1")
-	$oTableCursor = _LOWriter_TableCreateCursor($oDoc, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to create Text Table cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Cell names.
 	$asCellNames = _LOWriter_TableCellsGetNames($oTable)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Insert Cell names
 	For $i = 0 To UBound($asCellNames) - 1
-		; Retrieve each cell by name as returned in the array of cell names
+		; Retrieve each cell by name as returned in the table
 		$oCell = _LOWriter_TableGetCellObjByName($oTable, $asCellNames[$i])
 		If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-		; Set Cell text String to each Cell's name.
+		; Set each Cell text String to each Cell's name.
 		_LOWriter_TableCellString($oCell, $asCellNames[$i])
 		If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 
-	; Check what cell or cells the TableCursor is currently in.
-	$sReturn = _LOWriter_CursorGetStatus($oTableCursor, $LOW_CURSOR_STAT_GET_RANGE_NAME)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the Text Cursor Status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve 2nd down. 2nd over ("B2") Table Cell Object
+	$oCell = _LOWriter_TableGetCellObjByName($oTable, "B2")
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "When the Table cursor has no cells selected, the cell the Table cursor is presently in, is returned. The Table cursor is in cell: " & _
-			$sReturn)
+	; Set the Border width so I can set Border padding.
+	_LOWriter_TableCellBorderWidth($oCell, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell Border width settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Move the TableCursor right Twice, selecting cells as I go.
-	_LOWriter_CursorMove($oTableCursor, $LOW_TABLECUR_GO_RIGHT, 2, True)
-	If @error Then _ERROR($oDoc, "Failed to move Table Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Convert 1/4 Inch to Hundredths of a Millimeter (HMM).
+	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Check what cell or cells the TableCursor is currently in.
-	$sReturn = _LOWriter_CursorGetStatus($oTableCursor, $LOW_CURSOR_STAT_GET_RANGE_NAME)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the Text Cursor Status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Set cell Border padding values, 1/4 inch on all sides.
+	_LOWriter_TableCellBorderPadding($oCell, $iHMM, $iHMM, $iHMM, $iHMM)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "When the Table cursor has cells selected, the beginning cell and the ending cell, are returned, separated by a colon." & @CRLF & _
-			"The Table cursor has the following cell range selected: " & $sReturn)
+	; Retrieve current Border Padding settings. Return will be an Array, with Array elements in order of function parameters.
+	$aCellBorder = _LOWriter_TableCellBorderPadding($oCell)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Border Padding settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Cell Border padding settings are: " & @CRLF & _
+			"Top = " & $aCellBorder[0] & " Hundredths of a Millimeter (HMM)" & @CRLF & _
+			"Bottom = " & $aCellBorder[1] & " Hundredths of a Millimeter (HMM)" & @CRLF & _
+			"Left = " & $aCellBorder[2] & " Hundredths of a Millimeter (HMM)" & @CRLF & _
+			"Right = " & $aCellBorder[3] & " Hundredths of a Millimeter (HMM)")
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

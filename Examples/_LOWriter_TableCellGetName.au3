@@ -6,8 +6,8 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
-	Local $iRows, $iColumns
-	Local $sData
+	Local $sCellName
+	Local $asCellNames
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -21,31 +21,30 @@ Func Example()
 	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve how many Rows the Table currently contains.
-	$iRows = _LOWriter_TableRowGetCount($oTable)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Row count. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve Array of Cell names.
+	$asCellNames = _LOWriter_TableCellsGetNames($oTable)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve how many Columns the Table currently contains.
-	$iColumns = _LOWriter_TableColumnGetCount($oTable)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Column count. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Insert Cell names
+	For $i = 0 To UBound($asCellNames) - 1
+		; Retrieve each cell by name as returned in the array of cell names
+		$oCell = _LOWriter_TableGetCellObjByName($oTable, $asCellNames[$i])
+		If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	For $iRow = 0 To $iRows - 1
-		For $iColumn = 0 To $iColumns - 1
-			; Retrieve each cell by position in the Table.
-			$oCell = _LOWriter_TableGetCellObjByPosition($oTable, $iColumn, $iRow)
-			If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-			; Set Cell text String to Cell's position.
-			_LOWriter_TableCellString($oCell, "Column " & $iColumn & @CR & " Row " & $iRow)
-			If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-		Next
+		; Set Cell text String to each Cell's name.
+		_LOWriter_TableCellString($oCell, $asCellNames[$i])
+		If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 
-	; Retrieve Table data, second column over (Column 1), second row down (row 1). This will return a string.
-	$sData = _LOWriter_TableGetData($oTable, 1, 1)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve 2nd down. 2nd over ("B2") Table Cell Object
+	$oCell = _LOWriter_TableGetCellObjByName($oTable, "B2")
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The returned data was: " & @CRLF & $sData)
+	; Retrieve the Cell's name
+	$sCellName = _LOWriter_TableCellGetName($oCell)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell's name is: " & $sCellName)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

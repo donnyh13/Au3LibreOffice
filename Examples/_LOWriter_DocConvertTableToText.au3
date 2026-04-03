@@ -30,7 +30,7 @@ Func Example()
 		If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Set Cell text String to each Cell's name.
-		_LOWriter_CellString($oCell, $asCellNames[$i])
+		_LOWriter_TableCellString($oCell, $asCellNames[$i])
 		If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 

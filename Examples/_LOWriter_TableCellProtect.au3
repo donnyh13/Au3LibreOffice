@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
-	Local $asCellNames
+	Local $bCellProtected
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -20,32 +20,32 @@ Func Example()
 	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 2, 2)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; When retrieving multiple cells, a cell range will be returned, a cell range is largely the same as a single cell Object,
-	; but some functions don't accept a cell range.
-
-	; Retrieve top left ("A1") and bottom left ("A2") Table Cell range Object
-	$oCell = _LOWriter_TableGetCellObjByName($oTable, "A1", "A2")
+	; Retrieve top left ("A1") Table Cell Object
+	$oCell = _LOWriter_TableGetCellObjByName($oTable, "A1")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.
-	_LOWriter_TableCellBackColor($oCell, $LO_COLOR_BLUE)
-	If @error Then _ERROR($oDoc, "Failed to set Text Table cell background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Set A1 Table Cell's Text.
+	_LOWriter_TableCellString($oCell, "Try to change this Text.")
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve Array of Cell names.
-	$asCellNames = _LOWriter_TableCellsGetNames($oTable)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	$bCellProtected = _LOWriter_TableCellProtect($oCell)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell current write protection setting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	For $i = 0 To UBound($asCellNames) - 1
-		; Retrieve each cell by name as returned in the array of cell names
-		$oCell = _LOWriter_TableGetCellObjByName($oTable, $asCellNames[$i])
-		If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now demonstrate modifying a cell's write protection setting. The current setting is: " & $bCellProtected & _
+			@CRLF & " The possible settings are: " & @CRLF & "True, which means the cell cannot be edited, or " & @CRLF & _
+			"False, which means the cell can be edited.")
 
-		; Set Cell text String to each Cell's name.
-		_LOWriter_TableCellString($oCell, $asCellNames[$i])
-		If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-	Next
+	; Set the cell protection to True.
+	_LOWriter_TableCellProtect($oCell, True)
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell write protection setting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have now set the cell protection to True, attempt to edit the text, and then press ok.")
+
+	; Set the cell protection to False.
+	_LOWriter_TableCellProtect($oCell, False)
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell write protection setting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have now set the cell protection to False, now try to edit the text, and then press ok to close the document.")
 
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)

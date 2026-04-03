@@ -36,7 +36,7 @@ Func Example()
 			If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 			; Set Cell text String to Cell's position.
-			_LOWriter_CellString($oCell, "Column " & $iColumn & @CR & " Row " & $iRow)
+			_LOWriter_TableCellString($oCell, "Column " & $iColumn & @CR & " Row " & $iRow)
 			If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 		Next
 	Next

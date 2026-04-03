@@ -7,6 +7,8 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
 	Local $asCellNames
+	Local $iError
+	Local $sFormula
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -16,27 +18,17 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 2 columns, 2 rows.
-	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 2, 2)
+	; Create a Table, 3 columns, 5 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; When retrieving multiple cells, a cell range will be returned, a cell range is largely the same as a single cell Object,
-	; but some functions don't accept a cell range.
-
-	; Retrieve top left ("A1") and bottom left ("A2") Table Cell range Object
-	$oCell = _LOWriter_TableGetCellObjByName($oTable, "A1", "A2")
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.
-	_LOWriter_TableCellBackColor($oCell, $LO_COLOR_BLUE)
-	If @error Then _ERROR($oDoc, "Failed to set Text Table cell background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Cell names.
 	$asCellNames = _LOWriter_TableCellsGetNames($oTable)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Insert Cell names
 	For $i = 0 To UBound($asCellNames) - 1
-		; Retrieve each cell by name as returned in the array of cell names
+		; Retrieve each cell by name as returned in the array of cell names.
 		$oCell = _LOWriter_TableGetCellObjByName($oTable, $asCellNames[$i])
 		If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -44,6 +36,40 @@ Func Example()
 		_LOWriter_TableCellString($oCell, $asCellNames[$i])
 		If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
+
+	; Retrieve top left ("A1") Table Cell Object
+	$oCell = _LOWriter_TableGetCellObjByName($oTable, "A1")
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Set the Cell Formula to 2 + 2
+	_LOWriter_TableCellFormula($oCell, "2+2")
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell formula. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve the error value
+	$iError = _LOWriter_TableCellGetError($oCell)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Table Cell formula error value. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve the Cell Formula.
+	$sFormula = _LOWriter_TableCellFormula($oCell)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Formula. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell's current error value is: " & $iError & @CRLF & _
+			"The Cell's current formula is: " & $sFormula)
+
+	; Set the Cell Formula to 2 + 2 with some random letters to cause an error
+	_LOWriter_TableCellFormula($oCell, "2+2 xdv")
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell formula. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve the error value again
+	$iError = _LOWriter_TableCellGetError($oCell)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Table Cell formula error value. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve the Cell Formula again.
+	$sFormula = _LOWriter_TableCellFormula($oCell)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Formula. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell's current error value is: " & $iError & @CRLF & _
+			"The Cell's current formula is: " & $sFormula)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -5,8 +5,8 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oViewCursor, $oTable, $oTableCursor, $oCell
-	Local $sReturn
+	Local $oDoc, $oViewCursor, $oTable, $oCell
+	Local $nValue
 	Local $asCellNames
 
 	; Create a New, visible, Blank LibreOffice Document.
@@ -17,18 +17,15 @@ Func Example()
 	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 5 columns, 4 rows.
-	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 5, 3)
+	; Create a Table, 3 columns, 5 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Create a Table Cursor. -- Cursor will be created in the first cell ("A1")
-	$oTableCursor = _LOWriter_TableCreateCursor($oDoc, $oTable)
-	If @error Then _ERROR($oDoc, "Failed to create Text Table cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Cell names.
 	$asCellNames = _LOWriter_TableCellsGetNames($oTable)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Insert Cell names
 	For $i = 0 To UBound($asCellNames) - 1
 		; Retrieve each cell by name as returned in the array of cell names
 		$oCell = _LOWriter_TableGetCellObjByName($oTable, $asCellNames[$i])
@@ -39,23 +36,19 @@ Func Example()
 		If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 
-	; Check what cell or cells the TableCursor is currently in.
-	$sReturn = _LOWriter_CursorGetStatus($oTableCursor, $LOW_CURSOR_STAT_GET_RANGE_NAME)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the Text Cursor Status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve top left ("A1") Table Cell Object
+	$oCell = _LOWriter_TableGetCellObjByName($oTable, "A1")
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "When the Table cursor has no cells selected, the cell the Table cursor is presently in, is returned. The Table cursor is in cell: " & _
-			$sReturn)
+	; Set the Cell Value to the 1234.05
+	_LOWriter_TableCellValue($oCell, 1234.05)
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell Value. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Move the TableCursor right Twice, selecting cells as I go.
-	_LOWriter_CursorMove($oTableCursor, $LOW_TABLECUR_GO_RIGHT, 2, True)
-	If @error Then _ERROR($oDoc, "Failed to move Table Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve the Cell value.
+	$nValue = _LOWriter_TableCellValue($oCell)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Value. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Check what cell or cells the TableCursor is currently in.
-	$sReturn = _LOWriter_CursorGetStatus($oTableCursor, $LOW_CURSOR_STAT_GET_RANGE_NAME)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the Text Cursor Status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "When the Table cursor has cells selected, the beginning cell and the ending cell, are returned, separated by a colon." & @CRLF & _
-			"The Table cursor has the following cell range selected: " & $sReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell value is: " & $nValue)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

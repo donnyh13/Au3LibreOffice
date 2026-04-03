@@ -7,7 +7,6 @@
 #include "LibreOfficeWriter_Internal.au3"
 
 ; Other includes for Writer
-#include "LibreOfficeWriter_Cell.au3"
 #include "LibreOfficeWriter_Char.au3"
 #include "LibreOfficeWriter_Cursor.au3"
 #include "LibreOfficeWriter_DirectFormatting.au3"
