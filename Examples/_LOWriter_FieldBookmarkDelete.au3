@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oViewCursor
+	Local $oDoc, $oViewCursor, $oBookmark
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -20,10 +20,17 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Bookmark at the ViewCursor, named "New Bookmark".
-	_LOWriter_DocBookmarkInsert($oDoc, $oViewCursor, False, "New Bookmark")
+	$oBookmark = _LOWriter_FieldBookmarkInsert($oDoc, $oViewCursor, False, "New Bookmark")
 	If @error Then _ERROR($oDoc, "Failed to insert a Bookmark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does the document contain a Bookmark named ""New Bookmark""? True/False: " & _LOWriter_DocBookmarkExists($oDoc, "New Bookmark"))
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does the document contain a Bookmark named ""New Bookmark""? True/False: " & _LOWriter_FieldBookmarkExists($oDoc, "New Bookmark") & _
+			@CRLF & @CRLF & "Press Ok to delete the Bookmark.")
+
+	; Delete the Bookmark.
+	_LOWriter_FieldBookmarkDelete($oDoc, $oBookmark)
+	If @error Then _ERROR($oDoc, "Failed to delete a Bookmark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now does the document contain a Bookmark named ""New Bookmark""? True/False: " & _LOWriter_FieldBookmarkExists($oDoc, "New Bookmark"))
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

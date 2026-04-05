@@ -2112,11 +2112,19 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Renamed `_LOWriter_FieldSetVarMasterGetObj` to `_LOWriter_FieldSetVarMasterGetObjByName` for consistency.
 - Renamed `_LOWriter_DocBookmarkGetObj` to `_LOWriter_DocBookmarkGetObjByName` for consistency.
 - Changed `_LOWriter_DocViewCursorGetPosition` to return an Array instead of an Integer.
-- Renamed and moved some Cursor functions to group them better:
+- Renamed and moved some Cursor functions to group them more consistently:
   - `_LOWriter_DocCreateTextCursor` --> `_LOWriter_TextCursorCreate`
   - `_LOWriter_DocGetViewCursor` --> `_LOWriter_ViewCursorGetObj`
   - `_LOWriter_DocViewCursorGetPosition` --> `_LOWriter_ViewCursorGetPosition`
-- Renamed `_LOWriter_DocFormSettings` to `_LOWriter_FormDocSettings` for better grouping.
+- Renamed `_LOWriter_DocFormSettings` to `_LOWriter_FormDocSettings` for more consistent grouping.
+- Renamed Bookmark functions for more consistent grouping:
+  - `_LOWriter_DocBookmarkDelete` --> `_LOWriter_FieldBookmarkDelete`
+  - `_LOWriter_DocBookmarkExists` --> `_LOWriter_FieldBookmarkExists`
+  - `_LOWriter_DocBookmarkGetAnchor` --> `_LOWriter_FieldBookmarkGetAnchor`
+  - `_LOWriter_DocBookmarkGetObjByName` --> `_LOWriter_FieldBookmarkGetObjByName`
+  - `_LOWriter_DocBookmarkInsert` --> `_LOWriter_FieldBookmarkInsert`
+  - `_LOWriter_DocBookmarkModify` --> `_LOWriter_FieldBookmarkModify`
+  - `_LOWriter_DocBookmarksGetNames` --> `_LOWriter_FieldBookmarksGetNames`
 
 #### Documented
 

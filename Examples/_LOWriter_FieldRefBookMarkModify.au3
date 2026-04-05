@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Bookmark at the ViewCursor, named "New Bookmark".
-	_LOWriter_DocBookmarkInsert($oDoc, $oViewCursor, False, "New Bookmark")
+	_LOWriter_FieldBookmarkInsert($oDoc, $oViewCursor, False, "New Bookmark")
 	If @error Then _ERROR($oDoc, "Failed to insert a Bookmark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
@@ -37,7 +37,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Book Mark at the ViewCursor, named "Second Bookmark".
-	_LOWriter_DocBookmarkInsert($oDoc, $oViewCursor, False, "Second Bookmark")
+	_LOWriter_FieldBookmarkInsert($oDoc, $oViewCursor, False, "Second Bookmark")
 	If @error Then _ERROR($oDoc, "Failed to insert a Book Mark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to modify the Reference Field.")

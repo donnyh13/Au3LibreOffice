@@ -5,8 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oViewCursor
-	Local $asBookmarks
+	Local $oDoc, $oViewCursor, $oBookmark, $oBookAnchor
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -21,38 +20,22 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Bookmark at the ViewCursor, named "New Bookmark".
-	_LOWriter_DocBookmarkInsert($oDoc, $oViewCursor, False, "New Bookmark")
+	$oBookmark = _LOWriter_FieldBookmarkInsert($oDoc, $oViewCursor, False, "New Bookmark")
 	If @error Then _ERROR($oDoc, "Failed to insert a Bookmark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert some more text.
-	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "I have inserted another Bookmark at the end of this line.--> ")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will retrieve the anchor for ""New Bookmark"" and insert some text after it.")
+
+	; Retrieve the Bookmark's Anchor (Text Cursor).
+	$oBookAnchor = _LOWriter_FieldBookmarkGetAnchor($oBookmark)
+	If @error Then _ERROR($oDoc, "Failed to Retrieve a Reference Mark anchor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Move the Anchor (Text Cursor)
+	_LOWriter_CursorMove($oBookAnchor, $LOW_TEXTCUR_GO_RIGHT, 1, False)
+	If @error Then _ERROR($oDoc, "Failed to move a cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Insert Some text.
+	_LOWriter_CursorInsertString($oDoc, $oBookAnchor, " Some new text")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert another Bookmark at the ViewCursor, named "Second Bookmark".
-	_LOWriter_DocBookmarkInsert($oDoc, $oViewCursor, False, "Second Bookmark")
-	If @error Then _ERROR($oDoc, "Failed to insert a Bookmark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert some more text.
-	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & "I have inserted a third Bookmark at the end of this line.--> ")
-	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert another Bookmark at the ViewCursor, named "Third Bookmark".
-	_LOWriter_DocBookmarkInsert($oDoc, $oViewCursor, False, "Third Bookmark")
-	If @error Then _ERROR($oDoc, "Failed to insert a Bookmark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert some text.
-	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR & "The Bookmark names currently contained in this document are:" & @CR)
-	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Retrieve an array of all Bookmarks.
-	$asBookmarks = _LOWriter_DocBookmarksGetNames($oDoc)
-	If @error Then _ERROR($oDoc, "Failed to retrieve an array of Bookmarks. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	For $i = 0 To UBound($asBookmarks) - 1
-		; Insert some text.
-		_LOWriter_CursorInsertString($oDoc, $oViewCursor, $asBookmarks[$i] & @CR)
-		If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-	Next
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -21,15 +21,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Bookmark at the ViewCursor, named "New Bookmark".
-	_LOWriter_DocBookmarkInsert($oDoc, $oViewCursor, False, "New Bookmark")
+	$oBookmark = _LOWriter_FieldBookmarkInsert($oDoc, $oViewCursor, False, "New Bookmark")
 	If @error Then _ERROR($oDoc, "Failed to insert a Bookmark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the Bookmark's Object.
-	$oBookmark = _LOWriter_DocBookmarkGetObjByName($oDoc, "New Bookmark")
-	If @error Then _ERROR($oDoc, "Failed to retrieve a Bookmark Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
 	; Modify the Bookmark name to "Old Bookmark"
-	_LOWriter_DocBookmarkModify($oBookmark, "Old Bookmark")
+	_LOWriter_FieldBookmarkModify($oBookmark, "Old Bookmark")
 	If @error Then _ERROR($oDoc, "Failed to modify a Bookmark. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
@@ -37,7 +33,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of all Bookmarks.
-	$asBookmarks = _LOWriter_DocBookmarksGetNames($oDoc)
+	$asBookmarks = _LOWriter_FieldBookmarksGetNames($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve an array of Bookmarks. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To UBound($asBookmarks) - 1
