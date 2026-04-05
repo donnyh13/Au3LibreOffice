@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Paragraph Style object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
+	$oParStyle = _LOWriter_ParStyleGetObjByName($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Paragraph style Gradient settings to: Preset Gradient name = $LOW_GRAD_NAME_TEAL_TO_BLUE

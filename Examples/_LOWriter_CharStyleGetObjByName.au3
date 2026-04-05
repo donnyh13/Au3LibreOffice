@@ -6,7 +6,6 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oCharStyle
-	Local $avCharStyleSettings
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -17,7 +16,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the Character style.
-	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a Character style.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate retrieving a Character style Object.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -36,36 +35,15 @@ Func Example()
 	_LOWriter_CharStyleCurrent($oDoc, $oViewCursor, "Example")
 	If @error Then _ERROR($oDoc, "Failed to set the Character style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the "Example" object.
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now retrieve the ""Example"" character style object, and modify some of its settings.")
+
+	; Retrieve the "Example" character style object.
 	$oCharStyle = _LOWriter_CharStyleGetObjByName($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style font position to 75% Superscript, and relative size to 50%.
-	_LOWriter_CharStylePosition($oCharStyle, 75, Null, 50)
+	; Set "Example" character style font weight to bold.
+	_LOWriter_CharStyleFont($oCharStyle, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
-	$avCharStyleSettings = _LOWriter_CharStylePosition($oCharStyle)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's current position settings are as follows: " & @CRLF & _
-			"Current Superscript percentage (If Auto, then it will be -1): " & $avCharStyleSettings[0] & @CRLF & _
-			"Current Subscript percentage (If Auto, then it will be -1): " & $avCharStyleSettings[1] & @CRLF & _
-			"Relative size percentage: " & $avCharStyleSettings[2] & @CRLF & @CRLF & _
-			"Press ok and I will set Subscript next.")
-
-	; Set "Example" Character style font position to 75% Subscript
-	_LOWriter_CharStylePosition($oCharStyle, Null, 75)
-	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
-	$avCharStyleSettings = _LOWriter_CharStylePosition($oCharStyle)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's new position settings are as follows: " & @CRLF & _
-			"Current Superscript percentage (If Auto, then it will be -1): " & $avCharStyleSettings[0] & @CRLF & _
-			"Current Subscript percentage (If Auto, then it will be -1): " & $avCharStyleSettings[1] & @CRLF & _
-			"Relative size percentage: " & $avCharStyleSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

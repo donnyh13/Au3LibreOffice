@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Paragraph Style object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
+	$oParStyle = _LOWriter_ParStyleGetObjByName($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Default Paragraph Style Font to "Arial", Font size to 18, Posture (Italic) to $LOW_CHAR_POSTURE_ITALIC, and weight (Bold)

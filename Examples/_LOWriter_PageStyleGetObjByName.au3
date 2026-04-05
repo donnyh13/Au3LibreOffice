@@ -6,7 +6,6 @@ Example()
 
 Func Example()
 	Local $oDoc, $oPageStyle
-	Local $iTransparency
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -16,19 +15,9 @@ Func Example()
 	$oPageStyle = _LOWriter_PageStyleGetObjByName($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Background Color to $LO_COLOR_RED.
-	_LOWriter_PageStyleAreaColor($oPageStyle, $LO_COLOR_RED)
-	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Set Page style Transparency settings to 55% transparent
-	_LOWriter_PageStyleAreaTransparency($oPageStyle, 55)
-	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Retrieve the current settings. Return will be an Integer.
-	$iTransparency = _LOWriter_PageStyleAreaTransparency($oPageStyle)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the Page style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Header Transparency percentage is: " & $iTransparency)
+	; Set the Page Background color to $LO_COLOR_GREEN, to demonstrate that I retrieved the Page Style's Object.
+	_LOWriter_PageStyleAreaColor($oPageStyle, $LO_COLOR_GREEN)
+	If @error Then _ERROR($oDoc, "Failed to set Page Style Background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

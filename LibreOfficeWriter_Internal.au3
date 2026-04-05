@@ -4251,7 +4251,7 @@ EndFunc   ;==>__LOWriter_HeaderBorder
 ; Description ...: Return a suggested image width/height based on an image's original size.
 ; Syntax ........: __LOWriter_ImageGetSuggestedSize(ByRef $oGraphic, $oPageStyle)
 ; Parameters ....: $oGraphic            - [in/out] an object. A graphic Object returned from a queryGraphicDescriptor call.
-;                  $oPageStyle          - an object. A Page Style object returned by a previous _LOWriter_PageStyleGetObj function.
+;                  $oPageStyle          - an object. A Page Style object returned by a previous _LOWriter_PageStyleGetObjByName function.
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4913,7 +4913,7 @@ EndFunc   ;==>__LOWriter_NumStyleModify
 ; Description ...: Calculate appropriate values to set Frame, Frame Style or Image Width or Height, when using relative values.
 ; Syntax ........: __LOWriter_ObjRelativeSize(ByRef $oDoc, ByRef $oObj[, $bRelativeWidth = False[, $bRelativeHeight = False]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oObj                - [in/out] an object. A Frame or Frame Style object returned by a previous _LOWriter_FrameStyleCreate, _LOWriter_FrameCreate, _LOWriter_FrameStyleGetObj, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function. Can also be an Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
+;                  $oObj                - [in/out] an object. A Frame or Frame Style object returned by a previous _LOWriter_FrameStyleCreate, _LOWriter_FrameCreate, _LOWriter_FrameStyleGetObjByName, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function. Can also be an Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $bRelativeWidth      - [optional] a boolean value. Default is False. If True, modify Width based on relative Width percentage.
 ;                  $bRelativeHeight     - [optional] a boolean value. Default is False. If True, modify Height based on relative Height percentage.
 ; Return values .: Success: 1 or Array.
@@ -5900,7 +5900,7 @@ EndFunc   ;==>__LOWriter_ParAreaTransparencyGradientMulti
 ; Name ..........: __LOWriter_ParBorderPadding
 ; Description ...: Set or retrieve the Border Padding (spacing between the Paragraph and border) settings.
 ; Syntax ........: __LOWriter_ParBorderPadding(ByRef $oObj[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]]])
-; Parameters ....: $oObj                - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObj function.
+; Parameters ....: $oObj                - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
 ;                  $iAll                - [optional] an integer value. Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).

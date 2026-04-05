@@ -6,7 +6,6 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oParStyle
-	Local $iColor
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -17,22 +16,18 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the Default Paragraph style.
-	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style." & @CR & "Next Line")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate getting the paragraph style object.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now retrieve the default paragraph style object, and modify some of its settings.")
 
 	; Retrieve the Default Paragraph Style object.
 	$oParStyle = _LOWriter_ParStyleGetObjByName($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style background color to $LO_COLOR_GRAY.
-	_LOWriter_ParStyleAreaColor($oParStyle, $LO_COLOR_GRAY)
+	; Set Default Paragraph Style font weight to bold.
+	_LOWriter_ParStyleFont($oParStyle, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Retrieve the current settings. Return will be an Integer.
-	$iColor = _LOWriter_ParStyleAreaColor($oParStyle)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's current Background color is (as a RGB Color Integer): " & $iColor)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

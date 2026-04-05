@@ -2100,6 +2100,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Renamed Header/Footer text cursor creation functions for better grouping and to be more logical.
   - `_LOWriter_DocFooterGetTextCursor` --> `_LOWriter_PageStyleFooterCreateTextCursor`
   - `_LOWriter_DocHeaderGetTextCursor` --> `_LOWriter_PageStyleHeaderCreateTextCursor`
+- Renamed StyleGetObj functions to StyleGetObjByName for consistency:
+  - `_LOWriter_CharStyleGetObj` --> `_LOWriter_CharStyleGetObjByName`
+  - `_LOWriter_FrameStyleGetObj` --> `_LOWriter_FrameStyleGetObjByName`
+  - `_LOWriter_NumStyleGetObj` --> `_LOWriter_NumStyleGetObjByName`
+  - `_LOWriter_PageStyleGetObj` --> `_LOWriter_PageStyleGetObjByName`
+  - `_LOWriter_ParStyleGetObj` --> `_LOWriter_ParStyleGetObjByName`
 
 #### Documented
 

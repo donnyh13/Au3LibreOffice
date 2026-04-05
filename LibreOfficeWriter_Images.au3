@@ -1648,7 +1648,7 @@ Func _LOWriter_ImageInsert(ByRef $oDoc, $sImage, ByRef $oCursor, $iAnchorType = 
 	$sPageStyle = $oCursor.PageStyleName()
 	If Not IsString($sPageStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, $sPageStyle)
+	$oPageStyle = _LOWriter_PageStyleGetObjByName($oDoc, $sPageStyle)
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 	$oSize = __LOWriter_ImageGetSuggestedSize(($oProvider.queryGraphicDescriptor($atProp)), $oPageStyle)

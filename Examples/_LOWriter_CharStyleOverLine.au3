@@ -37,7 +37,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Character style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the "Example" object.
-	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
+	$oCharStyle = _LOWriter_CharStyleGetObjByName($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Example" Character style Overline settings to Overline style $LOW_CHAR_UNDERLINE_BOLD_DASH_DOT, Color to $LO_COLOR_BROWN, and Words only = True

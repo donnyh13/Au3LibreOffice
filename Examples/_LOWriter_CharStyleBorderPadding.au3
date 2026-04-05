@@ -38,7 +38,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Character style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the "Example" object.
-	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
+	$oCharStyle = _LOWriter_CharStyleGetObjByName($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Example" Character style Border Width to $LOW_BORDER_WIDTH_THICK.

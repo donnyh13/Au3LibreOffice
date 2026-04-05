@@ -37,7 +37,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Character style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the "Example" Character Style object.
-	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
+	$oCharStyle = _LOWriter_CharStyleGetObjByName($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Example" Character style Font to "Arial", Font size to 18, Posture (Italic) to $LOW_CHAR_POSTURE_ITALIC, and weight (Bold)
