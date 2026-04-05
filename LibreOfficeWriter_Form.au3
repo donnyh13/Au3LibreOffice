@@ -101,6 +101,7 @@
 ; _LOWriter_FormConTimeFieldGeneral
 ; _LOWriter_FormConTimeFieldValue
 ; _LOWriter_FormDelete
+; _LOWriter_FormDocSettings
 ; _LOWriter_FormGetObjByIndex
 ; _LOWriter_FormParent
 ; _LOWriter_FormPropertiesData
@@ -13744,6 +13745,194 @@ Func _LOWriter_FormDelete(ByRef $oForm)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FormDocSettings
+; Description ...: Set or Retrieve Document Form related settings.
+; Syntax ........: _LOWriter_FormDocSettings(ByRef $oDoc[, $bFormDesignMode = Null[, $bOpenInDesignMode = Null[, $bAutoControlFocus = Null[, $bUseControlWizards = Null]]]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bFormDesignMode     - [optional] a boolean value. Default is Null. If True, Form design mode will be active.
+;                  $bOpenInDesignMode   - [optional] a boolean value. Default is Null. If True, Form design mode will be active automatically upon opening the document.
+;                  $bAutoControlFocus   - [optional] a boolean value. Default is Null. If True, the first Form control will have the focus upon opening the document.
+;                  $bUseControlWizards  - [optional] a boolean value. Default is Null. If True, Control Wizards will be used.
+; Return values .: Success: 1 or Array
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bFormDesignMode not a Boolean.
+;                  @Error 1 @Extended 3 Return 0 = $bOpenInDesignMode not a Boolean.
+;                  @Error 1 @Extended 4 Return 0 = $bAutoControlFocus not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = $bUseControlWizards not a Boolean.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $bFormDesignMode
+;                  |                               2 = Error setting $bOpenInDesignMode
+;                  |                               4 = Error setting $bAutoControlFocus
+;                  |                               8 = Error setting $bUseControlWizards
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+;                  In order to determine current values for $bFormDesignMode and $bUseControlWizards, a Macro is temporarily injected into the document, and subsequently deleted.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FormDocSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDesignMode = Null, $bAutoControlFocus = Null, $bUseControlWizards = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $oStandardLibrary, $oScript
+	Local $abForm[4], $abStatus[0]
+	Local $aDummyArray[0]
+	Local $sControlWiz = "uno:UseWizards"
+	Local $sScript = "Function DocFormSettingStatus()" & @CRLF & _
+			"  REM Modified from Andrew Pitonyak's Macro '5.48. Toggle design mode', found in 'Useful Macro Information', page 152, Revision: 1137." & @CRLF & _
+			"  Dim oFrame            ' Current frame" & @CRLF & _
+			"  Dim oDisp             ' The created dispatcher" & @CRLF & _
+			"  Dim oParser           ' URL Transformer to parse the URL." & @CRLF & _
+			"  Dim oStatusListener   ' The status listener that is created" & @CRLF & _
+			"  Dim sListenerName     ' The type of listener that is created" & @CRLF & _
+			"  Dim oUrl as New com.sun.star.util.URL" & @CRLF & _
+			"  Dim oUrl2 as New com.sun.star.util.URL" & @CRLF & _
+			"  Dim abStatus(2)" & @CRLF & @CRLF & _
+			"  REM Parse the URL as required" & @CRLF & _
+			"  oUrl.Complete = "".uno:SwitchControlDesignMode""" & @CRLF & _
+			"  oUrl2.Complete = "".uno:UseWizards""" & @CRLF & _
+			"  oParser = createUnoService(""com.sun.star.util.URLTransformer"")" & @CRLF & _
+			"  oParser.parseStrict(oUrl)" & @CRLF & @CRLF & _
+			"  oParser.parseStrict(oUrl2)" & @CRLF & @CRLF & _
+			"  REM See if the current Frame supports the first UNO command" & @CRLF & _
+			"  oFrame = ThisComponent.getCurrentController().getFrame()" & @CRLF & _
+			"  oDisp = oFrame.queryDispatch(oUrl,"""",0)" & @CRLF & @CRLF & _
+			"  REM Create the status listener" & @CRLF & _
+			"  If (Not IsNull(oDisp)) Then" & @CRLF & _
+			"    sListenerName = ""com.sun.star.frame.XStatusListener""" & @CRLF & _
+			"    oStatusListener = CreateUnoListener(""Status_"", sListenerName)" & @CRLF & _
+			"    oDisp.addStatusListener(oStatusListener, oURL)" & @CRLF & @CRLF & _
+			"    abStatus(0) =  Status_Saver(Null) '" & @CRLF & _
+			"    oDisp.removeStatusListener(oStatusListener, oURL)" & @CRLF & _
+			"  Else" & @CRLF & _
+			"    abStatus(0) = False" & @CRLF & _
+			"  End If" & @CRLF & @CRLF & _
+			"  REM See if the current Frame supports the second UNO command" & @CRLF & _
+			"  oDisp = oFrame.queryDispatch(oUrl2,"""",0)" & @CRLF & @CRLF & _
+			"  REM Create the status listener" & @CRLF & _
+			"  If (Not IsNull(oDisp)) Then" & @CRLF & _
+			"    sListenerName = ""com.sun.star.frame.XStatusListener""" & @CRLF & _
+			"    oStatusListener = CreateUnoListener(""Status_"", sListenerName)" & @CRLF & _
+			"    oDisp.addStatusListener(oStatusListener, oURL2)" & @CRLF & @CRLF & _
+			"    abStatus(1) =  Status_Saver(Null) '" & @CRLF & _
+			"    oDisp.removeStatusListener(oStatusListener, oURL2)" & @CRLF & _
+			"  Else" & @CRLF & _
+			"    abStatus(1) = False" & @CRLF & _
+			"  End If" & @CRLF & _
+			"  DocFormSettingStatus = abStatus" & @CRLF & @CRLF & _
+			"End Function" & @CRLF & @CRLF & _
+			"REM The definition of the listener requires this, but we do not use this." & @CRLF & _
+			"Function Status_disposing(oEvt)" & @CRLF & _
+			"End Function" & @CRLF & @CRLF & _
+			"REM This is called when the status changes. In other words, when the design mode or Control Wizard is toggled and when the listener is first created." & @CRLF & _
+			"Function Status_statusChanged(oEvt)" & @CRLF & _
+			"  Status_Saver(oEvt.State)" & @CRLF & _
+			"End Function" & @CRLF & @CRLF & _
+			"Function Status_Saver(bStatus) As Boolean" & @CRLF & _
+			"  Static bCurStatus As Boolean" & @CRLF & _
+			"  If NOT IsNull(bStatus) Then" & @CRLF & _
+			"    bCurStatus = bStatus" & @CRLF & _
+			"  Else" & @CRLF & _
+			"    Status_Saver = bCurStatus" & @CRLF & _
+			"  End If" & @CRLF & _
+			"End Function"
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the following setting.
+	$oDoc.BasicLibraries.VBACompatibilityMode = $oDoc.BasicLibraries.VBACompatibilityMode()
+
+	$oStandardLibrary = $oDoc.BasicLibraries.Standard()
+	If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+
+	If __LO_VarsAreNull($bFormDesignMode, $bOpenInDesignMode, $bAutoControlFocus, $bUseControlWizards) Then
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sScript)
+		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.DocFormSettingStatus?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
+
+		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		__LO_ArrayFill($abForm, $abStatus[0], $oDoc.ApplyFormDesignMode(), $oDoc.AutomaticControlFocus(), $abStatus[1])
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $abForm)
+	EndIf
+
+	If ($bFormDesignMode <> Null) Then
+		If Not IsBool($bFormDesignMode) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		$oDoc.CurrentController.FormDesignMode = $bFormDesignMode
+
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sScript)
+		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.DocFormSettingStatus?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
+
+		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$iError = ($abStatus[0] = $bFormDesignMode) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($bOpenInDesignMode <> Null) Then
+		If Not IsBool($bOpenInDesignMode) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oDoc.ApplyFormDesignMode = $bOpenInDesignMode
+		$iError = ($oDoc.ApplyFormDesignMode() = $bOpenInDesignMode) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bAutoControlFocus <> Null) Then
+		If Not IsBool($bAutoControlFocus) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oDoc.AutomaticControlFocus = $bAutoControlFocus
+		$iError = ($oDoc.AutomaticControlFocus() = $bAutoControlFocus) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($bUseControlWizards <> Null) Then
+		If Not IsBool($bUseControlWizards) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", StringReplace($sScript, "###AUTOIT_PLACEHOLDER###", $sControlWiz))
+		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.DocFormSettingStatus?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
+
+		If ($abStatus[1] <> $bUseControlWizards) Then _LOWriter_DocExecuteDispatch($oDoc, $sControlWiz) ; If the value doesn't currently match, toggle the setting.
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
+
+		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$iError = ($abStatus[1] = $bUseControlWizards) ? ($iError) : (BitOR($iError, 8))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FormDocSettings
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormGetObjByIndex

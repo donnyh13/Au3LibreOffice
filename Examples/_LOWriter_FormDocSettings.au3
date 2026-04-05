@@ -13,15 +13,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Backup the Document's Form settings.
-	$abBackup = _LOWriter_DocFormSettings($oDoc)
+	$abBackup = _LOWriter_FormDocSettings($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve document Form settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Document's form settings to: Form Design Mode = True, Automatically open in Form Design Mode = True, Control Focus = False, Control Wizards = False.
-	_LOWriter_DocFormSettings($oDoc, True, True, False, False)
+	_LOWriter_FormDocSettings($oDoc, True, True, False, False)
 	If @error Then _ERROR($oDoc, "Failed to modify Document Form settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Document's Form settings. Return will be an Array in order of function parameters.
-	$avReturn = _LOWriter_DocFormSettings($oDoc)
+	$avReturn = _LOWriter_FormDocSettings($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve document Form settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The document's Form settings are: " & @CRLF & _
@@ -31,7 +31,7 @@ Func Example()
 			"Are Form Control Wizards used? True/False: " & $avReturn[3])
 
 	; Reset the Document's form settings to their former values.
-	_LOWriter_DocFormSettings($oDoc, $abBackup[0], $abBackup[1], $abBackup[2], $abBackup[3])
+	_LOWriter_FormDocSettings($oDoc, $abBackup[0], $abBackup[1], $abBackup[2], $abBackup[3])
 	If @error Then _ERROR($oDoc, "Failed to modify Document Form settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

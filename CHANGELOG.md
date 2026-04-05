@@ -2116,6 +2116,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_DocCreateTextCursor` --> `_LOWriter_TextCursorCreate`
   - `_LOWriter_DocGetViewCursor` --> `_LOWriter_ViewCursorGetObj`
   - `_LOWriter_DocViewCursorGetPosition` --> `_LOWriter_ViewCursorGetPosition`
+- Renamed `_LOWriter_DocFormSettings` to `_LOWriter_FormDocSettings` for better grouping.
 
 #### Documented
 
