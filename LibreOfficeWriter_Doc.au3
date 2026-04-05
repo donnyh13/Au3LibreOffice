@@ -37,7 +37,6 @@
 ; _LOWriter_DocConvertTableToText
 ; _LOWriter_DocConvertTextToTable
 ; _LOWriter_DocCreate
-; _LOWriter_DocCreateTextCursor
 ; _LOWriter_DocDescription
 ; _LOWriter_DocExecuteDispatch
 ; _LOWriter_DocExport
@@ -53,7 +52,6 @@
 ; _LOWriter_DocGetCounts
 ; _LOWriter_DocGetName
 ; _LOWriter_DocGetPath
-; _LOWriter_DocGetViewCursor
 ; _LOWriter_DocHasPath
 ; _LOWriter_DocIsActive
 ; _LOWriter_DocIsModified
@@ -86,7 +84,6 @@
 ; _LOWriter_DocUndoGetAllActionTitles
 ; _LOWriter_DocUndoIsPossible
 ; _LOWriter_DocUndoReset
-; _LOWriter_DocViewCursorGetPosition
 ; _LOWriter_DocVisible
 ; _LOWriter_DocZoom
 ; ===============================================================================================================================
@@ -735,7 +732,7 @@ EndFunc   ;==>_LOWriter_DocConvertTableToText
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function temporarily moves the ViewCursor to and selects the Text, and then attempts to restore the ViewCursor to its former position.
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_DocConvertTableToText
+; Related .......: _LOWriter_ViewCursorGetObj, _LOWriter_TextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_DocConvertTableToText
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -886,88 +883,6 @@ Func _LOWriter_DocCreate($bForceNew = True, $bHidden = False)
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oDoc)) : (SetError($__LO_STATUS_SUCCESS, 2, $oDoc))
 EndFunc   ;==>_LOWriter_DocCreate
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DocCreateTextCursor
-; Description ...: Create a TextCursor Object for future Textcursor related functional use.
-; Syntax ........: _LOWriter_DocCreateTextCursor(ByRef $oDoc[, $bCreateAtEnd = True[, $bCreateAtViewCursor = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or_LOWriter_DocCreate function.
-;                  $bCreateAtEnd        - [optional] a boolean value. Default is True. If True, creates the new cursor at the end of the Document. Else cursor is created at the beginning.
-;                  $bCreateAtViewCursor - [optional] a boolean value. Default is False. If True, create the Text cursor at the document's View Cursor. See Remarks
-; Return values .: Success: Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bCreateAtEnd not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bCreateAtViewCursor not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bCreateAtEnd and $bCreateAtViewCursor both called with True, set either one to False.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve ViewCursor Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Text Object.
-;                  @Error 3 @Extended 3 Return 0 = Current ViewCursor is in unknown data type or failed detecting what data type.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Object = Success, Cursor object was returned. @Extended can be on of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3 indicating the current created cursor is in that type of data.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: The cursor Created by this function in a text document, is used for inserting text, reading text, etc.
-;                  If you set $bCreateAtEnd to False, the new cursor is created at the beginning of the document, True creates the cursor at the very end of the document.
-;                  Setting $bCreateAtViewCursor to True will create a Textcursor at the current ViewCursor position.
-;                  There are two types of cursors in Word documents. The one you see, called the "ViewCursor", and one you do not see, called a "TextCursor". A "ViewCursor" is the blinking cursor you see when you are editing a Word document, there is only one per document. A "TextCursor" on the other hand, is an invisible cursor used for inserting text etc., into a Writer document. You can have multiple "TextCursors" per document.
-; Related .......: _LOWriter_CursorMove
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_DocCreateTextCursor(ByRef $oDoc, $bCreateAtEnd = True, $bCreateAtViewCursor = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oCursor, $oText, $oViewCursor
-	Local $iCursorType = 0
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bCreateAtEnd) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bCreateAtViewCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($bCreateAtEnd = True) And ($bCreateAtViewCursor = True) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-	If ($bCreateAtViewCursor = True) Then
-		$oViewCursor = $oDoc.CurrentController.getViewCursor()
-		If Not IsObj($oViewCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-		$oText = __LOWriter_CursorGetText($oDoc, $oViewCursor)
-		$iCursorType = @extended
-		If @error Or Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		If __LO_IntIsBetween($iCursorType, $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_HEADER_FOOTER) Then
-			$oCursor = $oText.createTextCursorByRange($oViewCursor)
-
-		Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; ViewCursor in unknown data type.
-		EndIf
-
-	Else
-		$oText = $oDoc.getText
-		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		$oCursor = $oText.createTextCursor()
-		If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		$iCursorType = $LOW_CURDATA_BODY_TEXT
-
-		If ($bCreateAtEnd = True) Then
-			$oCursor.gotoEnd(False)
-
-		Else
-			$oCursor.gotoStart(False)
-		EndIf
-	EndIf
-
-	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, $iCursorType, $oCursor)
-EndFunc   ;==>_LOWriter_DocCreateTextCursor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocDescription
@@ -1204,7 +1119,7 @@ EndFunc   ;==>_LOWriter_DocDescription
 ;                  - uno:ZoomPlus -- Increases the zoom value to the next increment up.
 ;                  - uno:ZoomPageWidth -- Set zoom to fit page width.
 ;                  - uno:ZoomPage -- Set zoom to fit page.
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_CursorMove
+; Related .......: _LOWriter_ViewCursorGetObj, _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1412,7 +1327,7 @@ EndFunc   ;==>_LOWriter_DocFindAll
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
+; Related .......: _LOWriter_ViewCursorGetObj, _LOWriter_TextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2337,39 +2252,6 @@ Func _LOWriter_DocGetPath(ByRef $oDoc, $bReturnLibreURL = False)
 
 	Return ($bReturnLibreURL = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sPath)) : (SetError($__LO_STATUS_SUCCESS, 0, $sPath))
 EndFunc   ;==>_LOWriter_DocGetPath
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DocGetViewCursor
-; Description ...: Retrieve the ViewCursor Object from a Document.
-; Syntax ........: _LOWriter_DocGetViewCursor(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or_LOWriter_DocCreate function.
-; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve ViewCursor Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. The Object for the Document's View Cursor is returned for use in other Cursor related functions.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LOWriter_CursorMove
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_DocGetViewCursor(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oViewCursor
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$oViewCursor = $oDoc.CurrentController.getViewCursor()
-
-	Return (IsObj($oViewCursor)) ? (SetError($__LO_STATUS_SUCCESS, 0, $oViewCursor)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)) ; Failed to Retrieve ViewCursor
-EndFunc   ;==>_LOWriter_DocGetViewCursor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocHasPath
@@ -3944,7 +3826,7 @@ Func _LOWriter_DocSelection(ByRef $oDoc, $oObj = Null, $bReturnMultiAsObj = Fals
 	$bSelect = $oDoc.CurrentController.Select($oObj)
 
 	If ($oObj.supportsService("com.sun.star.text.TextTable")) Then
-		$oCursor = _LOWriter_DocGetViewCursor($oDoc)
+		$oCursor = _LOWriter_ViewCursorGetObj($oDoc)
 		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		_LOWriter_CursorMove($oCursor, $LOW_VIEWCUR_GOTO_END, 1, True) ; Move and select to End of cell
@@ -4239,42 +4121,6 @@ Func _LOWriter_DocUndoReset(ByRef $oDoc)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_DocUndoReset
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DocViewCursorGetPosition
-; Description ...: Retrieve View Cursor position in Hundredths of a Millimeter (HMM).
-; Syntax ........: _LOWriter_DocViewCursorGetPosition(ByRef $oCursor)
-; Parameters ....: $oCursor             - [in/out] an object. A View Cursor Object returned by _LOWriter_DocGetViewCursor function.
-; Return values .: Success: Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not a View Cursor.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error determining Cursor type.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Integer = Success. Current Cursor Coordinate position relative to the top-left of the first page of the document is returned. @Extended is the "X" coordinate, and Return value is the "Y" Coordinate. In Hundredths of a Millimeter (HMM).
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_CursorMove, _LO_UnitConvert
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_DocViewCursorGetPosition(ByRef $oCursor)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iCursorType
-
-	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$iCursorType = __LOWriter_Internal_CursorGetType($oCursor)
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-	If ($iCursorType <> $LOW_CURTYPE_VIEW_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, $oCursor.getPosition().X(), $oCursor.getPosition().Y())
-EndFunc   ;==>_LOWriter_DocViewCursorGetPosition
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocVisible

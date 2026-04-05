@@ -170,7 +170,7 @@ EndFunc   ;==>_LOWriter_EndnoteGetTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Endnote cannot be inserted into a Frame, a Footnote, a Endnote, or the Header/Footer.
-; Related .......: _LOWriter_EndnoteDelete, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor,
+; Related .......: _LOWriter_EndnoteDelete, _LOWriter_ViewCursorGetObj, _LOWriter_TextCursorCreate, _LOWriter_TableCellCreateTextCursor,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -607,7 +607,7 @@ EndFunc   ;==>_LOWriter_FootnoteGetTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Footnote cannot be inserted into a Frame, a Footnote, an Endnote, or a Header/Footer.
-; Related .......: _LOWriter_FootnoteDelete, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor
+; Related .......: _LOWriter_FootnoteDelete, _LOWriter_ViewCursorGetObj, _LOWriter_TextCursorCreate, _LOWriter_TableCellCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

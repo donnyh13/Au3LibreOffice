@@ -2111,6 +2111,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_ParStyleGetObj` --> `_LOWriter_ParStyleGetObjByName`
 - Renamed `_LOWriter_FieldSetVarMasterGetObj` to `_LOWriter_FieldSetVarMasterGetObjByName` for consistency.
 - Renamed `_LOWriter_DocBookmarkGetObj` to `_LOWriter_DocBookmarkGetObjByName` for consistency.
+- Changed `_LOWriter_DocViewCursorGetPosition` to return an Array instead of an Integer.
+- Renamed and moved some Cursor functions to group them better:
+  - `_LOWriter_DocCreateTextCursor` --> `_LOWriter_TextCursorCreate`
+  - `_LOWriter_DocGetViewCursor` --> `_LOWriter_ViewCursorGetObj`
+  - `_LOWriter_DocViewCursorGetPosition` --> `_LOWriter_ViewCursorGetPosition`
 
 #### Documented
 

@@ -1554,7 +1554,7 @@ EndFunc   ;==>_LOWriter_PageStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_PageStylesGetNames
+; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_ViewCursorGetObj, _LOWriter_TextCursorCreate, _LOWriter_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

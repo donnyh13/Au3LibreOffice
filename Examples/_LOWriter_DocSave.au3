@@ -25,7 +25,7 @@ Func Example()
 			& $sPath & @CRLF & "Press Ok to write some data to it and then save the changes and close the document.")
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_ViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve View Cursor for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text

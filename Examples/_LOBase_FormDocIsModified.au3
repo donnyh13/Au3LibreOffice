@@ -50,7 +50,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Has the form been modified? True/False: " & $bReturn)
 
 	; Retrieve the ViewCursor for the document.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oFormDoc)
+	$oViewCursor = _LOWriter_ViewCursorGetObj($oFormDoc)
 	If @error Then Return _ERROR($oDoc, "Failed to retrieve the ViewCursor Object for the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text at the ViewCursor.

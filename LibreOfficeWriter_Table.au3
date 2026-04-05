@@ -1479,7 +1479,7 @@ EndFunc   ;==>_LOWriter_TableCreate
 ; Modified ......:
 ; Remarks .......: $oTable can be either called with a Table object, or Null Keyword with $oCursor called with a Cursor object, $oCursor can be either called with a cursor object currently located in a Table (such as a ViewCursor) or a TextCursor located in a table.
 ;                  $sCellName can be left blank, which will place the TextTableCursor at the first cell (Typically "A1") if $oTable is called with an Object, else if $oCursor is used, the cell the cursor is currently located in is used.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableCellsGetNames, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor
+; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableCellsGetNames, _LOWriter_ViewCursorGetObj, _LOWriter_TextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1695,7 +1695,7 @@ EndFunc   ;==>_LOWriter_TableExists
 ; Remarks .......: This function will accept a Table Cursor, a ViewCursor, or a Text Cursor.
 ;                  A TableCursor and ViewCursor can retrieve the single cell they are located in, or a range of cells that have been selected by them.
 ;                  A TextCursor can only retrieve the single cell it is located in.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor
+; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_ViewCursorGetObj, _LOWriter_TextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1945,7 +1945,7 @@ EndFunc   ;==>_LOWriter_TableGetData
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableGetObjByName, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor
+; Related .......: _LOWriter_TableGetObjByName, _LOWriter_ViewCursorGetObj, _LOWriter_TextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

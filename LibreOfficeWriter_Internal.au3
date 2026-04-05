@@ -10419,7 +10419,7 @@ EndFunc   ;==>__LOWriter_TransparencyGradientNameInsert
 ; Name ..........: __LOWriter_ViewCursorMove
 ; Description ...: For ViewCursor related movements.
 ; Syntax ........: __LOWriter_ViewCursorMove(ByRef $oCursor, $iMove, $iCount[, $bSelect = False])
-; Parameters ....: $oCursor             - [in/out] an object. A ViewCursor Object returned from _LOWriter_DocGetViewCursor function.
+; Parameters ....: $oCursor             - [in/out] an object. A ViewCursor Object returned from _LOWriter_ViewCursorGetObj function.
 ;                  $iMove               - an integer value. The movement command. See remarks and Constants, $LOW_VIEWCUR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iCount              - an integer value. Number of movements to make.
 ;                  $bSelect             - [optional] a boolean value. Default is False. Whether to select data during this cursor movement.

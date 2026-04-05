@@ -20,7 +20,7 @@ Func Example()
 			_LOWriter_DateFormatKeyGetString($oDoc, $iFormatKey) & @CRLF & @CRLF & "Press Ok to insert a Date Field using this key into the document.")
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_ViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Date and Time text Field at the View Cursor. using the DateTime Format Key I just created.

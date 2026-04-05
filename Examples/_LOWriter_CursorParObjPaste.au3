@@ -13,7 +13,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_ViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
@@ -71,7 +71,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I can even paste the same paragraph several times if I want.")
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor2 = _LOWriter_DocGetViewCursor($oDoc2)
+	$oViewCursor2 = _LOWriter_ViewCursorGetObj($oDoc2)
 	If @error Then _ERROR($oDoc, $oDoc2, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert 3 new paragraphs.
