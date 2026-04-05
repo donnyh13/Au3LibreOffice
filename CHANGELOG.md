@@ -2309,6 +2309,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Standardized error check in Examples to "If @error Then".
 - Reworded some example's error messages.
 - Removed _ArrayDisplay titles from `_LOWriter_TableGetData` and `_LOWriter_TableGetData[2]` examples.
+- Renamed `_LOWriter_FieldRefBookMarkInsert` and `_LOWriter_FieldRefBookMarkModify` to proper case name (BookMark to Bookmark).
 
 #### Removed
 

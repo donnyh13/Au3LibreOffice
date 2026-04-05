@@ -79,8 +79,8 @@
 ; _LOWriter_FieldInputListModify
 ; _LOWriter_FieldPageNumberInsert
 ; _LOWriter_FieldPageNumberModify
-; _LOWriter_FieldRefBookMarkInsert
-; _LOWriter_FieldRefBookMarkModify
+; _LOWriter_FieldRefBookmarkInsert
+; _LOWriter_FieldRefBookmarkModify
 ; _LOWriter_FieldRefEndnoteInsert
 ; _LOWriter_FieldRefEndnoteModify
 ; _LOWriter_FieldRefFootnoteInsert
@@ -3730,9 +3730,9 @@ Func _LOWriter_FieldPageNumberModify(ByRef $oDoc, ByRef $oPageNumField, $iNumFor
 EndFunc   ;==>_LOWriter_FieldPageNumberModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FieldRefBookMarkInsert
+; Name ..........: _LOWriter_FieldRefBookmarkInsert
 ; Description ...: Insert a Bookmark Reference Field.
-; Syntax ........: _LOWriter_FieldRefBookMarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkName[, $bOverwrite = False[, $iRefUsing = Null]])
+; Syntax ........: _LOWriter_FieldRefBookmarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkName[, $bOverwrite = False[, $iRefUsing = Null]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $sBookmarkName       - a string value. The Bookmark name to Reference.
@@ -3755,11 +3755,11 @@ EndFunc   ;==>_LOWriter_FieldPageNumberModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefBookMarkModify, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarksGetNames, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefBookmarkModify, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarksGetNames, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FieldRefBookMarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkName, $bOverwrite = False, $iRefUsing = Null)
+Func _LOWriter_FieldRefBookmarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkName, $bOverwrite = False, $iRefUsing = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3789,14 +3789,14 @@ Func _LOWriter_FieldRefBookMarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkNam
 	$oBookmarkRefField.Update()
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oBookmarkRefField)
-EndFunc   ;==>_LOWriter_FieldRefBookMarkInsert
+EndFunc   ;==>_LOWriter_FieldRefBookmarkInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FieldRefBookMarkModify
+; Name ..........: _LOWriter_FieldRefBookmarkModify
 ; Description ...: Set or Retrieve a Bookmark Reference Field's settings.
-; Syntax ........: _LOWriter_FieldRefBookMarkModify(ByRef $oDoc, ByRef $oBookmarkRefField[, $sBookmarkName = Null[, $iRefUsing = Null]])
+; Syntax ........: _LOWriter_FieldRefBookmarkModify(ByRef $oDoc, ByRef $oBookmarkRefField[, $sBookmarkName = Null[, $iRefUsing = Null]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oBookmarkRefField   - [in/out] an object. A Bookmark Reference field Object from a previous _LOWriter_FieldRefBookMarkInsert, or _LOWriter_FieldsGetList function.
+;                  $oBookmarkRefField   - [in/out] an object. A Bookmark Reference field Object from a previous _LOWriter_FieldRefBookmarkInsert, or _LOWriter_FieldsGetList function.
 ;                  $sBookmarkName       - [optional] a string value. Default is Null. The Bookmark name to Reference.
 ;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the bookmark. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
@@ -3818,11 +3818,11 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkInsert
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FieldRefBookMarkInsert, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarksGetNames, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldRefBookmarkInsert, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarksGetNames, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FieldRefBookMarkModify(ByRef $oDoc, ByRef $oBookmarkRefField, $sBookmarkName = Null, $iRefUsing = Null)
+Func _LOWriter_FieldRefBookmarkModify(ByRef $oDoc, ByRef $oBookmarkRefField, $sBookmarkName = Null, $iRefUsing = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3857,7 +3857,7 @@ Func _LOWriter_FieldRefBookMarkModify(ByRef $oDoc, ByRef $oBookmarkRefField, $sB
 	$oBookmarkRefField.Update()
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOWriter_FieldRefBookMarkModify
+EndFunc   ;==>_LOWriter_FieldRefBookmarkModify
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FieldRefEndnoteInsert

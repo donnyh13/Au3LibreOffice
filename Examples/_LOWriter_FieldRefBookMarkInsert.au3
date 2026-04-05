@@ -29,7 +29,7 @@ Func Example()
 
 	; Insert a Bookmark Reference Field. "New Bookmark" Bookmark, do not overwrite any content selected by the cursor, and refer using
 	; $LOW_FIELD_REF_USING_ABOVE_BELOW
-	_LOWriter_FieldRefBookMarkInsert($oDoc, $oViewCursor, "New Bookmark", False, $LOW_FIELD_REF_USING_ABOVE_BELOW)
+	_LOWriter_FieldRefBookmarkInsert($oDoc, $oViewCursor, "New Bookmark", False, $LOW_FIELD_REF_USING_ABOVE_BELOW)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

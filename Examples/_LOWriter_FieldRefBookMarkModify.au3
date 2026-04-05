@@ -30,7 +30,7 @@ Func Example()
 
 	; Insert a Bookmark Reference Field. "New Bookmark" Bookmark, do not overwrite any content selected by the cursor, and refer using
 	; $LOW_FIELD_REF_USING_REF_TEXT
-	$oField = _LOWriter_FieldRefBookMarkInsert($oDoc, $oViewCursor, "New Bookmark", False, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED)
+	$oField = _LOWriter_FieldRefBookmarkInsert($oDoc, $oViewCursor, "New Bookmark", False, $LOW_FIELD_REF_USING_PAGE_NUM_UNSTYLED)
 
 	; Insert some more text.
 	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR & "I have inserted a Bookmark at the end of this line.--> ")
@@ -43,11 +43,11 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to modify the Reference Field.")
 
 	; Modify the Bookmark Reference Field settings. Set the Referenced Bookmark to "Second Bookmark", and Refer using $LOW_FIELD_REF_USING_ABOVE_BELOW
-	_LOWriter_FieldRefBookMarkModify($oDoc, $oField, "Second Bookmark", $LOW_FIELD_REF_USING_ABOVE_BELOW)
+	_LOWriter_FieldRefBookmarkModify($oDoc, $oField, "Second Bookmark", $LOW_FIELD_REF_USING_ABOVE_BELOW)
 	If @error Then _ERROR($oDoc, "Failed to modify field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve current Field settings. Return will be an Array with elements in the order of function parameters.
-	$avSettings = _LOWriter_FieldRefBookMarkModify($oDoc, $oField)
+	$avSettings = _LOWriter_FieldRefBookmarkModify($oDoc, $oField)
 	If @error Then _ERROR($oDoc, "Failed to retrieve field settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Field settings are: " & @CRLF & _
