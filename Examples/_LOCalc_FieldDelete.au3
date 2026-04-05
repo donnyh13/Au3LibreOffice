@@ -43,7 +43,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Page Style object.
-	$oPageStyle = _LOCalc_PageStyleGetObj($oDoc, $sPageStyle)
+	$oPageStyle = _LOCalc_PageStyleGetObjByName($oDoc, $sPageStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style object by name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Header Object

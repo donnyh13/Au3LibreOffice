@@ -13,7 +13,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Page Style's Object, to modify its settings.
-	$oPageStyle = _LOCalc_PageStyleGetObj($oDoc, "Default")
+	$oPageStyle = _LOCalc_PageStyleGetObjByName($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Width to $LOC_PAPER_WIDTH_10ENVELOPE, and Height to $LOC_PAPER_HEIGHT_TABLOID, Landscape to false

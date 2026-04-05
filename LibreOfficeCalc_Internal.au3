@@ -1013,7 +1013,7 @@ EndFunc   ;==>__LOCalc_CellStrikeOut
 ; Name ..........: __LOCalc_CellStyleBorder
 ; Description ...: Internal function to Set and Retrieve the Cell Style Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_CellStyleBorder(ByRef $oCellStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]])
-; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
+; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObjByName function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
@@ -2308,7 +2308,7 @@ EndFunc   ;==>__LOCalc_NamedRangeGetScopeObj
 ; Name ..........: __LOCalc_PageStyleBorder
 ; Description ...: Internal function to Set and Retrieve the Page Style Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
+; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
@@ -2442,7 +2442,7 @@ EndFunc   ;==>__LOCalc_PageStyleBorder
 ; Name ..........: __LOCalc_PageStyleFooterBorder
 ; Description ...: Internal function to Set and Retrieve the Page Style Footer Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleFooterBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
+; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
@@ -2578,7 +2578,7 @@ EndFunc   ;==>__LOCalc_PageStyleFooterBorder
 ; Name ..........: __LOCalc_PageStyleHeaderBorder
 ; Description ...: Internal function to Set and Retrieve the Page Style Header Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleHeaderBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
+; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.

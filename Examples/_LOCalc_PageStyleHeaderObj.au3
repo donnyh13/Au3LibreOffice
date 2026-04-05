@@ -12,7 +12,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default page Style Object.
-	$oPageStyle = _LOCalc_PageStyleGetObj($oDoc, "Default")
+	$oPageStyle = _LOCalc_PageStyleGetObjByName($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Right Page Page Style Header Object.

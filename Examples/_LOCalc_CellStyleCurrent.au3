@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Object for Cell Style "Status".
-	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Status")
+	$oCellStyle = _LOCalc_CellStyleGetObjByName($oDoc, "Status")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell Style background color for "Status" to Teal.

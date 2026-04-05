@@ -19,7 +19,7 @@ Func Example()
 			_LOCalc_PageStyleExists($oDoc, "NewPageStyle"))
 
 	; Retrieve the Page Style Object for the Page Style I just created named "NewPageStyle", so I can delete it now.
-	$oPageStyle = _LOCalc_PageStyleGetObj($oDoc, "NewPageStyle")
+	$oPageStyle = _LOCalc_PageStyleGetObjByName($oDoc, "NewPageStyle")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Delete the Page Style

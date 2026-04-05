@@ -14,7 +14,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now retrieve the default Cell style object, and modify some of its settings.")
 
 	; Retrieve the "Default" Cell Style object.
-	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
+	$oCellStyle = _LOCalc_CellStyleGetObjByName($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set "Default" Cell Style background color to Red.

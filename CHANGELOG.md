@@ -1223,6 +1223,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Changed the parameters in `_LOCalc_DocConnect` to be more logical, and made the function (hopefully) work better.
 - Modified `_LOCalc_DocGetName` to have more error checking and different success @extended values.
 - Combined `_LOCalc_SheetGetActive` and `_LOCalc_SheetActivate` into `_LOCalc_SheetActive`.
+- Renamed StyleGetObj functions to StyleGetObjByName for consistency:
+  - `_LOCalc_CellStyleGetObj` --> `_LOCalc_CellStyleGetObjByName`
+  - `_LOCalc_PageStyleGetObj` --> `_LOCalc_PageStyleGetObjByName`
 
 #### Documented
 
