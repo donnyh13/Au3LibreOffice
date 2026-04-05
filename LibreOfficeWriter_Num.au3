@@ -117,7 +117,7 @@ EndFunc   ;==>_LOWriter_NumStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_NumStylesGetNames
+; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_NumStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -754,7 +754,7 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

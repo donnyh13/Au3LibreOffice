@@ -2096,6 +2096,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_CellString` --> `_LOWriter_TableCellString`
   - `_LOWriter_CellValue` --> `_LOWriter_TableCellValue`
   - `_LOWriter_CellVertOrient` --> `_LOWriter_TableCellVertOrient`
+- Moved `_LOWriter_DocFooterGetTextCursor` and `_LOWriter_DocHeaderGetTextCursor` from `LibreOfficeWriter_Doc.au3` to `LibreOfficeWriter_Page.au3`.
+- Renamed Header/Footer text cursor creation functions for better grouping and to be more logical.
+  - `_LOWriter_DocFooterGetTextCursor` --> `_LOWriter_PageStyleFooterCreateTextCursor`
+  - `_LOWriter_DocHeaderGetTextCursor` --> `_LOWriter_PageStyleHeaderCreateTextCursor`
 
 #### Documented
 

@@ -56,6 +56,7 @@
 ; _LOWriter_PageStyleFooterBorderPadding
 ; _LOWriter_PageStyleFooterBorderStyle
 ; _LOWriter_PageStyleFooterBorderWidth
+; _LOWriter_PageStyleFooterCreateTextCursor
 ; _LOWriter_PageStyleFooterShadow
 ; _LOWriter_PageStyleFootnoteArea
 ; _LOWriter_PageStyleFootnoteLine
@@ -72,6 +73,7 @@
 ; _LOWriter_PageStyleHeaderBorderPadding
 ; _LOWriter_PageStyleHeaderBorderStyle
 ; _LOWriter_PageStyleHeaderBorderWidth
+; _LOWriter_PageStyleHeaderCreateTextCursor
 ; _LOWriter_PageStyleHeaderShadow
 ; _LOWriter_PageStyleLayout
 ; _LOWriter_PageStyleMargins
@@ -2884,6 +2886,71 @@ Func _LOWriter_PageStyleFooterBorderWidth(ByRef $oPageStyle, $iTop = Null, $iBot
 EndFunc   ;==>_LOWriter_PageStyleFooterBorderWidth
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_PageStyleFooterCreateTextCursor
+; Description ...: Create a Text cursor in a Page Style footer for text related functions.
+; Syntax ........: _LOWriter_PageStyleFooterCreateTextCursor(ByRef $oPageStyle[, $bFooter = False[, $bFirstPage = False[, $bLeftPage = False[, $bRightPage = False]]]])
+; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObj function.
+;                  $bFooter             - [optional] a boolean value. Default is False. If True, creates a text cursor for the page Footer. See Remarks.
+;                  $bFirstPage          - [optional] a boolean value. Default is False. If True, creates a text cursor for the First page of the Footer. See Remarks.
+;                  $bLeftPage           - [optional] a boolean value. Default is False. If True, creates a text cursor for Left pages in the Footer. See Remarks.
+;                  $bRightPage          - [optional] a boolean value. Default is False. If True, creates a text cursor for Right pages in the Footer. See Remarks.
+; Return values .: Success: Object or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oPageStyle not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bFooter not a Boolean value.
+;                  @Error 1 @Extended 3 Return 0 = $bFirstPage not a Boolean value.
+;                  @Error 1 @Extended 4 Return 0 = $bLeftPage not a Boolean value.
+;                  @Error 1 @Extended 5 Return 0 = $bRightPage not a Boolean value.
+;                  @Error 1 @Extended 6 Return 0 = No parameters called with True.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Array = Success. See Remarks.
+;                  @Error 0 @Extended 1 Return Object = Success. See Remarks.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If more than one parameter is called with True, an array is returned with the requested objects in the order that the True parameters are listed. Else the requested object is returned.
+;                  If same content on left and right and first pages is active for the requested page style, you only need to use the $bFooter parameter, the others are only for when same content on first page or same content on left and right pages is deactivated.
+; Related .......: _LOWriter_PageStyleGetObj, _LOWriter_PageStyleCreate, _LOWriter_CursorInsertString
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_PageStyleFooterCreateTextCursor(ByRef $oPageStyle, $bFooter = False, $bFirstPage = False, $bLeftPage = False, $bRightPage = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $aoReturn[1]
+	Local $vReturn
+
+	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bFooter) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bFirstPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bLeftPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsBool($bRightPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($bFooter = False) And ($bFirstPage = False) And ($bLeftPage = False) And ($bRightPage = False) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+	If $bFooter Then $aoReturn[0] = $oPageStyle.FooterText.createTextCursor()
+
+	If $bFirstPage Then
+		If IsObj($aoReturn[0]) Then ReDim $aoReturn[2]
+		$aoReturn[UBound($aoReturn) - 1] = $oPageStyle.FooterTextFirst.createTextCursor()
+	EndIf
+
+	If $bLeftPage Then
+		If IsObj($aoReturn[UBound($aoReturn) - 1]) Then ReDim $aoReturn[UBound($aoReturn) + 1]
+		$aoReturn[UBound($aoReturn) - 1] = $oPageStyle.FooterTextLeft.createTextCursor()
+	EndIf
+
+	If $bRightPage Then
+		If IsObj($aoReturn[UBound($aoReturn) - 1]) Then ReDim $aoReturn[UBound($aoReturn) + 1]
+		$aoReturn[UBound($aoReturn) - 1] = $oPageStyle.FooterTextRight.createTextCursor()
+	EndIf
+
+	$vReturn = (UBound($aoReturn) = 1) ? ($aoReturn[0]) : ($aoReturn) ; If Array contains only one element, return it only outside of the array.
+
+	Return (IsArray($vReturn)) ? (SetError($__LO_STATUS_SUCCESS, 0, $vReturn)) : (SetError($__LO_STATUS_SUCCESS, 1, $vReturn))
+EndFunc   ;==>_LOWriter_PageStyleFooterCreateTextCursor
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleFooterShadow
 ; Description ...: Set or Retrieve the shadow settings for a Page Style Footer.
 ; Syntax ........: _LOWriter_PageStyleFooterShadow(ByRef $oPageStyle[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
@@ -4394,6 +4461,71 @@ Func _LOWriter_PageStyleHeaderBorderWidth(ByRef $oPageStyle, $iTop = Null, $iBot
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_PageStyleHeaderBorderWidth
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_PageStyleHeaderCreateTextCursor
+; Description ...: Create a Text cursor in a Page Style header for text related functions.
+; Syntax ........: _LOWriter_PageStyleHeaderCreateTextCursor(ByRef $oPageStyle[, $bHeader = False[, $bFirstPage = False[, $bLeftPage = False[, $bRightPage = False]]]])
+; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObj function.
+;                  $bHeader             - [optional] a boolean value. Default is False. If True, creates a text cursor in the page header. See Remarks.
+;                  $bFirstPage          - [optional] a boolean value. Default is False. If True, creates a text cursor in the First page of the header. See Remarks.
+;                  $bLeftPage           - [optional] a boolean value. Default is False. If True, creates a text cursor in the Left pages of the header. See Remarks.
+;                  $bRightPage          - [optional] a boolean value. Default is False. If True, creates a text cursor in the Right pages of the header. See Remarks.
+; Return values .: Success: Object or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oPageStyle not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bHeader not a Boolean value.
+;                  @Error 1 @Extended 3 Return 0 = $bFirstPage not a Boolean value.
+;                  @Error 1 @Extended 4 Return 0 = $bLeftPage not a Boolean value.
+;                  @Error 1 @Extended 5 Return 0 = $bRightPage not a Boolean value.
+;                  @Error 1 @Extended 6 Return 0 = No parameters called with True.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Array = Success. See Remarks.
+;                  @Error 0 @Extended 1 Return Object = Success. See Remarks.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If more than one parameter is called with True, an array is returned with the requested objects in the order that the True parameters are listed. Else the requested object is returned.
+;                  If same content on left and right and first pages is active for the requested page style, you only need to use the $bHeader parameter, the others are only for when same content on first page or same content on left and right pages is deactivated.
+; Related .......: _LOWriter_PageStyleGetObj, _LOWriter_PageStyleCreate, _LOWriter_CursorInsertString
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_PageStyleHeaderCreateTextCursor(ByRef $oPageStyle, $bHeader = False, $bFirstPage = False, $bLeftPage = False, $bRightPage = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $aoReturn[1]
+	Local $vReturn
+
+	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bHeader) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bFirstPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bLeftPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsBool($bRightPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($bHeader = False) And ($bFirstPage = False) And ($bLeftPage = False) And ($bRightPage = False) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+	If $bHeader Then $aoReturn[0] = $oPageStyle.HeaderText.createTextCursor()
+
+	If $bFirstPage Then
+		If IsObj($aoReturn[0]) Then ReDim $aoReturn[2]
+		$aoReturn[UBound($aoReturn) - 1] = $oPageStyle.HeaderTextFirst.createTextCursor()
+	EndIf
+
+	If $bLeftPage Then
+		If IsObj($aoReturn[UBound($aoReturn) - 1]) Then ReDim $aoReturn[UBound($aoReturn) + 1]
+		$aoReturn[UBound($aoReturn) - 1] = $oPageStyle.HeaderTextLeft.createTextCursor()
+	EndIf
+
+	If $bRightPage Then
+		If IsObj($aoReturn[UBound($aoReturn) - 1]) Then ReDim $aoReturn[UBound($aoReturn) + 1]
+		$aoReturn[UBound($aoReturn) - 1] = $oPageStyle.HeaderTextRight.createTextCursor()
+	EndIf
+
+	$vReturn = (UBound($aoReturn) = 1) ? ($aoReturn[0]) : ($aoReturn) ; If Array contains only one element, return it only outside of the array.
+
+	Return (IsArray($vReturn)) ? (SetError($__LO_STATUS_SUCCESS, 0, $vReturn)) : (SetError($__LO_STATUS_SUCCESS, 1, $vReturn))
+EndFunc   ;==>_LOWriter_PageStyleHeaderCreateTextCursor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleHeaderShadow

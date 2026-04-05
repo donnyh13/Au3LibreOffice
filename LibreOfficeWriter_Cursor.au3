@@ -57,7 +57,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns what type of data a cursor is currently located in, such as a TextTable, Footnote etc.
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -113,7 +113,7 @@ EndFunc   ;==>_LOWriter_CursorGetDataType
 ;                  - $LOW_CURSOR_STAT_GET_PAGE,
 ;                  # Table Cursor Status Flag Constants:
 ;                  - $LOW_CURSOR_STAT_GET_RANGE_NAME
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorGetType
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorGetType
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -189,7 +189,7 @@ EndFunc   ;==>_LOWriter_CursorGetStatus
 ; Modified ......:
 ; Remarks .......: LibreOffice documentation states that when used in Libre Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
 ;                  If there are multiple selections, the returned value will be an empty string ("").
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -225,7 +225,7 @@ EndFunc   ;==>_LOWriter_CursorGetString
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Will also work for Paragraph object and paragraph section objects.
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -263,7 +263,7 @@ EndFunc   ;==>_LOWriter_CursorGetType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the Cursor being used as a range has anything selected, the selection will be selected in the Cursor called in $oCursor also.
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_CursorMove
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -322,7 +322,7 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You may call this function with an already existing cursor object, which will place the Link at the cursor's current position. You can also set $oCursor to Default keyword, and set $bInsertAtViewCursor to True. This will insert the link at the current ViewCursor position. Or you can set $oCursor to Default, and leave $bInsertAtViewCursor undeclared which will insert the Link at the very end of the document.
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -404,7 +404,7 @@ EndFunc   ;==>_LOWriter_CursorHyperlinkInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -457,7 +457,7 @@ EndFunc   ;==>_LOWriter_CursorInsertControlChar
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -572,7 +572,7 @@ EndFunc   ;==>_LOWriter_CursorInsertString
 ;                  # Misc. Cursor Movements:
 ;                  + ViewCursor
 ;                  - $LOW_VIEWCUR_JUMP_TO_PAGE
-; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_TableCreateCursor, _LOWriter_CursorGoToRange
+; Related .......: _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_TableCreateCursor, _LOWriter_CursorGoToRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

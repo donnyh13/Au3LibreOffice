@@ -1478,7 +1478,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_UnitConvert, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LO_UnitConvert, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
