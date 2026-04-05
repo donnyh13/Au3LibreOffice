@@ -28,7 +28,7 @@
 ; _LOWriter_DocBookmarkDelete
 ; _LOWriter_DocBookmarkExists
 ; _LOWriter_DocBookmarkGetAnchor
-; _LOWriter_DocBookmarkGetObj
+; _LOWriter_DocBookmarkGetObjByName
 ; _LOWriter_DocBookmarkInsert
 ; _LOWriter_DocBookmarkModify
 ; _LOWriter_DocBookmarksGetNames
@@ -96,7 +96,7 @@
 ; Description ...: Delete a Bookmark.
 ; Syntax ........: _LOWriter_DocBookmarkDelete(ByRef $oDoc, ByRef $oBookmark)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oBookmark           - [in/out] an object. A Bookmark Object from a previous _LOWriter_DocBookmarkInsert, or _LOWriter_DocBookmarkGetObj function to delete.
+;                  $oBookmark           - [in/out] an object. A Bookmark Object from a previous _LOWriter_DocBookmarkInsert, or _LOWriter_DocBookmarkGetObjByName function to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -109,7 +109,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarkGetObj, _LOWriter_DocBookmarksGetNames
+; Related .......: _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarkGetObjByName, _LOWriter_DocBookmarksGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -173,7 +173,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkExists
 ; Name ..........: _LOWriter_DocBookmarkGetAnchor
 ; Description ...: Retrieve a Bookmark's Anchor cursor Object.
 ; Syntax ........: _LOWriter_DocBookmarkGetAnchor(ByRef $oBookmark)
-; Parameters ....: $oBookmark           - [in/out] an object. A Bookmark Object from a previous _LOWriter_DocBookmarkInsert, or _LOWriter_DocBookmarkGetObj function.
+; Parameters ....: $oBookmark           - [in/out] an object. A Bookmark Object from a previous _LOWriter_DocBookmarkInsert, or _LOWriter_DocBookmarkGetObjByName function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -185,7 +185,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Anchor cursor returned is just a Text Cursor placed at the anchor's position.
-; Related .......: _LOWriter_DocBookmarkGetObj, _LOWriter_DocBookmarkInsert, _LOWriter_CursorMove, _LOWriter_CursorGetString, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_DocBookmarkGetObjByName, _LOWriter_DocBookmarkInsert, _LOWriter_CursorMove, _LOWriter_CursorGetString, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -204,9 +204,9 @@ Func _LOWriter_DocBookmarkGetAnchor(ByRef $oBookmark)
 EndFunc   ;==>_LOWriter_DocBookmarkGetAnchor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DocBookmarkGetObj
+; Name ..........: _LOWriter_DocBookmarkGetObjByName
 ; Description ...: Retrieve a Bookmark Object by name.
-; Syntax ........: _LOWriter_DocBookmarkGetObj(ByRef $oDoc, $sBookmarkName)
+; Syntax ........: _LOWriter_DocBookmarkGetObjByName(ByRef $oDoc, $sBookmarkName)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sBookmarkName       - a string value. The Bookmark name to retrieve the Object for.
 ; Return values .: Success: Object
@@ -226,7 +226,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkGetAnchor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_DocBookmarkGetObj(ByRef $oDoc, $sBookmarkName)
+Func _LOWriter_DocBookmarkGetObjByName(ByRef $oDoc, $sBookmarkName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -240,7 +240,7 @@ Func _LOWriter_DocBookmarkGetObj(ByRef $oDoc, $sBookmarkName)
 	If Not IsObj($oBookmark) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oBookmark)
-EndFunc   ;==>_LOWriter_DocBookmarkGetObj
+EndFunc   ;==>_LOWriter_DocBookmarkGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocBookmarkInsert
@@ -305,7 +305,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkInsert
 ; Name ..........: _LOWriter_DocBookmarkModify
 ; Description ...: Set or Retrieve a Bookmark's settings.
 ; Syntax ........: _LOWriter_DocBookmarkModify(ByRef $oBookmark[, $sBookmarkName = Null])
-; Parameters ....: $oBookmark           - [in/out] an object. A Bookmark Object from a previous _LOWriter_DocBookmarkInsert, or _LOWriter_DocBookmarkGetObj function.
+; Parameters ....: $oBookmark           - [in/out] an object. A Bookmark Object from a previous _LOWriter_DocBookmarkInsert, or _LOWriter_DocBookmarkGetObjByName function.
 ;                  $sBookmarkName       - [optional] a string value. Default is Null. The new name to rename the bookmark called in $oBookmark.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -325,7 +325,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkInsert
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  A Bookmark name cannot contain the following characters: / \ @ : * ? " ; , . #
 ;                  If the document already contains a Bookmark by the same name, LibreOffice adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
-; Related .......: _LOWriter_DocBookmarkGetObj, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarkDelete
+; Related .......: _LOWriter_DocBookmarkGetObjByName, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarkDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -364,7 +364,7 @@ EndFunc   ;==>_LOWriter_DocBookmarkModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocBookmarkGetObj
+; Related .......: _LOWriter_DocBookmarkGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

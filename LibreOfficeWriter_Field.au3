@@ -102,7 +102,7 @@
 ; _LOWriter_FieldSetVarMasterDeleteByObj
 ; _LOWriter_FieldSetVarMasterExists
 ; _LOWriter_FieldSetVarMasterFieldsGetList
-; _LOWriter_FieldSetVarMasterGetObj
+; _LOWriter_FieldSetVarMasterGetObjByName
 ; _LOWriter_FieldSetVarMastersGetNames
 ; _LOWriter_FieldSetVarModify
 ; _LOWriter_FieldsGetList
@@ -4808,7 +4808,7 @@ Func _LOWriter_FieldSetVarInsert(ByRef $oDoc, ByRef $oCursor, $sName, $sValue, $
 	If Not IsObj($oSetVarField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If _LOWriter_FieldSetVarMasterExists($oDoc, $sName) Then
-		$oSetVarMaster = _LOWriter_FieldSetVarMasterGetObj($oDoc, $sName)
+		$oSetVarMaster = _LOWriter_FieldSetVarMasterGetObjByName($oDoc, $sName)
 		$iExtended = 1 ; 1 = Master already existed.
 
 	Else
@@ -4914,7 +4914,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMastersGetNames
+; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4949,7 +4949,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByName
 ; Description ...: Delete a Set Variable Master Field using its Object.
 ; Syntax ........: _LOWriter_FieldSetVarMasterDeleteByObj(ByRef $oDoc, ByRef $oMasterField)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oMasterField        - [in/out] an object. The Set Variable Master Field Object to delete as returned by a previous _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObj, or _LOWriter_FieldSetVarMastersGetNames function.
+;                  $oMasterField        - [in/out] an object. The Set Variable Master Field Object to delete as returned by a previous _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, or _LOWriter_FieldSetVarMastersGetNames function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4963,7 +4963,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMastersGetNames
+; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5037,7 +5037,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterExists
 ; Name ..........: _LOWriter_FieldSetVarMasterFieldsGetList
 ; Description ...: Return an Array of Objects of dependent fields for a specific Master Field.
 ; Syntax ........: _LOWriter_FieldSetVarMasterFieldsGetList(ByRef $oMasterfield)
-; Parameters ....: $oMasterfield        - [in/out] an object. The Set Variable Master Field Object returned from a previous _LOWriter_FieldSetVarMasterCreate, or _LOWriter_FieldSetVarMasterGetObj function.
+; Parameters ....: $oMasterfield        - [in/out] an object. The Set Variable Master Field Object returned from a previous _LOWriter_FieldSetVarMasterCreate, or _LOWriter_FieldSetVarMasterGetObjByName function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -5049,7 +5049,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Dependent Fields are SetVariable Fields that are referencing the Master field.
-; Related .......: _LOWriter_FieldSetVarMasterGetObj
+; Related .......: _LOWriter_FieldSetVarMasterGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5068,9 +5068,9 @@ Func _LOWriter_FieldSetVarMasterFieldsGetList(ByRef $oMasterfield)
 EndFunc   ;==>_LOWriter_FieldSetVarMasterFieldsGetList
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FieldSetVarMasterGetObj
+; Name ..........: _LOWriter_FieldSetVarMasterGetObjByName
 ; Description ...: Retrieve a Set Variable Master Field Object.
-; Syntax ........: _LOWriter_FieldSetVarMasterGetObj(ByRef $oDoc, $sMasterFieldName)
+; Syntax ........: _LOWriter_FieldSetVarMasterGetObjByName(ByRef $oDoc, $sMasterFieldName)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sMasterFieldName    - a string value. The Set Variable Master Field to retrieve the Object for.
 ; Return values .: Success: Object
@@ -5091,7 +5091,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterFieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FieldSetVarMasterGetObj(ByRef $oDoc, $sMasterFieldName)
+Func _LOWriter_FieldSetVarMasterGetObjByName(ByRef $oDoc, $sMasterFieldName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -5111,7 +5111,7 @@ Func _LOWriter_FieldSetVarMasterGetObj(ByRef $oDoc, $sMasterFieldName)
 	If Not IsObj($oMasterfield) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMasterfield)
-EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObj
+EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FieldSetVarMastersGetNames
@@ -5130,7 +5130,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function includes in the list about 5 built-in Master Fields from LibreOffice, namely: Illustration, Table, Text, Drawing, and Figure.
-; Related .......: _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMasterDeleteByName, _LOWriter_FieldSetVarMasterDeleteByObj
+; Related .......: _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMasterDeleteByName, _LOWriter_FieldSetVarMasterDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

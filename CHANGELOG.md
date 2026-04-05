@@ -2109,6 +2109,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_NumStyleGetObj` --> `_LOWriter_NumStyleGetObjByName`
   - `_LOWriter_PageStyleGetObj` --> `_LOWriter_PageStyleGetObjByName`
   - `_LOWriter_ParStyleGetObj` --> `_LOWriter_ParStyleGetObjByName`
+- Renamed `_LOWriter_FieldSetVarMasterGetObj` to `_LOWriter_FieldSetVarMasterGetObjByName` for consistency.
+- Renamed `_LOWriter_DocBookmarkGetObj` to `_LOWriter_DocBookmarkGetObjByName` for consistency.
 
 #### Documented
 
