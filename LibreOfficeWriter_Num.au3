@@ -311,6 +311,7 @@ Func _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel, $iNumFormat =
 		If ($iSubLevels <> Null) Then
 			If Not __LO_IntIsBetween($iSubLevels, 1, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 			If ($iLevel = -1) And ($iSubLevels > 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0) ; -1 for $iLevel = 0 = Modify all Numbering Style levels.
+
 			; Minus 1 to compensate for $iLevel being 0 based.
 			If ($iLevel <> -1) And ($iLevel < ($iSubLevels - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0) ; Sub-level higher than requested level
 

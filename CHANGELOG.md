@@ -2223,6 +2223,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_ShapeDelete
 - `_LOWriter_DocConnect` usage not updated in `_LOWriter_DocOpen`.
 - `_LOWriter_NumStyleCustomize` not testing Level vs Sub-Level correctly in error checking.
+- RegExp pattern in `_LOWriter_DocBookmarkInsert` and `_LOWriter_DocBookmarkModify` was not checking for backslash correctly.
 
 #### Refactored
 
