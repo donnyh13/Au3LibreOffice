@@ -12,7 +12,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_ViewCursorGetObj($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text
@@ -25,7 +25,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will create a text cursor now.")
 
 	; Create a TextCursor, I called false for $bCreateAtEnd, the cursor will be created at the beginning of the document.
-	$oTextCursor = _LOWriter_TextCursorCreate($oDoc, False)
+	$oTextCursor = _LOWriter_CursorTextCursorCreate($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to create Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now move the TextCursor right 6 spaces, not selecting any text, and then right 4 spaces selecting the word ""Line"".")

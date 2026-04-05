@@ -2113,9 +2113,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Renamed `_LOWriter_DocBookmarkGetObj` to `_LOWriter_DocBookmarkGetObjByName` for consistency.
 - Changed `_LOWriter_DocViewCursorGetPosition` to return an Array instead of an Integer.
 - Renamed and moved some Cursor functions to group them more consistently:
-  - `_LOWriter_DocCreateTextCursor` --> `_LOWriter_TextCursorCreate`
-  - `_LOWriter_DocGetViewCursor` --> `_LOWriter_ViewCursorGetObj`
-  - `_LOWriter_DocViewCursorGetPosition` --> `_LOWriter_ViewCursorGetPosition`
+  - `_LOWriter_DocCreateTextCursor` --> `_LOWriter_CursorTextCursorCreate`
+  - `_LOWriter_DocGetViewCursor` --> `_LOWriter_CursorViewCursorGetObj`
+  - `_LOWriter_DocViewCursorGetPosition` --> `_LOWriter_CursorViewCursorGetPosition`
 - Renamed `_LOWriter_DocFormSettings` to `_LOWriter_FormDocSettings` for more consistent grouping.
 - Renamed Bookmark functions for more consistent grouping:
   - `_LOWriter_DocBookmarkDelete` --> `_LOWriter_FieldBookmarkDelete`
