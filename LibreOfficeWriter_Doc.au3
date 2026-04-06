@@ -511,7 +511,9 @@ Func _LOWriter_DocConvertTextToTable(ByRef $oDoc, ByRef $oCursor, $sDelimiter = 
 		EndIf
 	Next
 
-	Return (IsObj($oTable)) ? (SetError($__LO_STATUS_SUCCESS, 0, $oTable)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0))
+	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oTable)
 EndFunc   ;==>_LOWriter_DocConvertTextToTable
 
 ; #FUNCTION# ====================================================================================================================
@@ -3348,7 +3350,9 @@ Func _LOWriter_DocSelection(ByRef $oDoc, $oObj = Null, $bReturnMultiAsObj = Fals
 		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	EndIf
 
-	Return ($bSelect) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0))
+	If ($bSelect = False) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_DocSelection
 
 ; #FUNCTION# ====================================================================================================================

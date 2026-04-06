@@ -233,8 +233,9 @@ Func _LOWriter_DateFormatKeyDelete(ByRef $oDoc, $iFormatKey)
 	If ($oFormats.getbykey($iFormatKey).UserDefined() = False) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Key not User Created.
 
 	$oFormats.removeByKey($iFormatKey)
+	If _LOWriter_DateFormatKeyExists($oDoc, $iFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return (_LOWriter_DateFormatKeyExists($oDoc, $iFormatKey) = False) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_DateFormatKeyDelete
 
 ; #FUNCTION# ====================================================================================================================
@@ -2252,8 +2253,9 @@ Func _LOWriter_FormatKeyDelete(ByRef $oDoc, $iFormatKey)
 	If ($oFormats.getbykey($iFormatKey).UserDefined() = False) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Key not User Created.
 
 	$oFormats.removeByKey($iFormatKey)
+	If _LOWriter_FormatKeyExists($oDoc, $iFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return (_LOWriter_FormatKeyExists($oDoc, $iFormatKey) = False) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormatKeyDelete
 
 ; #FUNCTION# ====================================================================================================================

@@ -1293,8 +1293,9 @@ Func _LOWriter_TableColumnInsert(ByRef $oTable, $iCount, $iColumn = Null)
 
 	$iColumn = ($iColumn = Null) ? ($iColumnCount) : ($iColumn)
 	$oTable.getColumns.insertByIndex($iColumn, $iCount)
+	If ($oTable.getColumns.getCount() <> ($iColumnCount + $iCount)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($oTable.getColumns.getCount() = ($iColumnCount + $iCount)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_TableColumnInsert
 
 ; #FUNCTION# ====================================================================================================================
@@ -2391,8 +2392,9 @@ Func _LOWriter_TableRowInsert(ByRef $oTable, $iCount, $iRow = Null)
 
 	$iRow = ($iRow = Null) ? ($iRowCount) : ($iRow)
 	$oTable.getRows.insertByIndex($iRow, $iCount)
+	If ($oTable.getRows.getCount() <> ($iRowCount + $iCount)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($oTable.getRows.getCount() = ($iRowCount + $iCount)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_TableRowInsert
 
 ; #FUNCTION# ====================================================================================================================

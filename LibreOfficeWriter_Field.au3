@@ -4578,8 +4578,9 @@ Func _LOWriter_FieldRefMarkDelete(ByRef $oDoc, $sName)
 	If Not IsObj($oRefMark) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oRefMark.dispose()
+	If $oRefMarks.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	Return ($oRefMarks.hasByName($sName)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FieldRefMarkDelete
 
 ; #FUNCTION# ====================================================================================================================

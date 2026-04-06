@@ -2343,6 +2343,17 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Reworded some example's error messages.
 - Removed _ArrayDisplay titles from `_LOWriter_TableGetData` and `_LOWriter_TableGetData[2]` examples.
 - Renamed `_LOWriter_FieldRefBookMarkInsert` and `_LOWriter_FieldRefBookMarkModify` to proper case name (BookMark to Bookmark).
+- Split Returns using Ternary:
+  - __LOWriter_IsCellRange
+  - __LOWriter_ParTabStopDelete
+  - _LOWriter_CursorGetStatus
+  - _LOWriter_DocConvertTextToTable
+  - _LOWriter_DocSelection
+  - _LOWriter_FieldRefMarkDelete
+  - _LOWriter_DateFormatKeyDelete
+  - _LOWriter_FormatKeyDelete
+  - _LOWriter_TableColumnInsert
+  - _LOWriter_TableRowInsert
 
 #### Removed
 

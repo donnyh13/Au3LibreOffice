@@ -4519,6 +4519,8 @@ EndFunc   ;==>__LOWriter_InternalComErrorHandler
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to determine if Cell Object is a Range.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = If the cell object is a Cell Range, True is returned. Else False.
 ; Author ........: donnyh13
@@ -4532,9 +4534,14 @@ Func __LOWriter_IsCellRange(ByRef $oCell)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	$bReturn
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Return ($oCell.supportsService("com.sun.star.text.CellRange")) ? (SetError($__LO_STATUS_SUCCESS, 0, True)) : (SetError($__LO_STATUS_SUCCESS, 0, False))
+	$bReturn = $oCell.supportsService("com.sun.star.text.CellRange")
+	If Not IsBool($bReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bReturn)
 EndFunc   ;==>__LOWriter_IsCellRange
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -6948,8 +6955,9 @@ Func __LOWriter_ParTabStopDelete(ByRef $oObj, ByRef $oDoc, $iTabStop)
 	ReDim $atNewTabStops[(($bDeleted) ? (UBound($atNewTabStops) - 1) : (UBound($atNewTabStops)))]
 
 	$oObj.ParaTabStops = $atNewTabStops
+	If Not $bDeleted Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return ($bDeleted) ? (SetError($__LO_STATUS_SUCCESS, 0, $bDeleted)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bDeleted)
 EndFunc   ;==>__LOWriter_ParTabStopDelete
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
