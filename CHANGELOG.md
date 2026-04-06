@@ -487,6 +487,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOBase_TableUIClose
 - Standardized error check in Examples to "If @error Then".
 - Reworded some example's error messages.
+- Split Returns using Ternary:
+  - _LOBase_FormatKeyDelete
 
 #### Removed
 

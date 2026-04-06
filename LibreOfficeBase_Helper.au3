@@ -876,8 +876,9 @@ Func _LOBase_FormatKeyDelete(ByRef $oObj, $iFormatKey)
 	If ($oFormats.getbykey($iFormatKey).UserDefined() = False) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Key not User Created.
 
 	$oFormats.removeByKey($iFormatKey)
+	If _LOBase_FormatKeyExists($oObj, $iFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return (_LOBase_FormatKeyExists($oObj, $iFormatKey) = False) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOBase_FormatKeyDelete
 
 ; #FUNCTION# ====================================================================================================================
