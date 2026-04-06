@@ -1227,6 +1227,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Renamed StyleGetObj functions to StyleGetObjByName for consistency:
   - `_LOCalc_CellStyleGetObj` --> `_LOCalc_CellStyleGetObjByName`
   - `_LOCalc_PageStyleGetObj` --> `_LOCalc_PageStyleGetObjByName`
+- Changed the @Extended values when returning a Document's path in `_LOCalc_DocGetPath`.
 
 #### Documented
 
