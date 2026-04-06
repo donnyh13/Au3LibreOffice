@@ -1737,8 +1737,7 @@ EndFunc   ;==>_LOWriter_DocGetName
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error converting Libre URL to Computer path format.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the P.C. path to the current document's save path.
-;                  @Error 0 @Extended 1 Return String = Success. Returning the LibreOffice URL to the current document's save path.
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1760,10 +1759,10 @@ Func _LOWriter_DocGetPath(ByRef $oDoc, $bReturnLibreURL = False)
 
 	If Not $bReturnLibreURL Then
 		$sPath = _LO_PathConvert($sPath, $LO_PATHCONV_PCPATH_RETURN)
-		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If (@error) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	EndIf
 
-	Return ($bReturnLibreURL = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sPath)) : (SetError($__LO_STATUS_SUCCESS, 0, $sPath))
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sPath)
 EndFunc   ;==>_LOWriter_DocGetPath
 
 ; #FUNCTION# ====================================================================================================================
