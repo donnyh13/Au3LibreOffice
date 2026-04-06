@@ -4770,8 +4770,9 @@ Func _LOCalc_RangeReplace(ByRef $oRange, ByRef $oSrchDescript, $sSearchString, $
 	If Not IsObj($oResult) Then Return SetError($__LO_STATUS_SUCCESS, 0, 1) ; No Results
 
 	$iReplacements = $oResult.replaceAll($oSrchDescript)
+	If ($iReplacements = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($iReplacements > 0) ? (SetError($__LO_STATUS_SUCCESS, 1, $oResult)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 1, $oResult)
 EndFunc   ;==>_LOCalc_RangeReplace
 
 ; #FUNCTION# ====================================================================================================================
@@ -4832,8 +4833,9 @@ Func _LOCalc_RangeReplaceAll(ByRef $oRange, ByRef $oSrchDescript, $sSearchString
 	EndIf
 
 	$iReplacements = $oRange.replaceAll($oSrchDescript)
+	If ($iReplacements = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($iReplacements > 0) ? (SetError($__LO_STATUS_SUCCESS, $iReplacements, $aoResults)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0))
+	Return SetError($__LO_STATUS_SUCCESS, $iReplacements, $aoResults)
 EndFunc   ;==>_LOCalc_RangeReplaceAll
 
 ; #FUNCTION# ====================================================================================================================

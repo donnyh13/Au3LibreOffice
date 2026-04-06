@@ -1316,6 +1316,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_SheetRemove
 - Standardized error check in Examples to "If @error Then".
 - Reworded some example's error messages.
+- Split Returns using Ternary:
+  - _LOCalc_FormatKeyDelete
+  - _LOCalc_RangeReplace
+  - _LOCalc_RangeReplaceAll
+  - _LOCalc_SheetAdd
+  - _LOCalc_SheetProtect
+  - _LOCalc_SheetUnprotect
 
 #### Removed
 

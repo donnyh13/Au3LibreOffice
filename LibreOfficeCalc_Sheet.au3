@@ -166,8 +166,9 @@ Func _LOCalc_SheetAdd(ByRef $oDoc, $sName = Null, $iPosition = Null)
 	$oSheets.insertNewByName($sName, $iPosition)
 
 	$oSheet = $oSheets.getByName($sName)
+	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return (IsObj($oSheet)) ? (SetError($__LO_STATUS_SUCCESS, 0, $oSheet)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oSheet)
 EndFunc   ;==>_LOCalc_SheetAdd
 
 ; #FUNCTION# ====================================================================================================================
@@ -1330,8 +1331,9 @@ Func _LOCalc_SheetProtect(ByRef $oSheet, $sPassword)
 	If ($sPassword = "") Or Not StringRegExp($sPassword, "[\w]") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Password contains no letters, digits, or underscores.
 
 	$oSheet.Protect($sPassword)
+	If Not $oSheet.isProtected() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($oSheet.isProtected()) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_SheetProtect
 
 ; #FUNCTION# ====================================================================================================================
@@ -1576,8 +1578,9 @@ Func _LOCalc_SheetUnprotect(ByRef $oSheet, $sPassword)
 	$oSheet.Unprotect($sPassword)
 
 	If ($oCOM_ErrorHandler.number() = -2147352567) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Wrong password
+	If $oSheet.isProtected() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return ($oSheet.isProtected()) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_SheetUnprotect
 
 ; #FUNCTION# ====================================================================================================================
