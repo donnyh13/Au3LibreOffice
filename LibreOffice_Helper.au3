@@ -1486,12 +1486,14 @@ Func _LO_UnitConvert($nValue, $iReturnType)
 
 		Case $LO_CONVERT_UNIT_PT_HMM
 			; 1 pt = 35 Hundredths of a Millimeter (HMM)
+			If ($nValue <> 0) Then $nValue = Round(($nValue * 35.2778))
 
-			Return ($nValue = 0) ? (SetError($__LO_STATUS_SUCCESS, 10, 0)) : (SetError($__LO_STATUS_SUCCESS, 10, Round(($nValue * 35.2778))))
+			Return SetError($__LO_STATUS_SUCCESS, 10, $nValue)
 
 		Case $LO_CONVERT_UNIT_HMM_PT
+			If ($nValue <> 0) Then $nValue = Round(($nValue / 35.2778), 2)
 
-			Return ($nValue = 0) ? (SetError($__LO_STATUS_SUCCESS, 11, 0)) : (SetError($__LO_STATUS_SUCCESS, 11, Round(($nValue / 35.2778), 2)))
+			Return SetError($__LO_STATUS_SUCCESS, 11, $nValue)
 
 		Case Else
 

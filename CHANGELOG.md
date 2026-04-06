@@ -107,6 +107,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Optimized `__LO_IntIsBetween`.
 - Increased readability of `_LO_PathConvert` example.
+- Split Returns using Ternary:
+  - _LO_UnitConvert
 
 #### Removed
 
@@ -2138,6 +2140,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_DocBookmarkInsert` --> `_LOWriter_FieldBookmarkInsert`
   - `_LOWriter_DocBookmarkModify` --> `_LOWriter_FieldBookmarkModify`
   - `_LOWriter_DocBookmarksGetNames` --> `_LOWriter_FieldBookmarksGetNames`
+- Changed the @Extended values when returning a Document's path in `_LOWriter_DocGetPath`.
 
 #### Documented
 
