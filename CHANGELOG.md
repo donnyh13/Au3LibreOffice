@@ -452,6 +452,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOBase_TableUIOpenByName` --> `_LOBase_TableDocOpenByName`
   - `_LOBase_TableUIOpenByObject` --> `_LOBase_TableDocOpenByObject`
   - `_LOBase_TableUIVisible` --> `_LOBase_TableDocVisible`
+- Changed the @Extended values when returning a Document's path in `_LOBase_DocGetPath`.
 
 #### Documented
 
