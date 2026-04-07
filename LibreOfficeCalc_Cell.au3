@@ -990,7 +990,7 @@ Func _LOCalc_CellString(ByRef $oCell, $sText = Null)
 
 	If __LO_VarsAreNull($sText) Then
 		$sCurrText = $oCell.getString()
-		If Not IsString($sText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsString($sCurrText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurrText)
 	EndIf
