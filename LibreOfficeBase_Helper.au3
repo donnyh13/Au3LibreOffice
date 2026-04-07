@@ -1017,6 +1017,7 @@ EndFunc   ;==>_LOBase_FormatKeyGetStandard
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve requested Format Key Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Format Key String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ; Author ........: donnyh13
@@ -1031,6 +1032,7 @@ Func _LOBase_FormatKeyGetString(ByRef $oObj, $iFormatKey)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oFormats, $oFormatKey
+	Local $sFormatKey
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oObj.supportsService("com.sun.star.sdbc.Connection") And Not $oObj.supportsService("com.sun.star.report.ReportDefinition") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1049,7 +1051,10 @@ Func _LOBase_FormatKeyGetString(ByRef $oObj, $iFormatKey)
 	$oFormatKey = $oFormats.getByKey($iFormatKey)
 	If Not IsObj($oFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Key not found.
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oFormatKey.FormatString())
+	$sFormatKey = $oFormatKey.FormatString()
+	If Not IsString($sFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sFormatKey)
 EndFunc   ;==>_LOBase_FormatKeyGetString
 
 ; #FUNCTION# ====================================================================================================================

@@ -127,6 +127,7 @@ EndFunc   ;==>_LOBase_ReportConDelete
 ;                  @Error 1 @Extended 3 Return 0 = $sDataField not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current DataField value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
@@ -149,6 +150,7 @@ Func _LOBase_ReportConFormattedFieldData(ByRef $oFormatField, $sDataField = Null
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sCurrDataField
 	Local $iError = 0
 
 	If Not IsObj($oFormatField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -156,8 +158,10 @@ Func _LOBase_ReportConFormattedFieldData(ByRef $oFormatField, $sDataField = Null
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($sDataField) Then
+		$sCurrDataField = $oFormatField.DataField()
+		If Not IsString($sCurrDataField) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oFormatField.DataField())
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sDataField)
 	EndIf
 
 	If Not IsString($sDataField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -334,6 +338,7 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldGeneral
 ;                  @Error 1 @Extended 3 Return 0 = $sDataField not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current DataField value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
@@ -356,6 +361,7 @@ Func _LOBase_ReportConImageConData(ByRef $oImageControl, $sDataField = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sCurrDataField
 	Local $iError = 0
 
 	If Not IsObj($oImageControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -363,8 +369,10 @@ Func _LOBase_ReportConImageConData(ByRef $oImageControl, $sDataField = Null)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($sDataField) Then
+		$sCurrDataField = $oImageControl.DataField()
+		If Not IsString($sCurrDataField) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oImageControl.DataField())
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurrDataField)
 	EndIf
 
 	If Not IsString($sDataField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -2348,6 +2356,8 @@ EndFunc   ;==>_LOBase_ReportDocHeader
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query whether Document has been modified.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Report has been modified since last being saved.
 ; Author ........: donnyh13
@@ -2361,9 +2371,14 @@ Func _LOBase_ReportDocIsModified(ByRef $oReportDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsMod
+
 	If Not IsObj($oReportDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oReportDoc.isModified())
+	$bIsMod = $oReportDoc.isModified()
+	If Not IsBool($bIsMod) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bIsMod)
 EndFunc   ;==>_LOBase_ReportDocIsModified
 
 ; #FUNCTION# ====================================================================================================================
@@ -2821,6 +2836,7 @@ EndFunc   ;==>_LOBase_ReportDocSectionGetObj
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Report Document called in $oReportDoc was opened "Hidden", document must be re-opened.
+;                  @Error 3 @Extended 2 Return 0 = Failed to query whether Document is visible.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -2839,12 +2855,18 @@ Func _LOBase_ReportDocVisible(ByRef $oReportDoc, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
 	Local $iError = 0
 
 	If Not IsObj($oReportDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If ($oReportDoc.ViewData.Count() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oReportDoc.CurrentController.Frame.ContainerWindow.isVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oReportDoc.CurrentController.Frame.ContainerWindow.isVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 

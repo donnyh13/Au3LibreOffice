@@ -1077,6 +1077,8 @@ EndFunc   ;==>_LOBase_QueryGetObjByName
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oQuery not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Query's name.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -1096,11 +1098,17 @@ Func _LOBase_QueryName(ByRef $oQuery, $sName = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sCurName
 	Local $iError = 0
 
 	If Not IsObj($oQuery) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($sName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oQuery.Name())
+	If __LO_VarsAreNull($sName) Then
+		$sCurName = $oQuery.Name()
+		If Not IsString($sCurName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurName)
+	EndIf
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -1121,6 +1129,8 @@ EndFunc   ;==>_LOBase_QueryName
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oQuery not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sSQL_Command not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current SQL command.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sSQL_Command
@@ -1138,11 +1148,17 @@ Func _LOBase_QuerySQLCommand(ByRef $oQuery, $sSQL_Command = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sCurSQL
 	Local $iError = 0
 
 	If Not IsObj($oQuery) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($sSQL_Command) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oQuery.Command())
+	If __LO_VarsAreNull($sSQL_Command) Then
+		$sCurSQL = $oQuery.Command()
+		If Not IsString($sCurSQL) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurSQL)
+	EndIf
 
 	If Not IsString($sSQL_Command) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 

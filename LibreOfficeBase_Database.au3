@@ -53,6 +53,8 @@
 ;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oConnection not a connection Object.
 ;                  @Error 1 @Extended 3 Return 0 = $bAutoCommit not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current AutoCommit value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bAutoCommit
@@ -73,11 +75,17 @@ Func _LOBase_DatabaseAutoCommit(ByRef $oConnection, $bAutoCommit = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
+	Local $bCurrAutoCommit
 
 	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oConnection.supportsService("com.sun.star.sdbc.Connection") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($bAutoCommit) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oConnection.getAutoCommit())
+	If __LO_VarsAreNull($bAutoCommit) Then
+		$bCurrAutoCommit = $oConnection.getAutoCommit()
+		If Not IsBool($bCurrAutoCommit) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bCurrAutoCommit)
+	EndIf
 
 	If Not IsBool($bAutoCommit) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
