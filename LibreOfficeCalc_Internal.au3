@@ -616,6 +616,8 @@ EndFunc   ;==>__LOCalc_CellFont
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than 0 or greater than 16777215.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Font Color.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFontColor
@@ -634,13 +636,15 @@ Func __LOCalc_CellFontColor(ByRef $oObj, $iFontColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurColor
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iFontColor) Then
+		$iCurColor = $oObj.CharColor()
+		If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oObj.CharColor())
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
 	EndIf
 
 	If ($iFontColor <> Null) Then
@@ -667,6 +671,8 @@ EndFunc   ;==>__LOCalc_CellFontColor
 ;                  @Error 1 @Extended 2 Return 0 = $oObj not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = Format Key called in $iFormatKey not found in document.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering Format.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFormatKey
@@ -685,12 +691,17 @@ Func __LOCalc_CellNumberFormat(ByRef $oDoc, ByRef $oObj, $iFormatKey = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurFormatKey
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($iFormatKey) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oObj.NumberFormat())
+	If __LO_VarsAreNull($iFormatKey) Then
+		$iCurFormatKey = $oObj.NumberFormat()
+		If Not IsInt($iCurFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurFormatKey)
+	EndIf
 
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not _LOCalc_FormatKeyExists($oDoc, $iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
@@ -2266,7 +2277,9 @@ EndFunc   ;==>__LOCalc_InternalComErrorHandler
 ;                  @Error 1 @Extended 3 Return 0 = $iTokenIndex not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $sContent not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Scope Object.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Named Range Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Sheet Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Scope Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning Scope object (Doc or Sheet) that contains the Named Range.
 ; Author ........: donnyh13
@@ -2280,7 +2293,7 @@ Func __LOCalc_NamedRangeGetScopeObj(ByRef $oDoc, $sName, $iTokenIndex, $sContent
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oObj
+	Local $oObj, $oSheet
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -2289,19 +2302,28 @@ Func __LOCalc_NamedRangeGetScopeObj(ByRef $oDoc, $sName, $iTokenIndex, $sContent
 
 	If ($oDoc.NamedRanges.Count() >= $iTokenIndex) Then
 		$oObj = $oDoc.NamedRanges.getByIndex($iTokenIndex - 1)
+		If Not IsObj($oObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 		If ($oObj.Name() == $sName) And ($oObj.Content = $sContent) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
 	EndIf
 
 	For $i = 0 To $oDoc.Sheets.Count() - 1
 		If ($oDoc.Sheets.getByIndex($i).NamedRanges.Count() >= $iTokenIndex) Then
 			$oObj = $oDoc.Sheets.getByIndex($i).NamedRanges.getByIndex($iTokenIndex - 1)
-			If ($oObj.Name() == $sName) And ($oObj.Content = $sContent) Then Return SetError($__LO_STATUS_SUCCESS, 2, $oDoc.Sheets.getByIndex($i))
+			If Not IsObj($oObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+			If ($oObj.Name() == $sName) And ($oObj.Content = $sContent) Then
+				$oSheet = $oDoc.Sheets.getByIndex($i)
+				If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				Return SetError($__LO_STATUS_SUCCESS, 2, $oSheet)
+			EndIf
 		EndIf
 
 		Sleep((IsInt($i / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
-	Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 EndFunc   ;==>__LOCalc_NamedRangeGetScopeObj
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================

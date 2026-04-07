@@ -582,6 +582,8 @@ EndFunc   ;==>_LOCalc_CellFont
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error 1 @Extended 3 Return 0 = $oCell does not support Character properties, or Table Column, or Table Row service.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Font Color.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFontColor
@@ -624,6 +626,8 @@ EndFunc   ;==>_LOCalc_CellFontColor
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a Cell Range and is not supported.
 ;                  @Error 1 @Extended 3 Return 0 = $sFormula not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Cell's formula.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFormula
@@ -642,12 +646,18 @@ Func _LOCalc_CellFormula(ByRef $oCell, $sFormula = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sCurrFormula
 	Local $iError = 0
 
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not ($oCell.supportsService("com.sun.star.sheet.SheetCell")) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Only single cells supported.
 
-	If __LO_VarsAreNull($sFormula) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCell.getFormula())
+	If __LO_VarsAreNull($sFormula) Then
+		$sCurrFormula = $oCell.getFormula()
+		If Not IsString($sCurrFormula) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurrFormula)
+	EndIf
 
 	If Not IsString($sFormula) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -708,6 +718,8 @@ EndFunc   ;==>_LOCalc_CellGetType
 ;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = Format Key called in $iFormatKey not found in document.
 ;                  @Error 1 @Extended 5 Return 0 = $oCell does not support Character properties, or Table Column, or Table Row service.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering Format.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFormatKey
@@ -950,6 +962,8 @@ EndFunc   ;==>_LOCalc_CellStrikeOut
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a Cell Range and is not supported.
 ;                  @Error 1 @Extended 3 Return 0 = $sText not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Cell's Text.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sText
@@ -968,12 +982,18 @@ Func _LOCalc_CellString(ByRef $oCell, $sText = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sCurrText
 	Local $iError = 0
 
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not ($oCell.supportsService("com.sun.star.sheet.SheetCell")) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Only single cells supported.
 
-	If __LO_VarsAreNull($sText) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCell.getString())
+	If __LO_VarsAreNull($sText) Then
+		$sCurrText = $oCell.getString()
+		If Not IsString($sText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurrText)
+	EndIf
 
 	If Not IsString($sText) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -1608,6 +1628,8 @@ EndFunc   ;==>_LOCalc_CellStyleFont
 ;                  @Error 1 @Extended 1 Return 0 = $oCellStyle not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error 1 @Extended 3 Return 0 = $oCellStyle is not a Cell Style object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Font Color.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFontColor
@@ -1690,6 +1712,8 @@ EndFunc   ;==>_LOCalc_CellStyleGetObjByName
 ;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = Format Key called in $iFormatKey not found in document.
 ;                  @Error 1 @Extended 5 Return 0 = $oCellStyle is not a Cell Style object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering Format.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFormatKey
@@ -2441,6 +2465,8 @@ EndFunc   ;==>_LOCalc_CellUnderline
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a Cell Range and is not supported.
 ;                  @Error 1 @Extended 3 Return 0 = $nValue not a Number.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Cell's current value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nValue
@@ -2459,12 +2485,18 @@ Func _LOCalc_CellValue(ByRef $oCell, $nValue = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $nCurrVal
 	Local $iError = 0
 
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not ($oCell.supportsService("com.sun.star.sheet.SheetCell")) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Only single cells supported.
 
-	If __LO_VarsAreNull($nValue) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCell.getValue())
+	If __LO_VarsAreNull($nValue) Then
+		$nCurrVal = $oCell.getValue()
+		If Not IsNumber($nCurrVal) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $nCurrVal)
+	EndIf
 
 	If Not IsNumber($nValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 

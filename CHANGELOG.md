@@ -1257,6 +1257,49 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Changed `_LOCalc_RangeFindAll` function to return a success result whether or not something was found or replaced.
 - Made `_LOCalc_RangeFindAll` return an array even if no results were found.
 - Changed the @Extended values when returning a Document's path in `_LOCalc_DocGetPath`.
+- Removed returns with Object calls directly in them. Also adding applicable error checking:
+  - __LOCalc_CellFontColor
+  - __LOCalc_CellNumberFormat
+  - __LOCalc_NamedRangeGetScopeObj
+  - _LOCalc_CellFontColor
+  - _LOCalc_CellFormula
+  - _LOCalc_CellNumberFormat
+  - _LOCalc_CellString
+  - _LOCalc_CellStyleFontColor
+  - _LOCalc_CellStyleNumberFormat
+  - _LOCalc_CellValue
+  - _LOCalc_CommentAreaColor
+  - _LOCalc_CommentAreaTransparency
+  - _LOCalc_CommentRotate
+  - _LOCalc_CommentVisible
+  - _LOCalc_TextCursorGetString
+  - _LOCalc_DocFormulaBarHeight
+  - _LOCalc_DocHasPath
+  - _LOCalc_DocIsActive
+  - _LOCalc_DocIsModified
+  - _LOCalc_DocIsReadOnly
+  - _LOCalc_DocMaximize
+  - _LOCalc_DocMinimize
+  - _LOCalc_DocRedoIsPossible
+  - _LOCalc_DocUndoIsPossible
+  - _LOCalc_DocVisible
+  - _LOCalc_DocWindowFirstColumn
+  - _LOCalc_DocWindowFirstRow
+  - _LOCalc_FormatKeyGetString
+  - _LOCalc_RangeColumnsGetCount
+  - _LOCalc_RangeColumnVisible
+  - _LOCalc_RangePivotName
+  - _LOCalc_RangeRowsGetCount
+  - _LOCalc_RangeRowVisible
+  - _LOCalc_SheetLinkModify
+  - _LOCalc_SheetMove
+  - _LOCalc_SheetName
+  - _LOCalc_SheetsGetCount
+  - _LOCalc_SheetTabColor
+  - _LOCalc_SheetVisible
+- Added Property error checking to some functions:
+  - _LOCalc_DocMaximize
+  - _LOCalc_DocMinimize
 
 #### Documented
 

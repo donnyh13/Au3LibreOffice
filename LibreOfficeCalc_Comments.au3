@@ -118,6 +118,9 @@ EndFunc   ;==>_LOCalc_CommentAdd
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oComment not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Error retrieving Annotation Shape Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Fill color.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColor
@@ -136,14 +139,19 @@ Func _LOCalc_CommentAreaColor(ByRef $oComment, $iColor = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oAnnotationShape
-	Local $iError = 0
+	Local $iError = 0, $iCurCol
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oAnnotationShape = $oComment.AnnotationShape()
 	If Not IsObj($oAnnotationShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iColor) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oAnnotationShape.FillColor())
+	If __LO_VarsAreNull($iColor) Then
+		$iCurCol = $oAnnotationShape.FillColor()
+		If Not IsInt($iCurCol) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurCol)
+	EndIf
 
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -678,6 +686,7 @@ EndFunc   ;==>_LOCalc_CommentAreaShadow
 ;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Annotation Shape Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -695,7 +704,7 @@ Func _LOCalc_CommentAreaTransparency(ByRef $oComment, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurTransp
 	Local $oAnnotationShape
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -703,7 +712,12 @@ Func _LOCalc_CommentAreaTransparency(ByRef $oComment, $iTransparency = Null)
 	$oAnnotationShape = $oComment.AnnotationShape()
 	If Not IsObj($oAnnotationShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oAnnotationShape.FillTransparence())
+	If __LO_VarsAreNull($iTransparency) Then
+		$iCurTransp = $oAnnotationShape.FillTransparence()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
+	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -1825,6 +1839,7 @@ EndFunc   ;==>_LOCalc_CommentPosition
 ;                  @Error 1 @Extended 2 Return 0 = $nRotate not a Number, less than 0 or greater than 359.99.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Annotation Shape Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current rotation value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nRotate
@@ -1844,6 +1859,7 @@ Func _LOCalc_CommentRotate(ByRef $oComment, $nRotate = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oAnnotationShape
+	Local $nCurRot
 	Local $iError = 0
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -1851,7 +1867,12 @@ Func _LOCalc_CommentRotate(ByRef $oComment, $nRotate = Null)
 	$oAnnotationShape = $oComment.AnnotationShape()
 	If Not IsObj($oAnnotationShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($nRotate) Then Return SetError($__LO_STATUS_SUCCESS, 1, (($oAnnotationShape.RotateAngle()) / 100)) ; Divide by 100 to match L.O. values.
+	If __LO_VarsAreNull($nRotate) Then
+		$nCurRot = (($oAnnotationShape.RotateAngle()) / 100) ; Divide by 100 to match L.O. values.
+		If Not IsNumber($nCurRot) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $nCurRot)
+	EndIf
 
 	If Not __LO_NumIsBetween($nRotate, 0, 359.99) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -2632,6 +2653,8 @@ EndFunc   ;==>_LOCalc_CommentTextSettings
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oComment not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query if Comment is visible.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -2649,11 +2672,17 @@ Func _LOCalc_CommentVisible(ByRef $oComment, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
 	Local $iError = 0
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oComment.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oComment.IsVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 

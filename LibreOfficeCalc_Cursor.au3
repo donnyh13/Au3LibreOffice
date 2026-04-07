@@ -559,7 +559,7 @@ EndFunc   ;==>_LOCalc_TextCursorFontColor
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oObj doesn't support Character Properties service.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor type.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. The selected text in String format.
 ; Author ........: donnyh13
@@ -573,10 +573,15 @@ Func _LOCalc_TextCursorGetString(ByRef $oObj)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sString
+
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oObj.supportsService("com.sun.star.style.CharacterProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oObj.getString())
+	$sString = $oObj.getString()
+	If Not IsString($sString) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sString)
 EndFunc   ;==>_LOCalc_TextCursorGetString
 
 ; #FUNCTION# ====================================================================================================================

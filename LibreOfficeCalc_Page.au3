@@ -1104,15 +1104,16 @@ Func _LOCalc_PageStyleFooterCreateTextCursor(ByRef $oFooter, $bAtEnd = False, $b
 
 	If $bLeftArea Then
 		$oTextCursor = $oFooter.LeftText.createTextCursor()
+		If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	ElseIf $bCenterArea Then
 		$oTextCursor = $oFooter.CenterText.createTextCursor()
+		If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	ElseIf $bRightArea Then
 		$oTextCursor = $oFooter.RightText.createTextCursor()
+		If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 	EndIf
-
-	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If $bAtEnd Then
 		$oTextCursor.gotoEnd(False)
@@ -1850,15 +1851,16 @@ Func _LOCalc_PageStyleHeaderCreateTextCursor(ByRef $oHeader, $bAtEnd = False, $b
 
 	If $bLeftArea Then
 		$oTextCursor = $oHeader.LeftText.createTextCursor()
+		If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	ElseIf $bCenterArea Then
 		$oTextCursor = $oHeader.CenterText.createTextCursor()
+		If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	ElseIf $bRightArea Then
 		$oTextCursor = $oHeader.RightText.createTextCursor()
+		If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 	EndIf
-
-	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If $bAtEnd Then
 		$oTextCursor.gotoEnd(False)

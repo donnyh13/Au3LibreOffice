@@ -467,6 +467,7 @@ EndFunc   ;==>_LOCalc_RangeColumnPageBreak
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Columns Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Columns.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning number of Columns contained in the Range.
 ; Author ........: donnyh13
@@ -481,13 +482,17 @@ Func _LOCalc_RangeColumnsGetCount(ByRef $oRange)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oColumns
+	Local $iCount
 
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oColumns = $oRange.getColumns()
 	If Not IsObj($oColumns) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oColumns.Count())
+	$iCount = $oColumns.Count()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
 EndFunc   ;==>_LOCalc_RangeColumnsGetCount
 
 ; #FUNCTION# ====================================================================================================================
@@ -501,6 +506,8 @@ EndFunc   ;==>_LOCalc_RangeColumnsGetCount
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oColumn not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query Column's visibility.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -518,11 +525,17 @@ Func _LOCalc_RangeColumnVisible(ByRef $oColumn, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
 	Local $iError = 0
 
 	If Not IsObj($oColumn) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oColumn.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oColumn.IsVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -3951,7 +3964,8 @@ EndFunc   ;==>_LOCalc_RangePivotInsert
 ;                  @Error 1 @Extended 4 Return 0 = Document called in $oDoc does not contain the Pivot Table called in $oPivotTable.
 ;                  @Error 1 @Extended 5 Return 0 = Parent sheet of Pivot Table called in $oPivotTable already contains a Pivot Table with the name called in $sName.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Pivot Table Parent Sheet.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Pivot Table's Name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Pivot Table Parent Sheet.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -3970,17 +3984,23 @@ Func _LOCalc_RangePivotName(ByRef $oDoc, ByRef $oPivotTable, $sName = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSheet
+	Local $sCurName
 	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPivotTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($sName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPivotTable.Name())
+	If __LO_VarsAreNull($sName) Then
+		$sCurName = $oPivotTable.Name()
+		If Not IsString($sCurName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurName)
+	EndIf
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oSheet = $oDoc.Sheets.getByIndex($oPivotTable.OutputRange.Sheet())
-	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	If Not $oSheet.DataPilotTables.hasByName($oPivotTable.Name()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If $oSheet.DataPilotTables.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
@@ -5098,6 +5118,7 @@ EndFunc   ;==>_LOCalc_RangeRowPageBreak
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Rows Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Columns.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning number of Rows contained in the Range.
 ; Author ........: donnyh13
@@ -5112,13 +5133,17 @@ Func _LOCalc_RangeRowsGetCount(ByRef $oRange)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oRows
+	Local $iCount
 
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oRows = $oRange.getRows()
 	If Not IsObj($oRows) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oRows.Count())
+	$iCount = $oRows.Count()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
 EndFunc   ;==>_LOCalc_RangeRowsGetCount
 
 ; #FUNCTION# ====================================================================================================================
@@ -5132,6 +5157,8 @@ EndFunc   ;==>_LOCalc_RangeRowsGetCount
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRow not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query Row's visibility.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -5149,11 +5176,17 @@ Func _LOCalc_RangeRowVisible(ByRef $oRow, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
 	Local $iError = 0
 
 	If Not IsObj($oRow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oRow.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oRow.IsVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 

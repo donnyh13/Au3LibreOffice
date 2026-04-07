@@ -897,7 +897,8 @@ Func _LOCalc_SheetLinkModify(ByRef $oSheet, $oNewDoc = Null, $sSheetName = Null,
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$bClose = (@extended = 2) ? (True) : (False)
-		If Not $oSourceDoc.Sheets.hasByName($sSheetName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, $oSourceDoc.Close(True))
+		If Not $oSourceDoc.Sheets.hasByName($sSheetName) And $bClose Then $oSourceDoc.Close(True)
+		If Not $oSourceDoc.Sheets.hasByName($sSheetName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		If $bClose Then $oSourceDoc.Close(True)
 
@@ -943,8 +944,9 @@ EndFunc   ;==>_LOCalc_SheetLinkModify
 ;                  @Error 1 @Extended 2 Return 0 = $oSheet not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $iPosition not an Integer, less than 0 or greater than number of sheets contained in the document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Sheet's name.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Sheets Object.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Sheet's position.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Sheet's name.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Sheets Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Sheet was successfully moved.
 ;                  @Error 0 @Extended 0 Return Integer = Success. $iPosition called with Null, returning Sheet's current position.
@@ -960,18 +962,24 @@ Func _LOCalc_SheetMove(ByRef $oDoc, ByRef $oSheet, $iPosition = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSheets
+	Local $iCurPos
 	Local $sName
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($iPosition) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.RangeAddress.Sheet())
+	If __LO_VarsAreNull($iPosition) Then
+		$iCurPos = $oSheet.RangeAddress.Sheet()
+		If Not IsInt($iCurPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurPos)
+	EndIf
 
 	$sName = $oSheet.Name()
-	If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oSheets = $oDoc.Sheets()
-	If Not IsObj($oSheets) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	If Not IsObj($oSheets) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If Not __LO_IntIsBetween($iPosition, 0, $oSheets.Count()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oSheets.moveByName($sName, $iPosition)
@@ -994,7 +1002,8 @@ EndFunc   ;==>_LOCalc_SheetMove
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = Document already has a Sheet named the same as called in $sName.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Sheets Object.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Sheet's name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Sheets Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -1013,17 +1022,23 @@ Func _LOCalc_SheetName(ByRef $oDoc, ByRef $oSheet, $sName = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSheets
+	Local $sCurName
 	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($sName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.Name())
+	If __LO_VarsAreNull($sName) Then
+		$sCurName = $oSheet.Name()
+		If Not IsString($sCurName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurName)
+	EndIf
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oSheets = $oDoc.Sheets()
-	If Not IsObj($oSheets) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not IsObj($oSheets) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	If $oSheets.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$oSheet.Name = $sName
@@ -1396,6 +1411,7 @@ EndFunc   ;==>_LOCalc_SheetRemove
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Sheets Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Sheets.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Sheets contained in the Calc Document.
 ; Author ........: donnyh13
@@ -1410,13 +1426,17 @@ Func _LOCalc_SheetsGetCount(ByRef $oDoc)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSheets
+	Local $iCount
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oSheets = $oDoc.Sheets()
 	If Not IsObj($oSheets) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oSheets.Count())
+	$iCount = $oSheets.Count()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
 EndFunc   ;==>_LOCalc_SheetsGetCount
 
 ; #FUNCTION# ====================================================================================================================
@@ -1512,6 +1532,8 @@ EndFunc   ;==>_LOCalc_SheetsGetNames
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSheet not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query Sheet's tab color.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColor
@@ -1529,11 +1551,16 @@ Func _LOCalc_SheetTabColor(ByRef $oSheet, $iColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurColor
 
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iColor) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.TabColor())
+	If __LO_VarsAreNull($iColor) Then
+		$iCurColor = $oSheet.TabColor()
+		If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
+	EndIf
 
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -1594,6 +1621,8 @@ EndFunc   ;==>_LOCalc_SheetUnprotect
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oSheet not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query Sheet's visibility.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisiblee
@@ -1611,11 +1640,17 @@ Func _LOCalc_SheetVisible(ByRef $oSheet, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
 	Local $iError = 0
 
 	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oSheet.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oSheet.IsVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
