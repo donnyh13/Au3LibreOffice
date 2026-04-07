@@ -3799,7 +3799,7 @@ Func _LOWriter_DocZoom(ByRef $oDoc, $iZoom = Null)
 
 	If __LO_VarsAreNull($iZoom) Then
 		$iCurZoom = $oDoc.CurrentController.ViewSettings.ZoomValue()
-		If Not IsInt($iZoom) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsInt($iCurZoom) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurZoom)
 	EndIf
