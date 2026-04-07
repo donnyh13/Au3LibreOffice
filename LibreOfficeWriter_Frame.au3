@@ -525,6 +525,8 @@ EndFunc   ;==>_LOWriter_FrameAreaGradientMulticolor
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -543,11 +545,16 @@ Func _LOWriter_FrameAreaTransparency(ByRef $oFrame, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurTransp
 
 	If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oFrame.FillTransparence())
+	If __LO_VarsAreNull($iTransparency) Then
+		$iCurTransp = $oFrame.FillTransparence()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
+	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -1249,6 +1256,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSeparator
 ;                  @Error 1 @Extended 2 Return 0 = $iColumns not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Text Columns.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColumns
@@ -1268,14 +1276,19 @@ Func _LOWriter_FrameColumnSettings(ByRef $oFrame, $iColumns = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oTextColumns
-	Local $iError = 0
+	Local $iError = 0, $iColumnCount
 
 	If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oTextColumns = $oFrame.TextColumns()
 	If Not IsObj($oTextColumns) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iColumns) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oTextColumns.ColumnCount())
+	If __LO_VarsAreNull($iColumns) Then
+		$iColumnCount = $oTextColumns.ColumnCount()
+		If Not IsInt($iColumnCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iColumnCount)
+	EndIf
 
 	If Not __LO_IntIsBetween($iColumns, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -1532,6 +1545,8 @@ EndFunc   ;==>_LOWriter_FrameCreate
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create a TextCursor.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. A Text Cursor Object located in the Frame.
 ; Author ........: donnyh13
@@ -1545,9 +1560,14 @@ Func _LOWriter_FrameCreateTextCursor(ByRef $oFrame)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $oTextCursor
+
 	If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oFrame.Text.createTextCursor())
+	$oTextCursor = $oFrame.Text.createTextCursor()
+	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextCursor)
 EndFunc   ;==>_LOWriter_FrameCreateTextCursor
 
 ; #FUNCTION# ====================================================================================================================
@@ -1693,6 +1713,8 @@ EndFunc   ;==>_LOWriter_FrameGetAnchor
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $oCursor not located in a Frame.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Frame Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning an Object for the requested Frame.
 ; Author ........: donnyh13
@@ -1706,11 +1728,16 @@ Func _LOWriter_FrameGetObjByCursor(ByRef $oDoc, ByRef $oCursor)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $oFrame
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If (__LOWriter_Internal_CursorGetDataType($oDoc, $oCursor) <> $LOW_CURDATA_FRAME) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Cursor not in Frame
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oDoc.TextFrames.getByName($oCursor.TextFrame.Name))
+	$oFrame = $oDoc.TextFrames.getByName($oCursor.TextFrame.Name)
+	If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oFrame)
 EndFunc   ;==>_LOWriter_FrameGetObjByCursor
 
 ; #FUNCTION# ====================================================================================================================
@@ -1727,6 +1754,7 @@ EndFunc   ;==>_LOWriter_FrameGetObjByCursor
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving TextFrame Object.
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving Shapes Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Frame Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. No matches found.
 ;                  @Error 0 @Extended 1 Return Object = Success. Successfully found requested Frame by name, returning Frame Object.
@@ -1742,7 +1770,7 @@ Func _LOWriter_FrameGetObjByName(ByRef $oDoc, $sFrameName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oFrames, $oShapes
+	Local $oFrames, $oFrame, $oShapes
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sFrameName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1750,7 +1778,12 @@ Func _LOWriter_FrameGetObjByName(ByRef $oDoc, $sFrameName)
 	$oFrames = $oDoc.TextFrames()
 	If Not IsObj($oFrames) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If ($oFrames.hasByName($sFrameName)) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oFrames.getByName($sFrameName))
+	If ($oFrames.hasByName($sFrameName)) Then
+		$oFrame = $oFrames.getByName($sFrameName)
+		If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $oFrame)
+	EndIf
 
 	; If No results, then search Shapes.
 	$oShapes = $oDoc.DrawPage()
@@ -1759,7 +1792,12 @@ Func _LOWriter_FrameGetObjByName(ByRef $oDoc, $sFrameName)
 	If $oShapes.hasElements() Then
 		For $i = 0 To $oShapes.getCount() - 1
 			If ($oShapes.getByIndex($i).Name() = $sFrameName) Then
-				If ($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") Then Return SetError($__LO_STATUS_SUCCESS, 2, $oShapes.getByIndex($i))
+				If ($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") Then
+					$oFrame = $oShapes.getByIndex($i)
+					If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+					Return SetError($__LO_STATUS_SUCCESS, 2, $oFrame)
+				EndIf
 			EndIf
 
 			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
@@ -2664,6 +2702,8 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradientMulticolor
 ;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
 ;                  @Error 1 @Extended 3 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -2682,12 +2722,17 @@ Func _LOWriter_FrameStyleAreaTransparency(ByRef $oFrameStyle, $iTransparency = N
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurTransp
 
 	If Not IsObj($oFrameStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oFrameStyle.supportsService("com.sun.star.style.Style") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oFrameStyle.FillTransparence())
+	If __LO_VarsAreNull($iTransparency) Then
+		$iCurTransp = $oFrameStyle.FillTransparence()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
+	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -3404,6 +3449,7 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSeparator
 ;                  @Error 1 @Extended 3 Return 0 = $iColumns not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Text Columns.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColumns
@@ -3423,7 +3469,7 @@ Func _LOWriter_FrameStyleColumnSettings(ByRef $oFrameStyle, $iColumns = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oTextColumns
-	Local $iError = 0
+	Local $iError = 0, $iCount
 
 	If Not IsObj($oFrameStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oFrameStyle.supportsService("com.sun.star.style.Style") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -3431,7 +3477,12 @@ Func _LOWriter_FrameStyleColumnSettings(ByRef $oFrameStyle, $iColumns = Null)
 	$oTextColumns = $oFrameStyle.TextColumns()
 	If Not IsObj($oTextColumns) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iColumns) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oTextColumns.ColumnCount())
+	If __LO_VarsAreNull($iColumns) Then
+		$iCount = $oTextColumns.ColumnCount()
+		If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCount)
+	EndIf
 
 	If Not __LO_IntIsBetween($iColumns, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 

@@ -325,6 +325,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarkDelete
 ;                  @Error 1 @Extended 2 Return 0 = $sBookmarkName not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Bookmarks Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to query if Bookmark exists.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If the document contains a Bookmark by the called name, then True is returned, Else False.
 ; Author ........: donnyh13
@@ -339,6 +340,7 @@ Func _LOWriter_FieldBookmarkExists(ByRef $oDoc, $sBookmarkName)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oBookmarks
+	Local $bExists
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -346,7 +348,10 @@ Func _LOWriter_FieldBookmarkExists(ByRef $oDoc, $sBookmarkName)
 	$oBookmarks = $oDoc.getBookmarks()
 	If Not IsObj($oBookmarks) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oBookmarks.hasByName($sBookmarkName))
+	$bExists = $oBookmarks.hasByName($sBookmarkName)
+	If Not IsBool($bExists) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bExists)
 EndFunc   ;==>_LOWriter_FieldBookmarkExists
 
 ; #FUNCTION# ====================================================================================================================
@@ -493,6 +498,8 @@ EndFunc   ;==>_LOWriter_FieldBookmarkInsert
 ;                  @Error 1 @Extended 1 Return 0 = $oBookmark not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sBookmarkName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = $sBookmarkName contains illegal characters, /\@:*?";,.# .
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Bookmark name.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sBookmarkName
@@ -513,11 +520,17 @@ Func _LOWriter_FieldBookmarkModify(ByRef $oBookmark, $sBookmarkName = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sCurName
 	Local $iError = 0
 
 	If Not IsObj($oBookmark) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($sBookmarkName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oBookmark.Name())
+	If __LO_VarsAreNull($sBookmarkName) Then
+		$sCurName = $oBookmark.Name()
+		If Not IsString($sCurName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurName)
+	EndIf
 
 	If Not IsString($sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If StringRegExp($sBookmarkName, '[/\\@:*?";,.#]') Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Invalid Characters in Name.
@@ -754,6 +767,8 @@ EndFunc   ;==>_LOWriter_FieldCombCharInsert
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sCharacters not a String.
 ;                  @Error 1 @Extended 3 Return 0 = String called in $sCharacters longer than 6 characters.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Combined Character Field value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sCharacters
@@ -773,10 +788,16 @@ Func _LOWriter_FieldCombCharModify(ByRef $oCombCharField, $sCharacters = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
+	Local $sCurChar
 
 	If Not IsObj($oCombCharField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($sCharacters) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCombCharField.Content())
+	If __LO_VarsAreNull($sCharacters) Then
+		$sCurChar = $oCombCharField.Content()
+		If Not IsString($sCurChar) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurChar)
+	EndIf
 
 	If Not IsString($sCharacters) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If (StringLen($sCharacters) > 6) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -4451,6 +4472,8 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteModify
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRefField not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Reference type.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Data Type Source for the reference Field. See constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3
 ; Author ........: donnyh13
@@ -4464,9 +4487,14 @@ Func _LOWriter_FieldRefGetType(ByRef $oRefField)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iSource
+
 	If Not IsObj($oRefField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oRefField.ReferenceFieldSource())
+	$iSource = $oRefField.ReferenceFieldSource()
+	If Not IsInt($iSource) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iSource)
 EndFunc   ;==>_LOWriter_FieldRefGetType
 
 ; #FUNCTION# ====================================================================================================================
@@ -4595,6 +4623,8 @@ EndFunc   ;==>_LOWriter_FieldRefMarkDelete
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = Document does not contain a Reference Mark named the same as called in $sName
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create a TextCursor at Reference Mark's anchor.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Reference Marks Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Reference Mark object called in $sName.
@@ -4612,6 +4642,7 @@ Func _LOWriter_FieldRefMarkGetAnchor(ByRef $oDoc, $sName)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oRefMark, $oRefMarks
+	Local $oTextCursor
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -4623,7 +4654,10 @@ Func _LOWriter_FieldRefMarkGetAnchor(ByRef $oDoc, $sName)
 	$oRefMark = $oRefMarks.getByName($sName)
 	If Not IsObj($oRefMark) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oRefMark.Anchor.Text.createTextCursorByRange($oRefMark.Anchor()))
+	$oTextCursor = $oRefMark.Anchor.Text.createTextCursorByRange($oRefMark.Anchor())
+	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextCursor)
 EndFunc   ;==>_LOWriter_FieldRefMarkGetAnchor
 
 ; #FUNCTION# ====================================================================================================================
@@ -5079,6 +5113,8 @@ EndFunc   ;==>_LOWriter_FieldSenderModify
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.text.TextField.SetExpression" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Error creating Master Field Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Master Field Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Set Variable field, returning its Object.
 ; Author ........: donnyh13
@@ -5108,12 +5144,12 @@ Func _LOWriter_FieldSetVarInsert(ByRef $oDoc, ByRef $oCursor, $sName, $sValue, $
 	If _LOWriter_FieldSetVarMasterExists($oDoc, $sName) Then
 		$oSetVarMaster = _LOWriter_FieldSetVarMasterGetObjByName($oDoc, $sName)
 		$iExtended = 1 ; 1 = Master already existed.
+		If Not IsObj($oSetVarMaster) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Else
 		$oSetVarMaster = _LOWriter_FieldSetVarMasterCreate($oDoc, $sName)
+		If Not IsObj($oSetVarMaster) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 	EndIf
-
-	If Not IsObj($oSetVarMaster) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	$oSetVarField.Content = $sValue
 
@@ -5985,6 +6021,8 @@ EndFunc   ;==>_LOWriter_FieldStatTemplateInsert
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oTemplateField not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFormat not an Integer, less than 0 or greater than 5. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Field Format.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iFormat
@@ -6003,11 +6041,16 @@ Func _LOWriter_FieldStatTemplateModify(ByRef $oTemplateField, $iFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurFormat
 
 	If Not IsObj($oTemplateField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iFormat) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oTemplateField.FileFormat())
+	If __LO_VarsAreNull($iFormat) Then
+		$iCurFormat = $oTemplateField.FileFormat()
+		If Not IsInt($iCurFormat) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurFormat)
+	EndIf
 
 	If Not __LO_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_TEMPLATE_NAME) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -6289,6 +6332,8 @@ EndFunc   ;==>_LOWriter_FieldVarShowPageInsert
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oPageShowField not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering Format.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iNumFormat
@@ -6307,11 +6352,16 @@ Func _LOWriter_FieldVarShowPageModify(ByRef $oPageShowField, $iNumFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurNumFormat
 
 	If Not IsObj($oPageShowField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iNumFormat) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPageShowField.NumberingType())
+	If __LO_VarsAreNull($iNumFormat) Then
+		$iCurNumFormat = $oPageShowField.NumberingType()
+		If Not IsInt($iCurNumFormat) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurNumFormat)
+	EndIf
 
 	If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 

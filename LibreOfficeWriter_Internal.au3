@@ -1578,7 +1578,7 @@ Func __LOWriter_DirFrmtCheck(ByRef $oSelection, $bCheckSelection = False)
 	; false if it is.
 	If $oSelection.supportsService("com.sun.star.text.TextCursor") Or _
 			$oSelection.supportsService("com.sun.star.text.TextViewCursor") Then
-		If $bCheckSelection Then Return SetError($__LO_STATUS_SUCCESS, 0, ($oSelection.IsCollapsed()) ? (False) : (True)) ; If collapsed return false meaning fail.
+		If $bCheckSelection And ($oSelection.IsCollapsed()) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)  ; If collapsed return False, meaning fail.
 
 		Return SetError($__LO_STATUS_SUCCESS, 0, True)
 	EndIf
@@ -4327,9 +4327,11 @@ EndFunc   ;==>__LOWriter_ImageGetSuggestedSize
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving TextFrame Object.
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving TextCell Object.
 ;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Footnotes Object for document.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Endnotes Object for document.
-;                  @Error 3 @Extended 5 Return 0 = Unable to identify Foot/EndNote.
-;                  @Error 3 @Extended 6 Return 0 = Cursor in unknown DataType
+;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Footnote Object.
+;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Endnotes Object for document.
+;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Endnote Object.
+;                  @Error 3 @Extended 7 Return 0 = Unable to identify Foot/EndNote.
+;                  @Error 3 @Extended 8 Return 0 = Cursor in unknown DataType
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Object = Success, If $bReturnObject is True, returning an object used for creating a Text Object, @Extended is set to one of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 0 @Extended 0 Return Integer = Success, If $bReturnObject is False, Return value will be one of constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
@@ -4380,21 +4382,31 @@ Func __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor, $bReturn
 
 			For $i = 0 To $oFootNotes.getCount() - 1
 				If ($oFootNotes.getByIndex($i).ReferenceId() = $oCursor.Text.ReferenceId()) And _
-						($oFootNotes.getByIndex($i).Text() = $oCursor.Text()) Then Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_FOOTNOTE, $oFootNotes.getByIndex($i))) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FOOTNOTE))
+						($oFootNotes.getByIndex($i).Text() = $oCursor.Text()) Then
+					$oReturnObject = $oFootNotes.getByIndex($i)
+					If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+					Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_FOOTNOTE, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FOOTNOTE))
+				EndIf
 			Next
 
 			$oEndNotes = $oDoc.getEndnotes()     ; Not found in Footnotes, check Endnotes.
-			If Not IsObj($oEndNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			If Not IsObj($oEndNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 			For $i = 0 To $oEndNotes.getCount() - 1
 				If ($oEndNotes.getByIndex($i).ReferenceId() = $oCursor.Text.ReferenceId()) And _
-						($oEndNotes.getByIndex($i).Text() = $oCursor.Text()) Then Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_ENDNOTE, $oEndNotes.getByIndex($i))) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_ENDNOTE))
+						($oEndNotes.getByIndex($i).Text() = $oCursor.Text()) Then
+					$oReturnObject = $oEndNotes.getByIndex($i)
+					If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+
+					Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_ENDNOTE, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_ENDNOTE))
+				EndIf
 			Next
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; no matches
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0) ; no matches
 	EndSwitch
 
-	Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)         ; unknown data type.
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)         ; unknown data type.
 EndFunc   ;==>__LOWriter_Internal_CursorGetDataType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -5574,6 +5586,8 @@ EndFunc   ;==>__LOWriter_ParAreaGradientMulticolor
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -5592,11 +5606,16 @@ Func __LOWriter_ParAreaTransparency(ByRef $oObj, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurTransp
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oObj.FillTransparence())
+	If __LO_VarsAreNull($iTransparency) Then
+		$iCurTransp = $oObj.FillTransparence()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
+	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -10441,6 +10460,7 @@ EndFunc   ;==>__LOWriter_TransparencyGradientNameInsert
 ;                  @Error 1 @Extended 5 Return 0 = $bSelect not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Current Page number.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. Or Page Number for "gotoPage" command. See Remarks
 ; Author ........: donnyh13
@@ -10479,7 +10499,7 @@ Func __LOWriter_ViewCursorMove(ByRef $oCursor, $iMove, $iCount, $bSelect = False
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iCounted = 0
+	Local $iCounted = 0, $iCurPage
 	Local $bMoved = False
 	Local $asMoves[17]
 
@@ -10523,7 +10543,10 @@ Func __LOWriter_ViewCursorMove(ByRef $oCursor, $iMove, $iCount, $bSelect = False
 		Case $LOW_VIEWCUR_JUMP_TO_PAGE
 			$bMoved = Execute("$oCursor." & $asMoves[$iMove] & "(" & $iCount & ")")
 
-			Return SetError($__LO_STATUS_SUCCESS, $oCursor.getPage(), $bMoved)
+			$iCurPage = $oCursor.getPage()
+			If Not IsInt($iCurPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+			Return SetError($__LO_STATUS_SUCCESS, $iCurPage, $bMoved)
 
 		Case $LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, $LOW_VIEWCUR_JUMP_TO_PREV_PAGE, $LOW_VIEWCUR_SCREEN_DOWN, $LOW_VIEWCUR_SCREEN_UP
 			Do

@@ -212,7 +212,7 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_EndnoteModifyAnchor
-; Description ...: Modify a Specific Endnote's settings.
+; Description ...: Set or Retrieve the Endnote's Anchor Character.
 ; Syntax ........: _LOWriter_EndnoteModifyAnchor(ByRef $oEndNote[, $sLabel = Null])
 ; Parameters ....: $oEndNote            - [in/out] an object. A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
 ;                  $sLabel              - [optional] a string value. Default is Null. A custom anchor label for the Endnote. Call with "" for automatic numbering.
@@ -221,6 +221,8 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oEndNote not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sLabel not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Anchor Character.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sLabel
@@ -242,16 +244,23 @@ Func _LOWriter_EndnoteModifyAnchor(ByRef $oEndNote, $sLabel = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
+	Local $sValue
 
 	If Not IsObj($oEndNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($sLabel = Null) Then
-		; If Label is blank, return the AutoNumbering Number.
-		If ($oEndNote.Label() = "") Then Return SetError($__LO_STATUS_SUCCESS, 2, $oEndNote.Anchor.String())
+	If __LO_VarsAreNull($sLabel) Then
+		If ($oEndNote.Label() = "") Then ; If Label is blank, return the AutoNumbering Number.
+			$sValue = $oEndNote.Anchor.String()
+			If Not IsString($sValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		; Else return the Label.
+			Return SetError($__LO_STATUS_SUCCESS, 2, $sValue)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oEndNote.Label())
+		Else ; return the Label.
+			$sValue = $oEndNote.Label()
+			If Not IsString($sValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+			Return SetError($__LO_STATUS_SUCCESS, 1, $sValue)
+		EndIf
 	EndIf
 
 	If Not IsString($sLabel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -649,7 +658,7 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FootnoteModifyAnchor
-; Description ...: Modify a Footnote's Anchor Character.
+; Description ...: Set or Retrieve the Footnote's Anchor Character.
 ; Syntax ........: _LOWriter_FootnoteModifyAnchor(ByRef $oFootNote[, $sLabel = Null])
 ; Parameters ....: $oFootNote           - [in/out] an object. A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
 ;                  $sLabel              - [optional] a string value. Default is Null. A custom anchor label for the Footnote. Call with "" for automatic numbering.
@@ -658,6 +667,8 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oFootNote not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sLabel not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Anchor Character.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sLabel
@@ -679,16 +690,23 @@ Func _LOWriter_FootnoteModifyAnchor(ByRef $oFootNote, $sLabel = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
+	Local $sValue
 
 	If Not IsObj($oFootNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($sLabel = Null) Then
-		; If Label is blank, return the AutoNumbering Number.
-		If ($oFootNote.Label() = "") Then Return SetError($__LO_STATUS_SUCCESS, 2, $oFootNote.Anchor.String())
+	If __LO_VarsAreNull($sLabel) Then
+		If ($oFootNote.Label() = "") Then ; If Label is blank, return the AutoNumbering Number.
+			$sValue = $oFootNote.Anchor.String()
+			If Not IsString($sValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		; Else return the Label.
+			Return SetError($__LO_STATUS_SUCCESS, 2, $sValue)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oFootNote.Label())
+		Else ; return the Label.
+			$sValue = $oFootNote.Label()
+			If Not IsString($sValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+			Return SetError($__LO_STATUS_SUCCESS, 1, $sValue)
+		EndIf
 	EndIf
 
 	If Not IsString($sLabel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)

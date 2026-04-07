@@ -1406,7 +1406,8 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaGradientMulticolor
 ;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  @Error 1 @Extended 3 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve TextParagraph Object.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve TextParagraph Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -1436,7 +1437,7 @@ Func _LOWriter_DirFrmtParAreaTransparency(ByRef $oSelection, $iTransparency = Nu
 	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oTxtPar = $oSelection.TextParagraph()
-	If Not IsObj($oTxtPar) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not IsObj($oTxtPar) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If $bClearDirFrmt Then
 		$oTxtPar.setPropertyToDefault("FillTransparence")

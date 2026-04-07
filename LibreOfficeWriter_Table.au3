@@ -816,6 +816,8 @@ EndFunc   ;==>_LOWriter_TableCellBorderWidth
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create a TextCursor.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning a Text Cursor Object located in the specified Cell.
 ; Author ........: donnyh13
@@ -829,10 +831,15 @@ Func _LOWriter_TableCellCreateTextCursor(ByRef $oCell)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $oTextCursor
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only create a Text Cursor for individual cells.
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell.Text.createTextCursor())
+	$oTextCursor = $oCell.Text.createTextCursor()
+	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextCursor)
 EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 
 ; #FUNCTION# ====================================================================================================================
@@ -847,6 +854,8 @@ EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
 ;                  @Error 1 @Extended 3 Return 0 = $sFormula not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current cell formula.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Formula was successfully set.
 ;                  @Error 0 @Extended 1 Return String = Success. Current formula is returned in String format.
@@ -864,10 +873,17 @@ Func _LOWriter_TableCellFormula(ByRef $oCell, $sFormula = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sCurFormula
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only set/get formula value for individual cells.
 
-	If __LO_VarsAreNull($sFormula) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCell.getFormula())
+	If __LO_VarsAreNull($sFormula) Then
+		$sCurFormula = $oCell.getFormula()
+		If Not IsString($sCurFormula) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurFormula)
+	EndIf
 
 	If Not IsString($sFormula) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -881,13 +897,15 @@ EndFunc   ;==>_LOWriter_TableCellFormula
 ; Description ...: Get the Data type of a specific cell, see remarks.
 ; Syntax ........: _LOWriter_TableCellGetDataType(ByRef $oCell)
 ; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-; Return values .: Success: A Number.
+; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to identify cell data type.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Number = Success. The Data Type in Number format, see constants, $LOW_CELL_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 0 @Extended 0 Return Integer = Success. The Data Type as an Integer, See Constants, $LOW_CELL_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns the data type as one of the constants, $LOW_CELL_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -900,10 +918,15 @@ Func _LOWriter_TableCellGetDataType(ByRef $oCell)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iType
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only get Data Type for individual cells
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell.getType())
+	$iType = $oCell.getType()
+	If Not IsInt($iType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iType)
 EndFunc   ;==>_LOWriter_TableCellGetDataType
 
 ; #FUNCTION# ====================================================================================================================
@@ -916,6 +939,8 @@ EndFunc   ;==>_LOWriter_TableCellGetDataType
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve cell error value.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. The Cell formula error code as an Integer.
 ; Author ........: donnyh13
@@ -929,10 +954,15 @@ Func _LOWriter_TableCellGetError(ByRef $oCell)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iCurError
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only get Error for individual cells.
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell.getError())
+	$iCurError = $oCell.getError()
+	If Not IsInt($iCurError) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCurError)
 EndFunc   ;==>_LOWriter_TableCellGetError
 
 ; #FUNCTION# ====================================================================================================================
@@ -945,6 +975,8 @@ EndFunc   ;==>_LOWriter_TableCellGetError
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve cell name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. The Cell name in String format.
 ; Author ........: donnyh13
@@ -958,10 +990,15 @@ Func _LOWriter_TableCellGetName(ByRef $oCell)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sName
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only get Cell Name for individual cells.
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell.CellName())
+	$sName = $oCell.CellName()
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sName)
 EndFunc   ;==>_LOWriter_TableCellGetName
 
 ; #FUNCTION# ====================================================================================================================
@@ -976,6 +1013,8 @@ EndFunc   ;==>_LOWriter_TableCellGetName
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a Cell Range. Can only set Write-Protect on individual cells.
 ;                  @Error 1 @Extended 3 Return 0 = $bProtect not a Boolean or not Null keyword.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query if cell is protected.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bProtect
@@ -994,11 +1033,17 @@ Func _LOWriter_TableCellProtect(ByRef $oCell, $bProtect = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
+	Local $bIsProtected
 
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only set individual cell protect property.
 
-	If __LO_VarsAreNull($bProtect) Then Return SetError($__LO_STATUS_SUCCESS, 0, $oCell.IsProtected())
+	If __LO_VarsAreNull($bProtect) Then
+		$bIsProtected = $oCell.IsProtected()
+		If Not IsBool($bIsProtected) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, $bIsProtected)
+	EndIf
 
 	If Not IsBool($bProtect) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -1054,6 +1099,8 @@ EndFunc   ;==>_LOWriter_TableCellsGetNames
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
 ;                  @Error 1 @Extended 3 Return 0 = $sString not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current string.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set the cell String.
 ;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current string.
@@ -1071,10 +1118,17 @@ Func _LOWriter_TableCellString(ByRef $oCell, $sString = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sCurString
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only set/get a String for individual cells.
 
-	If __LO_VarsAreNull($sString) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCell.getString())
+	If __LO_VarsAreNull($sString) Then
+		$sCurString = $oCell.getString()
+		If Not IsString($sCurString) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurString)
+	EndIf
 
 	If Not IsString($sString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -1092,15 +1146,17 @@ EndFunc   ;==>_LOWriter_TableCellString
 ; Syntax ........: _LOWriter_TableCellValue(ByRef $oCell[, $nValue = Null])
 ; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ;                  $nValue              - [optional] a general number value. Default is Null. The value to set the cell to.
-; Return values .: Success: 1 or String.
+; Return values .: Success: 1 or Number.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
 ;                  @Error 1 @Extended 3 Return 0 = $nValue not a Number.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current value.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set cell value.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current cell value.
+;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current cell value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Value can only be set for an individual cell, not a range.
@@ -1115,10 +1171,17 @@ Func _LOWriter_TableCellValue(ByRef $oCell, $nValue = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $nCurVal
+
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only set/get individual cell values.
 
-	If __LO_VarsAreNull($nValue) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCell.getValue())
+	If __LO_VarsAreNull($nValue) Then
+		$nCurVal = $oCell.getValue()
+		If Not IsNumber($nCurVal) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $nCurVal)
+	EndIf
 
 	If Not IsNumber($nValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -1138,6 +1201,8 @@ EndFunc   ;==>_LOWriter_TableCellValue
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iVertOrient not an Integer, less than 0 or greater than 3. See constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Vertical Orientation.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iVertOrient
@@ -1155,13 +1220,18 @@ Func _LOWriter_TableCellVertOrient(ByRef $oCell, $iVertOrient = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurOrient
 
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	; 3 = Vert Orient Bottom, 1 = Vert orient Top
 
-	If __LO_VarsAreNull($iVertOrient) Then Return SetError($__LO_STATUS_SUCCESS, 0, $oCell.VertOrient())
+	If __LO_VarsAreNull($iVertOrient) Then
+		$iCurOrient = $oCell.VertOrient()
+		If Not IsInt($iCurOrient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, $iCurOrient)
+	EndIf
 
 	If Not __LO_IntIsBetween($iVertOrient, $LOW_ORIENT_VERT_NONE, $LOW_ORIENT_VERT_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 

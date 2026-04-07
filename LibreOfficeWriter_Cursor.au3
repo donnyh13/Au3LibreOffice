@@ -189,6 +189,7 @@ EndFunc   ;==>_LOWriter_CursorGetStatus
 ;                  @Error 1 @Extended 3 Return 0 = $oObj is a TableCursor. Can only use View Cursor or Text Cursor.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. The selected text in String format.
 ; Author ........: donnyh13
@@ -203,6 +204,8 @@ Func _LOWriter_CursorGetString(ByRef $oObj)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $sString
+
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oObj.supportsService("com.sun.star.style.ParagraphProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -212,7 +215,10 @@ Func _LOWriter_CursorGetString(ByRef $oObj)
 		If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oObj.getString())
+	$sString = $oObj.getString()
+	If Not IsString($sString) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sString)
 EndFunc   ;==>_LOWriter_CursorGetString
 
 ; #FUNCTION# ====================================================================================================================
@@ -514,7 +520,8 @@ EndFunc   ;==>_LOWriter_CursorInsertString
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error determining cursor type.
 ;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
-;                  @Error 3 @Extended 3 Return 0 = $oCursor Object unknown cursor type.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Current Page number.
+;                  @Error 3 @Extended 4 Return 0 = $oCursor Object unknown cursor type.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. Or Page Number for "gotoPage" command. See Remarks
 ; Author ........: donnyh13
@@ -609,7 +616,7 @@ Func _LOWriter_CursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
 
 		Case Else
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; unknown cursor type.
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; unknown cursor type.
 	EndSwitch
 EndFunc   ;==>_LOWriter_CursorMove
 

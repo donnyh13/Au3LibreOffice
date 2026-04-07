@@ -288,6 +288,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyExists
 ;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not found in Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve requested Format Key Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Format Key string.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ; Author ........: donnyh13
@@ -302,6 +303,7 @@ Func _LOWriter_DateFormatKeyGetString(ByRef $oDoc, $iFormatKey)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oFormatKey
+	Local $sFormatKey
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -310,7 +312,10 @@ Func _LOWriter_DateFormatKeyGetString(ByRef $oDoc, $iFormatKey)
 	$oFormatKey = $oDoc.getNumberFormats().getByKey($iFormatKey)
 	If Not IsObj($oFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Failed to retrieve Key
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oFormatKey.FormatString())
+	$sFormatKey = $oFormatKey.FormatString()
+	If Not IsString($sFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sFormatKey)
 EndFunc   ;==>_LOWriter_DateFormatKeyGetString
 
 ; #FUNCTION# ====================================================================================================================
@@ -2376,6 +2381,7 @@ EndFunc   ;==>_LOWriter_FormatKeyGetStandard
 ;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not found in Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve requested Format Key Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Format Key string.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ; Author ........: donnyh13
@@ -2390,6 +2396,7 @@ Func _LOWriter_FormatKeyGetString(ByRef $oDoc, $iFormatKey)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oFormatKey
+	Local $sFormatKey
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -2398,7 +2405,10 @@ Func _LOWriter_FormatKeyGetString(ByRef $oDoc, $iFormatKey)
 	$oFormatKey = $oDoc.getNumberFormats().getByKey($iFormatKey)
 	If Not IsObj($oFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Key not found.
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oFormatKey.FormatString())
+	$sFormatKey = $oFormatKey.FormatString()
+	If Not IsString($sFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sFormatKey)
 EndFunc   ;==>_LOWriter_FormatKeyGetString
 
 ; #FUNCTION# ====================================================================================================================

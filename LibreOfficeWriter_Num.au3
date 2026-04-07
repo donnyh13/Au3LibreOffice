@@ -746,6 +746,8 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oObj does not support Paragraph Properties Service.
 ;                  @Error 1 @Extended 3 Return 0 = $iLevel not an Integer, less than 1 or greater than 10.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering level.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLevel
@@ -762,13 +764,18 @@ Func _LOWriter_NumStyleSetLevel(ByRef $oObj, $iLevel = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurLevel
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oObj.supportsService("com.sun.star.style.ParagraphProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_IntIsBetween($iLevel, 1, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	If __LO_VarsAreNull($iLevel) Then Return SetError($__LO_STATUS_SUCCESS, 1, ($oObj.NumberingLevel() + 1)) ; Plus one to compensate for Levels being 0 Based.
+	If __LO_VarsAreNull($iLevel) Then
+		$iCurLevel = $oObj.NumberingLevel()
+		If Not IsInt($iCurLevel) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, ($iCurLevel + 1)) ; Plus one to compensate for Levels being 0 Based.
+	EndIf
 
 	$iLevel -= 1 ; Level is 0 Based, minus one to compensate.
 

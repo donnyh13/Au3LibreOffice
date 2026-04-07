@@ -486,7 +486,6 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 		EndIf
 	EndIf
 
-
 	Return SetError($__LO_STATUS_SUCCESS, 1, $oStaticServiceManager)
 EndFunc   ;==>__LO_ServiceManager
 

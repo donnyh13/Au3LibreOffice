@@ -2207,6 +2207,67 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_DocBookmarkModify` --> `_LOWriter_FieldBookmarkModify`
   - `_LOWriter_DocBookmarksGetNames` --> `_LOWriter_FieldBookmarksGetNames`
 - Changed the @Extended values when returning a Document's path in `_LOWriter_DocGetPath`.
+- Removed returns with Object calls directly in them. Also adding applicable error checking:
+  - __LOWriter_DirFrmtCheck
+  - __LOWriter_Internal_CursorGetDataType
+  - __LOWriter_ParAreaTransparency
+  - __LOWriter_ViewCursorMove
+  - _LOWriter_CursorGetString
+  - _LOWriter_CursorMove
+  - _LOWriter_DirFrmtParAreaTransparency
+  - _LOWriter_DocHasPath
+  - _LOWriter_DocIsActive
+  - _LOWriter_DocIsModified
+  - _LOWriter_DocIsReadOnly
+  - _LOWriter_DocMaximize
+  - _LOWriter_DocMinimize
+  - _LOWriter_DocRedoIsPossible
+  - _LOWriter_DocUndoIsPossible
+  - _LOWriter_DocVisible
+  - _LOWriter_DocZoom
+  - _LOWriter_FieldBookmarkExists
+  - _LOWriter_FieldBookmarkModify
+  - _LOWriter_FieldCombCharModify
+  - _LOWriter_FieldRefGetType
+  - _LOWriter_FieldRefMarkGetAnchor
+  - _LOWriter_FieldSetVarInsert
+  - _LOWriter_FieldStatTemplateModify
+  - _LOWriter_FieldVarShowPageModify
+  - _LOWriter_EndnoteModifyAnchor
+  - _LOWriter_FootnoteModifyAnchor
+  - _LOWriter_FrameAreaTransparency
+  - _LOWriter_FrameColumnSettings
+  - _LOWriter_FrameCreateTextCursor
+  - _LOWriter_FrameGetObjByCursor
+  - _LOWriter_FrameGetObjByName
+  - _LOWriter_FrameStyleAreaTransparency
+  - _LOWriter_FrameStyleColumnSettings
+  - _LOWriter_DateFormatKeyGetString
+  - _LOWriter_FormatKeyGetString
+  - _LOWriter_ImageAreaTransparency
+  - _LOWriter_ImageTransparency
+  - _LOWriter_ParStyleAreaTransparency
+  - _LOWriter_NumStyleSetLevel
+  - _LOWriter_PageStyleAreaTransparency
+  - _LOWriter_PageStyleColumnSettings
+  - _LOWriter_PageStyleFooterAreaTransparency
+  - _LOWriter_PageStyleHeaderAreaTransparency
+  - _LOWriter_ShapeAreaColor
+  - _LOWriter_ShapeAreaTransparency
+  - _LOWriter_ShapeGetObjByName
+  - _LOWriter_ShapeName
+  - _LOWriter_TableCellCreateTextCursor
+  - _LOWriter_TableCellFormula
+  - _LOWriter_TableCellGetDataType
+  - _LOWriter_TableCellGetError
+  - _LOWriter_TableCellGetName
+  - _LOWriter_TableCellProtect
+  - _LOWriter_TableCellString
+  - _LOWriter_TableCellValue
+  - _LOWriter_TableCellVertOrient
+- Added Property error checking to some functions:
+  - _LOWriter_DocMaximize
+  - _LOWriter_DocMinimize
 
 #### Documented
 
