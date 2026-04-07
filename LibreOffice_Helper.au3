@@ -1130,6 +1130,8 @@ EndFunc   ;==>_LO_PrintersGetNames
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failure Creating Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failure retrieving printer list Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve default printer name.
 ;                  --Printer Related Errors--
 ;                  @Error 5 @Extended 1 Return 0 = No default printer found.
 ;                  --Success--
@@ -1152,6 +1154,7 @@ Func _LO_PrintersGetNamesAlt($sPrinterName = "", $bReturnDefault = False)
 	Local $asPrinterNames[10]
 	Local $sFilter
 	Local $iCount = 0
+	Local $sName
 	Local Const $wbemFlagReturnImmediately = 0x10, $wbemFlagForwardOnly = 0x20
 	Local $oWMIService, $oPrinters
 
@@ -1166,15 +1169,19 @@ Func _LO_PrintersGetNamesAlt($sPrinterName = "", $bReturnDefault = False)
 	If Not IsObj($oPrinters) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	For $oPrinter In $oPrinters
-		Switch $bReturnDefault
-			Case False
-				If $iCount >= (UBound($asPrinterNames) - 1) Then ReDim $asPrinterNames[UBound($asPrinterNames) * 2]
-				$asPrinterNames[$iCount] = $oPrinter.Name
-				$iCount += 1
+		If $bReturnDefault Then
+			If $oPrinter.Default() Then
+				$sName = $oPrinter.Name()
+				If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-			Case True
-				If $oPrinter.Default Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPrinter.Name)
-		EndSwitch
+				Return SetError($__LO_STATUS_SUCCESS, 1, $sName)
+			EndIf
+
+		Else
+			If $iCount >= (UBound($asPrinterNames) - 1) Then ReDim $asPrinterNames[UBound($asPrinterNames) * 2]
+			$asPrinterNames[$iCount] = $oPrinter.Name()
+			$iCount += 1
+		EndIf
 	Next
 	If $bReturnDefault Then Return SetError($__LO_STATUS_PRINTER_RELATED_ERROR, 1, 0)
 

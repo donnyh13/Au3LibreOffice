@@ -86,6 +86,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Attempted to standardize `$__LO_STATUS_INIT_ERROR` and `$__LO_STATUS_PROCESSING_ERROR` usage throughout functions:
   - _LO_VersionGet
 - Added _LO_Terminate to all examples for clean-up.
+- Removed returns with Object calls directly in them. Also adding applicable error checking:
+  - _LO_PrintersGetNamesAlt
 
 #### Documented
 

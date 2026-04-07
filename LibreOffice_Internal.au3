@@ -478,13 +478,14 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 		If $bIsPortable Then
 			; Try to create the ServiceManager again for the portable version.
 			__LO_SetPortableServiceManager()
+			If Not IsObj($oStaticServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Else ; Create a ServiceManager, for the installed version.
 			$oStaticServiceManager = ObjCreate("com.sun.star.ServiceManager")
+			If Not IsObj($oStaticServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 		EndIf
 	EndIf
 
-	If Not IsObj($oStaticServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, $oStaticServiceManager)
 EndFunc   ;==>__LO_ServiceManager
