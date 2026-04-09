@@ -3730,8 +3730,8 @@ EndFunc   ;==>_LOCalc_RangePivotFilter
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oPivotTable not an Object.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to clear previous filter.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to clear previous filter.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared the Pivot Table Filter.
 ; Author ........: donnyh13
@@ -4912,7 +4912,6 @@ EndFunc   ;==>_LOCalc_RangeRowDelete
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
-;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Rows Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Row Object.

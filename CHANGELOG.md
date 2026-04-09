@@ -1358,6 +1358,27 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_CellStyleDelete
   - _LOCalc_PageStyleDelete
 - `_LOCalc_DocConnect` usage not updated in `_LOCalc_DocOpen`.
+- Added missing error descriptions in headers, corrected wrong documented error values, and wrong function error values in:
+  - _LOCalc_CellOverline
+  - _LOCalc_CellStrikeOut
+  - _LOCalc_CellStyleOverline
+  - _LOCalc_CellStyleStrikeOut
+  - _LOCalc_CellStyleUnderline
+  - _LOCalc_CellUnderline
+  - _LOCalc_TextCursorFontColor
+  - _LOCalc_TextCursorOverline
+  - _LOCalc_TextCursorStrikeOut
+  - _LOCalc_FieldCurrentDisplayGet
+  - _LOCalc_PageStyleFooterBorderColor
+  - _LOCalc_PageStyleFooterBorderStyle
+  - _LOCalc_PageStyleFooterBorderWidth
+  - _LOCalc_PageStyleHeaderBorderColor
+  - _LOCalc_PageStyleHeaderBorderStyle
+  - _LOCalc_PageStyleHeaderBorderWidth
+  - _LOCalc_PageStyleLayout
+  - _LOCalc_RangePivotFilterClear
+  - _LOCalc_RangeRowGetObjByPosition
+  - _LOCalc_SheetDetectiveDependent
 
 #### Refactored
 

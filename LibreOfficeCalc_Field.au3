@@ -50,7 +50,6 @@
 ;                  @Error 1 @Extended 2 Return 0 = $bFieldName not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Field's current display.
-;                  @Error 3 @Extended 2 Return 0 = Failed to identify alternate Field Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning current Field display content in String format.
 ; Author ........: donnyh13

@@ -341,7 +341,7 @@ Func _LOCalc_SheetDetectiveDependent(ByRef $oCell, $bShow = True)
 
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not ($oCell.supportsService("com.sun.star.sheet.SheetCell")) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Only single cells supported.
-	If Not IsBool($bShow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bShow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$tCellAddress = $oCell.CellAddress()
 	If Not IsObj($tCellAddress) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)

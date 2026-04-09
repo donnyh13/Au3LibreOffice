@@ -793,7 +793,7 @@ Func _LOCalc_CellOverline(ByRef $oCell, $iOverLineStyle = Null, $iOLColor = Null
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCell.supportsService("com.sun.star.style.CharacterProperties") _
 			And Not $oCell.supportsService("com.sun.star.table.TableColumn") _ ; Column Obj
-			And Not $oCell.supportsService("com.sun.star.table.TableRow") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; Row Obj
+			And Not $oCell.supportsService("com.sun.star.table.TableRow") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Row Obj
 
 	$vReturn = __LOCalc_CellOverLine($oCell, $iOverLineStyle, $iOLColor, $bWordOnly)
 
@@ -943,7 +943,7 @@ Func _LOCalc_CellStrikeOut(ByRef $oCell, $iStrikeLineStyle = Null, $bWordOnly = 
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCell.supportsService("com.sun.star.style.CharacterProperties") _
 			And Not $oCell.supportsService("com.sun.star.table.TableColumn") _ ; Column Obj
-			And Not $oCell.supportsService("com.sun.star.table.TableRow") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Row Obj
+			And Not $oCell.supportsService("com.sun.star.table.TableRow") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Row Obj
 
 	$vReturn = __LOCalc_CellStrikeOut($oCell, $iStrikeLineStyle, $bWordOnly)
 
@@ -1869,7 +1869,7 @@ Func _LOCalc_CellStyleOverline(ByRef $oCellStyle, $iOverLineStyle = Null, $iOLCo
 	Local $vReturn
 
 	If Not IsObj($oCellStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$vReturn = __LOCalc_CellOverLine($oCellStyle, $iOverLineStyle, $iOLColor, $bWordOnly)
 
@@ -2058,7 +2058,7 @@ Func _LOCalc_CellStyleStrikeOut(ByRef $oCellStyle, $iStrikeLineStyle = Null, $bW
 	Local $vReturn
 
 	If Not IsObj($oCellStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$vReturn = __LOCalc_CellStrikeOut($oCellStyle, $iStrikeLineStyle, $bWordOnly)
 
@@ -2248,7 +2248,7 @@ Func _LOCalc_CellStyleUnderline(ByRef $oCellStyle, $iUnderLineStyle = Null, $iUL
 	Local $vReturn
 
 	If Not IsObj($oCellStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not $oCellStyle.supportsService("com.sun.star.style.CellStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$vReturn = __LOCalc_CellUnderLine($oCellStyle, $iUnderLineStyle, $iULColor, $bWordOnly)
 
@@ -2446,7 +2446,7 @@ Func _LOCalc_CellUnderline(ByRef $oCell, $iUnderLineStyle = Null, $iULColor = Nu
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCell.supportsService("com.sun.star.style.CharacterProperties") _
 			And Not $oCell.supportsService("com.sun.star.table.TableColumn") _ ; Column Obj
-			And Not $oCell.supportsService("com.sun.star.table.TableRow") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; Row Obj
+			And Not $oCell.supportsService("com.sun.star.table.TableRow") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Row Obj
 
 	$vReturn = __LOCalc_CellUnderLine($oCell, $iUnderLineStyle, $iULColor, $bWordOnly)
 

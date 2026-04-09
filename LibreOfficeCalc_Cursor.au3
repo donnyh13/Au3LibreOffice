@@ -507,6 +507,8 @@ EndFunc   ;==>_LOCalc_TextCursorFont
 ;                  @Error 1 @Extended 3 Return 0 = $oTextCursor does not support Character properties.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Font Color.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFontColor
@@ -858,7 +860,7 @@ Func _LOCalc_TextCursorOverline(ByRef $oTextCursor, $iOverLineStyle = Null, $iOL
 	Local $oCursor
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oTextCursor.supportsService("com.sun.star.style.CharacterProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not $oTextCursor.supportsService("com.sun.star.style.CharacterProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	Switch __LOCalc_Internal_CursorGetType($oTextCursor)
 		Case $LOC_CURTYPE_PARAGRAPH
@@ -1030,7 +1032,7 @@ Func _LOCalc_TextCursorStrikeOut(ByRef $oTextCursor, $iStrikeLineStyle = Null, $
 	Local $oCursor
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oTextCursor.supportsService("com.sun.star.style.CharacterProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not $oTextCursor.supportsService("com.sun.star.style.CharacterProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	Switch __LOCalc_Internal_CursorGetType($oTextCursor)
 		Case $LOC_CURTYPE_PARAGRAPH
