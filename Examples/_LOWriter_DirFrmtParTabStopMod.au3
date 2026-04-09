@@ -9,16 +9,16 @@ Func Example()
 	Local $iHMM, $iTabStop
 	Local $avTabStop
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the formatting settings directly.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying formatting settings directly.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @TAB & @TAB & "Some text to demonstrate modifying formatting settings directly.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -37,10 +37,10 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.5, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the TabStop from 1/4" to 1/2" Tab Stop position, Set the fill character to Asc(~) the Tilde key ASCII Value 126.
-	; Set alignment To  $LOW_TAB_ALIGN_DECIMAL, and the decimal character to ASC(.) a period, ASCII value 46.
+	; Modify the TabStop from 1/4" to 1/2" Tab Stop position, Set alignment To  $LOW_PAR_TAB_ALIGN_DECIMAL,
+	; and the decimal character to ASC(.) a period, ASCII value 46., Set the fill character to Asc(~) the Tilde key ASCII Value 126.
 	; Since I am modifying the TabStop position, @Extended will be my new Tab Stop position.
-	_LOWriter_DirFrmtParTabStopMod($oViewCursor, $iTabStop, $iHMM, Asc("~"), $LOW_TAB_ALIGN_DECIMAL, Asc("."))
+	_LOWriter_DirFrmtParTabStopMod($oViewCursor, $iTabStop, $iHMM, $LOW_PAR_TAB_ALIGN_DECIMAL, Asc("."), Asc("~"))
 	$iTabStop = @extended
 	If @error Then _ERROR($oDoc, "Failed to modify Paragraph Tab stop settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -50,15 +50,19 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Tab stop, having the position of " & $iTabStop & " has the following settings: " & @CRLF & _
 			"The Current position is, in Hundredths of a Millimeter (HMM): " & $avTabStop[0] & @CRLF & _
-			"The Current Fill Character is, in ASC value: " & $avTabStop[1] & " and looks like: " & Chr($avTabStop[1]) & @CRLF & _
-			"The Current Alignment setting is, (See UDF constants): " & $avTabStop[2] & @CRLF & _
-			"The Current Decimal Character is, in ASC value: " & $avTabStop[3] & " and looks like: " & Chr($avTabStop[3]))
+			"The Current Alignment setting is, (See UDF constants): " & $avTabStop[1] & @CRLF & _
+			"The Current Decimal Character is, in ASC value: " & $avTabStop[2] & " and looks like: " & Chr($avTabStop[2]) & @CRLF & _
+			"The Current Fill Character is, in ASC value: " & $avTabStop[3] & " and looks like: " & Chr($avTabStop[3]))
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

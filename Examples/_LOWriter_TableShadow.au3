@@ -9,12 +9,12 @@ Func Example()
 	Local $iHMM
 	Local $avShadow
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Table, 3 columns, 5 rows.
@@ -25,8 +25,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.5, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Table shadow to 1/2 an inch wide, the color to $LO_COLOR_DKGRAY, and shadow location to $LOW_SHADOW_BOTTOM_LEFT
-	_LOWriter_TableShadow($oTable, $iHMM, $LO_COLOR_DKGRAY, $LOW_SHADOW_BOTTOM_LEFT)
+	; Set the Table shadow location to $LOW_SHADOW_LOCATION_BOTTOM_LEFT, the color to $LO_COLOR_DKGRAY, and 1/2 an inch wide
+	_LOWriter_TableShadow($oTable, $LOW_SHADOW_LOCATION_BOTTOM_LEFT, $LO_COLOR_DKGRAY, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set Table shadow settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Table shadow settings. Return will be an Array, with values in order of function parameters.
@@ -34,15 +34,19 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Table shadow settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Table shadow values are as follows: " & @CRLF & _
-			"Width = " & $avShadow[0] & " Hundredths of a Millimeter (HMM)." & @CRLF & _
-			"Color = " & $avShadow[1] & " (as a RGB Color Integer)." & @CRLF & _
-			"Shadow Location (See constants) = " & $avShadow[2])
+			"The Shadow location is, (see UDF Constants): " & $avShadow[0] & @CRLF & _
+			"The Shadow color is (as a RGB Color Integer): " & $avShadow[1] & @CRLF & _
+			"The shadow width is, in Hundredths of a Millimeter (HMM): " & $avShadow[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

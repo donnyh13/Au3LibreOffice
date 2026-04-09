@@ -17,6 +17,10 @@ Func Example()
 	If @error Then Return _ERROR("Failed to Query Database for Read-Only status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Is the Database ""Bibliography"", currently set to Read Only? True/False: " & $bReturn)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR("Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($sErrorText)

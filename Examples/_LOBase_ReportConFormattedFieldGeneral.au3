@@ -17,7 +17,7 @@ Func Example()
 	Local $avControl
 	Local $sSavePath
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOBase_DocCreate(True, False)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -45,11 +45,11 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to create a Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Turn on the Page Header.
-	_LOBase_ReportPageHeader($oReportDoc, True)
+	_LOBase_ReportDocPageHeader($oReportDoc, True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to modify Report Document Page Header. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Page Header Section of the Report.
-	$oSection = _LOBase_ReportSectionGetObj($oReportDoc, $LOB_REP_SECTION_TYPE_PAGE_HEADER)
+	$oSection = _LOBase_ReportDocSectionGetObj($oReportDoc, $LOB_REP_SECTION_TYPE_PAGE_HEADER)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to retrieve Section Object of Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a control in the Page Header Section.
@@ -57,7 +57,7 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to insert a Control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOBase_FontDescCreate("Times New Roman", $LOB_WEIGHT_BOLD, $LOB_POSTURE_ITALIC, 16, $LO_COLOR_INDIGO, $LOB_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOB_STRIKEOUT_NONE, False, $LOB_RELIEF_NONE)
+	$mFont = _LOBase_FontDescCreate("Times New Roman", $LOB_CHAR_WEIGHT_BOLD, $LOB_CHAR_POSTURE_ITALIC, 16, $LO_COLOR_INDIGO, $LOB_CHAR_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOB_CHAR_STRIKEOUT_NONE, False, $LOB_CHAR_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve a Format key value for "#,###.00"
@@ -65,7 +65,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to retrieve a Format key. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
-	_LOBase_ReportConFormattedFieldGeneral($oControl, "Renamed_AutoIt_Control", 'rpt:COUNT(1;1)=VALUE("2")', True, True, $LO_COLOR_GRAY, $mFont, $LOB_TXT_ALIGN_HORI_CENTER, $LOB_ALIGN_VERT_BOTTOM, $iFormat)
+	_LOBase_ReportConFormattedFieldGeneral($oControl, "Renamed_AutoIt_Control", 'rpt:COUNT(1;1)=VALUE("2")', True, True, $LO_COLOR_GRAY, $mFont, $LOB_PAR_TXT_ALIGN_HORI_CENTER, $LOB_ALIGN_VERT_BOTTOM, $iFormat)
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to modify the Control's properties. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings for the control. Return will be an Array in order of function parameters.
@@ -86,7 +86,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to close the document.")
 
 	; Close the Report Document.
-	_LOBase_ReportClose($oReportDoc, True)
+	_LOBase_ReportDocClose($oReportDoc, True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
@@ -96,11 +96,15 @@ Func Example()
 	; Close the document.
 	_LOBase_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $oReportDoc, $sErrorText)
 	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
-	If IsObj($oReportDoc) Then _LOBase_ReportClose($oReportDoc, True)
+	If IsObj($oReportDoc) Then _LOBase_ReportDocClose($oReportDoc, True)
 	If IsObj($oDoc) Then _LOBase_DocClose($oDoc, False)
 	Exit
 EndFunc

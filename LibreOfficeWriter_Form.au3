@@ -101,6 +101,7 @@
 ; _LOWriter_FormConTimeFieldGeneral
 ; _LOWriter_FormConTimeFieldValue
 ; _LOWriter_FormDelete
+; _LOWriter_FormDocSettings
 ; _LOWriter_FormGetObjByIndex
 ; _LOWriter_FormParent
 ; _LOWriter_FormPropertiesData
@@ -264,7 +265,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
@@ -292,7 +293,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
 ;                  @Error 1 @Extended 5 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 6 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 7 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 8 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 10 Return 0 = $bPrintable not a Boolean.
@@ -407,7 +408,7 @@ Func _LOWriter_FormConCheckBoxGeneral(ByRef $oCheckBox, $sName = Null, $sLabel =
 		$oCheckBox.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		$oCheckBox.Control.WritingMode = $iTxtDir
 		$iError = ($oCheckBox.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 8))
@@ -760,7 +761,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ; Parameters ....: $oComboBox           - [in/out] an object. A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Combo box will accept.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
@@ -791,7 +792,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
 ;                  @Error 1 @Extended 8 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bVisible not a Boolean.
@@ -807,7 +808,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  @Error 1 @Extended 19 Return 0 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 20 Return 0 = $iBackColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error 1 @Extended 21 Return 0 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 22 Return 0 = $iBorderColor not an Integer, less than 0 or greater than 16777215. $bDropdown not a Boolean.
+;                  @Error 1 @Extended 22 Return 0 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error 1 @Extended 23 Return 0 = $bDropdown not a Boolean.
 ;                  @Error 1 @Extended 24 Return 0 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
 ;                  @Error 1 @Extended 25 Return 0 = $bAutoFill not an Boolean.
@@ -905,7 +906,7 @@ Func _LOWriter_FormConComboBoxGeneral(ByRef $oComboBox, $sName = Null, $oLabelFi
 		$oComboBox.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oComboBox.Control.WritingMode = $iTxtDir
 		$iError = ($oComboBox.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -1272,7 +1273,7 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ; Parameters ....: $oCurrencyField      - [in/out] an object. A Currency Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
@@ -1310,7 +1311,7 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $bStrict not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bVisible not a Boolean.
@@ -1441,7 +1442,7 @@ Func _LOWriter_FormConCurrencyFieldGeneral(ByRef $oCurrencyField, $sName = Null,
 		$oCurrencyField.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oCurrencyField.Control.WritingMode = $iTxtDir
 		$iError = ($oCurrencyField.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -1871,7 +1872,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ; Parameters ....: $oDateField          - [in/out] an object. A Date Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
@@ -1906,7 +1907,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $bStrict not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bVisible not a Boolean.
@@ -2066,7 +2067,7 @@ Func _LOWriter_FormConDateFieldGeneral(ByRef $oDateField, $sName = Null, $oLabel
 		$oDateField.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oDateField.Control.WritingMode = $iTxtDir
 		$iError = ($oDateField.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -2447,6 +2448,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldValue
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Control's parent Object.
 ;                  @Error 3 @Extended 2 Return 0 = Cannot delete the last control in a Grouped control.
+;                  @Error 3 @Extended 3 Return 0 = Failed to delete the Control.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Control was successfully deleted.
 ; Author ........: donnyh13
@@ -2470,6 +2472,10 @@ Func _LOWriter_FormConDelete(ByRef $oControl)
 
 	$oParent.remove($oControl)
 
+	If IsObj($oControl.Parent()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Parent will be Null when the control is deleted.
+
+	$oControl = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormConDelete
 
@@ -2479,7 +2485,7 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ; Syntax ........: _LOWriter_FormConFileSelFieldGeneral(ByRef $oFileSel[, $sName = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $sDefaultTxt = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]])
 ; Parameters ....: $oFileSel            - [in/out] an object. A File Selection Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -2503,7 +2509,7 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ;                  @Error 1 @Extended 1 Return 0 = $oFileSel not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oFileSel not a File Selection Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bReadOnly not a Boolean.
@@ -2592,7 +2598,7 @@ Func _LOWriter_FormConFileSelFieldGeneral(ByRef $oFileSel, $sName = Null, $iTxtD
 		$oFileSel.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oFileSel.Control.WritingMode = $iTxtDir
 		$iError = ($oFileSel.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 2))
@@ -2925,7 +2931,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ; Parameters ....: $oFormatField        - [in/out] an object. A Formatted Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Formatted field will accept.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
@@ -2959,7 +2965,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
 ;                  @Error 1 @Extended 8 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bVisible not a Boolean.
@@ -2988,6 +2994,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  @Error 1 @Extended 32 Return 0 = $sHelpURL not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form parent Document Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -3081,7 +3088,7 @@ Func _LOWriter_FormConFormattedFieldGeneral(ByRef $oFormatField, $sName = Null, 
 		$oFormatField.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oFormatField.Control.WritingMode = $iTxtDir
 		$iError = ($oFormatField.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -3465,7 +3472,7 @@ EndFunc   ;==>_LOWriter_FormConGetParent
 ; Parameters ....: $oGroupBox           - [in/out] an object. A Groupbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
@@ -3480,7 +3487,7 @@ EndFunc   ;==>_LOWriter_FormConGetParent
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oGroupBox not a GroupBox Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bPrintable not a Boolean.
@@ -3558,7 +3565,7 @@ Func _LOWriter_FormConGroupBoxGeneral(ByRef $oGroupBox, $sName = Null, $sLabel =
 		$oGroupBox.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oGroupBox.Control.WritingMode = $iTxtDir
 		$iError = ($oGroupBox.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -3643,7 +3650,7 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ; Syntax ........: _LOWriter_FormConImageButtonGeneral(ByRef $oImageButton[, $sName = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $iAction = Null[, $sURL = Null[, $sFrame = Null[, $sGraphics = Null[, $iScale = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]])
 ; Parameters ....: $oImageButton        - [in/out] an object. A Image Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
@@ -3666,7 +3673,7 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ;                  @Error 1 @Extended 1 Return 0 = $oImageButton not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oImageButton not an Image Button Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bPrintable not a Boolean.
@@ -3816,7 +3823,7 @@ Func _LOWriter_FormConImageButtonGeneral(ByRef $oImageButton, $sName = Null, $iT
 		$oImageButton.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oImageButton.Control.WritingMode = $iTxtDir
 		$iError = ($oImageButton.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 2))
@@ -4100,7 +4107,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ; Parameters ....: $oImageControl       - [in/out] an object. A Image Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -4123,7 +4130,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bReadOnly not a Boolean.
@@ -4219,7 +4226,7 @@ Func _LOWriter_FormConImageControlGeneral(ByRef $oImageControl, $sName = Null, $
 		$oImageControl.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oImageControl.Control.WritingMode = $iTxtDir
 		$iError = ($oImageControl.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -4552,7 +4559,7 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ; Parameters ....: $oLabel              - [in/out] an object. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The name of the Label control.
 ;                  $sLabel              - [optional] a string value. Default is Null. The Label of the control.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
@@ -4573,7 +4580,7 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oLabel not a Label Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bPrintable not a Boolean.
@@ -4664,7 +4671,7 @@ Func _LOWriter_FormConLabelGeneral(ByRef $oLabel, $sName = Null, $sLabel = Null,
 		$oLabel.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oLabel.Control.WritingMode = $iTxtDir
 		$iError = ($oLabel.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -4912,7 +4919,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ; Parameters ....: $oListBox            - [in/out] an object. A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -4941,7 +4948,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bReadOnly not a Boolean.
@@ -5054,7 +5061,7 @@ Func _LOWriter_FormConListBoxGeneral(ByRef $oListBox, $sName = Null, $oLabelFiel
 		$oListBox.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oListBox.Control.WritingMode = $iTxtDir
 		$iError = ($oListBox.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -5399,7 +5406,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ; Syntax ........: _LOWriter_FormConNavBarGeneral(ByRef $oNavBar[, $sName = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bTabStop = Null[, $iTabOrder = Null[, $iDelay = Null[, $mFont = Null[, $iBackColor = Null[, $iBorder = Null[, $bSmallIcon = Null[, $bShowPos = Null[, $bShowNav = Null[, $bShowActing = Null[, $bShowFiltering = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]])
 ; Parameters ....: $oNavBar             - [in/out] an object. A Navigation Bar Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
@@ -5422,7 +5429,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ;                  @Error 1 @Extended 1 Return 0 = $oNavBar not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oNavBar not a Navigation Bar Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bTabStop not a Boolean.
@@ -5511,7 +5518,7 @@ Func _LOWriter_FormConNavBarGeneral(ByRef $oNavBar, $sName = Null, $iTxtDir = Nu
 		$oNavBar.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oNavBar.Control.WritingMode = $iTxtDir
 		$iError = ($oNavBar.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 2))
@@ -5753,7 +5760,7 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ; Parameters ....: $oNumericField       - [in/out] an object. A Numeric Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
@@ -5789,7 +5796,7 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $bStrict not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bVisible not a Boolean.
@@ -5817,14 +5824,8 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  @Error 1 @Extended 31 Return 0 = $sAddInfo not a String.
 ;                  @Error 1 @Extended 32 Return 0 = $sHelpText not a String.
 ;                  @Error 1 @Extended 33 Return 0 = $sHelpURL not a String.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.util.Time" Struct.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Minimum Time.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve current Maximum Time.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify parent document.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -5920,7 +5921,7 @@ Func _LOWriter_FormConNumericFieldGeneral(ByRef $oNumericField, $sName = Null, $
 		$oNumericField.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oNumericField.Control.WritingMode = $iTxtDir
 		$iError = ($oNumericField.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -6332,7 +6333,7 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Group Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sGroupName          - [optional] a string value. Default is Null. The Group name the control is in.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
@@ -6360,7 +6361,7 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
 ;                  @Error 1 @Extended 5 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 6 Return 0 = Object called in $oLabelField not a Group Box Control.
-;                  @Error 1 @Extended 7 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 8 Return 0 = $sGroupName not a String.
 ;                  @Error 1 @Extended 9 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 10 Return 0 = $bVisible not a Boolean.
@@ -6476,7 +6477,7 @@ Func _LOWriter_FormConOptionButtonGeneral(ByRef $oOptionButton, $sName = Null, $
 		$oOptionButton.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		$oOptionButton.Control.WritingMode = $iTxtDir
 		$iError = ($oOptionButton.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 8))
@@ -6819,7 +6820,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ; Parameters ....: $oPatternField       - [in/out] an object. A Pattern Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Pattern field will accept.
 ;                  $sEditMask           - [optional] a string value. Default is Null. The edit mask of the field.
 ;                  $sLiteralMask        - [optional] a string value. Default is Null. The literal mask of the field.
@@ -6850,7 +6851,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
 ;                  @Error 1 @Extended 8 Return 0 = $sEditMask
 ;                  @Error 1 @Extended 9 Return 0 = $sLiteralMask not a String.
@@ -6964,7 +6965,7 @@ Func _LOWriter_FormConPatternFieldGeneral(ByRef $oPatternField, $sName = Null, $
 		$oPatternField.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oPatternField.Control.WritingMode = $iTxtDir
 		$iError = ($oPatternField.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -7283,7 +7284,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LO_UnitConvert, _LOWriter_FormConSize
 ; Link ..........:
 ; Example .......: Yes
@@ -7350,7 +7351,7 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ; Parameters ....: $oPushButton         - [in/out] an object. A Push Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
@@ -7382,7 +7383,7 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oPushButton not a Push Button Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bPrintable not a Boolean.
@@ -7561,7 +7562,7 @@ Func _LOWriter_FormConPushButtonGeneral(ByRef $oPushButton, $sName = Null, $sLab
 		$oPushButton.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oPushButton.Control.WritingMode = $iTxtDir
 		$iError = ($oPushButton.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -8205,7 +8206,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ; Parameters ....: $oCheckBox           - [in/out] an object. A Table Control Checkbox Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $iDefaultState       - [optional] an integer value (0-2). Default is Null. The Default state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
@@ -8223,7 +8224,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oCheckBox not a Check Box Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $iDefaultState not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 8 Return 0 = $iWidth not an Integer, less than 100 or greater than 200,000.
@@ -8308,7 +8309,7 @@ Func _LOWriter_FormConTableConCheckBoxGeneral(ByRef $oCheckBox, $sName = Null, $
 		$oCheckBox.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oCheckBox.WritingMode = $iTxtDir
 		$iError = ($oCheckBox.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -8560,6 +8561,8 @@ Func _LOWriter_FormConTableConColumnDelete(ByRef $oColumn)
 		If ($oParent.getByIndex($i) = $oColumn) Then
 			$oParent.removeByIndex($i) ; The name can be the same as another control, so I have to remove by Index.
 
+			$oColumn = Null
+
 			Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 		EndIf
 
@@ -8728,7 +8731,7 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ; Parameters ....: $oComboBox           - [in/out] an object. A Table Control Combo Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Combo box will accept.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -8749,7 +8752,7 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oComboBox not a Combo Box Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
 ;                  @Error 1 @Extended 7 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bReadOnly not a Boolean.
@@ -8844,7 +8847,7 @@ Func _LOWriter_FormConTableConComboBoxGeneral(ByRef $oComboBox, $sName = Null, $
 		$oComboBox.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oComboBox.WritingMode = $iTxtDir
 		$iError = ($oComboBox.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -9061,7 +9064,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ; Parameters ....: $oCurrencyField      - [in/out] an object. A Table Control Currency Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null.If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -9090,7 +9093,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oCurrencyField not a Currency Field Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bStrict not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bReadOnly not a Boolean.
@@ -9202,7 +9205,7 @@ Func _LOWriter_FormConTableConCurrencyFieldGeneral(ByRef $oCurrencyField, $sName
 		$oCurrencyField.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oCurrencyField.WritingMode = $iTxtDir
 		$iError = ($oCurrencyField.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -9494,7 +9497,7 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ; Parameters ....: $oDateField          - [in/out] an object. A Table Control Date Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -9520,7 +9523,7 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oDateField not a Date Field Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bStrict not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bReadOnly not a Boolean.
@@ -9663,7 +9666,7 @@ Func _LOWriter_FormConTableConDateFieldGeneral(ByRef $oDateField, $sName = Null,
 		$oDateField.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oDateField.WritingMode = $iTxtDir
 		$iError = ($oDateField.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -9967,7 +9970,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ; Parameters ....: $oFormatField        - [in/out] an object. A Table Control Formatted Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Formatted field will accept.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -9992,7 +9995,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oFormatField not a Formatted Field Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
 ;                  @Error 1 @Extended 7 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bReadOnly not a Boolean.
@@ -10013,6 +10016,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ;                  @Error 1 @Extended 23 Return 0 = $sHelpURL not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve form parent document Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -10096,7 +10100,7 @@ Func _LOWriter_FormConTableConFormattedFieldGeneral(ByRef $oFormatField, $sName 
 		$oFormatField.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oFormatField.WritingMode = $iTxtDir
 		$iError = ($oFormatField.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -10290,7 +10294,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ; Syntax ........: _LOWriter_FormConTableConGeneral(ByRef $oTableCon[, $sName = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $mFont = Null[, $nRowHeight = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bNavBar = Null[, $bRecordMarker = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]])
 ; Parameters ....: $oTableCon           - [in/out] an object. A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
 ;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
@@ -10312,7 +10316,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ;                  @Error 1 @Extended 1 Return 0 = $oTableCon not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oTableCon not a Table Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bVisible not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bPrintable not a Boolean.
@@ -10397,7 +10401,7 @@ Func _LOWriter_FormConTableConGeneral(ByRef $oTableCon, $sName = Null, $iTxtDir 
 		$oTableCon.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oTableCon.Control.WritingMode = $iTxtDir
 		$iError = ($oTableCon.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 2))
@@ -10665,7 +10669,7 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ; Parameters ....: $oListBox            - [in/out] an object. A Table Control List Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
 ;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
@@ -10684,7 +10688,7 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oListBox not a List Box Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bReadOnly not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
@@ -10776,7 +10780,7 @@ Func _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox, $sName = Null, $sL
 		$oListBox.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oListBox.WritingMode = $iTxtDir
 		$iError = ($oListBox.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -10823,7 +10827,7 @@ Func _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox, $sName = Null, $sL
 	EndIf
 
 	If ($asList = Default) Then
-		$iError = BitOR($iError, 1024) ; Can't Default StringItemList.
+		$iError = BitOR($iError, 128) ; Can't Default StringItemList.
 
 	ElseIf ($asList <> Null) Then
 		If Not IsArray($asList) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
@@ -10858,7 +10862,7 @@ Func _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox, $sName = Null, $sL
 	EndIf
 
 	If ($aiDefaultSel = Default) Then
-		$iError = BitOR($iError, 2048) ; Can't Default Name.
+		$iError = BitOR($iError, 1024) ; Can't Default Name.
 
 	ElseIf ($aiDefaultSel <> Null) Then
 		If Not IsArray($aiDefaultSel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 14, 0)
@@ -10874,7 +10878,7 @@ Func _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox, $sName = Null, $sL
 	EndIf
 
 	If ($sAddInfo = Default) Then
-		$iError = BitOR($iError, 4096) ; Can't Default Tag.
+		$iError = BitOR($iError, 2048) ; Can't Default Tag.
 
 	ElseIf ($sAddInfo <> Null) Then
 		If Not IsString($sAddInfo) Then Return SetError($__LO_STATUS_INPUT_ERROR, 17, 0)
@@ -10979,7 +10983,7 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ; Parameters ....: $oNumericField       - [in/out] an object. A Table Control Numeric Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -11006,7 +11010,7 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oNumericField not a Numeric Field Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bStrict not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bReadOnly not a Boolean.
@@ -11026,14 +11030,8 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ;                  @Error 1 @Extended 22 Return 0 = $sAddInfo not a String.
 ;                  @Error 1 @Extended 23 Return 0 = $sHelpText not a String.
 ;                  @Error 1 @Extended 24 Return 0 = $sHelpURL not a String.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.util.Time" Struct.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Minimum Time.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve current Maximum Time.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify parent document.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -11119,7 +11117,7 @@ Func _LOWriter_FormConTableConNumericFieldGeneral(ByRef $oNumericField, $sName =
 		$oNumericField.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oNumericField.WritingMode = $iTxtDir
 		$iError = ($oNumericField.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -11412,7 +11410,7 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ; Parameters ....: $oPatternField       - [in/out] an object. A Table Control Pattern Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Pattern field will accept.
 ;                  $sEditMask           - [optional] a string value. Default is Null. The edit mask of the field.
 ;                  $sLiteralMask        - [optional] a string value. Default is Null. The literal mask of the field.
@@ -11434,7 +11432,7 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oPatternField not a Pattern Field Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
 ;                  @Error 1 @Extended 7 Return 0 = $sEditMask
 ;                  @Error 1 @Extended 8 Return 0 = $sLiteralMask not a String.
@@ -11530,7 +11528,7 @@ Func _LOWriter_FormConTableConPatternFieldGeneral(ByRef $oPatternField, $sName =
 		$oPatternField.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oPatternField.WritingMode = $iTxtDir
 		$iError = ($oPatternField.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -11617,7 +11615,7 @@ Func _LOWriter_FormConTableConPatternFieldGeneral(ByRef $oPatternField, $sName =
 	EndIf
 
 	If ($sDefaultTxt = Default) Then
-		$iError = BitOR($iError, 16384) ; Can't Default DefaultText.
+		$iError = BitOR($iError, 2048) ; Can't Default DefaultText.
 
 	ElseIf ($sDefaultTxt <> Null) Then
 		If Not IsString($sDefaultTxt) Then Return SetError($__LO_STATUS_INPUT_ERROR, 14, 0)
@@ -11773,7 +11771,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ; Parameters ....: $oTextBox            - [in/out] an object. A Table Control Textbox Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control Name.
 ;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The max length of text that can be entered. 0 = unlimited.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -11793,7 +11791,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oTextBox not a Text Box Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
 ;                  @Error 1 @Extended 7 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bReadOnly not a Boolean.
@@ -11886,7 +11884,7 @@ Func _LOWriter_FormConTableConTextBoxGeneral(ByRef $oTextBox, $sName = Null, $sL
 		$oTextBox.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oTextBox.WritingMode = $iTxtDir
 		$iError = ($oTextBox.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -12094,7 +12092,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ; Parameters ....: $oTimeField          - [in/out] an object. A Table Control Time Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $sLabel              - [optional] a string value. Default is Null.The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
@@ -12119,7 +12117,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ;                  @Error 1 @Extended 2 Return 0 = Object called in $oTimeField not a Time Field Control.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 6 Return 0 = $bStrict not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bReadOnly not a Boolean.
@@ -12264,7 +12262,7 @@ Func _LOWriter_FormConTableConTimeFieldGeneral(ByRef $oTimeField, $sName = Null,
 		$oTimeField.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oTimeField.WritingMode = $iTxtDir
 		$iError = ($oTimeField.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -12603,7 +12601,7 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ; Parameters ....: $oTextBox            - [in/out] an object. A Textbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control Name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The max length of text that can be entered. 0 = unlimited.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
@@ -12634,7 +12632,7 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
 ;                  @Error 1 @Extended 8 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bVisible not a Boolean.
@@ -12753,7 +12751,7 @@ Func _LOWriter_FormConTextBoxGeneral(ByRef $oTextBox, $sName = Null, $oLabelFiel
 		$oTextBox.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oTextBox.Control.WritingMode = $iTxtDir
 		$iError = ($oTextBox.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -13099,7 +13097,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ; Parameters ....: $oTimeField          - [in/out] an object.object. A Time Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sName               - [optional] a string value. Default is Null. The control name.
 ;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
 ;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
@@ -13133,7 +13131,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = $oLabelField not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 7 Return 0 = $bStrict not a Boolean.
 ;                  @Error 1 @Extended 8 Return 0 = $bEnabled not a Boolean.
 ;                  @Error 1 @Extended 9 Return 0 = $bVisible not a Boolean.
@@ -13297,7 +13295,7 @@ Func _LOWriter_FormConTimeFieldGeneral(ByRef $oTimeField, $sName = Null, $oLabel
 		$oTimeField.Control.setPropertyToDefault("WritingMode")
 
 	ElseIf ($iTxtDir <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDir, $LOW_TXT_DIR_LR_TB, $LOW_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iTxtDir, $LOW_PAR_TXT_DIR_LR_TB, $LOW_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oTimeField.Control.WritingMode = $iTxtDir
 		$iError = ($oTimeField.Control.WritingMode() = $iTxtDir) ? ($iError) : (BitOR($iError, 4))
@@ -13733,8 +13731,204 @@ Func _LOWriter_FormDelete(ByRef $oForm)
 
 	If $oParent.hasByName($sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
+	$oForm = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FormDocSettings
+; Description ...: Set or Retrieve Document Form related settings.
+; Syntax ........: _LOWriter_FormDocSettings(ByRef $oDoc[, $bFormDesignMode = Null[, $bOpenInDesignMode = Null[, $bAutoControlFocus = Null[, $bUseControlWizards = Null]]]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bFormDesignMode     - [optional] a boolean value. Default is Null. If True, Form design mode will be active.
+;                  $bOpenInDesignMode   - [optional] a boolean value. Default is Null. If True, Form design mode will be active automatically upon opening the document.
+;                  $bAutoControlFocus   - [optional] a boolean value. Default is Null. If True, the first Form control will have the focus upon opening the document.
+;                  $bUseControlWizards  - [optional] a boolean value. Default is Null. If True, Control Wizards will be used.
+; Return values .: Success: 1 or Array
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bFormDesignMode not a Boolean.
+;                  @Error 1 @Extended 3 Return 0 = $bOpenInDesignMode not a Boolean.
+;                  @Error 1 @Extended 4 Return 0 = $bAutoControlFocus not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = $bUseControlWizards not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Standard Macro library Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a Macro Library.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Macro Script Object.
+;                  @Error 3 @Extended 4 Return 0 = Failed to delete Macro Library.
+;                  @Error 3 @Extended 5 Return 0 = Failed to execute a Document toggle control dispatch.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $bFormDesignMode
+;                  |                               2 = Error setting $bOpenInDesignMode
+;                  |                               4 = Error setting $bAutoControlFocus
+;                  |                               8 = Error setting $bUseControlWizards
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+;                  In order to determine current values for $bFormDesignMode and $bUseControlWizards, a Macro is temporarily injected into the document, and subsequently deleted.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FormDocSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDesignMode = Null, $bAutoControlFocus = Null, $bUseControlWizards = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $oStandardLibrary, $oScript
+	Local $abForm[4], $abStatus[0]
+	Local $aDummyArray[0]
+	Local $sControlWiz = "uno:UseWizards"
+	Local $sScript = "Function DocFormSettingStatus()" & @CRLF & _
+			"  REM Modified from Andrew Pitonyak's Macro '5.48. Toggle design mode', found in 'Useful Macro Information', page 152, Revision: 1137." & @CRLF & _
+			"  Dim oFrame            ' Current frame" & @CRLF & _
+			"  Dim oDisp             ' The created dispatcher" & @CRLF & _
+			"  Dim oParser           ' URL Transformer to parse the URL." & @CRLF & _
+			"  Dim oStatusListener   ' The status listener that is created" & @CRLF & _
+			"  Dim sListenerName     ' The type of listener that is created" & @CRLF & _
+			"  Dim oUrl as New com.sun.star.util.URL" & @CRLF & _
+			"  Dim oUrl2 as New com.sun.star.util.URL" & @CRLF & _
+			"  Dim abStatus(2)" & @CRLF & @CRLF & _
+			"  REM Parse the URL as required" & @CRLF & _
+			"  oUrl.Complete = "".uno:SwitchControlDesignMode""" & @CRLF & _
+			"  oUrl2.Complete = "".uno:UseWizards""" & @CRLF & _
+			"  oParser = createUnoService(""com.sun.star.util.URLTransformer"")" & @CRLF & _
+			"  oParser.parseStrict(oUrl)" & @CRLF & @CRLF & _
+			"  oParser.parseStrict(oUrl2)" & @CRLF & @CRLF & _
+			"  REM See if the current Frame supports the first UNO command" & @CRLF & _
+			"  oFrame = ThisComponent.getCurrentController().getFrame()" & @CRLF & _
+			"  oDisp = oFrame.queryDispatch(oUrl,"""",0)" & @CRLF & @CRLF & _
+			"  REM Create the status listener" & @CRLF & _
+			"  If (Not IsNull(oDisp)) Then" & @CRLF & _
+			"    sListenerName = ""com.sun.star.frame.XStatusListener""" & @CRLF & _
+			"    oStatusListener = CreateUnoListener(""Status_"", sListenerName)" & @CRLF & _
+			"    oDisp.addStatusListener(oStatusListener, oURL)" & @CRLF & @CRLF & _
+			"    abStatus(0) =  Status_Saver(Null) '" & @CRLF & _
+			"    oDisp.removeStatusListener(oStatusListener, oURL)" & @CRLF & _
+			"  Else" & @CRLF & _
+			"    abStatus(0) = False" & @CRLF & _
+			"  End If" & @CRLF & @CRLF & _
+			"  REM See if the current Frame supports the second UNO command" & @CRLF & _
+			"  oDisp = oFrame.queryDispatch(oUrl2,"""",0)" & @CRLF & @CRLF & _
+			"  REM Create the status listener" & @CRLF & _
+			"  If (Not IsNull(oDisp)) Then" & @CRLF & _
+			"    sListenerName = ""com.sun.star.frame.XStatusListener""" & @CRLF & _
+			"    oStatusListener = CreateUnoListener(""Status_"", sListenerName)" & @CRLF & _
+			"    oDisp.addStatusListener(oStatusListener, oURL2)" & @CRLF & @CRLF & _
+			"    abStatus(1) =  Status_Saver(Null) '" & @CRLF & _
+			"    oDisp.removeStatusListener(oStatusListener, oURL2)" & @CRLF & _
+			"  Else" & @CRLF & _
+			"    abStatus(1) = False" & @CRLF & _
+			"  End If" & @CRLF & _
+			"  DocFormSettingStatus = abStatus" & @CRLF & @CRLF & _
+			"End Function" & @CRLF & @CRLF & _
+			"REM The definition of the listener requires this, but we do not use this." & @CRLF & _
+			"Function Status_disposing(oEvt)" & @CRLF & _
+			"End Function" & @CRLF & @CRLF & _
+			"REM This is called when the status changes. In other words, when the design mode or Control Wizard is toggled and when the listener is first created." & @CRLF & _
+			"Function Status_statusChanged(oEvt)" & @CRLF & _
+			"  Status_Saver(oEvt.State)" & @CRLF & _
+			"End Function" & @CRLF & @CRLF & _
+			"Function Status_Saver(bStatus) As Boolean" & @CRLF & _
+			"  Static bCurStatus As Boolean" & @CRLF & _
+			"  If NOT IsNull(bStatus) Then" & @CRLF & _
+			"    bCurStatus = bStatus" & @CRLF & _
+			"  Else" & @CRLF & _
+			"    Status_Saver = bCurStatus" & @CRLF & _
+			"  End If" & @CRLF & _
+			"End Function"
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the following setting.
+	$oDoc.BasicLibraries.VBACompatibilityMode = $oDoc.BasicLibraries.VBACompatibilityMode()
+
+	$oStandardLibrary = $oDoc.BasicLibraries.Standard()
+	If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+
+	If __LO_VarsAreNull($bFormDesignMode, $bOpenInDesignMode, $bAutoControlFocus, $bUseControlWizards) Then
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sScript)
+		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.DocFormSettingStatus?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
+
+		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		__LO_ArrayFill($abForm, $abStatus[0], $oDoc.ApplyFormDesignMode(), $oDoc.AutomaticControlFocus(), $abStatus[1])
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $abForm)
+	EndIf
+
+	If ($bFormDesignMode <> Null) Then
+		If Not IsBool($bFormDesignMode) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		$oDoc.CurrentController.FormDesignMode = $bFormDesignMode
+
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sScript)
+		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.DocFormSettingStatus?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
+
+		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		$iError = ($abStatus[0] = $bFormDesignMode) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($bOpenInDesignMode <> Null) Then
+		If Not IsBool($bOpenInDesignMode) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oDoc.ApplyFormDesignMode = $bOpenInDesignMode
+		$iError = ($oDoc.ApplyFormDesignMode() = $bOpenInDesignMode) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bAutoControlFocus <> Null) Then
+		If Not IsBool($bAutoControlFocus) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oDoc.AutomaticControlFocus = $bAutoControlFocus
+		$iError = ($oDoc.AutomaticControlFocus() = $bAutoControlFocus) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($bUseControlWizards <> Null) Then
+		If Not IsBool($bUseControlWizards) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", StringReplace($sScript, "###AUTOIT_PLACEHOLDER###", $sControlWiz))
+		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.DocFormSettingStatus?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
+
+		If ($abStatus[1] <> $bUseControlWizards) Then _LOWriter_DocExecuteDispatch($oDoc, $sControlWiz) ; If the value doesn't currently match, toggle the setting.
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
+
+		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		$iError = ($abStatus[1] = $bUseControlWizards) ? ($iError) : (BitOR($iError, 8))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FormDocSettings
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormGetObjByIndex
@@ -13950,6 +14144,7 @@ EndFunc   ;==>_LOWriter_FormParent
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create "com.sun.star.sdb.DatabaseContext" Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Data Source Name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to convert path to URL for Data Source.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sSource

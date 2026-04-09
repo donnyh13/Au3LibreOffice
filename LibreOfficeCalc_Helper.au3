@@ -37,17 +37,11 @@
 ; _LOCalc_FormatKeyGetStandard
 ; _LOCalc_FormatKeyGetString
 ; _LOCalc_FormatKeysGetList
-; _LOCalc_GradientMulticolorAdd
-; _LOCalc_GradientMulticolorDelete
-; _LOCalc_GradientMulticolorModify
 ; _LOCalc_SearchDescriptorCreate
 ; _LOCalc_SearchDescriptorModify
 ; _LOCalc_SearchDescriptorSimilarityModify
 ; _LOCalc_SortFieldCreate
 ; _LOCalc_SortFieldModify
-; _LOCalc_TransparencyGradientMultiAdd
-; _LOCalc_TransparencyGradientMultiDelete
-; _LOCalc_TransparencyGradientMultiModify
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
@@ -135,14 +129,14 @@ EndFunc   ;==>_LOCalc_ComError_UserFunction
 ; Name ..........: _LOCalc_FilterDescriptorCreate
 ; Description ...: Create a Filter Descriptor to use in the Filter function.
 ; Syntax ........: _LOCalc_FilterDescriptorCreate(ByRef $oRange, $atFilterField[, $bCaseSensitive = False[, $bSkipDupl = False[, $bUseRegExp = False[, $bHeaders = False[, $bCopyOutput = False[, $oCopyOutput = Null[, $bSaveCriteria = True]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. The Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. The Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $atFilterField       - an array of dll structs. A single column Array of Filter Fields previously created by _LOCalc_FilterFieldCreate. Maximum of 8 Fields allowed.
 ;                  $bCaseSensitive      - [optional] a boolean value. Default is False. If True, the Filtering operation will be case sensitive.
 ;                  $bSkipDupl           - [optional] a boolean value. Default is False. If True, Duplicate values will be skipped in the list of filtered data.
 ;                  $bUseRegExp          - [optional] a boolean value. Default is False. If True, the String Value set will be considered as using Regular expressions.
 ;                  $bHeaders            - [optional] a boolean value. Default is False. If True, the Range contains column headers.
 ;                  $bCopyOutput         - [optional] a boolean value. Default is False. If True, the filtering results are copied to another location in the Sheet.
-;                  $oCopyOutput         - [optional] an object. Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+;                  $oCopyOutput         - [optional] an object. Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bSaveCriteria       - [optional] a boolean value. Default is True. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -235,7 +229,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ; Name ..........: _LOCalc_FilterDescriptorModify
 ; Description ...: Set or Retrieve Filter Descriptor settings.
 ; Syntax ........: _LOCalc_FilterDescriptorModify(ByRef $oRange, ByRef $oFilterDesc[, $atFilterField = Null[, $bCaseSensitive = Null[, $bSkipDupl = Null[, $bUseRegExp = Null[, $bHeaders = Null[, $bCopyOutput = Null[, $oCopyOutput = Null[, $bSaveCriteria = Null]]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. The Sheet the Filter Descriptor was Created with, or the Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. The Sheet the Filter Descriptor was Created with, or the Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $oFilterDesc         - [in/out] an object. A Filter Descriptor created by a previous _LOCalc_FilterDescriptorCreate function.
 ;                  $atFilterField       - [optional] an array of dll structs. Default is Null. A single column Array of Filter Fields previously created by _LOCalc_FilterFieldCreate. Maximum of 8 Fields allowed.
 ;                  $bCaseSensitive      - [optional] a boolean value. Default is Null. If True, the Filtering operation will be case sensitive.
@@ -243,7 +237,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ;                  $bUseRegExp          - [optional] a boolean value. Default is Null. If True, the String Value set will be considered as using Regular expressions.
 ;                  $bHeaders            - [optional] a boolean value. Default is Null. If True, the Range contains column headers.
 ;                  $bCopyOutput         - [optional] a boolean value. Default is Null. If True, the filtering results are copied to another location in the Sheet.
-;                  $oCopyOutput         - [optional] an object. Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+;                  $oCopyOutput         - [optional] an object. Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bSaveCriteria       - [optional] a boolean value. Default is Null. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -431,8 +425,8 @@ EndFunc   ;==>_LOCalc_FilterFieldCreate
 ;                  $bIsNumeric          - [optional] a boolean value. Default is Null. If True, the filter Value to search for is a number. If False, the filter value to search for is a string.
 ;                  $nValue              - [optional] a general number value. Default is Null. The numerical Value to filter the Range for. Only valid if $bIsNumeric is set to True.
 ;                  $sString             - [optional] a string value. Default is Null. The string Value to filter the Range for. Only valid if $bIsNumeric is set to False.
-;                  $iCondition          - [optional] an integer value (0-17). Default is Null. The comparative condition to test each cell and value by.
-;                  $iOperator           - [optional] an integer value (0,1). Default is Null. The connection this filter field has with the previous filter field.
+;                  $iCondition          - [optional] an integer value (0-17). Default is Null. The comparative condition to test each cell and value by. See Constants $LOC_FILTER_CONDITION_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iOperator           - [optional] an integer value (0,1). Default is Null. The connection this filter field has with the previous filter field. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Struct
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -606,8 +600,8 @@ EndFunc   ;==>_LOCalc_FontExists
 ;                  The returned array will be as follows:
 ;                  The first column (Array[1][0]) contains the Font Name.
 ;                  The Second column (Array [1][1] contains the style name (Such as Bold Italic etc.)
-;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOC_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3;
-;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOC_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3;
+;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Related .......: _LOCalc_FontExists
 ; Link ..........:
 ; Example .......: Yes
@@ -751,8 +745,9 @@ Func _LOCalc_FormatKeyDelete(ByRef $oDoc, $iFormatKey)
 	If ($oFormats.getbykey($iFormatKey).UserDefined() = False) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Key not User Created.
 
 	$oFormats.removeByKey($iFormatKey)
+	If _LOCalc_FormatKeyExists($oDoc, $iFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return (_LOCalc_FormatKeyExists($oDoc, $iFormatKey) = False) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_FormatKeyDelete
 
 ; #FUNCTION# ====================================================================================================================
@@ -767,7 +762,7 @@ EndFunc   ;==>_LOCalc_FormatKeyDelete
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFormatKey not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iFormatType not an Integer.
+;                  @Error 1 @Extended 3 Return 0 = $iFormatType not an Integer, less than 0 or greater than 15881. See Constants, $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to Create "com.sun.star.lang.Locale" Object.
 ;                  --Processing Errors--
@@ -792,7 +787,7 @@ Func _LOCalc_FormatKeyExists(ByRef $oDoc, $iFormatKey, $iFormatType = $LOC_FORMA
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsInt($iFormatType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_IntIsBetween($iFormatType, $LOC_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; 15881 = All keys BitOR'd together.
 
 	$tLocale = __LO_CreateStruct("com.sun.star.lang.Locale")
 	If Not IsObj($tLocale) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -873,6 +868,7 @@ EndFunc   ;==>_LOCalc_FormatKeyGetStandard
 ;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not found in Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve requested Format Key Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Format Key String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ; Author ........: donnyh13
@@ -887,6 +883,7 @@ Func _LOCalc_FormatKeyGetString(ByRef $oDoc, $iFormatKey)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oFormatKey
+	Local $sFormatkKey
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -895,7 +892,10 @@ Func _LOCalc_FormatKeyGetString(ByRef $oDoc, $iFormatKey)
 	$oFormatKey = $oDoc.getNumberFormats().getByKey($iFormatKey)
 	If Not IsObj($oFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Key not found.
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oFormatKey.FormatString())
+	$sFormatkKey = $oFormatKey.FormatString()
+	If Not IsString($sFormatkKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sFormatkKey)
 EndFunc   ;==>_LOCalc_FormatKeyGetString
 
 ; #FUNCTION# ====================================================================================================================
@@ -912,7 +912,7 @@ EndFunc   ;==>_LOCalc_FormatKeyGetString
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bIsUser not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iFormatKeyType not an Integer.
+;                  @Error 1 @Extended 4 Return 0 = $iFormatKeyType not an Integer, less than 0 or greater than 15881. See Constants, $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.lang.Locale" Object.
 ;                  --Processing Errors--
@@ -945,7 +945,7 @@ Func _LOCalc_FormatKeysGetList(ByRef $oDoc, $bIsUser = False, $bUserOnly = False
 
 	$iColumns = ($bIsUser = True) ? ($iColumns) : (2)
 
-	If Not IsInt($iFormatKeyType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iFormatKeyType, $LOC_FORMAT_KEYS_ALL, 15881) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; 15881 = all keys BitOR'd together.
 
 	$tLocale = __LO_CreateStruct("com.sun.star.lang.Locale")
 	If Not IsObj($tLocale) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -981,162 +981,10 @@ Func _LOCalc_FormatKeysGetList(ByRef $oDoc, $bIsUser = False, $bUserOnly = False
 EndFunc   ;==>_LOCalc_FormatKeysGetList
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_GradientMulticolorAdd
-; Description ...: Add a ColorStop to a Gradient ColorStop Array.
-; Syntax ........: _LOCalc_GradientMulticolorAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
-;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iColor              - an integer value (0-16777215). The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
-;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
-;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully added to array.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOCalc_GradientMulticolorAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local Const $__UBOUND_COLUMNS = 2
-
-	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-	ReDim $avColorStops[UBound($avColorStops) + 1][2]
-
-	For $iToWrite = (UBound($avColorStops) - 1) To 0 Step -1
-		If $iToWrite = $iIndex Then
-			$avColorStops[$iToWrite][0] = $nStopOffset
-			$avColorStops[$iToWrite][1] = $iColor
-			ExitLoop
-
-		Else
-			$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite - 1][0]
-			$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite - 1][1]
-		EndIf
-
-		Sleep((IsInt($iToWrite / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOCalc_GradientMulticolorAdd
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_GradientMulticolorDelete
-; Description ...: Delete a ColorStop from a Gradient ColorStop Array.
-; Syntax ........: _LOCalc_GradientMulticolorDelete(ByRef $avColorStops, $iIndex)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to delete. 0 Based.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully removed from array.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOCalc_GradientMulticolorDelete(ByRef $avColorStops, $iIndex)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local Const $__UBOUND_COLUMNS = 2
-	Local $iToRead = 0
-
-	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	For $iToWrite = 0 To UBound($avColorStops) - 2
-		If $iToWrite = $iIndex Then $iToRead += 1
-
-		$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite + $iToRead][0]
-		$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite + $iToRead][1]
-
-		Sleep((IsInt($iToWrite / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	ReDim $avColorStops[UBound($avColorStops) - 1][2]
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOCalc_GradientMulticolorDelete
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_GradientMulticolorModify
-; Description ...: Modify a ColorStop in a Gradient ColorStop Array.
-; Syntax ........: _LOCalc_GradientMulticolorModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to modify. 0 Based.
-;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iColor              - an integer value (0-16777215). The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element.
-;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
-;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully modified.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOCalc_GradientMulticolorModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local Const $__UBOUND_COLUMNS = 2
-
-	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-	For $iToWrite = 0 To UBound($avColorStops) - 1
-		If $iToWrite = $iIndex Then
-			$avColorStops[$iToWrite][0] = $nStopOffset
-			$avColorStops[$iToWrite][1] = $iColor
-			ExitLoop
-		EndIf
-
-		Sleep((IsInt($iToWrite / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOCalc_GradientMulticolorModify
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_SearchDescriptorCreate
 ; Description ...: Create a Search Descriptor for searching a document.
 ; Syntax ........: _LOCalc_SearchDescriptorCreate(ByRef $oRange[, $bBackwards = False[, $bSearchRows = True[, $bMatchCase = False[, $iSearchIn = $LOC_SEARCH_IN_FORMULAS[, $bEntireCell = False[, $bRegExp = False[, $bWildcards = False[, $bStyles = False]]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bBackwards          - [optional] a boolean value. Default is False. If True, the document is searched backwards.
 ;                  $bSearchRows         - [optional] a boolean value. Default is True. If True, Search is performed left to right along the rows, else if False, the search is performed top to bottom along the columns.
 ;                  $bMatchCase          - [optional] a boolean value. Default is False. If True, the case of the letters is important for the Search.
@@ -1521,155 +1369,3 @@ Func _LOCalc_SortFieldModify(ByRef $tSortField, $iIndex = Null, $iDataType = Nul
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_SortFieldModify
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_TransparencyGradientMultiAdd
-; Description ...: Add a ColorStop to a Gradient ColorStop Array.
-; Syntax ........: _LOCalc_TransparencyGradientMultiAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
-;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iTransparency       - an integer value (0-100). The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
-;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
-;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully added to array.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOCalc_TransparencyGradientMultiAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local Const $__UBOUND_COLUMNS = 2
-
-	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-	ReDim $avColorStops[UBound($avColorStops) + 1][2]
-
-	For $iToWrite = (UBound($avColorStops) - 1) To 0 Step -1
-		If $iToWrite = $iIndex Then
-			$avColorStops[$iToWrite][0] = $nStopOffset
-			$avColorStops[$iToWrite][1] = $iTransparency
-			ExitLoop
-
-		Else
-			$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite - 1][0]
-			$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite - 1][1]
-		EndIf
-
-		Sleep((IsInt($iToWrite / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOCalc_TransparencyGradientMultiAdd
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_TransparencyGradientMultiDelete
-; Description ...: Delete a ColorStop from a Gradient ColorStop Array.
-; Syntax ........: _LOCalc_TransparencyGradientMultiDelete(ByRef $avColorStops, $iIndex)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to delete. 0 Based.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully removed from array.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOCalc_TransparencyGradientMultiDelete(ByRef $avColorStops, $iIndex)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local Const $__UBOUND_COLUMNS = 2
-	Local $iToRead = 0
-
-	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	For $iToWrite = 0 To UBound($avColorStops) - 2
-		If $iToWrite = $iIndex Then $iToRead += 1
-
-		$avColorStops[$iToWrite][0] = $avColorStops[$iToWrite + $iToRead][0]
-		$avColorStops[$iToWrite][1] = $avColorStops[$iToWrite + $iToRead][1]
-
-		Sleep((IsInt($iToWrite / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	ReDim $avColorStops[UBound($avColorStops) - 1][2]
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOCalc_TransparencyGradientMultiDelete
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_TransparencyGradientMultiModify
-; Description ...: Modify a ColorStop in a Gradient ColorStop Array.
-; Syntax ........: _LOCalc_TransparencyGradientMultiModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to modify. 0 Based.
-;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iTransparency       - an integer value (0-100). The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element.
-;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
-;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully modified.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOCalc_TransparencyGradientMultiModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local Const $__UBOUND_COLUMNS = 2
-
-	If Not IsArray($avColorStops) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If (UBound($avColorStops, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iIndex, 0, UBound($avColorStops) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_NumIsBetween($nStopOffset, 0, 1.0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-	For $iToWrite = 0 To UBound($avColorStops) - 1
-		If $iToWrite = $iIndex Then
-			$avColorStops[$iToWrite][0] = $nStopOffset
-			$avColorStops[$iToWrite][1] = $iTransparency
-			ExitLoop
-		EndIf
-
-		Sleep((IsInt($iToWrite / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOCalc_TransparencyGradientMultiModify

@@ -7,7 +7,6 @@
 #include "LibreOfficeWriter_Internal.au3"
 
 ; Other includes for Writer
-#include "LibreOfficeWriter_Cell.au3"
 #include "LibreOfficeWriter_Char.au3"
 #include "LibreOfficeWriter_Cursor.au3"
 #include "LibreOfficeWriter_DirectFormatting.au3"
@@ -26,7 +25,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for interacting with Libre Office Writer.
+; Description ...: Provides basic functionality through AutoIt for interacting with LibreOffice Writer.
 ; Author(s) .....: donnyh13, mLipok
 ; Sources .......: Andrew Pitonyak & Laurent Godard. Useful Macro Information, section 5.7.1. OOo version. Used for VersionGet;
 ;				   jguinch -- Printmgr.au3. Function used: _PrintMgr_EnumPrinter.

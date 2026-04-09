@@ -8,12 +8,12 @@ Func Example()
 	Local $oDoc, $oSheet, $oSheet2, $oCell, $oCellRange
 	Local $iCount = 0
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Fill the Cell Range of B2 to D4 with numbers, one cell at a time. (Remember Columns and Rows are 0 based.)
@@ -62,7 +62,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Notice the Cell Range B2 to D4 is now Blank. Press ok to switch to Sheet 2, and you will see the Cell Range Data there.")
 
 	; Switch to Sheet 2
-	_LOCalc_SheetActivate($oDoc, $oSheet2)
+	_LOCalc_SheetActive($oDoc, $oSheet2)
 	If @error Then _ERROR($oDoc, "Failed to switch active sheets. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
@@ -70,6 +70,10 @@ Func Example()
 	; Close the document.
 	_LOCalc_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

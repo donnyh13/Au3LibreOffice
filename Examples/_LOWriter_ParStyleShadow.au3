@@ -9,28 +9,28 @@ Func Example()
 	Local $iHMM
 	Local $avParStyleSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the Default Paragraph style.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Paragraph Style object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
+	$oParStyle = _LOWriter_ParStyleGetObjByName($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Hundredths of a Millimeter (HMM)
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style Shadow to 1/4" wide, Color to $LO_COLOR_PURPLE, and location to $LOW_SHADOW_TOP_LEFT
-	_LOWriter_ParStyleShadow($oParStyle, $iHMM, $LO_COLOR_PURPLE, $LOW_SHADOW_TOP_LEFT)
+	; Set Default Paragraph Style Shadow location to $LOW_SHADOW_LOCATION_TOP_LEFT, Color to $LO_COLOR_PURPLE, and 1/4" wide
+	_LOWriter_ParStyleShadow($oParStyle, $LOW_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -38,15 +38,19 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's current shadow settings are as follows: " & @CRLF & _
-			"Shadow width, in Hundredths of a Millimeter (HMM): " & $avParStyleSettings[0] & @CRLF & _
+			"Shadow location, (see UDF constants): " & $avParStyleSettings[0] & @CRLF & _
 			"Shadow color is (as a RGB Color Integer): " & $avParStyleSettings[1] & @CRLF & _
-			"Shadow location, (see UDF constants): " & $avParStyleSettings[2])
+			"Shadow width, in Hundredths of a Millimeter (HMM): " & $avParStyleSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

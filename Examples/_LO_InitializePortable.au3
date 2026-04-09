@@ -41,6 +41,10 @@ Func Example()
 	; Close the Writer Document.
 	_LOWriter_DocClose($oWriterDoc, False)
 	If @error Then _ERROR($oCalcDoc, $oWriterDoc, "Failed to Close the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oCalcDoc, $oWriterDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDocCalc, $oDocWriter, $sErrorText)

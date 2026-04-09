@@ -9,8 +9,8 @@ Func Example()
 	Local $sDefault, $sPrinters = ""
 	Local $asPrinters
 
-	; Minimum Libre version is 4.1, Check Libre Office Version.
-	If (_LO_VersionGet(True) < 4.1) Then _ERROR("Current Libre Office version lower than 4.1, this function cannot be used." & " On Line: " & @ScriptLineNumber)
+	; Minimum Libre version is 4.1, Check LibreOffice Version.
+	If (_LO_VersionGet(True) < 4.1) Then _ERROR("Current LibreOffice version lower than 4.1, this function cannot be used." & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will list your currently available printers.")
 
@@ -32,7 +32,7 @@ Func Example()
 
 	; Check Libre version for searching default printer.
 	If (_LO_VersionGet(True) < 6.3) Then
-		_ERROR("Libre Office version is less than 6.3, I cannot list your default printer." & " On Line: " & @ScriptLineNumber)
+		_ERROR("LibreOffice version is less than 6.3, I cannot list your default printer." & " On Line: " & @ScriptLineNumber)
 
 	Else
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "I will list your currently default printer next.")
@@ -48,6 +48,10 @@ Func Example()
 	Else
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "Your default printer is: " & $sDefault)
 	EndIf
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR("Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($sErrorText)

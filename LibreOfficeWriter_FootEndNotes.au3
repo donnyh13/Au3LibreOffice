@@ -51,6 +51,8 @@
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oEndNote not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to delete Endnote.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Endnote successfully deleted.
 ; Author ........: donnyh13
@@ -67,6 +69,9 @@ Func _LOWriter_EndnoteDelete(ByRef $oEndNote)
 	If Not IsObj($oEndNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oEndNote.dispose()
+
+	If Not __LO_IsObjInvalid($oEndNote, "Anchor") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 	$oEndNote = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
@@ -88,7 +93,7 @@ EndFunc   ;==>_LOWriter_EndnoteDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Anchor cursor returned is just a Text Cursor placed at the anchor's position.
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorMove, _LOWriter_DocGetString, _LOWriter_DocInsertString
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorMove, _LOWriter_CursorGetString, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -122,7 +127,7 @@ EndFunc   ;==>_LOWriter_EndnoteGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_DocInsertString
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -165,7 +170,7 @@ EndFunc   ;==>_LOWriter_EndnoteGetTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Endnote cannot be inserted into a Frame, a Footnote, a Endnote, or the Header/Footer.
-; Related .......: _LOWriter_EndnoteDelete, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor,
+; Related .......: _LOWriter_EndnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -207,7 +212,7 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_EndnoteModifyAnchor
-; Description ...: Modify a Specific Endnote's settings.
+; Description ...: Set or Retrieve the Endnote's Anchor Character.
 ; Syntax ........: _LOWriter_EndnoteModifyAnchor(ByRef $oEndNote[, $sLabel = Null])
 ; Parameters ....: $oEndNote            - [in/out] an object. A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
 ;                  $sLabel              - [optional] a string value. Default is Null. A custom anchor label for the Endnote. Call with "" for automatic numbering.
@@ -216,6 +221,8 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oEndNote not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sLabel not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Anchor Character.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sLabel
@@ -237,22 +244,29 @@ Func _LOWriter_EndnoteModifyAnchor(ByRef $oEndNote, $sLabel = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
+	Local $sValue
 
 	If Not IsObj($oEndNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($sLabel = Null) Then
-		; If Label is blank, return the AutoNumbering Number.
-		If ($oEndNote.Label() = "") Then Return SetError($__LO_STATUS_SUCCESS, 2, $oEndNote.Anchor.String())
+	If __LO_VarsAreNull($sLabel) Then
+		If ($oEndNote.Label() = "") Then ; If Label is blank, return the AutoNumbering Number.
+			$sValue = $oEndNote.Anchor.String()
+			If Not IsString($sValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		; Else return the Label.
+			Return SetError($__LO_STATUS_SUCCESS, 2, $sValue)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oEndNote.Label())
+		Else ; return the Label.
+			$sValue = $oEndNote.Label()
+			If Not IsString($sValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+			Return SetError($__LO_STATUS_SUCCESS, 1, $sValue)
+		EndIf
 	EndIf
 
 	If Not IsString($sLabel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oEndNote.Label = $sLabel
-	$iError = ($oEndNote.Label() <> $sLabel) ? ($iError) : (BitOR($iError, 1))
+	$iError = ($oEndNote.Label() = $sLabel) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
@@ -285,7 +299,7 @@ EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
 ; Link ..........:
 ; Example .......: Yes
@@ -483,6 +497,8 @@ EndFunc   ;==>_LOWriter_EndnotesGetList
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oFootNote not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to delete Footnote.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Footnote successfully deleted.
 ; Author ........: donnyh13
@@ -499,6 +515,10 @@ Func _LOWriter_FootnoteDelete(ByRef $oFootNote)
 	If Not IsObj($oFootNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oFootNote.dispose()
+
+	If Not __LO_IsObjInvalid($oFootNote, "Anchor") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oFootNote = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FootnoteDelete
@@ -553,7 +573,7 @@ EndFunc   ;==>_LOWriter_FootnoteGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CursorMove, _LOWriter_DocInsertString
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -596,7 +616,7 @@ EndFunc   ;==>_LOWriter_FootnoteGetTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Footnote cannot be inserted into a Frame, a Footnote, an Endnote, or a Header/Footer.
-; Related .......: _LOWriter_FootnoteDelete, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor
+; Related .......: _LOWriter_FootnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -638,7 +658,7 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FootnoteModifyAnchor
-; Description ...: Modify a Footnote's Anchor Character.
+; Description ...: Set or Retrieve the Footnote's Anchor Character.
 ; Syntax ........: _LOWriter_FootnoteModifyAnchor(ByRef $oFootNote[, $sLabel = Null])
 ; Parameters ....: $oFootNote           - [in/out] an object. A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
 ;                  $sLabel              - [optional] a string value. Default is Null. A custom anchor label for the Footnote. Call with "" for automatic numbering.
@@ -647,6 +667,8 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oFootNote not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sLabel not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Anchor Character.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sLabel
@@ -668,22 +690,29 @@ Func _LOWriter_FootnoteModifyAnchor(ByRef $oFootNote, $sLabel = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
+	Local $sValue
 
 	If Not IsObj($oFootNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($sLabel = Null) Then
-		; If Label is blank, return the AutoNumbering Number.
-		If ($oFootNote.Label() = "") Then Return SetError($__LO_STATUS_SUCCESS, 2, $oFootNote.Anchor.String())
+	If __LO_VarsAreNull($sLabel) Then
+		If ($oFootNote.Label() = "") Then ; If Label is blank, return the AutoNumbering Number.
+			$sValue = $oFootNote.Anchor.String()
+			If Not IsString($sValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		; Else return the Label.
+			Return SetError($__LO_STATUS_SUCCESS, 2, $sValue)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oFootNote.Label())
+		Else ; return the Label.
+			$sValue = $oFootNote.Label()
+			If Not IsString($sValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+			Return SetError($__LO_STATUS_SUCCESS, 1, $sValue)
+		EndIf
 	EndIf
 
 	If Not IsString($sLabel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oFootNote.Label = $sLabel
-	$iError = ($oFootNote.Label() <> $sLabel) ? ($iError) : (BitOR($iError, 1))
+	$iError = ($oFootNote.Label() = $sLabel) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_FootnoteModifyAnchor

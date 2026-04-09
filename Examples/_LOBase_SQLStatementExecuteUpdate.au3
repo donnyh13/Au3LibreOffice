@@ -11,11 +11,11 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oConnection, $oTable, $oTableUI, $oStatement
+	Local $oDoc, $oConnection, $oTable, $oTableDoc, $oStatement
 	Local $sSavePath
 	Local $iReturn
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOBase_DocCreate(True, False)
 	If @error Then Return _ERROR($oDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -33,15 +33,15 @@ Func Example()
 	; Fill the Database with data.
 	If Not _FillDatabase($oDoc, $oConnection, $oTable) Then Return
 
-	; Open the Table UI.
-	$oTableUI = _LOBase_TableUIOpenByObject($oDoc, $oConnection, $oTable)
-	If @error Then Return _ERROR($oDoc, "Failed to open Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByObject($oDoc, $oConnection, $oTable)
+	If @error Then Return _ERROR($oDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to add 120 posts to all users entered in the Table that have a Post count less than 12,000.")
 
-	; Close the Table UI
-	_LOBase_TableUIClose($oTableUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close the Table Document
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Statement Object
 	$oStatement = _LOBase_SQLStatementCreate($oConnection)
@@ -51,16 +51,16 @@ Func Example()
 	$iReturn = _LOBase_SQLStatementExecuteUpdate($oStatement, "UPDATE ""tblNew_Table"" SET ""Post_Count"" = ""Post_Count""+120 WHERE ""Post_Count""<12000")
 	If @error Then Return _ERROR($oDoc, "Failed to Execute a SQL Statement Update. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Table UI.
-	$oTableUI = _LOBase_TableUIOpenByObject($oDoc, $oConnection, $oTable)
-	If @error Then Return _ERROR($oDoc, "Failed to open Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByObject($oDoc, $oConnection, $oTable)
+	If @error Then Return _ERROR($oDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have added 120 posts to those users who had less than 12,000 posts. " & $iReturn & " Users were affected." & @CRLF & _
 			"Press Ok to Close and Delete the Document.")
 
-	; Close the Table UI
-	_LOBase_TableUIClose($oTableUI)
-	If @error Then Return _ERROR($oDoc, "Failed to close Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close the Table Document
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
 	_LOBase_DatabaseConnectionClose($oConnection)
@@ -69,6 +69,10 @@ Func Example()
 	; Close the document.
 	_LOBase_DocClose($oDoc, False)
 	If @error Then Return _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _FillDatabase(ByRef $oDoc, ByRef $oConnection, ByRef $oTable)

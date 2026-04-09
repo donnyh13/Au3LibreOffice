@@ -9,12 +9,12 @@ Func Example()
 	Local $iHMM
 	Local $avSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Frame into the document at the ViewCursor position, and 6000x6000 Hundredths of a Millimeter (HMM) wide.
@@ -25,8 +25,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(.125, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Frame Shadow settings to: Width = 1/8", Color = $LO_COLOR_RED, Location = $LOW_SHADOW_TOP_LEFT
-	_LOWriter_FrameShadow($oFrame, $iHMM, $LO_COLOR_RED, $LOW_SHADOW_TOP_LEFT)
+	; Set Frame Shadow settings to: Location = $LOW_SHADOW_LOCATION_TOP_LEFT, Color = $LO_COLOR_RED, Width = 1/8"
+	_LOWriter_FrameShadow($oFrame, $LOW_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_RED, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame settings. Return will be an array in order of function parameters.
@@ -34,15 +34,19 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Frame's Shadow settings are as follows: " & @CRLF & _
-			"The shadow width is, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
+			"The Shadow location is, (see UDF Constants): " & $avSettings[0] & @CRLF & _
 			"The Shadow color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
-			"The Shadow location is, (see UDF Constants): " & $avSettings[2])
+			"The shadow width is, in Hundredths of a Millimeter (HMM): " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

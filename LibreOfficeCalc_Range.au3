@@ -66,7 +66,8 @@
 ; _LOCalc_RangeMerge
 ; _LOCalc_RangeNamedAdd
 ; _LOCalc_RangeNamedChangeScope
-; _LOCalc_RangeNamedDelete
+; _LOCalc_RangeNamedDeleteByName
+; _LOCalc_RangeNamedDeleteByObj
 ; _LOCalc_RangeNamedExists
 ; _LOCalc_RangeNamedGetNames
 ; _LOCalc_RangeNamedGetObjByName
@@ -125,7 +126,7 @@
 ; Name ..........: _LOCalc_RangeAutoOutline
 ; Description ...: Set up AutoOutline for a Range of Cells.
 ; Syntax ........: _LOCalc_RangeAutoOutline(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -161,7 +162,7 @@ EndFunc   ;==>_LOCalc_RangeAutoOutline
 ; Name ..........: _LOCalc_RangeClearContents
 ; Description ...: Clear specific cell contents in a range.
 ; Syntax ........: _LOCalc_RangeClearContents(ByRef $oRange, $iFlags)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell to clear the contents of. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell to clear the contents of. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iFlags              - an integer value (1-1023). The Cell Content type to delete. Can be BitOR'd together. See Constants $LOC_CELL_FLAG_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -193,7 +194,7 @@ EndFunc   ;==>_LOCalc_RangeClearContents
 ; Name ..........: _LOCalc_RangeColumnDelete
 ; Description ...: Delete Columns from a Range.
 ; Syntax ........: _LOCalc_RangeColumnDelete(ByRef $oRange, $iColumn[, $iCount = 1])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iColumn             - an integer value. The column to begin deleting at. The Column called will be deleted. See remarks.
 ;                  $iCount              - [optional] an integer value. Default is 1. The number of columns to delete after the called column.
 ; Return values .: Success: 1
@@ -270,7 +271,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetName
 ; Name ..........: _LOCalc_RangeColumnGetObjByName
 ; Description ...: Retrieve a Column's Object by name.
 ; Syntax ........: _LOCalc_RangeColumnGetObjByName(ByRef $oRange, $sName)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $sName               - a string value. The Column name to retrieve the Object for, such as "A".
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -313,7 +314,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetObjByName
 ; Name ..........: _LOCalc_RangeColumnGetObjByPosition
 ; Description ...: Retrieve the Column's Object by its position.
 ; Syntax ........: _LOCalc_RangeColumnGetObjByPosition(ByRef $oRange, $iColumn)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iColumn             - an integer value. The Column number to retrieve the Object for. See remarks.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -354,7 +355,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetObjByPosition
 ; Name ..........: _LOCalc_RangeColumnInsert
 ; Description ...: Insert blank columns into a Range at a specific column.
 ; Syntax ........: _LOCalc_RangeColumnInsert(ByRef $oRange, $iColumn[, $iCount = 1])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iColumn             - an integer value. The Column to insert the new column(s) at. See remarks. New columns will be inserted starting at this column and all content will be shifted right.
 ;                  $iCount              - [optional] an integer value. Default is 1. The number of blank columns to insert after the Column called.
 ; Return values .: Success: 1
@@ -459,13 +460,14 @@ EndFunc   ;==>_LOCalc_RangeColumnPageBreak
 ; Name ..........: _LOCalc_RangeColumnsGetCount
 ; Description ...: Retrieve the total count of Columns contained in a Range.
 ; Syntax ........: _LOCalc_RangeColumnsGetCount(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Columns Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Columns.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning number of Columns contained in the Range.
 ; Author ........: donnyh13
@@ -480,13 +482,17 @@ Func _LOCalc_RangeColumnsGetCount(ByRef $oRange)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oColumns
+	Local $iCount
 
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oColumns = $oRange.getColumns()
 	If Not IsObj($oColumns) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oColumns.Count())
+	$iCount = $oColumns.Count()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
 EndFunc   ;==>_LOCalc_RangeColumnsGetCount
 
 ; #FUNCTION# ====================================================================================================================
@@ -500,6 +506,8 @@ EndFunc   ;==>_LOCalc_RangeColumnsGetCount
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oColumn not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query Column's visibility.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -508,7 +516,7 @@ EndFunc   ;==>_LOCalc_RangeColumnsGetCount
 ;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning Column's current visibility setting.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -517,11 +525,17 @@ Func _LOCalc_RangeColumnVisible(ByRef $oColumn, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
 	Local $iError = 0
 
 	If Not IsObj($oColumn) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oColumn.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oColumn.IsVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -555,6 +569,7 @@ EndFunc   ;==>_LOCalc_RangeColumnVisible
 ; Modified ......:
 ; Remarks .......: $bOptimal only accepts True. False will return an error. Calling True again returns the cell to optimal width, setting a custom width essentially disables it.
 ;                  I am presently unable to find a setting for Optimal Width "Add" Value.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -595,7 +610,7 @@ EndFunc   ;==>_LOCalc_RangeColumnWidth
 ; Name ..........: _LOCalc_RangeCompute
 ; Description ...: Perform a Computation function on a Range. See Remarks.
 ; Syntax ........: _LOCalc_RangeCompute(ByRef $oRange, $iFunction)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iFunction           - an integer value (0-12). The Computation Function to perform. See Constants $LOC_COMPUTE_FUNC_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Number
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -632,9 +647,9 @@ EndFunc   ;==>_LOCalc_RangeCompute
 ; Name ..........: _LOCalc_RangeCopyMove
 ; Description ...: Copy or Move a Cell or Cell Range to another range.
 ; Syntax ........: _LOCalc_RangeCopyMove(ByRef $oSheet, ByRef $oRangeSrc, ByRef $oRangeDest[, $bMove = False])
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $oRangeSrc           - [in/out] an object. The Cell or Cell Range to copy or move from. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
-;                  $oRangeDest          - [in/out] an object. The Cell or Cell Range to copy or move to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $oRangeSrc           - [in/out] an object. The Cell or Cell Range to copy or move from. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $oRangeDest          - [in/out] an object. The Cell or Cell Range to copy or move to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bMove               - [optional] a boolean value. Default is False. If True, the cell range is moved to the destination. If False, the Cell Range is only copied.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -699,8 +714,8 @@ EndFunc   ;==>_LOCalc_RangeCopyMove
 ; Name ..........: _LOCalc_RangeCreateCursor
 ; Description ...: Create a Sheet Cursor for a particular range.
 ; Syntax ........: _LOCalc_RangeCreateCursor(ByRef $oSheet, ByRef $oRange)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -736,7 +751,7 @@ EndFunc   ;==>_LOCalc_RangeCreateCursor
 ; Name ..........: _LOCalc_RangeData
 ; Description ...: Set or Retrieve Data in a Range.
 ; Syntax ........: _LOCalc_RangeData(ByRef $oRange[, $aavData = Null[, $bStrictSize = False]])
-; Parameters ....: $oRange              - [in/out] an object. The Cell or Cell Range to set or retrieve data . A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. The Cell or Cell Range to set or retrieve data . A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $aavData             - [optional] an array of Arrays containing variants. Default is Null. An Array of Arrays containing data, strings or numbers, to fill the range with. See remarks.
 ;                  $bStrictSize         - [optional] a boolean value. Default is False. If True, The Range size must explicitly match the array sizing. If False, The Range will be resized right or down to fit the Array sizing.
 ; Return values .: Success: 1 or Array
@@ -847,7 +862,7 @@ EndFunc   ;==>_LOCalc_RangeData
 ; Description ...: Add a Database Range to a document.
 ; Syntax ........: _LOCalc_RangeDatabaseAdd(ByRef $oDoc, $oRange, $sName[, $bColumnHeaders = True[, $bTotalsRow = False[, $bAddDeleteCells = True[, $bKeepFormatting = True[, $bDontSaveImport = False[, $bAutoFilter = False]]]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oRange              - an object. The Range to designate as a Database range. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+;                  $oRange              - an object. The Range to designate as a Database range. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $sName               - a string value. The unique name of the Database Range to create.
 ;                  $bColumnHeaders      - [optional] a boolean value. Default is True. If True, the top row is considered a Header/label.
 ;                  $bTotalsRow          - [optional] a boolean value. Default is False. If True, the bottom row will be considered a totals row.
@@ -960,6 +975,8 @@ Func _LOCalc_RangeDatabaseDelete(ByRef $oDoc, $oDatabaseRange)
 	$oDatabaseRanges.removeByName($sDatabaseRange)
 
 	If $oDatabaseRanges.hasByName($sDatabaseRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$oDatabaseRange = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_RangeDatabaseDelete
@@ -1098,7 +1115,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseGetObjByName
 ; Syntax ........: _LOCalc_RangeDatabaseModify(ByRef $oDoc, ByRef $oDatabaseRange[, $oRange = Null[, $sName = Null[, $bColumnHeaders = Null[, $bTotalsRow = Null[, $bAddDeleteCells = Null[, $bKeepFormatting = Null[, $bDontSaveImport = Null[, $bAutoFilter = Null]]]]]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oDatabaseRange      - [in/out] an object. A Database Range Object as returned from _LOCalc_RangeDatabaseAdd or _LOCalc_RangeDatabaseGetObjByName.
-;                  $oRange              - [optional] an object. Default is Null. The Range to designate as a Database range. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+;                  $oRange              - [optional] an object. Default is Null. The Range to designate as a Database range. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $sName               - [optional] a string value. Default is Null. The new unique name to rename the Database Range to.
 ;                  $bColumnHeaders      - [optional] a boolean value. Default is Null. If True, the top row is considered a Header/label.
 ;                  $bTotalsRow          - [optional] a boolean value. Default is Null. If True, the bottom row will be considered a totals row.
@@ -1230,8 +1247,8 @@ EndFunc   ;==>_LOCalc_RangeDatabaseModify
 ; Name ..........: _LOCalc_RangeDelete
 ; Description ...: Delete a Range of cell contents and reposition surrounding cells.
 ; Syntax ........: _LOCalc_RangeDelete(ByRef $oSheet, $oRange, $iMode)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $oRange              - an object. A Cell or Cell range to delete. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $oRange              - an object. A Cell or Cell range to delete. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iMode               - an integer value (0-4). The Cell Deletion Mode. See Constants $LOC_CELL_DELETE_MODE_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1272,7 +1289,7 @@ EndFunc   ;==>_LOCalc_RangeDelete
 ; Name ..........: _LOCalc_RangeDetail
 ; Description ...: Expand or Hide Grouped cells in a Range.
 ; Syntax ........: _LOCalc_RangeDetail(ByRef $oRange[, $bShow = True])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bShow               - [optional] a boolean value. Default is True. If True, grouped cells are expanded, If False, grouped cells are collapsed.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1316,7 +1333,7 @@ EndFunc   ;==>_LOCalc_RangeDetail
 ; Name ..........: _LOCalc_RangeFill
 ; Description ...: Automatically fill cells with a value. See Remarks.
 ; Syntax ........: _LOCalc_RangeFill(ByRef $oRange, $iDirection[, $iCount = 1])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iDirection          - an integer value (0-3). The Direction to perform the Fill operation. See Constants $LOC_FILL_DIR_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iCount              - [optional] an integer value. Default is 1. The number of Cells to take into account at the beginning of the range to constitute the fill algorithm.
 ; Return values .: Success: 1
@@ -1351,7 +1368,7 @@ EndFunc   ;==>_LOCalc_RangeFill
 ; Name ..........: _LOCalc_RangeFillRandom
 ; Description ...: Fill a range with random numbers.
 ; Syntax ........: _LOCalc_RangeFillRandom(ByRef $oRange[, $nMin = 0.0000[, $nMax = 1.0000[, $iDecPlc = 15[, $nSeed = Null[, $bFillByRows = True]]]]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $nMin                - [optional] a general number value (-2^31-2^31). Default is 0.0000. The minimum number value. Max is -2^31-2^31.
 ;                  $nMax                - [optional] a general number value (-2^31-2^31). Default is 1.0000. The maximum number value. Max is -2^31-2^31.
 ;                  $iDecPlc             - [optional] an integer value (0-255). Default is 15. The decimal place to round the value to. Call with 0 to fill with Integers only.
@@ -1370,7 +1387,7 @@ EndFunc   ;==>_LOCalc_RangeFill
 ;                  @Error 0 @Extended 0 Return 1 = Success. Range successfully filled with random values.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function is a homemade version of Calc's Fill Random, as there is no built in method for calling Libre Office's built-in one. The results of this function may not be similar to the results of Libre Office's random number generator.
+; Remarks .......: This function is a homemade version of Calc's Fill Random, as there is no built in method for calling LibreOffice's built-in one. The results of this function may not be similar to the results of LibreOffice's random number generator.
 ;                  Any values in the range will be overwritten.
 ; Related .......:
 ; Link ..........:
@@ -1383,7 +1400,7 @@ Func _LOCalc_RangeFillRandom(ByRef $oRange, $nMin = 0.0000, $nMax = 1.0000, $iDe
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_NumIsBetween($nMin, -2 ^ 31, 2 ^ 31) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_NumIsBetween($nMax, -2 ^ 31, 2 ^ 31) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_NumIsBetween($iDecPlc, 0, 255) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iDecPlc, 0, 255) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If ($nSeed <> Null) And Not __LO_NumIsBetween($nSeed, -2 ^ 31, 2 ^ 31) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsBool($bFillByRows) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
@@ -1413,7 +1430,7 @@ EndFunc   ;==>_LOCalc_RangeFillRandom
 ; Name ..........: _LOCalc_RangeFillSeries
 ; Description ...: Fill a Range of Cells with Data.
 ; Syntax ........: _LOCalc_RangeFillSeries(ByRef $oRange, $iDirection, $iMode, $nStep, $nEnd[, $iDateMode = $LOC_FILL_DATE_MODE_DAY])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iDirection          - an integer value (0-3). The Direction of the Series Fill. See Constants $LOC_FILL_DIR_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iMode               - an integer value (0-4). The Fill Type. See Constants $LOC_FILL_MODE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $nStep               - a general number value. The amount the beginning value increments per step.
@@ -1457,7 +1474,7 @@ EndFunc   ;==>_LOCalc_RangeFillSeries
 ; Name ..........: _LOCalc_RangeFilter
 ; Description ...: Apply a Filter to a Range.
 ; Syntax ........: _LOCalc_RangeFilter(ByRef $oRange, ByRef $oFilterDesc)
-; Parameters ....: $oRange              - [in/out] an object. The Range to Filter. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. The Range to Filter. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $oFilterDesc         - [in/out] an object. A Filter Descriptor created by a previous _LOCalc_FilterDescriptorCreate function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1508,8 +1525,8 @@ EndFunc   ;==>_LOCalc_RangeFilter
 ; Name ..........: _LOCalc_RangeFilterAdvanced
 ; Description ...: Apply an advanced filter to a Range.
 ; Syntax ........: _LOCalc_RangeFilterAdvanced(ByRef $oRange, ByRef $oFilterDescRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
-;                  $oFilterDescRange    - [in/out] an object. The Range containing the Filter Criteria. See remarks. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $oFilterDescRange    - [in/out] an object. The Range containing the Filter Criteria. See remarks. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1547,7 +1564,7 @@ EndFunc   ;==>_LOCalc_RangeFilterAdvanced
 ; Name ..........: _LOCalc_RangeFilterClear
 ; Description ...: Clear any previous filters for a Range.
 ; Syntax ........: _LOCalc_RangeFilterClear(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. The Range to clear filtering for. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. The Range to clear filtering for. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1583,7 +1600,7 @@ EndFunc   ;==>_LOCalc_RangeFilterClear
 ; Name ..........: _LOCalc_RangeFindAll
 ; Description ...: Find all matches contained in a document of a specified Search String.
 ; Syntax ........: _LOCalc_RangeFindAll(ByRef $oRange, ByRef $oSrchDescript, $sSearchString)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOCalc_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or regular expression to search for.
 ; Return values .: Success: 1 or Array.
@@ -1596,7 +1613,6 @@ EndFunc   ;==>_LOCalc_RangeFilterClear
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Search did not return an Object, something went wrong.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Search was Successful, but found no results.
 ;                  @Error 0 @Extended ? Return Array = Success. Search was Successful, returning 1 dimensional array containing the objects to each match, @Extended is set to the number of matches.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1631,14 +1647,14 @@ Func _LOCalc_RangeFindAll(ByRef $oRange, ByRef $oSrchDescript, $sSearchString)
 		Next
 	EndIf
 
-	Return (UBound($aoResults) > 0) ? (SetError($__LO_STATUS_SUCCESS, UBound($aoResults), $aoResults)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError($__LO_STATUS_SUCCESS, UBound($aoResults), $aoResults)
 EndFunc   ;==>_LOCalc_RangeFindAll
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_RangeFindNext
 ; Description ...: Find a Search String in a Document once or one at a time.
 ; Syntax ........: _LOCalc_RangeFindNext(ByRef $oRange, ByRef $oSrchDescript, $sSearchString[, $oLastFind = Null])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOCalc_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or a regular expression to search for.
 ;                  $oLastFind           - [optional] an object. Default is Null. The last returned Object by a previous call to this function to begin the search from, if called with Null, the search begins at the start of the Range.
@@ -1695,7 +1711,7 @@ EndFunc   ;==>_LOCalc_RangeFindNext
 ; Name ..........: _LOCalc_RangeFormula
 ; Description ...: Set or Retrieve Formulas in a Range.
 ; Syntax ........: _LOCalc_RangeFormula(ByRef $oRange[, $aasFormulas = Null[, $bStrictSize = False]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $aasFormulas         - [optional] an array or arrays containing strings. Default is Null. An Array of Arrays containing formula strings to fill the range with. See remarks.
 ;                  $bStrictSize         - [optional] a boolean value. Default is False. If True, The Range size must explicitly match the array sizing. If False, The Range will be resized right or down to fit the Array sizing.
 ; Return values .: Success: 1 or Array
@@ -1804,7 +1820,7 @@ EndFunc   ;==>_LOCalc_RangeFormula
 ; Name ..........: _LOCalc_RangeGetAddressAsName
 ; Description ...: Retrieve the Name of the beginning and ending cells of the range.
 ; Syntax ........: _LOCalc_RangeGetAddressAsName(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1838,7 +1854,7 @@ EndFunc   ;==>_LOCalc_RangeGetAddressAsName
 ; Name ..........: _LOCalc_RangeGetAddressAsPosition
 ; Description ...: Retrieve the Position of the beginning and ending cells of the range.
 ; Syntax ........: _LOCalc_RangeGetAddressAsPosition(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1879,7 +1895,7 @@ EndFunc   ;==>_LOCalc_RangeGetAddressAsPosition
 ; Name ..........: _LOCalc_RangeGetCellByName
 ; Description ...: Retrieve a Cell or Cell Range Object by Cell name.
 ; Syntax ........: _LOCalc_RangeGetCellByName(ByRef $oRange, $sFromCellName[, $sToCellName = Null])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $sFromCellName       - a string value. The cell to retrieve the Object for, or to begin the Cell Range. See remarks.
 ;                  $sToCellName         - [optional] a string value. Default is Null. The cell to end the Cell Range at.
 ; Return values .: Success: Object
@@ -1922,7 +1938,7 @@ EndFunc   ;==>_LOCalc_RangeGetCellByName
 ; Name ..........: _LOCalc_RangeGetCellByPosition
 ; Description ...: Retrieve a Cell or Cell Range Object by position.
 ; Syntax ........: _LOCalc_RangeGetCellByPosition(ByRef $oRange, $iColumn, $iRow[, $iToColumn = Null[, $iToRow = Null]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iColumn             - an integer value. The Column of the desired cell, or of the beginning of the Cell range. 0 Based. See remarks.
 ;                  $iRow                - an integer value. The Row of the desired cell, or of the beginning of the Cell range. 0 Based. See remarks.
 ;                  $iToColumn           - [optional] an integer value. Default is Null. The Column of the end of the Cell range. 0 Based. Must be greater or equal to $iColumn.
@@ -1946,7 +1962,7 @@ EndFunc   ;==>_LOCalc_RangeGetCellByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: According to the wiki (https://wiki.documentfoundation.org/Faq/Calc/022), the maximum Columns contained in a sheet is 1024 until version 7.3, or 16384 from 7.3. and up..
-;                  According to Andrew Pitonyak, (OOME. 4.1 Page 492), the maximum number of rows contained in a sheet is 65,536 as of OOo Calc 3.0, but according to the wiki (https://wiki.documentfoundation.org/Faq/Calc/022), the maximum or Rows for Libre Office Calc is 1,048,576.
+;                  According to Andrew Pitonyak, (OOME. 4.1 Page 492), the maximum number of rows contained in a sheet is 65,536 as of OOo Calc 3.0, but according to the wiki (https://wiki.documentfoundation.org/Faq/Calc/022), the maximum or Rows for LibreOffice Calc is 1,048,576.
 ; Related .......: _LOCalc_RangeGetCellByName
 ; Link ..........:
 ; Example .......: Yes
@@ -1986,7 +2002,7 @@ EndFunc   ;==>_LOCalc_RangeGetCellByPosition
 ; Name ..........: _LOCalc_RangeGetSheet
 ; Description ...: Return the Sheet Object that contains the Range.
 ; Syntax ........: _LOCalc_RangeGetSheet(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2020,7 +2036,7 @@ EndFunc   ;==>_LOCalc_RangeGetSheet
 ; Name ..........: _LOCalc_RangeGroup
 ; Description ...: Group or Ungroup cells in a Range.
 ; Syntax ........: _LOCalc_RangeGroup(ByRef $oRange[, $iOrientation = $LOC_GROUP_ORIENT_ROWS[, $bGroup = True]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iOrientation        - [optional] an integer value (0-1). Default is $LOC_GROUP_ORIENT_ROWS. Whether to Group Rows or Columns. See Constants $LOC_GROUP_ORIENT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bGroup              - [optional] a boolean value. Default is True. If True Cells are Grouped, if False, cells are Ungrouped.
 ; Return values .: Success: 1
@@ -2067,8 +2083,8 @@ EndFunc   ;==>_LOCalc_RangeGroup
 ; Name ..........: _LOCalc_RangeInsert
 ; Description ...: Insert blank cells at a Cell Range.
 ; Syntax ........: _LOCalc_RangeInsert(ByRef $oSheet, $oRange, $iMode)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $oRange              - an object. A Cell or Cell Range to insert new blank cells at. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $oRange              - an object. A Cell or Cell Range to insert new blank cells at. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iMode               - an integer value (0-4). The Cell Insertion Mode. See Constants $LOC_CELL_INSERT_MODE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2111,7 +2127,7 @@ EndFunc   ;==>_LOCalc_RangeInsert
 ; Name ..........: _LOCalc_RangeIsMerged
 ; Description ...: Check if any part of a range contains merged cells.
 ; Syntax ........: _LOCalc_RangeIsMerged(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2145,7 +2161,7 @@ EndFunc   ;==>_LOCalc_RangeIsMerged
 ; Name ..........: _LOCalc_RangeMerge
 ; Description ...: Merge or Unmerge a Range of cells.
 ; Syntax ........: _LOCalc_RangeMerge(ByRef $oRange, $bMerge)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bMerge              - a boolean value. If True, the Cells within the range are merged. If False, any merged cells intercepting the Range will be unmurged. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2177,8 +2193,8 @@ EndFunc   ;==>_LOCalc_RangeMerge
 ; Name ..........: _LOCalc_RangeNamedAdd
 ; Description ...: Add a Named Range to a specific Scope.
 ; Syntax ........: _LOCalc_RangeNamedAdd(ByRef $oObj, $vRange, $sName[, $iOptions = $LOC_NAMED_RANGE_OPT_NONE[, $oRefCell = Null]])
-; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $vRange              - a variant value. See remarks. May be a String or a Cell Range object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $vRange              - a variant value. See remarks. May be a String or a Cell Range object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $sName               - a string value. The unique name of the Named Range to create. Must start with a letter or an Underscore, and ONLY contain Letters, Numbers and Underscores, no Spaces.
 ;                  $iOptions            - [optional] an integer value (0-15). Default is $LOC_NAMED_RANGE_OPT_NONE. Any options to set for the Named Range, can be BitOR'd together. See Constants $LOC_NAMED_RANGE_OPT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $oRefCell            - [optional] an object. Default is Null. The reference cell for the Range or Formula set in $vRange.
@@ -2208,7 +2224,7 @@ EndFunc   ;==>_LOCalc_RangeMerge
 ;                  $oRefCell "acts as the base address for cells referenced in a relative way. If the cell range is not specified as an absolute address, the referenced range will be different based on where in the spreadsheet the range is used."
 ;                  Or in the case of a formula, an example would if we created a "named range 'AddLeft', which refers to the equation A3+B3 with C3 as the reference cell. The cells A3 and B3 are the two cells directly to the left of C3, so, the equation =AddLeft calculates the sum of the two cells directly to the left of the cell that contains the equation. Changing the reference cell to C4, which is below A3 and B3, causes the AddLeft equation to calculate the sum of the two cells that are to the left on the previous row."
 ;                  [Both quotations above are adapted from Andrew Pitonyak's book OOME 4.1, pdf Page 523, book page 519]
-; Related .......: _LOCalc_RangeNamedDelete, _LOCalc_RangeNamedExists
+; Related .......: _LOCalc_RangeNamedDeleteByName, _LOCalc_RangeNamedDeleteByObj, _LOCalc_RangeNamedExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2274,7 +2290,7 @@ EndFunc   ;==>_LOCalc_RangeNamedAdd
 ; Syntax ........: _LOCalc_RangeNamedChangeScope(ByRef $oDoc, ByRef $oNamedRange, ByRef $oNewScope[, $sNewName = ""])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oNamedRange         - [in/out] an object. A Named Range Object returned by a previous _LOCalc_RangeNamedGetObjByName, or _LOCalc_RangeNamedAdd function.
-;                  $oNewScope           - [in/out] an object. The new Scope to place the Named Range in. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $oNewScope           - [in/out] an object. The new Scope to place the Named Range in. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $sNewName            - [optional] a string value. Default is "". A new name for the Range. Empty String means the name is reused.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2354,17 +2370,61 @@ Func _LOCalc_RangeNamedChangeScope(ByRef $oDoc, ByRef $oNamedRange, ByRef $oNewS
 EndFunc   ;==>_LOCalc_RangeNamedChangeScope
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOCalc_RangeNamedDelete
-; Description ...: Delete a Named Range from a particular scope.
-; Syntax ........: _LOCalc_RangeNamedDelete(ByRef $oObj, $vNamedRange)
-; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $vNamedRange         - a variant value. The name of the Named Range to delete, as a string, or the NamedRange Object as returned from _LOCalc_RangeNamedAdd or _LOCalc_RangeNamedGetObjByName.
+; Name ..........: _LOCalc_RangeNamedDeleteByName
+; Description ...: Delete a Named Range from a particular scope using its Name.
+; Syntax ........: _LOCalc_RangeNamedDeleteByName(ByRef $oObj, $sNamedRange)
+; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $sNamedRange         - a string value. The name of the Named Range to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $vNamedRange not an Object and not a String.
-;                  @Error 1 @Extended 3 Return 0 = Scope called in $oObj does not contain a Named Range as called in $vNamedRange.
+;                  @Error 1 @Extended 2 Return 0 = $sNamedRange not a String.
+;                  @Error 1 @Extended 3 Return 0 = Scope called in $oObj does not contain a Named Range as called in $sNamedRange.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Named Ranges Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to delete requested Named Range.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted the requested Named Range.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The Object called in $oObj must be the scope the Named Range is present in, either Globally (Document Object), or locally (Sheet Object).
+; Related .......: _LOCalc_RangeNamedAdd, _LOCalc_RangeNamedExists
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOCalc_RangeNamedDeleteByName(ByRef $oObj, $sNamedRange)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oNamedRanges
+
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oNamedRanges = $oObj.NamedRanges()
+	If Not IsObj($oNamedRanges) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oNamedRanges.removeByName($sNamedRange)
+
+	If $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOCalc_RangeNamedDeleteByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOCalc_RangeNamedDeleteByObj
+; Description ...: Delete a Named Range from a particular scope using its Object.
+; Syntax ........: _LOCalc_RangeNamedDeleteByObj(ByRef $oObj, ByRef $oNamedRange)
+; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $oNamedRange         - [in/out] an object. The Named Range Object to delete as returned from _LOCalc_RangeNamedAdd or _LOCalc_RangeNamedGetObjByName.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oNamedRange not an Object.
+;                  @Error 1 @Extended 3 Return 0 = Scope called in $oObj does not contain a Named Range as called in $oNamedRange.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Named Ranges Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Named Range's name.
@@ -2378,7 +2438,7 @@ EndFunc   ;==>_LOCalc_RangeNamedChangeScope
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_RangeNamedDelete(ByRef $oObj, $vNamedRange)
+Func _LOCalc_RangeNamedDeleteByObj(ByRef $oObj, ByRef $oNamedRange)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2386,33 +2446,29 @@ Func _LOCalc_RangeNamedDelete(ByRef $oObj, $vNamedRange)
 	Local $sNamedRange
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($vNamedRange) And Not IsObj($vNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsObj($oNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oNamedRanges = $oObj.NamedRanges()
 	If Not IsObj($oNamedRanges) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If IsObj($vNamedRange) Then
-		$sNamedRange = $vNamedRange.Name()
-		If Not IsString($sNamedRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	Else
-		$sNamedRange = $vNamedRange
-	EndIf
-
+	$sNamedRange = $oNamedRange.Name()
+	If Not IsString($sNamedRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	If Not $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oNamedRanges.removeByName($sNamedRange)
 
 	If $oNamedRanges.hasByName($sNamedRange) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
+	$oNamedRange = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOCalc_RangeNamedDelete
+EndFunc   ;==>_LOCalc_RangeNamedDeleteByObj
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_RangeNamedExists
 ; Description ...: Check if a Named Range exists in a particular scope.
 ; Syntax ........: _LOCalc_RangeNamedExists(ByRef $oObj, $sName)
-; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $sName               - a string value. The Named Range name to look for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2454,7 +2510,7 @@ EndFunc   ;==>_LOCalc_RangeNamedExists
 ; Name ..........: _LOCalc_RangeNamedGetNames
 ; Description ...: Retrieve an array of Named Range names for either the document or sheet.
 ; Syntax ........: _LOCalc_RangeNamedGetNames(ByRef $oObj)
-; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2497,7 +2553,7 @@ EndFunc   ;==>_LOCalc_RangeNamedGetNames
 ; Name ..........: _LOCalc_RangeNamedGetObjByName
 ; Description ...: Retrieve a Named Range Object by Name.
 ; Syntax ........: _LOCalc_RangeNamedGetObjByName(ByRef $oObj, $sName)
-; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oObj                - [in/out] an object. See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $sName               - a string value. The name of the Named Range to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2542,7 +2598,7 @@ EndFunc   ;==>_LOCalc_RangeNamedGetObjByName
 ; Syntax ........: _LOCalc_RangeNamedModify(ByRef $oDoc, ByRef $oNamedRange[, $vRange = Null[, $sName = Null[, $iOptions = Null[, $oRefCell = Null]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oNamedRange         - [in/out] an object. A Named Range Object returned by a previous _LOCalc_RangeNamedGetObjByName, or _LOCalc_RangeNamedAdd function.
-;                  $vRange              - [optional] a variant value. Default is Null. See remarks. May be a String or a Cell Range object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+;                  $vRange              - [optional] a variant value. Default is Null. See remarks. May be a String or a Cell Range object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $sName               - [optional] a string value. Default is Null. The unique name of the Named Range to create. Must start with a letter or Underscore, and ONLY contain Letters, Numbers and Underscores, no Spaces.
 ;                  $iOptions            - [optional] an integer value (0-15). Default is Null. Any options to set for the Named Range, can be BitOR'd together. See Constants $LOC_NAMED_RANGE_OPT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $oRefCell            - [optional] an object. Default is Null. The reference cell for the Range or Formula set in $vRange.
@@ -2668,7 +2724,7 @@ EndFunc   ;==>_LOCalc_RangeNamedModify
 ; Name ..........: _LOCalc_RangeNumbers
 ; Description ...: Set or Retrieve Numbers in a Range.
 ; Syntax ........: _LOCalc_RangeNumbers(ByRef $oRange[, $aanNumbers = Null[, $bStrictSize = False]])
-; Parameters ....: $oRange              - [in/out] an object. A cell or cell range to set or retrieve number values for. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A cell or cell range to set or retrieve number values for. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $aanNumbers          - [optional] an array of arrays containing general numbers. Default is Null. An Array of Arrays containing numbers to fill the range with. See remarks.
 ;                  $bStrictSize         - [optional] a boolean value. Default is False. If True, The Range size must explicitly match the array sizing. If False, The Range will be resized right or down to fit the Array sizing.
 ; Return values .: Success: 1 or Array
@@ -2777,7 +2833,7 @@ EndFunc   ;==>_LOCalc_RangeNumbers
 ; Name ..........: _LOCalc_RangeOutlineClearAll
 ; Description ...: Clear all Outline groups for a Sheet.
 ; Syntax ........: _LOCalc_RangeOutlineClearAll(ByRef $oSheet)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2806,7 +2862,7 @@ EndFunc   ;==>_LOCalc_RangeOutlineClearAll
 ; Name ..........: _LOCalc_RangeOutlineShow
 ; Description ...: Show Outlined groups of cells up a specific level in a Sheet.
 ; Syntax ........: _LOCalc_RangeOutlineShow(ByRef $oSheet, $iLevel[, $iOrientation = $LOC_GROUP_ORIENT_ROWS])
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $iLevel              - an integer value. The level of Outlines to show, beginning at 1 and continuing to the level input. Call 0 to collapse them all.
 ;                  $iOrientation        - [optional] an integer value (0-1). Default is $LOC_GROUP_ORIENT_ROWS. The orientation of the Outlines. See Constants $LOC_GROUP_ORIENT_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1
@@ -2883,6 +2939,8 @@ Func _LOCalc_RangePivotDelete(ByRef $oDoc, ByRef $oPivotTable)
 	$oSheet.DataPilotTables.removeByName($sName)
 	If $oSheet.DataPilotTables.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
+	$oPivotTable = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_RangePivotDelete
 
@@ -2892,7 +2950,7 @@ EndFunc   ;==>_LOCalc_RangePivotDelete
 ; Syntax ........: _LOCalc_RangePivotDest(ByRef $oDoc, ByRef $oPivotTable[, $oDestRange = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oPivotTable         - [in/out] an object. A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
-;                  $oDestRange          - [optional] an object. Default is Null. The Range to output the Pivot Table to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+;                  $oDestRange          - [optional] an object. Default is Null. The Range to output the Pivot Table to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2935,6 +2993,7 @@ Func _LOCalc_RangePivotDest(ByRef $oDoc, ByRef $oPivotTable, $oDestRange = Null)
 	Local $oSheet, $oOrigRange, $oNewPivotTable, $oPivotDesc, $oPivotField
 	Local $tCellAddr
 	Local $sName
+	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPivotTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -3050,19 +3109,18 @@ Func _LOCalc_RangePivotDest(ByRef $oDoc, ByRef $oPivotTable, $oDestRange = Null)
 	$oPivotTable = $oNewPivotTable
 
 	If ($oPivotTable.Name() <> $sName) Then $oPivotTable.Name = $sName
-
-	If Not (($oPivotTable.OutputRange.Sheet() = $oDestRange.RangeAddress.Sheet()) And _
+	$iError = (($oPivotTable.OutputRange.Sheet() = $oDestRange.RangeAddress.Sheet()) And _
 			($oPivotTable.OutputRange.StartColumn() = $oDestRange.RangeAddress.StartColumn()) And _
-			($oPivotTable.OutputRange.StartRow() = $oDestRange.RangeAddress.StartRow())) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+			($oPivotTable.OutputRange.StartRow() = $oDestRange.RangeAddress.StartRow())) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_RangePivotDest
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_RangePivotExists
 ; Description ...: Query if a Pivot Table with a specific name exists in a Sheet.
 ; Syntax ........: _LOCalc_RangePivotExists(ByRef $oSheet, $sName)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $sName               - a string value. The Pivot Table name to look for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -3673,8 +3731,8 @@ EndFunc   ;==>_LOCalc_RangePivotFilter
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oPivotTable not an Object.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to clear previous filter.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to clear previous filter.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared the Pivot Table Filter.
 ; Author ........: donnyh13
@@ -3707,7 +3765,7 @@ EndFunc   ;==>_LOCalc_RangePivotFilterClear
 ; Name ..........: _LOCalc_RangePivotGetObjByIndex
 ; Description ...: Retrieve the Object for a Pivot table by Index.
 ; Syntax ........: _LOCalc_RangePivotGetObjByIndex(ByRef $oSheet, $iIndex)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $iIndex              - an integer value. The Index number of the Pivot Table to retrieve the Object for. 0 Based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -3744,7 +3802,7 @@ EndFunc   ;==>_LOCalc_RangePivotGetObjByIndex
 ; Name ..........: _LOCalc_RangePivotGetObjByName
 ; Description ...: Retrieve the object for a Pivot Table by name.
 ; Syntax ........: _LOCalc_RangePivotGetObjByName(ByRef $oSheet, $sName)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $sName               - a string value. The name of the Pivot Table to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -3783,8 +3841,8 @@ EndFunc   ;==>_LOCalc_RangePivotGetObjByName
 ; Name ..........: _LOCalc_RangePivotInsert
 ; Description ...: Insert a new Pivot Table.
 ; Syntax ........: _LOCalc_RangePivotInsert(ByRef $oSourceRange, ByRef $oDestRange[, $sName = ""[, $sField = ""[, $iFieldType = $LOC_PIVOT_TBL_FIELD_TYPE_COLUMN[, $iFunc = $LOC_COMPUTE_FUNC_NONE]]]])
-; Parameters ....: $oSourceRange        - [in/out] an object. The Range containing the Data to use in the Pivot Table. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
-;                  $oDestRange          - [in/out] an object. The Range to output the Pivot Table to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oSourceRange        - [in/out] an object. The Range containing the Data to use in the Pivot Table. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $oDestRange          - [in/out] an object. The Range to output the Pivot Table to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $sName               - [optional] a string value. Default is "". The name of the new Pivot Table. If blank, an automatic name is generated.
 ;                  $sField              - [optional] a string value. Default is "". The name of one of the available fields in the source range to use in the Table. See remarks.
 ;                  $iFieldType          - [optional] an integer value (0-4). Default is $LOC_PIVOT_TBL_FIELD_TYPE_COLUMN. The type to set the field called in $sField to. See Constants $LOC_PIVOT_TBL_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -3907,7 +3965,8 @@ EndFunc   ;==>_LOCalc_RangePivotInsert
 ;                  @Error 1 @Extended 4 Return 0 = Document called in $oDoc does not contain the Pivot Table called in $oPivotTable.
 ;                  @Error 1 @Extended 5 Return 0 = Parent sheet of Pivot Table called in $oPivotTable already contains a Pivot Table with the name called in $sName.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Pivot Table Parent Sheet.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Pivot Table's Name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Pivot Table Parent Sheet.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -3926,24 +3985,30 @@ Func _LOCalc_RangePivotName(ByRef $oDoc, ByRef $oPivotTable, $sName = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSheet
+	Local $sCurName
+	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPivotTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($sName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPivotTable.Name())
+	If __LO_VarsAreNull($sName) Then
+		$sCurName = $oPivotTable.Name()
+		If Not IsString($sCurName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurName)
+	EndIf
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oSheet = $oDoc.Sheets.getByIndex($oPivotTable.OutputRange.Sheet())
-	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	If Not $oSheet.DataPilotTables.hasByName($oPivotTable.Name()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If $oSheet.DataPilotTables.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$oPivotTable.Name = $sName
+	$iError = ($oPivotTable.Name() = $sName) ? ($iError) : (BitOR($iError, 1))
 
-	If Not ($oPivotTable.Name() = $sName) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_RangePivotName
 
 ; #FUNCTION# ====================================================================================================================
@@ -4081,7 +4146,7 @@ EndFunc   ;==>_LOCalc_RangePivotSettings
 ; Name ..........: _LOCalc_RangePivotsGetCount
 ; Description ...: Retrieve a count of Pivot tables contained in the Sheet.
 ; Syntax ........: _LOCalc_RangePivotsGetCount(ByRef $oSheet)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4115,7 +4180,7 @@ EndFunc   ;==>_LOCalc_RangePivotsGetCount
 ; Name ..........: _LOCalc_RangePivotsGetNames
 ; Description ...: Retrieve an array of Pivot Tables contained in the Sheet.
 ; Syntax ........: _LOCalc_RangePivotsGetNames(ByRef $oSheet)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4162,7 +4227,7 @@ EndFunc   ;==>_LOCalc_RangePivotsGetNames
 ; Syntax ........: _LOCalc_RangePivotSource(ByRef $oDoc, ByRef $oPivotTable[, $oSourceRange = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oPivotTable         - [in/out] an object. A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
-;                  $oSourceRange        - [optional] an object. Default is Null. The Range containing the Data to use in the Pivot Table. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+;                  $oSourceRange        - [optional] an object. Default is Null. The Range containing the Data to use in the Pivot Table. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4219,7 +4284,7 @@ EndFunc   ;==>_LOCalc_RangePivotSource
 ; Name ..........: _LOCalc_RangeQueryColumnDiff
 ; Description ...: Query a Cell Range for differences on each column based on a specific row.
 ; Syntax ........: _LOCalc_RangeQueryColumnDiff(ByRef $oRange, $oCellToCompare)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range to look for differences in. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range to look for differences in. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $oCellToCompare      - an object. A single Cell object (not a range) returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function. The Row this cell is located in will be used for the query.
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4276,7 +4341,7 @@ EndFunc   ;==>_LOCalc_RangeQueryColumnDiff
 ; Name ..........: _LOCalc_RangeQueryContents
 ; Description ...: Query a Cell or Cell range for specific cell contents.
 ; Syntax ........: _LOCalc_RangeQueryContents(ByRef $oRange, $iFlags)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iFlags              - an integer value (1-1023). The Cell content type flag. Can be BitOR'd together. See Constants $LOC_CELL_FLAG_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4326,7 +4391,7 @@ EndFunc   ;==>_LOCalc_RangeQueryContents
 ; Name ..........: _LOCalc_RangeQueryDependents
 ; Description ...: Query a Cell or Cell Range for Dependents.
 ; Syntax ........: _LOCalc_RangeQueryDependents(ByRef $oRange[, $bRecursive = False])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bRecursive          - [optional] a boolean value. Default is False. If True, the query is repeated for each found cell.
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4376,7 +4441,7 @@ EndFunc   ;==>_LOCalc_RangeQueryDependents
 ; Name ..........: _LOCalc_RangeQueryEmpty
 ; Description ...: Query a Cell or Cell Range for empty cells.
 ; Syntax ........: _LOCalc_RangeQueryEmpty(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4423,7 +4488,7 @@ EndFunc   ;==>_LOCalc_RangeQueryEmpty
 ; Name ..........: _LOCalc_RangeQueryFormula
 ; Description ...: Query a Cell or Cell Range for formulas having a specific result.
 ; Syntax ........: _LOCalc_RangeQueryFormula(ByRef $oRange, $iResultType)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iResultType         - an integer value (1-7). The Formula result type. Can be BitOR'd together. See Constants $LOC_FORMULA_RESULT_TYPE_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4473,8 +4538,8 @@ EndFunc   ;==>_LOCalc_RangeQueryFormula
 ; Name ..........: _LOCalc_RangeQueryIntersection
 ; Description ...: Retrieve an array of cell ranges that intersect with a certain cell range.
 ; Syntax ........: _LOCalc_RangeQueryIntersection(ByRef $oRange, $oCell)
-; Parameters ....: $oRange              - [in/out] an object. A Cell range that contains the cell or cell range called in $oCell. A Cell Range object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
-;                  $oCell               - an object. A Cell or Cell Range located inside of the cell range called in $oRange. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell range that contains the cell or cell range called in $oCell. A Cell Range object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $oCell               - an object. A Cell or Cell Range located inside of the cell range called in $oRange. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4528,7 +4593,7 @@ EndFunc   ;==>_LOCalc_RangeQueryIntersection
 ; Name ..........: _LOCalc_RangeQueryPrecedents
 ; Description ...: Query a Cell or Cell Range for Precedents.
 ; Syntax ........: _LOCalc_RangeQueryPrecedents(ByRef $oRange[, $bRecursive = False])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bRecursive          - [optional] a boolean value. Default is False. If True, the query is repeated for each found cell.
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4578,7 +4643,7 @@ EndFunc   ;==>_LOCalc_RangeQueryPrecedents
 ; Name ..........: _LOCalc_RangeQueryRowDiff
 ; Description ...: Query a Cell Range for differences on each row based on a specific column.
 ; Syntax ........: _LOCalc_RangeQueryRowDiff(ByRef $oRange, $oCellToCompare)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range to look for differences in. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range to look for differences in. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $oCellToCompare      - an object. A single Cell object (not a range) returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function. The Column this cell is located in will be used for the query.
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4635,7 +4700,7 @@ EndFunc   ;==>_LOCalc_RangeQueryRowDiff
 ; Name ..........: _LOCalc_RangeQueryVisible
 ; Description ...: Query a Cell or Cell Range for visible cells.
 ; Syntax ........: _LOCalc_RangeQueryVisible(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4682,7 +4747,7 @@ EndFunc   ;==>_LOCalc_RangeQueryVisible
 ; Name ..........: _LOCalc_RangeReplace
 ; Description ...: Replace the first instances of a search within a Range.
 ; Syntax ........: _LOCalc_RangeReplace(ByRef $oRange, ByRef $oSrchDescript, $sSearchString, $sReplaceString)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOCalc_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or a regular expression to search for.
 ;                  $sReplaceString      - a string value. A String of text or a regular expression to replace the first result with.
@@ -4701,7 +4766,7 @@ EndFunc   ;==>_LOCalc_RangeQueryVisible
 ;                  @Error 0 @Extended 1 Return Object = Success. Search and Replace was successful, returning Object for Cell that the find and replace was performed upon.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office does not offer a Function to call to replace only one result within a Range, consequently I have had to create my own, which means this may not work exactly as expected.
+; Remarks .......: LibreOffice does not offer a Function to call to replace only one result within a Range, consequently I have had to create my own, which means this may not work exactly as expected.
 ; Related .......: _LOCalc_SearchDescriptorCreate, _LOCalc_RangeFindAll, _LOCalc_RangeFindNext, _LOCalc_RangeReplaceAll,
 ; Link ..........:
 ; Example .......: Yes
@@ -4726,15 +4791,16 @@ Func _LOCalc_RangeReplace(ByRef $oRange, ByRef $oSrchDescript, $sSearchString, $
 	If Not IsObj($oResult) Then Return SetError($__LO_STATUS_SUCCESS, 0, 1) ; No Results
 
 	$iReplacements = $oResult.replaceAll($oSrchDescript)
+	If ($iReplacements = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($iReplacements > 0) ? (SetError($__LO_STATUS_SUCCESS, 1, $oResult)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0))
+	Return SetError($__LO_STATUS_SUCCESS, 1, $oResult)
 EndFunc   ;==>_LOCalc_RangeReplace
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_RangeReplaceAll
 ; Description ...: Replace all instances of a search.
 ; Syntax ........: _LOCalc_RangeReplaceAll(ByRef $oRange, ByRef $oSrchDescript, $sSearchString, $sReplaceString)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOCalc_SearchDescriptorCreate function.
 ;                  $sSearchString       - a string value. A String of text or a Regular Expression to Search for.
 ;                  $sReplaceString      - a string value. A String of text or a Regular Expression to replace any results with.
@@ -4788,15 +4854,16 @@ Func _LOCalc_RangeReplaceAll(ByRef $oRange, ByRef $oSrchDescript, $sSearchString
 	EndIf
 
 	$iReplacements = $oRange.replaceAll($oSrchDescript)
+	If ($iReplacements = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($iReplacements > 0) ? (SetError($__LO_STATUS_SUCCESS, $iReplacements, $aoResults)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0))
+	Return SetError($__LO_STATUS_SUCCESS, $iReplacements, $aoResults)
 EndFunc   ;==>_LOCalc_RangeReplaceAll
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_RangeRowDelete
 ; Description ...: Delete Rows from a Sheet.
 ; Syntax ........: _LOCalc_RangeRowDelete(ByRef $oRange, $iRow[, $iCount = 1])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iRow                - an integer value. The Row to begin deleting at. The Row called will be deleted. See remarks.
 ;                  $iCount              - [optional] an integer value. Default is 1. The number of rows to delete, including the row called in $iRow.
 ; Return values .: Success: 1
@@ -4839,14 +4906,13 @@ EndFunc   ;==>_LOCalc_RangeRowDelete
 ; Name ..........: _LOCalc_RangeRowGetObjByPosition
 ; Description ...: Retrieve a Row's Object for further Row related functions.
 ; Syntax ........: _LOCalc_RangeRowGetObjByPosition(ByRef $oRange, $iRow)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iRow                - an integer value. The Row number to retrieve the Row Object for. See remarks.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
-;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Rows Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Row Object.
@@ -4900,6 +4966,7 @@ EndFunc   ;==>_LOCalc_RangeRowGetObjByPosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I am presently unable to find a setting for Optimal Height "Add" Value.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -4940,7 +5007,7 @@ EndFunc   ;==>_LOCalc_RangeRowHeight
 ; Name ..........: _LOCalc_RangeRowInsert
 ; Description ...: Insert blank rows from a specific row in a Range.
 ; Syntax ........: _LOCalc_RangeRowInsert(ByRef $oRange, $iRow[, $iCount = 1])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iRow                - an integer value. The Row to begin inserting blank rows at. See remarks. All contents from this row down will be shifted down.
 ;                  $iCount              - [optional] an integer value. Default is 1. The number of blank rows to insert.
 ; Return values .: Success: 1
@@ -5045,13 +5112,14 @@ EndFunc   ;==>_LOCalc_RangeRowPageBreak
 ; Name ..........: _LOCalc_RangeRowsGetCount
 ; Description ...: Retrieve the total count of Rows contained in a Range.
 ; Syntax ........: _LOCalc_RangeRowsGetCount(ByRef $oRange)
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Rows Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Columns.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning number of Rows contained in the Range.
 ; Author ........: donnyh13
@@ -5066,13 +5134,17 @@ Func _LOCalc_RangeRowsGetCount(ByRef $oRange)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oRows
+	Local $iCount
 
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oRows = $oRange.getRows()
 	If Not IsObj($oRows) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oRows.Count())
+	$iCount = $oRows.Count()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
 EndFunc   ;==>_LOCalc_RangeRowsGetCount
 
 ; #FUNCTION# ====================================================================================================================
@@ -5086,6 +5158,8 @@ EndFunc   ;==>_LOCalc_RangeRowsGetCount
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRow not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query Row's visibility.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -5094,7 +5168,7 @@ EndFunc   ;==>_LOCalc_RangeRowsGetCount
 ;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning Row's current visibility setting.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -5103,11 +5177,17 @@ Func _LOCalc_RangeRowVisible(ByRef $oRow, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
 	Local $iError = 0
 
 	If Not IsObj($oRow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oRow.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oRow.IsVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -5122,7 +5202,7 @@ EndFunc   ;==>_LOCalc_RangeRowVisible
 ; Description ...: Sort a Range of Data.
 ; Syntax ........: _LOCalc_RangeSort(ByRef $oDoc, ByRef $oRange, ByRef $tSortField[, $bSortColumns = False[, $bHasHeader = False[, $bBindFormat = True[, $bCopyOutput = False[, $oCellOutput = Null[, $tSortField2 = Null[, $tSortField3 = Null]]]]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+;                  $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $tSortField          - [in/out] a dll struct value. A Sort Field Struct created by a previous _LOCalc_SortFieldCreate function.
 ;                  $bSortColumns        - [optional] a boolean value. Default is False. If True, Columns contained in the Cell Range are sorted Left to Right. If False, Rows contained in the Cell Range are sorted top to bottom.
 ;                  $bHasHeader          - [optional] a boolean value. Default is False. If True, the Row or Column has a header that will not be sorted.
@@ -5312,7 +5392,7 @@ EndFunc   ;==>_LOCalc_RangeSort
 ; Description ...: An alternate version of Sort Data function.
 ; Syntax ........: _LOCalc_RangeSortAlt(ByRef $oDoc, ByRef $oRange, ByRef $tSortField[, $bSortColumns = False[, $bHasHeader = False[, $bBindFormat = True[, $bNaturalOrder = True[, $bIncludeComments = False[, $bIncludeImages = False[, $tSortField2 = Null[, $tSortField3 = Null]]]]]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+;                  $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $tSortField          - [in/out] a dll struct value. A Sort Field Struct created by a previous _LOCalc_SortFieldCreate function.
 ;                  $bSortColumns        - [optional] a boolean value. Default is False. If True, Columns contained in the Cell Range are sorted Left to Right. If False, Rows contained in the Cell Range are sorted top to bottom.
 ;                  $bHasHeader          - [optional] a boolean value. Default is False. If True, the Row or Column has a header that will not be sorted.
@@ -5492,7 +5572,7 @@ EndFunc   ;==>_LOCalc_RangeSortAlt
 ; Name ..........: _LOCalc_RangeValidation
 ; Description ...: Set or Retrieve Validation settings for a Range.
 ; Syntax ........: _LOCalc_RangeValidation(ByRef $oRange[, $iType = Null[, $iCondition = Null[, $sValue1 = Null[, $sValue2 = Null[, $oBaseCell = Null[, $bIgnoreBlanks = Null[, $iShowList = Null]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iType               - [optional] an integer value (0-7). Default is Null. The Validity check type. See Constants $LOC_VALIDATION_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iCondition          - [optional] an integer value (0-9). Default is Null. The Condition to check the cell data with. See Constants $LOC_VALIDATION_COND_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $sValue1             - [optional] a string value. Default is Null. If Condition is such that it requires a value, enter it here as a string.
@@ -5629,7 +5709,7 @@ EndFunc   ;==>_LOCalc_RangeValidation
 ; Name ..........: _LOCalc_RangeValidationSettings
 ; Description ...: Set or Retrieve Range Validation settings.
 ; Syntax ........: _LOCalc_RangeValidationSettings(ByRef $oRange[, $bInputMsg = Null[, $sInputTitle = Null[, $sInputMsg = Null[, $bErrorMsg = Null[, $iErrorStyle = Null[, $sErrorTitle = Null[, $sErrorMsg = Null]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bInputMsg           - [optional] a boolean value. Default is Null. If True, a input message is displayed when the cell is clicked.
 ;                  $sInputTitle         - [optional] a string value. Default is Null. If $bInputMsg is True, the Title of the Input tip to display.
 ;                  $sInputMsg           - [optional] a string value. Default is Null. If $bInputMsg is True, the Message of the Input tip to display.

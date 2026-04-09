@@ -10,7 +10,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I am going to demonstrate how to find the RGB Color Integer from R(ed), G(reen), B(lue) values, a Hexadecimal value, " & _
 			" C(yan), M(agenta), Y(ellow), and K(ey) values, and H(ue), S(aturation) B(rightness) values, from the color constant $LO_COLOR_MAGENTA. According to " & _
-			"Libre Office, Magenta has the following color values: RGB = R, 191; G, 0; B, 65;" & @CRLF & _
+			"LibreOffice, Magenta has the following color values: RGB = R, 191; G, 0; B, 65;" & @CRLF & _
 			"Hexadecimal = bf0041" & @CRLF & _
 			"CMYK = Cyan, 0; Magenta, 100; Yellow, 66; Key, 25." & @CRLF & _
 			"HSB = Hue, 340; Saturation, 100; Brightness, 75;" & @CRLF & @CRLF & _

@@ -9,12 +9,12 @@ Func Example()
 	Local $avSettings[0]
 	Local $iHMM
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell A1
@@ -34,15 +34,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Cell Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Object for "Default" Cell Style.
-	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
+	$oCellStyle = _LOCalc_CellStyleGetObjByName($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Hundredths of a Millimeter (HMM)
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Shadow to 1/4" wide, Color to $LO_COLOR_PURPLE, and location to $LOC_SHADOW_TOP_LEFT
-	_LOCalc_CellStyleShadow($oCellStyle, $iHMM, $LO_COLOR_PURPLE, $LOC_SHADOW_TOP_LEFT)
+	; Set the Cell Style's Shadow location to $LOC_SHADOW_LOCATION_TOP_LEFT, Color to $LO_COLOR_PURPLE, and 1/4" wide
+	_LOCalc_CellStyleShadow($oCellStyle, $LOC_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -50,15 +50,19 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell Style's Shadow settings are as follows: " & @CRLF & _
-			"Shadow width, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
+			"Shadow location, (see UDF Constants): " & $avSettings[0] & @CRLF & _
 			"Shadow color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
-			"Shadow location, (see UDF Constants): " & $avSettings[2])
+			"Shadow width, in Hundredths of a Millimeter (HMM): " & $avSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
 	; Close the document.
 	_LOCalc_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

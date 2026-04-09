@@ -10,12 +10,12 @@ Func Example()
 	Local $iRows, $iColumns
 	Local $avData
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Table, 3 columns, 5 rows.
@@ -37,7 +37,7 @@ Func Example()
 			If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 			; Set Cell text String to Cell's position.
-			_LOWriter_CellString($oCell, "Column " & $iColumn & @CR & " Row " & $iRow)
+			_LOWriter_TableCellString($oCell, "Column " & $iColumn & @CR & " Row " & $iRow)
 			If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 		Next
 	Next
@@ -46,19 +46,25 @@ Func Example()
 	$avData = _LOWriter_TableGetData($oTable, 1)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_ArrayDisplay($avData, "Column 1")
+	; Display Column 1
+	_ArrayDisplay($avData)
 
 	; Retrieve Table data, second down Row (row 1).
 	$avData = _LOWriter_TableGetData($oTable, Null, 1)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_ArrayDisplay($avData, "Row 1")
+	; Display Row 1
+	_ArrayDisplay($avData)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

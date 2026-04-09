@@ -10,16 +10,16 @@ Func Example()
 	Local $hExampleGUI, $hExecute, $hClose, $hExecuteCombo
 	Local $sExecuteCommand
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "This is to demonstrate using _LOWriter_DocExecuteDispatch. Try clicking ""Execute"" on the small GUI " & _
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "This is to demonstrate using _LOWriter_DocExecuteDispatch. Try clicking ""Execute"" on the small GUI " & _
 			"window present on your screen. You can also click the drop down and try any other command. If you press ""Execute"" with ""uno:SwBackspace"" selected " & _
 			"this smiley face will be backspaced.☻")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
@@ -57,6 +57,10 @@ Func Example()
 				MsgBox($MB_OK + $MB_TOPMOST, Default, "The command """ & $sExecuteCommand & """ was successfully performed.")
 		EndSwitch
 	WEnd
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

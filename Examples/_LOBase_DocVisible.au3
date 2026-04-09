@@ -8,7 +8,7 @@ Func Example()
 	Local $oDoc
 	Local $bReturn
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOBase_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -16,7 +16,7 @@ Func Example()
 
 	; Make the document invisible by setting visible to False
 	_LOBase_DocVisible($oDoc, False)
-	If (@error > 0) Then _ERROR($oDoc, "Failed to change Document visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to change Document visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Test if the document is Visible
 	$bReturn = _LOBase_DocVisible($oDoc)
@@ -27,7 +27,7 @@ Func Example()
 
 	; Make the document visible by setting visible to True
 	_LOBase_DocVisible($oDoc, True)
-	If (@error > 0) Then _ERROR($oDoc, "Failed to change Document visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to change Document visibility settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Test if the document is Visible
 	$bReturn = _LOBase_DocVisible($oDoc)
@@ -40,6 +40,10 @@ Func Example()
 	; Close the document.
 	_LOBase_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

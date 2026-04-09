@@ -118,6 +118,9 @@ EndFunc   ;==>_LOCalc_CommentAdd
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oComment not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Error retrieving Annotation Shape Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Fill color.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColor
@@ -136,22 +139,27 @@ Func _LOCalc_CommentAreaColor(ByRef $oComment, $iColor = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oAnnotationShape
+	Local $iError = 0, $iCurCol
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oAnnotationShape = $oComment.AnnotationShape()
 	If Not IsObj($oAnnotationShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iColor) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oAnnotationShape.FillColor())
+	If __LO_VarsAreNull($iColor) Then
+		$iCurCol = $oAnnotationShape.FillColor()
+		If Not IsInt($iCurCol) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurCol)
+	EndIf
 
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oAnnotationShape.FillStyle = $LOC_AREA_FILL_STYLE_SOLID
 	$oAnnotationShape.FillColor = $iColor
+	$iError = ($oAnnotationShape.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
-	If ($oAnnotationShape.FillColor() <> $iColor) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CommentAreaColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -458,7 +466,7 @@ EndFunc   ;==>_LOCalc_CommentAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOCalc_GradientMulticolorAdd, _LOCalc_GradientMulticolorDelete, _LOCalc_GradientMulticolorModify, _LOCalc_CommentAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOCalc_CommentAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -539,37 +547,37 @@ EndFunc   ;==>_LOCalc_CommentAreaGradientMulticolor
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CommentAreaShadow
 ; Description ...: Set or Retrieve the shadow settings for a Comment.
-; Syntax ........: _LOCalc_CommentAreaShadow(ByRef $oComment[, $bShadow = Null[, $iColor = Null[, $iDistance = Null[, $iTransparency = Null[, $iBlur = Null[, $iLocation = Null]]]]]])
+; Syntax ........: _LOCalc_CommentAreaShadow(ByRef $oComment[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
 ; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, a Shadow is present for the Comment.
+;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow. See Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iDistance           - [optional] an integer value. Default is Null. The distance of the Shadow from the Comment box, set in Hundredths of a Millimeter (HMM).
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
 ;                  $iBlur               - [optional] an integer value (0-150). Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
-;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow, must be one of the Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3..
+;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oComment not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bShadow not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iDistance not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 3 Return 0 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 Return 0 = $iDistance not an Integer, or less than 0.
 ;                  @Error 1 @Extended 6 Return 0 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
-;                  @Error 1 @Extended 7 Return 0 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 7 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Annotation Shape Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Distance and Location Values.
-;                  @Error 3 @Extended 3 Return 0 = Failed to modify Distance property.
-;                  @Error 3 @Extended 4 Return 0 = Failed to modify Location property.
+;                  @Error 3 @Extended 3 Return 0 = Failed to modify Location property.
+;                  @Error 3 @Extended 4 Return 0 = Failed to modify Distance property.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bShadow
-;                  |                               2 = Error setting $iColor
-;                  |                               4 = Error setting $iDistance
-;                  |                               8 = Error setting $iTransparency
+;                  |                               2 = Error setting $iLocation
+;                  |                               4 = Error setting $iColor
+;                  |                               8 = Error setting $iDistance
 ;                  |                               16 = Error setting $iBlur
-;                  |                               32 = Error setting $iLocation
+;                  |                               32 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -583,7 +591,7 @@ EndFunc   ;==>_LOCalc_CommentAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null, $iDistance = Null, $iTransparency = Null, $iBlur = Null, $iLocation = Null)
+Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iLocation = Null, $iColor = Null, $iDistance = Null, $iBlur = Null, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -596,13 +604,14 @@ Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null,
 	$oAnnotationShape = $oComment.AnnotationShape()
 	If Not IsObj($oAnnotationShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bShadow, $iColor, $iDistance, $iTransparency, $iBlur, $iLocation) Then
+	If __LO_VarsAreNull($bShadow, $iLocation, $iColor, $iDistance, $iBlur, $iTransparency) Then
 		$iInternalDistance = __LOCalc_CommentAreaShadowModify($oAnnotationShape)
 		$iInternalLocation = @extended
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		__LO_ArrayFill($avShadow, $oAnnotationShape.Shadow(), $oAnnotationShape.ShadowColor(), $iInternalDistance, $oAnnotationShape.ShadowTransparence(), _
-				_LO_UnitConvert($oAnnotationShape.ShadowBlur(), $LO_CONVERT_UNIT_HMM_PT), $iInternalLocation)
+		__LO_ArrayFill($avShadow, $oAnnotationShape.Shadow(), $iInternalLocation, $oAnnotationShape.ShadowColor(), $iInternalDistance, _
+				_LO_UnitConvert($oAnnotationShape.ShadowBlur(), $LO_CONVERT_UNIT_HMM_PT), _
+				$oAnnotationShape.ShadowTransparence())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avShadow)
 	EndIf
@@ -614,19 +623,12 @@ Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null,
 		$iError = ($oAnnotationShape.Shadow() = $bShadow) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
-	If ($iColor <> Null) Then
-		If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iLocation <> Null) Then
+		If Not __LO_IntIsBetween($iLocation, $LOC_COMMENT_SHADOW_TOP_LEFT, $LOC_COMMENT_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$oAnnotationShape.ShadowColor = $iColor
-		$iError = ($oAnnotationShape.ShadowColor() = $iColor) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iDistance <> Null) Then
-		If Not __LO_IntIsBetween($iDistance, 0, $iDistance) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		__LOCalc_CommentAreaShadowModify($oAnnotationShape, Null, $iDistance)
+		__LOCalc_CommentAreaShadowModify($oAnnotationShape, $iLocation)
 		If (@error = $__LO_STATUS_PROP_SETTING_ERROR) Then
-			$iError = BitOR($iError, 4)
+			$iError = BitOR($iError, 2)
 
 		ElseIf @error Then
 
@@ -634,11 +636,24 @@ Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null,
 		EndIf
 	EndIf
 
-	If ($iTransparency <> Null) Then
-		If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($iColor <> Null) Then
+		If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		$oAnnotationShape.ShadowTransparence = $iTransparency
-		$iError = ($oAnnotationShape.ShadowTransparence = $iTransparency) ? ($iError) : (BitOR($iError, 8))
+		$oAnnotationShape.ShadowColor = $iColor
+		$iError = ($oAnnotationShape.ShadowColor() = $iColor) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($iDistance <> Null) Then
+		If Not __LO_IntIsBetween($iDistance, 0, $iDistance) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		__LOCalc_CommentAreaShadowModify($oAnnotationShape, Null, $iDistance)
+		If (@error = $__LO_STATUS_PROP_SETTING_ERROR) Then
+			$iError = BitOR($iError, 8)
+
+		ElseIf @error Then
+
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+		EndIf
 	EndIf
 
 	If ($iBlur <> Null) Then
@@ -648,17 +663,11 @@ Func _LOCalc_CommentAreaShadow(ByRef $oComment, $bShadow = Null, $iColor = Null,
 		$iError = ($oAnnotationShape.ShadowBlur() = _LO_UnitConvert($iBlur, $LO_CONVERT_UNIT_PT_HMM)) ? ($iError) : (BitOR($iError, 16))
 	EndIf
 
-	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOC_COMMENT_SHADOW_TOP_LEFT, $LOC_COMMENT_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If ($iTransparency <> Null) Then
+		If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-		__LOCalc_CommentAreaShadowModify($oAnnotationShape, $iLocation)
-		If (@error = $__LO_STATUS_PROP_SETTING_ERROR) Then
-			$iError = BitOR($iError, 32)
-
-		ElseIf @error Then
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-		EndIf
+		$oAnnotationShape.ShadowTransparence = $iTransparency
+		$iError = ($oAnnotationShape.ShadowTransparence = $iTransparency) ? ($iError) : (BitOR($iError, 32))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -677,6 +686,7 @@ EndFunc   ;==>_LOCalc_CommentAreaShadow
 ;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Annotation Shape Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -694,7 +704,7 @@ Func _LOCalc_CommentAreaTransparency(ByRef $oComment, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurTransp
 	Local $oAnnotationShape
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -702,7 +712,12 @@ Func _LOCalc_CommentAreaTransparency(ByRef $oComment, $iTransparency = Null)
 	$oAnnotationShape = $oComment.AnnotationShape()
 	If Not IsObj($oAnnotationShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oAnnotationShape.FillTransparence())
+	If __LO_VarsAreNull($iTransparency) Then
+		$iCurTransp = $oAnnotationShape.FillTransparence()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
+	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -942,7 +957,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOCalc_TransparencyGradientMultiModify, _LOCalc_TransparencyGradientMultiDelete, _LOCalc_TransparencyGradientMultiAdd, _LOCalc_CommentAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOCalc_CommentAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1261,6 +1276,8 @@ Func _LOCalc_CommentDelete(ByRef $oComment)
 	__LOCalc_CommentGetObjByCell($oCell, True)
 	If (@error = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Comment still exists.
 
+	$oComment = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOCalc_CommentDelete
 
@@ -1379,7 +1396,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByCell
 ; Name ..........: _LOCalc_CommentGetObjByIndex
 ; Description ...: Retrieve a comment object by Index.
 ; Syntax ........: _LOCalc_CommentGetObjByIndex(ByRef $oSheet, $iComment)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $iComment            - an integer value. The Index number of the comment to retrieve. 0 based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1465,7 +1482,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
+; Remarks .......: LibreOffice has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
 ;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
 ;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -1753,6 +1770,7 @@ EndFunc   ;==>_LOCalc_CommentLineProperties
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The X Coordinate seems to be measured from the right hand edge of the Comment Box, and the Y Coordinate seems to be measured from the top of the comment box.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LO_UnitConvert, _LOCalc_CommentRotate, _LOCalc_CommentSize
 ; Link ..........:
 ; Example .......: Yes
@@ -1822,6 +1840,7 @@ EndFunc   ;==>_LOCalc_CommentPosition
 ;                  @Error 1 @Extended 2 Return 0 = $nRotate not a Number, less than 0 or greater than 359.99.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Annotation Shape Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current rotation value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nRotate
@@ -1830,7 +1849,7 @@ EndFunc   ;==>_LOCalc_CommentPosition
 ;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current setting as a Number.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function uses the deprecated Libre Office method RotateAngle and may stop working in future Libre Office versions, after 7.3.4.2.
+; Remarks .......: This function uses the deprecated LibreOffice method RotateAngle and may stop working in future LibreOffice versions, after 7.3.4.2.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOCalc_CommentPosition, _LOCalc_CommentSize
 ; Link ..........:
@@ -1841,27 +1860,34 @@ Func _LOCalc_CommentRotate(ByRef $oComment, $nRotate = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oAnnotationShape
+	Local $nCurRot
+	Local $iError = 0
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oAnnotationShape = $oComment.AnnotationShape()
 	If Not IsObj($oAnnotationShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($nRotate) Then Return SetError($__LO_STATUS_SUCCESS, 1, (($oAnnotationShape.RotateAngle()) / 100)) ; Divide by 100 to match L.O. values.
+	If __LO_VarsAreNull($nRotate) Then
+		$nCurRot = (($oAnnotationShape.RotateAngle()) / 100) ; Divide by 100 to match L.O. values.
+		If Not IsNumber($nCurRot) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $nCurRot)
+	EndIf
 
 	If Not __LO_NumIsBetween($nRotate, 0, 359.99) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oAnnotationShape.RotateAngle = ($nRotate * 100)     ; * 100 to match L.O. Values.
-	If (($oAnnotationShape.RotateAngle() / 100) <> $nRotate) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = (($oAnnotationShape.RotateAngle() / 100) = $nRotate) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CommentRotate
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CommentsGetCount
 ; Description ...: Retrieve a count of Comments contained in the Sheet.
 ; Syntax ........: _LOCalc_CommentsGetCount(ByRef $oSheet)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1900,7 +1926,7 @@ EndFunc   ;==>_LOCalc_CommentsGetCount
 ; Name ..........: _LOCalc_CommentsGetList
 ; Description ...: Retrieve an array of all comments contained in a Sheet.
 ; Syntax ........: _LOCalc_CommentsGetList(ByRef $oSheet)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetGetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2061,6 +2087,7 @@ Func _LOCalc_CommentText(ByRef $oComment, $sText = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $sString
+	Local $iError = 0
 
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -2076,9 +2103,9 @@ Func _LOCalc_CommentText(ByRef $oComment, $sText = Null)
 	$oComment.String = $sText
 
 	; Strip @CR / @LF from both to compare, otherwise they don't match.
-	If (StringRegExpReplace($oComment.String(), @CR & "|" & @LF, "") <> StringRegExpReplace($sText, @CR & "|" & @LF, "")) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ((StringRegExpReplace($oComment.String(), @CR & "|" & @LF, "") = StringRegExpReplace($sText, @CR & "|" & @LF, ""))) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CommentText
 
 ; #FUNCTION# ====================================================================================================================
@@ -2627,6 +2654,8 @@ EndFunc   ;==>_LOCalc_CommentTextSettings
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oComment not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query if Comment is visible.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -2644,15 +2673,22 @@ Func _LOCalc_CommentVisible(ByRef $oComment, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
+	Local $iError = 0
+
 	If Not IsObj($oComment) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oComment.IsVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oComment.IsVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oComment.IsVisible = $bVisible
+	$iError = ($oComment.IsVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	If ($oComment.IsVisible() <> $bVisible) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOCalc_CommentVisible

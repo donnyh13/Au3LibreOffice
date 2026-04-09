@@ -81,7 +81,7 @@ EndFunc   ;==>__LOBase_ColTransferProps
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $iType not an Integer, less than -16 or greater than 2014. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 2 Return 0 = $iType not one of the pre-defined constants.
+;                  @Error 1 @Extended 2 Return 0 = $iType not one of the pre-defined constants. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the Type name corresponding to the Type Constant.
 ; Author ........: donnyh13

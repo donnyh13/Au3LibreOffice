@@ -8,16 +8,16 @@ Func Example()
 	Local $oDoc, $oViewCursor
 	Local $avSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a Footnote at the end of this line. ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a Footnote at the end of this line. ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Footnote at the ViewCursor.
@@ -36,7 +36,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Document's current Footnote Continuation settings are as follows: " & @CRLF & _
 			"The text that appears at the end of a Footnote to indicate it is continued is: " & $avSettings[0] & @CRLF & _
 			"The text that appears at the beginning of a Footnote to indicate it was continued is: " & $avSettings[1] & @CRLF & _
-			"Note, Libre Office automatically inserts a Page number after the continuation notices, so where ""Page"" appears, there would be a page number " & _
+			"Note, LibreOffice automatically inserts a Page number after the continuation notices, so where ""Page"" appears, there would be a page number " & _
 			"directly after it.")
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
@@ -44,6 +44,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)
