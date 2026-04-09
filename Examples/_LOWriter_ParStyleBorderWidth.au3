@@ -8,24 +8,24 @@ Func Example()
 	Local $oDoc, $oViewCursor, $oParStyle
 	Local $avParStyleSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the Default Paragraph style.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style." & @CR & "Next Line")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying a paragraph style." & @CR & "Next Line")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Paragraph Style object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
+	$oParStyle = _LOWriter_ParStyleGetObjByName($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style Border Width to $LOW_BORDERWIDTH_THICK, And Connect border to True.
-	_LOWriter_ParStyleBorderWidth($oParStyle, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, $LOW_BORDERWIDTH_THICK, True)
+	; Set Default Paragraph Style Border Width to $LOW_BORDER_WIDTH_THICK, And Connect border to True.
+	_LOWriter_ParStyleBorderWidth($oParStyle, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -44,6 +44,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

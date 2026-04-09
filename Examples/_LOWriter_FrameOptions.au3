@@ -8,12 +8,12 @@ Func Example()
 	Local $oDoc, $oViewCursor, $oFrame
 	Local $avSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Frame into the document at the ViewCursor position, and 3000x3000 Hundredths of a Millimeter (HMM) wide.
@@ -21,8 +21,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Frame. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Frame Option settings. Set Protect content to True, Protect Position to True, Protect size to True, Vertical alignment to
-	; $LOW_TXT_ADJ_VERT_CENTER, Edit in Read-Only to True, Print to False, Text direction to $LOW_TXT_DIR_TB_LR
-	_LOWriter_FrameOptions($oFrame, True, True, True, $LOW_TXT_ADJ_VERT_CENTER, True, False, $LOW_TXT_DIR_TB_LR)
+	; $LOW_PAR_TXT_ADJ_VERT_CENTER, Edit in Read-Only to True, Print to False, Text direction to $LOW_PAR_TXT_DIR_TB_LR
+	_LOWriter_FrameOptions($oFrame, True, True, True, $LOW_PAR_TXT_ADJ_VERT_CENTER, True, False, $LOW_PAR_TXT_DIR_TB_LR)
 	If @error Then _ERROR($oDoc, "Failed to set Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Frame settings. Return will be an array in order of function parameters.
@@ -43,6 +43,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

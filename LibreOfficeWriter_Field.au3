@@ -14,7 +14,6 @@
 #include "LibreOfficeWriter_Internal.au3"
 
 ; Other includes for Writer
-#include "LibreOfficeWriter_Doc.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
@@ -28,6 +27,13 @@
 ; #CURRENT# =====================================================================================================================
 ; _LOWriter_FieldAuthorInsert
 ; _LOWriter_FieldAuthorModify
+; _LOWriter_FieldBookmarkDelete
+; _LOWriter_FieldBookmarkExists
+; _LOWriter_FieldBookmarkGetAnchor
+; _LOWriter_FieldBookmarkGetObjByName
+; _LOWriter_FieldBookmarkInsert
+; _LOWriter_FieldBookmarkModify
+; _LOWriter_FieldBookmarksGetNames
 ; _LOWriter_FieldChapterInsert
 ; _LOWriter_FieldChapterModify
 ; _LOWriter_FieldCombCharInsert
@@ -79,8 +85,8 @@
 ; _LOWriter_FieldInputListModify
 ; _LOWriter_FieldPageNumberInsert
 ; _LOWriter_FieldPageNumberModify
-; _LOWriter_FieldRefBookMarkInsert
-; _LOWriter_FieldRefBookMarkModify
+; _LOWriter_FieldRefBookmarkInsert
+; _LOWriter_FieldRefBookmarkModify
 ; _LOWriter_FieldRefEndnoteInsert
 ; _LOWriter_FieldRefEndnoteModify
 ; _LOWriter_FieldRefFootnoteInsert
@@ -98,10 +104,11 @@
 ; _LOWriter_FieldSenderModify
 ; _LOWriter_FieldSetVarInsert
 ; _LOWriter_FieldSetVarMasterCreate
-; _LOWriter_FieldSetVarMasterDelete
+; _LOWriter_FieldSetVarMasterDeleteByName
+; _LOWriter_FieldSetVarMasterDeleteByObj
 ; _LOWriter_FieldSetVarMasterExists
 ; _LOWriter_FieldSetVarMasterFieldsGetList
-; _LOWriter_FieldSetVarMasterGetObj
+; _LOWriter_FieldSetVarMasterGetObjByName
 ; _LOWriter_FieldSetVarMastersGetNames
 ; _LOWriter_FieldSetVarModify
 ; _LOWriter_FieldsGetList
@@ -145,7 +152,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldAuthorModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldAuthorModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -265,6 +272,310 @@ Func _LOWriter_FieldAuthorModify(ByRef $oAuthField, $bIsFixed = Null, $sAuthor =
 EndFunc   ;==>_LOWriter_FieldAuthorModify
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldBookmarkDelete
+; Description ...: Delete a Bookmark.
+; Syntax ........: _LOWriter_FieldBookmarkDelete(ByRef $oDoc, ByRef $oBookmark)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oBookmark           - [in/out] an object. A Bookmark Object from a previous _LOWriter_FieldBookmarkInsert, or _LOWriter_FieldBookmarkGetObjByName function to delete.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oBookmark not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Attempted to delete Bookmark, but document still contains a Bookmark by that name.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted requested Bookmark.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarkGetObjByName, _LOWriter_FieldBookmarksGetNames
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldBookmarkDelete(ByRef $oDoc, ByRef $oBookmark)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sBookmarkName
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oBookmark) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$sBookmarkName = $oBookmark.Name()
+
+	$oBookmark.dispose()
+	If _LOWriter_FieldBookmarkExists($oDoc, $sBookmarkName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oBookmark = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_FieldBookmarkDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldBookmarkExists
+; Description ...: Check if a document contains a Bookmark by name.
+; Syntax ........: _LOWriter_FieldBookmarkExists(ByRef $oDoc, $sBookmarkName)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sBookmarkName       - a string value. The Bookmark name to search for.
+; Return values .: Success: Boolean
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sBookmarkName not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Bookmarks Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to query if Bookmark exists.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = Success. If the document contains a Bookmark by the called name, then True is returned, Else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldBookmarkExists(ByRef $oDoc, $sBookmarkName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oBookmarks
+	Local $bExists
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oBookmarks = $oDoc.getBookmarks()
+	If Not IsObj($oBookmarks) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$bExists = $oBookmarks.hasByName($sBookmarkName)
+	If Not IsBool($bExists) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bExists)
+EndFunc   ;==>_LOWriter_FieldBookmarkExists
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldBookmarkGetAnchor
+; Description ...: Retrieve a Bookmark's Anchor cursor Object.
+; Syntax ........: _LOWriter_FieldBookmarkGetAnchor(ByRef $oBookmark)
+; Parameters ....: $oBookmark           - [in/out] an object. A Bookmark Object from a previous _LOWriter_FieldBookmarkInsert, or _LOWriter_FieldBookmarkGetObjByName function.
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oBookmark not an Object.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to retrieve Bookmark anchor Object.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Bookmark Anchor Cursor Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The Anchor cursor returned is just a Text Cursor placed at the anchor's position.
+; Related .......: _LOWriter_FieldBookmarkGetObjByName, _LOWriter_FieldBookmarkInsert, _LOWriter_CursorMove, _LOWriter_CursorGetString, _LOWriter_CursorInsertString
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldBookmarkGetAnchor(ByRef $oBookmark)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oBookAnchor
+
+	If Not IsObj($oBookmark) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oBookAnchor = $oBookmark.Anchor.Text.createTextCursorByRange($oBookmark.Anchor())
+	If Not IsObj($oBookAnchor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oBookAnchor)
+EndFunc   ;==>_LOWriter_FieldBookmarkGetAnchor
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldBookmarkGetObjByName
+; Description ...: Retrieve a Bookmark Object by name.
+; Syntax ........: _LOWriter_FieldBookmarkGetObjByName(ByRef $oDoc, $sBookmarkName)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sBookmarkName       - a string value. The Bookmark name to retrieve the Object for.
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sBookmarkName not a String.
+;                  @Error 1 @Extended 3 Return 0 = Document does not contain a Bookmark named in $sBookmarkName.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve requested Bookmark Object.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully retrieved requested Bookmark Object. Returning requested Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldBookmarkModify, _LOWriter_FieldBookmarkDelete
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldBookmarkGetObjByName(ByRef $oDoc, $sBookmarkName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oBookmark
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not _LOWriter_FieldBookmarkExists($oDoc, $sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oBookmark = $oDoc.Bookmarks.getByName($sBookmarkName)
+	If Not IsObj($oBookmark) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oBookmark)
+EndFunc   ;==>_LOWriter_FieldBookmarkGetObjByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldBookmarkInsert
+; Description ...: Insert a Bookmark into a document.
+; Syntax ........: _LOWriter_FieldBookmarkInsert(ByRef $oDoc, ByRef $oCursor[, $bOverwrite = False[, $sBookmarkName = Null]])
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function. Cannot be a Table Cursor.
+;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
+;                  $sBookmarkName       - [optional] a string value. Default is Null. The Name of the Bookmark to create. See Remarks.
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
+;                  @Error 1 @Extended 3 Return 0 = $oCursor is a Table Cursor, which is not supported.
+;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = $sBookmarkName not a String.
+;                  @Error 1 @Extended 6 Return 0 = $sBookmarkName contains illegal characters, /\@:*?";,.# .
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.Bookmark" Object.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Bookmark into the document. Returning the Bookmark Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If the cursor used to insert a Bookmark has text selected, the Bookmark will envelope the text, else the Bookmark will be inserted at a single point.
+;                  A Bookmark name cannot contain the following characters: / \ @ : * ? " ; , . #
+;                  If the document already contains a Bookmark by the same name, LibreOffice adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
+; Related .......: _LOWriter_FieldBookmarkModify, _LOWriter_FieldBookmarkDelete
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldBookmarkInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = False, $sBookmarkName = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oBookmark
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If (__LOWriter_Internal_CursorGetType($oCursor) = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oBookmark = $oDoc.createInstance("com.sun.star.text.Bookmark")
+	If Not IsObj($oBookmark) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	If ($sBookmarkName <> Null) Then
+		If Not IsString($sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If StringRegExp($sBookmarkName, '[/\\@:*?";,.#]') Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; Invalid Characters in Name.
+
+		$oBookmark.Name = $sBookmarkName
+
+	Else
+		$oBookmark.Name = "Bookmark "
+	EndIf
+
+	$oCursor.Text.insertTextContent($oCursor, $oBookmark, $bOverwrite)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oBookmark)
+EndFunc   ;==>_LOWriter_FieldBookmarkInsert
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldBookmarkModify
+; Description ...: Set or Retrieve a Bookmark's settings.
+; Syntax ........: _LOWriter_FieldBookmarkModify(ByRef $oBookmark[, $sBookmarkName = Null])
+; Parameters ....: $oBookmark           - [in/out] an object. A Bookmark Object from a previous _LOWriter_FieldBookmarkInsert, or _LOWriter_FieldBookmarkGetObjByName function.
+;                  $sBookmarkName       - [optional] a string value. Default is Null. The new name to rename the bookmark called in $oBookmark.
+; Return values .: Success: 1 or String
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oBookmark not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sBookmarkName not a String.
+;                  @Error 1 @Extended 3 Return 0 = $sBookmarkName contains illegal characters, /\@:*?";,.# .
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Bookmark name.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $sBookmarkName
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Bookmark name successfully modified.
+;                  @Error 0 @Extended 0 Return String = Success. All optional parameters were called with Null, returning current Bookmark name.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+;                  A Bookmark name cannot contain the following characters: / \ @ : * ? " ; , . #
+;                  If the document already contains a Bookmark by the same name, LibreOffice adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
+; Related .......: _LOWriter_FieldBookmarkGetObjByName, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarkDelete
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldBookmarkModify(ByRef $oBookmark, $sBookmarkName = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sCurName
+	Local $iError = 0
+
+	If Not IsObj($oBookmark) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($sBookmarkName) Then
+		$sCurName = $oBookmark.Name()
+		If Not IsString($sCurName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurName)
+	EndIf
+
+	If Not IsString($sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If StringRegExp($sBookmarkName, '[/\\@:*?";,.#]') Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Invalid Characters in Name.
+
+	$oBookmark.Name = $sBookmarkName
+	$iError = ($oBookmark.Name() = $sBookmarkName) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FieldBookmarkModify
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldBookmarksGetNames
+; Description ...: Retrieve an Array of Bookmark names.
+; Syntax ........: _LOWriter_FieldBookmarksGetNames(ByRef $oDoc)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+; Return values .: Success: Array
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Bookmark Names.
+;                  --Success--
+;                  @Error 0 @Extended ? Return Array = Success. Successfully searched for Bookmarks, returning Array of Bookmark names, @Extended set to number of results.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_FieldBookmarkGetObjByName
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldBookmarksGetNames(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $asBookmarkNames[0]
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$asBookmarkNames = $oDoc.Bookmarks.getElementNames()
+	If Not IsArray($asBookmarkNames) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, UBound($asBookmarkNames), $asBookmarkNames)
+EndFunc   ;==>_LOWriter_FieldBookmarksGetNames
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FieldChapterInsert
 ; Description ...: Insert a Chapter Field.
 ; Syntax ........: _LOWriter_FieldChapterInsert(ByRef $oDoc, ByRef $oCursor[, $bOverwrite = False[, $iChapFrmt = Null[, $iLevel = Null]]])
@@ -289,7 +600,7 @@ EndFunc   ;==>_LOWriter_FieldAuthorModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldChapterModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldChapterModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -412,7 +723,7 @@ EndFunc   ;==>_LOWriter_FieldChapterModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCombCharModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldCombCharModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -456,6 +767,8 @@ EndFunc   ;==>_LOWriter_FieldCombCharInsert
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sCharacters not a String.
 ;                  @Error 1 @Extended 3 Return 0 = String called in $sCharacters longer than 6 characters.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Combined Character Field value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sCharacters
@@ -475,10 +788,16 @@ Func _LOWriter_FieldCombCharModify(ByRef $oCombCharField, $sCharacters = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
+	Local $sCurChar
 
 	If Not IsObj($oCombCharField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($sCharacters) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oCombCharField.Content())
+	If __LO_VarsAreNull($sCharacters) Then
+		$sCurChar = $oCombCharField.Content()
+		If Not IsString($sCurChar) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurChar)
+	EndIf
 
 	If Not IsString($sCharacters) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If (StringLen($sCharacters) > 6) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
@@ -501,8 +820,8 @@ EndFunc   ;==>_LOWriter_FieldCombCharModify
 ;                  $sContent            - [optional] a string value. Default is Null. The content of the comment.
 ;                  $sAuthor             - [optional] a string value. Default is Null. The author of the comment.
 ;                  $tDateStruct         - [optional] a dll struct value. Default is Null. The date to display for the comment, created previously by _LOWriter_DateStructCreate. If left as Null, the current date is used.
-;                  $sInitials           - [optional] a string value. Default is Null. The Initials of the creator. Libre Office version 4.0 and up only.
-;                  $sName               - [optional] a string value. Default is Null. The name of the creator. Libre Office version 4.0 and up only.
+;                  $sInitials           - [optional] a string value. Default is Null. The Initials of the creator. LibreOffice version 4.0 and up only.
+;                  $sName               - [optional] a string value. Default is Null. The name of the creator. LibreOffice version 4.0 and up only.
 ;                  $bResolved           - [optional] a boolean value. Default is Null. If True, the comment is marked as resolved.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -520,13 +839,13 @@ EndFunc   ;==>_LOWriter_FieldCombCharModify
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.text.TextField.Annotation" Object.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office Version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice Version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted comment field, returning Comment Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCommentModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateStructCreate _LOWriter_DateStructModify
+; Related .......: _LOWriter_FieldCommentModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateStructCreate _LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -604,8 +923,8 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ;                  $sContent            - [optional] a string value. Default is Null. The content of the comment.
 ;                  $sAuthor             - [optional] a string value. Default is Null. The author of the comment.
 ;                  $tDateStruct         - [optional] a dll struct value. Default is Null. The date to display for the comment, created previously by _LOWriter_DateStructCreate.
-;                  $sInitials           - [optional] a string value. Default is Null. The Initials of the creator. Libre Office version 4.0 and up only.
-;                  $sName               - [optional] a string value. Default is Null. The name of the creator. Libre Office version 4.0 and up only.
+;                  $sInitials           - [optional] a string value. Default is Null. The Initials of the creator. LibreOffice version 4.0 and up only.
+;                  $sName               - [optional] a string value. Default is Null. The name of the creator. LibreOffice version 4.0 and up only.
 ;                  $bResolved           - [optional] a boolean value. Default is Null. If True, the comment is marked as resolved.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -619,7 +938,7 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ;                  @Error 1 @Extended 7 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 8 Return 0 = $bResolved not a Boolean.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office Version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice Version lower than 4.0.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sContent
@@ -743,7 +1062,7 @@ EndFunc   ;==>_LOWriter_FieldCommentModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCondTextModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldCondTextModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -929,7 +1248,7 @@ EndFunc   ;==>_LOWriter_FieldCurrentDisplayGet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDateTimeModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateStructCreate, _LOWriter_DateStructModify
+; Related .......: _LOWriter_FieldDateTimeModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateStructCreate, _LOWriter_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1042,7 +1361,7 @@ Func _LOWriter_FieldDateTimeModify(ByRef $oDoc, ByRef $oDateTimeField, $bIsFixed
 	If Not IsObj($oDateTimeField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $tDateStruct, $bIsDate, $iOffset, $iDateFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDateTimeField.NumberFormat()
@@ -1114,6 +1433,7 @@ EndFunc   ;==>_LOWriter_FieldDateTimeModify
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving TextFieldMaster Object.
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving Field Master Array of dependent fields.
+;                  @Error 3 @Extended 3 Return 0 = Failed to delete field.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted the field with the Text Master Field.
 ;                  @Error 0 @Extended 1 Return 1 = Success. Successfully deleted the field.
@@ -1150,10 +1470,18 @@ Func _LOWriter_FieldDelete(ByRef $oField, $bDeleteMaster = False)
 
 		$oFieldMaster.dispose()
 
+		If Not __LO_IsObjInvalid($oField, "TextFieldMaster") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$oField = Null
+
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
 	$oField.Anchor.Text.removeTextContent($oField)
+
+	If Not __LO_IsObjInvalid($oField, "TextFieldMaster") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$oField = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, 1)
 EndFunc   ;==>_LOWriter_FieldDelete
@@ -1183,7 +1511,7 @@ EndFunc   ;==>_LOWriter_FieldDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoCommentsModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoCommentsModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1311,7 +1639,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCommentsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoCreateAuthModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropCreation
+; Related .......: _LOWriter_FieldDocInfoCreateAuthModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropCreation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1440,7 +1768,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoCreateDateTimeModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropCreation
+; Related .......: _LOWriter_FieldDocInfoCreateDateTimeModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropCreation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1520,7 +1848,7 @@ Func _LOWriter_FieldDocInfoCreateDateTimeModify(ByRef $oDoc, ByRef $oDocInfoCrea
 	If Not IsObj($oDocInfoCreateDtTm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $iDateFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000 from
 		; the value.
 		$iNumberFormat = $oDocInfoCreateDtTm.NumberFormat()
@@ -1576,7 +1904,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateDateTimeModify
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Total Editing Time Field, returning its Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: _LOWriter_FieldDocInfoEditTimeModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenProp
+; Remarks .......: _LOWriter_FieldDocInfoEditTimeModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenProp
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1654,7 +1982,7 @@ Func _LOWriter_FieldDocInfoEditTimeModify(ByRef $oDocInfoEditTime, $bIsFixed = N
 	If Not IsObj($oDocInfoEditTime) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $iTimeFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDocInfoEditTime.NumberFormat()
@@ -1710,7 +2038,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoEditTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoKeywordsModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoKeywordsModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1838,7 +2166,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoKeywordsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoModAuthModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropModification
+; Related .......: _LOWriter_FieldDocInfoModAuthModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropModification
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1967,7 +2295,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoModDateTimeModify, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropModification
+; Related .......: _LOWriter_FieldDocInfoModDateTimeModify, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropModification
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2047,7 +2375,7 @@ Func _LOWriter_FieldDocInfoModDateTimeModify(ByRef $oDoc, ByRef $oDocInfoModDtTm
 	If Not IsObj($oDocInfoModDtTm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $iDateFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDocInfoModDtTm.NumberFormat()
@@ -2103,7 +2431,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoPrintAuthModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropPrint
+; Related .......: _LOWriter_FieldDocInfoPrintAuthModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2232,7 +2560,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoPrintDateTimeModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropPrint
+; Related .......: _LOWriter_FieldDocInfoPrintDateTimeModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2312,7 +2640,7 @@ Func _LOWriter_FieldDocInfoPrintDateTimeModify(ByRef $oDoc, ByRef $oDocInfoPrint
 	If Not IsObj($oDocInfoPrintDtTm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($bIsFixed, $iDateFormatKey) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oDocInfoPrintDtTm.NumberFormat()
@@ -2368,7 +2696,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoRevNumModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenProp
+; Related .......: _LOWriter_FieldDocInfoRevNumModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenProp
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2496,7 +2824,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoRevNumModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoSubjectModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoSubjectModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2624,7 +2952,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoSubjectModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoTitleModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoTitleModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2752,7 +3080,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoTitleModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Until L.O. Version 26.8, there is a bug where the wrong Path Format type is displayed when the content is set to Fixed = True. For example, $LOW_FIELD_FILENAME_NAME_AND_EXT, displays in the format of $LOW_FIELD_FILENAME_NAME. See (https://bugs.documentfoundation.org/show_bug.cgi?id=155780).
-; Related .......: _LOWriter_FieldFileNameModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFileNameModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2837,14 +3165,14 @@ Func _LOWriter_FieldFileNameModify(ByRef $oFileNameField, $bIsFixed = Null, $iFo
 		If Not IsBool($bIsFixed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oFileNameField.IsFixed = $bIsFixed
-		$iError = ($oFileNameField.IsFixed() = $bIsFixed) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($oFileNameField.IsFixed() = $bIsFixed) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iFormat <> Null) Then
 		If Not __LO_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_NAME_AND_EXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oFileNameField.FileFormat = $iFormat
-		$iError = ($oFileNameField.FileFormat() = $iFormat) ? ($iError) : (BitOR($iError, 1))
+		$iError = ($oFileNameField.FileFormat() = $iFormat) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($oFileNameField.IsFixed() = False) Then $oFileNameField.Update()
@@ -2875,7 +3203,7 @@ EndFunc   ;==>_LOWriter_FieldFileNameModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncHiddenParModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFuncHiddenParModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2983,7 +3311,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenParModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncHiddenTextModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFuncHiddenTextModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3107,7 +3435,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenTextModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncInputModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFuncInputModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3233,7 +3561,7 @@ EndFunc   ;==>_LOWriter_FieldFuncInputModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncPlaceholderModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFuncPlaceholderModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3409,7 +3737,7 @@ EndFunc   ;==>_LOWriter_FieldGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldInputListModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldInputListModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3553,7 +3881,7 @@ EndFunc   ;==>_LOWriter_FieldInputListModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldPageNumberModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldPageNumberModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3720,14 +4048,14 @@ Func _LOWriter_FieldPageNumberModify(ByRef $oDoc, ByRef $oPageNumField, $iNumFor
 EndFunc   ;==>_LOWriter_FieldPageNumberModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FieldRefBookMarkInsert
+; Name ..........: _LOWriter_FieldRefBookmarkInsert
 ; Description ...: Insert a Bookmark Reference Field.
-; Syntax ........: _LOWriter_FieldRefBookMarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkName[, $bOverwrite = False[, $iRefUsing = Null]])
+; Syntax ........: _LOWriter_FieldRefBookmarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkName[, $bOverwrite = False[, $iRefUsing = Null]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $sBookmarkName       - a string value. The Bookmark name to Reference.
 ;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the bookmark, see $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the bookmark. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3737,7 +4065,7 @@ EndFunc   ;==>_LOWriter_FieldPageNumberModify
 ;                  @Error 1 @Extended 4 Return 0 = $sBookmarkName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = Document does not contain a Bookmark by the same name as called in $sBookmarkName.
-;                  @Error 1 @Extended 7 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 7 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ;                  --Success--
@@ -3745,11 +4073,11 @@ EndFunc   ;==>_LOWriter_FieldPageNumberModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefBookMarkModify, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarksGetNames, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefBookmarkModify, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarksGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FieldRefBookMarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkName, $bOverwrite = False, $iRefUsing = Null)
+Func _LOWriter_FieldRefBookmarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkName, $bOverwrite = False, $iRefUsing = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3760,7 +4088,7 @@ Func _LOWriter_FieldRefBookMarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkNam
 	If (__LOWriter_Internal_CursorGetType($oCursor) = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsString($sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If Not _LOWriter_DocBookmarkExists($oDoc, $sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not _LOWriter_FieldBookmarkExists($oDoc, $sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 	$oBookmarkRefField = $oDoc.createInstance("com.sun.star.text.TextField.GetReference")
 	If Not IsObj($oBookmarkRefField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -3779,16 +4107,16 @@ Func _LOWriter_FieldRefBookMarkInsert(ByRef $oDoc, ByRef $oCursor, $sBookmarkNam
 	$oBookmarkRefField.Update()
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oBookmarkRefField)
-EndFunc   ;==>_LOWriter_FieldRefBookMarkInsert
+EndFunc   ;==>_LOWriter_FieldRefBookmarkInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FieldRefBookMarkModify
+; Name ..........: _LOWriter_FieldRefBookmarkModify
 ; Description ...: Set or Retrieve a Bookmark Reference Field's settings.
-; Syntax ........: _LOWriter_FieldRefBookMarkModify(ByRef $oDoc, ByRef $oBookmarkRefField[, $sBookmarkName = Null[, $iRefUsing = Null]])
+; Syntax ........: _LOWriter_FieldRefBookmarkModify(ByRef $oDoc, ByRef $oBookmarkRefField[, $sBookmarkName = Null[, $iRefUsing = Null]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oBookmarkRefField   - [in/out] an object. A Bookmark Reference field Object from a previous _LOWriter_FieldRefBookMarkInsert, or _LOWriter_FieldsGetList function.
+;                  $oBookmarkRefField   - [in/out] an object. A Bookmark Reference field Object from a previous _LOWriter_FieldRefBookmarkInsert, or _LOWriter_FieldsGetList function.
 ;                  $sBookmarkName       - [optional] a string value. Default is Null. The Bookmark name to Reference.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the bookmark, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the bookmark. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3796,7 +4124,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkInsert
 ;                  @Error 1 @Extended 2 Return 0 = $oBookmarkRefField not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sBookmarkName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = Document does not contain a Bookmark by the same name as called in $sBookmarkName.
-;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sBookmarkName
@@ -3808,11 +4136,11 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkInsert
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FieldRefBookMarkInsert, _LOWriter_DocBookmarkInsert, _LOWriter_DocBookmarksGetNames, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldRefBookmarkInsert, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FieldRefBookMarkModify(ByRef $oDoc, ByRef $oBookmarkRefField, $sBookmarkName = Null, $iRefUsing = Null)
+Func _LOWriter_FieldRefBookmarkModify(ByRef $oDoc, ByRef $oBookmarkRefField, $sBookmarkName = Null, $iRefUsing = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3830,7 +4158,7 @@ Func _LOWriter_FieldRefBookMarkModify(ByRef $oDoc, ByRef $oBookmarkRefField, $sB
 
 	If ($sBookmarkName <> Null) Then
 		If Not IsString($sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-		If Not _LOWriter_DocBookmarkExists($oDoc, $sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not _LOWriter_FieldBookmarkExists($oDoc, $sBookmarkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oBookmarkRefField.SourceName = $sBookmarkName
 		$oBookmarkRefField.ReferenceFieldSource = $LOW_FIELD_REF_TYPE_BOOKMARK ; Set Type to Bookmark in case input field Obj is a diff type.
@@ -3847,7 +4175,7 @@ Func _LOWriter_FieldRefBookMarkModify(ByRef $oDoc, ByRef $oBookmarkRefField, $sB
 	$oBookmarkRefField.Update()
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOWriter_FieldRefBookMarkModify
+EndFunc   ;==>_LOWriter_FieldRefBookmarkModify
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FieldRefEndnoteInsert
@@ -3857,7 +4185,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkModify
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $oEndNote            - [in/out] an object. A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
 ;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Endnote, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Endnote. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3866,7 +4194,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkModify
 ;                  @Error 1 @Extended 3 Return 0 = $oCursor is a Table Cursor, and is not supported.
 ;                  @Error 1 @Extended 4 Return 0 = $oEndNote not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 6 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ;                  --Success--
@@ -3874,7 +4202,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookMarkModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefEndnoteModify, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefEndnoteModify, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3917,7 +4245,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteInsert
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oEndNoteRefField    - [in/out] an object. A Endnote Reference field Object from a previous _LOWriter_FieldRefEndnoteInsert, or _LOWriter_FieldsGetList function.
 ;                  $oEndNote            - [optional] an object. Default is Null. A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Endnote, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Endnote. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3925,7 +4253,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteInsert
 ;                  @Error 1 @Extended 2 Return 0 = $oEndNoteRefField not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = Optional Parameters called with Null, but object called in $oEndNoteRefField not set as an Endnote Reference type field.
 ;                  @Error 1 @Extended 4 Return 0 = $oEndNote not an Object.
-;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Endnote Object for setting return.
 ;                  --Property Setting Errors--
@@ -4000,7 +4328,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteModify
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $oFootNote           - [in/out] an object. A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
 ;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Footnote, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Footnote See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4009,7 +4337,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteModify
 ;                  @Error 1 @Extended 3 Return 0 = $oCursor is a Table Cursor, and is not supported.
 ;                  @Error 1 @Extended 4 Return 0 = $oFootNote not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 6 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ;                  --Success--
@@ -4017,7 +4345,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefFootnoteModify, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefFootnoteModify, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4060,7 +4388,7 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteInsert
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oFootNoteRefField   - [in/out] an object. A Footnote Reference field Object from a previous _LOWriter_FieldRefFootnoteInsert, or _LOWriter_FieldsGetList function.
 ;                  $oFootNote           - [optional] an object. Default is Null. A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Footnote, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to use to reference the Footnote. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4068,7 +4396,7 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteInsert
 ;                  @Error 1 @Extended 2 Return 0 = $oFootNoteRefField not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = Optional Parameters called with Null, but object called in $oFootNoteRefField not set as a Footnote Reference type field.
 ;                  @Error 1 @Extended 4 Return 0 = $oFootNote not an Object.
-;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Footnote Object for setting return.
 ;                  --Property Setting Errors--
@@ -4144,6 +4472,8 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteModify
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oRefField not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Reference type.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Data Type Source for the reference Field. See constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3
 ; Author ........: donnyh13
@@ -4157,9 +4487,14 @@ Func _LOWriter_FieldRefGetType(ByRef $oRefField)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iSource
+
 	If Not IsObj($oRefField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oRefField.ReferenceFieldSource())
+	$iSource = $oRefField.ReferenceFieldSource()
+	If Not IsInt($iSource) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iSource)
 EndFunc   ;==>_LOWriter_FieldRefGetType
 
 ; #FUNCTION# ====================================================================================================================
@@ -4170,7 +4505,7 @@ EndFunc   ;==>_LOWriter_FieldRefGetType
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $sRefMarkName        - a string value. The Reference Mark Name to reference.
 ;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to insert, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to insert. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4180,7 +4515,7 @@ EndFunc   ;==>_LOWriter_FieldRefGetType
 ;                  @Error 1 @Extended 4 Return 0 = $sRefMarkName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = Document does not contain a Reference Mark by the same name as called in $sRefMarkName.
-;                  @Error 1 @Extended 7 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 7 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ;                  --Processing Errors--
@@ -4190,7 +4525,7 @@ EndFunc   ;==>_LOWriter_FieldRefGetType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefModify, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarksGetNames, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefModify, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarksGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4271,8 +4606,9 @@ Func _LOWriter_FieldRefMarkDelete(ByRef $oDoc, $sName)
 	If Not IsObj($oRefMark) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oRefMark.dispose()
+	If $oRefMarks.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	Return ($oRefMarks.hasByName($sName)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FieldRefMarkDelete
 
 ; #FUNCTION# ====================================================================================================================
@@ -4287,6 +4623,8 @@ EndFunc   ;==>_LOWriter_FieldRefMarkDelete
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = Document does not contain a Reference Mark named the same as called in $sName
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create a TextCursor at Reference Mark's anchor.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Reference Marks Object.
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Reference Mark object called in $sName.
@@ -4304,6 +4642,7 @@ Func _LOWriter_FieldRefMarkGetAnchor(ByRef $oDoc, $sName)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oRefMark, $oRefMarks
+	Local $oTextCursor
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -4315,7 +4654,10 @@ Func _LOWriter_FieldRefMarkGetAnchor(ByRef $oDoc, $sName)
 	$oRefMark = $oRefMarks.getByName($sName)
 	If Not IsObj($oRefMark) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oRefMark.Anchor.Text.createTextCursorByRange($oRefMark.Anchor()))
+	$oTextCursor = $oRefMark.Anchor.Text.createTextCursorByRange($oRefMark.Anchor())
+	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextCursor)
 EndFunc   ;==>_LOWriter_FieldRefMarkGetAnchor
 
 ; #FUNCTION# ====================================================================================================================
@@ -4344,7 +4686,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarkGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefMarkDelete, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefMarkDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4420,7 +4762,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarksGetNames
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oRefField           - [in/out] an object. A Reference field Object from a previous _LOWriter_FieldRefInsert or _LOWriter_FieldsGetList function.
 ;                  $sRefMarkName        - [optional] a string value. Default is Null. The Reference Mark Name to Reference.
-;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to insert, see $LOW_FIELD_REF_USING_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRefUsing           - [optional] an integer value (0-4). Default is Null. The Type of reference to insert. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4428,7 +4770,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarksGetNames
 ;                  @Error 1 @Extended 2 Return 0 = $oRefField not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sRefMarkName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = Document does not contain a Reference Mark by the same name as called in $sRefMarkName.
-;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4.
+;                  @Error 1 @Extended 5 Return 0 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Reference Marks Object.
 ;                  --Property Setting Errors--
@@ -4494,7 +4836,7 @@ EndFunc   ;==>_LOWriter_FieldRefModify
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iType               - [optional] an integer value (1-1023). Default is $LOW_FIELD_ADV_TYPE_ALL. The type of Field to search for. See Constants, $LOW_FIELD_ADV_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Can be BitOr'd together.
 ;                  $bSupportedServices  - [optional] a boolean value. Default is True. If True, adds a column to the array that has the supported service String for that particular Field, To assist in identifying the Field type.
-;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by Libre Office. To assist in identifying the Field type.
+;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOW_FIELD_ADV_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4550,7 +4892,7 @@ EndFunc   ;==>_LOWriter_FieldsAdvGetList
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iType               - [optional] an integer value (1-16383). Default is $LOW_FIELD_DOCINFO_TYPE_ALL. The type of Field to search for. See Constants, $LOW_FIELD_DOCINFO_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Can be BitOr'd together.
 ;                  $bSupportedServices  - [optional] a boolean value. Default is True. If True, adds a column to the array that has the supported service String for that particular Field, To assist in identifying the Field type.
-;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by Libre Office. To assist in identifying the Field type.
+;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOW_FIELD_DOCINFO_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4626,7 +4968,7 @@ EndFunc   ;==>_LOWriter_FieldsDocInfoGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSenderModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldSenderModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4771,12 +5113,14 @@ EndFunc   ;==>_LOWriter_FieldSenderModify
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.text.TextField.SetExpression" Object.
 ;                  @Error 2 @Extended 2 Return 0 = Error creating Master Field Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Master Field Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Set Variable field, returning its Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMastersGetNames
+; Related .......: _LOWriter_FieldSetVarModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4798,14 +5142,14 @@ Func _LOWriter_FieldSetVarInsert(ByRef $oDoc, ByRef $oCursor, $sName, $sValue, $
 	If Not IsObj($oSetVarField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	If _LOWriter_FieldSetVarMasterExists($oDoc, $sName) Then
-		$oSetVarMaster = _LOWriter_FieldSetVarMasterGetObj($oDoc, $sName)
+		$oSetVarMaster = _LOWriter_FieldSetVarMasterGetObjByName($oDoc, $sName)
 		$iExtended = 1 ; 1 = Master already existed.
+		If Not IsObj($oSetVarMaster) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Else
 		$oSetVarMaster = _LOWriter_FieldSetVarMasterCreate($oDoc, $sName)
+		If Not IsObj($oSetVarMaster) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 	EndIf
-
-	If Not IsObj($oSetVarMaster) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	$oSetVarField.Content = $sValue
 
@@ -4855,7 +5199,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarMasterDelete, _LOWriter_FieldSetVarInsert
+; Related .......: _LOWriter_FieldSetVarMasterDeleteByName, _LOWriter_FieldSetVarMasterDeleteByObj, _LOWriter_FieldSetVarInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4884,31 +5228,31 @@ Func _LOWriter_FieldSetVarMasterCreate(ByRef $oDoc, $sMasterFieldName)
 EndFunc   ;==>_LOWriter_FieldSetVarMasterCreate
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FieldSetVarMasterDelete
-; Description ...: Delete a Set Variable Master Field.
-; Syntax ........: _LOWriter_FieldSetVarMasterDelete(ByRef $oDoc, $vMasterField)
+; Name ..........: _LOWriter_FieldSetVarMasterDeleteByName
+; Description ...: Delete a Set Variable Master Field using its name.
+; Syntax ........: _LOWriter_FieldSetVarMasterDeleteByName(ByRef $oDoc, $sMasterField)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $vMasterField        - a variant value. The Set Variable Master Field name or object from _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObj, or _LOWriter_FieldSetVarMastersGetNames to delete.
+;                  $sMasterField        - a string value. The Set Variable Master Field name to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $vMasterField not a String and not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $vMasterField is a String, but document does not contain a Masterfield by that name.
+;                  @Error 1 @Extended 2 Return 0 = $sMasterField not a String.
+;                  @Error 1 @Extended 3 Return 0 = Document does not contain a Masterfield with the name called in $sMasterField.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve MasterFields Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve MasterField object called in $vMasterField.
-;                  @Error 3 @Extended 3 Return 0 = Attempted to delete MasterField, but document still contains a MasterField by that name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve MasterField object called in $sMasterField.
+;                  @Error 3 @Extended 3 Return 0 = Failed to delete MasterField.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted requested MasterField.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMastersGetNames
+; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FieldSetVarMasterDelete(ByRef $oDoc, $vMasterField)
+Func _LOWriter_FieldSetVarMasterDeleteByName(ByRef $oDoc, $sMasterField)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4917,28 +5261,69 @@ Func _LOWriter_FieldSetVarMasterDelete(ByRef $oDoc, $vMasterField)
 	Local $sField = "com.sun.star.text.fieldmaster.SetExpression"
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($vMasterField) And Not IsObj($vMasterField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsString($sMasterField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oMasterFields = $oDoc.getTextFieldMasters()
 	If Not IsObj($oMasterFields) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If IsObj($vMasterField) Then
-		$sFullFieldName = $sField & "." & $vMasterField.Name()
-		$oMasterfield = $vMasterField
+	$sFullFieldName = $sField & "." & $sMasterField
+	If Not $oMasterFields.hasByName($sFullFieldName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	Else
-		$sFullFieldName = $sField & "." & $vMasterField
-		If Not $oMasterFields.hasByName($sFullFieldName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oMasterfield = $oMasterFields.getByName($sFullFieldName)
-	EndIf
-
+	$oMasterfield = $oMasterFields.getByName($sFullFieldName)
 	If Not IsObj($oMasterfield) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oMasterfield.dispose()
+	If $oMasterFields.hasByName($sFullFieldName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	Return ($oMasterFields.hasByName($sFullFieldName)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOWriter_FieldSetVarMasterDelete
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldSetVarMasterDeleteByObj
+; Description ...: Delete a Set Variable Master Field using its Object.
+; Syntax ........: _LOWriter_FieldSetVarMasterDeleteByObj(ByRef $oDoc, ByRef $oMasterField)
+; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oMasterField        - [in/out] an object. The Set Variable Master Field Object to delete as returned by a previous _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, or _LOWriter_FieldSetVarMastersGetNames function.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oMasterField not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve MasterFields Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to delete MasterField.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted requested MasterField.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMastersGetNames
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldSetVarMasterDeleteByObj(ByRef $oDoc, ByRef $oMasterfield)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oMasterFields
+	Local $sFullFieldName
+	Local $sField = "com.sun.star.text.fieldmaster.SetExpression"
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oMasterfield) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oMasterFields = $oDoc.getTextFieldMasters()
+	If Not IsObj($oMasterFields) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$sFullFieldName = $sField & "." & $oMasterfield.Name()
+
+	$oMasterfield.dispose()
+	If $oMasterFields.hasByName($sFullFieldName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oMasterfield = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByObj
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FieldSetVarMasterExists
@@ -4986,7 +5371,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterExists
 ; Name ..........: _LOWriter_FieldSetVarMasterFieldsGetList
 ; Description ...: Return an Array of Objects of dependent fields for a specific Master Field.
 ; Syntax ........: _LOWriter_FieldSetVarMasterFieldsGetList(ByRef $oMasterfield)
-; Parameters ....: $oMasterfield        - [in/out] an object. The Set Variable Master Field Object returned from a previous _LOWriter_FieldSetVarMasterCreate, or _LOWriter_FieldSetVarMasterGetObj function.
+; Parameters ....: $oMasterfield        - [in/out] an object. The Set Variable Master Field Object returned from a previous _LOWriter_FieldSetVarMasterCreate, or _LOWriter_FieldSetVarMasterGetObjByName function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4998,7 +5383,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Dependent Fields are SetVariable Fields that are referencing the Master field.
-; Related .......: _LOWriter_FieldSetVarMasterGetObj
+; Related .......: _LOWriter_FieldSetVarMasterGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5017,9 +5402,9 @@ Func _LOWriter_FieldSetVarMasterFieldsGetList(ByRef $oMasterfield)
 EndFunc   ;==>_LOWriter_FieldSetVarMasterFieldsGetList
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FieldSetVarMasterGetObj
+; Name ..........: _LOWriter_FieldSetVarMasterGetObjByName
 ; Description ...: Retrieve a Set Variable Master Field Object.
-; Syntax ........: _LOWriter_FieldSetVarMasterGetObj(ByRef $oDoc, $sMasterFieldName)
+; Syntax ........: _LOWriter_FieldSetVarMasterGetObjByName(ByRef $oDoc, $sMasterFieldName)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sMasterFieldName    - a string value. The Set Variable Master Field to retrieve the Object for.
 ; Return values .: Success: Object
@@ -5040,7 +5425,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterFieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FieldSetVarMasterGetObj(ByRef $oDoc, $sMasterFieldName)
+Func _LOWriter_FieldSetVarMasterGetObjByName(ByRef $oDoc, $sMasterFieldName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -5060,7 +5445,7 @@ Func _LOWriter_FieldSetVarMasterGetObj(ByRef $oDoc, $sMasterFieldName)
 	If Not IsObj($oMasterfield) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMasterfield)
-EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObj
+EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FieldSetVarMastersGetNames
@@ -5078,8 +5463,8 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObj
 ;                  @Error 0 @Extended ? Return Array = Success. Successfully retrieved Array of Set Variable MasterField Names, returning Array of Set Variable MasterField Names with @Extended set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function includes in the list about 5 built-in Master Fields from Libre Office, namely: Illustration, Table, Text, Drawing, and Figure.
-; Related .......: _LOWriter_FieldSetVarMasterGetObj, _LOWriter_FieldSetVarMasterDelete
+; Remarks .......: This function includes in the list about 5 built-in Master Fields from LibreOffice, namely: Illustration, Table, Text, Drawing, and Figure.
+; Related .......: _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMasterDeleteByName, _LOWriter_FieldSetVarMasterDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5161,7 +5546,7 @@ Func _LOWriter_FieldSetVarModify(ByRef $oDoc, ByRef $oSetVarField, $sValue = Nul
 	If Not IsObj($oSetVarField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($sValue, $iNumFormatKey, $bIsVisible) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oSetVarField.NumberFormat()
@@ -5206,7 +5591,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarModify
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iType               - [optional] an integer value (1-2147483647). Default is $LOW_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOW_FIELD_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Can be BitOr'd together.
 ;                  $bSupportedServices  - [optional] a boolean value. Default is True. If True, adds a column to the array that has the supported service String for that particular Field, To assist in identifying the Field type.
-;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by Libre Office. To assist in identifying the Field type.
+;                  $bFieldType          - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOW_FIELD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -5284,7 +5669,7 @@ EndFunc   ;==>_LOWriter_FieldsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function checks if there is a Set Variable matching the name called in $sSetVarName.
-; Related .......: _LOWriter_FieldShowVarModify, _LOWriter_FieldSetVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldShowVarModify, _LOWriter_FieldSetVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5374,7 +5759,7 @@ Func _LOWriter_FieldShowVarModify(ByRef $oDoc, ByRef $oShowVarField, $sSetVarNam
 	If Not IsObj($oShowVarField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($sSetVarName, $iNumFormatKey, $bShowName) Then
-		; Libre Office Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
+		; LibreOffice Seems to insert its Number formats by adding 10,000 to the number, but if I insert that same value, it
 		; fails/causes the wrong format to be used, so, If the Number format is greater than or equal to 10,000, Minus 10,000
 		; from the value.
 		$iNumberFormat = $oShowVarField.NumberFormat()
@@ -5440,7 +5825,7 @@ EndFunc   ;==>_LOWriter_FieldShowVarModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: After insertion there seems to be a necessary delay before the value to display is available, thus when a new count field is inserted, the value will be "0". If you call a _LOWriter_FieldUpdate for this field after a few seconds, the value should appear.
-; Related .......: _LOWriter_FieldStatCountModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldStatCountModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5594,7 +5979,7 @@ EndFunc   ;==>_LOWriter_FieldStatCountModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldStatTemplateModify, _LOWriter_DocGenPropTemplate, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldStatTemplateModify, _LOWriter_DocGenPropTemplate, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5636,6 +6021,8 @@ EndFunc   ;==>_LOWriter_FieldStatTemplateInsert
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oTemplateField not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFormat not an Integer, less than 0 or greater than 5. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Field Format.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iFormat
@@ -5654,11 +6041,16 @@ Func _LOWriter_FieldStatTemplateModify(ByRef $oTemplateField, $iFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurFormat
 
 	If Not IsObj($oTemplateField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iFormat) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oTemplateField.FileFormat())
+	If __LO_VarsAreNull($iFormat) Then
+		$iCurFormat = $oTemplateField.FileFormat()
+		If Not IsInt($iCurFormat) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurFormat)
+	EndIf
 
 	If Not __LO_IntIsBetween($iFormat, $LOW_FIELD_FILENAME_FULL_PATH, $LOW_FIELD_FILENAME_TEMPLATE_NAME) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -5773,7 +6165,7 @@ EndFunc   ;==>_LOWriter_FieldUpdate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldVarSetPageModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldVarSetPageModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5895,7 +6287,7 @@ EndFunc   ;==>_LOWriter_FieldVarSetPageModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldVarShowPageModify, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldVarShowPageModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5940,6 +6332,8 @@ EndFunc   ;==>_LOWriter_FieldVarShowPageInsert
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oPageShowField not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering Format.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iNumFormat
@@ -5958,11 +6352,16 @@ Func _LOWriter_FieldVarShowPageModify(ByRef $oPageShowField, $iNumFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurNumFormat
 
 	If Not IsObj($oPageShowField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iNumFormat) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oPageShowField.NumberingType())
+	If __LO_VarsAreNull($iNumFormat) Then
+		$iCurNumFormat = $oPageShowField.NumberingType()
+		If Not IsInt($iCurNumFormat) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurNumFormat)
+	EndIf
 
 	If Not __LO_IntIsBetween($iNumFormat, $LOW_NUM_STYLE_CHARS_UPPER_LETTER, $LOW_NUM_STYLE_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 

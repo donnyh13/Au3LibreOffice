@@ -8,16 +8,16 @@ Func Example()
 	Local $oDoc, $oViewCursor
 	Local $avSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the formatting settings directly.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to Demonstrate modifying formatting settings directly.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to Demonstrate modifying formatting settings directly.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -32,8 +32,8 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 11, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Font effects to $LOW_RELIEF_EMBOSSED relief type.
-	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_RELIEF_EMBOSSED)
+	; Set the selected text's Font effects to $LOW_CHAR_RELIEF_EMBOSSED relief type.
+	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_CHAR_RELIEF_EMBOSSED)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -46,10 +46,10 @@ Func Example()
 			"Are the words hidden? True/False: " & $avSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avSettings[4] & @CRLF & @CRLF & _
-			"I will now set Case to $LOW_CASEMAP_SM_CAPS, and Relief to $LOW_RELIEF_NONE.")
+			"I will now set Case to $LOW_CHAR_CASEMAP_SM_CAPS, and Relief to $LOW_CHAR_RELIEF_NONE.")
 
-	; Set the selected text's Font effects to $LOW_RELIEF_NONE relief type, Case to $LOW_CASEMAP_SM_CAPS
-	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_RELIEF_NONE, $LOW_CASEMAP_SM_CAPS)
+	; Set the selected text's Font effects to $LOW_CHAR_RELIEF_NONE relief type, Case to $LOW_CHAR_CASEMAP_SM_CAPS
+	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_CASEMAP_SM_CAPS)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -73,6 +73,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

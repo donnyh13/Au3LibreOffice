@@ -53,6 +53,8 @@
 ;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oConnection not a connection Object.
 ;                  @Error 1 @Extended 3 Return 0 = $bAutoCommit not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current AutoCommit value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bAutoCommit
@@ -72,17 +74,25 @@ Func _LOBase_DatabaseAutoCommit(ByRef $oConnection, $bAutoCommit = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+	Local $bCurrAutoCommit
+
 	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oConnection.supportsService("com.sun.star.sdbc.Connection") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($bAutoCommit) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oConnection.getAutoCommit())
+	If __LO_VarsAreNull($bAutoCommit) Then
+		$bCurrAutoCommit = $oConnection.getAutoCommit()
+		If Not IsBool($bCurrAutoCommit) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bCurrAutoCommit)
+	EndIf
 
 	If Not IsBool($bAutoCommit) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oConnection.setAutoCommit($bAutoCommit)
-	If Not ($oConnection.getAutoCommit() = $bAutoCommit) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ($oConnection.getAutoCommit() = $bAutoCommit) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_DatabaseAutoCommit
 
 ; #FUNCTION# ====================================================================================================================
@@ -149,6 +159,8 @@ Func _LOBase_DatabaseConnectionClose(ByRef $oConnection)
 	$oConnection.Close()
 
 	If Not $oConnection.isClosed() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oConnection = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOBase_DatabaseConnectionClose
@@ -406,12 +418,12 @@ EndFunc   ;==>_LOBase_DatabaseIsReadOnly
 ; Syntax ........: _LOBase_DatabaseMetaDataQuery(ByRef $oConnection, $iQuery[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null[, $vParam6 = Null]]]]]])
 ; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ;                  $iQuery              - an integer value (0-148). The query to perform. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
-;                  $vParam1             - [optional] a variant value. Default is Null. The first Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam2             - [optional] a variant value. Default is Null. The second Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam3             - [optional] a variant value. Default is Null. The third Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam4             - [optional] a variant value. Default is Null. The fourth Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam5             - [optional] a variant value. Default is Null. The fifth Parameter required by the Query. See remarks for the queries that have parameters.
-;                  $vParam6             - [optional] a variant value. Default is Null. The sixth Parameter required by the Query. See remarks for the queries that have parameters.
+;                  $vParam1             - [optional] a variant value. Default is Null. The first Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam2             - [optional] a variant value. Default is Null. The second Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam3             - [optional] a variant value. Default is Null. The third Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam4             - [optional] a variant value. Default is Null. The fourth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam5             - [optional] a variant value. Default is Null. The fifth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam6             - [optional] a variant value. Default is Null. The sixth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Variable
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

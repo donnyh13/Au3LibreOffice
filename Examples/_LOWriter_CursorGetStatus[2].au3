@@ -8,16 +8,16 @@ Func Example()
 	Local $oDoc, $oTextCursor
 	Local $bReturn
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a new Text Cursor.
-	$oTextCursor = _LOWriter_DocCreateTextCursor($oDoc, False)
+	$oTextCursor = _LOWriter_CursorTextCursorCreate($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to create a Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oTextCursor, "Some text." & @CR & @CR & "Some different text" & @CR & "Another Line.")
+	_LOWriter_CursorInsertString($oDoc, $oTextCursor, "Some text." & @CR & @CR & "Some different text" & @CR & "Another Line.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Check if the TextCursor is currently at the end of a word.
@@ -48,6 +48,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

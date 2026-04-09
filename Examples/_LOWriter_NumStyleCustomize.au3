@@ -8,7 +8,7 @@ Func Example()
 	Local $oDoc, $oNumStyle, $oViewCursor
 	Local $avSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -17,7 +17,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Numbering Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style at the View Cursor to the new style.
@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to Set the Numbering Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Line 1" & @LF & "Line 1.1" & @LF & "Line 1.2" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Line 1" & @LF & "Line 1.1" & @LF & "Line 1.2" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 2.
@@ -33,7 +33,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Level 2" & @LF & "Line 2.1" & @LF & "Line 2.2" & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Level 2" & @LF & "Line 2.1" & @LF & "Line 2.2" & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Numbering Style Level for This Paragraph to 3.
@@ -41,7 +41,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Numbering Style level. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Line 3" & @LF & "Line 3.1" & @LF & "Line 3.2")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Line 3" & @LF & "Line 3.1" & @LF & "Line 3.2")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Numbering Style Customization settings: Modify Level 2, Numbering format = $LOW_NUM_STYLE_ARABIC, Start at 4, Char Style = "Emphasis",
@@ -88,6 +88,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

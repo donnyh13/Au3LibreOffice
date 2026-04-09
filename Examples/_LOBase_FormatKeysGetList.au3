@@ -11,12 +11,12 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oReportDoc, $oDBase, $oConnection, $oTable, $oTableUI, $oPrepStatement
+	Local $oDoc, $oReportDoc, $oDBase, $oConnection, $oTable, $oTableDoc, $oPrepStatement
 	Local $iResults
 	Local $avKeys[0][2]
 	Local $sSavePath
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOBase_DocCreate(True, False)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -85,18 +85,18 @@ Func Example()
 		Sleep(IsInt(($i / 15) ? (10) : (0)))
 	Next
 
-	; Open the Table UI.
-	$oTableUI = _LOBase_TableUIOpenByObject($oDoc, $oConnection, $oTable)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to open Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document.
+	$oTableDoc = _LOBase_TableDocOpenByObject($oDoc, $oConnection, $oTable)
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to close the document.")
 
-	; Close the Table UI
-	_LOBase_TableUIClose($oTableUI)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close Table User Interface. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Close the Table Document
+	_LOBase_TableDocClose($oTableDoc)
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the Report Document.
-	_LOBase_ReportClose($oReportDoc, True)
+	_LOBase_ReportDocClose($oReportDoc, True)
 	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to close the Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
@@ -106,6 +106,10 @@ Func Example()
 	; Close the document.
 	_LOBase_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _FillDatabase(ByRef $oDoc, ByRef $oReportDoc, ByRef $oConnection, ByRef $oTable)
@@ -148,7 +152,7 @@ EndFunc
 
 Func _ERROR($oDoc, $oReportDoc, $sErrorText)
 	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
-	If IsObj($oReportDoc) Then _LOBase_ReportClose($oReportDoc, True)
+	If IsObj($oReportDoc) Then _LOBase_ReportDocClose($oReportDoc, True)
 	If IsObj($oDoc) Then _LOBase_DocClose($oDoc, False)
 	Exit
 EndFunc

@@ -24,11 +24,15 @@
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
-; _LOBase_FormClose
-; _LOBase_FormConnect
 ; _LOBase_FormCopy
 ; _LOBase_FormCreate
 ; _LOBase_FormDelete
+; _LOBase_FormDocClose
+; _LOBase_FormDocConnect
+; _LOBase_FormDocGetName
+; _LOBase_FormDocIsModified
+; _LOBase_FormDocOpen
+; _LOBase_FormDocSave
 ; _LOBase_FormDocVisible
 ; _LOBase_FormExists
 ; _LOBase_FormFolderCopy
@@ -38,142 +42,10 @@
 ; _LOBase_FormFolderRename
 ; _LOBase_FormFoldersGetCount
 ; _LOBase_FormFoldersGetNames
-; _LOBase_FormIsModified
-; _LOBase_FormOpen
 ; _LOBase_FormRename
-; _LOBase_FormSave
 ; _LOBase_FormsGetCount
 ; _LOBase_FormsGetNames
 ; ===============================================================================================================================
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_FormClose
-; Description ...: Close an opened Form Document.
-; Syntax ........: _LOBase_FormClose(ByRef $oFormDoc[, $bForceClose = False])
-; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormOpen, _LOBase_FormConnect, or _LOBase_FormCreate function.
-;                  $bForceClose         - [optional] a boolean value. Default is False. If True, the Form document will be closed regardless if there are unsaved changes. See remarks.
-; Return values .: Success: Boolean
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bForceClose not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = Document called in $oFormDoc has not been saved to a Base Document yet.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Document has been modified and not saved, and $bForceClose is False.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Document's Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Form Document's properties.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify Form in Parent Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value of whether the Form Document was successfully closed (True), or not.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: If there are unsaved changes in the document when close is called, and $bForceClose is True, they will be lost.
-; Related .......: _LOBase_FormOpen, _LOBase_FormConnect
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_FormClose(ByRef $oFormDoc, $bForceClose = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $bReturn
-	Local $oForm, $oSource
-	Local $tPropertiesPair
-
-	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bForceClose) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If $oFormDoc.isModified() And Not $bForceClose Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-	If Not $oFormDoc.hasLocation() Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	$oSource = $oFormDoc.Parent.FormDocuments()
-	If Not IsObj($oSource) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	$tPropertiesPair = $oSource.Parent.CurrentController.identifySubComponent($oFormDoc)
-	If Not IsObj($tPropertiesPair) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	$oForm = $oSource.getByHierarchicalName($tPropertiesPair.Second())
-	If Not IsObj($oForm) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-	If $oFormDoc.isModified() Then $oFormDoc.Modified = False ; Set modified to false, so the user wont be prompted.
-
-	$bReturn = $oForm.Close()
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $bReturn)
-EndFunc   ;==>_LOBase_FormClose
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_FormConnect
-; Description ...: Retrieve an Object for the currently open Form or Forms.
-; Syntax ........: _LOBase_FormConnect([$bConnectCurrent = True])
-; Parameters ....: $bConnectCurrent     - [optional] a boolean value. Default is True. If True, Returns an Object for the last active Form. Else an array of all Open Forms. See Remarks.
-; Return values .: Success: Object or Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bConnectCurrent not a Boolean.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.ServiceManager Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create com.sun.star.frame.Desktop Object.
-;                  @Error 2 @Extended 3 Return 0 = Failed to create enumeration of open Documents.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No LibreOffice windows are open.
-;                  @Error 3 @Extended 2 Return 0 = Current LibreOffice window is not a Form Document.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Success. Connected to the currently active window, returning the Form Document Object.
-;                  @Error 0 @Extended ? Return Array = Success. Returning a Two columned Array with all open Form Documents. See Remarks. @Extended is set to number of results.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: The Returned array when connecting to all open Form Documents returns an array with Two columns per result. ($aArray[0][2]). Each result is stored in a separate row;
-;                  Row 1, Column 0 contain the Object for that document. e.g. $aArray[0][0] = $oDoc
-;                  Row 1, Column 1 contains the Document's full title with extension and the Form Name, separated by a colon. e.g. $aArray[0][1] = "Testing.odb : Form1"
-;                  Row 2, Column 0 contain the Object for the next document. And so on. e.g. $aArray[1][0] = $oDoc2
-; Related .......: _LOBase_FormOpen, _LOBase_FormClose
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_FormConnect($bConnectCurrent = True)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iCount = 0
-	Local $aoConnectAll[0][2]
-	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
-	Local $sServiceName = "com.sun.star.text.TextDocument"
-
-	If Not IsBool($bConnectCurrent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$oServiceManager = __LO_ServiceManager()
-	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
-	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-	If Not $oDesktop.getComponents.hasElements() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; no L.O open
-
-	$oEnumDoc = $oDesktop.getComponents.createEnumeration()
-	If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
-
-	If $bConnectCurrent Then
-		$oDoc = $oDesktop.currentComponent()
-
-		Return (($oDoc.supportsService($sServiceName) And IsObj($oDoc.Parent()))) ? (SetError($__LO_STATUS_SUCCESS, 1, $oDoc)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0))
-
-	Else
-		ReDim $aoConnectAll[1][2]
-		$iCount = 0
-		While $oEnumDoc.hasMoreElements()
-			$oDoc = $oEnumDoc.nextElement()
-			If ($oDoc.supportsService($sServiceName) And IsObj($oDoc.Parent())) Then ; If Parent is present, it should be a Database Form.
-
-				ReDim $aoConnectAll[$iCount + 1][2]
-				$aoConnectAll[$iCount][0] = $oDoc
-				$aoConnectAll[$iCount][1] = $oDoc.Title()
-				$iCount += 1
-			EndIf
-			Sleep(10)
-		WEnd
-
-		Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
-	EndIf
-EndFunc   ;==>_LOBase_FormConnect
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_FormCopy
@@ -297,7 +169,7 @@ Func _LOBase_FormCreate(ByRef $oConnection, $sForm, $bOpen = False, $bDesign = T
 	Local $oServiceManager, $oDesktop, $oSource, $oFormDoc, $oDocDef
 	Local Const $iURLFrameCreate = 8 ; frame will be created if not found
 	Local $aArgs[1]
-	Local $iError = 0, $iCount = 0
+	Local $iCount = 0
 	Local $sPath = @TempDir & "AutoIt_Form_Temp_Doc_", $sFormName
 
 	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -316,7 +188,6 @@ Func _LOBase_FormCreate(ByRef $oConnection, $sForm, $bOpen = False, $bDesign = T
 	If Not IsString($sFormName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	$aArgs[0] = __LO_SetPropertyValue("Hidden", True)
-	If Not IsObj($aArgs[0]) Then $iError = BitOR($iError, 1)
 
 	$oServiceManager = __LO_ServiceManager()
 	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -420,16 +291,350 @@ Func _LOBase_FormDelete(ByRef $oDoc, $sName)
 EndFunc   ;==>_LOBase_FormDelete
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_FormDocClose
+; Description ...: Close an opened Form Document.
+; Syntax ........: _LOBase_FormDocClose(ByRef $oFormDoc[, $bForceClose = False])
+; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+;                  $bForceClose         - [optional] a boolean value. Default is False. If True, the Form document will be closed regardless if there are unsaved changes. See remarks.
+; Return values .: Success: Boolean
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bForceClose not a Boolean.
+;                  @Error 1 @Extended 3 Return 0 = Document called in $oFormDoc has not been saved to a Base Document yet.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Document has been modified and not saved, and $bForceClose is False.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Document's Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Form Document's properties.
+;                  @Error 3 @Extended 4 Return 0 = Failed to identify Form in Parent Document.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value of whether the Form Document was successfully closed (True), or not.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If there are unsaved changes in the document when close is called, and $bForceClose is True, they will be lost.
+; Related .......: _LOBase_FormDocOpen, _LOBase_FormDocConnect
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_FormDocClose(ByRef $oFormDoc, $bForceClose = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $bReturn
+	Local $oForm, $oSource
+	Local $tPropertiesPair
+
+	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bForceClose) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If $oFormDoc.isModified() And Not $bForceClose Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not $oFormDoc.hasLocation() Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oSource = $oFormDoc.Parent.FormDocuments()
+	If Not IsObj($oSource) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$tPropertiesPair = $oSource.Parent.CurrentController.identifySubComponent($oFormDoc)
+	If Not IsObj($tPropertiesPair) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$oForm = $oSource.getByHierarchicalName($tPropertiesPair.Second())
+	If Not IsObj($oForm) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	If $oFormDoc.isModified() Then $oFormDoc.Modified = False ; Set modified to false, so the user wont be prompted.
+
+	$bReturn = $oForm.Close()
+
+	If $bReturn Then $oFormDoc = Null ; Only Null if Form was closed successfully.
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bReturn)
+EndFunc   ;==>_LOBase_FormDocClose
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_FormDocConnect
+; Description ...: Retrieve an Object for the currently open Form or Forms.
+; Syntax ........: _LOBase_FormDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
+; Parameters ....: $iMode               - [optional] an integer value (0-1). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+; Return values .: Success: Object or Array.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 Return 0 = Current Document not a Base Form Document.
+;                  @Error 3 @Extended 5 Return 0 = No matches found.
+;                  --Success--
+;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Form document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Form Documents. @Extended is set to number of results. See remarks.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Only Base Form documents are returned using either of the flags.
+;                  The Connect All option returns a two columned array. ($aArray[0][2]), each result is stored in a separate row.
+;                  -Row 1 Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
+;                  -Row 1 Column 1 contains the Document's type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3. e.g.: $aArray[0][1] = $LO_DOC_TYPE_BASE_FORM_VIEW.
+;                  -Row 2 contains the Object for the next document. e.g. $aArray[1][0] = $oDoc2. And so on.
+; Related .......: _LOBase_FormDocOpen, _LOBase_FormDocClose
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_FormDocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount = 0, $iDocType
+	Local $aoConnectAll[0][2]
+	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
+
+	If Not __LO_IntIsBetween($iMode, $LO_DOC_CONNECT_MODE_ALL, $LO_DOC_CONNECT_MODE_CURRENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
+	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+	If Not $oDesktop.getComponents.hasElements() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; no L.O open
+
+	Switch $iMode
+		Case $LO_DOC_CONNECT_MODE_ALL
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+			While $oEnumDoc.hasMoreElements()
+				$oDoc = $oEnumDoc.nextElement()
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				$iDocType = _LO_DocGetType($oDoc)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+				If __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_FORM_DESIGN, $LO_DOC_TYPE_BASE_FORM_VIEW) Then
+					If (UBound($aoConnectAll) <= $iCount) Then ReDim $aoConnectAll[$iCount + 1][2]
+					$aoConnectAll[$iCount][0] = $oDoc
+					$aoConnectAll[$iCount][1] = $iDocType
+					$iCount += 1
+				EndIf
+				Sleep((IsInt($iCount / $__LOBCONST_SLEEP_DIV) ? (10) : (0)))
+			WEnd
+
+			Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
+
+		Case $LO_DOC_CONNECT_MODE_CURRENT
+			$oDoc = $oDesktop.currentComponent()
+			If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$iDocType = _LO_DocGetType($oDoc)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+			If Not __LO_IntIsBetween($iDocType, $LO_DOC_TYPE_BASE_FORM_DESIGN, $LO_DOC_TYPE_BASE_FORM_VIEW) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Not a Base Form Doc.
+
+			Return SetError($__LO_STATUS_SUCCESS, $iDocType, $oDoc)
+	EndSwitch
+
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; No matches
+EndFunc   ;==>_LOBase_FormDocConnect
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_FormDocGetName
+; Description ...: Retrieve the Form document's name.
+; Syntax ........: _LOBase_FormDocGetName(ByRef $oFormDoc[, $bReturnFull = False])
+; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Return values .: Success: String
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Form Document called in $oFormDoc was opened "Hidden", can't return full document name. Document must be re-opened.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document's name.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If $bReturnFull is True, the return value will be like: "<Database Doc name>.<extension> : <Form name> — LibreOffice Base: Database Form" e.g. "Testing.odb : frmForm2 — LibreOffice Base: Database Form".
+;                  Else the return value will be like: "<Database Doc name>.<extension> : <Form name>", e.g. "Testing.odb : frmForm2"
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_FormDocGetName(ByRef $oFormDoc, $bReturnFull = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sName
+
+	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If $bReturnFull And Not IsObj($oFormDoc.CurrentController()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; If CurrentController is not an Object, Form Doc was opened "Hidden", can't retrieve full Doc name.
+
+	If $bReturnFull Then
+		$sName = $oFormDoc.CurrentController.Frame.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Else
+		$sName = $oFormDoc.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sName)
+EndFunc   ;==>_LOBase_FormDocGetName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_FormDocIsModified
+; Description ...: Test whether the form has been modified since being created or since the last save.
+; Syntax ........: _LOBase_FormDocIsModified(ByRef $oFormDoc)
+; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+; Return values .: Success: Boolean
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document has been modified.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Form has been modified since last being saved.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOBase_FormDocSave
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_FormDocIsModified(ByRef $oFormDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $bIsMod
+
+	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$bIsMod = $oFormDoc.isModified()
+	If Not IsBool($bIsMod) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bIsMod)
+EndFunc   ;==>_LOBase_FormDocIsModified
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_FormDocOpen
+; Description ...: Open a Form Document
+; Syntax ........: _LOBase_FormDocOpen(ByRef $oConnection, $sName[, $bDesign = True[, $bHidden = False]])
+; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sName               - a string value. The Form name to Open. See remarks.
+;                  $bDesign             - [optional] a boolean value. Default is True. If True, the form is opened in Design mode.
+;                  $bHidden             - [optional] a boolean value. Default is False. If True, the form document will be invisible when opened.
+; Return values .: Success: Object
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 3 Return 0 = $bDesign not a Boolean.
+;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = Name called in $sName not found.
+;                  @Error 1 @Extended 6 Return 0 = Name called in $sName not a Form.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to open Form Document.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Object = Success. Returning opened Form Document's Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To open a form located inside a folder, the form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to open FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FormXYZ.
+;                  Once a Form Document has been opened "Hidden", it cannot be made visible without re-opening the Form Document.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_FormDocOpen(ByRef $oConnection, $sName, $bDesign = True, $bHidden = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oSource, $oFormDoc
+	Local $aArgs[1]
+
+	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bDesign) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If $oConnection.isClosed() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oSource = $oConnection.Parent.DatabaseDocument.FormDocuments()
+	If Not IsObj($oSource) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	If Not $oSource.Parent.CurrentController.isConnected() Then $oSource.Parent.CurrentController.connect()
+
+	If Not $oSource.hasByHierarchicalName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not $oSource.getByHierarchicalName($sName).supportsService("com.sun.star.ucb.Content") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+	$aArgs[0] = __LO_SetPropertyValue("Hidden", $bHidden)
+
+	$oFormDoc = $oSource.Parent.CurrentController.loadComponentWithArguments($LOB_SUB_COMP_TYPE_FORM, $sName, $bDesign, $aArgs)
+	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oFormDoc)
+EndFunc   ;==>_LOBase_FormDocOpen
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBase_FormDocSave
+; Description ...: Save any changes made to a Document.
+; Syntax ........: _LOBase_FormDocSave(ByRef $oFormDoc)
+; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = Document called in $oFormDoc has not been saved to a Base Document yet or is read only.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Document's properties.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Form in Parent Document.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully saved.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOBase_FormDocIsModified
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBase_FormDocSave(ByRef $oFormDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oSource, $oForm
+	Local $tPropertiesPair
+
+	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oFormDoc.hasLocation Or $oFormDoc.isReadOnly Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oSource = $oFormDoc.Parent.FormDocuments()
+	If Not IsObj($oSource) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$tPropertiesPair = $oSource.Parent.CurrentController.identifySubComponent($oFormDoc)
+	If Not IsObj($tPropertiesPair) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oForm = $oSource.getByHierarchicalName($tPropertiesPair.Second())
+	If Not IsObj($oForm) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$oForm.Store()
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOBase_FormDocSave
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_FormDocVisible
 ; Description ...: Set or retrieve the current visibility of a document.
 ; Syntax ........: _LOBase_FormDocVisible(ByRef $oFormDoc[, $bVisible = Null])
-; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormOpen, _LOBase_FormConnect, or _LOBase_FormCreate function.
+; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the document is visible.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Form Document called in $oFormDoc was opened "Hidden", document must be re-opened.
+;                  @Error 3 @Extended 2 Return 0 = Failed to query whether the Document is Visible.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -438,7 +643,8 @@ EndFunc   ;==>_LOBase_FormDelete
 ;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call $bVisible with Null to return the current visibility setting.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current visibility setting.
+;                  If a Form Document has been opened "Hidden", visibility cannot be set or retrieved.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -447,18 +653,25 @@ Func _LOBase_FormDocVisible(ByRef $oFormDoc, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
 	Local $iError = 0
 
 	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oFormDoc.CurrentController()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; If CurrentController is not an Object, Form Doc was opened "Hidden", can't set/retrieve visibility.
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oFormDoc.CurrentController.Frame.ContainerWindow.isVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oFormDoc.CurrentController.Frame.ContainerWindow.isVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oFormDoc.CurrentController.Frame.ContainerWindow.Visible = $bVisible
-	$iError = ($oFormDoc.CurrentController.Frame.ContainerWindow.isVisible() = $bVisible) ? (0) : (1)
+	$iError = ($oFormDoc.CurrentController.Frame.ContainerWindow.isVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_FormDocVisible
 
 ; #FUNCTION# ====================================================================================================================
@@ -487,7 +700,7 @@ EndFunc   ;==>_LOBase_FormDocVisible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To narrow the search for a form down to a specific folder, you MUST prefix the Form name called in $sName by the folder path to look in, separated by forward slashes (/). e.g. to search for FormXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FormXYZ
-; Related .......: _LOBase_FormDelete, _LOBase_FormOpen, _LOBase_FormsGetNames
+; Related .......: _LOBase_FormDelete, _LOBase_FormDocOpen, _LOBase_FormsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1148,92 +1361,6 @@ Func _LOBase_FormFoldersGetNames(ByRef $oDoc, $bExhaustive = True, $sFolder = ""
 EndFunc   ;==>_LOBase_FormFoldersGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_FormIsModified
-; Description ...: Test whether the form has been modified since being created or since the last save.
-; Syntax ........: _LOBase_FormIsModified(ByRef $oFormDoc)
-; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormOpen, _LOBase_FormConnect, or _LOBase_FormCreate function.
-; Return values .: Success: Boolean
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Form has been modified since last being saved.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LOBase_FormSave
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_FormIsModified(ByRef $oFormDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oFormDoc.isModified())
-EndFunc   ;==>_LOBase_FormIsModified
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_FormOpen
-; Description ...: Open a Form Document
-; Syntax ........: _LOBase_FormOpen(ByRef $oConnection, $sName[, $bDesign = True[, $bHidden = False]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sName               - a string value. The Form name to Open. See remarks.
-;                  $bDesign             - [optional] a boolean value. Default is True. If True, the form is opened in Design mode.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the form document will be invisible when opened.
-; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bDesign not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = Name called in $sName not found.
-;                  @Error 1 @Extended 6 Return 0 = Name called in $sName not a Form.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to open Form Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning opened Form Document's Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To open a form located inside a folder, the form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to open FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FormXYZ.
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_FormOpen(ByRef $oConnection, $sName, $bDesign = True, $bHidden = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oSource, $oFormDoc
-	Local $aArgs[1]
-
-	If Not IsObj($oConnection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bDesign) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If $oConnection.isClosed() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	$oSource = $oConnection.Parent.DatabaseDocument.FormDocuments()
-	If Not IsObj($oSource) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	If Not $oSource.Parent.CurrentController.isConnected() Then $oSource.Parent.CurrentController.connect()
-
-	If Not $oSource.hasByHierarchicalName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If Not $oSource.getByHierarchicalName($sName).supportsService("com.sun.star.ucb.Content") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-	$aArgs[0] = __LO_SetPropertyValue("Hidden", $bHidden)
-
-	$oFormDoc = $oSource.Parent.CurrentController.loadComponentWithArguments($LOB_SUB_COMP_TYPE_FORM, $sName, $bDesign, $aArgs)
-	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oFormDoc)
-EndFunc   ;==>_LOBase_FormOpen
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_FormRename
 ; Description ...: Rename a Form.
 ; Syntax ........: _LOBase_FormRename(ByRef $oDoc, $sForm, $sNewName)
@@ -1281,53 +1408,6 @@ Func _LOBase_FormRename(ByRef $oDoc, $sForm, $sNewName)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOBase_FormRename
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOBase_FormSave
-; Description ...: Save any changes made to a Document.
-; Syntax ........: _LOBase_FormSave(ByRef $oFormDoc)
-; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormOpen, _LOBase_FormConnect, or _LOBase_FormCreate function.
-; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Document called in $oFormDoc has not been saved to a Base Document yet or is read only.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Document's properties.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Form in Parent Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully saved.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LOBase_FormIsModified
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOBase_FormSave(ByRef $oFormDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oSource, $oForm
-	Local $tPropertiesPair
-
-	If Not IsObj($oFormDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oFormDoc.hasLocation Or $oFormDoc.isReadOnly Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$oSource = $oFormDoc.Parent.FormDocuments()
-	If Not IsObj($oSource) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	$tPropertiesPair = $oSource.Parent.CurrentController.identifySubComponent($oFormDoc)
-	If Not IsObj($tPropertiesPair) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	$oForm = $oSource.getByHierarchicalName($tPropertiesPair.Second())
-	If Not IsObj($oForm) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	$oForm.Store()
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOBase_FormSave
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_FormsGetCount
@@ -1467,7 +1547,7 @@ EndFunc   ;==>_LOBase_FormsGetCount
 ;                  All forms located in folders will have the folder path prefixed to the Form name, separated by forward slashes (/). e.g. Folder1/Folder2/Folder3/FormXYZ.
 ;                  Calling $bExhaustive with True when searching inside a Folder, will get all Form names from inside that folder, and all sub-folders.
 ;                  The order of the form names inside the folders may not necessarily be in proper order, i.e. if there are two sub folders, and folders inside the first sub-folder, the Forms inside of the two folders will be listed first, then the forms inside the folders inside the first sub-folder.
-; Related .......: _LOBase_FormsGetCount, _LOBase_FormDelete, _LOBase_FormOpen
+; Related .......: _LOBase_FormsGetCount, _LOBase_FormDelete, _LOBase_FormDocOpen
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

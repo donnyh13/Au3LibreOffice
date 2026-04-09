@@ -10,7 +10,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Internal functions for interacting with Libre Office.
+; Description ...: Internal functions for interacting with LibreOffice.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;
@@ -23,11 +23,13 @@
 ; __LO_DeleteTempReg
 ; __LO_InternalComErrorHandler
 ; __LO_IntIsBetween
+; __LO_IsObjInvalid
 ; __LO_NumIsBetween
 ; __LO_ServiceManager
 ; __LO_SetPortableServiceManager
 ; __LO_SetPropertyValue
 ; __LO_StylesGetNames
+; __LO_TestObjCOM
 ; __LO_VarsAreNull
 ; __LO_VersionCheck
 ; ===============================================================================================================================
@@ -242,6 +244,7 @@ Func __LO_InternalComErrorHandler(ByRef $oComError)
 		Switch $vUserFunction
 			Case ConsoleWrite
 				ConsoleWrite("!--COM Error-Begin--" & @CRLF & _
+						"Module: LibreOffice Main" & @CRLF & _
 						"Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
 						"WinDescription: " & $oComError.windescription & @CRLF & _
 						"Source: " & $oComError.source & @CRLF & _
@@ -253,7 +256,8 @@ Func __LO_InternalComErrorHandler(ByRef $oComError)
 						"!--COM-Error-End--" & @CRLF)
 
 			Case MsgBox
-				MsgBox(0, "COM Error", "Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
+				MsgBox(0, "COM Error", "Module: LibreOffice Main" & @CRLF & _
+						"Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
 						"WinDescription: " & $oComError.windescription & @CRLF & _
 						"Source: " & $oComError.source & @CRLF & _
 						"Error Description: " & $oComError.description & @CRLF & _
@@ -285,102 +289,134 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ;                  @Error 0 @Extended 0 Return Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: If Minimum is a negative, and there is no max defined, it is treated as such that if a value is more negative, it is outside the range. e.g., min = -2, -3 is outside of the range, but -1 is inside.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
 Func __LO_IntIsBetween($iTest, $iMin, $iMax = 0, $vNot = "", $vIncl = "")
+	Local $iRealMin, $iRealMax
+
 	If Not IsInt($iTest) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, False)
 
-	Switch @NumParams
-		Case 2
+	If ($vNot <> "") Then
+		If IsString($vNot) Then
+			If StringInStr(":" & $vNot & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest < $iMin) ? (False) : (True))
+		ElseIf IsInt($vNot) Then
+			If ($iTest = $vNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		EndIf
+	EndIf
 
-		Case 3
+	If ($vIncl <> "") Then
+		If IsString($vIncl) Then
+			If StringInStr(":" & $vIncl & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, (($iTest < $iMin) Or ($iTest > $iMax)) ? (False) : (True))
+		ElseIf IsInt($vIncl) Then
+			If ($iTest = $vIncl) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+		EndIf
+	EndIf
 
-		Case 4, 5
-			If IsString($vNot) Then
-				If StringInStr(":" & $vNot & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+	If (@NumParams = 2) Then
 
-			ElseIf IsInt($vNot) Then
-				If ($iTest = $vNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
-			EndIf
+		Return SetError($__LO_STATUS_SUCCESS, 0, ($iTest < $iMin) ? (False) : (True))
 
-			If (($iTest >= $iMin) And ($iTest <= $iMax)) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+	Else
+		$iRealMin = ($iMin < $iMax) ? ($iMin) : ($iMax) ; Switch values if dealing with negatives.
+		$iRealMax = ($iMin < $iMax) ? ($iMax) : ($iMin)
 
-			If @NumParams = 5 Then ContinueCase
+		Return SetError($__LO_STATUS_SUCCESS, 0, (($iTest < $iRealMin) Or ($iTest > $iRealMax)) ? (False) : (True))
+	EndIf
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, False)
-
-		Case Else
-			If IsString($vIncl) Then
-				If StringInStr(":" & $vIncl & ":", ":" & $iTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
-
-			ElseIf IsInt($vIncl) Then
-				If ($iTest = $vIncl) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
-			EndIf
-
-			Return SetError($__LO_STATUS_SUCCESS, 0, False)
-	EndSwitch
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
 EndFunc   ;==>__LO_IntIsBetween
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_IsObjInvalid
+; Description ...: Test if an Object has been deleted or closed definitely.
+; Syntax ........: __LO_IsObjInvalid(ByRef $oObject[, $sTestMethod = "getCurrentController"])
+; Parameters ....: $oObject             - [in/out] an object. Any Object.
+;                  $sTestMethod         - [optional] a string value. Default is "getCurrentController". The Method or Property to try calling.
+; Return values .: Success: Boolean
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Object is not invalid. Else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function tries to call a method or property for an object, if it fails the Object has been closed or deleted successfully, if not, it has not.
+; Related .......: __LO_TestObjCOM
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_IsObjInvalid(ByRef $oObject, $sTestMethod = "getCurrentController")
+	Local $oLOError = ObjEvent("AutoIt.Error", __LO_TestObjCOM)
+	#forceref $oLOError
+
+	If Not IsObj($oObject) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+	; Try calling a method/property to see if the object is still active.
+	Execute("$oObject." & $sTestMethod & "()")
+
+	; If calling method/property above triggers a COM error, __LOTestObjCOM will be called, and @error will be set.
+	If @error Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
+EndFunc   ;==>__LO_IsObjInvalid
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_NumIsBetween
 ; Description ...: Test whether an input is a Number and is between two Numbers.
-; Syntax ........: __LO_NumIsBetween($nTest, $nMin, $nMax[, $snNot = ""[, $snIncl = Default]])
+; Syntax ........: __LO_NumIsBetween($nTest, $nMin[, $nMax = 0[, $vNot = ""[, $vIncl = ""]]])
 ; Parameters ....: $nTest               - a general number value. The Value to test.
-;                  $nMin                - a general number value. The minimum $iTest can be.
-;                  $nMax                - a general number value. The maximum $iTest can be.
-;                  $snNot               - [optional] a string value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
-;                  $snIncl              - [optional] a string value. Default is Default. Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
+;                  $nMin                - a general number value. The minimum $nTest can be.
+;                  $nMax                - [optional] a general number value. Default is 0. The maximum $nTest can be.
+;                  $vNot                - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
+;                  $vIncl               - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
 ;                  Failure: False
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: If Minimum is a negative, and there is no max defined, it is treated as such that if a value is more negative, it is outside the range. e.g., min = -2, -3 is outside of the range, but -1 is inside.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LO_NumIsBetween($nTest, $nMin, $nMax, $snNot = "", $snIncl = Default)
-	Local $bMatch = False
-	Local $anNot, $anIncl
+Func __LO_NumIsBetween($nTest, $nMin, $nMax = 0, $vNot = "", $vIncl = "")
+	Local $nRealMin, $nRealMax
 
 	If Not IsNumber($nTest) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
-	If (@NumParams = 3) Then Return (($nTest < $nMin) Or ($nTest > $nMax)) ? (SetError($__LO_STATUS_SUCCESS, 0, False)) : (SetError($__LO_STATUS_SUCCESS, 0, True))
 
-	If ($snNot <> "") Then
-		If IsString($snNot) And StringInStr($snNot, ":") Then
-			$anNot = StringSplit($snNot, ":")
-			For $i = 1 To $anNot[0]
-				If ($anNot[$i] = $nTest) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
-			Next
+	If ($vNot <> "") Then
+		If IsString($vNot) Then
+			If StringInStr(":" & $vNot & ":", ":" & $nTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
 
-		Else
-			If ($nTest = $snNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		ElseIf IsNumber($vNot) Then
+			If ($nTest = $vNot) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
 		EndIf
 	EndIf
 
-	If (($nTest >= $nMin) And ($nTest <= $nMax)) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+	If ($vIncl <> "") Then
+		If IsString($vIncl) Then
+			If StringInStr(":" & $vIncl & ":", ":" & $nTest & ":") Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
 
-	If IsString($snIncl) And StringInStr($snIncl, ":") Then
-		$anIncl = StringSplit($snIncl, ":")
-		For $j = 1 To $anIncl[0]
-			$bMatch = ($anIncl[$j] = $nTest) ? (True) : (False)
-			If $bMatch Then ExitLoop
-		Next
-
-	ElseIf IsNumber($snIncl) Then
-		$bMatch = ($nTest = $snIncl) ? (True) : (False)
+		ElseIf IsNumber($vIncl) Then
+			If ($nTest = $vIncl) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+		EndIf
 	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $bMatch)
+	If (@NumParams = 2) Then
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, ($nTest < $nMin) ? (False) : (True))
+
+	Else
+		$nRealMin = ($nMin < $nMax) ? ($nMin) : ($nMax) ; Switch values if dealing with negatives.
+		$nRealMax = ($nMin < $nMax) ? ($nMax) : ($nMin)
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, (($nTest < $nRealMin) Or ($nTest > $nRealMax)) ? (False) : (True))
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
 EndFunc   ;==>__LO_NumIsBetween
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -442,13 +478,13 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 		If $bIsPortable Then
 			; Try to create the ServiceManager again for the portable version.
 			__LO_SetPortableServiceManager()
+			If Not IsObj($oStaticServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Else ; Create a ServiceManager, for the installed version.
 			$oStaticServiceManager = ObjCreate("com.sun.star.ServiceManager")
+			If Not IsObj($oStaticServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 		EndIf
 	EndIf
-
-	If Not IsObj($oStaticServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, $oStaticServiceManager)
 EndFunc   ;==>__LO_ServiceManager
@@ -803,6 +839,37 @@ Func __LO_StylesGetNames(ByRef $oDoc, $sStyleFamily, $bUserOnly = False, $bAppli
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, $asStyles)
 EndFunc   ;==>__LO_StylesGetNames
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_TestObjCOM
+; Description ...: Catches the intentionally created COM error and does nothing.
+; Syntax ........: __LO_TestObjCOM($oLOError)
+; Parameters ....: $oLOError            - an object. The COM error Object.
+; Return values .: None
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: __LO_IsObjInvalid
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_TestObjCOM($oLOError)
+	#forceref $oLOError
+
+;~ 	ConsoleWrite("!--COM Error-Begin--" & @CRLF & _
+;~ 			"Module: LibreOffice Main" & @CRLF & _
+;~ 			"Number: 0x" & Hex($oLOError.number, 8) & @CRLF & _
+;~ 			"WinDescription: " & $oLOError.windescription & @CRLF & _
+;~ 			"Source: " & $oLOError.source & @CRLF & _
+;~ 			"Error Description: " & $oLOError.description & @CRLF & _
+;~ 			"HelpFile: " & $oLOError.helpfile & @CRLF & _
+;~ 			"HelpContext: " & $oLOError.helpcontext & @CRLF & _
+;~ 			"LastDLLError: " & $oLOError.lastdllerror & @CRLF & _
+;~ 			"At line: " & $oLOError.scriptline & @CRLF & _
+;~ 			"!--COM-Error-End--" & @CRLF)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>__LO_TestObjCOM
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_VarsAreNull

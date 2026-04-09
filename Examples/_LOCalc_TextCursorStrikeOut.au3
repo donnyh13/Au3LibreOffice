@@ -8,12 +8,12 @@ Func Example()
 	Local $oDoc, $oSheet, $oCell, $oTextCursor
 	Local $avSettings[0]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the active Sheet
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve active Sheet's Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell A1's Object
@@ -28,7 +28,7 @@ Func Example()
 	_LOCalc_TextCursorInsertString($oTextCursor, "Hi! Testing.")
 	If @error Then _ERROR($oDoc, "Failed to insert String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now select all the words, and set the strikeout settings to: Strike out words only, Turn Strikeout on, and use slashes to strike the characters out with.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now select all the words, and set the strikeout settings to: Use slashes to strike the characters out with and strike out words only.")
 
 	; Go to the Start.
 	_LOCalc_TextCursorMove($oTextCursor, $LOC_TEXTCUR_GOTO_START, 1, False)
@@ -38,8 +38,8 @@ Func Example()
 	_LOCalc_TextCursorMove($oTextCursor, $LOC_TEXTCUR_GOTO_END, 1, True)
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Strikeout settings to: Strike out words only, Strike out the characters, and use slashes to strike the characters out with.
-	_LOCalc_TextCursorStrikeOut($oTextCursor, True, True, $LOC_STRIKEOUT_SLASH)
+	; Set the Strikeout settings to: Use slashes to strike the characters out with and Strike out words only
+	_LOCalc_TextCursorStrikeOut($oTextCursor, $LOC_CHAR_STRIKEOUT_SLASH, True)
 	If @error Then _ERROR($oDoc, "Failed to set text formatting. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array in order of function parameters.
@@ -47,15 +47,18 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve current format settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Strikeout settings at the Cursor's current position are as follows: " & @CRLF & _
-			"Are words only struck-out? True/False: " & $avSettings[0] & @CRLF & _
-			"Is character strikeout currently active? True/False: " & $avSettings[1] & @CRLF & _
-			"The Strikeout style is (See UDF Constants): " & $avSettings[2])
+			"The Strikeout style is (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"Are words only struck-out? True/False: " & $avSettings[1])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
 	; Close the document.
 	_LOCalc_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

@@ -8,21 +8,21 @@ Func Example()
 	Local $oDoc, $oParStyle
 	Local $iHMM, $iTabStop
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Paragraph Style object.
-	$oParStyle = _LOWriter_ParStyleGetObj($oDoc, "Standard")
+	$oParStyle = _LOWriter_ParStyleGetObjByName($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Paragraph style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1/4" to Hundredths of a Millimeter (HMM)
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a TabStop at 1/4" Tab Stop position, Set the fill character to Asc(~) the Tilde key ASCII Value 126.
-	; Set alignment To  $LOW_TAB_ALIGN_DECIMAL, and the decimal character to ASC(.) a period, ASCII value 46.
-	$iTabStop = _LOWriter_ParStyleTabStopCreate($oParStyle, $iHMM, Asc("~"), $LOW_TAB_ALIGN_DECIMAL, Asc("."))
+	; Create a TabStop at 1/4" Tab Stop position, Set alignment To  $LOW_PAR_TAB_ALIGN_DECIMAL,
+	; and the decimal character to ASC(.) a period, ASCII value 46, Set the fill character to Asc(~) the Tilde key ASCII Value 126.
+	$iTabStop = _LOWriter_ParStyleTabStopCreate($oParStyle, $iHMM, $LOW_PAR_TAB_ALIGN_DECIMAL, Asc("."), Asc("~"))
 	If @error Then _ERROR($oDoc, "Failed to Create a Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The new Tab stop has the position of " & $iTabStop)
@@ -32,6 +32,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

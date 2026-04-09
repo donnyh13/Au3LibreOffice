@@ -10,38 +10,38 @@ Func Example()
 	; An example of a computer path
 	$sPCPath = "C:\A Folder With Spaces\FolderWithASemicolon;\{FolderWithBrackets}\TestDocument.odt"
 
-	; An example of a Libre Office URL
+	; An example of a LibreOffice URL
 	$sOfficePath = "file:///C:/A%20Folder%20With%20Spaces/FolderWithASemicolon%3B/%7BFolderWithBrackets%7D/TestDocument.odt"
 
 	; AutoReturn From a Computer Path
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Auto_Return -- Computer Path" & @CRLF & "This is the result from converting a Computer path to Libre Office URL automatically." & @CRLF & _
-			"Original Path: " & @CRLF & $sPCPath & @CRLF & "Result: " & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Auto_Return -- Computer Path" & @CRLF & "This is the result from converting a Computer path to LibreOffice URL automatically." & @CRLF & @CRLF & _
+			"Original Path: " & @CRLF & $sPCPath & @CRLF & @CRLF & "Result: " & @CRLF & _
 			_LO_PathConvert($sPCPath, $LO_PATHCONV_AUTO_RETURN))
 
-	; AutoReturn From a Libre Office URL
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Auto_Return -- Libre Office URL" & @CRLF & "This is the result from converting a Libre Office URL to Computer Path automatically." & @CRLF & _
-			"Original Path: " & @CRLF & $sOfficePath & @CRLF & "Result: " & @CRLF & _
+	; AutoReturn From a LibreOffice URL
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Auto_Return -- LibreOffice URL" & @CRLF & "This is the result from converting a LibreOffice URL to Computer Path automatically." & @CRLF & @CRLF & _
+			"Original Path: " & @CRLF & $sOfficePath & @CRLF & @CRLF & "Result: " & @CRLF & _
 			_LO_PathConvert($sOfficePath, $LO_PATHCONV_AUTO_RETURN))
 
-	; Return From a Libre Office URL to Computer Path conversion
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "PCPATH_RETURN -- Libre Office URL" & @CRLF & "This is the result from converting a Libre Office URL to Computer Path." & @CRLF & _
-			"Original Path: " & @CRLF & $sOfficePath & @CRLF & "Result: " & @CRLF & _
+	; Return From a LibreOffice URL to Computer Path conversion
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "PCPATH_RETURN -- LibreOffice URL" & @CRLF & "This is the result from converting a LibreOffice URL to Computer Path." & @CRLF & @CRLF & _
+			"Original Path: " & @CRLF & $sOfficePath & @CRLF & @CRLF & "Result: " & @CRLF & _
 			_LO_PathConvert($sOfficePath, $LO_PATHCONV_PCPATH_RETURN))
 
-	; Return From a Libre Office URL to Computer Path conversion when the path is already a computer path.
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "PCPATH_RETURN -- Computer Path" & @CRLF & "This is the result from converting a Libre Office URL to Computer Path " & _
-			"when the path is already a computer path." & @CRLF & _
-			"Original Path: " & @CRLF & $sPCPath & @CRLF & "Result: " & @CRLF & _
+	; Return From a LibreOffice URL to Computer Path conversion when the path is already a computer path.
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "PCPATH_RETURN -- Computer Path" & @CRLF & "This is the result from converting a LibreOffice URL to Computer Path " & _
+			"when the path is already a computer path." & @CRLF & @CRLF & _
+			"Original Path: " & @CRLF & $sPCPath & @CRLF & @CRLF & "Result: " & @CRLF & _
 			_LO_PathConvert($sPCPath, $LO_PATHCONV_PCPATH_RETURN))
 
-	; Return From a Computer Path to Libre Office URL conversion
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "OFFICE_RETURN -- Computer Path" & @CRLF & "This is the result from converting a Computer Path to Libre Office URL." & @CRLF & _
-			"Original Path: " & @CRLF & $sPCPath & @CRLF & "Result: " & @CRLF & _
+	; Return From a Computer Path to LibreOffice URL conversion
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "OFFICE_RETURN -- Computer Path" & @CRLF & "This is the result from converting a Computer Path to LibreOffice URL." & @CRLF & @CRLF & _
+			"Original Path: " & @CRLF & $sPCPath & @CRLF & @CRLF & "Result: " & @CRLF & _
 			_LO_PathConvert($sPCPath, $LO_PATHCONV_OFFICE_RETURN))
 
-	; Return From a Computer Path to Libre Office URL conversion when the path is already a Libre Office path.
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "OFFICE_RETURN -- Libre Office URL" & @CRLF & "This is the result from converting a Computer Path to Libre Office URL " & _
-			"when the path is already a Libre Office URL." & @CRLF & _
-			"Original Path: " & @CRLF & $sOfficePath & @CRLF & "Result: " & @CRLF & _
+	; Return From a Computer Path to LibreOffice URL conversion when the path is already a LibreOffice path.
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "OFFICE_RETURN -- LibreOffice URL" & @CRLF & "This is the result from converting a Computer Path to LibreOffice URL " & _
+			"when the path is already a LibreOffice URL." & @CRLF & @CRLF & _
+			"Original Path: " & @CRLF & $sOfficePath & @CRLF & @CRLF & "Result: " & @CRLF & _
 			_LO_PathConvert($sOfficePath, $LO_PATHCONV_OFFICE_RETURN))
 EndFunc

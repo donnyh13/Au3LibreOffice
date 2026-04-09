@@ -9,16 +9,16 @@ Func Example()
 	Local $sResultString
 	Local $atFindFormat[0] ; Create an Empty Array to fill.
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text, to use for searching later.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to Search." & @CR & "A New Line to SEARCH.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to Search." & @CR & "A New Line to SEARCH.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -50,7 +50,7 @@ Func Example()
 
 	; Retrieve the Result's string.
 	If IsObj($oResult) Then
-		$sResultString = _LOWriter_DocGetString($oResult)
+		$sResultString = _LOWriter_CursorGetString($oResult)
 		If @error Then _ERROR($oDoc, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "The search was successful, I searched using a Find Format, looking for any paragraphs that are center aligned, " & _
 				"containing the word ""Search"", and found the following: " & $sResultString)
@@ -64,6 +64,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

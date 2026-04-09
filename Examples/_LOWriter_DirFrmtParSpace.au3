@@ -9,16 +9,16 @@ Func Example()
 	Local $iHMM, $iHMM2
 	Local $avSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the formatting settings directly.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying formatting settings directly." & @CR & "Next Line" & _
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying formatting settings directly." & @CR & "Next Line" & _
 			@CR & "Next Line")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -39,8 +39,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the paragraph at the current cursor's location line space settings to, 1/4" above paragraph, 1/4" below paragraph, AddSpace = True,
-	; Line space mode = $LOW_LINE_SPC_MODE_FIX, Line space height = 1/2",  and Page Line Space = False.
-	_LOWriter_DirFrmtParSpace($oViewCursor, $iHMM, $iHMM, True, $LOW_LINE_SPC_MODE_FIX, $iHMM2, False)
+	; Line space mode = $LOW_PAR_LINE_SPC_MODE_FIX, Line space height = 1/2",  and Page Line Space = False.
+	_LOWriter_DirFrmtParSpace($oViewCursor, $iHMM, $iHMM, True, $LOW_PAR_LINE_SPC_MODE_FIX, $iHMM2, False)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -52,7 +52,8 @@ Func Example()
 			"Spacing below the paragraph, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
 			"Do not apply spacing if above and/or below paragraph are the same style? True/False: " & $avSettings[2] & @CRLF & _
 			"Line spacing mode, (See UDF constants): " & $avSettings[3] & @CRLF & _
-			"Line spacing distance, in Hundredths of a Millimeter (HMM) except for $LOW_LINE_SPC_MODE_PROP(0), which is a percentage: " & $avSettings[4] & @CRLF & @CRLF & _
+			"Line spacing distance, in Hundredths of a Millimeter (HMM) except for $LOW_PAR_LINE_SPC_MODE_PROP(0), which is a percentage: " & $avSettings[4] & @CRLF & _
+			"Is Register mode enabled for the paragraph? True/False: " & $avSettings[5] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")
 
 	; Remove direct formatting
@@ -64,6 +65,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

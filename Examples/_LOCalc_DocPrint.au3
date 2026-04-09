@@ -9,12 +9,12 @@ Func Example()
 	Local $aavData[5]
 	Local $avRowData[2]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Fill my arrays with the desired Number Values I want in Column A and B.
@@ -49,7 +49,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now print the new Calc Document. I suggest turning off your printer so you can cancel the print job without wasting paper.")
 
 	; Print the document, 1 copy, Collate = True, "ALL" Pages, Wait = True, Duplex  = Off
-	_LOCalc_DocPrint($oDoc, 1, True, "ALL", True, $LOC_DUPLEX_OFF)
+	_LOCalc_DocPrint($oDoc, 1, True, "ALL", True, $LOC_PRINT_DUPLEX_OFF)
 	If @error Then _ERROR($oDoc, "Failed to print the L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the document.
@@ -57,6 +57,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have now printed the document and then closed it.")
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

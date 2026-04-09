@@ -8,7 +8,7 @@ Func Example()
 	Local $oDoc
 	Local $avSettings, $avSettingsNew
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -20,15 +20,15 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Your current print size settings are as follows: " & @CRLF & @CRLF & _
 			"Paper format:— " & $avSettings[0] & @CRLF & _
-			"0 =$LOW_PAPER_A3;" & @CRLF & _
-			"1 = $LOW_PAPER_A4;" & @CRLF & _
-			"2 = $LOW_PAPER_A5;" & @CRLF & _
-			"3 = $LOW_PAPER_B4;" & @CRLF & _
-			"4 = $LOW_PAPER_B5;" & @CRLF & _
-			"5 = $LOW_PAPER_LETTER;" & @CRLF & _
-			"6 = $LOW_PAPER_LEGAL;" & @CRLF & _
-			"7 = $LOW_PAPER_TABLOID;" & @CRLF & _
-			"8 = $LOW_PAPER_USER_DEFINED" & @CRLF & @CRLF & _
+			"0 =$LOW_PAPER_FORMAT_A3;" & @CRLF & _
+			"1 = $LOW_PAPER_FORMAT_A4;" & @CRLF & _
+			"2 = $LOW_PAPER_FORMAT_A5;" & @CRLF & _
+			"3 = $LOW_PAPER_FORMAT_B4;" & @CRLF & _
+			"4 = $LOW_PAPER_FORMAT_B5;" & @CRLF & _
+			"5 = $LOW_PAPER_FORMAT_LETTER;" & @CRLF & _
+			"6 = $LOW_PAPER_FORMAT_LEGAL;" & @CRLF & _
+			"7 = $LOW_PAPER_FORMAT_TABLOID;" & @CRLF & _
+			"8 = $LOW_PAPER_FORMAT_USER_DEFINED" & @CRLF & @CRLF & _
 			"Paper Width in Hundredths of a Millimeter (HMM):— " & $avSettings[1] & @CRLF & _
 			"Which is " & _LO_UnitConvert($avSettings[1], $LO_CONVERT_UNIT_HMM_INCH) & " Inches, and " & _
 			_LO_UnitConvert($avSettings[1], $LO_CONVERT_UNIT_HMM_CM) & "Centimeters" & @CRLF & @CRLF & _
@@ -38,7 +38,7 @@ Func Example()
 			"I will now modify the settings and show the result.")
 
 	; Changes the print size settings to Tabloid.
-	_LOWriter_DocPrintSizeSettings($oDoc, $LOW_PAPER_TABLOID)
+	_LOWriter_DocPrintSizeSettings($oDoc, $LOW_PAPER_FORMAT_TABLOID)
 	If @error Then _ERROR($oDoc, "Error setting Writer Document Print settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Now retrieve the settings again.
@@ -48,15 +48,15 @@ Func Example()
 	; Display the new settings.
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Your new print size settings are as follows: " & @CRLF & @CRLF & _
 			"Paper format:— " & $avSettingsNew[0] & @CRLF & _
-			"0 =$LOW_PAPER_A3;" & @CRLF & _
-			"1 = $LOW_PAPER_A4;" & @CRLF & _
-			"2 = $LOW_PAPER_A5;" & @CRLF & _
-			"3 = $LOW_PAPER_B4;" & @CRLF & _
-			"4 = $LOW_PAPER_B5;" & @CRLF & _
-			"5 = $LOW_PAPER_LETTER;" & @CRLF & _
-			"6 = $LOW_PAPER_LEGAL;" & @CRLF & _
-			"7 = $LOW_PAPER_TABLOID;" & @CRLF & _
-			"8 = $LOW_PAPER_USER_DEFINED" & @CRLF & @CRLF & _
+			"0 =$LOW_PAPER_FORMAT_A3;" & @CRLF & _
+			"1 = $LOW_PAPER_FORMAT_A4;" & @CRLF & _
+			"2 = $LOW_PAPER_FORMAT_A5;" & @CRLF & _
+			"3 = $LOW_PAPER_FORMAT_B4;" & @CRLF & _
+			"4 = $LOW_PAPER_FORMAT_B5;" & @CRLF & _
+			"5 = $LOW_PAPER_FORMAT_LETTER;" & @CRLF & _
+			"6 = $LOW_PAPER_FORMAT_LEGAL;" & @CRLF & _
+			"7 = $LOW_PAPER_FORMAT_TABLOID;" & @CRLF & _
+			"8 = $LOW_PAPER_FORMAT_USER_DEFINED" & @CRLF & @CRLF & _
 			"Paper Width in Hundredths of a Millimeter (HMM):— " & $avSettingsNew[1] & @CRLF & _
 			"Which is " & _LO_UnitConvert($avSettingsNew[1], $LO_CONVERT_UNIT_HMM_INCH) & " Inches, and " & _
 			_LO_UnitConvert($avSettingsNew[1], $LO_CONVERT_UNIT_HMM_CM) & "Centimeters" & @CRLF & @CRLF & _
@@ -76,15 +76,15 @@ Func Example()
 	; Display the new settings.
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Your new print size settings are as follows: " & @CRLF & @CRLF & _
 			"Paper format:— " & $avSettingsNew[0] & @CRLF & _
-			"0 =$LOW_PAPER_A3;" & @CRLF & _
-			"1 = $LOW_PAPER_A4;" & @CRLF & _
-			"2 = $LOW_PAPER_A5;" & @CRLF & _
-			"3 = $LOW_PAPER_B4;" & @CRLF & _
-			"4 = $LOW_PAPER_B5;" & @CRLF & _
-			"5 = $LOW_PAPER_LETTER;" & @CRLF & _
-			"6 = $LOW_PAPER_LEGAL;" & @CRLF & _
-			"7 = $LOW_PAPER_TABLOID;" & @CRLF & _
-			"8 = $LOW_PAPER_USER_DEFINED" & @CRLF & @CRLF & _
+			"0 =$LOW_PAPER_FORMAT_A3;" & @CRLF & _
+			"1 = $LOW_PAPER_FORMAT_A4;" & @CRLF & _
+			"2 = $LOW_PAPER_FORMAT_A5;" & @CRLF & _
+			"3 = $LOW_PAPER_FORMAT_B4;" & @CRLF & _
+			"4 = $LOW_PAPER_FORMAT_B5;" & @CRLF & _
+			"5 = $LOW_PAPER_FORMAT_LETTER;" & @CRLF & _
+			"6 = $LOW_PAPER_FORMAT_LEGAL;" & @CRLF & _
+			"7 = $LOW_PAPER_FORMAT_TABLOID;" & @CRLF & _
+			"8 = $LOW_PAPER_FORMAT_USER_DEFINED" & @CRLF & @CRLF & _
 			"Paper Width in Hundredths of a Millimeter (HMM):— " & $avSettingsNew[1] & @CRLF & _
 			"Which is " & _LO_UnitConvert($avSettingsNew[1], $LO_CONVERT_UNIT_HMM_INCH) & " Inches, and " & _
 			_LO_UnitConvert($avSettingsNew[1], $LO_CONVERT_UNIT_HMM_CM) & "Centimeters" & @CRLF & @CRLF & _
@@ -100,6 +100,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

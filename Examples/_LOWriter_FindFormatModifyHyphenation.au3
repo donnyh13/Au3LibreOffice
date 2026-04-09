@@ -10,16 +10,16 @@ Func Example()
 	Local $atFindFormat[0] ; Create an Empty Array to fill.
 	Local $aoResults
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text, to use for searching later.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to Search." & @CR & "A New Line to SEARCH.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to Search." & @CR & "A New Line to SEARCH.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -44,7 +44,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "As of May 27th 2023, searching for any of these attribute will fail. If you watch closely, once you click ok, and I perform the " & _
-			"search, all instances of ""Search"" will disappear. Libre Office is aware of the bug, but haven't decided how to fix it yet.")
+			"search, all instances of ""Search"" will disappear. LibreOffice is aware of the bug, but haven't decided how to fix it yet.")
 
 	; Search for the word "search".
 	$aoResults = _LOWriter_DocFindAll($oDoc, $oSrchDesc, "search", $atFindFormat)
@@ -55,8 +55,8 @@ Func Example()
 	; Retrieve the Result's string.
 	If IsArray($aoResults) Then
 		For $i = 0 To UBound($aoResults) - 1
-			$sResultString = _LOWriter_DocGetString($aoResults[$i])
-			If (@error > 0) Then MsgBox($MB_OK + $MB_TOPMOST, Default, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended)
+			$sResultString = _LOWriter_CursorGetString($aoResults[$i])
+			If @error Then MsgBox($MB_OK + $MB_TOPMOST, Default, "Failed to retrieve String. Error:" & @error & " Extended:" & @extended)
 		Next
 
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "The search was successful, I searched using a Find Format, looking for any paragraphs that are hyphenated, " & _
@@ -68,6 +68,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

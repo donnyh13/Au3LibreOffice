@@ -9,12 +9,12 @@ Func Example()
 	Local $iHMM, $iHMM2, $iHMM3
 	Local $avPageStyleSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Page Style's Object, to modify its settings.
-	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Standard")
+	$oPageStyle = _LOWriter_PageStyleGetObjByName($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Convert 1" to Hundredths of a Millimeter (HMM)
@@ -29,7 +29,7 @@ Func Example()
 	$iHMM3 = _LO_UnitConvert(.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; If Libre Office version is higher or equal to 7.2 then set Gutter margin.
+	; If LibreOffice version is higher or equal to 7.2 then set Gutter margin.
 	If (_LO_VersionGet(True) >= 7.2) Then
 		; Set Left and Right margins to 1", Top and Bottom Margins to 1/2" and Gutter Margin to 1/4".
 		_LOWriter_PageStyleMargins($oPageStyle, $iHMM, $iHMM, $iHMM2, $iHMM2, $iHMM3)
@@ -45,7 +45,7 @@ Func Example()
 	$avPageStyleSettings = _LOWriter_PageStyleMargins($oPageStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Page style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; If Libre Office version is higher or equal to 7.2 then display the Gutter margin setting.
+	; If LibreOffice version is higher or equal to 7.2 then display the Gutter margin setting.
 	If (_LO_VersionGet(True) >= 7.2) Then
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Margin settings are as follows: " & @CRLF & _
 				"The Left page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[0] & @CRLF & _
@@ -67,6 +67,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

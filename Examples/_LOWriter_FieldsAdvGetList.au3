@@ -11,16 +11,16 @@ Func Example()
 	Local $avFields
 	Local $tDateStruct
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a Regular field at the end of this line, it wont be listed.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a Regular field at the end of this line, it wont be listed.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Date Structure, Year = 1992, Month = 03, Day = 28, Hour = 15, Minute = 43, Second = 25, Nanoseconds = 765, UTC =True
@@ -37,11 +37,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert 2 newlines.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a Regular field at the end of this line, it wont be listed.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a Regular field at the end of this line, it wont be listed.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Count Field at the View Cursor. Set count type to $LOW_FIELD_COUNT_TYPE_WORDS, Overwrite to False, and Number format to
@@ -50,11 +50,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert 2 newlines.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a Regular field at the end of this line, it wont be listed.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a Regular field at the end of this line, it wont be listed.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Combined character Field at the View Cursor. Insert the Characters "ABCDEF
@@ -62,11 +62,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert 2 newlines.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "I have inserted a Doc info field at the end of this line, it wont be listed.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "I have inserted a Doc info field at the end of this line, it wont be listed.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Doc Info Title Field at the View Cursor. Set is Fixed = True, Title = "This is a Title Field."
@@ -74,33 +74,33 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert 2 newlines.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Please insert a User Field here.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Please insert a User Field here.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have no functions currently that insert any ""Advanced"" Fields, if you would like a demonstration, please follow to prompts, First go to: " & @CRLF & _
 			"Insert, Field, More Fields, Variables, Click on ""User Field"" and enter ""Test"" as ""name"", and 1234 as value, then click insert. Press Ok on this MsgBox.")
 
 	; Insert 2 newlines.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Please insert a DDE Field here.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Please insert a DDE Field here.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Next go to: " & @CRLF & _
 			"Insert, Field, More Fields, Variables, Click on ""DDE Field"" and enter ""Test"" as ""name"", and 1234 as value, then click insert. Press Ok on this MsgBox.")
 
 	; Insert 2 newlines.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, @CR & @CR)
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Please insert a Database Name Field here.--> ")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Please insert a Database Name Field here.--> ")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Next go to: " & @CRLF & _
@@ -123,6 +123,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

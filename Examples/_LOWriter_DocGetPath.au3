@@ -9,7 +9,7 @@ Func Example()
 	Local $oDoc
 	Local $sSavePath, $sPath, $sReturn
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -26,11 +26,11 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The document's save location/Path is: " & $sReturn)
 
-	; Retrieve the Document's Save Path again, the return will be a string, and the path will be a Libre Office URL.
+	; Retrieve the Document's Save Path again, the return will be a string, and the path will be a LibreOffice URL.
 	$sReturn = _LOWriter_DocGetPath($oDoc, True)
 	If (@error > 0) Or ($sReturn = "") Then _ERROR($oDoc, "Failed to retrieve document information. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The document's save location/Path, in Libre Office URL format, is: " & $sReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The document's save location/Path, in LibreOffice URL format, is: " & $sReturn)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
@@ -40,6 +40,10 @@ Func Example()
 
 	; Delete the file.
 	FileDelete($sPath)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

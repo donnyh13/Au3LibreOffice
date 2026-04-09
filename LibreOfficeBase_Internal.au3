@@ -81,7 +81,7 @@ EndFunc   ;==>__LOBase_ColTransferProps
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $iType not an Integer, less than -16 or greater than 2014. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 2 Return 0 = $iType not one of the pre-defined constants.
+;                  @Error 1 @Extended 2 Return 0 = $iType not one of the pre-defined constants. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the Type name corresponding to the Type Constant.
 ; Author ........: donnyh13
@@ -429,6 +429,7 @@ Func __LOBase_InternalComErrorHandler(ByRef $oComError)
 		Switch $vUserFunction
 			Case ConsoleWrite
 				ConsoleWrite("!--COM Error-Begin--" & @CRLF & _
+						"Module: LibreOffice Base" & @CRLF & _
 						"Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
 						"WinDescription: " & $oComError.windescription & @CRLF & _
 						"Source: " & $oComError.source & @CRLF & _
@@ -440,7 +441,8 @@ Func __LOBase_InternalComErrorHandler(ByRef $oComError)
 						"!--COM-Error-End--" & @CRLF)
 
 			Case MsgBox
-				MsgBox(0, "COM Error", "Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
+				MsgBox(0, "COM Error", "Module: LibreOffice Base" & @CRLF & _
+						"Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
 						"WinDescription: " & $oComError.windescription & @CRLF & _
 						"Source: " & $oComError.source & @CRLF & _
 						"Error Description: " & $oComError.description & @CRLF & _

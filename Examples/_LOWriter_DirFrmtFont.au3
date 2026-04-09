@@ -8,16 +8,16 @@ Func Example()
 	Local $oDoc, $oViewCursor
 	Local $avSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the formatting settings directly.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying formatting settings directly.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying formatting settings directly.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -32,9 +32,9 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GO_RIGHT, 11, True)
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the selected text's Font to "Arial", Font size to 18, Posture (Italic) to $LOW_POSTURE_ITALIC, and weight (Bold)
-	; to $LOW_WEIGHT_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, "Arial", 18, $LOW_POSTURE_ITALIC, $LOW_WEIGHT_BOLD)
+	; Set the selected text's Font to "Arial", Font size to 18, Posture (Italic) to $LOW_CHAR_POSTURE_ITALIC, and weight (Bold)
+	; to $LOW_CHAR_WEIGHT_BOLD
+	_LOWriter_DirFrmtFont($oViewCursor, "Arial", 18, $LOW_CHAR_POSTURE_ITALIC, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -57,6 +57,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

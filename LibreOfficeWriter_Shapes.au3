@@ -64,7 +64,8 @@
 ;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve old Transparency value.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current color value.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColor
@@ -82,12 +83,21 @@ Func _LOWriter_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0, $iOldTransparency
+	Local $iError = 0, $iOldTransparency, $iCurColor
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	; If $iColor is Null, and Fill Style is set to solid, then return current color value, else return LOW_COLOR_OFF.
-	If __LO_VarsAreNull($iColor) Then Return SetError($__LO_STATUS_SUCCESS, 1, ($oShape.FillStyle() = $LOW_AREA_FILL_STYLE_SOLID) ? (__LOWriter_ColorRemoveAlpha($oShape.FillColor())) : ($LO_COLOR_OFF))
+	If __LO_VarsAreNull($iColor) Then
+		If ($oShape.FillStyle() = $LOW_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then return current color value, else return LOW_COLOR_OFF (Probably a Gradient it used or otherwise.).
+			$iCurColor = __LOWriter_ColorRemoveAlpha($oShape.FillColor())
+			If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Else
+			$iCurColor = $LO_COLOR_OFF
+		EndIf
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
+	EndIf
 
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -96,7 +106,7 @@ Func _LOWriter_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 
 	Else
 		$iOldTransparency = $oShape.FillTransparence()
-		If Not IsInt($iOldTransparency) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsInt($iOldTransparency) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oShape.FillStyle = $LOW_AREA_FILL_STYLE_SOLID
 		$oShape.FillColor = $iColor
@@ -407,7 +417,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_GradientMulticolorAdd, _LOWriter_GradientMulticolorDelete, _LOWriter_GradientMulticolorModify, _LOWriter_ShapeAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -492,6 +502,8 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradientMulticolor
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -510,11 +522,16 @@ Func _LOWriter_ShapeAreaTransparency(ByRef $oShape, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurTransp
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oShape.FillTransparence())
+	If __LO_VarsAreNull($iTransparency) Then
+		$iCurTransp = $oShape.FillTransparence()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
+	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -747,7 +764,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_TransparencyGradientMultiModify, _LOWriter_TransparencyGradientMultiDelete, _LOWriter_TransparencyGradientMultiAdd, _LOWriter_ShapeAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_ShapeAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -857,8 +874,11 @@ Func _LOWriter_ShapeDelete(ByRef $oDoc, $oShape)
 	If Not IsString($sShapeName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oDoc.getDrawPage().remove($oShape)
+	If _LOWriter_ShapeExists($oDoc, $sShapeName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return (_LOWriter_ShapeExists($oDoc, $sShapeName)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	$oShape = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_ShapeDelete
 
 ; #FUNCTION# ====================================================================================================================
@@ -953,7 +973,8 @@ EndFunc   ;==>_LOWriter_ShapeGetAnchor
 ;                  @Error 1 @Extended 2 Return 0 = $sShapeName not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Draw Page Object.
-;                  @Error 3 @Extended 2 Return 0 = Shape requested in $sShapeName not found in document.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Shape Object.
+;                  @Error 3 @Extended 3 Return 0 = Shape requested in $sShapeName not found in document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning the requested Shape Object.
 ; Author ........: donnyh13
@@ -967,7 +988,7 @@ Func _LOWriter_ShapeGetObjByName(ByRef $oDoc, $sShapeName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oShapes
+	Local $oShapes, $oShape
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sShapeName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -977,13 +998,18 @@ Func _LOWriter_ShapeGetObjByName(ByRef $oDoc, $sShapeName)
 
 	If $oShapes.hasElements() Then
 		For $i = 0 To $oShapes.getCount() - 1
-			If ($oShapes.getByIndex($i).Name() = $sShapeName) Then Return SetError($__LO_STATUS_SUCCESS, 2, $oShapes.getByIndex($i))
+			If ($oShapes.getByIndex($i).Name() = $sShapeName) Then
+				$oShape = $oShapes.getByIndex($i)
+				If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				Return SetError($__LO_STATUS_SUCCESS, 2, $oShape)
+			EndIf
 
 			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
 	EndIf
 
-	Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Shape not found
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Shape not found
 EndFunc   ;==>_LOWriter_ShapeGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
@@ -1257,7 +1283,7 @@ EndFunc   ;==>_LOWriter_ShapeInsert
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Libre Office has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
+; Remarks .......: LibreOffice has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
 ;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
 ;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1521,6 +1547,8 @@ EndFunc   ;==>_LOWriter_ShapeLineProperties
 ;                  @Error 1 @Extended 2 Return 0 = $oShape not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
 ;                  @Error 1 @Extended 4 Return 0 = Document already contains a Shape with the same name as called in $sName.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape's current name.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sName
@@ -1539,11 +1567,17 @@ Func _LOWriter_ShapeName(ByRef $oDoc, ByRef $oShape, $sName = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
+	Local $sCurName
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($sName) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oShape.Name())
+	If __LO_VarsAreNull($sName) Then
+		$sCurName = $oShape.Name()
+		If Not IsString($sCurName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurName)
+	EndIf
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If _LOWriter_ShapeExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
@@ -1592,7 +1626,7 @@ EndFunc   ;==>_LOWriter_ShapeName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only $LOW_SHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
-;                  This is a homemade function as LibreOffice doesn't offer an easy way for adding points to a shape. Consequently this will not produce similar results as when working with Libre office manually, and may wreck your shape's shape. Use with caution.
+;                  This is a homemade function as LibreOffice doesn't offer an easy way for adding points to a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you call a new point with "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
 ;                  Calling any Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as with the last point in a shape, as they are already a curve, or not supported in the case of the last point.
@@ -2083,7 +2117,7 @@ EndFunc   ;==>_LOWriter_ShapePointsGetCount
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings for the Array Element called in $iArrayElement.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Only $LOW_SHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
-;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with Libre office manually, and may wreck your shape's shape. Use with caution.
+;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you modify a point to "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
 ;                  Calling and Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
@@ -2203,7 +2237,7 @@ EndFunc   ;==>_LOWriter_ShapePointsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only $LOW_SHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
-;                  This is a homemade function as LibreOffice doesn't offer an easy way for removing points in a shape. Consequently this will not produce similar results as when working with Libre office manually, and may wreck your shape's shape. Use with caution.
+;                  This is a homemade function as LibreOffice doesn't offer an easy way for removing points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon deletion that were already present in the shape. Some symmetrical points may revert also.
 ; Related .......: _LOWriter_ShapePointsAdd, _LOWriter_ShapePointsModify, _LOWriter_ShapePointsGetCount
 ; Link ..........:
@@ -2532,7 +2566,7 @@ EndFunc   ;==>_LOWriter_ShapePointsRemove
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -2608,7 +2642,7 @@ EndFunc   ;==>_LOWriter_ShapePosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you attempt to apply rotation to an already slanted Shape, or vice versa, a property setting error will occur, and the values will be very inaccurately applied.
-;                  This function uses the deprecated Libre Office methods RotateAngle, and ShearAngle, and may stop working in future Libre Office versions, after 7.3.4.2.
+;                  This function uses the deprecated LibreOffice methods RotateAngle, and ShearAngle, and may stop working in future LibreOffice versions, after 7.3.4.2.
 ;                  At the present time Control Point settings are not included as they are too complex to manipulate.
 ;                  At the present time Corner Radius setting is not included, as I was unable to identify a shape that utilized this setting.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2729,6 +2763,7 @@ EndFunc   ;==>_LOWriter_ShapesGetNames
 ;                  - $LOW_SHAPE_TYPE_LINE_LINE, $LOW_SHAPE_TYPE_LINE_FREEFORM_LINE, $LOW_SHAPE_TYPE_LINE_FREEFORM_LINE_FILLED, $LOW_SHAPE_TYPE_LINE_CURVE, $LOW_SHAPE_TYPE_LINE_CURVE_FILLED, $LOW_SHAPE_TYPE_LINE_POLYGON, $LOW_SHAPE_TYPE_LINE_POLYGON_45, $LOW_SHAPE_TYPE_LINE_POLYGON_45_FILLED.
 ;                  - $LOW_SHAPE_TYPE_BASIC_CIRCLE_SEGMENT, $LOW_SHAPE_TYPE_BASIC_ARC.
 ;                  To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
 ; Link ..........:
 ; Example .......: Yes
@@ -2940,7 +2975,7 @@ Func _LOWriter_ShapeTypePosition(ByRef $oShape, $iHorAlign = Null, $iHorPos = Nu
 
 		$iCurrentAnchor = (($iAnchorPos <> Null) ? $iAnchorPos : $oShape.AnchorType())
 
-		; Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting
+		; LibreOffice is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting
 		;		values for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or
 		; "$LOW_RELATIVE_PARAGRAPH", For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the
 		; L.O. UI the furthest left drop down box)  is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1),

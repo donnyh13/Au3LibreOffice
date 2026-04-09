@@ -44,7 +44,7 @@
 ; Name ..........: _LOBase_SQLResultColumnMetaDataQuery
 ; Description ...: Query a Result set for current column status or settings.
 ; Syntax ........: _LOBase_SQLResultColumnMetaDataQuery(ByRef $oResult, $iColumn, $iQuery)
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ;                  $iColumn             - an integer value. The column to perform the Query on. 1 based.
 ;                  $iQuery              - an integer value (0-18). The Query command to perform. See Constants, $LOB_RESULT_METADATA_QUERY_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Variable
@@ -126,7 +126,7 @@ EndFunc   ;==>_LOBase_SQLResultColumnMetaDataQuery
 ; Name ..........: _LOBase_SQLResultColumnsGetCount
 ; Description ...: Retrieve a count of Columns returned in a Result Set.
 ; Syntax ........: _LOBase_SQLResultColumnsGetCount(ByRef $oResult)
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -162,7 +162,7 @@ EndFunc   ;==>_LOBase_SQLResultColumnsGetCount
 ; Name ..........: _LOBase_SQLResultColumnsGetNames
 ; Description ...: Retrieve an Array of Column names Returned in a Result Set.
 ; Syntax ........: _LOBase_SQLResultColumnsGetNames(ByRef $oResult)
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -198,7 +198,7 @@ EndFunc   ;==>_LOBase_SQLResultColumnsGetNames
 ; Name ..........: _LOBase_SQLResultCursorMove
 ; Description ...: Move the Result Set Cursor within the Result Set.
 ; Syntax ........: _LOBase_SQLResultCursorMove(ByRef $oResult, $iMove[, $iNumber = Null])
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ;                  $iMove               - an integer value (0-7). The move command for the cursor. See Constants, $LOB_RESULT_CURSOR_MOVE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iNumber             - [optional] an integer value. Default is Null. The Absolute row number or number of moves to go forward or backward. See Remarks.
 ; Return values .: Success: Boolean
@@ -261,7 +261,7 @@ EndFunc   ;==>_LOBase_SQLResultCursorMove
 ; Name ..........: _LOBase_SQLResultCursorQuery
 ; Description ...: Perform a Query on the Result Set Cursor position.
 ; Syntax ........: _LOBase_SQLResultCursorQuery(ByRef $oResult, $iQuery)
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ;                  $iQuery              - an integer value (0-4). The Query to perform on the cursor. See Constants, $LOB_RESULT_CURSOR_QUERY_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Boolean or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -271,6 +271,7 @@ EndFunc   ;==>_LOBase_SQLResultCursorMove
 ;                  @Error 1 @Extended 3 Return 0 = $iQuery not an Integer, less than 0 or greater than 4. See Constants, $LOB_RESULT_CURSOR_QUERY_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to process Cursor Query.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Cursor row.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning cursor query result.
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning current row number containing the cursor.
@@ -317,7 +318,7 @@ EndFunc   ;==>_LOBase_SQLResultCursorQuery
 ; Name ..........: _LOBase_SQLResultRowModify
 ; Description ...: Modify the values of the current Result Set Row.
 ; Syntax ........: _LOBase_SQLResultRowModify(ByRef $oResult, $iModify, $iColumn, $vValue)
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ;                  $iModify             - an integer value (0-12). The modify command for the Result Set Row. See Constants, $LOB_RESULT_ROW_MOD_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iColumn             - an integer value. The column to perform the Modification upon. 1 based.
 ;                  $vValue              - a variant value. The Value to change the column to.
@@ -451,7 +452,7 @@ EndFunc   ;==>_LOBase_SQLResultRowModify
 ; Name ..........: _LOBase_SQLResultRowQuery
 ; Description ...: Query the status of the current Result Set Row.
 ; Syntax ........: _LOBase_SQLResultRowQuery(ByRef $oResult, $iQuery)
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ;                  $iQuery              - an integer value (0-2). The Query to perform for the current row of the Result Set. See Constants, $LOB_RESULT_ROW_QUERY_IS_ROW_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -494,7 +495,7 @@ EndFunc   ;==>_LOBase_SQLResultRowQuery
 ; Name ..........: _LOBase_SQLResultRowRead
 ; Description ...: Read a column from the current Result Set Row.
 ; Syntax ........: _LOBase_SQLResultRowRead(ByRef $oResult, $iRead, $iColumn)
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ;                  $iRead               - an integer value (0-12). The read command to perform for the Result Set Row. See Constants, $LOB_RESULT_ROW_READ_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iColumn             - an integer value. The column to perform the Query for. 1 based.
 ; Return values .: Success: Variable
@@ -589,7 +590,7 @@ EndFunc   ;==>_LOBase_SQLResultRowRead
 ; Name ..........: _LOBase_SQLResultRowRefresh
 ; Description ...: Read the original values back into the Result Row Set.
 ; Syntax ........: _LOBase_SQLResultRowRefresh(ByRef $oResult)
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -620,7 +621,7 @@ EndFunc   ;==>_LOBase_SQLResultRowRefresh
 ; Name ..........: _LOBase_SQLResultRowUpdate
 ; Description ...: Perform an Update for the current Result Set Row.
 ; Syntax ........: _LOBase_SQLResultRowUpdate(ByRef $oResult, $iUpdate)
-; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryUIGetRowSet, or _LOBase_TableUIGetRowSet function.
+; Parameters ....: $oResult             - [in/out] an object. A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ;                  $iUpdate             - an integer value (0-5). The Update command to perform for the current row of the Result Set. See Constants, $LOB_RESULT_ROW_UPDATE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

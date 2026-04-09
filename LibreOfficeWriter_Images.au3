@@ -415,7 +415,7 @@ EndFunc   ;==>_LOWriter_ImageAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_GradientMulticolorAdd, _LOWriter_GradientMulticolorDelete, _LOWriter_GradientMulticolorModify, _LOWriter_ImageAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_ImageAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -500,6 +500,8 @@ EndFunc   ;==>_LOWriter_ImageAreaGradientMulticolor
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oImage not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -518,11 +520,16 @@ Func _LOWriter_ImageAreaTransparency(ByRef $oImage, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurTransp
 
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oImage.FillTransparence())
+	If __LO_VarsAreNull($iTransparency) Then
+		$iCurTransp = $oImage.FillTransparence()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
+	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -755,7 +762,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_TransparencyGradientMultiModify, _LOWriter_TransparencyGradientMultiDelete, _LOWriter_TransparencyGradientMultiAdd, _LOWriter_ImageAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_ImageAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -831,7 +838,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradientMulti
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageBorderColor
-; Description ...: Set or retrieve the Image Border Line Color. Libre Office Version 3.4 and Up.
+; Description ...: Set or retrieve the Image Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_ImageBorderColor(ByRef $oImage[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Image, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -861,7 +868,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradientMulti
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -984,21 +991,21 @@ EndFunc   ;==>_LOWriter_ImageBorderPadding
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageBorderStyle
-; Description ...: Set or Retrieve the Image Border Line style. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Image Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_ImageBorderStyle(ByRef $oImage[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
-;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Image. See Constants, $LOW_BORDERSTYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Image. See Constants, $LOW_BORDERSTYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Image. See Constants, $LOW_BORDERSTYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Image. See Constants, $LOW_BORDERSTYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Image. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Image. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Image. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Image. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oImage not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF.
+;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
@@ -1014,7 +1021,7 @@ EndFunc   ;==>_LOWriter_ImageBorderPadding
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1034,10 +1041,10 @@ Func _LOWriter_ImageBorderStyle(ByRef $oImage, $iTop = Null, $iBottom = Null, $i
 	Local $vReturn
 
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If ($iTop <> Null) And Not __LO_IntIsBetween($iTop, $LOW_BORDERSTYLE_SOLID, $LOW_BORDERSTYLE_DASH_DOT_DOT, "", $LOW_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If ($iBottom <> Null) And Not __LO_IntIsBetween($iBottom, $LOW_BORDERSTYLE_SOLID, $LOW_BORDERSTYLE_DASH_DOT_DOT, "", $LOW_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($iLeft <> Null) And Not __LO_IntIsBetween($iLeft, $LOW_BORDERSTYLE_SOLID, $LOW_BORDERSTYLE_DASH_DOT_DOT, "", $LOW_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If ($iRight <> Null) And Not __LO_IntIsBetween($iRight, $LOW_BORDERSTYLE_SOLID, $LOW_BORDERSTYLE_DASH_DOT_DOT, "", $LOW_BORDERSTYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($iTop <> Null) And Not __LO_IntIsBetween($iTop, $LOW_BORDER_STYLE_SOLID, $LOW_BORDER_STYLE_DASH_DOT_DOT, "", $LOW_BORDER_STYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If ($iBottom <> Null) And Not __LO_IntIsBetween($iBottom, $LOW_BORDER_STYLE_SOLID, $LOW_BORDER_STYLE_DASH_DOT_DOT, "", $LOW_BORDER_STYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iLeft <> Null) And Not __LO_IntIsBetween($iLeft, $LOW_BORDER_STYLE_SOLID, $LOW_BORDER_STYLE_DASH_DOT_DOT, "", $LOW_BORDER_STYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($iRight <> Null) And Not __LO_IntIsBetween($iRight, $LOW_BORDER_STYLE_SOLID, $LOW_BORDER_STYLE_DASH_DOT_DOT, "", $LOW_BORDER_STYLE_NONE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$vReturn = __LOWriter_Border($oImage, False, True, False, $iTop, $iBottom, $iLeft, $iRight)
 
@@ -1046,13 +1053,13 @@ EndFunc   ;==>_LOWriter_ImageBorderStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageBorderWidth
-; Description ...: Set or Retrieve the Image Border Line Width. Libre Office Version 3.4 and Up.
+; Description ...: Set or Retrieve the Image Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_ImageBorderWidth(ByRef $oImage[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDERWIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDERWIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDERWIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDERWIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1072,7 +1079,7 @@ EndFunc   ;==>_LOWriter_ImageBorderStyle
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.4.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1258,7 +1265,7 @@ EndFunc   ;==>_LOWriter_ImageColorAdjust
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: There is no literal setting for $bKeepScale in Libre Office's settings, so I have made an internal static setting in this function to behave the same as Libre Office. When you retrieve the current settings for an image, the return for $bKeepScale will be my internal static value, and NOT the current LibreOffice setting.
+; Remarks .......: There is no literal setting for $bKeepScale in LibreOffice's settings, so I have made an internal static setting in this function to behave the same as LibreOffice. When you retrieve the current settings for an image, the return for $bKeepScale will be my internal static value, and NOT the current LibreOffice setting.
 ;                  Maximum crop values are based on page width. You cannot exceed the size of the page, nor crop too much of the image away.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
@@ -1367,6 +1374,8 @@ Func _LOWriter_ImageDelete(ByRef $oDoc, ByRef $oImage)
 	$sImageName = $oImage.getName()
 	$oImage.dispose()
 	If ($oDoc.GraphicObjects().hasByName($sImageName)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Document still contains Image named the same.
+
+	$oImage = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_ImageDelete
@@ -1594,7 +1603,7 @@ EndFunc   ;==>_LOWriter_ImageHyperlink
 ;                  @Error 2 @Extended 4 Return 0 = Error creating a property value for retrieving the Image's size.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error getting Cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Error converting Image Path to Libre Office URL.
+;                  @Error 3 @Extended 2 Return 0 = Error converting Image Path to LibreOffice URL.
 ;                  @Error 3 @Extended 3 Return 0 = Error retrieving current Page Style name at insertion point.
 ;                  @Error 3 @Extended 4 Return 0 = Error retrieving Page Style Object.
 ;                  @Error 3 @Extended 5 Return 0 = Error calculating suggested image size.
@@ -1603,7 +1612,7 @@ EndFunc   ;==>_LOWriter_ImageHyperlink
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Unfortunately, I am unable to find a way to insert an image "linked", images can only be inserted as embedded.
-; Related .......: _LOWriter_ImageDelete, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor,_LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_FrameCreateTextCursor
+; Related .......: _LOWriter_ImageDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate,_LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_FrameCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1646,7 +1655,7 @@ Func _LOWriter_ImageInsert(ByRef $oDoc, $sImage, ByRef $oCursor, $iAnchorType = 
 	$sPageStyle = $oCursor.PageStyleName()
 	If Not IsString($sPageStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, $sPageStyle)
+	$oPageStyle = _LOWriter_PageStyleGetObjByName($oDoc, $sPageStyle)
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 	$oSize = __LOWriter_ImageGetSuggestedSize(($oProvider.queryGraphicDescriptor($atProp)), $oPageStyle)
@@ -1915,7 +1924,7 @@ EndFunc   ;==>_LOWriter_ImageOptionsName
 ;                  @Error 1 @Extended 2 Return 0 = $sNewImage not a string.
 ;                  @Error 1 @Extended 3 Return 0 = File called in $sNewImage doesn't exist.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to convert $sNewImage Path to Libre Office URL.
+;                  @Error 3 @Extended 1 Return 0 = Failed to convert $sNewImage Path to LibreOffice URL.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Image was successfully replaced.
 ; Author ........: donnyh13
@@ -1985,26 +1994,26 @@ EndFunc   ;==>_LOWriter_ImagesGetNames
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageShadow
 ; Description ...: Set or Retrieve the shadow settings for an Image.
-; Syntax ........: _LOWriter_ImageShadow(ByRef $oImage[, $iWidth = Null[, $iColor = Null[, $iLocation = Null]]])
+; Syntax ........: _LOWriter_ImageShadow(ByRef $oImage[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
 ; Parameters ....: $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Width of the Image Shadow set in Hundredths of a Millimeter (HMM).
+;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Image Shadow. See constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The Color of the Image shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Image Shadow. See constants, $LOW_SHADOW_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iWidth              - [optional] an integer value. Default is Null. The Width of the Image Shadow set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oImage not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving ShadowFormat Object.
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iWidth
+;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
-;                  |                               4 = Error setting $iLocation
+;                  |                               4 = Error setting $iWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -2017,7 +2026,7 @@ EndFunc   ;==>_LOWriter_ImagesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ImageShadow(ByRef $oImage, $iWidth = Null, $iColor = Null, $iLocation = Null)
+Func _LOWriter_ImageShadow(ByRef $oImage, $iLocation = Null, $iColor = Null, $iWidth = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2030,16 +2039,16 @@ Func _LOWriter_ImageShadow(ByRef $oImage, $iWidth = Null, $iColor = Null, $iLoca
 	$tShdwFrmt = $oImage.ShadowFormat()
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iWidth, $iColor, $iLocation) Then
-		__LO_ArrayFill($avShadow, $tShdwFrmt.ShadowWidth(), $tShdwFrmt.Color(), $tShdwFrmt.Location())
+	If __LO_VarsAreNull($iLocation, $iColor, $iWidth) Then
+		__LO_ArrayFill($avShadow, $tShdwFrmt.Location(), $tShdwFrmt.Color(), $tShdwFrmt.ShadowWidth())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avShadow)
 	EndIf
 
-	If ($iWidth <> Null) Then
-		If Not IsInt($iWidth) Or ($iWidth < 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If ($iLocation <> Null) Then
+		If Not __LO_IntIsBetween($iLocation, $LOW_SHADOW_LOCATION_NONE, $LOW_SHADOW_LOCATION_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-		$tShdwFrmt.ShadowWidth = $iWidth
+		$tShdwFrmt.Location = $iLocation
 	EndIf
 
 	If ($iColor <> Null) Then
@@ -2048,10 +2057,10 @@ Func _LOWriter_ImageShadow(ByRef $oImage, $iWidth = Null, $iColor = Null, $iLoca
 		$tShdwFrmt.Color = $iColor
 	EndIf
 
-	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOW_SHADOW_NONE, $LOW_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($iWidth <> Null) Then
+		If Not __LO_IntIsBetween($iWidth, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		$tShdwFrmt.Location = $iLocation
+		$tShdwFrmt.ShadowWidth = $iWidth
 	EndIf
 
 	$oImage.ShadowFormat = $tShdwFrmt
@@ -2059,9 +2068,9 @@ Func _LOWriter_ImageShadow(ByRef $oImage, $iWidth = Null, $iColor = Null, $iLoca
 	$tShdwFrmt = $oImage.ShadowFormat
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($tShdwFrmt.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($tShdwFrmt.Location() = $iLocation) ? ($iError) : (BitOR($iError, 1)))
 	$iError = (__LO_VarsAreNull($iColor)) ? ($iError) : (($tShdwFrmt.Color() = $iColor) ? ($iError) : (BitOR($iError, 2)))
-	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($tShdwFrmt.Location() = $iLocation) ? ($iError) : (BitOR($iError, 4)))
+	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($tShdwFrmt.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 4)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_ImageShadow
@@ -2175,13 +2184,17 @@ Func _LOWriter_ImageSize(ByRef $oImage, $iScaleWidth = Null, $iScaleHeight = Nul
 		$iError = (__LO_VarsAreNull($iHeight)) ? ($iError) : ((__LO_IntIsBetween($oImage.Size.Height(), $iHeight - 1, $iHeight + 1)) ? ($iError) : (BitOR($iError, 8)))
 	EndIf
 
-	If ($bOriginalSize = True) Then
-		$tSize.Width = $tOrigSize.Width()
-		$tSize.Height = $tOrigSize.Height()
+	If ($bOriginalSize <> Null) Then
+		If Not IsBool($bOriginalSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-		$oImage.Size = $tSize
+		If ($bOriginalSize = True) Then
+			$tSize.Width = $tOrigSize.Width()
+			$tSize.Height = $tOrigSize.Height()
 
-		$iError = (($oImage.Size.Width() = $tOrigSize.Width()) And $oImage.Size.Height() = $tOrigSize.Height()) ? ($iError) : (BitOR($iError, 16))
+			$oImage.Size = $tSize
+
+			$iError = (($oImage.Size.Width() = $tOrigSize.Width()) And $oImage.Size.Height() = $tOrigSize.Height()) ? ($iError) : (BitOR($iError, 16))
+		EndIf
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -2198,6 +2211,8 @@ EndFunc   ;==>_LOWriter_ImageSize
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oImage not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -2216,15 +2231,23 @@ Func _LOWriter_ImageTransparency(ByRef $oImage, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0, $iCurTransp
+
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oImage.Transparency())
+	If __LO_VarsAreNull($iTransparency) Then
+		$iCurTransp = $oImage.Transparency()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
+	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oImage.Transparency = $iTransparency
+	$iError = ($oImage.Transparency() = $iTransparency) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($oImage.Transparency() = $iTransparency) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_ImageTransparency
 
 ; #FUNCTION# ====================================================================================================================
@@ -2386,7 +2409,7 @@ Func _LOWriter_ImageTypePosition(ByRef $oImage, $iHorAlign = Null, $iHorPos = Nu
 
 		$iCurrentAnchor = (($iAnchorPos <> Null) ? ($iAnchorPos) : ($oImage.AnchorType()))
 
-		; Libre Office is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting values
+		; LibreOffice is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting values
 		; for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or "$LOW_RELATIVE_PARAGRAPH",
 		; For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the L.O. UI the furthest left
 		; drop down box) is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1), $LOW_ORIENT_VERT_CHAR_CENTER(2),
@@ -2475,10 +2498,10 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Image, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeWidth      - [optional] an integer value (0-254). Default is Null. Calculates the width of the Image as a percentage of the width of the page text area. 0 = off.
-;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. Decides what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. Decides what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Image, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeHeight     - [optional] an integer value (0-254). Default is Null. Calculates the Height of the Image as a percentage of the Height of the page text area. 0 = off.
-;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. Decides what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. Libre Office 4.3 and Up.
+;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. Decides what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $bKeepRatio          - [optional] a boolean value. Default is Null. Maintains the height and width ratio when you change the width or the height setting.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2487,10 +2510,10 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  @Error 1 @Extended 2 Return 0 = $oImage not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $iWidth Not an Integer, or less than 51.
 ;                  @Error 1 @Extended 4 Return 0 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 5 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0, and not equal to 7. See Constants.
+;                  @Error 1 @Extended 5 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0, and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  @Error 1 @Extended 6 Return 0 = $iHeight Not an Integer, or less than 51.
 ;                  @Error 1 @Extended 7 Return 0 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 8 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants.
+;                  @Error 1 @Extended 8 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  @Error 1 @Extended 9 Return 0 = $bKeepRatio not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -2502,10 +2525,10 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  |                               32 = Error setting $iHeightRelativeTo
 ;                  |                               64 = Error setting $bKeepRatio
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.3.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 7 Element Array depending on current Libre Office Version, If the current Libre Office version is greater than or equal to 4.3, then a 7 element Array is returned, else 5 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 7 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater than or equal to 4.3, then a 7 element Array is returned, else 5 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2613,7 +2636,7 @@ EndFunc   ;==>_LOWriter_ImageTypeSize
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oImage not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants.
+;                  @Error 1 @Extended 2 Return 0 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = $iLeft not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $iRight not an Integer.
 ;                  @Error 1 @Extended 5 Return 0 = $iTop not an Integer.
