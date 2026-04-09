@@ -1775,7 +1775,7 @@ EndFunc   ;==>_LOCalc_CellStyleNumberFormat
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 2 elements because $bHidden is not available.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOCalc_CellStyleExists, _LOCalc_CellStylesGetNames
 ; Link ..........:
 ; Example .......: Yes

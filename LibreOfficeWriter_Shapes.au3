@@ -2566,7 +2566,7 @@ EndFunc   ;==>_LOWriter_ShapePointsRemove
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -2763,6 +2763,7 @@ EndFunc   ;==>_LOWriter_ShapesGetNames
 ;                  - $LOW_SHAPE_TYPE_LINE_LINE, $LOW_SHAPE_TYPE_LINE_FREEFORM_LINE, $LOW_SHAPE_TYPE_LINE_FREEFORM_LINE_FILLED, $LOW_SHAPE_TYPE_LINE_CURVE, $LOW_SHAPE_TYPE_LINE_CURVE_FILLED, $LOW_SHAPE_TYPE_LINE_POLYGON, $LOW_SHAPE_TYPE_LINE_POLYGON_45, $LOW_SHAPE_TYPE_LINE_POLYGON_45_FILLED.
 ;                  - $LOW_SHAPE_TYPE_BASIC_CIRCLE_SEGMENT, $LOW_SHAPE_TYPE_BASIC_ARC.
 ;                  To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
 ; Link ..........:
 ; Example .......: Yes

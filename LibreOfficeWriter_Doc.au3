@@ -1924,7 +1924,7 @@ EndFunc   ;==>_LOWriter_DocIsReadOnly
 ;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMaximize is called with Null, returns a Boolean indicating if document is currently maximized (True).
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1974,7 +1974,7 @@ EndFunc   ;==>_LOWriter_DocMaximize
 ;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMinimize is called with Null, returns a Boolean indicating if document is currently minimized (True).
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -3729,7 +3729,7 @@ EndFunc   ;==>_LOWriter_DocUndoReset
 ;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call $bVisible with Null to return the current visibility setting.
+; Remarks .......:Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current visibility setting.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

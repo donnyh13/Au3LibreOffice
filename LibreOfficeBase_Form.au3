@@ -643,7 +643,7 @@ EndFunc   ;==>_LOBase_FormDocSave
 ;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call $bVisible with Null to return the current visibility setting.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current visibility setting.
 ;                  If a Form Document has been opened "Hidden", visibility cannot be set or retrieved.
 ; Related .......:
 ; Link ..........:

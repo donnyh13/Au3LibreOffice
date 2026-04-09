@@ -1549,7 +1549,7 @@ EndFunc   ;==>__LOCalc_CellUnderLine
 ;                  @Error 0 @Extended ? Return Integer = Success. $iLocation and $iDistance called with Null, returning current Values. Return will be current distance, and @Extended will be the current Location.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No

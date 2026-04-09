@@ -1770,6 +1770,7 @@ EndFunc   ;==>_LOCalc_CommentLineProperties
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The X Coordinate seems to be measured from the right hand edge of the Comment Box, and the Y Coordinate seems to be measured from the top of the comment box.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LO_UnitConvert, _LOCalc_CommentRotate, _LOCalc_CommentSize
 ; Link ..........:
 ; Example .......: Yes

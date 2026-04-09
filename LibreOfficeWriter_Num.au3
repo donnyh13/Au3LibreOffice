@@ -752,10 +752,12 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLevel
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Numbering Style successfully set.
+;                  @Error 0 @Extended 0 Return 1 = Success. Numbering Style level successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. $iLevel called with Null, returning current Numbering Style level.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes

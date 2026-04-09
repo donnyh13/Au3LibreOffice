@@ -651,7 +651,7 @@ EndFunc   ;==>_LOBase_DocIsModified
 ;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMaximize is called with Null, returns a Boolean indicating if document is currently maximized (True).
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -701,7 +701,7 @@ EndFunc   ;==>_LOBase_DocMaximize
 ;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMinimize is called with Null, returns a Boolean indicating if document is currently minimized (True).
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

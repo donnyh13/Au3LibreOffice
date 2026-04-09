@@ -516,7 +516,7 @@ EndFunc   ;==>_LOCalc_RangeColumnsGetCount
 ;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning Column's current visibility setting.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -569,6 +569,7 @@ EndFunc   ;==>_LOCalc_RangeColumnVisible
 ; Modified ......:
 ; Remarks .......: $bOptimal only accepts True. False will return an error. Calling True again returns the cell to optimal width, setting a custom width essentially disables it.
 ;                  I am presently unable to find a setting for Optimal Width "Add" Value.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -4965,6 +4966,7 @@ EndFunc   ;==>_LOCalc_RangeRowGetObjByPosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I am presently unable to find a setting for Optimal Height "Add" Value.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -5166,7 +5168,7 @@ EndFunc   ;==>_LOCalc_RangeRowsGetCount
 ;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning Row's current visibility setting.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
