@@ -2863,7 +2863,7 @@ Func _LOBase_ReportDocVisible(ByRef $oReportDoc, $bVisible = Null)
 
 	If __LO_VarsAreNull($bVisible) Then
 		$bIsVis = $oReportDoc.CurrentController.Frame.ContainerWindow.isVisible()
-		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
 	EndIf

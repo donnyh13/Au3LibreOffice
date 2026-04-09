@@ -271,6 +271,7 @@ EndFunc   ;==>_LOBase_SQLResultCursorMove
 ;                  @Error 1 @Extended 3 Return 0 = $iQuery not an Integer, less than 0 or greater than 4. See Constants, $LOB_RESULT_CURSOR_QUERY_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to process Cursor Query.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Cursor row.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning cursor query result.
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning current row number containing the cursor.

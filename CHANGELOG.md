@@ -492,6 +492,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - COM Error being triggered when calling $bSuppress in `_LOBase_ReportDocData` using a "Hidden" Report Document.
 - COM Error and crash when setting or retrieving visibility settings for a Report or Form Document opened "Hidden".
 - `_LOBase_DocConnect` usage not updated in `_LOBase_DocOpen`.
+- Added missing error descriptions in headers, corrected wrong documented error values, and wrong function error values in:
+  - _LOBase_ReportDocVisible
+  - _LOBase_SQLResultCursorQuery
+  - _LOBase_TablePrimaryKey
 
 #### Refactored
 

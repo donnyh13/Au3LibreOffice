@@ -1760,6 +1760,8 @@ EndFunc   ;==>_LOBase_TableName
 ;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $aoPrimary not an Array.
 ;                  @Error 1 @Extended 3 Return ? = $aoPrimary contains an element that is not a Column Object. Returning problem Element number.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create a Data Descriptor.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Keys Object
 ;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Primary Key Object.
