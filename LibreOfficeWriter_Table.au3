@@ -896,7 +896,7 @@ Func _LOWriter_TableCellFormula(ByRef $oCell, $sFormula = Null)
 	$oCell.setFormula($sFormula)
 	$iError = ($oCell.getFormula() = $sFormula) ? ($iError) : (BitOR($iError, 2))
 
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oTable)) : (SetError($__LO_STATUS_SUCCESS, 0, $oTable))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_TableCellFormula
 
 ; #FUNCTION# ====================================================================================================================
