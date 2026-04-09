@@ -858,6 +858,9 @@ EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 ;                  @Error 1 @Extended 3 Return 0 = $sFormula not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current cell formula.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sFormula
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Formula was successfully set.
 ;                  @Error 0 @Extended 1 Return String = Success. Current formula is returned in String format.
@@ -876,6 +879,7 @@ Func _LOWriter_TableCellFormula(ByRef $oCell, $sFormula = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $sCurFormula
+	Local $iError = 0
 
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only set/get formula value for individual cells.
@@ -890,8 +894,9 @@ Func _LOWriter_TableCellFormula(ByRef $oCell, $sFormula = Null)
 	If Not IsString($sFormula) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oCell.setFormula($sFormula)
+	$iError = ($oCell.getFormula() = $sFormula) ? ($iError) : (BitOR($iError, 2))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oTable)) : (SetError($__LO_STATUS_SUCCESS, 0, $oTable))
 EndFunc   ;==>_LOWriter_TableCellFormula
 
 ; #FUNCTION# ====================================================================================================================
@@ -1022,10 +1027,10 @@ EndFunc   ;==>_LOWriter_TableCellGetName
 ;                  |                               1 = Error setting $bProtect
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set Cell Protect setting.
-;                  @Error 0 @Extended 0 Return Boolean = Success. All optional parameters were called with Null, return will be the current setting of write-protection for the cell.
+;                  @Error 0 @Extended 0 Return Boolean = Success. All optional parameters were called with Null, returning a Boolean whether the cell isprotected (True) or not.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Calling $bProtect with Null keyword returns the current WriteProtection setting of the cell. (True or False)
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
@@ -1156,6 +1161,9 @@ EndFunc   ;==>_LOWriter_TableCellString
 ;                  @Error 1 @Extended 3 Return 0 = $nValue not a Number.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current value.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $nValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set cell value.
 ;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current cell value.
@@ -1174,6 +1182,7 @@ Func _LOWriter_TableCellValue(ByRef $oCell, $nValue = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $nCurVal
+	Local $iError = 0
 
 	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If __LOWriter_IsCellRange($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can only set/get individual cell values.
@@ -1188,8 +1197,9 @@ Func _LOWriter_TableCellValue(ByRef $oCell, $nValue = Null)
 	If Not IsNumber($nValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oCell.setValue($nValue)
+	$iError = ($oCell.getValue() = $nValue) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_TableCellValue
 
 ; #FUNCTION# ====================================================================================================================

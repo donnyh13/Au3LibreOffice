@@ -2293,6 +2293,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Property error checking to some functions:
   - _LOWriter_DocMaximize
   - _LOWriter_DocMinimize
+  - _LOWriter_TableCellFormula
+  - _LOWriter_TableCellValue
 
 #### Documented
 
