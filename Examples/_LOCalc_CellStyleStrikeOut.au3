@@ -8,12 +8,12 @@ Func Example()
 	Local $oDoc, $oSheet, $oCellStyle, $oCell
 	Local $avSettings[0]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the active Sheet.
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell A1
@@ -33,11 +33,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Cell Text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Object for "Default" Cell Style.
-	$oCellStyle = _LOCalc_CellStyleGetObj($oDoc, "Default")
+	$oCellStyle = _LOCalc_CellStyleGetObjByName($oDoc, "Default")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Cell Style's Strikeout settings to, Words only = True, Strikeout = True, Line style = $LOC_STRIKEOUT_X
-	_LOCalc_CellStyleStrikeOut($oCellStyle, True, True, $LOC_STRIKEOUT_X)
+	; Set the Cell Style's Strikeout settings to, Line style = $LOC_CHAR_STRIKEOUT_X, Words only = True
+	_LOCalc_CellStyleStrikeOut($oCellStyle, $LOC_CHAR_STRIKEOUT_X, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -45,15 +45,18 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell Style's current Strikeout settings are as follows: " & @CRLF & _
-			"Strikeout words only? True/False: " & $avSettings[0] & @CRLF & _
-			"Strike out words? True/False: " & $avSettings[1] & @CRLF & _
-			"Strikeout line style, (See UDF Constants): " & $avSettings[2])
+			"Strikeout line style, (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"Strikeout words only? True/False: " & $avSettings[1])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
 	; Close the document.
 	_LOCalc_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

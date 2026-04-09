@@ -17,7 +17,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will Create and Save a new Base Doc to begin this example, a screen will flash up and disappear after " _
 			& "pressing OK.")
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOBase_DocCreate(True, False)
 	If @error Then Return _ERROR($oDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -38,6 +38,10 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have created and saved a blank L.O. Base Doc to your Desktop, found at the following Path: " _
 			& $sPath & @CRLF & "Press Ok to delete it.")
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

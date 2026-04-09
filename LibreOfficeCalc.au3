@@ -20,7 +20,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for interacting with Libre Office Calc.
+; Description ...: Provides basic functionality through AutoIt for interacting with LibreOffice Calc.
 ; Author(s) .....: donnyh13, mLipok
 ; Sources .......: Andrew Pitonyak & Laurent Godard. Useful Macro Information, section 5.7.1. OOo version. Used for VersionGet;
 ;				   jguinch -- Printmgr.au3. Function used: _PrintMgr_EnumPrinter.

@@ -31,7 +31,7 @@
 ; _LOWriter_NumStyleCustomize
 ; _LOWriter_NumStyleDelete
 ; _LOWriter_NumStyleExists
-; _LOWriter_NumStyleGetObj
+; _LOWriter_NumStyleGetObjByName
 ; _LOWriter_NumStyleOrganizer
 ; _LOWriter_NumStylePosition
 ; _LOWriter_NumStyleSetLevel
@@ -96,7 +96,7 @@ EndFunc   ;==>_LOWriter_NumStyleCreate
 ; Description ...: Set or Retrieve the current numbering style for a paragraph by Cursor or paragraph Object.
 ; Syntax ........: _LOWriter_NumStyleCurrent(ByRef $oDoc, ByRef $oObj[, $sNumStyle = Null])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object returned from _LOWriter_ParObjCreateList function.
+;                  $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object returned from _LOWriter_CursorParObjCreateList function.
 ;                  $sNumStyle           - [optional] a string value. Default is Null. The Numbering Style name to set the paragraph to.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -117,7 +117,7 @@ EndFunc   ;==>_LOWriter_NumStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_ParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_NumStylesGetNames
+; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_NumStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -145,7 +145,7 @@ Func _LOWriter_NumStyleCurrent(ByRef $oDoc, ByRef $oObj, $sNumStyle = Null)
 	$oObj.NumberingStyleName = $sNumStyle
 	$iError = (__LOWriter_NumberingStyleCompare($oDoc, $oObj.NumberingStyleName(), $sNumStyle)) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_NumStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================
@@ -153,7 +153,7 @@ EndFunc   ;==>_LOWriter_NumStyleCurrent
 ; Description ...: Retrieve and Set Numbering Style Customize settings. See Remarks.
 ; Syntax ........: _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel[, $iNumFormat = Null[, $iStartAt = Null[, $sCharStyle = Null[, $iSubLevels = Null[, $sSepBefore = Null[, $sSepAfter = Null[, $bConsecutiveNum = Null[, $sBulletFont = Null[, $iCharDecimal = Null]]]]]]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oNumStyle           - [in/out] an object. A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObj function.
+;                  $oNumStyle           - [in/out] an object. A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObjByName function.
 ;                  $iLevel              - an integer value (0-10). The Numbering Level to modify; enter 0 to modify all levels.
 ;                  $iNumFormat          - [optional] an integer value (0-71). Default is Null. The numbering scheme for the selected levels. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iStartAt            - [optional] an integer value. Default is Null. A new starting number for the current level
@@ -215,7 +215,7 @@ EndFunc   ;==>_LOWriter_NumStyleCurrent
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  When a lot of settings are set, especially for all levels, this function can be a bit slow.
 ;                  For $iSubLevels, if you enter "2" and the previous level uses the "A, B, C..." numbering scheme, the numbering scheme for the current level becomes: "A.1". The Maximum value, if $iLevel is set to 0, is 1.
-; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObj
+; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -312,7 +312,9 @@ Func _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel, $iNumFormat =
 			If Not __LO_IntIsBetween($iSubLevels, 1, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 			If ($iLevel = -1) And ($iSubLevels > 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0) ; -1 for $iLevel = 0 = Modify all Numbering Style levels.
 
-			If ($iLevel <> -1) And ($iLevel < $iSubLevels) Then SetError($__LO_STATUS_INPUT_ERROR, 11, 0) ; Sub-level higher than requested level
+			; Minus 1 to compensate for $iLevel being 0 based.
+			If ($iLevel <> -1) And ($iLevel < ($iSubLevels - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0) ; Sub-level higher than requested level
+
 			$atNumLevel[$mNumLevel["ParentNumbering"]].Value = $iSubLevels
 
 			; If Document has "ListFormat" setting (Libre 7.2 +), Sub Levels ("ParentNumbering") wont accept a setting without also setting "List format", which means combining the corresponding "ListFormat"  number values + Prefix & Suffix.
@@ -389,7 +391,7 @@ EndFunc   ;==>_LOWriter_NumStyleCustomize
 ; Description ...: Delete a User-Created Numbering Style from a Document.
 ; Syntax ........: _LOWriter_NumStyleDelete(ByRef $oDoc, $oNumStyle)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oNumStyle           - [in/out] an object. A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObj function.
+;                  $oNumStyle           - [in/out] an object. A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObjByName function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -407,11 +409,11 @@ EndFunc   ;==>_LOWriter_NumStyleCustomize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObj
+; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_NumStyleDelete(ByRef $oDoc, $oNumStyle)
+Func _LOWriter_NumStyleDelete(ByRef $oDoc, ByRef $oNumStyle)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -431,8 +433,11 @@ Func _LOWriter_NumStyleDelete(ByRef $oDoc, $oNumStyle)
 	If $oNumStyle.isInUse() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; If Style is in use return an error unless force delete is true.
 
 	$oNumStyles.removeByName($sNumStyle)
+	If $oNumStyles.hasByName($sNumStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-	Return ($oNumStyles.hasByName($sNumStyle)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	$oNumStyle = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_NumStyleDelete
 
 ; #FUNCTION# ====================================================================================================================
@@ -468,9 +473,9 @@ Func _LOWriter_NumStyleExists(ByRef $oDoc, $sNumStyle)
 EndFunc   ;==>_LOWriter_NumStyleExists
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_NumStyleGetObj
+; Name ..........: _LOWriter_NumStyleGetObjByName
 ; Description ...: Retrieve a Numbering Style Style Object for use with other Numbering Style Style functions.
-; Syntax ........: _LOWriter_NumStyleGetObj(ByRef $oDoc, $sNumStyle)
+; Syntax ........: _LOWriter_NumStyleGetObjByName(ByRef $oDoc, $sNumStyle)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sNumStyle           - a string value. The Numbering Style Style name to retrieve the Object for.
 ; Return values .: Success: Object
@@ -490,7 +495,7 @@ EndFunc   ;==>_LOWriter_NumStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_NumStyleGetObj(ByRef $oDoc, $sNumStyle)
+Func _LOWriter_NumStyleGetObjByName(ByRef $oDoc, $sNumStyle)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -504,14 +509,14 @@ Func _LOWriter_NumStyleGetObj(ByRef $oDoc, $sNumStyle)
 	If Not IsObj($oNumStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oNumStyle)
-EndFunc   ;==>_LOWriter_NumStyleGetObj
+EndFunc   ;==>_LOWriter_NumStyleGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_NumStyleOrganizer
 ; Description ...: Set or retrieve the Organizer settings of a Numbering Style.
 ; Syntax ........: _LOWriter_NumStyleOrganizer(ByRef $oDoc, $oNumStyle[, $sNewNumStyleName = Null[, $bHidden = Null]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oNumStyle           - [in/out] an object. A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObj function.
+;                  $oNumStyle           - [in/out] an object. A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObjByName function.
 ;                  $sNewNumStyleName    - [optional] a string value. Default is Null. The new name to set the Numbering Style called in $oNumStyle to.
 ;                  $bHidden             - [optional] a boolean value. Default is Null. If True, hide the style in the UI.
 ; Return values .: Success: 1 or Array.
@@ -528,15 +533,15 @@ EndFunc   ;==>_LOWriter_NumStyleGetObj
 ;                  |                               1 = Error setting $sNewParStyleName
 ;                  |                               2 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 4.0.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 1 or 2 Element Array with values in order of function parameters. If the Libre Office version is below 4.0, the Array will contain 1 element because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 1 or 2 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 1 element because $bHidden is not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObj
+; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -586,11 +591,11 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ; Description ...: Retrieve and Set Numbering Style Position settings. See Remarks.
 ; Syntax ........: _LOWriter_NumStylePosition(ByRef $oDoc, $oNumStyle, $iLevel[, $iAlignedAt = Null[, $iNumAlign = Null[, $iFollowedBy = Null[, $iTabstop = Null[, $iIndent = Null]]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oNumStyle           - [in/out] an object. A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObj function.
+;                  $oNumStyle           - [in/out] an object. A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObjByName function.
 ;                  $iLevel              - an integer value (0-10). The Numbering Level to modify; enter 0 to modify all of them.
 ;                  $iAlignedAt          - [optional] an integer value. Default is Null. Specifies the first line indent. Set in Hundredths of a Millimeter (HMM).
 ;                  $iNumAlign           - [optional] an integer value (1-3). Default is Null. The alignment of the numbering symbols, in comparison to the "Aligned at" position. See Constants. $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iFollowedBy         - [optional] an integer value (0-2). Default is Null. Select the element that will follow the numbering: a tab stop, a space, or nothing; See Constants, $LOW_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iFollowedBy         - [optional] an integer value (0-2). Default is Null. Select the element that will follow the numbering: a tab stop, a space, or nothing; See Constants, $LOW_NUM_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iTabstop            - [optional] an integer value. Default is Null. If you select a tab stop to follow the numbering, you can enter a positive value as the tab stop position. Set in Hundredths of a Millimeter (HMM).
 ;                  $iIndent             - [optional] an integer value. Default is Null. Enter the distance from the left page margin to the start of all lines in the numbered paragraph that follow the first line. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
@@ -602,7 +607,7 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ;                  @Error 1 @Extended 4 Return 0 = $iLevel not between 0 - 10.
 ;                  @Error 1 @Extended 5 Return 0 = $iAlignedAt not an Integer.
 ;                  @Error 1 @Extended 6 Return 0 = $iNumAlign not an Integer, less than 1 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $iFollowedBy not an Integer, less than 0 or greater than 2. See Constants, $LOW_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 Return 0 = $iFollowedBy not an Integer, less than 0 or greater than 2. See Constants, $LOW_NUM_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 8 Return 0 = $iTabstop not an Integer.
 ;                  @Error 1 @Extended 9 Return 0 = $iIndent not an Integer.
 ;                  --Initialization Errors--
@@ -627,7 +632,7 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings. You can request setting values for one numbering level at a time, or all at once (see below).
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObj, _LO_UnitConvert
+; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -691,7 +696,7 @@ Func _LOWriter_NumStylePosition(ByRef $oDoc, $oNumStyle, $iLevel, $iAlignedAt = 
 		EndIf
 
 		If ($iFollowedBy <> Null) Then
-			If Not __LO_IntIsBetween($iFollowedBy, $LOW_FOLLOW_BY_TABSTOP, $LOW_FOLLOW_BY_NEWLINE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+			If Not __LO_IntIsBetween($iFollowedBy, $LOW_NUM_FOLLOW_BY_TABSTOP, $LOW_NUM_FOLLOW_BY_NEWLINE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 			$atNumLevel[$mNumLevel["LabelFollowedBy"]].Value = $iFollowedBy
 		EndIf
@@ -733,7 +738,7 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ; Name ..........: _LOWriter_NumStyleSetLevel
 ; Description ...: Set the numbering style level for a paragraph by Cursor or paragraph Object.
 ; Syntax ........: _LOWriter_NumStyleSetLevel(ByRef $oObj[, $iLevel = Null])
-; Parameters ....: $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object returned from _LOWriter_ParObjCreateList function.
+; Parameters ....: $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object returned from _LOWriter_CursorParObjCreateList function.
 ;                  $iLevel              - [optional] an integer value (1-10). Default is Null. The Numbering Style level to set the paragraph to.
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -741,15 +746,19 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oObj does not support Paragraph Properties Service.
 ;                  @Error 1 @Extended 3 Return 0 = $iLevel not an Integer, less than 1 or greater than 10.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering level.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLevel
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Numbering Style successfully set.
+;                  @Error 0 @Extended 0 Return 1 = Success. Numbering Style level successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. $iLevel called with Null, returning current Numbering Style level.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_ParObjCreateList, _LOWriter_DocGetViewCursor, _LOWriter_DocCreateTextCursor, _LOWriter_CellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_DocHeaderGetTextCursor, _LOWriter_DocFooterGetTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -757,17 +766,25 @@ Func _LOWriter_NumStyleSetLevel(ByRef $oObj, $iLevel = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0, $iCurLevel
+
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oObj.supportsService("com.sun.star.style.ParagraphProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_IntIsBetween($iLevel, 1, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	If __LO_VarsAreNull($iLevel) Then Return SetError($__LO_STATUS_SUCCESS, 1, ($oObj.NumberingLevel() + 1)) ; Plus one to compensate for Levels being 0 Based.
+	If __LO_VarsAreNull($iLevel) Then
+		$iCurLevel = $oObj.NumberingLevel()
+		If Not IsInt($iCurLevel) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, ($iCurLevel + 1)) ; Plus one to compensate for Levels being 0 Based.
+	EndIf
 
 	$iLevel -= 1 ; Level is 0 Based, minus one to compensate.
 
 	$oObj.NumberingLevel = $iLevel
+	$iError = ($oObj.NumberingLevel() = $iLevel) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($oObj.NumberingLevel() = $iLevel) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_NumStyleSetLevel
 
 ; #FUNCTION# ====================================================================================================================
@@ -802,7 +819,7 @@ EndFunc   ;==>_LOWriter_NumStyleSetLevel
 ;                  Previous to LibreOffice 25.2 either name would work when setting a Style, however after 25.2 only the internal, or programmatic style names, will work.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
 ;                  Numbering Styles with special characters may return a name like "Bullet ?" when $bDisplayName is True.
-; Related .......: _LOWriter_NumStyleGetObj
+; Related .......: _LOWriter_NumStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

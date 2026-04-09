@@ -17,6 +17,10 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does the document have a font called ""Times New Roman"" ? True/False: " & $bResult1 & @CRLF & @CRLF & _
 			"Does the document have a font called ""Fake Font"" ? True/False: " & $bResult2)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR("Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($sErrorText)

@@ -64,6 +64,7 @@
 ;                  @Error 3 @Extended 1 Return 0 = $bSaveChanges called with True, and Document hasn't been assigned a Database type yet. Set it using _LOBase_DocDatabaseType.
 ;                  @Error 3 @Extended 2 Return 0 = Document hasn't been assigned a Database type yet. Set it using _LOBase_DocDatabaseType.
 ;                  @Error 3 @Extended 3 Return 0 = Path Conversion to L.O. URL Failed.
+;                  @Error 3 @Extended 4 Return 0 = Failed to close Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
 ;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
@@ -97,6 +98,10 @@ Func _LOBase_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDeli
 			$sDocPath = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
 			$oDoc.Close($bDeliverOwnership)
 
+			If Not __LO_IsObjInvalid($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+			$oDoc = Null
+
 			Return SetError($__LO_STATUS_SUCCESS, 2, $sDocPath)
 
 		Else
@@ -117,7 +122,12 @@ Func _LOBase_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDeli
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 			$oDoc.storeAsURL($sSavePath, $aArgs)
+
 			$oDoc.Close($bDeliverOwnership)
+
+			If Not __LO_IsObjInvalid($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+			$oDoc = Null
 
 			Return SetError($__LO_STATUS_SUCCESS, 1, _LO_PathConvert($sSavePath, $LO_PATHCONV_PCPATH_RETURN))
 		EndIf
@@ -125,64 +135,68 @@ Func _LOBase_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDeli
 
 	$oDoc.Close($bDeliverOwnership)
 
+	If Not __LO_IsObjInvalid($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	$oDoc = Null
+
 	Return SetError($__LO_STATUS_SUCCESS, 3, 1)
 EndFunc   ;==>_LOBase_DocClose
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_DocConnect
 ; Description ...: Retrieve the Object of an already opened instance of LibreOffice Base.
-; Syntax ........: _LOBase_DocConnect($sFile[, $bConnectCurrent = False[, $bConnectAll = False]])
-; Parameters ....: $sFile               - a string value. A Full or partial file path, or a full or partial file name. See remarks. Can be an empty string if $bConnectAll or $bConnectCurrent is True.
-;                  $bConnectCurrent     - [optional] a boolean value. Default is False. If True, returns the currently active, or last active Document, unless it is not a Database Document.
-;                  $bConnectAll         - [optional] a boolean value. Default is False. If True, returns an array containing all open LibreOffice Base Documents. See remarks.
+; Syntax ........: _LOBase_DocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT[, $sSearch = ""[, $bCaseless = False]]])
+; Parameters ....: $iMode               - [optional] an integer value (0-4). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  $sSearch             - [optional] a string value. Default is "". The Name, Title or Path of the Document to search for. See remarks.
+;                  $bCaseless           - [optional] a boolean value. Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sFile not a string.
-;                  @Error 1 @Extended 2 Return 0 = $bConnectCurrent not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bConnectAll not a Boolean.
+;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $sSearch not a String.
+;                  @Error 1 @Extended 3 Return 0 = $bCaseless not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
 ;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
 ;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open Libre Office documents found.
-;                  @Error 3 @Extended 2 Return 0 = Current Component not a Base Document.
-;                  @Error 3 @Extended 3 Return 0 = Error converting path to Libre Office URL.
-;                  @Error 3 @Extended 4 Return 0 = No matches found.
+;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 Return 0 = Error converting path to LibreOffice URL.
+;                  @Error 3 @Extended 5 Return 0 = Current Document not a Base Document.
+;                  @Error 3 @Extended 6 Return 0 = No matches found.
 ;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active document is returned.
-;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Base documents is returned. See remarks. @Extended is set to number of results.
-;                  @Error 0 @Extended 3 Return Object = Success, The Object for the document with matching URL is returned.
-;                  @Error 0 @Extended 4 Return Object = Success, The Object for the document with matching Title is returned.
-;                  @Error 0 @Extended 5 Return Object = Success, A partial Title or Path search found only one match, returning the Object for the found document.
-;                  @Error 0 @Extended ? Return Array = Success, An Array of all matching Libre Text documents from a partial Title or Path search. See remarks. @Extended is set to number of results.
+;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active Base document is returned.
+;                  @Error 0 @Extended 1 Return Object = Success, The Object for the found Document with matching Name, Title or Path.
+;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Base Documents. @Extended is set to number of results. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function does not open a connection to the Database, but retrieves an Object for the currently opened Document(s).
-;                  $sFile can be either the full Path (Name and extension included; e.g: C:\file\Test.ods Or file:///C:/file/Test.ods) of the document, or the full Title with extension, (e.g: Test.ods), or a partial file path (e.g: file1\file2\Test Or file1\file2 Or file1/file2/ etc.), or a partial name (e.g: test, would match Test1.ods, Test2.xlsx etc.).
-;                  Partial file path searches and file name searches, as well as the connect all option, return arrays with three columns per result. ($aArray[0][3]). each result is stored in a separate row;
-;                  Row 1, Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
-;                  Row 1, Column 1 contains the Document's full title and extension. e.g. $aArray[0][1] = This Test File.odb
-;                  Row 1, Column 2 contains the document's full file path. e.g. $aArray[0][2] = C:\Folder1\Folder2\This Test File.odb
-;                  Row 2, Column 0 contains the Object for the next document. And so on. e.g. $aArray[1][0] = $oDoc2
+; Remarks .......: Only Base documents are searched or returned using any of the flags.
+;                  The value used for $sSearch depends on the flag called in $iMode. It is ignored except for the $LO_DOC_CONNECT_MODE_SEARCH_* flags.
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $sSearch must be the full Title with Office and Component name; e.g: "Test.odb — LibreOffice Base". This will be the same Title AutoIt would match or return from functions like WinGetTitle.
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME, $sSearch must be the Document's full name, without the extension; e.g: "Test".
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $sSearch must be the Document's name, with the extension; e.g: "Test.odb". If the Document hasn't been saved, just the name will work, e.g., "Untitled 1".
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_PATH, $sSearch must be the full Path of the document (Name and extension included); e.g: "C:\file\Test.odb."
+;                  The Connect All option returns a single columned array. ($aArray[0]), each result is stored in a separate row.
+;                  -Row 1 contains the Object for that document. e.g. $aArray[0] = $oDoc
+;                  -Row 2 contains the Object for the next document. e.g. $aArray[1] = $oDoc2. And so on.
 ; Related .......: _LOBase_DocOpen, _LOBase_DocClose, _LOBase_DocCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOBase_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False)
+Func _LOBase_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $bCaseless = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iCount = 0
-	Local Const $__STR_STRIPLEADING = 1
-	Local $aoConnectAll[1], $aoPartNameSearch[1]
+	Local $iCount = 0, $iDocType
+	Local $aoConnectAll[0]
+	Local $sCaseless = ""
 	Local $oEnumDoc, $oDoc, $oServiceManager, $oDesktop
-	Local $sServiceName = "com.sun.star.sdb.OfficeDatabaseDocument"
 
-	If Not IsString($sFile) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bConnectCurrent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bConnectAll) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LO_IntIsBetween($iMode, $LO_DOC_CONNECT_MODE_ALL, $LO_DOC_CONNECT_MODE_SEARCH_PATH) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sSearch) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bCaseless) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oServiceManager = __LO_ServiceManager()
 	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -191,101 +205,97 @@ Func _LOBase_DocConnect($sFile, $bConnectCurrent = False, $bConnectAll = False)
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 	If Not $oDesktop.getComponents.hasElements() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; no L.O open
 
-	$oEnumDoc = $oDesktop.getComponents.createEnumeration()
-	If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+	Switch $iMode
+		Case $LO_DOC_CONNECT_MODE_ALL
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-	If $bConnectCurrent Then
-		$oDoc = $oDesktop.currentComponent()
-
-		Return ($oDoc.supportsService($sServiceName)) ? (SetError($__LO_STATUS_SUCCESS, 1, $oDoc)) : (SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0))
-	EndIf
-
-	If $bConnectAll Then
-		ReDim $aoConnectAll[1][3]
-		$iCount = 0
-		While $oEnumDoc.hasMoreElements()
-			$oDoc = $oEnumDoc.nextElement()
-			If $oDoc.supportsService($sServiceName) Then
-				ReDim $aoConnectAll[$iCount + 1][3]
-				$aoConnectAll[$iCount][0] = $oDoc
-				$aoConnectAll[$iCount][1] = $oDoc.Title()
-				$aoConnectAll[$iCount][2] = _LO_PathConvert($oDoc.getURL(), $LO_PATHCONV_PCPATH_RETURN)
-				$iCount += 1
-			EndIf
-			Sleep(10)
-		WEnd
-
-		Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
-	EndIf
-
-	$sFile = StringStripWS($sFile, $__STR_STRIPLEADING)
-	If StringInStr($sFile, "\") Then $sFile = _LO_PathConvert($sFile, $LO_PATHCONV_OFFICE_RETURN) ; Convert to L.O File path.
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	If StringInStr($sFile, "file:///") Then ; URL/Path and Name search
-
-		While $oEnumDoc.hasMoreElements()
-			$oDoc = $oEnumDoc.nextElement()
-
-			If ($oDoc.getURL() == $sFile) Then Return SetError($__LO_STATUS_SUCCESS, 3, $oDoc) ; Match
-		WEnd
-
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; no match
-
-	Else
-		If Not StringInStr($sFile, "/") And StringInStr($sFile, ".") Then ; Name with extension only search
 			While $oEnumDoc.hasMoreElements()
 				$oDoc = $oEnumDoc.nextElement()
-				If StringInStr($oDoc.Title, $sFile) Then Return SetError($__LO_STATUS_SUCCESS, 4, $oDoc) ; Match
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				$iDocType = _LO_DocGetType($oDoc)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+				If ($iDocType = $LO_DOC_TYPE_BASE) Then
+					If (UBound($aoConnectAll) <= $iCount) Then ReDim $aoConnectAll[$iCount + 1]
+					$aoConnectAll[$iCount] = $oDoc
+					$iCount += 1
+				EndIf
+				Sleep((IsInt($iCount / $__LOBCONST_SLEEP_DIV) ? (10) : (0)))
 			WEnd
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; no match
-		EndIf
+			Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoConnectAll)
 
-		$iCount = 0 ; partial name or partial URL search
-		ReDim $aoPartNameSearch[$iCount + 1][3]
+		Case $LO_DOC_CONNECT_MODE_CURRENT
+			$oDoc = $oDesktop.currentComponent()
+			If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		While $oEnumDoc.hasMoreElements()
-			$oDoc = $oEnumDoc.nextElement()
-			If StringInStr($sFile, "/") Then
-				If StringInStr($oDoc.getURL(), $sFile) Then
-					ReDim $aoPartNameSearch[$iCount + 1][3]
-					$aoPartNameSearch[$iCount][0] = $oDoc
-					$aoPartNameSearch[$iCount][1] = $oDoc.Title
-					$aoPartNameSearch[$iCount][2] = _LO_PathConvert($oDoc.getURL, $LO_PATHCONV_PCPATH_RETURN)
-					$iCount += 1
-				EndIf
+			$iDocType = _LO_DocGetType($oDoc)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+			If ($iDocType <> $LO_DOC_TYPE_BASE) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Not a Base Doc.
 
-			Else
-				If StringInStr($oDoc.Title, $sFile) Then
-					ReDim $aoPartNameSearch[$iCount + 1][3]
-					$aoPartNameSearch[$iCount][0] = $oDoc
-					$aoPartNameSearch[$iCount][1] = $oDoc.Title
-					$aoPartNameSearch[$iCount][2] = _LO_PathConvert($oDoc.getURL, $LO_PATHCONV_PCPATH_RETURN)
-					$iCount += 1
-				EndIf
-			EndIf
-		WEnd
-		If IsString($aoPartNameSearch[0][1]) Then
-			If (UBound($aoPartNameSearch) = 1) Then
+			Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
 
-				Return SetError($__LO_STATUS_SUCCESS, 5, $aoPartNameSearch[0][0]) ; matches
+		Case $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $LO_DOC_CONNECT_MODE_SEARCH_NAME, $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $LO_DOC_CONNECT_MODE_SEARCH_PATH
+			$sSearch = StringRegExpReplace($sSearch, "(^\s*|\s*$)", "") ; Strip leading and trailing spaces
 
-			Else
+			If $bCaseless Then $sCaseless = "(?i)"
 
-				Return SetError($__LO_STATUS_SUCCESS, $iCount, $aoPartNameSearch) ; matches
+			If ($iMode = $LO_DOC_CONNECT_MODE_SEARCH_PATH) Then
+				$sSearch = _LO_PathConvert($sSearch, $LO_PATHCONV_OFFICE_RETURN) ; Convert to L.O File path.
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 			EndIf
 
-		Else
+			$oEnumDoc = $oDesktop.getComponents.createEnumeration()
+			If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; no match
-		EndIf
-	EndIf
+			While $oEnumDoc.hasMoreElements()
+				$oDoc = $oEnumDoc.nextElement()
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				$iDocType = _LO_DocGetType($oDoc)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
+
+				If ($iDocType = $LO_DOC_TYPE_BASE) Then
+					Switch $iMode
+						Case $LO_DOC_CONNECT_MODE_SEARCH_TITLE
+							; First make sure Current Controller is available (It wont be if Document is opened Hidden, in some Components.).
+							If IsObj($oDoc.CurrentController()) And StringRegExp($oDoc.CurrentController.Frame.Title(), $sCaseless & "\Q" & $sSearch & "\E") Then
+
+								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+							EndIf
+
+						Case $LO_DOC_CONNECT_MODE_SEARCH_NAME
+							; Allow space(s) after name in case user put some in the Document name.
+							; Add additional capture for Extension to just match the name the user put in, else force match at end of String for unsaved Documents.
+							If StringRegExp($oDoc.Title(), $sCaseless & "\Q" & $sSearch & "\E\s*(\.\w+)?$") Then
+
+								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+							EndIf
+
+						Case $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT
+							If StringRegExp($oDoc.Title(), $sCaseless & "\Q" & $sSearch & "\E") Then
+
+								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+							EndIf
+
+						Case $LO_DOC_CONNECT_MODE_SEARCH_PATH
+							If StringRegExp($oDoc.getURL(), $sCaseless & "\Q" & $sSearch & "\E") Then
+
+								Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
+							EndIf
+					EndSwitch
+				EndIf
+			WEnd
+	EndSwitch
+
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0) ; No matches
 EndFunc   ;==>_LOBase_DocConnect
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_DocCreate
-; Description ...: Open a new Libre Office Base Document.
+; Description ...: Open a new LibreOffice Base Document.
 ; Syntax ........: _LOBase_DocCreate([$bForceNew = True[, $bHidden = False[, $bWizard = False]]])
 ; Parameters ....: $bForceNew           - [optional] a boolean value. Default is True. If True, force opening a new Base Document instead of checking for a usable blank.
 ;                  $bHidden             - [optional] a boolean value. Default is False. If True opens the new document invisible or changes the existing document to invisible.
@@ -360,12 +370,12 @@ Func _LOBase_DocCreate($bForceNew = True, $bHidden = False, $bWizard = False)
 
 	If $bWizard Then
 		$oDoc = $oDesktop.loadComponentFromURL("private:factory/sdatabase?Interactive", "_blank", $iURLFrameCreate, $aArgs)
+		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 
 	Else
 		$oDoc = $oDesktop.loadComponentFromURL("private:factory/sdatabase", "_blank", $iURLFrameCreate, $aArgs)
+		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 	EndIf
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oDoc)) : (SetError($__LO_STATUS_SUCCESS, 2, $oDoc))
 EndFunc   ;==>_LOBase_DocCreate
@@ -406,6 +416,7 @@ Func _LOBase_DocDatabaseType(ByRef $oDoc, $sType = Default, $bOverwrite = False)
 	#forceref $oCOM_ErrorHandler
 
 	Local $sDataType
+	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -425,9 +436,9 @@ Func _LOBase_DocDatabaseType(ByRef $oDoc, $sType = Default, $bOverwrite = False)
 	If ($sDataType <> "jdbc:") And ($bOverwrite = False) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oDoc.DataSource.URL = $sType
-	If ($oDoc.DataSource.URL() <> $sType) Then Return SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0)
+	$iError = ($oDoc.DataSource.URL() = $sType) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_DocDatabaseType
 
 ; #FUNCTION# ====================================================================================================================
@@ -441,12 +452,14 @@ EndFunc   ;==>_LOBase_DocDatabaseType
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Document's name.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's current Name/Title
-;                  @Error 0 @Extended 1 Return String = Success. Returning the document's current Window Title, which includes the document name and usually: "-LibreOffice Base".
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: If $bReturnFull is True, the return value will be like: "<Database Doc name>.<extension> — LibreOffice Base" e.g. "Testing.odb — LibreOffice Base".
+;                  Else the return value will be like: "<Database Doc name>.<extension>", e.g. "Testing.odb"
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -460,9 +473,16 @@ Func _LOBase_DocGetName(ByRef $oDoc, $bReturnFull = False)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsBool($bReturnFull) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$sName = ($bReturnFull = True) ? ($oDoc.CurrentController.Frame.Title()) : ($oDoc.Title())
+	If $bReturnFull Then
+		$sName = $oDoc.CurrentController.Frame.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return ($bReturnFull = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sName)) : (SetError($__LO_STATUS_SUCCESS, 0, $sName))
+	Else
+		$sName = $oDoc.Title()
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sName)
 EndFunc   ;==>_LOBase_DocGetName
 
 ; #FUNCTION# ====================================================================================================================
@@ -470,7 +490,7 @@ EndFunc   ;==>_LOBase_DocGetName
 ; Description ...: Returns a Document's current save path.
 ; Syntax ........: _LOBase_DocGetPath(ByRef $oDoc[, $bReturnLibreURL = False])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in Libre Office URL format, else False returns a regular Windows path.
+;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in LibreOffice URL format, else False returns a regular Windows path.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -480,8 +500,7 @@ EndFunc   ;==>_LOBase_DocGetName
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error converting Libre URL to Computer path format.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the P.C. path to the current document's save path.
-;                  @Error 0 @Extended 1 Return String = Success. Returning the Libre Office URL to the current document's save path.
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -506,7 +525,7 @@ Func _LOBase_DocGetPath(ByRef $oDoc, $bReturnLibreURL = False)
 		If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	EndIf
 
-	Return ($bReturnLibreURL = True) ? (SetError($__LO_STATUS_SUCCESS, 1, $sPath)) : (SetError($__LO_STATUS_SUCCESS, 0, $sPath))
+	Return SetError($__LO_STATUS_SUCCESS, 0, $sPath)
 EndFunc   ;==>_LOBase_DocGetPath
 
 ; #FUNCTION# ====================================================================================================================
@@ -518,6 +537,8 @@ EndFunc   ;==>_LOBase_DocGetPath
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document had a path value.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has a save location. Else False.
 ; Author ........: donnyh13
@@ -531,9 +552,14 @@ Func _LOBase_DocHasPath(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bHasPath
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oDoc.hasLocation())
+	$bHasPath = $oDoc.hasLocation()
+	If Not IsBool($bHasPath) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bHasPath)
 EndFunc   ;==>_LOBase_DocHasPath
 
 ; #FUNCTION# ====================================================================================================================
@@ -545,11 +571,13 @@ EndFunc   ;==>_LOBase_DocHasPath
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document is active.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active Libre window. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other Libre Office documents.
+; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -558,9 +586,14 @@ Func _LOBase_DocIsActive(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsActive
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oDoc.CurrentController.Frame.isActive())
+	$bIsActive = $oDoc.CurrentController.Frame.isActive()
+	If Not IsBool($bIsActive) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bIsActive)
 EndFunc   ;==>_LOBase_DocIsActive
 
 ; #FUNCTION# ====================================================================================================================
@@ -572,6 +605,8 @@ EndFunc   ;==>_LOBase_DocIsActive
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document has been modified.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has been modified since last being saved.
 ; Author ........: donnyh13
@@ -585,9 +620,14 @@ Func _LOBase_DocIsModified(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsMod
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oDoc.isModified())
+	$bIsMod = $oDoc.isModified()
+	If Not IsBool($bIsMod) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bIsMod)
 EndFunc   ;==>_LOBase_DocIsModified
 
 ; #FUNCTION# ====================================================================================================================
@@ -601,12 +641,17 @@ EndFunc   ;==>_LOBase_DocIsModified
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bMaximize not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document is Maximized.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $bMaximize
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
 ;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMaximize is called with Null, returns a Boolean indicating if document is currently maximized (True).
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -615,15 +660,24 @@ Func _LOBase_DocMaximize(ByRef $oDoc, $bMaximize = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $iError = 0
+	Local $bIsMax
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bMaximize) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.Frame.ContainerWindow.IsMaximized())
+	If __LO_VarsAreNull($bMaximize) Then
+		$bIsMax = $oDoc.CurrentController.Frame.ContainerWindow.IsMaximized()
+		If Not IsBool($bIsMax) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsMax)
+	EndIf
 
 	If Not IsBool($bMaximize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oDoc.CurrentController.Frame.ContainerWindow.IsMaximized = $bMaximize
+	$iError = ($oDoc.CurrentController.Frame.ContainerWindow.IsMaximized() = $bMaximize) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_DocMaximize
 
 ; #FUNCTION# ====================================================================================================================
@@ -637,12 +691,17 @@ EndFunc   ;==>_LOBase_DocMaximize
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bMinimize not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document is Minimized.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $bMinimize
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
 ;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bMinimize is called with Null, returns a Boolean indicating if document is currently minimized (True).
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -651,15 +710,24 @@ Func _LOBase_DocMinimize(ByRef $oDoc, $bMinimize = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsMin
+	Local $iError = 0
+
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bMinimize) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.Frame.ContainerWindow.IsMinimized())
+	If __LO_VarsAreNull($bMinimize) Then
+		$bIsMin = $oDoc.CurrentController.Frame.ContainerWindow.IsMinimized()
+		If Not IsBool($bIsMin) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsMin)
+	EndIf
 
 	If Not IsBool($bMinimize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oDoc.CurrentController.Frame.ContainerWindow.IsMinimized = $bMinimize
+	$iError = ($oDoc.CurrentController.Frame.ContainerWindow.IsMinimized() = $bMinimize) ? ($iError) : (BitOR($iError, 1))
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_DocMinimize
 
 ; #FUNCTION# ====================================================================================================================
@@ -759,7 +827,7 @@ Func _LOBase_DocOpen($sFilePath, $bConnectIfOpen = True, $bHidden = Null, $bRead
 		EndIf
 	EndIf
 
-	If $bConnectIfOpen Then $oDoc = _LOBase_DocConnect($sFilePath)
+	If $bConnectIfOpen Then $oDoc = _LOBase_DocConnect($LO_DOC_CONNECT_MODE_SEARCH_PATH, $sFilePath, True)
 	If IsObj($oDoc) Then Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oDoc)) : (SetError($__LO_STATUS_SUCCESS, 1, $oDoc))
 
 	$oDoc = $oDesktop.loadComponentFromURL($sFileURL, "_default", $iURLFrameCreate, $aoProperties)
@@ -1065,6 +1133,8 @@ EndFunc   ;==>_LOBase_DocSubComponentsGetList
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document is Visible.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
@@ -1082,16 +1152,22 @@ Func _LOBase_DocVisible(ByRef $oDoc, $bVisible = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOBase_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $bIsVis
 	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bVisible) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc.CurrentController.Frame.ContainerWindow.isVisible())
+	If __LO_VarsAreNull($bVisible) Then
+		$bIsVis = $oDoc.CurrentController.Frame.ContainerWindow.isVisible()
+		If Not IsBool($bIsVis) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsVis)
+	EndIf
 
 	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oDoc.CurrentController.Frame.ContainerWindow.Visible = $bVisible
-	$iError = ($oDoc.CurrentController.Frame.ContainerWindow.isVisible() = $bVisible) ? (0) : (1)
+	$iError = ($oDoc.CurrentController.Frame.ContainerWindow.isVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
 
-	Return ($iError = 0) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, 1, 0))
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOBase_DocVisible

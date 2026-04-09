@@ -8,16 +8,16 @@ Func Example()
 	Local $oDoc, $oViewCursor, $oCharStyle
 	Local $avCharStyleSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the Character style.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to Demonstrate modifying a Character style.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to Demonstrate modifying a Character style.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -37,11 +37,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set the Character style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the "Example" object.
-	$oCharStyle = _LOWriter_CharStyleGetObj($oDoc, "Example")
+	$oCharStyle = _LOWriter_CharStyleGetObjByName($oDoc, "Example")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Character style object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set "Example" Character style Font effects to $LOW_RELIEF_EMBOSSED relief type.
-	_LOWriter_CharStyleEffect($oCharStyle, $LOW_RELIEF_EMBOSSED)
+	; Set "Example" Character style Font effects to $LOW_CHAR_RELIEF_EMBOSSED relief type.
+	_LOWriter_CharStyleEffect($oCharStyle, $LOW_CHAR_RELIEF_EMBOSSED)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -54,10 +54,10 @@ Func Example()
 			"Are the words hidden? True/False: " & $avCharStyleSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avCharStyleSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avCharStyleSettings[4] & @CRLF & @CRLF & _
-			"I will now set Case to $LOW_CASEMAP_SM_CAPS, and Relief to $LOW_RELIEF_NONE.")
+			"I will now set Case to $LOW_CHAR_CASEMAP_SM_CAPS, and Relief to $LOW_CHAR_RELIEF_NONE.")
 
-	; Set "Example" Character style Font effects to $LOW_RELIEF_NONE relief type, Case to $LOW_CASEMAP_SM_CAPS
-	_LOWriter_CharStyleEffect($oCharStyle, $LOW_RELIEF_NONE, $LOW_CASEMAP_SM_CAPS)
+	; Set "Example" Character style Font effects to $LOW_CHAR_RELIEF_NONE relief type, Case to $LOW_CHAR_CASEMAP_SM_CAPS
+	_LOWriter_CharStyleEffect($oCharStyle, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_CASEMAP_SM_CAPS)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -76,6 +76,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

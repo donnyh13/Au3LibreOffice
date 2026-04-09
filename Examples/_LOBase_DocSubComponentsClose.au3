@@ -14,7 +14,7 @@ Func Example()
 	Local $oDoc, $oDBase, $oConnection, $oTable, $oQuery
 	Local $sSavePath
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOBase_DocCreate(True, False)
 	If @error Then Return _ERROR($oDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -41,25 +41,25 @@ Func Example()
 	$oTable = _LOBase_TableAdd($oConnection, "tblNew_Table", "Col1")
 	If @error Then Return _ERROR($oDoc, "Failed to add a table to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Table UI.
-	_LOBase_TableUIOpenByObject($oDoc, $oConnection, $oTable)
-	If @error Then Return _ERROR($oDoc, "Failed to open Table UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document.
+	_LOBase_TableDocOpenByObject($oDoc, $oConnection, $oTable)
+	If @error Then Return _ERROR($oDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Table UI in Design Mode.
-	_LOBase_TableUIOpenByObject($oDoc, $oConnection, $oTable, True)
-	If @error Then Return _ERROR($oDoc, "Failed to open Table UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Table Document in Design Mode.
+	_LOBase_TableDocOpenByObject($oDoc, $oConnection, $oTable, True)
+	If @error Then Return _ERROR($oDoc, "Failed to open Table Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Add a Query to the Document.
 	$oQuery = _LOBase_QueryAddByName($oConnection, "qryAutoIt_Query", "tblNew_Table", "*")
 	If @error Then Return _ERROR($oDoc, "Failed to add a Query to the Database. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Query UI.
-	_LOBase_QueryUIOpenByObject($oConnection, $oQuery)
-	If @error Then Return _ERROR($oDoc, "Failed to open Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Query Document.
+	_LOBase_QueryDocOpenByObject($oConnection, $oQuery)
+	If @error Then Return _ERROR($oDoc, "Failed to open Query Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Open the Query UI in Design mode.
-	_LOBase_QueryUIOpenByObject($oConnection, $oQuery, True)
-	If @error Then Return _ERROR($oDoc, "Failed to open Query UI. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Open the Query Document in Design mode.
+	_LOBase_QueryDocOpenByObject($oConnection, $oQuery, True)
+	If @error Then Return _ERROR($oDoc, "Failed to open Query Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a new form.
 	_LOBase_FormCreate($oConnection, "frmAutoIt_Form", True)
@@ -88,6 +88,10 @@ Func Example()
 	; Close the document.
 	_LOBase_DocClose($oDoc, False)
 	If @error Then Return _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

@@ -9,12 +9,12 @@ Func Example()
 	Local $sStops = ""
 	Local $avStops
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the Default Page Style's Object, to modify its settings.
-	$oPageStyle = _LOWriter_PageStyleGetObj($oDoc, "Standard")
+	$oPageStyle = _LOWriter_PageStyleGetObjByName($oDoc, "Standard")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Page style Gradient settings to: Preset Gradient name = $LOW_GRAD_NAME_SUNDOWN
@@ -34,7 +34,7 @@ Func Example()
 			"Press ok to add a new ColorStop.")
 
 	; Add a new ColorStop in the middle.
-	_LOWriter_GradientMulticolorAdd($avStops, 3, 0.6, 1234567)
+	_LO_GradientMulticolorAdd($avStops, 3, 0.6, 1234567)
 	If @error Then _ERROR($oDoc, "Failed to add a ColorStop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new ColorStops.
@@ -46,6 +46,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

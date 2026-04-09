@@ -19,9 +19,13 @@ Func Example()
 	$sSimpleVersion = _LO_VersionGet(True)
 	If @error Then _ERROR("Failed to retrieve L.O. version information. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Your current full Libre Office version, including the name is: " & $sVersionAndName & @CRLF & _
-			"Your current full Libre Office version is: " & $sFullVersion & @CRLF & _
-			"Your current simple Libre Office version is: " & $sSimpleVersion)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Your current full LibreOffice version, including the name is: " & $sVersionAndName & @CRLF & _
+			"Your current full LibreOffice version is: " & $sFullVersion & @CRLF & _
+			"Your current simple LibreOffice version is: " & $sSimpleVersion)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR("Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($sErrorText)

@@ -8,7 +8,7 @@ Func Example()
 	Local $mFont
 	Local $avControl[0], $avFont[0]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a form control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Font Descriptor.
-	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_WEIGHT_BOLD, $LOW_POSTURE_ITALIC, 18, $LO_COLOR_BRICK, $LOW_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOW_STRIKEOUT_NONE, True, $LOW_RELIEF_NONE)
+	$mFont = _LOWriter_FontDescCreate("Times New Roman", $LOW_CHAR_WEIGHT_BOLD, $LOW_CHAR_POSTURE_ITALIC, 18, $LO_COLOR_BRICK, $LOW_CHAR_UNDERLINE_BOLD, $LO_COLOR_GREEN, $LOW_CHAR_STRIKEOUT_NONE, True, $LOW_CHAR_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, "Failed to create a Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Control's General properties.
@@ -50,7 +50,7 @@ Func Example()
 			"Press ok to modify the Font for this Label control.")
 
 	; Modify the Font Descriptor.
-	_LOWriter_FontDescEdit($avControl[6], "Arial", $LOW_WEIGHT_NORMAL, $LOW_POSTURE_NONE, 16, $LO_COLOR_LIME, $LOW_UNDERLINE_DBL_WAVE, $LO_COLOR_PURPLE, Null, False, $LOW_RELIEF_ENGRAVED)
+	_LOWriter_FontDescEdit($avControl[6], "Arial", $LOW_CHAR_WEIGHT_NORMAL, $LOW_CHAR_POSTURE_NONE, 16, $LO_COLOR_LIME, $LOW_CHAR_UNDERLINE_DBL_WAVE, $LO_COLOR_PURPLE, Null, False, $LOW_CHAR_RELIEF_ENGRAVED)
 	If @error Then _ERROR($oDoc, "Failed to modify the Font Descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Apply the new Font descriptor to the Label.
@@ -62,6 +62,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

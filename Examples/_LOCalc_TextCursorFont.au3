@@ -8,12 +8,12 @@ Func Example()
 	Local $oDoc, $oSheet, $oCell, $oTextCursor
 	Local $avSettings[0]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the active Sheet
-	$oSheet = _LOCalc_SheetGetActive($oDoc)
+	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve active Sheet's Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Cell A1's Object
@@ -35,7 +35,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Word Hi to Font = "Arial", 16 point font, Italic and Bold
-	_LOCalc_TextCursorFont($oTextCursor, "Arial", 16, $LOC_POSTURE_ITALIC, $LOC_WEIGHT_BOLD)
+	_LOCalc_TextCursorFont($oTextCursor, "Arial", 16, $LOC_CHAR_POSTURE_ITALIC, $LOC_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set text font. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now set the font to Stencil, no Bold or Italic and font size 14, and then insert some text.")
@@ -45,7 +45,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Font to = "Stencil", 14 point font, No Italic or Bold
-	_LOCalc_TextCursorFont($oTextCursor, "Stencil", 14, $LOC_POSTURE_NONE, $LOC_WEIGHT_NORMAL)
+	_LOCalc_TextCursorFont($oTextCursor, "Stencil", 14, $LOC_CHAR_POSTURE_NONE, $LOC_CHAR_WEIGHT_NORMAL)
 	If @error Then _ERROR($oDoc, "Failed to set text font. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Word
@@ -83,6 +83,10 @@ Func Example()
 	; Close the document.
 	_LOCalc_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

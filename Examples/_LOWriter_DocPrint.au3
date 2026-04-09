@@ -7,7 +7,7 @@ Example()
 Func Example()
 	Local $oDoc
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -15,7 +15,7 @@ Func Example()
 			"the print job without wasting paper.")
 
 	; Print the document, 1 copy, Collate = True, "ALL" Pages, Wait = True, Duplex  = Off
-	_LOWriter_DocPrint($oDoc, 1, True, "ALL", True, $LOW_DUPLEX_OFF)
+	_LOWriter_DocPrint($oDoc, 1, True, "ALL", True, $LOW_PRINT_DUPLEX_OFF)
 	If @error Then _ERROR($oDoc, "Failed to print the L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the document.
@@ -23,6 +23,10 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have now printed the document and then closed it.")
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

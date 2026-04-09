@@ -4,9 +4,9 @@
 #include-once
 
 ; #INDEX# =======================================================================================================================
-; Title .........: Libre Office Calc Constants for the Libre Office UDF.
+; Title .........: LibreOffice Calc Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the Libre Office UDF.
+; Description ...: Constants for various functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -33,34 +33,34 @@ Global Enum _                                                   ; com.sun.star.d
 
 ; Border Style
 Global Const _                                                  ; com.sun.star.table.BorderLineStyle
-		$LOC_BORDERSTYLE_NONE = 0x7FFF, _                       ; No border line.
-		$LOC_BORDERSTYLE_SOLID = 0, _                           ; Solid border line.
-		$LOC_BORDERSTYLE_DOTTED = 1, _                          ; Dotted border line.
-		$LOC_BORDERSTYLE_DASHED = 2, _                          ; Dashed border line.
-		$LOC_BORDERSTYLE_DOUBLE = 3, _                          ; Double border line.
-		$LOC_BORDERSTYLE_THINTHICK_SMALLGAP = 4, _              ; Double border line with a thin line outside and a thick line inside separated by a small gap.
-		$LOC_BORDERSTYLE_THINTHICK_MEDIUMGAP = 5, _             ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
-		$LOC_BORDERSTYLE_THINTHICK_LARGEGAP = 6, _              ; Double border line with a thin line outside and a thick line inside separated by a large gap.
-		$LOC_BORDERSTYLE_THICKTHIN_SMALLGAP = 7, _              ; Double border line with a thick line outside and a thin line inside separated by a small gap.
-		$LOC_BORDERSTYLE_THICKTHIN_MEDIUMGAP = 8, _             ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
-		$LOC_BORDERSTYLE_THICKTHIN_LARGEGAP = 9, _              ; Double border line with a thick line outside and a thin line inside separated by a large gap.
-		$LOC_BORDERSTYLE_EMBOSSED = 10, _                       ; 3D embossed border line.
-		$LOC_BORDERSTYLE_ENGRAVED = 11, _                       ; 3D engraved border line.
-		$LOC_BORDERSTYLE_OUTSET = 12, _                         ; Outset border line.
-		$LOC_BORDERSTYLE_INSET = 13, _                          ; Inset border line.
-		$LOC_BORDERSTYLE_FINE_DASHED = 14, _                    ; Finely dashed border line.
-		$LOC_BORDERSTYLE_DOUBLE_THIN = 15, _                    ; Double border line consisting of two fixed thin lines separated by a variable gap.
-		$LOC_BORDERSTYLE_DASH_DOT = 16, _                       ; Line consisting of a repetition of one dash and one dot.
-		$LOC_BORDERSTYLE_DASH_DOT_DOT = 17                      ; Line consisting of a repetition of one dash and 2 dots.
+		$LOC_BORDER_STYLE_NONE = 0x7FFF, _                      ; No border line.
+		$LOC_BORDER_STYLE_SOLID = 0, _                          ; Solid border line.
+		$LOC_BORDER_STYLE_DOTTED = 1, _                         ; Dotted border line.
+		$LOC_BORDER_STYLE_DASHED = 2, _                         ; Dashed border line.
+		$LOC_BORDER_STYLE_DOUBLE = 3, _                         ; Double border line.
+		$LOC_BORDER_STYLE_THINTHICK_SMALLGAP = 4, _             ; Double border line with a thin line outside and a thick line inside separated by a small gap.
+		$LOC_BORDER_STYLE_THINTHICK_MEDIUMGAP = 5, _            ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
+		$LOC_BORDER_STYLE_THINTHICK_LARGEGAP = 6, _             ; Double border line with a thin line outside and a thick line inside separated by a large gap.
+		$LOC_BORDER_STYLE_THICKTHIN_SMALLGAP = 7, _             ; Double border line with a thick line outside and a thin line inside separated by a small gap.
+		$LOC_BORDER_STYLE_THICKTHIN_MEDIUMGAP = 8, _            ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
+		$LOC_BORDER_STYLE_THICKTHIN_LARGEGAP = 9, _             ; Double border line with a thick line outside and a thin line inside separated by a large gap.
+		$LOC_BORDER_STYLE_EMBOSSED = 10, _                      ; 3D embossed border line.
+		$LOC_BORDER_STYLE_ENGRAVED = 11, _                      ; 3D engraved border line.
+		$LOC_BORDER_STYLE_OUTSET = 12, _                        ; Outset border line.
+		$LOC_BORDER_STYLE_INSET = 13, _                         ; Inset border line.
+		$LOC_BORDER_STYLE_FINE_DASHED = 14, _                   ; Finely dashed border line.
+		$LOC_BORDER_STYLE_DOUBLE_THIN = 15, _                   ; Double border line consisting of two fixed thin lines separated by a variable gap.
+		$LOC_BORDER_STYLE_DASH_DOT = 16, _                      ; Line consisting of a repetition of one dash and one dot.
+		$LOC_BORDER_STYLE_DASH_DOT_DOT = 17                     ; Line consisting of a repetition of one dash and 2 dots.
 
 ; Border Width
 Global Const _
-		$LOC_BORDERWIDTH_HAIRLINE = 2, _                        ; Hairline Border line width.
-		$LOC_BORDERWIDTH_VERY_THIN = 18, _                      ; Very Thin Border line width.
-		$LOC_BORDERWIDTH_THIN = 26, _                           ; Thin Border line width.
-		$LOC_BORDERWIDTH_MEDIUM = 53, _                         ; Medium Border line width.
-		$LOC_BORDERWIDTH_THICK = 79, _                          ; Thick Border line width.
-		$LOC_BORDERWIDTH_EXTRA_THICK = 159                      ; Extra Thick Border line width.
+		$LOC_BORDER_WIDTH_HAIRLINE = 2, _                       ; Hairline Border line width.
+		$LOC_BORDER_WIDTH_VERY_THIN = 18, _                     ; Very Thin Border line width.
+		$LOC_BORDER_WIDTH_THIN = 26, _                          ; Thin Border line width.
+		$LOC_BORDER_WIDTH_MEDIUM = 53, _                        ; Medium Border line width.
+		$LOC_BORDER_WIDTH_THICK = 79, _                         ; Thick Border line width.
+		$LOC_BORDER_WIDTH_EXTRA_THICK = 159                     ; Extra Thick Border line width.
 
 ; Cell Content Horizontal Alignment
 Global Const _                                                  ; com.sun.star.table.CellHoriJustify
@@ -124,17 +124,77 @@ Global Const _                                                  ; com.sun.star.t
 		$LOC_CELL_TYPE_TEXT = 2, _                              ; Cell contains text.
 		$LOC_CELL_TYPE_FORMULA = 3                              ; Cell contains a formula.
 
+; Posture/Italic
+Global Const _                                                  ; com.sun.star.awt.FontSlant
+		$LOC_CHAR_POSTURE_NONE = 0, _                           ; Specifies a font without slant.
+		$LOC_CHAR_POSTURE_OBLIQUE = 1, _                        ; Specifies an oblique font (slant not designed into the font).
+		$LOC_CHAR_POSTURE_ITALIC = 2, _                         ; Specifies an italic font (slant designed into the font).
+		$LOC_CHAR_POSTURE_DontKnow = 3, _                       ; Specifies a font with an unknown slant. For Read Only.
+		$LOC_CHAR_POSTURE_REV_OBLIQUE = 4, _                    ; Specifies a reverse oblique font (slant not designed into the font).
+		$LOC_CHAR_POSTURE_REV_ITALIC = 5                        ; Specifies a reverse italic font (slant designed into the font).
+
+; Relief
+Global Const _                                                  ; com.sun.star.text.FontRelief
+		$LOC_CHAR_RELIEF_NONE = 0, _                            ; No relief is applied.
+		$LOC_CHAR_RELIEF_EMBOSSED = 1, _                        ; The font relief is embossed.
+		$LOC_CHAR_RELIEF_ENGRAVED = 2                           ; The font relief is engraved.
+
+; Strikeout
+Global Const _                                                  ; com.sun.star.awt.FontStrikeout
+		$LOC_CHAR_STRIKEOUT_NONE = 0, _                         ; No strike out.
+		$LOC_CHAR_STRIKEOUT_SINGLE = 1, _                       ; Strike out the characters with a single line.
+		$LOC_CHAR_STRIKEOUT_DOUBLE = 2, _                       ; Strike out the characters with a double line.
+		$LOC_CHAR_STRIKEOUT_DONT_KNOW = 3, _                    ; The strikeout mode is not specified. For Read Only.
+		$LOC_CHAR_STRIKEOUT_BOLD = 4, _                         ; Strike out the characters with a bold line.
+		$LOC_CHAR_STRIKEOUT_SLASH = 5, _                        ; Strike out the characters with slashes.
+		$LOC_CHAR_STRIKEOUT_X = 6                               ; Strike out the characters with X's.
+
+; Underline/Overline
+Global Const _                                                  ; com.sun.star.awt.FontUnderline
+		$LOC_CHAR_UNDERLINE_NONE = 0, _                         ; No Underline or Overline style.
+		$LOC_CHAR_UNDERLINE_SINGLE = 1, _                       ; Single line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DOUBLE = 2, _                       ; Double line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DOTTED = 3, _                       ; Dotted line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DONT_KNOW = 4, _                    ; Unknown Underline/Overline style, for read only.
+		$LOC_CHAR_UNDERLINE_DASH = 5, _                         ; Dashed line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_LONG_DASH = 6, _                    ; Long Dashed line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DASH_DOT = 7, _                     ; Dash Dot line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DASH_DOT_DOT = 8, _                 ; Dash Dot Dot line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_SML_WAVE = 9, _                     ; Small Wave line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_WAVE = 10, _                        ; Wave line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_DBL_WAVE = 11, _                    ; Double Wave line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD = 12, _                        ; Bold line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_DOTTED = 13, _                 ; Bold Dotted line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_DASH = 14, _                   ; Bold Dashed line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_LONG_DASH = 15, _              ; Bold Long Dash line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_DASH_DOT = 16, _               ; Bold Dash Dot line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _           ; Bold Dash Dot Dot line Underline/Overline style.
+		$LOC_CHAR_UNDERLINE_BOLD_WAVE = 18                      ; Bold Wave line Underline/Overline style.
+
+; Weight/Bold
+Global Const _                                                  ; com.sun.star.awt.FontWeight
+		$LOC_CHAR_WEIGHT_DONT_KNOW = 0, _                       ; The font weight is not specified/unknown. For Read Only.
+		$LOC_CHAR_WEIGHT_THIN = 50, _                           ; A 50% (Thin) font weight.
+		$LOC_CHAR_WEIGHT_ULTRA_LIGHT = 60, _                    ; A 60% (Ultra Light) font weight.
+		$LOC_CHAR_WEIGHT_LIGHT = 75, _                          ; A 75% (Light) font weight.
+		$LOC_CHAR_WEIGHT_SEMI_LIGHT = 90, _                     ; A 90% (Semi-Light) font weight.
+		$LOC_CHAR_WEIGHT_NORMAL = 100, _                        ; A 100% (Normal) font weight.
+		$LOC_CHAR_WEIGHT_SEMI_BOLD = 110, _                     ; A 110% (Semi-Bold) font weight.
+		$LOC_CHAR_WEIGHT_BOLD = 150, _                          ; A 150% (Bold) font weight.
+		$LOC_CHAR_WEIGHT_ULTRA_BOLD = 175, _                    ; A 175% (Ultra-Bold) font weight.
+		$LOC_CHAR_WEIGHT_BLACK = 200                            ; A 200% (Black) font weight.
+
 ; Comment Text Anchor Position
 Global Enum _
-		$LOC_COMMENT_ANCHOR_TOP_LEFT, _                         ; The comment text is anchored in the Upper-Left corner of the comment box.
-		$LOC_COMMENT_ANCHOR_TOP_CENTER, _                       ; The comment text is anchored in the Upper-Center of the comment box.
-		$LOC_COMMENT_ANCHOR_TOP_RIGHT, _                        ; The comment text is anchored in the Upper-Right of the comment box.
-		$LOC_COMMENT_ANCHOR_MIDDLE_LEFT, _                      ; The comment text is anchored in the Middle-Left corner of the comment box.
-		$LOC_COMMENT_ANCHOR_MIDDLE_CENTER, _                    ; The comment text is anchored in the Middle-Center of the comment box.
-		$LOC_COMMENT_ANCHOR_MIDDLE_RIGHT, _                     ; The comment text is anchored in the Middle-Right of the comment box.
-		$LOC_COMMENT_ANCHOR_BOTTOM_LEFT, _                      ; The comment text is anchored in the Lower-Left corner of the comment box.
-		$LOC_COMMENT_ANCHOR_BOTTOM_CENTER, _                    ; The comment text is anchored in the Lower-Center of the comment box.
-		$LOC_COMMENT_ANCHOR_BOTTOM_RIGHT                        ; The comment text is anchored in the Lower-Right of the comment box.
+		$LOC_COMMENT_ANCHOR_TOP_LEFT, _                         ; 0 The comment text is anchored in the Upper-Left corner of the comment box.
+		$LOC_COMMENT_ANCHOR_TOP_CENTER, _                       ; 1 The comment text is anchored in the Upper-Center of the comment box.
+		$LOC_COMMENT_ANCHOR_TOP_RIGHT, _                        ; 2 The comment text is anchored in the Upper-Right of the comment box.
+		$LOC_COMMENT_ANCHOR_MIDDLE_LEFT, _                      ; 3 The comment text is anchored in the Middle-Left corner of the comment box.
+		$LOC_COMMENT_ANCHOR_MIDDLE_CENTER, _                    ; 4 The comment text is anchored in the Middle-Center of the comment box.
+		$LOC_COMMENT_ANCHOR_MIDDLE_RIGHT, _                     ; 5 The comment text is anchored in the Middle-Right of the comment box.
+		$LOC_COMMENT_ANCHOR_BOTTOM_LEFT, _                      ; 6 The comment text is anchored in the Lower-Left corner of the comment box.
+		$LOC_COMMENT_ANCHOR_BOTTOM_CENTER, _                    ; 7 The comment text is anchored in the Lower-Center of the comment box.
+		$LOC_COMMENT_ANCHOR_BOTTOM_RIGHT                        ; 8 The comment text is anchored in the Lower-Right of the comment box.
 
 ; Comment Animation Direction
 Global Const _                                                  ; com.sun.star.drawing.TextAnimationDirection
@@ -264,15 +324,15 @@ Global Enum _
 
 ; Comment Shadow Position
 Global Enum _
-		$LOC_COMMENT_SHADOW_TOP_LEFT, _                         ; The comment Shadow is positioned in the Upper-Left corner of the comment box.
-		$LOC_COMMENT_SHADOW_TOP_CENTER, _                       ; The comment Shadow is positioned in the Upper-Center of the comment box.
-		$LOC_COMMENT_SHADOW_TOP_RIGHT, _                        ; The comment Shadow is positioned in the Upper-Right corner of the comment box.
-		$LOC_COMMENT_SHADOW_MIDDLE_LEFT, _                      ; The comment Shadow is positioned in the Middle-Left corner of the comment box.
-		$LOC_COMMENT_SHADOW_MIDDLE_CENTER, _                    ; The comment Shadow is positioned in the Middle-Center of the comment box.
-		$LOC_COMMENT_SHADOW_MIDDLE_RIGHT, _                     ; The comment Shadow is positioned in the Middle-Right of the comment box.
-		$LOC_COMMENT_SHADOW_BOTTOM_LEFT, _                      ; The comment Shadow is positioned in the Lower-Left corner of the comment box.
-		$LOC_COMMENT_SHADOW_BOTTOM_CENTER, _                    ; The comment Shadow is positioned in the Lower-Center of the comment box.
-		$LOC_COMMENT_SHADOW_BOTTOM_RIGHT                        ; The comment Shadow is positioned in the Lower-Right corner of the comment box.
+		$LOC_COMMENT_SHADOW_TOP_LEFT, _                         ; 0 The comment Shadow is positioned in the Upper-Left corner of the comment box.
+		$LOC_COMMENT_SHADOW_TOP_CENTER, _                       ; 1 The comment Shadow is positioned in the Upper-Center of the comment box.
+		$LOC_COMMENT_SHADOW_TOP_RIGHT, _                        ; 2 The comment Shadow is positioned in the Upper-Right corner of the comment box.
+		$LOC_COMMENT_SHADOW_MIDDLE_LEFT, _                      ; 3 The comment Shadow is positioned in the Middle-Left corner of the comment box.
+		$LOC_COMMENT_SHADOW_MIDDLE_CENTER, _                    ; 4 The comment Shadow is positioned in the Middle-Center of the comment box.
+		$LOC_COMMENT_SHADOW_MIDDLE_RIGHT, _                     ; 5 The comment Shadow is positioned in the Middle-Right of the comment box.
+		$LOC_COMMENT_SHADOW_BOTTOM_LEFT, _                      ; 6 The comment Shadow is positioned in the Lower-Left corner of the comment box.
+		$LOC_COMMENT_SHADOW_BOTTOM_CENTER, _                    ; 7 The comment Shadow is positioned in the Lower-Center of the comment box.
+		$LOC_COMMENT_SHADOW_BOTTOM_RIGHT                        ; 8 The comment Shadow is positioned in the Lower-Right corner of the comment box.
 
 ; General Computation Functions
 Global Const _                                                  ; com.sun.star.sheet.GeneralFunction
@@ -297,23 +357,16 @@ Global Const _
 		$LOC_CURTYPE_PARAGRAPH = 3, _                           ; Object is a Paragraph Object.
 		$LOC_CURTYPE_TEXT_PORTION = 4                           ; Object is a Paragraph Text Portion Object.
 
-; Printer Duplex Constants.
-Global Const _                                                  ; com.sun.star.view.DuplexMode
-		$LOC_DUPLEX_UNKNOWN = 0, _                              ; Duplex mode setting is unknown.
-		$LOC_DUPLEX_OFF = 1, _                                  ; Duplex mode is off.
-		$LOC_DUPLEX_LONG = 2, _                                 ; Duplex mode is on, flip on Long edge.
-		$LOC_DUPLEX_SHORT = 3                                   ; Duplex mode is on, flip on Short edge.
-
 ; Field Types
 Global Enum Step *2 _
-		$LOC_FIELD_TYPE_ALL = 1, _                              ; Returns an array of all field types listed below.
-		$LOC_FIELD_TYPE_DATE_TIME, _                            ; A Date or Time field. {Cell & Header.}
-		$LOC_FIELD_TYPE_DOC_TITLE, _                            ; A Document Title field. {Cell & Header.}
-		$LOC_FIELD_TYPE_FILE_NAME, _                            ; A File Name or Path and File Name field. {Header.}
-		$LOC_FIELD_TYPE_PAGE_NUM, _                             ; A Page Number field. {Header.}
-		$LOC_FIELD_TYPE_PAGE_COUNT, _                           ; A total Page Count field. {Header.}
-		$LOC_FIELD_TYPE_SHEET_NAME, _                           ; A Sheet Name field. {Cell & Header.}
-		$LOC_FIELD_TYPE_URL                                     ; A Hyperlink/URL field. {Cell.}
+		$LOC_FIELD_TYPE_ALL = 1, _                              ; 1 Returns an array of all field types listed below.
+		$LOC_FIELD_TYPE_DATE_TIME, _                            ; 2 A Date or Time field. {Cell & Header.}
+		$LOC_FIELD_TYPE_DOC_TITLE, _                            ; 4 A Document Title field. {Cell & Header.}
+		$LOC_FIELD_TYPE_FILE_NAME, _                            ; 8 A File Name or Path and File Name field. {Header.}
+		$LOC_FIELD_TYPE_PAGE_NUM, _                             ; 16 A Page Number field. {Header.}
+		$LOC_FIELD_TYPE_PAGE_COUNT, _                           ; 32 A total Page Count field. {Header.}
+		$LOC_FIELD_TYPE_SHEET_NAME, _                           ; 64 A Sheet Name field. {Cell & Header.}
+		$LOC_FIELD_TYPE_URL                                     ; 128 A Hyperlink/URL field. {Cell.}
 
 ; Fill Date Mode
 Global Const _                                                  ; com.sun.star.sheet.FillDateMode
@@ -575,6 +628,12 @@ Global Const _
 		$LOC_PAPER_WIDTH_12ENVELOPE = 12065, _                  ; 12 Pound Envelope paper width in Hundredths of a Millimeter (HMM).
 		$LOC_PAPER_WIDTH_JAP_POSTCARD = 10008                   ; Japanese Postcard paper width in Hundredths of a Millimeter (HMM).
 
+; Text Direction
+Global Const _                                                  ; com.sun.star.text.WritingMode2
+		$LOC_PAR_TXT_DIR_LR = 0, _                              ; Text within lines is written left-to-right. Typically, this is the writing mode for normal "alphabetic" text.
+		$LOC_PAR_TXT_DIR_RL = 1, _                              ; Text within a line are written right-to-left. Typically, this writing mode is used in Arabic and Hebrew text.
+		$LOC_PAR_TXT_DIR_CONTEXT = 4                            ; Obtain actual writing mode from the context of the object.
+
 ; Pivot Table Field Base Item Type
 Global Const _                                                  ; com.sun.star.sheet.DataPilotFieldReferenceItemType
 		$LOC_PIVOT_TBL_FIELD_BASE_ITEM_NAMED = 0, _             ; The reference item is given by a name.
@@ -601,26 +660,18 @@ Global Const _                                                  ; com.sun.star.s
 		$LOC_PIVOT_TBL_FIELD_TYPE_FILTER = 3, _                 ; The field is used as a filter field. Also called "Page" in the constants.
 		$LOC_PIVOT_TBL_FIELD_TYPE_DATA = 4                      ; The field is used as a data field.
 
-; Posture/Italic
-Global Const _                                                  ; com.sun.star.awt.FontSlant
-		$LOC_POSTURE_NONE = 0, _                                ; Specifies a font without slant.
-		$LOC_POSTURE_OBLIQUE = 1, _                             ; Specifies an oblique font (slant not designed into the font).
-		$LOC_POSTURE_ITALIC = 2, _                              ; Specifies an italic font (slant designed into the font).
-		$LOC_POSTURE_DontKnow = 3, _                            ; Specifies a font with an unknown slant. For Read Only.
-		$LOC_POSTURE_REV_OBLIQUE = 4, _                         ; Specifies a reverse oblique font (slant not designed into the font).
-		$LOC_POSTURE_REV_ITALIC = 5                             ; Specifies a reverse italic font (slant designed into the font).
-
-; Relief
-Global Const _                                                  ; com.sun.star.text.FontRelief
-		$LOC_RELIEF_NONE = 0, _                                 ; No relief is applied.
-		$LOC_RELIEF_EMBOSSED = 1, _                             ; The font relief is embossed.
-		$LOC_RELIEF_ENGRAVED = 2                                ; The font relief is engraved.
+; Printer Duplex Constants.
+Global Const _                                                  ; com.sun.star.view.DuplexMode
+		$LOC_PRINT_DUPLEX_UNKNOWN = 0, _                        ; Duplex mode setting is unknown.
+		$LOC_PRINT_DUPLEX_OFF = 1, _                            ; Duplex mode is off.
+		$LOC_PRINT_DUPLEX_LONG = 2, _                           ; Duplex mode is on, flip on Long edge.
+		$LOC_PRINT_DUPLEX_SHORT = 3                             ; Duplex mode is on, flip on Short edge.
 
 ; Page Print Scale Mode
 Global Enum _
-		$LOC_SCALE_REDUCE_ENLARGE = 1, _                        ; Specifies a scaling factor to scale all printed pages.
-		$LOC_SCALE_FIT_WIDTH_HEIGHT, _                          ; Specifies the maximum number of pages horizontally (width) and vertically (height) on which every sheet is to be printed.
-		$LOC_SCALE_FIT_PAGES                                    ; Specifies the maximum number of pages on which every sheet is to be printed. The scale will be reduced as necessary to fit the defined number of pages.
+		$LOC_SCALE_REDUCE_ENLARGE = 1, _                        ; 1 Specifies a scaling factor to scale all printed pages.
+		$LOC_SCALE_FIT_WIDTH_HEIGHT, _                          ; 2 Specifies the maximum number of pages horizontally (width) and vertically (height) on which every sheet is to be printed.
+		$LOC_SCALE_FIT_PAGES                                    ; 3 Specifies the maximum number of pages on which every sheet is to be printed. The scale will be reduced as necessary to fit the defined number of pages.
 
 ; Search In
 Global Const _
@@ -630,11 +681,11 @@ Global Const _
 
 ; Shadow Location
 Global Const _                                                  ; com.sun.star.table.ShadowLocation
-		$LOC_SHADOW_NONE = 0, _                                 ; No shadow is applied.
-		$LOC_SHADOW_TOP_LEFT = 1, _                             ; Shadow is located along the upper and left sides.
-		$LOC_SHADOW_TOP_RIGHT = 2, _                            ; Shadow is located along the upper and right sides.
-		$LOC_SHADOW_BOTTOM_LEFT = 3, _                          ; Shadow is located along the lower and left sides.
-		$LOC_SHADOW_BOTTOM_RIGHT = 4                            ; Shadow is located along the lower and right sides.
+		$LOC_SHADOW_LOCATION_NONE = 0, _                        ; No shadow is applied.
+		$LOC_SHADOW_LOCATION_TOP_LEFT = 1, _                    ; Shadow is located along the upper and left sides.
+		$LOC_SHADOW_LOCATION_TOP_RIGHT = 2, _                   ; Shadow is located along the upper and right sides.
+		$LOC_SHADOW_LOCATION_BOTTOM_LEFT = 3, _                 ; Shadow is located along the lower and left sides.
+		$LOC_SHADOW_LOCATION_BOTTOM_RIGHT = 4                   ; Shadow is located along the lower and right sides.
 
 ; Sheet Link Mode
 Global Const _                                                  ; com.sun.star.sheet.SheetLinkMode
@@ -644,19 +695,19 @@ Global Const _                                                  ; com.sun.star.s
 
 ; Sheet Cursor Movement Constants.
 Global Enum _
-		$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY, _              ; Collapses or Expands the range to contain the current array formula.
-		$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION, _             ; Collapses or Expands the range to contain all contiguous nonempty cells.
-		$LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA, _                ; Collapses or Expand the range to contain merged cells that intersect the range.
-		$LOC_SHEETCUR_COLLAPSE_TO_SIZE, _                       ; Beginning with the upper-left corner or the current range, set the cursor range size.
-		$LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN, _                ; Expands the range to contain all columns that intersect the range.
-		$LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW, _                   ; Expands the range to contain all rows that intersect the range.
-		$LOC_SHEETCUR_GOTO_OFFSET, _                            ; Shift the cursor’s range relative to the current position. Negative numbers shift left/up; positive numbers shift right/down.
-		$LOC_SHEETCUR_GOTO_START, _                             ; Move the cursor to the first filled cell at the beginning of a contiguous series of filled cells. This cell may be outside the cursor’s range.
-		$LOC_SHEETCUR_GOTO_END, _                               ; Move the cursor to the last filled cell at the end of a contiguous series of filled cells. This cell may be outside the cursor’s range.
-		$LOC_SHEETCUR_GOTO_NEXT, _                              ; Move the cursor to the next (right) unprotected cell.
-		$LOC_SHEETCUR_GOTO_PREV, _                              ; Move the cursor to the previous (left) unprotected cell.
-		$LOC_SHEETCUR_GOTO_USED_AREA_START, _                   ; Set the cursor to the start of the used area.
-		$LOC_SHEETCUR_GOTO_USED_AREA_END                        ; Set the cursor to the end of the used area.
+		$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY, _              ; 0 Collapses or Expands the range to contain the current array formula.
+		$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION, _             ; 1 Collapses or Expands the range to contain all contiguous nonempty cells.
+		$LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA, _                ; 2 Collapses or Expand the range to contain merged cells that intersect the range.
+		$LOC_SHEETCUR_COLLAPSE_TO_SIZE, _                       ; 3 Beginning with the upper-left corner or the current range, set the cursor range size.
+		$LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN, _                ; 4 Expands the range to contain all columns that intersect the range.
+		$LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW, _                   ; 5 Expands the range to contain all rows that intersect the range.
+		$LOC_SHEETCUR_GOTO_OFFSET, _                            ; 6 Shift the cursor’s range relative to the current position. Negative numbers shift left/up; positive numbers shift right/down.
+		$LOC_SHEETCUR_GOTO_START, _                             ; 7 Move the cursor to the first filled cell at the beginning of a contiguous series of filled cells. This cell may be outside the cursor’s range.
+		$LOC_SHEETCUR_GOTO_END, _                               ; 8 Move the cursor to the last filled cell at the end of a contiguous series of filled cells. This cell may be outside the cursor’s range.
+		$LOC_SHEETCUR_GOTO_NEXT, _                              ; 9 Move the cursor to the next (right) unprotected cell.
+		$LOC_SHEETCUR_GOTO_PREV, _                              ; 10 Move the cursor to the previous (left) unprotected cell.
+		$LOC_SHEETCUR_GOTO_USED_AREA_START, _                   ; 11 Set the cursor to the start of the used area.
+		$LOC_SHEETCUR_GOTO_USED_AREA_END                        ; 12 Set the cursor to the end of the used area.
 
 ; Sort Data Type
 Global Const _                                                  ; com.sun.star.table.TableSortFieldType
@@ -664,52 +715,14 @@ Global Const _                                                  ; com.sun.star.t
 		$LOC_SORT_DATA_TYPE_NUMERIC = 1, _                      ; Sort Data type is Numerical.
 		$LOC_SORT_DATA_TYPE_ALPHANUMERIC = 2                    ; Sort Data type is Text.
 
-; Strikeout
-Global Const _                                                  ; com.sun.star.awt.FontStrikeout
-		$LOC_STRIKEOUT_NONE = 0, _                              ; No strike out.
-		$LOC_STRIKEOUT_SINGLE = 1, _                            ; Strike out the characters with a single line.
-		$LOC_STRIKEOUT_DOUBLE = 2, _                            ; Strike out the characters with a double line.
-		$LOC_STRIKEOUT_DONT_KNOW = 3, _                         ; The strikeout mode is not specified. For Read Only.
-		$LOC_STRIKEOUT_BOLD = 4, _                              ; Strike out the characters with a bold line.
-		$LOC_STRIKEOUT_SLASH = 5, _                             ; Strike out the characters with slashes.
-		$LOC_STRIKEOUT_X = 6                                    ; Strike out the characters with X's.
-
 ; Text Cursor Movement Constants.
 Global Enum _
-		$LOC_TEXTCUR_COLLAPSE_TO_START, _                       ; Collapses the current selection to the start of the selection.
-		$LOC_TEXTCUR_COLLAPSE_TO_END, _                         ; Collapses the current selection the to end of the selection.
-		$LOC_TEXTCUR_GO_LEFT, _                                 ; Move the cursor left by n characters.
-		$LOC_TEXTCUR_GO_RIGHT, _                                ; Move the cursor right by n characters.
-		$LOC_TEXTCUR_GOTO_START, _                              ; Move the cursor to the start of the text.
-		$LOC_TEXTCUR_GOTO_END                                   ; Move the cursor to the end of the text.
-
-; Text Direction
-Global Const _                                                  ; com.sun.star.text.WritingMode2
-		$LOC_TXT_DIR_LR = 0, _                                  ; Text within lines is written left-to-right. Typically, this is the writing mode for normal "alphabetic" text.
-		$LOC_TXT_DIR_RL = 1, _                                  ; Text within a line are written right-to-left. Typically, this writing mode is used in Arabic and Hebrew text.
-		$LOC_TXT_DIR_CONTEXT = 4                                ; Obtain actual writing mode from the context of the object.
-
-; Underline/Overline
-Global Const _                                                  ; com.sun.star.awt.FontUnderline
-		$LOC_UNDERLINE_NONE = 0, _                              ; No Underline or Overline style.
-		$LOC_UNDERLINE_SINGLE = 1, _                            ; Single line Underline/Overline style.
-		$LOC_UNDERLINE_DOUBLE = 2, _                            ; Double line Underline/Overline style.
-		$LOC_UNDERLINE_DOTTED = 3, _                            ; Dotted line Underline/Overline style.
-		$LOC_UNDERLINE_DONT_KNOW = 4, _                         ; Unknown Underline/Overline style, for read only.
-		$LOC_UNDERLINE_DASH = 5, _                              ; Dashed line Underline/Overline style.
-		$LOC_UNDERLINE_LONG_DASH = 6, _                         ; Long Dashed line Underline/Overline style.
-		$LOC_UNDERLINE_DASH_DOT = 7, _                          ; Dash Dot line Underline/Overline style.
-		$LOC_UNDERLINE_DASH_DOT_DOT = 8, _                      ; Dash Dot Dot line Underline/Overline style.
-		$LOC_UNDERLINE_SML_WAVE = 9, _                          ; Small Wave line Underline/Overline style.
-		$LOC_UNDERLINE_WAVE = 10, _                             ; Wave line Underline/Overline style.
-		$LOC_UNDERLINE_DBL_WAVE = 11, _                         ; Double Wave line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD = 12, _                             ; Bold line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_DOTTED = 13, _                      ; Bold Dotted line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_DASH = 14, _                        ; Bold Dashed line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_LONG_DASH = 15, _                   ; Bold Long Dash line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_DASH_DOT = 16, _                    ; Bold Dash Dot line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _                ; Bold Dash Dot Dot line Underline/Overline style.
-		$LOC_UNDERLINE_BOLD_WAVE = 18                           ; Bold Wave line Underline/Overline style.
+		$LOC_TEXTCUR_COLLAPSE_TO_START, _                       ; 0 Collapses the current selection to the start of the selection.
+		$LOC_TEXTCUR_COLLAPSE_TO_END, _                         ; 1 Collapses the current selection the to end of the selection.
+		$LOC_TEXTCUR_GO_LEFT, _                                 ; 2 Move the cursor left by n characters.
+		$LOC_TEXTCUR_GO_RIGHT, _                                ; 3 Move the cursor right by n characters.
+		$LOC_TEXTCUR_GOTO_START, _                              ; 4 Move the cursor to the start of the text.
+		$LOC_TEXTCUR_GOTO_END                                   ; 5 Move the cursor to the end of the text.
 
 ; Validation Conditions.
 Global Const _                                                  ; com.sun.star.sheet.ConditionOperator
@@ -747,19 +760,6 @@ Global Const _                                                  ; com.sun.star.s
 		$LOC_VALIDATION_TYPE_TEXT_LEN = 5, _                    ; String is valid if its length matches the specified condition.
 		$LOC_VALIDATION_TYPE_LIST = 6, _                        ; Only strings from a specified list are valid.
 		$LOC_VALIDATION_TYPE_CUSTOM = 7                         ; The specified formula determines which contents are valid.
-
-; Weight/Bold
-Global Const _                                                  ; com.sun.star.awt.FontWeight
-		$LOC_WEIGHT_DONT_KNOW = 0, _                            ; The font weight is not specified/unknown. For Read Only.
-		$LOC_WEIGHT_THIN = 50, _                                ; A 50% (Thin) font weight.
-		$LOC_WEIGHT_ULTRA_LIGHT = 60, _                         ; A 60% (Ultra Light) font weight.
-		$LOC_WEIGHT_LIGHT = 75, _                               ; A 75% (Light) font weight.
-		$LOC_WEIGHT_SEMI_LIGHT = 90, _                          ; A 90% (Semi-Light) font weight.
-		$LOC_WEIGHT_NORMAL = 100, _                             ; A 100% (Normal) font weight.
-		$LOC_WEIGHT_SEMI_BOLD = 110, _                          ; A 110% (Semi-Bold) font weight.
-		$LOC_WEIGHT_BOLD = 150, _                               ; A 150% (Bold) font weight.
-		$LOC_WEIGHT_ULTRA_BOLD = 175, _                         ; A 175% (Ultra-Bold) font weight.
-		$LOC_WEIGHT_BLACK = 200                                 ; A 200% (Black) font weight.
 
 ; Zoom Type Constants
 Global Const _                                                  ; com.sun.star.view.DocumentZoomType

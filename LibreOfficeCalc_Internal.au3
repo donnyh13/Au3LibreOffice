@@ -53,8 +53,6 @@
 ; __LOCalc_PageStyleFooterBorder
 ; __LOCalc_PageStyleHeaderBorder
 ; __LOCalc_RangeAddressIsSame
-; __LOCalc_SheetCursorMove
-; __LOCalc_TextCursorMove
 ; __LOCalc_TransparencyGradientConvert
 ; __LOCalc_TransparencyGradientNameInsert
 ; ===============================================================================================================================
@@ -145,9 +143,9 @@ EndFunc   ;==>__LOCalc_CellBackColor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_CellBorder
-; Description ...: Internal function to Set and Retrieve the Cell, or Cell Range Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Cell, or Cell Range Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_CellBorder(ByRef $oRange, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetGetActive function.
+; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
@@ -187,7 +185,7 @@ EndFunc   ;==>__LOCalc_CellBackColor
 ;                  |                               64 = Error setting $iTLBRDiag
 ;                  |                               128 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
@@ -199,7 +197,7 @@ EndFunc   ;==>__LOCalc_CellBackColor
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOCalc_CellBorder(ByRef $oRange, $bWid, $bSty, $bCol, $iTop = Null, $iBottom = Null, $iLeft = Null = Null, $iRight = Null, $iVert = Null, $iHori = Null, $iTLBRDiag = Null, $iBLTRDiag = Null)
+Func __LOCalc_CellBorder(ByRef $oRange, $bWid, $bSty, $bCol, $iTop = Null, $iBottom = Null, $iLeft = Null, $iRight = Null, $iVert = Null, $iHori = Null, $iTLBRDiag = Null, $iBLTRDiag = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -323,34 +321,34 @@ Func __LOCalc_CellBorder(ByRef $oRange, $bWid, $bSty, $bCol, $iTop = Null, $iBot
 	EndIf
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oRange.TableBorder2.TopLine.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oRange.TableBorder2.BottomLine.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oRange.TableBorder2.LeftLine.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oRange.TableBorder2.RightLine.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
-		$iError = ($iVert <> Null) ? ($iError) : (__LO_IntIsBetween($oRange.TableBorder2.VerticalLine.LineWidth(), $iVert - 1, $iVert + 1)) ? ($iError) : (BitOR($iError, 16))
-		$iError = ($iHori <> Null) ? ($iError) : (__LO_IntIsBetween($oRange.TableBorder2.HorizontalLine.LineWidth(), $iHori - 1, $iHori + 1)) ? ($iError) : (BitOR($iError, 32))
-		$iError = ($iTLBRDiag <> Null) ? ($iError) : (__LO_IntIsBetween($oRange.DiagonalTLBR2.LineWidth(), $iTLBRDiag - 1, $iTLBRDiag + 1)) ? ($iError) : (BitOR($iError, 64))
-		$iError = ($iBLTRDiag <> Null) ? ($iError) : (__LO_IntIsBetween($oRange.DiagonalBLTR2.LineWidth(), $iBLTRDiag - 1, $iBLTRDiag + 1)) ? ($iError) : (BitOR($iError, 128))
+		$iError = ($iTop = Null) ? ($iError) : ((__LO_IntIsBetween($oRange.TableBorder2.TopLine.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : ((__LO_IntIsBetween($oRange.TableBorder2.BottomLine.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : ((__LO_IntIsBetween($oRange.TableBorder2.LeftLine.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : ((__LO_IntIsBetween($oRange.TableBorder2.RightLine.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8)))
+		$iError = ($iVert = Null) ? ($iError) : ((__LO_IntIsBetween($oRange.TableBorder2.VerticalLine.LineWidth(), $iVert - 1, $iVert + 1)) ? ($iError) : (BitOR($iError, 16)))
+		$iError = ($iHori = Null) ? ($iError) : ((__LO_IntIsBetween($oRange.TableBorder2.HorizontalLine.LineWidth(), $iHori - 1, $iHori + 1)) ? ($iError) : (BitOR($iError, 32)))
+		$iError = ($iTLBRDiag = Null) ? ($iError) : ((__LO_IntIsBetween($oRange.DiagonalTLBR2.LineWidth(), $iTLBRDiag - 1, $iTLBRDiag + 1)) ? ($iError) : (BitOR($iError, 64)))
+		$iError = ($iBLTRDiag = Null) ? ($iError) : ((__LO_IntIsBetween($oRange.DiagonalBLTR2.LineWidth(), $iBLTRDiag - 1, $iBLTRDiag + 1)) ? ($iError) : (BitOR($iError, 128)))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oRange.TableBorder2.TopLine.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oRange.TableBorder2.BottomLine.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oRange.TableBorder2.LeftLine.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oRange.TableBorder2.RightLine.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
-		$iError = ($iVert <> Null) ? ($iError) : ($oRange.TableBorder2.VerticalLine.LineStyle() = $iVert) ? ($iError) : (BitOR($iError, 16))
-		$iError = ($iHori <> Null) ? ($iError) : ($oRange.TableBorder2.HorizontalLine.LineStyle() = $iHori) ? ($iError) : (BitOR($iError, 32))
-		$iError = ($iTLBRDiag <> Null) ? ($iError) : ($oRange.DiagonalTLBR2.LineStyle() = $iTLBRDiag) ? ($iError) : (BitOR($iError, 64))
-		$iError = ($iBLTRDiag <> Null) ? ($iError) : ($oRange.DiagonalBLTR2.LineStyle() = $iBLTRDiag) ? ($iError) : (BitOR($iError, 128))
+		$iError = ($iTop = Null) ? ($iError) : (($oRange.TableBorder2.TopLine.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oRange.TableBorder2.BottomLine.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oRange.TableBorder2.LeftLine.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oRange.TableBorder2.RightLine.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8)))
+		$iError = ($iVert = Null) ? ($iError) : (($oRange.TableBorder2.VerticalLine.LineStyle() = $iVert) ? ($iError) : (BitOR($iError, 16)))
+		$iError = ($iHori = Null) ? ($iError) : (($oRange.TableBorder2.HorizontalLine.LineStyle() = $iHori) ? ($iError) : (BitOR($iError, 32)))
+		$iError = ($iTLBRDiag = Null) ? ($iError) : (($oRange.DiagonalTLBR2.LineStyle() = $iTLBRDiag) ? ($iError) : (BitOR($iError, 64)))
+		$iError = ($iBLTRDiag = Null) ? ($iError) : (($oRange.DiagonalBLTR2.LineStyle() = $iBLTRDiag) ? ($iError) : (BitOR($iError, 128)))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oRange.TableBorder2.TopLine.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oRange.TableBorder2.BottomLine.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oRange.TableBorder2.LeftLine.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oRange.TableBorder2.RightLine.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
-		$iError = ($iVert <> Null) ? ($iError) : ($oRange.TableBorder2.VerticalLine.Color() = $iVert) ? ($iError) : (BitOR($iError, 16))
-		$iError = ($iHori <> Null) ? ($iError) : ($oRange.TableBorder2.HorizontalLine.Color() = $iHori) ? ($iError) : (BitOR($iError, 32))
-		$iError = ($iTLBRDiag <> Null) ? ($iError) : ($oRange.DiagonalTLBR2.Color() = $iTLBRDiag) ? ($iError) : (BitOR($iError, 64))
-		$iError = ($iBLTRDiag <> Null) ? ($iError) : ($oRange.DiagonalBLTR2.Color() = $iBLTRDiag) ? ($iError) : (BitOR($iError, 128))
+		$iError = ($iTop = Null) ? ($iError) : (($oRange.TableBorder2.TopLine.Color() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oRange.TableBorder2.BottomLine.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oRange.TableBorder2.LeftLine.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oRange.TableBorder2.RightLine.Color() = $iRight) ? ($iError) : (BitOR($iError, 8)))
+		$iError = ($iVert = Null) ? ($iError) : (($oRange.TableBorder2.VerticalLine.Color() = $iVert) ? ($iError) : (BitOR($iError, 16)))
+		$iError = ($iHori = Null) ? ($iError) : (($oRange.TableBorder2.HorizontalLine.Color() = $iHori) ? ($iError) : (BitOR($iError, 32)))
+		$iError = ($iTLBRDiag = Null) ? ($iError) : (($oRange.DiagonalTLBR2.Color() = $iTLBRDiag) ? ($iError) : (BitOR($iError, 64)))
+		$iError = ($iBLTRDiag = Null) ? ($iError) : (($oRange.DiagonalBLTR2.Color() = $iBLTRDiag) ? ($iError) : (BitOR($iError, 128)))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -458,14 +456,14 @@ EndFunc   ;==>__LOCalc_CellBorderPadding
 ; Description ...: Internal function to Set or Retrieve the Font Effect settings for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellEffect(ByRef $oObj[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]])
 ; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOC_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOC_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
@@ -500,7 +498,7 @@ Func __LOCalc_CellEffect(ByRef $oObj, $iRelief = Null, $bOutline = Null, $bShado
 	EndIf
 
 	If ($iRelief <> Null) Then
-		If Not __LO_IntIsBetween($iRelief, $LOC_RELIEF_NONE, $LOC_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iRelief, $LOC_CHAR_RELIEF_NONE, $LOC_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharRelief = $iRelief
 		$iError = ($oObj.CharRelief() = $iRelief) ? ($iError) : (BitOR($iError, 1))
@@ -530,8 +528,8 @@ EndFunc   ;==>__LOCalc_CellEffect
 ; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
 ;                  $sFontName           - [optional] a string value. Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] a general number value. Default is Null. The new Font size.
-;                  $iPosture            - [optional] an integer value (0-5). Default is Null. The Font Italic setting. See Constants, $LOC_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] an integer value (0, 50-200). Default is Null. The Font Bold settings see Constants, $LOC_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
+;                  $iPosture            - [optional] an integer value (0-5). Default is Null. The Font Italic setting. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] an integer value (0, 50-200). Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -539,8 +537,8 @@ EndFunc   ;==>__LOCalc_CellEffect
 ;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
 ;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not available.
 ;                  @Error 1 @Extended 4 Return 0 = $nFontSize not a number.
-;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOC_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOC_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 6 Return 0 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFontName
@@ -591,14 +589,14 @@ Func __LOCalc_CellFont(ByRef $oObj, $sFontName = Null, $nFontSize = Null, $iPost
 	EndIf
 
 	If ($iPosture <> Null) Then
-		If Not __LO_IntIsBetween($iPosture, $LOC_POSTURE_NONE, $LOC_POSTURE_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iPosture, $LOC_CHAR_POSTURE_NONE, $LOC_CHAR_POSTURE_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oObj.CharPosture = $iPosture
 		$iError = ($oObj.CharPosture() = $iPosture) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($iWeight <> Null) Then
-		If Not __LO_IntIsBetween($iWeight, $LOC_WEIGHT_THIN, $LOC_WEIGHT_BLACK, "", $LOC_WEIGHT_DONT_KNOW) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iWeight, $LOC_CHAR_WEIGHT_THIN, $LOC_CHAR_WEIGHT_BLACK, "", $LOC_CHAR_WEIGHT_DONT_KNOW) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oObj.CharWeight = $iWeight
 		$iError = ($oObj.CharWeight() = $iWeight) ? ($iError) : (BitOR($iError, 8))
@@ -618,6 +616,8 @@ EndFunc   ;==>__LOCalc_CellFont
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than 0 or greater than 16777215.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Font Color.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFontColor
@@ -636,13 +636,15 @@ Func __LOCalc_CellFontColor(ByRef $oObj, $iFontColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurColor
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iFontColor) Then
+		$iCurColor = $oObj.CharColor()
+		If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oObj.CharColor())
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
 	EndIf
 
 	If ($iFontColor <> Null) Then
@@ -669,6 +671,8 @@ EndFunc   ;==>__LOCalc_CellFontColor
 ;                  @Error 1 @Extended 2 Return 0 = $oObj not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = Format Key called in $iFormatKey not found in document.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering Format.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFormatKey
@@ -687,12 +691,17 @@ Func __LOCalc_CellNumberFormat(ByRef $oDoc, ByRef $oObj, $iFormatKey = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurFormatKey
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($iFormatKey) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oObj.NumberFormat())
+	If __LO_VarsAreNull($iFormatKey) Then
+		$iCurFormatKey = $oObj.NumberFormat()
+		If Not IsInt($iCurFormatKey) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurFormatKey)
+	EndIf
 
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not _LOCalc_FormatKeyExists($oDoc, $iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
@@ -706,29 +715,26 @@ EndFunc   ;==>__LOCalc_CellNumberFormat
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_CellOverLine
 ; Description ...: Internal function to Set and retrieve the OverLine settings for a Cell, Cell Range, or Cell Style.
-; Syntax ........: __LOCalc_CellOverLine(ByRef $oObj[, $bWordOnly = Null[, $iOverLineStyle = Null[, $bOLHasColor = Null[, $iOLColor = Null]]]])
+; Syntax ........: __LOCalc_CellOverLine(ByRef $oObj[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
-;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOC_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
-;                  $bOLHasColor         - [optional] a boolean value. Default is Null. If True, the Overline is colored, must be set to True in order to set the Overline color.
+;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
-;                  @Error 1 @Extended 4 Return 0 = $bOLHasColor not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
+;                  @Error 1 @Extended 3 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iOverLineStyle
-;                  |                               4 = Error setting $bOLHasColor
-;                  |                               8 = Error setting $iOLColor
+;                  |                               1 = Error setting $iOverLineStyle
+;                  |                               2 = Error setting $iOLColor
+;                  |                               4 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Overline line style uses the same constants as underline style.
@@ -738,47 +744,48 @@ EndFunc   ;==>__LOCalc_CellNumberFormat
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOCalc_CellOverLine(ByRef $oObj, $bWordOnly = Null, $iOverLineStyle = Null, $bOLHasColor = Null, $iOLColor = Null)
+Func __LOCalc_CellOverLine(ByRef $oObj, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avOverLine[4]
+	Local $avOverLine[3]
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bWordOnly, $iOverLineStyle, $bOLHasColor, $iOLColor) Then
-		__LO_ArrayFill($avOverLine, $oObj.CharWordMode(), $oObj.CharOverline(), $oObj.CharOverlineHasColor(), $oObj.CharOverlineColor())
+	If __LO_VarsAreNull($iOverLineStyle, $iOLColor, $bWordOnly) Then
+		__LO_ArrayFill($avOverLine, $oObj.CharOverline(), $oObj.CharOverlineColor(), $oObj.CharWordMode())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOverLine)
 	EndIf
 
-	If ($bWordOnly <> Null) Then
-		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oObj.CharWordMode = $bWordOnly
-		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
 	If ($iOverLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iOverLineStyle, $LOC_UNDERLINE_NONE, $LOC_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iOverLineStyle, $LOC_CHAR_UNDERLINE_NONE, $LOC_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharOverline = $iOverLineStyle
-		$iError = ($oObj.CharOverline() = $iOverLineStyle) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($bOLHasColor <> Null) Then
-		If Not IsBool($bOLHasColor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oObj.CharOverlineHasColor = $bOLHasColor
-		$iError = ($oObj.CharOverlineHasColor() = $bOLHasColor) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($oObj.CharOverline() = $iOverLineStyle) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iOLColor <> Null) Then
-		If Not __LO_IntIsBetween($iOLColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iOLColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$oObj.CharOverlineColor = $iOLColor
-		$iError = ($oObj.CharOverlineColor() = $iOLColor) ? ($iError) : (BitOR($iError, 8))
+		If ($iOLColor = $LO_COLOR_OFF) Then
+			If ($oObj.CharOverlineHasColor() = True) Then $oObj.CharOverlineHasColor = False
+			$oObj.CharOverlineColor = $iOLColor
+
+		Else
+			If ($oObj.CharOverlineHasColor() = False) Then $oObj.CharOverlineHasColor = True
+			$oObj.CharOverlineColor = $iOLColor
+		EndIf
+
+		$iError = ($oObj.CharOverlineColor() = $iOLColor) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bWordOnly <> Null) Then
+		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oObj.CharWordMode = $bWordOnly
+		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -877,25 +884,25 @@ EndFunc   ;==>__LOCalc_CellProtection
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_CellShadow
 ; Description ...: Internal function to Set or Retrieve the Shadow settings for a Cell, Cell Range, or Cell style.
-; Syntax ........: __LOCalc_CellShadow(ByRef $oObj[, $iWidth = Null[, $iColor = Null[, $iLocation = Null]]])
+; Syntax ........: __LOCalc_CellShadow(ByRef $oObj[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
 ; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iWidth              - [optional] an integer value (0-5009). Default is Null. The shadow width, set in Hundredths of a Millimeter (HMM).
+;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The location of the shadow compared to the Cell. See Constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The color of the shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The location of the shadow compared to the Cell. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iWidth              - [optional] an integer value (0-5009). Default is Null. The shadow width, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer, less than 0 or greater than 5009.
+;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, less than 0 or greater than 5009.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shadow Format Structure.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $iWidth
+;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
-;                  |                               4 = Error setting $iLocation
+;                  |                               4 = Error setting $iWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -907,7 +914,7 @@ EndFunc   ;==>__LOCalc_CellProtection
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOCalc_CellShadow(ByRef $oObj, $iWidth = Null, $iColor = Null, $iLocation = Null)
+Func __LOCalc_CellShadow(ByRef $oObj, $iLocation = Null, $iColor = Null, $iWidth = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -920,16 +927,16 @@ Func __LOCalc_CellShadow(ByRef $oObj, $iWidth = Null, $iColor = Null, $iLocation
 	$tShdwFrmt = $oObj.ShadowFormat()
 	If Not IsObj($tShdwFrmt) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iWidth, $iColor, $iLocation) Then
-		__LO_ArrayFill($avShadow, $tShdwFrmt.ShadowWidth(), $tShdwFrmt.Color(), $tShdwFrmt.Location())
+	If __LO_VarsAreNull($iLocation, $iColor, $iWidth) Then
+		__LO_ArrayFill($avShadow, $tShdwFrmt.Location(), $tShdwFrmt.Color(), $tShdwFrmt.ShadowWidth())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avShadow)
 	EndIf
 
-	If ($iWidth <> Null) Then
-		If Not __LO_IntIsBetween($iWidth, 0, 5009) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If ($iLocation <> Null) Then
+		If Not __LO_IntIsBetween($iLocation, $LOC_SHADOW_LOCATION_NONE, $LOC_SHADOW_LOCATION_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-		$tShdwFrmt.ShadowWidth = $iWidth
+		$tShdwFrmt.Location = $iLocation
 	EndIf
 
 	If ($iColor <> Null) Then
@@ -938,17 +945,17 @@ Func __LOCalc_CellShadow(ByRef $oObj, $iWidth = Null, $iColor = Null, $iLocation
 		$tShdwFrmt.Color = $iColor
 	EndIf
 
-	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOC_SHADOW_NONE, $LOC_SHADOW_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($iWidth <> Null) Then
+		If Not __LO_IntIsBetween($iWidth, 0, 5009) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		$tShdwFrmt.Location = $iLocation
+		$tShdwFrmt.ShadowWidth = $iWidth
 	EndIf
 
 	$oObj.ShadowFormat = $tShdwFrmt
 
-	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($oObj.ShadowFormat.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($oObj.ShadowFormat.Location() = $iLocation) ? ($iError) : (BitOR($iError, 1)))
 	$iError = (__LO_VarsAreNull($iColor)) ? ($iError) : (($oObj.ShadowFormat.Color() = $iColor) ? ($iError) : (BitOR($iError, 2)))
-	$iError = (__LO_VarsAreNull($iLocation)) ? ($iError) : (($oObj.ShadowFormat.Location() = $iLocation) ? ($iError) : (BitOR($iError, 4)))
+	$iError = (__LO_VarsAreNull($iWidth)) ? ($iError) : ((__LO_IntIsBetween($oObj.ShadowFormat.ShadowWidth(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 4)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>__LOCalc_CellShadow
@@ -956,26 +963,23 @@ EndFunc   ;==>__LOCalc_CellShadow
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_CellStrikeOut
 ; Description ...: Internal function to Set or Retrieve the Strikeout settings for a Cell, Cell Range, or Cell Style.
-; Syntax ........: __LOCalc_CellStrikeOut(ByRef $oObj[, $bWordOnly = Null[, $bStrikeOut = Null[, $iStrikeLineStyle = Null]]])
+; Syntax ........: __LOCalc_CellStrikeOut(ByRef $oObj[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
-;                  $bStrikeOut          - [optional] a boolean value. Default is Null. If True, strikeout is applied to characters.
-;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bStrikeOut not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $bStrikeOut
-;                  |                               4 = Error setting $iStrikeLineStyle
+;                  |                               1 = Error setting $iStrikeLineStyle
+;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -984,40 +988,33 @@ EndFunc   ;==>__LOCalc_CellShadow
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOCalc_CellStrikeOut(ByRef $oObj, $bWordOnly = Null, $bStrikeOut = Null, $iStrikeLineStyle = Null)
+Func __LOCalc_CellStrikeOut(ByRef $oObj, $iStrikeLineStyle = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avStrikeOut[3]
+	Local $avStrikeOut[2]
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bWordOnly, $bStrikeOut, $iStrikeLineStyle) Then
-		__LO_ArrayFill($avStrikeOut, $oObj.CharWordMode(), $oObj.CharCrossedOut(), $oObj.CharStrikeout())
+	If __LO_VarsAreNull($iStrikeLineStyle, $bWordOnly) Then
+		__LO_ArrayFill($avStrikeOut, $oObj.CharStrikeout(), $oObj.CharWordMode())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avStrikeOut)
 	EndIf
 
-	If ($bWordOnly <> Null) Then
-		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oObj.CharWordMode = $bWordOnly
-		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($bStrikeOut <> Null) Then
-		If Not IsBool($bStrikeOut) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oObj.CharCrossedOut = $bStrikeOut
-		$iError = ($oObj.CharCrossedOut() = $bStrikeOut) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
 	If ($iStrikeLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iStrikeLineStyle, $LOC_STRIKEOUT_NONE, $LOC_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iStrikeLineStyle, $LOC_CHAR_STRIKEOUT_NONE, $LOC_CHAR_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharStrikeout = $iStrikeLineStyle
-		$iError = ($oObj.CharStrikeout() = $iStrikeLineStyle) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($oObj.CharStrikeout() = $iStrikeLineStyle) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($bWordOnly <> Null) Then
+		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oObj.CharWordMode = $bWordOnly
+		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -1025,9 +1022,9 @@ EndFunc   ;==>__LOCalc_CellStrikeOut
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_CellStyleBorder
-; Description ...: Internal function to Set and Retrieve the Cell Style Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Cell Style Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_CellStyleBorder(ByRef $oCellStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]])
-; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObj function.
+; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObjByName function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
@@ -1060,7 +1057,7 @@ EndFunc   ;==>__LOCalc_CellStrikeOut
 ;                  |                               16 = Error setting $iTLBRDiag
 ;                  |                               32 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1165,28 +1162,28 @@ Func __LOCalc_CellStyleBorder(ByRef $oCellStyle, $bWid, $bSty, $bCol, $iTop = Nu
 	EndIf
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oCellStyle.TopBorder2.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oCellStyle.BottomBorder2.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oCellStyle.LeftBorder2.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oCellStyle.RightBorder2.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
-		$iError = ($iTLBRDiag <> Null) ? ($iError) : (__LO_IntIsBetween($oCellStyle.DiagonalTLBR2.LineWidth(), $iTLBRDiag - 1, $iTLBRDiag + 1)) ? ($iError) : (BitOR($iError, 16))
-		$iError = ($iBLTRDiag <> Null) ? ($iError) : (__LO_IntIsBetween($oCellStyle.DiagonalBLTR2.LineWidth(), $iBLTRDiag - 1, $iBLTRDiag + 1)) ? ($iError) : (BitOR($iError, 32))
+		$iError = ($iTop = Null) ? ($iError) : ((__LO_IntIsBetween($oCellStyle.TopBorder2.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : ((__LO_IntIsBetween($oCellStyle.BottomBorder2.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : ((__LO_IntIsBetween($oCellStyle.LeftBorder2.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : ((__LO_IntIsBetween($oCellStyle.RightBorder2.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8)))
+		$iError = ($iTLBRDiag = Null) ? ($iError) : ((__LO_IntIsBetween($oCellStyle.DiagonalTLBR2.LineWidth(), $iTLBRDiag - 1, $iTLBRDiag + 1)) ? ($iError) : (BitOR($iError, 16)))
+		$iError = ($iBLTRDiag = Null) ? ($iError) : ((__LO_IntIsBetween($oCellStyle.DiagonalBLTR2.LineWidth(), $iBLTRDiag - 1, $iBLTRDiag + 1)) ? ($iError) : (BitOR($iError, 32)))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oCellStyle.TopBorder2.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oCellStyle.BottomBorder2.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oCellStyle.LeftBorder2.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oCellStyle.RightBorder2.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
-		$iError = ($iTLBRDiag <> Null) ? ($iError) : ($oCellStyle.DiagonalTLBR2.LineStyle() = $iTLBRDiag) ? ($iError) : (BitOR($iError, 16))
-		$iError = ($iBLTRDiag <> Null) ? ($iError) : ($oCellStyle.DiagonalBLTR2.LineStyle() = $iBLTRDiag) ? ($iError) : (BitOR($iError, 32))
+		$iError = ($iTop = Null) ? ($iError) : (($oCellStyle.TopBorder2.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oCellStyle.BottomBorder2.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oCellStyle.LeftBorder2.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oCellStyle.RightBorder2.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8)))
+		$iError = ($iTLBRDiag = Null) ? ($iError) : (($oCellStyle.DiagonalTLBR2.LineStyle() = $iTLBRDiag) ? ($iError) : (BitOR($iError, 16)))
+		$iError = ($iBLTRDiag = Null) ? ($iError) : (($oCellStyle.DiagonalBLTR2.LineStyle() = $iBLTRDiag) ? ($iError) : (BitOR($iError, 32)))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oCellStyle.TopBorder2.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oCellStyle.BottomBorder2.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oCellStyle.LeftBorder2.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oCellStyle.RightBorder2.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
-		$iError = ($iTLBRDiag <> Null) ? ($iError) : ($oCellStyle.DiagonalTLBR2.Color() = $iTLBRDiag) ? ($iError) : (BitOR($iError, 16))
-		$iError = ($iBLTRDiag <> Null) ? ($iError) : ($oCellStyle.DiagonalBLTR2.Color() = $iBLTRDiag) ? ($iError) : (BitOR($iError, 32))
+		$iError = ($iTop = Null) ? ($iError) : (($oCellStyle.TopBorder2.Color() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oCellStyle.BottomBorder2.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oCellStyle.LeftBorder2.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oCellStyle.RightBorder2.Color() = $iRight) ? ($iError) : (BitOR($iError, 8)))
+		$iError = ($iTLBRDiag = Null) ? ($iError) : (($oCellStyle.DiagonalTLBR2.Color() = $iTLBRDiag) ? ($iError) : (BitOR($iError, 16)))
+		$iError = ($iBLTRDiag = Null) ? ($iError) : (($oCellStyle.DiagonalBLTR2.Color() = $iBLTRDiag) ? ($iError) : (BitOR($iError, 32)))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -1290,8 +1287,8 @@ EndFunc   ;==>__LOCalc_CellTextAlign
 ; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
 ;                  $iRotate             - [optional] an integer value (0-359). Default is Null. The rotation angle of the text.
 ;                  $iReference          - [optional] an integer value (0,1,3). Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bVerticalStack      - [optional] a boolean value. Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in Libre Office settings.
-;                  $bAsianLayout        - [optional] a boolean value. Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in Libre Office settings, and enable vertical text.
+;                  $bVerticalStack      - [optional] a boolean value. Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in LibreOffice settings.
+;                  $bAsianLayout        - [optional] a boolean value. Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in LibreOffice settings, and enable vertical text.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1352,7 +1349,7 @@ Func __LOCalc_CellTextOrient(ByRef $oObj, $iRotate = Null, $iReference = Null, $
 	If ($bVerticalStack <> Null) Then
 		If Not IsBool($bVerticalStack) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		; According to Libre Office IDL Vertical Stack (Orientation set to 3) is only taken into account when RotateAngle is set to 0.
+		; According to LibreOffice IDL Vertical Stack (Orientation set to 3) is only taken into account when RotateAngle is set to 0.
 		If ($bVerticalStack = True) Then
 			$oObj.RotateAngle = 0
 			$oObj.Orientation = $__iIsStacked
@@ -1382,7 +1379,7 @@ EndFunc   ;==>__LOCalc_CellTextOrient
 ;                  $bAutoWrapText       - [optional] a boolean value. Default is Null. If True, Wraps text onto another line at the cell border.
 ;                  $bHyphen             - [optional] a boolean value. Default is Null. If True, Enables word hyphenation for text wrapping to the next line.
 ;                  $bShrinkToFit        - [optional] a boolean value. Default is Null. If True, Reduces the apparent size of the font so that the contents of the cell fit into the current cell width.
-;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [Libre Office Default is 4]
+;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1390,7 +1387,7 @@ EndFunc   ;==>__LOCalc_CellTextOrient
 ;                  @Error 1 @Extended 2 Return 0 = $bAutoWrapText not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = $bHyphen not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bShrinkToFitnot a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [Libre Office Default is 4]
+;                  @Error 1 @Extended 5 Return 0 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bAutoWrapText
@@ -1445,7 +1442,7 @@ Func __LOCalc_CellTextProperties(ByRef $oObj, $bAutoWrapText = Null, $bHyphen = 
 	EndIf
 
 	If ($iTextDirection <> Null) Then
-		If Not __LO_IntIsBetween($iTextDirection, $LOC_TXT_DIR_LR, $LOC_TXT_DIR_RL, "", $LOC_TXT_DIR_CONTEXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iTextDirection, $LOC_PAR_TXT_DIR_LR, $LOC_PAR_TXT_DIR_RL, "", $LOC_PAR_TXT_DIR_CONTEXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oObj.WritingMode = $iTextDirection
 		$iError = ($oObj.WritingMode() = $iTextDirection) ? ($iError) : (BitOR($iError, 8))
@@ -1457,29 +1454,26 @@ EndFunc   ;==>__LOCalc_CellTextProperties
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_CellUnderLine
 ; Description ...: Internal function to Set and retrieve the Underline settings for a Cell, Cell Range, or Cell Style.
-; Syntax ........: __LOCalc_CellUnderLine(ByRef $oObj[, $bWordOnly = Null[, $iUnderLineStyle = Null[, $bULHasColor = Null[, $iULColor = Null]]]])
+; Syntax ........: __LOCalc_CellUnderLine(ByRef $oObj[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
-;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The Underline line style, see constants, $LOC_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bULHasColor         - [optional] a boolean value. Default is Null. If True, the underline is colored, must be set to True in order to set the underline color.
+;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The Underline line style, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
-;                  @Error 1 @Extended 4 Return 0 = $bULHasColor not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
+;                  @Error 1 @Extended 3 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $bWordOnly
-;                  |                               2 = Error setting $iUnderLineStyle
-;                  |                               4 = Error setting $bULHasColor
-;                  |                               8 = Error setting $iULColor
+;                  |                               1 = Error setting $iUnderLineStyle
+;                  |                               2 = Error setting $iULColor
+;                  |                               4 = Error setting $bWordOnly
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1488,47 +1482,48 @@ EndFunc   ;==>__LOCalc_CellTextProperties
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOCalc_CellUnderLine(ByRef $oObj, $bWordOnly = Null, $iUnderLineStyle = Null, $bULHasColor = Null, $iULColor = Null)
+Func __LOCalc_CellUnderLine(ByRef $oObj, $iUnderLineStyle = Null, $iULColor = Null, $bWordOnly = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avUnderLine[4]
+	Local $avUnderLine[3]
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bWordOnly, $iUnderLineStyle, $bULHasColor, $iULColor) Then
-		__LO_ArrayFill($avUnderLine, $oObj.CharWordMode(), $oObj.CharUnderline(), $oObj.CharUnderlineHasColor(), $oObj.CharUnderlineColor())
+	If __LO_VarsAreNull($iUnderLineStyle, $iULColor, $bWordOnly) Then
+		__LO_ArrayFill($avUnderLine, $oObj.CharUnderline(), $oObj.CharUnderlineColor(), $oObj.CharWordMode())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avUnderLine)
 	EndIf
 
-	If ($bWordOnly <> Null) Then
-		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oObj.CharWordMode = $bWordOnly
-		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
 	If ($iUnderLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iUnderLineStyle, $LOC_UNDERLINE_NONE, $LOC_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iUnderLineStyle, $LOC_CHAR_UNDERLINE_NONE, $LOC_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharUnderline = $iUnderLineStyle
-		$iError = ($oObj.CharUnderline() = $iUnderLineStyle) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($bULHasColor <> Null) Then
-		If Not IsBool($bULHasColor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oObj.CharUnderlineHasColor = $bULHasColor
-		$iError = ($oObj.CharUnderlineHasColor() = $bULHasColor) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($oObj.CharUnderline() = $iUnderLineStyle) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iULColor <> Null) Then
-		If Not __LO_IntIsBetween($iULColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iULColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		$oObj.CharUnderlineColor = $iULColor
-		$iError = ($oObj.CharUnderlineColor() = $iULColor) ? ($iError) : (BitOR($iError, 8))
+		If ($iULColor = $LO_COLOR_OFF) Then
+			If ($oObj.CharUnderlineHasColor() = True) Then $oObj.CharUnderlineHasColor = False
+			$oObj.CharUnderlineColor = $iULColor
+
+		Else
+			If ($oObj.CharUnderlineHasColor() = False) Then $oObj.CharUnderlineHasColor = True
+			$oObj.CharUnderlineColor = $iULColor
+		EndIf
+
+		$iError = ($oObj.CharUnderlineColor() = $iULColor) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bWordOnly <> Null) Then
+		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oObj.CharWordMode = $bWordOnly
+		$iError = ($oObj.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -1554,7 +1549,7 @@ EndFunc   ;==>__LOCalc_CellUnderLine
 ;                  @Error 0 @Extended ? Return Integer = Success. $iLocation and $iDistance called with Null, returning current Values. Return will be current distance, and @Extended will be the current Location.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -1575,31 +1570,31 @@ Func __LOCalc_CommentAreaShadowModify($oAnnotationShape, $iLocation = Null, $iDi
 		$iError = 2
 		Select
 			Case (($oAnnotationShape.ShadowXDistance() < 0) And ($oAnnotationShape.ShadowYDistance() < 0)) ; Top Left.
-				$iLocation = $LOC_COMMENT_ANCHOR_TOP_LEFT
+				$iLocation = $LOC_COMMENT_SHADOW_TOP_LEFT
 
 			Case (($oAnnotationShape.ShadowXDistance() = 0) And ($oAnnotationShape.ShadowYDistance() < 0)) ; Top Center
-				$iLocation = $LOC_COMMENT_ANCHOR_TOP_CENTER
+				$iLocation = $LOC_COMMENT_SHADOW_TOP_CENTER
 
 			Case (($oAnnotationShape.ShadowXDistance() > 0) And ($oAnnotationShape.ShadowYDistance() < 0)) ; Top Right
-				$iLocation = $LOC_COMMENT_ANCHOR_TOP_RIGHT
+				$iLocation = $LOC_COMMENT_SHADOW_TOP_RIGHT
 
 			Case (($oAnnotationShape.ShadowXDistance() < 0) And ($oAnnotationShape.ShadowYDistance() = 0)) ; Middle Left
-				$iLocation = $LOC_COMMENT_ANCHOR_MIDDLE_LEFT
+				$iLocation = $LOC_COMMENT_SHADOW_MIDDLE_LEFT
 
 			Case (($oAnnotationShape.ShadowXDistance() = 0) And ($oAnnotationShape.ShadowYDistance() = 0)) ; Middle Center
-				$iLocation = $LOC_COMMENT_ANCHOR_MIDDLE_CENTER
+				$iLocation = $LOC_COMMENT_SHADOW_MIDDLE_CENTER
 
 			Case (($oAnnotationShape.ShadowXDistance() > 0) And ($oAnnotationShape.ShadowYDistance() = 0)) ; Middle Right
-				$iLocation = $LOC_COMMENT_ANCHOR_MIDDLE_RIGHT
+				$iLocation = $LOC_COMMENT_SHADOW_MIDDLE_RIGHT
 
 			Case (($oAnnotationShape.ShadowXDistance() < 0) And ($oAnnotationShape.ShadowYDistance() > 0)) ; Bottom Left
-				$iLocation = $LOC_COMMENT_ANCHOR_BOTTOM_LEFT
+				$iLocation = $LOC_COMMENT_SHADOW_BOTTOM_LEFT
 
 			Case (($oAnnotationShape.ShadowXDistance() = 0) And ($oAnnotationShape.ShadowYDistance() > 0)) ; Bottom Center
-				$iLocation = $LOC_COMMENT_ANCHOR_BOTTOM_CENTER
+				$iLocation = $LOC_COMMENT_SHADOW_BOTTOM_CENTER
 
 			Case (($oAnnotationShape.ShadowXDistance() > 0) And ($oAnnotationShape.ShadowYDistance() > 0)) ; Bottom Right
-				$iLocation = $LOC_COMMENT_ANCHOR_BOTTOM_RIGHT
+				$iLocation = $LOC_COMMENT_SHADOW_BOTTOM_RIGHT
 		EndSelect
 	EndIf
 
@@ -1907,7 +1902,7 @@ EndFunc   ;==>__LOCalc_CommentLineStyleName
 ; Description ...: Retrieve the Field's Object after insertion.
 ; Syntax ........: __LOCalc_FieldGetObj(ByRef $oTextCursor[, $iType = $LOC_FIELD_TYPE_ALL])
 ; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iType               - [optional] an integer value. Default is $LOC_FIELD_TYPE_ALL. The Type of field to search for.
+;                  $iType               - [optional] an integer value. Default is $LOC_FIELD_TYPE_ALL. The Type of field to search for. Can be BitOR'd together. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2238,6 +2233,7 @@ Func __LOCalc_InternalComErrorHandler(ByRef $oComError)
 		Switch $vUserFunction
 			Case ConsoleWrite
 				ConsoleWrite("!--COM Error-Begin--" & @CRLF & _
+						"Module: LibreOffice Calc" & @CRLF & _
 						"Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
 						"WinDescription: " & $oComError.windescription & @CRLF & _
 						"Source: " & $oComError.source & @CRLF & _
@@ -2249,7 +2245,8 @@ Func __LOCalc_InternalComErrorHandler(ByRef $oComError)
 						"!--COM-Error-End--" & @CRLF)
 
 			Case MsgBox
-				MsgBox(0, "COM Error", "Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
+				MsgBox(0, "COM Error", "Module: LibreOffice Calc" & @CRLF & _
+						"Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
 						"WinDescription: " & $oComError.windescription & @CRLF & _
 						"Source: " & $oComError.source & @CRLF & _
 						"Error Description: " & $oComError.description & @CRLF & _
@@ -2280,7 +2277,9 @@ EndFunc   ;==>__LOCalc_InternalComErrorHandler
 ;                  @Error 1 @Extended 3 Return 0 = $iTokenIndex not an Integer.
 ;                  @Error 1 @Extended 4 Return 0 = $sContent not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Scope Object.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Named Range Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Sheet Object.
+;                  @Error 3 @Extended 3 Return 0 = Failed to identify Scope Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning Scope object (Doc or Sheet) that contains the Named Range.
 ; Author ........: donnyh13
@@ -2294,7 +2293,7 @@ Func __LOCalc_NamedRangeGetScopeObj(ByRef $oDoc, $sName, $iTokenIndex, $sContent
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oObj
+	Local $oObj, $oSheet
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -2303,26 +2302,35 @@ Func __LOCalc_NamedRangeGetScopeObj(ByRef $oDoc, $sName, $iTokenIndex, $sContent
 
 	If ($oDoc.NamedRanges.Count() >= $iTokenIndex) Then
 		$oObj = $oDoc.NamedRanges.getByIndex($iTokenIndex - 1)
+		If Not IsObj($oObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 		If ($oObj.Name() == $sName) And ($oObj.Content = $sContent) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
 	EndIf
 
 	For $i = 0 To $oDoc.Sheets.Count() - 1
 		If ($oDoc.Sheets.getByIndex($i).NamedRanges.Count() >= $iTokenIndex) Then
 			$oObj = $oDoc.Sheets.getByIndex($i).NamedRanges.getByIndex($iTokenIndex - 1)
-			If ($oObj.Name() == $sName) And ($oObj.Content = $sContent) Then Return SetError($__LO_STATUS_SUCCESS, 2, $oDoc.Sheets.getByIndex($i))
+			If Not IsObj($oObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+			If ($oObj.Name() == $sName) And ($oObj.Content = $sContent) Then
+				$oSheet = $oDoc.Sheets.getByIndex($i)
+				If Not IsObj($oSheet) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+				Return SetError($__LO_STATUS_SUCCESS, 2, $oSheet)
+			EndIf
 		EndIf
 
 		Sleep((IsInt($i / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
-	Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 EndFunc   ;==>__LOCalc_NamedRangeGetScopeObj
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_PageStyleBorder
-; Description ...: Internal function to Set and Retrieve the Page Style Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Page Style Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
+; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
@@ -2349,7 +2357,7 @@ EndFunc   ;==>__LOCalc_NamedRangeGetScopeObj
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2431,22 +2439,22 @@ Func __LOCalc_PageStyleBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol, $iTop = Nu
 	EndIf
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.TopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.BottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.LeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.RightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.TopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.BottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.LeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.RightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8)))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oPageStyle.TopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oPageStyle.BottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oPageStyle.LeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oPageStyle.RightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (($oPageStyle.TopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oPageStyle.BottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oPageStyle.LeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oPageStyle.RightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8)))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oPageStyle.TopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oPageStyle.BottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oPageStyle.LeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oPageStyle.RightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (($oPageStyle.TopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oPageStyle.BottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oPageStyle.LeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oPageStyle.RightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8)))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -2454,9 +2462,9 @@ EndFunc   ;==>__LOCalc_PageStyleBorder
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_PageStyleFooterBorder
-; Description ...: Internal function to Set and Retrieve the Page Style Footer Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Page Style Footer Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleFooterBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
+; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
@@ -2484,7 +2492,7 @@ EndFunc   ;==>__LOCalc_PageStyleBorder
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2567,22 +2575,22 @@ Func __LOCalc_PageStyleFooterBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol, $iTo
 	EndIf
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.FooterTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.FooterBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.FooterLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.FooterRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.FooterTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.FooterBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.FooterLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.FooterRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8)))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oPageStyle.FooterTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oPageStyle.FooterBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oPageStyle.FooterLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oPageStyle.FooterRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (($oPageStyle.FooterTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oPageStyle.FooterBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oPageStyle.FooterLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oPageStyle.FooterRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8)))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oPageStyle.FooterTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oPageStyle.FooterBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oPageStyle.FooterLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oPageStyle.FooterRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (($oPageStyle.FooterTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oPageStyle.FooterBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oPageStyle.FooterLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oPageStyle.FooterRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8)))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -2590,9 +2598,9 @@ EndFunc   ;==>__LOCalc_PageStyleFooterBorder
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_PageStyleHeaderBorder
-; Description ...: Internal function to Set and Retrieve the Page Style Header Border Line Width, Style, and Color. Libre Office Version 3.6 and Up.
+; Description ...: Internal function to Set and Retrieve the Page Style Header Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleHeaderBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObj function.
+; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
 ;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
 ;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
@@ -2620,7 +2628,7 @@ EndFunc   ;==>__LOCalc_PageStyleFooterBorder
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current Libre Office version lower than 3.6.
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2703,22 +2711,22 @@ Func __LOCalc_PageStyleHeaderBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol, $iTo
 	EndIf
 
 	If $bWid Then
-		$iError = ($iTop <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.HeaderTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.HeaderBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.HeaderLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : (__LO_IntIsBetween($oPageStyle.HeaderRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.HeaderTopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.HeaderBottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.HeaderLeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : ((__LO_IntIsBetween($oPageStyle.HeaderRightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8)))
 
 	ElseIf $bSty Then
-		$iError = ($iTop <> Null) ? ($iError) : ($oPageStyle.HeaderTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oPageStyle.HeaderBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oPageStyle.HeaderLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oPageStyle.HeaderRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (($oPageStyle.HeaderTopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oPageStyle.HeaderBottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oPageStyle.HeaderLeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oPageStyle.HeaderRightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8)))
 
 	Else
-		$iError = ($iTop <> Null) ? ($iError) : ($oPageStyle.HeaderTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
-		$iError = ($iBottom <> Null) ? ($iError) : ($oPageStyle.HeaderBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
-		$iError = ($iLeft <> Null) ? ($iError) : ($oPageStyle.HeaderLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
-		$iError = ($iRight <> Null) ? ($iError) : ($oPageStyle.HeaderRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
+		$iError = ($iTop = Null) ? ($iError) : (($oPageStyle.HeaderTopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oPageStyle.HeaderBottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oPageStyle.HeaderLeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oPageStyle.HeaderRightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8)))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -2759,199 +2767,6 @@ Func __LOCalc_RangeAddressIsSame($tRange1, $tRange2)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False)
 EndFunc   ;==>__LOCalc_RangeAddressIsSame
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOCalc_SheetCursorMove
-; Description ...: For Sheet Cursor related movements.
-; Syntax ........: __LOCalc_SheetCursorMove(ByRef $oCursor, $iMove, $iColumns, $iRows, $iCount, $bSelect)
-; Parameters ....: $oCursor             - [in/out] an object. A Sheet Cursor Object returned from any Sheet Cursor creation functions.
-;                  $iMove               - an Integer value. The movement command constant. See remarks and Constants, $LOC_SHEETCUR* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iColumns            - an integer value. The Number of Columns either to contain in the Range, or to move, depending on the called move command.
-;                  $iRows               - an integer value. The Number of Rows either to contain in the Range, or to move, depending on the called move command.
-;                  $iCount              - an integer value. Number of movements to make.
-;                  $bSelect             - [optional] a boolean value. Default is False. If True, select data during this cursor movement.
-; Return values .: Success: 1.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iMove less than 0 or greater than highest move Constant. See Constants, $LOC_SHEETCUR* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iColumns not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iRows not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iCount not an Integer or is a negative.
-;                  @Error 1 @Extended 7 Return 0 = $bSelect not a Boolean.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
-;                  --Success--
-;                  @Error 0 @Extended ? Return 1 = Success, Cursor object movement was processed successfully.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Only some movements accept Column and Row Values, creating/ extending a selection of cells, etc. They will be specified below.
-;                  #Cursor Movement Constants which accept Column and Row values:
-;                  $LOC_SHEETCUR_COLLAPSE_TO_SIZE,
-;                  $LOC_SHEETCUR_GOTO_OFFSET
-;                  #Cursor Movements which accept Selecting Only:
-;                  $LOC_SHEETCUR_GOTO_USED_AREA_START,
-;                  $LOC_SHEETCUR_GOTO_USED_AREA_END
-;                  #Cursor Movements which accept nothing and are done once per call:
-;                  $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY,
-;                  $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION,
-;                  $LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA,
-;                  $LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN,
-;                  $LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW,
-;                  $LOC_SHEETCUR_GOTO_START,
-;                  $LOC_SHEETCUR_GOTO_END
-;                  #Cursor Movements which accept only number of moves ($iCount):
-;                  $LOC_SHEETCUR_GOTO_NEXT,
-;                  $LOC_SHEETCUR_GOTO_PREV
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOCalc_SheetCursorMove(ByRef $oCursor, $iMove, $iColumns, $iRows, $iCount, $bSelect)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iCounted = 0
-	Local $asMoves[13]
-
-	$asMoves[$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY] = "collapseToCurrentArray"
-	$asMoves[$LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION] = "collapseToCurrentRegion"
-	$asMoves[$LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA] = "collapseToMergedArea"
-	$asMoves[$LOC_SHEETCUR_COLLAPSE_TO_SIZE] = "collapseToSize"
-	$asMoves[$LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN] = "expandToEntireColumns"
-	$asMoves[$LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW] = "expandToEntireRows"
-	$asMoves[$LOC_SHEETCUR_GOTO_OFFSET] = "gotoOffset"
-	$asMoves[$LOC_SHEETCUR_GOTO_START] = "gotoStart"
-	$asMoves[$LOC_SHEETCUR_GOTO_END] = "gotoEnd"
-	$asMoves[$LOC_SHEETCUR_GOTO_NEXT] = "gotoNext"
-	$asMoves[$LOC_SHEETCUR_GOTO_PREV] = "gotoPrevious"
-	$asMoves[$LOC_SHEETCUR_GOTO_USED_AREA_START] = "gotoStartOfUsedArea"
-	$asMoves[$LOC_SHEETCUR_GOTO_USED_AREA_END] = "gotoEndOfUsedArea"
-
-	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsInt($iMove) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iMove, 0, UBound($asMoves) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsInt($iColumns) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsInt($iRows) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not IsBool($bSelect) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-
-	Switch $iMove
-		Case $LOC_SHEETCUR_COLLAPSE_TO_SIZE, $LOC_SHEETCUR_GOTO_OFFSET
-			Execute("$oCursor." & $asMoves[$iMove] & "(" & $iColumns & "," & $iRows & ")")
-
-			Return SetError($__LO_STATUS_SUCCESS, 1, 1)
-
-		Case $LOC_SHEETCUR_GOTO_NEXT, $LOC_SHEETCUR_GOTO_PREV
-			Do
-				Execute("$oCursor." & $asMoves[$iMove] & "()")
-				$iCounted += 1
-
-				Sleep((IsInt($iCounted / $__LOCCONST_SLEEP_DIV) ? (10) : (0)))
-			Until ($iCounted >= $iCount)
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCounted, 1)
-
-		Case $LOC_SHEETCUR_GOTO_USED_AREA_START, $LOC_SHEETCUR_GOTO_USED_AREA_END
-			Execute("$oCursor." & $asMoves[$iMove] & "(" & $bSelect & ")")
-
-			Return SetError($__LO_STATUS_SUCCESS, 1, 1)
-
-		Case $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_ARRAY, $LOC_SHEETCUR_COLLAPSE_TO_CURRENT_REGION, $LOC_SHEETCUR_COLLAPSE_TO_MERGED_AREA, _
-				$LOC_SHEETCUR_EXPAND_TO_ENTIRE_COLUMN, $LOC_SHEETCUR_EXPAND_TO_ENTIRE_ROW, $LOC_SHEETCUR_GOTO_START, $LOC_SHEETCUR_GOTO_END
-			Execute("$oCursor." & $asMoves[$iMove] & "()")
-
-			Return SetError($__LO_STATUS_SUCCESS, 1, 1)
-
-		Case Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-	EndSwitch
-EndFunc   ;==>__LOCalc_SheetCursorMove
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOCalc_TextCursorMove
-; Description ...: For Text Cursor related movements.
-; Syntax ........: __LOCalc_TextCursorMove(ByRef $oCursor, $iMove, $iCount[, $bSelect = False])
-; Parameters ....: $oCursor             - [in/out] an object. A Text Cursor Object returned from any Text Cursor creation functions.
-;                  $iMove               - an Integer value. The movement command constant. See remarks and Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iCount              - an integer value. Number of movements to make.
-;                  $bSelect             - [optional] a boolean value. Default is False. If True, select data during this cursor movement.
-; Return values .: Success: Boolean.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iMove less than 0 or greater than highest move Constant. See Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iCount not an Integer or is a negative.
-;                  @Error 1 @Extended 5 Return 0 = $bSelect not a Boolean.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. Or Page Number for "gotoPage" command. See Remarks
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Only some movements accept movement amounts and selecting (such as $LOC_TEXTCUR_GO_RIGHT 2, True) etc. Also only some accept creating/ extending a selection of text/ data. They will be specified below.
-;                  To Clear /Unselect a current selection, you can input a move such as $LOC_TEXTCUR_GO_RIGHT, 0, False.
-;                  #Cursor Movement Constants which accept number of Moves and Selecting:
-;                  $LOC_TEXTCUR_GO_LEFT, Move the cursor left by n characters.
-;                  $LOC_TEXTCUR_GO_RIGHT, Move the cursor right by n characters.
-;                  #Cursor Movements which accept Selecting Only:
-;                  $LOC_TEXTCUR_GOTO_START, Move the cursor to the start of the text.
-;                  $LOC_TEXTCUR_GOTO_END, Move the cursor to the end of the text.
-;                  #Cursor Movements which accept nothing and are done once per call:
-;                  $LOC_TEXTCUR_COLLAPSE_TO_START,
-;                  $LOC_TEXTCUR_COLLAPSE_TO_END (Collapses the current selection and moves the cursor to start or End of selection.
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOCalc_TextCursorMove(ByRef $oCursor, $iMove, $iCount, $bSelect = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iCounted = 0
-	Local $bMoved = False
-	Local $asMoves[6]
-
-	$asMoves[$LOC_TEXTCUR_COLLAPSE_TO_START] = "collapseToStart"
-	$asMoves[$LOC_TEXTCUR_COLLAPSE_TO_END] = "collapseToEnd"
-	$asMoves[$LOC_TEXTCUR_GO_LEFT] = "goLeft"
-	$asMoves[$LOC_TEXTCUR_GO_RIGHT] = "goRight"
-	$asMoves[$LOC_TEXTCUR_GOTO_START] = "gotoStart"
-	$asMoves[$LOC_TEXTCUR_GOTO_END] = "gotoEnd"
-
-	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsInt($iMove) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iMove, 0, UBound($asMoves) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsBool($bSelect) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-	Switch $iMove
-		Case $LOC_TEXTCUR_GO_LEFT, $LOC_TEXTCUR_GO_RIGHT
-			$bMoved = Execute("$oCursor." & $asMoves[$iMove] & "(" & $iCount & "," & $bSelect & ")")
-			$iCounted = ($bMoved) ? ($iCount) : (0)
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCounted, $bMoved)
-
-		Case $LOC_TEXTCUR_GOTO_START, $LOC_TEXTCUR_GOTO_END
-			$bMoved = Execute("$oCursor." & $asMoves[$iMove] & "(" & $bSelect & ")")
-			$iCounted = ($bMoved) ? (1) : (0)
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCounted, $bMoved)
-
-		Case $LOC_TEXTCUR_COLLAPSE_TO_START, $LOC_TEXTCUR_COLLAPSE_TO_END
-			$bMoved = Execute("$oCursor." & $asMoves[$iMove] & "()")
-			$iCounted = ($bMoved) ? (1) : (0)
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCounted, $bMoved)
-
-		Case Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-	EndSwitch
-EndFunc   ;==>__LOCalc_TextCursorMove
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOCalc_TransparencyGradientConvert

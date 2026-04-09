@@ -4,9 +4,9 @@
 #include-once
 
 ; #INDEX# =======================================================================================================================
-; Title .........: Libre Office Writer Constants for the Libre Office UDF.
+; Title .........: LibreOffice Writer Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the Libre Office UDF.
+; Description ...: Constants for various functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -63,42 +63,34 @@ Global Const _                                                  ; com.sun.star.s
 
 ; Border Style
 Global Const _                                                  ; com.sun.star.table.BorderLineStyle
-		$LOW_BORDERSTYLE_NONE = 0x7FFF, _                       ; No border line.
-		$LOW_BORDERSTYLE_SOLID = 0, _                           ; Solid border line.
-		$LOW_BORDERSTYLE_DOTTED = 1, _                          ; Dotted border line.
-		$LOW_BORDERSTYLE_DASHED = 2, _                          ; Dashed border line.
-		$LOW_BORDERSTYLE_DOUBLE = 3, _                          ; Double border line.
-		$LOW_BORDERSTYLE_THINTHICK_SMALLGAP = 4, _              ; Double border line with a thin line outside and a thick line inside separated by a small gap.
-		$LOW_BORDERSTYLE_THINTHICK_MEDIUMGAP = 5, _             ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
-		$LOW_BORDERSTYLE_THINTHICK_LARGEGAP = 6, _              ; Double border line with a thin line outside and a thick line inside separated by a large gap.
-		$LOW_BORDERSTYLE_THICKTHIN_SMALLGAP = 7, _              ; Double border line with a thick line outside and a thin line inside separated by a small gap.
-		$LOW_BORDERSTYLE_THICKTHIN_MEDIUMGAP = 8, _             ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
-		$LOW_BORDERSTYLE_THICKTHIN_LARGEGAP = 9, _              ; Double border line with a thick line outside and a thin line inside separated by a large gap.
-		$LOW_BORDERSTYLE_EMBOSSED = 10, _                       ; 3D embossed border line.
-		$LOW_BORDERSTYLE_ENGRAVED = 11, _                       ; 3D engraved border line.
-		$LOW_BORDERSTYLE_OUTSET = 12, _                         ; Outset border line.
-		$LOW_BORDERSTYLE_INSET = 13, _                          ; Inset border line.
-		$LOW_BORDERSTYLE_FINE_DASHED = 14, _                    ; Finely dashed border line.
-		$LOW_BORDERSTYLE_DOUBLE_THIN = 15, _                    ; Double border line consisting of two fixed thin lines separated by a variable gap.
-		$LOW_BORDERSTYLE_DASH_DOT = 16, _                       ; Line consisting of a repetition of one dash and one dot.
-		$LOW_BORDERSTYLE_DASH_DOT_DOT = 17                      ; Line consisting of a repetition of one dash and 2 dots.
+		$LOW_BORDER_STYLE_NONE = 0x7FFF, _                      ; No border line.
+		$LOW_BORDER_STYLE_SOLID = 0, _                          ; Solid border line.
+		$LOW_BORDER_STYLE_DOTTED = 1, _                         ; Dotted border line.
+		$LOW_BORDER_STYLE_DASHED = 2, _                         ; Dashed border line.
+		$LOW_BORDER_STYLE_DOUBLE = 3, _                         ; Double border line.
+		$LOW_BORDER_STYLE_THINTHICK_SMALLGAP = 4, _             ; Double border line with a thin line outside and a thick line inside separated by a small gap.
+		$LOW_BORDER_STYLE_THINTHICK_MEDIUMGAP = 5, _            ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
+		$LOW_BORDER_STYLE_THINTHICK_LARGEGAP = 6, _             ; Double border line with a thin line outside and a thick line inside separated by a large gap.
+		$LOW_BORDER_STYLE_THICKTHIN_SMALLGAP = 7, _             ; Double border line with a thick line outside and a thin line inside separated by a small gap.
+		$LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP = 8, _            ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
+		$LOW_BORDER_STYLE_THICKTHIN_LARGEGAP = 9, _             ; Double border line with a thick line outside and a thin line inside separated by a large gap.
+		$LOW_BORDER_STYLE_EMBOSSED = 10, _                      ; 3D embossed border line.
+		$LOW_BORDER_STYLE_ENGRAVED = 11, _                      ; 3D engraved border line.
+		$LOW_BORDER_STYLE_OUTSET = 12, _                        ; Outset border line.
+		$LOW_BORDER_STYLE_INSET = 13, _                         ; Inset border line.
+		$LOW_BORDER_STYLE_FINE_DASHED = 14, _                   ; Finely dashed border line.
+		$LOW_BORDER_STYLE_DOUBLE_THIN = 15, _                   ; Double border line consisting of two fixed thin lines separated by a variable gap.
+		$LOW_BORDER_STYLE_DASH_DOT = 16, _                      ; Line consisting of a repetition of one dash and one dot.
+		$LOW_BORDER_STYLE_DASH_DOT_DOT = 17                     ; Line consisting of a repetition of one dash and 2 dots.
 
 ; Border Width
 Global Const _
-		$LOW_BORDERWIDTH_HAIRLINE = 2, _                        ; Hairline Border line width.
-		$LOW_BORDERWIDTH_VERY_THIN = 18, _                      ; Very Thin Border line width.
-		$LOW_BORDERWIDTH_THIN = 26, _                           ; Thin Border line width.
-		$LOW_BORDERWIDTH_MEDIUM = 53, _                         ; Medium Border line width.
-		$LOW_BORDERWIDTH_THICK = 79, _                          ; Thick Border line width.
-		$LOW_BORDERWIDTH_EXTRA_THICK = 159                      ; Extra Thick Border line width.
-
-; Case Constants
-Global Const _                                                  ; com.sun.star.style.CaseMap
-		$LOW_CASEMAP_NONE = 0, _                                ; The case of the characters is unchanged.
-		$LOW_CASEMAP_UPPER = 1, _                               ; All characters are put in upper case.
-		$LOW_CASEMAP_LOWER = 2, _                               ; All characters are put in lower case.
-		$LOW_CASEMAP_TITLE = 3, _                               ; The first character of each word is put in upper case.
-		$LOW_CASEMAP_SM_CAPS = 4                                ; All characters are put in upper case, but with a smaller font height.
+		$LOW_BORDER_WIDTH_HAIRLINE = 2, _                       ; Hairline Border line width.
+		$LOW_BORDER_WIDTH_VERY_THIN = 18, _                     ; Very Thin Border line width.
+		$LOW_BORDER_WIDTH_THIN = 26, _                          ; Thin Border line width.
+		$LOW_BORDER_WIDTH_MEDIUM = 53, _                        ; Medium Border line width.
+		$LOW_BORDER_WIDTH_THICK = 79, _                         ; Thick Border line width.
+		$LOW_BORDER_WIDTH_EXTRA_THICK = 159                     ; Extra Thick Border line width.
 
 ; Cell Type
 Global Const _                                                  ; com.sun.star.table.CellContentType
@@ -106,6 +98,74 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_CELL_TYPE_VALUE = 1, _                             ; Cell contains a value.
 		$LOW_CELL_TYPE_TEXT = 2, _                              ; Cell contains text.
 		$LOW_CELL_TYPE_FORMULA = 3                              ; Cell contains a formula.
+
+; Case Constants
+Global Const _                                                  ; com.sun.star.style.CaseMap
+		$LOW_CHAR_CASEMAP_NONE = 0, _                           ; The case of the characters is unchanged.
+		$LOW_CHAR_CASEMAP_UPPER = 1, _                          ; All characters are put in upper case.
+		$LOW_CHAR_CASEMAP_LOWER = 2, _                          ; All characters are put in lower case.
+		$LOW_CHAR_CASEMAP_TITLE = 3, _                          ; The first character of each word is put in upper case.
+		$LOW_CHAR_CASEMAP_SM_CAPS = 4                           ; All characters are put in upper case, but with a smaller font height.
+
+; Posture/Italic
+Global Const _                                                  ; com.sun.star.awt.FontSlant
+		$LOW_CHAR_POSTURE_NONE = 0, _                           ; Specifies a font without slant.
+		$LOW_CHAR_POSTURE_OBLIQUE = 1, _                        ; Specifies an oblique font (slant not designed into the font).
+		$LOW_CHAR_POSTURE_ITALIC = 2, _                         ; Specifies an italic font (slant designed into the font).
+		$LOW_CHAR_POSTURE_DONTKNOW = 3, _                       ; Specifies a font with an unknown slant. For Read Only.
+		$LOW_CHAR_POSTURE_REV_OBLIQUE = 4, _                    ; Specifies a reverse oblique font (slant not designed into the font).
+		$LOW_CHAR_POSTURE_REV_ITALIC = 5                        ; Specifies a reverse italic font (slant designed into the font).
+
+; Relief
+Global Const _                                                  ; com.sun.star.text.FontRelief
+		$LOW_CHAR_RELIEF_NONE = 0, _                            ; No relief is applied.
+		$LOW_CHAR_RELIEF_EMBOSSED = 1, _                        ; The font relief is embossed.
+		$LOW_CHAR_RELIEF_ENGRAVED = 2                           ; The font relief is engraved.
+
+; Strikeout
+Global Const _                                                  ; com.sun.star.awt.FontStrikeout
+		$LOW_CHAR_STRIKEOUT_NONE = 0, _                         ; No strike out.
+		$LOW_CHAR_STRIKEOUT_SINGLE = 1, _                       ; Strike out the characters with a single line.
+		$LOW_CHAR_STRIKEOUT_DOUBLE = 2, _                       ; Strike out the characters with a double line.
+		$LOW_CHAR_STRIKEOUT_DONT_KNOW = 3, _                    ; The strikeout mode is not specified. For Read Only.
+		$LOW_CHAR_STRIKEOUT_BOLD = 4, _                         ; Strike out the characters with a bold line.
+		$LOW_CHAR_STRIKEOUT_SLASH = 5, _                        ; Strike out the characters with slashes.
+		$LOW_CHAR_STRIKEOUT_X = 6                               ; Strike out the characters with X's.
+
+; Underline/Overline
+Global Const _                                                  ; com.sun.star.awt.FontUnderline
+		$LOW_CHAR_UNDERLINE_NONE = 0, _                         ; No Underline or Overline style.
+		$LOW_CHAR_UNDERLINE_SINGLE = 1, _                       ; Single line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DOUBLE = 2, _                       ; Double line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DOTTED = 3, _                       ; Dotted line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DONT_KNOW = 4, _                    ; Unknown Underline/Overline style, for read only.
+		$LOW_CHAR_UNDERLINE_DASH = 5, _                         ; Dashed line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_LONG_DASH = 6, _                    ; Long Dashed line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DASH_DOT = 7, _                     ; Dash Dot line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DASH_DOT_DOT = 8, _                 ; Dash Dot Dot line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_SML_WAVE = 9, _                     ; Small Wave line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_WAVE = 10, _                        ; Wave line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_DBL_WAVE = 11, _                    ; Double Wave line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD = 12, _                        ; Bold line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_DOTTED = 13, _                 ; Bold Dotted line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_DASH = 14, _                   ; Bold Dashed line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_LONG_DASH = 15, _              ; Bold Long Dash line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_DASH_DOT = 16, _               ; Bold Dash Dot line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _           ; Bold Dash Dot Dot line Underline/Overline style.
+		$LOW_CHAR_UNDERLINE_BOLD_WAVE = 18                      ; Bold Wave line Underline/Overline style.
+
+; Weight/Bold
+Global Const _                                                  ; com.sun.star.awt.FontWeight
+		$LOW_CHAR_WEIGHT_DONT_KNOW = 0, _                       ; The font weight is not specified/unknown. For Read Only.
+		$LOW_CHAR_WEIGHT_THIN = 50, _                           ; A 50% (Thin) font weight.
+		$LOW_CHAR_WEIGHT_ULTRA_LIGHT = 60, _                    ; A 60% (Ultra Light) font weight.
+		$LOW_CHAR_WEIGHT_LIGHT = 75, _                          ; A 75% (Light) font weight.
+		$LOW_CHAR_WEIGHT_SEMI_LIGHT = 90, _                     ; A 90% (Semi-Light) font weight.
+		$LOW_CHAR_WEIGHT_NORMAL = 100, _                        ; A 100% (Normal) font weight.
+		$LOW_CHAR_WEIGHT_SEMI_BOLD = 110, _                     ; A 110% (Semi-Bold) font weight.
+		$LOW_CHAR_WEIGHT_BOLD = 150, _                          ; A 150% (Bold) font weight.
+		$LOW_CHAR_WEIGHT_ULTRA_BOLD = 175, _                    ; A 175% (Ultra-Bold) font weight.
+		$LOW_CHAR_WEIGHT_BLACK = 200                            ; A 200% (Black) font weight.
 
 ; Color Mode Constants.
 Global Const _                                                  ; com.sun.star.drawing.ColorMode
@@ -134,17 +194,17 @@ Global Const _
 
 ; Cursor Status
 Global Enum _
-		$LOW_CURSOR_STAT_IS_COLLAPSED, _                        ; Test if the start and end positions are the same for a cursor selection, meaning the cursor has nothing selected.
-		$LOW_CURSOR_STAT_IS_START_OF_WORD, _                    ; Test if a cursor is at the start of a word. Returns True if so.
-		$LOW_CURSOR_STAT_IS_END_OF_WORD, _                      ; Test if a cursor is at the end of a word. Returns True if so.
-		$LOW_CURSOR_STAT_IS_START_OF_SENTENCE, _                ; Test if a cursor is at the start of a sentence. Returns True if so.
-		$LOW_CURSOR_STAT_IS_END_OF_SENTENCE, _                  ; Test if a cursor is at the end of a sentence. Returns True if so.
-		$LOW_CURSOR_STAT_IS_START_OF_PAR, _                     ; Test if a cursor is at the start of a paragraph. Returns True if so.
-		$LOW_CURSOR_STAT_IS_END_OF_PAR, _                       ; Test if a cursor is at the End of a paragraph. Returns True if so.
-		$LOW_CURSOR_STAT_IS_START_OF_LINE, _                    ; Test if a cursor is at the start of the line. Returns True if so.
-		$LOW_CURSOR_STAT_IS_END_OF_LINE, _                      ; Test if a cursor is at the end of the line. Returns True if so.
-		$LOW_CURSOR_STAT_GET_PAGE, _                            ; Return the current page number the cursor is in as an integer.
-		$LOW_CURSOR_STAT_GET_RANGE_NAME                         ; Return the cell range selected by a cursor as a string. For example, “B3:D5”.
+		$LOW_CURSOR_STAT_IS_COLLAPSED, _                        ; 0 Test if the start and end positions are the same for a cursor selection, meaning the cursor has nothing selected.
+		$LOW_CURSOR_STAT_IS_START_OF_WORD, _                    ; 1 Test if a cursor is at the start of a word. Returns True if so.
+		$LOW_CURSOR_STAT_IS_END_OF_WORD, _                      ; 2 Test if a cursor is at the end of a word. Returns True if so.
+		$LOW_CURSOR_STAT_IS_START_OF_SENTENCE, _                ; 3 Test if a cursor is at the start of a sentence. Returns True if so.
+		$LOW_CURSOR_STAT_IS_END_OF_SENTENCE, _                  ; 4 Test if a cursor is at the end of a sentence. Returns True if so.
+		$LOW_CURSOR_STAT_IS_START_OF_PAR, _                     ; 5 Test if a cursor is at the start of a paragraph. Returns True if so.
+		$LOW_CURSOR_STAT_IS_END_OF_PAR, _                       ; 6 Test if a cursor is at the End of a paragraph. Returns True if so.
+		$LOW_CURSOR_STAT_IS_START_OF_LINE, _                    ; 7 Test if a cursor is at the start of the line. Returns True if so.
+		$LOW_CURSOR_STAT_IS_END_OF_LINE, _                      ; 8 Test if a cursor is at the end of the line. Returns True if so.
+		$LOW_CURSOR_STAT_GET_PAGE, _                            ; 9 Return the current page number the cursor is in as an integer.
+		$LOW_CURSOR_STAT_GET_RANGE_NAME                         ; 10 Return the cell range selected by a cursor as a string. For example, “B3:D5”.
 
 ; Cursor Type Related Constants
 Global Const _
@@ -154,25 +214,18 @@ Global Const _
 		$LOW_CURTYPE_PARAGRAPH = 4, _                           ; Object is a Paragraph Object.
 		$LOW_CURTYPE_TEXT_PORTION = 5                           ; Object is a Paragraph Text Portion Object.
 
-; Printer Duplex Constants.
-Global Const _                                                  ; com.sun.star.view.DuplexMode
-		$LOW_DUPLEX_UNKNOWN = 0, _                              ; Duplex mode setting is unknown.
-		$LOW_DUPLEX_OFF = 1, _                                  ; Duplex mode is off.
-		$LOW_DUPLEX_LONG = 2, _                                 ; Duplex mode is on, flip on Long edge.
-		$LOW_DUPLEX_SHORT = 3                                   ; Duplex mode is on, flip on Short edge.
-
 ; Advanced Field Types
 Global Enum Step *2 _
-		$LOW_FIELD_ADV_TYPE_ALL = 1, _                          ; All of the below listed Fields will be returned.
-		$LOW_FIELD_ADV_TYPE_BIBLIOGRAPHY, _                     ; A Bibliography Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE, _                         ; A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE_SET_NUM, _                 ; A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE_NAME, _                    ; A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE_NEXT_SET, _                ; A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE_NAME_OF_SET, _             ; A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DDE, _                              ; A DDE Field, found in Fields dialog, Variables tab.
-		$LOW_FIELD_ADV_TYPE_INPUT_USER, _                       ; ?
-		$LOW_FIELD_ADV_TYPE_USER                                ; A User Field, found in Fields dialog, Variables tab.
+		$LOW_FIELD_ADV_TYPE_ALL = 1, _                          ; 1 All of the below listed Fields will be returned.
+		$LOW_FIELD_ADV_TYPE_BIBLIOGRAPHY, _                     ; 2 A Bibliography Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_ADV_TYPE_DATABASE, _                         ; 4 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_ADV_TYPE_DATABASE_SET_NUM, _                 ; 8 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_ADV_TYPE_DATABASE_NAME, _                    ; 16 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_ADV_TYPE_DATABASE_NEXT_SET, _                ; 32 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_ADV_TYPE_DATABASE_NAME_OF_SET, _             ; 64 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_ADV_TYPE_DDE, _                              ; 128 A DDE Field, found in Fields dialog, Variables tab.
+		$LOW_FIELD_ADV_TYPE_INPUT_USER, _                       ; 256 ?
+		$LOW_FIELD_ADV_TYPE_USER                                ; 512 A User Field, found in Fields dialog, Variables tab.
 
 ; Field Chapter Display Type
 Global Const _                                                  ; com.sun.star.text.ChapterFormat
@@ -184,30 +237,30 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Count Field Type
 Global Enum _
-		$LOW_FIELD_COUNT_TYPE_CHARACTERS = 0, _                 ; Count field is a Character Count type field.
-		$LOW_FIELD_COUNT_TYPE_IMAGES, _                         ; Count field is an Image Count type field.
-		$LOW_FIELD_COUNT_TYPE_OBJECTS, _                        ; Count field is an Object Count type field.
-		$LOW_FIELD_COUNT_TYPE_PAGES, _                          ; Count field is a Page Count type field.
-		$LOW_FIELD_COUNT_TYPE_PARAGRAPHS, _                     ; Count field is a Paragraph Count type field.
-		$LOW_FIELD_COUNT_TYPE_TABLES, _                         ; Count field is a Table Count type field.
-		$LOW_FIELD_COUNT_TYPE_WORDS                             ; Count field is a Word Count type field.
+		$LOW_FIELD_COUNT_TYPE_CHARACTERS = 0, _                 ; 0 Count field is a Character Count type field.
+		$LOW_FIELD_COUNT_TYPE_IMAGES, _                         ; 1 Count field is an Image Count type field.
+		$LOW_FIELD_COUNT_TYPE_OBJECTS, _                        ; 2 Count field is an Object Count type field.
+		$LOW_FIELD_COUNT_TYPE_PAGES, _                          ; 3 Count field is a Page Count type field.
+		$LOW_FIELD_COUNT_TYPE_PARAGRAPHS, _                     ; 4 Count field is a Paragraph Count type field.
+		$LOW_FIELD_COUNT_TYPE_TABLES, _                         ; 5 Count field is a Table Count type field.
+		$LOW_FIELD_COUNT_TYPE_WORDS                             ; 6 Count field is a Word Count type field.
 
 ; Document Information Field Types
 Global Enum Step *2 _
-		$LOW_FIELD_DOCINFO_TYPE_ALL = 1, _                      ; Returns an array of all field types listed below.
-		$LOW_FIELD_DOCINFO_TYPE_MOD_AUTH, _                     ; A Modified By Author Field, found in Fields dialog, DocInformation Tab, Modified Type.
-		$LOW_FIELD_DOCINFO_TYPE_MOD_DATE_TIME, _                ; A Modified Date/Time Field, found in Fields dialog, DocInformation Tab, Modified Type.
-		$LOW_FIELD_DOCINFO_TYPE_CREATE_AUTH, _                  ; A Created By Author Field, found in Fields dialog, DocInformation Tab, Created Type.
-		$LOW_FIELD_DOCINFO_TYPE_CREATE_DATE_TIME, _             ; A Created Date/Time Field, found in Fields dialog, DocInformation Tab, Created Type.
-		$LOW_FIELD_DOCINFO_TYPE_CUSTOM, _                       ; A Custom Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_COMMENTS, _                     ; A Comments Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_EDIT_TIME, _                    ; A Total Editing Time Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_KEYWORDS, _                     ; A Keywords Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_PRINT_AUTH, _                   ; A Printed By Author Field, found in Fields dialog, DocInformation Tab, Last Printed Type.
-		$LOW_FIELD_DOCINFO_TYPE_PRINT_DATE_TIME, _              ; A Printed Date/Time Field, found in Fields dialog, DocInformation Tab, Last Printed Type.
-		$LOW_FIELD_DOCINFO_TYPE_REVISION, _                     ; A Revision Number Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_SUBJECT, _                      ; A Subject Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_TITLE                           ; A Title Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_DOCINFO_TYPE_ALL = 1, _                      ; 1 Returns an array of all field types listed below.
+		$LOW_FIELD_DOCINFO_TYPE_MOD_AUTH, _                     ; 2 A Modified By Author Field, found in Fields dialog, DocInformation Tab, Modified Type.
+		$LOW_FIELD_DOCINFO_TYPE_MOD_DATE_TIME, _                ; 4 A Modified Date/Time Field, found in Fields dialog, DocInformation Tab, Modified Type.
+		$LOW_FIELD_DOCINFO_TYPE_CREATE_AUTH, _                  ; 8 A Created By Author Field, found in Fields dialog, DocInformation Tab, Created Type.
+		$LOW_FIELD_DOCINFO_TYPE_CREATE_DATE_TIME, _             ; 16 A Created Date/Time Field, found in Fields dialog, DocInformation Tab, Created Type.
+		$LOW_FIELD_DOCINFO_TYPE_CUSTOM, _                       ; 32 A Custom Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_DOCINFO_TYPE_COMMENTS, _                     ; 64 A Comments Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_DOCINFO_TYPE_EDIT_TIME, _                    ; 128 A Total Editing Time Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_DOCINFO_TYPE_KEYWORDS, _                     ; 256 A Keywords Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_DOCINFO_TYPE_PRINT_AUTH, _                   ; 512 A Printed By Author Field, found in Fields dialog, DocInformation Tab, Last Printed Type.
+		$LOW_FIELD_DOCINFO_TYPE_PRINT_DATE_TIME, _              ; 1024 A Printed Date/Time Field, found in Fields dialog, DocInformation Tab, Last Printed Type.
+		$LOW_FIELD_DOCINFO_TYPE_REVISION, _                     ; 2048 A Revision Number Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_DOCINFO_TYPE_SUBJECT, _                      ; 4096 A Subject Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_DOCINFO_TYPE_TITLE                           ; 8192 A Title Field, found in Fields dialog, DocInformation Tab.
 
 ; File Name Field Type
 Global Const _                                                  ; com.sun.star.text.FilenameDisplayFormat
@@ -250,36 +303,36 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Regular Field Types
 Global Enum Step *2 _
-		$LOW_FIELD_TYPE_ALL = 1, _                              ; Returns an array of all field types listed below.
-		$LOW_FIELD_TYPE_COMMENT, _                              ; A Comment Field. As Found at Insert > Comment
-		$LOW_FIELD_TYPE_AUTHOR, _                               ; A Author field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_CHAPTER, _                              ; A Chapter field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_CHAR_COUNT, _                           ; A Character Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_COMBINED_CHAR, _                        ; A Combined Character field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_COND_TEXT, _                            ; A Conditional Text field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_DATE_TIME, _                            ; A Date/Time field, found in the Fields Dialog, Document tab, Date Type and Time Type..
-		$LOW_FIELD_TYPE_INPUT_LIST, _                           ; A Input List field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_EMB_OBJ_COUNT, _                        ; A Object Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_SENDER, _                               ; A Sender field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_FILENAME, _                             ; A File Name field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_SHOW_VAR, _                             ; A Show Variable field, found in the Fields Dialog, Variables tab.
-		$LOW_FIELD_TYPE_INSERT_REF, _                           ; A Insert Reference field, found in the Fields Dialog, Cross-References tab. [Includes: "Insert Reference", "Headings", "Numbered Paragraphs", "Drawing", "Bookmarks", "Footnotes", "Endnotes", etc.]
-		$LOW_FIELD_TYPE_IMAGE_COUNT, _                          ; A Image Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_HIDDEN_PAR, _                           ; A Hidden Paragraph field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_HIDDEN_TEXT, _                          ; A Hidden Text field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_INPUT, _                                ; A Input field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_PLACEHOLDER, _                          ; A Placeholder field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_MACRO, _                                ; A Execute Macro field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_PAGE_COUNT, _                           ; A Page Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_PAGE_NUM, _                             ; A Page Number (Unstyled) field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_PAR_COUNT, _                            ; A Paragraph Count field, found in the Fields Dialog, Document tab, Statistics Type..
-		$LOW_FIELD_TYPE_SHOW_PAGE_VAR, _                        ; A Show Page Variable field, found in the Fields Dialog, Variables tab.
-		$LOW_FIELD_TYPE_SET_PAGE_VAR, _                         ; A Set Page Variable field, found in the Fields Dialog, Variables tab.
-		$LOW_FIELD_TYPE_SCRIPT, _                               ;
-		$LOW_FIELD_TYPE_SET_VAR, _                              ; A Set Variable field, found in the Fields Dialog, Variables tab..
-		$LOW_FIELD_TYPE_TABLE_COUNT, _                          ; A Table Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_TEMPLATE_NAME, _                        ; A Templates field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_WORD_COUNT                              ; A Word Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_ALL = 1, _                              ; 1 Returns an array of all field types listed below.
+		$LOW_FIELD_TYPE_COMMENT, _                              ; 2 A Comment Field. As Found at Insert > Comment
+		$LOW_FIELD_TYPE_AUTHOR, _                               ; 4 A Author field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_CHAPTER, _                              ; 8 A Chapter field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_CHAR_COUNT, _                           ; 16 A Character Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_COMBINED_CHAR, _                        ; 32 A Combined Character field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_COND_TEXT, _                            ; 64 A Conditional Text field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_DATE_TIME, _                            ; 128 A Date/Time field, found in the Fields Dialog, Document tab, Date Type and Time Type..
+		$LOW_FIELD_TYPE_INPUT_LIST, _                           ; 256 A Input List field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_EMB_OBJ_COUNT, _                        ; 512 A Object Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_SENDER, _                               ; 1024 A Sender field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_FILENAME, _                             ; 2048 A File Name field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_SHOW_VAR, _                             ; 4096 A Show Variable field, found in the Fields Dialog, Variables tab.
+		$LOW_FIELD_TYPE_INSERT_REF, _                           ; 8192 A Insert Reference field, found in the Fields Dialog, Cross-References tab. [Includes: "Insert Reference", "Headings", "Numbered Paragraphs", "Drawing", "Bookmarks", "Footnotes", "Endnotes", etc.]
+		$LOW_FIELD_TYPE_IMAGE_COUNT, _                          ; 16384 A Image Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_HIDDEN_PAR, _                           ; 32768 A Hidden Paragraph field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_HIDDEN_TEXT, _                          ; 65536 A Hidden Text field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_INPUT, _                                ; 131072 A Input field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_PLACEHOLDER, _                          ; 262144 A Placeholder field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_MACRO, _                                ; 524288 A Execute Macro field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_PAGE_COUNT, _                           ; 1048576 A Page Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_PAGE_NUM, _                             ; 2097152 A Page Number (Unstyled) field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_PAR_COUNT, _                            ; 4194304 A Paragraph Count field, found in the Fields Dialog, Document tab, Statistics Type..
+		$LOW_FIELD_TYPE_SHOW_PAGE_VAR, _                        ; 8388608 A Show Page Variable field, found in the Fields Dialog, Variables tab.
+		$LOW_FIELD_TYPE_SET_PAGE_VAR, _                         ; 16777216 A Set Page Variable field, found in the Fields Dialog, Variables tab.
+		$LOW_FIELD_TYPE_SCRIPT, _                               ; 33554432
+		$LOW_FIELD_TYPE_SET_VAR, _                              ; 67108864 A Set Variable field, found in the Fields Dialog, Variables tab..
+		$LOW_FIELD_TYPE_TABLE_COUNT, _                          ; 134217728 A Table Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_TEMPLATE_NAME, _                        ; 268435456 A Templates field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_WORD_COUNT                              ; 536870912 A Word Count field, found in the Fields Dialog, Document tab, Statistics Type.
 
 ; User Data Field Type
 Global Const _                                                  ; com.sun.star.text.UserDataPart
@@ -298,13 +351,6 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_FIELD_USER_DATA_FAX = 12, _                        ; The field shows the fax number.
 		$LOW_FIELD_USER_DATA_EMAIL = 13, _                      ; The field shows the e-Mail.
 		$LOW_FIELD_USER_DATA_STATE = 14                         ; The field shows the state.
-
-; Follow By
-Global Const _                                                  ; com.sun.star.text.LabelFollow
-		$LOW_FOLLOW_BY_TABSTOP = 0, _                           ; A Tab will follow the Numbering Style Number.
-		$LOW_FOLLOW_BY_SPACE = 1, _                             ; A Space will follow the Numbering Style Number.
-		$LOW_FOLLOW_BY_NOTHING = 2, _                           ; Nothing will follow the Numbering Style Number.
-		$LOW_FOLLOW_BY_NEWLINE = 3                              ; A Newline will follow the Numbering Style Number.
 
 ; Form Content Type.
 Global Const _                                                  ; com.sun.star.sdb.CommandType
@@ -369,26 +415,26 @@ Global Const _                                                  ; "com.sun.star.
 
 ; Form Control Push Button Action.
 Global Enum _
-		$LOW_FORM_CON_PUSH_CMD_NONE, _                          ; No action occurs.
-		$LOW_FORM_CON_PUSH_CMD_SUBMIT_FORM, _                   ; Submit the data that is entered in other control fields to the current form.
-		$LOW_FORM_CON_PUSH_CMD_RESET_FORM, _                    ; Resets the settings in other control fields to the predefined defaults.
-		$LOW_FORM_CON_PUSH_CMD_OPEN, _                          ; Opens the URL that is specified under URL.
-		$LOW_FORM_CON_PUSH_CMD_FIRST_REC, _                     ; Moves the current form to the first record.
-		$LOW_FORM_CON_PUSH_CMD_LAST_REC, _                      ; Moves the current form to the last record.
-		$LOW_FORM_CON_PUSH_CMD_NEXT_REC, _                      ; Moves the current form to the next record.
-		$LOW_FORM_CON_PUSH_CMD_PREV_REC, _                      ; Moves the current form to the previous record.
-		$LOW_FORM_CON_PUSH_CMD_SAVE_REC, _                      ; Saves the current record, if necessary.
-		$LOW_FORM_CON_PUSH_CMD_UNDO, _                          ; Reverses the changes in the current record.
-		$LOW_FORM_CON_PUSH_CMD_NEW_REC, _                       ; Moves the current form to the insert row.
-		$LOW_FORM_CON_PUSH_CMD_DELETE_REC, _                    ; Deletes the current record.
-		$LOW_FORM_CON_PUSH_CMD_REFRESH_FORM                     ; Reloads the most recently saved version of the current form.
+		$LOW_FORM_CON_PUSH_CMD_NONE, _                          ; 0 No action occurs.
+		$LOW_FORM_CON_PUSH_CMD_SUBMIT_FORM, _                   ; 1 Submit the data that is entered in other control fields to the current form.
+		$LOW_FORM_CON_PUSH_CMD_RESET_FORM, _                    ; 2 Resets the settings in other control fields to the predefined defaults.
+		$LOW_FORM_CON_PUSH_CMD_OPEN, _                          ; 3 Opens the URL that is specified under URL.
+		$LOW_FORM_CON_PUSH_CMD_FIRST_REC, _                     ; 4 Moves the current form to the first record.
+		$LOW_FORM_CON_PUSH_CMD_LAST_REC, _                      ; 5 Moves the current form to the last record.
+		$LOW_FORM_CON_PUSH_CMD_NEXT_REC, _                      ; 6 Moves the current form to the next record.
+		$LOW_FORM_CON_PUSH_CMD_PREV_REC, _                      ; 7 Moves the current form to the previous record.
+		$LOW_FORM_CON_PUSH_CMD_SAVE_REC, _                      ; 8 Saves the current record, if necessary.
+		$LOW_FORM_CON_PUSH_CMD_UNDO, _                          ; 9 Reverses the changes in the current record.
+		$LOW_FORM_CON_PUSH_CMD_NEW_REC, _                       ; 10 Moves the current form to the insert row.
+		$LOW_FORM_CON_PUSH_CMD_DELETE_REC, _                    ; 11 Deletes the current record.
+		$LOW_FORM_CON_PUSH_CMD_REFRESH_FORM                     ; 12 Reloads the most recently saved version of the current form.
 
 ; Form Control Scrollbars.
 Global Enum _
-		$LOW_FORM_CON_SCROLL_NONE, _                            ; No Scrollbars are added.
-		$LOW_FORM_CON_SCROLL_HORI, _                            ; A Horizontal Scrollbar is added.
-		$LOW_FORM_CON_SCROLL_VERT, _                            ; A Vertical Scrollbar is added.
-		$LOW_FORM_CON_SCROLL_BOTH                               ; Both a Horizontal and Vertical Scrollbar is added.
+		$LOW_FORM_CON_SCROLL_NONE, _                            ; 0 No Scrollbars are added.
+		$LOW_FORM_CON_SCROLL_HORI, _                            ; 1 A Horizontal Scrollbar is added.
+		$LOW_FORM_CON_SCROLL_VERT, _                            ; 2 A Vertical Scrollbar is added.
+		$LOW_FORM_CON_SCROLL_BOTH                               ; 3 Both a Horizontal and Vertical Scrollbar is added.
 
 ; Form Control List Source Type.
 Global Const _                                                  ; "com.sun.star.form.ListSourceType"
@@ -410,33 +456,33 @@ Global Const _                                                  ; "com.sun.star.
 
 ; Form Control Line Break type.
 Global Enum _
-		$LOW_FORM_CON_TXT_TYPE_SINGLE_LINE, _                   ; No line-breaks are used.
-		$LOW_FORM_CON_TXT_TYPE_MULTI_LINE, _                    ; Line-breaks may be used.
-		$LOW_FORM_CON_TXT_TYPE_MULTI_LINE_FORMATTED             ; Line-breaks may be used and text can be formatted. Cannot bind the control to a database field.
+		$LOW_FORM_CON_TXT_TYPE_SINGLE_LINE, _                   ; 0 No line-breaks are used.
+		$LOW_FORM_CON_TXT_TYPE_MULTI_LINE, _                    ; 1 Line-breaks may be used.
+		$LOW_FORM_CON_TXT_TYPE_MULTI_LINE_FORMATTED             ; 2 Line-breaks may be used and text can be formatted. Cannot bind the control to a database field.
 
 ; Form Control Type.
 Global Enum Step *2 _
-		$LOW_FORM_CON_TYPE_CHECK_BOX = 1, _                     ; CHECKBOX
-		$LOW_FORM_CON_TYPE_COMBO_BOX, _                         ; COMBOBOX
-		$LOW_FORM_CON_TYPE_CURRENCY_FIELD, _                    ; CURRENCY_FIELD
-		$LOW_FORM_CON_TYPE_DATE_FIELD, _                        ; DATE_FIELD
-		$LOW_FORM_CON_TYPE_FILE_SELECTION, _                    ; FILE_CONTROL
-		$LOW_FORM_CON_TYPE_FORMATTED_FIELD, _                   ; FORMATTED_FIELD
-		$LOW_FORM_CON_TYPE_GROUP_BOX, _                         ; GROUP_BOX
-		$LOW_FORM_CON_TYPE_GROUPED_CONTROL, _                   ; A Group of Controls, consisting of a Group box and various controls.
-		$LOW_FORM_CON_TYPE_IMAGE_BUTTON, _                      ; IMAGE_BUTTON
-		$LOW_FORM_CON_TYPE_IMAGE_CONTROL, _                     ; IMAGE_CONTROL
-		$LOW_FORM_CON_TYPE_LABEL, _                             ; FIXED_TEXT
-		$LOW_FORM_CON_TYPE_LIST_BOX, _                          ; LIST_BOX
-		$LOW_FORM_CON_TYPE_NAV_BAR, _                           ; NAV_TOOLBAR
-		$LOW_FORM_CON_TYPE_NUMERIC_FIELD, _                     ; NUMERIC_FIELD
-		$LOW_FORM_CON_TYPE_OPTION_BUTTON, _                     ; RADIO_BUTTON
-		$LOW_FORM_CON_TYPE_PATTERN_FIELD, _                     ; PATTERN_FIELD
-		$LOW_FORM_CON_TYPE_PUSH_BUTTON, _                       ; COMMAND_BUTTON
-		$LOW_FORM_CON_TYPE_TABLE_CONTROL, _                     ; GRID_CONTROL
-		$LOW_FORM_CON_TYPE_TEXT_BOX, _                          ; TEXT_FIELD
-		$LOW_FORM_CON_TYPE_TIME_FIELD, _                        ; TIME_FIELD
-		$LOW_FORM_CON_TYPE_ALL = 1048575                        ; All of the above Control Types. (This value is the BitOR value of all above)
+		$LOW_FORM_CON_TYPE_CHECK_BOX = 1, _                     ; 1 CHECKBOX
+		$LOW_FORM_CON_TYPE_COMBO_BOX, _                         ; 2 COMBOBOX
+		$LOW_FORM_CON_TYPE_CURRENCY_FIELD, _                    ; 4 CURRENCY_FIELD
+		$LOW_FORM_CON_TYPE_DATE_FIELD, _                        ; 8 DATE_FIELD
+		$LOW_FORM_CON_TYPE_FILE_SELECTION, _                    ; 16 FILE_CONTROL
+		$LOW_FORM_CON_TYPE_FORMATTED_FIELD, _                   ; 32 FORMATTED_FIELD
+		$LOW_FORM_CON_TYPE_GROUP_BOX, _                         ; 64 GROUP_BOX
+		$LOW_FORM_CON_TYPE_GROUPED_CONTROL, _                   ; 128 A Group of Controls, consisting of a Group box and various controls.
+		$LOW_FORM_CON_TYPE_IMAGE_BUTTON, _                      ; 256 IMAGE_BUTTON
+		$LOW_FORM_CON_TYPE_IMAGE_CONTROL, _                     ; 512 IMAGE_CONTROL
+		$LOW_FORM_CON_TYPE_LABEL, _                             ; 1024 FIXED_TEXT
+		$LOW_FORM_CON_TYPE_LIST_BOX, _                          ; 2048 LIST_BOX
+		$LOW_FORM_CON_TYPE_NAV_BAR, _                           ; 4096 NAV_TOOLBAR
+		$LOW_FORM_CON_TYPE_NUMERIC_FIELD, _                     ; 8192 NUMERIC_FIELD
+		$LOW_FORM_CON_TYPE_OPTION_BUTTON, _                     ; 16384 RADIO_BUTTON
+		$LOW_FORM_CON_TYPE_PATTERN_FIELD, _                     ; 32768 PATTERN_FIELD
+		$LOW_FORM_CON_TYPE_PUSH_BUTTON, _                       ; 65536 COMMAND_BUTTON
+		$LOW_FORM_CON_TYPE_TABLE_CONTROL, _                     ; 131072 GRID_CONTROL
+		$LOW_FORM_CON_TYPE_TEXT_BOX, _                          ; 262144 TEXT_FIELD
+		$LOW_FORM_CON_TYPE_TIME_FIELD, _                        ; 524288 TIME_FIELD
+		$LOW_FORM_CON_TYPE_ALL = 1048575                        ; 1048575 All of the above Control Types. (This value is the BitOR value of all above)
 
 ; Form Tab Key Action.
 Global Const _                                                  ; com.sun.star.form.TabulatorCycle
@@ -524,19 +570,19 @@ Global Const _                                                  ; com.sun.star.a
 		$LOW_GRAD_TYPE_SQUARE = 4, _                            ; Square type Gradient
 		$LOW_GRAD_TYPE_RECT = 5                                 ; Rectangle type Gradient
 
-; Line Spacing
-Global Const _                                                  ; com.sun.star.style.LineSpacingMode
-		$LOW_LINE_SPC_MODE_PROP = 0, _                          ; Specifies the height value as a proportional value. Min 6% Max 65,535%. (without percentage sign)
-		$LOW_LINE_SPC_MODE_MIN = 1, _                           ; Specifies the height as the minimum line height. [Minimum/At least in L.O. U.I.] Min 0, Max 10008 (HMM)
-		$LOW_LINE_SPC_MODE_LEADING = 2, _                       ; Specifies the height value as the distance to the previous line. Min 0, Max 10008 Hundredths of a Millimeter (HMM).
-		$LOW_LINE_SPC_MODE_FIX = 3                              ; Specifies the height value as a fixed line height. Min 51, Max 10008 Hundredths of a Millimeter (HMM).
-
 ; Line Style
 Global Const _                                                  ; com.sun.star.text.ColumnSeparatorStyle
 		$LOW_LINE_STYLE_NONE = 0, _                             ; No line.
 		$LOW_LINE_STYLE_SOLID = 1, _                            ; A solid line.
 		$LOW_LINE_STYLE_DOTTED = 2, _                           ; A dotted line.
 		$LOW_LINE_STYLE_DASHED = 3                              ; A Dashed line.
+
+; Follow By
+Global Const _                                                  ; com.sun.star.text.LabelFollow
+		$LOW_NUM_FOLLOW_BY_TABSTOP = 0, _                       ; A Tab will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_SPACE = 1, _                         ; A Space will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_NOTHING = 2, _                       ; Nothing will follow the Numbering Style Number.
+		$LOW_NUM_FOLLOW_BY_NEWLINE = 3                          ; A Newline will follow the Numbering Style Number.
 
 ; Numbering Style Type
 Global Const _                                                  ; com.sun.star.style.NumberingType
@@ -635,20 +681,6 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_ORIENT_VERT_LINE_CENTER = 8, _                     ; Aligned at the center of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 		$LOW_ORIENT_VERT_LINE_BOTTOM = 9                        ; Aligned at the bottom of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 
-; Outline
-Global Const _
-		$LOW_OUTLINE_BODY = 0, _                                ; The paragraph belongs to the body text.
-		$LOW_OUTLINE_LEVEL_1 = 1, _                             ; The paragraph belongs to the level 1 outline level.
-		$LOW_OUTLINE_LEVEL_2 = 2, _                             ; The paragraph belongs to the level 2 outline level.
-		$LOW_OUTLINE_LEVEL_3 = 3, _                             ; The paragraph belongs to the level 3 outline level.
-		$LOW_OUTLINE_LEVEL_4 = 4, _                             ; The paragraph belongs to the level 4 outline level.
-		$LOW_OUTLINE_LEVEL_5 = 5, _                             ; The paragraph belongs to the level 5 outline level.
-		$LOW_OUTLINE_LEVEL_6 = 6, _                             ; The paragraph belongs to the level 6 outline level.
-		$LOW_OUTLINE_LEVEL_7 = 7, _                             ; The paragraph belongs to the level 7 outline level.
-		$LOW_OUTLINE_LEVEL_8 = 8, _                             ; The paragraph belongs to the level 8 outline level.
-		$LOW_OUTLINE_LEVEL_9 = 9, _                             ; The paragraph belongs to the level 9 outline level.
-		$LOW_OUTLINE_LEVEL_10 = 10                              ; The paragraph belongs to the level 10 outline level.
-
 ; Page Layout
 Global Const _                                                  ; com.sun.star.style.PageStyleLayout
 		$LOW_PAGE_LAYOUT_ALL = 0, _                             ; Page style shows both odd(Right) and even(Left) pages. With left and right margins.
@@ -664,15 +696,15 @@ Global Const _                                                  ; com.sun.star.t
 
 ; Paper Size Constants.
 Global Const _                                                  ; com.sun.star.view.PaperFormat
-		$LOW_PAPER_A3 = 0, _                                    ; A3 Paper size.
-		$LOW_PAPER_A4 = 1, _                                    ; A4 Paper size.
-		$LOW_PAPER_A5 = 2, _                                    ; A5 Paper size.
-		$LOW_PAPER_B4 = 3, _                                    ; B4 Paper size.
-		$LOW_PAPER_B5 = 4, _                                    ; B5 Paper size.
-		$LOW_PAPER_LETTER = 5, _                                ; Letter Paper size.
-		$LOW_PAPER_LEGAL = 6, _                                 ; Legal Paper size.
-		$LOW_PAPER_TABLOID = 7, _                               ; Tabloid Paper size.
-		$LOW_PAPER_USER_DEFINED = 8                             ; Paper size is User-Defined.
+		$LOW_PAPER_FORMAT_A3 = 0, _                             ; A3 Paper size.
+		$LOW_PAPER_FORMAT_A4 = 1, _                             ; A4 Paper size.
+		$LOW_PAPER_FORMAT_A5 = 2, _                             ; A5 Paper size.
+		$LOW_PAPER_FORMAT_B4 = 3, _                             ; B4 Paper size.
+		$LOW_PAPER_FORMAT_B5 = 4, _                             ; B5 Paper size.
+		$LOW_PAPER_FORMAT_LETTER = 5, _                         ; Letter Paper size.
+		$LOW_PAPER_FORMAT_LEGAL = 6, _                          ; Legal Paper size.
+		$LOW_PAPER_FORMAT_TABLOID = 7, _                        ; Tabloid Paper size.
+		$LOW_PAPER_FORMAT_USER_DEFINED = 8                      ; Paper size is User-Defined.
 
 ; Paper Height in Hundredths of a Millimeter (HMM)
 Global Const _
@@ -765,14 +797,57 @@ Global Const _
 		$LOW_PAR_LAST_LINE_JUSTIFIED = 2, _                     ; The Paragraph is adjusted to both borders / stretched.
 		$LOW_PAR_LAST_LINE_CENTER = 3                           ; The Paragraph is centered between the left and right borders.
 
-; Posture/Italic
-Global Const _                                                  ; com.sun.star.awt.FontSlant
-		$LOW_POSTURE_NONE = 0, _                                ; Specifies a font without slant.
-		$LOW_POSTURE_OBLIQUE = 1, _                             ; Specifies an oblique font (slant not designed into the font).
-		$LOW_POSTURE_ITALIC = 2, _                              ; Specifies an italic font (slant designed into the font).
-		$LOW_POSTURE_DONTKNOW = 3, _                            ; Specifies a font with an unknown slant. For Read Only.
-		$LOW_POSTURE_REV_OBLIQUE = 4, _                         ; Specifies a reverse oblique font (slant not designed into the font).
-		$LOW_POSTURE_REV_ITALIC = 5                             ; Specifies a reverse italic font (slant designed into the font).
+; Line Spacing
+Global Const _                                                  ; com.sun.star.style.LineSpacingMode
+		$LOW_PAR_LINE_SPC_MODE_PROP = 0, _                      ; Specifies the height value as a proportional value. Min 6% Max 65,535%. (without percentage sign)
+		$LOW_PAR_LINE_SPC_MODE_MIN = 1, _                       ; Specifies the height as the minimum line height. [Minimum/At least in L.O. U.I.] Min 0, Max 10008 (HMM)
+		$LOW_PAR_LINE_SPC_MODE_LEADING = 2, _                   ; Specifies the height value as the distance to the previous line. Min 0, Max 10008 Hundredths of a Millimeter (HMM).
+		$LOW_PAR_LINE_SPC_MODE_FIX = 3                          ; Specifies the height value as a fixed line height. Min 51, Max 10008 Hundredths of a Millimeter (HMM).
+
+; Outline
+Global Const _
+		$LOW_PAR_OUTLINE_BODY = 0, _                            ; The paragraph belongs to the body text.
+		$LOW_PAR_OUTLINE_LEVEL_1 = 1, _                         ; The paragraph belongs to the level 1 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_2 = 2, _                         ; The paragraph belongs to the level 2 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_3 = 3, _                         ; The paragraph belongs to the level 3 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_4 = 4, _                         ; The paragraph belongs to the level 4 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_5 = 5, _                         ; The paragraph belongs to the level 5 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_6 = 6, _                         ; The paragraph belongs to the level 6 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_7 = 7, _                         ; The paragraph belongs to the level 7 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_8 = 8, _                         ; The paragraph belongs to the level 8 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_9 = 9, _                         ; The paragraph belongs to the level 9 outline level.
+		$LOW_PAR_OUTLINE_LEVEL_10 = 10                          ; The paragraph belongs to the level 10 outline level.
+
+; Tab Alignment
+Global Const _                                                  ; com.sun.star.style.TabAlign
+		$LOW_PAR_TAB_ALIGN_LEFT = 0, _                          ; Aligns the left edge of the text to the tab stop and extends the text to the right.
+		$LOW_PAR_TAB_ALIGN_CENTER = 1, _                        ; Aligns the center of the text to the tab stop.
+		$LOW_PAR_TAB_ALIGN_RIGHT = 2, _                         ; Aligns the right edge of the text to the tab stop and extends the text to the left of the tab stop.
+		$LOW_PAR_TAB_ALIGN_DECIMAL = 3, _                       ; Aligns the decimal separator of a number to the center of the tab stop and text to the left of the tab.
+		$LOW_PAR_TAB_ALIGN_DEFAULT = 4                          ; This setting is the default setting when no TabStops are present. Setting any Tabstop to this constant will make it disappear from the TabStop list. It is therefore only listed here for property reading purposes.
+
+; Text Adjust
+Global Const _                                                  ; com.sun.star.drawing.TextVerticalAdjust
+		$LOW_PAR_TXT_ADJ_VERT_TOP = 0, _                        ; The top edge of the text is adjusted to the top edge of the object.
+		$LOW_PAR_TXT_ADJ_VERT_CENTER = 1, _                     ; The text is centered inside the object.
+		$LOW_PAR_TXT_ADJ_VERT_BOTTOM = 2, _                     ; The bottom edge of the text is adjusted to the bottom edge of the object.
+		$LOW_PAR_TXT_ADJ_VERT_BLOCK = 3                         ;
+
+; Text Direction
+Global Const _                                                  ; com.sun.star.text.WritingMode2
+		$LOW_PAR_TXT_DIR_LR_TB = 0, _                           ; Text within lines is written left-to-right. Lines and blocks are placed top-to-bottom. Typically, this is the writing mode for normal "alphabetic" text.
+		$LOW_PAR_TXT_DIR_RL_TB = 1, _                           ; Text within a line are written right-to-left. Lines and blocks are placed top-to-bottom. Typically, this writing mode is used in Arabic and Hebrew text.
+		$LOW_PAR_TXT_DIR_TB_RL = 2, _                           ; Text within a line is written top-to-bottom. Lines and blocks are placed right-to-left. Typically, this writing mode is used in Chinese and Japanese text.
+		$LOW_PAR_TXT_DIR_TB_LR = 3, _                           ; Text within a line is written top-to-bottom. Lines and blocks are placed left-to-right. Typically, this writing mode is used in Mongolian text.
+		$LOW_PAR_TXT_DIR_CONTEXT = 4, _                         ; Obtain actual writing mode from the context of the object.
+		$LOW_PAR_TXT_DIR_BT_LR = 5                              ; Text within a line is written bottom-to-top. Lines and blocks are placed left-to-right. (LibreOffice 6.3).
+
+; Printer Duplex Constants.
+Global Const _                                                  ; com.sun.star.view.DuplexMode
+		$LOW_PRINT_DUPLEX_UNKNOWN = 0, _                        ; Duplex mode setting is unknown.
+		$LOW_PRINT_DUPLEX_OFF = 1, _                            ; Duplex mode is off.
+		$LOW_PRINT_DUPLEX_LONG = 2, _                           ; Duplex mode is on, flip on Long edge.
+		$LOW_PRINT_DUPLEX_SHORT = 3                             ; Duplex mode is on, flip on Short edge.
 
 ; LO Print Comments Constants.
 Global Const _                                                  ; com.sun.star.text.NotePrintMode
@@ -797,19 +872,13 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_RELATIVE_PAGE_PRINT_BOTTOM = 10, _                 ; The Object is placed considering the space available in the page footer(?)
 		$LOW_RELATIVE_PAGE_PRINT_TOP = 11                       ; The Object is placed considering the space available in the page header(?)
 
-; Relief
-Global Const _                                                  ; com.sun.star.text.FontRelief
-		$LOW_RELIEF_NONE = 0, _                                 ; No relief is applied.
-		$LOW_RELIEF_EMBOSSED = 1, _                             ; The font relief is embossed.
-		$LOW_RELIEF_ENGRAVED = 2                                ; The font relief is engraved.
-
 ; Shadow Location
 Global Const _                                                  ; com.sun.star.table.ShadowLocation
-		$LOW_SHADOW_NONE = 0, _                                 ; No shadow is applied.
-		$LOW_SHADOW_TOP_LEFT = 1, _                             ; Shadow is located along the upper and left sides.
-		$LOW_SHADOW_TOP_RIGHT = 2, _                            ; Shadow is located along the upper and right sides.
-		$LOW_SHADOW_BOTTOM_LEFT = 3, _                          ; Shadow is located along the lower and left sides.
-		$LOW_SHADOW_BOTTOM_RIGHT = 4                            ; Shadow is located along the lower and right sides.
+		$LOW_SHADOW_LOCATION_NONE = 0, _                        ; No shadow is applied.
+		$LOW_SHADOW_LOCATION_TOP_LEFT = 1, _                    ; Shadow is located along the upper and left sides.
+		$LOW_SHADOW_LOCATION_TOP_RIGHT = 2, _                   ; Shadow is located along the upper and right sides.
+		$LOW_SHADOW_LOCATION_BOTTOM_LEFT = 3, _                 ; Shadow is located along the lower and left sides.
+		$LOW_SHADOW_LOCATION_BOTTOM_RIGHT = 4                   ; Shadow is located along the lower and right sides.
 
 ; Arrowhead Type Constants
 Global Enum _
@@ -913,28 +982,28 @@ Global Enum _
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_RIGHT, _           ; 5 -- A Right hand Callout Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP, _              ; 6 -- A Upward Callout Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN, _         ; 7 -- A Upward and Downward Callout Arrow.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, _        ; 8 -- Upward and Right hand Callout Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, _        ; 8 -- Upward and Right hand Callout Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_CIRCULAR, _                ; 9 -- A Circular Arrow.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, _            ; 10 -- A Right hand Corner Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, _            ; 10 -- A Right hand Corner Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_DOWN, _                    ; 11 -- A Downward Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_LEFT, _                    ; 12 -- A Left hand Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_LEFT_RIGHT, _              ; 13 -- A Left and Right Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_NOTCHED_RIGHT, _           ; 14 -- A Notched Right Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_RIGHT, _                   ; 15 -- A Right hand Arrow.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, _           ; 16 -- A Right or Left Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_S_SHAPED, _                ; 17 -- A "S"-Shaped Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_SPLIT, _                   ; 18 -- A Split Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, _           ; 16 -- A Right or Left Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_S_SHAPED, _                ; 17 -- A "S"-Shaped Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_SPLIT, _                   ; 18 -- A Split Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT, _           ; 19 -- A Striped Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP, _                      ; 20 -- A Upward Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP_DOWN, _                 ; 21 -- A Up and Down Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP_RIGHT, _                ; 22 -- A Upward and Right hand Arrow.
-		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, _           ; 23 -- A Upward, Right hand and Downward Arrow. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, _           ; 23 -- A Upward, Right hand and Downward Arrow. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_ARROWS_CHEVRON, _                       ; 24 -- A Chevron Shape Arrow.
 		$LOW_SHAPE_TYPE_ARROWS_PENTAGON, _                      ; 25 -- A Pentagon Shape Arrow.
 		$LOW_SHAPE_TYPE_BASIC_ARC, _                            ; 26 -- An Arc Shape.
 		$LOW_SHAPE_TYPE_BASIC_ARC_BLOCK, _                      ; 27 -- A Block Arc Shape.
 		$LOW_SHAPE_TYPE_BASIC_CIRCLE, _                         ; 28 -- A Circle.
-		$LOW_SHAPE_TYPE_BASIC_CIRCLE_PIE, _                     ; 29 -- A Pie Circle. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_BASIC_CIRCLE_PIE, _                     ; 29 -- A Pie Circle. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_BASIC_CIRCLE_SEGMENT, _                 ; 30 -- A Segment Circle.
 		$LOW_SHAPE_TYPE_BASIC_CROSS, _                          ; 31 -- A Cross Shape.
 		$LOW_SHAPE_TYPE_BASIC_CUBE, _                           ; 32 -- A Cube Shape.
@@ -942,7 +1011,7 @@ Global Enum _
 		$LOW_SHAPE_TYPE_BASIC_DIAMOND, _                        ; 34 -- A Diamond Shape.
 		$LOW_SHAPE_TYPE_BASIC_ELLIPSE, _                        ; 35 -- An Ellipse Shape.
 		$LOW_SHAPE_TYPE_BASIC_FOLDED_CORNER, _                  ; 36 -- A Paper Shape with a Folded Corner.
-		$LOW_SHAPE_TYPE_BASIC_FRAME, _                          ; 37 -- A Frame Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_BASIC_FRAME, _                          ; 37 -- A Frame Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_BASIC_HEXAGON, _                        ; 38 -- A Hexagon Shape.
 		$LOW_SHAPE_TYPE_BASIC_OCTAGON, _                        ; 39 -- A Octagon Shape.
 		$LOW_SHAPE_TYPE_BASIC_PARALLELOGRAM, _                  ; 40 -- A Parallelogram Shape.
@@ -1000,18 +1069,18 @@ Global Enum _
 		$LOW_SHAPE_TYPE_LINE_POLYGON_45_FILLED, _               ; 92 -- A Filled 45 degree Polygon.
 		$LOW_SHAPE_TYPE_STARS_4_POINT, _                        ; 93 -- A 4 Pointed Star.
 		$LOW_SHAPE_TYPE_STARS_5_POINT, _                        ; 94 -- A 5 Pointed Star.
-		$LOW_SHAPE_TYPE_STARS_6_POINT, _                        ; 95 -- A 6 Pointed Star. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_STARS_6_POINT_CONCAVE, _                ; 96 -- A Concave 6 Pointed Star. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_STARS_6_POINT, _                        ; 95 -- A 6 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_STARS_6_POINT_CONCAVE, _                ; 96 -- A Concave 6 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_STARS_8_POINT, _                        ; 97 -- A 8 Pointed Star.
-		$LOW_SHAPE_TYPE_STARS_12_POINT, _                       ; 98 -- A 12 Pointed Star. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_STARS_12_POINT, _                       ; 98 -- A 12 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_STARS_24_POINT, _                       ; 99 -- A 24 Pointed Star.
 		$LOW_SHAPE_TYPE_STARS_DOORPLATE, _                      ; 100 -- A Doorplate Shape.
 		$LOW_SHAPE_TYPE_STARS_EXPLOSION, _                      ; 101 -- A Explosion Shape.
 		$LOW_SHAPE_TYPE_STARS_SCROLL_HORIZONTAL, _              ; 102 -- A Horizontal Scroll.
 		$LOW_SHAPE_TYPE_STARS_SCROLL_VERTICAL, _                ; 103 -- A Vertical Scroll.
-		$LOW_SHAPE_TYPE_STARS_SIGNET, _                         ; 104 -- A Signet Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, _                 ; 105 -- A Diamond Bevel. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, _                 ; 106 -- A Octagon Bevel. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_STARS_SIGNET, _                         ; 104 -- A Signet Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, _                 ; 105 -- A Diamond Bevel. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, _                 ; 106 -- A Octagon Bevel. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_SYMBOL_BEVEL_SQUARE, _                  ; 107 -- A Square Bevel.
 		$LOW_SHAPE_TYPE_SYMBOL_BRACE_DOUBLE, _                  ; 108 -- A Double Brace.
 		$LOW_SHAPE_TYPE_SYMBOL_BRACE_LEFT, _                    ; 109 -- A Left hand Brace.
@@ -1019,134 +1088,65 @@ Global Enum _
 		$LOW_SHAPE_TYPE_SYMBOL_BRACKET_DOUBLE, _                ; 111 -- A Double Bracket.
 		$LOW_SHAPE_TYPE_SYMBOL_BRACKET_LEFT, _                  ; 112 -- A Left hand Bracket.
 		$LOW_SHAPE_TYPE_SYMBOL_BRACKET_RIGHT, _                 ; 113 -- A Right hand Bracket.
-		$LOW_SHAPE_TYPE_SYMBOL_CLOUD, _                         ; 114 -- A Cloud Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-		$LOW_SHAPE_TYPE_SYMBOL_FLOWER, _                        ; 115 -- A Flower Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_SYMBOL_CLOUD, _                         ; 114 -- A Cloud Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
+		$LOW_SHAPE_TYPE_SYMBOL_FLOWER, _                        ; 115 -- A Flower Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 		$LOW_SHAPE_TYPE_SYMBOL_HEART, _                         ; 116 -- A Heart Shape.
 		$LOW_SHAPE_TYPE_SYMBOL_LIGHTNING, _                     ; 117 -- A Lightning Shape. ## Note: Lightning is visually different than the one available in L.O. Shapes U.I.
 		$LOW_SHAPE_TYPE_SYMBOL_MOON, _                          ; 118 -- A Moon Shape.
 		$LOW_SHAPE_TYPE_SYMBOL_SMILEY, _                        ; 119 -- A Smiley Shape.
 		$LOW_SHAPE_TYPE_SYMBOL_SUN, _                           ; 120 -- A Sun Shape.
 		$LOW_SHAPE_TYPE_SYMBOL_PROHIBITED, _                    ; 121 -- A Prohibited Shape.
-		$LOW_SHAPE_TYPE_SYMBOL_PUZZLE                           ; 122 -- A Puzzle Piece Shape. ## Not implemented into Libre Office SDK as of 7.3.4.2 or higher.
-
-; Strikeout
-Global Const _                                                  ; com.sun.star.awt.FontStrikeout
-		$LOW_STRIKEOUT_NONE = 0, _                              ; No strike out.
-		$LOW_STRIKEOUT_SINGLE = 1, _                            ; Strike out the characters with a single line.
-		$LOW_STRIKEOUT_DOUBLE = 2, _                            ; Strike out the characters with a double line.
-		$LOW_STRIKEOUT_DONT_KNOW = 3, _                         ; The strikeout mode is not specified. For Read Only.
-		$LOW_STRIKEOUT_BOLD = 4, _                              ; Strike out the characters with a bold line.
-		$LOW_STRIKEOUT_SLASH = 5, _                             ; Strike out the characters with slashes.
-		$LOW_STRIKEOUT_X = 6                                    ; Strike out the characters with X's.
-
-; Tab Alignment
-Global Const _                                                  ; com.sun.star.style.TabAlign
-		$LOW_TAB_ALIGN_LEFT = 0, _                              ; Aligns the left edge of the text to the tab stop and extends the text to the right.
-		$LOW_TAB_ALIGN_CENTER = 1, _                            ; Aligns the center of the text to the tab stop.
-		$LOW_TAB_ALIGN_RIGHT = 2, _                             ; Aligns the right edge of the text to the tab stop and extends the text to the left of the tab stop.
-		$LOW_TAB_ALIGN_DECIMAL = 3, _                           ; Aligns the decimal separator of a number to the center of the tab stop and text to the left of the tab.
-		$LOW_TAB_ALIGN_DEFAULT = 4                              ; This setting is the default setting when no TabStops are present. Setting any Tabstop to this constant will make it disappear from the TabStop list. It is therefore only listed here for property reading purposes.
+		$LOW_SHAPE_TYPE_SYMBOL_PUZZLE                           ; 122 -- A Puzzle Piece Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 
 ; LO TableCursor Movement Constants.
 Global Enum _
-		$LOW_TABLECUR_GO_LEFT, _                                ; Move the cursor left n cells.
-		$LOW_TABLECUR_GO_RIGHT, _                               ; Move the cursor right n cells.
-		$LOW_TABLECUR_GO_UP, _                                  ; Move the cursor up n cells.
-		$LOW_TABLECUR_GO_DOWN, _                                ; Move the cursor down n cells.
-		$LOW_TABLECUR_GOTO_START, _                             ; Move the cursor to the first cell.
-		$LOW_TABLECUR_GOTO_END                                  ; Move the cursor to the last cell.
+		$LOW_TABLECUR_GO_LEFT, _                                ; 0 Move the cursor left n cells.
+		$LOW_TABLECUR_GO_RIGHT, _                               ; 1 Move the cursor right n cells.
+		$LOW_TABLECUR_GO_UP, _                                  ; 2 Move the cursor up n cells.
+		$LOW_TABLECUR_GO_DOWN, _                                ; 3 Move the cursor down n cells.
+		$LOW_TABLECUR_GOTO_START, _                             ; 4 Move the cursor to the first cell.
+		$LOW_TABLECUR_GOTO_END                                  ; 5 Move the cursor to the last cell.
 
 ; LO TextCursor Movement Constants.
 Global Enum _
-		$LOW_TEXTCUR_COLLAPSE_TO_START, _                       ; Collapses the current selection to the start of the selection.
-		$LOW_TEXTCUR_COLLAPSE_TO_END, _                         ; Collapses the current selection the to end of the selection.
-		$LOW_TEXTCUR_GO_LEFT, _                                 ; Move the cursor left by n characters.
-		$LOW_TEXTCUR_GO_RIGHT, _                                ; Move the cursor right by n characters.
-		$LOW_TEXTCUR_GOTO_START, _                              ; Move the cursor to the start of the text.
-		$LOW_TEXTCUR_GOTO_END, _                                ; Move the cursor to the end of the text.
-		$LOW_TEXTCUR_GOTO_NEXT_WORD, _                          ; Move to the start of the next word.
-		$LOW_TEXTCUR_GOTO_PREV_WORD, _                          ; Move to the end of the previous word.
-		$LOW_TEXTCUR_GOTO_END_OF_WORD, _                        ; Move to the end of the current word.
-		$LOW_TEXTCUR_GOTO_START_OF_WORD, _                      ; Move to the start of the current word.
-		$LOW_TEXTCUR_GOTO_NEXT_SENTENCE, _                      ; Move to the start of the next sentence.
-		$LOW_TEXTCUR_GOTO_PREV_SENTENCE, _                      ; Move to the end of the previous sentence.
-		$LOW_TEXTCUR_GOTO_END_OF_SENTENCE, _                    ; Move to the end of the current sentence.
-		$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, _                  ; Move to the start of the current sentence.
-		$LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, _                     ; Move to the start of the next paragraph.
-		$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH, _                     ; Move to the End of the previous paragraph.
-		$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, _                   ; Move to the end of the current paragraph.
-		$LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH                    ; Move to the start of the current paragraph.
-
-; Text Adjust
-Global Const _                                                  ; com.sun.star.drawing.TextVerticalAdjust
-		$LOW_TXT_ADJ_VERT_TOP = 0, _                            ; The top edge of the text is adjusted to the top edge of the object.
-		$LOW_TXT_ADJ_VERT_CENTER = 1, _                         ; The text is centered inside the object.
-		$LOW_TXT_ADJ_VERT_BOTTOM = 2, _                         ; The bottom edge of the text is adjusted to the bottom edge of the object.
-		$LOW_TXT_ADJ_VERT_BLOCK = 3                             ;
-
-; Text Direction
-Global Const _                                                  ; com.sun.star.text.WritingMode2
-		$LOW_TXT_DIR_LR_TB = 0, _                               ; Text within lines is written left-to-right. Lines and blocks are placed top-to-bottom. Typically, this is the writing mode for normal "alphabetic" text.
-		$LOW_TXT_DIR_RL_TB = 1, _                               ; Text within a line are written right-to-left. Lines and blocks are placed top-to-bottom. Typically, this writing mode is used in Arabic and Hebrew text.
-		$LOW_TXT_DIR_TB_RL = 2, _                               ; Text within a line is written top-to-bottom. Lines and blocks are placed right-to-left. Typically, this writing mode is used in Chinese and Japanese text.
-		$LOW_TXT_DIR_TB_LR = 3, _                               ; Text within a line is written top-to-bottom. Lines and blocks are placed left-to-right. Typically, this writing mode is used in Mongolian text.
-		$LOW_TXT_DIR_CONTEXT = 4, _                             ; Obtain actual writing mode from the context of the object.
-		$LOW_TXT_DIR_BT_LR = 5                                  ; Text within a line is written bottom-to-top. Lines and blocks are placed left-to-right. (LibreOffice 6.3).
-
-; Underline/Overline
-Global Const _                                                  ; com.sun.star.awt.FontUnderline
-		$LOW_UNDERLINE_NONE = 0, _                              ; No Underline or Overline style.
-		$LOW_UNDERLINE_SINGLE = 1, _                            ; Single line Underline/Overline style.
-		$LOW_UNDERLINE_DOUBLE = 2, _                            ; Double line Underline/Overline style.
-		$LOW_UNDERLINE_DOTTED = 3, _                            ; Dotted line Underline/Overline style.
-		$LOW_UNDERLINE_DONT_KNOW = 4, _                         ; Unknown Underline/Overline style, for read only.
-		$LOW_UNDERLINE_DASH = 5, _                              ; Dashed line Underline/Overline style.
-		$LOW_UNDERLINE_LONG_DASH = 6, _                         ; Long Dashed line Underline/Overline style.
-		$LOW_UNDERLINE_DASH_DOT = 7, _                          ; Dash Dot line Underline/Overline style.
-		$LOW_UNDERLINE_DASH_DOT_DOT = 8, _                      ; Dash Dot Dot line Underline/Overline style.
-		$LOW_UNDERLINE_SML_WAVE = 9, _                          ; Small Wave line Underline/Overline style.
-		$LOW_UNDERLINE_WAVE = 10, _                             ; Wave line Underline/Overline style.
-		$LOW_UNDERLINE_DBL_WAVE = 11, _                         ; Double Wave line Underline/Overline style.
-		$LOW_UNDERLINE_BOLD = 12, _                             ; Bold line Underline/Overline style.
-		$LOW_UNDERLINE_BOLD_DOTTED = 13, _                      ; Bold Dotted line Underline/Overline style.
-		$LOW_UNDERLINE_BOLD_DASH = 14, _                        ; Bold Dashed line Underline/Overline style.
-		$LOW_UNDERLINE_BOLD_LONG_DASH = 15, _                   ; Bold Long Dash line Underline/Overline style.
-		$LOW_UNDERLINE_BOLD_DASH_DOT = 16, _                    ; Bold Dash Dot line Underline/Overline style.
-		$LOW_UNDERLINE_BOLD_DASH_DOT_DOT = 17, _                ; Bold Dash Dot Dot line Underline/Overline style.
-		$LOW_UNDERLINE_BOLD_WAVE = 18                           ; Bold Wave line Underline/Overline style.
+		$LOW_TEXTCUR_COLLAPSE_TO_START, _                       ; 0 Collapses the current selection to the start of the selection.
+		$LOW_TEXTCUR_COLLAPSE_TO_END, _                         ; 1 Collapses the current selection the to end of the selection.
+		$LOW_TEXTCUR_GO_LEFT, _                                 ; 2 Move the cursor left by n characters.
+		$LOW_TEXTCUR_GO_RIGHT, _                                ; 3 Move the cursor right by n characters.
+		$LOW_TEXTCUR_GOTO_START, _                              ; 4 Move the cursor to the start of the text.
+		$LOW_TEXTCUR_GOTO_END, _                                ; 5 Move the cursor to the end of the text.
+		$LOW_TEXTCUR_GOTO_NEXT_WORD, _                          ; 6 Move to the start of the next word.
+		$LOW_TEXTCUR_GOTO_PREV_WORD, _                          ; 7 Move to the end of the previous word.
+		$LOW_TEXTCUR_GOTO_END_OF_WORD, _                        ; 8 Move to the end of the current word.
+		$LOW_TEXTCUR_GOTO_START_OF_WORD, _                      ; 9 Move to the start of the current word.
+		$LOW_TEXTCUR_GOTO_NEXT_SENTENCE, _                      ; 10 Move to the start of the next sentence.
+		$LOW_TEXTCUR_GOTO_PREV_SENTENCE, _                      ; 11 Move to the end of the previous sentence.
+		$LOW_TEXTCUR_GOTO_END_OF_SENTENCE, _                    ; 12 Move to the end of the current sentence.
+		$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, _                  ; 13 Move to the start of the current sentence.
+		$LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, _                     ; 14 Move to the start of the next paragraph.
+		$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH, _                     ; 15 Move to the End of the previous paragraph.
+		$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, _                   ; 16 Move to the end of the current paragraph.
+		$LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH                    ; 17 Move to the start of the current paragraph.
 
 ; LO ViewCursor Movement Constants.
 Global Enum _
-		$LOW_VIEWCUR_GO_DOWN, _                                 ; Move the cursor Down by n lines.
-		$LOW_VIEWCUR_GO_UP, _                                   ; Move the cursor Up by n lines.
-		$LOW_VIEWCUR_GO_LEFT, _                                 ; Move the cursor left by n characters.
-		$LOW_VIEWCUR_GO_RIGHT, _                                ; Move the cursor right by n characters.
-		$LOW_VIEWCUR_GOTO_END_OF_LINE, _                        ; Move the cursor to the end of the current line.
-		$LOW_VIEWCUR_GOTO_START_OF_LINE, _                      ; Move the cursor to the start of the current line.
-		$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, _                      ; Move the cursor to the first page.
-		$LOW_VIEWCUR_JUMP_TO_LAST_PAGE, _                       ; Move the cursor to the Last page.
-		$LOW_VIEWCUR_JUMP_TO_PAGE, _                            ; Jump to a specified page.
-		$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, _                       ; Move the cursor to the Next page.
-		$LOW_VIEWCUR_JUMP_TO_PREV_PAGE, _                       ; Move the cursor to the previous page.
-		$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, _                     ; Move the cursor to the end of the current page.
-		$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, _                   ; Move the cursor to the start of the current page.
-		$LOW_VIEWCUR_SCREEN_DOWN, _                             ; Scroll the view forward by one visible page.
-		$LOW_VIEWCUR_SCREEN_UP, _                               ; Scroll the view back by one visible page.
-		$LOW_VIEWCUR_GOTO_START, _                              ; Move the cursor to the start of the document or Table.
-		$LOW_VIEWCUR_GOTO_END                                   ; Move the cursor to the end of the document or Table.
-
-; Weight/Bold
-Global Const _                                                  ; com.sun.star.awt.FontWeight
-		$LOW_WEIGHT_DONT_KNOW = 0, _                            ; The font weight is not specified/unknown. For Read Only.
-		$LOW_WEIGHT_THIN = 50, _                                ; A 50% (Thin) font weight.
-		$LOW_WEIGHT_ULTRA_LIGHT = 60, _                         ; A 60% (Ultra Light) font weight.
-		$LOW_WEIGHT_LIGHT = 75, _                               ; A 75% (Light) font weight.
-		$LOW_WEIGHT_SEMI_LIGHT = 90, _                          ; A 90% (Semi-Light) font weight.
-		$LOW_WEIGHT_NORMAL = 100, _                             ; A 100% (Normal) font weight.
-		$LOW_WEIGHT_SEMI_BOLD = 110, _                          ; A 110% (Semi-Bold) font weight.
-		$LOW_WEIGHT_BOLD = 150, _                               ; A 150% (Bold) font weight.
-		$LOW_WEIGHT_ULTRA_BOLD = 175, _                         ; A 175% (Ultra-Bold) font weight.
-		$LOW_WEIGHT_BLACK = 200                                 ; A 200% (Black) font weight.
+		$LOW_VIEWCUR_GO_DOWN, _                                 ; 0 Move the cursor Down by n lines.
+		$LOW_VIEWCUR_GO_UP, _                                   ; 1 Move the cursor Up by n lines.
+		$LOW_VIEWCUR_GO_LEFT, _                                 ; 2 Move the cursor left by n characters.
+		$LOW_VIEWCUR_GO_RIGHT, _                                ; 3 Move the cursor right by n characters.
+		$LOW_VIEWCUR_GOTO_END_OF_LINE, _                        ; 4 Move the cursor to the end of the current line.
+		$LOW_VIEWCUR_GOTO_START_OF_LINE, _                      ; 5 Move the cursor to the start of the current line.
+		$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, _                      ; 6 Move the cursor to the first page.
+		$LOW_VIEWCUR_JUMP_TO_LAST_PAGE, _                       ; 7 Move the cursor to the Last page.
+		$LOW_VIEWCUR_JUMP_TO_PAGE, _                            ; 8 Jump to a specified page.
+		$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, _                       ; 9 Move the cursor to the Next page.
+		$LOW_VIEWCUR_JUMP_TO_PREV_PAGE, _                       ; 10 Move the cursor to the previous page.
+		$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, _                     ; 11 Move the cursor to the end of the current page.
+		$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, _                   ; 12 Move the cursor to the start of the current page.
+		$LOW_VIEWCUR_SCREEN_DOWN, _                             ; 13 Scroll the view forward by one visible page.
+		$LOW_VIEWCUR_SCREEN_UP, _                               ; 14 Scroll the view back by one visible page.
+		$LOW_VIEWCUR_GOTO_START, _                              ; 15 Move the cursor to the start of the document or Table.
+		$LOW_VIEWCUR_GOTO_END                                   ; 16 Move the cursor to the end of the document or Table.
 
 ; Wrap Type
 Global Const _                                                  ; com.sun.star.text.WrapTextMode

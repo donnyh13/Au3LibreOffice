@@ -15,7 +15,7 @@ Func Example()
 	Local $sSavePath, $sForms = ""
 	Local $asForms[0]
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOBase_DocCreate(True, False)
 	If @error Then Return _ERROR($oDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -45,7 +45,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have created a form and opened it. Press ok to close it.")
 
 	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
+	_LOBase_FormDocClose($oFormDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now demonstrate creating a form in a folder. Click on the ""Forms"" button to view the new folder and forms.")
@@ -77,6 +77,10 @@ Func Example()
 	; Close the document.
 	_LOBase_DocClose($oDoc, False)
 	If @error Then Return _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

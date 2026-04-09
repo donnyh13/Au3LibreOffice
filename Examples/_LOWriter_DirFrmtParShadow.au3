@@ -9,16 +9,16 @@ Func Example()
 	Local $iHMM
 	Local $avSettings
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_DocGetViewCursor($oDoc)
+	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text before I modify the formatting settings directly.
-	_LOWriter_DocInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying formatting settings directly.")
+	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text to demonstrate modifying formatting settings directly.")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the View Cursor to the start of the document
@@ -29,8 +29,8 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the paragraph at the current cursor's location Shadow to 1/4" wide, Color to $LO_COLOR_PURPLE, and location to $LOW_SHADOW_TOP_LEFT
-	_LOWriter_DirFrmtParShadow($oViewCursor, $iHMM, $LO_COLOR_PURPLE, $LOW_SHADOW_TOP_LEFT)
+	; Set the paragraph at the current cursor's location Shadow location to $LOW_SHADOW_LOCATION_TOP_LEFT, Color to $LO_COLOR_PURPLE, and 1/4" wide
+	_LOWriter_DirFrmtParShadow($oViewCursor, $LOW_SHADOW_LOCATION_TOP_LEFT, $LO_COLOR_PURPLE, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -38,9 +38,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Paragraph Shadow settings are as follows: " & @CRLF & _
-			"Shadow width, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
+			"Shadow location, (see UDF Constants): " & $avSettings[0] & @CRLF & _
 			"Shadow color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
-			"Shadow location, (see UDF Constants): " & $avSettings[2] & @CRLF & @CRLF & _
+			"Shadow width, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")
 
 	; Remove direct formatting
@@ -52,6 +52,10 @@ Func Example()
 	; Close the document.
 	_LOWriter_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

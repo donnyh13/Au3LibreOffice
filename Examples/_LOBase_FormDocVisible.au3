@@ -15,7 +15,7 @@ Func Example()
 	Local $sSavePath
 	Local $bVisible
 
-	; Create a New, visible, Blank Libre Office Document.
+	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOBase_DocCreate(True, False)
 	If @error Then Return _ERROR($oDoc, "Failed to Create a new Base Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -43,7 +43,7 @@ Func Example()
 	If @error Then Return _ERROR($oDoc, "Failed to create a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Open the new Form in Design Mode.
-	$oFormDoc = _LOBase_FormOpen($oConnection, "frmAutoIt_Form", True)
+	$oFormDoc = _LOBase_FormDocOpen($oConnection, "frmAutoIt_Form", True)
 	If @error Then Return _ERROR($oDoc, "Failed to open a form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened the form called ""frmAutoIt_Form"" in Design Mode. Press ok to make it invisible.")
@@ -65,7 +65,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the Base document.")
 
 	; Close the Form Document.
-	_LOBase_FormClose($oFormDoc, True)
+	_LOBase_FormDocClose($oFormDoc, True)
 	If @error Then Return _ERROR($oDoc, "Failed to close the form Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Close the connection.
@@ -75,6 +75,10 @@ Func Example()
 	; Close the document.
 	_LOBase_DocClose($oDoc, False)
 	If @error Then Return _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _ERROR($oDoc, $sErrorText)

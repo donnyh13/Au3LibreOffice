@@ -61,6 +61,10 @@ Func Example()
 
 	; Create a COM Error by calling a non existent Method.
 	$oServiceManager.FakeMethod()
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR("Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 EndFunc
 
 Func _FunctionForErrors($oObjectError, $vParam1 = Null, $vParam2 = Null, $vParam3 = Null, $vParam4 = Null, $vParam5 = Null)
@@ -73,7 +77,7 @@ Func _FunctionForErrors($oObjectError, $vParam1 = Null, $vParam2 = Null, $vParam
 			"helpfile: " & $oObjectError.helpfile & @CRLF & _
 			"Help content: " & $oObjectError.helpcontent & @CRLF & _
 			"LastdllError: " & $oObjectError.lastdllerror & @CRLF & @CRLF & _
-			"Some of the above are, as best I know, almost always blank for Libre Office errors." & @CRLF & @CRLF & _
+			"Some of the above are, as best I know, almost always blank for LibreOffice errors." & @CRLF & @CRLF & _
 			"The Following User set parameters were also passed: " & @CRLF & _
 			"Parameter 1: " & $vParam1 & @CRLF & _
 			"Parameter 2: " & $vParam2 & @CRLF & _
