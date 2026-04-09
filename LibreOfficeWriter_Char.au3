@@ -823,7 +823,7 @@ Func _LOWriter_CharStyleOverLine(ByRef $oCharStyle, $iOverLineStyle = Null, $iOL
 	Local $vReturn
 
 	If Not IsObj($oCharStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oCharStyle.supportsService("com.sun.star.style.CharacterStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not $oCharStyle.supportsService("com.sun.star.style.CharacterStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$vReturn = __LOWriter_CharOverLine($oCharStyle, $iOverLineStyle, $iOLColor, $bWordOnly)
 
@@ -1113,7 +1113,7 @@ Func _LOWriter_CharStyleStrikeOut(ByRef $oCharStyle, $iStrikeLineStyle = Null, $
 	Local $vReturn
 
 	If Not IsObj($oCharStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oCharStyle.supportsService("com.sun.star.style.CharacterStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not $oCharStyle.supportsService("com.sun.star.style.CharacterStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$vReturn = __LOWriter_CharStrikeOut($oCharStyle, $iStrikeLineStyle, $bWordOnly)
 

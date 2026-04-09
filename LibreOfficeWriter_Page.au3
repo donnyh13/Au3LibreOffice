@@ -1346,7 +1346,6 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSettings
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
 ;                  @Error 3 @Extended 2 Return 0 = Error retrieving Page Style Column Object Array.
 ;                  @Error 3 @Extended 3 Return 0 = No columns present for requested Page Style.
-;                  @Error 3 @Extended 4 Return 0 = No columns present for requested Page Style.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoWidth

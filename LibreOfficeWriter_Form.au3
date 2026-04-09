@@ -2994,6 +2994,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  @Error 1 @Extended 32 Return 0 = $sHelpURL not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form parent Document Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -5823,14 +5824,8 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  @Error 1 @Extended 31 Return 0 = $sAddInfo not a String.
 ;                  @Error 1 @Extended 32 Return 0 = $sHelpText not a String.
 ;                  @Error 1 @Extended 33 Return 0 = $sHelpURL not a String.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.util.Time" Struct.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Minimum Time.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve current Maximum Time.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify parent document.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -10021,6 +10016,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ;                  @Error 1 @Extended 23 Return 0 = $sHelpURL not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve form parent document Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -11034,14 +11030,8 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ;                  @Error 1 @Extended 22 Return 0 = $sAddInfo not a String.
 ;                  @Error 1 @Extended 23 Return 0 = $sHelpText not a String.
 ;                  @Error 1 @Extended 24 Return 0 = $sHelpURL not a String.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.util.Time" Struct.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Minimum Time.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve current Maximum Time.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify parent document.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
@@ -13763,6 +13753,12 @@ EndFunc   ;==>_LOWriter_FormDelete
 ;                  @Error 1 @Extended 3 Return 0 = $bOpenInDesignMode not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $bAutoControlFocus not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $bUseControlWizards not a Boolean.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Standard Macro library Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to create a Macro Library.
+;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Macro Script Object.
+;                  @Error 3 @Extended 4 Return 0 = Failed to delete Macro Library.
+;                  @Error 3 @Extended 5 Return 0 = Failed to execute a Document toggle control dispatch.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bFormDesignMode
@@ -13869,7 +13865,7 @@ Func _LOWriter_FormDocSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDes
 		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
 
 		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
-		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 		__LO_ArrayFill($abForm, $abStatus[0], $oDoc.ApplyFormDesignMode(), $oDoc.AutomaticControlFocus(), $abStatus[1])
 
@@ -13890,7 +13886,7 @@ Func _LOWriter_FormDocSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDes
 		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
 
 		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
-		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 		$iError = ($abStatus[0] = $bFormDesignMode) ? ($iError) : (BitOR($iError, 1))
 	EndIf
@@ -13910,7 +13906,7 @@ Func _LOWriter_FormDocSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDes
 	EndIf
 
 	If ($bUseControlWizards <> Null) Then
-		If Not IsBool($bUseControlWizards) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not IsBool($bUseControlWizards) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", StringReplace($sScript, "###AUTOIT_PLACEHOLDER###", $sControlWiz))
 		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
@@ -13921,12 +13917,12 @@ Func _LOWriter_FormDocSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDes
 		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
 
 		If ($abStatus[1] <> $bUseControlWizards) Then _LOWriter_DocExecuteDispatch($oDoc, $sControlWiz) ; If the value doesn't currently match, toggle the setting.
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 		$abStatus = $oScript.Invoke($aDummyArray, $aDummyArray, $aDummyArray)
 
 		$oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
-		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 		$iError = ($abStatus[1] = $bUseControlWizards) ? ($iError) : (BitOR($iError, 8))
 	EndIf
@@ -14148,6 +14144,7 @@ EndFunc   ;==>_LOWriter_FormParent
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create "com.sun.star.sdb.DatabaseContext" Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Data Source Name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to convert path to URL for Data Source.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sSource

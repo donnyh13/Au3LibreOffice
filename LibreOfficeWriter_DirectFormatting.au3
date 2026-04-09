@@ -1012,7 +1012,7 @@ Func _LOWriter_DirFrmtOverLine(ByRef $oSelection, $iOverLineStyle = Null, $iOLCo
 	Local $vReturn
 
 	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	If __LOWriter_AnyAreDefault($iOverLineStyle, $iOLColor, $bWordOnly) Then
 		If ($iOverLineStyle = Default) Then
@@ -2602,7 +2602,7 @@ Func _LOWriter_DirFrmtStrikeOut(ByRef $oSelection, $iStrikeLineStyle = Null, $bW
 	Local $vReturn
 
 	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	If __LOWriter_AnyAreDefault($iStrikeLineStyle, $bWordOnly) Then
 		If ($iStrikeLineStyle = Default) Then

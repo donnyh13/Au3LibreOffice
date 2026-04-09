@@ -2184,13 +2184,17 @@ Func _LOWriter_ImageSize(ByRef $oImage, $iScaleWidth = Null, $iScaleHeight = Nul
 		$iError = (__LO_VarsAreNull($iHeight)) ? ($iError) : ((__LO_IntIsBetween($oImage.Size.Height(), $iHeight - 1, $iHeight + 1)) ? ($iError) : (BitOR($iError, 8)))
 	EndIf
 
-	If ($bOriginalSize = True) Then
-		$tSize.Width = $tOrigSize.Width()
-		$tSize.Height = $tOrigSize.Height()
+	If ($bOriginalSize <> Null) Then
+		If Not IsBool($bOriginalSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-		$oImage.Size = $tSize
+		If ($bOriginalSize = True) Then
+			$tSize.Width = $tOrigSize.Width()
+			$tSize.Height = $tOrigSize.Height()
 
-		$iError = (($oImage.Size.Width() = $tOrigSize.Width()) And $oImage.Size.Height() = $tOrigSize.Height()) ? ($iError) : (BitOR($iError, 16))
+			$oImage.Size = $tSize
+
+			$iError = (($oImage.Size.Width() = $tOrigSize.Width()) And $oImage.Size.Height() = $tOrigSize.Height()) ? ($iError) : (BitOR($iError, 16))
+		EndIf
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

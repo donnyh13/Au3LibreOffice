@@ -2421,6 +2421,30 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_DocConnect` usage not updated in `_LOWriter_DocOpen`.
 - `_LOWriter_NumStyleCustomize` not testing Level vs Sub-Level correctly in error checking.
 - RegExp pattern in `_LOWriter_DocBookmarkInsert` and `_LOWriter_DocBookmarkModify` was not checking for backslash correctly.
+- Added missing error descriptions in headers, corrected wrong documented error values, and wrong function error values in:
+  - __LOWriter_CharBorder
+  - __LOWriter_CharFont
+  - __LOWriter_CharPosition
+  - __LOWriter_DateStructCompare
+  - __LOWriter_NumStyleInitiateDocument
+  - _LOWriter_CharStyleOverLine
+  - _LOWriter_CharStyleStrikeOut
+  - _LOWriter_DirFrmtOverLine
+  - _LOWriter_DirFrmtStrikeOut
+  - _LOWriter_FormConFormattedFieldGeneral
+  - _LOWriter_FormConNumericFieldGeneral
+  - _LOWriter_FormConTableConFormattedFieldGeneral
+  - _LOWriter_FormConTableConNumericFieldGeneral
+  - _LOWriter_FormDocSettings
+  - _LOWriter_FormPropertiesData
+  - _LOWriter_FrameAreaTransparencyGradient
+  - _LOWriter_DateFormatKeyExists
+  - _LOWriter_ImageSize
+  - _LOWriter_PageStyleColumnSize
+  - _LOWriter_ParStyleAreaFillStyle
+  - _LOWriter_ParStyleOverLine
+  - _LOWriter_ParStyleStrikeOut
+  - _LOWriter_TableCellBorderColor
 
 #### Refactored
 

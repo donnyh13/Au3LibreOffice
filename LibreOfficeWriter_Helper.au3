@@ -249,11 +249,11 @@ EndFunc   ;==>_LOWriter_DateFormatKeyDelete
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFormatKey not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iFormatType Parameter for internal Function not an Integer. UDF needs fixed.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to Create "com.sun.star.lang.Locale" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to retrieve Number Formats Object.
-;                  @Error 2 @Extended 3 Return 0 = Failed to obtain Array of Date/Time Formats.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Number Formats Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to obtain Array of Date/Time Formats.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If the Date/Time Format already exists in document, True is Returned. Else False.
 ; Author ........: donnyh13
@@ -264,14 +264,31 @@ EndFunc   ;==>_LOWriter_DateFormatKeyDelete
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOWriter_DateFormatKeyExists(ByRef $oDoc, $iFormatKey)
-	Local $vReturn
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oFormats
+	Local $aiFormatKeys[0]
+	Local $tLocale
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iFormatKey) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$vReturn = _LOWriter_FormatKeyExists($oDoc, $iFormatKey, $LOW_FORMAT_KEYS_DATE_TIME)
+	$tLocale = __LO_CreateStruct("com.sun.star.lang.Locale")
+	If Not IsObj($tLocale) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-	Return SetError(@error, @extended, $vReturn)
+	$oFormats = $oDoc.getNumberFormats()
+	If Not IsObj($oFormats) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$aiFormatKeys = $oFormats.queryKeys($LOW_FORMAT_KEYS_DATE_TIME, $tLocale, False)
+	If Not IsArray($aiFormatKeys) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	For $i = 0 To UBound($aiFormatKeys) - 1
+		If ($aiFormatKeys[$i] = $iFormatKey) Then Return SetError($__LO_STATUS_SUCCESS, 0, True) ; Doc does contain format Key
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV)) ? (10) : (0))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, False) ; Doc does not contain format Key
 EndFunc   ;==>_LOWriter_DateFormatKeyExists
 
 ; #FUNCTION# ====================================================================================================================

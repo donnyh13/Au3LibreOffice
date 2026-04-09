@@ -178,6 +178,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaColor
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oParStyle not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oParStyle not a Paragraph Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Fill Style.
 ;                  --Success--
@@ -746,6 +747,7 @@ Func _LOWriter_ParStyleBorderWidth(ByRef $oParStyle, $iTop = Null, $iBottom = Nu
 
 	ElseIf Not __LO_VarsAreNull($iTop, $iBottom, $iLeft, $iRight) Then
 		$vReturn = __LOWriter_Border($oParStyle, True, False, False, $iTop, $iBottom, $iLeft, $iRight)
+
 		If @error Then Return SetError(@error, @extended, $vReturn)
 	EndIf
 
@@ -1532,7 +1534,7 @@ Func _LOWriter_ParStyleOverLine(ByRef $oParStyle, $iOverLineStyle = Null, $iOLCo
 	Local $vReturn
 
 	If Not IsObj($oParStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oParStyle.supportsService("com.sun.star.style.ParagraphStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not $oParStyle.supportsService("com.sun.star.style.ParagraphStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$vReturn = __LOWriter_CharOverLine($oParStyle, $iOverLineStyle, $iOLColor, $bWordOnly)
 
@@ -1938,7 +1940,7 @@ Func _LOWriter_ParStyleStrikeOut(ByRef $oParStyle, $iStrikeLineStyle = Null, $bW
 	Local $vReturn
 
 	If Not IsObj($oParStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oParStyle.supportsService("com.sun.star.style.ParagraphStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not $oParStyle.supportsService("com.sun.star.style.ParagraphStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$vReturn = __LOWriter_CharStrikeOut($oParStyle, $iStrikeLineStyle, $bWordOnly)
 
