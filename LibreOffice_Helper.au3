@@ -1143,8 +1143,7 @@ EndFunc   ;==>_LO_PrintersGetNames
 ;                  If $sPrinterName is set, the name must be exact, or no results will be found, unless you use an asterisk (*) for partial name searches, either prefixed (*Canon), suffixed (Canon*), or both (*Canon*).
 ;                  When $bReturnDefault is True, The function returns only the default printer's name or sets an error if no default printer is found.
 ; Related .......: _LO_PrintersGetNames
-; Link ..........: https://www.autoitscript.com/forum/topic/155485-printers-management-udf/
-; UDF title......: Printmgr.au3
+; Link ..........: (Printmgr.au3) https://www.autoitscript.com/forum/topic/155485-printers-management-udf/
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LO_PrintersGetNamesAlt($sPrinterName = "", $bReturnDefault = False)
