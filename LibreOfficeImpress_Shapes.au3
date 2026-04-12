@@ -114,6 +114,220 @@ Func _LOImpress_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 EndFunc   ;==>_LOImpress_ShapeAreaColor
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeName
+; Description ...: Set or Retrieve a Shape's Name.
+; Syntax ........: _LOImpress_ShapeName(ByRef $oShape[, $sName = Null])
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_ShapesGetList function.
+;                  $sName               - [optional] a string value. Default is Null. The new, unique Name for the Shape.
+; Return values .: Success: 1 or String
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 3 Return 0 = Document already contains a Shape with the same name as called in $sName.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape's name.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Parent Slide Object.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $sName
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Shape's name was successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning the Shape's current name.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  On newly created shapes, the name value is blank for some reason, even though the shape in the UI has a name.
+;                  The Shape name must be unique, however due to the above issue, it is possible to have two shapes with the same name in the UI (But not internally).
+;                  I have modified the check for a Shape name already existing by assuming a Shape's name when encountering one without a name, e.g. assuming the name would be "Shape 1" etc. This could cause issues with non-English versions of LibreOffice.
+;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LOImpress_SlideShapesGetList.
+; Related .......: _LOImpress_ShapeInsert
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeName(ByRef $oShape, $sName = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $oSlide
+	Local $sCurrName
+
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($sName) Then
+		$sCurrName = $oShape.Name()
+		If Not IsString($sCurrName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurrName)
+	EndIf
+
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oSlide = $oShape.Parent()
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	If _LOImpress_ShapeExists($oSlide, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oShape.Name = $sName
+	$iError = ($oShape.Name() = $sName) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_ShapeName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeExists
+; Description ...: Check if a Slide contains a DrawShape with the specified name.
+; Syntax ........: _LOImpress_ShapeExists(ByRef $oSlide, $sShapeName)
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
+;                  $sShapeName          - a string value. The Shape name to search for.
+; Return values .: Success: Boolean
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $sShapeName not a String.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Error retrieving Shape name.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return Boolean = Success. If a Shape was found matching $sShapeName, True is returned, else False.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: On newly created shapes, the name value is blank for some reason, even though the shape in the UI has a name.
+;                  The Shape name must be unique, however due to the above issue, it is possible to have two shapes with the same name in the UI (But not internally).
+;                  I have modified the check for a Shape name already existing by assuming a Shape's name when encountering one without a name, e.g. assuming the name would be "Shape 1" etc. This could cause issues with non-English versions of LibreOffice.
+;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LOImpress_SlideShapesGetList.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeExists(ByRef $oSlide, $sShapeName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sName
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sShapeName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If $oSlide.hasElements() Then
+		For $i = 0 To $oSlide.getCount() - 1
+			$sName = $oSlide.getByIndex($i).Name()
+			If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+			; Impress doesn't set the Shape name on new shapes. It has names in the UI that would correspond to the order of the shapes inserted, i.e. Shape 1, Shape 2. Etc.
+			If (($sName = "") And (("Shape " & ($i + 1)) = $sShapeName)) Or ($sName = $sShapeName) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, False) ; No matches
+EndFunc   ;==>_LOImpress_ShapeExists
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeDelete
+; Description ...: Delete a Shape.
+; Syntax ........: _LOImpress_ShapeDelete(ByRef $oShape)
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_ShapeInsert, or _LOImpress_ShapesGetList function.
+; Return values .: Success: 1
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape's containing Slide.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of shapes.
+;                  @Error 3 @Extended 3 Return 0 = Same number of shapes still present. Failed to delete the Shape.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Shape was successfully deleted.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function will work for all drawing shapes, as well as other shapes that are returned by _LOImpress_SlideShapesGetList.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeDelete(ByRef $oShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iShapes
+	Local $oDrawPage
+
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oDrawPage = $oShape.Parent()
+	If Not IsObj($oDrawPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$iShapes = $oDrawPage.getCount()
+	If Not IsInt($iShapes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oDrawPage.remove($oShape)
+	If ($oDrawPage.getCount() = $iShapes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Count of shapes the same, shape wasn't deleted.
+
+	$oShape = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_ShapeDelete
+
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapesGetList
+; Description ...: Retrieve an array of Shapes (Text Boxes, DrawShapes, Images etc) contained in a Slide.
+; Syntax ........: _LOImpress_ShapesGetList(ByRef $oSlide[, $iTypes = $LOI_SHAPE_TYPE_ALL])
+; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetByIndex, _LOImpress_SlideGetByName, or _LOImpress_SlideCopy function.
+;                  $iTypes              - [optional] an integer value (0-1023). Default is $LOI_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: Array
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oSlide not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $iTypes not an Integer, less than 1 or greater than 1023. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape Object.
+;                  @Error 3 @Extended 2 Return 0 = Failed to identify Shape Type.
+;                  --Success--
+;                  @Error 0 @Extended ? Return Array = Success. A two columned Array containing the Shape Objects contained in the Slide. See Remarks. @Extended is set to number of results.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The Array returned has two columns. The first column is the shape Object. The second column is the Shape Type, corresponding to one of the Constants $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Related .......: _LOImpress_DrawShapeGetType
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapesGetList(ByRef $oSlide, $iTypes = $LOI_SHAPE_TYPE_ALL)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $avShapes[0][2]
+	Local $oShape
+	Local $iShapeType, $iCount = 0
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iTypes, $LOI_SHAPE_TYPE_DRAWING_SHAPE, $LOI_SHAPE_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If $oSlide.hasElements() Then
+		ReDim $avShapes[$oSlide.getCount()][2]
+
+		For $i = 0 To $oSlide.getCount() - 1
+			$oShape = $oSlide.getByIndex($i)
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+			$iShapeType = __LOImpress_ShapeGetType($oShape)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			If (BitAND($iTypes, $iShapeType) = $iShapeType) Then
+				$avShapes[$iCount][0] = $oShape
+				$avShapes[$iCount][1] = $iShapeType
+				$iCount += 1
+			EndIf
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		ReDim $avShapes[$iCount][2]
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, $iCount, $avShapes)
+EndFunc   ;==>_LOImpress_ShapesGetList
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeAreaFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOImpress_ShapeAreaFillStyle(ByRef $oShape)

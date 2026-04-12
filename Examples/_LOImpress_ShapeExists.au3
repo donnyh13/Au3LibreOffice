@@ -20,21 +20,25 @@ Func Example()
 	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Check if the Slide has a Shape by the name of "Shape 1"
-	$bReturn = _LOImpress_DrawShapeExists($oSlide, "Shape 1")
+	; Rename the shape to "AutoIt-Shape"
+	_LOImpress_ShapeName($oShape, "AutoIt-Shape")
+	If @error Then _ERROR($oDoc, "Failed to rename a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Check if the Slide has a Shape by the name of "AutoIt-Shape"
+	$bReturn = _LOImpress_ShapeExists($oSlide, "AutoIt-Shape")
 	If @error Then _ERROR($oDoc, "Failed to look for Shape name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does this Slide contain a Shape named ""Shape 1""? True/ False. " & $bReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does this Slide contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
 
 	; Delete the Shape.
-	_LOImpress_DrawShapeDelete($oShape)
+	_LOImpress_ShapeDelete($oShape)
 	If @error Then _ERROR($oDoc, "Failed to delete Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Check again, if the Slide has a Shape by the name of "Shape 1"
-	$bReturn = _LOImpress_DrawShapeExists($oDoc, "Shape 1")
+	; Check again, if the Slide has a Shape by the name of "AutoIt-Shape"
+	$bReturn = _LOImpress_ShapeExists($oSlide, "AutoIt-Shape")
 	If @error Then _ERROR($oDoc, "Failed to look for Shape name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now does this Slide contain a Shape named ""Shape 1""? True/ False. " & $bReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now does this Slide contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

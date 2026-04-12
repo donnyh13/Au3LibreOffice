@@ -1584,12 +1584,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Drawing Shape functions
   - _LOImpress_DrawShapeConnectorModify
   - _LOImpress_DrawShapeConnectorSettings
-  - _LOImpress_DrawShapeDelete
   - _LOImpress_DrawShapeDimensionSettings
-  - _LOImpress_DrawShapeExists
   - _LOImpress_DrawShapeGetType
   - _LOImpress_DrawShapeInsert
-  - _LOImpress_DrawShapeName
   - _LOImpress_DrawShapePointsAdd
   - _LOImpress_DrawShapePointsGetCount
   - _LOImpress_DrawShapePointsModify
@@ -1635,10 +1632,14 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_ShapeAreaTransparencyGradient
   - _LOImpress_ShapeAreaTransparencyGradientMulti
   - _LOImpress_ShapeCreateTextCursor
+  - _LOImpress_ShapeDelete
+  - _LOImpress_ShapeExists
   - _LOImpress_ShapeLineArrowStyles
   - _LOImpress_ShapeLineProperties
+  - _LOImpress_ShapeName
   - _LOImpress_ShapePosition
   - _LOImpress_ShapeRotateSlant
+  - _LOImpress_ShapesGetList
   - _LOImpress_ShapeSize
   - _LOImpress_ShapeTextAttrAnimation
   - _LOImpress_ShapeTextAttrColumns
@@ -1663,7 +1664,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideName
   - _LOImpress_SlidesGetCount
   - _LOImpress_SlidesGetNames
-  - _LOImpress_SlideShapesGetList
   - _LOImpress_SlideshowActiveSettings
   - _LOImpress_SlideshowCustomCreate
   - _LOImpress_SlideshowCustomDelete

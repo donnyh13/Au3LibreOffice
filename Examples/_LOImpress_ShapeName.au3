@@ -21,17 +21,17 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape name
-	$sName = _LOImpress_DrawShapeName($oShape)
+	$sName = _LOImpress_ShapeName($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's current name is: " & $sName)
 
 	; Change the Shape's name to "AutoIt Test"
-	$sName = _LOImpress_DrawShapeName($oShape, "AutoIt Test")
+	$sName = _LOImpress_ShapeName($oShape, "AutoIt Test")
 	If @error Then _ERROR($oDoc, "Failed to modify Shape name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Shape name
-	$sName = _LOImpress_DrawShapeName($oShape)
+	$sName = _LOImpress_ShapeName($oShape)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's new name is: " & $sName)

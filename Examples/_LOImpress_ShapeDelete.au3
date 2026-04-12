@@ -12,19 +12,23 @@ Func Example()
 	$oDoc = _LOImpress_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Impress Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to delete all the text boxes from the current slide.")
-
 	; Retrieve the current Slide.
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Set the slide's layout.
+	_LOImpress_SlideLayout($oSlide, $LOI_SLIDE_LAYOUT_TITLE_4_CONTENT)
+	If @error Then _ERROR($oDoc, "Failed to modify slide layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to delete all the text boxes from the current slide.")
+
 	; Retrieve an Array of Textboxes in the current slide.
-	$avShapes = _LOImpress_SlideShapesGetList($oSlide, BitOR($LOI_SHAPE_TYPE_TEXTBOX, $LOI_SHAPE_TYPE_TEXTBOX_TITLE, $LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE))
+	$avShapes = _LOImpress_ShapesGetList($oSlide, BitOR($LOI_SHAPE_TYPE_TEXTBOX, $LOI_SHAPE_TYPE_TEXTBOX_TITLE, $LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, $LOI_SHAPE_TYPE_TEXTBOX_OUTLINER))
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shapes in slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To @extended - 1
 		; Delete the shape
-		_LOImpress_DrawShapeDelete($avShapes[$i][0])
+		_LOImpress_ShapeDelete($avShapes[$i][0])
 		If @error Then _ERROR($oDoc, "Failed to delete the shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
 
