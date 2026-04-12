@@ -42,7 +42,6 @@
 ; _LOImpress_SlideName
 ; _LOImpress_SlidesGetCount
 ; _LOImpress_SlidesGetNames
-; _LOImpress_SlideShapesGetList
 ; _LOImpress_SlideshowActiveSettings
 ; _LOImpress_SlideshowCustomCreate
 ; _LOImpress_SlideshowCustomDelete
@@ -145,7 +144,8 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.Background" service.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve parent Document.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current color value.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve parent Document.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColor
@@ -165,7 +165,7 @@ Func _LOImpress_SlideBackColor(ByRef $oSlide, $iColor = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oBackground, $oDoc
-	Local $iError = 0
+	Local $iError = 0, $iCurColor
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -174,14 +174,17 @@ Func _LOImpress_SlideBackColor(ByRef $oSlide, $iColor = Null)
 	If __LO_VarsAreNull($iColor) Then
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, $LO_COLOR_OFF) ; If no background is set, this will be void, instead of an Object.
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oBackground.FillColor())
+		$iCurColor = __LOImpress_ColorRemoveAlpha($oBackground.FillColor())
+		If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
 	EndIf
 
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
 		$oDoc = $oSlide.MasterPage.Forms.Parent()
-		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -535,7 +538,8 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.drawing.Background" service.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve parent Document.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve parent Document.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -554,7 +558,7 @@ Func _LOImpress_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurTransp
 	Local $oBackground, $oDoc
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -564,14 +568,17 @@ Func _LOImpress_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
 	If __LO_VarsAreNull($iTransparency) Then
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, -1) ; No background present.
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oBackground.FillTransparence())
+		$iCurTransp = $oBackground.FillTransparence()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
 	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
 		$oDoc = $oSlide.MasterPage.Forms.Parent()
-		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -2459,12 +2466,11 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsRange
 ;                  @Error 1 @Extended 5 Return 0 = Slide name called in $sStartSlide not found.
 ;                  @Error 1 @Extended 6 Return 0 = Custom Slideshow name called in $sCustomShow not found.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to retrieve presentation Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to create FirstPage property.
-;                  @Error 2 @Extended 3 Return 0 = Failed to create CustomShow property.
+;                  @Error 2 @Extended 1 Return 0 = Failed to create FirstPage property.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = There is already a presentation running.
-;                  @Error 3 @Extended 2 Return 0 = Failed to start the presentation.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Presentation Object.
+;                  @Error 3 @Extended 2 Return 0 = There is already a presentation running.
+;                  @Error 3 @Extended 3 Return 0 = Failed to start the presentation.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. The Presentation was started successfully.
 ; Author ........: donnyh13

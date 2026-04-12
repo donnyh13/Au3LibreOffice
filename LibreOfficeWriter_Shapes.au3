@@ -88,7 +88,7 @@ Func _LOWriter_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iColor) Then
-		If ($oShape.FillStyle() = $LOW_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then return current color value, else return LOW_COLOR_OFF (Probably a Gradient it used or otherwise.).
+		If ($oShape.FillStyle() = $LOW_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then return current color value, else return $LO_COLOR_OFF (Probably a Gradient is used or otherwise).
 			$iCurColor = __LOWriter_ColorRemoveAlpha($oShape.FillColor())
 			If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 

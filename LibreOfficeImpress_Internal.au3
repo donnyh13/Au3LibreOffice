@@ -3645,6 +3645,7 @@ EndFunc   ;==>__LOImpress_InternalComErrorHandler
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_SlideShapesGetList.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No

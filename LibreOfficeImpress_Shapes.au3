@@ -57,7 +57,8 @@
 ;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve old Transparency value.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current color value.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColor
@@ -76,12 +77,22 @@ Func _LOImpress_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0, $iOldTransparency
+	Local $iError = 0, $iOldTransparency, $iCurColor
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	; If $iColor is Null, and Fill Style is set to solid, then return current color value, else return LO_COLOR_OFF.
-	If __LO_VarsAreNull($iColor) Then Return SetError($__LO_STATUS_SUCCESS, 1, ($oShape.FillStyle() = $LOI_AREA_FILL_STYLE_SOLID) ? (__LOImpress_ColorRemoveAlpha($oShape.FillColor())) : ($LO_COLOR_OFF))
+	If __LO_VarsAreNull($iColor) Then
+		If ($oShape.FillStyle() = $LOI_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then return current color value, else return $LO_COLOR_OFF (Probably a Gradient is used or otherwise).
+			$iCurColor = __LOImpress_ColorRemoveAlpha($oShape.FillColor())
+			If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Else
+			$iCurColor = $LO_COLOR_OFF
+		EndIf
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
+	EndIf
 
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -90,7 +101,7 @@ Func _LOImpress_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 
 	Else
 		$iOldTransparency = $oShape.FillTransparence()
-		If Not IsInt($iOldTransparency) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsInt($iOldTransparency) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oShape.FillStyle = $LOI_AREA_FILL_STYLE_SOLID
 		$oShape.FillColor = $iColor
@@ -502,10 +513,9 @@ EndFunc   ;==>_LOImpress_ShapeAreaGradientMulticolor
 ;                  @Error 1 @Extended 6 Return 0 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
 ;                  @Error 1 @Extended 7 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Annotation Shape Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Distance and Location Values.
-;                  @Error 3 @Extended 3 Return 0 = Failed to modify Location property.
-;                  @Error 3 @Extended 4 Return 0 = Failed to modify Distance property.
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Distance and Location Values.
+;                  @Error 3 @Extended 2 Return 0 = Failed to modify Location property.
+;                  @Error 3 @Extended 3 Return 0 = Failed to modify Distance property.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bShadow
@@ -539,7 +549,7 @@ Func _LOImpress_ShapeAreaShadow(ByRef $oShape, $bShadow = Null, $iLocation = Nul
 	If __LO_VarsAreNull($bShadow, $iLocation, $iColor, $iDistance, $iBlur, $iTransparency) Then
 		$iInternalDistance = __LOImpress_ShapeAreaShadowModify($oShape)
 		$iInternalLocation = @extended
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		__LO_ArrayFill($avShadow, $oShape.Shadow(), $iInternalLocation, $oShape.ShadowColor(), $iInternalDistance, _
 				_LO_UnitConvert($oShape.ShadowBlur(), $LO_CONVERT_UNIT_HMM_PT), _
@@ -564,7 +574,7 @@ Func _LOImpress_ShapeAreaShadow(ByRef $oShape, $bShadow = Null, $iLocation = Nul
 
 		ElseIf @error Then
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 		EndIf
 	EndIf
 
@@ -584,7 +594,7 @@ Func _LOImpress_ShapeAreaShadow(ByRef $oShape, $bShadow = Null, $iLocation = Nul
 
 		ElseIf @error Then
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 		EndIf
 	EndIf
 
@@ -616,6 +626,8 @@ EndFunc   ;==>_LOImpress_ShapeAreaShadow
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  --Processing Errors--
+;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
@@ -635,11 +647,16 @@ Func _LOImpress_ShapeAreaTransparency(ByRef $oShape, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
+	Local $iError = 0, $iCurTransp
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iTransparency) Then Return SetError($__LO_STATUS_SUCCESS, 1, $oShape.FillTransparence())
+	If __LO_VarsAreNull($iTransparency) Then
+		$iCurTransp = $oShape.FillTransparence()
+		If Not IsInt($iCurTransp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurTransp)
+	EndIf
 
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -1310,6 +1327,7 @@ EndFunc   ;==>_LOImpress_ShapeLineProperties
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_SlideShapesGetList.
+;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
