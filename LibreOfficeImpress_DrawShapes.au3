@@ -40,7 +40,7 @@
 ; Name ..........: _LOImpress_DrawShapeConnectorModify
 ; Description ...: Set or Retrieve Connector line connections or position.
 ; Syntax ........: _LOImpress_DrawShapeConnectorModify(ByRef $oShape[, $iStartX = Null[, $iStartY = Null[, $oStartShape = Null[, $iStartGluePoint = Null[, $iEndX = Null[, $iEndY = Null[, $oEndShape = Null[, $iEndGluePoint = Null]]]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Connector Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Connector Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $iStartX             - [optional] an integer value. Default is Null. The X position from the insertion point of the Start of the line, in Hundredths of a Millimeter (HMM).
 ;                  $iStartY             - [optional] an integer value. Default is Null. The Y position from the insertion point of the Start of the line, in Hundredths of a Millimeter (HMM).
 ;                  $oStartShape         - [optional] an object. Default is Null. The Shape to attach the Start of the line to.
@@ -191,7 +191,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorModify
 ; Name ..........: _LOImpress_DrawShapeConnectorSettings
 ; Description ...: Set or Retrieve Connector line settings.
 ; Syntax ........: _LOImpress_DrawShapeConnectorSettings(ByRef $oShape[, $iType = Null[, $iL1Skew = Null[, $iL2Skew = Null[, $iL3Skew = Null[, $iHoriBeg = Null[, $iHoriEnd = Null[, $iVertBeg = Null[, $iVertEnd = Null]]]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Connector Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Connector Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $iType               - [optional] an integer value (0-3). Default is Null. The connector line type. See Constants, $LOI_DRAWSHAPE_CONNECTOR_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iL1Skew             - [optional] an integer value (-100000-100000). Default is Null. The skew amount of line 1, in Hundredths of a Millimeter (HMM).
 ;                  $iL2Skew             - [optional] an integer value (-100000-100000). Default is Null. The skew amount of line 2, in Hundredths of a Millimeter (HMM).
@@ -312,7 +312,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorSettings
 ; Name ..........: _LOImpress_DrawShapeDimensionSettings
 ; Description ...: Set or Retrieve Dimension line settings.
 ; Syntax ........: _LOImpress_DrawShapeDimensionSettings(ByRef $oShape[, $iDistance = Null[, $iGuideOverhang = Null[, $iGuideDistance = Null[, $iLGuide = Null[, $iRGuide = Null[, $bBelow = Null[, $iDecimal = Null[, $iVertPos = Null[, $iHoriPos = Null[, $bParallel = Null[, $iUnitType = Null]]]]]]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Dimension Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Dimension Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $iDistance           - [optional] an integer value (-10,008-10,008). Default is Null. The distance between the dimension line and the baseline, in Hundredths of a Millimeter (HMM).
 ;                  $iGuideOverhang      - [optional] an integer value (-10,008-10,008). Default is Null. The length of the left and right guides starting at the baseline. Positive values extend the guides above the baseline and negative values extend the guides below the baseline, in Hundredths of a Millimeter (HMM).
 ;                  $iGuideDistance      - [optional] an integer value (-10,008-10,008). Default is Null. The length of the right and left guides starting at the dimension line. Positive values extend the guides above the dimension line and negative values extend the guides below the dimension line, in Hundredths of a Millimeter (HMM).
@@ -473,7 +473,7 @@ EndFunc   ;==>_LOImpress_DrawShapeDimensionSettings
 ; Name ..........: _LOImpress_DrawShapeGetType
 ; Description ...: Return the Drawing Shape's Type corresponding to the constants $LOI_DRAWSHAPE_TYPE_*
 ; Syntax ........: _LOImpress_DrawShapeGetType(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -860,7 +860,7 @@ EndFunc   ;==>_LOImpress_DrawShapeInsert
 ; Name ..........: _LOImpress_DrawShapePointsAdd
 ; Description ...: Add a Position Point to Shape.
 ; Syntax ........: _LOImpress_DrawShapePointsAdd(ByRef $oShape, $iPoint, $iX, $iY[, $iPointType = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL[, $bIsCurve = False]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
 ;                  $iPoint              - an integer value. The Point to insert the new point AFTER. 0 means insert at the beginning.
 ;                  $iX                  - an integer value. The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
@@ -1308,7 +1308,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsAdd
 ; Name ..........: _LOImpress_DrawShapePointsGetCount
 ; Description ...: Retrieve a count of Points present in a Shape.
 ; Syntax ........: _LOImpress_DrawShapePointsGetCount(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1352,7 +1352,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ; Name ..........: _LOImpress_DrawShapePointsModify
 ; Description ...: Modify an existing Position Point or Point Type in a shape.
 ; Syntax ........: _LOImpress_DrawShapePointsModify(ByRef $oShape, $iPoint[, $iX = Null[, $iY = Null[, $iPointType = Null[, $bIsCurve = Null]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function. See remarks.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
 ;                  $iPoint              - an integer value. The Point to modify, starting at 1.
 ;                  $iX                  - [optional] an integer value. Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] an integer value. Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
@@ -1481,7 +1481,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsModify
 ; Name ..........: _LOImpress_DrawShapePointsRemove
 ; Description ...: Remove a position Point from a Shape.
 ; Syntax ........: _LOImpress_DrawShapePointsRemove(ByRef $oShape, $iPoint)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $iPoint              - an integer value. The Point to in the Shape to delete, beginning at 1.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1811,7 +1811,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ; Name ..........: _LOImpress_DrawShapeText
 ; Description ...: Set or Retrieve the current text displayed in a shape's text box.
 ; Syntax ........: _LOImpress_DrawShapeText(ByRef $oShape[, $sText = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_SlideShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $sText               - [optional] a string value. Default is Null. The text to display in the Shape's text box.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
