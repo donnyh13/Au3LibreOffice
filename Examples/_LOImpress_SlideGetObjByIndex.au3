@@ -28,7 +28,7 @@ Func Example()
 
 	For $i = 0 To $iSlides - 1
 		; Get the slide's object
-		$oSlide = _LOImpress_SlideGetByIndex($oDoc, $i)
+		$oSlide = _LOImpress_SlideGetObjByIndex($oDoc, $i)
 		If @error Then _ERROR($oDoc, "Failed to retrieve Slide Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Set slide background.

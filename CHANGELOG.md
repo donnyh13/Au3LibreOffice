@@ -1656,8 +1656,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideDeleteByIndex
   - _LOImpress_SlideExists
   - _LOImpress_SlideDeleteByObj
-  - _LOImpress_SlideGetByIndex
-  - _LOImpress_SlideGetByName
+  - _LOImpress_SlideGetObjByIndex
+  - _LOImpress_SlideGetObjByName
   - _LOImpress_SlideLayout
   - _LOImpress_SlideMove
   - _LOImpress_SlideName

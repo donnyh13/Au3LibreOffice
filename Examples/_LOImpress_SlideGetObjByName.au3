@@ -21,7 +21,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to set the background color of ""Slide 2"".")
 
 	; Get the slide's object
-	$oSlide = _LOImpress_SlideGetByName($oDoc, "Slide 2")
+	$oSlide = _LOImpress_SlideGetObjByName($oDoc, "Slide 2")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Slide Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set slide background.
