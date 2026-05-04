@@ -1838,12 +1838,13 @@ EndFunc   ;==>_LOWriter_ImageOptions
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageOptionsName
 ; Description ...: Set or Retrieve Image Name settings.
-; Syntax ........: _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage[, $sName = Null[, $sAltText = Null[, $sDesc = Null]]])
+; Syntax ........: _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage[, $sName = Null[, $sAltText = Null[, $sDesc = Null[, $bDecorative = Null]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $sName               - [optional] a string value. Default is Null. The new name for the Image.
 ;                  $sAltText            - [optional] a string value. Default is Null. Enter alternative text to display when the image isn't available.
 ;                  $sDesc               - [optional] a string value. Default is Null. Description of the Image.
+;                  $bDecorative         - [optional] a boolean value. Default is Null. If True, the image is considered decorative and is ignored by assistive readers. L.O. 7.6+.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1853,14 +1854,18 @@ EndFunc   ;==>_LOWriter_ImageOptions
 ;                  @Error 1 @Extended 4 Return 0 = Document already contains Image with same name as called in $sName.
 ;                  @Error 1 @Extended 5 Return 0 = $sAltText not a string.
 ;                  @Error 1 @Extended 6 Return 0 = $sDesc not a string.
+;                  @Error 1 @Extended 7 Return 0 = $bDecorative not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sAltText
 ;                  |                               4 = Error setting $sDesc
+;                  |                               8 = Error setting $bDecorative
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version less than 7.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 or 4 Element Array with values in order of function parameters. A 4 element array will be returned in LibreOffice version 7.6+ with the Decorative parameter.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1870,7 +1875,7 @@ EndFunc   ;==>_LOWriter_ImageOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAltText = Null, $sDesc = Null)
+Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAltText = Null, $sDesc = Null, $bDecorative = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1881,7 +1886,11 @@ Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAlt
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($sName, $sAltText, $sDesc) Then
-		__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description())
+		If __LO_VersionCheck(7.6) Then
+			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description(), $oImage.Decorative())
+		Else
+			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description())
+		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asName)
 	EndIf
@@ -1906,6 +1915,14 @@ Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAlt
 
 		$oImage.Description = $sDesc
 		$iError = ($oImage.Description() = $sDesc) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($bDecorative <> Null) Then
+		If Not IsBool($bDecorative) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_VersionCheck(7.6) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+
+		$oImage.Decorative = $bDecorative
+		$iError = ($oImage.Decorative() = $bDecorative) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
