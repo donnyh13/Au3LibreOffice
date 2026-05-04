@@ -789,18 +789,18 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FindFormatModifyEffects
 ; Description ...: Modify or Add Find Format Effects Settings.
-; Syntax ........: _LOWriter_FindFormatModifyEffects(ByRef $atFormat[,$iRelief = Null[, $iCase = Null[, $bOutline = Null[, $bShadow = Null]]]])
+; Syntax ........: _LOWriter_FindFormatModifyEffects(ByRef $atFormat[, $iCase = Null[,$iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Relief setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Relief format or not, this is supposed to be fixed in L.O. 7.6.
 ;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Relief setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Relief format or not, this is supposed to be fixed in L.O. 7.6.
 ;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 4 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $bShadow not a Boolean.
 ;                  --Success--
@@ -814,30 +814,30 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FindFormatModifyEffects(ByRef $atFormat, $iRelief = Null, $iCase = Null, $bOutline = Null, $bShadow = Null)
+Func _LOWriter_FindFormatModifyEffects(ByRef $atFormat, $iCase = Null, $iRelief = Null, $bOutline = Null, $bShadow = Null)
 	Local Const $UBOUND_COLUMNS = 2
 
 	If Not IsArray($atFormat) Or (UBound($atFormat, $UBOUND_COLUMNS) > 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	If ($iRelief <> Null) Then
-		If ($iRelief = Default) Then
-			__LOWriter_FindFormatDeleteSetting($atFormat, "CharRelief")
-
-		Else
-			If Not __LO_IntIsBetween($iRelief, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharRelief", $iRelief))
-		EndIf
-	EndIf
 
 	If ($iCase <> Null) Then
 		If ($iCase = Default) Then
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharCaseMap")
 
 		Else
-			If Not __LO_IntIsBetween($iCase, $LOW_CHAR_CASEMAP_NONE, $LOW_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+			If Not __LO_IntIsBetween($iCase, $LOW_CHAR_CASEMAP_NONE, $LOW_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharCaseMap", $iCase))
+		EndIf
+	EndIf
+
+	If ($iRelief <> Null) Then
+		If ($iRelief = Default) Then
+			__LOWriter_FindFormatDeleteSetting($atFormat, "CharRelief")
+
+		Else
+			If Not __LO_IntIsBetween($iRelief, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharRelief", $iRelief))
 		EndIf
 	EndIf
 

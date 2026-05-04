@@ -2295,6 +2295,15 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_DocMinimize
   - _LOWriter_TableCellFormula
   - _LOWriter_TableCellValue
+- Rearranged Effect parameters to match LO UI order.
+  > Previous order:(***$iRelief***, $iCase, $bHidden, $bOutline, $bShadow)
+  >
+  > New order:($iCase, $bHidden, ***$iRelief***, $bOutline, $bShadow)
+  - __LOWriter_CharEffect
+  - _LOWriter_CharStyleEffect
+  - _LOWriter_DirFrmtCharEffect
+  - _LOWriter_FindFormatModifyEffects
+  - _LOWriter_ParStyleEffect
 
 #### Documented
 
