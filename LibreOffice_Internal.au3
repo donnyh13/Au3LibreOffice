@@ -746,9 +746,9 @@ EndFunc   ;==>__LO_SetPropertyValue
 ;                  @Error 0 @Extended 1 Return Array = Success. An Array containing all Styles matching the called parameters. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If Only a Document object is called, all available Paragraph styles will be returned.
+; Remarks .......: If Only a Document object is called, all available styles will be returned.
 ;                  If Both $bUserOnly and $bAppliedOnly are called with True, only User-Created styles that are applied are returned.
-;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Paragraph Styling.
+;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No

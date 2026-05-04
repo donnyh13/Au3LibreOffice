@@ -880,7 +880,7 @@ EndFunc   ;==>_LOWriter_ParStyleCurrent
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ParStyleDelete
 ; Description ...: Delete a User-Created Paragraph Style from a Document.
-; Syntax ........: _LOWriter_ParStyleDelete(ByRef $oDoc, $oParStyle[, $bForceDelete = False[, $sReplacementStyle = "Default Paragraph Style"]])
+; Syntax ........: _LOWriter_ParStyleDelete(ByRef $oDoc, $oParStyle[, $bForceDelete = False[, $sReplacementStyle = "Standard"]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function. Must be a User-Created Style, not a built-in Style native to LibreOffice.
 ;                  $bForceDelete        - [optional] a boolean value. Default is False. If True, Paragraph style will be deleted regardless of whether it is in use or not.
@@ -1623,7 +1623,7 @@ EndFunc   ;==>_LOWriter_ParStylePageBreak
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Set either $iSubScript or $iSuperScript to 0 to return it to Normal setting.
-;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrievine subscript values.
+;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName

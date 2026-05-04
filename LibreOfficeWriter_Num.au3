@@ -163,7 +163,7 @@ EndFunc   ;==>_LOWriter_NumStyleCurrent
 ;                  $sSepAfter           - [optional] a string value. Default is Null. A character or the text to display behind the number in the list.
 ;                  $bConsecutiveNum     - [optional] a boolean value. Default is Null. Increases the numbering by one as you go down each level in the list hierarchy.
 ;                  $sBulletFont         - [optional] a string value. Default is Null. The font to use for special characters that are associated with it. Note: $iNumFormat must be set to $LOW_NUM_STYLE_CHAR_SPECIAL(6) before these can be set.
-;                  $iCharDecimal        - [optional] an integer value. Default is Null. The decimal value of the desired character. Note: $iNumFormat must be set to $LOW_NUM_STYLE_CHAR_SPECIAL(6) before these can be set.
+;                  $iCharDecimal        - [optional] an integer value. Default is Null. The ASCII Decimal character code value (See ASC function) of the desired character. Note: $iNumFormat must be set to $LOW_NUM_STYLE_CHAR_SPECIAL(6) before these can be set.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
