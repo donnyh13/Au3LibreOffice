@@ -1888,6 +1888,7 @@ Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAlt
 	If __LO_VarsAreNull($sName, $sAltText, $sDesc) Then
 		If __LO_VersionCheck(7.6) Then
 			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description(), $oImage.Decorative())
+
 		Else
 			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description())
 		EndIf

@@ -4284,11 +4284,11 @@ Func __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor)
 
 	If $oCursor.Text.supportsService("com.sun.star.text.TextFrame") Then
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FRAME)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FRAME)
 
 	ElseIf $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_CELL)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_CELL)
 
 	ElseIf $oCursor.Text.supportsService("com.sun.star.text.Footnote") Then
 
@@ -4304,7 +4304,6 @@ Func __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor)
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_HEADER_FOOTER)
 
 		ElseIf ($oCursor.Text.getImplementationName() = "SwXBodyText") Then
-
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_BODY_TEXT)
 		EndIf
@@ -4341,26 +4340,27 @@ Func __LOWriter_Internal_CursorGetType(ByRef $oCursor)
 
 	If $oCursor.supportsService("com.sun.star.text.TextViewCursor") Then ; "SwXTextViewCursor"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_VIEW_CURSOR)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_VIEW_CURSOR)
 
 	ElseIf $oCursor.supportsService("com.sun.star.text.TextTableCursor") Then ; "SwXTextTableCursor"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TABLE_CURSOR)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TABLE_CURSOR)
 
 	ElseIf $oCursor.supportsService("com.sun.star.text.TextCursor") Then ; "SwXTextCursor", "SvxUnoTextCursor" ; SvxUnoTextCursor is a Text Cursor created in a TextBox Form Control.
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_CURSOR)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_CURSOR)
 
 	ElseIf $oCursor.supportsService("com.sun.star.text.Paragraph") Then ; "SwXParagraph"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_PARAGRAPH)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_PARAGRAPH)
 
 	ElseIf $oCursor.supportsService("com.sun.star.text.TextPortion") Then ; "SwXTextPortion"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_PORTION)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_PORTION)
+
 	Else
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; unknown Cursor type.
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)     ; unknown Cursor type.
 	EndIf
 EndFunc   ;==>__LOWriter_Internal_CursorGetType
 

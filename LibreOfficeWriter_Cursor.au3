@@ -868,11 +868,10 @@ Func _LOWriter_CursorTextCursorCreate(ByRef $oDoc, $bCreateAtEnd = True, $bCreat
 		$iCursorType = __LOWriter_Internal_CursorGetDataType($oDoc, $oViewCursor)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oCursor = $oViewCursor.Text.createTextCursorByRange($oViewCursor)
-			If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+		$oCursor = $oViewCursor.Text.createTextCursorByRange($oViewCursor)
+		If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	Else
-
 		$oCursor = $oDoc.getText.createTextCursor()
 		If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
