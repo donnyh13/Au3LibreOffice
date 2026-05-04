@@ -499,7 +499,7 @@ Func _LOImpress_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 		$tStyleGradient.EndIntensity = $iToIntense
 	EndIf
 
-	If ($oBackground.FillGradientName() = "") Then
+	If ($oBackground.FillGradientName() = "") Or __LOImpress_GradientIsModified($tStyleGradient, $oSlide.FillGradientName()) Then
 		$sGradName = __LOImpress_GradientNameInsert($oDoc, $tStyleGradient)
 		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 

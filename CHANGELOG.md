@@ -1499,6 +1499,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_DRAWSHAPE_TYPE_*
   - $LOI_GRAD_NAME_*
   - $LOI_GRAD_TYPE_*
+  - $LOI_NUM_FRMT_*
   - $LOI_ORIENT_HORI_*
   - $LOI_ORIENT_VERT_*
   - $LOI_PAR_ALIGN_HOR_*
@@ -1516,6 +1517,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_SHAPE_LINE_JOINT_*
   - $LOI_SHAPE_LINE_STYLE_*
   - $LOI_SHAPE_SHADOW_LOCATION_*
+  - $LOI_SHAPE_TEXTBOX_TYPE_*
   - $LOI_SHAPE_TYPE_*
   - $LOI_SLIDE_LAYOUT_*
   - $LOI_SLIDE_TRANSITION_*
@@ -1582,6 +1584,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_DocVisible
   - _LOImpress_DocZoom
 - Drawing Shape functions
+  - _LOImpress_DrawShapeAltText
   - _LOImpress_DrawShapeConnectorModify
   - _LOImpress_DrawShapeConnectorSettings
   - _LOImpress_DrawShapeDimensionSettings
@@ -1597,9 +1600,19 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_FontExists
   - _LOImpress_FontsGetNames
 - Internal Functions
+  - __LOImpress_CharEffect
+  - __LOImpress_CharFont
+  - __LOImpress_CharFontColor
+  - __LOImpress_CharOverLine
+  - __LOImpress_CharPosition
+  - __LOImpress_CharScaling
+  - __LOImpress_CharSpacing
+  - __LOImpress_CharStrikeOut
+  - __LOImpress_CharUnderLine
   - __LOImpress_ColorRemoveAlpha
   - __LOImpress_CreatePoint
   - __LOImpress_CursorParHasTabStop
+  - __LOImpress_DimensionSettings
   - __LOImpress_DrawShape_CreateArrow
   - __LOImpress_DrawShape_CreateBasic
   - __LOImpress_DrawShape_CreateCallout
@@ -1612,13 +1625,42 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_DrawShapePointModify
   - __LOImpress_FilterNameGet
   - __LOImpress_GetShapeName
+  - __LOImpress_GradientIsModified
   - __LOImpress_GradientNameInsert
   - __LOImpress_GradientPresets
   - __LOImpress_InternalComErrorHandler
+  - __LOImpress_NumRuleCreateMap
+  - __LOImpress_ParAlignment
+  - __LOImpress_ParIndent
+  - __LOImpress_ParSpacing
+  - __LOImpress_ParTabStopCreate
+  - __LOImpress_ParTabStopDelete
+  - __LOImpress_ParTabStopMod
+  - __LOImpress_ParTabStopsGetList
+  - __LOImpress_ShapeAreaGradient
+  - __LOImpress_ShapeAreaGradientMulticolor
+  - __LOImpress_ShapeAreaShadow
   - __LOImpress_ShapeAreaShadowModify
-  - __LOImpress_ShapeArrowStyleName
+  - __LOImpress_ShapeAreaTransparency
+  - __LOImpress_ShapeAreaTransparencyGradientMulti
   - __LOImpress_ShapeGetType
+  - __LOImpress_ShapeLineArrowheadNameInsert
+  - __LOImpress_ShapeLineArrowStyleName
+  - __LOImpress_ShapeLineDashNameInsert
   - __LOImpress_ShapeLineStyleName
+  - __LOImpress_ShapePresStyleNumCreateScript
+  - __LOImpress_ShapePresStyleNumDeleteScript
+  - __LOImpress_ShapePresStyleNumInitiateDocument
+  - __LOImpress_ShapePresStyleNumModify
+  - __LOImpress_ShapeStyleAreaColor
+  - __LOImpress_ShapeStyleAreaTransparencyGradient
+  - __LOImpress_ShapeStyleCompare
+  - __LOImpress_ShapeStyleLineArrowStyles
+  - __LOImpress_ShapeStyleLineProperties
+  - __LOImpress_ShapeTextAttrAnimation
+  - __LOImpress_ShapeTextAttrFit
+  - __LOImpress_ShapeTextAttrSettings
+  - __LOImpress_StyleCharFontColor
   - __LOImpress_Transition
   - __LOImpress_TransparencyGradientConvert
   - __LOImpress_TransparencyGradientNameInsert
@@ -1631,20 +1673,106 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_ShapeAreaTransparency
   - _LOImpress_ShapeAreaTransparencyGradient
   - _LOImpress_ShapeAreaTransparencyGradientMulti
+  - _LOImpress_ShapeCharEffect
+  - _LOImpress_ShapeCharFont
+  - _LOImpress_ShapeCharFontColor
+  - _LOImpress_ShapeCharOverLine
+  - _LOImpress_ShapeCharPosition
+  - _LOImpress_ShapeCharScaling
+  - _LOImpress_ShapeCharSpacing
+  - _LOImpress_ShapeCharStrikeOut
+  - _LOImpress_ShapeCharUnderLine
   - _LOImpress_ShapeCreateTextCursor
   - _LOImpress_ShapeDelete
   - _LOImpress_ShapeExists
+  - _LOImpress_ShapeImageAltText
+  - _LOImpress_ShapeImageCrop
+  - _LOImpress_ShapeImageInsert
+  - _LOImpress_ShapeImageModify
+  - _LOImpress_ShapeImageReplace
   - _LOImpress_ShapeLineArrowStyles
   - _LOImpress_ShapeLineProperties
   - _LOImpress_ShapeName
+  - _LOImpress_ShapeParAlignment
+  - _LOImpress_ShapeParIndent
+  - _LOImpress_ShapeParSpacing
+  - _LOImpress_ShapeParTabStopCreate
+  - _LOImpress_ShapeParTabStopDelete
+  - _LOImpress_ShapeParTabStopMod
+  - _LOImpress_ShapeParTabStopsGetList
   - _LOImpress_ShapePosition
+  - _LOImpress_ShapePresStyleAreaColor
+  - _LOImpress_ShapePresStyleAreaFillStyle
+  - _LOImpress_ShapePresStyleAreaGradient
+  - _LOImpress_ShapePresStyleAreaGradientMulticolor
+  - _LOImpress_ShapePresStyleAreaShadow
+  - _LOImpress_ShapePresStyleAreaTransparency
+  - _LOImpress_ShapePresStyleAreaTransparencyGradient
+  - _LOImpress_ShapePresStyleAreaTransparencyGradientMulti
+  - _LOImpress_ShapePresStyleCharEffect
+  - _LOImpress_ShapePresStyleCharFont
+  - _LOImpress_ShapePresStyleCharFontColor
+  - _LOImpress_ShapePresStyleCharOverLine
+  - _LOImpress_ShapePresStyleCharStrikeOut
+  - _LOImpress_ShapePresStyleCharUnderLine
+  - _LOImpress_ShapePresStyleGetObjByName
+  - _LOImpress_ShapePresStyleLineArrowStyles
+  - _LOImpress_ShapePresStyleLineProperties
+  - _LOImpress_ShapePresStyleNumCustomize
+  - _LOImpress_ShapePresStyleParAlignment
+  - _LOImpress_ShapePresStyleParIndent
+  - _LOImpress_ShapePresStyleParSpacing
+  - _LOImpress_ShapePresStyleParTabStopCreate
+  - _LOImpress_ShapePresStyleParTabStopDelete
+  - _LOImpress_ShapePresStyleParTabStopMod
+  - _LOImpress_ShapePresStyleParTabStopsGetList
+  - _LOImpress_ShapePresStylesGetNames
+  - _LOImpress_ShapePresStyleTextAttrFit
+  - _LOImpress_ShapePresStyleTextAttrSettings
   - _LOImpress_ShapeRotateSlant
   - _LOImpress_ShapesGetList
   - _LOImpress_ShapeSize
+  - _LOImpress_ShapeStyleAreaColor
+  - _LOImpress_ShapeStyleAreaFillStyle
+  - _LOImpress_ShapeStyleAreaGradient
+  - _LOImpress_ShapeStyleAreaGradientMulticolor
+  - _LOImpress_ShapeStyleAreaShadow
+  - _LOImpress_ShapeStyleAreaTransparency
+  - _LOImpress_ShapeStyleAreaTransparencyGradient
+  - _LOImpress_ShapeStyleAreaTransparencyGradientMulti
+  - _LOImpress_ShapeStyleCharEffect
+  - _LOImpress_ShapeStyleCharFont
+  - _LOImpress_ShapeStyleCharFontColor
+  - _LOImpress_ShapeStyleCharOverLine
+  - _LOImpress_ShapeStyleCharStrikeOut
+  - _LOImpress_ShapeStyleCharUnderLine
+  - _LOImpress_ShapeStyleConnectorSettings
+  - _LOImpress_ShapeStyleCreate
+  - _LOImpress_ShapeStyleCurrent
+  - _LOImpress_ShapeStyleDelete
+  - _LOImpress_ShapeStyleDimensionSettings
+  - _LOImpress_ShapeStyleExists
+  - _LOImpress_ShapeStyleGetObjByName
+  - _LOImpress_ShapeStyleLineArrowStyles
+  - _LOImpress_ShapeStyleLineProperties
+  - _LOImpress_ShapeStyleOrganizer
+  - _LOImpress_ShapeStyleParAlignment
+  - _LOImpress_ShapeStyleParIndent
+  - _LOImpress_ShapeStyleParSpacing
+  - _LOImpress_ShapeStyleParTabStopCreate
+  - _LOImpress_ShapeStyleParTabStopDelete
+  - _LOImpress_ShapeStyleParTabStopMod
+  - _LOImpress_ShapeStyleParTabStopsGetList
+  - _LOImpress_ShapeStylesGetNames
+  - _LOImpress_ShapeStyleTextAttrAnimation
+  - _LOImpress_ShapeStyleTextAttrFit
+  - _LOImpress_ShapeStyleTextAttrSettings
+  - _LOImpress_ShapeTableInsert
   - _LOImpress_ShapeTextAttrAnimation
   - _LOImpress_ShapeTextAttrColumns
   - _LOImpress_ShapeTextAttrFit
   - _LOImpress_ShapeTextAttrSettings
+  - _LOImpress_ShapeTextBoxInsert
 - Slide Functions
   - _LOImpress_SlideAdd
   - _LOImpress_SlideBackColor

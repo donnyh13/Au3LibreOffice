@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to modify Slide layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an Array of Textboxes in the slide.
-	$avShapes = _LOImpress_SlideShapesGetList($oSlide, BitOR($LOI_SHAPE_TYPE_TEXTBOX, $LOI_SHAPE_TYPE_TEXTBOX_TITLE, $LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE))
+	$avShapes = _LOImpress_ShapesGetList($oSlide, BitOR($LOI_SHAPE_TYPE_TEXTBOX, $LOI_SHAPE_TYPE_TEXTBOX_TITLE, $LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE))
 	If @error Or (@extended = 0) Then _ERROR($oDoc, "Failed to retrieve Shapes, or no Shapes present in Slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a Dimension line Shape into the Slide
@@ -41,11 +41,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert some text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Text Box's Fit settings, set Fit to Width to True and Fit to Height to True.
-	_LOImpress_ShapeTextAttrFit($avShapes[0][0], Null, Null, True, True)
+	_LOImpress_ShapeTextAttrFit($avShapes[0][0], True, True, False)
 	If @error Then _ERROR($oDoc, "Failed to modify Shape Text Attribute settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Dimension Line's Fit settings, set Fit to Frame to False, and Adjust Contour to True.
-	_LOImpress_ShapeTextAttrFit($oDimension, False, True)
+	_LOImpress_ShapeTextAttrFit($oDimension, Null, Null, False, True)
 	If @error Then _ERROR($oDoc, "Failed to modify Shape Text Attribute settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Rectangle Shape's Fit settings, set Wrap Text to False, and Resize Shape to True.
@@ -57,17 +57,17 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Text Box's fit settings are as follows (Take note of the index values used in the array): " & @CRLF & _
-			"[Index 0] Is the text fitted to the Frame? True/False: " & $avSettings[0] & @CRLF & _
-			"[Index 2] Is the width of the shape adjusted to fit the text? True/False): " & $avSettings[2] & @CRLF & _
-			"[Index 3] Is the width of the shape adjusted to fit the text? True/False): " & $avSettings[3])
+			"[Index 0] Is the width of the shape adjusted to fit the text? True/False) " & $avSettings[0] & @CRLF & _
+			"[Index 1] Is the height of the shape adjusted to fit the text? True/False): " & $avSettings[1] & @CRLF & _
+			"[Index 2] Is the text fitted to the Frame? True/False: " & $avSettings[2])
 
 	; Retrieve the Dimension Line's current fit settings. Return will be an array in order of function parameters.
 	$avSettings = _LOImpress_ShapeTextAttrFit($oDimension)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Dimension Line's fit settings are as follows (Take note of the index values used in the array): " & @CRLF & _
-			"[Index 0] Is the text fitted to the Frame? True/False: " & $avSettings[0] & @CRLF & _
-			"[Index 1] Is the text adjusted to contour to the frame? True/False): " & $avSettings[1])
+			"[Index 2] Is the text fitted to the Frame? True/False: " & $avSettings[2] & @CRLF & _
+			"[Index 3] Is the text adjusted to contour to the frame? True/False): " & $avSettings[3])
 
 	; Retrieve the Rectangle's current fit settings. Return will be an array in order of function parameters.
 	$avSettings = _LOImpress_ShapeTextAttrFit($oShape)

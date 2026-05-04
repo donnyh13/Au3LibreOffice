@@ -24,6 +24,7 @@
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
+; _LOImpress_DrawShapeAltText
 ; _LOImpress_DrawShapeConnectorModify
 ; _LOImpress_DrawShapeConnectorSettings
 ; _LOImpress_DrawShapeDimensionSettings
@@ -35,6 +36,86 @@
 ; _LOImpress_DrawShapePointsRemove
 ; _LOImpress_DrawShapeText
 ; ===============================================================================================================================
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_DrawShapeAltText
+; Description ...: Set or Retrieve Draw Shape Alternate text settings.
+; Syntax ........: _LOImpress_DrawShapeAltText(ByRef $oDrawShape[, $sText = Null[, $sAltText = Null[, $bDecorative = Null]]])
+; Parameters ....: $oDrawShape          - [in/out] an object. A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+;                  $sText               - [optional] a string value. Default is Null. Enter alternative text to display when the image isn't available.
+;                  $sAltText            - [optional] a string value. Default is Null. Detailed alternative text of the Image.
+;                  $bDecorative         - [optional] a boolean value. Default is Null. If True, the image is considered decorative and is ignored by assistive readers. L.O. 7.6+.
+; Return values .: Success: 1 or Array
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 Return 0 = $oDrawShape not an Object.
+;                  @Error 1 @Extended 2 Return 0 = Shape called in $oDrawShape not a drawing shape.
+;                  @Error 1 @Extended 3 Return 0 = $sText not a string.
+;                  @Error 1 @Extended 4 Return 0 = $sAltText not a string.
+;                  @Error 1 @Extended 5 Return 0 = $bDecorative not a Boolean.
+;                  --Property Setting Errors--
+;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $sText
+;                  |                               2 = Error setting $sAltText
+;                  |                               4 = Error setting $bDecorative
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version less than 7.6.
+;                  --Success--
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. A 3 element array will be returned in LibreOffice version 7.6+ with the Decorative parameter.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+;                  These properties are only available for shapes other than lines (e.g. squares, stars, etc.).
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_DrawShapeAltText(ByRef $oDrawShape, $sText = Null, $sAltText = Null, $bDecorative = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $asAltTxt[2]
+
+	If Not IsObj($oDrawShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oDrawShape.supportsService("com.sun.star.drawing.Shape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If __LO_VarsAreNull($sText, $sAltText, $bDecorative) Then
+		If __LO_VersionCheck(7.6) Then
+			__LO_ArrayFill($asAltTxt, $oDrawShape.Title(), $oDrawShape.Description(), $oDrawShape.Decorative())
+		Else
+			__LO_ArrayFill($asAltTxt, $oDrawShape.Title(), $oDrawShape.Description())
+		EndIf
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $asAltTxt)
+	EndIf
+
+	If ($sText <> Null) Then
+		If Not IsString($sText) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oDrawShape.Title = $sText
+		$iError = ($oDrawShape.Title() = $sText) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($sAltText <> Null) Then
+		If Not IsString($sAltText) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oDrawShape.Description = $sAltText
+		$iError = ($oDrawShape.Description() = $sAltText) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bDecorative <> Null) Then
+		If Not IsBool($bDecorative) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_VersionCheck(7.6) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+
+		$oDrawShape.Decorative = $bDecorative
+		$iError = ($oDrawShape.Decorative() = $bDecorative) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_DrawShapeAltText
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DrawShapeConnectorModify
@@ -367,113 +448,20 @@ Func _LOImpress_DrawShapeDimensionSettings(ByRef $oShape, $iDistance = Null, $iG
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avDimension[11]
+	Local $vReturn
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iDistance, $iGuideOverhang, $iGuideDistance, $iLGuide, $iRGuide, $bBelow, $iDecimal, $iVertPos, $iHoriPos, $bParallel, $iUnitType) Then
-		__LO_ArrayFill($avDimension, $oShape.MeasureLineDistance(), $oShape.MeasureHelpLineOverhang(), $oShape.MeasureHelpLineDistance(), $oShape.MeasureHelpLine1Length(), _
-				$oShape.MeasureHelpLine2Length(), $oShape.MeasureBelowReferenceEdge(), $oShape.MeasureDecimalPlaces(), $oShape.MeasureTextVerticalPosition(), _
-				$oShape.MeasureTextHorizontalPosition(), _
-				($oShape.MeasureTextRotate90()) ? (False) : (True), _ ; When MeasureTextRotate90 is True, $bParallel is False and vice versa.
-				($oShape.MeasureShowUnit()) ? ($oShape.MeasureUnit()) : ($LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF)) ; If MeasureShowUnit is True, return the Unit type, else indicate units are off.
+	$vReturn = __LOImpress_DimensionSettings($oShape, $iDistance, $iGuideOverhang, $iGuideDistance, $iLGuide, $iRGuide, $bBelow, $iDecimal, $iVertPos, $iHoriPos, $bParallel, $iUnitType)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avDimension)
-	EndIf
-
-	If ($iDistance <> Null) Then
-		If Not __LO_IntIsBetween($iDistance, -10008, 10008) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oShape.MeasureLineDistance = $iDistance
-		$iError = (__LO_IntIsBetween($oShape.MeasureLineDistance(), $iDistance - 1, $iDistance + 1)) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($iGuideOverhang <> Null) Then
-		If Not __LO_IntIsBetween($iGuideOverhang, -10008, 10008) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oShape.MeasureHelpLineOverhang = $iGuideOverhang
-		$iError = (__LO_IntIsBetween($oShape.MeasureHelpLineOverhang(), $iGuideOverhang - 1, $iGuideOverhang + 1)) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iGuideDistance <> Null) Then
-		If Not __LO_IntIsBetween($iGuideDistance, -10008, 10008) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oShape.MeasureHelpLineDistance = $iGuideDistance
-		$iError = (__LO_IntIsBetween($oShape.MeasureHelpLineDistance(), $iGuideDistance - 1, $iGuideDistance + 1)) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	If ($iLGuide <> Null) Then
-		If Not __LO_IntIsBetween($iLGuide, -10008, 10008) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-		$oShape.MeasureHelpLine1Length = $iLGuide
-		$iError = (__LO_IntIsBetween($oShape.MeasureHelpLine1Length(), $iLGuide - 1, $iLGuide + 1)) ? ($iError) : (BitOR($iError, 8))
-	EndIf
-
-	If ($iRGuide <> Null) Then
-		If Not __LO_IntIsBetween($iRGuide, -10008, 10008) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-		$oShape.MeasureHelpLine2Length = $iRGuide
-		$iError = (__LO_IntIsBetween($oShape.MeasureHelpLine2Length(), $iRGuide - 1, $iRGuide + 1)) ? ($iError) : (BitOR($iError, 16))
-	EndIf
-
-	If ($bBelow <> Null) Then
-		If Not IsBool($bBelow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-
-		$oShape.MeasureBelowReferenceEdge = $bBelow
-		$iError = ($oShape.MeasureBelowReferenceEdge() = $bBelow) ? ($iError) : (BitOR($iError, 32))
-	EndIf
-
-	If ($iDecimal <> Null) Then
-		If Not __LO_IntIsBetween($iDecimal, 0, 99) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-
-		$oShape.MeasureDecimalPlaces = $iDecimal
-		$iError = (__LO_IntIsBetween($oShape.MeasureDecimalPlaces(), $iDecimal - 1, $iDecimal + 1)) ? ($iError) : (BitOR($iError, 64))
-	EndIf
-
-	If ($iVertPos <> Null) Then
-		If Not __LO_IntIsBetween($iVertPos, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_AUTO, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_MIDDLE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
-
-		$oShape.MeasureTextVerticalPosition = $iVertPos
-		$iError = ($oShape.MeasureTextVerticalPosition() = $iVertPos) ? ($iError) : (BitOR($iError, 128))
-	EndIf
-
-	If ($iHoriPos <> Null) Then
-		If Not __LO_IntIsBetween($iHoriPos, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_AUTO, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
-
-		$oShape.MeasureTextHorizontalPosition = $iHoriPos
-		$iError = ($oShape.MeasureTextHorizontalPosition() = $iHoriPos) ? ($iError) : (BitOR($iError, 256))
-	EndIf
-
-	If ($bParallel <> Null) Then
-		If Not IsBool($bParallel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
-
-		$oShape.MeasureTextRotate90 = ($bParallel) ? (False) : (True) ; When MeasureTextRotate90 is True, $bParallel is False and vice versa.
-		$iError = ($oShape.MeasureTextRotate90() = ($bParallel) ? (False) : (True)) ? ($iError) : (BitOR($iError, 512))
-	EndIf
-
-	If ($iUnitType <> Null) Then
-		If Not __LO_IntIsBetween($iUnitType, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_LINE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
-
-		If ($iUnitType = $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF) Then
-			$oShape.MeasureShowUnit = False
-			$iError = ($oShape.MeasureShowUnit() = False) ? ($iError) : (BitOR($iError, 1024))
-
-		Else
-			$oShape.MeasureShowUnit = True
-			$oShape.MeasureUnit = $iUnitType
-			$iError = ($oShape.MeasureUnit() = $iUnitType) ? ($iError) : (BitOR($iError, 1024))
-		EndIf
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_DrawShapeDimensionSettings
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DrawShapeGetType
 ; Description ...: Return the Drawing Shape's Type corresponding to the constants $LOI_DRAWSHAPE_TYPE_*
 ; Syntax ........: _LOImpress_DrawShapeGetType(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -763,8 +751,8 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ;                  $iShapeType          - an integer value (0-187). The Type of shape to create. See remarks. See $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM). Note, for Lines, Width is the length of the line.
 ;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM). Note, for Lines, Height is the amount the line goes below the point of insertion.
-;                  $iX                  - [optional] an integer value. Default is 0. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] an integer value. Default is 0. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iX                  - [optional] an integer value. Default is 0. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - [optional] an integer value. Default is 0. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -860,7 +848,7 @@ EndFunc   ;==>_LOImpress_DrawShapeInsert
 ; Name ..........: _LOImpress_DrawShapePointsAdd
 ; Description ...: Add a Position Point to Shape.
 ; Syntax ........: _LOImpress_DrawShapePointsAdd(ByRef $oShape, $iPoint, $iX, $iY[, $iPointType = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL[, $bIsCurve = False]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
+; Parameters ....: $oShape              - [in/out] an object. A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
 ;                  $iPoint              - an integer value. The Point to insert the new point AFTER. 0 means insert at the beginning.
 ;                  $iX                  - an integer value. The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - an integer value. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
@@ -1308,7 +1296,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsAdd
 ; Name ..........: _LOImpress_DrawShapePointsGetCount
 ; Description ...: Retrieve a count of Points present in a Shape.
 ; Syntax ........: _LOImpress_DrawShapePointsGetCount(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
+; Parameters ....: $oShape              - [in/out] an object. A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1352,7 +1340,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ; Name ..........: _LOImpress_DrawShapePointsModify
 ; Description ...: Modify an existing Position Point or Point Type in a shape.
 ; Syntax ........: _LOImpress_DrawShapePointsModify(ByRef $oShape, $iPoint[, $iX = Null[, $iY = Null[, $iPointType = Null[, $bIsCurve = Null]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
+; Parameters ....: $oShape              - [in/out] an object. A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
 ;                  $iPoint              - an integer value. The Point to modify, starting at 1.
 ;                  $iX                  - [optional] an integer value. Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] an integer value. Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
@@ -1481,7 +1469,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsModify
 ; Name ..........: _LOImpress_DrawShapePointsRemove
 ; Description ...: Remove a position Point from a Shape.
 ; Syntax ........: _LOImpress_DrawShapePointsRemove(ByRef $oShape, $iPoint)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $iPoint              - an integer value. The Point to in the Shape to delete, beginning at 1.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1811,7 +1799,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ; Name ..........: _LOImpress_DrawShapeText
 ; Description ...: Set or Retrieve the current text displayed in a shape's text box.
 ; Syntax ........: _LOImpress_DrawShapeText(ByRef $oShape[, $sText = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - [in/out] an object. A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $sText               - [optional] a string value. Default is Null. The text to display in the Shape's text box.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

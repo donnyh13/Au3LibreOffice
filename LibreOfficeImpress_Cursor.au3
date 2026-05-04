@@ -50,24 +50,24 @@
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_CursorCharEffect
 ; Description ...: Set or Retrieve the Font Effect settings.
-; Syntax ........: _LOImpress_CursorCharEffect(ByRef $oTextCursor[, $iRelief = Null[, $iCase = Null[, $bOutline = Null[, $bShadow = Null]]]])
+; Syntax ........: _LOImpress_CursorCharEffect(ByRef $oTextCursor[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
 ; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error 1 @Extended 4 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iRelief
-;                  |                               2 = Error setting $iCase
+;                  |                               1 = Error setting $iCase
+;                  |                               2 = Error setting $iRelief
 ;                  |                               4 = Error setting $bOutline
 ;                  |                               8 = Error setting $bShadow
 ;                  --Success--
@@ -81,55 +81,22 @@
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_CursorCharEffect(ByRef $oTextCursor, $iRelief = Null, $iCase = Null, $bOutline = Null, $bShadow = Null)
+Func _LOImpress_CursorCharEffect(ByRef $oTextCursor, $iCase = Null, $iRelief = Null, $bOutline = Null, $bShadow = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avEffect[4]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iRelief, $iCase, $bOutline, $bShadow) Then
-		__LO_ArrayFill($avEffect, $oTextCursor.CharRelief(), $oTextCursor.CharCaseMap(), $oTextCursor.CharContoured(), $oTextCursor.CharShadowed())
+	$vReturn = __LOImpress_CharEffect($oTextCursor, $iCase, $iRelief, $bOutline, $bShadow)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avEffect)
-	EndIf
-
-	If ($iRelief <> Null) Then
-		If Not __LO_IntIsBetween($iRelief, $LOI_CHAR_RELIEF_NONE, $LOI_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oTextCursor.CharRelief = $iRelief
-		$iError = ($oTextCursor.CharRelief() = $iRelief) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($iCase <> Null) Then
-		If Not __LO_IntIsBetween($iCase, $LOI_CHAR_CASEMAP_NONE, $LOI_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oTextCursor.CharCaseMap = $iCase
-		$iError = ($oTextCursor.CharCaseMap() = $iCase) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($bOutline <> Null) Then
-		If Not IsBool($bOutline) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oTextCursor.CharContoured = $bOutline
-		$iError = ($oTextCursor.CharContoured() = $bOutline) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	If ($bShadow <> Null) Then
-		If Not IsBool($bShadow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-		$oTextCursor.CharShadowed = $bShadow
-		$iError = ($oTextCursor.CharShadowed() = $bShadow) ? ($iError) : (BitOR($iError, 8))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorCharEffect
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_CursorCharFont
-; Description ...: Set and Retrieve the Font Settings for Paragraph.
+; Description ...: Set and Retrieve the Font Settings.
 ; Syntax ........: _LOImpress_CursorCharFont(ByRef $oTextCursor[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
 ; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ;                  $sFontName           - [optional] a string value. Default is Null. The Font Name to use.
@@ -168,47 +135,13 @@ Func _LOImpress_CursorCharFont(ByRef $oTextCursor, $sFontName = Null, $nFontSize
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avFont[4]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($sFontName, $nFontSize, $iPosture, $iWeight) Then
-		__LO_ArrayFill($avFont, $oTextCursor.CharFontName(), $oTextCursor.CharHeight(), $oTextCursor.CharPosture(), $oTextCursor.CharWeight())
+	$vReturn = __LOImpress_CharFont($oTextCursor, $sFontName, $nFontSize, $iPosture, $iWeight)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avFont)
-	EndIf
-
-	If ($sFontName <> Null) Then
-		If Not IsString($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-		If Not _LOImpress_FontExists($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oTextCursor.CharFontName = $sFontName
-		$iError = ($oTextCursor.CharFontName() = $sFontName) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($nFontSize <> Null) Then
-		If Not IsNumber($nFontSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oTextCursor.CharHeight = $nFontSize
-		$iError = ($oTextCursor.CharHeight() = $nFontSize) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iPosture <> Null) Then
-		If Not __LO_IntIsBetween($iPosture, $LOI_CHAR_POSTURE_NONE, $LOI_CHAR_POSTURE_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-		$oTextCursor.CharPosture = $iPosture
-		$iError = ($oTextCursor.CharPosture() = $iPosture) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	If ($iWeight <> Null) Then
-		If Not __LO_IntIsBetween($iWeight, $LOI_CHAR_WEIGHT_THIN, $LOI_CHAR_WEIGHT_BLACK, "", $LOI_CHAR_WEIGHT_DONT_KNOW) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-		$oTextCursor.CharWeight = $iWeight
-		$iError = ($oTextCursor.CharWeight() = $iWeight) ? ($iError) : (BitOR($iError, 8))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorCharFont
 
 ; #FUNCTION# ====================================================================================================================
@@ -250,56 +183,13 @@ Func _LOImpress_CursorCharFontColor(ByRef $oTextCursor, $iFontColor = Null, $iTr
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0, $iOldTransparency
-	Local $avColor[2]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iFontColor, $iTransparency, $iHighlight) Then
-		If __LO_VersionCheck(7.0) Then
-			__LO_ArrayFill($avColor, __LOImpress_ColorRemoveAlpha($oTextCursor.CharColor()), $oTextCursor.CharTransparence(), $oTextCursor.CharBackColor())
+	$vReturn = __LOImpress_CharFontColor($oTextCursor, $iFontColor, $iTransparency, $iHighlight)
 
-		Else
-			__LO_ArrayFill($avColor, __LOImpress_ColorRemoveAlpha($oTextCursor.CharColor()), $oTextCursor.CharBackColor())
-		EndIf
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avColor)
-	EndIf
-
-	If ($iFontColor <> Null) Then
-		If Not __LO_IntIsBetween($iFontColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		If __LO_VersionCheck(7.0) Then
-			$iOldTransparency = $oTextCursor.CharTransparence()
-			If Not IsInt($iOldTransparency) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-		EndIf
-
-		$oTextCursor.CharColor = $iFontColor
-		$iError = ($oTextCursor.CharColor() = $iFontColor) ? ($iError) : (BitOR($iError, 1))
-
-		If IsInt($iOldTransparency) Then $oTextCursor.CharTransparence = $iOldTransparency
-	EndIf
-
-	If ($iTransparency <> Null) Then
-		If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-		If Not __LO_VersionCheck(7.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
-
-		$oTextCursor.CharTransparence = $iTransparency
-		$iError = ($oTextCursor.CharTransparence() = $iTransparency) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iHighlight <> Null) Then
-		If Not __LO_IntIsBetween($iHighlight, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		; CharHighlight; same as CharBackColor---Libre seems to use back color for highlighting however, so using that for setting.
-;~ 		If Not __LO_VersionCheck(4.2) Then Return SetError($__LO_STATUS_VER_ERROR, 2, 0)
-;~ 		$oTextCursor.CharHighlight = $iHighlight ;-- keeping old method in case.
-;~ 		$iError = ($oTextCursor.CharHighlight() = $iHighlight) ? ($iError) : (BitOR($iError, 4)
-		$oTextCursor.CharBackColor = $iHighlight
-		$iError = ($oTextCursor.CharBackColor() = $iHighlight) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorCharFontColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -338,48 +228,13 @@ Func _LOImpress_CursorCharOverLine(ByRef $oTextCursor, $iOverLineStyle = Null, $
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avOverLine[3]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iOverLineStyle, $iOLColor, $bWordOnly) Then
-		__LO_ArrayFill($avOverLine, $oTextCursor.CharOverline(), $oTextCursor.CharOverlineColor(), $oTextCursor.CharWordMode())
+	$vReturn = __LOImpress_CharOverLine($oTextCursor, $iOverLineStyle, $iOLColor, $bWordOnly)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avOverLine)
-	EndIf
-
-	If ($iOverLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iOverLineStyle, $LOI_CHAR_UNDERLINE_NONE, $LOI_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oTextCursor.CharOverline = $iOverLineStyle
-		$iError = ($oTextCursor.CharOverline() = $iOverLineStyle) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($iOLColor <> Null) Then
-		If Not __LO_IntIsBetween($iOLColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		If ($iOLColor = $LO_COLOR_OFF) Then
-			If ($oTextCursor.CharOverlineHasColor() = True) Then $oTextCursor.CharOverlineHasColor = False
-			$oTextCursor.CharOverlineColor = $iOLColor
-
-		Else
-			If ($oTextCursor.CharOverlineHasColor() = False) Then $oTextCursor.CharOverlineHasColor = True
-			$oTextCursor.CharOverlineColor = $iOLColor
-		EndIf
-
-		$oTextCursor.CharOverlineColor = $iOLColor
-		$iError = ($oTextCursor.CharOverlineColor() = $iOLColor) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($bWordOnly <> Null) Then
-		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oTextCursor.CharWordMode = $bWordOnly
-		$iError = ($oTextCursor.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorCharOverLine
 
 ; #FUNCTION# ====================================================================================================================
@@ -411,7 +266,7 @@ EndFunc   ;==>_LOImpress_CursorCharOverLine
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Set either $iSubScript or $iSuperScript to 0 to return it to Normal setting.
-;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrievine subscript values.
+;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
 ; Related .......:
@@ -422,55 +277,13 @@ Func _LOImpress_CursorCharPosition(ByRef $oTextCursor, $iSuperScript = Null, $iS
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avPosition[3]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $oTextCursor.supportsService("com.sun.star.style.CharacterProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($iSuperScript, $iSubScript, $iRelativeSize) Then
-		__LO_ArrayFill($avPosition, ($oTextCursor.CharEscapement() <= 0) ? (0) : ((__LO_IntIsBetween($oTextCursor.CharEscapement(), 1, 100)) ? ($oTextCursor.CharEscapement()) : (-1)), _
-				($oTextCursor.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oTextCursor.CharEscapement(), -1, -100)) ? (($oTextCursor.CharEscapement() * -1)) : (-1)), _
-				$oTextCursor.CharEscapementHeight())
+	$vReturn = __LOImpress_CharPosition($oTextCursor, $iSuperScript, $iSubScript, $iRelativeSize)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avPosition)
-	EndIf
-
-	If ($iSuperScript <> Null) Then
-		If Not __LO_IntIsBetween($iSuperScript, -1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		If ($iSuperScript = -1) Then
-			$oTextCursor.CharEscapement = 14000
-			$iError = ($oTextCursor.CharEscapement() = 14000) ? ($iError) : (BitOR($iError, 1))
-
-		Else
-			$oTextCursor.CharEscapement = $iSuperScript
-			$iError = ($oTextCursor.CharEscapement() = $iSuperScript) ? ($iError) : (BitOR($iError, 1))
-		EndIf
-	EndIf
-
-	If ($iSubScript <> Null) Then
-		If Not __LO_IntIsBetween($iSubScript, -1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		If ($iSubScript = -1) Then
-			$oTextCursor.CharEscapement = -14000
-			$iError = ($oTextCursor.CharEscapement() = -14000) ? ($iError) : (BitOR($iError, 2))
-
-		Else
-			$iSubScript = ($iSubScript * -1) ; Change to negative value, as SubScript is set in negative integers.
-			$oTextCursor.CharEscapement = $iSubScript
-			$iError = ($oTextCursor.CharEscapement() = $iSubScript) ? ($iError) : (BitOR($iError, 2))
-		EndIf
-	EndIf
-
-	If ($iRelativeSize <> Null) Then
-		If Not __LO_IntIsBetween($iRelativeSize, 1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-		$oTextCursor.CharEscapementHeight = $iRelativeSize
-		$iError = ($oTextCursor.CharEscapementHeight() = $iRelativeSize) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorCharPosition
 
 ; #FUNCTION# ====================================================================================================================
@@ -505,24 +318,13 @@ Func _LOImpress_CursorCharScaling(ByRef $oTextCursor, $iScaleWidth = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $iCurrScale
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iScaleWidth) Then
-		$iCurrScale = $oTextCursor.CharScaleWidth()
-		If Not IsInt($iCurrScale) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$vReturn = __LOImpress_CharScaling($oTextCursor, $iScaleWidth)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrScale)
-	EndIf
-
-	If Not __LO_IntIsBetween($iScaleWidth, 1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)     ; can't be less than 1%
-
-	$oTextCursor.CharScaleWidth = $iScaleWidth
-	$iError = ($oTextCursor.CharScaleWidth() = $iScaleWidth) ? ($iError) : (BitOR($iError, 1))
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorCharScaling
 
 ; #FUNCTION# ====================================================================================================================
@@ -560,34 +362,13 @@ Func _LOImpress_CursorCharSpacing(ByRef $oTextCursor, $bAutoKerning = Null, $nKe
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avKerning[2]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($bAutoKerning, $nKerning) Then
-		$nKerning = _LO_UnitConvert($oTextCursor.CharKerning(), $LO_CONVERT_UNIT_HMM_PT)
-		__LO_ArrayFill($avKerning, $oTextCursor.CharAutoKerning(), (($nKerning > 928.8) ? (1000) : (($nKerning < -928.8) ? (-1000) : ($nKerning))))
+	$vReturn = __LOImpress_CharSpacing($oTextCursor, $bAutoKerning, $nKerning)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avKerning)
-	EndIf
-
-	If ($bAutoKerning <> Null) Then
-		If Not IsBool($bAutoKerning) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oTextCursor.CharAutoKerning = $bAutoKerning
-		$iError = ($oTextCursor.CharAutoKerning() = $bAutoKerning) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($nKerning <> Null) Then
-		If Not __LO_NumIsBetween($nKerning, -928.8, 928.8) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$nKerning = _LO_UnitConvert($nKerning, $LO_CONVERT_UNIT_PT_HMM)
-		$oTextCursor.CharKerning = $nKerning
-		$iError = ($oTextCursor.CharKerning() = $nKerning) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorCharSpacing
 
 ; #FUNCTION# ====================================================================================================================
@@ -622,39 +403,20 @@ Func _LOImpress_CursorCharStrikeOut(ByRef $oTextCursor, $iStrikeLineStyle = Null
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avStrikeOut[2]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iStrikeLineStyle, $bWordOnly) Then
-		__LO_ArrayFill($avStrikeOut, $oTextCursor.CharStrikeout(), $oTextCursor.CharWordMode())
+	$vReturn = __LOImpress_CharStrikeOut($oTextCursor, $iStrikeLineStyle, $bWordOnly)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avStrikeOut)
-	EndIf
-
-	If ($iStrikeLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iStrikeLineStyle, $LOI_CHAR_STRIKEOUT_NONE, $LOI_CHAR_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oTextCursor.CharStrikeout = $iStrikeLineStyle
-		$iError = ($oTextCursor.CharStrikeout() = $iStrikeLineStyle) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($bWordOnly <> Null) Then
-		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oTextCursor.CharWordMode = $bWordOnly
-		$iError = ($oTextCursor.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorCharStrikeOut
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_CursorCharUnderLine
 ; Description ...: Set and retrieve the Underline settings for a Paragraph.
 ; Syntax ........: _LOImpress_CursorCharUnderLine(ByRef $oTextCursor[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
+; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The Underline line style, see constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
@@ -685,47 +447,13 @@ Func _LOImpress_CursorCharUnderLine(ByRef $oTextCursor, $iUnderLineStyle = Null,
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avUnderLine[3]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iUnderLineStyle, $iULColor, $bWordOnly) Then
-		__LO_ArrayFill($avUnderLine, $oTextCursor.CharUnderline(), $oTextCursor.CharUnderlineColor(), $oTextCursor.CharWordMode())
+	$vReturn = __LOImpress_CharUnderLine($oTextCursor, $iUnderLineStyle, $iULColor, $bWordOnly)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avUnderLine)
-	EndIf
-
-	If ($iUnderLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iUnderLineStyle, $LOI_CHAR_UNDERLINE_NONE, $LOI_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oTextCursor.CharUnderline = $iUnderLineStyle
-		$iError = ($oTextCursor.CharUnderline() = $iUnderLineStyle) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($iULColor <> Null) Then
-		If Not __LO_IntIsBetween($iULColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		If ($iULColor = $LO_COLOR_OFF) Then
-			If ($oTextCursor.CharUnderlineHasColor() = True) Then $oTextCursor.CharUnderlineHasColor = False
-			$oTextCursor.CharUnderlineColor = $iULColor
-
-		Else
-			If ($oTextCursor.CharUnderlineHasColor() = False) Then $oTextCursor.CharUnderlineHasColor = True
-			$oTextCursor.CharUnderlineColor = $iULColor
-		EndIf
-
-		$iError = ($oTextCursor.CharUnderlineColor() = $iULColor) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($bWordOnly <> Null) Then
-		If Not IsBool($bWordOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oTextCursor.CharWordMode = $bWordOnly
-		$iError = ($oTextCursor.CharWordMode() = $bWordOnly) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorCharUnderLine
 
 ; #FUNCTION# ====================================================================================================================
@@ -983,39 +711,13 @@ Func _LOImpress_CursorParAlignment(ByRef $oTextCursor, $iHorAlign = Null, $iLast
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avAlignment[3]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iHorAlign, $iLastLineAlign, $iTxtDirection) Then
-		__LO_ArrayFill($avAlignment, $oTextCursor.ParaAdjust(), $oTextCursor.ParaLastLineAdjust(), $oTextCursor.WritingMode())
+	$vReturn = __LOImpress_ParAlignment($oTextCursor, $iHorAlign, $iLastLineAlign, $iTxtDirection)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avAlignment)
-	EndIf
-
-	If ($iHorAlign <> Null) Then
-		If Not __LO_IntIsBetween($iHorAlign, $LOI_PAR_ALIGN_HOR_LEFT, $LOI_PAR_ALIGN_HOR_CENTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oTextCursor.ParaAdjust = $iHorAlign
-		$iError = ($oTextCursor.ParaAdjust() = $iHorAlign) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($iLastLineAlign <> Null) Then
-		If Not __LO_IntIsBetween($iLastLineAlign, $LOI_PAR_LAST_LINE_JUSTIFIED, $LOI_PAR_LAST_LINE_CENTER, "", $LOI_PAR_LAST_LINE_START) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oTextCursor.ParaLastLineAdjust = $iLastLineAlign
-		$iError = ($oTextCursor.ParaLastLineAdjust() = $iLastLineAlign) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iTxtDirection <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDirection, $LOI_PAR_TXT_DIR_LR_TB, $LOI_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oTextCursor.WritingMode = $iTxtDirection
-		$iError = ($oTextCursor.WritingMode() = $iTxtDirection) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorParAlignment
 
 ; #FUNCTION# ====================================================================================================================
@@ -1054,39 +756,13 @@ Func _LOImpress_CursorParIndent(ByRef $oTextCursor, $iBeforeTxt = Null, $iAfterT
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0
-	Local $avIndent[3]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iBeforeTxt, $iAfterTxt, $iFirstLine) Then
-		__LO_ArrayFill($avIndent, $oTextCursor.ParaLeftMargin(), $oTextCursor.ParaRightMargin(), $oTextCursor.ParaFirstLineIndent())
+	$vReturn = __LOImpress_ParIndent($oTextCursor, $iBeforeTxt, $iAfterTxt, $iFirstLine)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avIndent)
-	EndIf
-
-	If ($iBeforeTxt <> Null) Then
-		If Not __LO_IntIsBetween($iBeforeTxt, 0, 1162202) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oTextCursor.ParaLeftMargin = $iBeforeTxt
-		$iError = (__LO_IntIsBetween(($oTextCursor.ParaLeftMargin()), ($iBeforeTxt - 1), ($iBeforeTxt + 1))) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($iAfterTxt <> Null) Then
-		If Not __LO_IntIsBetween($iAfterTxt, 0, 1162202) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oTextCursor.ParaRightMargin = $iAfterTxt
-		$iError = (__LO_IntIsBetween(($oTextCursor.ParaRightMargin()), ($iAfterTxt - 1), ($iAfterTxt + 1))) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iFirstLine <> Null) Then
-		If Not __LO_IntIsBetween($iFirstLine, 0, 1162202) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oTextCursor.ParaFirstLineIndent = $iFirstLine
-		$iError = (__LO_IntIsBetween(($oTextCursor.ParaFirstLineIndent()), ($iFirstLine - 1), ($iFirstLine + 1))) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorParIndent
 
 ; #FUNCTION# ====================================================================================================================
@@ -1127,7 +803,7 @@ EndFunc   ;==>_LOImpress_CursorParIndent
 ;                  $iAbovePar, $iBelowPar, $iLineSpcHeight may change +/- a Hundredth of a Millimeter (HMM) once set.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-;                  The "Do not add space between paragraphs os the same style" setting seems to be not available to set or retrieve in the API, and seem to do nothing in LibreOffice anyway.
+;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -1136,65 +812,13 @@ Func _LOImpress_CursorParSpacing(ByRef $oTextCursor, $iAbovePar = Null, $iBelowP
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $tLine
-	Local $iError = 0
-	Local $avSpacing[4]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iAbovePar, $iBelowPar, $iLineSpcMode, $iLineSpcHeight) Then
-		__LO_ArrayFill($avSpacing, $oTextCursor.ParaTopMargin(), $oTextCursor.ParaBottomMargin(), $oTextCursor.ParaLineSpacing.Mode(), $oTextCursor.ParaLineSpacing.Height())
+	$vReturn = __LOImpress_ParSpacing($oTextCursor, $iAbovePar, $iBelowPar, $iLineSpcMode, $iLineSpcHeight)
 
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avSpacing)
-	EndIf
-
-	If ($iAbovePar <> Null) Then
-		If Not __LO_IntIsBetween($iAbovePar, 0, 100000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oTextCursor.ParaTopMargin = $iAbovePar
-		$iError = (__LO_IntIsBetween(($oTextCursor.ParaTopMargin()), ($iAbovePar - 1), ($iAbovePar + 1))) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($iBelowPar <> Null) Then
-		If Not __LO_IntIsBetween($iBelowPar, 0, 100000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oTextCursor.ParaBottomMargin = $iBelowPar
-		$iError = (__LO_IntIsBetween(($oTextCursor.ParaBottomMargin()), ($iBelowPar - 1), ($iBelowPar + 1))) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iLineSpcMode <> Null) Then
-		If Not __LO_IntIsBetween($iLineSpcMode, $LOI_PAR_LINE_SPC_MODE_PROP, $LOI_PAR_LINE_SPC_MODE_FIX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$tLine = $oTextCursor.ParaLineSpacing()
-		If Not IsObj($tLine) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-		$tLine.Mode = $iLineSpcMode
-		$oTextCursor.ParaLineSpacing = $tLine
-		$iError = ($oTextCursor.ParaLineSpacing.Mode() = $iLineSpcMode) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	If ($iLineSpcHeight <> Null) Then
-		If Not IsInt($iLineSpcHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-		$tLine = $oTextCursor.ParaLineSpacing()
-		If Not IsObj($tLine) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-		Switch $tLine.Mode()
-			Case $LOI_PAR_LINE_SPC_MODE_PROP ; Proportional
-				If Not __LO_IntIsBetween($iLineSpcHeight, 6, 65535) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; Min setting on Proportional is 6%
-
-			Case $LOI_PAR_LINE_SPC_MODE_MIN, $LOI_PAR_LINE_SPC_MODE_LEADING ; Minimum and Leading Modes
-				If Not __LO_IntIsBetween($iLineSpcHeight, 0, 100000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-
-			Case $LOI_PAR_LINE_SPC_MODE_FIX ; Fixed Line Spacing Mode
-				If Not __LO_IntIsBetween($iLineSpcHeight, 51, 100000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0) ; Min spacing is 51 when Fixed Mode
-		EndSwitch
-		$tLine.Height = $iLineSpcHeight
-		$oTextCursor.ParaLineSpacing = $tLine
-		$iError = (__LO_IntIsBetween(($oTextCursor.ParaLineSpacing.Height()), ($iLineSpcHeight - 1), ($iLineSpcHeight + 1))) ? ($iError) : (BitOR($iError, 8))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorParSpacing
 
 ; #FUNCTION# ====================================================================================================================
@@ -1244,78 +868,18 @@ Func _LOImpress_CursorParTabStopCreate(ByRef $oTextCursor, $iPosition, $iAlignme
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $aiTabList
-	Local $bFound = False
-	Local $iNewPosition = -1
-	Local $atTabStops, $atNewTabStops
-	Local $tFoundTabStop, $tTabStruct
-	Local $iError = 0
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsInt($iPosition) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If __LOImpress_CursorParHasTabStop($oTextCursor, $iPosition) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	$atTabStops = $oTextCursor.ParaTabStops()
-	If Not IsArray($atTabStops) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$vReturn = __LOImpress_ParTabStopCreate($oTextCursor, $iPosition, $iAlignment, $iDecChar, $iFillChar)
 
-	$tTabStruct = __LO_CreateStruct("com.sun.star.style.TabStop")
-	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$tTabStruct.Position = $iPosition
-	$tTabStruct.Alignment = 0
-	$tTabStruct.DecimalChar = 0
-	$tTabStruct.FillChar = 32 ; If set to 0 Libre sets fill character to Null instead of setting to None. 32 = None.(Space character)
-
-	If ($iAlignment <> Null) Then
-		If Not __LO_IntIsBetween($iAlignment, $LOI_PAR_TAB_ALIGN_LEFT, $LOI_PAR_TAB_ALIGN_DEFAULT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$tTabStruct.Alignment = $iAlignment
-	EndIf
-
-	If ($iDecChar <> Null) Then
-		If Not IsInt($iDecChar) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-		$tTabStruct.DecimalChar = $iDecChar
-	EndIf
-
-	If ($iFillChar <> Null) Then
-		If Not IsInt($iFillChar) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-		$tTabStruct.FillChar = ($iFillChar = 0) ? (32) : ($iFillChar)
-	EndIf
-
-	__LO_AddTo1DArray($atTabStops, $tTabStruct)
-
-	$aiTabList = _LOImpress_CursorParTabStopsGetList($oTextCursor)     ; Get an array of existing tabstops to compare with
-	If Not IsArray($aiTabList) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	__LO_AddTo1DArray($aiTabList, 0)     ; Add a dummy to make Array sizes equal.
-
-	$oTextCursor.ParaTabStops = $atTabStops     ; Insert the new TabStop
-
-	$atNewTabStops = $oTextCursor.ParaTabStops()     ; Now retrieve a new list to find the final Tab Stop position.
-	For $i = 0 To UBound($atNewTabStops) - 1
-		If ($atNewTabStops[$i].Position()) <> $aiTabList[$i] Then
-			$iNewPosition = $atNewTabStops[$i].Position()
-			$tFoundTabStop = $atNewTabStops[$i]
-			$bFound = True
-			ExitLoop
-		EndIf
-	Next
-
-	If Not $bFound Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)     ; Didn't find the new TabStop
-
-	$iError = (__LO_IntIsBetween(($tFoundTabStop.Position()), ($iPosition - 1), ($iPosition + 1))) ? ($iError) : (BitOR($iError, 1))
-	$iError = (__LO_VarsAreNull($iAlignment)) ? ($iError) : (($tFoundTabStop.Alignment = $iAlignment) ? ($iError) : (BitOR($iError, 2)))
-	$iError = (__LO_VarsAreNull($iDecChar)) ? ($iError) : (($tFoundTabStop.DecimalChar = $iDecChar) ? ($iError) : (BitOR($iError, 4)))
-	$iError = (__LO_VarsAreNull($iFillChar)) ? ($iError) : (($tFoundTabStop.FillChar = $iFillChar) ? ($iError) : (BitOR($iError, 8)))
-
-	Return ($iError > 0) ? SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $iNewPosition) : SetError($__LO_STATUS_SUCCESS, 0, $iNewPosition)
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorParTabStopCreate
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_CursorParTabStopDelete
-; Description ...: Delete a TabStop from a Paragraph
+; Description ...: Delete a TabStop from a Paragraph.
 ; Syntax ........: _LOImpress_CursorParTabStopDelete(ByRef $oTextCursor, $iTabStop)
 ; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ;                  $iTabStop            - an integer value. The Tab position of the TabStop to modify. See Remarks.
@@ -1340,33 +904,13 @@ Func _LOImpress_CursorParTabStopDelete(ByRef $oTextCursor, $iTabStop)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $atOldTabStops[0]
-	Local $bDeleted = False
-	Local $iCount = 0
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsInt($iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LOImpress_CursorParHasTabStop($oTextCursor, $iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	$atOldTabStops = $oTextCursor.ParaTabStops()
-	If Not IsArray($atOldTabStops) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$vReturn = __LOImpress_ParTabStopDelete($oTextCursor, $iTabStop)
 
-	For $i = 0 To UBound($atOldTabStops) - 1
-		If ($atOldTabStops[$i].Position() = $iTabStop) Then
-			$bDeleted = True
-
-		Else
-			$atOldTabStops[$iCount] = $atOldTabStops[$i]
-			$iCount += 1
-		EndIf
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	ReDim $atOldTabStops[$iCount]
-
-	$oTextCursor.ParaTabStops = $atOldTabStops
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $bDeleted)
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
@@ -1420,87 +964,13 @@ Func _LOImpress_CursorParTabStopMod(ByRef $oTextCursor, $iTabStop, $iPosition = 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $atTabStops, $atNewTabStops
-	Local $iError = 0, $iNewPosition = 0
-	Local $tTabStruct
-	Local $bNewPosition = False
-	Local $aiTabList
-	Local $aiTabSettings[4]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsInt($iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LOImpress_CursorParHasTabStop($oTextCursor, $iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	$atTabStops = $oTextCursor.ParaTabStops()
-	If Not IsArray($atTabStops) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$vReturn = __LOImpress_ParTabStopMod($oTextCursor, $iTabStop, $iPosition, $iAlignment, $iDecChar, $iFillChar)
 
-	For $i = 0 To UBound($atTabStops) - 1
-		If ($atTabStops[$i].Position() = $iTabStop) Then $tTabStruct = $atTabStops[$i]
-		If IsObj($tTabStruct) Then ExitLoop
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-	If Not IsObj($tTabStruct) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	If __LO_VarsAreNull($iPosition, $iAlignment, $iDecChar, $iFillChar) Then
-		__LO_ArrayFill($aiTabSettings, $tTabStruct.Position(), $tTabStruct.Alignment(), $tTabStruct.DecimalChar(), $tTabStruct.FillChar())
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTabSettings)
-	EndIf
-
-	If ($iPosition <> Null) Then
-		If Not IsInt($iPosition) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-		If __LOImpress_CursorParHasTabStop($oTextCursor, $iPosition) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-		$tTabStruct.Position = $iPosition
-		$iError = ($tTabStruct.Position() = $iPosition) ? ($iError) : (BitOR($iError, 1))
-		$bNewPosition = True
-	EndIf
-
-	If ($iAlignment <> Null) Then
-		If Not __LO_IntIsBetween($iAlignment, $LOI_PAR_TAB_ALIGN_LEFT, $LOI_PAR_TAB_ALIGN_DEFAULT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-		$tTabStruct.Alignment = $iAlignment
-		$iError = ($tTabStruct.Alignment = $iAlignment) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iDecChar <> Null) Then
-		If Not IsInt($iDecChar) And ($iDecChar <> Null) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-		$tTabStruct.DecimalChar = $iDecChar
-		$iError = ($tTabStruct.DecimalChar = $iDecChar) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	If ($iFillChar <> Null) Then
-		If Not IsInt($iFillChar) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-
-		$tTabStruct.FillChar = $iFillChar
-		$tTabStruct.FillChar = ($tTabStruct.FillChar() = 0) ? (32) : ($tTabStruct.FillChar())
-		$iError = ($tTabStruct.FillChar = $iFillChar) ? ($iError) : (BitOR($iError, 8))
-	EndIf
-
-	$atTabStops[$i] = $tTabStruct
-
-	If $bNewPosition Then
-		$aiTabList = _LOImpress_CursorParTabStopsGetList($oTextCursor)
-		If Not IsArray($aiTabList) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-	EndIf
-
-	$oTextCursor.ParaTabStops = $atTabStops
-
-	If $bNewPosition Then
-		$atNewTabStops = $oTextCursor.ParaTabStops()
-		For $j = 0 To UBound($atNewTabStops) - 1
-			If ($atNewTabStops[$j].Position()) <> $aiTabList[$j] Then
-				$iNewPosition = $atNewTabStops[$j].Position()
-				ExitLoop
-			EndIf
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
-		Next
-
-		Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, $iNewPosition, 2))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorParTabStopMod
 
 ; #FUNCTION# ====================================================================================================================
@@ -1527,20 +997,11 @@ Func _LOImpress_CursorParTabStopsGetList(ByRef $oTextCursor)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $atTabStops[0]
-	Local $aiTabList[0]
+	Local $vReturn
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$atTabStops = $oTextCursor.ParaTabStops()
-	If Not IsArray($atTabStops) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$vReturn = __LOImpress_ParTabStopsGetList($oTextCursor)
 
-	ReDim $aiTabList[UBound($atTabStops)]
-
-	For $i = 0 To UBound($atTabStops) - 1
-		$aiTabList[$i] = $atTabStops[$i].Position()
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	Return SetError($__LO_STATUS_SUCCESS, $i, $aiTabList)
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_CursorParTabStopsGetList

@@ -391,6 +391,81 @@ Global Const _                                                       ; com.sun.s
 		$LOI_GRAD_TYPE_SQUARE = 4, _                                 ; Square type Gradient
 		$LOI_GRAD_TYPE_RECT = 5                                      ; Rectangle type Gradient
 
+; Numbering Style Type
+Global Const _                                                       ; com.sun.star.style.NumberingType
+		$LOI_NUM_FRMT_CHARS_UPPER_LETTER = 0, _                      ; Numbering is put in upper case letters. ("A, B, C, D)
+		$LOI_NUM_FRMT_CHARS_LOWER_LETTER = 1, _                      ; Numbering is in lower case letters. (a, b, c, d)
+		$LOI_NUM_FRMT_ROMAN_UPPER = 2, _                             ; Numbering is in Roman numbers with upper case letters. (I, II, III)
+		$LOI_NUM_FRMT_ROMAN_LOWER = 3, _                             ; Numbering is in Roman numbers with lower case letters. (i, ii, iii).
+		$LOI_NUM_FRMT_ARABIC = 4, _                                  ; Numbering is in Arabic numbers. (1, 2, 3, 4),
+		$LOI_NUM_FRMT_NUMBER_NONE = 5, _                             ; Numbering is invisible.
+		$LOI_NUM_FRMT_CHAR_SPECIAL = 6, _                            ; Use a character from a specified font.
+		$LOI_NUM_FRMT_PAGE_DESCRIPTOR = 7, _                         ; Numbering is specified in the page style.
+		$LOI_NUM_FRMT_BITMAP = 8, _                                  ; Numbering is displayed as a bitmap graphic.
+		$LOI_NUM_FRMT_CHARS_UPPER_LETTER_N = 9, _                    ; Numbering is put in upper case letters. (A, B, Y, Z, AA, BB)
+		$LOI_NUM_FRMT_CHARS_LOWER_LETTER_N = 10, _                   ; Numbering is put in lower case letters. (a, b, y, z, aa, bb)
+		$LOI_NUM_FRMT_TRANSLITERATION = 11, _                        ; A transliteration module will be used to produce numbers in Chinese, Japanese, etc.
+		$LOI_NUM_FRMT_NATIVE_NUMBERING = 12, _                       ; The NativeNumberSupplier service will be called to produce numbers in native languages.
+		$LOI_NUM_FRMT_FULLWIDTH_ARABIC = 13, _                       ; Numbering for full width Arabic number.
+		$LOI_NUM_FRMT_CIRCLE_NUMBER = 14, _                          ; Bullet for Circle Number.
+		$LOI_NUM_FRMT_NUMBER_LOWER_ZH = 15, _                        ; Numbering for Chinese lower case number.
+		$LOI_NUM_FRMT_NUMBER_UPPER_ZH = 16, _                        ; Numbering for Chinese upper case number.
+		$LOI_NUM_FRMT_NUMBER_UPPER_ZH_TW = 17, _                     ; Numbering for Traditional Chinese upper case number.
+		$LOI_NUM_FRMT_TIAN_GAN_ZH = 18, _                            ; Bullet for Chinese Tian Gan.
+		$LOI_NUM_FRMT_DI_ZI_ZH = 19, _                               ; Bullet for Chinese Di Zi.
+		$LOI_NUM_FRMT_NUMBER_TRADITIONAL_JA = 20, _                  ; Numbering for Japanese traditional number.
+		$LOI_NUM_FRMT_AIU_FULLWIDTH_JA = 21, _                       ; Bullet for Japanese AIU fullwidth.
+		$LOI_NUM_FRMT_AIU_HALFWIDTH_JA = 22, _                       ; Bullet for Japanese AIU halfwidth.
+		$LOI_NUM_FRMT_IROHA_FULLWIDTH_JA = 23, _                     ; Bullet for Japanese IROHA fullwidth.
+		$LOI_NUM_FRMT_IROHA_HALFWIDTH_JA = 24, _                     ; Bullet for Japanese IROHA halfwidth.
+		$LOI_NUM_FRMT_NUMBER_UPPER_KO = 25, _                        ; Numbering for Korean upper case number.
+		$LOI_NUM_FRMT_NUMBER_HANGUL_KO = 26, _                       ; Numbering for Korean Hangul number.
+		$LOI_NUM_FRMT_HANGUL_JAMO_KO = 27, _                         ; Bullet for Korean Hangul Jamo.
+		$LOI_NUM_FRMT_HANGUL_SYLLABLE_KO = 28, _                     ; Bullet for Korean Hangul Syllable.
+		$LOI_NUM_FRMT_HANGUL_CIRCLED_JAMO_KO = 29, _                 ; Bullet for Korean Hangul Circled Jamo.
+		$LOI_NUM_FRMT_HANGUL_CIRCLED_SYLLABLE_KO = 30, _             ; Bullet for Korean Hangul Circled Syllable.
+		$LOI_NUM_FRMT_CHARS_ARABIC = 31, _                           ; Numbering in Arabic alphabet letters.
+		$LOI_NUM_FRMT_CHARS_THAI = 32, _                             ; Numbering in Thai alphabet letters.
+		$LOI_NUM_FRMT_CHARS_HEBREW = 33, _                           ; Numbering in Hebrew alphabet letters.
+		$LOI_NUM_FRMT_CHARS_NEPALI = 34, _                           ; Numbering in Nepali alphabet letters.
+		$LOI_NUM_FRMT_CHARS_KHMER = 35, _                            ; Numbering in Khmer alphabet letters.
+		$LOI_NUM_FRMT_CHARS_LAO = 36, _                              ; Numbering in Lao alphabet letters.
+		$LOI_NUM_FRMT_CHARS_TIBETAN = 37, _                          ; Numbering in Tibetan/Dzongkha alphabet letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_UPPER_LETTER_BG = 38, _         ; Numbering in Cyrillic alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_LOWER_LETTER_BG = 39, _         ; Numbering in Cyrillic alphabet lower case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_UPPER_LETTER_N_BG = 40, _       ; Numbering in Cyrillic alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_LOWER_LETTER_N_BG = 41, _       ; Numbering in Cyrillic alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_UPPER_LETTER_RU = 42, _         ; Numbering in Russian Cyrillic alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_LOWER_LETTER_RU = 43, _         ; Numbering in Russian Cyrillic alphabet lower case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_UPPER_LETTER_N_RU = 44, _       ; Numbering in Russian Cyrillic alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_LOWER_LETTER_N_RU = 45, _       ; Numbering in Russian Cyrillic alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_PERSIAN = 46, _                          ; Numbering in Persian alphabet letters.
+		$LOI_NUM_FRMT_CHARS_MYANMAR = 47, _                          ; Numbering in Myanmar alphabet letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_UPPER_LETTER_SR = 48, _         ; Numbering in Serbian Cyrillic alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_LOWER_LETTER_SR = 49, _         ; Numbering in Russian Serbian alphabet lower case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_UPPER_LETTER_N_SR = 50, _       ; Numbering in Serbian Cyrillic alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_CYRILLIC_LOWER_LETTER_N_SR = 51, _       ; Numbering in Serbian Cyrillic alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_GREEK_UPPER_LETTER = 52, _               ; Numbering in Greek alphabet upper case letters.
+		$LOI_NUM_FRMT_CHARS_GREEK_LOWER_LETTER = 53, _               ; Numbering in Greek alphabet lower case letters.
+		$LOI_NUM_FRMT_CHARS_ARABIC_ABJAD = 54, _                     ; Numbering in Arabic alphabet using abjad sequence.
+		$LOI_NUM_FRMT_CHARS_PERSIAN_WORD = 55, _                     ; Numbering in Persian words.
+		$LOI_NUM_FRMT_NUMBER_HEBREW = 56, _                          ; Numbering in Hebrew numerals.
+		$LOI_NUM_FRMT_NUMBER_ARABIC_INDIC = 57, _                    ; Numbering in Arabic-Indic numerals.
+		$LOI_NUM_FRMT_NUMBER_EAST_ARABIC_INDIC = 58, _               ; Numbering in East Arabic-Indic numerals.
+		$LOI_NUM_FRMT_NUMBER_INDIC_DEVANAGARI = 59, _                ; Numbering in Indic Devanagari numerals.
+		$LOI_NUM_FRMT_TEXT_NUMBER = 60, _                            ; Numbering in ordinal numbers of the language of the text node. (1st, 2nd, 3rd)
+		$LOI_NUM_FRMT_TEXT_CARDINAL = 61, _                          ; Numbering in cardinal numbers of the language of the text node. (One, Two)
+		$LOI_NUM_FRMT_TEXT_ORDINAL = 62, _                           ; Numbering in ordinal numbers of the language of the text node. (First, Second)
+		$LOI_NUM_FRMT_SYMBOL_CHICAGO = 63, _                         ; Footnoting symbols according the University of Chicago style.
+		$LOI_NUM_FRMT_ARABIC_ZERO = 64, _                            ; Numbering is in Arabic numbers, padded with zero to have a length of at least two. (01, 02)
+		$LOI_NUM_FRMT_ARABIC_ZERO3 = 65, _                           ; Numbering is in Arabic numbers, padded with zero to have a length of at least three.
+		$LOI_NUM_FRMT_ARABIC_ZERO4 = 66, _                           ; Numbering is in Arabic numbers, padded with zero to have a length of at least four.
+		$LOI_NUM_FRMT_ARABIC_ZERO5 = 67, _                           ; Numbering is in Arabic numbers, padded with zero to have a length of at least five.
+		$LOI_NUM_FRMT_SZEKELY_ROVAS = 68, _                          ; Numbering is in Szekely rovas (Old Hungarian) numerals.
+		$LOI_NUM_FRMT_NUMBER_DIGITAL_KO = 69, _                      ; Numbering is in Korean Digital number.
+		$LOI_NUM_FRMT_NUMBER_DIGITAL2_KO = 70, _                     ; Numbering is in Korean Digital Number, reserved "koreanDigital2".
+		$LOI_NUM_FRMT_NUMBER_LEGAL_KO = 71                           ; Numbering is in Korean Legal Number, reserved "koreanLegal".
+
 ; Horizontal Orientation
 Global Const _                                                       ; com.sun.star.text.HoriOrientation
 		$LOI_ORIENT_HORI_NONE = 0, _                                 ; No hard alignment is applied. Equal to "From Left" in L.O. U.I.
@@ -598,6 +673,13 @@ Global Enum _
 		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, _                  ; 7 The Shadow is positioned in the Lower-Center of the shape.
 		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT                      ; 8 The Shadow is positioned in the Lower-Right corner of the shape.
 
+; Text Box type Constants.
+Global Enum _
+		$LOI_SHAPE_TEXTBOX_TYPE_TEXTBOX, _                           ; - A Text Box, including Hyperlinks, and most Fields.
+		$LOI_SHAPE_TEXTBOX_TYPE_OUTLINE, _                           ; - A Slide Outline Text Box.
+		$LOI_SHAPE_TEXTBOX_TYPE_SUBTITLE, _                          ; - A Slide Subtitle Text Box.
+		$LOI_SHAPE_TEXTBOX_TYPE_TITLE                                ; - A Slide Title Text Box.
+
 ; Shape Type Constants.
 Global Enum Step * 2 _
 		$LOI_SHAPE_TYPE_DRAWING_SHAPE = 1, _                         ; 1 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
@@ -609,7 +691,7 @@ Global Enum Step * 2 _
 		$LOI_SHAPE_TYPE_TEXTBOX, _                                   ; 64 - A Text Box, including Hyperlinks, and most Fields.
 		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 128 - A Slide Subtitle Text Box.
 		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 256 - A Slide Title Text Box.
-		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINER, _                          ; 512 - A Slide Outliner Text Box.
+		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 512 - A Slide Outline Text Box.
 		$LOI_SHAPE_TYPE_ALL = 1023                                   ; 1023 All types above.
 
 ; Slide layout arrangements.

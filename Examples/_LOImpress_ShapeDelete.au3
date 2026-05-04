@@ -23,7 +23,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to delete all the text boxes from the current slide.")
 
 	; Retrieve an Array of Textboxes in the current slide.
-	$avShapes = _LOImpress_ShapesGetList($oSlide, BitOR($LOI_SHAPE_TYPE_TEXTBOX, $LOI_SHAPE_TYPE_TEXTBOX_TITLE, $LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, $LOI_SHAPE_TYPE_TEXTBOX_OUTLINER))
+	$avShapes = _LOImpress_ShapesGetList($oSlide, BitOR($LOI_SHAPE_TYPE_TEXTBOX, $LOI_SHAPE_TYPE_TEXTBOX_TITLE, $LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, $LOI_SHAPE_TYPE_TEXTBOX_OUTLINE))
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shapes in slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To @extended - 1
