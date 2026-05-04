@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an Array of all drawing Shapes in the current slide.
-	$avShapes = _LOImpress_SlideShapesGetList($oSlide, $LOI_SHAPE_TYPE_DRAWING_SHAPE)
+	$avShapes = _LOImpress_ShapesGetList($oSlide, $LOI_SHAPE_TYPE_DRAWING_SHAPE)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shapes in slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	For $i = 0 To @extended - 1
