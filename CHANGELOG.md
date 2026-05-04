@@ -1419,6 +1419,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_SheetAdd
   - _LOCalc_SheetProtect
   - _LOCalc_SheetUnprotect
+- Removed ImplementationName usage, as it is unreliable long term.
 
 #### Removed
 

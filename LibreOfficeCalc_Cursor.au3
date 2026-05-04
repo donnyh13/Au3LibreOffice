@@ -973,7 +973,7 @@ Func _LOCalc_TextCursorParObjSectionsGet(ByRef $oParObj)
 	Local $iCount = 0
 
 	If Not IsObj($oParObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If ($oParObj.ImplementationName() <> "SvxUnoTextContent") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not $oParObj.supportsService("com.sun.star.text.Paragraph") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oSecEnum = $oParObj.createEnumeration()
 	If Not IsObj($oSecEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
