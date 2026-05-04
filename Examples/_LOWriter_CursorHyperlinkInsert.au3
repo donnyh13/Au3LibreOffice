@@ -20,7 +20,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text into the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a hyperlink. Set the display text to "Autoit v3©.", and the website URL to "http://www.autoitscript.com/site/autoit/"
-	_LOWriter_CursorHyperlinkInsert($oDoc, $oViewCursor, "Autoit v3©.", "http://www.autoitscript.com/site/autoit/")
+	_LOWriter_CursorHyperlinkInsert($oViewCursor, "Autoit v3©.", "http://www.autoitscript.com/site/autoit/")
 	If @error Then _ERROR($oDoc, "Failed to insert a hyperlink into the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have inserted a hyperlink into the document. Press ok to close the document.")

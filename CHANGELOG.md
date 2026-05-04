@@ -2308,6 +2308,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FindFormatModifyEffects
   - _LOWriter_ParStyleEffect
 - Added Decorative parameter to `_LOWriter_ImageOptionsName`, which was added in L.O. 7.6.
+- Simplified `_LOWriter_CursorHyperlinkInsert` to have only a Cursor parameter, and less unnecessary options.
 
 #### Documented
 
