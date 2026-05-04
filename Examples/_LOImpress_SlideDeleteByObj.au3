@@ -38,7 +38,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to delete the middle slide.")
 
 	; Get the middle slide's object
-	$oSlide = _LOImpress_SlideGetByIndex($oDoc, 1)
+	$oSlide = _LOImpress_SlideGetObjByIndex($oDoc, 1)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Slide Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Delete the middle slide.
