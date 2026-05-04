@@ -305,7 +305,7 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorHyperlinkInsert
 ; Description ...: Insert a hyperlink into the document at the cursor location.
-; Syntax ........: _LOWriter_CursorHyperlinkInsert(ByRef $oDoc, ByRef $oCursor, $sLinkText, $sLinkAddress[, $bInsertAtViewCursor = False[, $bOverwrite = False]])
+; Syntax ........: _LOWriter_CursorHyperlinkInsert(ByRef $oCursor, $sLinkText, $sLinkAddress[, $bOverwrite = False]])
 ; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions.
 ;                  $sLinkText           - a string value. Link text you want displayed (Insert the URL here too if you want the link inserted raw.)
 ;                  $sLinkAddress        - a string value. A URL.
