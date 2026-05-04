@@ -2179,23 +2179,24 @@ Func __LOCalc_Internal_CursorGetType(ByRef $oCursor)
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If $oCursor.supportsService("com.sun.star.text.TextCursor") Then ; "SvxUnoTextCursor"
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_TEXT_CURSOR)
+
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_TEXT_CURSOR)
 
 	ElseIf $oCursor.supportsService("com.sun.star.sheet.SheetCellCursor") Then ; "ScCellCursorObj"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_SHEET_CURSOR)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_SHEET_CURSOR)
 
 	ElseIf $oCursor.supportsService("com.sun.star.text.Paragraph") Then ; "SvxUnoTextContent"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_PARAGRAPH)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_PARAGRAPH)
 
 	ElseIf $oCursor.supportsService("com.sun.star.style.CharacterProperties") And $oCursor.getPropertySetInfo.hasPropertyByName("TextPortionType") Then ; "SvxUnoTextRange"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_TEXT_PORTION)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_TEXT_PORTION)
 
 	Else
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; unknown Cursor type.
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)     ; unknown Cursor type.
 	EndIf
 EndFunc   ;==>__LOCalc_Internal_CursorGetType
 
