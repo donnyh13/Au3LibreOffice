@@ -42,7 +42,6 @@
 ; __LOWriter_CharUnderLine
 ; __LOWriter_ColorRemoveAlpha
 ; __LOWriter_CreatePoint
-; __LOWriter_CursorGetText
 ; __LOWriter_DateStructCompare
 ; __LOWriter_DirFrmtCheck
 ; __LOWriter_FieldCountType
@@ -1429,65 +1428,6 @@ Func __LOWriter_CreatePoint($iX, $iY)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $tPoint)
 EndFunc   ;==>__LOWriter_CreatePoint
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOWriter_CursorGetText
-; Description ...: Retrieves a Text object appropriate for the type of cursor.
-; Syntax ........: __LOWriter_CursorGetText(ByRef $oDoc, $oCursor)
-; Parameters ....: $oDoc                - [in/out] A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
-; Return values .: Success: Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to get Cursor data type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to create Object for creating TextObject.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Text Object.
-;                  @Error 3 @Extended 4 Return 0 = Cursor is in an unknown data field.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Object = Success, Text object was returned. @Extended will be one of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Also returns what type of cursor, such as a text Table, footnote etc.
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOWriter_CursorGetText(ByRef $oDoc, ByRef $oCursor)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oText, $oReturnedObj
-	Local $iCursorDataType
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$oReturnedObj = __LOWriter_Internal_CursorGetDataType($oDoc, $oCursor, True)
-	$iCursorDataType = @extended
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-	If Not IsObj($oReturnedObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	Switch $iCursorDataType
-		Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE, $LOW_CURDATA_HEADER_FOOTER
-			$oText = $oReturnedObj.getText()
-			If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCursorDataType, $oText)
-
-		Case $LOW_CURDATA_CELL
-			$oText = $oReturnedObj.getCellByName($oCursor.Cell.CellName)
-			If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCursorDataType, $oText)
-
-		Case Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-	EndSwitch
-EndFunc   ;==>__LOWriter_CursorGetText
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_DateStructCompare

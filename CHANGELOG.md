@@ -2614,6 +2614,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_FieldSetVarMasterDelete`, split into separate files.
 - Second _LOWriter_DocConnect example.
 - LibreOfficeWriter_Cell.au3.
+- __LOWriter_CursorGetText
 
 [To Top](#releases)
 
