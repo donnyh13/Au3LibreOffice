@@ -2560,6 +2560,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_TableColumnInsert
   - _LOWriter_TableRowInsert
 - Removed ImplementationName usages generally, as it is unreliable long term.
+- Simplified some internal workings of some cursor functions.
 
 #### Removed
 

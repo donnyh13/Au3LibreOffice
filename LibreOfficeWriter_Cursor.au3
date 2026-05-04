@@ -835,8 +835,7 @@ EndFunc   ;==>_LOWriter_CursorParObjSectionsGet
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve ViewCursor Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Text Object.
-;                  @Error 3 @Extended 3 Return 0 = Current ViewCursor is in unknown data type or failed detecting what data type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Cursor Data Type.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Object = Success, Cursor object was returned. @Extended can be on of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3 indicating the current created cursor is in that type of data.
 ; Author ........: donnyh13
@@ -854,7 +853,7 @@ Func _LOWriter_CursorTextCursorCreate(ByRef $oDoc, $bCreateAtEnd = True, $bCreat
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oCursor, $oText, $oViewCursor
+	Local $oCursor, $oViewCursor
 	Local $iCursorType = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -866,24 +865,15 @@ Func _LOWriter_CursorTextCursorCreate(ByRef $oDoc, $bCreateAtEnd = True, $bCreat
 		$oViewCursor = $oDoc.CurrentController.getViewCursor()
 		If Not IsObj($oViewCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		$oText = __LOWriter_CursorGetText($oDoc, $oViewCursor)
-		$iCursorType = @extended
-		If @error Or Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		$iCursorType = __LOWriter_Internal_CursorGetDataType($oDoc, $oViewCursor)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		If __LO_IntIsBetween($iCursorType, $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_HEADER_FOOTER) Then
-			$oCursor = $oText.createTextCursorByRange($oViewCursor)
+			$oCursor = $oViewCursor.Text.createTextCursorByRange($oViewCursor)
 			If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-		Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; ViewCursor in unknown data type.
-		EndIf
-
 	Else
-		$oText = $oDoc.getText
-		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		$oCursor = $oText.createTextCursor()
+		$oCursor = $oDoc.getText.createTextCursor()
 		If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		$iCursorType = $LOW_CURDATA_BODY_TEXT
