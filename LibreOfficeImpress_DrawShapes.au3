@@ -85,6 +85,7 @@ Func _LOImpress_DrawShapeAltText(ByRef $oDrawShape, $sText = Null, $sAltText = N
 	If __LO_VarsAreNull($sText, $sAltText, $bDecorative) Then
 		If __LO_VersionCheck(7.6) Then
 			__LO_ArrayFill($asAltTxt, $oDrawShape.Title(), $oDrawShape.Description(), $oDrawShape.Decorative())
+
 		Else
 			__LO_ArrayFill($asAltTxt, $oDrawShape.Title(), $oDrawShape.Description())
 		EndIf

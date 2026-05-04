@@ -1426,6 +1426,7 @@ Func _LOImpress_ShapeImageAltText(ByRef $oImage, $sText = Null, $sAltText = Null
 	If __LO_VarsAreNull($sText, $sAltText, $bDecorative) Then
 		If __LO_VersionCheck(7.6) Then
 			__LO_ArrayFill($asName, $oImage.Title(), $oImage.Description(), $oImage.Decorative())
+
 		Else
 			__LO_ArrayFill($asName, $oImage.Title(), $oImage.Description())
 		EndIf
@@ -1640,6 +1641,7 @@ Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL)
 	If ($nPageRatio > $nImageRatio) Then ; Compare the ratios to see which is wider.
 		$tNewSize.Width = $oSlide.Width()
 		$tNewSize.Height = Int($oSlide.Width() * $nImageRatio)
+
 	Else
 		$tNewSize.Width = Int($oSlide.Width() / $nImageRatio)
 		$tNewSize.Height = $oSlide.Height()
@@ -1708,6 +1710,7 @@ Func _LOImpress_ShapeImageModify(ByRef $oImage, $bFlipVert = Null, $bFlipHori = 
 		If $bFlipVert Then
 			$oImage.RotateAngle = 18000 ; Image is vertically flipped.
 			$iError = ($oImage.RotateAngle() = 18000) ? ($iError) : (BitOR($iError, 1))
+
 		Else
 			$oImage.RotateAngle = 0
 			$iError = ($oImage.RotateAngle() = 0) ? ($iError) : (BitOR($iError, 1))
@@ -2854,20 +2857,20 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaTransparency
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oPresStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 4 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 5 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 6 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iEnd not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oPresStyle not an Object.
+;                  @Error 1 @Extended 3 Return 0 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 5 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 6 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 7 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 Return 0 = $iStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 9 Return 0 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Parent Document Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 4 Return 0 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 5 Return 0 = Error setting Transparency Gradient Name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 Return 0 = Error creating Transparency Gradient Name.
+;                  @Error 3 @Extended 4 Return 0 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
@@ -2895,7 +2898,8 @@ Func _LOImpress_ShapePresStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oPres
 
 	Local $vReturn
 
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$vReturn = __LOImpress_ShapeStyleAreaTransparencyGradient($oDoc, $oPresStyle, $iType, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iStart, $iEnd)
 
@@ -3064,8 +3068,6 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharFont
 ;                  @Error 1 @Extended 1 Return 0 = $oPresStyle not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 3 Return 0 = $iHighlight not an Integer, less than -1 or greater than 16777215.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $FontColor
@@ -3292,6 +3294,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleGetObjByName
 ;                  @Error 1 @Extended 11 Return 0 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to convert Constant to Arrowhead name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to insert preset Arrowhead name and style.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStartStyle
@@ -3358,6 +3361,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleLineArrowStyles
 ;                  @Error 1 @Extended 9 Return 0 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOI_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to convert Constant to Line Style name.
+;                  @Error 3 @Extended 2 Return 0 =  Failed to insert Line Style name.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStyle
@@ -3448,7 +3452,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleLineProperties
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  When a lot of settings are set, especially for all levels, this function can be a bit slow.
-; Related .......: _LOImpress_NumStyleCreate, _LOImpress_NumStyleGetObjByName
+; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3920,7 +3924,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParTabStopsGetList
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapePresStylesGetNames
 ; Description ...: Retrieve an array of all Presentation Style names available for a document.
-; Syntax ........: _LOImpress_ShapePresStylesGetNames(ByRef $oDoc[, $bUserOnly = False[, $bAppliedOnly = False[, $bDisplayName = False]]])
+; Syntax ........: _LOImpress_ShapePresStylesGetNames(ByRef $oDoc[, $bAppliedOnly = False[, $bDisplayName = False]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $bAppliedOnly        - [optional] a boolean value. Default is False. If True, only Applied Presentation Styles are returned.
 ;                  $bDisplayName        - [optional] a boolean value. Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
@@ -4621,20 +4625,20 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaTransparency
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShapeStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 4 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 5 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 6 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iEnd not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 Return 0 = $oShapeStyle not an Object.
+;                  @Error 1 @Extended 3 Return 0 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 4 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 5 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 6 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 7 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 Return 0 = $iStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 9 Return 0 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Parent Document Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 4 Return 0 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 5 Return 0 = Error setting Transparency Gradient Name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 Return 0 = Error creating Transparency Gradient Name.
+;                  @Error 3 @Extended 4 Return 0 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
@@ -4662,7 +4666,8 @@ Func _LOImpress_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oShapeSty
 
 	Local $vReturn
 
-	If Not IsObj($oShapeStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oShapeStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$vReturn = __LOImpress_ShapeStyleAreaTransparencyGradient($oDoc, $oShapeStyle, $iType, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iStart, $iEnd)
 
@@ -4831,8 +4836,6 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharFont
 ;                  @Error 1 @Extended 1 Return 0 = $oShapeStyle not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 3 Return 0 = $iHighlight not an Integer, less than -1 or greater than 16777215.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $FontColor
@@ -5187,8 +5190,8 @@ Func _LOImpress_ShapeStyleCurrent(ByRef $oDoc, ByRef $oShape, $sShapeStyle = Nul
 		If Not IsString($sCurrStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		If $oShape.IsPresentationObject() Then ; Presentation Objects (Title, Subtitle, Outline textboxes etc) only have Presentation styles.
-			Return SetError($__LO_STATUS_SUCCESS, 2, $sCurrStyle) ; Style is a Presentation Style.
 
+			Return SetError($__LO_STATUS_SUCCESS, 2, $sCurrStyle) ; Style is a Presentation Style.
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurrStyle) ; Style is a Graphics/Drawing/Shape Style.
@@ -5440,6 +5443,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleGetObjByName
 ;                  @Error 1 @Extended 11 Return 0 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to convert Constant to Arrowhead name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to insert preset Arrowhead name and style.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStartStyle
@@ -5506,6 +5510,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleLineArrowStyles
 ;                  @Error 1 @Extended 9 Return 0 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOI_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to convert Constant to Line Style name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to insert Line Style name.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStyle

@@ -675,10 +675,10 @@ Global Enum _
 
 ; Text Box type Constants.
 Global Enum _
-		$LOI_SHAPE_TEXTBOX_TYPE_TEXTBOX, _                           ; - A Text Box, including Hyperlinks, and most Fields.
-		$LOI_SHAPE_TEXTBOX_TYPE_OUTLINE, _                           ; - A Slide Outline Text Box.
-		$LOI_SHAPE_TEXTBOX_TYPE_SUBTITLE, _                          ; - A Slide Subtitle Text Box.
-		$LOI_SHAPE_TEXTBOX_TYPE_TITLE                                ; - A Slide Title Text Box.
+		$LOI_SHAPE_TEXTBOX_TYPE_TEXTBOX, _                           ; 0 - A Text Box, including Hyperlinks, and most Fields.
+		$LOI_SHAPE_TEXTBOX_TYPE_OUTLINE, _                           ; 1 - A Slide Outline Text Box.
+		$LOI_SHAPE_TEXTBOX_TYPE_SUBTITLE, _                          ; 2 - A Slide Subtitle Text Box.
+		$LOI_SHAPE_TEXTBOX_TYPE_TITLE                                ; 3 - A Slide Title Text Box.
 
 ; Shape Type Constants.
 Global Enum Step * 2 _

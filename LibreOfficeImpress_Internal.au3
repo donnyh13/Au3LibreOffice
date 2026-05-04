@@ -570,7 +570,7 @@ EndFunc   ;==>__LOImpress_CharScaling
 ; Name ..........: __LOImpress_CharSpacing
 ; Description ...: Set and retrieve the spacing between characters (Kerning).
 ; Syntax ........: __LOImpress_CharSpacing(ByRef $oObj[, $bAutoKerning = Null[, $nKerning = Null]])
-; Parameters ....: $oObj         - [in/out] an object. A Text Cursor or Shape object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
+; Parameters ....: $oObj                - [in/out] an object. A Text Cursor or Shape object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
 ;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
 ;                  $nKerning            - [optional] a general number value (-928.8-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
@@ -6563,6 +6563,8 @@ EndFunc   ;==>__LOImpress_ShapeLineArrowheadNameInsert
 ;                  @Error 1 @Extended 3 Return 0 = $bReturnPresets not a Boolean.
 ;                  @Error 1 @Extended 4 Return 0 = $tPolyCoords not an Object.
 ;                  @Error 1 @Extended 5 Return 0 = Both $iArrowStyle and $sArrowStyle called with Null.
+;                  --Initialization Errors--
+;                  @Error 2 @Extended 1 Return 0 = Failed to create a Shape position point.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iArrowStyle was successfully converted to its corresponding Arrow Type Name.
 ;                  @Error 0 @Extended 1 Return Integer = Success. Arrow Type Name called in $sArrowStyle was successfully converted to its corresponding Constant value.
@@ -6637,7 +6639,6 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 		If Not IsObj($tPolyCoords) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		Switch $iArrowStyle
-
 			Case $LOI_SHAPE_LINE_ARROW_TYPE_ARROW_SHORT
 				Local $aiFlags[4] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[4][2] = [[0, 13], [10, 0], [20, 13], [0, 13]]
@@ -7194,6 +7195,7 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 		$tPolyCoords.Flags = $avArray
 
 		Return SetError($__LO_STATUS_SUCCESS, 3, $tPolyCoords)
+
 	Else
 
 		Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; No values called.
@@ -7254,7 +7256,6 @@ Func __LOImpress_ShapeLineDashNameInsert(ByRef $oDoc, $iLineDashType)
 
 		$oDashTable.insertByName($sDashName, $tNewDash)
 		If Not ($oDashTable.hasByName($sDashName)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
@@ -7288,7 +7289,6 @@ EndFunc   ;==>__LOImpress_ShapeLineDashNameInsert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-; #INTERNAL_USE_ONLY# ===========================================================================================================
 Func __LOImpress_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null, $bReturnPresets = False, $tDash = Null)
 	Local $asLineStyles[32]
 	Local Const $__LOI_DASH_STYLE_RECT = 0, $__LOI_DASH_STYLE_RECT_RELATIVE = 2, $__LOI_DASH_STYLE_ROUND_RELATIVE = 3 ; $__LOI_DASH_STYLE_ROUND = 1 (Not Used), com.sun.star.drawing.DashStyle
@@ -7351,7 +7351,6 @@ Func __LOImpress_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null, $bRe
 		If Not IsObj($tDash) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		Switch $iLineStyle
-
 			Case $LOI_SHAPE_LINE_STYLE_DOT
 				With $tDash
 					.Dashes = 0
@@ -7654,6 +7653,7 @@ Func __LOImpress_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null, $bRe
 		EndSwitch
 
 		Return SetError($__LO_STATUS_SUCCESS, 3, $tDash)
+
 	Else
 
 		Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; No values called.
@@ -8384,6 +8384,7 @@ EndFunc   ;==>__LOImpress_ShapeStyleCompare
 ;                  @Error 1 @Extended 11 Return 0 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to convert Constant to Arrowhead name.
+;                  @Error 3 @Extended 2 Return 0 = Failed to insert preset Arrowhead name and style.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStartStyle
@@ -8489,6 +8490,7 @@ Func __LOImpress_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj, $vStartStyl
 
 			__LOImpress_ShapeLineArrowheadNameInsert($oDoc, $vEndStyle)
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 		Else
 			$sEndStyle = $vEndStyle
 		EndIf
