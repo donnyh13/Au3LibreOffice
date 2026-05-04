@@ -1656,7 +1656,7 @@ Func _LOWriter_FrameExists(ByRef $oDoc, $sFrameName)
 		For $i = 0 To $oShapes.getCount() - 1
 			If ($oShapes.getByIndex($i).Name() = $sFrameName) Then
 				If ($oShapes.getByIndex($i).supportsService("com.sun.star.drawing.Text")) And _
-						($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") And Not _
+						($oShapes.getByIndex($i).Text.supportsService("com.sun.star.text.TextFrame")) And Not _
 						$oShapes.getByIndex($i).getPropertySetInfo().hasPropertyByName("ActualSize") Then Return SetError($__LO_STATUS_SUCCESS, 2, True)
 			EndIf
 
@@ -1732,7 +1732,7 @@ Func _LOWriter_FrameGetObjByCursor(ByRef $oDoc, ByRef $oCursor)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If (__LOWriter_Internal_CursorGetDataType($oDoc, $oCursor) <> $LOW_CURDATA_FRAME) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Cursor not in Frame
+	If Not $oCursor.Text.supportsService("com.sun.star.text.TextFrame") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Cursor not in Frame
 
 	$oFrame = $oDoc.TextFrames.getByName($oCursor.TextFrame.Name)
 	If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -1792,7 +1792,7 @@ Func _LOWriter_FrameGetObjByName(ByRef $oDoc, $sFrameName)
 	If $oShapes.hasElements() Then
 		For $i = 0 To $oShapes.getCount() - 1
 			If ($oShapes.getByIndex($i).Name() = $sFrameName) Then
-				If ($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") Then
+				If ($oShapes.getByIndex($i).Text.supportsService("com.sun.star.text.TextFrame")) Then
 					$oFrame = $oShapes.getByIndex($i)
 					If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
@@ -2148,7 +2148,7 @@ Func _LOWriter_FramesGetNames(ByRef $oDoc, $bSearchShapes = False)
 			ReDim $asShapes[$oShapes.getCount()]
 			For $i = 0 To $oShapes.getCount() - 1
 				If $oShapes.getByIndex($i).supportsService("com.sun.star.drawing.Text") Then ; Determine if the Shape is an actual Frame or not.
-					If ($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") And Not _
+					If ($oShapes.getByIndex($i).Text.supportsService("com.sun.star.text.TextFrame")) And Not _
 							$oShapes.getByIndex($i).getPropertySetInfo().hasPropertyByName("ActualSize") Then
 						$asShapes[$iCount] = $oShapes.getByIndex($i).Name()
 						$iCount += 1

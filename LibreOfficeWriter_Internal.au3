@@ -4314,29 +4314,19 @@ EndFunc   ;==>__LOWriter_ImageGetSuggestedSize
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_Internal_CursorGetDataType
 ; Description ...: Get what type of Text data the cursor object is currently in. Internal version of CursorGetDataType.
-; Syntax ........: __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor[, $bReturnObject = False])
+; Syntax ........: __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $bReturnObject       - [optional] a boolean value. Default is False. If True, return the object used for creating a Text Object etc.
 ; Return values .: Success: Object or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bReturnObject not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $oCursor is a Table Cursor, or a View Cursor with table cells selected. Can't get data type from these types of Cursors.
+;                  @Error 1 @Extended 3 Return 0 = $oCursor is a Table Cursor, or a View Cursor with table cells selected. Can't get data type from these types of Cursors.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving TextFrame Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving TextCell Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Footnotes Object for document.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Footnote Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Endnotes Object for document.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Endnote Object.
-;                  @Error 3 @Extended 7 Return 0 = Unable to identify Foot/EndNote.
-;                  @Error 3 @Extended 8 Return 0 = Cursor in unknown DataType
+;                  @Error 3 @Extended 1 Return 0 = Cursor in unknown DataType
 ;                  --Success--
-;                  @Error 0 @Extended ? Return Object = Success, If $bReturnObject is True, returning an object used for creating a Text Object, @Extended is set to one of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 0 @Extended 0 Return Integer = Success, If $bReturnObject is False, Return value will be one of constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 0 @Extended 0 Return Integer = Success, Return value will be one of constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns what type of cursor, such as a TextTable, Footnote etc.
@@ -4344,71 +4334,43 @@ EndFunc   ;==>__LOWriter_ImageGetSuggestedSize
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor, $bReturnObject = False)
+Func __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oEndNotes, $oFootNotes, $oReturnObject
-
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bReturnObject) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If (($oCursor.ImplementationName()) = "SwXTextTableCursor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Can't get data type from Table Cursor.
+	If $oCursor.supportsService("com.sun.star.text.TextTableCursor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Can't get data type from Table Cursor.
 
-	Switch $oCursor.Text.getImplementationName()
-		Case "SwXBodyText"
-			$oReturnObject = $oDoc
+	If $oCursor.Text.supportsService("com.sun.star.text.TextFrame") Then
 
-			Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_BODY_TEXT, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_BODY_TEXT))
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FRAME)
 
-		Case "SwXTextFrame"
-			$oReturnObject = $oDoc.TextFrames.getByName($oCursor.TextFrame.Name)
-			If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	ElseIf $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then
 
-			Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_FRAME, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FRAME))
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_CELL)
 
-		Case "SwXCell"
-			$oReturnObject = $oDoc.TextTables.getByName($oCursor.TextTable.Name)
-			If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	ElseIf $oCursor.Text.supportsService("com.sun.star.text.Footnote") Then
 
-			Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_CELL, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_CELL))
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FOOTNOTE)
 
-		Case "SwXHeadFootText"
-			$oReturnObject = $oCursor
+	ElseIf $oCursor.Text.supportsService("com.sun.star.text.Endnote") Then
 
-			Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_HEADER_FOOTER, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_HEADER_FOOTER))
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_ENDNOTE)
 
-		Case "SwXFootnote"
-			$oFootNotes = $oDoc.getFootnotes()
-			If Not IsObj($oFootNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	ElseIf $oCursor.Text.supportsService("com.sun.star.text.Text") Then
+		If ($oCursor.Text.getImplementationName() = "SwXHeadFootText") Then ; Implementation name could fail in the future, as it isn't guaranteed to not be changed, but I can't find another way to identify a Header/Footer.
 
-			For $i = 0 To $oFootNotes.getCount() - 1
-				If ($oFootNotes.getByIndex($i).ReferenceId() = $oCursor.Text.ReferenceId()) And _
-						($oFootNotes.getByIndex($i).Text() = $oCursor.Text()) Then
-					$oReturnObject = $oFootNotes.getByIndex($i)
-					If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_HEADER_FOOTER)
 
-					Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_FOOTNOTE, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FOOTNOTE))
-				EndIf
-			Next
+		ElseIf ($oCursor.Text.getImplementationName() = "SwXBodyText") Then
 
-			$oEndNotes = $oDoc.getEndnotes()     ; Not found in Footnotes, check Endnotes.
-			If Not IsObj($oEndNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-			For $i = 0 To $oEndNotes.getCount() - 1
-				If ($oEndNotes.getByIndex($i).ReferenceId() = $oCursor.Text.ReferenceId()) And _
-						($oEndNotes.getByIndex($i).Text() = $oCursor.Text()) Then
-					$oReturnObject = $oEndNotes.getByIndex($i)
-					If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_BODY_TEXT)
+		EndIf
+	EndIf
 
-					Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_ENDNOTE, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_ENDNOTE))
-				EndIf
-			Next
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0) ; no matches
-	EndSwitch
-
-	Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)         ; unknown data type.
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; unknown data type.
 EndFunc   ;==>__LOWriter_Internal_CursorGetDataType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -4437,31 +4399,29 @@ Func __LOWriter_Internal_CursorGetType(ByRef $oCursor)
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Switch $oCursor.getImplementationName()
-		Case "SwXTextViewCursor"
+	If $oCursor.supportsService("com.sun.star.text.TextViewCursor") Then ; "SwXTextViewCursor"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_VIEW_CURSOR)
 
-		Case "SwXTextTableCursor"
+	ElseIf $oCursor.supportsService("com.sun.star.text.TextTableCursor") Then ; "SwXTextTableCursor"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TABLE_CURSOR)
 
-		Case "SwXTextCursor", "SvxUnoTextCursor" ; SvxUnoTextCursor is a Text Cursor created in a TextBox Form Control.
+	ElseIf $oCursor.supportsService("com.sun.star.text.TextCursor") Then ; "SwXTextCursor", "SvxUnoTextCursor" ; SvxUnoTextCursor is a Text Cursor created in a TextBox Form Control.
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_CURSOR)
 
-		Case "SwXParagraph"
+	ElseIf $oCursor.supportsService("com.sun.star.text.Paragraph") Then ; "SwXParagraph"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_PARAGRAPH)
 
-		Case "SwXTextPortion"
+	ElseIf $oCursor.supportsService("com.sun.star.text.TextPortion") Then ; "SwXTextPortion"
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_PORTION)
-
-		Case Else
+	Else
 
 			Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; unknown Cursor type.
-	EndSwitch
+	EndIf
 EndFunc   ;==>__LOWriter_Internal_CursorGetType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================

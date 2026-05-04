@@ -1413,8 +1413,6 @@ EndFunc   ;==>_LOWriter_TableColumnInsert
 ;                  @Error 1 @Extended 13 Return 0 = $iHeadingRows not an Integer, or less than 1.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 Return 0 = Failed to Create "com.sun.star.text.TextTable" Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error getting Text Object from Cursor.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iBackColor
@@ -1448,11 +1446,7 @@ Func _LOWriter_TableCreate(ByRef $oDoc, ByRef $oCursor, $iColumns = 2, $iRows = 
 	If Not IsObj($oCursor) And ($oCursor <> Default) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_IntIsBetween($iColumns, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not __LO_IntIsBetween($iRows, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-	$oText = __LOWriter_CursorGetText($oDoc, $oCursor)
-	$iCursorDataType = @extended
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-	If ($iCursorDataType = $LOW_CURDATA_FOOTNOTE) Or ($iCursorDataType = $LOW_CURDATA_ENDNOTE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Unable to insert tables in footnotes/ EndNotes
+	If $oCursor.Text.supportsService("com.sun.star.text.Footnote") Or $oCursor.Text.supportsService("com.sun.star.text.Endnote") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Unable to insert tables in footnotes/ EndNotes
 
 	$oTable = $oDoc.createInstance("com.sun.star.text.TextTable")
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -1471,7 +1465,7 @@ Func _LOWriter_TableCreate(ByRef $oDoc, ByRef $oCursor, $iColumns = 2, $iRows = 
 		If _LOWriter_TableExists($oDoc, $sTableName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 	EndIf
 
-	$oText.insertTextContent($oCursor, $oTable, False)
+	$oCursor.Text.insertTextContent($oCursor, $oTable, False)
 
 	If ($sTableName <> Null) Then ; Set name after inserting, otherwise the name changes.
 		$oTable.setName($sTableName)
@@ -1579,17 +1573,16 @@ Func _LOWriter_TableCreateCursor(ByRef $oDoc, $oTable, $sCellName = "", $oCursor
 	If Not IsString($sCellName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	If IsObj($oCursor) Then
-		Switch __LOWriter_Internal_CursorGetDataType($oDoc, $oCursor)
-			Case $LOW_CURDATA_CELL ; Transform to TextTableCursor
-				$oTable = $oDoc.TextTables.getByName($oCursor.TextTable.Name)
-				If Not IsObj($oTable) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then ; Transform to TextTableCursor
+			$oTable = $oDoc.TextTables.getByName($oCursor.TextTable.Name())
+			If Not IsObj($oTable) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-				$sCellName = ($sCellName = "") ? ($oCursor.Cell.CellName) : ($sCellName)
+			$sCellName = ($sCellName = "") ? ($oCursor.Cell.CellName()) : ($sCellName)
 
-			Case Else
+		Else
 
-				Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Wrong Cursor Data Type
-		EndSwitch
+			Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Wrong Cursor Data Type
+		EndIf
 	EndIf
 
 	If ($sCellName = "") Then ; If cell name undefined, get first cell.
@@ -1786,7 +1779,7 @@ Func _LOWriter_TableGetCellObjByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCurso
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iCursorType, $iCursorDataType
+	Local $iCursorType
 	Local $oCell, $oSelection
 	Local $sCellRange
 
@@ -1802,21 +1795,19 @@ Func _LOWriter_TableGetCellObjByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCurso
 			$oCell = (StringInStr($sCellRange, ":")) ? ($oTable.getCellRangeByName($sCellRange)) : ($oTable.getCellByName($sCellRange))
 
 		Case $LOW_CURTYPE_TEXT_CURSOR
-			$iCursorDataType = __LOWriter_Internal_CursorGetDataType($oDoc, $oCursor)
-			If Not ($iCursorDataType = $LOW_CURDATA_CELL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Cursor not in a Table cell.
+			If Not $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Cursor not in a Table cell.
 
-			$oCell = $oTable.getCellByName($oCursor.Cell.CellName)
+			$oCell = $oTable.getCellByName($oCursor.Cell.CellName())
 
 		Case $LOW_CURTYPE_VIEW_CURSOR
 			$oSelection = $oDoc.CurrentSelection()
-			If ($oSelection.ImplementationName() = "SwXTextTableCursor") Then
+			If $oSelection.supportsService("com.sun.star.text.TextTableCursor") Then
 				$oCell = $oTable.getCellRangeByName($oSelection.getRangeName())
 
 			Else
-				$iCursorDataType = __LOWriter_Internal_CursorGetDataType($oDoc, $oCursor)
-				If Not ($iCursorDataType = $LOW_CURDATA_CELL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Cursor not in a Table cell.
+				If Not $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Cursor not in a Table cell.
 
-				$oCell = $oTable.getCellByName($oCursor.Cell.CellName)
+				$oCell = $oTable.getCellByName($oCursor.Cell.CellName())
 			EndIf
 
 		Case Else
@@ -2040,7 +2031,7 @@ Func _LOWriter_TableGetObjByCursor(ByRef $oDoc, ByRef $oCursor)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If (__LOWriter_Internal_CursorGetDataType($oDoc, $oCursor) <> $LOW_CURDATA_CELL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Cursor not in Table
+	If Not $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Cursor not in Table
 
 	$oTable = $oDoc.TextTables.getByName($oCursor.TextTable.Name)
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
