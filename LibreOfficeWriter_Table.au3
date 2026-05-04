@@ -1439,8 +1439,8 @@ Func _LOWriter_TableCreate(ByRef $oDoc, ByRef $oCursor, $iColumns = 2, $iRows = 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oTable, $oText, $oTextCursor
-	Local $iCursorDataType, $iError = 0
+	Local $oTable, $oTextCursor
+	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCursor) And ($oCursor <> Default) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
