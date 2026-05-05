@@ -1468,7 +1468,7 @@ EndFunc   ;==>_LOImpress_ShapeImageAltText
 ;                  $iRight              - [optional] an integer value. Default is Null. The amount in Hundredths of a Millimeter (HMM) to either extend the background of the image, (negative numbers), or to crop, (positive numbers) from the Right side.
 ;                  $iTop                - [optional] an integer value. Default is Null. The amount in Hundredths of a Millimeter (HMM) to either extend the background of the image, (negative numbers), or to crop, (positive numbers) from the Top side.
 ;                  $iBottom             - [optional] an integer value. Default is Null. The amount in Hundredths of a Millimeter (HMM) to either extend the background of the image, (negative numbers), or to crop, (positive numbers) from the Bottom side.
-;                  $bKeepScale          - [optional] a boolean value. Default is Null. If True, crop amounts are removed or added to the image, while keeping the scaling. If False, crop values are removed or added while retaining the image size. See remarks. This setting is internally static, you do not need to set this each call for as long as the script life, unless you wish to change the value. Default static setting is True.
+;                  $bKeepScale          - [optional] a boolean value. Default is Null. If True, crop amounts are removed or added to the image, while keeping the scaling. If False, crop values are removed or added while retaining the image size. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1493,7 +1493,10 @@ EndFunc   ;==>_LOImpress_ShapeImageAltText
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: There is no literal setting for $bKeepScale in LibreOffice's settings, so I have made an internal static setting in this function to behave the same as LibreOffice. When you retrieve the current settings for an image, the return for $bKeepScale will be my internal static value, and NOT the current LibreOffice setting.
+; Remarks .......: There is no setting for $bKeepScale in LibreOffice's API. Therefore I have made this function behave as follows:
+;                  - Unless $bKeepScale is called with False, $bKeepScale is assumed to be True.
+;                  - Calling $bKeepScale alone, without setting a crop value does nothing.
+;                  - The return value of $bKeepScale is always Null.
 ;                  Maximum crop values are based on page width. You cannot exceed the size of the page, nor crop too much of the image away.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
@@ -1508,13 +1511,9 @@ Func _LOImpress_ShapeImageCrop(ByRef $oImage, $iLeft = Null, $iRight = Null, $iT
 	Local $iError = 0
 	Local $avImage[5]
 	Local $tCrop, $tSize
-	Local Static $bKeepScaleInternal = True
 
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oImage.supportsService("com.sun.star.drawing.GraphicObjectShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If ($bKeepScale <> Null) And Not IsBool($bKeepScale) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	$bKeepScaleInternal = ($bKeepScale = Null) ? ($bKeepScaleInternal) : ($bKeepScale)
 
 	$tCrop = $oImage.GraphicCrop()
 	If Not IsObj($tCrop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -1523,42 +1522,46 @@ Func _LOImpress_ShapeImageCrop(ByRef $oImage, $iLeft = Null, $iRight = Null, $iT
 	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($iLeft, $iRight, $iTop, $iBottom, $bKeepScale) Then
-		__LO_ArrayFill($avImage, $tCrop.Left(), $tCrop.Right(), $tCrop.Top(), $tCrop.Bottom(), $bKeepScaleInternal)
+		__LO_ArrayFill($avImage, $tCrop.Left(), $tCrop.Right(), $tCrop.Top(), $tCrop.Bottom(), Null)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avImage)
 	EndIf
 
+	If ($bKeepScale = Null) Then $bKeepScale = True
+
+	If Not IsBool($bKeepScale) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 	If ($iLeft <> Null) Then
 		If Not IsInt($iLeft) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		If ($bKeepScaleInternal = True) Then $tSize.Width = ($tSize.Width() + $tCrop.Left() - $iLeft)
+		If $bKeepScale Then $tSize.Width = ($tSize.Width() + $tCrop.Left() - $iLeft)
 		$tCrop.Left = $iLeft
 	EndIf
 
 	If ($iRight <> Null) Then
 		If Not IsInt($iRight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-		If ($bKeepScaleInternal = True) Then $tSize.Width = ($tSize.Width() + $tCrop.Right() - $iRight)
+		If $bKeepScale Then $tSize.Width = ($tSize.Width() + $tCrop.Right() - $iRight)
 		$tCrop.Right = $iRight
 	EndIf
 
 	If ($iTop <> Null) Then
 		If Not IsInt($iTop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-		If ($bKeepScaleInternal = True) Then $tSize.Height = ($tSize.Height() + $tCrop.Top() - $iTop)
+		If $bKeepScale Then $tSize.Height = ($tSize.Height() + $tCrop.Top() - $iTop)
 		$tCrop.Top = $iTop
 	EndIf
 
 	If ($iBottom <> Null) Then
 		If Not IsInt($iBottom) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-		If ($bKeepScaleInternal = True) Then $tSize.Height = ($tSize.Height() + $tCrop.Bottom() - $iBottom)
+		If $bKeepScale Then $tSize.Height = ($tSize.Height() + $tCrop.Bottom() - $iBottom)
 		$tCrop.Bottom = $iBottom
 	EndIf
 
 	$oImage.GraphicCrop = $tCrop
 
-	If ($bKeepScaleInternal = True) Then $oImage.Size = $tSize
+	If $bKeepScale Then $oImage.Size = $tSize
 
 	; Error checking
 	$iError = (__LO_VarsAreNull($iLeft)) ? ($iError) : ((__LO_IntIsBetween($oImage.GraphicCrop.Left(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 1)))

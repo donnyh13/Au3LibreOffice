@@ -1817,6 +1817,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_DocClose
   - _LOImpress_DocSaveAs
 - Add an error return to Style Organizer functions for trying to rename built-in styles.
+- Removed static $bKeepScale from `_LOWriter_ImageCrop`. Return is now always Null, and default state is True.
 
 #### Refactored
 
