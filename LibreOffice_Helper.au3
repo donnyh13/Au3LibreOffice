@@ -1192,10 +1192,10 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_Terminate
 ; Description ...: Closes the background instance of LibreOffice. See Remarks.
-; Syntax ........: _LO_Terminate([$bForceClose = False[, $iSleep = 500]])
+; Syntax ........: _LO_Terminate([$bForceClose = False[, $iSleep = 250]])
 ; Parameters ....: $bForceClose         - [optional] a boolean value. Default is False. If True, any opened documents will be closed. See remarks.
-;                  $iSleep              - [optional] an integer value. Default is 500. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
 ; Return values .: Success: 1
+;                  $iSleep              - [optional] an integer value. Default is 250. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $bForceClose not a Boolean.
@@ -1210,12 +1210,12 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ; Remarks .......: If $bForceClose is called with False, and there are no open Documents, the background instance of soffice.bin will be terminated.
 ;                  If $bForceClose is called with True, all opened documents are closed, any documents with unsaved changes will have a save dialog initiated for the user to interact with.
 ;                  If this function was not used, a left-over instance of soffice.bin would remain running after automating LibreOffice.
-;                  It is recommended to allow a minimum of 500ms sleep before terminating the LibreOffice instance to allow it finish closing any documents etc., otherwise the "Document Recovery" mode will be triggered upon next startup.
+;                  Some Online sources recommend to allow a minimum of 500ms sleep before terminating the LibreOffice instance to allow it finish closing any documents etc., otherwise the "Document Recovery" mode will be triggered upon next startup.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LO_Terminate($bForceClose = False, $iSleep = 500)
+Func _LO_Terminate($bForceClose = False, $iSleep = 250)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
