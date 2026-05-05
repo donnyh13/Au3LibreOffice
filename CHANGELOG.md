@@ -1305,6 +1305,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Property error checking to some functions:
   - _LOCalc_DocMaximize
   - _LOCalc_DocMinimize
+- Add an error return to Style Organizer functions for trying to rename built-in styles.
 
 #### Documented
 
