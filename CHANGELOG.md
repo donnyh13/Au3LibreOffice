@@ -1816,6 +1816,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Fix inconsistent Initialization and Processing error usage:
   - _LOImpress_DocClose
   - _LOImpress_DocSaveAs
+- Add an error return to Style Organizer functions for trying to rename built-in styles.
 
 #### Refactored
 
