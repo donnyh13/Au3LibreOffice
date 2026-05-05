@@ -713,9 +713,10 @@ EndFunc   ;==>_LOWriter_CharStyleGetObjByName
 ;                  @Error 1 @Extended 3 Return 0 = $oCharStyle not a Character Style Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewCharStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Character Style called in $sNewCharStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = $sParentStyle not a String.
-;                  @Error 1 @Extended 7 Return 0 = Character Style called in $sParentStyle doesn't exist in this Document.
-;                  @Error 1 @Extended 8 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Character Styles.
+;                  @Error 1 @Extended 7 Return 0 = $sParentStyle not a String.
+;                  @Error 1 @Extended 8 Return 0 = Character Style called in $sParentStyle doesn't exist in this Document.
+;                  @Error 1 @Extended 9 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
@@ -759,21 +760,22 @@ Func _LOWriter_CharStyleOrganizer(ByRef $oDoc, ByRef $oCharStyle, $sNewCharStyle
 	If ($sNewCharStyleName <> Null) Then
 		If Not IsString($sNewCharStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOWriter_CharStyleExists($oDoc, $sNewCharStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oCharStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oCharStyle.Name = $sNewCharStyleName
 		$iError = (__LOWriter_CharacterStyleCompare($oDoc, $oCharStyle.Name(), $sNewCharStyleName)) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($sParentStyle <> Null) Then
-		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-		If ($sParentStyle <> "") And Not _LOWriter_CharStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If ($sParentStyle <> "") And Not _LOWriter_CharStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$oCharStyle.ParentStyle = $sParentStyle
 		$iError = (__LOWriter_CharacterStyleCompare($oDoc, $oCharStyle.ParentStyle(), $sParentStyle)) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oCharStyle.Hidden = $bHidden

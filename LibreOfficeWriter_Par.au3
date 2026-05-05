@@ -1351,12 +1351,13 @@ EndFunc   ;==>_LOWriter_ParStyleIndent
 ;                  @Error 1 @Extended 3 Return 0 = $oParStyle not a Paragraph Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewParStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Paragraph Style name called in $sNewParStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = $sFollowStyle not a String.
-;                  @Error 1 @Extended 7 Return 0 = Paragraph Style called in $sFollowStyle doesn't exist in this document.
-;                  @Error 1 @Extended 8 Return 0 = $sParentStyle not a String.
-;                  @Error 1 @Extended 9 Return 0 = Paragraph Style called in $sParentStyle doesn't exist in this Document.
-;                  @Error 1 @Extended 10 Return 0 = $bAutoUpdate not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Paragraph Styles.
+;                  @Error 1 @Extended 7 Return 0 = $sFollowStyle not a String.
+;                  @Error 1 @Extended 8 Return 0 = Paragraph Style called in $sFollowStyle doesn't exist in this document.
+;                  @Error 1 @Extended 9 Return 0 = $sParentStyle not a String.
+;                  @Error 1 @Extended 10 Return 0 = Paragraph Style called in $sParentStyle doesn't exist in this Document.
+;                  @Error 1 @Extended 11 Return 0 = $bAutoUpdate not a Boolean.
+;                  @Error 1 @Extended 12 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
@@ -1402,36 +1403,37 @@ Func _LOWriter_ParStyleOrganizer(ByRef $oDoc, ByRef $oParStyle, $sNewParStyleNam
 	If ($sNewParStyleName <> Null) Then
 		If Not IsString($sNewParStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOWriter_ParStyleExists($oDoc, $sNewParStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oParStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oParStyle.Name = $sNewParStyleName
 		$iError = (__LOWriter_ParStyleCompare($oDoc, $oParStyle.Name(), $sNewParStyleName)) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($sFollowStyle <> Null) Then
-		If Not IsString($sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-		If Not _LOWriter_ParStyleExists($oDoc, $sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not IsString($sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not _LOWriter_ParStyleExists($oDoc, $sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$oParStyle.setPropertyValue("FollowStyle", $sFollowStyle)
 		$iError = (__LOWriter_ParStyleCompare($oDoc, $oParStyle.getPropertyValue("FollowStyle"), $sFollowStyle)) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($sParentStyle <> Null) Then
-		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-		If ($sParentStyle <> "") And Not _LOWriter_ParStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If ($sParentStyle <> "") And Not _LOWriter_ParStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 
 		$oParStyle.ParentStyle = $sParentStyle
 		$iError = (__LOWriter_ParStyleCompare($oDoc, $oParStyle.ParentStyle(), $sParentStyle)) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($bAutoUpdate <> Null) Then
-		If Not IsBool($bAutoUpdate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
+		If Not IsBool($bAutoUpdate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
 
 		$oParStyle.IsAutoUpdate = $bAutoUpdate
 		$iError = ($oParStyle.IsAutoUpdate() = $bAutoUpdate) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oParStyle.Hidden = $bHidden

@@ -527,7 +527,8 @@ EndFunc   ;==>_LOWriter_NumStyleGetObjByName
 ;                  @Error 1 @Extended 3 Return 0 = $oNumStyle not a Numbering Style Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewNumStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Numbering Style name called in $sNewNumStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Numbering Styles.
+;                  @Error 1 @Extended 7 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
@@ -570,13 +571,14 @@ Func _LOWriter_NumStyleOrganizer(ByRef $oDoc, $oNumStyle, $sNewNumStyleName = Nu
 	If ($sNewNumStyleName <> Null) Then
 		If Not IsString($sNewNumStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOWriter_NumStyleExists($oDoc, $sNewNumStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oNumStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oNumStyle.Name = $sNewNumStyleName
 		$iError = (__LOWriter_NumberingStyleCompare($oDoc, $oNumStyle.Name(), $sNewNumStyleName)) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oNumStyle.Hidden = $bHidden

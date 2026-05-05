@@ -4035,11 +4035,12 @@ EndFunc   ;==>_LOWriter_FrameStyleOptions
 ;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
 ;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewFrameStyleName not a String.
-;                  @Error 1 @Extended 5 Return 0 = A Frame style already exists in document by the name called in $sNewFrameStyleName .
-;                  @Error 1 @Extended 6 Return 0 = $sParentStyle not a String.
-;                  @Error 1 @Extended 7 Return 0 = Frame Style called in $sParentStyle doesn't exist in this Document.
-;                  @Error 1 @Extended 8 Return 0 = $bAutoUpdate not a Boolean.
-;                  @Error 1 @Extended 9 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = A Frame style already exists in document by the name called in $sNewFrameStyleName.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Frame Styles.
+;                  @Error 1 @Extended 7 Return 0 = $sParentStyle not a String.
+;                  @Error 1 @Extended 8 Return 0 = Frame Style called in $sParentStyle doesn't exist in this Document.
+;                  @Error 1 @Extended 9 Return 0 = $bAutoUpdate not a Boolean.
+;                  @Error 1 @Extended 10 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewFrameStyleName
@@ -4084,30 +4085,31 @@ Func _LOWriter_FrameStyleOrganizer(ByRef $oDoc, $oFrameStyle, $sNewFrameStyleNam
 	If ($sNewFrameStyleName <> Null) Then
 		If Not IsString($sNewFrameStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOWriter_FrameStyleExists($oDoc, $sNewFrameStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oFrameStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oFrameStyle.Name = $sNewFrameStyleName
 		$iError = ($oFrameStyle.Name() = $sNewFrameStyleName) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($sParentStyle <> Null) Then
-		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		If ($sParentStyle <> "") Then
-			If Not _LOWriter_FrameStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+			If Not _LOWriter_FrameStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 		EndIf
 		$oFrameStyle.ParentStyle = $sParentStyle
 		$iError = ($oFrameStyle.ParentStyle() = $sParentStyle) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($bAutoUpdate <> Null) Then
-		If Not IsBool($bAutoUpdate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not IsBool($bAutoUpdate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
 		$oFrameStyle.IsAutoUpdate = $bAutoUpdate
 		$iError = ($oFrameStyle.IsAutoUpdate() = $bAutoUpdate) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oFrameStyle.Hidden = $bHidden
