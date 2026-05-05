@@ -88,6 +88,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added _LO_Terminate to all examples for clean-up.
 - Removed returns with Object calls directly in them. Also adding applicable error checking:
   - _LO_PrintersGetNamesAlt
+- Added Boolean return to `_LO_Terminate`.
 - Lowered sleep time from 500 ms to 250 ms in `_LO_Terminate`.
 
 #### Documented

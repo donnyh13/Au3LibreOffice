@@ -1194,8 +1194,8 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ; Description ...: Closes the background instance of LibreOffice. See Remarks.
 ; Syntax ........: _LO_Terminate([$bForceClose = False[, $iSleep = 250]])
 ; Parameters ....: $bForceClose         - [optional] a boolean value. Default is False. If True, any opened documents will be closed. See remarks.
-; Return values .: Success: 1
 ;                  $iSleep              - [optional] an integer value. Default is 250. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
+; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $bForceClose not a Boolean.
@@ -1204,7 +1204,7 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create a ServiceManager Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a com.sun.star.frame.Desktop Object.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Terminate command was successfuly processed.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Terminate command was successfuly processed. Returning True if all Documents agree to be terminated.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bForceClose is called with False, and there are no open Documents, the background instance of soffice.bin will be terminated.
@@ -1220,6 +1220,7 @@ Func _LO_Terminate($bForceClose = False, $iSleep = 250)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oServiceManager, $oDesktop
+	Local $bTerminated
 
 	If Not IsBool($bForceClose) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iSleep, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1231,11 +1232,11 @@ Func _LO_Terminate($bForceClose = False, $iSleep = 250)
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	If Not $oDesktop.getComponents.hasElements() Or $bForceClose Then ; no L.O open, or force it to close.
-		Sleep($iSleep) ; Sleep to make sure LO has time to finish any processes it may be doing, otherwise a document recovery will be triggered the next startup.
-		$oDesktop.Terminate()
+		Sleep($iSleep) ; Sleep to make sure LO has time to finish any processes it may be doing, otherwise document recovery mode may be triggered at the next startup.
+		$bTerminated = $oDesktop.Terminate()
 	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bTerminated)
 EndFunc   ;==>_LO_Terminate
 
 ; #FUNCTION# ====================================================================================================================
