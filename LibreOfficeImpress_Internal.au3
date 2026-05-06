@@ -471,7 +471,7 @@ Func __LOImpress_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = N
 
 	If __LO_VarsAreNull($iSuperScript, $iSubScript, $iRelativeSize) Then
 		__LO_ArrayFill($avPosition, ($oObj.CharEscapement() <= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), 1, 100)) ? ($oObj.CharEscapement()) : (-1)), _
-				($oObj.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), -1, -100)) ? (($oObj.CharEscapement() * -1)) : (-1)), _
+				($oObj.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), -1, -100)) ? (Abs($oObj.CharEscapement())) : (-1)), _
 				$oObj.CharEscapementHeight())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avPosition)
@@ -6213,7 +6213,7 @@ Func __LOImpress_ShapeAreaShadowModify($oShape, $iLocation = Null, $iDistance = 
 		If $bModifyLocation And ($iDistance = 0) Then $iDistance = 100 ; Set a non 0 value so location can be set.
 
 		; If negative, make it positive for easier processing.
-		$iDistance = ($iDistance < 0) ? ($iDistance * -1) : ($iDistance)
+		$iDistance = ($iDistance < 0) ? (Abs($iDistance) : ($iDistance)
 	EndIf
 
 	If $bReturn Then Return SetError($__LO_STATUS_SUCCESS, $iLocation, $iDistance)
@@ -8728,7 +8728,7 @@ Func __LOImpress_ShapeTextAttrAnimation(ByRef $oObj, $iEffect = Null, $iDirectio
 	If __LO_VarsAreNull($iEffect, $iDirection, $bStartInside, $bVisibleOnExit, $iCycles, $iInc, $bPixels, $iDelay) Then
 		__LO_ArrayFill($avTextAttr, $oObj.TextAnimationKind(), $oObj.TextAnimationDirection(), $oObj.TextAnimationStartInside(), _
 				$oObj.TextAnimationStopInside(), $oObj.TextAnimationCount(), _
-				($oObj.TextAnimationAmount() < 0) ? ($oObj.TextAnimationAmount() * -1) : ($oObj.TextAnimationAmount()), _ ; If TextAnimationAmount is negative, Pixels are used, if positive Hundredths of a Millimeter (HMM).
+				($oObj.TextAnimationAmount() < 0) ? (Abs($oObj.TextAnimationAmount())) : ($oObj.TextAnimationAmount()), _ ; If TextAnimationAmount is negative, Pixels are used, if positive Hundredths of a Millimeter (HMM).
 				($oObj.TextAnimationAmount() < 0) ? (True) : (False), _ ; $bPixels
 				$oObj.TextAnimationDelay())
 
@@ -8799,7 +8799,7 @@ Func __LOImpress_ShapeTextAttrAnimation(ByRef $oObj, $iEffect = Null, $iDirectio
 
 		Else
 			If ($iValue < 0) Then ; Set to pixels, convert to Hundredths of a Millimeter (HMM).
-				$iValue = ($iValue * -1) ; Convert the value to positive for Hundredths of a Millimeter (HMM).
+				$iValue = Abs($iValue) ; Convert the value to positive for Hundredths of a Millimeter (HMM).
 				$oObj.TextAnimationAmount = $iValue
 			EndIf
 		EndIf
