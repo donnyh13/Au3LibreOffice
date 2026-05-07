@@ -62,7 +62,7 @@
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version less than 7.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. A 3 element array will be returned in LibreOffice version 7.6+ with the Decorative parameter.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.6 the $bDecorative parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -77,7 +77,7 @@ Func _LOImpress_DrawShapeAltText(ByRef $oDrawShape, $sText = Null, $sAltText = N
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $asAltTxt[2]
+	Local $asAltTxt[3]
 
 	If Not IsObj($oDrawShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oDrawShape.supportsService("com.sun.star.drawing.Shape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -87,7 +87,7 @@ Func _LOImpress_DrawShapeAltText(ByRef $oDrawShape, $sText = Null, $sAltText = N
 			__LO_ArrayFill($asAltTxt, $oDrawShape.Title(), $oDrawShape.Description(), $oDrawShape.Decorative())
 
 		Else
-			__LO_ArrayFill($asAltTxt, $oDrawShape.Title(), $oDrawShape.Description())
+			__LO_ArrayFill($asAltTxt, $oDrawShape.Title(), $oDrawShape.Description(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asAltTxt)

@@ -1461,7 +1461,7 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ;                  |                               16 = Error setting $iPenWidth
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the LibreOffice version is below 4.2, the Array will contain 4 elements because $iPenWidth is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.2, the $iPenWidth parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1476,7 +1476,7 @@ Func _LOImpress_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouse
 
 	Local $iError = 0
 	Local $oPresentation
-	Local $avSlideShow[4]
+	Local $avSlideShow[5]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oDoc.Presentation.isRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; No Slideshow active.
@@ -1489,7 +1489,7 @@ Func _LOImpress_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouse
 			__LO_ArrayFill($avSlideShow, $oPresentation.AlwaysOnTop(), $oPresentation.MouseVisible(), $oPresentation.UsePen(), $oPresentation.PenColor(), $oPresentation.PenWidth())
 
 		Else
-			__LO_ArrayFill($avSlideShow, $oPresentation.AlwaysOnTop(), $oPresentation.MouseVisible(), $oPresentation.UsePen(), $oPresentation.PenColor())
+			__LO_ArrayFill($avSlideShow, $oPresentation.AlwaysOnTop(), $oPresentation.MouseVisible(), $oPresentation.UsePen(), $oPresentation.PenColor(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avSlideShow)

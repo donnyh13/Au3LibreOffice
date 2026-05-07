@@ -963,7 +963,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFont
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1404,7 +1404,7 @@ EndFunc   ;==>_LOImpress_ShapeExists
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version less than 7.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. A 3 element array will be returned in LibreOffice version 7.6+ with the Decorative parameter.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.6 the $bDecorative parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1418,7 +1418,7 @@ Func _LOImpress_ShapeImageAltText(ByRef $oImage, $sText = Null, $sAltText = Null
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $asName[2]
+	Local $asName[3]
 
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oImage.supportsService("com.sun.star.drawing.GraphicObjectShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1428,7 +1428,7 @@ Func _LOImpress_ShapeImageAltText(ByRef $oImage, $sText = Null, $sAltText = Null
 			__LO_ArrayFill($asName, $oImage.Title(), $oImage.Description(), $oImage.Decorative())
 
 		Else
-			__LO_ArrayFill($asName, $oImage.Title(), $oImage.Description())
+			__LO_ArrayFill($asName, $oImage.Title(), $oImage.Description(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asName)
@@ -3445,13 +3445,15 @@ EndFunc   ;==>_LOImpress_ShapePresStyleLineProperties
 ;                  |                               64 = Error setting $iCharDecimal
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully set the requested Properties.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 or 7 Element Array with values in order of function parameters. See remarks.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. See remarks.
 ;                  @Error 0 @Extended 2 Return Array = Success. All optional parameters were called with Null, returning a 10 Element Array containing arrays of settings for each Numbering level corresponding to their position in the array. Each array will be as described above. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function should work just fine as the others do for modifying styles, but for setting Numbering Style settings, it would seem that the Array of Setting Objects passed by AutoIt is not recognized as an appropriate array/sequence by LibreOffice, and consequently causes a com.sun.star.lang.IllegalArgumentException COM error. See __LOImpress_ShapePresStyleNumModify function for a more detailed explanation. This function can still be used to set and retrieve, setting values, however now, this function either inserts a temporary macro into $oDoc for performing the needed procedure, or if that fails, it invisibly opens an .odt Libre document and inserts a macro, see __LOImpress_ShapePresStyleNumInitiateDocument which is then called with the necessary parameters to set.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  You can request setting values for one numbering level at a time, or all at once (see below). If Current numbering type is set to Bullet, the returned array will contain 7 elements, in the order of parameters, if the current numbering type is other than bullet style, a 6 element array will be returned, with the last parameter excluded.
+;                  If Current numbering type is set to Bullet, the returned array will be a 7 Element Array with values in order of function parameters, the parameters $iStartAt, $sSepBefore, and $sSepAfter will return a Null value, as they are not valid for Bullets.
+;                  If the current numbering type is other than bullet style, a 7 element array will be returned, the $iCharDecimal parameter will return a Null value.
+;                  You can request setting values for one numbering level at a time, or all at once (see below).
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  When a lot of settings are set, especially for all levels, this function can be a bit slow.
@@ -3465,7 +3467,7 @@ Func _LOImpress_ShapePresStyleNumCustomize(ByRef $oDoc, ByRef $oPresStyle, $iLev
 
 	Local $oNumRules
 	Local $iError = 0
-	Local $avCustomize[6], $aaAllLevels[10]
+	Local $avCustomize[7], $aaAllLevels[10]
 	Local $atNumLevel[0]
 	Local $mNumLevel[]
 
@@ -3489,11 +3491,10 @@ Func _LOImpress_ShapePresStyleNumCustomize(ByRef $oDoc, ByRef $oPresStyle, $iLev
 
 			If MapExists($mNumLevel, "BulletChar") Then
 				__LO_ArrayFill($avCustomize, $atNumLevel[$mNumLevel["NumberingType"]].Value(), _
-						$atNumLevel[$mNumLevel["StartWith"]].Value(), _
+						Null, _
 						$atNumLevel[$mNumLevel["BulletColor"]].Value(), _
 						$atNumLevel[$mNumLevel["BulletRelSize"]].Value(), _
-						$atNumLevel[$mNumLevel["Prefix"]].Value(), _
-						$atNumLevel[$mNumLevel["Suffix"]].Value(), _
+						Null, Null, _
 						Asc($atNumLevel[$mNumLevel["BulletChar"]].Value()))
 
 			Else ; If not set for Bullet style, return only these settings as BulletChar doesn't exist.
@@ -3502,7 +3503,7 @@ Func _LOImpress_ShapePresStyleNumCustomize(ByRef $oDoc, ByRef $oPresStyle, $iLev
 						$atNumLevel[$mNumLevel["BulletColor"]].Value(), _
 						$atNumLevel[$mNumLevel["BulletRelSize"]].Value(), _
 						$atNumLevel[$mNumLevel["Prefix"]].Value(), _
-						$atNumLevel[$mNumLevel["Suffix"]].Value())
+						$atNumLevel[$mNumLevel["Suffix"]].Value(), Null)
 			EndIf
 
 			If ($iLevel = -1) Then $aaAllLevels[$i] = $avCustomize
@@ -5579,7 +5580,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleLineProperties
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 2 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -5593,7 +5594,7 @@ Func _LOImpress_ShapeStyleOrganizer(ByRef $oDoc, ByRef $oShapeStyle, $sNewShapeS
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avOrganizer[2]
+	Local $avOrganizer[3]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oShapeStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -5604,7 +5605,7 @@ Func _LOImpress_ShapeStyleOrganizer(ByRef $oDoc, ByRef $oShapeStyle, $sNewShapeS
 			__LO_ArrayFill($avOrganizer, $oShapeStyle.Name(), $oShapeStyle.ParentStyle(), $oShapeStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oShapeStyle.Name(), $oShapeStyle.ParentStyle())
+			__LO_ArrayFill($avOrganizer, $oShapeStyle.Name(), $oShapeStyle.ParentStyle(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
