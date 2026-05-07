@@ -188,7 +188,7 @@ Func _LOWriter_EndnoteInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = False, $
 	Switch __LOWriter_Internal_CursorGetDataType($oDoc, $oCursor)
 		Case $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE, $LOW_CURDATA_HEADER_FOOTER
 
-			Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Unsupported cursor type.
+			Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Unsupported Data type.
 
 		Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_CELL
 			$oEndNote = $oDoc.createInstance("com.sun.star.text.Endnote")
@@ -196,7 +196,7 @@ Func _LOWriter_EndnoteInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = False, $
 
 		Case Else
 
-			Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; Unknown Cursor type.
+			Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; Unknown Data type.
 	EndSwitch
 
 	If ($sLabel <> Null) Then
@@ -634,7 +634,7 @@ Func _LOWriter_FootnoteInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = False, 
 	Switch __LOWriter_Internal_CursorGetDataType($oDoc, $oCursor)
 		Case $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE, $LOW_CURDATA_HEADER_FOOTER
 
-			Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Unsupported cursor type.
+			Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Unsupported Data type.
 
 		Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_CELL
 			$oFootNote = $oDoc.createInstance("com.sun.star.text.Footnote")
@@ -642,7 +642,7 @@ Func _LOWriter_FootnoteInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = False, 
 
 		Case Else
 
-			Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; Unknown Cursor type.
+			Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; Unknown Data type.
 	EndSwitch
 
 	If ($sLabel <> Null) Then

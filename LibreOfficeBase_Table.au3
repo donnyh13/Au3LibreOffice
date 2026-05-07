@@ -324,12 +324,12 @@ EndFunc   ;==>_LOBase_TableColAdd
 ;                  |                               8 = Error setting $sDescription
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 or 4 Element Array with values in order of function parameters. See remarks.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-;                  Column Objects retrieved for primary keys do not support a Description text, thus if a Primary Key Column is called in $oColumn, that parameter will be omitted from the returned array when retrieving the settings.
+;                  Column Objects retrieved for primary keys do not support a Description text, thus if a Primary Key Column is called in $oColumn, that parameter will return a Null value when retrieving the settings.
 ; Related .......: _LOBase_TableColProperties
 ; Link ..........:
 ; Example .......: Yes
@@ -341,14 +341,14 @@ Func _LOBase_TableColDefinition(ByRef $oTable, ByRef $oColumn, $sName = Null, $i
 	Local $oNewCol
 	Local $sOldName
 	Local $iError = 0
-	Local $asSettings[3]
+	Local $asSettings[4]
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oColumn) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($sName, $iType, $sTypeName, $sDescription) Then
 		If $oColumn.supportsService("com.sun.star.sdbcx.KeyColumn") Then ; Key Column
-			__LO_ArrayFill($asSettings, $oColumn.Name(), $oColumn.Type(), $oColumn.TypeName())
+			__LO_ArrayFill($asSettings, $oColumn.Name(), $oColumn.Type(), $oColumn.TypeName(), Null)
 
 		Else
 			__LO_ArrayFill($asSettings, $oColumn.Name(), $oColumn.Type(), $oColumn.TypeName(), $oColumn.HelpText())

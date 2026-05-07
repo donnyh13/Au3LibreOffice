@@ -194,7 +194,7 @@ EndFunc   ;==>_LOWriter_CursorGetStatus
 ;                  @Error 0 @Extended 0 Return String = Success. The selected text in String format.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: LibreOffice documentation states that when used in Libre Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
+; Remarks .......: LibreOffice documentation states that when used in LibreOffice Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
 ;                  If there are multiple selections, the returned value will be an empty string ("").
 ; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
@@ -304,84 +304,42 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorHyperlinkInsert
-; Description ...: Insert a hyperlink into the specified document and a cursor location or other.
-; Syntax ........: _LOWriter_CursorHyperlinkInsert(ByRef $oDoc, ByRef $oCursor, $sLinkText, $sLinkAddress[, $bInsertAtViewCursor = False[, $bOverwrite = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
+; Description ...: Insert a hyperlink into the document at the cursor location.
+; Syntax ........: _LOWriter_CursorHyperlinkInsert(ByRef $oCursor, $sLinkText, $sLinkAddress[, $bOverwrite = False]])
+; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions.
 ;                  $sLinkText           - a string value. Link text you want displayed (Insert the URL here too if you want the link inserted raw.)
 ;                  $sLinkAddress        - a string value. A URL.
-;                  $bInsertAtViewCursor - [optional] a boolean value. Default is False. If True, inserts the hyperlink at the ViewCursor's position. See Remarks.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, overwrites any data selected by the $oCursor.
+;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, overwrites any data selected by the Cursor called in $oCursor.
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object, and is not called with Default keyword.
-;                  @Error 1 @Extended 3 Return 0 = $sLinkText not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sLinkAddress not a String.
-;                  @Error 1 @Extended 5 Return 0 = $bInsertAtViewCursor not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $oCursor is called with an Object, and $bInsertAtViewCursor is called with True. Change $oCursor to Default or call $bInsertAtViewCursor with False.
-;                  @Error 1 @Extended 7 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $oCursor is a TableCursor, and is not supported.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Cursor Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Current ViewCursor is in unknown data type or failed detecting what data type.
-;                  @Error 3 @Extended 3 Return 0 = Failed to Retrieve Text Object.
+;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object, and is not called with Default keyword.
+;                  @Error 1 @Extended 2 Return 0 = $sLinkText not a String.
+;                  @Error 1 @Extended 3 Return 0 = $sLinkAddress not a String.
+;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 5 Return 0 = $oCursor is a TableCursor, and is not supported.
 ;                  --Success--
-;                  @Error 0 @Extended 1 Return 1 = Success, hyperlink was successfully inserted.
+;                  @Error 0 @Extended 0 Return 1 = Success, hyperlink was successfully inserted.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: You may call this function with an already existing cursor object, which will place the Link at the cursor's current position. You can also set $oCursor to Default keyword, and set $bInsertAtViewCursor to True. This will insert the link at the current ViewCursor position. Or you can set $oCursor to Default, and leave $bInsertAtViewCursor undeclared which will insert the Link at the very end of the document.
+; Remarks .......:
 ; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_CursorHyperlinkInsert(ByRef $oDoc, ByRef $oCursor, $sLinkText, $sLinkAddress, $bInsertAtViewCursor = False, $bOverwrite = False)
+Func _LOWriter_CursorHyperlinkInsert(ByRef $oCursor, $sLinkText, $sLinkAddress, $bOverwrite = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oText, $oTextCursor
-	Local $iCursorType = 0
+	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sLinkText) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsString($sLinkAddress) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If $oCursor.supportsService("com.sun.star.text.TextTableCursor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Can't get data type from Table Cursor.
 
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oCursor) And ($oCursor <> Default) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsString($sLinkText) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsString($sLinkAddress) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsBool($bInsertAtViewCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If IsObj($oCursor) And $bInsertAtViewCursor Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	$oCursor.Text.insertString($oCursor, $sLinkText, $bOverwrite)
 
-	If IsObj($oCursor) Or $bInsertAtViewCursor Then
-		$iCursorType = (IsObj($oCursor)) ? (__LOWriter_Internal_CursorGetType($oCursor)) : (0)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-		If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-
-		If $bInsertAtViewCursor Or ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then
-			$oTextCursor = _LOWriter_CursorTextCursorCreate($oDoc, False, True) ; create new Text cursor at ViewCursor
-			If Not IsObj($oTextCursor) Or @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-		EndIf
-
-		$oTextCursor = ($iCursorType = $LOW_CURTYPE_TEXT_CURSOR) ? ($oCursor) : ($oTextCursor) ; If already was a TextCursor transfer to $oTextCursor
-
-		$oText = __LOWriter_CursorGetText($oDoc, $oTextCursor)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	Else
-		$oText = $oDoc.getText
-		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-		$oTextCursor = $oText.createTextCursor()
-		If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		$oTextCursor.gotoEnd(False)
-	EndIf
-
-	$oText.insertString($oTextCursor, $sLinkText, $bOverwrite)
-
-	With $oTextCursor
+	With $oCursor
 		.goLeft(StringLen($sLinkText), False)
 		.goRight(StringLen($sLinkText), True)
 		.HyperLinkURL = $sLinkAddress
@@ -389,7 +347,7 @@ Func _LOWriter_CursorHyperlinkInsert(ByRef $oDoc, ByRef $oCursor, $sLinkText, $s
 		.goRight(1, False)
 	EndWith
 
-	Return SetError($__LO_STATUS_SUCCESS, 1, $oTextCursor)
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_CursorHyperlinkInsert
 
 ; #FUNCTION# ====================================================================================================================
@@ -877,8 +835,7 @@ EndFunc   ;==>_LOWriter_CursorParObjSectionsGet
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve ViewCursor Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Text Object.
-;                  @Error 3 @Extended 3 Return 0 = Current ViewCursor is in unknown data type or failed detecting what data type.
+;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Cursor Data Type.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Object = Success, Cursor object was returned. @Extended can be on of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3 indicating the current created cursor is in that type of data.
 ; Author ........: donnyh13
@@ -896,7 +853,7 @@ Func _LOWriter_CursorTextCursorCreate(ByRef $oDoc, $bCreateAtEnd = True, $bCreat
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oCursor, $oText, $oViewCursor
+	Local $oCursor, $oViewCursor
 	Local $iCursorType = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -908,24 +865,14 @@ Func _LOWriter_CursorTextCursorCreate(ByRef $oDoc, $bCreateAtEnd = True, $bCreat
 		$oViewCursor = $oDoc.CurrentController.getViewCursor()
 		If Not IsObj($oViewCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		$oText = __LOWriter_CursorGetText($oDoc, $oViewCursor)
-		$iCursorType = @extended
-		If @error Or Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		$iCursorType = __LOWriter_Internal_CursorGetDataType($oDoc, $oViewCursor)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		If __LO_IntIsBetween($iCursorType, $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_HEADER_FOOTER) Then
-			$oCursor = $oText.createTextCursorByRange($oViewCursor)
-			If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; ViewCursor in unknown data type.
-		EndIf
+		$oCursor = $oViewCursor.Text.createTextCursorByRange($oViewCursor)
+		If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	Else
-		$oText = $oDoc.getText
-		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		$oCursor = $oText.createTextCursor()
+		$oCursor = $oDoc.getText.createTextCursor()
 		If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		$iCursorType = $LOW_CURDATA_BODY_TEXT

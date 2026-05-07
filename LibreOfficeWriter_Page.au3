@@ -1386,7 +1386,7 @@ Func _LOWriter_PageStyleColumnSize(ByRef $oPageStyle, $iColumn, $bAutoWidth = Nu
 	If ($oTextColumns.ColumnCount() <= 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If ($iColumn > UBound($atColumns)) Or ($iColumn < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$iColumn = $iColumn - 1 ; Libre Columns Array is 0 based -- Minus one to compensate
+	$iColumn = $iColumn - 1 ; LibreOffice Columns Array is 0 based -- Minus one to compensate
 
 	If __LO_VarsAreNull($bAutoWidth, $iGlobalSpacing, $iSpacing, $iWidth) Then
 		If ($iColumn = (UBound($atColumns) - 1)) Then ; If last column is called, there is no spacing value, so return the outer margin, which will be 0.
@@ -1726,7 +1726,7 @@ EndFunc   ;==>_LOWriter_PageStyleExists
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 or 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, then the Array returned will contain 8 elements, because $bSameOnFirst will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, the $bSameOnFirst parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1740,7 +1740,7 @@ Func _LOWriter_PageStyleFooter(ByRef $oPageStyle, $bFooterOn = Null, $bSameLeftR
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avFooter[8]
+	Local $avFooter[9]
 
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oPageStyle.supportsService("com.sun.star.style.PageStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1752,7 +1752,7 @@ Func _LOWriter_PageStyleFooter(ByRef $oPageStyle, $bFooterOn = Null, $bSameLeftR
 					$oPageStyle.FooterIsDynamicHeight())
 
 		Else
-			__LO_ArrayFill($avFooter, $oPageStyle.FooterIsOn(), $oPageStyle.FooterIsShared(), $oPageStyle.FooterLeftMargin(), _
+			__LO_ArrayFill($avFooter, $oPageStyle.FooterIsOn(), $oPageStyle.FooterIsShared(), Null, $oPageStyle.FooterLeftMargin(), _
 					$oPageStyle.FooterRightMargin(), $oPageStyle.FooterBodyDistance(), $oPageStyle.FooterDynamicSpacing(), $oPageStyle.FooterHeight(), _
 					$oPageStyle.FooterIsDynamicHeight())
 		EndIf
@@ -3309,7 +3309,7 @@ EndFunc   ;==>_LOWriter_PageStyleGetObjByName
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 or 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, then the Array returned will contain 8 elements, because $bSameOnFirst will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, the $bSameOnFirst parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -3323,7 +3323,7 @@ Func _LOWriter_PageStyleHeader(ByRef $oPageStyle, $bHeaderOn = Null, $bSameLeftR
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avHeader[8]
+	Local $avHeader[9]
 
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oPageStyle.supportsService("com.sun.star.style.PageStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -3335,7 +3335,7 @@ Func _LOWriter_PageStyleHeader(ByRef $oPageStyle, $bHeaderOn = Null, $bSameLeftR
 					$oPageStyle.HeaderIsDynamicHeight())
 
 		Else
-			__LO_ArrayFill($avHeader, $oPageStyle.HeaderIsOn(), $oPageStyle.HeaderIsShared(), $oPageStyle.HeaderLeftMargin(), _
+			__LO_ArrayFill($avHeader, $oPageStyle.HeaderIsOn(), $oPageStyle.HeaderIsShared(), Null, $oPageStyle.HeaderLeftMargin(), _
 					$oPageStyle.HeaderRightMargin(), $oPageStyle.HeaderBodyDistance(), $oPageStyle.HeaderDynamicSpacing(), $oPageStyle.HeaderHeight(), _
 					$oPageStyle.HeaderIsDynamicHeight())
 		EndIf
@@ -4648,9 +4648,9 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 ;                  $iLayout             - [optional] an integer value (0-4). Default is Null. Specify the current Page layout style, either Left(Even) pages, Right(Odd) pages, or both Left(Even) and Right(Odd) pages or mirrored. See Constants, $LOW_PAGE_LAYOUT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iNumFormat          - [optional] an integer value (0-71). Default is Null. The page numbering format to use for this Page Style. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sRefStyle           - [optional] a string value. Default is Null. The Paragraph Style to use as a reference for lining up the text on the selected Page style. To disable Page Spacing alignment, call with "".
-;                  $bGutterOnRight      - [optional] a boolean value. Default is Null. If True, the page gutter will be placed on the right side of the page. Libre 7.2 and up.
+;                  $bGutterOnRight      - [optional] a boolean value. Default is Null. If True, the page gutter will be placed on the right side of the page. LibreOffice 7.2 and up.
 ;                  $bGutterAtTop        - [optional] a boolean value. Default is Null. If False, the current document's gutter will be positioned at the left of the document's pages (L.O. default) or If True, at top of the document's pages when the document is displayed.
-;                  $bBackCoversMargins  - [optional] a boolean value. Default is Null. If True, the background covers the full page, Else only inside the margins. Libre 7.2 and up.
+;                  $bBackCoversMargins  - [optional] a boolean value. Default is Null. If True, the background covers the full page, Else only inside the margins. LibreOffice 7.2 and up.
 ;                  $sPaperTray          - [optional] a string value. Default is Null. The paper source for your printer. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4681,7 +4681,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 7 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the Array will be a 4 element Array, because $bGutterOnRight, $bGutterAtTop, and $bBackCoversMargins will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the parameters $bGutterOnRight, $bGutterAtTop, and $bBackCoversMargins will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4697,7 +4697,7 @@ Func _LOWriter_PageStyleLayout(ByRef $oDoc, ByRef $oPageStyle, $iLayout = Null, 
 
 	Local $oSettings
 	Local $iError = 0
-	Local $avLayout[4]
+	Local $avLayout[7]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -4712,7 +4712,8 @@ Func _LOWriter_PageStyleLayout(ByRef $oDoc, ByRef $oPageStyle, $iLayout = Null, 
 					$oPageStyle.RtlGutter(), $oSettings.getPropertyValue("GutterAtTop"), $oPageStyle.BackgroundFullSize(), $oPageStyle.PrinterPaperTray())
 
 		Else
-			__LO_ArrayFill($avLayout, $oPageStyle.PageStyleLayout(), $oPageStyle.NumberingType(), $oPageStyle.RegisterParagraphStyle(), $oPageStyle.PrinterPaperTray())
+			__LO_ArrayFill($avLayout, $oPageStyle.PageStyleLayout(), $oPageStyle.NumberingType(), $oPageStyle.RegisterParagraphStyle(), _
+					Null, Null, Null, $oPageStyle.PrinterPaperTray())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avLayout)
@@ -4783,7 +4784,7 @@ EndFunc   ;==>_LOWriter_PageStyleLayout
 ;                  $iRight              - [optional] an integer value. Default is Null. The amount of space to leave between the right edge of the page and the document text. If you are using the Mirrored page layout, enter the amount of space to leave between the outer text margin and the outer edge of the page. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] an integer value. Default is Null. The amount of space to leave between the upper edge of the page and the document text. Set in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] an integer value. Default is Null. The amount of space to leave between the lower edge of the page and the document text. Set in Hundredths of a Millimeter (HMM).
-;                  $iGutter             - [optional] an integer value. Default is Null. The amount of space to leave between the left edge of the page and the left margin. If you are using the Mirrored page layout, enter the amount of space to leave between the inner page margin and the inner edge of the page. Set in Hundredths of a Millimeter (HMM). Libre 7.2 and up.
+;                  $iGutter             - [optional] an integer value. Default is Null. The amount of space to leave between the left edge of the page and the left margin. If you are using the Mirrored page layout, enter the amount of space to leave between the inner page margin and the inner edge of the page. Set in Hundredths of a Millimeter (HMM). LibreOffice 7.2 and up.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4805,7 +4806,7 @@ EndFunc   ;==>_LOWriter_PageStyleLayout
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, then the array will have 4 elements as Gutter Margin will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the $iGutter parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4819,7 +4820,7 @@ Func _LOWriter_PageStyleMargins(ByRef $oPageStyle, $iLeft = Null, $iRight = Null
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $aiMargins[4]
+	Local $aiMargins[5]
 
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oPageStyle.supportsService("com.sun.star.style.PageStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -4830,7 +4831,7 @@ Func _LOWriter_PageStyleMargins(ByRef $oPageStyle, $iLeft = Null, $iRight = Null
 					$oPageStyle.GutterMargin())
 
 		Else
-			__LO_ArrayFill($aiMargins, $oPageStyle.LeftMargin(), $oPageStyle.RightMargin(), $oPageStyle.TopMargin(), $oPageStyle.BottomMargin())
+			__LO_ArrayFill($aiMargins, $oPageStyle.LeftMargin(), $oPageStyle.RightMargin(), $oPageStyle.TopMargin(), $oPageStyle.BottomMargin(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiMargins)
@@ -4878,12 +4879,12 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleOrganizer
 ; Description ...: Set or retrieve the Organizer settings of a Page Style.
-; Syntax ........: _LOWriter_PageStyleOrganizer(ByRef $oDoc, $oPageStyle[, $sNewPageStyleName = Null[, $bHidden = Null[, $sFollowStyle = Null]]])
+; Syntax ........: _LOWriter_PageStyleOrganizer(ByRef $oDoc, $oPageStyle[, $sNewPageStyleName = Null[, $sFollowStyle = Null[, $bHidden = Null]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $sNewPageStyleName   - [optional] a string value. Default is Null. The new name to set the Page Style called in $oPageStyle to.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the style is hidden in L.O. UI. LibreOffice 4.0 and Up.
 ;                  $sFollowStyle        - [optional] a string value. Default is Null. The name of the Page style that is applied After this Page Style.
+;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the style is hidden in L.O. UI. LibreOffice 4.0 and Up.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4892,19 +4893,20 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ;                  @Error 1 @Extended 3 Return 0 = $oPageStyle not a Page Style Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewPageStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Page Style name called in $sNewPageStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Page Styles.
 ;                  @Error 1 @Extended 7 Return 0 = $sFollowStyle not a String.
 ;                  @Error 1 @Extended 8 Return 0 = Page Style called in $sFollowStyle doesn't exist in this document.
+;                  @Error 1 @Extended 9 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
-;                  |                               2 = Error setting $bHidden
-;                  |                               4 = Error setting $sFollowStyle
+;                  |                               2 = Error setting $sFollowStyle
+;                  |                               4 = Error setting $bHidden
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 2 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4913,23 +4915,23 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyleName = Null, $bHidden = Null, $sFollowStyle = Null)
+Func _LOWriter_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyleName = Null, $sFollowStyle = Null, $bHidden = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avOrganizer[2]
+	Local $avOrganizer[3]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not $oPageStyle.supportsService("com.sun.star.style.PageStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	If __LO_VarsAreNull($sNewPageStyleName, $bHidden, $sFollowStyle) Then
+	If __LO_VarsAreNull($sNewPageStyleName, $sFollowStyle, $bHidden) Then
 		If __LO_VersionCheck(4.0) Then
-			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), $oPageStyle.Hidden(), $oPageStyle.FollowStyle())
+			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), $oPageStyle.FollowStyle(), $oPageStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), $oPageStyle.FollowStyle())
+			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), $oPageStyle.FollowStyle(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -4938,17 +4940,10 @@ Func _LOWriter_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyle
 	If ($sNewPageStyleName <> Null) Then
 		If Not IsString($sNewPageStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOWriter_PageStyleExists($oDoc, $sNewPageStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oPageStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oPageStyle.Name = $sNewPageStyleName
 		$iError = (__LOWriter_PageStyleCompare($oDoc, $oPageStyle.Name(), $sNewPageStyleName)) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
-
-		$oPageStyle.Hidden = $bHidden
-		$iError = ($oPageStyle.Hidden() = $bHidden) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($sFollowStyle <> Null) Then
@@ -4956,7 +4951,15 @@ Func _LOWriter_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyle
 		If Not _LOWriter_PageStyleExists($oDoc, $sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$oPageStyle.FollowStyle = $sFollowStyle
-		$iError = (__LOWriter_PageStyleCompare($oDoc, $oPageStyle.FollowStyle(), $sFollowStyle)) ? ($iError) : (BitOR($iError, 4))
+		$iError = (__LOWriter_PageStyleCompare($oDoc, $oPageStyle.FollowStyle(), $sFollowStyle)) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($bHidden <> Null) Then
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+
+		$oPageStyle.Hidden = $bHidden
+		$iError = ($oPageStyle.Hidden() = $bHidden) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

@@ -163,7 +163,7 @@ EndFunc   ;==>_LOWriter_NumStyleCurrent
 ;                  $sSepAfter           - [optional] a string value. Default is Null. A character or the text to display behind the number in the list.
 ;                  $bConsecutiveNum     - [optional] a boolean value. Default is Null. Increases the numbering by one as you go down each level in the list hierarchy.
 ;                  $sBulletFont         - [optional] a string value. Default is Null. The font to use for special characters that are associated with it. Note: $iNumFormat must be set to $LOW_NUM_STYLE_CHAR_SPECIAL(6) before these can be set.
-;                  $iCharDecimal        - [optional] an integer value. Default is Null. The decimal value of the desired character. Note: $iNumFormat must be set to $LOW_NUM_STYLE_CHAR_SPECIAL(6) before these can be set.
+;                  $iCharDecimal        - [optional] an integer value. Default is Null. The ASCII Decimal character code value (See ASC function) of the desired character. Note: $iNumFormat must be set to $LOW_NUM_STYLE_CHAR_SPECIAL(6) before these can be set.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -204,13 +204,15 @@ EndFunc   ;==>_LOWriter_NumStyleCurrent
 ;                  |                               256 = Error setting $iCharDecimal
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully set the requested Properties.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array with values in order of function parameters. See remarks.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. See remarks.
 ;                  @Error 0 @Extended 2 Return Array = Success. All optional parameters were called with Null, returning a 10 Element Array containing arrays of settings for each Numbering level corresponding to their position in the array. Each array will be as described above. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function should work just fine as the others do for modifying styles, but for setting Numbering Style settings, it would seem that the Array of Setting Objects passed by AutoIt is not recognized as an appropriate array/sequence by LibreOffice, and consequently causes a com.sun.star.lang.IllegalArgumentException COM error. See __LOWriter_NumStyleModify function for a more detailed explanation. This function can still be used to set and retrieve, setting values, however now, this function either inserts a temporary macro into $oDoc for performing the needed procedure, or if that fails, it invisibly opens an .odt Libre document and inserts a macro, see __LOWriter_NumStyleInitiateDocument which is then called with the necessary parameters to set.
+; Remarks .......: This function should work just fine as the others do for modifying styles, but for setting Numbering Style settings, it would seem that the Array of Setting Objects passed by AutoIt is not recognized as an appropriate array/sequence by LibreOffice, and consequently causes a com.sun.star.lang.IllegalArgumentException COM error. See __LOWriter_NumStyleModify function for a more detailed explanation. This function can still be used to set and retrieve, setting values, however now, this function either inserts a temporary macro into $oDoc for performing the needed procedure, or if that fails, it invisibly opens an .odt LibreOffice document and inserts a macro, see __LOWriter_NumStyleInitiateDocument which is then called with the necessary parameters to set.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  You can request setting values for one numbering level at a time, or all at once (see below). If Current numbering type is set to Bullet, the returned array will contain 9 elements, in the order of parameters, if the current numbering type is other than bullet style, a 7 element array will be returned, with the last two parameters excluded.
+;                  If Current numbering type is set to Bullet, the returned array will be a 9 Element Array with values in order of function parameters, the parameters $iStartAt, $sCharStyle, $iSubLevels, $sSepBefore, $sSepAfter, $bConsecutiveNum will return Null, as they are not valid for Bullets.
+;                  If the current numbering type is other than bullet style, a 9 element array will be returned, the last two parameters ($sBulletFont and $iCharDecimal) will return a Null value.
+;                  You can request setting values for one numbering level at a time, or all at once (see below).
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  When a lot of settings are set, especially for all levels, this function can be a bit slow.
@@ -225,7 +227,7 @@ Func _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel, $iNumFormat =
 
 	Local $oNumRules
 	Local $iError = 0
-	Local $avCustomize[7], $aaAllLevels[10]
+	Local $avCustomize[9], $aaAllLevels[10]
 	Local $atNumLevel[0]
 	Local $mNumLevel[]
 
@@ -249,12 +251,7 @@ Func _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel, $iNumFormat =
 
 			If MapExists($mNumLevel, "BulletFont") Then
 				__LO_ArrayFill($avCustomize, $atNumLevel[$mNumLevel["NumberingType"]].Value(), _
-						$atNumLevel[$mNumLevel["StartWith"]].Value(), _
-						$atNumLevel[$mNumLevel["CharStyleName"]].Value(), _
-						$atNumLevel[$mNumLevel["ParentNumbering"]].Value(), _
-						$atNumLevel[$mNumLevel["Prefix"]].Value(), _
-						$atNumLevel[$mNumLevel["Suffix"]].Value(), _
-						$oNumRules.IsContinuousNumbering(), _
+						Null, Null, Null, Null, Null, Null, _
 						$atNumLevel[$mNumLevel["BulletFont"]].Value(), _
 						Asc($atNumLevel[$mNumLevel["BulletChar"]].Value()))
 
@@ -265,7 +262,7 @@ Func _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel, $iNumFormat =
 						$atNumLevel[$mNumLevel["ParentNumbering"]].Value(), _
 						$atNumLevel[$mNumLevel["Prefix"]].Value(), _
 						$atNumLevel[$mNumLevel["Suffix"]].Value(), _
-						$oNumRules.IsContinuousNumbering())
+						$oNumRules.IsContinuousNumbering(), Null, Null)
 			EndIf
 
 			If ($iLevel = -1) Then $aaAllLevels[$i] = $avCustomize
@@ -317,7 +314,7 @@ Func _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel, $iNumFormat =
 
 			$atNumLevel[$mNumLevel["ParentNumbering"]].Value = $iSubLevels
 
-			; If Document has "ListFormat" setting (Libre 7.2 +), Sub Levels ("ParentNumbering") wont accept a setting without also setting "List format", which means combining the corresponding "ListFormat"  number values + Prefix & Suffix.
+			; If Document has "ListFormat" setting (LibreOffice 7.2 +), Sub Levels ("ParentNumbering") wont accept a setting without also setting "List format", which means combining the corresponding "ListFormat"  number values + Prefix & Suffix.
 			If MapExists($mNumLevel, "ListFormat") Then ; Test if "ListFormat" exists in the Numbering Rules.
 				$atNumLevel[$mNumLevel["ListFormat"]].Value = __LOWriter_NumStyleListFormat($atNumLevel, $i, $iSubLevels)
 			EndIf
@@ -527,7 +524,8 @@ EndFunc   ;==>_LOWriter_NumStyleGetObjByName
 ;                  @Error 1 @Extended 3 Return 0 = $oNumStyle not a Numbering Style Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewNumStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Numbering Style name called in $sNewNumStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Numbering Styles.
+;                  @Error 1 @Extended 7 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
@@ -536,7 +534,7 @@ EndFunc   ;==>_LOWriter_NumStyleGetObjByName
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 1 or 2 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 1 element because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -550,7 +548,7 @@ Func _LOWriter_NumStyleOrganizer(ByRef $oDoc, $oNumStyle, $sNewNumStyleName = Nu
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avOrganizer[1]
+	Local $avOrganizer[2]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oNumStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -561,7 +559,7 @@ Func _LOWriter_NumStyleOrganizer(ByRef $oDoc, $oNumStyle, $sNewNumStyleName = Nu
 			__LO_ArrayFill($avOrganizer, $oNumStyle.Name(), $oNumStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oNumStyle.Name())
+			__LO_ArrayFill($avOrganizer, $oNumStyle.Name(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -570,13 +568,14 @@ Func _LOWriter_NumStyleOrganizer(ByRef $oDoc, $oNumStyle, $sNewNumStyleName = Nu
 	If ($sNewNumStyleName <> Null) Then
 		If Not IsString($sNewNumStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOWriter_NumStyleExists($oDoc, $sNewNumStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oNumStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oNumStyle.Name = $sNewNumStyleName
 		$iError = (__LOWriter_NumberingStyleCompare($oDoc, $oNumStyle.Name(), $sNewNumStyleName)) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oNumStyle.Hidden = $bHidden
@@ -628,7 +627,7 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ;                  @Error 0 @Extended 2 Return Array = Success. All optional parameters were called with Null, returning a 10 Element Array containing arrays of settings for each Numbering level corresponding to their position in the array. Each array will be as described above. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function should work just fine as the others do for modifying styles, but for setting Numbering Style settings, it would seem that the Array of Setting Objects passed by AutoIt is not recognized as an appropriate array/Sequence by LibreOffice, and consequently causes a com.sun.star.lang.IllegalArgumentException COM error. See __LOWriter_NumStyleModify function for a more detailed explanation. This function can still be used to set and retrieve, setting values, however now, this function either inserts a temporary macro into $oDoc for performing the needed procedure, or if that fails, it invisibly opens an .odt Libre document and inserts a macro, (see __LOWriter_NumStyleInitiateDocument), which is then called with the necessary parameters to set.
+; Remarks .......: This function should work just fine as the others do for modifying styles, but for setting Numbering Style settings, it would seem that the Array of Setting Objects passed by AutoIt is not recognized as an appropriate array/Sequence by LibreOffice, and consequently causes a com.sun.star.lang.IllegalArgumentException COM error. See __LOWriter_NumStyleModify function for a more detailed explanation. This function can still be used to set and retrieve, setting values, however now, this function either inserts a temporary macro into $oDoc for performing the needed procedure, or if that fails, it invisibly opens an .odt LibreOffice document and inserts a macro, (see __LOWriter_NumStyleInitiateDocument), which is then called with the necessary parameters to set.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings. You can request setting values for one numbering level at a time, or all at once (see below).
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
 ;                  Call any optional parameter with Null keyword to skip it.

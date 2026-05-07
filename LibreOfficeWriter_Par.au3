@@ -880,7 +880,7 @@ EndFunc   ;==>_LOWriter_ParStyleCurrent
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ParStyleDelete
 ; Description ...: Delete a User-Created Paragraph Style from a Document.
-; Syntax ........: _LOWriter_ParStyleDelete(ByRef $oDoc, $oParStyle[, $bForceDelete = False[, $sReplacementStyle = "Default Paragraph Style"]])
+; Syntax ........: _LOWriter_ParStyleDelete(ByRef $oDoc, $oParStyle[, $bForceDelete = False[, $sReplacementStyle = "Standard"]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function. Must be a User-Created Style, not a built-in Style native to LibreOffice.
 ;                  $bForceDelete        - [optional] a boolean value. Default is False. If True, Paragraph style will be deleted regardless of whether it is in use or not.
@@ -980,7 +980,7 @@ EndFunc   ;==>_LOWriter_ParStyleDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Set $iNumChars, $iLines, $iSpcTxt to 0 to disable DropCaps.
-;                  I am unable to find a way to set Drop Caps character style to "None" as is available in the User Interface. When it is set to "None" Libre returns a blank string ("") but setting it to a blank string throws a COM error/Exception. Consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
+;                  I am unable to find a way to set Drop Caps character style to "None" as is available in the User Interface. When it is set to "None" LibreOffice returns a blank string ("") but setting it to a blank string throws a COM error/Exception. Consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_UnitConvert
@@ -1005,28 +1005,28 @@ EndFunc   ;==>_LOWriter_ParStyleDropCaps
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ParStyleEffect
 ; Description ...: Set or Retrieve the Font Effect settings for a Paragraph Style.
-; Syntax ........: _LOWriter_ParStyleEffect(ByRef $oParStyle[, $iRelief = Null[, $iCase = Null[, $bHidden = Null[, $bOutline = Null[, $bShadow = Null]]]]])
+; Syntax ........: _LOWriter_ParStyleEffect(ByRef $oParStyle[, $iCase = Null[, $bHidden = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]]])
 ; Parameters ....: $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the Characters are hidden.
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oParStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 2 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 4 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bShadow not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $oParStyle not a Paragraph Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iRelief
-;                  |                               2 = Error setting $iCase
-;                  |                               4 = Error setting $bHidden
+;                  |                               1 = Error setting $iCase
+;                  |                               2 = Error setting $bHidden
+;                  |                               4 = Error setting $iRelief
 ;                  |                               8 = Error setting $bOutline
 ;                  |                               16 = Error setting $bShadow
 ;                  --Success--
@@ -1040,7 +1040,7 @@ EndFunc   ;==>_LOWriter_ParStyleDropCaps
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ParStyleEffect(ByRef $oParStyle, $iRelief = Null, $iCase = Null, $bHidden = Null, $bOutline = Null, $bShadow = Null)
+Func _LOWriter_ParStyleEffect(ByRef $oParStyle, $iCase = Null, $bHidden = Null, $iRelief = Null, $bOutline = Null, $bShadow = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1049,7 +1049,7 @@ Func _LOWriter_ParStyleEffect(ByRef $oParStyle, $iRelief = Null, $iCase = Null, 
 	If Not IsObj($oParStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oParStyle.supportsService("com.sun.star.style.ParagraphStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-	$vReturn = __LOWriter_CharEffect($oParStyle, $iRelief, $iCase, $bHidden, $bOutline, $bShadow)
+	$vReturn = __LOWriter_CharEffect($oParStyle, $iCase, $bHidden, $iRelief, $bOutline, $bShadow)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_ParStyleEffect
@@ -1119,7 +1119,7 @@ EndFunc   ;==>_LOWriter_ParStyleExists
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  Libre Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LOWriter_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -1165,7 +1165,7 @@ EndFunc   ;==>_LOWriter_ParStyleFont
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1233,7 +1233,7 @@ EndFunc   ;==>_LOWriter_ParStyleGetObjByName
 ; Syntax ........: _LOWriter_ParStyleHyphenation(ByRef $oParStyle[, $bAutoHyphen = Null[, $bHyphenNoCaps = Null[, $iMaxHyphens = Null[, $iMinLeadingChar = Null[, $iMinTrailingChar = Null]]]]])
 ; Parameters ....: $oParStyle           - [in/out] an object. A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
 ;                  $bAutoHyphen         - [optional] a boolean value. Default is Null. If True, automatic hyphenation is applied.
-;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation of words written in CAPS is disabled for this paragraph. Libre 6.4 and up.
+;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation of words written in CAPS is disabled for this paragraph. LibreOffice 6.4 and up.
 ;                  $iMaxHyphens         - [optional] an integer value (0-99). Default is Null. The maximum number of consecutive hyphens.
 ;                  $iMinLeadingChar     - [optional] an integer value (2-9). Default is Null. The minimum number of characters to remain before the hyphen character (when hyphenation is applied).
 ;                  $iMinTrailingChar    - [optional] an integer value (2-9). Default is Null. The minimum number of characters to remain after the hyphen character (when hyphenation is applied).
@@ -1258,7 +1258,7 @@ EndFunc   ;==>_LOWriter_ParStyleGetObjByName
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 6.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current LibreOffice Version is below 6.4, then the Array returned will contain 4 elements because $bHyphenNoCaps is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If the current LibreOffice Version is below 6.4, the $bHyphenNoCaps parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bAutoHyphen needs to be set to True for the rest of the settings to be activated, but they will be still successfully be set regardless.
@@ -1342,7 +1342,7 @@ EndFunc   ;==>_LOWriter_ParStyleIndent
 ;                  $sFollowStyle        - [optional] a string value. Default is Null. The Paragraph Style name to apply to the following paragraph.
 ;                  $sParentStyle        - [optional] a string value. Default is Null. Set an existing paragraph style (or an Empty String ("") = - None -) to apply its settings to the current style. Use the other settings to modify the inherited style settings.
 ;                  $bAutoUpdate         - [optional] a boolean value. Default is Null. If True, Updates the style when you apply direct formatting to a paragraph using this style in your document. The formatting of all paragraphs using this style is automatically updated.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, this style is hidden in the L.O. UI. Libre 4.0 and up only.
+;                  $bHidden             - [optional] a boolean value. Default is Null. If True, this style is hidden in the L.O. UI. LibreOffice 4.0 and up only.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1351,12 +1351,13 @@ EndFunc   ;==>_LOWriter_ParStyleIndent
 ;                  @Error 1 @Extended 3 Return 0 = $oParStyle not a Paragraph Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewParStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Paragraph Style name called in $sNewParStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = $sFollowStyle not a String.
-;                  @Error 1 @Extended 7 Return 0 = Paragraph Style called in $sFollowStyle doesn't exist in this document.
-;                  @Error 1 @Extended 8 Return 0 = $sParentStyle not a String.
-;                  @Error 1 @Extended 9 Return 0 = Paragraph Style called in $sParentStyle doesn't exist in this Document.
-;                  @Error 1 @Extended 10 Return 0 = $bAutoUpdate not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Paragraph Styles.
+;                  @Error 1 @Extended 7 Return 0 = $sFollowStyle not a String.
+;                  @Error 1 @Extended 8 Return 0 = Paragraph Style called in $sFollowStyle doesn't exist in this document.
+;                  @Error 1 @Extended 9 Return 0 = $sParentStyle not a String.
+;                  @Error 1 @Extended 10 Return 0 = Paragraph Style called in $sParentStyle doesn't exist in this Document.
+;                  @Error 1 @Extended 11 Return 0 = $bAutoUpdate not a Boolean.
+;                  @Error 1 @Extended 12 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
@@ -1368,7 +1369,7 @@ EndFunc   ;==>_LOWriter_ParStyleIndent
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 4 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1382,7 +1383,7 @@ Func _LOWriter_ParStyleOrganizer(ByRef $oDoc, ByRef $oParStyle, $sNewParStyleNam
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avOrganizer[4]
+	Local $avOrganizer[5]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oParStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1393,7 +1394,7 @@ Func _LOWriter_ParStyleOrganizer(ByRef $oDoc, ByRef $oParStyle, $sNewParStyleNam
 			__LO_ArrayFill($avOrganizer, $oParStyle.Name(), $oParStyle.getPropertyValue("FollowStyle"), $oParStyle.ParentStyle(), $oParStyle.IsAutoUpdate(), $oParStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oParStyle.Name(), $oParStyle.getPropertyValue("FollowStyle"), $oParStyle.ParentStyle(), $oParStyle.IsAutoUpdate())
+			__LO_ArrayFill($avOrganizer, $oParStyle.Name(), $oParStyle.getPropertyValue("FollowStyle"), $oParStyle.ParentStyle(), $oParStyle.IsAutoUpdate(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -1402,36 +1403,37 @@ Func _LOWriter_ParStyleOrganizer(ByRef $oDoc, ByRef $oParStyle, $sNewParStyleNam
 	If ($sNewParStyleName <> Null) Then
 		If Not IsString($sNewParStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOWriter_ParStyleExists($oDoc, $sNewParStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oParStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oParStyle.Name = $sNewParStyleName
 		$iError = (__LOWriter_ParStyleCompare($oDoc, $oParStyle.Name(), $sNewParStyleName)) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($sFollowStyle <> Null) Then
-		If Not IsString($sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-		If Not _LOWriter_ParStyleExists($oDoc, $sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not IsString($sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not _LOWriter_ParStyleExists($oDoc, $sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$oParStyle.setPropertyValue("FollowStyle", $sFollowStyle)
 		$iError = (__LOWriter_ParStyleCompare($oDoc, $oParStyle.getPropertyValue("FollowStyle"), $sFollowStyle)) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($sParentStyle <> Null) Then
-		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-		If ($sParentStyle <> "") And Not _LOWriter_ParStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If ($sParentStyle <> "") And Not _LOWriter_ParStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 
 		$oParStyle.ParentStyle = $sParentStyle
 		$iError = (__LOWriter_ParStyleCompare($oDoc, $oParStyle.ParentStyle(), $sParentStyle)) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($bAutoUpdate <> Null) Then
-		If Not IsBool($bAutoUpdate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
+		If Not IsBool($bAutoUpdate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
 
 		$oParStyle.IsAutoUpdate = $bAutoUpdate
 		$iError = ($oParStyle.IsAutoUpdate() = $bAutoUpdate) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oParStyle.Hidden = $bHidden
@@ -1623,7 +1625,7 @@ EndFunc   ;==>_LOWriter_ParStylePageBreak
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Set either $iSubScript or $iSuperScript to 0 to return it to Normal setting.
-;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrievine subscript values.
+;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName
@@ -1828,7 +1830,7 @@ EndFunc   ;==>_LOWriter_ParStyleShadow
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 6 Element Array with values in order of function parameters. If the current LibreOffice version is less than 3.6, the returned Array will contain 5 elements, because $bAddSpace is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters. If the LibreOffice version is below 3.6, the $bAddSpace parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bPageLineSpc(Register mode) is only used if the register mode property of the page style is switched on.
@@ -1884,7 +1886,7 @@ EndFunc   ;==>_LOWriter_ParStyleSpace
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. the figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: 928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258.
-;                  Attempting to set Libre's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
+;                  Attempting to set LibreOffice's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -1984,7 +1986,7 @@ EndFunc   ;==>_LOWriter_ParStyleStrikeOut
 ; Modified ......:
 ; Remarks .......: $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position in @Extended when $iPosition is set, return value will be set to 2. See Return Values.
 ;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
-;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
+;                  $iFillChar, LibreOffice's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by LibreOffice are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_UnitConvert, _LOWriter_ParStyleTabStopDelete
@@ -2090,7 +2092,7 @@ EndFunc   ;==>_LOWriter_ParStyleTabStopDelete
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per document.
 ;                  $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position in @Extended when $iPosition is set, return value will be set to 2. See Return Values.
 ;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
-;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
+;                  $iFillChar, LibreOffice's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by LibreOffice are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LOWriter_ParStyleTabStopCreate, _LOWriter_ParStyleTabStopsGetList, _LO_UnitConvert

@@ -965,7 +965,7 @@ Func _LO_InitializePortable($sOfficePortablePath)
 		__LO_SetPortableServiceManager($sOfficePortablePath)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	ElseIf FileExists($sOfficePortablePath & "\App\libreoffice\program\soffice.exe") Then ; Check Libre path.
+	ElseIf FileExists($sOfficePortablePath & "\App\libreoffice\program\soffice.exe") Then ; Check LibreOffice path.
 		__LO_SetPortableServiceManager($sOfficePortablePath & "\App\libreoffice\program\soffice.exe")
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
@@ -1016,17 +1016,17 @@ Func _LO_PathConvert($sFilePath, $iReturnMode = $LO_PATHCONV_AUTO_RETURN)
 
 	$iPathSearch = StringRegExp($sFilePath, "(?i)\b[A-Z]:\\") ; Search For a Computer Path, as in C:\ etc.
 	$iPartialPCPath = StringInStr($sFilePath, "\") ; Search for partial computer Path containing a backslash.
-	$iFileSearch = StringInStr($sFilePath, "file:///", 0, 1, 1, 9) ; Search for a full Libre path, which begins with File:///
-	$iPartialFilePath = StringInStr($sFilePath, "/") ; Search For a Partial Libre path containing forward slash
+	$iFileSearch = StringInStr($sFilePath, "file:///", 0, 1, 1, 9) ; Search for a full LibreOffice path, which begins with File:///
+	$iPartialFilePath = StringInStr($sFilePath, "/") ; Search For a Partial LibreOffice path containing forward slash
 
 	If ($iReturnMode = $LO_PATHCONV_AUTO_RETURN) Then
-		If ($iPathSearch > 0) Or ($iPartialPCPath > 0) Then ;  if file path contains partial or full PC path, set to convert to Libre URL.
+		If ($iPathSearch > 0) Or ($iPartialPCPath > 0) Then ;  if file path contains partial or full PC path, set to convert to LibreOffice URL.
 			$iReturnMode = $LO_PATHCONV_OFFICE_RETURN
 
-		ElseIf ($iFileSearch > 0) Or ($iPartialFilePath > 0) Then ;  if file path contains partial or full Libre URL, set to convert to PC Path.
+		ElseIf ($iFileSearch > 0) Or ($iPartialFilePath > 0) Then ;  if file path contains partial or full LibreOffice URL, set to convert to PC Path.
 			$iReturnMode = $LO_PATHCONV_PCPATH_RETURN
 
-		Else ; If file path contains neither above. convert to Libre URL
+		Else ; If file path contains neither above. convert to LibreOffice URL
 			$iReturnMode = $LO_PATHCONV_OFFICE_RETURN
 		EndIf
 	EndIf
@@ -1192,10 +1192,10 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_Terminate
 ; Description ...: Closes the background instance of LibreOffice. See Remarks.
-; Syntax ........: _LO_Terminate([$bForceClose = False[, $iSleep = 500]])
+; Syntax ........: _LO_Terminate([$bForceClose = False[, $iSleep = 250]])
 ; Parameters ....: $bForceClose         - [optional] a boolean value. Default is False. If True, any opened documents will be closed. See remarks.
-;                  $iSleep              - [optional] an integer value. Default is 500. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
-; Return values .: Success: 1
+;                  $iSleep              - [optional] an integer value. Default is 250. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
+; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $bForceClose not a Boolean.
@@ -1204,22 +1204,23 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ;                  @Error 2 @Extended 1 Return 0 = Failed to create a ServiceManager Object.
 ;                  @Error 2 @Extended 2 Return 0 = Failed to create a com.sun.star.frame.Desktop Object.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Terminate command was successfuly processed.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Terminate command was successfuly processed. Returning True if all Documents agree to be terminated.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bForceClose is called with False, and there are no open Documents, the background instance of soffice.bin will be terminated.
 ;                  If $bForceClose is called with True, all opened documents are closed, any documents with unsaved changes will have a save dialog initiated for the user to interact with.
 ;                  If this function was not used, a left-over instance of soffice.bin would remain running after automating LibreOffice.
-;                  It is recommended to allow a minimum of 500ms sleep before terminating the LibreOffice instance to allow it finish closing any documents etc., otherwise the "Document Recovery" mode will be triggered upon next startup.
+;                  Some Online sources recommend to allow a minimum of 500ms sleep before terminating the LibreOffice instance to allow it finish closing any documents etc., otherwise the "Document Recovery" mode will be triggered upon next startup.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LO_Terminate($bForceClose = False, $iSleep = 500)
+Func _LO_Terminate($bForceClose = False, $iSleep = 250)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oServiceManager, $oDesktop
+	Local $bTerminated
 
 	If Not IsBool($bForceClose) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iSleep, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1231,11 +1232,11 @@ Func _LO_Terminate($bForceClose = False, $iSleep = 500)
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	If Not $oDesktop.getComponents.hasElements() Or $bForceClose Then ; no L.O open, or force it to close.
-		Sleep($iSleep) ; Sleep to make sure LO has time to finish any processes it may be doing, otherwise a document recovery will be triggered the next startup.
-		$oDesktop.Terminate()
+		Sleep($iSleep) ; Sleep to make sure LO has time to finish any processes it may be doing, otherwise document recovery mode may be triggered at the next startup.
+		$bTerminated = $oDesktop.Terminate()
 	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bTerminated)
 EndFunc   ;==>_LO_Terminate
 
 ; #FUNCTION# ====================================================================================================================

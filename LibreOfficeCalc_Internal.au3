@@ -15,7 +15,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Various functions for internal data processing, data retrieval, retrieving and applying settings for LibreOffice UDF.
+; Description ...: Various functions for internal data processing, data retrieval, retrieving and applying settings for LibreOffice Calc.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;
@@ -553,7 +553,7 @@ EndFunc   ;==>__LOCalc_CellEffect
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  Libre Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -1613,7 +1613,7 @@ Func __LOCalc_CommentAreaShadowModify($oAnnotationShape, $iLocation = Null, $iDi
 		If $bModifyLocation And ($iDistance = 0) Then $iDistance = 100 ; Set a non 0 value so location can be set.
 
 		; If negative, make it positive for easier processing.
-		$iDistance = ($iDistance < 0) ? ($iDistance * -1) : ($iDistance)
+		$iDistance = ($iDistance < 0) ? (Abs($iDistance)) : ($iDistance)
 	EndIf
 
 	If $bReturn Then Return SetError($__LO_STATUS_SUCCESS, $iLocation, $iDistance)
@@ -2178,27 +2178,26 @@ Func __LOCalc_Internal_CursorGetType(ByRef $oCursor)
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Switch $oCursor.getImplementationName()
-		Case "SvxUnoTextCursor"
+	If $oCursor.supportsService("com.sun.star.text.TextCursor") Then ; "SvxUnoTextCursor"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_TEXT_CURSOR)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_TEXT_CURSOR)
 
-		Case "ScCellCursorObj"
+	ElseIf $oCursor.supportsService("com.sun.star.sheet.SheetCellCursor") Then ; "ScCellCursorObj"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_SHEET_CURSOR)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_SHEET_CURSOR)
 
-		Case "SvxUnoTextContent"
+	ElseIf $oCursor.supportsService("com.sun.star.text.Paragraph") Then ; "SvxUnoTextContent"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_PARAGRAPH)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_PARAGRAPH)
 
-		Case "SvxUnoTextRange"
+	ElseIf $oCursor.supportsService("com.sun.star.style.CharacterProperties") And $oCursor.getPropertySetInfo.hasPropertyByName("TextPortionType") Then ; "SvxUnoTextRange"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_TEXT_PORTION)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOC_CURTYPE_TEXT_PORTION)
 
-		Case Else
+	Else
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; unknown Cursor type.
-	EndSwitch
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)     ; unknown Cursor type.
+	EndIf
 EndFunc   ;==>__LOCalc_Internal_CursorGetType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================

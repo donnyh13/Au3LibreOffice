@@ -411,7 +411,7 @@ EndFunc   ;==>_LOWriter_CharStyleCurrent
 ; Description ...: Delete a User-Created Character Style from a Document.
 ; Syntax ........: _LOWriter_CharStyleDelete(ByRef $oDoc, $oCharStyle[, $bForceDelete = False[, $sReplacementStyle = ""]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function. Must be a User-Created Style, not a built-in Style native to Libre-Office.
+;                  $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function. Must be a User-Created Style, not a built-in Style native to LibreOffice.
 ;                  $bForceDelete        - [optional] a boolean value. Default is False. If True Character style will be deleted regardless of whether it is in use or not.
 ;                  $sReplacementStyle   - [optional] a string value. Default is "". The Character style to use instead of the one being deleted if the Character style being deleted was already applied to text in the document. "" = No Character Style
 ; Return values .: Success: 1
@@ -474,28 +474,28 @@ EndFunc   ;==>_LOWriter_CharStyleDelete
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CharStyleEffect
 ; Description ...: Set or Retrieve the Font Effect settings for a Character Style.
-; Syntax ........: _LOWriter_CharStyleEffect(ByRef $oCharStyle[, $iRelief = Null[, $iCase = Null[, $bHidden = Null[, $bOutline = Null[, $bShadow = Null]]]]])
+; Syntax ........: _LOWriter_CharStyleEffect(ByRef $oCharStyle[, $iCase = Null[, $bHidden = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]]])
 ; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the Characters are hidden.
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
-;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 2 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error 1 @Extended 3 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 4 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bShadow not a Boolean.
 ;                  @Error 1 @Extended 7 Return 0 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iRelief
-;                  |                               2 = Error setting $iCase
-;                  |                               4 = Error setting $bHidden
+;                  |                               1 = Error setting $iCase
+;                  |                               2 = Error setting $bHidden
+;                  |                               4 = Error setting $iRelief
 ;                  |                               8 = Error setting $bOutline
 ;                  |                               16 = Error setting $bShadow
 ;                  --Success--
@@ -509,7 +509,7 @@ EndFunc   ;==>_LOWriter_CharStyleDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_CharStyleEffect(ByRef $oCharStyle, $iRelief = Null, $iCase = Null, $bHidden = Null, $bOutline = Null, $bShadow = Null)
+Func _LOWriter_CharStyleEffect(ByRef $oCharStyle, $iCase = Null, $bHidden = Null, $iRelief = Null, $bOutline = Null, $bShadow = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -518,7 +518,7 @@ Func _LOWriter_CharStyleEffect(ByRef $oCharStyle, $iRelief = Null, $iCase = Null
 	If Not IsObj($oCharStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oCharStyle.supportsService("com.sun.star.style.CharacterStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-	$vReturn = __LOWriter_CharEffect($oCharStyle, $iRelief, $iCase, $bHidden, $bOutline, $bShadow)
+	$vReturn = __LOWriter_CharEffect($oCharStyle, $iCase, $bHidden, $iRelief, $bOutline, $bShadow)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_CharStyleEffect
@@ -588,7 +588,7 @@ EndFunc   ;==>_LOWriter_CharStyleExists
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  Libre Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LOWriter_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -634,7 +634,7 @@ EndFunc   ;==>_LOWriter_CharStyleFont
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -713,9 +713,10 @@ EndFunc   ;==>_LOWriter_CharStyleGetObjByName
 ;                  @Error 1 @Extended 3 Return 0 = $oCharStyle not a Character Style Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewCharStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Character Style called in $sNewCharStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = $sParentStyle not a String.
-;                  @Error 1 @Extended 7 Return 0 = Character Style called in $sParentStyle doesn't exist in this Document.
-;                  @Error 1 @Extended 8 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Character Styles.
+;                  @Error 1 @Extended 7 Return 0 = $sParentStyle not a String.
+;                  @Error 1 @Extended 8 Return 0 = Character Style called in $sParentStyle doesn't exist in this Document.
+;                  @Error 1 @Extended 9 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
@@ -725,7 +726,7 @@ EndFunc   ;==>_LOWriter_CharStyleGetObjByName
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 2 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -739,7 +740,7 @@ Func _LOWriter_CharStyleOrganizer(ByRef $oDoc, ByRef $oCharStyle, $sNewCharStyle
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avOrganizer[2]
+	Local $avOrganizer[3]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCharStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -750,7 +751,7 @@ Func _LOWriter_CharStyleOrganizer(ByRef $oDoc, ByRef $oCharStyle, $sNewCharStyle
 			__LO_ArrayFill($avOrganizer, $oCharStyle.Name(), $oCharStyle.ParentStyle(), $oCharStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oCharStyle.Name(), $oCharStyle.ParentStyle())
+			__LO_ArrayFill($avOrganizer, $oCharStyle.Name(), $oCharStyle.ParentStyle(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -759,21 +760,22 @@ Func _LOWriter_CharStyleOrganizer(ByRef $oDoc, ByRef $oCharStyle, $sNewCharStyle
 	If ($sNewCharStyleName <> Null) Then
 		If Not IsString($sNewCharStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOWriter_CharStyleExists($oDoc, $sNewCharStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oCharStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oCharStyle.Name = $sNewCharStyleName
 		$iError = (__LOWriter_CharacterStyleCompare($oDoc, $oCharStyle.Name(), $sNewCharStyleName)) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($sParentStyle <> Null) Then
-		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-		If ($sParentStyle <> "") And Not _LOWriter_CharStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If ($sParentStyle <> "") And Not _LOWriter_CharStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$oCharStyle.ParentStyle = $sParentStyle
 		$iError = (__LOWriter_CharacterStyleCompare($oDoc, $oCharStyle.ParentStyle(), $sParentStyle)) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oCharStyle.Hidden = $bHidden
@@ -859,7 +861,7 @@ EndFunc   ;==>_LOWriter_CharStyleOverLine
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Set either $iSubScript or $iSuperScript to 0 to return it to Normal setting.
-;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrievine subscript values.
+;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
 ; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate
@@ -1057,7 +1059,7 @@ EndFunc   ;==>_LOWriter_CharStyleShadow
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to HMM and back for retrieval of settings.
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. The figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter (HMM) internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: ;928.9 Pt = -32766 (HMM); 929 Pt = -32763 (HMM); 929.1 = -32759; 1000 pt = -30258.
-;                  Attempting to set Libre's kerning value to anything over 32768 (HMM) causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
+;                  Attempting to set LibreOffice's kerning value to anything over 32768 (HMM) causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
 ; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes

@@ -41,9 +41,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current Font Effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avSettings[4] & @CRLF & @CRLF & _
 			"I will now set shadow to false, and Outline to True.")
@@ -57,15 +57,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current Font Effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avSettings[4] & @CRLF & @CRLF & _
 			"I will next set Outline to false, and set Hidden to true.")
 
 	; Set the selected text's Font effects Outline to False, and Hidden to true.
-	_LOWriter_DirFrmtCharEffect($oViewCursor, Null, Null, True, False, Null)
+	_LOWriter_DirFrmtCharEffect($oViewCursor, Null, True, Null, False, Null)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -73,9 +73,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current Font Effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avSettings[4] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")

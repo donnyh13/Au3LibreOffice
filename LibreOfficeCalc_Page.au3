@@ -631,7 +631,7 @@ EndFunc   ;==>_LOCalc_PageStyleExists
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, then the Array returned will contain 7 elements, because $bSameOnFirst will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.0, the $bSameOnFirst parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -645,7 +645,7 @@ Func _LOCalc_PageStyleFooter(ByRef $oPageStyle, $bFooterOn = Null, $bSameLeftRig
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avFooter[7]
+	Local $avFooter[8]
 
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oPageStyle.supportsService("com.sun.star.style.PageStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -656,7 +656,7 @@ Func _LOCalc_PageStyleFooter(ByRef $oPageStyle, $bFooterOn = Null, $bSameLeftRig
 					$oPageStyle.FooterRightMargin(), $oPageStyle.FooterBodyDistance(), $oPageStyle.FooterHeight(), $oPageStyle.FooterIsDynamicHeight())
 
 		Else
-			__LO_ArrayFill($avFooter, $oPageStyle.FooterIsOn(), $oPageStyle.FooterIsShared(), $oPageStyle.FooterLeftMargin(), _
+			__LO_ArrayFill($avFooter, $oPageStyle.FooterIsOn(), $oPageStyle.FooterIsShared(), Null, $oPageStyle.FooterLeftMargin(), _
 					$oPageStyle.FooterRightMargin(), $oPageStyle.FooterBodyDistance(), $oPageStyle.FooterHeight(), $oPageStyle.FooterIsDynamicHeight())
 		EndIf
 
@@ -1384,7 +1384,7 @@ EndFunc   ;==>_LOCalc_PageStyleGetObjByName
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, then the Array returned will contain 7 elements, because $bSameOnFirst will not be available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.0, the $bSameOnFirst parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1398,7 +1398,7 @@ Func _LOCalc_PageStyleHeader(ByRef $oPageStyle, $bHeaderOn = Null, $bSameLeftRig
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avHeader[7]
+	Local $avHeader[8]
 
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oPageStyle.supportsService("com.sun.star.style.PageStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1409,7 +1409,7 @@ Func _LOCalc_PageStyleHeader(ByRef $oPageStyle, $bHeaderOn = Null, $bSameLeftRig
 					$oPageStyle.HeaderRightMargin(), $oPageStyle.HeaderBodyDistance(), $oPageStyle.HeaderHeight(), $oPageStyle.HeaderIsDynamicHeight())
 
 		Else
-			__LO_ArrayFill($avHeader, $oPageStyle.HeaderIsOn(), $oPageStyle.HeaderIsShared(), $oPageStyle.HeaderLeftMargin(), _
+			__LO_ArrayFill($avHeader, $oPageStyle.HeaderIsOn(), $oPageStyle.HeaderIsShared(), Null, $oPageStyle.HeaderLeftMargin(), _
 					$oPageStyle.HeaderRightMargin(), $oPageStyle.HeaderBodyDistance(), $oPageStyle.HeaderHeight(), $oPageStyle.HeaderIsDynamicHeight())
 		EndIf
 
@@ -2250,7 +2250,8 @@ EndFunc   ;==>_LOCalc_PageStyleMargins
 ;                  @Error 1 @Extended 3 Return 0 = $oPageStyle not a Page Style Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewPageStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Page Style name called in $sNewPageStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Page Styles.
+;                  @Error 1 @Extended 7 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
@@ -2259,7 +2260,7 @@ EndFunc   ;==>_LOCalc_PageStyleMargins
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 1 or 2 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 1 element because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters. If The current LibreOffice version is below4.0, the $bHidden parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2273,7 +2274,7 @@ Func _LOCalc_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyleNa
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avOrganizer[1]
+	Local $avOrganizer[2]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -2284,7 +2285,7 @@ Func _LOCalc_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyleNa
 			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), $oPageStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oPageStyle.Name())
+			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -2293,13 +2294,14 @@ Func _LOCalc_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyleNa
 	If ($sNewPageStyleName <> Null) Then
 		If Not IsString($sNewPageStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOCalc_PageStyleExists($oDoc, $sNewPageStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oPageStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oPageStyle.Name = $sNewPageStyleName
 		$iError = ($oPageStyle.Name() = $sNewPageStyleName) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oPageStyle.Hidden = $bHidden
@@ -2773,11 +2775,12 @@ EndFunc   ;==>_LOCalc_PageStyleSheetPrint
 ;                  |                               16 = Error setting $iVariable1 for mode $LOC_SCALE_FIT_PAGES
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the current mode is equal to $LOC_SCALE_FIT_WIDTH_HEIGHT, there will be three elements, Elelemnt 1(0) will be the current mode, element 2(1) will be the Width value, and Element 3(2) will be the height value.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
+;                  When retrieving the current settings, if the current mode is equal to $LOC_SCALE_FIT_WIDTH_HEIGHT, all three elements of the returned array will contain data, Element 1(0) will be the current mode, element 2(1) will be the Width value, and Element 3(2) will be the height value. Otherwise the third element will be Null.
 ;                  $iVariable1 and $iVariable2 setting values depend on what the current or new mode is. For Modes Reduce/Enlarge and Fit Pages, $iVariable1 ALONE is used for setting Scale Percentage or Number of Pages Respectively.
 ;                  If Mode is set to Fit Width and Height, $iVariable1 is for setting Width, and $iVariable2 is for setting height.
 ;                  You can set the Scale Values still without setting Mode each time.
@@ -2793,7 +2796,7 @@ Func _LOCalc_PageStyleSheetScale(ByRef $oPageStyle, $iMode = Null, $iVariable1 =
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $abSheetScale[2]
+	Local $abSheetScale[3]
 
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oPageStyle.supportsService("com.sun.star.style.PageStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -2803,10 +2806,10 @@ Func _LOCalc_PageStyleSheetScale(ByRef $oPageStyle, $iMode = Null, $iVariable1 =
 			__LO_ArrayFill($abSheetScale, $LOC_SCALE_FIT_WIDTH_HEIGHT, $oPageStyle.ScaleToPagesX(), $oPageStyle.ScaleToPagesY)
 
 		ElseIf ($oPageStyle.ScaleToPages() > 0) Then
-			__LO_ArrayFill($abSheetScale, $LOC_SCALE_FIT_PAGES, $oPageStyle.ScaleToPages())
+			__LO_ArrayFill($abSheetScale, $LOC_SCALE_FIT_PAGES, $oPageStyle.ScaleToPages(), Null)
 
 		ElseIf ($oPageStyle.PageScale() > 0) Then ; Page Scale has to be last because each time I Set one of the other settings, Scale returns to 100%, if I set it back to 0 I lose my other settings. So Scale seems to be alway above 0.
-			__LO_ArrayFill($abSheetScale, $LOC_SCALE_REDUCE_ENLARGE, $oPageStyle.PageScale())
+			__LO_ArrayFill($abSheetScale, $LOC_SCALE_REDUCE_ENLARGE, $oPageStyle.PageScale(), Null)
 
 		Else
 

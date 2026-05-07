@@ -549,7 +549,7 @@ EndFunc   ;==>_LOCalc_CellEffect
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  Libre Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ; Related .......: _LOCalc_FontsGetNames, _LOCalc_CellStyleFont
 ; Link ..........:
 ; Example .......: Yes
@@ -1597,7 +1597,7 @@ EndFunc   ;==>_LOCalc_CellStyleExists
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  Libre Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ; Related .......: _LOCalc_FontsGetNames, _LOCalc_CellFont
 ; Link ..........:
 ; Example .......: Yes
@@ -1751,7 +1751,7 @@ EndFunc   ;==>_LOCalc_CellStyleNumberFormat
 ;                  $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObjByName function.
 ;                  $sNewCellStyleName   - [optional] a string value. Default is Null. The new name to set the Cell style called in $oCellStyle to.
 ;                  $sParentStyle        - [optional] a string value. Default is Null. Set an existing Cell style (or an Empty String ("") = - None -) to apply its settings to the current style.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, this style is hidden in the L.O. UI. Libre 4.0 and up only.
+;                  $bHidden             - [optional] a boolean value. Default is Null. If True, this style is hidden in the L.O. UI. LibreOffice 4.0 and up only.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1760,9 +1760,10 @@ EndFunc   ;==>_LOCalc_CellStyleNumberFormat
 ;                  @Error 1 @Extended 3 Return 0 = $oCellStyle not a Cell Style Object.
 ;                  @Error 1 @Extended 4 Return 0 = $sNewCellStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Cell Style name called in $sNewCellStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = $sParentStyle not a String.
-;                  @Error 1 @Extended 7 Return 0 = Cell Style called in $sParentStyle doesn't exist in this Document.
-;                  @Error 1 @Extended 8 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Cell Styles.
+;                  @Error 1 @Extended 7 Return 0 = $sParentStyle not a String.
+;                  @Error 1 @Extended 8 Return 0 = Cell Style called in $sParentStyle doesn't exist in this Document.
+;                  @Error 1 @Extended 9 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewCellStyleName
@@ -1772,7 +1773,7 @@ EndFunc   ;==>_LOCalc_CellStyleNumberFormat
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 2 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1785,7 +1786,7 @@ Func _LOCalc_CellStyleOrganizer(ByRef $oDoc, ByRef $oCellStyle, $sNewCellStyleNa
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avOrganizer[2]
+	Local $avOrganizer[3]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCellStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1796,7 +1797,7 @@ Func _LOCalc_CellStyleOrganizer(ByRef $oDoc, ByRef $oCellStyle, $sNewCellStyleNa
 			__LO_ArrayFill($avOrganizer, $oCellStyle.Name(), $oCellStyle.ParentStyle(), $oCellStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oCellStyle.Name(), $oCellStyle.ParentStyle())
+			__LO_ArrayFill($avOrganizer, $oCellStyle.Name(), $oCellStyle.ParentStyle(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -1805,21 +1806,22 @@ Func _LOCalc_CellStyleOrganizer(ByRef $oDoc, ByRef $oCellStyle, $sNewCellStyleNa
 	If ($sNewCellStyleName <> Null) Then
 		If Not IsString($sNewCellStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOCalc_CellStyleExists($oDoc, $sNewCellStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oCellStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oCellStyle.Name = $sNewCellStyleName
 		$iError = ($oCellStyle.Name() = $sNewCellStyleName) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($sParentStyle <> Null) Then
-		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-		If ($sParentStyle <> "") And Not _LOCalc_CellStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If ($sParentStyle <> "") And Not _LOCalc_CellStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$oCellStyle.ParentStyle = $sParentStyle
 		$iError = ($oCellStyle.ParentStyle() = $sParentStyle) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oCellStyle.Hidden = $bHidden

@@ -1241,7 +1241,7 @@ EndFunc   ;==>_LOWriter_ImageColorAdjust
 ;                  $iRight              - [optional] an integer value. Default is Null. The amount in Hundredths of a Millimeter (HMM) to either extend the background of the image, (negative numbers), or to crop, (positive numbers) from the Right side.
 ;                  $iTop                - [optional] an integer value. Default is Null. The amount in Hundredths of a Millimeter (HMM) to either extend the background of the image, (negative numbers), or to crop, (positive numbers) from the Top side.
 ;                  $iBottom             - [optional] an integer value. Default is Null. The amount in Hundredths of a Millimeter (HMM) to either extend the background of the image, (negative numbers), or to crop, (positive numbers) from the Bottom side.
-;                  $bKeepScale          - [optional] a boolean value. Default is Null. If True, crop amounts are removed or added to the image, while keeping the scaling. If False, crop values are removed or added while retaining the image size. See remarks. This setting is internally static, you do not need to set this each call for as long as the script life, unless you wish to change the value. Default static setting is True.
+;                  $bKeepScale          - [optional] a boolean value. Default is Null. If True, crop amounts are removed or added to the image, while keeping the scaling. If False, crop values are removed or added while retaining the image size. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1265,7 +1265,10 @@ EndFunc   ;==>_LOWriter_ImageColorAdjust
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: There is no literal setting for $bKeepScale in LibreOffice's settings, so I have made an internal static setting in this function to behave the same as LibreOffice. When you retrieve the current settings for an image, the return for $bKeepScale will be my internal static value, and NOT the current LibreOffice setting.
+; Remarks .......: There is no setting for $bKeepScale in LibreOffice's API. Therefore I have made this function behave as follows:
+;                  - Unless $bKeepScale is called with False, $bKeepScale is assumed to be True.
+;                  - Calling $bKeepScale alone, without setting a crop value does nothing.
+;                  - The return value of $bKeepScale is always Null.
 ;                  Maximum crop values are based on page width. You cannot exceed the size of the page, nor crop too much of the image away.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
@@ -1280,12 +1283,8 @@ Func _LOWriter_ImageCrop(ByRef $oImage, $iLeft = Null, $iRight = Null, $iTop = N
 	Local $iError = 0
 	Local $avImage[5]
 	Local $tCrop, $tSize
-	Local Static $bKeepScaleInternal = True
 
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If ($bKeepScale <> Null) And Not IsBool($bKeepScale) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$bKeepScaleInternal = ($bKeepScale = Null) ? ($bKeepScaleInternal) : ($bKeepScale)
 
 	$tCrop = $oImage.GraphicCrop()
 	If Not IsObj($tCrop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -1294,42 +1293,46 @@ Func _LOWriter_ImageCrop(ByRef $oImage, $iLeft = Null, $iRight = Null, $iTop = N
 	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($iLeft, $iRight, $iTop, $iBottom, $bKeepScale) Then
-		__LO_ArrayFill($avImage, $tCrop.Left(), $tCrop.Right(), $tCrop.Top(), $tCrop.Bottom(), $bKeepScaleInternal)
+		__LO_ArrayFill($avImage, $tCrop.Left(), $tCrop.Right(), $tCrop.Top(), $tCrop.Bottom(), Null)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avImage)
 	EndIf
 
+	If ($bKeepScale = Null) Then $bKeepScale = True
+
+	If Not IsBool($bKeepScale) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 	If ($iLeft <> Null) Then
 		If Not IsInt($iLeft) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		If ($bKeepScaleInternal = True) Then $tSize.Width = ($tSize.Width() + $tCrop.Left() - $iLeft)
+		If $bKeepScale Then $tSize.Width = ($tSize.Width() + $tCrop.Left() - $iLeft)
 		$tCrop.Left = $iLeft
 	EndIf
 
 	If ($iRight <> Null) Then
 		If Not IsInt($iRight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		If ($bKeepScaleInternal = True) Then $tSize.Width = ($tSize.Width() + $tCrop.Right() - $iRight)
+		If $bKeepScale Then $tSize.Width = ($tSize.Width() + $tCrop.Right() - $iRight)
 		$tCrop.Right = $iRight
 	EndIf
 
 	If ($iTop <> Null) Then
 		If Not IsInt($iTop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-		If ($bKeepScaleInternal = True) Then $tSize.Height = ($tSize.Height() + $tCrop.Top() - $iTop)
+		If $bKeepScale Then $tSize.Height = ($tSize.Height() + $tCrop.Top() - $iTop)
 		$tCrop.Top = $iTop
 	EndIf
 
 	If ($iBottom <> Null) Then
 		If Not IsInt($iBottom) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-		If ($bKeepScaleInternal = True) Then $tSize.Height = ($tSize.Height() + $tCrop.Bottom() - $iBottom)
+		If $bKeepScale Then $tSize.Height = ($tSize.Height() + $tCrop.Bottom() - $iBottom)
 		$tCrop.Bottom = $iBottom
 	EndIf
 
 	$oImage.GraphicCrop = $tCrop
 
-	If ($bKeepScaleInternal = True) Then $oImage.Size = $tSize
+	If $bKeepScale Then $oImage.Size = $tSize
 
 	; Error checking
 	$iError = (__LO_VarsAreNull($iLeft)) ? ($iError) : ((__LO_IntIsBetween($oImage.GraphicCrop.Left(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 1)))
@@ -1838,12 +1841,13 @@ EndFunc   ;==>_LOWriter_ImageOptions
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageOptionsName
 ; Description ...: Set or Retrieve Image Name settings.
-; Syntax ........: _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage[, $sName = Null[, $sAltText = Null[, $sDesc = Null]]])
+; Syntax ........: _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage[, $sName = Null[, $sAltText = Null[, $sDesc = Null[, $bDecorative = Null]]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oImage              - [in/out] an object. A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $sName               - [optional] a string value. Default is Null. The new name for the Image.
 ;                  $sAltText            - [optional] a string value. Default is Null. Enter alternative text to display when the image isn't available.
 ;                  $sDesc               - [optional] a string value. Default is Null. Description of the Image.
+;                  $bDecorative         - [optional] a boolean value. Default is Null. If True, the image is considered decorative and is ignored by assistive readers. L.O. 7.6+.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1853,14 +1857,18 @@ EndFunc   ;==>_LOWriter_ImageOptions
 ;                  @Error 1 @Extended 4 Return 0 = Document already contains Image with same name as called in $sName.
 ;                  @Error 1 @Extended 5 Return 0 = $sAltText not a string.
 ;                  @Error 1 @Extended 6 Return 0 = $sDesc not a string.
+;                  @Error 1 @Extended 7 Return 0 = $bDecorative not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sAltText
 ;                  |                               4 = Error setting $sDesc
+;                  |                               8 = Error setting $bDecorative
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version less than 7.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. If the LibreOffice version is below 7.6, the $bDecorative parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1870,18 +1878,23 @@ EndFunc   ;==>_LOWriter_ImageOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAltText = Null, $sDesc = Null)
+Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAltText = Null, $sDesc = Null, $bDecorative = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $asName[3]
+	Local $asName[4]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($sName, $sAltText, $sDesc) Then
-		__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description())
+		If __LO_VersionCheck(7.6) Then
+			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description(), $oImage.Decorative())
+
+		Else
+			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description(), Null)
+		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asName)
 	EndIf
@@ -1906,6 +1919,14 @@ Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAlt
 
 		$oImage.Description = $sDesc
 		$iError = ($oImage.Description() = $sDesc) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($bDecorative <> Null) Then
+		If Not IsBool($bDecorative) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_VersionCheck(7.6) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+
+		$oImage.Decorative = $bDecorative
+		$iError = ($oImage.Decorative() = $bDecorative) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
@@ -2528,7 +2549,7 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 7 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater than or equal to 4.3, then a 7 element Array is returned, else 5 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. If the LibreOffice version is below 7.6, the $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2551,13 +2572,12 @@ Func _LOWriter_ImageTypeSize(ByRef $oDoc, ByRef $oImage, $iWidth = Null, $iRelat
 
 	If __LO_VarsAreNull($iWidth, $iRelativeWidth, $iWidthRelativeTo, $iHeight, $iRelativeHeight, $iHeightRelativeTo, $bKeepRatio) Then
 		If __LO_VersionCheck(4.3) Then
-			__LO_ArrayFill($avSize, $oImage.Width(), $oImage.RelativeWidth(), $oImage.RelativeWidthRelation(), _
-					$oImage.Height(), $oImage.RelativeHeight(), $oImage.RelativeHeightRelation(), _
-					(($oImage.IsSyncHeightToWidth() And $oImage.IsSyncWidthToHeight()) ? (True) : (False)))
+			__LO_ArrayFill($avSize, $oImage.Width(), $oImage.RelativeWidth(), $oImage.RelativeWidthRelation(), $oImage.Height(), $oImage.RelativeHeight(), _
+					$oImage.RelativeHeightRelation(), (($oImage.IsSyncHeightToWidth() And $oImage.IsSyncWidthToHeight()) ? (True) : (False)))
 
 		Else
-			__LO_ArrayFill($avSize, $oImage.Width(), $oImage.RelativeWidth(), $oImage.Height(), $oImage.RelativeHeight(), _
-					(($oImage.IsSyncHeightToWidth() And $oImage.IsSyncWidthToHeight()) ? (True) : (False)))
+			__LO_ArrayFill($avSize, $oImage.Width(), $oImage.RelativeWidth(), Null, $oImage.Height(), $oImage.RelativeHeight(), _
+					Null, (($oImage.IsSyncHeightToWidth() And $oImage.IsSyncWidthToHeight()) ? (True) : (False)))
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avSize)

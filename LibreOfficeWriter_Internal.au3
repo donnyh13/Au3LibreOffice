@@ -18,7 +18,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Various functions for internal data processing, data retrieval, retrieving and applying settings for LibreOffice UDF.
+; Description ...: Various functions for internal data processing, data retrieval, retrieving and applying settings for LibreOffice Writer.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;
@@ -42,7 +42,6 @@
 ; __LOWriter_CharUnderLine
 ; __LOWriter_ColorRemoveAlpha
 ; __LOWriter_CreatePoint
-; __LOWriter_CursorGetText
 ; __LOWriter_DateStructCompare
 ; __LOWriter_DirFrmtCheck
 ; __LOWriter_FieldCountType
@@ -174,9 +173,9 @@ EndFunc   ;==>__LOWriter_AnyAreDefault
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style/Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border style/Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border style/Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border style/Color when Right Border width not set.
+;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style/Color when Right Border width not set.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
@@ -357,9 +356,9 @@ EndFunc   ;==>__LOWriter_CharacterStyleCompare
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style/Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border style/Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border style/Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border style/Color when Right Border width not set.
+;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style/Color when Right Border width not set.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
@@ -566,27 +565,27 @@ EndFunc   ;==>__LOWriter_CharBorderPadding
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_CharEffect
 ; Description ...: Set or Retrieve the Font Effect settings.
-; Syntax ........: __LOWriter_CharEffect(ByRef $oObj[, $iRelief = Null[, $iCase = Null[, $bHidden = Null[, $bOutline = Null[, $bShadow = Null]]]]])
+; Syntax ........: __LOWriter_CharEffect(ByRef $oObj[, $iCase = Null[, $bHidden = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]]])
 ; Parameters ....: $oObj                - [in/out] an object. An Object that supports "com.sun.star.text.Paragraph" Or "com.sun.star.text.TextPortion" services, such as a Cursor with data selected or paragraph section.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the Characters are hidden.
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 2 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 4 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 5 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 6 Return 0 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iRelief
-;                  |                               2 = Error setting $iCase
-;                  |                               4 = Error setting $bHidden
+;                  |                               1 = Error setting $iCase
+;                  |                               2 = Error setting $bHidden
+;                  |                               4 = Error setting $iRelief
 ;                  |                               8 = Error setting $bOutline
 ;                  |                               16 = Error setting $bShadow
 ;                  --Success--
@@ -600,7 +599,7 @@ EndFunc   ;==>__LOWriter_CharBorderPadding
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_CharEffect(ByRef $oObj, $iRelief = Null, $iCase = Null, $bHidden = Null, $bOutline = Null, $bShadow = Null)
+Func __LOWriter_CharEffect(ByRef $oObj, $iCase = Null, $bHidden = Null, $iRelief = Null, $bOutline = Null, $bShadow = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -609,31 +608,31 @@ Func __LOWriter_CharEffect(ByRef $oObj, $iRelief = Null, $iCase = Null, $bHidden
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iRelief, $iCase, $bHidden, $bOutline, $bShadow) Then
-		__LO_ArrayFill($avEffect, $oObj.CharRelief(), $oObj.CharCaseMap(), $oObj.CharHidden(), $oObj.CharContoured(), $oObj.CharShadowed())
+	If __LO_VarsAreNull($iCase, $bHidden, $iRelief, $bOutline, $bShadow) Then
+		__LO_ArrayFill($avEffect, $oObj.CharCaseMap(), $oObj.CharHidden(), $oObj.CharRelief(), $oObj.CharContoured(), $oObj.CharShadowed())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avEffect)
 	EndIf
 
-	If ($iRelief <> Null) Then
-		If Not __LO_IntIsBetween($iRelief, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oObj.CharRelief = $iRelief
-		$iError = ($oObj.CharRelief() = $iRelief) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
 	If ($iCase <> Null) Then
-		If Not __LO_IntIsBetween($iCase, $LOW_CHAR_CASEMAP_NONE, $LOW_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iCase, $LOW_CHAR_CASEMAP_NONE, $LOW_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharCaseMap = $iCase
-		$iError = ($oObj.CharCaseMap() = $iCase) ? ($iError) : (BitOR($iError, 2))
+		$iError = ($oObj.CharCaseMap() = $iCase) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oObj.CharHidden = $bHidden
-		$iError = ($oObj.CharHidden() = $bHidden) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($oObj.CharHidden() = $bHidden) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($iRelief <> Null) Then
+		If Not __LO_IntIsBetween($iRelief, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oObj.CharRelief = $iRelief
+		$iError = ($oObj.CharRelief() = $iRelief) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($bOutline <> Null) Then
@@ -685,7 +684,7 @@ EndFunc   ;==>__LOWriter_CharEffect
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  Libre Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -763,7 +762,7 @@ EndFunc   ;==>__LOWriter_CharFont
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 or 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the returned array will contain 2 elements, because $iTransparency is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -776,7 +775,7 @@ Func __LOWriter_CharFontColor(ByRef $oObj, $iFontColor = Null, $iTransparency = 
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iOldTransparency
-	Local $avColor[2]
+	Local $avColor[3]
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -785,7 +784,7 @@ Func __LOWriter_CharFontColor(ByRef $oObj, $iFontColor = Null, $iTransparency = 
 			__LO_ArrayFill($avColor, __LOWriter_ColorRemoveAlpha($oObj.CharColor()), $oObj.CharTransparence(), $oObj.CharBackColor())
 
 		Else
-			__LO_ArrayFill($avColor, __LOWriter_ColorRemoveAlpha($oObj.CharColor()), $oObj.CharBackColor())
+			__LO_ArrayFill($avColor, __LOWriter_ColorRemoveAlpha($oObj.CharColor()), Null, $oObj.CharBackColor())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avColor)
@@ -816,7 +815,7 @@ Func __LOWriter_CharFontColor(ByRef $oObj, $iFontColor = Null, $iTransparency = 
 	If ($iHighlight <> Null) Then
 		If Not __LO_IntIsBetween($iHighlight, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		; CharHighlight; same as CharBackColor---Libre seems to use back color for highlighting however, so using that for setting.
+		; CharHighlight; same as CharBackColor---LibreOffice seems to use back color for highlighting however, so using that for setting.
 ;~ 		If Not __LO_VersionCheck(4.2) Then Return SetError($__LO_STATUS_VER_ERROR, 2, 0)
 ;~ 		$oObj.CharHighlight = $iHighlight ;-- keeping old method in case.
 ;~ 		$iError = ($oObj.CharHighlight() = $iHighlight) ? ($iError) : (BitOR($iError, 4)
@@ -934,7 +933,7 @@ EndFunc   ;==>__LOWriter_CharOverLine
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Set either $iSubScript or $iSuperScript to 0 to return it to Normal setting.
-;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrievine subscript values.
+;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
 ; Related .......:
@@ -952,7 +951,7 @@ Func __LOWriter_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = Nu
 
 	If __LO_VarsAreNull($iSuperScript, $iSubScript, $iRelativeSize) Then
 		__LO_ArrayFill($avPosition, ($oObj.CharEscapement() <= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), 1, 100)) ? ($oObj.CharEscapement()) : (-1)), _
-				($oObj.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), -1, -100)) ? (($oObj.CharEscapement() * -1)) : (-1)), _
+				($oObj.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), -1, -100)) ? (Abs($oObj.CharEscapement())) : (-1)), _
 				$oObj.CharEscapementHeight())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avPosition)
@@ -1177,7 +1176,7 @@ EndFunc   ;==>__LOWriter_CharShadow
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values for $nKerning are from -2 Pt to 928.8 Pt. the figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: 928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258.
-;                  Attempting to set Libre's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
+;                  Attempting to set LibreOffice's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
@@ -1429,65 +1428,6 @@ Func __LOWriter_CreatePoint($iX, $iY)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $tPoint)
 EndFunc   ;==>__LOWriter_CreatePoint
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOWriter_CursorGetText
-; Description ...: Retrieves a Text object appropriate for the type of cursor.
-; Syntax ........: __LOWriter_CursorGetText(ByRef $oDoc, $oCursor)
-; Parameters ....: $oDoc                - [in/out] A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
-; Return values .: Success: Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to get Cursor data type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to create Object for creating TextObject.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Text Object.
-;                  @Error 3 @Extended 4 Return 0 = Cursor is in an unknown data field.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Object = Success, Text object was returned. @Extended will be one of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Also returns what type of cursor, such as a text Table, footnote etc.
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOWriter_CursorGetText(ByRef $oDoc, ByRef $oCursor)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oText, $oReturnedObj
-	Local $iCursorDataType
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$oReturnedObj = __LOWriter_Internal_CursorGetDataType($oDoc, $oCursor, True)
-	$iCursorDataType = @extended
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-	If Not IsObj($oReturnedObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	Switch $iCursorDataType
-		Case $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_FRAME, $LOW_CURDATA_FOOTNOTE, $LOW_CURDATA_ENDNOTE, $LOW_CURDATA_HEADER_FOOTER
-			$oText = $oReturnedObj.getText()
-			If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCursorDataType, $oText)
-
-		Case $LOW_CURDATA_CELL
-			$oText = $oReturnedObj.getCellByName($oCursor.Cell.CellName)
-			If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-			Return SetError($__LO_STATUS_SUCCESS, $iCursorDataType, $oText)
-
-		Case Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-	EndSwitch
-EndFunc   ;==>__LOWriter_CursorGetText
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_DateStructCompare
@@ -4314,29 +4254,19 @@ EndFunc   ;==>__LOWriter_ImageGetSuggestedSize
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_Internal_CursorGetDataType
 ; Description ...: Get what type of Text data the cursor object is currently in. Internal version of CursorGetDataType.
-; Syntax ........: __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor[, $bReturnObject = False])
+; Syntax ........: __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $bReturnObject       - [optional] a boolean value. Default is False. If True, return the object used for creating a Text Object etc.
 ; Return values .: Success: Object or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bReturnObject not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $oCursor is a Table Cursor, or a View Cursor with table cells selected. Can't get data type from these types of Cursors.
+;                  @Error 1 @Extended 3 Return 0 = $oCursor is a Table Cursor, or a View Cursor with table cells selected. Can't get data type from these types of Cursors.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving TextFrame Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving TextCell Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Footnotes Object for document.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Footnote Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Endnotes Object for document.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Endnote Object.
-;                  @Error 3 @Extended 7 Return 0 = Unable to identify Foot/EndNote.
-;                  @Error 3 @Extended 8 Return 0 = Cursor in unknown DataType
+;                  @Error 3 @Extended 1 Return 0 = Cursor in unknown DataType
 ;                  --Success--
-;                  @Error 0 @Extended ? Return Object = Success, If $bReturnObject is True, returning an object used for creating a Text Object, @Extended is set to one of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 0 @Extended 0 Return Integer = Success, If $bReturnObject is False, Return value will be one of constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 0 @Extended 0 Return Integer = Success, Return value will be one of constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns what type of cursor, such as a TextTable, Footnote etc.
@@ -4344,71 +4274,42 @@ EndFunc   ;==>__LOWriter_ImageGetSuggestedSize
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor, $bReturnObject = False)
+Func __LOWriter_Internal_CursorGetDataType(ByRef $oDoc, ByRef $oCursor)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oEndNotes, $oFootNotes, $oReturnObject
-
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bReturnObject) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If (($oCursor.ImplementationName()) = "SwXTextTableCursor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Can't get data type from Table Cursor.
+	If $oCursor.supportsService("com.sun.star.text.TextTableCursor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Can't get data type from Table Cursor.
 
-	Switch $oCursor.Text.getImplementationName()
-		Case "SwXBodyText"
-			$oReturnObject = $oDoc
+	If $oCursor.Text.supportsService("com.sun.star.text.TextFrame") Then
 
-			Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_BODY_TEXT, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_BODY_TEXT))
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FRAME)
 
-		Case "SwXTextFrame"
-			$oReturnObject = $oDoc.TextFrames.getByName($oCursor.TextFrame.Name)
-			If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	ElseIf $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then
 
-			Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_FRAME, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FRAME))
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_CELL)
 
-		Case "SwXCell"
-			$oReturnObject = $oDoc.TextTables.getByName($oCursor.TextTable.Name)
-			If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	ElseIf $oCursor.Text.supportsService("com.sun.star.text.Footnote") Then
 
-			Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_CELL, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_CELL))
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FOOTNOTE)
 
-		Case "SwXHeadFootText"
-			$oReturnObject = $oCursor
+	ElseIf $oCursor.Text.supportsService("com.sun.star.text.Endnote") Then
 
-			Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_HEADER_FOOTER, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_HEADER_FOOTER))
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_ENDNOTE)
 
-		Case "SwXFootnote"
-			$oFootNotes = $oDoc.getFootnotes()
-			If Not IsObj($oFootNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	ElseIf $oCursor.Text.supportsService("com.sun.star.text.Text") Then
+		If ($oCursor.Text.getImplementationName() = "SwXHeadFootText") Then ; Implementation name could fail in the future, as it isn't guaranteed to not be changed, but I can't find another way to identify a Header/Footer.
 
-			For $i = 0 To $oFootNotes.getCount() - 1
-				If ($oFootNotes.getByIndex($i).ReferenceId() = $oCursor.Text.ReferenceId()) And _
-						($oFootNotes.getByIndex($i).Text() = $oCursor.Text()) Then
-					$oReturnObject = $oFootNotes.getByIndex($i)
-					If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_HEADER_FOOTER)
 
-					Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_FOOTNOTE, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_FOOTNOTE))
-				EndIf
-			Next
+		ElseIf ($oCursor.Text.getImplementationName() = "SwXBodyText") Then
 
-			$oEndNotes = $oDoc.getEndnotes()     ; Not found in Footnotes, check Endnotes.
-			If Not IsObj($oEndNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_BODY_TEXT)
+		EndIf
+	EndIf
 
-			For $i = 0 To $oEndNotes.getCount() - 1
-				If ($oEndNotes.getByIndex($i).ReferenceId() = $oCursor.Text.ReferenceId()) And _
-						($oEndNotes.getByIndex($i).Text() = $oCursor.Text()) Then
-					$oReturnObject = $oEndNotes.getByIndex($i)
-					If Not IsObj($oReturnObject) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
-
-					Return ($bReturnObject) ? (SetError($__LO_STATUS_SUCCESS, $LOW_CURDATA_ENDNOTE, $oReturnObject)) : (SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURDATA_ENDNOTE))
-				EndIf
-			Next
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0) ; no matches
-	EndSwitch
-
-	Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)         ; unknown data type.
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; unknown data type.
 EndFunc   ;==>__LOWriter_Internal_CursorGetDataType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -4437,31 +4338,30 @@ Func __LOWriter_Internal_CursorGetType(ByRef $oCursor)
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	Switch $oCursor.getImplementationName()
-		Case "SwXTextViewCursor"
+	If $oCursor.supportsService("com.sun.star.text.TextViewCursor") Then ; "SwXTextViewCursor"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_VIEW_CURSOR)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_VIEW_CURSOR)
 
-		Case "SwXTextTableCursor"
+	ElseIf $oCursor.supportsService("com.sun.star.text.TextTableCursor") Then ; "SwXTextTableCursor"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TABLE_CURSOR)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TABLE_CURSOR)
 
-		Case "SwXTextCursor", "SvxUnoTextCursor" ; SvxUnoTextCursor is a Text Cursor created in a TextBox Form Control.
+	ElseIf $oCursor.supportsService("com.sun.star.text.TextCursor") Then ; "SwXTextCursor", "SvxUnoTextCursor" ; SvxUnoTextCursor is a Text Cursor created in a TextBox Form Control.
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_CURSOR)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_CURSOR)
 
-		Case "SwXParagraph"
+	ElseIf $oCursor.supportsService("com.sun.star.text.Paragraph") Then ; "SwXParagraph"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_PARAGRAPH)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_PARAGRAPH)
 
-		Case "SwXTextPortion"
+	ElseIf $oCursor.supportsService("com.sun.star.text.TextPortion") Then ; "SwXTextPortion"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_PORTION)
+		Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_CURTYPE_TEXT_PORTION)
 
-		Case Else
+	Else
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; unknown Cursor type.
-	EndSwitch
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)     ; unknown Cursor type.
+	EndIf
 EndFunc   ;==>__LOWriter_Internal_CursorGetType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
@@ -4907,7 +4807,7 @@ Func __LOWriter_NumStyleModify(ByRef $oDoc, ByRef $oNumRules, $iLevel, $atNumLev
 		$bNumDocOpen = True
 	EndIf
 
-	; $oNumRules.replaceByIndex($iGetLevel, $atNumLevel); This should work but doesn't -- It would seem that the Array passed by
+	; $oNumRules.replaceByIndex($iLevel, $atNumLevel); This should work but doesn't -- It would seem that the Array passed by
 	; AutoIt is not recognized as an appropriate array(or Sequence) by LibreOffice, or perhaps as variable type "Any", which is
 	; what LibreOffice replace by index is expecting, and consequently causes a com.sun.star.lang.IllegalArgumentException COM error.
 
@@ -6051,7 +5951,7 @@ EndFunc   ;==>__LOWriter_ParBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Set $iNumChars, $iLines, $iSpcTxt to 0 to disable DropCaps.
-;                  I am unable to find a way to set Drop Caps character style to "None" as is available in the User Interface. When it is set to "None" Libre returns a blank string ("") but setting it to a blank string throws a COM error/Exception. Consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
+;                  I am unable to find a way to set Drop Caps character style to "None" as is available in the User Interface. When it is set to "None" LibreOffice returns a blank string ("") but setting it to a blank string throws a COM error/Exception. Consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
@@ -6170,7 +6070,7 @@ EndFunc   ;==>__LOWriter_ParHasTabStop
 ; Syntax ........: __LOWriter_ParHyphenation(ByRef $oObj[, $bAutoHyphen = Null[, $bHyphenNoCaps = Null[, $iMaxHyphens = Null[, $iMinLeadingChar = Null[, $iMinTrailingChar = Null]]]]])
 ; Parameters ....: $oObj                - [in/out] an object. Paragraph Style Object or a Cursor or Paragraph Object.
 ;                  $bAutoHyphen         - [optional] a boolean value. Default is Null. If True, automatic hyphenation is applied.
-;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. Libre 6.4 and up.
+;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. LibreOffice 6.4 and up.
 ;                  $iMaxHyphens         - [optional] an integer value (0-99). Default is Null. The maximum number of consecutive hyphens.
 ;                  $iMinLeadingChar     - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied).
 ;                  $iMinTrailingChar    - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied).
@@ -6194,7 +6094,7 @@ EndFunc   ;==>__LOWriter_ParHasTabStop
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 6.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 or 5 Element Array with values in order of function parameters. If the current LibreOffice Version is below 6.4, then the Array returned will contain 4 elements because $bHyphenNoCaps is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If the current LibreOffice Version is below 6.4, the $bHyphenNoCaps parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bAutoHyphen needs to be set to True for the rest of the settings to be activated, but they will be still successfully be set regardless.
@@ -6209,7 +6109,7 @@ Func __LOWriter_ParHyphenation(ByRef $oObj, $bAutoHyphen = Null, $bHyphenNoCaps 
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avHyphenation[4]
+	Local $avHyphenation[5]
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -6219,7 +6119,7 @@ Func __LOWriter_ParHyphenation(ByRef $oObj, $bAutoHyphen = Null, $bHyphenNoCaps 
 					$oObj.ParaHyphenationMaxLeadingChars(), $oObj.ParaHyphenationMaxTrailingChars())
 
 		Else
-			__LO_ArrayFill($avHyphenation, $oObj.ParaIsHyphenation(), $oObj.ParaHyphenationMaxHyphens(), _
+			__LO_ArrayFill($avHyphenation, $oObj.ParaIsHyphenation(), Null, $oObj.ParaHyphenationMaxHyphens(), _
 					$oObj.ParaHyphenationMaxLeadingChars(), $oObj.ParaHyphenationMaxTrailingChars())
 		EndIf
 
@@ -6463,7 +6363,7 @@ EndFunc   ;==>__LOWriter_ParOutLineAndList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Break Type must be set before Page Style will be able to be set, and page style needs set before $iPgNumOffSet can be set.
-;                  Libre doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both) and (Page both), but doesn't throw an error when being set to either one, so they are included here, though I'm not sure if they will work correctly.
+;                  LibreOffice doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both) and (Page both), but doesn't throw an error when being set to either one, so they are included here, though I'm not sure if they will work correctly.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
@@ -6633,7 +6533,7 @@ EndFunc   ;==>__LOWriter_ParShadow
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters. If the LibreOffice version is below 3.6, the $bAddSpace parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bPageLineSpc(Register mode) is only used if the register mode property of the page style is switched on. $bPageLineSpc(Register Mode) Aligns the baseline of each line of text to a vertical document grid, so that each line is the same height.
@@ -6652,7 +6552,7 @@ Func __LOWriter_ParSpace(ByRef $oObj, $iAbovePar = Null, $iBelowPar = Null, $bAd
 
 	Local $tLine
 	Local $iError = 0
-	Local $avSpacing[5]
+	Local $avSpacing[6]
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -6662,7 +6562,7 @@ Func __LOWriter_ParSpace(ByRef $oObj, $iAbovePar = Null, $iBelowPar = Null, $bAd
 					$oObj.ParaLineSpacing.Mode(), $oObj.ParaLineSpacing.Height(), $oObj.ParaRegisterModeActive())
 
 		Else
-			__LO_ArrayFill($avSpacing, $oObj.ParaTopMargin(), $oObj.ParaBottomMargin(), $oObj.ParaLineSpacing.Mode(), $oObj.ParaLineSpacing.Height(), _
+			__LO_ArrayFill($avSpacing, $oObj.ParaTopMargin(), $oObj.ParaBottomMargin(), Null, $oObj.ParaLineSpacing.Mode(), $oObj.ParaLineSpacing.Height(), _
 					$oObj.ParaRegisterModeActive())
 		EndIf
 
@@ -6815,7 +6715,7 @@ EndFunc   ;==>__LOWriter_ParStyleCompare
 ; Modified ......:
 ; Remarks .......: $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position.
 ;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
-;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
+;                  $iFillChar, LibreOffice's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by LibreOffice are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
 ; Related .......: _LO_UnitConvert
@@ -6844,7 +6744,7 @@ Func __LOWriter_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment = Null, $i
 	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	$tTabStruct.Position = $iPosition
-	; If set to 0 Libre sets fill character to Null instead of setting to None. 32 = None.(Space character)
+	; If set to 0 LibreOffice sets fill character to Null instead of setting to None. 32 = None.(Space character)
 	$tTabStruct.Alignment = 0
 	$tTabStruct.DecimalChar = 0
 	$tTabStruct.FillChar = 32
@@ -7020,7 +6920,7 @@ EndFunc   ;==>__LOWriter_ParTabStopDelete
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per Paragraph Style.
 ;                  $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position in @Extended when $iPosition is set, return value will be set to 2. See Return Values.
 ;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
-;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
+;                  $iFillChar, LibreOffice's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by LibreOffice are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LO_UnitConvert

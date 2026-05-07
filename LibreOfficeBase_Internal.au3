@@ -15,7 +15,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Various functions for internal data processing, data retrieval, retrieving and applying settings for LibreOffice UDF.
+; Description ...: Various functions for internal data processing, data retrieval, retrieving and applying settings for LibreOffice Base.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;

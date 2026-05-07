@@ -587,7 +587,7 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the Array will contain 7 elements, as $bIsUTC will be eliminated.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the $bIsUTC  parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -601,7 +601,7 @@ Func _LOWriter_DateStructModify(ByRef $tDateStruct, $iYear = Null, $iMonth = Nul
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avMod[7]
+	Local $avMod[8]
 
 	If Not IsObj($tDateStruct) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -612,7 +612,7 @@ Func _LOWriter_DateStructModify(ByRef $tDateStruct, $iYear = Null, $iMonth = Nul
 
 		Else
 			__LO_ArrayFill($avMod, $tDateStruct.Year(), $tDateStruct.Month(), $tDateStruct.Day(), $tDateStruct.Hours(), _
-					$tDateStruct.Minutes(), $tDateStruct.Seconds(), $tDateStruct.NanoSeconds())
+					$tDateStruct.Minutes(), $tDateStruct.Seconds(), $tDateStruct.NanoSeconds(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avMod)
@@ -620,7 +620,7 @@ Func _LOWriter_DateStructModify(ByRef $tDateStruct, $iYear = Null, $iMonth = Nul
 
 	If ($iYear <> Null) Then
 		If Not IsInt($iYear) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-		If Not (StringLen($iYear) = 4) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not StringRegExp($iYear, "\d{4}") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$tDateStruct.Year = $iYear
 		$iError = ($tDateStruct.Year() = $iYear) ? ($iError) : (BitOR($iError, 1))
@@ -789,18 +789,18 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FindFormatModifyEffects
 ; Description ...: Modify or Add Find Format Effects Settings.
-; Syntax ........: _LOWriter_FindFormatModifyEffects(ByRef $atFormat[,$iRelief = Null[, $iCase = Null[, $bOutline = Null[, $bShadow = Null]]]])
+; Syntax ........: _LOWriter_FindFormatModifyEffects(ByRef $atFormat[, $iCase = Null[,$iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Relief setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Relief format or not, this is supposed to be fixed in L.O. 7.6.
 ;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Relief setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Relief format or not, this is supposed to be fixed in L.O. 7.6.
 ;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $atFormat not an Array or contains more than 1 column.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 2 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 4 Return 0 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 5 Return 0 = $bShadow not a Boolean.
 ;                  --Success--
@@ -814,30 +814,30 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_FindFormatModifyEffects(ByRef $atFormat, $iRelief = Null, $iCase = Null, $bOutline = Null, $bShadow = Null)
+Func _LOWriter_FindFormatModifyEffects(ByRef $atFormat, $iCase = Null, $iRelief = Null, $bOutline = Null, $bShadow = Null)
 	Local Const $UBOUND_COLUMNS = 2
 
 	If Not IsArray($atFormat) Or (UBound($atFormat, $UBOUND_COLUMNS) > 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	If ($iRelief <> Null) Then
-		If ($iRelief = Default) Then
-			__LOWriter_FindFormatDeleteSetting($atFormat, "CharRelief")
-
-		Else
-			If Not __LO_IntIsBetween($iRelief, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharRelief", $iRelief))
-		EndIf
-	EndIf
 
 	If ($iCase <> Null) Then
 		If ($iCase = Default) Then
 			__LOWriter_FindFormatDeleteSetting($atFormat, "CharCaseMap")
 
 		Else
-			If Not __LO_IntIsBetween($iCase, $LOW_CHAR_CASEMAP_NONE, $LOW_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+			If Not __LO_IntIsBetween($iCase, $LOW_CHAR_CASEMAP_NONE, $LOW_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharCaseMap", $iCase))
+		EndIf
+	EndIf
+
+	If ($iRelief <> Null) Then
+		If ($iRelief = Default) Then
+			__LOWriter_FindFormatDeleteSetting($atFormat, "CharRelief")
+
+		Else
+			If Not __LO_IntIsBetween($iRelief, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharRelief", $iRelief))
 		EndIf
 	EndIf
 
@@ -987,7 +987,7 @@ Func _LOWriter_FindFormatModifyFont(ByRef $atFormat, $sFontName = Null, $iFontSi
 		Else
 			If Not __LO_IntIsBetween($iHighlight, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-			; CharHighlight; same as CharBackColor---Libre seems to use back color for highlighting.
+			; CharHighlight; same as CharBackColor---LibreOffice seems to use back color for highlighting.
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharBackColor", $iHighlight))
 			If __LO_VersionCheck(4.2) Then __LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharHighlight", $iHighlight))
 		EndIf
@@ -1002,7 +1002,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyFont
 ; Syntax ........: _LOWriter_FindFormatModifyHyphenation(ByRef $atFormat[, $bAutoHyphen = Null[, $bHyphenNoCaps = Null[, $iMaxHyphens = Null[, $iMinLeadingChar = Null[, $iMinTrailingChar = Null]]]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $bAutoHyphen         - [optional] a boolean value. Default is Null. If True, automatic hyphenation is applied.
-;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. Libre 6.4 and up.
+;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. LibreOffice 6.4 and up.
 ;                  $iMaxHyphens         - [optional] an integer value (0-99). Default is Null. The maximum number of consecutive hyphens.
 ;                  $iMinLeadingChar     - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied).
 ;                  $iMinTrailingChar    - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied).
@@ -1350,7 +1350,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPageBreak
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  0 is the normal $iSubScript or $iSuperScript setting.
-;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrievine subscript values.
+;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
 ; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange
@@ -1438,7 +1438,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values for $nKerning are from -2 Pt to 928.8 Pt. the figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: ;928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258.
-;                  Attempting to set Libre's kerning value to anything over 32768 Hundredths of a Millimeter causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
+;                  Attempting to set LibreOffice's kerning value to anything over 32768 Hundredths of a Millimeter causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
 ; Related .......: _LO_UnitConvert, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes

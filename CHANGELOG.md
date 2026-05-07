@@ -88,6 +88,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added _LO_Terminate to all examples for clean-up.
 - Removed returns with Object calls directly in them. Also adding applicable error checking:
   - _LO_PrintersGetNamesAlt
+- Added Boolean return to `_LO_Terminate`.
+- Lowered sleep time from 500 ms to 250 ms in `_LO_Terminate`.
 
 #### Documented
 
@@ -478,6 +480,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Property error checking to some functions:
   - _LOBase_DocMaximize
   - _LOBase_DocMinimize
+- All functions that returned variable sized arrays depending on current LibreOffice version now return the same sized array, with Null values for invalid properties:
+  - _LOBase_DateStructModify
+  - _LOBase_TableColDefinition
 
 #### Documented
 
@@ -1017,6 +1022,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOC_ZOOMTYPE_*
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
 - Added Enumeration values to comments after enumerated Constants.
+- Added default value for user inputs in examples.
 
 #### Changed
 
@@ -1304,6 +1310,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Property error checking to some functions:
   - _LOCalc_DocMaximize
   - _LOCalc_DocMinimize
+- Add an error return to Style Organizer functions for trying to rename built-in styles.
+- All functions that returned variable sized arrays depending on current LibreOffice version now return the same sized array, with Null values for invalid properties:
+  - _LOCalc_CellStyleOrganizer
+  - _LOCalc_PageStyleFooter
+  - _LOCalc_PageStyleHeader
+  - _LOCalc_PageStyleOrganizer
+  - _LOCalc_PageStyleSheetScale
 
 #### Documented
 
@@ -1418,6 +1431,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_SheetAdd
   - _LOCalc_SheetProtect
   - _LOCalc_SheetUnprotect
+- Removed ImplementationName usage, as it is unreliable long term.
 
 #### Removed
 
@@ -1688,6 +1702,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - __LOWriter_GradientIsModified
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
 - Added Enumeration values to comments after enumerated Constants.
+- Added default value for user inputs in examples.
 
 #### Changed
 
@@ -2295,6 +2310,43 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_DocMinimize
   - _LOWriter_TableCellFormula
   - _LOWriter_TableCellValue
+- Rearranged Effect parameters to match LO UI order.
+  > Previous order:(***$iRelief***, $iCase, $bHidden, $bOutline, $bShadow)
+  >
+  > New order:($iCase, $bHidden, ***$iRelief***, $bOutline, $bShadow)
+  - __LOWriter_CharEffect
+  - _LOWriter_CharStyleEffect
+  - _LOWriter_DirFrmtCharEffect
+  - _LOWriter_FindFormatModifyEffects
+  - _LOWriter_ParStyleEffect
+- Added Decorative parameter to `_LOWriter_ImageOptionsName`, which was added in L.O. 7.6.
+- Simplified `_LOWriter_CursorHyperlinkInsert` to have only a Cursor parameter, and less unnecessary options.
+- Add an error return to Style Organizer functions for trying to rename built-in styles.
+- Removed static $bKeepScale from `_LOWriter_ImageCrop`. Return is now always Null, and default state is True.
+- All functions that returned variable sized arrays depending on current LibreOffice version now return the same sized array, with Null values for invalid properties:
+  - __LOWriter_CharFontColor
+  - __LOWriter_ParHyphenation
+  - __LOWriter_ParSpace
+  - _LOWriter_CharStyleOrganizer
+  - _LOWriter_DocDescription
+  - _LOWriter_FieldCommentModify
+  - _LOWriter_FrameStyleOrganizer
+  - _LOWriter_FrameStyleTypeSize
+  - _LOWriter_DateStructModify
+  - _LOWriter_ImageOptionsName
+  - _LOWriter_ImageTypeSize
+  - _LOWriter_NumStyleCustomize
+  - _LOWriter_NumStyleOrganizer
+  - _LOWriter_PageStyleFooter
+  - _LOWriter_PageStyleHeader
+  - _LOWriter_PageStyleLayout
+  - _LOWriter_PageStyleMargins
+  - _LOWriter_PageStyleOrganizer
+  - _LOWriter_ParStyleOrganizer
+- Rearranged `_LOWriter_PageStyleOrganizer` parameters to match LO UI order, and also similar functions.
+  > Previous order:($oDoc, $oPageStyle, $sNewPageStyleName, ***$bHidden***, $sFollowStyle)
+  >
+  > New order:($oDoc, $oPageStyle, $sNewPageStyleName, $sFollowStyle, ***$bHidden***)
 
 #### Documented
 
@@ -2447,6 +2499,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_ParStyleOverLine
   - _LOWriter_ParStyleStrikeOut
   - _LOWriter_TableCellBorderColor
+- `_LOWriter_TableCellFormula` Wrong Bit value for property setting error.
 
 #### Refactored
 
@@ -2544,6 +2597,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FormatKeyDelete
   - _LOWriter_TableColumnInsert
   - _LOWriter_TableRowInsert
+- Removed ImplementationName usages generally, as it is unreliable long term.
+- Simplified some internal workings of some cursor functions.
+- Change StringLen for StringRegExp in `_LOWriter_DateStructModify`.
 
 #### Removed
 
@@ -2599,6 +2655,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_FieldSetVarMasterDelete`, split into separate files.
 - Second _LOWriter_DocConnect example.
 - LibreOfficeWriter_Cell.au3.
+- __LOWriter_CursorGetText
 
 [To Top](#releases)
 
