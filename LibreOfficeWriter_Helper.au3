@@ -620,7 +620,7 @@ Func _LOWriter_DateStructModify(ByRef $tDateStruct, $iYear = Null, $iMonth = Nul
 
 	If ($iYear <> Null) Then
 		If Not IsInt($iYear) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-		If Not (StringLen($iYear) = 4) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not StringRegExp($iYear, "\d{4}") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$tDateStruct.Year = $iYear
 		$iError = ($tDateStruct.Year() = $iYear) ? ($iError) : (BitOR($iError, 1))
