@@ -587,7 +587,7 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the Array will contain 7 elements, as $bIsUTC will be eliminated.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the $bIsUTC  parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -601,7 +601,7 @@ Func _LOWriter_DateStructModify(ByRef $tDateStruct, $iYear = Null, $iMonth = Nul
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avMod[7]
+	Local $avMod[8]
 
 	If Not IsObj($tDateStruct) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -612,7 +612,7 @@ Func _LOWriter_DateStructModify(ByRef $tDateStruct, $iYear = Null, $iMonth = Nul
 
 		Else
 			__LO_ArrayFill($avMod, $tDateStruct.Year(), $tDateStruct.Month(), $tDateStruct.Day(), $tDateStruct.Hours(), _
-					$tDateStruct.Minutes(), $tDateStruct.Seconds(), $tDateStruct.NanoSeconds())
+					$tDateStruct.Minutes(), $tDateStruct.Seconds(), $tDateStruct.NanoSeconds(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avMod)

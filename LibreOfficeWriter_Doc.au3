@@ -640,7 +640,7 @@ EndFunc   ;==>_LOWriter_DocCreate
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version is less than 24.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array or a 12 Element array if current LibreOffice version 24.2 or greater. Returning array with values in order of function parameters. Any array values could be empty if no values are presently set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 12 Element Array with values in order of function parameters. If current LibreOffice version is less than 24.2, $asContributor, $sCoverage, $sIdentifier, $asPublisher, $asRelation, $sRights, $sSource, $sType will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: "Title" is the Title as found in File>Properties, not the Document's Title as set when saving it.
@@ -657,7 +657,7 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 
 	Local $oDocProp
 	Local $iError = 0
-	Local $avDescription[4]
+	Local $avDescription[12]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -670,7 +670,8 @@ Func _LOWriter_DocDescription(ByRef $oDoc, $sTitle = Null, $sSubject = Null, $as
 					$oDocProp.Identifier(), $oDocProp.Publisher(), $oDocProp.Relation(), $oDocProp.Rights(), $oDocProp.Source(), $oDocProp.Type())
 
 		Else
-			__LO_ArrayFill($avDescription, $oDocProp.Title(), $oDocProp.Subject(), $oDocProp.Keywords(), $oDocProp.Description())
+			__LO_ArrayFill($avDescription, $oDocProp.Title(), $oDocProp.Subject(), $oDocProp.Keywords(), $oDocProp.Description(), Null, Null, Null, Null, Null, _
+					Null, Null, Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDescription)

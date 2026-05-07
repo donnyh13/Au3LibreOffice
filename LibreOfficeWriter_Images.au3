@@ -1868,7 +1868,7 @@ EndFunc   ;==>_LOWriter_ImageOptions
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version less than 7.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 or 4 Element Array with values in order of function parameters. A 4 element array will be returned in LibreOffice version 7.6+ with the Decorative parameter.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. If the LibreOffice version is below 7.6, the $bDecorative parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1883,7 +1883,7 @@ Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAlt
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $asName[3]
+	Local $asName[4]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1893,7 +1893,7 @@ Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAlt
 			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description(), $oImage.Decorative())
 
 		Else
-			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description())
+			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asName)
@@ -2549,7 +2549,7 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 or 7 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater than or equal to 4.3, then a 7 element Array is returned, else 5 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. If the LibreOffice version is below 7.6, the $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2572,13 +2572,12 @@ Func _LOWriter_ImageTypeSize(ByRef $oDoc, ByRef $oImage, $iWidth = Null, $iRelat
 
 	If __LO_VarsAreNull($iWidth, $iRelativeWidth, $iWidthRelativeTo, $iHeight, $iRelativeHeight, $iHeightRelativeTo, $bKeepRatio) Then
 		If __LO_VersionCheck(4.3) Then
-			__LO_ArrayFill($avSize, $oImage.Width(), $oImage.RelativeWidth(), $oImage.RelativeWidthRelation(), _
-					$oImage.Height(), $oImage.RelativeHeight(), $oImage.RelativeHeightRelation(), _
-					(($oImage.IsSyncHeightToWidth() And $oImage.IsSyncWidthToHeight()) ? (True) : (False)))
+			__LO_ArrayFill($avSize, $oImage.Width(), $oImage.RelativeWidth(), $oImage.RelativeWidthRelation(), $oImage.Height(), $oImage.RelativeHeight(), _
+					$oImage.RelativeHeightRelation(), (($oImage.IsSyncHeightToWidth() And $oImage.IsSyncWidthToHeight()) ? (True) : (False)))
 
 		Else
-			__LO_ArrayFill($avSize, $oImage.Width(), $oImage.RelativeWidth(), $oImage.Height(), $oImage.RelativeHeight(), _
-					(($oImage.IsSyncHeightToWidth() And $oImage.IsSyncWidthToHeight()) ? (True) : (False)))
+			__LO_ArrayFill($avSize, $oImage.Width(), $oImage.RelativeWidth(), Null, $oImage.Height(), $oImage.RelativeHeight(), _
+					Null, (($oImage.IsSyncHeightToWidth() And $oImage.IsSyncWidthToHeight()) ? (True) : (False)))
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avSize)

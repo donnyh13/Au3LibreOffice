@@ -45,22 +45,12 @@ Func Example()
 	$avPageStyleSettings = _LOWriter_PageStyleMargins($oPageStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Page style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; If LibreOffice version is higher or equal to 7.2 then display the Gutter margin setting.
-	If (_LO_VersionGet(True) >= 7.2) Then
-		MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Margin settings are as follows: " & @CRLF & _
-				"The Left page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[0] & @CRLF & _
-				"The Right page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[1] & @CRLF & _
-				"The Top page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[2] & @CRLF & _
-				"The Bottom page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[3] & @CRLF & _
-				"The Gutter page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[4])
-
-	Else ; Display all other margin settings, except the Gutter margin.
-		MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Margin settings are as follows: " & @CRLF & _
-				"The Left page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[0] & @CRLF & _
-				"The Right page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[1] & @CRLF & _
-				"The Top page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[2] & @CRLF & _
-				"The Bottom page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[3])
-	EndIf
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Margin settings are as follows: " & @CRLF & _
+			"The Left page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[0] & @CRLF & _
+			"The Right page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[1] & @CRLF & _
+			"The Top page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[2] & @CRLF & _
+			"The Bottom page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[3] & @CRLF & _
+			"The Gutter page margin, in Hundredths of a Millimeter (HMM), is: " & $avPageStyleSettings[4])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

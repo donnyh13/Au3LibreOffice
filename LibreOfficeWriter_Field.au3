@@ -949,7 +949,7 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ;                  |                               32 = Error setting $bResolved
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array If L.O. version is less than 4.0, else a 6 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.0, the $sInitials and $sName parameters will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -963,7 +963,7 @@ Func _LOWriter_FieldCommentModify(ByRef $oDoc, ByRef $oCommentField, $sContent =
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avAnnot[4]
+	Local $avAnnot[6]
 	Local $bRefresh = False
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -975,7 +975,7 @@ Func _LOWriter_FieldCommentModify(ByRef $oDoc, ByRef $oCommentField, $sContent =
 					$oCommentField.Name(), $oCommentField.Resolved())
 
 		Else
-			__LO_ArrayFill($avAnnot, $oCommentField.Content(), $oCommentField.Author(), $oCommentField.DateTimeValue(), $oCommentField.Resolved())
+			__LO_ArrayFill($avAnnot, $oCommentField.Content(), $oCommentField.Author(), $oCommentField.DateTimeValue(), Null, Null, $oCommentField.Resolved())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avAnnot)

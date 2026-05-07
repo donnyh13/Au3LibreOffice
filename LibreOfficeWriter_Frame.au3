@@ -1373,7 +1373,7 @@ Func _LOWriter_FrameColumnSize(ByRef $oFrame, $iColumn, $bAutoWidth = Null, $iGl
 
 		Else
 			__LO_ArrayFill($avColumnSize, $oTextColumns.IsAutomatic, $oTextColumns.AutomaticDistance(), _
-					$atColumns[$iColumn].RightMargin() + $atColumns[$iColumn + 1].LeftMargin(), $atColumns[$iColumn].Width())
+					($atColumns[$iColumn].RightMargin() + $atColumns[$iColumn + 1].LeftMargin()), $atColumns[$iColumn].Width())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avColumnSize)
@@ -3569,7 +3569,7 @@ Func _LOWriter_FrameStyleColumnSize(ByRef $oFrameStyle, $iColumn, $bAutoWidth = 
 
 		Else
 			__LO_ArrayFill($avColumnSize, $oTextColumns.IsAutomatic, $oTextColumns.AutomaticDistance(), _
-					$atColumns[$iColumn].RightMargin() + $atColumns[$iColumn + 1].LeftMargin(), $atColumns[$iColumn].Width())
+					($atColumns[$iColumn].RightMargin() + $atColumns[$iColumn + 1].LeftMargin()), $atColumns[$iColumn].Width())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avColumnSize)
@@ -4051,7 +4051,7 @@ EndFunc   ;==>_LOWriter_FrameStyleOptions
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 or 4 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 3 elements because $bHidden is not available.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4076,7 +4076,7 @@ Func _LOWriter_FrameStyleOrganizer(ByRef $oDoc, $oFrameStyle, $sNewFrameStyleNam
 			__LO_ArrayFill($avOrganizer, $oFrameStyle.Name(), $oFrameStyle.ParentStyle(), $oFrameStyle.IsAutoUpdate(), $oFrameStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oFrameStyle.Name(), $oFrameStyle.ParentStyle(), $oFrameStyle.IsAutoUpdate())
+			__LO_ArrayFill($avOrganizer, $oFrameStyle.Name(), $oFrameStyle.ParentStyle(), $oFrameStyle.IsAutoUpdate(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -4555,7 +4555,7 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater or equal to than 4.3, then a 9 element Array is returned, else 7 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If the current LibreOffice version is less than 4.3, then both $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4571,7 +4571,7 @@ Func _LOWriter_FrameStyleTypeSize(ByRef $oDoc, ByRef $oFrameStyle, $iWidth = Nul
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avSize[7]
+	Local $avSize[9]
 	Local Const $iCONST_AutoHW_OFF = 1, $iCONST_AutoHW_ON = 2
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -4586,9 +4586,9 @@ Func _LOWriter_FrameStyleTypeSize(ByRef $oDoc, ByRef $oFrameStyle, $iWidth = Nul
 					(($oFrameStyle.IsSyncHeightToWidth() And $oFrameStyle.IsSyncWidthToHeight()) ? (True) : (False)))
 
 		Else
-			__LO_ArrayFill($avSize, $oFrameStyle.Width(), $oFrameStyle.RelativeWidth(), _
-					($oFrameStyle.WidthType() = $iCONST_AutoHW_ON) ? (True) : (False), $oFrameStyle.Height(), _
-					$oFrameStyle.RelativeHeight(), ($oFrameStyle.SizeType() = $iCONST_AutoHW_ON) ? (True) : (False), _
+			__LO_ArrayFill($avSize, $oFrameStyle.Width(), $oFrameStyle.RelativeWidth(), Null, _
+					($oFrameStyle.WidthType() = $iCONST_AutoHW_ON) ? (True) : (False), $oFrameStyle.Height(), $oFrameStyle.RelativeHeight(), _
+					Null, ($oFrameStyle.SizeType() = $iCONST_AutoHW_ON) ? (True) : (False), _
 					(($oFrameStyle.IsSyncHeightToWidth() And $oFrameStyle.IsSyncWidthToHeight()) ? (True) : (False)))
 		EndIf
 

@@ -1308,6 +1308,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_DocMaximize
   - _LOCalc_DocMinimize
 - Add an error return to Style Organizer functions for trying to rename built-in styles.
+- All functions that returned variable sized arrays depending on current LibreOffice version now return the same sized array, with Null values for invalid properties:
+  - _LOCalc_CellStyleOrganizer
+  - _LOCalc_PageStyleFooter
+  - _LOCalc_PageStyleHeader
+  - _LOCalc_PageStyleOrganizer
+  - _LOCalc_PageStyleSheetScale
 
 #### Documented
 
@@ -2314,6 +2320,26 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Simplified `_LOWriter_CursorHyperlinkInsert` to have only a Cursor parameter, and less unnecessary options.
 - Add an error return to Style Organizer functions for trying to rename built-in styles.
 - Removed static $bKeepScale from `_LOWriter_ImageCrop`. Return is now always Null, and default state is True.
+- All functions that returned variable sized arrays depending on current LibreOffice version now return the same sized array, with Null values for invalid properties:
+  - __LOWriter_CharFontColor
+  - __LOWriter_ParHyphenation
+  - __LOWriter_ParSpace
+  - _LOWriter_CharStyleOrganizer
+  - _LOWriter_DocDescription
+  - _LOWriter_FieldCommentModify
+  - _LOWriter_FrameStyleOrganizer
+  - _LOWriter_FrameStyleTypeSize
+  - _LOWriter_DateStructModify
+  - _LOWriter_ImageOptionsName
+  - _LOWriter_ImageTypeSize
+  - _LOWriter_NumStyleCustomize
+  - _LOWriter_NumStyleOrganizer
+  - _LOWriter_PageStyleFooter
+  - _LOWriter_PageStyleHeader
+  - _LOWriter_PageStyleLayout
+  - _LOWriter_PageStyleMargins
+  - _LOWriter_PageStyleOrganizer
+  - _LOWriter_ParStyleOrganizer
 
 #### Documented
 
