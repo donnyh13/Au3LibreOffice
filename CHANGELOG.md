@@ -480,6 +480,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Property error checking to some functions:
   - _LOBase_DocMaximize
   - _LOBase_DocMinimize
+- All functions that returned variable sized arrays depending on current LibreOffice version now return the same sized array, with Null values for invalid properties:
+  - _LOBase_DateStructModify
+  - _LOBase_TableColDefinition
 
 #### Documented
 
