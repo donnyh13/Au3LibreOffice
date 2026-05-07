@@ -16,8 +16,8 @@ Func Example()
 	$oPageStyle = _LOWriter_PageStyleCreate($oDoc, "NewPageStyle")
 	If @error Then _ERROR($oDoc, "Failed to create a new Page Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Change the Page Style's name to "New-PageStyle-Name", hidden to False, Set the follow style to "HTML"
-	_LOWriter_PageStyleOrganizer($oDoc, $oPageStyle, "New-PageStyle-Name", False, "HTML")
+	; Change the Page Style's name to "New-PageStyle-Name", Set the follow style to "HTML", hidden to False.
+	_LOWriter_PageStyleOrganizer($oDoc, $oPageStyle, "New-PageStyle-Name", "HTML", False)
 	If @error Then _ERROR($oDoc, "Failed to modify Page Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -26,8 +26,8 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Organizer settings are as follows: " & @CRLF & _
 			"The Page Style's name is: " & $avPageStyleSettings[0] & @CRLF & _
-			"Is this style hidden in the User Interface? True/False: " & $avPageStyleSettings[1] & @CRLF & _
-			"The Page Style's name that comes after this style is: " & $avPageStyleSettings[2])
+			"The Page Style's name that comes after this style is: " & $avPageStyleSettings[1] & @CRLF & _
+			"Is this style hidden in the User Interface? True/False: " & $avPageStyleSettings[2])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

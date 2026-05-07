@@ -4879,12 +4879,12 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleOrganizer
 ; Description ...: Set or retrieve the Organizer settings of a Page Style.
-; Syntax ........: _LOWriter_PageStyleOrganizer(ByRef $oDoc, $oPageStyle[, $sNewPageStyleName = Null[, $bHidden = Null[, $sFollowStyle = Null]]])
+; Syntax ........: _LOWriter_PageStyleOrganizer(ByRef $oDoc, $oPageStyle[, $sNewPageStyleName = Null[, $sFollowStyle = Null[, $bHidden = Null]]])
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $sNewPageStyleName   - [optional] a string value. Default is Null. The new name to set the Page Style called in $oPageStyle to.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the style is hidden in L.O. UI. LibreOffice 4.0 and Up.
 ;                  $sFollowStyle        - [optional] a string value. Default is Null. The name of the Page style that is applied After this Page Style.
+;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the style is hidden in L.O. UI. LibreOffice 4.0 and Up.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4894,14 +4894,14 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ;                  @Error 1 @Extended 4 Return 0 = $sNewPageStyleName not a String.
 ;                  @Error 1 @Extended 5 Return 0 = Page Style name called in $sNewPageStyleName already exists in document.
 ;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Page Styles.
-;                  @Error 1 @Extended 7 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $sFollowStyle not a String.
-;                  @Error 1 @Extended 9 Return 0 = Page Style called in $sFollowStyle doesn't exist in this document.
+;                  @Error 1 @Extended 7 Return 0 = $sFollowStyle not a String.
+;                  @Error 1 @Extended 8 Return 0 = Page Style called in $sFollowStyle doesn't exist in this document.
+;                  @Error 1 @Extended 9 Return 0 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
-;                  |                               2 = Error setting $bHidden
-;                  |                               4 = Error setting $sFollowStyle
+;                  |                               2 = Error setting $sFollowStyle
+;                  |                               4 = Error setting $bHidden
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
@@ -4915,7 +4915,7 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyleName = Null, $bHidden = Null, $sFollowStyle = Null)
+Func _LOWriter_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyleName = Null, $sFollowStyle = Null, $bHidden = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4926,12 +4926,12 @@ Func _LOWriter_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyle
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not $oPageStyle.supportsService("com.sun.star.style.PageStyle") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	If __LO_VarsAreNull($sNewPageStyleName, $bHidden, $sFollowStyle) Then
+	If __LO_VarsAreNull($sNewPageStyleName, $sFollowStyle, $bHidden) Then
 		If __LO_VersionCheck(4.0) Then
-			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), $oPageStyle.Hidden(), $oPageStyle.FollowStyle())
+			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), $oPageStyle.FollowStyle(), $oPageStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), Null, $oPageStyle.FollowStyle())
+			__LO_ArrayFill($avOrganizer, $oPageStyle.Name(), $oPageStyle.FollowStyle(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -4946,20 +4946,20 @@ Func _LOWriter_PageStyleOrganizer(ByRef $oDoc, ByRef $oPageStyle, $sNewPageStyle
 		$iError = (__LOWriter_PageStyleCompare($oDoc, $oPageStyle.Name(), $sNewPageStyleName)) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
+	If ($sFollowStyle <> Null) Then
+		If Not IsString($sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not _LOWriter_PageStyleExists($oDoc, $sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+
+		$oPageStyle.FollowStyle = $sFollowStyle
+		$iError = (__LOWriter_PageStyleCompare($oDoc, $oPageStyle.FollowStyle(), $sFollowStyle)) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oPageStyle.Hidden = $bHidden
-		$iError = ($oPageStyle.Hidden() = $bHidden) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($sFollowStyle <> Null) Then
-		If Not IsString($sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-		If Not _LOWriter_PageStyleExists($oDoc, $sFollowStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
-
-		$oPageStyle.FollowStyle = $sFollowStyle
-		$iError = (__LOWriter_PageStyleCompare($oDoc, $oPageStyle.FollowStyle(), $sFollowStyle)) ? ($iError) : (BitOR($iError, 4))
+		$iError = ($oPageStyle.Hidden() = $bHidden) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

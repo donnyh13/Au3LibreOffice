@@ -2343,6 +2343,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_PageStyleMargins
   - _LOWriter_PageStyleOrganizer
   - _LOWriter_ParStyleOrganizer
+- Rearranged `_LOWriter_PageStyleOrganizer` parameters to match LO UI order, and also similar functions.
+  > Previous order:($oDoc, $oPageStyle, $sNewPageStyleName, ***$bHidden***, $sFollowStyle)
+  >
+  > New order:($oDoc, $oPageStyle, $sNewPageStyleName, $sFollowStyle, ***$bHidden***)
 
 #### Documented
 
