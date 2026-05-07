@@ -951,7 +951,7 @@ Func __LOWriter_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = Nu
 
 	If __LO_VarsAreNull($iSuperScript, $iSubScript, $iRelativeSize) Then
 		__LO_ArrayFill($avPosition, ($oObj.CharEscapement() <= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), 1, 100)) ? ($oObj.CharEscapement()) : (-1)), _
-				($oObj.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), -1, -100)) ? (($oObj.CharEscapement() * -1)) : (-1)), _
+				($oObj.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oObj.CharEscapement(), -1, -100)) ? (Abs($oObj.CharEscapement())) : (-1)), _
 				$oObj.CharEscapementHeight())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avPosition)
