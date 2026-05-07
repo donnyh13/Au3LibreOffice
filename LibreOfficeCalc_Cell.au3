@@ -549,7 +549,7 @@ EndFunc   ;==>_LOCalc_CellEffect
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  Libre Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ; Related .......: _LOCalc_FontsGetNames, _LOCalc_CellStyleFont
 ; Link ..........:
 ; Example .......: Yes
@@ -1597,7 +1597,7 @@ EndFunc   ;==>_LOCalc_CellStyleExists
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  Libre Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ; Related .......: _LOCalc_FontsGetNames, _LOCalc_CellFont
 ; Link ..........:
 ; Example .......: Yes

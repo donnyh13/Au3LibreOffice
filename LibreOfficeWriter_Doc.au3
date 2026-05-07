@@ -1738,7 +1738,7 @@ EndFunc   ;==>_LOWriter_DocGetName
 ;                  @Error 1 @Extended 2 Return 0 = $bReturnLibreURL not a Boolean.
 ;                  @Error 1 @Extended 3 Return 0 = Document has no save path.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error converting Libre URL to Computer path format.
+;                  @Error 3 @Extended 1 Return 0 = Error converting LibreOffice URL to Computer path format.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
 ; Author ........: donnyh13
@@ -1804,7 +1804,7 @@ EndFunc   ;==>_LOWriter_DocHasPath
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocIsActive
-; Description ...: Tests if called document is the active document of other Libre windows.
+; Description ...: Tests if called document is the active document of other LibreOffice windows.
 ; Syntax ........: _LOWriter_DocIsActive(ByRef $oDoc)
 ; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Boolean
@@ -1814,7 +1814,7 @@ EndFunc   ;==>_LOWriter_DocHasPath
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 Return 0 = Failed to query Document whether it is active.
 ;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active Libre window. See remarks.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active LibreOffice window. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.

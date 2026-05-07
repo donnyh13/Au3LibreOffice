@@ -1364,7 +1364,7 @@ Func _LOWriter_FrameColumnSize(ByRef $oFrame, $iColumn, $bAutoWidth = Null, $iGl
 	If ($oTextColumns.ColumnCount() <= 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If ($iColumn > UBound($atColumns)) Or ($iColumn < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	$iColumn = $iColumn - 1 ; Libre Columns Array is 0 based -- Minus one to compensate
+	$iColumn = $iColumn - 1 ; LibreOffice Columns Array is 0 based -- Minus one to compensate
 
 	If __LO_VarsAreNull($bAutoWidth, $iGlobalSpacing, $iSpacing, $iWidth) Then
 		If ($iColumn = (UBound($atColumns) - 1)) Then ; If last column is called, there is no spacing value, so return the outer margin, which will be 0.
@@ -3560,7 +3560,7 @@ Func _LOWriter_FrameStyleColumnSize(ByRef $oFrameStyle, $iColumn, $bAutoWidth = 
 	If ($oTextColumns.ColumnCount() <= 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If ($iColumn > UBound($atColumns)) Or ($iColumn < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$iColumn = $iColumn - 1 ; Libre Columns Array is 0 based -- Minus one to compensate
+	$iColumn = $iColumn - 1 ; LibreOffice Columns Array is 0 based -- Minus one to compensate
 
 	If __LO_VarsAreNull($bAutoWidth, $iGlobalSpacing, $iSpacing, $iWidth) Then
 		If ($iColumn = (UBound($atColumns) - 1)) Then ; If last column is called, there is no spacing value, so return the outer margin, which will be 0.
@@ -4027,7 +4027,7 @@ EndFunc   ;==>_LOWriter_FrameStyleOptions
 ;                  $sNewFrameStyleName  - [optional] a string value. Default is Null. The new name to set $sFrameStyle Frame style to.
 ;                  $sParentStyle        - [optional] a string value. Default is Null. Set an existing Frame style (or an Empty String ("") = - None -) to apply its settings to the current style. Use the other settings to modify the inherited style settings.
 ;                  $bAutoUpdate         - [optional] a boolean value. Default is Null. If True, Updates the style when you apply direct formatting to a Frame using this style in your document. The formatting of all Frames using this style is automatically updated.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, hide the style in the UI. (Libre 4.0 and up only.)
+;                  $bHidden             - [optional] a boolean value. Default is Null. If True, hide the style in the UI. (LibreOffice 4.0 and up only.)
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

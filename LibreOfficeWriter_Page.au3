@@ -1386,7 +1386,7 @@ Func _LOWriter_PageStyleColumnSize(ByRef $oPageStyle, $iColumn, $bAutoWidth = Nu
 	If ($oTextColumns.ColumnCount() <= 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If ($iColumn > UBound($atColumns)) Or ($iColumn < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$iColumn = $iColumn - 1 ; Libre Columns Array is 0 based -- Minus one to compensate
+	$iColumn = $iColumn - 1 ; LibreOffice Columns Array is 0 based -- Minus one to compensate
 
 	If __LO_VarsAreNull($bAutoWidth, $iGlobalSpacing, $iSpacing, $iWidth) Then
 		If ($iColumn = (UBound($atColumns) - 1)) Then ; If last column is called, there is no spacing value, so return the outer margin, which will be 0.
@@ -4648,9 +4648,9 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 ;                  $iLayout             - [optional] an integer value (0-4). Default is Null. Specify the current Page layout style, either Left(Even) pages, Right(Odd) pages, or both Left(Even) and Right(Odd) pages or mirrored. See Constants, $LOW_PAGE_LAYOUT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iNumFormat          - [optional] an integer value (0-71). Default is Null. The page numbering format to use for this Page Style. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sRefStyle           - [optional] a string value. Default is Null. The Paragraph Style to use as a reference for lining up the text on the selected Page style. To disable Page Spacing alignment, call with "".
-;                  $bGutterOnRight      - [optional] a boolean value. Default is Null. If True, the page gutter will be placed on the right side of the page. Libre 7.2 and up.
+;                  $bGutterOnRight      - [optional] a boolean value. Default is Null. If True, the page gutter will be placed on the right side of the page. LibreOffice 7.2 and up.
 ;                  $bGutterAtTop        - [optional] a boolean value. Default is Null. If False, the current document's gutter will be positioned at the left of the document's pages (L.O. default) or If True, at top of the document's pages when the document is displayed.
-;                  $bBackCoversMargins  - [optional] a boolean value. Default is Null. If True, the background covers the full page, Else only inside the margins. Libre 7.2 and up.
+;                  $bBackCoversMargins  - [optional] a boolean value. Default is Null. If True, the background covers the full page, Else only inside the margins. LibreOffice 7.2 and up.
 ;                  $sPaperTray          - [optional] a string value. Default is Null. The paper source for your printer. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -4784,7 +4784,7 @@ EndFunc   ;==>_LOWriter_PageStyleLayout
 ;                  $iRight              - [optional] an integer value. Default is Null. The amount of space to leave between the right edge of the page and the document text. If you are using the Mirrored page layout, enter the amount of space to leave between the outer text margin and the outer edge of the page. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] an integer value. Default is Null. The amount of space to leave between the upper edge of the page and the document text. Set in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] an integer value. Default is Null. The amount of space to leave between the lower edge of the page and the document text. Set in Hundredths of a Millimeter (HMM).
-;                  $iGutter             - [optional] an integer value. Default is Null. The amount of space to leave between the left edge of the page and the left margin. If you are using the Mirrored page layout, enter the amount of space to leave between the inner page margin and the inner edge of the page. Set in Hundredths of a Millimeter (HMM). Libre 7.2 and up.
+;                  $iGutter             - [optional] an integer value. Default is Null. The amount of space to leave between the left edge of the page and the left margin. If you are using the Mirrored page layout, enter the amount of space to leave between the inner page margin and the inner edge of the page. Set in Hundredths of a Millimeter (HMM). LibreOffice 7.2 and up.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

@@ -684,7 +684,7 @@ EndFunc   ;==>__LOWriter_CharEffect
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  Libre Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -815,7 +815,7 @@ Func __LOWriter_CharFontColor(ByRef $oObj, $iFontColor = Null, $iTransparency = 
 	If ($iHighlight <> Null) Then
 		If Not __LO_IntIsBetween($iHighlight, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		; CharHighlight; same as CharBackColor---Libre seems to use back color for highlighting however, so using that for setting.
+		; CharHighlight; same as CharBackColor---LibreOffice seems to use back color for highlighting however, so using that for setting.
 ;~ 		If Not __LO_VersionCheck(4.2) Then Return SetError($__LO_STATUS_VER_ERROR, 2, 0)
 ;~ 		$oObj.CharHighlight = $iHighlight ;-- keeping old method in case.
 ;~ 		$iError = ($oObj.CharHighlight() = $iHighlight) ? ($iError) : (BitOR($iError, 4)
@@ -1176,7 +1176,7 @@ EndFunc   ;==>__LOWriter_CharShadow
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values for $nKerning are from -2 Pt to 928.8 Pt. the figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: 928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258.
-;                  Attempting to set Libre's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
+;                  Attempting to set LibreOffice's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
@@ -5951,7 +5951,7 @@ EndFunc   ;==>__LOWriter_ParBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Set $iNumChars, $iLines, $iSpcTxt to 0 to disable DropCaps.
-;                  I am unable to find a way to set Drop Caps character style to "None" as is available in the User Interface. When it is set to "None" Libre returns a blank string ("") but setting it to a blank string throws a COM error/Exception. Consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
+;                  I am unable to find a way to set Drop Caps character style to "None" as is available in the User Interface. When it is set to "None" LibreOffice returns a blank string ("") but setting it to a blank string throws a COM error/Exception. Consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
@@ -6070,7 +6070,7 @@ EndFunc   ;==>__LOWriter_ParHasTabStop
 ; Syntax ........: __LOWriter_ParHyphenation(ByRef $oObj[, $bAutoHyphen = Null[, $bHyphenNoCaps = Null[, $iMaxHyphens = Null[, $iMinLeadingChar = Null[, $iMinTrailingChar = Null]]]]])
 ; Parameters ....: $oObj                - [in/out] an object. Paragraph Style Object or a Cursor or Paragraph Object.
 ;                  $bAutoHyphen         - [optional] a boolean value. Default is Null. If True, automatic hyphenation is applied.
-;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. Libre 6.4 and up.
+;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. LibreOffice 6.4 and up.
 ;                  $iMaxHyphens         - [optional] an integer value (0-99). Default is Null. The maximum number of consecutive hyphens.
 ;                  $iMinLeadingChar     - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied).
 ;                  $iMinTrailingChar    - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied).
@@ -6363,7 +6363,7 @@ EndFunc   ;==>__LOWriter_ParOutLineAndList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Break Type must be set before Page Style will be able to be set, and page style needs set before $iPgNumOffSet can be set.
-;                  Libre doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both) and (Page both), but doesn't throw an error when being set to either one, so they are included here, though I'm not sure if they will work correctly.
+;                  LibreOffice doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both) and (Page both), but doesn't throw an error when being set to either one, so they are included here, though I'm not sure if they will work correctly.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
@@ -6715,7 +6715,7 @@ EndFunc   ;==>__LOWriter_ParStyleCompare
 ; Modified ......:
 ; Remarks .......: $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position.
 ;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
-;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
+;                  $iFillChar, LibreOffice's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by LibreOffice are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
 ; Related .......: _LO_UnitConvert
@@ -6744,7 +6744,7 @@ Func __LOWriter_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment = Null, $i
 	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	$tTabStruct.Position = $iPosition
-	; If set to 0 Libre sets fill character to Null instead of setting to None. 32 = None.(Space character)
+	; If set to 0 LibreOffice sets fill character to Null instead of setting to None. 32 = None.(Space character)
 	$tTabStruct.Alignment = 0
 	$tTabStruct.DecimalChar = 0
 	$tTabStruct.FillChar = 32
@@ -6920,7 +6920,7 @@ EndFunc   ;==>__LOWriter_ParTabStopDelete
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per Paragraph Style.
 ;                  $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position in @Extended when $iPosition is set, return value will be set to 2. See Return Values.
 ;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
-;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
+;                  $iFillChar, LibreOffice's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by LibreOffice are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LO_UnitConvert

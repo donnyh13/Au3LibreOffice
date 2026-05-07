@@ -987,7 +987,7 @@ Func _LOWriter_FindFormatModifyFont(ByRef $atFormat, $sFontName = Null, $iFontSi
 		Else
 			If Not __LO_IntIsBetween($iHighlight, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-			; CharHighlight; same as CharBackColor---Libre seems to use back color for highlighting.
+			; CharHighlight; same as CharBackColor---LibreOffice seems to use back color for highlighting.
 			__LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharBackColor", $iHighlight))
 			If __LO_VersionCheck(4.2) Then __LOWriter_FindFormatAddSetting($atFormat, __LO_SetPropertyValue("CharHighlight", $iHighlight))
 		EndIf
@@ -1002,7 +1002,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyFont
 ; Syntax ........: _LOWriter_FindFormatModifyHyphenation(ByRef $atFormat[, $bAutoHyphen = Null[, $bHyphenNoCaps = Null[, $iMaxHyphens = Null[, $iMinLeadingChar = Null[, $iMinTrailingChar = Null]]]]])
 ; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $bAutoHyphen         - [optional] a boolean value. Default is Null. If True, automatic hyphenation is applied.
-;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. Libre 6.4 and up.
+;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. LibreOffice 6.4 and up.
 ;                  $iMaxHyphens         - [optional] an integer value (0-99). Default is Null. The maximum number of consecutive hyphens.
 ;                  $iMinLeadingChar     - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied).
 ;                  $iMinTrailingChar    - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied).
@@ -1438,7 +1438,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values for $nKerning are from -2 Pt to 928.8 Pt. the figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: ;928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258.
-;                  Attempting to set Libre's kerning value to anything over 32768 Hundredths of a Millimeter causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
+;                  Attempting to set LibreOffice's kerning value to anything over 32768 Hundredths of a Millimeter causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
 ; Related .......: _LO_UnitConvert, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes

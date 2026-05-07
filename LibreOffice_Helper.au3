@@ -965,7 +965,7 @@ Func _LO_InitializePortable($sOfficePortablePath)
 		__LO_SetPortableServiceManager($sOfficePortablePath)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	ElseIf FileExists($sOfficePortablePath & "\App\libreoffice\program\soffice.exe") Then ; Check Libre path.
+	ElseIf FileExists($sOfficePortablePath & "\App\libreoffice\program\soffice.exe") Then ; Check LibreOffice path.
 		__LO_SetPortableServiceManager($sOfficePortablePath & "\App\libreoffice\program\soffice.exe")
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
@@ -1016,17 +1016,17 @@ Func _LO_PathConvert($sFilePath, $iReturnMode = $LO_PATHCONV_AUTO_RETURN)
 
 	$iPathSearch = StringRegExp($sFilePath, "(?i)\b[A-Z]:\\") ; Search For a Computer Path, as in C:\ etc.
 	$iPartialPCPath = StringInStr($sFilePath, "\") ; Search for partial computer Path containing a backslash.
-	$iFileSearch = StringInStr($sFilePath, "file:///", 0, 1, 1, 9) ; Search for a full Libre path, which begins with File:///
-	$iPartialFilePath = StringInStr($sFilePath, "/") ; Search For a Partial Libre path containing forward slash
+	$iFileSearch = StringInStr($sFilePath, "file:///", 0, 1, 1, 9) ; Search for a full LibreOffice path, which begins with File:///
+	$iPartialFilePath = StringInStr($sFilePath, "/") ; Search For a Partial LibreOffice path containing forward slash
 
 	If ($iReturnMode = $LO_PATHCONV_AUTO_RETURN) Then
-		If ($iPathSearch > 0) Or ($iPartialPCPath > 0) Then ;  if file path contains partial or full PC path, set to convert to Libre URL.
+		If ($iPathSearch > 0) Or ($iPartialPCPath > 0) Then ;  if file path contains partial or full PC path, set to convert to LibreOffice URL.
 			$iReturnMode = $LO_PATHCONV_OFFICE_RETURN
 
-		ElseIf ($iFileSearch > 0) Or ($iPartialFilePath > 0) Then ;  if file path contains partial or full Libre URL, set to convert to PC Path.
+		ElseIf ($iFileSearch > 0) Or ($iPartialFilePath > 0) Then ;  if file path contains partial or full LibreOffice URL, set to convert to PC Path.
 			$iReturnMode = $LO_PATHCONV_PCPATH_RETURN
 
-		Else ; If file path contains neither above. convert to Libre URL
+		Else ; If file path contains neither above. convert to LibreOffice URL
 			$iReturnMode = $LO_PATHCONV_OFFICE_RETURN
 		EndIf
 	EndIf
