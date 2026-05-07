@@ -2343,7 +2343,7 @@ Func _LOCalc_CommentTextAnimation(ByRef $oComment, $iAnimation = Null, $iDirecti
 	If __LO_VarsAreNull($iAnimation, $iDirection, $bBeginInside, $bVisibleOnExit, $iCycles, $iPixelIncrement, $iIncrement, $iDelay) Then
 		__LO_ArrayFill($avAnim, $oAnnotationShape.TextAnimationKind(), $oAnnotationShape.TextAnimationDirection(), $oAnnotationShape.TextAnimationStartInside(), _
 				$oAnnotationShape.TextAnimationStopInside(), $oAnnotationShape.TextAnimationCount(), _
-				($oAnnotationShape.TextAnimationAmount() < 0) ? ($oAnnotationShape.TextAnimationAmount() * -1) : (0), _ ; Convert from negative to positive for return.
+				($oAnnotationShape.TextAnimationAmount() < 0) ? (Abs($oAnnotationShape.TextAnimationAmount())) : (0), _ ; Convert from negative to positive for return.
 				($oAnnotationShape.TextAnimationAmount() < 0) ? (0) : ($oAnnotationShape.TextAnimationAmount()), _
 				$oAnnotationShape.TextAnimationDelay())
 

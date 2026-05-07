@@ -1613,7 +1613,7 @@ Func __LOCalc_CommentAreaShadowModify($oAnnotationShape, $iLocation = Null, $iDi
 		If $bModifyLocation And ($iDistance = 0) Then $iDistance = 100 ; Set a non 0 value so location can be set.
 
 		; If negative, make it positive for easier processing.
-		$iDistance = ($iDistance < 0) ? ($iDistance * -1) : ($iDistance)
+		$iDistance = ($iDistance < 0) ? (Abs($iDistance)) : ($iDistance)
 	EndIf
 
 	If $bReturn Then Return SetError($__LO_STATUS_SUCCESS, $iLocation, $iDistance)

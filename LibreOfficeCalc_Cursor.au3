@@ -240,7 +240,7 @@ Func _LOCalc_TextCursorCharPosition(ByRef $oTextCursor, $iSuperScript = Null, $i
 	If __LO_VarsAreNull($iSuperScript, $iSubScript, $iRelativeSize) Then
 		; If CharEscapement is less than or equal to 0, return 0 as it is SubScript, not SuperScript. If CharEscapement is not between 1 and 100 return -1, it is set to Auto SuperScript, else return the current CharEscapement as it is user-set SuperScript.
 		__LO_ArrayFill($avPosition, ($oCursor.CharEscapement() <= 0) ? (0) : ((__LO_IntIsBetween($oCursor.CharEscapement(), 1, 100)) ? ($oCursor.CharEscapement()) : (-1)), _
-				($oCursor.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oCursor.CharEscapement(), -1, -100)) ? (($oCursor.CharEscapement() * -1)) : (-1)), _
+				($oCursor.CharEscapement() >= 0) ? (0) : ((__LO_IntIsBetween($oCursor.CharEscapement(), -1, -100)) ? (Abs($oCursor.CharEscapement())) : (-1)), _
 				$oCursor.CharEscapementHeight())
 		; If CharEscapement is greater than or equal to 0, return 0 as it is SuperScript, not SubScript. If CharEscapement is not between -1 and -100 return -1, it is set to Auto SubScript, else return the current CharEscapement, converted to a positive, as it is user-set SubScript.
 
