@@ -49,11 +49,11 @@
 ; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
 ; Syntax ........: _LOCalc_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
 ; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
-;                  $vParam1             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam2             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam3             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam4             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam5             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam2             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam3             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam4             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam5             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ; Return values .: Success: 1 or UserFunction.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -129,15 +129,15 @@ EndFunc   ;==>_LOCalc_ComError_UserFunction
 ; Name ..........: _LOCalc_FilterDescriptorCreate
 ; Description ...: Create a Filter Descriptor to use in the Filter function.
 ; Syntax ........: _LOCalc_FilterDescriptorCreate(ByRef $oRange, $atFilterField[, $bCaseSensitive = False[, $bSkipDupl = False[, $bUseRegExp = False[, $bHeaders = False[, $bCopyOutput = False[, $oCopyOutput = Null[, $bSaveCriteria = True]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. The Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
-;                  $atFilterField       - an array of dll structs. A single column Array of Filter Fields previously created by _LOCalc_FilterFieldCreate. Maximum of 8 Fields allowed.
-;                  $bCaseSensitive      - [optional] a boolean value. Default is False. If True, the Filtering operation will be case sensitive.
-;                  $bSkipDupl           - [optional] a boolean value. Default is False. If True, Duplicate values will be skipped in the list of filtered data.
-;                  $bUseRegExp          - [optional] a boolean value. Default is False. If True, the String Value set will be considered as using Regular expressions.
-;                  $bHeaders            - [optional] a boolean value. Default is False. If True, the Range contains column headers.
-;                  $bCopyOutput         - [optional] a boolean value. Default is False. If True, the filtering results are copied to another location in the Sheet.
-;                  $oCopyOutput         - [optional] an object. Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
-;                  $bSaveCriteria       - [optional] a boolean value. Default is True. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
+; Parameters ....: $oRange              - The Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $atFilterField       - A single column Array of Filter Fields previously created by _LOCalc_FilterFieldCreate. Maximum of 8 Fields allowed.
+;                  $bCaseSensitive      - [optional] Default is False. If True, the Filtering operation will be case sensitive.
+;                  $bSkipDupl           - [optional] Default is False. If True, Duplicate values will be skipped in the list of filtered data.
+;                  $bUseRegExp          - [optional] Default is False. If True, the String Value set will be considered as using Regular expressions.
+;                  $bHeaders            - [optional] Default is False. If True, the Range contains column headers.
+;                  $bCopyOutput         - [optional] Default is False. If True, the filtering results are copied to another location in the Sheet.
+;                  $oCopyOutput         - [optional] Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $bSaveCriteria       - [optional] Default is True. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -229,16 +229,16 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ; Name ..........: _LOCalc_FilterDescriptorModify
 ; Description ...: Set or Retrieve Filter Descriptor settings.
 ; Syntax ........: _LOCalc_FilterDescriptorModify(ByRef $oRange, ByRef $oFilterDesc[, $atFilterField = Null[, $bCaseSensitive = Null[, $bSkipDupl = Null[, $bUseRegExp = Null[, $bHeaders = Null[, $bCopyOutput = Null[, $oCopyOutput = Null[, $bSaveCriteria = Null]]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. The Sheet the Filter Descriptor was Created with, or the Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
-;                  $oFilterDesc         - [in/out] an object. A Filter Descriptor created by a previous _LOCalc_FilterDescriptorCreate function.
-;                  $atFilterField       - [optional] an array of dll structs. Default is Null. A single column Array of Filter Fields previously created by _LOCalc_FilterFieldCreate. Maximum of 8 Fields allowed.
-;                  $bCaseSensitive      - [optional] a boolean value. Default is Null. If True, the Filtering operation will be case sensitive.
-;                  $bSkipDupl           - [optional] a boolean value. Default is Null. If True, Duplicate values will be skipped in the list of filtered data.
-;                  $bUseRegExp          - [optional] a boolean value. Default is Null. If True, the String Value set will be considered as using Regular expressions.
-;                  $bHeaders            - [optional] a boolean value. Default is Null. If True, the Range contains column headers.
-;                  $bCopyOutput         - [optional] a boolean value. Default is Null. If True, the filtering results are copied to another location in the Sheet.
-;                  $oCopyOutput         - [optional] an object. Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
-;                  $bSaveCriteria       - [optional] a boolean value. Default is Null. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
+; Parameters ....: $oRange              - The Sheet the Filter Descriptor was Created with, or the Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $oFilterDesc         - A Filter Descriptor created by a previous _LOCalc_FilterDescriptorCreate function.
+;                  $atFilterField       - [optional] Default is Null. A single column Array of Filter Fields previously created by _LOCalc_FilterFieldCreate. Maximum of 8 Fields allowed.
+;                  $bCaseSensitive      - [optional] Default is Null. If True, the Filtering operation will be case sensitive.
+;                  $bSkipDupl           - [optional] Default is Null. If True, Duplicate values will be skipped in the list of filtered data.
+;                  $bUseRegExp          - [optional] Default is Null. If True, the String Value set will be considered as using Regular expressions.
+;                  $bHeaders            - [optional] Default is Null. If True, the Range contains column headers.
+;                  $bCopyOutput         - [optional] Default is Null. If True, the filtering results are copied to another location in the Sheet.
+;                  $oCopyOutput         - [optional] Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $bSaveCriteria       - [optional] Default is Null. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -362,11 +362,11 @@ EndFunc   ;==>_LOCalc_FilterDescriptorModify
 ; Name ..........: _LOCalc_FilterFieldCreate
 ; Description ...: Create a Filter Field for defining Filter values and settings.
 ; Syntax ........: _LOCalc_FilterFieldCreate($iColumn[, $bIsNumeric = False[, $nValue = 0[, $sString = ""[, $iCondition = $LOC_FILTER_CONDITION_EMPTY[, $iOperator = $LOC_FILTER_OPERATOR_AND]]]]])
-; Parameters ....: $iColumn             - an integer value. The 0 based Column number to perform the filtering operation upon counting from the beginning of the range.
-;                  $bIsNumeric          - [optional] a boolean value. Default is False. If True, the filter Value to search for is a number. If False, the filter value to search for is a string.
-;                  $nValue              - [optional] a general number value. Default is 0. The numerical Value to filter the Range for. Only valid if $bIsNumeric is set to True. Call with any number to skip, it will not be used unless $bIsNumeric is True.
-;                  $sString             - [optional] a string value. Default is "". The string Value to filter the Range for. Only valid if $bIsNumeric is set to False. Call with an empty string to skip, it will not be used unless $bIsNumeric is False.
-;                  $iCondition          - [optional] an integer value (0-17). Default is $LOC_FILTER_CONDITION_EMPTY. The comparative condition to test each cell and value by. See Constants $LOC_FILTER_CONDITION_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $iColumn             - The 0 based Column number to perform the filtering operation upon counting from the beginning of the range.
+;                  $bIsNumeric          - [optional] Default is False. If True, the filter Value to search for is a number. If False, the filter value to search for is a string.
+;                  $nValue              - [optional] Default is 0. The numerical Value to filter the Range for. Only valid if $bIsNumeric is set to True. Call with any number to skip, it will not be used unless $bIsNumeric is True.
+;                  $sString             - [optional] Default is "". The string Value to filter the Range for. Only valid if $bIsNumeric is set to False. Call with an empty string to skip, it will not be used unless $bIsNumeric is False.
+;                  $iCondition          - [optional] (0-17) Default is $LOC_FILTER_CONDITION_EMPTY. The comparative condition to test each cell and value by. See Constants $LOC_FILTER_CONDITION_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iOperator           - [optional] an integer value (0,1). Default is $LOC_FILTER_OPERATOR_AND. The connection this filter field has with the previous filter field. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Struct
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -420,12 +420,12 @@ EndFunc   ;==>_LOCalc_FilterFieldCreate
 ; Name ..........: _LOCalc_FilterFieldModify
 ; Description ...: Set or Retrieve Filter Field structure settings.
 ; Syntax ........: _LOCalc_FilterFieldModify(ByRef $tFilterField[, $iColumn = Null[, $bIsNumeric = Null[, $nValue = Null[, $sString = Null[, $iCondition = Null[, $iOperator = Null]]]]]])
-; Parameters ....: $tFilterField        - [in/out] a dll struct value. A Filter Field from a previous _LOCalc_FilterFieldCreate function call.
-;                  $iColumn             - [optional] an integer value. Default is Null. The 0 based Column number to perform the filtering operation upon counting from the beginning of the range.
-;                  $bIsNumeric          - [optional] a boolean value. Default is Null. If True, the filter Value to search for is a number. If False, the filter value to search for is a string.
-;                  $nValue              - [optional] a general number value. Default is Null. The numerical Value to filter the Range for. Only valid if $bIsNumeric is set to True.
-;                  $sString             - [optional] a string value. Default is Null. The string Value to filter the Range for. Only valid if $bIsNumeric is set to False.
-;                  $iCondition          - [optional] an integer value (0-17). Default is Null. The comparative condition to test each cell and value by. See Constants $LOC_FILTER_CONDITION_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $tFilterField        - A Filter Field from a previous _LOCalc_FilterFieldCreate function call.
+;                  $iColumn             - [optional] Default is Null. The 0 based Column number to perform the filtering operation upon counting from the beginning of the range.
+;                  $bIsNumeric          - [optional] Default is Null. If True, the filter Value to search for is a number. If False, the filter value to search for is a string.
+;                  $nValue              - [optional] Default is Null. The numerical Value to filter the Range for. Only valid if $bIsNumeric is set to True.
+;                  $sString             - [optional] Default is Null. The string Value to filter the Range for. Only valid if $bIsNumeric is set to False.
+;                  $iCondition          - [optional] (0-17) Default is Null. The comparative condition to test each cell and value by. See Constants $LOC_FILTER_CONDITION_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iOperator           - [optional] an integer value (0,1). Default is Null. The connection this filter field has with the previous filter field. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Struct
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -506,8 +506,8 @@ EndFunc   ;==>_LOCalc_FilterFieldModify
 ; Name ..........: _LOCalc_FontExists
 ; Description ...: Tests whether a specific font exists by name.
 ; Syntax ........: _LOCalc_FontExists($sFontName[, $oDoc = Null])
-; Parameters ....: $sFontName           - a string value. The Font name to search for.
-;                  $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+; Parameters ....: $sFontName           - The Font name to search for.
+;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -580,7 +580,7 @@ EndFunc   ;==>_LOCalc_FontExists
 ; Name ..........: _LOCalc_FontsGetNames
 ; Description ...: Retrieve an array of currently available font names.
 ; Syntax ........: _LOCalc_FontsGetNames([$oDoc = Null])
-; Parameters ....: $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
@@ -658,8 +658,8 @@ EndFunc   ;==>_LOCalc_FontsGetNames
 ; Name ..........: _LOCalc_FormatKeyCreate
 ; Description ...: Create a Format Key.
 ; Syntax ........: _LOCalc_FormatKeyCreate(ByRef $oDoc, $sFormat)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $sFormat             - a string value. The format key String to create.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $sFormat             - The format key String to create.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -709,8 +709,8 @@ EndFunc   ;==>_LOCalc_FormatKeyCreate
 ; Name ..........: _LOCalc_FormatKeyDelete
 ; Description ...: Delete a User-Created Format Key from a Document.
 ; Syntax ........: _LOCalc_FormatKeyDelete(ByRef $oDoc, $iFormatKey)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $iFormatKey          - an integer value. The User-Created format Key to delete.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $iFormatKey          - The User-Created format Key to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -754,9 +754,9 @@ EndFunc   ;==>_LOCalc_FormatKeyDelete
 ; Name ..........: _LOCalc_FormatKeyExists
 ; Description ...: Check if a Document contains a certain Format Key.
 ; Syntax ........: _LOCalc_FormatKeyExists(ByRef $oDoc, $iFormatKey[, $iFormatType = $LOC_FORMAT_KEYS_ALL])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $iFormatKey          - an integer value. The Format Key to look for.
-;                  $iFormatType         - [optional] an integer value (0-15881). Default is $LOC_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $iFormatKey          - The Format Key to look for.
+;                  $iFormatType         - [optional] (0-15881) Default is $LOC_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -810,8 +810,8 @@ EndFunc   ;==>_LOCalc_FormatKeyExists
 ; Name ..........: _LOCalc_FormatKeyGetStandard
 ; Description ...: Retrieve the Standard Format for a specific Format Key Type.
 ; Syntax ........: _LOCalc_FormatKeyGetStandard(ByRef $oDoc, $iFormatKeyType)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $iFormatKeyType      - an integer value (1-8196). The Format Key type to retrieve the standard Format for. See Constants $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $iFormatKeyType      - (1-8196) The Format Key type to retrieve the standard Format for. See Constants $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -858,8 +858,8 @@ EndFunc   ;==>_LOCalc_FormatKeyGetStandard
 ; Name ..........: _LOCalc_FormatKeyGetString
 ; Description ...: Retrieve a Format Key String.
 ; Syntax ........: _LOCalc_FormatKeyGetString(ByRef $oDoc, $iFormatKey)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $iFormatKey          - an integer value. The Format Key to retrieve the string for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $iFormatKey          - The Format Key to retrieve the string for.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -902,10 +902,10 @@ EndFunc   ;==>_LOCalc_FormatKeyGetString
 ; Name ..........: _LOCalc_FormatKeysGetList
 ; Description ...: Retrieve an Array of Date/Time Format Keys.
 ; Syntax ........: _LOCalc_FormatKeysGetList(ByRef $oDoc[, $bIsUser = False[, $bUserOnly = False[, $iFormatKeyType = $LOC_FORMAT_KEYS_ALL]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $bIsUser             - [optional] a boolean value. Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
-;                  $bUserOnly           - [optional] a boolean value. Default is False. If True, only user-created Format Keys are returned.
-;                  $iFormatKeyType      - [optional] an integer value (0-15881). Default is $LOC_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $bIsUser             - [optional] Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
+;                  $bUserOnly           - [optional] Default is False. If True, only user-created Format Keys are returned.
+;                  $iFormatKeyType      - [optional] (0-15881) Default is $LOC_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -984,15 +984,15 @@ EndFunc   ;==>_LOCalc_FormatKeysGetList
 ; Name ..........: _LOCalc_SearchDescriptorCreate
 ; Description ...: Create a Search Descriptor for searching a document.
 ; Syntax ........: _LOCalc_SearchDescriptorCreate(ByRef $oRange[, $bBackwards = False[, $bSearchRows = True[, $bMatchCase = False[, $iSearchIn = $LOC_SEARCH_IN_FORMULAS[, $bEntireCell = False[, $bRegExp = False[, $bWildcards = False[, $bStyles = False]]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
-;                  $bBackwards          - [optional] a boolean value. Default is False. If True, the document is searched backwards.
-;                  $bSearchRows         - [optional] a boolean value. Default is True. If True, Search is performed left to right along the rows, else if False, the search is performed top to bottom along the columns.
-;                  $bMatchCase          - [optional] a boolean value. Default is False. If True, the case of the letters is important for the Search.
-;                  $iSearchIn           - [optional] an integer value (0-2). Default is $LOC_SEARCH_IN_FORMULAS. The Cell data type to search in. See Constants $LOC_SEARCH_IN_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bEntireCell         - [optional] a boolean value. Default is False. If True, Searches for whole words or cells that are identical to the search text.
-;                  $bRegExp             - [optional] a boolean value. Default is False. If True, the search string is evaluated as a regular expression.
-;                  $bWildcards          - [optional] a boolean value. Default is False. If True, the search string is considered to contain wildcards (* ?). A Backslash can be used to escape a wildcard.
-;                  $bStyles             - [optional] a boolean value. Default is False. If True, the search string is considered a Cell Style name, and the search will return any Cell utilizing the specified name.
+; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $bBackwards          - [optional] Default is False. If True, the document is searched backwards.
+;                  $bSearchRows         - [optional] Default is True. If True, Search is performed left to right along the rows, else if False, the search is performed top to bottom along the columns.
+;                  $bMatchCase          - [optional] Default is False. If True, the case of the letters is important for the Search.
+;                  $iSearchIn           - [optional] (0-2) Default is $LOC_SEARCH_IN_FORMULAS. The Cell data type to search in. See Constants $LOC_SEARCH_IN_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bEntireCell         - [optional] Default is False. If True, Searches for whole words or cells that are identical to the search text.
+;                  $bRegExp             - [optional] Default is False. If True, the search string is evaluated as a regular expression.
+;                  $bWildcards          - [optional] Default is False. If True, the search string is considered to contain wildcards (* ?). A Backslash can be used to escape a wildcard.
+;                  $bStyles             - [optional] Default is False. If True, the search string is considered a Cell Style name, and the search will return any Cell utilizing the specified name.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1057,15 +1057,15 @@ EndFunc   ;==>_LOCalc_SearchDescriptorCreate
 ; Name ..........: _LOCalc_SearchDescriptorModify
 ; Description ...: Modify Search Descriptor settings of an existing Search Descriptor Object.
 ; Syntax ........: _LOCalc_SearchDescriptorModify(ByRef $oSrchDescript[, $bBackwards = Null[, $bSearchRows = Null[, $bMatchCase = Null[, $iSearchIn = Null[, $bEntireCell = Null[, $bRegExp = Null[, $bWildcards = Null[, $bStyles = Null]]]]]]]])
-; Parameters ....: $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOCalc_SearchDescriptorCreate function.
-;                  $bBackwards          - [optional] a boolean value. Default is Null. If True, the document is searched backwards.
-;                  $bSearchRows         - [optional] a boolean value. Default is Null. If True, Search is performed left to right along the rows, else if False, the search is performed top to bottom along the columns.
-;                  $bMatchCase          - [optional] a boolean value. Default is Null. If True, the case of the letters is important for the Search.
-;                  $iSearchIn           - [optional] an integer value (0-2). Default is Null. The Cell data type to search in. See Constants $LOC_SEARCH_IN_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bEntireCell         - [optional] a boolean value. Default is Null. If True, Searches for whole words or cells that are identical to the search text.
-;                  $bRegExp             - [optional] a boolean value. Default is Null. If True, the search string is evaluated as a regular expression.
-;                  $bWildcards          - [optional] a boolean value. Default is Null. If True, the search string is considered to contain wildcards (* ?). A Backslash can be used to escape a wildcard.
-;                  $bStyles             - [optional] a boolean value. Default is Null. If True, the search string is considered a Cell Style name, and the search will return any Cell utilizing the specified name.
+; Parameters ....: $oSrchDescript       - A Search Descriptor Object returned from _LOCalc_SearchDescriptorCreate function.
+;                  $bBackwards          - [optional] Default is Null. If True, the document is searched backwards.
+;                  $bSearchRows         - [optional] Default is Null. If True, Search is performed left to right along the rows, else if False, the search is performed top to bottom along the columns.
+;                  $bMatchCase          - [optional] Default is Null. If True, the case of the letters is important for the Search.
+;                  $iSearchIn           - [optional] (0-2) Default is Null. The Cell data type to search in. See Constants $LOC_SEARCH_IN_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bEntireCell         - [optional] Default is Null. If True, Searches for whole words or cells that are identical to the search text.
+;                  $bRegExp             - [optional] Default is Null. If True, the search string is evaluated as a regular expression.
+;                  $bWildcards          - [optional] Default is Null. If True, the search string is considered to contain wildcards (* ?). A Backslash can be used to escape a wildcard.
+;                  $bStyles             - [optional] Default is Null. If True, the search string is considered a Cell Style name, and the search will return any Cell utilizing the specified name.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1167,12 +1167,12 @@ EndFunc   ;==>_LOCalc_SearchDescriptorModify
 ; Name ..........: _LOCalc_SearchDescriptorSimilarityModify
 ; Description ...: Modify Similarity Search Settings for an existing Search Descriptor Object.
 ; Syntax ........: _LOCalc_SearchDescriptorSimilarityModify(ByRef $oSrchDescript[, $bSimilarity = Null[, $bCombine = Null[, $iRemove = Null[, $iAdd = Null[, $iExchange = Null]]]]])
-; Parameters ....: $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOCalc_SearchDescriptorCreate function.
-;                  $bSimilarity         - [optional] a boolean value. Default is Null. If True, a "similarity search" is performed.
-;                  $bCombine            - [optional] a boolean value. Default is Null. If True, all similarity rules ($iRemove, $iAdd, and $iExchange) are applied together.
-;                  $iRemove             - [optional] an integer value. Default is Null. Specifies the number of characters that may be ignored to match the search pattern.
-;                  $iAdd                - [optional] an integer value. Default is Null. Specifies the number of characters that must be added to match the search pattern.
-;                  $iExchange           - [optional] an integer value. Default is Null. Specifies the number of characters that must be replaced to match the search pattern.
+; Parameters ....: $oSrchDescript       - A Search Descriptor Object returned from _LOCalc_SearchDescriptorCreate function.
+;                  $bSimilarity         - [optional] Default is Null. If True, a "similarity search" is performed.
+;                  $bCombine            - [optional] Default is Null. If True, all similarity rules ($iRemove, $iAdd, and $iExchange) are applied together.
+;                  $iRemove             - [optional] Default is Null. Specifies the number of characters that may be ignored to match the search pattern.
+;                  $iAdd                - [optional] Default is Null. Specifies the number of characters that must be added to match the search pattern.
+;                  $iExchange           - [optional] Default is Null. Specifies the number of characters that must be replaced to match the search pattern.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1255,10 +1255,10 @@ EndFunc   ;==>_LOCalc_SearchDescriptorSimilarityModify
 ; Name ..........: _LOCalc_SortFieldCreate
 ; Description ...: Create a Sort Field for sorting a Range of data with.
 ; Syntax ........: _LOCalc_SortFieldCreate($iIndex[, $iDataType = $LOC_SORT_DATA_TYPE_AUTO[, $bAscending = True[, $bCaseSensitive = False]]])
-; Parameters ....: $iIndex              - an integer value. The Column or Row to perform the sort upon. 0 Based. 0 is the first Column/Row in the Cell Range.
-;                  $iDataType           - [optional] an integer value (0-2). Default is $LOC_SORT_DATA_TYPE_AUTO. The type of data that will be sorted. See Constants $LOC_SORT_DATA_TYPE_* as defined in LibreOfficeCalc_Constants.au3
-;                  $bAscending          - [optional] a boolean value. Default is True. If True, data will be sorted into ascending order.
-;                  $bCaseSensitive      - [optional] a boolean value. Default is False. If True, sort will be case sensitive.
+; Parameters ....: $iIndex              - The Column or Row to perform the sort upon. 0 Based. 0 is the first Column/Row in the Cell Range.
+;                  $iDataType           - [optional] (0-2) Default is $LOC_SORT_DATA_TYPE_AUTO. The type of data that will be sorted. See Constants $LOC_SORT_DATA_TYPE_* as defined in LibreOfficeCalc_Constants.au3
+;                  $bAscending          - [optional] Default is True. If True, data will be sorted into ascending order.
+;                  $bCaseSensitive      - [optional] Default is False. If True, sort will be case sensitive.
 ; Return values .: Success: Struct
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1305,11 +1305,11 @@ EndFunc   ;==>_LOCalc_SortFieldCreate
 ; Name ..........: _LOCalc_SortFieldModify
 ; Description ...: Modify or retrieve the settings for a Sort Field previously created by _LOCalc_SortFieldCreate.
 ; Syntax ........: _LOCalc_SortFieldModify(ByRef $tSortField[, $iIndex = Null[, $iDataType = Null[, $bAscending = Null[, $bCaseSensitive = Null]]]])
-; Parameters ....: $tSortField          - [in/out] a dll struct value. A Sort Field Struct created by a previous _LOCalc_SortFieldCreate function.
-;                  $iIndex              - [optional] an integer value. Default is Null. The Column or Row to perform the sort upon. 0 Based. 0 is the first Column/Row in the Cell Range.
-;                  $iDataType           - [optional] an integer value (0-2). Default is Null. The type of data that will be sorted. See Constants $LOC_SORT_DATA_TYPE_* as defined in LibreOfficeCalc_Constants.au3
-;                  $bAscending          - [optional] a boolean value. Default is Null. If True, data will be sorted into ascending order.
-;                  $bCaseSensitive      - [optional] a boolean value. Default is Null. If True, sort will be case sensitive.
+; Parameters ....: $tSortField          - A Sort Field Struct created by a previous _LOCalc_SortFieldCreate function.
+;                  $iIndex              - [optional] Default is Null. The Column or Row to perform the sort upon. 0 Based. 0 is the first Column/Row in the Cell Range.
+;                  $iDataType           - [optional] (0-2) Default is Null. The type of data that will be sorted. See Constants $LOC_SORT_DATA_TYPE_* as defined in LibreOfficeCalc_Constants.au3
+;                  $bAscending          - [optional] Default is Null. If True, data will be sorted into ascending order.
+;                  $bCaseSensitive      - [optional] Default is Null. If True, sort will be case sensitive.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

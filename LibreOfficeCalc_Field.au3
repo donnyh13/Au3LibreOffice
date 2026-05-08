@@ -41,8 +41,8 @@
 ; Name ..........: _LOCalc_FieldCurrentDisplayGet
 ; Description ...: Retrieve the current data displayed by a field.
 ; Syntax ........: _LOCalc_FieldCurrentDisplayGet(ByRef $mField[, $bFieldName = False])
-; Parameters ....: $mField              - [in/out] a map. A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
-;                  $bFieldName          - [optional] a boolean value. Default is False. If True, the Field command name is returned, else the current Field display is returned.
+; Parameters ....: $mField              - A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
+;                  $bFieldName          - [optional] Default is False. If True, the Field command name is returned, else the current Field display is returned.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -79,10 +79,10 @@ EndFunc   ;==>_LOCalc_FieldCurrentDisplayGet
 ; Name ..........: _LOCalc_FieldDateTimeInsert
 ; Description ...: Insert a Date or Time Field.
 ; Syntax ........: _LOCalc_FieldDateTimeInsert(ByRef $oDoc, ByRef $oTextCursor[, $bIsDate = True[, $bOverwrite = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bIsDate             - [optional] a boolean value. Default is True. If True, the inserted Field will be a Date Field, if False, the Field will be a Time Field.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bIsDate             - [optional] Default is True. If True, the inserted Field will be a Date Field, if False, the Field will be a Time Field.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -137,7 +137,7 @@ EndFunc   ;==>_LOCalc_FieldDateTimeInsert
 ; Name ..........: _LOCalc_FieldDelete
 ; Description ...: Delete a Field from a Document.
 ; Syntax ........: _LOCalc_FieldDelete(ByRef $mField)
-; Parameters ....: $mField              - [in/out] a map. A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
+; Parameters ....: $mField              - A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -178,10 +178,10 @@ EndFunc   ;==>_LOCalc_FieldDelete
 ; Name ..........: _LOCalc_FieldFileNameInsert
 ; Description ...: Insert a File Name field.
 ; Syntax ........: _LOCalc_FieldFileNameInsert(ByRef $oDoc, ByRef $oTextCursor[, $bPath = False[, $bOverwrite = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bPath               - [optional] a boolean value. Default is False. If True, the File name will be prefixed by the File Path. If False, the File name and extension will be displayed.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bPath               - [optional] Default is False. If True, the File name will be prefixed by the File Path. If False, the File name and extension will be displayed.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -233,7 +233,7 @@ EndFunc   ;==>_LOCalc_FieldFileNameInsert
 ; Name ..........: _LOCalc_FieldGetAnchor
 ; Description ...: Retrieve the Anchor Cursor Object for a Field.
 ; Syntax ........: _LOCalc_FieldGetAnchor(ByRef $mField)
-; Parameters ....: $mField              - [in/out] a map. A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
+; Parameters ....: $mField              - A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -267,12 +267,12 @@ EndFunc   ;==>_LOCalc_FieldGetAnchor
 ; Name ..........: _LOCalc_FieldHyperlinkInsert
 ; Description ...: Insert a Hyperlink into a Calc Cell.
 ; Syntax ........: _LOCalc_FieldHyperlinkInsert(ByRef $oDoc, ByRef $oTextCursor, $sURL[, $sText = ""[, $sTargetFrame = ""[, $bOverwrite = False]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $sURL                - a string value. The URL/Hyperlink Address.
-;                  $sText               - [optional] a string value. Default is "". The Text to display instead of the URL. "" means the URL itself is displayed.
-;                  $sTargetFrame        - [optional] a string value. Default is "". Enter the name of the frame that you want the linked file to open in. Leave blank to skip.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $sURL                - The URL/Hyperlink Address.
+;                  $sText               - [optional] Default is "". The Text to display instead of the URL. "" means the URL itself is displayed.
+;                  $sTargetFrame        - [optional] Default is "". Enter the name of the frame that you want the linked file to open in. Leave blank to skip.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -329,10 +329,10 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkInsert
 ; Name ..........: _LOCalc_FieldHyperlinkModify
 ; Description ...: Set or Retrieve the settings of a Hyperlink/URL field.
 ; Syntax ........: _LOCalc_FieldHyperlinkModify(ByRef $mHyperlinkField[, $sURL = Null[, $sText = Null[, $sTargetFrame = Null]]])
-; Parameters ....: $mHyperlinkField     - [in/out] a map. A Hyperlink/URL Map containing the Field Field Object returned by a previous _LOCalc_FieldHyperlinkInsert or _LOCalc_FieldsGetList function.
-;                  $sURL                - [optional] a string value. Default is Null. The URL/Hyperlink Address.
-;                  $sText               - [optional] a string value. Default is Null. The Text to display instead of the URL. "" means the URL itself is displayed.
-;                  $sTargetFrame        - [optional] a string value. Default is Null. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $mHyperlinkField     - A Hyperlink/URL Map containing the Field Field Object returned by a previous _LOCalc_FieldHyperlinkInsert or _LOCalc_FieldsGetList function.
+;                  $sURL                - [optional] Default is Null. The URL/Hyperlink Address.
+;                  $sText               - [optional] Default is Null. The Text to display instead of the URL. "" means the URL itself is displayed.
+;                  $sTargetFrame        - [optional] Default is Null. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -399,9 +399,9 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkModify
 ; Name ..........: _LOCalc_FieldPageCountInsert
 ; Description ...: Insert a total Page Count Field.
 ; Syntax ........: _LOCalc_FieldPageCountInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -448,9 +448,9 @@ EndFunc   ;==>_LOCalc_FieldPageCountInsert
 ; Name ..........: _LOCalc_FieldPageNumberInsert
 ; Description ...: Insert a Page Number Field.
 ; Syntax ........: _LOCalc_FieldPageNumberInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -497,9 +497,9 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ; Name ..........: _LOCalc_FieldsGetList
 ; Description ...: Retrieve an Array of maps containing Field Objects present in a Cell or Header/Footer.
 ; Syntax ........: _LOCalc_FieldsGetList(ByRef $oTextCursor[, $iType = $LOC_FIELD_TYPE_ALL[, $bFieldTypeNum = True]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iType               - [optional] an integer value (1-255). Default is $LOC_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Can be BitOr'd together.
-;                  $bFieldTypeNum       - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $iType               - [optional] (1-255) Default is $LOC_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Can be BitOr'd together.
+;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -626,9 +626,9 @@ EndFunc   ;==>_LOCalc_FieldsGetList
 ; Name ..........: _LOCalc_FieldSheetNameInsert
 ; Description ...: Insert a Sheet Name Field at a Text Cursor location.
 ; Syntax ........: _LOCalc_FieldSheetNameInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -675,9 +675,9 @@ EndFunc   ;==>_LOCalc_FieldSheetNameInsert
 ; Name ..........: _LOCalc_FieldTitleInsert
 ; Description ...: Insert a Document Title field.
 ; Syntax ........: _LOCalc_FieldTitleInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

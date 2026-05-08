@@ -45,12 +45,12 @@
 ; Name ..........: _LOCalc_SheetCursorMove
 ; Description ...: Move a Sheet Cursor object in a document. Also for creating/Expanding selections.
 ; Syntax ........: _LOCalc_SheetCursorMove(ByRef $oCursor, $iMove[, $iColumns = 0[, $iRows = 0[, $iCount = 1[, $bSelect = False]]]])
-; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions.
-;                  $iMove               - an integer value (0-12). The movement command. See remarks and Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iColumns            - [optional] an integer value. Default is 0. The Number of Columns either to contain in the Range, or to move, depending on the called move command.
-;                  $iRows               - [optional] an integer value. Default is 0. The Number of Rows either to contain in the Range, or to move, depending on the called move command.
-;                  $iCount              - [optional] an integer value. Default is 1. Number of movements to make. See remarks.
-;                  $bSelect             - [optional] a boolean value. Default is False. Whether to select data during this cursor movement. See remarks.
+; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions.
+;                  $iMove               - (0-12) The movement command. See remarks and Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColumns            - [optional] Default is 0. The Number of Columns either to contain in the Range, or to move, depending on the called move command.
+;                  $iRows               - [optional] Default is 0. The Number of Rows either to contain in the Range, or to move, depending on the called move command.
+;                  $iCount              - [optional] Default is 1. Number of movements to make. See remarks.
+;                  $bSelect             - [optional] Default is False. Whether to select data during this cursor movement. See remarks.
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -180,10 +180,10 @@ EndFunc   ;==>_LOCalc_SheetCursorMove
 ; Name ..........: _LOCalc_TextCursorCharPosition
 ; Description ...: Set and retrieve settings related to Sub/Super Script and relative size for a Text Cursor.
 ; Syntax ........: _LOCalc_TextCursorCharPosition(ByRef $oTextCursor[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null]]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iSuperScript        - [optional] an integer value (-1-100). Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
-;                  $iSubScript          - [optional] an integer value (-1-100). Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
-;                  $iRelativeSize       - [optional] an integer value (1-100). Default is Null. The size percentage relative to current font size.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $iSuperScript        - [optional] (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
+;                  $iSubScript          - [optional] (-1-100) Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
+;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -288,9 +288,9 @@ EndFunc   ;==>_LOCalc_TextCursorCharPosition
 ; Name ..........: _LOCalc_TextCursorCharSpacing
 ; Description ...: Set and retrieve the spacing between characters (Kerning) for a Text Cursor.
 ; Syntax ........: _LOCalc_TextCursorCharSpacing(ByRef $oTextCursor[, $bAutoKerning = Null[, $nKerning = Null]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
-;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
+;                  $nKerning            - [optional] (-2-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -370,10 +370,10 @@ EndFunc   ;==>_LOCalc_TextCursorCharSpacing
 ; Name ..........: _LOCalc_TextCursorEffect
 ; Description ...: Set or Retrieve the Font Effect settings for a Text Cursor.
 ; Syntax ........: _LOCalc_TextCursorEffect(ByRef $oTextCursor[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
-;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
+;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -431,10 +431,10 @@ EndFunc   ;==>_LOCalc_TextCursorEffect
 ; Name ..........: _LOCalc_TextCursorFont
 ; Description ...: Set and Retrieve the Font Settings for a Text Cursor.
 ; Syntax ........: _LOCalc_TextCursorFont(ByRef $oTextCursor[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $sFontName           - [optional] a string value. Default is Null. The Font Name to use.
-;                  $nFontSize           - [optional] a general number value. Default is Null. The new Font size.
-;                  $iPosture            - [optional] an integer value (0-5). Default is Null. The Font Italic setting. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $sFontName           - [optional] Default is Null. The Font Name to use.
+;                  $nFontSize           - [optional] Default is Null. The new Font size.
+;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
 ;                  $iWeight             - [optional] an integer value(0,50-200). Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -497,8 +497,8 @@ EndFunc   ;==>_LOCalc_TextCursorFont
 ; Name ..........: _LOCalc_TextCursorFontColor
 ; Description ...: Set or Retrieve the Font Color for a Text Cursor.
 ; Syntax ........: _LOCalc_TextCursorFontColor(ByRef $oTextCursor[, $iFontColor = Null])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -554,7 +554,7 @@ EndFunc   ;==>_LOCalc_TextCursorFontColor
 ; Name ..........: _LOCalc_TextCursorGetString
 ; Description ...: Retrieve the string of text currently selected by a cursor or contained in a paragraph object.
 ; Syntax ........: _LOCalc_TextCursorGetString(ByRef $oObj)
-; Parameters ....: $oObj                - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+; Parameters ....: $oObj                - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -590,9 +590,9 @@ EndFunc   ;==>_LOCalc_TextCursorGetString
 ; Name ..........: _LOCalc_TextCursorGoToRange
 ; Description ...: Moves a Text cursor to another Text Cursor or Paragraph portion Position or Range.
 ; Syntax ........: _LOCalc_TextCursorGoToRange(ByRef $oCursor, ByRef $oRange[, $bSelect = False])
-; Parameters ....: $oCursor             - [in/out] an object. an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $oRange              - [in/out] an object. an object. The Cursor or paragraph portion to move cursor called in $oCursor to. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bSelect             - [optional] a boolean value. Default is False. If True, the selection is expanded or created from original cursor location to Range location.
+; Parameters ....: $oCursor             - an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $oRange              - an object. The Cursor or paragraph portion to move cursor called in $oCursor to. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bSelect             - [optional] Default is False. If True, the selection is expanded or created from original cursor location to Range location.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -640,9 +640,9 @@ EndFunc   ;==>_LOCalc_TextCursorGoToRange
 ; Name ..........: _LOCalc_TextCursorInsertString
 ; Description ...: Insert a string using a Text cursor.
 ; Syntax ........: _LOCalc_TextCursorInsertString(ByRef $oCursor, $sString[, $bOverwrite = False])
-; Parameters ....: $oCursor             - [in/out] an object. A Text Cursor Object returned from any Cursor Object creation function.
-;                  $sString             - a string value. A String to insert.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, and the cursor object has text selected, the selection is overwritten, else if False, the string is inserted to the left of the selection.
+; Parameters ....: $oCursor             - A Text Cursor Object returned from any Cursor Object creation function.
+;                  $sString             - A String to insert.
+;                  $bOverwrite          - [optional] Default is False. If True, and the cursor object has text selected, the selection is overwritten, else if False, the string is inserted to the left of the selection.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -684,7 +684,7 @@ EndFunc   ;==>_LOCalc_TextCursorInsertString
 ; Name ..........: _LOCalc_TextCursorIsCollapsed
 ; Description ...: Retrieve the current status of a Text cursor, whether it has any data selected or not.
 ; Syntax ........: _LOCalc_TextCursorIsCollapsed(ByRef $oCursor)
-; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions.
+; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -729,10 +729,10 @@ EndFunc   ;==>_LOCalc_TextCursorIsCollapsed
 ; Name ..........: _LOCalc_TextCursorMove
 ; Description ...: Move a Text Cursor object in a document. Also for creating/Expanding selections.
 ; Syntax ........: _LOCalc_TextCursorMove(ByRef $oCursor, $iMove[, $iCount = 1[, $bSelect = False]])
-; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions.
-;                  $iMove               - an integer value (0-5). The movement command. See remarks and Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iCount              - [optional] an integer value. Default is 1. Number of movements to make. See remarks.
-;                  $bSelect             - [optional] a boolean value. Default is False. Whether to select data during this cursor movement. See remarks.
+; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions.
+;                  $iMove               - (0-5) The movement command. See remarks and Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iCount              - [optional] Default is 1. Number of movements to make. See remarks.
+;                  $bSelect             - [optional] Default is False. Whether to select data during this cursor movement. See remarks.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -820,10 +820,10 @@ EndFunc   ;==>_LOCalc_TextCursorMove
 ; Name ..........: _LOCalc_TextCursorOverline
 ; Description ...: Set and retrieve the Overline settings for a Text Cursor.
 ; Syntax ........: _LOCalc_TextCursorOverline(ByRef $oTextCursor[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
-;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
+;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -882,7 +882,7 @@ EndFunc   ;==>_LOCalc_TextCursorOverline
 ; Name ..........: _LOCalc_TextCursorParObjCreateList
 ; Description ...: Return Objects for every paragraph contained in a specific section of a document.
 ; Syntax ........: _LOCalc_TextCursorParObjCreateList(ByRef $oTextCursor)
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
 ; Return values .: Success: 1D Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -931,7 +931,7 @@ EndFunc   ;==>_LOCalc_TextCursorParObjCreateList
 ; Name ..........: _LOCalc_TextCursorParObjSectionsGet
 ; Description ...: Break a Paragraph Object into individual Sections for Formatting etc. See Remarks.
 ; Syntax ........: _LOCalc_TextCursorParObjSectionsGet(ByRef $oParObj)
-; Parameters ....: $oParObj             - [in/out] an object. A Paragraph Object returned from _LOCalc_TextCursorParObjCreateList function.
+; Parameters ....: $oParObj             - A Paragraph Object returned from _LOCalc_TextCursorParObjCreateList function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -996,9 +996,9 @@ EndFunc   ;==>_LOCalc_TextCursorParObjSectionsGet
 ; Name ..........: _LOCalc_TextCursorStrikeOut
 ; Description ...: Set or Retrieve the Strikeout settings for a Text Cursor.
 ; Syntax ........: _LOCalc_TextCursorStrikeOut(ByRef $oTextCursor[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1054,10 +1054,10 @@ EndFunc   ;==>_LOCalc_TextCursorStrikeOut
 ; Name ..........: _LOCalc_TextCursorUnderline
 ; Description ...: Set and retrieve the Underline settings for a Text Cursor.
 ; Syntax ........: _LOCalc_TextCursorUnderline(ByRef $oTextCursor[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The Underline line style, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

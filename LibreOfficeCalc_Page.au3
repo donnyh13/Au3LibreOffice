@@ -66,8 +66,8 @@
 ; Name ..........: _LOCalc_PageStyleBackColor
 ; Description ...: Set or Retrieve background color settings for a Page style.
 ; Syntax ........: _LOCalc_PageStyleBackColor(ByRef $oPageStyle[, $iBackColor = Null])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -118,11 +118,11 @@ EndFunc   ;==>_LOCalc_PageStyleBackColor
 ; Name ..........: _LOCalc_PageStyleBorderColor
 ; Description ...: Set the Page Style Border Line Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_PageStyleBorderColor(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -182,12 +182,12 @@ EndFunc   ;==>_LOCalc_PageStyleBorderColor
 ; Name ..........: _LOCalc_PageStyleBorderPadding
 ; Description ...: Set or retrieve the Page Style Border Padding settings.
 ; Syntax ........: _LOCalc_PageStyleBorderPadding(ByRef $oPageStyle[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iAll                - [optional] an integer value. Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iAll                - [optional] Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -275,7 +275,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderPadding
 ; Name ..........: _LOCalc_PageStyleBorderStyle
 ; Description ...: Set or Retrieve the Page Style Border Line style. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_PageStyleBorderStyle(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Page. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Page. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Page. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -339,11 +339,11 @@ EndFunc   ;==>_LOCalc_PageStyleBorderStyle
 ; Name ..........: _LOCalc_PageStyleBorderWidth
 ; Description ...: Set or Retrieve the Page Style Border Line Width. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_PageStyleBorderWidth(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -399,8 +399,8 @@ EndFunc   ;==>_LOCalc_PageStyleBorderWidth
 ; Name ..........: _LOCalc_PageStyleCreate
 ; Description ...: Create a new Page Style in a Document.
 ; Syntax ........: _LOCalc_PageStyleCreate(ByRef $oDoc, $sPageStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $sPageStyle          - a string value. The Name of the new Page Style to create.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $sPageStyle          - The Name of the new Page Style to create.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -452,9 +452,9 @@ EndFunc   ;==>_LOCalc_PageStyleCreate
 ; Name ..........: _LOCalc_PageStyleCurrent
 ; Description ...: Set or Retrieve the current Page style for a Sheet.
 ; Syntax ........: _LOCalc_PageStyleCurrent(ByRef $oDoc, ByRef $oSheet[, $sPageStyle = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $sPageStyle          - [optional] a string value. Default is Null. The Page Style name to set the Page to.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $sPageStyle          - [optional] Default is Null. The Page Style name to set the Page to.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -509,8 +509,8 @@ EndFunc   ;==>_LOCalc_PageStyleCurrent
 ; Name ..........: _LOCalc_PageStyleDelete
 ; Description ...: Delete a User-Created Page Style from a Document.
 ; Syntax ........: _LOCalc_PageStyleDelete(ByRef $oDoc, $oPageStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function. Must be User-Created, not a built-in Style native to LibreOffice.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function. Must be User-Created, not a built-in Style native to LibreOffice.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -563,8 +563,8 @@ EndFunc   ;==>_LOCalc_PageStyleDelete
 ; Name ..........: _LOCalc_PageStyleExists
 ; Description ...: Check whether a document contains the requested Page Style by Name.
 ; Syntax ........: _LOCalc_PageStyleExists(ByRef $oDoc, $sPageStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $sPageStyle          - a string value. The Page Style Name to search for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $sPageStyle          - The Page Style Name to search for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -595,15 +595,15 @@ EndFunc   ;==>_LOCalc_PageStyleExists
 ; Name ..........: _LOCalc_PageStyleFooter
 ; Description ...: Modify or retrieve Footer settings for a page style.
 ; Syntax ........: _LOCalc_PageStyleFooter(ByRef $oPageStyle[, $bFooterOn = Null[, $bSameLeftRight = Null[, $bSameOnFirst = Null[, $iLeftMargin = Null[, $iRightMargin = Null[, $iSpacing = Null[, $iHeight = Null[, $bAutoHeight = Null]]]]]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $bFooterOn           - [optional] a boolean value. Default is Null. If True, adds a footer to the page style.
-;                  $bSameLeftRight      - [optional] a boolean value. Default is Null. If True, Even and odd pages share the same content.
-;                  $bSameOnFirst        - [optional] a boolean value. Default is Null. If True, First and even/odd pages share the same content. LibreOffice 4.0 and up.
-;                  $iLeftMargin         - [optional] an integer value. Default is Null. The amount of space to leave between the left edge of the page and the left edge of the footer. Set in Hundredths of a Millimeter (HMM).
-;                  $iRightMargin        - [optional] an integer value. Default is Null. The amount of space to leave between the right edge of the page and the right edge of the footer. Set in Hundredths of a Millimeter (HMM).
-;                  $iSpacing            - [optional] an integer value. Default is Null. The amount of space that you want to maintain between the bottom edge of the document text and the top edge of the footer. Set in Hundredths of a Millimeter (HMM).
-;                  $iHeight             - [optional] an integer value. Default is Null. The height of the footer. Set in Hundredths of a Millimeter (HMM).
-;                  $bAutoHeight         - [optional] a boolean value. Default is Null. If True, automatically adjusts the height of the footer to fit the contents.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $bFooterOn           - [optional] Default is Null. If True, adds a footer to the page style.
+;                  $bSameLeftRight      - [optional] Default is Null. If True, Even and odd pages share the same content.
+;                  $bSameOnFirst        - [optional] Default is Null. If True, First and even/odd pages share the same content. LibreOffice 4.0 and up.
+;                  $iLeftMargin         - [optional] Default is Null. The amount of space to leave between the left edge of the page and the left edge of the footer. Set in Hundredths of a Millimeter (HMM).
+;                  $iRightMargin        - [optional] Default is Null. The amount of space to leave between the right edge of the page and the right edge of the footer. Set in Hundredths of a Millimeter (HMM).
+;                  $iSpacing            - [optional] Default is Null. The amount of space that you want to maintain between the bottom edge of the document text and the top edge of the footer. Set in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - [optional] Default is Null. The height of the footer. Set in Hundredths of a Millimeter (HMM).
+;                  $bAutoHeight         - [optional] Default is Null. If True, automatically adjusts the height of the footer to fit the contents.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -727,8 +727,8 @@ EndFunc   ;==>_LOCalc_PageStyleFooter
 ; Name ..........: _LOCalc_PageStyleFooterBackColor
 ; Description ...: Set or Retrieve background color settings for a Page style Footer.
 ; Syntax ........: _LOCalc_PageStyleFooterBackColor(ByRef $oPageStyle[, $iBackColor = Null])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -781,11 +781,11 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBackColor
 ; Name ..........: _LOCalc_PageStyleFooterBorderColor
 ; Description ...: Set and Retrieve the Page Style Footer Border Line Color. LibreOffice 3.6+.
 ; Syntax ........: _LOCalc_PageStyleFooterBorderColor(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -846,12 +846,12 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderColor
 ; Name ..........: _LOCalc_PageStyleFooterBorderPadding
 ; Description ...: Set or retrieve the Footer Border Padding settings.
 ; Syntax ........: _LOCalc_PageStyleFooterBorderPadding(ByRef $oPageStyle[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iAll                - [optional] an integer value. Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iAll                - [optional] Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array, see Remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -942,7 +942,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderPadding
 ; Name ..........: _LOCalc_PageStyleFooterBorderStyle
 ; Description ...: Set and retrieve the Page Style Footer Border Line style. LibreOffice 3.6+.
 ; Syntax ........: _LOCalc_PageStyleFooterBorderStyle(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Page Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Page Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Page Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -1007,11 +1007,11 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderStyle
 ; Name ..........: _LOCalc_PageStyleFooterBorderWidth
 ; Description ...: Set and retrieve the Page Style Footer Border Line Width. LibreOffice 3.6+.
 ; Syntax ........: _LOCalc_PageStyleFooterBorderWidth(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1068,11 +1068,11 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderWidth
 ; Name ..........: _LOCalc_PageStyleFooterCreateTextCursor
 ; Description ...: Create a Text Cursor in a Footer area.
 ; Syntax ........: _LOCalc_PageStyleFooterCreateTextCursor(ByRef $oFooter[, $bAtEnd = False[, $bLeftArea = False[, $bCenterArea = False[, $bRightArea = False]]]])
-; Parameters ....: $oFooter             - [in/out] an object. A Footer Object from a previous _LOCalc_PageStyleFooterObj function.
-;                  $bAtEnd              - [optional] a boolean value. Default is False. If True, the Text Cursor is created at the end of the Text, else it will be created at the beginning.
-;                  $bLeftArea           - [optional] a boolean value. Default is False. If True, the Text Cursor will be created in the Left Area of the Footer.
-;                  $bCenterArea         - [optional] a boolean value. Default is False. If True, the Text Cursor will be created in the Center Area of the Footer.
-;                  $bRightArea          - [optional] a boolean value. Default is False. If True, the Text Cursor will be created in the Right Area of the Footer.
+; Parameters ....: $oFooter             - A Footer Object from a previous _LOCalc_PageStyleFooterObj function.
+;                  $bAtEnd              - [optional] Default is False. If True, the Text Cursor is created at the end of the Text, else it will be created at the beginning.
+;                  $bLeftArea           - [optional] Default is False. If True, the Text Cursor will be created in the Left Area of the Footer.
+;                  $bCenterArea         - [optional] Default is False. If True, the Text Cursor will be created in the Center Area of the Footer.
+;                  $bRightArea          - [optional] Default is False. If True, the Text Cursor will be created in the Right Area of the Footer.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1135,10 +1135,10 @@ EndFunc   ;==>_LOCalc_PageStyleFooterCreateTextCursor
 ; Name ..........: _LOCalc_PageStyleFooterObj
 ; Description ...: Set or Retrieve the Object for the Page Style Footer Object. See Remarks.
 ; Syntax ........: _LOCalc_PageStyleFooterObj(ByRef $oPageStyle[, $oFirstPage = Null[, $oRightPage = Null[, $oLeftPage = Null]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $oFirstPage          - [optional] an object. Default is Null. Set or Retrieve the First Page Footer Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
-;                  $oRightPage          - [optional] an object. Default is Null. Set or Retrieve the Right Page Footer Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
-;                  $oLeftPage           - [optional] an object. Default is Null. Set or Retrieve the Left Page Footer Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $oFirstPage          - [optional] Default is Null. Set or Retrieve the First Page Footer Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
+;                  $oRightPage          - [optional] Default is Null. Set or Retrieve the Right Page Footer Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
+;                  $oLeftPage           - [optional] Default is Null. Set or Retrieve the Left Page Footer Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1221,10 +1221,10 @@ EndFunc   ;==>_LOCalc_PageStyleFooterObj
 ; Name ..........: _LOCalc_PageStyleFooterShadow
 ; Description ...: Set or Retrieve the shadow settings for a Page Style Footer.
 ; Syntax ........: _LOCalc_PageStyleFooterShadow(ByRef $oPageStyle[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Footer Shadow. See Constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Color of the Footer shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the footer, set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iLocation           - [optional] (0-4) Default is Null. The Location of the Footer Shadow. See Constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The Color of the Footer shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Shadow Width of the footer, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1309,8 +1309,8 @@ EndFunc   ;==>_LOCalc_PageStyleFooterShadow
 ; Name ..........: _LOCalc_PageStyleGetObjByName
 ; Description ...: Retrieve a Page Style Object for use with other Page Style functions.
 ; Syntax ........: _LOCalc_PageStyleGetObjByName(ByRef $oDoc, $sPageStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $sPageStyle          - a string value. The Page Style name to retrieve the Object for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $sPageStyle          - The Page Style name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1348,15 +1348,15 @@ EndFunc   ;==>_LOCalc_PageStyleGetObjByName
 ; Name ..........: _LOCalc_PageStyleHeader
 ; Description ...: Modify or retrieve Header settings for a page style.
 ; Syntax ........: _LOCalc_PageStyleHeader(ByRef $oPageStyle[, $bHeaderOn = Null[, $bSameLeftRight = Null[, $bSameOnFirst = Null[, $iLeftMargin = Null[, $iRightMargin = Null[, $iSpacing = Null[, $iHeight = Null[, $bAutoHeight = Null]]]]]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $bHeaderOn           - [optional] a boolean value. Default is Null. If True, adds a Header to the page style.
-;                  $bSameLeftRight      - [optional] a boolean value. Default is Null. If True, Even and odd pages share the same content.
-;                  $bSameOnFirst        - [optional] a boolean value. Default is Null. If True, First and even/odd pages share the same content. LibreOffice 4.0 and up.
-;                  $iLeftMargin         - [optional] an integer value. Default is Null. The amount of space to leave between the left edge of the page and the left edge of the Header. Set in Hundredths of a Millimeter (HMM).
-;                  $iRightMargin        - [optional] an integer value. Default is Null. The amount of space to leave between the right edge of the page and the right edge of the Header. Set in Hundredths of a Millimeter (HMM).
-;                  $iSpacing            - [optional] an integer value. Default is Null. The amount of space to maintain between the Top edge of the document text and the bottom edge of the Header. Set in Hundredths of a Millimeter (HMM).
-;                  $iHeight             - [optional] an integer value. Default is Null. The height for the Header. Set in Hundredths of a Millimeter (HMM).
-;                  $bAutoHeight         - [optional] a boolean value. Default is Null. If True, Automatically adjusts the height of the Header to fit the contents.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $bHeaderOn           - [optional] Default is Null. If True, adds a Header to the page style.
+;                  $bSameLeftRight      - [optional] Default is Null. If True, Even and odd pages share the same content.
+;                  $bSameOnFirst        - [optional] Default is Null. If True, First and even/odd pages share the same content. LibreOffice 4.0 and up.
+;                  $iLeftMargin         - [optional] Default is Null. The amount of space to leave between the left edge of the page and the left edge of the Header. Set in Hundredths of a Millimeter (HMM).
+;                  $iRightMargin        - [optional] Default is Null. The amount of space to leave between the right edge of the page and the right edge of the Header. Set in Hundredths of a Millimeter (HMM).
+;                  $iSpacing            - [optional] Default is Null. The amount of space to maintain between the Top edge of the document text and the bottom edge of the Header. Set in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - [optional] Default is Null. The height for the Header. Set in Hundredths of a Millimeter (HMM).
+;                  $bAutoHeight         - [optional] Default is Null. If True, Automatically adjusts the height of the Header to fit the contents.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1480,8 +1480,8 @@ EndFunc   ;==>_LOCalc_PageStyleHeader
 ; Name ..........: _LOCalc_PageStyleHeaderBackColor
 ; Description ...: Set or Retrieve background color settings for a Page style header.
 ; Syntax ........: _LOCalc_PageStyleHeaderBackColor(ByRef $oPageStyle[, $iBackColor = Null])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1534,11 +1534,11 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBackColor
 ; Name ..........: _LOCalc_PageStyleHeaderBorderColor
 ; Description ...: Set and Retrieve the Page Style Header Border Line Color. LibreOffice 3.6+.
 ; Syntax ........: _LOCalc_PageStyleHeaderBorderColor(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1599,12 +1599,12 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderColor
 ; Name ..........: _LOCalc_PageStyleHeaderBorderPadding
 ; Description ...: Set or retrieve the Header Border Padding settings.
 ; Syntax ........: _LOCalc_PageStyleHeaderBorderPadding(ByRef $oPageStyle[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iAll                - [optional] an integer value. Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iAll                - [optional] Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1695,7 +1695,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderPadding
 ; Name ..........: _LOCalc_PageStyleHeaderBorderStyle
 ; Description ...: Set and retrieve the Page Style Header Border Line style. LibreOffice 3.6+.
 ; Syntax ........: _LOCalc_PageStyleHeaderBorderStyle(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Page Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Page Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Page Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -1760,11 +1760,11 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderStyle
 ; Name ..........: _LOCalc_PageStyleHeaderBorderWidth
 ; Description ...: Set and retrieve the Page Style Header Border Line Width. LibreOffice 3.6+.
 ; Syntax ........: _LOCalc_PageStyleHeaderBorderWidth(ByRef $oPageStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOC_BORDER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1821,11 +1821,11 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderWidth
 ; Name ..........: _LOCalc_PageStyleHeaderCreateTextCursor
 ; Description ...: Create a Text Cursor in a Header area.
 ; Syntax ........: _LOCalc_PageStyleHeaderCreateTextCursor(ByRef $oHeader[, $bAtEnd = False[, $bLeftArea = False[, $bCenterArea = False[, $bRightArea = False]]]])
-; Parameters ....: $oHeader             - [in/out] an object. A Header Object from a previous _LOCalc_PageStyleHeaderObj function.
-;                  $bAtEnd              - [optional] a boolean value. Default is False. If True, the Text Cursor is created at the end of the Text, else it will be created at the beginning.
-;                  $bLeftArea           - [optional] a boolean value. Default is False. If True, the Text Cursor will be created in the Left Area of the Header.
-;                  $bCenterArea         - [optional] a boolean value. Default is False. If True, the Text Cursor will be created in the Center Area of the Header.
-;                  $bRightArea          - [optional] a boolean value. Default is False. If True, the Text Cursor will be created in the Right Area of the Header.
+; Parameters ....: $oHeader             - A Header Object from a previous _LOCalc_PageStyleHeaderObj function.
+;                  $bAtEnd              - [optional] Default is False. If True, the Text Cursor is created at the end of the Text, else it will be created at the beginning.
+;                  $bLeftArea           - [optional] Default is False. If True, the Text Cursor will be created in the Left Area of the Header.
+;                  $bCenterArea         - [optional] Default is False. If True, the Text Cursor will be created in the Center Area of the Header.
+;                  $bRightArea          - [optional] Default is False. If True, the Text Cursor will be created in the Right Area of the Header.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1888,10 +1888,10 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderCreateTextCursor
 ; Name ..........: _LOCalc_PageStyleHeaderObj
 ; Description ...: Set or Retrieve the Object for the Page Style Header Object. See Remarks.
 ; Syntax ........: _LOCalc_PageStyleHeaderObj(ByRef $oPageStyle[, $oFirstPage = Null[, $oRightPage = Null[, $oLeftPage = Null]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $oFirstPage          - [optional] an object. Default is Null. Set or Retrieve the First Page Header Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
-;                  $oRightPage          - [optional] an object. Default is Null. Set or Retrieve the Right Page Header Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
-;                  $oLeftPage           - [optional] an object. Default is Null. Set or Retrieve the Left Page Header Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $oFirstPage          - [optional] Default is Null. Set or Retrieve the First Page Header Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
+;                  $oRightPage          - [optional] Default is Null. Set or Retrieve the Right Page Header Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
+;                  $oLeftPage           - [optional] Default is Null. Set or Retrieve the Left Page Header Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1974,10 +1974,10 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderObj
 ; Name ..........: _LOCalc_PageStyleHeaderShadow
 ; Description ...: Set or Retrieve the shadow settings for a Page Style Header.
 ; Syntax ........: _LOCalc_PageStyleHeaderShadow(ByRef $oPageStyle[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Header Shadow. See constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Color of the Header shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the Header, set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iLocation           - [optional] (0-4) Default is Null. The Location of the Header Shadow. See constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The Color of the Header shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Shadow Width of the Header, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2062,12 +2062,12 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderShadow
 ; Name ..........: _LOCalc_PageStyleLayout
 ; Description ...: Modify or retrieve the Layout settings for a Page Style.
 ; Syntax ........: _LOCalc_PageStyleLayout(ByRef $oPageStyle[, $iLayout = Null[, $iNumFormat = Null[, $bTableAlignHori = Null[, $bTableAlignVert = Null[, $sPaperTray = Null]]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iLayout             - [optional] an integer value (0-4). Default is Null. Specify the current Page layout style, either Left(Even) pages, Right(Odd) pages, or both Left(Even) and Right(Odd) pages or mirrored. See Constants, $LOC_PAGE_LAYOUT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iNumFormat          - [optional] an integer value (0-71). Default is Null. The page numbering format to use for this Page Style. See Constants, $LOC_NUM_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bTableAlignHori     - [optional] a boolean value. Default is Null. If True, Centers the cells Horizontally on the printed page.
-;                  $bTableAlignVert     - [optional] a boolean value. Default is Null. If True, Centers the cells Vertically on the printed page.
-;                  $sPaperTray          - [optional] a string value. Default is Null. The paper source for your printer. See remarks.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iLayout             - [optional] (0-4) Default is Null. Specify the current Page layout style, either Left(Even) pages, Right(Odd) pages, or both Left(Even) and Right(Odd) pages or mirrored. See Constants, $LOC_PAGE_LAYOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iNumFormat          - [optional] (0-71) Default is Null. The page numbering format to use for this Page Style. See Constants, $LOC_NUM_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bTableAlignHori     - [optional] Default is Null. If True, Centers the cells Horizontally on the printed page.
+;                  $bTableAlignVert     - [optional] Default is Null. If True, Centers the cells Vertically on the printed page.
+;                  $sPaperTray          - [optional] Default is Null. The paper source for your printer. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2156,11 +2156,11 @@ EndFunc   ;==>_LOCalc_PageStyleLayout
 ; Name ..........: _LOCalc_PageStyleMargins
 ; Description ...: Modify or retrieve the margin settings for a Page Style.
 ; Syntax ........: _LOCalc_PageStyleMargins(ByRef $oPageStyle[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iLeft               - [optional] an integer value. Default is Null. The amount of space to leave between the left edge of the page and the document text. If you are using the Mirrored page layout, enter the amount of space to leave between the inner text margin and the inner edge of the page. Set in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The amount of space to leave between the right edge of the page and the document text. If you are using the Mirrored page layout, enter the amount of space to leave between the outer text margin and the outer edge of the page. Set in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The amount of space to leave between the upper edge of the page and the document text. Set in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The amount of space to leave between the lower edge of the page and the document text. Set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the document text. If you are using the Mirrored page layout, enter the amount of space to leave between the inner text margin and the inner edge of the page. Set in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the document text. If you are using the Mirrored page layout, enter the amount of space to leave between the outer text margin and the outer edge of the page. Set in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the document text. Set in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The amount of space to leave between the lower edge of the page and the document text. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2238,10 +2238,10 @@ EndFunc   ;==>_LOCalc_PageStyleMargins
 ; Name ..........: _LOCalc_PageStyleOrganizer
 ; Description ...: Set or retrieve the Organizer settings of a Page Style.
 ; Syntax ........: _LOCalc_PageStyleOrganizer(ByRef $oDoc, $oPageStyle[, $sNewPageStyleName = Null[, $bHidden = Null]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $sNewPageStyleName   - [optional] a string value. Default is Null. The new name to set the Page Style called in $oPageStyle to.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the style is hidden in L.O. UI. LibreOffice 4.0 and Up.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $sNewPageStyleName   - [optional] Default is Null. The new name to set the Page Style called in $oPageStyle to.
+;                  $bHidden             - [optional] Default is Null. If True, the style is hidden in L.O. UI. LibreOffice 4.0 and Up.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2315,10 +2315,10 @@ EndFunc   ;==>_LOCalc_PageStyleOrganizer
 ; Name ..........: _LOCalc_PageStylePaperFormat
 ; Description ...: Modify or retrieve the paper format settings for a Page Style.
 ; Syntax ........: _LOCalc_PageStylePaperFormat(ByRef $oPageStyle[, $iWidth = Null[, $iHeight = Null[, $bLandscape = Null]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOC_PAPER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iHeight             - [optional] an integer value. Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOC_PAPER_HEIGHT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bLandscape          - [optional] a boolean value. Default is Null. If True, displays the page in Landscape layout.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOC_PAPER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOC_PAPER_HEIGHT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bLandscape          - [optional] Default is Null. If True, displays the page in Landscape layout.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2400,9 +2400,9 @@ EndFunc   ;==>_LOCalc_PageStylePaperFormat
 ; Name ..........: _LOCalc_PageStylesGetNames
 ; Description ...: Retrieve an array of all Page Style names available for a document.
 ; Syntax ........: _LOCalc_PageStylesGetNames(ByRef $oDoc[, $bUserOnly = False[, $bAppliedOnly = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $bUserOnly           - [optional] a boolean value. Default is False. If True only User-Created Page Styles are returned.
-;                  $bAppliedOnly        - [optional] a boolean value. Default is False. If True only Applied Page Styles are returned.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $bUserOnly           - [optional] Default is False. If True only User-Created Page Styles are returned.
+;                  $bAppliedOnly        - [optional] Default is False. If True only Applied Page Styles are returned.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2469,10 +2469,10 @@ EndFunc   ;==>_LOCalc_PageStylesGetNames
 ; Name ..........: _LOCalc_PageStyleShadow
 ; Description ...: Set or Retrieve the shadow settings for a Page Style.
 ; Syntax ........: _LOCalc_PageStyleShadow(ByRef $oPageStyle[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Page Shadow. See constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iColor              - [optional] an integer value. Default is Null (0-16777215). The shadow Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the Page, set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iLocation           - [optional] (0-4) Default is Null. The Location of the Page Shadow. See constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColor              - [optional] Default is Null (0-16777215). The shadow Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Shadow Width of the Page, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2555,10 +2555,10 @@ EndFunc   ;==>_LOCalc_PageStyleShadow
 ; Name ..........: _LOCalc_PageStyleSheetPageOrder
 ; Description ...: Set or Retrieve Sheet Printing Page order settings.
 ; Syntax ........: _LOCalc_PageStyleSheetPageOrder(ByRef $oPageStyle[, $bTop2Bottom = Null[, $bFirstPageNum = Null[, $iFirstPage = Null]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $bTop2Bottom         - [optional] a boolean value. Default is Null. If True, the Sheet is printed from Top to Bottom and then Right. If False, the Sheet is printed Left to Right, and then down.
-;                  $bFirstPageNum       - [optional] a boolean value. Default is Null. If True Page numbering will be restarted.
-;                  $iFirstPage          - [optional] an integer value (0-9999). Default is Null. The Page number you want the numbering to restart at.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $bTop2Bottom         - [optional] Default is Null. If True, the Sheet is printed from Top to Bottom and then Right. If False, the Sheet is printed Left to Right, and then down.
+;                  $bFirstPageNum       - [optional] Default is Null. If True Page numbering will be restarted.
+;                  $iFirstPage          - [optional] (0-9999) Default is Null. The Page number you want the numbering to restart at.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2627,15 +2627,15 @@ EndFunc   ;==>_LOCalc_PageStyleSheetPageOrder
 ; Name ..........: _LOCalc_PageStyleSheetPrint
 ; Description ...: Set or Retrieve Sheet Printing settings.
 ; Syntax ........: _LOCalc_PageStyleSheetPrint(ByRef $oPageStyle[, $bHeaders = Null[, $bGrid = Null[, $bComments = Null[, $bObjectsOrImages = Null[, $bCharts = Null[, $bDrawing = Null[, $bFormulas = Null[, $bZeroValues = Null]]]]]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $bHeaders            - [optional] a boolean value. Default is Null. If True, Column and Row Headers will be included when printed.
-;                  $bGrid               - [optional] a boolean value. Default is Null. If True, Cell Border lines are printed as a grid.
-;                  $bComments           - [optional] a boolean value. Default is Null. If True, Comments are printed.
-;                  $bObjectsOrImages    - [optional] a boolean value. Default is Null. If True, Objects or Images are printed.
-;                  $bCharts             - [optional] a boolean value. Default is Null. If True, Charts are printed.
-;                  $bDrawing            - [optional] a boolean value. Default is Null. If True, Drawings are printed.
-;                  $bFormulas           - [optional] a boolean value. Default is Null. If True, Formulas are printed instead of the results.
-;                  $bZeroValues         - [optional] a boolean value. Default is Null. IF True, Cells containing Zero Values are printed.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $bHeaders            - [optional] Default is Null. If True, Column and Row Headers will be included when printed.
+;                  $bGrid               - [optional] Default is Null. If True, Cell Border lines are printed as a grid.
+;                  $bComments           - [optional] Default is Null. If True, Comments are printed.
+;                  $bObjectsOrImages    - [optional] Default is Null. If True, Objects or Images are printed.
+;                  $bCharts             - [optional] Default is Null. If True, Charts are printed.
+;                  $bDrawing            - [optional] Default is Null. If True, Drawings are printed.
+;                  $bFormulas           - [optional] Default is Null. If True, Formulas are printed instead of the results.
+;                  $bZeroValues         - [optional] Default is Null. IF True, Cells containing Zero Values are printed.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2750,10 +2750,10 @@ EndFunc   ;==>_LOCalc_PageStyleSheetPrint
 ; Name ..........: _LOCalc_PageStyleSheetScale
 ; Description ...: Set or Retrieve the Sheet Printing Scale settings.
 ; Syntax ........: _LOCalc_PageStyleSheetScale(ByRef $oPageStyle[, $iMode = Null[, $iVariable1 = Null[, $iVariable2 = Null]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $iMode               - [optional] an integer value (1-3). Default is Null. The Scaling mode when the spreadsheet is printed. See Constants $LOC_SCALE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iVariable1          - [optional] an integer value. Default is Null. The First Scale Value. See Remarks
-;                  $iVariable2          - [optional] an integer value. Default is Null. The Second Scale Value. See Remarks
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $iMode               - [optional] (1-3) Default is Null. The Scaling mode when the spreadsheet is printed. See Constants $LOC_SCALE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iVariable1          - [optional] Default is Null. The First Scale Value. See Remarks
+;                  $iVariable2          - [optional] Default is Null. The Second Scale Value. See Remarks
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

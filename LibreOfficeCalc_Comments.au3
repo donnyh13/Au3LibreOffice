@@ -57,8 +57,8 @@
 ; Name ..........: _LOCalc_CommentAdd
 ; Description ...: Add a comment to a cell.
 ; Syntax ........: _LOCalc_CommentAdd(ByRef $oCell, $sText)
-; Parameters ....: $oCell               - [in/out] an object. A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
-;                  $sText               - a string value. The initial text of the Comment. Cannot be empty.
+; Parameters ....: $oCell               - A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
+;                  $sText               - The initial text of the Comment. Cannot be empty.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -111,8 +111,8 @@ EndFunc   ;==>_LOCalc_CommentAdd
 ; Name ..........: _LOCalc_CommentAreaColor
 ; Description ...: Set or Retrieve the Comment's background color.
 ; Syntax ........: _LOCalc_CommentAreaColor(ByRef $oComment[, $iColor = Null])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The comment color background, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The comment color background, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -166,7 +166,7 @@ EndFunc   ;==>_LOCalc_CommentAreaColor
 ; Name ..........: _LOCalc_CommentAreaFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOCalc_CommentAreaFillStyle(ByRef $oComment)
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -201,18 +201,18 @@ EndFunc   ;==>_LOCalc_CommentAreaFillStyle
 ; Name ..........: _LOCalc_CommentAreaGradient
 ; Description ...: Modify or retrieve the settings for Comment Background color Gradient.
 ; Syntax ........: _LOCalc_CommentAreaGradient(ByRef $oComment[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $sGradientName       - [optional] a string value. Default is Null. A Preset Gradient Name. See remarks. See constants, $LOC_GRAD_NAME_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The gradient type to apply. See Constants, $LOC_GRAD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOC_GRAD_NAME_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOC_GRAD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iIncrement          - [optional] an integer value (0, 3-256). Default is Null. The number of steps of color change. 0 = Automatic.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
-;                  $iFromColor          - [optional] an integer value (0-16777215). Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iToColor            - [optional] an integer value (0-16777215). Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iFromIntense        - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
-;                  $iToIntense          - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
+;                  $iFromColor          - [optional] (0-16777215) Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iToColor            - [optional] (0-16777215) Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
+;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -434,8 +434,8 @@ EndFunc   ;==>_LOCalc_CommentAreaGradient
 ; Name ..........: _LOCalc_CommentAreaGradientMulticolor
 ; Description ...: Set or Retrieve a Comment's Multicolor Gradient settings. See remarks.
 ; Syntax ........: _LOCalc_CommentAreaGradientMulticolor(ByRef $oComment[, $avColorStops = Null])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -548,13 +548,13 @@ EndFunc   ;==>_LOCalc_CommentAreaGradientMulticolor
 ; Name ..........: _LOCalc_CommentAreaShadow
 ; Description ...: Set or Retrieve the shadow settings for a Comment.
 ; Syntax ........: _LOCalc_CommentAreaShadow(ByRef $oComment[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $bShadow             - [optional] a boolean value. Default is Null. If True, a Shadow is present for the Comment.
-;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow. See Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iDistance           - [optional] an integer value. Default is Null. The distance of the Shadow from the Comment box, set in Hundredths of a Millimeter (HMM).
-;                  $iBlur               - [optional] an integer value (0-150). Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $bShadow             - [optional] Default is Null. If True, a Shadow is present for the Comment.
+;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow. See Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Comment box, set in Hundredths of a Millimeter (HMM).
+;                  $iBlur               - [optional] (0-150) Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
+;                  $iTransparency       - [optional] (0-100) Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -677,8 +677,8 @@ EndFunc   ;==>_LOCalc_CommentAreaShadow
 ; Name ..........: _LOCalc_CommentAreaTransparency
 ; Description ...: Set or retrieve Transparency settings for a Comment.
 ; Syntax ........: _LOCalc_CommentAreaTransparency(ByRef $oComment[, $iTransparency = Null])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -732,15 +732,15 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparency
 ; Name ..........: _LOCalc_CommentAreaTransparencyGradient
 ; Description ...: Set or retrieve the Comment transparency gradient settings.
 ; Syntax ........: _LOCalc_CommentAreaTransparencyGradient(ByRef $oDoc, ByRef $oComment[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient to apply. See Constants, $LOC_GRAD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Call with $LOC_GRAD_TYPE_OFF to turn Transparency Gradient off.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
-;                  $iStart              - [optional] an integer value (0-100). Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
-;                  $iEnd                - [optional] an integer value (0-100). Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOC_GRAD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Call with $LOC_GRAD_TYPE_OFF to turn Transparency Gradient off.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
+;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
+;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -925,8 +925,8 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradient
 ; Name ..........: _LOCalc_CommentAreaTransparencyGradientMulti
 ; Description ...: Set or Retrieve a Comment's Multi Transparency Gradient settings. See remarks.
 ; Syntax ........: _LOCalc_CommentAreaTransparencyGradientMulti(ByRef $oComment[, $avColorStops = Null])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1039,13 +1039,13 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ; Name ..........: _LOCalc_CommentCallout
 ; Description ...: Set or Retrieve Comment Callout settings.
 ; Syntax ........: _LOCalc_CommentCallout(ByRef $oComment[, $iCalloutStyle = Null[, $iSpacing = Null[, $iExtension = Null[, $iExtendBy = Null[, $bOptimal = Null[, $iLength = Null]]]]]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $iCalloutStyle       - [optional] an integer value (0-2). Default is Null. The Style of Callout connector line. See Constants $LOC_COMMENT_CALLOUT_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iSpacing            - [optional] an integer value (0-240005). Default is Null. The amount of space between the Callout connector line end and the comment box, in Hundredths of a Millimeter (HMM).
-;                  $iExtension          - [optional] an integer value (0-4). Default is Null. The position to extend the Callout line from. See Constants $LOC_COMMENT_CALLOUT_EXT_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $iCalloutStyle       - [optional] (0-2) Default is Null. The Style of Callout connector line. See Constants $LOC_COMMENT_CALLOUT_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iSpacing            - [optional] (0-240005) Default is Null. The amount of space between the Callout connector line end and the comment box, in Hundredths of a Millimeter (HMM).
+;                  $iExtension          - [optional] (0-4) Default is Null. The position to extend the Callout line from. See Constants $LOC_COMMENT_CALLOUT_EXT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iExtendBy           - [optional] an integer value (0-240005;0,5000,10000). Default is Null. The length to extend the Callout line, in Hundredths of a Millimeter (HMM), or the alignment of the line depending on the current setting of $iExtension. See remarks. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, or $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bOptimal            - [optional] a boolean value. Default is Null. If True a angled line will be used optimally.
-;                  $iLength             - [optional] an integer value (0-240005). Default is Null. The length of the callout line, in Hundredths of a Millimeter (HMM).
+;                  $bOptimal            - [optional] Default is Null. If True a angled line will be used optimally.
+;                  $iLength             - [optional] (0-240005) Default is Null. The length of the callout line, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1190,8 +1190,8 @@ EndFunc   ;==>_LOCalc_CommentCallout
 ; Name ..........: _LOCalc_CommentCreateTextCursor
 ; Description ...: Create a Text Cursor in a Comment.
 ; Syntax ........: _LOCalc_CommentCreateTextCursor(ByRef $oComment[, $bAtEnd = True])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $bAtEnd              - [optional] a boolean value. Default is True. If True, The Text Cursor will be created at the end of any Text Content present.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $bAtEnd              - [optional] Default is True. If True, The Text Cursor will be created at the end of any Text Content present.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1234,7 +1234,7 @@ EndFunc   ;==>_LOCalc_CommentCreateTextCursor
 ; Name ..........: _LOCalc_CommentDelete
 ; Description ...: Delete a comment from a Cell.
 ; Syntax ........: _LOCalc_CommentDelete(ByRef $oComment)
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1285,7 +1285,7 @@ EndFunc   ;==>_LOCalc_CommentDelete
 ; Name ..........: _LOCalc_CommentGetCell
 ; Description ...: Retrieve the Object of the Cell containing this Object.
 ; Syntax ........: _LOCalc_CommentGetCell(ByRef $oComment)
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1319,7 +1319,7 @@ EndFunc   ;==>_LOCalc_CommentGetCell
 ; Name ..........: _LOCalc_CommentGetLastEdit
 ; Description ...: Retrieve the Last Edit Date and Author of the Comment.
 ; Syntax ........: _LOCalc_CommentGetLastEdit(ByRef $oComment)
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1360,7 +1360,7 @@ EndFunc   ;==>_LOCalc_CommentGetLastEdit
 ; Name ..........: _LOCalc_CommentGetObjByCell
 ; Description ...: Retrieve a comment Object for a particular cell, if one exists.
 ; Syntax ........: _LOCalc_CommentGetObjByCell(ByRef $oCell)
-; Parameters ....: $oCell               - [in/out] an object. A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
+; Parameters ....: $oCell               - A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1396,8 +1396,8 @@ EndFunc   ;==>_LOCalc_CommentGetObjByCell
 ; Name ..........: _LOCalc_CommentGetObjByIndex
 ; Description ...: Retrieve a comment object by Index.
 ; Syntax ........: _LOCalc_CommentGetObjByIndex(ByRef $oSheet, $iComment)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $iComment            - an integer value. The Index number of the comment to retrieve. 0 based.
+; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+;                  $iComment            - The Index number of the comment to retrieve. 0 based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1444,14 +1444,14 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ; Name ..........: _LOCalc_CommentLineArrowStyles
 ; Description ...: Set or Retrieve Comment Line Start and End Arrow Style settings.
 ; Syntax ........: _LOCalc_CommentLineArrowStyles(ByRef $oComment[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $vStartStyle         - [optional] a variant value (0-32, or String). Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3. See remarks.
-;                  $iStartWidth         - [optional] an integer value (0-5004). Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
-;                  $bStartCenter        - [optional] a boolean value. Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
-;                  $bSync               - [optional] a boolean value. Default is Null. If True, Synchronizes the Start Arrowhead settings with the end Arrowhead settings. See remarks.
+;                  $iStartWidth         - [optional] (0-5004) Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
+;                  $bStartCenter        - [optional] Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
+;                  $bSync               - [optional] Default is Null. If True, Synchronizes the Start Arrowhead settings with the end Arrowhead settings. See remarks.
 ;                  $vEndStyle           - [optional] a variant value (0-32, or String). Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3. See remarks.
-;                  $iEndWidth           - [optional] an integer value (0-5004). Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
-;                  $bEndCenter          - [optional] a boolean value. Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
+;                  $iEndWidth           - [optional] (0-5004) Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
+;                  $bEndCenter          - [optional] Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1596,13 +1596,13 @@ EndFunc   ;==>_LOCalc_CommentLineArrowStyles
 ; Name ..........: _LOCalc_CommentLineProperties
 ; Description ...: Set or Retrieve Comment Line settings.
 ; Syntax ........: _LOCalc_CommentLineProperties(ByRef $oComment[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $vStyle              - [optional] a variant value (0-31, or String). Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3. See remarks.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value (0-5004). Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The Line transparency percentage. 100% = fully transparent.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] (0-5004) Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
+;                  $iTransparency       - [optional] (0-100) Default is Null. The Line transparency percentage. 100% = fully transparent.
 ;                  $iCornerStyle        - [optional] an integer value (0,2-4). Default is Null. The Line Corner Style. See Constants $LOC_COMMENT_LINE_JOINT_* as defined in LibreOfficeCalc_Constants.au3
-;                  $iCapStyle           - [optional] an integer value (0-2). Default is Null. The Line Cap Style. See Constants $LOC_COMMENT_LINE_CAP_* as defined in LibreOfficeCalc_Constants.au3
+;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOC_COMMENT_LINE_CAP_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1745,10 +1745,10 @@ EndFunc   ;==>_LOCalc_CommentLineProperties
 ; Name ..........: _LOCalc_CommentPosition
 ; Description ...: Set or Retrieve the Comment's position settings.
 ; Syntax ........: _LOCalc_CommentPosition(ByRef $oComment[, $iX = Null[, $iY = Null[, $bProtectPos = Null]]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $iX                  - [optional] an integer value. Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] an integer value. Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, the Comment's position is locked.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $iX                  - [optional] Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - [optional] Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $bProtectPos         - [optional] Default is Null. If True, the Comment's position is locked.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1831,8 +1831,8 @@ EndFunc   ;==>_LOCalc_CommentPosition
 ; Name ..........: _LOCalc_CommentRotate
 ; Description ...: Set or retrieve Rotation settings for a Comment.
 ; Syntax ........: _LOCalc_CommentRotate(ByRef $oComment[, $nRotate = Null])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $nRotate             - [optional] a general number value (0-359.99). Default is Null. The Degrees to rotate the Comment. See remarks.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $nRotate             - [optional] (0-359.99) Default is Null. The Degrees to rotate the Comment. See remarks.
 ; Return values .: Success: 1 or Number.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1887,7 +1887,7 @@ EndFunc   ;==>_LOCalc_CommentRotate
 ; Name ..........: _LOCalc_CommentsGetCount
 ; Description ...: Retrieve a count of Comments contained in the Sheet.
 ; Syntax ........: _LOCalc_CommentsGetCount(ByRef $oSheet)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1926,7 +1926,7 @@ EndFunc   ;==>_LOCalc_CommentsGetCount
 ; Name ..........: _LOCalc_CommentsGetList
 ; Description ...: Retrieve an array of all comments contained in a Sheet.
 ; Syntax ........: _LOCalc_CommentsGetList(ByRef $oSheet)
-; Parameters ....: $oSheet              - [in/out] an object. A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
+; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1973,10 +1973,10 @@ EndFunc   ;==>_LOCalc_CommentsGetList
 ; Name ..........: _LOCalc_CommentSize
 ; Description ...: Set or Retrieve Comment Size related settings.
 ; Syntax ........: _LOCalc_CommentSize(ByRef $oComment[, $iWidth = Null[, $iHeight = Null[, $bProtectSize = Null]]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Comment, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Comment, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the Comment.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $iWidth              - [optional] Default is Null. The width of the Comment, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $iHeight             - [optional] Default is Null. The height of the Comment, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the Comment.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2060,8 +2060,8 @@ EndFunc   ;==>_LOCalc_CommentSize
 ; Name ..........: _LOCalc_CommentText
 ; Description ...: Set or Retrieve the current text contained in the Comment.
 ; Syntax ........: _LOCalc_CommentText(ByRef $oComment[, $sText = Null])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $sText               - [optional] a string value. Default is Null. The text to set the Comment to. Will overwrite any previous text.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $sText               - [optional] Default is Null. The text to set the Comment to. Will overwrite any previous text.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2112,9 +2112,9 @@ EndFunc   ;==>_LOCalc_CommentText
 ; Name ..........: _LOCalc_CommentTextAnchor
 ; Description ...: Set or Retrieve Comment Text Anchor settings.
 ; Syntax ........: _LOCalc_CommentTextAnchor(ByRef $oComment[, $iAnchor = Null[, $bFullWidth = Null]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $iAnchor             - [optional] an integer value (0-8). Default is Null. The Comment Anchor position. See Constants $LOC_COMMENT_ANCHOR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bFullWidth          - [optional] a boolean value. Default is Null. If True, the text will be expanded to cover the full width of the comment.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $iAnchor             - [optional] (0-8) Default is Null. The Comment Anchor position. See Constants $LOC_COMMENT_ANCHOR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bFullWidth          - [optional] Default is Null. If True, the text will be expanded to cover the full width of the comment.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2280,15 +2280,15 @@ EndFunc   ;==>_LOCalc_CommentTextAnchor
 ; Name ..........: _LOCalc_CommentTextAnimation
 ; Description ...: Set or Retrieve Comment Text Animation settings.
 ; Syntax ........: _LOCalc_CommentTextAnimation(ByRef $oComment[, $iAnimation = Null[, $iDirection = Null[, $bBeginInside = Null[, $bVisibleOnExit = Null[, $iCycles = Null[, $iPixelIncrement = Null[, $iIncrement = Null[, $iDelay = Null]]]]]]]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $iAnimation          - [optional] an integer value (0-4). Default is Null. The Animation type. See Constants $LOC_COMMENT_ANIMATION_KIND_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iDirection          - [optional] an integer value (0-3). Default is Null. The Animation direction. See Constants $LOC_COMMENT_ANIMATION_DIR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bBeginInside        - [optional] a boolean value. Default is Null. If True, the text is visible inside the Comment when the animation begins.
-;                  $bVisibleOnExit      - [optional] a boolean value. Default is Null. If True, the text is visible inside the Comment when the animation ends.
-;                  $iCycles             - [optional] an integer value (0-100). Default is Null. The number of times to repeat the animation. 0 = continuous.
-;                  $iPixelIncrement     - [optional] an integer value (0-100). Default is Null. The increment value measured in pixels. See remarks.
-;                  $iIncrement          - [optional] an integer value (0-25400). Default is Null. The increment value measured in Hundredths of a Millimeter (HMM). See remarks.
-;                  $iDelay              - [optional] an integer value (0-30000). Default is Null. The delay between animation repeats, in milliseconds. 0 = Automatic.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $iAnimation          - [optional] (0-4) Default is Null. The Animation type. See Constants $LOC_COMMENT_ANIMATION_KIND_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iDirection          - [optional] (0-3) Default is Null. The Animation direction. See Constants $LOC_COMMENT_ANIMATION_DIR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bBeginInside        - [optional] Default is Null. If True, the text is visible inside the Comment when the animation begins.
+;                  $bVisibleOnExit      - [optional] Default is Null. If True, the text is visible inside the Comment when the animation ends.
+;                  $iCycles             - [optional] (0-100) Default is Null. The number of times to repeat the animation. 0 = continuous.
+;                  $iPixelIncrement     - [optional] (0-100) Default is Null. The increment value measured in pixels. See remarks.
+;                  $iIncrement          - [optional] (0-25400) Default is Null. The increment value measured in Hundredths of a Millimeter (HMM). See remarks.
+;                  $iDelay              - [optional] (0-30000) Default is Null. The delay between animation repeats, in milliseconds. 0 = Automatic.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2413,10 +2413,10 @@ EndFunc   ;==>_LOCalc_CommentTextAnimation
 ; Name ..........: _LOCalc_CommentTextColumns
 ; Description ...: Set or Retrieve Comment Text Column settings.
 ; Syntax ........: _LOCalc_CommentTextColumns(ByRef $oDoc, ByRef $oComment[, $iColumns = Null[, $iSpacing = Null]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $iColumns            - [optional] an integer value (1-16). Default is Null. The number of columns to break the text area into.
-;                  $iSpacing            - [optional] an integer value. Default is Null. The amount of spacing between the columns, in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $iColumns            - [optional] (1-16) Default is Null. The number of columns to break the text area into.
+;                  $iSpacing            - [optional] Default is Null. The amount of spacing between the columns, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2501,15 +2501,15 @@ EndFunc   ;==>_LOCalc_CommentTextColumns
 ; Name ..........: _LOCalc_CommentTextSettings
 ; Description ...: Set or Retrieve Comment Text settings.
 ; Syntax ........: _LOCalc_CommentTextSettings(ByRef $oComment[, $bFitWidth = Null[, $bFitHeight = Null[, $bFitToFrame = Null[, $iSpacingAll = Null[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]]]]]])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $bFitWidth           - [optional] a boolean value. Default is Null. If True, the comment box width will expand to fit text content.
-;                  $bFitHeight          - [optional] a boolean value. Default is Null. If True, the comment box height will expand to fit text content.
-;                  $bFitToFrame         - [optional] a boolean value. Default is Null. If True text will be resized to fit the frame.
-;                  $iSpacingAll         - [optional] an integer value (-100000-100000). Default is Null. The spacing around the text between the text and the Comment borders, in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value (-100000-100000). Default is Null. The spacing on the Left side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value (-100000-100000). Default is Null. The spacing on the Right side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value (-100000-100000). Default is Null. The spacing on the Top side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value (-100000-100000). Default is Null. The spacing on the Bottom side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $bFitWidth           - [optional] Default is Null. If True, the comment box width will expand to fit text content.
+;                  $bFitHeight          - [optional] Default is Null. If True, the comment box height will expand to fit text content.
+;                  $bFitToFrame         - [optional] Default is Null. If True text will be resized to fit the frame.
+;                  $iSpacingAll         - [optional] (-100000-100000) Default is Null. The spacing around the text between the text and the Comment borders, in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] (-100000-100000) Default is Null. The spacing on the Left side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] (-100000-100000) Default is Null. The spacing on the Right side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] (-100000-100000) Default is Null. The spacing on the Top side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] (-100000-100000) Default is Null. The spacing on the Bottom side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2647,8 +2647,8 @@ EndFunc   ;==>_LOCalc_CommentTextSettings
 ; Name ..........: _LOCalc_CommentVisible
 ; Description ...: Set or Retrieve the Comment's visibility settings.
 ; Syntax ........: _LOCalc_CommentVisible(ByRef $oComment[, $bVisible = Null])
-; Parameters ....: $oComment            - [in/out] an object. A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the comment will be always visible.
+; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
+;                  $bVisible            - [optional] Default is Null. If True, the comment will be always visible.
 ; Return values .: Success: 1 or Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

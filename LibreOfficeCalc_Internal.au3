@@ -61,8 +61,8 @@
 ; Name ..........: __LOCalc_CellAddressIsSame
 ; Description ...: Compare two Cell Addresses to see if they are the same.
 ; Syntax ........: __LOCalc_CellAddressIsSame(ByRef $tCellAddr1, ByRef $tCellAddr2)
-; Parameters ....: $tCellAddr1          - a dll struct value. The first Cell Address Structure to compare.
-;                  $tCellAddr2          - a dll struct value. The second Cell Address Structure to compare.
+; Parameters ....: $tCellAddr1          - The first Cell Address Structure to compare.
+;                  $tCellAddr2          - The second Cell Address Structure to compare.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -95,8 +95,8 @@ EndFunc   ;==>__LOCalc_CellAddressIsSame
 ; Name ..........: __LOCalc_CellBackColor
 ; Description ...: Internal function to Set or Retrieve the background color setting for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellBackColor(ByRef $oObj[, $iBackColor = Null])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1), to turn Background color off.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1), to turn Background color off.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -145,18 +145,18 @@ EndFunc   ;==>__LOCalc_CellBackColor
 ; Name ..........: __LOCalc_CellBorder
 ; Description ...: Internal function to Set and Retrieve the Cell, or Cell Range Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_CellBorder(ByRef $oRange, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]]]])
-; Parameters ....: $oRange              - [in/out] an object. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
-;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
-;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
-;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
-;                  $iTop                - [optional] an integer value. Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
-;                  $iBottom             - [optional] an integer value. Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
-;                  $iLeft               - [optional] an integer value. Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
-;                  $iRight              - [optional] an integer value. Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
-;                  $iVert               - [optional] an integer value. Default is Null. Modifies the vertical border line settings. See Width, Style or Color functions for values.
-;                  $iHori               - [optional] an integer value. Default is Null. Modifies the horizontal border line settings. See Width, Style or Color functions for values.
-;                  $iTLBRDiag           - [optional] an integer value. Default is Null. Modifies the top-left to bottom-right diagonal border line settings. See Width, Style or Color functions for values.
-;                  $iBLTRDiag           - [optional] an integer value. Default is Null. Modifies the bottom-left to top-right diagonal border line settings. See Width, Style or Color functions for values.
+; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $bWid                - If True, Border Width is being modified. Only one can be True at once.
+;                  $bSty                - If True, Border Style is being modified. Only one can be True at once.
+;                  $bCol                - If True, Border Color is being modified. Only one can be True at once.
+;                  $iTop                - [optional] Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
+;                  $iBottom             - [optional] Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
+;                  $iLeft               - [optional] Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
+;                  $iRight              - [optional] Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
+;                  $iVert               - [optional] Default is Null. Modifies the vertical border line settings. See Width, Style or Color functions for values.
+;                  $iHori               - [optional] Default is Null. Modifies the horizontal border line settings. See Width, Style or Color functions for values.
+;                  $iTLBRDiag           - [optional] Default is Null. Modifies the top-left to bottom-right diagonal border line settings. See Width, Style or Color functions for values.
+;                  $iBLTRDiag           - [optional] Default is Null. Modifies the bottom-left to top-right diagonal border line settings. See Width, Style or Color functions for values.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -358,12 +358,12 @@ EndFunc   ;==>__LOCalc_CellBorder
 ; Name ..........: __LOCalc_CellBorderPadding
 ; Description ...: Internal function to Set or retrieve the Cell, Cell Range, or Cell Style Border Padding settings.
 ; Syntax ........: __LOCalc_CellBorderPadding(ByRef $oObj[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iAll                - [optional] an integer value. Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Cell contents, in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Cell contents, in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Distance between the Border and Cell contents, in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Distance between the Border and Cell contents, in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iAll                - [optional] Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Cell contents, in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Cell contents, in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Cell contents, in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Cell contents, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -455,10 +455,10 @@ EndFunc   ;==>__LOCalc_CellBorderPadding
 ; Name ..........: __LOCalc_CellEffect
 ; Description ...: Internal function to Set or Retrieve the Font Effect settings for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellEffect(ByRef $oObj[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
-;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
+;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -525,10 +525,10 @@ EndFunc   ;==>__LOCalc_CellEffect
 ; Name ..........: __LOCalc_CellFont
 ; Description ...: Internal function to Set and Retrieve the Font Settings for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellFont(ByRef $oObj[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $sFontName           - [optional] a string value. Default is Null. The Font Name to use.
-;                  $nFontSize           - [optional] a general number value. Default is Null. The new Font size.
-;                  $iPosture            - [optional] an integer value (0-5). Default is Null. The Font Italic setting. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $sFontName           - [optional] Default is Null. The Font Name to use.
+;                  $nFontSize           - [optional] Default is Null. The new Font size.
+;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
 ;                  $iWeight             - [optional] an integer value (0, 50-200). Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -609,8 +609,8 @@ EndFunc   ;==>__LOCalc_CellFont
 ; Name ..........: __LOCalc_CellFontColor
 ; Description ...: Internal function to Set or Retrieve the Font Color for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellFontColor(ByRef $oObj[, $iFontColor = Null])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -661,9 +661,9 @@ EndFunc   ;==>__LOCalc_CellFontColor
 ; Name ..........: __LOCalc_CellNumberFormat
 ; Description ...: Internal function to Set or Retrieve Cell, Cell Range, or Cell Style Number Format settings.
 ; Syntax ........: __LOCalc_CellNumberFormat(ByRef $oDoc, ByRef $oObj[, $iFormatKey = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iFormatKey          - [optional] an integer value. Default is Null. A Format Key from a previous _LOCalc_FormatKeyCreate or _LOCalc_FormatKeysGetList function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iFormatKey          - [optional] Default is Null. A Format Key from a previous _LOCalc_FormatKeyCreate or _LOCalc_FormatKeysGetList function.
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -716,10 +716,10 @@ EndFunc   ;==>__LOCalc_CellNumberFormat
 ; Name ..........: __LOCalc_CellOverLine
 ; Description ...: Internal function to Set and retrieve the OverLine settings for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellOverLine(ByRef $oObj[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
-;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
+;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -795,11 +795,11 @@ EndFunc   ;==>__LOCalc_CellOverLine
 ; Name ..........: __LOCalc_CellProtection
 ; Description ...: Internal function to Set or Retrieve Cell, Cell Range, or Cell Style protection settings.
 ; Syntax ........: __LOCalc_CellProtection(ByRef $oObj[, $bHideAll = Null[, $bProtected = Null[, $bHideFormula = Null[, $bHideWhenPrint = Null]]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $bHideAll            - [optional] a boolean value. Default is Null. If True, Hides formulas and contents of the cell.
-;                  $bProtected          - [optional] a boolean value. Default is Null. If True, Prevents the cell from being modified.
-;                  $bHideFormula        - [optional] a boolean value. Default is Null. If True, Hides formulas in the cell.
-;                  $bHideWhenPrint      - [optional] a boolean value. Default is Null. If True, the cell is kept from being printed.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $bHideAll            - [optional] Default is Null. If True, Hides formulas and contents of the cell.
+;                  $bProtected          - [optional] Default is Null. If True, Prevents the cell from being modified.
+;                  $bHideFormula        - [optional] Default is Null. If True, Hides formulas in the cell.
+;                  $bHideWhenPrint      - [optional] Default is Null. If True, the cell is kept from being printed.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -885,10 +885,10 @@ EndFunc   ;==>__LOCalc_CellProtection
 ; Name ..........: __LOCalc_CellShadow
 ; Description ...: Internal function to Set or Retrieve the Shadow settings for a Cell, Cell Range, or Cell style.
 ; Syntax ........: __LOCalc_CellShadow(ByRef $oObj[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The location of the shadow compared to the Cell. See Constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The color of the shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value (0-5009). Default is Null. The shadow width, set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iLocation           - [optional] (0-4) Default is Null. The location of the shadow compared to the Cell. See Constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The color of the shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] (0-5009) Default is Null. The shadow width, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -964,9 +964,9 @@ EndFunc   ;==>__LOCalc_CellShadow
 ; Name ..........: __LOCalc_CellStrikeOut
 ; Description ...: Internal function to Set or Retrieve the Strikeout settings for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellStrikeOut(ByRef $oObj[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out is applied to words only, skipping whitespaces.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1024,16 +1024,16 @@ EndFunc   ;==>__LOCalc_CellStrikeOut
 ; Name ..........: __LOCalc_CellStyleBorder
 ; Description ...: Internal function to Set and Retrieve the Cell Style Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_CellStyleBorder(ByRef $oCellStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]])
-; Parameters ....: $oCellStyle          - [in/out] an object. A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObjByName function.
-;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
-;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
-;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
-;                  $iTop                - [optional] an integer value. Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
-;                  $iBottom             - [optional] an integer value. Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
-;                  $iLeft               - [optional] an integer value. Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
-;                  $iRight              - [optional] an integer value. Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
-;                  $iTLBRDiag           - [optional] an integer value. Default is Null. Modifies the top-left to bottom-right diagonal border line settings. See Width, Style or Color functions for values.
-;                  $iBLTRDiag           - [optional] an integer value. Default is Null. Modifies the bottom-left to top-right diagonal border line settings. See Width, Style or Color functions for values.
+; Parameters ....: $oCellStyle          - A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObjByName function.
+;                  $bWid                - If True, Border Width is being modified. Only one can be True at once.
+;                  $bSty                - If True, Border Style is being modified. Only one can be True at once.
+;                  $bCol                - If True, Border Color is being modified. Only one can be True at once.
+;                  $iTop                - [optional] Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
+;                  $iBottom             - [optional] Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
+;                  $iLeft               - [optional] Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
+;                  $iRight              - [optional] Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
+;                  $iTLBRDiag           - [optional] Default is Null. Modifies the top-left to bottom-right diagonal border line settings. See Width, Style or Color functions for values.
+;                  $iBLTRDiag           - [optional] Default is Null. Modifies the bottom-left to top-right diagonal border line settings. See Width, Style or Color functions for values.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1193,10 +1193,10 @@ EndFunc   ;==>__LOCalc_CellStyleBorder
 ; Name ..........: __LOCalc_CellTextAlign
 ; Description ...: Internal function to Set and Retrieve text Alignment settings for a Cell, Cell Range, or Cell style.
 ; Syntax ........: __LOCalc_CellTextAlign(ByRef $oObj[, $iHoriAlign = Null[, $iVertAlign = Null[, $iIndent = Null]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iHoriAlign          - [optional] an integer value (0-6). Default is Null. The Horizontal alignment of the text. See Constants, $LOC_CELL_ALIGN_HORI_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-5). Default is Null. The Vertical alignment of the text. See Constants, $LOC_CELL_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iIndent             - [optional] an integer value. Default is Null. The amount of indentation from the left side of the cell, in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iHoriAlign          - [optional] (0-6) Default is Null. The Horizontal alignment of the text. See Constants, $LOC_CELL_ALIGN_HORI_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iVertAlign          - [optional] (0-5) Default is Null. The Vertical alignment of the text. See Constants, $LOC_CELL_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iIndent             - [optional] Default is Null. The amount of indentation from the left side of the cell, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1284,11 +1284,11 @@ EndFunc   ;==>__LOCalc_CellTextAlign
 ; Name ..........: __LOCalc_CellTextOrient
 ; Description ...: Internal function to Set or Retrieve Text Orientation settings for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellTextOrient(ByRef $oObj[, $iRotate = Null[, $iReference = Null[, $bVerticalStack = Null[, $bAsianLayout = Null]]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iRotate             - [optional] an integer value (0-359). Default is Null. The rotation angle of the text.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iRotate             - [optional] (0-359) Default is Null. The rotation angle of the text.
 ;                  $iReference          - [optional] an integer value (0,1,3). Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $bVerticalStack      - [optional] a boolean value. Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in LibreOffice settings.
-;                  $bAsianLayout        - [optional] a boolean value. Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in LibreOffice settings, and enable vertical text.
+;                  $bVerticalStack      - [optional] Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in LibreOffice settings.
+;                  $bAsianLayout        - [optional] Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in LibreOffice settings, and enable vertical text.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1375,10 +1375,10 @@ EndFunc   ;==>__LOCalc_CellTextOrient
 ; Name ..........: __LOCalc_CellTextProperties
 ; Description ...: Internal function to Set or Retrieve Text property settings for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellTextProperties(ByRef $oObj[, $bAutoWrapText = Null[, $bHyphen = Null[, $bShrinkToFit = Null[, $iTextDirection = Null]]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $bAutoWrapText       - [optional] a boolean value. Default is Null. If True, Wraps text onto another line at the cell border.
-;                  $bHyphen             - [optional] a boolean value. Default is Null. If True, Enables word hyphenation for text wrapping to the next line.
-;                  $bShrinkToFit        - [optional] a boolean value. Default is Null. If True, Reduces the apparent size of the font so that the contents of the cell fit into the current cell width.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $bAutoWrapText       - [optional] Default is Null. If True, Wraps text onto another line at the cell border.
+;                  $bHyphen             - [optional] Default is Null. If True, Enables word hyphenation for text wrapping to the next line.
+;                  $bShrinkToFit        - [optional] Default is Null. If True, Reduces the apparent size of the font so that the contents of the cell fit into the current cell width.
 ;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -1455,10 +1455,10 @@ EndFunc   ;==>__LOCalc_CellTextProperties
 ; Name ..........: __LOCalc_CellUnderLine
 ; Description ...: Internal function to Set and retrieve the Underline settings for a Cell, Cell Range, or Cell Style.
 ; Syntax ........: __LOCalc_CellUnderLine(ByRef $oObj[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oObj                - [in/out] an object. A Cell, Cell Range or Cell Style Object returned from an applicable function.
-;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The Underline line style, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
+; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1533,9 +1533,9 @@ EndFunc   ;==>__LOCalc_CellUnderLine
 ; Name ..........: __LOCalc_CommentAreaShadowModify
 ; Description ...: Internal function for setting or retrieving Comment Shadow Location and Distance settings.
 ; Syntax ........: __LOCalc_CommentAreaShadowModify($oAnnotationShape[, $iLocation = Null[, $iDistance = Null]])
-; Parameters ....: $oAnnotationShape    - an object. A Annotation Shape Object retrieved from a Comment.
-;                  $iLocation           - [optional] an integer value (0-8). Default is Null. The Location of the Shadow, must be one of the Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3..
-;                  $iDistance           - [optional] an integer value. Default is Null. The distance of the Shadow from the Comment box, set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oAnnotationShape    - A Annotation Shape Object retrieved from a Comment.
+;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3..
+;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Comment box, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1679,8 +1679,8 @@ EndFunc   ;==>__LOCalc_CommentAreaShadowModify
 ; Name ..........: __LOCalc_CommentArrowStyleName
 ; Description ...: Convert a Arrow head Constant to the corresponding name or reverse.
 ; Syntax ........: __LOCalc_CommentArrowStyleName([$iArrowStyle = Null[, $sArrowStyle = Null]])
-; Parameters ....: $iArrowStyle         - [optional] an integer value (0-32). Default is Null. The Arrow Style Constant to convert to its corresponding name. See $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3
-;                  $sArrowStyle         - [optional] a string value. Default is Null. The Arrow Style Name to convert to the corresponding constant if found.
+; Parameters ....: $iArrowStyle         - [optional] (0-32) Default is Null. The Arrow Style Constant to convert to its corresponding name. See $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3
+;                  $sArrowStyle         - [optional] Default is Null. The Arrow Style Name to convert to the corresponding constant if found.
 ; Return values .: Success: String or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1761,8 +1761,8 @@ EndFunc   ;==>__LOCalc_CommentArrowStyleName
 ; Name ..........: __LOCalc_CommentGetObjByCell
 ; Description ...: Internal function for getting a Comment Object by Cell.
 ; Syntax ........: __LOCalc_CommentGetObjByCell(ByRef $oCell[, $bReturnIndex = False])
-; Parameters ....: $oCell               - [in/out] an object. A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
-;                  $bReturnIndex        - [optional] a boolean value. Default is False. If True, the Comment's index number is returned instead of its Object.
+; Parameters ....: $oCell               - A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
+;                  $bReturnIndex        - [optional] Default is False. If True, the Comment's index number is returned instead of its Object.
 ; Return values .: Success: Integer or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1819,8 +1819,8 @@ EndFunc   ;==>__LOCalc_CommentGetObjByCell
 ; Name ..........: __LOCalc_CommentLineStyleName
 ; Description ...: Convert a Line Style Constant to the corresponding name or reverse.
 ; Syntax ........: __LOCalc_CommentLineStyleName([$iLineStyle = Null[, $sLineStyle = Null]])
-; Parameters ....: $iLineStyle          - [optional] an integer value (0-31). Default is Null. The Line Style Constant to convert to its corresponding name. See $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3
-;                  $sLineStyle          - [optional] a string value. Default is Null. The Line Style Name to convert to the corresponding constant if found.
+; Parameters ....: $iLineStyle          - [optional] (0-31) Default is Null. The Line Style Constant to convert to its corresponding name. See $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3
+;                  $sLineStyle          - [optional] Default is Null. The Line Style Name to convert to the corresponding constant if found.
 ; Return values .: Success: String or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1901,8 +1901,8 @@ EndFunc   ;==>__LOCalc_CommentLineStyleName
 ; Name ..........: __LOCalc_FieldGetObj
 ; Description ...: Retrieve the Field's Object after insertion.
 ; Syntax ........: __LOCalc_FieldGetObj(ByRef $oTextCursor[, $iType = $LOC_FIELD_TYPE_ALL])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iType               - [optional] an integer value. Default is $LOC_FIELD_TYPE_ALL. The Type of field to search for. Can be BitOR'd together. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $iType               - [optional] Default is $LOC_FIELD_TYPE_ALL. The Type of field to search for. Can be BitOR'd together. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1997,7 +1997,7 @@ EndFunc   ;==>__LOCalc_FieldGetObj
 ; Name ..........: __LOCalc_FieldTypeServices
 ; Description ...: Retrieve an Array of Supported Service Names and Integer Constants to search for Fields.
 ; Syntax ........: __LOCalc_FieldTypeServices($iFieldType)
-; Parameters ....: $iFieldType          - an integer value. The Constant Field type.
+; Parameters ....: $iFieldType          - The Constant Field type.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2043,8 +2043,8 @@ EndFunc   ;==>__LOCalc_FieldTypeServices
 ; Name ..........: __LOCalc_FilterNameGet
 ; Description ...: Retrieves the correct L.O. Filtername for use in SaveAs and Export.
 ; Syntax ........: __LOCalc_FilterNameGet(ByRef $sDocSavePath[, $bExportFilters = False])
-; Parameters ....: $sDocSavePath        - [in/out] a string value. Full path with extension.
-;                  $bExportFilters      - [optional] a boolean value. Default is False. If True, includes the FilterNames that can be used to Export only, in the search.
+; Parameters ....: $sDocSavePath        - Full path with extension.
+;                  $bExportFilters      - [optional] Default is False. If True, includes the FilterNames that can be used to Export only, in the search.
 ; Return values .: Success: String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2156,7 +2156,7 @@ EndFunc   ;==>__LOCalc_FilterNameGet
 ; Name ..........: __LOCalc_Internal_CursorGetType
 ; Description ...: Get what type of cursor the object is.
 ; Syntax ........: __LOCalc_Internal_CursorGetType(ByRef $oCursor)
-; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions.
+; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2204,7 +2204,7 @@ EndFunc   ;==>__LOCalc_Internal_CursorGetType
 ; Name ..........: __LOCalc_InternalComErrorHandler
 ; Description ...: ComError Handler
 ; Syntax ........: __LOCalc_InternalComErrorHandler(ByRef $oComError)
-; Parameters ....: $oComError           - [in/out] an object. The Com Error Object passed by Autoit.Error.
+; Parameters ....: $oComError           - The Com Error Object passed by Autoit.Error.
 ; Return values .: None
 ; Author ........: mLipok
 ; Modified ......: donnyh13 - Added parameters option. Also added MsgBox & ConsoleWrite options.
@@ -2264,10 +2264,10 @@ EndFunc   ;==>__LOCalc_InternalComErrorHandler
 ; Name ..........: __LOCalc_NamedRangeGetScopeObj
 ; Description ...: Retrieve the Scope Object that contains a particular Named Range.
 ; Syntax ........: __LOCalc_NamedRangeGetScopeObj(ByRef $oDoc, $sName, $iTokenIndex, $sContent)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $sName               - a string value. The name of the Named Range to retrieve the scope object for.
-;                  $iTokenIndex         - an integer value. The Token Index of the Named Range to retrieve the scope object for.
-;                  $sContent            - a string value. The Content of the Named Range to retrieve the scope object for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $sName               - The name of the Named Range to retrieve the scope object for.
+;                  $iTokenIndex         - The Token Index of the Named Range to retrieve the scope object for.
+;                  $sContent            - The Content of the Named Range to retrieve the scope object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2329,14 +2329,14 @@ EndFunc   ;==>__LOCalc_NamedRangeGetScopeObj
 ; Name ..........: __LOCalc_PageStyleBorder
 ; Description ...: Internal function to Set and Retrieve the Page Style Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
-;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
-;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
-;                  $iTop                - [optional] an integer value. Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
-;                  $iBottom             - [optional] an integer value. Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
-;                  $iLeft               - [optional] an integer value. Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
-;                  $iRight              - [optional] an integer value. Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $bWid                - If True, Border Width is being modified. Only one can be True at once.
+;                  $bSty                - If True, Border Style is being modified. Only one can be True at once.
+;                  $bCol                - If True, Border Color is being modified. Only one can be True at once.
+;                  $iTop                - [optional] Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
+;                  $iBottom             - [optional] Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
+;                  $iLeft               - [optional] Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
+;                  $iRight              - [optional] Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2463,14 +2463,14 @@ EndFunc   ;==>__LOCalc_PageStyleBorder
 ; Name ..........: __LOCalc_PageStyleFooterBorder
 ; Description ...: Internal function to Set and Retrieve the Page Style Footer Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleFooterBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
-;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
-;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
-;                  $iTop                - [optional] an integer value. Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
-;                  $iBottom             - [optional] an integer value. Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
-;                  $iLeft               - [optional] an integer value. Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
-;                  $iRight              - [optional] an integer value. Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $bWid                - If True, Border Width is being modified. Only one can be True at once.
+;                  $bSty                - If True, Border Style is being modified. Only one can be True at once.
+;                  $bCol                - If True, Border Color is being modified. Only one can be True at once.
+;                  $iTop                - [optional] Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
+;                  $iBottom             - [optional] Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
+;                  $iLeft               - [optional] Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
+;                  $iRight              - [optional] Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2599,14 +2599,14 @@ EndFunc   ;==>__LOCalc_PageStyleFooterBorder
 ; Name ..........: __LOCalc_PageStyleHeaderBorder
 ; Description ...: Internal function to Set and Retrieve the Page Style Header Border Line Width, Style, and Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: __LOCalc_PageStyleHeaderBorder(ByRef $oPageStyle, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oPageStyle          - [in/out] an object. A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
-;                  $bWid                - a boolean value. If True, Border Width is being modified. Only one can be True at once.
-;                  $bSty                - a boolean value. If True, Border Style is being modified. Only one can be True at once.
-;                  $bCol                - a boolean value. If True, Border Color is being modified. Only one can be True at once.
-;                  $iTop                - [optional] an integer value. Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
-;                  $iBottom             - [optional] an integer value. Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
-;                  $iLeft               - [optional] an integer value. Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
-;                  $iRight              - [optional] an integer value. Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
+; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
+;                  $bWid                - If True, Border Width is being modified. Only one can be True at once.
+;                  $bSty                - If True, Border Style is being modified. Only one can be True at once.
+;                  $bCol                - If True, Border Color is being modified. Only one can be True at once.
+;                  $iTop                - [optional] Default is Null. Modifies the top border line settings. See Width, Style or Color functions for values.
+;                  $iBottom             - [optional] Default is Null. Modifies the bottom border line settings. See Width, Style or Color functions for values.
+;                  $iLeft               - [optional] Default is Null. Modifies the left border line settings. See Width, Style or Color functions for values.
+;                  $iRight              - [optional] Default is Null. Modifies the right border line settings. See Width, Style or Color functions for values.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2735,8 +2735,8 @@ EndFunc   ;==>__LOCalc_PageStyleHeaderBorder
 ; Name ..........: __LOCalc_RangeAddressIsSame
 ; Description ...: Compare two Range Addresses to see if they are the same.
 ; Syntax ........: __LOCalc_RangeAddressIsSame(ByRef $tRange1, ByRef $tRange2)
-; Parameters ....: $tRange1             - a dll struct value. The first Range Address Structure to compare.
-;                  $tRange2             - a dll struct value. The second Range Address Structure to compare.
+; Parameters ....: $tRange1             - The first Range Address Structure to compare.
+;                  $tRange2             - The second Range Address Structure to compare.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2771,8 +2771,8 @@ EndFunc   ;==>__LOCalc_RangeAddressIsSame
 ; Name ..........: __LOCalc_TransparencyGradientConvert
 ; Description ...: Convert a Transparency Gradient percentage value to a color value or from a color value to a percentage.
 ; Syntax ........: __LOCalc_TransparencyGradientConvert([$iPercentToLong = Null[, $iLongToPercent = Null]])
-; Parameters ....: $iPercentToLong      - [optional] an integer value. Default is Null. The percentage to convert to a RGB Color Integer.
-;                  $iLongToPercent      - [optional] an integer value. Default is Null. The RGB Color Integer to convert to percentage.
+; Parameters ....: $iPercentToLong      - [optional] Default is Null. The percentage to convert to a RGB Color Integer.
+;                  $iLongToPercent      - [optional] Default is Null. The RGB Color Integer to convert to percentage.
 ; Return values .: Success: Integer.
 ;                  Failure: Null and sets the @Error and @Extended flags to non-zero.
 ;                  --Processing Errors--
@@ -2812,8 +2812,8 @@ EndFunc   ;==>__LOCalc_TransparencyGradientConvert
 ; Name ..........: __LOCalc_TransparencyGradientNameInsert
 ; Description ...: Create and insert a new Transparency Gradient name.
 ; Syntax ........: __LOCalc_TransparencyGradientNameInsert(ByRef $oDoc, $tTGradient)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $tTGradient          - a dll struct value. A Gradient Structure to copy settings from.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $tTGradient          - A Gradient Structure to copy settings from.
 ; Return values .: Success: String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
