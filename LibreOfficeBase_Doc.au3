@@ -47,10 +47,10 @@
 ; Name ..........: _LOBase_DocClose
 ; Description ...: Close an existing Database Document.
 ; Syntax ........: _LOBase_DocClose(ByRef $oDoc[, $bSaveChanges = True[, $sSaveName = ""[, $bDeliverOwnership = True]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bSaveChanges        - [optional] a boolean value. Default is True. If True, saves changes if any were made before closing. See remarks.
-;                  $sSaveName           - [optional] a string value. Default is "". The file name to save the file as, if the file hasn't been saved before. See Remarks.
-;                  $bDeliverOwnership   - [optional] a boolean value. Default is True. If True, deliver ownership of the document Object from the script to LibreOffice, recommended is True.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bSaveChanges        - [optional] Default is True. If True, saves changes if any were made before closing. See remarks.
+;                  $sSaveName           - [optional] Default is "". The file name to save the file as, if the file hasn't been saved before. See Remarks.
+;                  $bDeliverOwnership   - [optional] Default is True. If True, deliver ownership of the document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -146,9 +146,9 @@ EndFunc   ;==>_LOBase_DocClose
 ; Name ..........: _LOBase_DocConnect
 ; Description ...: Retrieve the Object of an already opened instance of LibreOffice Base.
 ; Syntax ........: _LOBase_DocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT[, $sSearch = ""[, $bCaseless = False]]])
-; Parameters ....: $iMode               - [optional] an integer value (0-4). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
-;                  $sSearch             - [optional] a string value. Default is "". The Name, Title or Path of the Document to search for. See remarks.
-;                  $bCaseless           - [optional] a boolean value. Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
+; Parameters ....: $iMode               - [optional] (0-4) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  $sSearch             - [optional] Default is "". The Name, Title or Path of the Document to search for. See remarks.
+;                  $bCaseless           - [optional] Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -297,9 +297,9 @@ EndFunc   ;==>_LOBase_DocConnect
 ; Name ..........: _LOBase_DocCreate
 ; Description ...: Open a new LibreOffice Base Document.
 ; Syntax ........: _LOBase_DocCreate([$bForceNew = True[, $bHidden = False[, $bWizard = False]]])
-; Parameters ....: $bForceNew           - [optional] a boolean value. Default is True. If True, force opening a new Base Document instead of checking for a usable blank.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True opens the new document invisible or changes the existing document to invisible.
-;                  $bWizard             - [optional] a boolean value. Default is False. If True, opens the Create a Database Document wizard. See remarks.
+; Parameters ....: $bForceNew           - [optional] Default is True. If True, force opening a new Base Document instead of checking for a usable blank.
+;                  $bHidden             - [optional] Default is False. If True opens the new document invisible or changes the existing document to invisible.
+;                  $bWizard             - [optional] Default is False. If True, opens the Create a Database Document wizard. See remarks.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -384,9 +384,9 @@ EndFunc   ;==>_LOBase_DocCreate
 ; Name ..........: _LOBase_DocDatabaseType
 ; Description ...: Set or Retrieve a Base Document's Database Type.
 ; Syntax ........: _LOBase_DocDatabaseType(ByRef $oDoc[, $sType = "sdbc:embedded:hsqldb"[, $bOverwrite = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sType               - [optional] a string value. Default is Default. Default is "sdbc:embedded:hsqldb". The Database Type string to set the document to. See remarks.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, an existing Database type will be overwritten. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sType               - [optional] Default is Default. Default is "sdbc:embedded:hsqldb". The Database Type string to set the document to. See remarks.
+;                  $bOverwrite          - [optional] Default is False. If True, an existing Database type will be overwritten. See remarks.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -445,8 +445,8 @@ EndFunc   ;==>_LOBase_DocDatabaseType
 ; Name ..........: _LOBase_DocGetName
 ; Description ...: Retrieve the document's name.
 ; Syntax ........: _LOBase_DocGetName(ByRef $oDoc[, $bReturnFull = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -489,8 +489,8 @@ EndFunc   ;==>_LOBase_DocGetName
 ; Name ..........: _LOBase_DocGetPath
 ; Description ...: Returns a Document's current save path.
 ; Syntax ........: _LOBase_DocGetPath(ByRef $oDoc[, $bReturnLibreURL = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bReturnLibreURL     - [optional] a boolean value. Default is False. If True, returns a path in LibreOffice URL format, else False returns a regular Windows path.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bReturnLibreURL     - [optional] Default is False. If True, returns a path in LibreOffice URL format, else False returns a regular Windows path.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -532,7 +532,7 @@ EndFunc   ;==>_LOBase_DocGetPath
 ; Name ..........: _LOBase_DocHasPath
 ; Description ...: Returns whether a document has been saved to a location already or not.
 ; Syntax ........: _LOBase_DocHasPath(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -566,7 +566,7 @@ EndFunc   ;==>_LOBase_DocHasPath
 ; Name ..........: _LOBase_DocIsActive
 ; Description ...: Tests if called document is the active document of other LibreOffice windows.
 ; Syntax ........: _LOBase_DocIsActive(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -600,7 +600,7 @@ EndFunc   ;==>_LOBase_DocIsActive
 ; Name ..........: _LOBase_DocIsModified
 ; Description ...: Test whether the document has been modified since being created or since the last save.
 ; Syntax ........: _LOBase_DocIsModified(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -634,8 +634,8 @@ EndFunc   ;==>_LOBase_DocIsModified
 ; Name ..........: _LOBase_DocMaximize
 ; Description ...: Maximize or restore a document.
 ; Syntax ........: _LOBase_DocMaximize(ByRef $oDoc[, $bMaximize = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bMaximize           - [optional] a boolean value. Default is Null. If True, document window is maximized, else if False, document is restored to its previous size and location.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bMaximize           - [optional] Default is Null. If True, document window is maximized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -684,8 +684,8 @@ EndFunc   ;==>_LOBase_DocMaximize
 ; Name ..........: _LOBase_DocMinimize
 ; Description ...: Minimize or restore a document.
 ; Syntax ........: _LOBase_DocMinimize(ByRef $oDoc[, $bMinimize = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bMinimize           - [optional] a boolean value. Default is Null. If True, document window is minimized, else if False, document is restored to its previous size and location.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bMinimize           - [optional] Default is Null. If True, document window is minimized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -734,12 +734,12 @@ EndFunc   ;==>_LOBase_DocMinimize
 ; Name ..........: _LOBase_DocOpen
 ; Description ...: Open an existing Database Document.
 ; Syntax ........: _LOBase_DocOpen($sFilePath[, $bConnectIfOpen = True[, $bHidden = Null[, $bReadOnly = Null[, $sPassword = Null[, $bLoadAsTemplate = Null]]]]])
-; Parameters ....: $sFilePath           - a string value. Full path and filename of the file to be opened.
-;                  $bConnectIfOpen      - [optional] a boolean value. Default is True(Connect). Whether to connect to the requested document if it is already open. See remarks.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, opens the document invisibly.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, opens the document as read-only.
-;                  $sPassword           - [optional] a string value. Default is Null. The password that was used to read-protect the document, if any.
-;                  $bLoadAsTemplate     - [optional] a boolean value. Default is Null. If True, opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
+; Parameters ....: $sFilePath           - Full path and filename of the file to be opened.
+;                  $bConnectIfOpen      - [optional] Default is True. If True, connect to the requested document if it is already open. See remarks.
+;                  $bHidden             - [optional] Default is Null. If True, opens the document invisibly.
+;                  $bReadOnly           - [optional] Default is Null. If True, opens the document as read-only.
+;                  $sPassword           - [optional] Default is Null. The password that was used to read-protect the document, if any.
+;                  $bLoadAsTemplate     - [optional] Default is Null. If True, opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -840,7 +840,7 @@ EndFunc   ;==>_LOBase_DocOpen
 ; Name ..........: _LOBase_DocSave
 ; Description ...: Save any changes made to a Document.
 ; Syntax ........: _LOBase_DocSave(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -872,10 +872,10 @@ EndFunc   ;==>_LOBase_DocSave
 ; Name ..........: _LOBase_DocSaveAs
 ; Description ...: Save a Document with the specified file name to the path specified with any parameters called.
 ; Syntax ........: _LOBase_DocSaveAs(ByRef $oDoc, $sFilePath[, $bOverwrite = Null[, $sPassword = Null]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sFilePath           - a string value. Full path to save the document to, including Filename and extension.
-;                  $bOverwrite          - [optional] a boolean value. Default is Null. If True, the existing file will be overwritten.
-;                  $sPassword           - [optional] a string value. Default is Null. Sets a password for the document. (Not all file formats can have a Password set). Null or "" (blank string) = No Password.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sFilePath           - Full path to save the document to, including Filename and extension.
+;                  $bOverwrite          - [optional] Default is Null. If True, the existing file will be overwritten.
+;                  $sPassword           - [optional] Default is Null. Sets a password for the document. (Not all file formats can have a Password set). Null or "" (blank string) = No Password.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -950,10 +950,10 @@ EndFunc   ;==>_LOBase_DocSaveAs
 ; Name ..........: _LOBase_DocSaveCopy
 ; Description ...: Save a copy of a Document to the path and file name specified, without modifying the original save location.
 ; Syntax ........: _LOBase_DocSaveCopy(ByRef $oDoc, $sFilePath[, $bOverwrite = Null[, $sPassword = Null]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sFilePath           - a string value. Full path to save the document to, including Filename and extension. See Remarks.
-;                  $bOverwrite          - [optional] a boolean value. Default is Null. If True, file will be overwritten.
-;                  $sPassword           - [optional] a string value. Default is Null. Password String to set for the document. (Not all file formats can have a Password set). "" (blank string) or Null = No Password.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sFilePath           - Full path to save the document to, including Filename and extension. See Remarks.
+;                  $bOverwrite          - [optional] Default is Null. If True, file will be overwritten.
+;                  $sPassword           - [optional] Default is Null. Password String to set for the document. (Not all file formats can have a Password set). "" (blank string) or Null = No Password.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1022,7 +1022,7 @@ EndFunc   ;==>_LOBase_DocSaveCopy
 ; Name ..........: _LOBase_DocSubComponentsClose
 ; Description ...: Attempt to close all open SubComponent windows.
 ; Syntax ........: _LOBase_DocSubComponentsClose(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1058,7 +1058,7 @@ EndFunc   ;==>_LOBase_DocSubComponentsClose
 ; Name ..........: _LOBase_DocSubComponentsGetList
 ; Description ...: Retrieve an Array of currently open SubComponents (Tables, Queries, Forms or Reports [Except Reports in Viewing mode]).
 ; Syntax ........: _LOBase_DocSubComponentsGetList(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1126,8 +1126,8 @@ EndFunc   ;==>_LOBase_DocSubComponentsGetList
 ; Name ..........: _LOBase_DocVisible
 ; Description ...: Set or retrieve the current visibility of a document.
 ; Syntax ........: _LOBase_DocVisible(ByRef $oDoc[, $bVisible = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the document is visible.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bVisible            - [optional] Default is Null. If True, the document is visible.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

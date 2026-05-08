@@ -44,11 +44,11 @@
 ; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
 ; Syntax ........: _LOBase_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
 ; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
-;                  $vParam1             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam2             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam3             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam4             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam5             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam2             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam3             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam4             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam5             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ; Return values .: Success: 1 or UserFunction.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -124,14 +124,14 @@ EndFunc   ;==>_LOBase_ComError_UserFunction
 ; Name ..........: _LOBase_DateStructCreate
 ; Description ...: Create a Date Structure for inserting a Date into certain other functions.
 ; Syntax ........: _LOBase_DateStructCreate([$iYear = Null[, $iMonth = Null[, $iDay = Null[, $iHours = Null[, $iMinutes = Null[, $iSeconds = Null[, $iNanoSeconds = Null[, $bIsUTC = Null]]]]]]]])
-; Parameters ....: $iYear               - [optional] an integer value. Default is Null. The Year, as a 4 digit Integer.
-;                  $iMonth              - [optional] an integer value (0-12). Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
-;                  $iDay                - [optional] an integer value (0-31). Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
-;                  $iHours              - [optional] an integer value (0-23). Default is Null. The Hour, as a 2 digit Integer.
-;                  $iMinutes            - [optional] an integer value (0-59). Default is Null. Minutes, as a 2 digit Integer.
-;                  $iSeconds            - [optional] an integer value (0-59). Default is Null. Seconds, as a 2 digit Integer.
+; Parameters ....: $iYear               - [optional] Default is Null. The Year, as a 4 digit Integer.
+;                  $iMonth              - [optional] (0-12) Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
+;                  $iDay                - [optional] (0-31) Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
+;                  $iHours              - [optional] (0-23) Default is Null. The Hour, as a 2 digit Integer.
+;                  $iMinutes            - [optional] (0-59) Default is Null. Minutes, as a 2 digit Integer.
+;                  $iSeconds            - [optional] (0-59) Default is Null. Seconds, as a 2 digit Integer.
 ;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
-;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
+;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -247,15 +247,15 @@ EndFunc   ;==>_LOBase_DateStructCreate
 ; Name ..........: _LOBase_DateStructModify
 ; Description ...: Set or retrieve Date Structure settings.
 ; Syntax ........: _LOBase_DateStructModify(ByRef $tDateStruct[, $iYear = Null[, $iMonth = Null[, $iDay = Null[, $iHours = Null[, $iMinutes = Null[, $iSeconds = Null[, $iNanoSeconds = Null[, $bIsUTC = Null]]]]]]]])
-; Parameters ....: $tDateStruct         - [in/out] a dll struct value. The Date Structure to modify, returned from a _LOBase_DateStructCreate, or setting retrieval function. Structure will be directly modified.
-;                  $iYear               - [optional] an integer value. Default is Null. The Year, as a 4 digit Integer.
-;                  $iMonth              - [optional] an integer value (0-12). Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
-;                  $iDay                - [optional] an integer value (0-31). Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
-;                  $iHours              - [optional] an integer value (0-23). Default is Null. The Hour, as a 2 digit Integer.
-;                  $iMinutes            - [optional] an integer value (0-59). Default is Null. Minutes, as a 2 digit Integer.
-;                  $iSeconds            - [optional] an integer value (0-59). Default is Null. Seconds, as a 2 digit Integer.
+; Parameters ....: $tDateStruct         - The Date Structure to modify, returned from a _LOBase_DateStructCreate, or setting retrieval function. Structure will be directly modified.
+;                  $iYear               - [optional] Default is Null. The Year, as a 4 digit Integer.
+;                  $iMonth              - [optional] (0-12) Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
+;                  $iDay                - [optional] (0-31) Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
+;                  $iHours              - [optional] (0-23) Default is Null. The Hour, as a 2 digit Integer.
+;                  $iMinutes            - [optional] (0-59) Default is Null. Minutes, as a 2 digit Integer.
+;                  $iSeconds            - [optional] (0-59) Default is Null. Seconds, as a 2 digit Integer.
 ;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
-;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
+;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -379,20 +379,20 @@ EndFunc   ;==>_LOBase_DateStructModify
 ; Name ..........: _LOBase_FontDescCreate
 ; Description ...: Create a Font Descriptor Map.
 ; Syntax ........: _LOBase_FontDescCreate([$sFontName = ""[, $iWeight = $LOB_CHAR_WEIGHT_DONT_KNOW[, $iPosture = $LOB_CHAR_POSTURE_DONTKNOW[, $nSize = 0[, $iColor = $LO_COLOR_OFF[, $iUnderlineStyle = $LOB_CHAR_UNDERLINE_DONT_KNOW[, $iUnderlineColor = $LO_COLOR_OFF[, $iStrikelineStyle = $LOB_CHAR_STRIKEOUT_DONT_KNOW[, $bIndividualWords = False[, $iRelief = $LOB_CHAR_RELIEF_NONE[, $iCase = $LOB_CHAR_CASEMAP_NONE[, $bHidden = False[, $bOutline = False[, $bShadow = False]]]]]]]]]]]]]])
-; Parameters ....: $sFontName           - [optional] a string value. Default is "". The Font name.
-;                  $iWeight             - [optional] an integer value (0-200). Default is $LOB_CHAR_WEIGHT_DONT_KNOW. The Font weight. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iPosture            - [optional] an integer value (0-5). Default is $LOB_CHAR_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $nSize               - [optional] a general number value. Default is 0. The Font size.
-;                  $iColor              - [optional] an integer value (-1-16777215). Default is $LO_COLOR_OFF. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is $LOB_CHAR_UNDERLINE_DONT_KNOW. The Font underline Style. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iUnderlineColor     - [optional] an integer value (-1-16777215). Default is $LO_COLOR_OFF. The Font Underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is $LOB_CHAR_STRIKEOUT_DONT_KNOW. The Strikeout line style. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bIndividualWords    - [optional] a boolean value. Default is False. If True, only individual words are underlined.
-;                  $iRelief             - [optional] an integer value (0-2). Default is $LOB_CHAR_RELIEF_NONE. The Font relief style. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iCase               - [optional] an integer value (0-4). Default is $LOB_CHAR_CASEMAP_NONE. The Character Case Style. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Characters are hidden.
-;                  $bOutline            - [optional] a boolean value. Default is False. If True, the characters have an outline around the outside.
-;                  $bShadow             - [optional] a boolean value. Default is False. If True, the characters have a shadow.
+; Parameters ....: $sFontName           - [optional] Default is "". The Font name.
+;                  $iWeight             - [optional] (0-200) Default is $LOB_CHAR_WEIGHT_DONT_KNOW. The Font weight. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iPosture            - [optional] (0-5) Default is $LOB_CHAR_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $nSize               - [optional] Default is 0. The Font size.
+;                  $iColor              - [optional] (-1-16777215) Default is $LO_COLOR_OFF. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+;                  $iUnderlineStyle     - [optional] (0-18) Default is $LOB_CHAR_UNDERLINE_DONT_KNOW. The Font underline Style. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iUnderlineColor     - [optional] (-1-16777215) Default is $LO_COLOR_OFF. The Font Underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+;                  $iStrikelineStyle    - [optional] (0-6) Default is $LOB_CHAR_STRIKEOUT_DONT_KNOW. The Strikeout line style. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bIndividualWords    - [optional] Default is False. If True, only individual words are underlined.
+;                  $iRelief             - [optional] (0-2) Default is $LOB_CHAR_RELIEF_NONE. The Font relief style. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iCase               - [optional] (0-4) Default is $LOB_CHAR_CASEMAP_NONE. The Character Case Style. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bHidden             - [optional] Default is False. If True, the Characters are hidden.
+;                  $bOutline            - [optional] Default is False. If True, the characters have an outline around the outside.
+;                  $bShadow             - [optional] Default is False. If True, the characters have a shadow.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -464,21 +464,21 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ; Name ..........: _LOBase_FontDescEdit
 ; Description ...: Set or Retrieve Font Descriptor settings.
 ; Syntax ........: _LOBase_FontDescEdit(ByRef $mFontDesc[, $sFontName = Null[, $iWeight = Null[, $iPosture = Null[, $nSize = Null[, $iColor = Null[, $iUnderlineStyle = Null[, $iUnderlineColor = Null[, $iStrikelineStyle = Null[, $bIndividualWords = Null[, $iRelief = Null[, $iCase = Null[, $bHidden = Null[, $bOutline = Null[, $bShadow = Null]]]]]]]]]]]]]])
-; Parameters ....: $mFontDesc           - [in/out] a map. A Font descriptor Map as returned from a _LOBase_FontDescCreate, or control property return function.
-;                  $sFontName           - [optional] a string value. Default is Null. The Font name.
-;                  $iWeight             - [optional] an integer value (0-200). Default is Null. The Font weight. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iPosture            - [optional] an integer value (0-5). Default is Null. The Font italic setting. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $nSize               - [optional] a general number value. Default is Null. The Font size.
-;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is Null. The Font underline Style. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iUnderlineColor     - [optional] an integer value (-1-16777215). Default is Null.
-;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout line style. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bIndividualWords    - [optional] a boolean value. Default is Null. If True, only individual words are underlined.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Font relief style. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the Characters are hidden.
-;                  $bOutline            - [optional] a boolean value. Default is False. If True, the characters have an outline around the outside.
-;                  $bShadow             - [optional] a boolean value. Default is False. If True, the characters have a shadow.
+; Parameters ....: $mFontDesc           - A Font descriptor Map as returned from a _LOBase_FontDescCreate, or control property return function.
+;                  $sFontName           - [optional] Default is Null. The Font name.
+;                  $iWeight             - [optional] (0-200) Default is Null. The Font weight. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iPosture            - [optional] (0-5) Default is Null. The Font italic setting. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $nSize               - [optional] Default is Null. The Font size.
+;                  $iColor              - [optional] (-1-16777215) Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+;                  $iUnderlineStyle     - [optional] (0-18) Default is Null. The Font underline Style. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iUnderlineColor     - [optional] (-1-16777215) Default is Null.
+;                  $iStrikelineStyle    - [optional] (0-6) Default is Null. The Strikeout line style. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bIndividualWords    - [optional] Default is Null. If True, only individual words are underlined.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Font relief style. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bHidden             - [optional] Default is Null. If True, the Characters are hidden.
+;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
+;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -617,8 +617,8 @@ EndFunc   ;==>_LOBase_FontDescEdit
 ; Name ..........: _LOBase_FontExists
 ; Description ...: Tests whether a specific font exists by name.
 ; Syntax ........: _LOBase_FontExists($sFontName[, $oDoc = Null])
-; Parameters ....: $sFontName           - a string value. The Font name to search for.
-;                  $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $sFontName           - The Font name to search for.
+;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -693,7 +693,7 @@ EndFunc   ;==>_LOBase_FontExists
 ; Name ..........: _LOBase_FontsGetNames
 ; Description ...: Retrieve an array of currently available fonts.
 ; Syntax ........: _LOBase_FontsGetNames([$oDoc = Null])
-; Parameters ....: $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
@@ -772,8 +772,8 @@ EndFunc   ;==>_LOBase_FontsGetNames
 ; Name ..........: _LOBase_FormatKeyCreate
 ; Description ...: Create a Format Key.
 ; Syntax ........: _LOBase_FormatKeyCreate(ByRef $oObj, $sFormat)
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
-;                  $sFormat             - a string value. The format key String to create.
+; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
+;                  $sFormat             - The format key String to create.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -832,8 +832,8 @@ EndFunc   ;==>_LOBase_FormatKeyCreate
 ; Name ..........: _LOBase_FormatKeyDelete
 ; Description ...: Delete a User-Created Format Key.
 ; Syntax ........: _LOBase_FormatKeyDelete(ByRef $oObj, $iFormatKey)
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
-;                  $iFormatKey          - an Integer value. The User-Created format Key to delete.
+; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
+;                  $iFormatKey          - The User-Created format Key to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -885,9 +885,9 @@ EndFunc   ;==>_LOBase_FormatKeyDelete
 ; Name ..........: _LOBase_FormatKeyExists
 ; Description ...: Check if a Document contains a certain Format Key.
 ; Syntax ........: _LOBase_FormatKeyExists(ByRef $oObj, $iFormatKey[, $iFormatType = $LOB_FORMAT_KEYS_ALL])
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
-;                  $iFormatKey          - an Integer value. The Format Key to look for.
-;                  $iFormatType         - [optional] an integer value (0-15881). Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
+;                  $iFormatKey          - The Format Key to look for.
+;                  $iFormatType         - [optional] (0-15881) Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -949,8 +949,8 @@ EndFunc   ;==>_LOBase_FormatKeyExists
 ; Name ..........: _LOBase_FormatKeyGetStandard
 ; Description ...: Retrieve the Standard Format for a specific Format Key Type.
 ; Syntax ........: _LOBase_FormatKeyGetStandard(ByRef $oObj, $iFormatKeyType)
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
-;                  $iFormatKeyType      - an Integer value (1-8196). The Format Key type to retrieve the standard Format for. See Constants $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
+;                  $iFormatKeyType      - (1-8196) The Format Key type to retrieve the standard Format for. See Constants $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1005,8 +1005,8 @@ EndFunc   ;==>_LOBase_FormatKeyGetStandard
 ; Name ..........: _LOBase_FormatKeyGetString
 ; Description ...: Retrieve a Format Key String.
 ; Syntax ........: _LOBase_FormatKeyGetString(ByRef $oObj, $iFormatKey)
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
-;                  $iFormatKey          - an Integer value. The Format Key to retrieve the string for.
+; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
+;                  $iFormatKey          - The Format Key to retrieve the string for.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1061,10 +1061,10 @@ EndFunc   ;==>_LOBase_FormatKeyGetString
 ; Name ..........: _LOBase_FormatKeysGetList
 ; Description ...: Retrieve an Array of Format Keys.
 ; Syntax ........: _LOBase_FormatKeysGetList(ByRef $oObj[, $bIsUser = False[, $bUserOnly = False[, $iFormatKeyType = $LOB_FORMAT_KEYS_ALL]]])
-; Parameters ....: $oObj                - [in/out] an object. A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
-;                  $bIsUser             - [optional] a boolean value. Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
-;                  $bUserOnly           - [optional] a boolean value. Default is False. If True, only user-created Format Keys are returned.
-;                  $iFormatKeyType      - [optional] an integer value (0-15881). Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
+;                  $bIsUser             - [optional] Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
+;                  $bUserOnly           - [optional] Default is False. If True, only user-created Format Keys are returned.
+;                  $iFormatKeyType      - [optional] (0-15881) Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

@@ -51,9 +51,9 @@
 ; Name ..........: _LOBase_FormCopy
 ; Description ...: Create a copy of an existing Form.
 ; Syntax ........: _LOBase_FormCopy(ByRef $oConnection, $sInputForm, $sOutputForm)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sInputForm          - a string value. The Name of the Form to Copy. Also the Sub-directory the Form is in. See Remarks.
-;                  $sOutputForm         - a string value. The Name of the Form to Create. Also the Sub-directory to place the Form in. See Remarks.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sInputForm          - The Name of the Form to Copy. Also the Sub-directory the Form is in. See Remarks.
+;                  $sOutputForm         - The Name of the Form to Create. Also the Sub-directory to place the Form in. See Remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -126,11 +126,11 @@ EndFunc   ;==>_LOBase_FormCopy
 ; Name ..........: _LOBase_FormCreate
 ; Description ...: Create and Insert a new Form Document into a Base Document.
 ; Syntax ........: _LOBase_FormCreate(ByRef $oConnection, $sForm[, $bOpen = False[, $bDesign = True[, $bHidden = False]]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sForm               - a string value. The Name of the Form to Create. Also the Sub-directory to place the form in. See Remarks.
-;                  $bOpen               - [optional] a boolean value. Default is False. If True, the new Form will be opened.
-;                  $bDesign             - [optional] a boolean value. Default is True. If True, and $bOpen is True, the Form will be opened in Design mode. Else in Form mode.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Form will be invisible when opened.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sForm               - The Name of the Form to Create. Also the Sub-directory to place the form in. See Remarks.
+;                  $bOpen               - [optional] Default is False. If True, the new Form will be opened.
+;                  $bDesign             - [optional] Default is True. If True, and $bOpen is True, the Form will be opened in Design mode. Else in Form mode.
+;                  $bHidden             - [optional] Default is False. If True, the Form will be invisible when opened.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -248,8 +248,8 @@ EndFunc   ;==>_LOBase_FormCreate
 ; Name ..........: _LOBase_FormDelete
 ; Description ...: Delete a Form from a Document.
 ; Syntax ........: _LOBase_FormDelete(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sName               - a string value. The Form name to Delete. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sName               - The Form name to Delete. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -294,8 +294,8 @@ EndFunc   ;==>_LOBase_FormDelete
 ; Name ..........: _LOBase_FormDocClose
 ; Description ...: Close an opened Form Document.
 ; Syntax ........: _LOBase_FormDocClose(ByRef $oFormDoc[, $bForceClose = False])
-; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
-;                  $bForceClose         - [optional] a boolean value. Default is False. If True, the Form document will be closed regardless if there are unsaved changes. See remarks.
+; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+;                  $bForceClose         - [optional] Default is False. If True, the Form document will be closed regardless if there are unsaved changes. See remarks.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -351,7 +351,7 @@ EndFunc   ;==>_LOBase_FormDocClose
 ; Name ..........: _LOBase_FormDocConnect
 ; Description ...: Retrieve an Object for the currently open Form or Forms.
 ; Syntax ........: _LOBase_FormDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
-; Parameters ....: $iMode               - [optional] an integer value (0-1). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $iMode               - [optional] (0-1) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -438,8 +438,8 @@ EndFunc   ;==>_LOBase_FormDocConnect
 ; Name ..........: _LOBase_FormDocGetName
 ; Description ...: Retrieve the Form document's name.
 ; Syntax ........: _LOBase_FormDocGetName(ByRef $oFormDoc[, $bReturnFull = False])
-; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
-;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -484,7 +484,7 @@ EndFunc   ;==>_LOBase_FormDocGetName
 ; Name ..........: _LOBase_FormDocIsModified
 ; Description ...: Test whether the form has been modified since being created or since the last save.
 ; Syntax ........: _LOBase_FormDocIsModified(ByRef $oFormDoc)
-; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -518,10 +518,10 @@ EndFunc   ;==>_LOBase_FormDocIsModified
 ; Name ..........: _LOBase_FormDocOpen
 ; Description ...: Open a Form Document
 ; Syntax ........: _LOBase_FormDocOpen(ByRef $oConnection, $sName[, $bDesign = True[, $bHidden = False]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sName               - a string value. The Form name to Open. See remarks.
-;                  $bDesign             - [optional] a boolean value. Default is True. If True, the form is opened in Design mode.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the form document will be invisible when opened.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sName               - The Form name to Open. See remarks.
+;                  $bDesign             - [optional] Default is True. If True, the form is opened in Design mode.
+;                  $bHidden             - [optional] Default is False. If True, the form document will be invisible when opened.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -578,7 +578,7 @@ EndFunc   ;==>_LOBase_FormDocOpen
 ; Name ..........: _LOBase_FormDocSave
 ; Description ...: Save any changes made to a Document.
 ; Syntax ........: _LOBase_FormDocSave(ByRef $oFormDoc)
-; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -625,8 +625,8 @@ EndFunc   ;==>_LOBase_FormDocSave
 ; Name ..........: _LOBase_FormDocVisible
 ; Description ...: Set or retrieve the current visibility of a document.
 ; Syntax ........: _LOBase_FormDocVisible(ByRef $oFormDoc[, $bVisible = Null])
-; Parameters ....: $oFormDoc            - [in/out] an object. A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the document is visible.
+; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
+;                  $bVisible            - [optional] Default is Null. If True, the document is visible.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -678,9 +678,9 @@ EndFunc   ;==>_LOBase_FormDocVisible
 ; Name ..........: _LOBase_FormExists
 ; Description ...: Check whether a Document contains a Form by name.
 ; Syntax ........: _LOBase_FormExists(ByRef $oDoc, $sName[, $bExhaustive = True])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sName               - a string value. The name of the Form to look for. See remarks.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, the search looks inside sub-folders.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sName               - The name of the Form to look for. See remarks.
+;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -790,9 +790,9 @@ EndFunc   ;==>_LOBase_FormExists
 ; Name ..........: _LOBase_FormFolderCopy
 ; Description ...: Create a copy of an existing Folder.
 ; Syntax ........: _LOBase_FormFolderCopy(ByRef $oDoc, $sInputFolder, $sOutputFolder)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sInputFolder        - a string value. The Name of the Folder to Copy. Also the Sub-directory the Folder is in. See Remarks.
-;                  $sOutputFolder       - a string value. The Name of the Folder to Create. Also the Sub-directory to place the Folder in. See Remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sInputFolder        - The Name of the Folder to Copy. Also the Sub-directory the Folder is in. See Remarks.
+;                  $sOutputFolder       - The Name of the Folder to Create. Also the Sub-directory to place the Folder in. See Remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -861,9 +861,9 @@ EndFunc   ;==>_LOBase_FormFolderCopy
 ; Name ..........: _LOBase_FormFolderCreate
 ; Description ...: Create a Form Folder.
 ; Syntax ........: _LOBase_FormFolderCreate(ByRef $oDoc, $sFolder[, $bCreateMulti = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sFolder             - a string value. The Folder name to create. Can also include the sub-folder path. See Remarks.
-;                  $bCreateMulti        - [optional] a boolean value. Default is False. If True, multiple folders in a path will be created if they do not exist.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sFolder             - The Folder name to create. Can also include the sub-folder path. See Remarks.
+;                  $bCreateMulti        - [optional] Default is False. If True, multiple folders in a path will be created if they do not exist.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -938,8 +938,8 @@ EndFunc   ;==>_LOBase_FormFolderCreate
 ; Name ..........: _LOBase_FormFolderDelete
 ; Description ...: Delete a Form Folder from a Document.
 ; Syntax ........: _LOBase_FormFolderDelete(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sName               - a string value. The Folder name to Delete. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sName               - The Folder name to Delete. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -985,9 +985,9 @@ EndFunc   ;==>_LOBase_FormFolderDelete
 ; Name ..........: _LOBase_FormFolderExists
 ; Description ...: Check whether a Document contains a Form Folder by name.
 ; Syntax ........: _LOBase_FormFolderExists(ByRef $oDoc, $sName[, $bExhaustive = True])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sName               - a string value. The name of the Folder to look for.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, the search looks inside sub-folders.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sName               - The name of the Folder to look for.
+;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1097,9 +1097,9 @@ EndFunc   ;==>_LOBase_FormFolderExists
 ; Name ..........: _LOBase_FormFolderRename
 ; Description ...: Rename a Form Folder.
 ; Syntax ........: _LOBase_FormFolderRename(ByRef $oDoc, $sFolder, $sNewName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sFolder             - a string value. The Folder to rename, including the Sub-Folder path, if applicable. See Remarks.
-;                  $sNewName            - a string value. The New name to rename the form Folder to.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sFolder             - The Folder to rename, including the Sub-Folder path, if applicable. See Remarks.
+;                  $sNewName            - The New name to rename the form Folder to.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1146,9 +1146,9 @@ EndFunc   ;==>_LOBase_FormFolderRename
 ; Name ..........: _LOBase_FormFoldersGetCount
 ; Description ...: Retrieve a count of Form Folders contained in the Document.
 ; Syntax ........: _LOBase_FormFoldersGetCount(ByRef $oDoc[, $bExhaustive = True[, $sFolder = ""]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, retrieves a count of all folders, including those in sub-folders.
-;                  $sFolder             - [optional] a string value. Default is "". The Folder to return the count of folders for. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bExhaustive         - [optional] Default is True. If True, retrieves a count of all folders, including those in sub-folders.
+;                  $sFolder             - [optional] Default is "". The Folder to return the count of folders for. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1250,9 +1250,9 @@ EndFunc   ;==>_LOBase_FormFoldersGetCount
 ; Name ..........: _LOBase_FormFoldersGetNames
 ; Description ...: Retrieve an array of Folder Names contained in a Document.
 ; Syntax ........: _LOBase_FormFoldersGetNames(ByRef $oDoc[, $bExhaustive = True[, $sFolder = ""]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, the search looks inside sub-folders.
-;                  $sFolder             - [optional] a string value. Default is "". The Sub-Folder to return the array of Folder names from. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
+;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of Folder names from. See remarks.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1364,9 +1364,9 @@ EndFunc   ;==>_LOBase_FormFoldersGetNames
 ; Name ..........: _LOBase_FormRename
 ; Description ...: Rename a Form.
 ; Syntax ........: _LOBase_FormRename(ByRef $oDoc, $sForm, $sNewName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sForm               - a string value. The Form to rename, including the Sub-Folder path, if applicable. See Remarks.
-;                  $sNewName            - a string value. The New name to rename the form to.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sForm               - The Form to rename, including the Sub-Folder path, if applicable. See Remarks.
+;                  $sNewName            - The New name to rename the form to.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1413,9 +1413,9 @@ EndFunc   ;==>_LOBase_FormRename
 ; Name ..........: _LOBase_FormsGetCount
 ; Description ...: Retrieve a count of Forms contained in the Document.
 ; Syntax ........: _LOBase_FormsGetCount(ByRef $oDoc[, $bExhaustive = True[, $sFolder = ""]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, retrieves a count of all forms, including those in sub-folders.
-;                  $sFolder             - [optional] a string value. Default is "". The Folder to return the count of forms for. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bExhaustive         - [optional] Default is True. If True, retrieves a count of all forms, including those in sub-folders.
+;                  $sFolder             - [optional] Default is "". The Folder to return the count of forms for. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1521,9 +1521,9 @@ EndFunc   ;==>_LOBase_FormsGetCount
 ; Name ..........: _LOBase_FormsGetNames
 ; Description ...: Retrieve an Array of Form Names contained in a Document.
 ; Syntax ........: _LOBase_FormsGetNames(ByRef $oDoc[, $bExhaustive = True[, $sFolder = ""]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, retrieves all form names, including those in sub-folders.
-;                  $sFolder             - [optional] a string value. Default is "". The Sub-Folder to return the array of form names from. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bExhaustive         - [optional] Default is True. If True, retrieves all form names, including those in sub-folders.
+;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of form names from. See remarks.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

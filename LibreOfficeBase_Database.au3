@@ -45,8 +45,8 @@
 ; Name ..........: _LOBase_DatabaseAutoCommit
 ; Description ...: Set or Retrieve the Database's current AutoCommit setting. See remarks.
 ; Syntax ........: _LOBase_DatabaseAutoCommit(ByRef $oConnection[, $bAutoCommit = Null])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $bAutoCommit         - [optional] a boolean value. Default is Null. If True, all of the SQL statements will be executed and committed as individual transactions.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $bAutoCommit         - [optional] Default is Null. If True, all of the SQL statements will be executed and committed as individual transactions.
 ; Return values .: Success: 1 or Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -99,7 +99,7 @@ EndFunc   ;==>_LOBase_DatabaseAutoCommit
 ; Name ..........: _LOBase_DatabaseCommit
 ; Description ...: Commit any changes made to the database since the last save.
 ; Syntax ........: _LOBase_DatabaseCommit(ByRef $oConnection)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -130,7 +130,7 @@ EndFunc   ;==>_LOBase_DatabaseCommit
 ; Name ..........: _LOBase_DatabaseConnectionClose
 ; Description ...: Close an opened Database connection.
 ; Syntax ........: _LOBase_DatabaseConnectionClose(ByRef $oConnection)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -169,11 +169,11 @@ EndFunc   ;==>_LOBase_DatabaseConnectionClose
 ; Name ..........: _LOBase_DatabaseConnectionGet
 ; Description ...: Create a connection to a Database.
 ; Syntax ........: _LOBase_DatabaseConnectionGet(ByRef $oDBase[, $sUser = ""[, $sPass = ""[, $bPromptUser = False[, $bPrivate = False]]]])
-; Parameters ....: $oDBase              - [in/out] an object. A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
-;                  $sUser               - [optional] a string value. Default is "". The Username for connecting to the Database. If none, leave as a blank string.
-;                  $sPass               - [optional] a string value. Default is "". The Password for connecting to the Database. If none, leave as a blank string.
-;                  $bPromptUser         - [optional] a boolean value. Default is False. If True, $sUser and $sPass are ignored, and the user is prompted for the required information.
-;                  $bPrivate            - [optional] a boolean value. Default is False. If True, a private connection is created, otherwise a public connection is created.
+; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
+;                  $sUser               - [optional] Default is "". The Username for connecting to the Database. If none, leave as a blank string.
+;                  $sPass               - [optional] Default is "". The Password for connecting to the Database. If none, leave as a blank string.
+;                  $bPromptUser         - [optional] Default is False. If True, $sUser and $sPass are ignored, and the user is prompted for the required information.
+;                  $bPrivate            - [optional] Default is False. If True, a private connection is created, otherwise a public connection is created.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -246,7 +246,7 @@ EndFunc   ;==>_LOBase_DatabaseConnectionGet
 ; Name ..........: _LOBase_DatabaseGetDefaultQuote
 ; Description ...: Retrieves the string used to quote SQL identifiers.
 ; Syntax ........: _LOBase_DatabaseGetDefaultQuote(ByRef $oConnection)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -282,7 +282,7 @@ EndFunc   ;==>_LOBase_DatabaseGetDefaultQuote
 ; Name ..........: _LOBase_DatabaseGetObjByDoc
 ; Description ...: Retrieve a Database Object from a Document Object.
 ; Syntax ........: _LOBase_DatabaseGetObjByDoc(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -333,7 +333,7 @@ EndFunc   ;==>_LOBase_DatabaseGetObjByDoc
 ; Name ..........: _LOBase_DatabaseGetObjByURL
 ; Description ...: Retrieve a Database Object from a URL or registered Database name.
 ; Syntax ........: _LOBase_DatabaseGetObjByURL($sURL)
-; Parameters ....: $sURL                - a string value. The File path of the Database file or a Database name that is registered.
+; Parameters ....: $sURL                - The File path of the Database file or a Database name that is registered.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -382,7 +382,7 @@ EndFunc   ;==>_LOBase_DatabaseGetObjByURL
 ; Name ..........: _LOBase_DatabaseIsReadOnly
 ; Description ...: Check if a Database is currently in a Read-Only state.
 ; Syntax ........: _LOBase_DatabaseIsReadOnly(ByRef $oDBase)
-; Parameters ....: $oDBase              - [in/out] an object. A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
+; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -416,14 +416,14 @@ EndFunc   ;==>_LOBase_DatabaseIsReadOnly
 ; Name ..........: _LOBase_DatabaseMetaDataQuery
 ; Description ...: Query a Database's MetaData.
 ; Syntax ........: _LOBase_DatabaseMetaDataQuery(ByRef $oConnection, $iQuery[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null[, $vParam6 = Null]]]]]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $iQuery              - an integer value (0-148). The query to perform. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
-;                  $vParam1             - [optional] a variant value. Default is Null. The first Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $vParam2             - [optional] a variant value. Default is Null. The second Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $vParam3             - [optional] a variant value. Default is Null. The third Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $vParam4             - [optional] a variant value. Default is Null. The fourth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $vParam5             - [optional] a variant value. Default is Null. The fifth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $vParam6             - [optional] a variant value. Default is Null. The sixth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $iQuery              - (0-148) The query to perform. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam1             - [optional] Default is Null. The first Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam2             - [optional] Default is Null. The second Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam3             - [optional] Default is Null. The third Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam4             - [optional] Default is Null. The fourth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam5             - [optional] Default is Null. The fifth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $vParam6             - [optional] Default is Null. The sixth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Variable
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -663,7 +663,7 @@ EndFunc   ;==>_LOBase_DatabaseMetaDataQuery
 ; Name ..........: _LOBase_DatabaseName
 ; Description ...: Retrieve the Database Name property. See remarks.
 ; Syntax ........: _LOBase_DatabaseName(ByRef $oDBase)
-; Parameters ....: $oDBase              - [in/out] an object.
+; Parameters ....: $oDBase              - 
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -702,8 +702,8 @@ EndFunc   ;==>_LOBase_DatabaseName
 ; Name ..........: _LOBase_DatabaseRegisteredAdd
 ; Description ...: Add a Database to the Registered Databases list.
 ; Syntax ........: _LOBase_DatabaseRegisteredAdd(ByRef $oDBase, $sName)
-; Parameters ....: $oDBase              - [in/out] an object. A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
-;                  $sName               - a string value. The name to register the Database under.
+; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
+;                  $sName               - The name to register the Database under.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -750,7 +750,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredAdd
 ; Name ..........: _LOBase_DatabaseRegisteredExists
 ; Description ...: Query whether a Registered Database exists by name.
 ; Syntax ........: _LOBase_DatabaseRegisteredExists($sName)
-; Parameters ....: $sName               - a string value. The Database name to look for.
+; Parameters ....: $sName               - The Database name to look for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -834,7 +834,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredGetNames
 ; Name ..........: _LOBase_DatabaseRegisteredRemoveByName
 ; Description ...: Remove a registered Database by name.
 ; Syntax ........: _LOBase_DatabaseRegisteredRemoveByName($sName)
-; Parameters ....: $sName               - a string value. The Registered Database name to remove.
+; Parameters ....: $sName               - The Registered Database name to remove.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -879,7 +879,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredRemoveByName
 ; Name ..........: _LOBase_DatabaseRequiresPassword
 ; Description ...: Check if a Database requires a password in order to connect to it.
 ; Syntax ........: _LOBase_DatabaseRequiresPassword(ByRef $oDBase)
-; Parameters ....: $oDBase              - [in/out] an object. A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
+; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -913,7 +913,7 @@ EndFunc   ;==>_LOBase_DatabaseRequiresPassword
 ; Name ..........: _LOBase_DatabaseRollback
 ; Description ...: Rollback any changes made to the database since the last save.
 ; Syntax ........: _LOBase_DatabaseRollback(ByRef $oConnection)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

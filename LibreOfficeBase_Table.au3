@@ -58,12 +58,12 @@
 ; Name ..........: _LOBase_TableAdd
 ; Description ...: Add a Table to a Database.
 ; Syntax ........: _LOBase_TableAdd(ByRef $oConnection, $sName, $sColName[, $iColType = $LOB_DATA_TYPE_VARCHAR[, $sColTypeName = ""[, $sColDesc = ""]]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sName               - a string value. The Unique name of the table to create.
-;                  $sColName            - a string value. The Name for the first column.
-;                  $iColType            - [optional] an integer value (-16-2014). Default is $LOB_DATA_TYPE_VARCHAR. The new Column's data type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $sColTypeName        - [optional] a string value. Default is "". If the column type is a user-defined type, then a fully-qualified type name will be entered here.
-;                  $sColDesc            - [optional] a string value. Default is "". The description text of the new column.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sName               - The Unique name of the table to create.
+;                  $sColName            - The Name for the first column.
+;                  $iColType            - [optional] (-16-2014) Default is $LOB_DATA_TYPE_VARCHAR. The new Column's data type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $sColTypeName        - [optional] Default is "". If the column type is a user-defined type, then a fully-qualified type name will be entered here.
+;                  $sColDesc            - [optional] Default is "". The description text of the new column.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -194,11 +194,11 @@ EndFunc   ;==>_LOBase_TableAdd
 ; Name ..........: _LOBase_TableColAdd
 ; Description ...: Add a new Column to a Table.
 ; Syntax ........: _LOBase_TableColAdd(ByRef $oTable, $sName, $iType[, $sTypeName = ""[, $sDescription = ""]])
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
-;                  $sName               - a string value. The unique Column Name.
-;                  $iType               - an integer value (-16-2014). The Column Type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $sTypeName           - [optional] a string value. Default is "". If the column type is a user-defined type, then a fully-qualified type name will be entered here.
-;                  $sDescription        - [optional] a string value. Default is "". The description text of the new column.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+;                  $sName               - The unique Column Name.
+;                  $iType               - (-16-2014) The Column Type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $sTypeName           - [optional] Default is "". If the column type is a user-defined type, then a fully-qualified type name will be entered here.
+;                  $sDescription        - [optional] Default is "". The description text of the new column.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -292,12 +292,12 @@ EndFunc   ;==>_LOBase_TableColAdd
 ; Name ..........: _LOBase_TableColDefinition
 ; Description ...: Set or Retrieve column type settings.
 ; Syntax ........: _LOBase_TableColDefinition(ByRef $oTable, ByRef $oColumn[, $sName = Null[, $iType = Null[, $sTypeName = Null[, $sDescription = Null]]]])
-; Parameters ....: $oTable              - [in/out] an object.A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
-;                  $oColumn             - [in/out] an object. A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
-;                  $sName               - [optional] a string value. Default is Null. The Column Name.
-;                  $iType               - [optional] an integer value (-16-2014). Default is Null. The Column Type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $sTypeName           - [optional] a string value. Default is Null. If the column type is a user-defined type, then a fully-qualified type name will be entered here.
-;                  $sDescription        - [optional] a string value. Default is Null. The description text of the column.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
+;                  $oColumn             - A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
+;                  $sName               - [optional] Default is Null. The Column Name.
+;                  $iType               - [optional] (-16-2014) Default is Null. The Column Type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $sTypeName           - [optional] Default is Null. If the column type is a user-defined type, then a fully-qualified type name will be entered here.
+;                  $sDescription        - [optional] Default is Null. The description text of the column.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -415,8 +415,8 @@ EndFunc   ;==>_LOBase_TableColDefinition
 ; Name ..........: _LOBase_TableColDelete
 ; Description ...: Delete a Column from a Table.
 ; Syntax ........: _LOBase_TableColDelete(ByRef $oTable, ByRef $oColumn)
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
-;                  $oColumn             - [in/out] an object. A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+;                  $oColumn             - A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -463,8 +463,8 @@ EndFunc   ;==>_LOBase_TableColDelete
 ; Name ..........: _LOBase_TableColGetObjByIndex
 ; Description ...: Retrieve a Table Column's Object by Index.
 ; Syntax ........: _LOBase_TableColGetObjByIndex(ByRef $oTable, $iIndex)
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
-;                  $iIndex              - an integer value. The Index of the Column to retrieve the Column for. 0 Based.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+;                  $iIndex              - The Index of the Column to retrieve the Column for. 0 Based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -504,8 +504,8 @@ EndFunc   ;==>_LOBase_TableColGetObjByIndex
 ; Name ..........: _LOBase_TableColGetObjByName
 ; Description ...: Retrieve a Table Column's Object by name.
 ; Syntax ........: _LOBase_TableColGetObjByName(ByRef $oTable, $sName)
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
-;                  $sName               - a string value. The name of the Column to retrieve the Object for.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+;                  $sName               - The name of the Column to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -547,16 +547,16 @@ EndFunc   ;==>_LOBase_TableColGetObjByName
 ; Name ..........: _LOBase_TableColProperties
 ; Description ...: Set or Retrieve Column properties.
 ; Syntax ........: _LOBase_TableColProperties(ByRef $oConnection, ByRef $oTable, ByRef $oColumn[, $iLength = Null[, $sDefaultVal = Null[, $bRequired = Null[, $iDecimalPlace = Null[, $bAutoValue = Null[, $iFormat = Null[, $iAlign = Null]]]]]]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
-;                  $oColumn             - [in/out] an object. A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
-;                  $iLength             - [optional] an integer value. Default is Null. The maximum number of characters allowed to be entered.
-;                  $sDefaultVal         - [optional] a string value. Default is Null. The Default value of the column. See remarks.
-;                  $bRequired           - [optional] a boolean value. Default is Null. If True, the column cannot be empty.
-;                  $iDecimalPlace       - [optional] an integer value (0-32767). Default is Null. The Decimal place for numerical values.
-;                  $bAutoValue          - [optional] a boolean value. Default is Null. If True, The column's value is auto-generated.
-;                  $iFormat             - [optional] an integer value. Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOBase_FormatKeysGetList call, or created by _LOBase_FormatKeyCreate function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The alignment of the column's text. See Constants, $LOB_COL_TXT_ALIGN_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+;                  $oColumn             - A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
+;                  $iLength             - [optional] Default is Null. The maximum number of characters allowed to be entered.
+;                  $sDefaultVal         - [optional] Default is Null. The Default value of the column. See remarks.
+;                  $bRequired           - [optional] Default is Null. If True, the column cannot be empty.
+;                  $iDecimalPlace       - [optional] (0-32767) Default is Null. The Decimal place for numerical values.
+;                  $bAutoValue          - [optional] Default is Null. If True, The column's value is auto-generated.
+;                  $iFormat             - [optional] Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOBase_FormatKeysGetList call, or created by _LOBase_FormatKeyCreate function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The alignment of the column's text. See Constants, $LOB_COL_TXT_ALIGN_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -704,7 +704,7 @@ EndFunc   ;==>_LOBase_TableColProperties
 ; Name ..........: _LOBase_TableColsGetCount
 ; Description ...: Retrieve a count of the number of columns contained in a Table.
 ; Syntax ........: _LOBase_TableColsGetCount(ByRef $oTable)
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -743,7 +743,7 @@ EndFunc   ;==>_LOBase_TableColsGetCount
 ; Name ..........: _LOBase_TableColsGetNames
 ; Description ...: Retrieve an array of Column names contained in a Table.
 ; Syntax ........: _LOBase_TableColsGetNames(ByRef $oTable)
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -782,8 +782,8 @@ EndFunc   ;==>_LOBase_TableColsGetNames
 ; Name ..........: _LOBase_TableDelete
 ; Description ...: Delete a Table from a Database.
 ; Syntax ........: _LOBase_TableDelete(ByRef $oConnection, ByRef $oTable)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -835,8 +835,8 @@ EndFunc   ;==>_LOBase_TableDelete
 ; Name ..........: _LOBase_TableDocClose
 ; Description ...: Close a Table Document.
 ; Syntax ........: _LOBase_TableDocClose(ByRef $oTableDoc[, $bDeliverOwnership = True])
-; Parameters ....: $oTableDoc           - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
-;                  $bDeliverOwnership   - [optional] a boolean value. Default is True. If True, deliver ownership of the Table Document Object from the script to LibreOffice, recommended is True.
+; Parameters ....: $oTableDoc           - A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+;                  $bDeliverOwnership   - [optional] Default is True. If True, deliver ownership of the Table Document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -873,7 +873,7 @@ EndFunc   ;==>_LOBase_TableDocClose
 ; Name ..........: _LOBase_TableDocConnect
 ; Description ...: Connect to an open instance of a Database Table Document.
 ; Syntax ........: _LOBase_TableDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
-; Parameters ....: $iMode               - [optional] an integer value (0-1). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $iMode               - [optional] (0-1) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -960,8 +960,8 @@ EndFunc   ;==>_LOBase_TableDocConnect
 ; Name ..........: _LOBase_TableDocGetName
 ; Description ...: Retrieve the Table document's name.
 ; Syntax ........: _LOBase_TableDocGetName(ByRef $oTableDoc[, $bReturnFull = False])
-; Parameters ....: $oTableDoc           - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
-;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Parameters ....: $oTableDoc           - A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1008,7 +1008,7 @@ EndFunc   ;==>_LOBase_TableDocGetName
 ; Name ..........: _LOBase_TableDocGetRowSet
 ; Description ...: Retrieve a Row Set for a Table opened for Data entry/Viewing. See remarks.
 ; Syntax ........: _LOBase_TableDocGetRowSet(ByRef $oTableDoc)
-; Parameters ....: $oTableDoc           - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+; Parameters ....: $oTableDoc           - A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1044,10 +1044,10 @@ EndFunc   ;==>_LOBase_TableDocGetRowSet
 ; Name ..........: _LOBase_TableDocOpenByName
 ; Description ...: Open a Table Document either in design mode or viewing mode.
 ; Syntax ........: _LOBase_TableDocOpenByName(ByRef $oConnection, $sTable[, $bEdit = False[, $bHidden = False]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sTable              - a string value. The Table's name.
-;                  $bEdit               - [optional] a boolean value. Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Document will be invisible.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sTable              - The Table's name.
+;                  $bEdit               - [optional] Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
+;                  $bHidden             - [optional] Default is False. If True, the Document will be invisible.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1104,11 +1104,11 @@ EndFunc   ;==>_LOBase_TableDocOpenByName
 ; Name ..........: _LOBase_TableDocOpenByObject
 ; Description ...: Open a Table Document either in design mode or viewing mode.
 ; Syntax ........: _LOBase_TableDocOpenByObject(ByRef $oDoc, ByRef $oConnection, ByRef $oTable[, $bEdit = False[, $bHidden = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
-;                  $bEdit               - [optional] a boolean value. Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Document will be invisible.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+;                  $bEdit               - [optional] Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
+;                  $bHidden             - [optional] Default is False. If True, the Document will be invisible.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1166,8 +1166,8 @@ EndFunc   ;==>_LOBase_TableDocOpenByObject
 ; Name ..........: _LOBase_TableDocVisible
 ; Description ...: Set or Retrieve Table Document Visibility.
 ; Syntax ........: _LOBase_TableDocVisible(ByRef $oTableDoc[, $bVisible = Null])
-; Parameters ....: $oTableDoc           - [in/out] an object. A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the Table Document will be visible.
+; Parameters ....: $oTableDoc           - A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
+;                  $bVisible            - [optional] Default is Null. If True, the Table Document will be visible.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1215,8 +1215,8 @@ EndFunc   ;==>_LOBase_TableDocVisible
 ; Name ..........: _LOBase_TableExists
 ; Description ...: Check whether a Database contains a Table by name.
 ; Syntax ........: _LOBase_TableExists(ByRef $oConnection, $sName)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sName               - a string value. The name of the Table to look for.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sName               - The name of the Table to look for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1261,8 +1261,8 @@ EndFunc   ;==>_LOBase_TableExists
 ; Name ..........: _LOBase_TableGetObjByIndex
 ; Description ...: Retrieve a Table's Object by Index.
 ; Syntax ........: _LOBase_TableGetObjByIndex(ByRef $oConnection, $iTable)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $iTable              - an integer value. The Index value of the Table to retrieve. 0 Based.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $iTable              - The Index value of the Table to retrieve. 0 Based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1306,8 +1306,8 @@ EndFunc   ;==>_LOBase_TableGetObjByIndex
 ; Name ..........: _LOBase_TableGetObjByName
 ; Description ...: Retrieve a Table's Object by name.
 ; Syntax ........: _LOBase_TableGetObjByName(ByRef $oConnection, $sName)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sName               - a string value. The Table's name to retrieve the Object for.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sName               - The Table's name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1353,10 +1353,10 @@ EndFunc   ;==>_LOBase_TableGetObjByName
 ; Name ..........: _LOBase_TableIndexAdd
 ; Description ...: Add an Index to a Table.
 ; Syntax ........: _LOBase_TableIndexAdd(ByRef $oTable, $sName, $avColumns[, $bIsUnique = False])
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
-;                  $sName               - a string value. The name of the new Index.
-;                  $avColumns           - an array of variants. A 2 column array of Column names and accompanying Boolean values. See Remarks.
-;                  $bIsUnique           - [optional] a boolean value. Default is False. If True the Indexed Column(s) can contain only unique entries.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
+;                  $sName               - The name of the new Index.
+;                  $avColumns           - A 2 column array of Column names and accompanying Boolean values. See Remarks.
+;                  $bIsUnique           - [optional] Default is False. If True the Indexed Column(s) can contain only unique entries.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1426,8 +1426,8 @@ EndFunc   ;==>_LOBase_TableIndexAdd
 ; Name ..........: _LOBase_TableIndexDelete
 ; Description ...: Delete a Table Index by name.
 ; Syntax ........: _LOBase_TableIndexDelete(ByRef $oTable, $sName)
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
-;                  $sName               - a string value. The Index name to delete.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
+;                  $sName               - The Index name to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1463,7 +1463,7 @@ EndFunc   ;==>_LOBase_TableIndexDelete
 ; Name ..........: _LOBase_TableIndexesGetCount
 ; Description ...: Retrieve a count of Indexes for a Table.
 ; Syntax ........: _LOBase_TableIndexesGetCount(ByRef $oTable)
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1497,7 +1497,7 @@ EndFunc   ;==>_LOBase_TableIndexesGetCount
 ; Name ..........: _LOBase_TableIndexesGetNames
 ; Description ...: Retrieve an array of Table Index names.
 ; Syntax ........: _LOBase_TableIndexesGetNames(ByRef $oTable)
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1531,10 +1531,10 @@ EndFunc   ;==>_LOBase_TableIndexesGetNames
 ; Name ..........: _LOBase_TableIndexModify
 ; Description ...: Modify the columns used in an Index.
 ; Syntax ........: _LOBase_TableIndexModify(ByRef $oTable, $sName[, $avColumns = Null[, $bIsUnique = Null]])
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
-;                  $sName               - a string value. The Index name to modify.
-;                  $avColumns           - [optional] an array of variants. Default is Null. A 2 column array of Column names and accompanying Boolean values. See Remarks.
-;                  $bIsUnique           - [optional] a boolean value. Default is Null. If True the Indexed Column(s) can contain only unique entries.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
+;                  $sName               - The Index name to modify.
+;                  $avColumns           - [optional] Default is Null. A 2 column array of Column names and accompanying Boolean values. See Remarks.
+;                  $bIsUnique           - [optional] Default is Null. If True the Indexed Column(s) can contain only unique entries.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1700,8 +1700,8 @@ EndFunc   ;==>_LOBase_TableIndexModify
 ; Name ..........: _LOBase_TableName
 ; Description ...: Set or Retrieve the Table's name.
 ; Syntax ........: _LOBase_TableName(ByRef $oTable[, $sName = Null])
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
-;                  $sName               - [optional] a string value. Default is Null. The new name to set the Table to. See Remarks.
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+;                  $sName               - [optional] Default is Null. The new name to set the Table to. See Remarks.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1752,8 +1752,8 @@ EndFunc   ;==>_LOBase_TableName
 ; Name ..........: _LOBase_TablePrimaryKey
 ; Description ...: Set or Retrieve the primary key for a Table.
 ; Syntax ........: _LOBase_TablePrimaryKey(ByRef $oTable[, $aoPrimary = Null])
-; Parameters ....: $oTable              - [in/out] an object. A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
-;                  $aoPrimary           - [optional] an array of objects. Default is Null. An array containing Column Objects (Returned from a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function).
+; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
+;                  $aoPrimary           - [optional] Default is Null. An array containing Column Objects (Returned from a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function).
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1849,7 +1849,7 @@ EndFunc   ;==>_LOBase_TablePrimaryKey
 ; Name ..........: _LOBase_TablesGetCount
 ; Description ...: Retrieve a count of Tables contained in the Database.
 ; Syntax ........: _LOBase_TablesGetCount(ByRef $oConnection)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1892,7 +1892,7 @@ EndFunc   ;==>_LOBase_TablesGetCount
 ; Name ..........: _LOBase_TablesGetNames
 ; Description ...: Retrieve an Array of Table Names contained in a Database.
 ; Syntax ........: _LOBase_TablesGetNames(ByRef $oConnection)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

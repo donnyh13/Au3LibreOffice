@@ -51,7 +51,7 @@
 ; Name ..........: _LOBase_QueriesGetCount
 ; Description ...: Retrieve a count of Queries contained in the Document.
 ; Syntax ........: _LOBase_QueriesGetCount(ByRef $oConnection)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -89,7 +89,7 @@ EndFunc   ;==>_LOBase_QueriesGetCount
 ; Name ..........: _LOBase_QueriesGetNames
 ; Description ...: Retrieve an Array of Query Names contained in the Document.
 ; Syntax ........: _LOBase_QueriesGetNames(ByRef $oConnection)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -127,10 +127,10 @@ EndFunc   ;==>_LOBase_QueriesGetNames
 ; Name ..........: _LOBase_QueryAddByName
 ; Description ...: Add a Query to a Database by Name.
 ; Syntax ........: _LOBase_QueryAddByName(ByRef $oConnection, $sQueryName, $sSourceName, $sFieldName)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sQueryName          - a string value. The Unique name of the Query to create.
-;                  $sSourceName         - a string value. The Table or Query Name to use as a Source.
-;                  $sFieldName          - a string value. The Field name to reference from the Table or Query called in $sSourceName. Accepts "*" also.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sQueryName          - The Unique name of the Query to create.
+;                  $sSourceName         - The Table or Query Name to use as a Source.
+;                  $sFieldName          - The Field name to reference from the Table or Query called in $sSourceName. Accepts "*" also.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -220,9 +220,9 @@ EndFunc   ;==>_LOBase_QueryAddByName
 ; Name ..........: _LOBase_QueryAddBySQL
 ; Description ...: Add a Query to a Database using an SQL Command.
 ; Syntax ........: _LOBase_QueryAddBySQL(ByRef $oConnection, $sQueryName, $sSQL_Command)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sQueryName          - a string value. The Unique name of the Query to create.
-;                  $sSQL_Command        - a string value. The SQL Query Command to initialize the new Query with.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sQueryName          - The Unique name of the Query to create.
+;                  $sSQL_Command        - The SQL Query Command to initialize the new Query with.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -286,8 +286,8 @@ EndFunc   ;==>_LOBase_QueryAddBySQL
 ; Name ..........: _LOBase_QueryDelete
 ; Description ...: Delete a Query from the Document.
 ; Syntax ........: _LOBase_QueryDelete(ByRef $oConnection, ByRef $oQuery)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $oQuery              - [in/out] an object. A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $oQuery              - A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -341,8 +341,8 @@ EndFunc   ;==>_LOBase_QueryDelete
 ; Name ..........: _LOBase_QueryDocClose
 ; Description ...: Close a Query Document.
 ; Syntax ........: _LOBase_QueryDocClose(ByRef $oQueryDoc[, $bDeliverOwnership = True])
-; Parameters ....: $oQueryDoc           - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
-;                  $bDeliverOwnership   - [optional] a boolean value. Default is True. If True, deliver ownership of the Query Document Object from the script to LibreOffice, recommended is True.
+; Parameters ....: $oQueryDoc           - A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
+;                  $bDeliverOwnership   - [optional] Default is True. If True, deliver ownership of the Query Document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -379,7 +379,7 @@ EndFunc   ;==>_LOBase_QueryDocClose
 ; Name ..........: _LOBase_QueryDocConnect
 ; Description ...: Connect to an open instance of a Database Query Document.
 ; Syntax ........: _LOBase_QueryDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
-; Parameters ....: $iMode               - [optional] an integer value (0-1). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $iMode               - [optional] (0-1) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -466,8 +466,8 @@ EndFunc   ;==>_LOBase_QueryDocConnect
 ; Name ..........: _LOBase_QueryDocGetName
 ; Description ...: Retrieve the Query document's name.
 ; Syntax ........: _LOBase_QueryDocGetName(ByRef $oQueryDoc[, $bReturnFull = False])
-; Parameters ....: $oQueryDoc           - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
-;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Parameters ....: $oQueryDoc           - A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
+;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -514,7 +514,7 @@ EndFunc   ;==>_LOBase_QueryDocGetName
 ; Name ..........: _LOBase_QueryDocGetRowSet
 ; Description ...: Retrieve a Row Set for a Query opened for Data entry/Viewing. See remarks.
 ; Syntax ........: _LOBase_QueryDocGetRowSet(ByRef $oQueryDoc)
-; Parameters ....: $oQueryDoc           - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
+; Parameters ....: $oQueryDoc           - A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -550,10 +550,10 @@ EndFunc   ;==>_LOBase_QueryDocGetRowSet
 ; Name ..........: _LOBase_QueryDocOpenByName
 ; Description ...: Open a Query Document either in design mode or viewing mode.
 ; Syntax ........: _LOBase_QueryDocOpenByName(ByRef $oConnection, $sQuery[, $bEdit = False[, $bHidden = False]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sQuery              - a string value. The Query's name.
-;                  $bEdit               - [optional] a boolean value. Default is False. If True, the Query is opened in editing mode to add or remove columns. If False, the Query is opened in data viewing mode, to modify Query Data.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Document will be invisible.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sQuery              - The Query's name.
+;                  $bEdit               - [optional] Default is False. If True, the Query is opened in editing mode to add or remove columns. If False, the Query is opened in data viewing mode, to modify Query Data.
+;                  $bHidden             - [optional] Default is False. If True, the Document will be invisible.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -610,10 +610,10 @@ EndFunc   ;==>_LOBase_QueryDocOpenByName
 ; Name ..........: _LOBase_QueryDocOpenByObject
 ; Description ...: Open a Query Document either in design mode or viewing mode.
 ; Syntax ........: _LOBase_QueryDocOpenByObject(ByRef $oConnection, ByRef $oQuery[, $bEdit = False[, $bHidden = False]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $oQuery              - [in/out] an object. A Query object returned by a previous _LOBase_QueryGetObjByIndex, _LOBase_QueryGetObjByName, _LOBase_QueryAddByName or _LOBase_QueryAddBySQL function.
-;                  $bEdit               - [optional] a boolean value. Default is False. If True, the Query is opened in editing mode to add or remove columns. If False, the Query is opened in data viewing mode, to modify Query Data.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Document will be invisible.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $oQuery              - A Query object returned by a previous _LOBase_QueryGetObjByIndex, _LOBase_QueryGetObjByName, _LOBase_QueryAddByName or _LOBase_QueryAddBySQL function.
+;                  $bEdit               - [optional] Default is False. If True, the Query is opened in editing mode to add or remove columns. If False, the Query is opened in data viewing mode, to modify Query Data.
+;                  $bHidden             - [optional] Default is False. If True, the Document will be invisible.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -669,8 +669,8 @@ EndFunc   ;==>_LOBase_QueryDocOpenByObject
 ; Name ..........: _LOBase_QueryDocVisible
 ; Description ...: Set or Retrieve Query Document Visibility.
 ; Syntax ........: _LOBase_QueryDocVisible(ByRef $oQueryDoc[, $bVisible = Null])
-; Parameters ....: $oQueryDoc           - [in/out] an object. A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the Query Document will be visible.
+; Parameters ....: $oQueryDoc           - A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
+;                  $bVisible            - [optional] Default is Null. If True, the Query Document will be visible.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -718,8 +718,8 @@ EndFunc   ;==>_LOBase_QueryDocVisible
 ; Name ..........: _LOBase_QueryExists
 ; Description ...: Check whether a Document contains a Query by name.
 ; Syntax ........: _LOBase_QueryExists(ByRef $oConnection, $sName)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sName               - a string value. The name of the Query to look for.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sName               - The name of the Query to look for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -764,8 +764,8 @@ EndFunc   ;==>_LOBase_QueryExists
 ; Name ..........: _LOBase_QueryFieldGetObjByIndex
 ; Description ...: Retrieve a Query Field's Object by Index.
 ; Syntax ........: _LOBase_QueryFieldGetObjByIndex(ByRef $oQuery, $iField)
-; Parameters ....: $oQuery              - [in/out] an object. A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
-;                  $iField              - an integer value. The Index value of the Field to retrieve the Object for. 0 Based.
+; Parameters ....: $oQuery              - A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
+;                  $iField              - The Index value of the Field to retrieve the Object for. 0 Based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -805,8 +805,8 @@ EndFunc   ;==>_LOBase_QueryFieldGetObjByIndex
 ; Name ..........: _LOBase_QueryFieldGetObjByName
 ; Description ...: Retrieve a Query Field's Object by name.
 ; Syntax ........: _LOBase_QueryFieldGetObjByName(ByRef $oQuery, $sName)
-; Parameters ....: $oQuery              - [in/out] an object. A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
-;                  $sName               - a string value. The Query Field name to retrieve the Object for.
+; Parameters ....: $oQuery              - A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
+;                  $sName               - The Query Field name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -848,10 +848,10 @@ EndFunc   ;==>_LOBase_QueryFieldGetObjByName
 ; Name ..........: _LOBase_QueryFieldModify
 ; Description ...: Set or Retrieve Query Field settings.
 ; Syntax ........: _LOBase_QueryFieldModify(ByRef $oField[, $sAlias = Null[, $bVisible = Null[, $sRealName = Null]]])
-; Parameters ....: $oField              - [in/out] an object. A Query field object returned by a previous _LOBase_QueryFieldGetObjByIndex, or _LOBase_QueryFieldGetObjByName function.
-;                  $sAlias              - [optional] a string value. Default is Null. The Alias to call the present field in this Query.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the Query Field will be visible in the Query results.
-;                  $sRealName           - [optional] a string value. Default is Null. This parameter is not settable, but indicates in what position the Field's real name will be returned.
+; Parameters ....: $oField              - A Query field object returned by a previous _LOBase_QueryFieldGetObjByIndex, or _LOBase_QueryFieldGetObjByName function.
+;                  $sAlias              - [optional] Default is Null. The Alias to call the present field in this Query.
+;                  $bVisible            - [optional] Default is Null. If True, the Query Field will be visible in the Query results.
+;                  $sRealName           - [optional] Default is Null. This parameter is not settable, but indicates in what position the Field's real name will be returned.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -910,7 +910,7 @@ EndFunc   ;==>_LOBase_QueryFieldModify
 ; Name ..........: _LOBase_QueryFieldsGetCount
 ; Description ...: Retrieve a count of Fields referenced in a Query.
 ; Syntax ........: _LOBase_QueryFieldsGetCount(ByRef $oQuery)
-; Parameters ....: $oQuery              - [in/out] an object. A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
+; Parameters ....: $oQuery              - A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -944,7 +944,7 @@ EndFunc   ;==>_LOBase_QueryFieldsGetCount
 ; Name ..........: _LOBase_QueryFieldsGetNames
 ; Description ...: Retrieve an Array of Fields referenced in a Query.
 ; Syntax ........: _LOBase_QueryFieldsGetNames(ByRef $oQuery)
-; Parameters ....: $oQuery              - [in/out] an object. A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
+; Parameters ....: $oQuery              - A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -978,8 +978,8 @@ EndFunc   ;==>_LOBase_QueryFieldsGetNames
 ; Name ..........: _LOBase_QueryGetObjByIndex
 ; Description ...: Retrieve a Query's Object by Index.
 ; Syntax ........: _LOBase_QueryGetObjByIndex(ByRef $oConnection, $iQuery)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $iQuery              - an integer value. The Index value of the Query to retrieve. 0 Based.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $iQuery              - The Index value of the Query to retrieve. 0 Based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1023,8 +1023,8 @@ EndFunc   ;==>_LOBase_QueryGetObjByIndex
 ; Name ..........: _LOBase_QueryGetObjByName
 ; Description ...: Retrieve a Query's Object by name.
 ; Syntax ........: _LOBase_QueryGetObjByName(ByRef $oConnection, $sName)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sName               - a string value. The Query's name to retrieve the Object for.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sName               - The Query's name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1070,8 +1070,8 @@ EndFunc   ;==>_LOBase_QueryGetObjByName
 ; Name ..........: _LOBase_QueryName
 ; Description ...: Set or Retrieve the Query's name.
 ; Syntax ........: _LOBase_QueryName(ByRef $oQuery[, $sName = Null])
-; Parameters ....: $oQuery              - [in/out] an object. A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
-;                  $sName               - [optional] a string value. Default is Null. The new name to set the Query to. See Remarks.
+; Parameters ....: $oQuery              - A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
+;                  $sName               - [optional] Default is Null. The new name to set the Query to. See Remarks.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1122,8 +1122,8 @@ EndFunc   ;==>_LOBase_QueryName
 ; Name ..........: _LOBase_QuerySQLCommand
 ; Description ...: Set or Retrieve the Query's SQL command.
 ; Syntax ........: _LOBase_QuerySQLCommand(ByRef $oQuery[, $sSQL_Command = Null])
-; Parameters ....: $oQuery              - [in/out] an object. A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
-;                  $sSQL_Command        - [optional] a string value. Default is Null. The SQL command to set for the Query.
+; Parameters ....: $oQuery              - A Query object returned by a previous _LOBase_QueryGetObjByName, _LOBase_QueryGetObjByIndex, _LOBase_QueryAddByName, or _LOBase_QueryAddBySQL function.
+;                  $sSQL_Command        - [optional] Default is Null. The SQL command to set for the Query.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

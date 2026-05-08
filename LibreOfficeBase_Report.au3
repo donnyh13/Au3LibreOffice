@@ -79,7 +79,7 @@
 ; Name ..........: _LOBase_ReportConDelete
 ; Description ...: Delete a Report Control.
 ; Syntax ........: _LOBase_ReportConDelete(ByRef $oControl)
-; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+; Parameters ....: $oControl            - A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -117,8 +117,8 @@ EndFunc   ;==>_LOBase_ReportConDelete
 ; Name ..........: _LOBase_ReportConFormattedFieldData
 ; Description ...: Set or Retrieve Formatted Field Data Properties.
 ; Syntax ........: _LOBase_ReportConFormattedFieldData(ByRef $oFormatField[, $sDataField = Null])
-; Parameters ....: $oFormatField        - [in/out] an object. A Formatted Field Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The DataField value, see Remarks.
+; Parameters ....: $oFormatField        - A Formatted Field Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The DataField value, see Remarks.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -176,16 +176,16 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldData
 ; Name ..........: _LOBase_ReportConFormattedFieldGeneral
 ; Description ...: Set or Retrieve general Formatted Field properties.
 ; Syntax ........: _LOBase_ReportConFormattedFieldGeneral(ByRef $oFormatField[, $sName = Null[, $sCondPrint = Null[, $bPrintRep = Null[, $bPrintRepOnGroup = Null[, $iBackColor = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iFormat = Null]]]]]]]]])
-; Parameters ....: $oFormatField        - [in/out] an object. A Formatted Field Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The conditional print expression, prefixed by "rpt:".
-;                  $bPrintRep           - [optional] a boolean value. Default is Null. If True, repeated values will be printed.
-;                  $bPrintRepOnGroup    - [optional] a boolean value. Default is Null. If True, repeated values will be printed on group change.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
-;                  $mFont               - [optional] a map. Default is Null. A Font descriptor Map returned by a previous _LOBase_FontDescCreate or _LOBase_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iFormat             - [optional] an integer value. Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOBase_FormatKeysGetList call, or created by _LOBase_FormatKeyCreate function.
+; Parameters ....: $oFormatField        - A Formatted Field Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sCondPrint          - [optional] Default is Null. The conditional print expression, prefixed by "rpt:".
+;                  $bPrintRep           - [optional] Default is Null. If True, repeated values will be printed.
+;                  $bPrintRepOnGroup    - [optional] Default is Null. If True, repeated values will be printed on group change.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+;                  $mFont               - [optional] Default is Null. A Font descriptor Map returned by a previous _LOBase_FontDescCreate or _LOBase_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iFormat             - [optional] Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOBase_FormatKeysGetList call, or created by _LOBase_FormatKeyCreate function.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -328,8 +328,8 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldGeneral
 ; Name ..........: _LOBase_ReportConImageConData
 ; Description ...: Set or Retrieve Image Control Data Properties.
 ; Syntax ........: _LOBase_ReportConImageConData(ByRef $oImageControl[, $sDataField = Null])
-; Parameters ....: $oImageControl       - [in/out] an object. A Image Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The DataField value, see Remarks.
+; Parameters ....: $oImageControl       - A Image Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The DataField value, see Remarks.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -387,16 +387,16 @@ EndFunc   ;==>_LOBase_ReportConImageConData
 ; Name ..........: _LOBase_ReportConImageConGeneral
 ; Description ...: Set or retrieve general Image control properties.
 ; Syntax ........: _LOBase_ReportConImageConGeneral(ByRef $oImageControl[, $sName = Null[, $bPreserveAsLink = Null[, $sCondPrint = Null[, $bPrintRep = Null[, $bPrintRepOnGroup = Null[, $iBackColor = Null[, $iVertAlign = Null[, $sGraphics = Null[, $iScale = Null]]]]]]]]])
-; Parameters ....: $oImageControl       - [in/out] an object. A Image Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $bPreserveAsLink     - [optional] a boolean value. Default is Null. If True, the image inserted will be linked instead of embedded.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The conditional print expression, prefixed by "rpt:".
-;                  $bPrintRep           - [optional] a boolean value. Default is Null. If True, repeated values will be printed.
-;                  $bPrintRepOnGroup    - [optional] a boolean value. Default is Null. If True, repeated values will be printed on group change.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
-;                  $iScale              - [optional] an integer value (0-2). Default is Null. How to scale the image to fit the button. See Constants $LOB_REP_CON_IMG_BTN_SCALE_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oImageControl       - A Image Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $bPreserveAsLink     - [optional] Default is Null. If True, the image inserted will be linked instead of embedded.
+;                  $sCondPrint          - [optional] Default is Null. The conditional print expression, prefixed by "rpt:".
+;                  $bPrintRep           - [optional] Default is Null. If True, repeated values will be printed.
+;                  $bPrintRepOnGroup    - [optional] Default is Null. If True, repeated values will be printed on group change.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $sGraphics           - [optional] Default is Null. The path to an Image file.
+;                  $iScale              - [optional] (0-2) Default is Null. How to scale the image to fit the button. See Constants $LOB_REP_CON_IMG_BTN_SCALE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -526,13 +526,13 @@ EndFunc   ;==>_LOBase_ReportConImageConGeneral
 ; Name ..........: _LOBase_ReportConInsert
 ; Description ...: Insert a control into a report section.
 ; Syntax ........: _LOBase_ReportConInsert(ByRef $oSection, $iControl, $iX, $iY, $iWidth, $iHeight[, $sName = ""])
-; Parameters ....: $oSection            - [in/out] an object. A section object returned by a previous _LOBase_ReportDocSectionGetObj, _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
-;                  $iControl            - an integer value (1-32). The control type to insert. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iX                  - an integer value.The X Coordinate, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - an integer value. The Y Coordinate, in Hundredths of a Millimeter (HMM).
-;                  $iWidth              - an integer value. The Width of the control, in Hundredths of a Millimeter (HMM).
-;                  $iHeight             - an integer value. The Height of the control, in Hundredths of a Millimeter (HMM).
-;                  $sName               - [optional] a string value. Default is "". The name of the control, if called with "", a name is automatically given it.
+; Parameters ....: $oSection            - A section object returned by a previous _LOBase_ReportDocSectionGetObj, _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
+;                  $iControl            - (1-32) The control type to insert. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iX                  - The X Coordinate, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - The Y Coordinate, in Hundredths of a Millimeter (HMM).
+;                  $iWidth              - The Width of the control, in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - The Height of the control, in Hundredths of a Millimeter (HMM).
+;                  $sName               - [optional] Default is "". The name of the control, if called with "", a name is automatically given it.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -634,16 +634,16 @@ EndFunc   ;==>_LOBase_ReportConInsert
 ; Name ..........: _LOBase_ReportConLabelGeneral
 ; Description ...: Set or Retrieve general Label control settings.
 ; Syntax ........: _LOBase_ReportConLabelGeneral(ByRef $oLabel[, $sName = Null[, $sLabel = Null[, $sCondPrint = Null[, $bPrintRep = Null[, $bPrintRepOnGroup = Null[, $iBackColor = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null]]]]]]]]])
-; Parameters ....: $oLabel              - [in/out] an object. A Label Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The name of the Label control.
-;                  $sLabel              - [optional] a string value. Default is Null. The Label of the control.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The conditional print expression, prefixed by "rpt:".
-;                  $bPrintRep           - [optional] a boolean value. Default is Null. If True, repeated values will be printed.
-;                  $bPrintRepOnGroup    - [optional] a boolean value. Default is Null. If True, repeated values will be printed on group change.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
-;                  $mFont               - [optional] a map. Default is Null. A Font descriptor Map returned by a previous _LOBase_FontDescCreate or _LOBase_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oLabel              - A Label Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $sName               - [optional] Default is Null. The name of the Label control.
+;                  $sLabel              - [optional] Default is Null. The Label of the control.
+;                  $sCondPrint          - [optional] Default is Null. The conditional print expression, prefixed by "rpt:".
+;                  $bPrintRep           - [optional] Default is Null. If True, repeated values will be printed.
+;                  $bPrintRepOnGroup    - [optional] Default is Null. If True, repeated values will be printed on group change.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+;                  $mFont               - [optional] Default is Null. A Font descriptor Map returned by a previous _LOBase_FontDescCreate or _LOBase_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -773,10 +773,10 @@ EndFunc   ;==>_LOBase_ReportConLabelGeneral
 ; Name ..........: _LOBase_ReportConLineGeneral
 ; Description ...: Set or Retrieve general Line control settings.
 ; Syntax ........: _LOBase_ReportConLineGeneral(ByRef $oLine[, $sName = Null[, $iVertAlign = Null[, $iOrient = Null]]])
-; Parameters ....: $oLine               - [in/out] an object. A Line Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The name of the control.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iOrient             - [optional] an integer value (0-1). Default is Null. The orientation of the line. See Constants $LOB_REP_CON_LINE_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oLine               - A Line Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $sName               - [optional] Default is Null. The name of the control.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iOrient             - [optional] (0-1) Default is Null. The orientation of the line. See Constants $LOB_REP_CON_LINE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -849,9 +849,9 @@ EndFunc   ;==>_LOBase_ReportConLineGeneral
 ; Name ..........: _LOBase_ReportConPosition
 ; Description ...: Set or Retrieve the Control's position settings.
 ; Syntax ........: _LOBase_ReportConPosition(ByRef $oControl[, $iX = Null[, $iY = Null]])
-; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $iX                  - [optional] an integer value. Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] an integer value. Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oControl            - A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $iX                  - [optional] Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - [optional] Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -917,8 +917,8 @@ EndFunc   ;==>_LOBase_ReportConPosition
 ; Name ..........: _LOBase_ReportConsGetList
 ; Description ...: Retrieve an array of Control Objects contained in a Report's Section.
 ; Syntax ........: _LOBase_ReportConsGetList(ByRef $oSection[, $iType = $LOB_REP_CON_TYPE_ALL])
-; Parameters ....: $oSection            - [in/out] an object. A section object returned by a previous _LOBase_ReportDocSectionGetObj, _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
-;                  $iType               - [optional] an integer value (1-63). Default is $LOB_REP_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oSection            - A section object returned by a previous _LOBase_ReportDocSectionGetObj, _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
+;                  $iType               - [optional] (1-63) Default is $LOB_REP_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -976,10 +976,10 @@ EndFunc   ;==>_LOBase_ReportConsGetList
 ; Name ..........: _LOBase_ReportConSize
 ; Description ...: Set or Retrieve Control Size or related settings.
 ; Syntax ........: _LOBase_ReportConSize(ByRef $oControl[, $iWidth = Null[, $iHeight = Null[, $bAutoGrow = Null]]])
-; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $bAutoGrow           - [optional] a boolean value. Default is Null. If True, the control's size will automatically adjust to fit content.
+; Parameters ....: $oControl            - A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $iWidth              - [optional] Default is Null. The width of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $iHeight             - [optional] Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $bAutoGrow           - [optional] Default is Null. If True, the control's size will automatically adjust to fit content.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1057,9 +1057,9 @@ EndFunc   ;==>_LOBase_ReportConSize
 ; Name ..........: _LOBase_ReportCopy
 ; Description ...: Create a copy of an existing Report.
 ; Syntax ........: _LOBase_ReportCopy(ByRef $oConnection, $sInputReport, $sOutputReport)
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sInputReport        - a string value. The Name of the Report to Copy. Also the Sub-directory the Report is in. See Remarks.
-;                  $sOutputReport       - a string value. The Name of the Report to Create. Also the Sub-directory to place the Report in. See Remarks.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sInputReport        - The Name of the Report to Copy. Also the Sub-directory the Report is in. See Remarks.
+;                  $sOutputReport       - The Name of the Report to Create. Also the Sub-directory to place the Report in. See Remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1132,10 +1132,10 @@ EndFunc   ;==>_LOBase_ReportCopy
 ; Name ..........: _LOBase_ReportCreate
 ; Description ...: Create and Insert a new Report Document into a Base Document.
 ; Syntax ........: _LOBase_ReportCreate(ByRef $oConnection, $sReport[, $bOpen = False[, $bHidden = False]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sReport             - a string value. The Name of the Report to Create. Also the Sub-directory to place the Report in. See Remarks.
-;                  $bOpen               - [optional] a boolean value. Default is False. If True, the new Report will be opened in Design mode.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Report will be invisible when opened.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sReport             - The Name of the Report to Create. Also the Sub-directory to place the Report in. See Remarks.
+;                  $bOpen               - [optional] Default is False. If True, the new Report will be opened in Design mode.
+;                  $bHidden             - [optional] Default is False. If True, the Report will be invisible when opened.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1222,8 +1222,8 @@ EndFunc   ;==>_LOBase_ReportCreate
 ; Name ..........: _LOBase_ReportDelete
 ; Description ...: Delete a Report from a Document.
 ; Syntax ........: _LOBase_ReportDelete(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sName               - a string value. The Report name to Delete. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sName               - The Report name to Delete. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1268,8 +1268,8 @@ EndFunc   ;==>_LOBase_ReportDelete
 ; Name ..........: _LOBase_ReportDocClose
 ; Description ...: Close an opened Report Document.
 ; Syntax ........: _LOBase_ReportDocClose(ByRef $oReportDoc[, $bForceClose = False])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $bForceClose         - [optional] a boolean value. Default is False. If True, the Report document will be closed regardless if there are unsaved changes. See remarks.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $bForceClose         - [optional] Default is False. If True, the Report document will be closed regardless if there are unsaved changes. See remarks.
 ; Return values .: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1334,7 +1334,7 @@ EndFunc   ;==>_LOBase_ReportDocClose
 ; Name ..........: _LOBase_ReportDocConnect
 ; Description ...: Retrieve an Object for the currently open Report or Reports.
 ; Syntax ........: _LOBase_ReportDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
-; Parameters ....: $iMode               - [optional] an integer value (0-1). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $iMode               - [optional] (0-1) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1421,13 +1421,13 @@ EndFunc   ;==>_LOBase_ReportDocConnect
 ; Name ..........: _LOBase_ReportDocData
 ; Description ...: Set or Retrieve Data related properties for a Report Document.
 ; Syntax ........: _LOBase_ReportDocData(ByRef $oReportDoc[, $iContentType = Null[, $sContent = Null[, $bAnalyzeSQL = Null[, $sFilter = Null[, $iReportOutput = Null[, $bSuppress = Null]]]]]])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $iContentType        - [optional] an integer value (0-2). Default is Null. The Type of data source for the Report. See Constants, $LOB_REP_CONTENT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $sContent            - [optional] a string value. Default is Null. The Content to be used for the Report, either a Table or Query name, or an SQL statement.
-;                  $bAnalyzeSQL         - [optional] a boolean value. Default is Null. If True, SQL commands will be analyzed by LibreOffice.
-;                  $sFilter             - [optional] a string value. Default is Null. The SQL filter command.
-;                  $iReportOutput       - [optional] an integer value (1-2). Default is Null. The type of output document when the Report is executed. See Constants, $LOB_REP_OUTPUT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bSuppress           - [optional] a boolean value. Default is Null. If True, the "Add a Field" dialog will be suppressed from coming up. See remarks.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $iContentType        - [optional] (0-2) Default is Null. The Type of data source for the Report. See Constants, $LOB_REP_CONTENT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $sContent            - [optional] Default is Null. The Content to be used for the Report, either a Table or Query name, or an SQL statement.
+;                  $bAnalyzeSQL         - [optional] Default is Null. If True, SQL commands will be analyzed by LibreOffice.
+;                  $sFilter             - [optional] Default is Null. The SQL filter command.
+;                  $iReportOutput       - [optional] (1-2) Default is Null. The type of output document when the Report is executed. See Constants, $LOB_REP_OUTPUT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bSuppress           - [optional] Default is Null. If True, the "Add a Field" dialog will be suppressed from coming up. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1535,14 +1535,14 @@ EndFunc   ;==>_LOBase_ReportDocData
 ; Name ..........: _LOBase_ReportDocDetail
 ; Description ...: Set or Retrieve Report Detail section properties.
 ; Syntax ........: _LOBase_ReportDocDetail(ByRef $oReportDoc[, $sName = Null[, $iForceNewPage = Null[, $bKeepTogether = Null[, $bVisible = Null[, $iHeight = Null[, $sCondPrint = Null[, $iBackColor = Null]]]]]]])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $sName               - [optional] a string value. Default is Null. The name of the Section.
-;                  $iForceNewPage       - [optional] an integer value (0-3). Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bKeepTogether       - [optional] a boolean value. Default is Null. If True, the section should be printed on one page.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the section is visible in the Report.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $sName               - [optional] Default is Null. The name of the Section.
+;                  $iForceNewPage       - [optional] (0-3) Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
+;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
 ;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The Conditional Print Statement.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1650,15 +1650,15 @@ EndFunc   ;==>_LOBase_ReportDocDetail
 ; Name ..........: _LOBase_ReportDocFooter
 ; Description ...: Set or Retrieve a Report's Report Footer properties.
 ; Syntax ........: _LOBase_ReportDocFooter(ByRef $oReportDoc[, $bEnabled = Null[, $sName = Null[, $iForceNewPage = Null[, $bKeepTogether = Null[, $bVisible = Null[, $iHeight = Null[, $sCondPrint = Null[, $iBackColor = Null]]]]]]]])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the Report Footer is enabled.
-;                  $sName               - [optional] a string value. Default is Null. The name of the Section.
-;                  $iForceNewPage       - [optional] an integer value (0-3). Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bKeepTogether       - [optional] a boolean value. Default is Null. If True, the section should be printed on one page.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the section is visible in the Report.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $bEnabled            - [optional] Default is Null. If True, the Report Footer is enabled.
+;                  $sName               - [optional] Default is Null. The name of the Section.
+;                  $iForceNewPage       - [optional] (0-3) Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
+;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
 ;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The Conditional Print Statement.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1817,12 +1817,12 @@ EndFunc   ;==>_LOBase_ReportDocFooter
 ; Name ..........: _LOBase_ReportDocGeneral
 ; Description ...: Set or Retrieve General Report Document properties.
 ; Syntax ........: _LOBase_ReportDocGeneral(ByRef $oReportDoc[, $sName = Null[, $iPageHeader = Null[, $iPageFooter = Null[, $bAutoGrow = Null[, $bPrintRep = Null]]]]])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $sName               - [optional] a string value. Default is Null. The name of the Report. This is separate from the save name of the Report contained in the Database.
-;                  $iPageHeader         - [optional] an integer value (0-3). Default is Null. Determines if a Page Header is printed on a page that also contains a Report Header. See Constants, $LOB_REP_PAGE_PRINT_OPT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iPageFooter         - [optional] an integer value (0-3). Default is Null. Determines if a Page Footer is printed on a page that also contains a Report Footer. See Constants, $LOB_REP_PAGE_PRINT_OPT_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bAutoGrow           - [optional] a boolean value. Default is Null. If True, the Report will automatically grow to fit content.
-;                  $bPrintRep           - [optional] a boolean value. Default is Null. If True, repeated values will be printed.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $sName               - [optional] Default is Null. The name of the Report. This is separate from the save name of the Report contained in the Database.
+;                  $iPageHeader         - [optional] (0-3) Default is Null. Determines if a Page Header is printed on a page that also contains a Report Header. See Constants, $LOB_REP_PAGE_PRINT_OPT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iPageFooter         - [optional] (0-3) Default is Null. Determines if a Page Footer is printed on a page that also contains a Report Footer. See Constants, $LOB_REP_PAGE_PRINT_OPT_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bAutoGrow           - [optional] Default is Null. If True, the Report will automatically grow to fit content.
+;                  $bPrintRep           - [optional] Default is Null. If True, repeated values will be printed.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1909,8 +1909,8 @@ EndFunc   ;==>_LOBase_ReportDocGeneral
 ; Name ..........: _LOBase_ReportDocGetName
 ; Description ...: Retrieve the Report document's name.
 ; Syntax ........: _LOBase_ReportDocGetName(ByRef $oReportDoc[, $bReturnFull = False])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $bReturnFull         - [optional] a boolean value. Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1959,8 +1959,8 @@ EndFunc   ;==>_LOBase_ReportDocGetName
 ; Name ..........: _LOBase_ReportDocGroupAdd
 ; Description ...: Add a Group to the Report.
 ; Syntax ........: _LOBase_ReportDocGroupAdd(ByRef $oReportDoc[, $iPosition = Null])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $iPosition           - [optional] an integer value. Default is Null. The position to insert the new Group. 0 Based, call Null to insert at the end.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $iPosition           - [optional] Default is Null. The position to insert the new Group. 0 Based, call Null to insert at the end.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2010,8 +2010,8 @@ EndFunc   ;==>_LOBase_ReportDocGroupAdd
 ; Name ..........: _LOBase_ReportDocGroupDeleteByIndex
 ; Description ...: Delete a Group by position.
 ; Syntax ........: _LOBase_ReportDocGroupDeleteByIndex(ByRef $oReportDoc, $iGroup)
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $iGroup              - an integer value. The Index position of the Group to Delete. 0 based.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $iGroup              - The Index position of the Group to Delete. 0 based.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2054,7 +2054,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByIndex
 ; Name ..........: _LOBase_ReportDocGroupDeleteByObj
 ; Description ...: Delete a Group by its Object.
 ; Syntax ........: _LOBase_ReportDocGroupDeleteByObj(ByRef $oGroup)
-; Parameters ....: $oGroup              - [in/out] an object. A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
+; Parameters ....: $oGroup              - A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2109,8 +2109,8 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByObj
 ; Name ..........: _LOBase_ReportDocGroupGetByIndex
 ; Description ...: Retrieve a Group Object by position.
 ; Syntax ........: _LOBase_ReportDocGroupGetByIndex(ByRef $oReportDoc, $iReport)
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $iReport             - an integer value. The index position for the Group to retrieve the Object for. 0 Based.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $iReport             - The index position for the Group to retrieve the Object for. 0 Based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2148,7 +2148,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupGetByIndex
 ; Name ..........: _LOBase_ReportDocGroupsGetCount
 ; Description ...: Retrieve a count of Report Groups.
 ; Syntax ........: _LOBase_ReportDocGroupsGetCount(ByRef $oReportDoc)
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2184,15 +2184,15 @@ EndFunc   ;==>_LOBase_ReportDocGroupsGetCount
 ; Name ..........: _LOBase_ReportDocHeader
 ; Description ...: Set or Retrieve a Report's Report Header properties.
 ; Syntax ........: _LOBase_ReportDocHeader(ByRef $oReportDoc[, $bEnabled = Null[, $sName = Null[, $iForceNewPage = Null[, $bKeepTogether = Null[, $bVisible = Null[, $iHeight = Null[, $sCondPrint = Null[, $iBackColor = Null]]]]]]]])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the Report Header is enabled.
-;                  $sName               - [optional] a string value. Default is Null. The name of the Section.
-;                  $iForceNewPage       - [optional] an integer value (0-3). Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bKeepTogether       - [optional] a boolean value. Default is Null. If True, the section should be printed on one page.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the section is visible in the Report.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $bEnabled            - [optional] Default is Null. If True, the Report Header is enabled.
+;                  $sName               - [optional] Default is Null. The name of the Section.
+;                  $iForceNewPage       - [optional] (0-3) Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
+;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
 ;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The Conditional Print Statement.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2351,7 +2351,7 @@ EndFunc   ;==>_LOBase_ReportDocHeader
 ; Name ..........: _LOBase_ReportDocIsModified
 ; Description ...: Test whether the Report has been modified since being created or since the last save.
 ; Syntax ........: _LOBase_ReportDocIsModified(ByRef $oReportDoc)
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2385,10 +2385,10 @@ EndFunc   ;==>_LOBase_ReportDocIsModified
 ; Name ..........: _LOBase_ReportDocOpen
 ; Description ...: Open a Report Document
 ; Syntax ........: _LOBase_ReportDocOpen(ByRef $oConnection, $sName[, $bDesign = True[, $bHidden = False]])
-; Parameters ....: $oConnection         - [in/out] an object. A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
-;                  $sName               - a string value. The Report name to Open. See remarks.
-;                  $bDesign             - [optional] a boolean value. Default is True. If True, the Report is opened in Design mode.
-;                  $bHidden             - [optional] a boolean value. Default is False. If True, the Report document will be invisible when opened.
+; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
+;                  $sName               - The Report name to Open. See remarks.
+;                  $bDesign             - [optional] Default is True. If True, the Report is opened in Design mode.
+;                  $bHidden             - [optional] Default is False. If True, the Report document will be invisible when opened.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2445,13 +2445,13 @@ EndFunc   ;==>_LOBase_ReportDocOpen
 ; Name ..........: _LOBase_ReportDocPageFooter
 ; Description ...: Set or Retrieve a Report's Page Footer properties.
 ; Syntax ........: _LOBase_ReportDocPageFooter(ByRef $oReportDoc[, $bEnabled = Null[, $sName = Null[, $bVisible = Null[, $iHeight = Null[, $sCondPrint = Null[, $iBackColor = Null]]]]]])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the Page Footer is enabled.
-;                  $sName               - [optional] a string value. Default is Null. The name of the Section.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the section is visible in the Report.
-;                  $iHeight             - [optional] an integer value. Default is Null. (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The Conditional Print Statement.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $bEnabled            - [optional] Default is Null. If True, the Page Footer is enabled.
+;                  $sName               - [optional] Default is Null. The name of the Section.
+;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
+;                  $iHeight             - [optional] Default is Null. (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
+;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2581,13 +2581,13 @@ EndFunc   ;==>_LOBase_ReportDocPageFooter
 ; Name ..........: _LOBase_ReportDocPageHeader
 ; Description ...: Set or Retrieve a Report's Page Header properties.
 ; Syntax ........: _LOBase_ReportDocPageHeader(ByRef $oReportDoc[, $bEnabled = Null[, $sName = Null[, $bVisible = Null[, $iHeight = Null[, $sCondPrint = Null[, $iBackColor = Null]]]]]])
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the Page Header is enabled.
-;                  $sName               - [optional] a string value. Default is Null. The name of the Section.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the section is visible in the Report.
-;                  $iHeight             - [optional] an integer value. Default is Null. (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The Conditional Print Statement.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $bEnabled            - [optional] Default is Null. If True, the Page Header is enabled.
+;                  $sName               - [optional] Default is Null. The name of the Section.
+;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
+;                  $iHeight             - [optional] Default is Null. (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
+;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2717,7 +2717,7 @@ EndFunc   ;==>_LOBase_ReportDocPageHeader
 ; Name ..........: _LOBase_ReportDocSave
 ; Description ...: Save any changes made to a Document.
 ; Syntax ........: _LOBase_ReportDocSave(ByRef $oReportDoc)
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2772,8 +2772,8 @@ EndFunc   ;==>_LOBase_ReportDocSave
 ; Name ..........: _LOBase_ReportDocSectionGetObj
 ; Description ...: Retrieve a Section Object for one of the sections in a Report.
 ; Syntax ........: _LOBase_ReportDocSectionGetObj(ByRef $oReportDoc, $iSection)
-; Parameters ....: $oReportDoc          - [in/out] an object. A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $iSection            - an integer value (0-4). The section type to retrieve the Object for. See Constants, $LOB_REP_SECTION_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $iSection            - (0-4) The section type to retrieve the Object for. See Constants, $LOB_REP_SECTION_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2827,8 +2827,8 @@ EndFunc   ;==>_LOBase_ReportDocSectionGetObj
 ; Name ..........: _LOBase_FormDocVisible
 ; Description ...: Set or retrieve the current visibility of a document.
 ; Syntax ........: _LOBase_FormDocVisible(ByRef $oReportDoc[, $bVisible = Null])
-; Parameters ....: $oReportDoc          - [in/out] an object.  A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the document is visible.
+; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
+;                  $bVisible            - [optional] Default is Null. If True, the document is visible.
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2880,9 +2880,9 @@ EndFunc   ;==>_LOBase_ReportDocVisible
 ; Name ..........: _LOBase_ReportExists
 ; Description ...: Check whether a Document contains a Report by name.
 ; Syntax ........: _LOBase_ReportExists(ByRef $oDoc, $sName[, $bExhaustive = True])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sName               - a string value. The name of the Report to look for. See remarks.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, the search looks inside sub-folders.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sName               - The name of the Report to look for. See remarks.
+;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2992,9 +2992,9 @@ EndFunc   ;==>_LOBase_ReportExists
 ; Name ..........: _LOBase_ReportFolderCopy
 ; Description ...: Create a copy of an existing Folder.
 ; Syntax ........: _LOBase_ReportFolderCopy(ByRef $oDoc, $sInputFolder, $sOutputFolder)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sInputFolder        - a string value. The Name of the Folder to Copy. Also the Sub-directory the Folder is in. See Remarks.
-;                  $sOutputFolder       - a string value. The Name of the Folder to Create. Also the Sub-directory to place the Folder in. See Remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sInputFolder        - The Name of the Folder to Copy. Also the Sub-directory the Folder is in. See Remarks.
+;                  $sOutputFolder       - The Name of the Folder to Create. Also the Sub-directory to place the Folder in. See Remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3063,9 +3063,9 @@ EndFunc   ;==>_LOBase_ReportFolderCopy
 ; Name ..........: _LOBase_ReportFolderCreate
 ; Description ...: Create a Report Folder.
 ; Syntax ........: _LOBase_ReportFolderCreate(ByRef $oDoc, $sFolder[, $bCreateMulti = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sFolder             - a string value. The Folder name to create. Can also include the sub-folder path. See Remarks.
-;                  $bCreateMulti        - [optional] a boolean value. Default is False. If True, multiple folders in a path will be created if they do not exist.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sFolder             - The Folder name to create. Can also include the sub-folder path. See Remarks.
+;                  $bCreateMulti        - [optional] Default is False. If True, multiple folders in a path will be created if they do not exist.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3140,8 +3140,8 @@ EndFunc   ;==>_LOBase_ReportFolderCreate
 ; Name ..........: _LOBase_ReportFolderDelete
 ; Description ...: Delete a Report Folder from a Document.
 ; Syntax ........: _LOBase_ReportFolderDelete(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sName               - a string value. The Folder name to Delete. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sName               - The Folder name to Delete. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3187,9 +3187,9 @@ EndFunc   ;==>_LOBase_ReportFolderDelete
 ; Name ..........: _LOBase_ReportFolderExists
 ; Description ...: Check whether a Document contains a Report Folder by name.
 ; Syntax ........: _LOBase_ReportFolderExists(ByRef $oDoc, $sName[, $bExhaustive = True])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sName               - a string value. The name of the Folder to look for.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, the search looks inside sub-folders.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sName               - The name of the Folder to look for.
+;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3299,9 +3299,9 @@ EndFunc   ;==>_LOBase_ReportFolderExists
 ; Name ..........: _LOBase_ReportFolderRename
 ; Description ...: Rename a Report Folder.
 ; Syntax ........: _LOBase_ReportFolderRename(ByRef $oDoc, $sFolder, $sNewName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sFolder             - a string value. The Folder to rename, including the Sub-Folder path, if applicable. See Remarks.
-;                  $sNewName            - a string value. The New name to rename the Report Folder to.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sFolder             - The Folder to rename, including the Sub-Folder path, if applicable. See Remarks.
+;                  $sNewName            - The New name to rename the Report Folder to.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3348,9 +3348,9 @@ EndFunc   ;==>_LOBase_ReportFolderRename
 ; Name ..........: _LOBase_ReportFoldersGetCount
 ; Description ...: Retrieve a count of Report Folders contained in the Document.
 ; Syntax ........: _LOBase_ReportFoldersGetCount(ByRef $oDoc[, $bExhaustive = True[, $sFolder = ""]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, retrieves a count of all folders, including those in sub-folders.
-;                  $sFolder             - [optional] a string value. Default is "". The Folder to return the count of folders for. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bExhaustive         - [optional] Default is True. If True, retrieves a count of all folders, including those in sub-folders.
+;                  $sFolder             - [optional] Default is "". The Folder to return the count of folders for. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3452,9 +3452,9 @@ EndFunc   ;==>_LOBase_ReportFoldersGetCount
 ; Name ..........: _LOBase_ReportFoldersGetNames
 ; Description ...: Retrieve an array of Folder Names contained in a Document.
 ; Syntax ........: _LOBase_ReportFoldersGetNames(ByRef $oDoc[, $bExhaustive = True[, $sFolder = ""]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, the search looks inside sub-folders.
-;                  $sFolder             - [optional] a string value. Default is "". The Sub-Folder to return the array of Folder names from. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
+;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of Folder names from. See remarks.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3566,16 +3566,16 @@ EndFunc   ;==>_LOBase_ReportFoldersGetNames
 ; Name ..........: _LOBase_ReportGroupFooter
 ; Description ...: Set or Retrieve Group Footer settings.
 ; Syntax ........: _LOBase_ReportGroupFooter(ByRef $oGroup[, $bFooterOn = Null[, $sName = Null[, $iForceNewPage = Null[, $bKeepTogether = Null[, $bRepeatSec = Null[, $bVisible = Null[, $iHeight = Null[, $sCondPrint = Null[, $iBackColor = Null]]]]]]]]])
-; Parameters ....: $oGroup              - [in/out] an object. A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
-;                  $bFooterOn           - [optional] a boolean value. Default is Null. If True, the Footer is enabled (on).
-;                  $sName               - [optional] a string value. Default is Null. The name of the Group Footer.
-;                  $iForceNewPage       - [optional] an integer value (0-3). Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bKeepTogether       - [optional] a boolean value. Default is Null. If True, the section should be printed on one page.
-;                  $bRepeatSec          - [optional] a boolean value. Default is Null. If True, the Group Footer section will be repeated on the next page if the section spans more than one page.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the section is visible in the Report.
+; Parameters ....: $oGroup              - A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
+;                  $bFooterOn           - [optional] Default is Null. If True, the Footer is enabled (on).
+;                  $sName               - [optional] Default is Null. The name of the Group Footer.
+;                  $iForceNewPage       - [optional] (0-3) Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
+;                  $bRepeatSec          - [optional] Default is Null. If True, the Group Footer section will be repeated on the next page if the section spans more than one page.
+;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
 ;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The Conditional Print Statement.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3748,16 +3748,16 @@ EndFunc   ;==>_LOBase_ReportGroupFooter
 ; Name ..........: _LOBase_ReportGroupHeader
 ; Description ...: Set or Retrieve Group Header settings.
 ; Syntax ........: _LOBase_ReportGroupHeader(ByRef $oGroup[, $bHeaderOn = Null[, $sName = Null[, $iForceNewPage = Null[, $bKeepTogether = Null[, $bRepeatSec = Null[, $bVisible = Null[, $iHeight = Null[, $sCondPrint = Null[, $iBackColor = Null]]]]]]]]])
-; Parameters ....: $oGroup              - [in/out] an object. A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
-;                  $bHeaderOn           - [optional] a boolean value. Default is Null. If True, the Header is enabled (on).
-;                  $sName               - [optional] a string value. Default is Null. The name of the Group Header.
-;                  $iForceNewPage       - [optional] an integer value (0-3). Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $bKeepTogether       - [optional] a boolean value. Default is Null. If True, the section should be printed on one page.
-;                  $bRepeatSec          - [optional] a boolean value. Default is Null. If True, the Group Header section will be repeated on the next page if the section spans more than one page.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the section is visible in the Report.
+; Parameters ....: $oGroup              - A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
+;                  $bHeaderOn           - [optional] Default is Null. If True, the Header is enabled (on).
+;                  $sName               - [optional] Default is Null. The name of the Group Header.
+;                  $iForceNewPage       - [optional] (0-3) Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
+;                  $bRepeatSec          - [optional] Default is Null. If True, the Group Header section will be repeated on the next page if the section spans more than one page.
+;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
 ;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
-;                  $sCondPrint          - [optional] a string value. Default is Null. The Conditional Print Statement.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
+;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3930,8 +3930,8 @@ EndFunc   ;==>_LOBase_ReportGroupHeader
 ; Name ..........: _LOBase_ReportGroupPosition
 ; Description ...: Set or Retrieve the Group's position in the list of Groups.
 ; Syntax ........: _LOBase_ReportGroupPosition(ByRef $oGroup[, $iPos = Null])
-; Parameters ....: $oGroup              - [in/out] an object. A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
-;                  $iPos                - [optional] an integer value. Default is Null. The position of the in the list of Groups. 0 Based. See Remarks.
+; Parameters ....: $oGroup              - A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
+;                  $iPos                - [optional] Default is Null. The position of the in the list of Groups. 0 Based. See Remarks.
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4005,12 +4005,12 @@ EndFunc   ;==>_LOBase_ReportGroupPosition
 ; Name ..........: _LOBase_ReportGroupSort
 ; Description ...: Set or Retrieve a Group's Sorting settings.
 ; Syntax ........: _LOBase_ReportGroupSort(ByRef $oGroup[, $sField = Null[, $bSortAsc = Null[, $iGroupOn = Null[, $iGroupInt = Null[, $iKeepTogether = Null]]]]])
-; Parameters ....: $oGroup              - [in/out] an object. A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
-;                  $sField              - [optional] a string value. Default is Null. The Column name or Expression. See remarks.
-;                  $bSortAsc            - [optional] a boolean value. Default is Null. If True, the Group is sorted in Ascending order. Else in Descending order.
-;                  $iGroupOn            - [optional] an integer value (0-9). Default is Null. How to Group the Data. See Constants, $LOB_REP_GROUP_ON_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iGroupInt           - [optional] an integer value (0-100). Default is Null. The Group Interval value.
-;                  $iKeepTogether       - [optional] an integer value (0-2). Default is Null. Whether or not, and how to keep Data together on one page. See Constants, $LOB_REP_KEEP_TOG_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oGroup              - A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
+;                  $sField              - [optional] Default is Null. The Column name or Expression. See remarks.
+;                  $bSortAsc            - [optional] Default is Null. If True, the Group is sorted in Ascending order. Else in Descending order.
+;                  $iGroupOn            - [optional] (0-9) Default is Null. How to Group the Data. See Constants, $LOB_REP_GROUP_ON_* as defined in LibreOfficeBase_Constants.au3.
+;                  $iGroupInt           - [optional] (0-100) Default is Null. The Group Interval value.
+;                  $iKeepTogether       - [optional] (0-2) Default is Null. Whether or not, and how to keep Data together on one page. See Constants, $LOB_REP_KEEP_TOG_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4099,9 +4099,9 @@ EndFunc   ;==>_LOBase_ReportGroupSort
 ; Name ..........: _LOBase_ReportRename
 ; Description ...: Rename a Report.
 ; Syntax ........: _LOBase_ReportRename(ByRef $oDoc, $sReport, $sNewName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sReport             - a string value. The Report to rename, including the Sub-Folder path, if applicable. See Remarks.
-;                  $sNewName            - a string value. The New name to rename the Report to.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $sReport             - The Report to rename, including the Sub-Folder path, if applicable. See Remarks.
+;                  $sNewName            - The New name to rename the Report to.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4148,9 +4148,9 @@ EndFunc   ;==>_LOBase_ReportRename
 ; Name ..........: _LOBase_ReportsGetCount
 ; Description ...: Retrieve a count of Reports contained in the Document.
 ; Syntax ........: _LOBase_ReportsGetCount(ByRef $oDoc[, $bExhaustive = True[, $sFolder = ""]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, retrieves a count of all Reports, including those in sub-folders.
-;                  $sFolder             - [optional] a string value. Default is "". The Folder to return the count of Reports for. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bExhaustive         - [optional] Default is True. If True, retrieves a count of all Reports, including those in sub-folders.
+;                  $sFolder             - [optional] Default is "". The Folder to return the count of Reports for. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4256,9 +4256,9 @@ EndFunc   ;==>_LOBase_ReportsGetCount
 ; Name ..........: _LOBase_ReportsGetNames
 ; Description ...: Retrieve an Array of Report Names contained in a Document.
 ; Syntax ........: _LOBase_ReportsGetNames(ByRef $oDoc[, $bExhaustive = True[, $sFolder = ""]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $bExhaustive         - [optional] a boolean value. Default is True. If True, retrieves all Report names, including those in sub-folders.
-;                  $sFolder             - [optional] a string value. Default is "". The Sub-Folder to return the array of Report names from. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
+;                  $bExhaustive         - [optional] Default is True. If True, retrieves all Report names, including those in sub-folders.
+;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of Report names from. See remarks.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

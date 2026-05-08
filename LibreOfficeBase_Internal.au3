@@ -34,8 +34,8 @@
 ; Name ..........: __LOBase_ColTransferProps
 ; Description ...: Transfer column properties from one to another.
 ; Syntax ........: __LOBase_ColTransferProps(ByRef $oNewCol, ByRef $oOldCol)
-; Parameters ....: $oNewCol             - [in/out] an object. A new column Object.
-;                  $oOldCol             - [in/out] an object. A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
+; Parameters ....: $oNewCol             - A new column Object.
+;                  $oOldCol             - A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -76,7 +76,7 @@ EndFunc   ;==>__LOBase_ColTransferProps
 ; Name ..........: __LOBase_ColTypeName
 ; Description ...: Obtain an appropriate Type Name for a Column Type.
 ; Syntax ........: __LOBase_ColTypeName($iType)
-; Parameters ....: $iType               - an integer value. The Column Type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $iType               - The Column Type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -226,7 +226,7 @@ EndFunc   ;==>__LOBase_ColTypeName
 ; Name ..........: __LOBase_DatabaseMetaGetQuery
 ; Description ...: Return the Query command from a Constant value.
 ; Syntax ........: __LOBase_DatabaseMetaGetQuery($iQuery)
-; Parameters ....: $iQuery              - an integer value (0-148). The Query to retrieve the command for. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $iQuery              - (0-148) The Query to retrieve the command for. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -401,7 +401,7 @@ EndFunc   ;==>__LOBase_DatabaseMetaGetQuery
 ; Name ..........: __LOBase_InternalComErrorHandler
 ; Description ...: ComError Handler
 ; Syntax ........: __LOBase_InternalComErrorHandler(ByRef $oComError)
-; Parameters ....: $oComError           - [in/out] an object. The Com Error Object passed by Autoit.Error.
+; Parameters ....: $oComError           - The Com Error Object passed by Autoit.Error.
 ; Return values .: None
 ; Author ........: mLipok
 ; Modified ......: donnyh13 - Added parameters option. Also added MsgBox & ConsoleWrite options.
@@ -461,8 +461,8 @@ EndFunc   ;==>__LOBase_InternalComErrorHandler
 ; Name ..........: __LOBase_ReportConIdentify
 ; Description ...: Identify the type of Control being called, or return the Service name of a control type.
 ; Syntax ........: __LOBase_ReportConIdentify($oControl[, $iControlType = Null])
-; Parameters ....: $oControl            - an object. A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $iControlType        - [optional] an integer value (1-32). Default is Null. The Control Type Constant. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+; Parameters ....: $oControl            - A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $iControlType        - [optional] (1-32) Default is Null. The Control Type Constant. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Integer or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -507,8 +507,8 @@ EndFunc   ;==>__LOBase_ReportConIdentify
 ; Name ..........: __LOBase_ReportConSetGetFontDesc
 ; Description ...: Set or Retrieve a Control's Font values.
 ; Syntax ........: __LOBase_ReportConSetGetFontDesc(ByRef $oControl[, $mFontDesc = Null])
-; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
-;                  $mFontDesc           - [optional] a map. Default is Null. A Font descriptor Map returned by a previous _LOBase_FontDescCreate or _LOBase_FontDescEdit function.
+; Parameters ....: $oControl            - A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
+;                  $mFontDesc           - [optional] Default is Null. A Font descriptor Map returned by a previous _LOBase_FontDescCreate or _LOBase_FontDescEdit function.
 ; Return values .: Success: 1 or Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
