@@ -100,6 +100,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added missing error values and corrected wrong error values listed in the headers.
 - Reworded Color terminology.
 - Reworded measurement terminology.
+- Removed "[in/out]", and parameter descriptions, such a "a string vale", from Header parameter descriptions for chm compatibility.
 
 #### Fixed
 
@@ -489,6 +490,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOBase_DocOpen` Header Syntax contained one incorrect parameter.
 - Fix incorrect Constant name in `_LOBase_ReportConImageConData` header.
 - Added missing "See Constants" to applicable variables in headers.
+- Removed "[in/out]", and parameter descriptions, such a "a string vale", from Header parameter descriptions for chm compatibility.
 
 #### Fixed
 
@@ -1326,6 +1328,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOCalc_CellOverLine
   - __LOCalc_CellUnderLine
 - Added missing "See Constants" to applicable variables in headers.
+- Removed "[in/out]", and parameter descriptions, such a "a string vale", from Header parameter descriptions for chm compatibility.
 
 #### Fixed
 
@@ -2367,6 +2370,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_FormConPushButtonGeneral` Removed duplicated parameter in Header Parameter description.
 - Added LibreOffice SDK/API Constant names to constants.
 - Added missing "See Constants" to applicable variables in headers.
+- Removed "[in/out]", and parameter descriptions, such a "a string vale", from Header parameter descriptions for chm compatibility.
 
 #### Fixed
 

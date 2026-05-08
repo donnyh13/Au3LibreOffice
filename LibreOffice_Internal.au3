@@ -38,9 +38,9 @@
 ; Name ..........: __LO_AddTo1DArray
 ; Description ...: Add data to a 1 Dimensional array.
 ; Syntax ........: __LO_AddTo1DArray(ByRef $aArray, $vData[, $bCountInFirst = False])
-; Parameters ....: $aArray              - [in/out] an array of unknowns. The Array to directly add data to. Array will be directly modified.
-;                  $vData               - a variant value. The Data to add to the Array.
-;                  $bCountInFirst       - [optional] a boolean value. Default is False. If True the first element of the array is a count of contained elements.
+; Parameters ....: $aArray              - The Array to directly add data to. Array will be directly modified.
+;                  $vData               - The Data to add to the Array.
+;                  $bCountInFirst       - [optional] Default is False. If True the first element of the array is a count of contained elements.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -82,39 +82,39 @@ EndFunc   ;==>__LO_AddTo1DArray
 ; Name ..........: __LO_ArrayFill
 ; Description ...: Fill an Array with data.
 ; Syntax ........: __LO_ArrayFill(ByRef $aArrayToFill[, $vVar1 = Null[, $vVar2 = Null[, $vVar3 = Null[, $vVar4 = Null[, $vVar5 = Null[, $vVar6 = Null[, $vVar7 = Null[, $vVar8 = Null[, $vVar9 = Null[, $vVar10 = Null[, $vVar11 = Null[, $vVar12 = Null[, $vVar13 = Null[, $vVar14 = Null[, $vVar15 = Null[, $vVar16 = Null[, $vVar17 = Null[, $vVar18 = Null[, $vVar19 = Null[, $vVar20 = Null[, $vVar21 = Null[, $vVar22 = Null[, $vVar23 = Null[, $vVar24 = Null[, $vVar25 = Null[, $vVar26 = Null[, $vVar27 = Null[, $vVar28 = Null[, $vVar29 = Null[, $vVar30 = Null[, $vVar31 = Null[, $vVar32 = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $aArrayToFill        - [in/out] an array of unknowns. The Array to Fill. Array will be directly modified.
-;                  $vVar1               - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar2               - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar3               - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar4               - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar5               - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar6               - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar7               - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar8               - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar9               - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar10              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar11              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar12              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar13              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar14              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar15              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar16              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar17              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar18              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar19              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar20              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar21              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar22              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar23              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar24              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar25              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar26              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar27              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar28              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar29              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar30              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar31              - [optional] a variant value. Default is Null. The Data to add to the Array.
-;                  $vVar32              - [optional] a variant value. Default is Null. The Data to add to the Array.
+; Parameters ....: $aArrayToFill        - The Array to Fill. Array will be directly modified.
+;                  $vVar1               - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar2               - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar3               - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar4               - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar5               - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar6               - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar7               - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar8               - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar9               - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar10              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar11              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar12              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar13              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar14              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar15              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar16              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar17              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar18              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar19              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar20              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar21              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar22              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar23              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar24              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar25              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar26              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar27              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar28              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar29              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar30              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar31              - [optional] Default is Null. The Data to add to the Array.
+;                  $vVar32              - [optional] Default is Null. The Data to add to the Array.
 ; Return values .: None
 ; Author ........: donnyh13
 ; Modified ......:
@@ -136,7 +136,7 @@ EndFunc   ;==>__LO_ArrayFill
 ; Name ..........: __LO_CreateStruct
 ; Description ...: Retrieves a Struct.
 ; Syntax ........: __LO_CreateStruct($sStructName)
-; Parameters ....: $sStructName         - a string value. Name of structure to create.
+; Parameters ....: $sStructName         - Name of structure to create.
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -174,7 +174,7 @@ EndFunc   ;==>__LO_CreateStruct
 ; Name ..........: __LO_DeleteTempReg
 ; Description ...: Delete Temporary Registry entries used for connecting to Portable LO.
 ; Syntax ........: __LO_DeleteTempReg([$asRegKeys = Null])
-; Parameters ....: $asRegKeys           - [optional] an array of strings. Default is Null. An array of Registry keys to Delete.
+; Parameters ....: $asRegKeys           - [optional] Default is Null. An array of Registry keys to Delete.
 ; Return values .: Success: 1, 2
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -216,7 +216,7 @@ EndFunc   ;==>__LO_DeleteTempReg
 ; Name ..........: __LO_InternalComErrorHandler
 ; Description ...: ComError Handler
 ; Syntax ........: __LO_InternalComErrorHandler(ByRef $oComError)
-; Parameters ....: $oComError           - [in/out] an object. The Com Error Object passed by Autoit.Error.
+; Parameters ....: $oComError           - The Com Error Object passed by Autoit.Error.
 ; Return values .: None
 ; Author ........: mLipok
 ; Modified ......: donnyh13 - Added parameters option. Also added MsgBox & ConsoleWrite options.
@@ -276,11 +276,11 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ; Name ..........: __LO_IntIsBetween
 ; Description ...: Test whether an input is an Integer and is between two Integers.
 ; Syntax ........: __LO_IntIsBetween($iTest, $iMin, $iMax[, $vNot = ""[, $vIncl = ""]])
-; Parameters ....: $iTest               - an integer value. The Value to test.
-;                  $iMin                - an integer value. The minimum $iTest can be.
-;                  $iMax                - [optional] an integer value. Default is 0. The maximum $iTest can be.
-;                  $vNot                - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
-;                  $vIncl               - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
+; Parameters ....: $iTest               - The Value to test.
+;                  $iMin                - The minimum $iTest can be.
+;                  $iMax                - [optional] Default is 0. The maximum $iTest can be.
+;                  $vNot                - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
+;                  $vIncl               - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
 ;                  Failure: False and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -335,8 +335,8 @@ EndFunc   ;==>__LO_IntIsBetween
 ; Name ..........: __LO_IsObjInvalid
 ; Description ...: Test if an Object has been deleted or closed definitely.
 ; Syntax ........: __LO_IsObjInvalid(ByRef $oObject[, $sTestMethod = "getCurrentController"])
-; Parameters ....: $oObject             - [in/out] an object. Any Object.
-;                  $sTestMethod         - [optional] a string value. Default is "getCurrentController". The Method or Property to try calling.
+; Parameters ....: $oObject             - Any Object.
+;                  $sTestMethod         - [optional] Default is "getCurrentController". The Method or Property to try calling.
 ; Return values .: Success: Boolean
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Object is not invalid. Else False.
@@ -366,11 +366,11 @@ EndFunc   ;==>__LO_IsObjInvalid
 ; Name ..........: __LO_NumIsBetween
 ; Description ...: Test whether an input is a Number and is between two Numbers.
 ; Syntax ........: __LO_NumIsBetween($nTest, $nMin[, $nMax = 0[, $vNot = ""[, $vIncl = ""]]])
-; Parameters ....: $nTest               - a general number value. The Value to test.
-;                  $nMin                - a general number value. The minimum $nTest can be.
-;                  $nMax                - [optional] a general number value. Default is 0. The maximum $nTest can be.
-;                  $vNot                - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
-;                  $vIncl               - [optional] a variant value. Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
+; Parameters ....: $nTest               - The Value to test.
+;                  $nMin                - The minimum $nTest can be.
+;                  $nMax                - [optional] Default is 0. The maximum $nTest can be.
+;                  $vNot                - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
+;                  $vIncl               - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
 ;                  Failure: False
 ;                  --Success--
@@ -423,8 +423,8 @@ EndFunc   ;==>__LO_NumIsBetween
 ; Name ..........: __LO_ServiceManager
 ; Description ...: Set or Retrieve a stored Service Manager Object for use in the UDF.
 ; Syntax ........: __LO_ServiceManager([$oServiceManager = Null[, $bPortable = Null]])
-; Parameters ....: $oServiceManager     - [optional] an object. Default is Null. A ServiceManager Object. Typically this is used to store a Portable Service Manager Object.
-;                  $bPortable           - [optional] a boolean value. Default is Null. If True, a Portable LibreOffice ServiceManager will be stored.
+; Parameters ....: $oServiceManager     - [optional] Default is Null. A ServiceManager Object. Typically this is used to store a Portable Service Manager Object.
+;                  $bPortable           - [optional] Default is Null. If True, a Portable LibreOffice ServiceManager will be stored.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -493,7 +493,7 @@ EndFunc   ;==>__LO_ServiceManager
 ; Name ..........: __LO_SetPortableServiceManager
 ; Description ...: Create and store a Portable LibreOffice ServiceManager Object.
 ; Syntax ........: __LO_SetPortableServiceManager([$sPortableLO_Path = Null])
-; Parameters ....: $sPortableLO_Path    - [optional] a string value. Default is Null. A path to the Portable LibreOffice soffice.exe file.
+; Parameters ....: $sPortableLO_Path    - [optional] Default is Null. A path to the Portable LibreOffice soffice.exe file.
 ; Return values .: Success: 1, 2
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -688,8 +688,8 @@ EndFunc   ;==>__LO_SetPortableServiceManager
 ; Name ..........: __LO_SetPropertyValue
 ; Description ...: Creates a property value struct object.
 ; Syntax ........: __LO_SetPropertyValue($sName, $vValue)
-; Parameters ....: $sName               - a string value. Property name.
-;                  $vValue              - a variant value. Property value.
+; Parameters ....: $sName               - Property name.
+;                  $vValue              - Property value.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -726,11 +726,11 @@ EndFunc   ;==>__LO_SetPropertyValue
 ; Name ..........: __LO_StylesGetNames
 ; Description ...: Retrieve an Array of Style names available.
 ; Syntax ........: __LO_StylesGetNames(ByRef $oDoc, $sStyleFamily[, $bUserOnly = False[, $bAppliedOnly = False[, $bDisplayName = False]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LO*_DocOpen, _LO*_DocConnect, or _LO*_DocCreate function.
-;                  $sStyleFamily        - a string value. The Style type to retrieve names for.
-;                  $bUserOnly           - [optional] a boolean value. Default is False. If True, only user-created Styles are returned.
-;                  $bAppliedOnly        - [optional] a boolean value. Default is False. If True, only applied styles are returned.
-;                  $bDisplayName        - [optional] a boolean value. Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LO*_DocOpen, _LO*_DocConnect, or _LO*_DocCreate function.
+;                  $sStyleFamily        - The Style type to retrieve names for.
+;                  $bUserOnly           - [optional] Default is False. If True, only user-created Styles are returned.
+;                  $bAppliedOnly        - [optional] Default is False. If True, only applied styles are returned.
+;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -844,7 +844,7 @@ EndFunc   ;==>__LO_StylesGetNames
 ; Name ..........: __LO_TestObjCOM
 ; Description ...: Catches the intentionally created COM error and does nothing.
 ; Syntax ........: __LO_TestObjCOM($oLOError)
-; Parameters ....: $oLOError            - an object. The COM error Object.
+; Parameters ....: $oLOError            - The COM error Object.
 ; Return values .: None
 ; Author ........: donnyh13
 ; Modified ......:
@@ -875,38 +875,38 @@ EndFunc   ;==>__LO_TestObjCOM
 ; Name ..........: __LO_VarsAreNull
 ; Description ...: Tests whether all input parameters are equal to Null keyword.
 ; Syntax ........: __LO_VarsAreNull($vVar1[, $vVar2 = Null[, $vVar3 = Null[, $vVar4 = Null[, $vVar5 = Null[, $vVar6 = Null[, $vVar7 = Null[, $vVar8 = Null[, $vVar9 = Null[, $vVar10 = Null[, $vVar11 = Null[, $vVar12 = Null[, $vVar13 = Null[, $vVar14 = Null[, $vVar15 = Null[, $vVar16 = Null[, $vVar17 = Null[, $vVar18 = Null[, $vVar19 = Null[, $vVar20 = Null[, $vVar21 = Null[, $vVar22 = Null[, $vVar23 = Null[, $vVar24 = Null[, $vVar25 = Null[, $vVar26 = Null[, $vVar27 = Null[, $vVar28 = Null[, $vVar29 = Null[, $vVar30 = Null[, $vVar31 = Null[, $vVar32 = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $vVar1               - a variant value.
-;                  $vVar2               - [optional] a variant value. Default is Null.
-;                  $vVar3               - [optional] a variant value. Default is Null.
-;                  $vVar4               - [optional] a variant value. Default is Null.
-;                  $vVar5               - [optional] a variant value. Default is Null.
-;                  $vVar6               - [optional] a variant value. Default is Null.
-;                  $vVar7               - [optional] a variant value. Default is Null.
-;                  $vVar8               - [optional] a variant value. Default is Null.
-;                  $vVar9               - [optional] a variant value. Default is Null.
-;                  $vVar10              - [optional] a variant value. Default is Null.
-;                  $vVar11              - [optional] a variant value. Default is Null.
-;                  $vVar12              - [optional] a variant value. Default is Null.
-;                  $vVar13              - [optional] a variant value. Default is Null.
-;                  $vVar14              - [optional] a variant value. Default is Null.
-;                  $vVar15              - [optional] a variant value. Default is Null.
-;                  $vVar16              - [optional] a variant value. Default is Null.
-;                  $vVar17              - [optional] a variant value. Default is Null.
-;                  $vVar18              - [optional] a variant value. Default is Null.
-;                  $vVar19              - [optional] a variant value. Default is Null.
-;                  $vVar20              - [optional] a variant value. Default is Null.
-;                  $vVar21              - [optional] a variant value. Default is Null.
-;                  $vVar22              - [optional] a variant value. Default is Null.
-;                  $vVar23              - [optional] a variant value. Default is Null.
-;                  $vVar24              - [optional] a variant value. Default is Null.
-;                  $vVar25              - [optional] a variant value. Default is Null.
-;                  $vVar26              - [optional] a variant value. Default is Null.
-;                  $vVar27              - [optional] a variant value. Default is Null.
-;                  $vVar28              - [optional] a variant value. Default is Null.
-;                  $vVar29              - [optional] a variant value. Default is Null.
-;                  $vVar30              - [optional] a variant value. Default is Null.
-;                  $vVar31              - [optional] a variant value. Default is Null.
-;                  $vVar32              - [optional] a variant value. Default is Null.
+; Parameters ....: $vVar1               - 
+;                  $vVar2               - [optional] Default is Null.
+;                  $vVar3               - [optional] Default is Null.
+;                  $vVar4               - [optional] Default is Null.
+;                  $vVar5               - [optional] Default is Null.
+;                  $vVar6               - [optional] Default is Null.
+;                  $vVar7               - [optional] Default is Null.
+;                  $vVar8               - [optional] Default is Null.
+;                  $vVar9               - [optional] Default is Null.
+;                  $vVar10              - [optional] Default is Null.
+;                  $vVar11              - [optional] Default is Null.
+;                  $vVar12              - [optional] Default is Null.
+;                  $vVar13              - [optional] Default is Null.
+;                  $vVar14              - [optional] Default is Null.
+;                  $vVar15              - [optional] Default is Null.
+;                  $vVar16              - [optional] Default is Null.
+;                  $vVar17              - [optional] Default is Null.
+;                  $vVar18              - [optional] Default is Null.
+;                  $vVar19              - [optional] Default is Null.
+;                  $vVar20              - [optional] Default is Null.
+;                  $vVar21              - [optional] Default is Null.
+;                  $vVar22              - [optional] Default is Null.
+;                  $vVar23              - [optional] Default is Null.
+;                  $vVar24              - [optional] Default is Null.
+;                  $vVar25              - [optional] Default is Null.
+;                  $vVar26              - [optional] Default is Null.
+;                  $vVar27              - [optional] Default is Null.
+;                  $vVar28              - [optional] Default is Null.
+;                  $vVar29              - [optional] Default is Null.
+;                  $vVar30              - [optional] Default is Null.
+;                  $vVar31              - [optional] Default is Null.
+;                  $vVar32              - [optional] Default is Null.
 ; Return values .: Success: Boolean
 ;                  Failure: False
 ;                  --Success--
@@ -950,7 +950,7 @@ EndFunc   ;==>__LO_VarsAreNull
 ; Name ..........: __LO_VersionCheck
 ; Description ...: Test if the currently installed LibreOffice version is high enough to support a certain function.
 ; Syntax ........: __LO_VersionCheck($fRequiredVersion)
-; Parameters ....: $fRequiredVersion    - a floating point value. The version of LibreOffice required.
+; Parameters ....: $fRequiredVersion    - The version of LibreOffice required.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

@@ -42,11 +42,11 @@
 ; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
 ; Syntax ........: _LO_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
 ; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
-;                  $vParam1             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam2             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam3             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam4             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam5             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam2             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam3             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam4             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam5             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ; Return values .: Success: 1 or UserFunction.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -122,10 +122,10 @@ EndFunc   ;==>_LO_ComError_UserFunction
 ; Name ..........: _LO_ConvertColorFromLong
 ; Description ...: Convert a RGB Color Integer to Hex, RGB, HSB or CMYK.
 ; Syntax ........: _LO_ConvertColorFromLong([$iHex = Null[, $iRGB = Null[, $iHSB = Null[, $iCMYK = Null]]]])
-; Parameters ....: $iHex                - [optional] an integer value. Default is Null. Convert a RGB Color Integer to Hexadecimal.
-;                  $iRGB                - [optional] an integer value. Default is Null. Convert a RGB Color Integer to R.G.B.
-;                  $iHSB                - [optional] an integer value. Default is Null. Convert a RGB Color Integer to H.S.B.
-;                  $iCMYK               - [optional] an integer value. Default is Null. Convert a RGB Color Integer to C.M.Y.K.
+; Parameters ....: $iHex                - [optional] Default is Null. Convert a RGB Color Integer to Hexadecimal.
+;                  $iRGB                - [optional] Default is Null. Convert a RGB Color Integer to R.G.B.
+;                  $iHSB                - [optional] Default is Null. Convert a RGB Color Integer to H.S.B.
+;                  $iCMYK               - [optional] Default is Null. Convert a RGB Color Integer to C.M.Y.K.
 ; Return values .: Success: String or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -268,10 +268,10 @@ EndFunc   ;==>_LO_ConvertColorFromLong
 ; Name ..........: _LO_ConvertColorToLong
 ; Description ...: Convert Hex, RGB, HSB or CMYK to a RGB Color Integer.
 ; Syntax ........: _LO_ConvertColorToLong([$vVal1 = Null[, $vVal2 = Null[, $vVal3 = Null[, $vVal4 = Null]]]])
-; Parameters ....: $vVal1               - [optional] a variant value. Default is Null. See remarks.
-;                  $vVal2               - [optional] a variant value. Default is Null. See remarks.
-;                  $vVal3               - [optional] a variant value. Default is Null. See remarks.
-;                  $vVal4               - [optional] a variant value. Default is Null. See remarks.
+; Parameters ....: $vVal1               - [optional] Default is Null. See remarks.
+;                  $vVal2               - [optional] Default is Null. See remarks.
+;                  $vVal3               - [optional] Default is Null. See remarks.
+;                  $vVal4               - [optional] Default is Null. See remarks.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -439,9 +439,9 @@ EndFunc   ;==>_LO_ConvertColorToLong
 ; Name ..........: _LO_DocConnect
 ; Description ...: Connect to an already opened instance of LibreOffice.
 ; Syntax ........: _LO_DocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT[, $sSearch = ""[, $bCaseless = False]]])
-; Parameters ....: $iMode               - [optional] an integer value (0-4). Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
-;                  $sSearch             - [optional] a string value. Default is "". The Name, Title or Path of the Document to search for. See remarks.
-;                  $bCaseless           - [optional] a boolean value. Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
+; Parameters ....: $iMode               - [optional] (0-4) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  $sSearch             - [optional] Default is "". The Name, Title or Path of the Document to search for. See remarks.
+;                  $bCaseless           - [optional] Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -587,7 +587,7 @@ EndFunc   ;==>_LO_DocConnect
 ; Name ..........: _LO_DocGetType
 ; Description ...: Identify the document's type.
 ; Syntax ........: _LO_DocGetType(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous Document Open, Connect, or Create function.
+; Parameters ....: $oDoc                - A Document object returned by a previous Document Open, Connect, or Create function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -769,10 +769,10 @@ EndFunc   ;==>_LO_DocGetType
 ; Name ..........: _LO_GradientMulticolorAdd
 ; Description ...: Add a ColorStop to a Gradient ColorStop Array.
 ; Syntax ........: _LO_GradientMulticolorAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
-;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iColor              - an integer value (0-16777215). The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $avColorStops        - A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
+;                  $nStopOffset         - (0-1.0) The ColorStop offset value.
+;                  $iColor              - (0-16777215) The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -825,8 +825,8 @@ EndFunc   ;==>_LO_GradientMulticolorAdd
 ; Name ..........: _LO_GradientMulticolorDelete
 ; Description ...: Delete a ColorStop from a Gradient ColorStop Array.
 ; Syntax ........: _LO_GradientMulticolorDelete(ByRef $avColorStops, $iIndex)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to delete. 0 Based.
+; Parameters ....: $avColorStops        - A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - The array index to delete. 0 Based.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -871,10 +871,10 @@ EndFunc   ;==>_LO_GradientMulticolorDelete
 ; Name ..........: _LO_GradientMulticolorModify
 ; Description ...: Modify a ColorStop in a Gradient ColorStop Array.
 ; Syntax ........: _LO_GradientMulticolorModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to modify. 0 Based.
-;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iColor              - an integer value (0-16777215). The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $avColorStops        - A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - The array index to modify. 0 Based.
+;                  $nStopOffset         - (0-1.0) The ColorStop offset value.
+;                  $iColor              - (0-16777215) The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -921,7 +921,7 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ; Name ..........: _LO_InitializePortable
 ; Description ...: Setup Portable LibreOffice (Or Open Office) for use in this UDF. See remarks.
 ; Syntax ........: _LO_InitializePortable($sOfficePortablePath)
-; Parameters ....: $sOfficePortablePath - a string value. The Path to the Portable LibreOffice/OpenOffice folder. See remarks.
+; Parameters ....: $sOfficePortablePath - The Path to the Portable LibreOffice/OpenOffice folder. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -985,8 +985,8 @@ EndFunc   ;==>_LO_InitializePortable
 ; Name ..........: _LO_PathConvert
 ; Description ...: Converts the input path to or from a LibreOffice URL notation path.
 ; Syntax ........: _LO_PathConvert($sFilePath[, $iReturnMode = $LO_PATHCONV_AUTO_RETURN])
-; Parameters ....: $sFilePath           - a string value. Full path to convert in String format.
-;                  $iReturnMode         - [optional] an integer value (0-2). Default is $__g_iAutoReturn. The type of path format to return. See Constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $sFilePath           - Full path to convert in String format.
+;                  $iReturnMode         - [optional] (0-2) Default is $__g_iAutoReturn. The type of path format to return. See Constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1060,7 +1060,7 @@ EndFunc   ;==>_LO_PathConvert
 ; Name ..........: _LO_PrintersGetNames
 ; Description ...: Enumerates all installed printers, or current default printer.
 ; Syntax ........: _LO_PrintersGetNames([$bDefaultOnly = False])
-; Parameters ....: $bDefaultOnly        - [optional] a boolean value. Default is False. If True, returns only the name of the current default printer. LibreOffice 6.3 and up only.
+; Parameters ....: $bDefaultOnly        - [optional] Default is False. If True, returns only the name of the current default printer. LibreOffice 6.3 and up only.
 ; Return values .: Success: An array or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1120,8 +1120,8 @@ EndFunc   ;==>_LO_PrintersGetNames
 ; Name ..........: _LO_PrintersGetNamesAlt
 ; Description ...: Alternate function; Enumerates all installed printers, or current default printer.
 ; Syntax ........: _LO_PrintersGetNamesAlt([$sPrinterName = ""[, $bReturnDefault = False]])
-; Parameters ....: $sPrinterName        - [optional] a string value. Default is "". Name of the printer to list. Default "" returns the list of all printers. See Remarks.
-;                  $bReturnDefault      - [optional] a boolean value. Default is False. If True, returns only the name of the current default printer.
+; Parameters ....: $sPrinterName        - [optional] Default is "". Name of the printer to list. Default "" returns the list of all printers. See Remarks.
+;                  $bReturnDefault      - [optional] Default is False. If True, returns only the name of the current default printer.
 ; Return values .: Success: Array or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1193,8 +1193,8 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ; Name ..........: _LO_Terminate
 ; Description ...: Closes the background instance of LibreOffice. See Remarks.
 ; Syntax ........: _LO_Terminate([$bForceClose = False[, $iSleep = 250]])
-; Parameters ....: $bForceClose         - [optional] a boolean value. Default is False. If True, any opened documents will be closed. See remarks.
-;                  $iSleep              - [optional] an integer value. Default is 250. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
+; Parameters ....: $bForceClose         - [optional] Default is False. If True, any opened documents will be closed. See remarks.
+;                  $iSleep              - [optional] Default is 250. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1243,10 +1243,10 @@ EndFunc   ;==>_LO_Terminate
 ; Name ..........: _LO_TransparencyGradientMultiAdd
 ; Description ...: Add a ColorStop to a Gradient ColorStop Array.
 ; Syntax ........: _LO_TransparencyGradientMultiAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
-;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iTransparency       - an integer value (0-100). The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $avColorStops        - A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - The array index to insert the color stop. 0 Based. Call the last element index plus 1 to insert at the end.
+;                  $nStopOffset         - (0-1.0) The ColorStop offset value.
+;                  $iTransparency       - (0-100) The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1299,8 +1299,8 @@ EndFunc   ;==>_LO_TransparencyGradientMultiAdd
 ; Name ..........: _LO_TransparencyGradientMultiDelete
 ; Description ...: Delete a ColorStop from a Gradient ColorStop Array.
 ; Syntax ........: _LO_TransparencyGradientMultiDelete(ByRef $avColorStops, $iIndex)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to delete. 0 Based.
+; Parameters ....: $avColorStops        - A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - The array index to delete. 0 Based.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1345,10 +1345,10 @@ EndFunc   ;==>_LO_TransparencyGradientMultiDelete
 ; Name ..........: _LO_TransparencyGradientMultiModify
 ; Description ...: Modify a ColorStop in a Gradient ColorStop Array.
 ; Syntax ........: _LO_TransparencyGradientMultiModify(ByRef $avColorStops, $iIndex, $nStopOffset, $iTransparency)
-; Parameters ....: $avColorStops        - [in/out] an array of variants. A two column array of ColorStops. Array will be directly modified.
-;                  $iIndex              - an integer value. The array index to modify. 0 Based.
-;                  $nStopOffset         - a general number value (0-1.0). The ColorStop offset value.
-;                  $iTransparency       - an integer value (0-100). The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $avColorStops        - A two column array of ColorStops. Array will be directly modified.
+;                  $iIndex              - The array index to modify. 0 Based.
+;                  $nStopOffset         - (0-1.0) The ColorStop offset value.
+;                  $iTransparency       - (0-100) The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1395,8 +1395,8 @@ EndFunc   ;==>_LO_TransparencyGradientMultiModify
 ; Name ..........: _LO_UnitConvert
 ; Description ...: For converting measurement units.
 ; Syntax ........: _LO_UnitConvert($nValue, $iReturnType)
-; Parameters ....: $nValue              - a general number value. The Number to be converted.
-;                  $iReturnType         - an Integer value (0-10). The conversion type to perform on $nValue. See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $nValue              - The Number to be converted.
+;                  $iReturnType         - (0-10) The conversion type to perform on $nValue. See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: Integer or Number.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1512,8 +1512,8 @@ EndFunc   ;==>_LO_UnitConvert
 ; Name ..........: _LO_VersionGet
 ; Description ...: Retrieve the current Office version.
 ; Syntax ........: _LO_VersionGet([$bSimpleVersion = False[, $bReturnName = False]])
-; Parameters ....: $bSimpleVersion      - [optional] a boolean value. Default is False. If True, returns a two digit version number, such as "7.3", else returns the complex version number, such as "7.3.2.4".
-;                  $bReturnName         - [optional] a boolean value. Default is True. If True returns the Program Name, such as "LibreOffice", appended by the version, i.e. "LibreOffice 7.3".
+; Parameters ....: $bSimpleVersion      - [optional] Default is False. If True, returns a two digit version number, such as "7.3", else returns the complex version number, such as "7.3.2.4".
+;                  $bReturnName         - [optional] Default is True. If True returns the Program Name, such as "LibreOffice", appended by the version, i.e. "LibreOffice 7.3".
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
