@@ -71,12 +71,12 @@
 ; Name ..........: _LOWriter_DirFrmtCharBorderColor
 ; Description ...: Set and Retrieve the Character Style Border Line Color by Direct Formatting. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_DirFrmtCharBorderColor(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Character Style as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Character Style as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Character Style as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Character Style as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of border, Width, Style and Color.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Character Style as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Character Style as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Character Style as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Character Style as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of border, Width, Style and Color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -149,13 +149,13 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderColor
 ; Name ..........: _LOWriter_DirFrmtCharBorderPadding
 ; Description ...: Set and retrieve the distance between the border and the characters by Direct Format. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_DirFrmtCharBorderPadding(ByRef $oSelection[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iAll                - [optional] an integer value. Default is Null. Set all four values to the same value. When used, all other parameters are ignored. In Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The Top border distance in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom border distance in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The left border distance in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right border distance in Hundredths of a Millimeter (HMM).
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of border padding, on all sides.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iAll                - [optional] Default is Null. Set all four values to the same value. When used, all other parameters are ignored. In Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The Top border distance in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom border distance in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The left border distance in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right border distance in Hundredths of a Millimeter (HMM).
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of border padding, on all sides.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -214,12 +214,12 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderPadding
 ; Name ..........: _LOWriter_DirFrmtCharBorderStyle
 ; Description ...: Set or Retrieve the Character Style Border Line style by Direct Format. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_DirFrmtCharBorderStyle(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Characters. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Characters. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Characters. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Characters. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of border, Width, Style and Color.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of border, Width, Style and Color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -292,12 +292,12 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderStyle
 ; Name ..........: _LOWriter_DirFrmtCharBorderWidth
 ; Description ...: Set and Retrieve the Character Style Border Line Width by Direct Formatting. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_DirFrmtCharBorderWidth(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of these constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of these constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of these constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of these constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of border, Width, Style and Color.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of these constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of these constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of these constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of these constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of border, Width, Style and Color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -366,12 +366,12 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderWidth
 ; Name ..........: _LOWriter_DirFrmtCharEffect
 ; Description ...: Set or Retrieve the Font Effect settings by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtCharEffect(ByRef $oSelection[, $iCase = Null[, $bHidden = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the Characters are hidden.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
-;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bHidden             - [optional] Default is Null. If True, the Characters are hidden.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
+;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -451,11 +451,11 @@ EndFunc   ;==>_LOWriter_DirFrmtCharEffect
 ; Name ..........: _LOWriter_DirFrmtCharPosition
 ; Description ...: Set and retrieve settings related to Sub/Super Script and relative size by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtCharPosition(ByRef $oSelection[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null[, $bClearDirFrmt = False]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iSuperScript        - [optional] an integer value (-1-100). Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
-;                  $iSubScript          - [optional] an integer value (-1-100). Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
-;                  $iRelativeSize       - [optional] an integer value (1-100). Default is Null. The size percentage relative to current font size.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Super/Sub Script settings.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iSuperScript        - [optional] (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
+;                  $iSubScript          - [optional] (-1-100) Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
+;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Super/Sub Script settings.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -510,10 +510,10 @@ EndFunc   ;==>_LOWriter_DirFrmtCharPosition
 ; Name ..........: _LOWriter_DirFrmtCharRotateScale
 ; Description ...: Set or retrieve the character rotational and Scale settings by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtCharRotateScale(ByRef $oSelection[, $iRotation = Null[, $iScaleWidth = Null[, $bRotateFitLine = Null]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
 ;                  $iRotation           - [optional] an integer value (0,90,270). Default is Null. Degrees to rotate the text.
-;                  $iScaleWidth         - [optional] an integer value (1-100). Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
-;                  $bRotateFitLine      - [optional] a boolean value. Default is Null. If True, Stretches or compresses the selected text so that it fits between the line that is above the text and the line that is below the text.
+;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
+;                  $bRotateFitLine      - [optional] Default is Null. If True, Stretches or compresses the selected text so that it fits between the line that is above the text and the line that is below the text.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -586,11 +586,11 @@ EndFunc   ;==>_LOWriter_DirFrmtCharRotateScale
 ; Name ..........: _LOWriter_DirFrmtCharShadow
 ; Description ...: Set and retrieve the Shadow for a Character Style by Direct Formatting. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_DirFrmtCharShadow(ByRef $oSelection[, $iLocation = Null[, $iColor = Null[, $iWidth = Null[, $bClearDirFrmt = False]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. Location of the shadow compared to the characters. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. Color of the shadow, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. See remarks.
-;                  $iWidth              - [optional] an integer value. Default is Null. Width of the shadow, set in Hundredths of a Millimeter (HMM).
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Character Shadow, Width, Color and Location.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iLocation           - [optional] (0-4) Default is Null. Location of the shadow compared to the characters. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iColor              - [optional] (0-16777215) Default is Null. Color of the shadow, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. See remarks.
+;                  $iWidth              - [optional] Default is Null. Width of the shadow, set in Hundredths of a Millimeter (HMM).
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Character Shadow, Width, Color and Location.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -648,9 +648,9 @@ EndFunc   ;==>_LOWriter_DirFrmtCharShadow
 ; Name ..........: _LOWriter_DirFrmtCharSpacing
 ; Description ...: Set and retrieve the spacing between characters (Kerning)by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtCharSpacing(ByRef $oSelection[, $bAutoKerning = Null[, $nKerning = Null]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
-;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
+;                  $nKerning            - [optional] (-2-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -712,8 +712,8 @@ EndFunc   ;==>_LOWriter_DirFrmtCharSpacing
 ; Name ..........: _LOWriter_DirFrmtClear
 ; Description ...: Clear any Direct formatting in a Cursor or Text Object.
 ; Syntax ........: _LOWriter_DirFrmtClear(ByRef $oDoc, ByRef $oSelection)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -782,10 +782,10 @@ EndFunc   ;==>_LOWriter_DirFrmtClear
 ; Name ..........: _LOWriter_DirFrmtFont
 ; Description ...: Set and Retrieve the Font Settings by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtFont(ByRef $oSelection[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $sFontName           - [optional] a string value. Default is Null. The Font Name to use.
-;                  $nFontSize           - [optional] a general number value. Default is Null. The new Font size.
-;                  $iPosture            - [optional] an integer value (0-5). Default is Null. Font Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $sFontName           - [optional] Default is Null. The Font Name to use.
+;                  $nFontSize           - [optional] Default is Null. The new Font size.
+;                  $iPosture            - [optional] (0-5) Default is Null. Font Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
 ;                  $iWeight             - [optional] an integer value (0, 50-200). Default is Null. Font Bold settings, see Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -862,10 +862,10 @@ EndFunc   ;==>_LOWriter_DirFrmtFont
 ; Name ..........: _LOWriter_DirFrmtFontColor
 ; Description ...: Set or retrieve the font color, transparency and highlighting by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtFontColor(ByRef $oSelection[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Font color, as a RGB Color Integer, Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
-;                  $iHighlight          - [optional] an integer value (-1-16777215). Default is Null. The highlight color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The Font color, as a RGB Color Integer, Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+;                  $iTransparency       - [optional] (0-100) Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
+;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -938,7 +938,7 @@ EndFunc   ;==>_LOWriter_DirFrmtFontColor
 ; Name ..........: _LOWriter_DirFrmtGetCurStyles
 ; Description ...: Retrieve the current Styles set for a selection of text.
 ; Syntax ........: _LOWriter_DirFrmtGetCurStyles(ByRef $oSelection)
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions that has data selected. Or a paragraph or paragraph section.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions that has data selected. Or a paragraph or paragraph section.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -973,10 +973,10 @@ EndFunc   ;==>_LOWriter_DirFrmtGetCurStyles
 ; Name ..........: _LOWriter_DirFrmtOverLine
 ; Description ...: Set and retrieve the OverLine settings by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtOverLine(ByRef $oSelection[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1043,13 +1043,13 @@ EndFunc   ;==>_LOWriter_DirFrmtOverLine
 ; Name ..........: _LOWriter_DirFrmtParAlignment
 ; Description ...: Set and Retrieve Alignment settings for a paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParAlignment(ByRef $oSelection[, $iHorAlign = Null[, $iVertAlign = Null[, $iLastLineAlign = Null[, $bExpandSingleWord = Null[, $bSnapToGrid = Null[, $iTxtDirection = Null]]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iHorAlign           - [optional] an integer value (0-3). Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOW_PAR_ALIGN_HOR_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iVertAlign          - [optional] an integer value (0-4). Default is Null. The Vertical alignment of the paragraph. See Constants, $LOW_PAR_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLastLineAlign      - [optional] an integer value (0-3). Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $bExpandSingleWord   - [optional] a boolean value. Default is Null. If True, and the last line of a justified paragraph consists of one word, the word is stretched to the width of the paragraph.
-;                  $bSnapToGrid         - [optional] a boolean value. Default is Null. If True, Aligns the paragraph to a text grid (if one is active).
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [LibreOffice Default is 4]
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOW_PAR_ALIGN_HOR_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iVertAlign          - [optional] (0-4) Default is Null. The Vertical alignment of the paragraph. See Constants, $LOW_PAR_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $bExpandSingleWord   - [optional] Default is Null. If True, and the last line of a justified paragraph consists of one word, the word is stretched to the width of the paragraph.
+;                  $bSnapToGrid         - [optional] Default is Null. If True, Aligns the paragraph to a text grid (if one is active).
+;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1138,9 +1138,9 @@ EndFunc   ;==>_LOWriter_DirFrmtParAlignment
 ; Name ..........: _LOWriter_DirFrmtParAreaColor
 ; Description ...: Set or Retrieve background color settings for a Paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParAreaColor(ByRef $oSelection[, $iBackColor = Null[, $bClearDirFrmt = False]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) to turn Background color off.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Background color.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) to turn Background color off.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Background color.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1193,7 +1193,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaColor
 ; Name ..........: _LOWriter_DirFrmtParAreaFillStyle
 ; Description ...: Retrieve what kind of background fill is active by Direct Formatting, if any.
 ; Syntax ........: _LOWriter_DirFrmtParAreaFillStyle(ByRef $oSelection)
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1237,20 +1237,20 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaFillStyle
 ; Name ..........: _LOWriter_DirFrmtParAreaGradient
 ; Description ...: Set or retrieve the Direct Formatting settings for Paragraph Background color Gradient.
 ; Syntax ........: _LOWriter_DirFrmtParAreaGradient(ByRef $oDoc, ByRef $oSelection[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null[, $bClearDirFrmt = False]]]]]]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $sGradientName       - [optional] a string value. Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The gradient type to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iIncrement          - [optional] an integer value (0, 3-256). Default is Null. The number of steps of color change. 0 = Automatic.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
-;                  $iFromColor          - [optional] an integer value (0-16777215). Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iToColor            - [optional] an integer value (0-16777215). Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iFromIntense        - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
-;                  $iToIntense          - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Background color.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
+;                  $iFromColor          - [optional] (0-16777215) Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iToColor            - [optional] (0-16777215) Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
+;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Background color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1334,8 +1334,8 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaGradient
 ; Name ..........: _LOWriter_DirFrmtParAreaGradientMulticolor
 ; Description ...: Set or retrieve a Paragraph's Direct Formatting Multicolor Gradient settings. See remarks.
 ; Syntax ........: _LOWriter_DirFrmtParAreaGradientMulticolor(ByRef $oSelection[, $avColorStops = Null])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1396,9 +1396,9 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaGradientMulticolor
 ; Name ..........: _LOWriter_DirFrmtParAreaTransparency
 ; Description ...: Set or retrieve Transparency settings for a Paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParAreaTransparency(ByRef $oSelection[, $iTransparency = Null[, $bClearDirFrmt = False]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Background color.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Background color.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1453,12 +1453,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaTransparency
 ; Name ..........: _LOWriter_DirFrmtParBorderColor
 ; Description ...: Set and Retrieve the Paragraph Style Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_DirFrmtParBorderColor(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of the Paragraph Border, Width, Style and Color.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Paragraph Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of the Paragraph Border, Width, Style and Color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1531,13 +1531,13 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderColor
 ; Name ..........: _LOWriter_DirFrmtParBorderPadding
 ; Description ...: Set or retrieve the Border Padding (spacing between the Paragraph and border) settings by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParBorderPadding(ByRef $oSelection[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iAll                - [optional] an integer value. Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Border padding related settings.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iAll                - [optional] Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Paragraph in Hundredths of a Millimeter (HMM).
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Border padding related settings.
 ; Return values .: Success: Integer or Array, see Remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1592,12 +1592,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderPadding
 ; Name ..........: _LOWriter_DirFrmtParBorderStyle
 ; Description ...: Set and retrieve the Paragraph Border Line style by Direct Formatting. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_DirFrmtParBorderStyle(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bClearDirFrmt = False]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of the Paragraph Border, Width, Style and Color.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of the Paragraph Border, Width, Style and Color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1670,13 +1670,13 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderStyle
 ; Name ..........: _LOWriter_DirFrmtParBorderWidth
 ; Description ...: Set and retrieve the Paragraph Border Line Width, or the Paragraph Connect Border option by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParBorderWidth(ByRef $oSelection[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $bConnectBorder = Null[, $bClearDirFrmt = False]]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
-;                  $bConnectBorder      - [optional] a boolean value. Default is Null. If True, borders set for a paragraph are merged with the next paragraph. Note: Borders are only merged if they are identical. LibreOffice Version 3.4 and Up.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of the Paragraph Border, Width, Style and Color. Doesn't clear $bConnectBorder. See Remarks.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Paragraph in Hundredths of a Millimeter (HMM). Can be a custom value of one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Version 3.4 and Up.
+;                  $bConnectBorder      - [optional] Default is Null. If True, borders set for a paragraph are merged with the next paragraph. Note: Borders are only merged if they are identical. LibreOffice Version 3.4 and Up.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of the Paragraph Border, Width, Style and Color. Doesn't clear $bConnectBorder. See Remarks.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1778,14 +1778,14 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderWidth
 ; Name ..........: _LOWriter_DirFrmtParDropCaps
 ; Description ...: Set or Retrieve DropCaps settings for a Paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParDropCaps(ByRef $oDoc, ByRef $oSelection[, $iNumChar = Null[, $iLines = Null[, $iSpcTxt = Null[, $bWholeWord = Null[, $sCharStyle = Null[, $bClearDirFrmt = False]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oSelection          - [in/out] an object. an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iNumChar            - [optional] an integer value (0-9). Default is Null. The number of characters to make into DropCaps.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oSelection          - an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iNumChar            - [optional] (0-9) Default is Null. The number of characters to make into DropCaps.
 ;                  $iLines              - [optional] an integer value (0,2-9). Default is Null. The number of lines to drop down.
-;                  $iSpcTxt             - [optional] an integer value. Default is Null. The distance between the drop cap and the following text. In Hundredths of a Millimeter (HMM).
-;                  $bWholeWord          - [optional] a boolean value. Default is Null. If True, DropCap the whole first word. (Nullifys $iNumChar.)
-;                  $sCharStyle          - [optional] a string value. Default is Null. The character style to use for the DropCaps. See Remarks.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of DropCaps and related settings.
+;                  $iSpcTxt             - [optional] Default is Null. The distance between the drop cap and the following text. In Hundredths of a Millimeter (HMM).
+;                  $bWholeWord          - [optional] Default is Null. If True, DropCap the whole first word. (Nullifys $iNumChar.)
+;                  $sCharStyle          - [optional] Default is Null. The character style to use for the DropCaps. See Remarks.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of DropCaps and related settings.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1847,13 +1847,13 @@ EndFunc   ;==>_LOWriter_DirFrmtParDropCaps
 ; Name ..........: _LOWriter_DirFrmtParHyphenation
 ; Description ...: Set or Retrieve Hyphenation settings for a paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParHyphenation(ByRef $oSelection[, $bAutoHyphen = Null[, $bHyphenNoCaps = Null[, $iMaxHyphens = Null[, $iMinLeadingChar = Null[, $iMinTrailingChar = Null[, $bClearDirFrmt = False]]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $bAutoHyphen         - [optional] a boolean value. Default is Null. If True, automatic hyphenation is applied.
-;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. Setting to True will disable hyphenation of words written in CAPS for this paragraph. LibreOffice 6.4 and up.
-;                  $iMaxHyphens         - [optional] an integer value (0-99). Default is Null. The maximum number of consecutive hyphens.
-;                  $iMinLeadingChar     - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied).
-;                  $iMinTrailingChar    - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied).
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Hyphenation.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $bAutoHyphen         - [optional] Default is Null. If True, automatic hyphenation is applied.
+;                  $bHyphenNoCaps       - [optional] Default is Null. Setting to True will disable hyphenation of words written in CAPS for this paragraph. LibreOffice 6.4 and up.
+;                  $iMaxHyphens         - [optional] (0-99) Default is Null. The maximum number of consecutive hyphens.
+;                  $iMinLeadingChar     - [optional] (2-9) Default is Null. Specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied).
+;                  $iMinTrailingChar    - [optional] (2-9) Default is Null. Specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied).
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Hyphenation.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1911,12 +1911,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParHyphenation
 ; Name ..........: _LOWriter_DirFrmtParIndent
 ; Description ...: Set or Retrieve Indent settings for a Paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParIndent(ByRef $oSelection[, $iBeforeTxt = Null[, $iAfterTxt = Null[, $iFirstLine = Null[, $bAutoFirstLine = Null[, $bClearDirFrmt = False]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iBeforeTxt          - [optional] an integer value (-9998989-17094). Default is Null. The amount of space that you want to indent the paragraph from the page margin. If you want the paragraph to extend into the page margin, enter a negative number. Set in Hundredths of a Millimeter (HMM).
-;                  $iAfterTxt           - [optional] an integer value (-9998989-17094). Default is Null. The amount of space that you want to indent the paragraph from the page margin. If you want the paragraph to extend into the page margin, enter a negative number. Set in Hundredths of a Millimeter (HMM).
-;                  $iFirstLine          - [optional] an integer value (-57785-17904). Default is Null. Indents the first line of a paragraph by the amount that you enter. Set in Hundredths of a Millimeter (HMM).
-;                  $bAutoFirstLine      - [optional] a boolean value. Default is Null. If True, the first line will be indented automatically.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Indent related settings.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iBeforeTxt          - [optional] (-9998989-17094) Default is Null. The amount of space that you want to indent the paragraph from the page margin. If you want the paragraph to extend into the page margin, enter a negative number. Set in Hundredths of a Millimeter (HMM).
+;                  $iAfterTxt           - [optional] (-9998989-17094) Default is Null. The amount of space that you want to indent the paragraph from the page margin. If you want the paragraph to extend into the page margin, enter a negative number. Set in Hundredths of a Millimeter (HMM).
+;                  $iFirstLine          - [optional] (-57785-17904) Default is Null. Indents the first line of a paragraph by the amount that you enter. Set in Hundredths of a Millimeter (HMM).
+;                  $bAutoFirstLine      - [optional] Default is Null. If True, the first line will be indented automatically.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Indent related settings.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1973,12 +1973,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParIndent
 ; Name ..........: _LOWriter_DirFrmtParOutLineAndList
 ; Description ...: Set and Retrieve the Outline and List settings for a paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParOutLineAndList(ByRef $oDoc, ByRef $oSelection[, $iOutline = Null[, $sNumStyle = Null[, $bParLineCount = Null[, $iLineCountVal = Null]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iOutline            - [optional] an integer value (0-10). Default is Null. The Outline Level, see Constants, $LOW_PAR_OUTLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sNumStyle           - [optional] a string value. Default is Null. The name of the Numbering Style for the Paragraph numbering. Call with "" for None.
-;                  $bParLineCount       - [optional] a boolean value. Default is Null. If True, the paragraph is included in the line numbering.
-;                  $iLineCountVal       - [optional] an integer value. Default is Null. The start value for numbering if a new numbering starts at this paragraph. Call with 0 for no line numbering restart.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iOutline            - [optional] (0-10) Default is Null. The Outline Level, see Constants, $LOW_PAR_OUTLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sNumStyle           - [optional] Default is Null. The name of the Numbering Style for the Paragraph numbering. Call with "" for None.
+;                  $bParLineCount       - [optional] Default is Null. If True, the paragraph is included in the line numbering.
+;                  $iLineCountVal       - [optional] Default is Null. The start value for numbering if a new numbering starts at this paragraph. Call with 0 for no line numbering restart.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2056,12 +2056,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParOutLineAndList
 ; Name ..........: _LOWriter_DirFrmtParPageBreak
 ; Description ...: Set or Retrieve Page Break Settings for a Paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParPageBreak(ByRef $oDoc, ByRef $oSelection[, $iBreakType = Null[, $sPageStyle = Null[, $iPgNumOffSet = Null[, $bClearDirFrmt = False]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iBreakType          - [optional] an integer value (0-6). Default is Null. The Page Break Type. See Constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sPageStyle          - [optional] a string value. Default is Null. Creates a page break before the paragraph it belongs to and assigns the new page style to use. Note: If you set this parameter, to remove the page break setting you must set this to "".
-;                  $iPgNumOffSet        - [optional] an integer value. Default is Null. If a page break property is set at a paragraph, this property contains the new value for the page number.
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Page Break, including Type, Number offset and Page Style. See Remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iBreakType          - [optional] (0-6) Default is Null. The Page Break Type. See Constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sPageStyle          - [optional] Default is Null. Creates a page break before the paragraph it belongs to and assigns the new page style to use. Note: If you set this parameter, to remove the page break setting you must set this to "".
+;                  $iPgNumOffSet        - [optional] Default is Null. If a page break property is set at a paragraph, this property contains the new value for the page number.
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Page Break, including Type, Number offset and Page Style. See Remarks.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2123,11 +2123,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParPageBreak
 ; Name ..........: _LOWriter_DirFrmtParShadow
 ; Description ...: Set or Retrieve the Shadow settings for a Paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParShadow(ByRef $oSelection[, $iLocation = Null[, $iColor = Null[, $iWidth = Null[, $bClearDirFrmt = False]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The location of the shadow compared to the paragraph. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The color of the shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the shadow set in Hundredths of a Millimeter (HMM).
-;                  $bClearDirFrmt       - [optional] a boolean value. Default is False. If True, clears ALL direct formatting of Shadow Width, Color and Location.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iLocation           - [optional] (0-4) Default is Null. The location of the shadow compared to the paragraph. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The color of the shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The width of the shadow set in Hundredths of a Millimeter (HMM).
+;                  $bClearDirFrmt       - [optional] Default is False. If True, clears ALL direct formatting of Shadow Width, Color and Location.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2182,13 +2182,13 @@ EndFunc   ;==>_LOWriter_DirFrmtParShadow
 ; Name ..........: _LOWriter_DirFrmtParSpace
 ; Description ...: Set and Retrieve Line Spacing settings for a paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParSpace(ByRef $oSelection[, $iAbovePar = Null[, $iBelowPar = Null[, $bAddSpace = Null[, $iLineSpcMode = Null[, $iLineSpcHeight = Null[, $bPageLineSpc = Null]]]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iAbovePar           - [optional] an integer value (0-10008). Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $iBelowPar           - [optional] an integer value (0-10008). Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. LibreOffice 3.6 and Up.
-;                  $iLineSpcMode        - [optional] an integer value (0-3). Default is Null. The type of the line spacing of a paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3. Also notice min and max values for each.
-;                  $iLineSpcHeight      - [optional] an integer value. Default is Null. This value specifies the spacing of the lines. See Remarks for Minimum and Max values.
-;                  $bPageLineSpc        - [optional] a boolean value. Default is Null. If True, register mode is applied to the paragraph. See Remarks.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iAbovePar           - [optional] (0-10008) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
+;                  $iBelowPar           - [optional] (0-10008) Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
+;                  $bAddSpace           - [optional] Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. LibreOffice 3.6 and Up.
+;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The type of the line spacing of a paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3. Also notice min and max values for each.
+;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the spacing of the lines. See Remarks for Minimum and Max values.
+;                  $bPageLineSpc        - [optional] Default is Null. If True, register mode is applied to the paragraph. See Remarks.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2288,11 +2288,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParSpace
 ; Name ..........: _LOWriter_DirFrmtParTabStopCreate
 ; Description ...: Create a new TabStop for a Paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParTabStopCreate(ByRef $oSelection, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iPosition           - an integer value. The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] an integer value (0-4). Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOW_PAR_TAB_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iDecChar            - [optional] an integer value. Default is Null. Enter a character(in Asc Value (See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOW_PAR_TAB_ALIGN_DECIMAL.
-;                  $iFillChar           - [optional] an integer value. Default is Null. The Asc value (see AutoIt function) of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iPosition           - The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOW_PAR_TAB_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value (See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOW_PAR_TAB_ALIGN_DECIMAL.
+;                  $iFillChar           - [optional] Default is Null. The Asc value (see AutoIt function) of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2343,9 +2343,9 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopCreate
 ; Name ..........: _LOWriter_DirFrmtParTabStopDelete
 ; Description ...: Delete a TabStop from a Paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParTabStopDelete(ByRef $oDoc, ByRef $oSelection, $iTabStop)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iTabStop            - an integer value. The TabStop position of the TabStop to modify. See Remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iTabStop            - The TabStop position of the TabStop to modify. See Remarks.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2383,12 +2383,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopDelete
 ; Name ..........: _LOWriter_DirFrmtParTabStopMod
 ; Description ...: Modify or retrieve the properties of an existing TabStop in a Paragraph from Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParTabStopMod(ByRef $oSelection, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $iTabStop            - an integer value. The TabStop position of the TabStop to modify. See Remarks.
-;                  $iPosition           - [optional] an integer value. Default is Null. The New position to set the TabStop called in $iTabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] an integer value (0-4). Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOW_PAR_TAB_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iDecChar            - [optional] an integer value. Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOW_PAR_TAB_ALIGN_DECIMAL.
-;                  $iFillChar           - [optional] an integer value. Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $iTabStop            - The TabStop position of the TabStop to modify. See Remarks.
+;                  $iPosition           - [optional] Default is Null. The New position to set the TabStop called in $iTabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOW_PAR_TAB_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOW_PAR_TAB_ALIGN_DECIMAL.
+;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2455,7 +2455,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopMod
 ; Name ..........: _LOWriter_DirFrmtParTabStopsGetList
 ; Description ...: Retrieve an array of TabStops available in a Paragraph from Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParTabStopsGetList(ByRef $oSelection)
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2487,9 +2487,9 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopsGetList
 ; Name ..........: _LOWriter_DirFrmtParTxtFlowOpt
 ; Description ...: Set and Retrieve Text Flow settings for a Paragraph by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParTxtFlowOpt(ByRef $oSelection[, $bParSplit = Null[, $bKeepTogether = Null[, $iParOrphans = Null[, $iParWidows = Null]]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
-;                  $bParSplit           - [optional] a boolean value. Default is Null. If False, prevents the paragraph from getting split between two pages or columns
-;                  $bKeepTogether       - [optional] a boolean value. Default is Null. If True, prevents page or column breaks between this and the following paragraph
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
+;                  $bParSplit           - [optional] Default is Null. If False, prevents the paragraph from getting split between two pages or columns
+;                  $bKeepTogether       - [optional] Default is Null. If True, prevents page or column breaks between this and the following paragraph
 ;                  $iParOrphans         - [optional] an integer value(0,2-9). Default is Null. Specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = disabled.
 ;                  $iParWidows          - [optional] an integer value(0,2-9). Default is Null. Specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = disabled.
 ; Return values .: Success: Integer or Array.
@@ -2565,9 +2565,9 @@ EndFunc   ;==>_LOWriter_DirFrmtParTxtFlowOpt
 ; Name ..........: _LOWriter_DirFrmtStrikeOut
 ; Description ...: Set or Retrieve the StrikeOut settings by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtStrikeOut(ByRef $oSelection[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strikes out words only and skip whitespaces.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bWordOnly           - [optional] Default is Null. If True, strikes out words only and skip whitespaces.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2628,10 +2628,10 @@ EndFunc   ;==>_LOWriter_DirFrmtStrikeOut
 ; Name ..........: _LOWriter_DirFrmtUnderLine
 ; Description ...: Set and retrieve the Underline settings by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtUnderLine(ByRef $oSelection[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oSelection          - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The style of the Underline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The style of the Underline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iULColor            - [optional] (-1-16777215) Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

@@ -81,8 +81,8 @@
 ; Name ..........: _LOWriter_TableBackColor
 ; Description ...: Set or Retrieve the Background color of a Table.
 ; Syntax ........: _LOWriter_TableBackColor(ByRef $oTable[, $iBackColor = Null])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Table background color, as a RGB Color Integer. See Remarks. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for no background color.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Table background color, as a RGB Color Integer. See Remarks. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for no background color.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -131,13 +131,13 @@ EndFunc   ;==>_LOWriter_TableBackColor
 ; Name ..........: _LOWriter_TableBorderColor
 ; Description ...: Set or Retrieve the Table Border Line Color. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOWriter_TableBorderColor(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iVert               - [optional] an integer value (0-16777215). Default is Null. The Vertical Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iHori               - [optional] an integer value (0-16777215). Default is Null. The Horizontal Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iVert               - [optional] (0-16777215) Default is Null. The Vertical Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iHori               - [optional] (0-16777215) Default is Null. The Horizontal Border Line Color of the Table, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -201,11 +201,11 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ; Name ..........: _LOWriter_TableBorderPadding
 ; Description ...: Set or retrieve the Border Padding (spacing between the Table text and border) settings.
 ; Syntax ........: _LOWriter_TableBorderPadding(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Table contents in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Table contents in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Distance between the Border and Table contents in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Distance between the Border and Table contents in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Table contents in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Table contents in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Table contents in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Table contents in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -295,7 +295,7 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 ; Name ..........: _LOWriter_TableBorderStyle
 ; Description ...: Set or Retrieve the Table Border Line style. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOWriter_TableBorderStyle(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Table. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Table. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Table. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -365,13 +365,13 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 ; Name ..........: _LOWriter_TableBorderWidth
 ; Description ...: Set or Retrieve the Table Border Line Width. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOWriter_TableBorderWidth(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVert               - [optional] an integer value. Default is Null. The Internal Vertical Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iHori               - [optional] an integer value. Default is Null. The Internal Horizontal Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVert               - [optional] Default is Null. The Internal Vertical Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iHori               - [optional] Default is Null. The Internal Horizontal Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -429,11 +429,11 @@ EndFunc   ;==>_LOWriter_TableBorderWidth
 ; Name ..........: _LOWriter_TableBreak
 ; Description ...: Set or retrieve the Paragraph break settings for before or after the Table.
 ; Syntax ........: _LOWriter_TableBreak(ByRef $oDoc, ByRef $oTable[, $iBreakType = Null[, $sPageStyle = Null[, $iPgNumOffSet = Null]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iBreakType          - [optional] an integer value (0-6). Default is Null. The Type of break to insert, see constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sPageStyle          - [optional] a string value. Default is Null. The New Page Style to begin with after the paragraph break. If Set, to remove the break you must set this to "".
-;                  $iPgNumOffSet        - [optional] an integer value. Default is Null. If a page break property is set at the table, this property contains the new value for the page number.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iBreakType          - [optional] (0-6) Default is Null. The Type of break to insert, see constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sPageStyle          - [optional] Default is Null. The New Page Style to begin with after the paragraph break. If Set, to remove the break you must set this to "".
+;                  $iPgNumOffSet        - [optional] Default is Null. If a page break property is set at the table, this property contains the new value for the page number.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -506,8 +506,8 @@ EndFunc   ;==>_LOWriter_TableBreak
 ; Name ..........: _LOWriter_TableCellBackColor
 ; Description ...: Set and Retrieve the Background color of a Cell or Cell Range.
 ; Syntax ........: _LOWriter_TableCellBackColor(ByRef $oCell[, $iBackColor = Null])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. Specify the Cell background color as a RGB Color Integer. Call with $LO_COLOR_OFF(-1) to disable Background color. Can also be one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. Specify the Cell background color as a RGB Color Integer. Call with $LO_COLOR_OFF(-1) to disable Background color. Can also be one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -556,11 +556,11 @@ EndFunc   ;==>_LOWriter_TableCellBackColor
 ; Name ..........: _LOWriter_TableCellBorderColor
 ; Description ...: Set the Cell or Cell Range Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_TableCellBorderColor(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -616,11 +616,11 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ; Name ..........: _LOWriter_TableCellBorderPadding
 ; Description ...: Set or retrieve the Border Padding (spacing between the Cell text and border) settings.
 ; Syntax ........: _LOWriter_TableCellBorderPadding(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -696,7 +696,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderPadding
 ; Name ..........: _LOWriter_TableCellBorderStyle
 ; Description ...: Set or Retrieve the Cell or Cell Range Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_TableCellBorderStyle(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -756,11 +756,11 @@ EndFunc   ;==>_LOWriter_TableCellBorderStyle
 ; Name ..........: _LOWriter_TableCellBorderWidth
 ; Description ...: Set or Retrieve the Cell or Cell Range Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_TableCellBorderWidth(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -812,7 +812,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderWidth
 ; Name ..........: _LOWriter_TableCellCreateTextCursor
 ; Description ...: Create a Text Cursor in a particular cell for inserting text etc.
 ; Syntax ........: _LOWriter_TableCellCreateTextCursor(ByRef $oCell)
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ; Return values .: Success: An Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -848,8 +848,8 @@ EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 ; Name ..........: _LOWriter_TableCellFormula
 ; Description ...: Set or retrieve a formula for a cell.
 ; Syntax ........: _LOWriter_TableCellFormula(ByRef $oCell[, $sFormula = Null])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $sFormula            - [optional] a string value. Default is Null. The Formula to set the Cell to.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+;                  $sFormula            - [optional] Default is Null. The Formula to set the Cell to.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -903,7 +903,7 @@ EndFunc   ;==>_LOWriter_TableCellFormula
 ; Name ..........: _LOWriter_TableCellGetDataType
 ; Description ...: Get the Data type of a specific cell, see remarks.
 ; Syntax ........: _LOWriter_TableCellGetDataType(ByRef $oCell)
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -940,7 +940,7 @@ EndFunc   ;==>_LOWriter_TableCellGetDataType
 ; Name ..........: _LOWriter_TableCellGetError
 ; Description ...: Get the formula error Value.
 ; Syntax ........: _LOWriter_TableCellGetError(ByRef $oCell)
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -976,7 +976,7 @@ EndFunc   ;==>_LOWriter_TableCellGetError
 ; Name ..........: _LOWriter_TableCellGetName
 ; Description ...: Retrieve the current Cell's name.
 ; Syntax ........: _LOWriter_TableCellGetName(ByRef $oCell)
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ; Return values .: Success: A String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1012,8 +1012,8 @@ EndFunc   ;==>_LOWriter_TableCellGetName
 ; Name ..........: _LOWriter_TableCellProtect
 ; Description ...: Write-Protect a Cell
 ; Syntax ........: _LOWriter_TableCellProtect(ByRef $oCell[, $bProtect = Null])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $bProtect            - [optional] a boolean value. Default is Null. If True, cell is protected from being written to. See remarks.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+;                  $bProtect            - [optional] Default is Null. If True, cell is protected from being written to. See remarks.
 ; Return values .: Success: 1 Or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1064,7 +1064,7 @@ EndFunc   ;==>_LOWriter_TableCellProtect
 ; Name ..........: _LOWriter_TableCellsGetNames
 ; Description ...: Retrieve an array of all Cell names from a Table.
 ; Syntax ........: _LOWriter_TableCellsGetNames(ByRef $oTable)
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1098,8 +1098,8 @@ EndFunc   ;==>_LOWriter_TableCellsGetNames
 ; Name ..........: _LOWriter_TableCellString
 ; Description ...: Set or retrieve the current string for a cell.
 ; Syntax ........: _LOWriter_TableCellString(ByRef $oCell[, $sString = Null])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $sString             - [optional] a string value. Default is Null. The String of text to set the cell to.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+;                  $sString             - [optional] Default is Null. The String of text to set the cell to.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1151,8 +1151,8 @@ EndFunc   ;==>_LOWriter_TableCellString
 ; Name ..........: _LOWriter_TableCellValue
 ; Description ...: Set or retrieve a Numerical value to a Cell
 ; Syntax ........: _LOWriter_TableCellValue(ByRef $oCell[, $nValue = Null])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $nValue              - [optional] a general number value. Default is Null. The value to set the cell to.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+;                  $nValue              - [optional] Default is Null. The value to set the cell to.
 ; Return values .: Success: 1 or Number.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1206,8 +1206,8 @@ EndFunc   ;==>_LOWriter_TableCellValue
 ; Name ..........: _LOWriter_TableCellVertOrient
 ; Description ...: Set the Vertical Orientation of the Cell or Cell Range contents.
 ; Syntax ........: _LOWriter_TableCellVertOrient(ByRef $oCell[, $iVertOrient = Null])
-; Parameters ....: $oCell               - [in/out] an object. A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
-;                  $iVertOrient         - [optional] an integer value (0-3). Default is Null. A Vertical Orientation constant. $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+;                  $iVertOrient         - [optional] (0-3) Default is Null. A Vertical Orientation constant. $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1257,9 +1257,9 @@ EndFunc   ;==>_LOWriter_TableCellVertOrient
 ; Name ..........: _LOWriter_TableColumnDelete
 ; Description ...: Delete a column from a Text Table.
 ; Syntax ........: _LOWriter_TableColumnDelete(ByRef $oTable, $iColumn[, $iCount = 1])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iColumn             - an integer value. The Column to delete.
-;                  $iCount              - [optional] an integer value. Default is 1. Number of columns to delete starting at the column called in $iColumn and moving right.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iColumn             - The Column to delete.
+;                  $iCount              - [optional] Default is 1. Number of columns to delete starting at the column called in $iColumn and moving right.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1303,7 +1303,7 @@ EndFunc   ;==>_LOWriter_TableColumnDelete
 ; Name ..........: _LOWriter_TableColumnGetCount
 ; Description ...: Retrieves the number of Columns in a table.
 ; Syntax ........: _LOWriter_TableColumnGetCount(ByRef $oTable)
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1337,9 +1337,9 @@ EndFunc   ;==>_LOWriter_TableColumnGetCount
 ; Name ..........: _LOWriter_TableColumnInsert
 ; Description ...: Insert columns into a Text Table
 ; Syntax ........: _LOWriter_TableColumnInsert(ByRef $oTable, $iCount[, $iColumn = Null])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iCount              - an integer value. Number of columns to insert.
-;                  $iColumn             - [optional] an integer value. Default is Null. The column to insert columns after. See Remarks.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iCount              - Number of columns to insert.
+;                  $iColumn             - [optional] Default is Null. The column to insert columns after. See Remarks.
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1384,17 +1384,17 @@ EndFunc   ;==>_LOWriter_TableColumnInsert
 ; Name ..........: _LOWriter_TableCreate
 ; Description ...: Create and insert a Text Table into a document.
 ; Syntax ........: _LOWriter_TableCreate(ByRef $oDoc, ByRef $oCursor[, $iColumns = 2[, $iRows = 3[, $iBackColor = Null[, $sTableName = Null[, $bHeading = Null[, $sStyle = Null[, $bSplit = Null[, $bRepeatHeading = Null[, $iHeadingRows = Null]]]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
-;                  $iColumns            - [optional] an integer value. Default is 2. The number of columns to create the table with.
-;                  $iRows               - [optional] an integer value. Default is 3. The number of rows to create the table with.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Table background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF (-1) for no background color.
-;                  $sTableName          - [optional] a string value. Default is Null. The unique table name. If set to Null, the Table is automatically named.
-;                  $bHeading            - [optional] a boolean value. Default is Null. If True, the first row of a Table is a Heading row.
-;                  $sStyle              - [optional] a string value. Default is Null. The TableStyle to apply to the Table.
-;                  $bSplit              - [optional] a boolean value. Default is Null. If True, the table is allowed to split across two pages.
-;                  $bRepeatHeading      - [optional] a boolean value. Default is Null. If True, the Heading is repeated on each subsequent page.
-;                  $iHeadingRows        - [optional] an integer value. Default is Null. The number of rows to count as a Heading. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
+;                  $iColumns            - [optional] Default is 2. The number of columns to create the table with.
+;                  $iRows               - [optional] Default is 3. The number of rows to create the table with.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Table background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF (-1) for no background color.
+;                  $sTableName          - [optional] Default is Null. The unique table name. If set to Null, the Table is automatically named.
+;                  $bHeading            - [optional] Default is Null. If True, the first row of a Table is a Heading row.
+;                  $sStyle              - [optional] Default is Null. The TableStyle to apply to the Table.
+;                  $bSplit              - [optional] Default is Null. If True, the table is allowed to split across two pages.
+;                  $bRepeatHeading      - [optional] Default is Null. If True, the Heading is repeated on each subsequent page.
+;                  $iHeadingRows        - [optional] Default is Null. The number of rows to count as a Heading. See remarks.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1533,10 +1533,10 @@ EndFunc   ;==>_LOWriter_TableCreate
 ; Name ..........: _LOWriter_TableCreateCursor
 ; Description ...: Create a Table Cursor for modifying Text-Table properties.
 ; Syntax ........: _LOWriter_TableCreateCursor(ByRef $oDoc, $oTable[, $sCellName = ""[, $oCursor = Null]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oTable              - an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function. See remarks.
-;                  $sCellName           - [optional] a string value. Default is "". The Table Cell name to create a Text Table Cursor in. See Remarks.
-;                  $oCursor             - [optional] an object. Default is Null. A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function. See remarks.
+;                  $sCellName           - [optional] Default is "". The Table Cell name to create a Text Table Cursor in. See Remarks.
+;                  $oCursor             - [optional] Default is Null. A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1602,12 +1602,12 @@ EndFunc   ;==>_LOWriter_TableCreateCursor
 ; Name ..........: _LOWriter_TableCursor
 ; Description ...: Commands related to a Table Cursor.
 ; Syntax ........: _LOWriter_TableCursor(ByRef $oCursor[, $sGoToCellByName = Null[, $bSelect = False[, $bMergeRange = Null[, $iSplitRangeInto = Null[, $bSplitRangeHori = False]]]]])
-; Parameters ....: $oCursor             - [in/out] an object. A Table Cursor Object returned from a _LOWriter_TableCreateCursor function.
-;                  $sGoToCellByName     - [optional] a string value. Default is Null. Move the cursor to the cell with the specified name, Case Sensitive; See also $bSelect.
-;                  $bSelect             - [optional] a boolean value. Default is False. If True, selection is expanded when moving to a specific cell with $sGoToCellByName.
-;                  $bMergeRange         - [optional] a boolean value. Default is Null. Merge the selected range of cells.
-;                  $iSplitRangeInto     - [optional] an integer value. Default is Null. Create n new cells in each cell selected by the cursor. See also $bSplitRangeHori.
-;                  $bSplitRangeHori     - [optional] a boolean value. Default is False. If True, splits the selected cell or cell range horizontally, else, False for vertically.
+; Parameters ....: $oCursor             - A Table Cursor Object returned from a _LOWriter_TableCreateCursor function.
+;                  $sGoToCellByName     - [optional] Default is Null. Move the cursor to the cell with the specified name, Case Sensitive; See also $bSelect.
+;                  $bSelect             - [optional] Default is False. If True, selection is expanded when moving to a specific cell with $sGoToCellByName.
+;                  $bMergeRange         - [optional] Default is Null. Merge the selected range of cells.
+;                  $iSplitRangeInto     - [optional] Default is Null. Create n new cells in each cell selected by the cursor. See also $bSplitRangeHori.
+;                  $bSplitRangeHori     - [optional] Default is False. If True, splits the selected cell or cell range horizontally, else, False for vertically.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1669,8 +1669,8 @@ EndFunc   ;==>_LOWriter_TableCursor
 ; Name ..........: _LOWriter_TableDelete
 ; Description ...: Delete a table from the document.
 ; Syntax ........: _LOWriter_TableDelete(ByRef $oDoc, ByRef $oTable)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1712,8 +1712,8 @@ EndFunc   ;==>_LOWriter_TableDelete
 ; Name ..........: _LOWriter_TableExists
 ; Description ...: Check if a Document contains a Table by name.
 ; Syntax ........: _LOWriter_TableExists(ByRef $oDoc, $sTableName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or_LOWriter_DocCreate function.
-;                  $sTableName          - a string value. The Table name to search for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or_LOWriter_DocCreate function.
+;                  $sTableName          - The Table name to search for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1751,9 +1751,9 @@ EndFunc   ;==>_LOWriter_TableExists
 ; Name ..........: _LOWriter_TableGetCellObjByCursor
 ; Description ...: Retrieve a single Cell Object or a Cell Range by Cursor.
 ; Syntax ........: _LOWriter_TableGetCellObjByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCursor)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1824,9 +1824,9 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByCursor
 ; Name ..........: _LOWriter_TableGetCellObjByName
 ; Description ...: Retrieve a Cell Object or a Cell range by name.
 ; Syntax ........: _LOWriter_TableGetCellObjByName(ByRef $oTable, $sCellName[, $sToCellName = $sCellName])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $sCellName           - a string value. A Cell Name. Note: Case Sensitive. See remarks.
-;                  $sToCellName         - [optional] a string value. Default is $sCellName. The Cell name to end the Cell Range. Note: Case Sensitive.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $sCellName           - A Cell Name. Note: Case Sensitive. See remarks.
+;                  $sToCellName         - [optional] Default is $sCellName. The Cell name to end the Cell Range. Note: Case Sensitive.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1874,11 +1874,11 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByName
 ; Name ..........: _LOWriter_TableGetCellObjByPosition
 ; Description ...: Retrieve a Cell object or Cell Range by position. See Remarks
 ; Syntax ........: _LOWriter_TableGetCellObjByPosition(ByRef $oTable, $iColumn, $iRow[, $iToColumn = Null[, $iToRow = Null]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iColumn             - an integer value. The column the desired cell is located in, or where to start the the cell range from.
-;                  $iRow                - an integer value. The row the desired cell is located in, or where to start the the cell range from.
-;                  $iToColumn           - [optional] an integer value. Default is Null. The column containing the cell where to end the the cell range. Can be the same as $iRow or higher. If left blank $iToColumn will be the same as $iColumn.
-;                  $iToRow              - [optional] an integer value. Default is Null. The row containing the cell where to end the the cell range. Can be the same as $iRow or higher. If left blank $iToRow will be the same as $iRow.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iColumn             - The column the desired cell is located in, or where to start the the cell range from.
+;                  $iRow                - The row the desired cell is located in, or where to start the the cell range from.
+;                  $iToColumn           - [optional] Default is Null. The column containing the cell where to end the the cell range. Can be the same as $iRow or higher. If left blank $iToColumn will be the same as $iColumn.
+;                  $iToRow              - [optional] Default is Null. The row containing the cell where to end the the cell range. Can be the same as $iRow or higher. If left blank $iToRow will be the same as $iRow.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1934,9 +1934,9 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByPosition
 ; Name ..........: _LOWriter_TableGetData
 ; Description ...: Retrieve current text of a Text Table.
 ; Syntax ........: _LOWriter_TableGetData(ByRef $oTable[, $iColumn = -1[, $iRow = -1]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iColumn             - [optional] an integer value. Default is -1. The desired Column, See Remarks.
-;                  $iRow                - [optional] an integer value. Default is -1. The desired Row, See Remarks.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iColumn             - [optional] Default is -1. The desired Column, See Remarks.
+;                  $iRow                - [optional] Default is -1. The desired Row, See Remarks.
 ; Return values .: Success: Array or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2004,8 +2004,8 @@ EndFunc   ;==>_LOWriter_TableGetData
 ; Name ..........: _LOWriter_TableGetObjByCursor
 ; Description ...: Returns a Table Object, for later Table related functions.
 ; Syntax ........: _LOWriter_TableGetObjByCursor(ByRef $oDoc, ByRef $oCursor)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions. Cursor object must be located in a Table.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions. Cursor object must be located in a Table.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2043,8 +2043,8 @@ EndFunc   ;==>_LOWriter_TableGetObjByCursor
 ; Name ..........: _LOWriter_TableGetObjByName
 ; Description ...: Retrieve a Table Object.
 ; Syntax ........: _LOWriter_TableGetObjByName(ByRef $oDoc, $sTableName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sTableName          - a string value. Table Name to retrieve the Object for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sTableName          - Table Name to retrieve the Object for.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2082,11 +2082,11 @@ EndFunc   ;==>_LOWriter_TableGetObjByName
 ; Name ..........: _LOWriter_TableMargin
 ; Description ...: Set or Retrieve the Table Margins.
 ; Syntax ........: _LOWriter_TableMargin(ByRef $oTable[, $iTopMargin = Null[, $iBottomMargin = Null[, $iLeftMargin = Null[, $iRightMargin = Null]]]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iTopMargin          - [optional] an integer value. Default is Null. The top table margin in Hundredths of a Millimeter (HMM).
-;                  $iBottomMargin       - [optional] an integer value. Default is Null. The Bottom table margin in Hundredths of a Millimeter (HMM).
-;                  $iLeftMargin         - [optional] an integer value. Default is Null. The Left table margin in Hundredths of a Millimeter (HMM). See Remarks
-;                  $iRightMargin        - [optional] an integer value. Default is Null. The Right table margin in Hundredths of a Millimeter (HMM). See Remarks.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iTopMargin          - [optional] Default is Null. The top table margin in Hundredths of a Millimeter (HMM).
+;                  $iBottomMargin       - [optional] Default is Null. The Bottom table margin in Hundredths of a Millimeter (HMM).
+;                  $iLeftMargin         - [optional] Default is Null. The Left table margin in Hundredths of a Millimeter (HMM). See Remarks
+;                  $iRightMargin        - [optional] Default is Null. The Right table margin in Hundredths of a Millimeter (HMM). See Remarks.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2169,15 +2169,15 @@ EndFunc   ;==>_LOWriter_TableMargin
 ; Name ..........: _LOWriter_TableProperties
 ; Description ...: Set or Retrieve Table properties.
 ; Syntax ........: _LOWriter_TableProperties(ByRef $oDoc, ByRef $oTable[, $iTableAlign = Null[, $bKeepTogether = Null[, $sTableName = Null[, $bSplit = Null[, $bSplitRows = Null[, $bRepeatHeading = Null[, $iHeaderRows = Null]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iTableAlign         - [optional] an integer value (0-7). Default is Null. The horizontal alignment of the Table. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Default is $LOW_ORIENT_HORI_FULL.
-;                  $bKeepTogether       - [optional] a boolean value. Default is Null. If True, prevents page or column breaks between this table and the following paragraph or text table.
-;                  $sTableName          - [optional] a string value. Default is Null. The new table name. See Remarks.
-;                  $bSplit              - [optional] a boolean value. Default is Null. If False, the table will not split across two pages.
-;                  $bSplitRows          - [optional] a boolean value. Default is Null. If True, the content in a Table row is allowed to split at page splits, else if False, Content is not allowed to split across pages.
-;                  $bRepeatHeading      - [optional] a boolean value. Default is Null. If True, the first row of the table is repeated on every new page.
-;                  $iHeaderRows         - [optional] an integer value. Default is Null. The number of rows to include in the heading.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iTableAlign         - [optional] (0-7) Default is Null. The horizontal alignment of the Table. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice Default is $LOW_ORIENT_HORI_FULL.
+;                  $bKeepTogether       - [optional] Default is Null. If True, prevents page or column breaks between this table and the following paragraph or text table.
+;                  $sTableName          - [optional] Default is Null. The new table name. See Remarks.
+;                  $bSplit              - [optional] Default is Null. If False, the table will not split across two pages.
+;                  $bSplitRows          - [optional] Default is Null. If True, the content in a Table row is allowed to split at page splits, else if False, Content is not allowed to split across pages.
+;                  $bRepeatHeading      - [optional] Default is Null. If True, the first row of the table is repeated on every new page.
+;                  $iHeaderRows         - [optional] Default is Null. The number of rows to include in the heading.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2286,9 +2286,9 @@ EndFunc   ;==>_LOWriter_TableProperties
 ; Name ..........: _LOWriter_TableRowBackColor
 ; Description ...: Set the background color of an entire Table row.
 ; Syntax ........: _LOWriter_TableRowBackColor(ByRef $oTable, $iRow[, $iBackColor = Null])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iRow                - an integer value. The row number to set the background color for. Rows are 0 based.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The Row background color, as a RGB Color Integer. See Remarks. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) to disable background color.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iRow                - The row number to set the background color for. Rows are 0 based.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Row background color, as a RGB Color Integer. See Remarks. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) to disable background color.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2346,9 +2346,9 @@ EndFunc   ;==>_LOWriter_TableRowBackColor
 ; Name ..........: _LOWriter_TableRowDelete
 ; Description ...: Delete a row from a Text Table.
 ; Syntax ........: _LOWriter_TableRowDelete(ByRef $oTable, $iRow[, $iCount = 1])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iRow                - an integer value. The row number to delete. Rows are 0 based.
-;                  $iCount              - [optional] an integer value. Default is 1. Number of rows to delete starting at $iRow and moving down.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iRow                - The row number to delete. Rows are 0 based.
+;                  $iCount              - [optional] Default is 1. Number of rows to delete starting at $iRow and moving down.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2392,7 +2392,7 @@ EndFunc   ;==>_LOWriter_TableRowDelete
 ; Name ..........: _LOWriter_TableRowGetCount
 ; Description ...: Retrieves the number of Rows in a table.
 ; Syntax ........: _LOWriter_TableRowGetCount(ByRef $oTable)
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2426,9 +2426,9 @@ EndFunc   ;==>_LOWriter_TableRowGetCount
 ; Name ..........: _LOWriter_TableRowInsert
 ; Description ...: Insert a row into a Text Table
 ; Syntax ........: _LOWriter_TableRowInsert(ByRef $oTable, $iCount[, $iRow = Null])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iCount              - an integer value. Number of rows to insert.
-;                  $iRow                - [optional] an integer value. Default is Null. The row to insert rows after. See Remarks.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iCount              - Number of rows to insert.
+;                  $iRow                - [optional] Default is Null. The row to insert rows after. See Remarks.
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2474,11 +2474,11 @@ EndFunc   ;==>_LOWriter_TableRowInsert
 ; Name ..........: _LOWriter_TableRowProperty
 ; Description ...: Set or Retrieve properties for a Text Table.
 ; Syntax ........: _LOWriter_TableRowProperty(ByRef $oTable, $iRow[, $iHeight = Null[, $bIsAutoHeight = Null[, $bIsSplitAllowed = Null]]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iRow                - an integer value. The Row to set the properties for.
-;                  $iHeight             - [optional] an integer value. Default is Null. The row height in Hundredths of a Millimeter (HMM).
-;                  $bIsAutoHeight       - [optional] a boolean value. Default is Null. If True, the row's height is automatically adjusted.
-;                  $bIsSplitAllowed     - [optional] a boolean value. Default is Null. If False, the row can not be split at a page boundary.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iRow                - The Row to set the properties for.
+;                  $iHeight             - [optional] Default is Null. The row height in Hundredths of a Millimeter (HMM).
+;                  $bIsAutoHeight       - [optional] Default is Null. If True, the row's height is automatically adjusted.
+;                  $bIsSplitAllowed     - [optional] Default is Null. If False, the row can not be split at a page boundary.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2557,8 +2557,8 @@ EndFunc   ;==>_LOWriter_TableRowProperty
 ; Name ..........: _LOWriter_TableSetData
 ; Description ...: Fill a Text Table with Data.
 ; Syntax ........: _LOWriter_TableSetData(ByRef $oTable, ByRef $avData)
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $avData              - [in/out] an array of variants. See Remarks.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $avData              - See Remarks.
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2611,7 +2611,7 @@ EndFunc   ;==>_LOWriter_TableSetData
 ; Name ..........: _LOWriter_TablesGetNames
 ; Description ...: Retrieve an array of names for all tables contained in a document.
 ; Syntax ........: _LOWriter_TablesGetNames(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2648,10 +2648,10 @@ EndFunc   ;==>_LOWriter_TablesGetNames
 ; Name ..........: _LOWriter_TableShadow
 ; Description ...: Set or Retrieve the shadow settings for a Table Border.
 ; Syntax ........: _LOWriter_TableShadow(ByRef $oTable[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Table Shadow. See constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Table shadow Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Shadow Width of the Table, set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iLocation           - [optional] (0-4) Default is Null. The Location of the Table Shadow. See constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The Table shadow Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Shadow Width of the Table, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2728,9 +2728,9 @@ EndFunc   ;==>_LOWriter_TableShadow
 ; Name ..........: _LOWriter_TableStyleCurrent
 ; Description ...: Set or Retrieve the current Table style for a Table.
 ; Syntax ........: _LOWriter_TableStyleCurrent(ByRef $oDoc, ByRef $oTable[, $sTableStyle = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $sTableStyle         - [optional] a string value. Default is Null. The Table Style name to set the Table to.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $sTableStyle         - [optional] Default is Null. The Table Style name to set the Table to.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2783,8 +2783,8 @@ EndFunc   ;==>_LOWriter_TableStyleCurrent
 ; Name ..........: _LOWriter_TableStyleExists
 ; Description ...: Check whether a Document contains a specific Table Style by name.
 ; Syntax ........: _LOWriter_TableStyleExists(ByRef $oDoc, $sTableStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sTableStyle         - a string value. The Table Style Name to search for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sTableStyle         - The Table Style Name to search for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2815,10 +2815,10 @@ EndFunc   ;==>_LOWriter_TableStyleExists
 ; Name ..........: _LOWriter_TableStylesGetNames
 ; Description ...: Retrieve an array of all Table Style names available for a document.
 ; Syntax ........: _LOWriter_TableStylesGetNames(ByRef $oDoc[, $bUserOnly = False[, $bAppliedOnly = False[, $bDisplayName = False]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $bUserOnly           - [optional] a boolean value. Default is False. If True only User-Created Table Styles are returned.
-;                  $bAppliedOnly        - [optional] a boolean value. Default is False. If True only Applied Table Styles are returned.
-;                  $bDisplayName        - [optional] a boolean value. Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bUserOnly           - [optional] Default is False. If True only User-Created Table Styles are returned.
+;                  $bAppliedOnly        - [optional] Default is False. If True only Applied Table Styles are returned.
+;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2863,9 +2863,9 @@ EndFunc   ;==>_LOWriter_TableStylesGetNames
 ; Name ..........: _LOWriter_TableWidth
 ; Description ...: Set or Retrieve the Width of a inserted table.
 ; Syntax ........: _LOWriter_TableWidth(ByRef $oTable[, $iWidth = Null[, $iRelativeWidth = Null]])
-; Parameters ....: $oTable              - [in/out] an object. A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The absolute table width in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iRelativeWidth      - [optional] an integer value. Default is Null. The width of the table relative to its environment, in percentage, without a percent sign. See Remarks.
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iWidth              - [optional] Default is Null. The absolute table width in Hundredths of a Millimeter (HMM). See Remarks.
+;                  $iRelativeWidth      - [optional] Default is Null. The width of the table relative to its environment, in percentage, without a percent sign. See Remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

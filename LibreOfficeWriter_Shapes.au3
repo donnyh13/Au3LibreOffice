@@ -56,8 +56,8 @@
 ; Name ..........: _LOWriter_ShapeAreaColor
 ; Description ...: Set or Retrieve the Fill color settings for a Shape.
 ; Syntax ........: _LOWriter_ShapeAreaColor(ByRef $oShape[, $iColor = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $iColor              - [optional] (-1-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -122,7 +122,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaColor
 ; Name ..........: _LOWriter_ShapeAreaFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOWriter_ShapeAreaFillStyle(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+; Parameters ....: $oShape              - A Shape object returned by previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -157,19 +157,19 @@ EndFunc   ;==>_LOWriter_ShapeAreaFillStyle
 ; Name ..........: _LOWriter_ShapeAreaGradient
 ; Description ...: Modify or retrieve the settings for Shape Background color Gradient.
 ; Syntax ........: _LOWriter_ShapeAreaGradient(ByRef $oDoc, ByRef $oShape[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $sGradientName       - [optional] a string value. Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The gradient type to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iIncrement          - [optional] an integer value (0, 3-256). Default is Null. The number of steps of color change. 0 = Automatic.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
-;                  $iFromColor          - [optional] an integer value (0-16777215). Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iToColor            - [optional] an integer value (0-16777215). Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iFromIntense        - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
-;                  $iToIntense          - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
+;                  $iFromColor          - [optional] (0-16777215) Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iToColor            - [optional] (0-16777215) Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
+;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -386,8 +386,8 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradient
 ; Name ..........: _LOWriter_ShapeAreaGradientMulticolor
 ; Description ...: Set or Retrieve a Shape's Multicolor Gradient settings. See remarks.
 ; Syntax ........: _LOWriter_ShapeAreaGradientMulticolor(ByRef $oShape[, $avColorStops = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
+; Parameters ....: $oShape              - A Shape object returned by previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -495,8 +495,8 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradientMulticolor
 ; Name ..........: _LOWriter_ShapeAreaTransparency
 ; Description ...: Set or retrieve Transparency settings for a Shape.
 ; Syntax ........: _LOWriter_ShapeAreaTransparency(ByRef $oShape[, $iTransparency = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -546,15 +546,15 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparency
 ; Name ..........: _LOWriter_ShapeAreaTransparencyGradient
 ; Description ...: Set or retrieve the Shape transparency gradient settings.
 ; Syntax ........: _LOWriter_ShapeAreaTransparencyGradient(ByRef $oDoc, ByRef $oShape[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Call with $LOW_GRAD_TYPE_OFF to turn Transparency Gradient off.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
-;                  $iStart              - [optional] an integer value (0-100). Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
-;                  $iEnd                - [optional] an integer value (0-100). Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Call with $LOW_GRAD_TYPE_OFF to turn Transparency Gradient off.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
+;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
+;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -733,8 +733,8 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradient
 ; Name ..........: _LOWriter_ShapeAreaTransparencyGradientMulti
 ; Description ...: Set or Retrieve a Shape's Multi Transparency Gradient settings. See remarks.
 ; Syntax ........: _LOWriter_ShapeAreaTransparencyGradientMulti(ByRef $oShape[, $avColorStops = Null])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
+; Parameters ....: $oShape              - A Shape object returned by previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -842,8 +842,8 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradientMulti
 ; Name ..........: _LOWriter_ShapeDelete
 ; Description ...: Delete a Shape.
 ; Syntax ........: _LOWriter_ShapeDelete(ByRef $oDoc, $oShape)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oShape              - an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -885,8 +885,8 @@ EndFunc   ;==>_LOWriter_ShapeDelete
 ; Name ..........: _LOWriter_ShapeExists
 ; Description ...: Check if a Document contains a Shape with the specified name.
 ; Syntax ........: _LOWriter_ShapeExists(ByRef $oDoc, $sShapeName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sShapeName          - a string value. The Shape name to search for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sShapeName          - The Shape name to search for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -930,7 +930,7 @@ EndFunc   ;==>_LOWriter_ShapeExists
 ; Name ..........: _LOWriter_ShapeGetAnchor
 ; Description ...: Create a Text Cursor at the Shape Anchor position.
 ; Syntax ........: _LOWriter_ShapeGetAnchor(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -964,8 +964,8 @@ EndFunc   ;==>_LOWriter_ShapeGetAnchor
 ; Name ..........: _LOWriter_ShapeGetObjByName
 ; Description ...: Retrieve a Shape Object, for later Shape related functions.
 ; Syntax ........: _LOWriter_ShapeGetObjByName(ByRef $oDoc, $sShapeName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sShapeName          - a string value. The Shape name to retrieve the object for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sShapeName          - The Shape name to retrieve the object for.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1016,7 +1016,7 @@ EndFunc   ;==>_LOWriter_ShapeGetObjByName
 ; Name ..........: _LOWriter_ShapeGetType
 ; Description ...: Return the Shape's Type corresponding to the constants $LOW_SHAPE_TYPE_*
 ; Syntax ........: _LOWriter_ShapeGetType(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1149,13 +1149,13 @@ EndFunc   ;==>_LOWriter_ShapeGetType
 ; Name ..........: _LOWriter_ShapeInsert
 ; Description ...: Insert a shape into a document.
 ; Syntax ........: _LOWriter_ShapeInsert(ByRef $oDoc, ByRef $oCursor, $iShapeType, $iWidth, $iHeight[, $iX = 0[, $iY = 0]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
-;                  $iShapeType          - an integer value (0-122). The Type of shape to create. See remarks. See $LOW_SHAPE_TYPE_* as defined in LibreOfficeWriter_Constants.au3
-;                  $iWidth              - an integer value. The Shape's Width in Hundredths of a Millimeter (HMM). Note, for Lines, Width is the length of the line
-;                  $iHeight             - an integer value. The Shape's Height in Hundredths of a Millimeter (HMM). Note, for Lines, Height is the amount the line goes below the point of insertion.
-;                  $iX                  - [optional] an integer value. Default is 0. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] an integer value. Default is 0. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
+;                  $iShapeType          - (0-122) The Type of shape to create. See remarks. See $LOW_SHAPE_TYPE_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM). Note, for Lines, Width is the length of the line
+;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM). Note, for Lines, Height is the amount the line goes below the point of insertion.
+;                  $iX                  - [optional] Default is 0. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - [optional] Default is 0. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1246,14 +1246,14 @@ EndFunc   ;==>_LOWriter_ShapeInsert
 ; Name ..........: _LOWriter_ShapeLineArrowStyles
 ; Description ...: Set or Retrieve Shape Line Start and End Arrow Style settings.
 ; Syntax ........: _LOWriter_ShapeLineArrowStyles(ByRef $oShape[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ;                  $vStartStyle         - [optional] a variant value (0-32, or String). Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
-;                  $iStartWidth         - [optional] an integer value (0-5004). Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
-;                  $bStartCenter        - [optional] a boolean value. Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
-;                  $bSync               - [optional] a boolean value. Default is Null. If True, Synchronizes the Start Arrowhead settings with the end Arrowhead settings. See remarks.
+;                  $iStartWidth         - [optional] (0-5004) Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
+;                  $bStartCenter        - [optional] Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
+;                  $bSync               - [optional] Default is Null. If True, Synchronizes the Start Arrowhead settings with the end Arrowhead settings. See remarks.
 ;                  $vEndStyle           - [optional] a variant value (0-32, or String). Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
-;                  $iEndWidth           - [optional] an integer value (0-5004). Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
-;                  $bEndCenter          - [optional] a boolean value. Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
+;                  $iEndWidth           - [optional] (0-5004) Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
+;                  $bEndCenter          - [optional] Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1393,13 +1393,13 @@ EndFunc   ;==>_LOWriter_ShapeLineArrowStyles
 ; Name ..........: _LOWriter_ShapeLineProperties
 ; Description ...: Set or Retrieve Shape Line settings.
 ; Syntax ........: _LOWriter_ShapeLineProperties(ByRef $oShape[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ;                  $vStyle              - [optional] a variant value (0-31, or String). Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOW_SHAPE_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value (0-5004). Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The Line transparency percentage. 100% = fully transparent.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] (0-5004) Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
+;                  $iTransparency       - [optional] (0-100) Default is Null. The Line transparency percentage. 100% = fully transparent.
 ;                  $iCornerStyle        - [optional] an integer value (0,2-4). Default is Null. The Line Corner Style. See Constants $LOW_SHAPE_LINE_JOINT_* as defined in LibreOfficeWriter_Constants.au3
-;                  $iCapStyle           - [optional] an integer value (0-2). Default is Null. The Line Cap Style. See Constants $LOW_SHAPE_LINE_CAP_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOW_SHAPE_LINE_CAP_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1537,9 +1537,9 @@ EndFunc   ;==>_LOWriter_ShapeLineProperties
 ; Name ..........: _LOWriter_ShapeName
 ; Description ...: Set or Retrieve a Shape's Name.
 ; Syntax ........: _LOWriter_ShapeName(ByRef $oDoc, ByRef $oShape[, $sName = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $sName               - [optional] a string value. Default is Null. The new Name for the Shape.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $sName               - [optional] Default is Null. The new Name for the Shape.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1592,12 +1592,12 @@ EndFunc   ;==>_LOWriter_ShapeName
 ; Name ..........: _LOWriter_ShapePointsAdd
 ; Description ...: Add a Position Point to Shape.
 ; Syntax ........: _LOWriter_ShapePointsAdd(ByRef $oShape, $iPoint, $iX, $iY[, $iPointType = $LOW_SHAPE_POINT_TYPE_NORMAL[, $bIsCurve = False]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function. See remarks.
-;                  $iPoint              - an integer value. The Point to insert the new point AFTER. 0 means insert at the beginning.
-;                  $iX                  - an integer value. The X coordinate value, set in Hundredths of a Millimeter (HMM).
-;                  $iY                  - an integer value. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function. See remarks.
+;                  $iPoint              - The Point to insert the new point AFTER. 0 means insert at the beginning.
+;                  $iX                  - The X coordinate value, set in Hundredths of a Millimeter (HMM).
+;                  $iY                  - The Y coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iPointType          - [optional] an integer value (0,1,3). Default is $LOW_SHAPE_POINT_TYPE_NORMAL. The Type of Point this new Point is. See Remarks. See constants $LOW_SHAPE_POINT_TYPE_* as defined in LibreOfficeWriter_Constants.au3
-;                  $bIsCurve            - [optional] a boolean value. Default is False. If True, the Normal Point is a Curve. See remarks.
+;                  $bIsCurve            - [optional] Default is False. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2040,7 +2040,7 @@ EndFunc   ;==>_LOWriter_ShapePointsAdd
 ; Name ..........: _LOWriter_ShapePointsGetCount
 ; Description ...: Retrieve a count of Points present in a Shape.
 ; Syntax ........: _LOWriter_ShapePointsGetCount(ByRef $oShape)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function. See remarks.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2084,12 +2084,12 @@ EndFunc   ;==>_LOWriter_ShapePointsGetCount
 ; Name ..........: _LOWriter_ShapePointsModify
 ; Description ...: Modify an existing Position Point or Point Type in a shape.
 ; Syntax ........: _LOWriter_ShapePointsModify(ByRef $oShape, $iPoint[, $iX = Null[, $iY = Null[, $iPointType = Null[, $bIsCurve = Null]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function. See remarks.
-;                  $iPoint              - an integer value. The Point to modify, starting at 1.
-;                  $iX                  - [optional] an integer value. Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] an integer value. Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function. See remarks.
+;                  $iPoint              - The Point to modify, starting at 1.
+;                  $iX                  - [optional] Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
+;                  $iY                  - [optional] Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iPointType          - [optional] an integer value (0,1,3). Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOW_SHAPE_POINT_TYPE_* as defined in LibreOfficeWriter_Constants.au3
-;                  $bIsCurve            - [optional] a boolean value. Default is Null. If True, the Normal Point is a Curve. See remarks.
+;                  $bIsCurve            - [optional] Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2213,8 +2213,8 @@ EndFunc   ;==>_LOWriter_ShapePointsModify
 ; Name ..........: _LOWriter_ShapePointsRemove
 ; Description ...: Remove a position Point from a Shape.
 ; Syntax ........: _LOWriter_ShapePointsRemove(ByRef $oShape, $iPoint)
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $iPoint              - an integer value. The Point to in the Shape to delete, beginning at 1.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $iPoint              - The Point to in the Shape to delete, beginning at 1.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2543,10 +2543,10 @@ EndFunc   ;==>_LOWriter_ShapePointsRemove
 ; Name ..........: _LOWriter_ShapePosition
 ; Description ...: Set or Retrieve the Shape's position settings.
 ; Syntax ........: _LOWriter_ShapePosition(ByRef $oShape[, $iX = Null[, $iY = Null[, $bProtectPos = Null]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $iX                  - [optional] an integer value. Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] an integer value. Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, the Shape's position is locked.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $iX                  - [optional] Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - [optional] Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $bProtectPos         - [optional] Default is Null. If True, the Shape's position is locked.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2623,9 +2623,9 @@ EndFunc   ;==>_LOWriter_ShapePosition
 ; Name ..........: _LOWriter_ShapeRotateSlant
 ; Description ...: Set or retrieve Rotation and Slant settings for a Shape.
 ; Syntax ........: _LOWriter_ShapeRotateSlant(ByRef $oShape[, $nRotate = Null[, $nSlant = Null]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $nRotate             - [optional] a general number value (0-359.99). Default is Null. The Degrees to rotate the shape. See remarks.
-;                  $nSlant              - [optional] a general number value (-89-89.00). Default is Null. The Degrees to slant the shape. See remarks.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $nRotate             - [optional] (0-359.99) Default is Null. The Degrees to rotate the shape. See remarks.
+;                  $nSlant              - [optional] (-89-89.00) Default is Null. The Degrees to slant the shape. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2687,7 +2687,7 @@ EndFunc   ;==>_LOWriter_ShapeRotateSlant
 ; Name ..........: _LOWriter_ShapesGetNames
 ; Description ...: Retrieve an array of Shape names contained in a document.
 ; Syntax ........: _LOWriter_ShapesGetNames(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: 2D Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2739,9 +2739,9 @@ EndFunc   ;==>_LOWriter_ShapesGetNames
 ; Name ..........: _LOWriter_ShapeTextBox
 ; Description ...: Activate, Set, and Retrieve Shape TextBox settings.
 ; Syntax ........: _LOWriter_ShapeTextBox(ByRef $oShape[, $bTextBox = Null[, $sContent = Null]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $bTextBox            - [optional] a boolean value. Default is Null. If True, adds a TextBox inside of the Shape. See Remarks.
-;                  $sContent            - [optional] a string value. Default is Null. The Text content of the Shape's TextBox.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $bTextBox            - [optional] Default is Null. If True, adds a TextBox inside of the Shape. See Remarks.
+;                  $sContent            - [optional] Default is Null. The Text content of the Shape's TextBox.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2810,15 +2810,15 @@ EndFunc   ;==>_LOWriter_ShapeTextBox
 ; Name ..........: _LOWriter_ShapeTypePosition
 ; Description ...: Set or Retrieve Shape Position Settings.
 ; Syntax ........: _LOWriter_ShapeTypePosition(ByRef $oShape[, $iHorAlign = Null[, $iHorPos = Null[, $iHorRelation = Null[, $bMirror = Null[, $iVertAlign = Null[, $iVertPos = Null[, $iVertRelation = Null[, $bKeepInside = Null[, $iAnchorPos = Null]]]]]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $iHorAlign           - [optional] an integer value (0-3). Default is Null. The horizontal orientation of the Shape. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. Can't be set if Anchor position is set to "As Character".
-;                  $iHorPos             - [optional] an integer value. Default is Null. The horizontal position of the Shape. set in Hundredths of a Millimeter (HMM). Only valid if $iHorAlign is set to $LOW_ORIENT_HORI_NONE().
-;                  $iHorRelation        - [optional] an integer value (0-8). Default is Null. The reference point for the selected horizontal alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3, and Remarks for acceptable values.
-;                  $bMirror             - [optional] a boolean value. Default is Null. If True, Reverses the current horizontal alignment settings on even pages.
-;                  $iVertAlign          - [optional] an integer value (0-9). Default is Null. The vertical orientation of the Shape. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertPos            - [optional] an integer value. Default is Null. The vertical position of the Shape. set in Hundredths of a Millimeter (HMM). Only valid if $iVertAlign is set to $LOW_ORIENT_VERT_NONE().
-;                  $iVertRelation       - [optional] an integer value (-1-9). Default is Null. The reference point for the selected vertical alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3, and Remarks for acceptable values.
-;                  $bKeepInside         - [optional] a boolean value. Default is Null. If True, Keeps the Shape within the layout boundaries of the text that the Shape is anchored to.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $iHorAlign           - [optional] (0-3) Default is Null. The horizontal orientation of the Shape. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. Can't be set if Anchor position is set to "As Character".
+;                  $iHorPos             - [optional] Default is Null. The horizontal position of the Shape. set in Hundredths of a Millimeter (HMM). Only valid if $iHorAlign is set to $LOW_ORIENT_HORI_NONE().
+;                  $iHorRelation        - [optional] (0-8) Default is Null. The reference point for the selected horizontal alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3, and Remarks for acceptable values.
+;                  $bMirror             - [optional] Default is Null. If True, Reverses the current horizontal alignment settings on even pages.
+;                  $iVertAlign          - [optional] (0-9) Default is Null. The vertical orientation of the Shape. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertPos            - [optional] Default is Null. The vertical position of the Shape. set in Hundredths of a Millimeter (HMM). Only valid if $iVertAlign is set to $LOW_ORIENT_VERT_NONE().
+;                  $iVertRelation       - [optional] (-1-9) Default is Null. The reference point for the selected vertical alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3, and Remarks for acceptable values.
+;                  $bKeepInside         - [optional] Default is Null. If True, Keeps the Shape within the layout boundaries of the text that the Shape is anchored to.
 ;                  $iAnchorPos          - [optional] an integer value(0,1,4). Default is Null. Specify the anchoring options for the Shape. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -3060,10 +3060,10 @@ EndFunc   ;==>_LOWriter_ShapeTypePosition
 ; Name ..........: _LOWriter_ShapeTypeSize
 ; Description ...: Set or Retrieve Shape Size related settings.
 ; Syntax ........: _LOWriter_ShapeTypeSize(ByRef $oShape[, $iWidth = Null[, $iHeight = Null[, $bProtectSize = Null]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the Shape.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $iWidth              - [optional] Default is Null. The width of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $iHeight             - [optional] Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the Shape.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3142,12 +3142,12 @@ EndFunc   ;==>_LOWriter_ShapeTypeSize
 ; Name ..........: _LOWriter_ShapeWrap
 ; Description ...: Set or Retrieve Shape Wrap and Spacing settings.
 ; Syntax ........: _LOWriter_ShapeWrap(ByRef $oShape[, $iWrapType = Null[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $iWrapType           - [optional] an integer value (0-5). Default is Null. The way you want text to wrap around the Shape. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The amount of space between the left edge of the Shape and the text. Set in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The amount of space between the Right edge of the Shape and the text. Set in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The amount of space between the Top edge of the Shape and the text. Set in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The amount of space between the Bottom edge of the Shape and the text. Set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $iWrapType           - [optional] (0-5) Default is Null. The way you want text to wrap around the Shape. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The amount of space between the left edge of the Shape and the text. Set in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The amount of space between the Right edge of the Shape and the text. Set in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The amount of space between the Top edge of the Shape and the text. Set in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The amount of space between the Bottom edge of the Shape and the text. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3252,10 +3252,10 @@ EndFunc   ;==>_LOWriter_ShapeWrap
 ; Name ..........: _LOWriter_ShapeWrapOptions
 ; Description ...: Set or Retrieve Shape Wrap Options.
 ; Syntax ........: _LOWriter_ShapeWrapOptions(ByRef $oShape[, $bFirstPar = Null[, $bInBackground = Null[, $bAllowOverlap = Null]]])
-; Parameters ....: $oShape              - [in/out] an object. A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
-;                  $bFirstPar           - [optional] a boolean value. Default is Null. If True, Starts a new paragraph below the object.
-;                  $bInBackground       - [optional] a boolean value. Default is Null. If True, Moves the selected object to the background. This option is only available with the "Through" wrap type.
-;                  $bAllowOverlap       - [optional] a boolean value. Default is Null. If True, the object is allowed to overlap another object. This option has no effect on wrap through objects, which can always overlap.
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
+;                  $bFirstPar           - [optional] Default is Null. If True, Starts a new paragraph below the object.
+;                  $bInBackground       - [optional] Default is Null. If True, Moves the selected object to the background. This option is only available with the "Through" wrap type.
+;                  $bAllowOverlap       - [optional] Default is Null. If True, the object is allowed to overlap another object. This option has no effect on wrap through objects, which can always overlap.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

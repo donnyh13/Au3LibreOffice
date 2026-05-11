@@ -66,11 +66,11 @@
 ; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
 ; Syntax ........: _LOWriter_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
 ; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
-;                  $vParam1             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam2             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam3             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam4             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
-;                  $vParam5             - [optional] a variant value. Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam2             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam3             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam4             - [optional] Default is Null. Any optional parameter to be called with the user function.
+;                  $vParam5             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ; Return values .: Success: 1 or UserFunction.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -146,8 +146,8 @@ EndFunc   ;==>_LOWriter_ComError_UserFunction
 ; Name ..........: _LOWriter_DateFormatKeyCreate
 ; Description ...: Create a Date/Time Format Key.
 ; Syntax ........: _LOWriter_DateFormatKeyCreate(ByRef $oDoc, $sFormat)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sFormat             - a string value. The Date/Time format String to create.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sFormat             - The Date/Time format String to create.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -197,8 +197,8 @@ EndFunc   ;==>_LOWriter_DateFormatKeyCreate
 ; Name ..........: _LOWriter_DateFormatKeyDelete
 ; Description ...: Delete a User-Created Date/Time Format Key from a Document.
 ; Syntax ........: _LOWriter_DateFormatKeyDelete(ByRef $oDoc, $iFormatKey)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $iFormatKey          - an integer value. The User-Created Date/Time format Key to delete.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $iFormatKey          - The User-Created Date/Time format Key to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -242,8 +242,8 @@ EndFunc   ;==>_LOWriter_DateFormatKeyDelete
 ; Name ..........: _LOWriter_DateFormatKeyExists
 ; Description ...: Check if a Document contains a Date/Time Format Key Already or not.
 ; Syntax ........: _LOWriter_DateFormatKeyExists(ByRef $oDoc, $iFormatKey)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $iFormatKey          - an integer value. The Date Format Key to check for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $iFormatKey          - The Date Format Key to check for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -295,8 +295,8 @@ EndFunc   ;==>_LOWriter_DateFormatKeyExists
 ; Name ..........: _LOWriter_DateFormatKeyGetString
 ; Description ...: Retrieve a Date/Time Format Key String.
 ; Syntax ........: _LOWriter_DateFormatKeyGetString(ByRef $oDoc, $iFormatKey)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $iFormatKey          - an integer value. The Date/Time Format Key to retrieve the string for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $iFormatKey          - The Date/Time Format Key to retrieve the string for.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -339,11 +339,11 @@ EndFunc   ;==>_LOWriter_DateFormatKeyGetString
 ; Name ..........: _LOWriter_DateFormatKeysGetList
 ; Description ...: Retrieve an Array of Date/Time Format Keys.
 ; Syntax ........: _LOWriter_DateFormatKeysGetList(ByRef $oDoc[, $bIsUser = False[, $bUserOnly = False[, $bDateOnly = False[, $bTimeOnly = False]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $bIsUser             - [optional] a boolean value. Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
-;                  $bUserOnly           - [optional] a boolean value. Default is False. If True, only user-created Date/Time Format Keys are returned.
-;                  $bDateOnly           - [optional] a boolean value. Default is False. If True, Only Date FormatKeys are returned.
-;                  $bTimeOnly           - [optional] a boolean value. Default is False. If True, Only Time Format Keys are returned.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bIsUser             - [optional] Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
+;                  $bUserOnly           - [optional] Default is False. If True, only user-created Date/Time Format Keys are returned.
+;                  $bDateOnly           - [optional] Default is False. If True, Only Date FormatKeys are returned.
+;                  $bTimeOnly           - [optional] Default is False. If True, Only Time Format Keys are returned.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -428,14 +428,14 @@ EndFunc   ;==>_LOWriter_DateFormatKeysGetList
 ; Name ..........: _LOWriter_DateStructCreate
 ; Description ...: Create a Date Structure for inserting a Date into certain other functions.
 ; Syntax ........: _LOWriter_DateStructCreate([$iYear = Null[, $iMonth = Null[, $iDay = Null[, $iHours = Null[, $iMinutes = Null[, $iSeconds = Null[, $iNanoSeconds = Null[, $bIsUTC = Null]]]]]]]])
-; Parameters ....: $iYear               - [optional] an integer value. Default is Null. The Year, as a 4 digit Integer.
-;                  $iMonth              - [optional] an integer value (0-12). Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
-;                  $iDay                - [optional] an integer value (0-31). Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
-;                  $iHours              - [optional] an integer value (0-23). Default is Null. The Hour, as a 2 digit Integer.
-;                  $iMinutes            - [optional] an integer value (0-59). Default is Null. Minutes, as a 2 digit Integer.
-;                  $iSeconds            - [optional] an integer value (0-59). Default is Null. Seconds, as a 2 digit Integer.
+; Parameters ....: $iYear               - [optional] Default is Null. The Year, as a 4 digit Integer.
+;                  $iMonth              - [optional] (0-12) Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
+;                  $iDay                - [optional] (0-31) Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
+;                  $iHours              - [optional] (0-23) Default is Null. The Hour, as a 2 digit Integer.
+;                  $iMinutes            - [optional] (0-59) Default is Null. Minutes, as a 2 digit Integer.
+;                  $iSeconds            - [optional] (0-59) Default is Null. Seconds, as a 2 digit Integer.
 ;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
-;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
+;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -551,15 +551,15 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ; Name ..........: _LOWriter_DateStructModify
 ; Description ...: Set or retrieve Date Structure settings.
 ; Syntax ........: _LOWriter_DateStructModify(ByRef $tDateStruct[, $iYear = Null[, $iMonth = Null[, $iDay = Null[, $iHours = Null[, $iMinutes = Null[, $iSeconds = Null[, $iNanoSeconds = Null[, $bIsUTC = Null]]]]]]]])
-; Parameters ....: $tDateStruct         - [in/out] a dll struct value. The Date Structure to modify, returned from a _LOWriter_DateStructCreate, or setting retrieval function. Structure will be directly modified.
-;                  $iYear               - [optional] an integer value. Default is Null. The Year, as a 4 digit Integer.
-;                  $iMonth              - [optional] an integer value (0-12). Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
-;                  $iDay                - [optional] an integer value (0-31). Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
-;                  $iHours              - [optional] an integer value (0-23). Default is Null. The Hour, as a 2 digit Integer.
-;                  $iMinutes            - [optional] an integer value (0-59). Default is Null. Minutes, as a 2 digit Integer.
-;                  $iSeconds            - [optional] an integer value (0-59). Default is Null. Seconds, as a 2 digit Integer.
+; Parameters ....: $tDateStruct         - The Date Structure to modify, returned from a _LOWriter_DateStructCreate, or setting retrieval function. Structure will be directly modified.
+;                  $iYear               - [optional] Default is Null. The Year, as a 4 digit Integer.
+;                  $iMonth              - [optional] (0-12) Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
+;                  $iDay                - [optional] (0-31) Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
+;                  $iHours              - [optional] (0-23) Default is Null. The Hour, as a 2 digit Integer.
+;                  $iMinutes            - [optional] (0-59) Default is Null. Minutes, as a 2 digit Integer.
+;                  $iSeconds            - [optional] (0-59) Default is Null. Seconds, as a 2 digit Integer.
 ;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
-;                  $bIsUTC              - [optional] a boolean value. Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
+;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -683,13 +683,13 @@ EndFunc   ;==>_LOWriter_DateStructModify
 ; Name ..........: _LOWriter_FindFormatModifyAlignment
 ; Description ...: Modify or Add Find Format Alignment Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyAlignment(ByRef $atFormat[, $iHorAlign = Null[, $iVertAlign = Null[, $iLastLineAlign = Null[, $bExpandSingleWord = Null[, $bSnapToGrid = Null[, $iTxtDirection = Null]]]]]])
-; Parameters ....: $atFormat            - [in/out] an array of dll structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iHorAlign           - [optional] an integer value (0-3). Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOW_PAR_ALIGN_HOR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-4). Default is Null. The Vertical alignment of the paragraph. See Constants, $LOW_PAR_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Vertical Alignment setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Vert. Align format or not, this is supposed to be fixed in L.O. 7.6.
-;                  $iLastLineAlign      - [optional] an integer value (0-3). Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bExpandSingleWord   - [optional] a boolean value. Default is Null. If True, and the last line of a justified paragraph consists of one word, the word is stretched to the width of the paragraph.
-;                  $bSnapToGrid         - [optional] a boolean value. Default is Null. If True, Aligns the paragraph to a text grid (if one is active).
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [LibreOffice Default is 4] In my personal testing, searching for the Text Direction setting using this parameter alone, without using other parameters, causes any results matching the searched for string to be replaced, whether they contain the Text Direction format or not, this is supposed to be fixed in L.O. 7.6.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOW_PAR_ALIGN_HOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-4) Default is Null. The Vertical alignment of the paragraph. See Constants, $LOW_PAR_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Vertical Alignment setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Vert. Align format or not, this is supposed to be fixed in L.O. 7.6.
+;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bExpandSingleWord   - [optional] Default is Null. If True, and the last line of a justified paragraph consists of one word, the word is stretched to the width of the paragraph.
+;                  $bSnapToGrid         - [optional] Default is Null. If True, Aligns the paragraph to a text grid (if one is active).
+;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [LibreOffice Default is 4] In my personal testing, searching for the Text Direction setting using this parameter alone, without using other parameters, causes any results matching the searched for string to be replaced, whether they contain the Text Direction format or not, this is supposed to be fixed in L.O. 7.6.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -790,11 +790,11 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ; Name ..........: _LOWriter_FindFormatModifyEffects
 ; Description ...: Modify or Add Find Format Effects Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyEffects(ByRef $atFormat[, $iCase = Null[,$iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Relief setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Relief format or not, this is supposed to be fixed in L.O. 7.6.
-;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
-;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3. In my personal testing, searching for the Relief setting using this parameter causes any results matching the searched for string to be replaced, whether they contain the Relief format or not, this is supposed to be fixed in L.O. 7.6.
+;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
+;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -870,14 +870,14 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ; Name ..........: _LOWriter_FindFormatModifyFont
 ; Description ...: Modify or Add Find Format Font Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyFont(ByRef $atFormat[, $sFontName = Null[, $iFontSize = Null[, $iFontPosture = Null[, $iFontWeight = Null[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]]]]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified. See Remarks.
-;                  $sFontName           - [optional] a string value. Default is Null. The Font name to search for.
-;                  $iFontSize           - [optional] an integer value. Default is Null. The Font size to search for.
-;                  $iFontPosture        - [optional] an integer value (0-5). Default is Null. The Font Posture(Italic etc.,) See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified. See Remarks.
+;                  $sFontName           - [optional] Default is Null. The Font name to search for.
+;                  $iFontSize           - [optional] Default is Null. The Font size to search for.
+;                  $iFontPosture        - [optional] (0-5) Default is Null. The Font Posture(Italic etc.,) See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iFontWeight         - [optional] an integer value(0,50-200). Default is Null. The Font weight to search for. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The percentage of Transparency. 0 is visible, 100 is invisible. Seems to require a color entered in $iFontColor before transparency can be searched for. LibreOffice 7.0 and Up.
-;                  $iHighlight          - [optional] an integer value (-1-16777215). Default is Null. The Highlight color to search for, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iTransparency       - [optional] (0-100) Default is Null. The percentage of Transparency. 0 is visible, 100 is invisible. Seems to require a color entered in $iFontColor before transparency can be searched for. LibreOffice 7.0 and Up.
+;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The Highlight color to search for, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1000,12 +1000,12 @@ EndFunc   ;==>_LOWriter_FindFormatModifyFont
 ; Name ..........: _LOWriter_FindFormatModifyHyphenation
 ; Description ...: Modify or Add Find Format Hyphenation Settings. See Remarks.
 ; Syntax ........: _LOWriter_FindFormatModifyHyphenation(ByRef $atFormat[, $bAutoHyphen = Null[, $bHyphenNoCaps = Null[, $iMaxHyphens = Null[, $iMinLeadingChar = Null[, $iMinTrailingChar = Null]]]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $bAutoHyphen         - [optional] a boolean value. Default is Null. If True, automatic hyphenation is applied.
-;                  $bHyphenNoCaps       - [optional] a boolean value. Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. LibreOffice 6.4 and up.
-;                  $iMaxHyphens         - [optional] an integer value (0-99). Default is Null. The maximum number of consecutive hyphens.
-;                  $iMinLeadingChar     - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied).
-;                  $iMinTrailingChar    - [optional] an integer value (2-9). Default is Null. Specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied).
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $bAutoHyphen         - [optional] Default is Null. If True, automatic hyphenation is applied.
+;                  $bHyphenNoCaps       - [optional] Default is Null. If True, hyphenation will be disabled for words written in CAPS for this paragraph. LibreOffice 6.4 and up.
+;                  $iMaxHyphens         - [optional] (0-99) Default is Null. The maximum number of consecutive hyphens.
+;                  $iMinLeadingChar     - [optional] (2-9) Default is Null. Specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied).
+;                  $iMinTrailingChar    - [optional] (2-9) Default is Null. Specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied).
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1097,11 +1097,11 @@ EndFunc   ;==>_LOWriter_FindFormatModifyHyphenation
 ; Name ..........: _LOWriter_FindFormatModifyIndent
 ; Description ...: Modify or Add Find Format Indent Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyIndent(ByRef $atFormat[, $iBeforeText = Null[, $iAfterText = Null[, $iFirstLine = Null[, $bAutoFirstLine = Null]]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iBeforeText         - [optional] an integer value (-9998989-17094). Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM). Both $iBeforeText and $iAfterText must be set to perform a search for either.
-;                  $iAfterText          - [optional] an integer value (-9998989-17094). Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM). Both $iBeforeText and $iAfterText must be set to perform a search for either.
-;                  $iFirstLine          - [optional] an integer value (-57785-17094). Default is Null. Indentation distance of the first line of a paragraph, Set in Hundredths of a Millimeter (HMM). Both $iBeforeText and $iAfterText must be set to perform a search for $iFirstLine.
-;                  $bAutoFirstLine      - [optional] a boolean value. Default is Null. If True, the first line will be indented automatically. Both $iBeforeText and $iAfterText must be set to perform a search for $bAutoFirstLine.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $iBeforeText         - [optional] (-9998989-17094) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM). Both $iBeforeText and $iAfterText must be set to perform a search for either.
+;                  $iAfterText          - [optional] (-9998989-17094) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM). Both $iBeforeText and $iAfterText must be set to perform a search for either.
+;                  $iFirstLine          - [optional] (-57785-17094) Default is Null. Indentation distance of the first line of a paragraph, Set in Hundredths of a Millimeter (HMM). Both $iBeforeText and $iAfterText must be set to perform a search for $iFirstLine.
+;                  $bAutoFirstLine      - [optional] Default is Null. If True, the first line will be indented automatically. Both $iBeforeText and $iAfterText must be set to perform a search for $bAutoFirstLine.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1180,10 +1180,10 @@ EndFunc   ;==>_LOWriter_FindFormatModifyIndent
 ; Name ..........: _LOWriter_FindFormatModifyOverline
 ; Description ...: Modify or Add Find Format Overline Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyOverline(ByRef $atFormat[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See remarks. Overline style must be set before any of the other parameters can be searched for.
-;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined. See remarks.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See remarks. Overline style must be set before any of the other parameters can be searched for.
+;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1257,11 +1257,11 @@ EndFunc   ;==>_LOWriter_FindFormatModifyOverline
 ; Name ..........: _LOWriter_FindFormatModifyPageBreak
 ; Description ...: Modify or Add Find Format Page Break Settings. See Remarks.
 ; Syntax ........: _LOWriter_FindFormatModifyPageBreak(ByRef $oDoc, ByRef $atFormat[, $iBreakType = Null[, $sPageStyle = Null[, $iPgNumOffSet = Null]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iBreakType          - [optional] an integer value (0-6). Default is Null. The Page Break Type. See Constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3..
-;                  $sPageStyle          - [optional] a string value. Default is Null. Creates a page break before the paragraph it belongs to and assigns the new page style to use.
-;                  $iPgNumOffSet        - [optional] an integer value. Default is Null. If a page break property is set at a paragraph, this property contains the new value for the page number.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $iBreakType          - [optional] (0-6) Default is Null. The Page Break Type. See Constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3..
+;                  $sPageStyle          - [optional] Default is Null. Creates a page break before the paragraph it belongs to and assigns the new page style to use.
+;                  $iPgNumOffSet        - [optional] Default is Null. If a page break property is set at a paragraph, this property contains the new value for the page number.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1331,10 +1331,10 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPageBreak
 ; Name ..........: _LOWriter_FindFormatModifyPosition
 ; Description ...: Modify or Add Find Format Position Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyPosition(ByRef $atFormat[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $iSuperScript        - [optional] an integer value (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
 ;                  $iSubScript          - [optional] an integer value (-1-100) Default is Null. The Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
-;                  $iRelativeSize       - [optional] an integer value (1-100). Default is Null. The size percentage relative to current font size.
+;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1413,11 +1413,11 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ; Name ..........: _LOWriter_FindFormatModifyRotateScaleSpace
 ; Description ...: Modify or Add Find Format Rotate, Scale, and Space Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyRotateScaleSpace(ByRef $atFormat[, $iRotation = Null[, $iScaleWidth = Null[, $bAutoKerning = Null[, $nKerning = Null]]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $iRotation           - [optional] an integer value (0,90,270). Default is Null. Degrees to rotate the text. See remarks.
-;                  $iScaleWidth         - [optional] an integer value (1-100). Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing. See remarks.
-;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
-;                  $nKerning            - [optional] a general number value (-2-928.8). Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
+;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing. See remarks.
+;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
+;                  $nKerning            - [optional] (-2-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1501,12 +1501,12 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ; Name ..........: _LOWriter_FindFormatModifySpacing
 ; Description ...: Modify or Add Find Format Spacing Settings.
 ; Syntax ........: _LOWriter_FindFormatModifySpacing(ByRef $atFormat[, $iAbovePar = Null[, $iBelowPar = Null[, $bAddSpace = Null[, $iLineSpcMode = Null[, $iLineSpcHeight = Null]]]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iAbovePar           - [optional] an integer value (0-10008). Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $iBelowPar           - [optional] an integer value (0-10008). Default is Null. The Space below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $bAddSpace           - [optional] a boolean value. Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. LibreOffice version 3.6 and up.
-;                  $iLineSpcMode        - [optional] an integer value (0-3). Default is Null. The type of line spacing of a paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3, also notice min and max values for each. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
-;                  $iLineSpcHeight      - [optional] an integer value. Default is Null. This value specifies the spacing of the lines. See Remarks for Minimum and Max values. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $iAbovePar           - [optional] (0-10008) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
+;                  $iBelowPar           - [optional] (0-10008) Default is Null. The Space below a paragraph, in Hundredths of a Millimeter (HMM).
+;                  $bAddSpace           - [optional] Default is Null. If True, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style. LibreOffice version 3.6 and up.
+;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The type of line spacing of a paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3, also notice min and max values for each. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
+;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the spacing of the lines. See Remarks for Minimum and Max values. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1623,9 +1623,9 @@ EndFunc   ;==>_LOWriter_FindFormatModifySpacing
 ; Name ..........: _LOWriter_FindFormatModifyStrikeout
 ; Description ...: Modify or Add Find Format Strikeout Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyStrikeout(ByRef $atFormat[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined. See remarks.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1686,9 +1686,9 @@ EndFunc   ;==>_LOWriter_FindFormatModifyStrikeout
 ; Name ..........: _LOWriter_FindFormatModifyTxtFlowOpt
 ; Description ...: Modify or Add Find Format Text Flow Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyTxtFlowOpt(ByRef $atFormat[, $bParSplit = Null[, $bKeepTogether = Null[, $iParOrphans = Null[, $iParWidows = Null]]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $bParSplit           - [optional] a boolean value. Default is Null. If False, prevents the paragraph from getting split into two pages or columns
-;                  $bKeepTogether       - [optional] a boolean value. Default is Null. If True, prevents page or column breaks between this and the following paragraph.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $bParSplit           - [optional] Default is Null. If False, prevents the paragraph from getting split into two pages or columns
+;                  $bKeepTogether       - [optional] Default is Null. If True, prevents page or column breaks between this and the following paragraph.
 ;                  $iParOrphans         - [optional] an integer value (0,2-9). Default is Null. Specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = disabled. See remarks.
 ;                  $iParWidows          - [optional] an integer value (0,2-9). Default is Null. Specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = disabled.
 ; Return values .: Success: 1
@@ -1768,10 +1768,10 @@ EndFunc   ;==>_LOWriter_FindFormatModifyTxtFlowOpt
 ; Name ..........: _LOWriter_FindFormatModifyUnderline
 ; Description ...: Modify or Add Find Format Underline Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyUnderline(ByRef $atFormat[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $atFormat            - [in/out] an array of structs. A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The line style of the Underline, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. Underline style must be set before any of the other parameters can be searched for.
-;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.. $LO_COLOR_OFF(-1) is automatic color mode.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined. See remarks.
+; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The line style of the Underline, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. Underline style must be set before any of the other parameters can be searched for.
+;                  $iULColor            - [optional] (-1-16777215) Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.. $LO_COLOR_OFF(-1) is automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1844,16 +1844,16 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ; Name ..........: _LOWriter_FontDescCreate
 ; Description ...: Create a Font Descriptor Map.
 ; Syntax ........: _LOWriter_FontDescCreate([$sFontName = ""[, $iWeight = $LOW_CHAR_WEIGHT_DONT_KNOW[, $iPosture = $LOW_CHAR_POSTURE_DONTKNOW[, $nSize = 0[, $iColor = $LO_COLOR_OFF[, $iUnderlineStyle = $LOW_CHAR_UNDERLINE_DONT_KNOW[, $iUnderlineColor = $LO_COLOR_OFF[, $iStrikelineStyle = $LOW_CHAR_STRIKEOUT_DONT_KNOW[, $bIndividualWords = False[, $iRelief = $LOW_CHAR_RELIEF_NONE]]]]]]]]]])
-; Parameters ....: $sFontName           - [optional] a string value. Default is "". The Font name.
-;                  $iWeight             - [optional] an integer value (0-200). Default is $LOW_CHAR_WEIGHT_DONT_KNOW. The Font weight. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iPosture            - [optional] an integer value (0-5). Default is $LOW_CHAR_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $nSize               - [optional] a general number value. Default is 0. The Font size.
-;                  $iColor              - [optional] an integer value (-1-16777215). Default is $LO_COLOR_OFF. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is $LOW_CHAR_UNDERLINE_DONT_KNOW. The Font underline Style. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iUnderlineColor     - [optional] an integer value (-1-16777215). Default is $LO_COLOR_OFF. The Font Underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is $LOW_CHAR_STRIKEOUT_DONT_KNOW. The Strikeout line style. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bIndividualWords    - [optional] a boolean value. Default is False. If True, only individual words are underlined.
-;                  $iRelief             - [optional] an integer value (0-2). Default is $LOW_CHAR_RELIEF_NONE. The Font relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $sFontName           - [optional] Default is "". The Font name.
+;                  $iWeight             - [optional] (0-200) Default is $LOW_CHAR_WEIGHT_DONT_KNOW. The Font weight. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iPosture            - [optional] (0-5) Default is $LOW_CHAR_POSTURE_DONTKNOW. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $nSize               - [optional] Default is 0. The Font size.
+;                  $iColor              - [optional] (-1-16777215) Default is $LO_COLOR_OFF. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+;                  $iUnderlineStyle     - [optional] (0-18) Default is $LOW_CHAR_UNDERLINE_DONT_KNOW. The Font underline Style. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iUnderlineColor     - [optional] (-1-16777215) Default is $LO_COLOR_OFF. The Font Underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+;                  $iStrikelineStyle    - [optional] (0-6) Default is $LOW_CHAR_STRIKEOUT_DONT_KNOW. The Strikeout line style. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bIndividualWords    - [optional] Default is False. If True, only individual words are underlined.
+;                  $iRelief             - [optional] (0-2) Default is $LOW_CHAR_RELIEF_NONE. The Font relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1913,17 +1913,17 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ; Name ..........: _LOWriter_FontDescEdit
 ; Description ...: Set or Retrieve Font Descriptor settings.
 ; Syntax ........: _LOWriter_FontDescEdit(ByRef $mFontDesc[, $sFontName = Null[, $iWeight = Null[, $iPosture = Null[, $nSize = Null[, $iColor = Null[, $iUnderlineStyle = Null[, $iUnderlineColor = Null[, $iStrikelineStyle = Null[, $bIndividualWords = Null[, $iRelief = Null]]]]]]]]]])
-; Parameters ....: $mFontDesc           - [in/out] a map. A Font descriptor Map as returned from a _LOWriter_FontDescCreate, or control property return function.
-;                  $sFontName           - [optional] a string value. Default is Null. The Font name.
-;                  $iWeight             - [optional] an integer value (0-200). Default is Null. The Font weight. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iPosture            - [optional] an integer value (0-5). Default is Null. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $nSize               - [optional] a general number value. Default is Null. The Font size.
-;                  $iColor              - [optional] an integer value (-1-16777215). Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iUnderlineStyle     - [optional] an integer value (0-18). Default is Null. The Font underline Style. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iUnderlineColor     - [optional] an integer value (-1-16777215). Default is Null.
-;                  $iStrikelineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout line style. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bIndividualWords    - [optional] a boolean value. Default is Null. If True, only individual words are underlined.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Font relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $mFontDesc           - A Font descriptor Map as returned from a _LOWriter_FontDescCreate, or control property return function.
+;                  $sFontName           - [optional] Default is Null. The Font name.
+;                  $iWeight             - [optional] (0-200) Default is Null. The Font weight. See Constants $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iPosture            - [optional] (0-5) Default is Null. The Font italic setting. See Constants $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $nSize               - [optional] Default is Null. The Font size.
+;                  $iColor              - [optional] (-1-16777215) Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+;                  $iUnderlineStyle     - [optional] (0-18) Default is Null. The Font underline Style. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iUnderlineColor     - [optional] (-1-16777215) Default is Null.
+;                  $iStrikelineStyle    - [optional] (0-6) Default is Null. The Strikeout line style. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bIndividualWords    - [optional] Default is Null. If True, only individual words are underlined.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Font relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2033,8 +2033,8 @@ EndFunc   ;==>_LOWriter_FontDescEdit
 ; Name ..........: _LOWriter_FontExists
 ; Description ...: Tests whether a specific font exists by name.
 ; Syntax ........: _LOWriter_FontExists($sFontName[, $oDoc = Null])
-; Parameters ....: $sFontName           - a string value. The Font name to search for.
-;                  $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+; Parameters ....: $sFontName           - The Font name to search for.
+;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2109,7 +2109,7 @@ EndFunc   ;==>_LOWriter_FontExists
 ; Name ..........: _LOWriter_FontsGetNames
 ; Description ...: Retrieve an array of currently available fonts.
 ; Syntax ........: _LOWriter_FontsGetNames([$oDoc = Null])
-; Parameters ....: $oDoc                - [optional] an object. Default is Null. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
@@ -2188,8 +2188,8 @@ EndFunc   ;==>_LOWriter_FontsGetNames
 ; Name ..........: _LOWriter_FormatKeyCreate
 ; Description ...: Create a Format Key.
 ; Syntax ........: _LOWriter_FormatKeyCreate(ByRef $oDoc, $sFormat)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sFormat             - a string value. The format key String to create.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sFormat             - The format key String to create.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2239,8 +2239,8 @@ EndFunc   ;==>_LOWriter_FormatKeyCreate
 ; Name ..........: _LOWriter_FormatKeyDelete
 ; Description ...: Delete a User-Created Format Key from a Document.
 ; Syntax ........: _LOWriter_FormatKeyDelete(ByRef $oDoc, $iFormatKey)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $iFormatKey          - an integer value. The User-Created format Key to delete.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $iFormatKey          - The User-Created format Key to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2284,9 +2284,9 @@ EndFunc   ;==>_LOWriter_FormatKeyDelete
 ; Name ..........: _LOWriter_FormatKeyExists
 ; Description ...: Check if a Document contains a certain Format Key.
 ; Syntax ........: _LOWriter_FormatKeyExists(ByRef $oDoc, $iFormatKey[, $iFormatType = $LOW_FORMAT_KEYS_ALL])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $iFormatKey          - an integer value. The Format Key to look for.
-;                  $iFormatType         - [optional] an integer value (0-15881). Default is $LOW_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $iFormatKey          - The Format Key to look for.
+;                  $iFormatType         - [optional] (0-15881) Default is $LOW_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2340,8 +2340,8 @@ EndFunc   ;==>_LOWriter_FormatKeyExists
 ; Name ..........: _LOWriter_FormatKeyGetStandard
 ; Description ...: Retrieve the Standard Format for a specific Format Key Type.
 ; Syntax ........: _LOWriter_FormatKeyGetStandard(ByRef $oDoc, $iFormatKeyType)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $iFormatKeyType      - an integer value (1-8196). The Format Key type to retrieve the standard Format for. See Constants $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $iFormatKeyType      - (1-8196) The Format Key type to retrieve the standard Format for. See Constants $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2388,8 +2388,8 @@ EndFunc   ;==>_LOWriter_FormatKeyGetStandard
 ; Name ..........: _LOWriter_FormatKeyGetString
 ; Description ...: Retrieve a Format Key String.
 ; Syntax ........: _LOWriter_FormatKeyGetString(ByRef $oDoc, $iFormatKey)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $iFormatKey          - an integer value. The Format Key to retrieve the string for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $iFormatKey          - The Format Key to retrieve the string for.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2432,10 +2432,10 @@ EndFunc   ;==>_LOWriter_FormatKeyGetString
 ; Name ..........: _LOWriter_FormatKeysGetList
 ; Description ...: Retrieve an Array of Date/Time Format Keys.
 ; Syntax ........: _LOWriter_FormatKeysGetList(ByRef $oDoc[, $bIsUser = False[, $bUserOnly = False[, $iFormatKeyType = $LOW_FORMAT_KEYS_ALL]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $bIsUser             - [optional] a boolean value. Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
-;                  $bUserOnly           - [optional] a boolean value. Default is False. If True, only user-created Format Keys are returned.
-;                  $iFormatKeyType      - [optional] an integer value (0-15881). Default is $LOW_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3..
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bIsUser             - [optional] Default is False. If True, Adds a third column to the return Array with a boolean, whether each Key is user-created or not.
+;                  $bUserOnly           - [optional] Default is False. If True, only user-created Format Keys are returned.
+;                  $iFormatKeyType      - [optional] (0-15881) Default is $LOW_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3..
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2514,13 +2514,13 @@ EndFunc   ;==>_LOWriter_FormatKeysGetList
 ; Name ..........: _LOWriter_SearchDescriptorCreate
 ; Description ...: Create a Search Descriptor for searching a document.
 ; Syntax ........: _LOWriter_SearchDescriptorCreate(ByRef $oDoc[, $bBackwards = False[, $bMatchCase = False[, $bWholeWord = False[, $bRegExp = False[, $bStyles = False[, $bSearchPropValues = False]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $bBackwards          - [optional] a boolean value. Default is False. If True, the document is searched backwards.
-;                  $bMatchCase          - [optional] a boolean value. Default is False. If True, the case of the letters is important for the Search.
-;                  $bWholeWord          - [optional] a boolean value. Default is False. If True, only complete words will be found.
-;                  $bRegExp             - [optional] a boolean value. Default is False. If True, the search string is evaluated as a regular expression.
-;                  $bStyles             - [optional] a boolean value. Default is False. If True, the string is considered a Paragraph Style name, and the search will return any paragraph utilizing the specified name, EXCEPT if you input Format properties to search for, then setting this to True causes the search to search both for direct formatting matching those properties and also Paragraph/Character styles that contain matching properties.
-;                  $bSearchPropValues   - [optional] a boolean value. Default is False. If True, any formatting properties searched for are matched based on their value, else if False, the search only looks for their existence. See Remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bBackwards          - [optional] Default is False. If True, the document is searched backwards.
+;                  $bMatchCase          - [optional] Default is False. If True, the case of the letters is important for the Search.
+;                  $bWholeWord          - [optional] Default is False. If True, only complete words will be found.
+;                  $bRegExp             - [optional] Default is False. If True, the search string is evaluated as a regular expression.
+;                  $bStyles             - [optional] Default is False. If True, the string is considered a Paragraph Style name, and the search will return any paragraph utilizing the specified name, EXCEPT if you input Format properties to search for, then setting this to True causes the search to search both for direct formatting matching those properties and also Paragraph/Character styles that contain matching properties.
+;                  $bSearchPropValues   - [optional] Default is False. If True, any formatting properties searched for are matched based on their value, else if False, the search only looks for their existence. See Remarks.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2577,13 +2577,13 @@ EndFunc   ;==>_LOWriter_SearchDescriptorCreate
 ; Name ..........: _LOWriter_SearchDescriptorModify
 ; Description ...: Modify Search Descriptor settings of an existing Search Descriptor Object.
 ; Syntax ........: _LOWriter_SearchDescriptorModify(ByRef $oSrchDescript[, $bBackwards = Null[, $bMatchCase = Null[, $bWholeWord = Null[, $bRegExp = Null[, $bStyles = Null[, $bSearchPropValues = Null]]]]]])
-; Parameters ....: $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
-;                  $bBackwards          - [optional] a boolean value. Default is False. If True, the document is searched backwards.
-;                  $bMatchCase          - [optional] a boolean value. Default is False. If True, the case of the letters is important for the Search.
-;                  $bWholeWord          - [optional] a boolean value. Default is False. If True, only complete words will be found.
-;                  $bRegExp             - [optional] a boolean value. Default is False. If True, the search string is evaluated as a regular expression. Cannot be called with True if Similarity Search is set to True.
-;                  $bStyles             - [optional] a boolean value. Default is False. If True, the string is considered a Paragraph Style name, and the search will return any paragraph utilizing the specified name, EXCEPT if you input Format properties to search for, then setting this to True causes the search to search both for direct formatting matching those properties and also Paragraph/Character styles that contain matching properties.
-;                  $bSearchPropValues   - [optional] a boolean value. Default is False. If True, any formatting properties searched for are matched based on their value, else if False, the search only looks for their existence. See Remarks.
+; Parameters ....: $oSrchDescript       - A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
+;                  $bBackwards          - [optional] Default is False. If True, the document is searched backwards.
+;                  $bMatchCase          - [optional] Default is False. If True, the case of the letters is important for the Search.
+;                  $bWholeWord          - [optional] Default is False. If True, only complete words will be found.
+;                  $bRegExp             - [optional] Default is False. If True, the search string is evaluated as a regular expression. Cannot be called with True if Similarity Search is set to True.
+;                  $bStyles             - [optional] Default is False. If True, the string is considered a Paragraph Style name, and the search will return any paragraph utilizing the specified name, EXCEPT if you input Format properties to search for, then setting this to True causes the search to search both for direct formatting matching those properties and also Paragraph/Character styles that contain matching properties.
+;                  $bSearchPropValues   - [optional] Default is False. If True, any formatting properties searched for are matched based on their value, else if False, the search only looks for their existence. See Remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2670,12 +2670,12 @@ EndFunc   ;==>_LOWriter_SearchDescriptorModify
 ; Name ..........: _LOWriter_SearchDescriptorSimilarityModify
 ; Description ...: Modify Similarity Search Settings for an existing Search Descriptor Object.
 ; Syntax ........: _LOWriter_SearchDescriptorSimilarityModify(ByRef $oSrchDescript[, $bSimilarity = Null[, $bCombine = Null[, $iRemove = Null[, $iAdd = Null[, $iExchange = Null]]]]])
-; Parameters ....: $oSrchDescript       - [in/out] an object. A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
-;                  $bSimilarity         - [optional] a boolean value. Default is Null. If True, a "similarity search" is performed.
-;                  $bCombine            - [optional] a boolean value. Default is Null. If True, all similarity rules ($iRemove, $iAdd, and $iExchange) are applied together.
-;                  $iRemove             - [optional] an integer value. Default is Null. Specifies the number of characters that may be ignored to match the search pattern.
-;                  $iAdd                - [optional] an integer value. Default is Null. Specifies the number of characters that must be added to match the search pattern.
-;                  $iExchange           - [optional] an integer value. Default is Null. Specifies the number of characters that must be replaced to match the search pattern.
+; Parameters ....: $oSrchDescript       - A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
+;                  $bSimilarity         - [optional] Default is Null. If True, a "similarity search" is performed.
+;                  $bCombine            - [optional] Default is Null. If True, all similarity rules ($iRemove, $iAdd, and $iExchange) are applied together.
+;                  $iRemove             - [optional] Default is Null. Specifies the number of characters that may be ignored to match the search pattern.
+;                  $iAdd                - [optional] Default is Null. Specifies the number of characters that must be added to match the search pattern.
+;                  $iExchange           - [optional] Default is Null. Specifies the number of characters that must be replaced to match the search pattern.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

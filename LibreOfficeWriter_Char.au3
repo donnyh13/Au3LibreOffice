@@ -52,11 +52,11 @@
 ; Name ..........: _LOWriter_CharStyleBorderColor
 ; Description ...: Set and Retrieve the Character Style Border Line Color. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_CharStyleBorderColor(ByRef $oCharStyle[, $iTop = Null[, $iBottom = Null[,$iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Character Style, as a RGB Color Integer. A custom value can be used, or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Character Style, as a RGB Color Integer. A custom value can be used, or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Character Style, as a RGB Color Integer. A custom value can be used, or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Character Style, as a RGB Color Integer. A custom value can be used, or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Character Style, as a RGB Color Integer. A custom value can be used, or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Character Style, as a RGB Color Integer. A custom value can be used, or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Character Style, as a RGB Color Integer. A custom value can be used, or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Character Style, as a RGB Color Integer. A custom value can be used, or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -118,12 +118,12 @@ EndFunc   ;==>_LOWriter_CharStyleBorderColor
 ; Name ..........: _LOWriter_CharStyleBorderPadding
 ; Description ...: Set and retrieve the distance between the border and the characters. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_CharStyleBorderPadding(ByRef $oCharStyle[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iAll                - [optional] an integer value. Default is Null. Set all four values to the same value. When used, all other parameters are ignored. In Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The Top border distance in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom border distance in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The left border distance in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right border distance in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iAll                - [optional] Default is Null. Set all four values to the same value. When used, all other parameters are ignored. In Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The Top border distance in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom border distance in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The left border distance in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right border distance in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -173,7 +173,7 @@ EndFunc   ;==>_LOWriter_CharStyleBorderPadding
 ; Name ..........: _LOWriter_CharStyleBorderStyle
 ; Description ...: Set or Retrieve the Character Style Border Line style. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_CharStyleBorderStyle(ByRef $oCharStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
 ;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Character Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Character Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Character Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -238,11 +238,11 @@ EndFunc   ;==>_LOWriter_CharStyleBorderStyle
 ; Name ..........: _LOWriter_CharStyleBorderWidth
 ; Description ...: Set and Retrieve the Character Style Border Line Width. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_CharStyleBorderWidth(ByRef $oCharStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Character Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -300,8 +300,8 @@ EndFunc   ;==>_LOWriter_CharStyleBorderWidth
 ; Name ..........: _LOWriter_CharStyleCreate
 ; Description ...: Create a new Character Style in a Document.
 ; Syntax ........: _LOWriter_CharStyleCreate(ByRef $oDoc, $sCharStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sCharStyle          - a string value. The name of the new Character Style to create.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sCharStyle          - The name of the new Character Style to create.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -353,9 +353,9 @@ EndFunc   ;==>_LOWriter_CharStyleCreate
 ; Name ..........: _LOWriter_CharStyleCurrent
 ; Description ...: Set or Retrieve the current Character style for a section of text by Cursor or paragraph Object.
 ; Syntax ........: _LOWriter_CharStyleCurrent(ByRef $oDoc, ByRef $oObj[, $sCharStyle = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object returned from _LOWriter_CursorParObjCreateList function.
-;                  $sCharStyle          - [optional] a string value. Default is Null. The Character Style name to set the text to.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oObj                - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object returned from _LOWriter_CursorParObjCreateList function.
+;                  $sCharStyle          - [optional] Default is Null. The Character Style name to set the text to.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -410,10 +410,10 @@ EndFunc   ;==>_LOWriter_CharStyleCurrent
 ; Name ..........: _LOWriter_CharStyleDelete
 ; Description ...: Delete a User-Created Character Style from a Document.
 ; Syntax ........: _LOWriter_CharStyleDelete(ByRef $oDoc, $oCharStyle[, $bForceDelete = False[, $sReplacementStyle = ""]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function. Must be a User-Created Style, not a built-in Style native to LibreOffice.
-;                  $bForceDelete        - [optional] a boolean value. Default is False. If True Character style will be deleted regardless of whether it is in use or not.
-;                  $sReplacementStyle   - [optional] a string value. Default is "". The Character style to use instead of the one being deleted if the Character style being deleted was already applied to text in the document. "" = No Character Style
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function. Must be a User-Created Style, not a built-in Style native to LibreOffice.
+;                  $bForceDelete        - [optional] Default is False. If True Character style will be deleted regardless of whether it is in use or not.
+;                  $sReplacementStyle   - [optional] Default is "". The Character style to use instead of the one being deleted if the Character style being deleted was already applied to text in the document. "" = No Character Style
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -475,12 +475,12 @@ EndFunc   ;==>_LOWriter_CharStyleDelete
 ; Name ..........: _LOWriter_CharStyleEffect
 ; Description ...: Set or Retrieve the Font Effect settings for a Character Style.
 ; Syntax ........: _LOWriter_CharStyleEffect(ByRef $oCharStyle[, $iCase = Null[, $bHidden = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iCase               - [optional] an integer value (0-4). Default is Null. The Character Case Style. See Constants $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, the Characters are hidden.
-;                  $iRelief             - [optional] an integer value (0-2). Default is Null. The Character Relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bOutline            - [optional] a boolean value. Default is Null. If True, the characters have an outline around the outside.
-;                  $bShadow             - [optional] a boolean value. Default is Null. If True, the characters have a shadow.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bHidden             - [optional] Default is Null. If True, the Characters are hidden.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
+;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -527,8 +527,8 @@ EndFunc   ;==>_LOWriter_CharStyleEffect
 ; Name ..........: _LOWriter_CharStyleExists
 ; Description ...: Check whether a document contains a Character Style by Name.
 ; Syntax ........: _LOWriter_CharStyleExists(ByRef $oDoc, $sCharStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sCharStyle          - a string value. The Character Style name to search for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sCharStyle          - The Character Style name to search for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -559,10 +559,10 @@ EndFunc   ;==>_LOWriter_CharStyleExists
 ; Name ..........: _LOWriter_CharStyleFont
 ; Description ...: Set and Retrieve the Font Settings for a Character Style.
 ; Syntax ........: _LOWriter_CharStyleFont(ByRef $oCharStyle[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $sFontName           - [optional] a string value. Default is Null. The Font Name to use.
-;                  $nFontSize           - [optional] a general number value. Default is Null. The Font size.
-;                  $iPosture            - [optional] an integer value (0-5). Default is Null. Font Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $sFontName           - [optional] Default is Null. The Font Name to use.
+;                  $nFontSize           - [optional] Default is Null. The Font size.
+;                  $iPosture            - [optional] (0-5) Default is Null. Font Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
 ;                  $iWeight             - [optional] an integer value (0, 50-200). Default is Null. Bold settings. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -611,10 +611,10 @@ EndFunc   ;==>_LOWriter_CharStyleFont
 ; Name ..........: _LOWriter_CharStyleFontColor
 ; Description ...: Set or retrieve the font color, transparency and highlighting of a Character style.
 ; Syntax ........: _LOWriter_CharStyleFontColor(ByRef $oCharStyle[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iFontColor          - [optional] an integer value (-1-16777215). Default is Null. the desired font color, as a RGB Color Integer, can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
-;                  $iHighlight          - [optional] an integer value (-1-16777215). Default is Null. The highlight Color, as a RGB Color Integer, can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iFontColor          - [optional] (-1-16777215) Default is Null. the desired font color, as a RGB Color Integer, can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+;                  $iTransparency       - [optional] (0-100) Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
+;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer, can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -661,8 +661,8 @@ EndFunc   ;==>_LOWriter_CharStyleFontColor
 ; Name ..........: _LOWriter_CharStyleGetObjByName
 ; Description ...: Retrieve a Character Style Object for use with other CharStyle functions.
 ; Syntax ........: _LOWriter_CharStyleGetObjByName(ByRef $oDoc, $sCharStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sCharStyle          - a string value. The Character Style name to retrieve the Object for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sCharStyle          - The Character Style name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -700,11 +700,11 @@ EndFunc   ;==>_LOWriter_CharStyleGetObjByName
 ; Name ..........: _LOWriter_CharStyleOrganizer
 ; Description ...: Set or retrieve the Organizer settings of a Character Style.
 ; Syntax ........: _LOWriter_CharStyleOrganizer(ByRef $oDoc, $oCharStyle[, $sNewCharStyleName = Null[, $sParentStyle = Null[, $bHidden = Null]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $sNewCharStyleName   - [optional] a string value. Default is Null. The new name to set the called Character style to.
-;                  $sParentStyle        - [optional] a string value. Default is Null. Set an existing Character style (or an Empty String ("") = - None -) to apply its settings to the current style. Use the other settings to modify the inherited style settings.
-;                  $bHidden             - [optional] a boolean value. Default is Null. Whether to hide the style in the UI. LibreOffice version 4.0 and up only.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $sNewCharStyleName   - [optional] Default is Null. The new name to set the called Character style to.
+;                  $sParentStyle        - [optional] Default is Null. Set an existing Character style (or an Empty String ("") = - None -) to apply its settings to the current style. Use the other settings to modify the inherited style settings.
+;                  $bHidden             - [optional] Default is Null. Whether to hide the style in the UI. LibreOffice version 4.0 and up only.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -789,10 +789,10 @@ EndFunc   ;==>_LOWriter_CharStyleOrganizer
 ; Name ..........: _LOWriter_CharStyleOverLine
 ; Description ...: Set and retrieve the Overline settings for a Character style.
 ; Syntax ........: _LOWriter_CharStyleOverLine(ByRef $oCharStyle[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iOverLineStyle      - [optional] an integer value (0-18). Default is Null. The style of the Overline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iOLColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not Overlined.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -836,10 +836,10 @@ EndFunc   ;==>_LOWriter_CharStyleOverLine
 ; Name ..........: _LOWriter_CharStylePosition
 ; Description ...: Set and retrieve settings related to Sub/Super Script and relative size.
 ; Syntax ........: _LOWriter_CharStylePosition(ByRef $oCharStyle[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iSuperScript        - [optional] an integer value (-1-100). Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
-;                  $iSubScript          - [optional] an integer value (-1-100). Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
-;                  $iRelativeSize       - [optional] an integer value (1-100). Default is Null. The size percentage relative to current font size.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iSuperScript        - [optional] (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
+;                  $iSubScript          - [optional] (-1-100) Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
+;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -886,9 +886,9 @@ EndFunc   ;==>_LOWriter_CharStylePosition
 ; Name ..........: _LOWriter_CharStyleRotateScale
 ; Description ...: Set or retrieve the character rotational and Scale settings for a Character Style.
 ; Syntax ........: _LOWriter_CharStyleRotateScale(ByRef $oCharStyle[, $iRotation = Null[, $iScaleWidth = Null]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
 ;                  $iRotation           - [optional] an integer value (0,90,270). Default is Null. Degrees to rotate the text.
-;                  $iScaleWidth         - [optional] an integer value (1-100). Default is Null. The percentage to horizontally stretch or compress the text. 100% is a normal sizing.
+;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100% is a normal sizing.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -930,10 +930,10 @@ EndFunc   ;==>_LOWriter_CharStyleRotateScale
 ; Name ..........: _LOWriter_CharStylesGetNames
 ; Description ...: Retrieve an array of all Character Style names available for a document.
 ; Syntax ........: _LOWriter_CharStylesGetNames(ByRef $oDoc[, $bUserOnly = False[, $bAppliedOnly = False[, $bDisplayName = False]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $bUserOnly           - [optional] a boolean value. Default is False. If True only User-Created Character Styles are returned.
-;                  $bAppliedOnly        - [optional] a boolean value. Default is False. If True only Applied Character Styles are returned.
-;                  $bDisplayName        - [optional] a boolean value. Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bUserOnly           - [optional] Default is False. If True only User-Created Character Styles are returned.
+;                  $bAppliedOnly        - [optional] Default is False. If True only Applied Character Styles are returned.
+;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -982,10 +982,10 @@ EndFunc   ;==>_LOWriter_CharStylesGetNames
 ; Name ..........: _LOWriter_CharStyleShadow
 ; Description ...: Set and retrieve the Shadow for a Character Style. LibreOffice 4.2 and Up.
 ; Syntax ........: _LOWriter_CharStyleShadow(ByRef $oCharStyle[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. Location of the shadow compared to the characters. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. Color of the shadow, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value. Default is Null. Width of the shadow, set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iLocation           - [optional] (0-4) Default is Null. Location of the shadow compared to the characters. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iColor              - [optional] (0-16777215) Default is Null. Color of the shadow, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. Width of the shadow, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1035,9 +1035,9 @@ EndFunc   ;==>_LOWriter_CharStyleShadow
 ; Name ..........: _LOWriter_CharStyleSpacing
 ; Description ...: Set and retrieve the spacing between characters (Kerning) for a Character style.
 ; Syntax ........: _LOWriter_CharStyleSpacing(ByRef $oCharStyle[, $bAutoKerning = Null[, $nKerning = Null]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $bAutoKerning        - [optional] a boolean value. Default is Null. If True, applies a spacing in between certain pairs of characters.
-;                  $nKerning            - [optional] a general number value (-2-928.9). Default is Null. The kerning value of the characters. Min is -2 Pt. Max is 928.8 Pt. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
+;                  $nKerning            - [optional] (-2-928.9) Default is Null. The kerning value of the characters. Min is -2 Pt. Max is 928.8 Pt. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1082,9 +1082,9 @@ EndFunc   ;==>_LOWriter_CharStyleSpacing
 ; Name ..........: _LOWriter_CharStyleStrikeOut
 ; Description ...: Set or Retrieve the StrikeOut settings for a Character style.
 ; Syntax ........: _LOWriter_CharStyleStrikeOut(ByRef $oCharStyle[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iStrikeLineStyle    - [optional] an integer value (0-6). Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, strike out words only and skip whitespaces.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bWordOnly           - [optional] Default is Null. If True, strike out words only and skip whitespaces.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1126,10 +1126,10 @@ EndFunc   ;==>_LOWriter_CharStyleStrikeOut
 ; Name ..........: _LOWriter_CharStyleUnderLine
 ; Description ...: Set and retrieve the Underline settings for a Character style.
 ; Syntax ........: _LOWriter_CharStyleUnderLine(ByRef $oCharStyle[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oCharStyle          - [in/out] an object. A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iUnderLineStyle     - [optional] an integer value (0-18). Default is Null. The style of the Underline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iULColor            - [optional] an integer value (-1-16777215). Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] a boolean value. Default is Null. If True, white spaces are not underlined.
+; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The style of the Underline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iULColor            - [optional] (-1-16777215) Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

@@ -114,8 +114,8 @@
 ; Name ..........: _LOWriter_FormAdd
 ; Description ...: Add a form to a Document or create a sub-form.
 ; Syntax ........: _LOWriter_FormAdd(ByRef $oObj, $sName)
-; Parameters ....: $oObj                - [in/out] an object. Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
-;                  $sName               - a string value. The name of the new Form. Form names do not need to be unique, but it will help for clarity.
+; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
+;                  $sName               - The name of the new Form. Form names do not need to be unique, but it will help for clarity.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -194,9 +194,9 @@ EndFunc   ;==>_LOWriter_FormAdd
 ; Name ..........: _LOWriter_FormConCheckBoxData
 ; Description ...: Set or Retrieve Check Box Data Properties.
 ; Syntax ........: _LOWriter_FormConCheckBoxData(ByRef $oCheckBox[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oCheckBox           - [in/out] an object. A Check Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oCheckBox           - A Check Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -261,29 +261,29 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ; Name ..........: _LOWriter_FormConCheckBoxGeneral
 ; Description ...: Set or Retrieve general Checkbox control properties.
 ; Syntax ........: _LOWriter_FormConCheckBoxGeneral(ByRef $oCheckBox[, $sName = Null[, $sLabel = Null[, $oLabelField = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $iDefaultState = Null[, $mFont = Null[, $iStyle = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $bWordBreak = Null[, $sGraphics = Null[, $iGraphicAlign = Null[, $bTriState = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oCheckBox           - [in/out] an object. A Checkbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $iDefaultState       - [optional] an integer value (0-2). Default is Null. The Default state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iStyle              - [optional] an integer value (1-2). Default is Null. The display style of the checkbox. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
-;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
-;                  $iGraphicAlign       - [optional] an integer value (0-12). Default is Null. The Alignment of the Image. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bTriState           - [optional] a boolean value. Default is Null. If True, the checkbox will have a third checked state.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oCheckBox           - A Checkbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $iDefaultState       - [optional] (0-2) Default is Null. The Default state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iStyle              - [optional] (1-2) Default is Null. The display style of the checkbox. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bWordBreak          - [optional] Default is Null. If True, line breaks are allowed to be used.
+;                  $sGraphics           - [optional] Default is Null. The path to an Image file.
+;                  $iGraphicAlign       - [optional] (0-12) Default is Null. The Alignment of the Image. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bTriState           - [optional] Default is Null. If True, the checkbox will have a third checked state.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -602,8 +602,8 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxGeneral
 ; Name ..........: _LOWriter_FormConCheckBoxState
 ; Description ...: Set or Retrieve the current Checkbox state.
 ; Syntax ........: _LOWriter_FormConCheckBoxState(ByRef $oCheckBox[, $iState = Null])
-; Parameters ....: $oCheckBox           - [in/out] an object. A Checkbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iState              - [optional] an integer value (0-2). Default is Null. The current checked state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oCheckBox           - A Checkbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iState              - [optional] (0-2) Default is Null. The current checked state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -661,12 +661,12 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxState
 ; Name ..........: _LOWriter_FormConComboBoxData
 ; Description ...: Set or Retrieve Combo Box Data Properties.
 ; Syntax ........: _LOWriter_FormConComboBoxData(ByRef $oComboBox[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $iType = Null[, $sListContent = Null]]]]])
-; Parameters ....: $oComboBox           - [in/out] an object. A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $iType               - [optional] an integer value (1-5). Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sListContent        - [optional] a string value. Default is Null. Default is Null. The SQL statement, Table Name, etc., depending on the value of $iType.
+; Parameters ....: $oComboBox           - A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bEmptyIsNull        - [optional] Default is Null. If True, an empty string will be treated as a Null value.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $iType               - [optional] (1-5) Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sListContent        - [optional] Default is Null. Default is Null. The SQL statement, Table Name, etc., depending on the value of $iType.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -758,32 +758,32 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ; Name ..........: _LOWriter_FormConComboBoxGeneral
 ; Description ...: Set or Retrieve general Combo Box Properties.
 ; Syntax ........: _LOWriter_FormConComboBoxGeneral(ByRef $oComboBox[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $iMaxLen = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $iMouseScroll = Null[, $bTabStop = Null[, $iTabOrder = Null[, $asList = Null[, $sDefaultTxt = Null[, $mFont = Null[, $iAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bDropdown = Null[, $iLines = Null[, $bAutoFill = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oComboBox           - [in/out] an object. A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Combo box will accept.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $asList              - [optional] an array of strings. Default is Null. An array of entries. See remarks.
-;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text of the combo Box.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bDropdown           - [optional] a boolean value. Default is Null. If True, the Combo Box will behave like a dropdown.
-;                  $iLines              - [optional] an integer value. Default is Null. If $bDropdown is True, $iLines specifies how many lines are shown in the dropdown list.
-;                  $bAutoFill           - [optional] a boolean value. Default is Null. If True, the Autofill function is enabled.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oComboBox           - A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iMaxLen             - [optional] (-1-2147483647) Default is Null. The maximum text length that the Combo box will accept.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $asList              - [optional] Default is Null. An array of entries. See remarks.
+;                  $sDefaultTxt         - [optional] Default is Null. The default text of the combo Box.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bDropdown           - [optional] Default is Null. If True, the Combo Box will behave like a dropdown.
+;                  $iLines              - [optional] Default is Null. If $bDropdown is True, $iLines specifies how many lines are shown in the dropdown list.
+;                  $bAutoFill           - [optional] Default is Null. If True, the Autofill function is enabled.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1144,8 +1144,8 @@ EndFunc   ;==>_LOWriter_FormConComboBoxGeneral
 ; Name ..........: _LOWriter_FormConComboBoxValue
 ; Description ...: Set or Retrieve a Combo Box's current selection.
 ; Syntax ........: _LOWriter_FormConComboBoxValue(ByRef $oComboBox[, $sValue = Null])
-; Parameters ....: $oComboBox           - [in/out] an object. A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sValue              - [optional] a string value. Default is Null. The current value in the Combo Box's entry field. Value doesn't need to match an available field.
+; Parameters ....: $oComboBox           - A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sValue              - [optional] Default is Null. The current value in the Combo Box's entry field. Value doesn't need to match an available field.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1204,9 +1204,9 @@ EndFunc   ;==>_LOWriter_FormConComboBoxValue
 ; Name ..........: _LOWriter_FormConCurrencyFieldData
 ; Description ...: Set or Retrieve Currency Field Data Properties.
 ; Syntax ........: _LOWriter_FormConCurrencyFieldData(ByRef $oCurrencyField[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oCurrencyField      - [in/out] an object. A Currency Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oCurrencyField      - A Currency Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1270,39 +1270,39 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ; Name ..........: _LOWriter_FormConCurrencyFieldGeneral
 ; Description ...: Set or Retrieve general Currency Field properties.
 ; Syntax ........: _LOWriter_FormConCurrencyFieldGeneral(ByRef $oCurrencyField[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $bStrict = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $iMouseScroll = Null[, $bTabStop = Null[, $iTabOrder = Null[, $nMin = Null[, $nMax = Null[, $iIncr = Null[, $nDefault = Null[, $iDecimal = Null[, $bThousandsSep = Null[, $sCurrSymbol = Null[, $bPrefix = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oCurrencyField      - [in/out] an object. A Currency Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $nMin                - [optional] a general number value. Default is Null. The minimum value the control can be set to.
-;                  $nMax                - [optional] a general number value. Default is Null. The maximum value the control can be set to.
-;                  $iIncr               - [optional] an integer value. Default is Null. The amount to Increase or Decrease the value by.
-;                  $nDefault            - [optional] a general number value. Default is Null. The default value the control will be set to.
-;                  $iDecimal            - [optional] an integer value (0-20). Default is Null. The amount of decimal accuracy.
-;                  $bThousandsSep       - [optional] a boolean value. Default is Null. If True, a thousands separator will be added.
-;                  $sCurrSymbol         - [optional] a string value. Default is Null. The symbol to use for currency.
-;                  $bPrefix             - [optional] a boolean value. Default is Null. If True, the currency symbol is prefixed to the value.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oCurrencyField      - A Currency Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $nMin                - [optional] Default is Null. The minimum value the control can be set to.
+;                  $nMax                - [optional] Default is Null. The maximum value the control can be set to.
+;                  $iIncr               - [optional] Default is Null. The amount to Increase or Decrease the value by.
+;                  $nDefault            - [optional] Default is Null. The default value the control will be set to.
+;                  $iDecimal            - [optional] (0-20) Default is Null. The amount of decimal accuracy.
+;                  $bThousandsSep       - [optional] Default is Null. If True, a thousands separator will be added.
+;                  $sCurrSymbol         - [optional] Default is Null. The symbol to use for currency.
+;                  $bPrefix             - [optional] Default is Null. If True, the currency symbol is prefixed to the value.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1745,8 +1745,8 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldGeneral
 ; Name ..........: _LOWriter_FormConCurrencyFieldValue
 ; Description ...: Set or retrieve the current Currency field value.
 ; Syntax ........: _LOWriter_FormConCurrencyFieldValue(ByRef $oCurrencyField[, $nValue = Null])
-; Parameters ....: $oCurrencyField      - [in/out] an object. A Currency Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $nValue              - [optional] a general number value. Default is Null. The value to set the field to.
+; Parameters ....: $oCurrencyField      - A Currency Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $nValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or Number
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1803,9 +1803,9 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldValue
 ; Name ..........: _LOWriter_FormConDateFieldData
 ; Description ...: Set or Retrieve Date Field Data Properties.
 ; Syntax ........: _LOWriter_FormConDateFieldData(ByRef $oDateField[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oDateField          - [in/out] an object. A Date Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oDateField          - A Date Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1869,36 +1869,36 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ; Name ..........: _LOWriter_FormConDateFieldGeneral
 ; Description ...: Set or Retrieve general Date Field properties.
 ; Syntax ........: _LOWriter_FormConDateFieldGeneral(ByRef $oDateField[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $bStrict = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $iMouseScroll = Null[, $bTabStop = Null[, $iTabOrder = Null[, $tDateMin = Null[, $tDateMax = Null[, $iFormat = Null[, $tDateDefault = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bDropdown = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oDateField          - [in/out] an object. A Date Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $tDateMin            - [optional] a dll struct value. Default is Null. The minimum date allowed to be entered, created previously by _LOWriter_DateStructCreate.
-;                  $tDateMax            - [optional] a dll struct value. Default is Null. The maximum date allowed to be entered, created previously by _LOWriter_DateStructCreate.
-;                  $iFormat             - [optional] an integer value (0-11). Default is Null. The Date Format to display the content in. See Constants $LOW_FORM_CON_DATE_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $tDateDefault        - [optional] a dll struct value. Default is Null. The Default date to display, created previously by _LOWriter_DateStructCreate.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bDropdown           - [optional] a boolean value. Default is Null. If True, the field will behave as a dropdown control.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oDateField          - A Date Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $tDateMin            - [optional] Default is Null. The minimum date allowed to be entered, created previously by _LOWriter_DateStructCreate.
+;                  $tDateMax            - [optional] Default is Null. The maximum date allowed to be entered, created previously by _LOWriter_DateStructCreate.
+;                  $iFormat             - [optional] (0-11) Default is Null. The Date Format to display the content in. See Constants $LOW_FORM_CON_DATE_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $tDateDefault        - [optional] Default is Null. The Default date to display, created previously by _LOWriter_DateStructCreate.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bDropdown           - [optional] Default is Null. If True, the field will behave as a dropdown control.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2361,8 +2361,8 @@ EndFunc   ;==>_LOWriter_FormConDateFieldGeneral
 ; Name ..........: _LOWriter_FormConDateFieldValue
 ; Description ...: Set or retrieve the current Date field value.
 ; Syntax ........: _LOWriter_FormConDateFieldValue(ByRef $oDateField[, $tDateValue = Null])
-; Parameters ....: $oDateField          - [in/out] an object. A Date Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $tDateValue          - [optional] a dll struct value. Default is Null. The date to set the field to, created previously by _LOWriter_DateStructCreate.
+; Parameters ....: $oDateField          - A Date Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $tDateValue          - [optional] Default is Null. The date to set the field to, created previously by _LOWriter_DateStructCreate.
 ; Return values .: Success: 1 or Structure
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2440,7 +2440,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldValue
 ; Name ..........: _LOWriter_FormConDelete
 ; Description ...: Delete a Form Control or Control from a Group.
 ; Syntax ........: _LOWriter_FormConDelete(ByRef $oControl)
-; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2483,26 +2483,26 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ; Name ..........: _LOWriter_FormConFileSelFieldGeneral
 ; Description ...: Set or Retrieve general File Selection Field properties.
 ; Syntax ........: _LOWriter_FormConFileSelFieldGeneral(ByRef $oFileSel[, $sName = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $sDefaultTxt = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oFileSel            - [in/out] an object. A File Selection Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text to display in the field.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oFileSel            - A File Selection Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $sDefaultTxt         - [optional] Default is Null. The default text to display in the field.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2781,8 +2781,8 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldGeneral
 ; Name ..........: _LOWriter_FormConFileSelFieldValue
 ; Description ...: Set or retrieve the current File Selection Field value.
 ; Syntax ........: _LOWriter_FormConFileSelFieldValue(ByRef $oFileSel[, $sValue = Null])
-; Parameters ....: $oFileSel            - [in/out] an object. A File Selection Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sValue              - [optional] a string value. Default is Null. The value to set the field to.
+; Parameters ....: $oFileSel            - A File Selection Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2841,11 +2841,11 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldValue
 ; Name ..........: _LOWriter_FormConFormattedFieldData
 ; Description ...: Set or Retrieve Formatted Field Data Properties.
 ; Syntax ........: _LOWriter_FormConFormattedFieldData(ByRef $oFormatField[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $bFilter = Null]]]])
-; Parameters ....: $oFormatField        - [in/out] an object. A Formatted Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $bFilter             - [optional] a boolean value. Default is Null. If True, filter proposal is active.
+; Parameters ....: $oFormatField        - A Formatted Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bEmptyIsNull        - [optional] Default is Null. If True, an empty string will be treated as a Null value.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2928,35 +2928,35 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ; Name ..........: _LOWriter_FormConFormattedFieldGeneral
 ; Description ...: Set or Retrieve general Formatted Field properties.
 ; Syntax ........: _LOWriter_FormConFormattedFieldGeneral(ByRef $oFormatField[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $iMaxLen = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $iMouseScroll = Null[, $bTabStop = Null[, $iTabOrder = Null[, $nMin = Null[, $nMax = Null[, $nDefault = Null[, $iFormat = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oFormatField        - [in/out] an object. A Formatted Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Formatted field will accept.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $nMin                - [optional] a general number value. Default is Null. The minimum value allowed in the field.
-;                  $nMax                - [optional] a general number value. Default is Null. The maximum value allowed in the field.
-;                  $nDefault            - [optional] a general number value. Default is Null. The default value of the field.
-;                  $iFormat             - [optional] an integer value. Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOWriter_FormatKeysGetList call, or created by _LOWriter_FormatKeyCreate function.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oFormatField        - A Formatted Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iMaxLen             - [optional] (-1-2147483647) Default is Null. The maximum text length that the Formatted field will accept.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $nMin                - [optional] Default is Null. The minimum value allowed in the field.
+;                  $nMax                - [optional] Default is Null. The maximum value allowed in the field.
+;                  $nDefault            - [optional] Default is Null. The default value of the field.
+;                  $iFormat             - [optional] Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOWriter_FormatKeysGetList call, or created by _LOWriter_FormatKeyCreate function.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3360,8 +3360,8 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldGeneral
 ; Name ..........: _LOWriter_FormConFormattedFieldValue
 ; Description ...: Set or Retrieve the current Formatted Field value.
 ; Syntax ........: _LOWriter_FormConFormattedFieldValue(ByRef $oFormatField[, $nValue = Null])
-; Parameters ....: $oFormatField        - [in/out] an object. A Formatted Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $nValue              - [optional] a general number value. Default is Null. The Value to set the Formatted Field to.
+; Parameters ....: $oFormatField        - A Formatted Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $nValue              - [optional] Default is Null. The Value to set the Formatted Field to.
 ; Return values .: Success: 1 or Number
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3419,7 +3419,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldValue
 ; Name ..........: _LOWriter_FormConGetParent
 ; Description ...: Retrieve the Parent Form of the called Control.
 ; Syntax ........: _LOWriter_FormConGetParent(ByRef $oControl)
-; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3469,17 +3469,17 @@ EndFunc   ;==>_LOWriter_FormConGetParent
 ; Name ..........: _LOWriter_FormConGroupBoxGeneral
 ; Description ...: Set or Retrieve general GroupBox control properties.
 ; Syntax ........: _LOWriter_FormConGroupBoxGeneral(ByRef $oGroupBox[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bPrintable = Null[, $mFont = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]])
-; Parameters ....: $oGroupBox           - [in/out] an object. A Groupbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oGroupBox           - A Groupbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -3648,25 +3648,25 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ; Name ..........: _LOWriter_FormConImageButtonGeneral
 ; Description ...: Set or Retrieve general Image Button properties.
 ; Syntax ........: _LOWriter_FormConImageButtonGeneral(ByRef $oImageButton[, $sName = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $iAction = Null[, $sURL = Null[, $sFrame = Null[, $sGraphics = Null[, $iScale = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oImageButton        - [in/out] an object. A Image Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iAction             - [optional] an integer value (0-12). Default is Null. The action that occurs when the button is pushed. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sURL                - [optional] a string value. Default is Null. The URL or Document path to open.
-;                  $sFrame              - [optional] a string value. Default is Null. The frame to open the URL in. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
-;                  $iScale              - [optional] an integer value (0-2). Default is Null. How to scale the image to fit the button. See Constants $LOW_FORM_CON_IMG_BTN_SCALE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oImageButton        - A Image Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iAction             - [optional] (0-12) Default is Null. The action that occurs when the button is pushed. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sURL                - [optional] Default is Null. The URL or Document path to open.
+;                  $sFrame              - [optional] Default is Null. The frame to open the URL in. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sGraphics           - [optional] Default is Null. The path to an Image file.
+;                  $iScale              - [optional] (0-2) Default is Null. How to scale the image to fit the button. See Constants $LOW_FORM_CON_IMG_BTN_SCALE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4038,9 +4038,9 @@ EndFunc   ;==>_LOWriter_FormConImageButtonGeneral
 ; Name ..........: _LOWriter_FormConImageControlData
 ; Description ...: Set or Retrieve Image Control Data Properties.
 ; Syntax ........: _LOWriter_FormConImageControlData(ByRef $oImageControl[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oImageControl       - [in/out] an object. A Image Control Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oImageControl       - A Image Control Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4104,24 +4104,24 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ; Name ..........: _LOWriter_FormConImageControlGeneral
 ; Description ...: Set or retrieve general Image control properties.
 ; Syntax ........: _LOWriter_FormConImageControlGeneral(ByRef $oImageControl[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $sGraphics = Null[, $iScale = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]])
-; Parameters ....: $oImageControl       - [in/out] an object. A Image Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
-;                  $iScale              - [optional] an integer value (0-2). Default is Null. How to scale the image to fit the button. See Constants $LOW_FORM_CON_IMG_BTN_SCALE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oImageControl       - A Image Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $sGraphics           - [optional] Default is Null. The path to an Image file.
+;                  $iScale              - [optional] (0-2) Default is Null. How to scale the image to fit the button. See Constants $LOW_FORM_CON_IMG_BTN_SCALE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4380,13 +4380,13 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ; Name ..........: _LOWriter_FormConInsert
 ; Description ...: Insert a control into a form and document.
 ; Syntax ........: _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $iHeight[, $sName = ""])
-; Parameters ....: $oParentForm         - [in/out] an object. A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
-;                  $iControl            - an integer value (1-524288). The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iX                  - an integer value. The X Coordinate, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - an integer value. The Y Coordinate, in Hundredths of a Millimeter (HMM).
-;                  $iWidth              - an integer value. The Width of the control, in Hundredths of a Millimeter (HMM).
-;                  $iHeight             - an integer value. The Height of the control, in Hundredths of a Millimeter (HMM).
-;                  $sName               - [optional] a string value. Default is "". The name of the control, if called with "", a name is automatically given it.
+; Parameters ....: $oParentForm         - A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
+;                  $iControl            - (1-524288) The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iX                  - The X Coordinate, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - The Y Coordinate, in Hundredths of a Millimeter (HMM).
+;                  $iWidth              - The Width of the control, in Hundredths of a Millimeter (HMM).
+;                  $iHeight             - The Height of the control, in Hundredths of a Millimeter (HMM).
+;                  $sName               - [optional] Default is "". The name of the control, if called with "", a name is automatically given it.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4556,23 +4556,23 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ; Name ..........: _LOWriter_FormConLabelGeneral
 ; Description ...: Set or Retrieve general Label control settings.
 ; Syntax ........: _LOWriter_FormConLabelGeneral(ByRef $oLabel[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bPrintable = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bWordBreak = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]])
-; Parameters ....: $oLabel              - [in/out] an object. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The name of the Label control.
-;                  $sLabel              - [optional] a string value. Default is Null. The Label of the control.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oLabel              - A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The name of the Label control.
+;                  $sLabel              - [optional] Default is Null. The Label of the control.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bWordBreak          - [optional] Default is Null. If True, line breaks are allowed to be used.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4814,12 +4814,12 @@ EndFunc   ;==>_LOWriter_FormConLabelGeneral
 ; Name ..........: _LOWriter_FormConListBoxData
 ; Description ...: Set or Retrieve List Box Data Properties.
 ; Syntax ........: _LOWriter_FormConListBoxData(ByRef $oListBox[, $sDataField = Null[, $bInputRequired = Null[, $iType = Null[, $asListContent = Null[, $iBoundField = Null]]]]])
-; Parameters ....: $oListBox            - [in/out] an object. A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $iType               - [optional] an integer value (0-5). Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $asListContent       - [optional] an array of strings. Default is Null. A single dimension array. See remarks
-;                  $iBoundField         - [optional] an integer value (-1-2147483647). Default is Null. The bound data field of a linked table to display.
+; Parameters ....: $oListBox            - A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $iType               - [optional] (0-5) Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $asListContent       - [optional] Default is Null. A single dimension array. See remarks
+;                  $iBoundField         - [optional] (-1-2147483647) Default is Null. The bound data field of a linked table to display.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -4916,30 +4916,30 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ; Name ..........: _LOWriter_FormConListBoxGeneral
 ; Description ...: Set or Retrieve general List box properties.
 ; Syntax ........: _LOWriter_FormConListBoxGeneral(ByRef $oListBox[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $iMouseScroll = Null[, $bTabStop = Null[, $iTabOrder = Null[, $asList = Null[, $mFont = Null[, $iAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bDropdown = Null[, $iLines = Null[, $bMultiSel = Null[, $aiDefaultSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oListBox            - [in/out] an object. A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $asList              - [optional] an array of strings. Default is Null. An array of List entries. See remarks.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bDropdown           - [optional] a boolean value. Default is Null. If True, the List Box will behave like a dropdown.
-;                  $iLines              - [optional] an integer value (-2147483648-2147483647). Default is Null. If $bDropdown is True, $iLines specifies how many lines are shown in the dropdown list.
-;                  $bMultiSel           - [optional] a boolean value. Default is Null. If True, more than one selection can be made in a list box.
-;                  $aiDefaultSel        - [optional] an array of integers. Default is Null. A single dimension array of selection values. See remarks.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oListBox            - A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $asList              - [optional] Default is Null. An array of List entries. See remarks.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bDropdown           - [optional] Default is Null. If True, the List Box will behave like a dropdown.
+;                  $iLines              - [optional] (-2147483648-2147483647) Default is Null. If $bDropdown is True, $iLines specifies how many lines are shown in the dropdown list.
+;                  $bMultiSel           - [optional] Default is Null. If True, more than one selection can be made in a list box.
+;                  $aiDefaultSel        - [optional] Default is Null. A single dimension array of selection values. See remarks.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -5285,7 +5285,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxGeneral
 ; Name ..........: _LOWriter_FormConListBoxGetCount
 ; Description ...: Retrieve a count of values contained in a List Box.
 ; Syntax ........: _LOWriter_FormConListBoxGetCount(ByRef $oListBox)
-; Parameters ....: $oListBox            - [in/out] an object. A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+; Parameters ....: $oListBox            - A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -5323,9 +5323,9 @@ EndFunc   ;==>_LOWriter_FormConListBoxGetCount
 ; Name ..........: _LOWriter_FormConListBoxSelection
 ; Description ...: Set or Retrieve the current List Box selection.
 ; Syntax ........: _LOWriter_FormConListBoxSelection(ByRef $oListBox[, $aiSelection = Null[, $bReturnValue = False]])
-; Parameters ....: $oListBox            - [in/out] an object. A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $aiSelection         - [optional] an array of integers. Default is Null. A single dimension array of selection values. See remarks.
-;                  $bReturnValue        - [optional] a boolean value. Default is False. If True, when retrieving the the current selection(s), the current selected VALUE, instead of the position is returned.
+; Parameters ....: $oListBox            - A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $aiSelection         - [optional] Default is Null. A single dimension array of selection values. See remarks.
+;                  $bReturnValue        - [optional] Default is False. If True, when retrieving the the current selection(s), the current selected VALUE, instead of the position is returned.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -5404,25 +5404,25 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ; Name ..........: _LOWriter_FormConNavBarGeneral
 ; Description ...: Set or Retrieve general Navigation Bar properties.
 ; Syntax ........: _LOWriter_FormConNavBarGeneral(ByRef $oNavBar[, $sName = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bTabStop = Null[, $iTabOrder = Null[, $iDelay = Null[, $mFont = Null[, $iBackColor = Null[, $iBorder = Null[, $bSmallIcon = Null[, $bShowPos = Null[, $bShowNav = Null[, $bShowActing = Null[, $bShowFiltering = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oNavBar             - [in/out] an object. A Navigation Bar Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $bSmallIcon          - [optional] a boolean value. Default is Null. If True, small Icon sizing is used.
-;                  $bShowPos            - [optional] a boolean value. Default is Null. If True, positioning items are shown.
-;                  $bShowNav            - [optional] a boolean value. Default is Null. If True, navigation items are shown.
-;                  $bShowActing         - [optional] a boolean value. Default is Null. If True, action items are shown.
-;                  $bShowFiltering      - [optional] a boolean value. Default is Null. If True, filtering and sorting items are shown.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oNavBar             - A Navigation Bar Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $bSmallIcon          - [optional] Default is Null. If True, small Icon sizing is used.
+;                  $bShowPos            - [optional] Default is Null. If True, positioning items are shown.
+;                  $bShowNav            - [optional] Default is Null. If True, navigation items are shown.
+;                  $bShowActing         - [optional] Default is Null. If True, action items are shown.
+;                  $bShowFiltering      - [optional] Default is Null. If True, filtering and sorting items are shown.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -5691,9 +5691,9 @@ EndFunc   ;==>_LOWriter_FormConNavBarGeneral
 ; Name ..........: _LOWriter_FormConNumericFieldData
 ; Description ...: Set or Retrieve Numeric Field Data Properties.
 ; Syntax ........: _LOWriter_FormConNumericFieldData(ByRef $oNumericField[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oNumericField       - [in/out] an object. A Numeric Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oNumericField       - A Numeric Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -5757,37 +5757,37 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ; Name ..........: _LOWriter_FormConNumericFieldGeneral
 ; Description ...: Set or Retrieve general Numeric Field properties.
 ; Syntax ........: _LOWriter_FormConNumericFieldGeneral(ByRef $oNumericField[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $bStrict = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $iMouseScroll = Null[, $bTabStop = Null[, $iTabOrder = Null[, $nMin = Null[, $nMax = Null[, $iIncr = Null[, $nDefault = Null[, $iDecimal = Null[, $bThousandsSep = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oNumericField       - [in/out] an object. A Numeric Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $nMin                - [optional] a general number value. Default is Null. The minimum value the control can be set to.
-;                  $nMax                - [optional] a general number value. Default is Null. The maximum value the control can be set to.
-;                  $iIncr               - [optional] an integer value. Default is Null. The amount to Increase or Decrease the value by.
-;                  $nDefault            - [optional] a general number value. Default is Null. The default value the control will be set to.
-;                  $iDecimal            - [optional] an integer value (0-20). Default is Null. The amount of decimal accuracy.
-;                  $bThousandsSep       - [optional] a boolean value. Default is Null. If True, a thousands separator will be added.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oNumericField       - A Numeric Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $nMin                - [optional] Default is Null. The minimum value the control can be set to.
+;                  $nMax                - [optional] Default is Null. The maximum value the control can be set to.
+;                  $iIncr               - [optional] Default is Null. The amount to Increase or Decrease the value by.
+;                  $nDefault            - [optional] Default is Null. The default value the control will be set to.
+;                  $iDecimal            - [optional] (0-20) Default is Null. The amount of decimal accuracy.
+;                  $bThousandsSep       - [optional] Default is Null. If True, a thousands separator will be added.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -6204,8 +6204,8 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldGeneral
 ; Name ..........: _LOWriter_FormConNumericFieldValue
 ; Description ...: Set or retrieve the current Numeric field value.
 ; Syntax ........: _LOWriter_FormConNumericFieldValue(ByRef $oNumericField[, $nValue = Null])
-; Parameters ....: $oNumericField       - [in/out] an object. A Numeric Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $nValue              - [optional] a general number value. Default is Null. The value to set the field to.
+; Parameters ....: $oNumericField       - A Numeric Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $nValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or Number
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -6262,9 +6262,9 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldValue
 ; Name ..........: _LOWriter_FormConOptionButtonData
 ; Description ...: Set or Retrieve Option Button Data Properties.
 ; Syntax ........: _LOWriter_FormConOptionButtonData(ByRef $oOptionButton[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oOptionButton       - [in/out] an object. A Option Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oOptionButton       - A Option Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -6329,29 +6329,29 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ; Name ..........: _LOWriter_FormConOptionButtonGeneral
 ; Description ...: Set or Retrieve general Option button properties.
 ; Syntax ........: _LOWriter_FormConOptionButtonGeneral(ByRef $oOptionButton[, $sName = Null[, $sLabel = Null[, $oLabelField = Null[, $iTxtDir = Null[, $sGroupName = Null[, $bEnabled = Null[, $bVisible = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $iDefaultState = Null[, $mFont = Null[, $iStyle = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $bWordBreak = Null[, $sGraphics = Null[, $iGraphicAlign = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oOptionButton       - [in/out] an object. A Option button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $oLabelField         - [optional] an object. Default is Null. A Group Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sGroupName          - [optional] a string value. Default is Null. The Group name the control is in.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $iDefaultState       - [optional] an integer value (0-1). Default is Null. The Default state of the Option button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iStyle              - [optional] an integer value (1-2). Default is Null. The display style of the Option button. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
-;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
-;                  $iGraphicAlign       - [optional] an integer value (0-12). Default is Null. The Alignment of the Image. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oOptionButton       - A Option button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $oLabelField         - [optional] Default is Null. A Group Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sGroupName          - [optional] Default is Null. The Group name the control is in.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $iDefaultState       - [optional] (0-1) Default is Null. The Default state of the Option button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iStyle              - [optional] (1-2) Default is Null. The display style of the Option button. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bWordBreak          - [optional] Default is Null. If True, line breaks are allowed to be used.
+;                  $sGraphics           - [optional] Default is Null. The path to an Image file.
+;                  $iGraphicAlign       - [optional] (0-12) Default is Null. The Alignment of the Image. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -6671,8 +6671,8 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonGeneral
 ; Name ..........: _LOWriter_FormConOptionButtonState
 ; Description ...: Set or Retrieve the current Option button state.
 ; Syntax ........: _LOWriter_FormConOptionButtonState(ByRef $oOptionButton[, $iState = Null])
-; Parameters ....: $oOptionButton       - [in/out] an object. A Option Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iState              - [optional] an integer value (0-1). Default is Null. The current state of the Option Button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oOptionButton       - A Option Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iState              - [optional] (0-1) Default is Null. The current state of the Option Button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -6730,11 +6730,11 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonState
 ; Name ..........: _LOWriter_FormConPatternFieldData
 ; Description ...: Set or Retrieve Pattern Field Data Properties.
 ; Syntax ........: _LOWriter_FormConPatternFieldData(ByRef $oPatternField[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $bFilter = Null]]]])
-; Parameters ....: $oPatternField       - [in/out] an object. A Pattern Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $bFilter             - [optional] a boolean value. Default is Null. If True, filter proposal is active.
+; Parameters ....: $oPatternField       - A Pattern Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bEmptyIsNull        - [optional] Default is Null. If True, an empty string will be treated as a Null value.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -6817,32 +6817,32 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ; Name ..........: _LOWriter_FormConPatternFieldGeneral
 ; Description ...: Set or Retrieve general Pattern Field properties.
 ; Syntax ........: _LOWriter_FormConPatternFieldGeneral(ByRef $oPatternField[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $iMaxLen = Null[, $sEditMask = Null[, $sLiteralMask = Null[, $bStrict = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $iMouseScroll = Null[, $bTabStop = Null[, $iTabOrder = Null[, $sDefaultTxt = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oPatternField       - [in/out] an object. A Pattern Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Pattern field will accept.
-;                  $sEditMask           - [optional] a string value. Default is Null. The edit mask of the field.
-;                  $sLiteralMask        - [optional] a string value. Default is Null. The literal mask of the field.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text to display in the field.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oPatternField       - A Pattern Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iMaxLen             - [optional] (-1-2147483647) Default is Null. The maximum text length that the Pattern field will accept.
+;                  $sEditMask           - [optional] Default is Null. The edit mask of the field.
+;                  $sLiteralMask        - [optional] Default is Null. The literal mask of the field.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $sDefaultTxt         - [optional] Default is Null. The default text to display in the field.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -7198,8 +7198,8 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldGeneral
 ; Name ..........: _LOWriter_FormConPatternFieldValue
 ; Description ...: Set or retrieve the current Pattern field value.
 ; Syntax ........: _LOWriter_FormConPatternFieldValue(ByRef $oPatternField[, $sValue = Null])
-; Parameters ....: $oPatternField       - [in/out] an object. A Pattern Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sValue              - [optional] a string value. Default is Null. The value to set the field to.
+; Parameters ....: $oPatternField       - A Pattern Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -7258,11 +7258,11 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ; Name ..........: _LOWriter_FormConPosition
 ; Description ...: Set or Retrieve the Control's position settings.
 ; Syntax ........: _LOWriter_FormConPosition(ByRef $oControl[, $iX = Null[, $iY = Null[, $iAnchor = Null[, $bProtectPos = Null]]]])
-; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iX                  - [optional] an integer value. Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] an integer value. Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iAnchor             - [optional] an integer value(0-4). Default is Null. The anchoring position for the Control. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, the Shape's position is locked.
+; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iX                  - [optional] Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iY                  - [optional] Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
+;                  $iAnchor             - [optional](0-4) Default is Null. The anchoring position for the Control. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bProtectPos         - [optional] Default is Null. If True, the Shape's position is locked.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -7348,34 +7348,34 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ; Name ..........: _LOWriter_FormConPushButtonGeneral
 ; Description ...: Set or Retrieve general Push Button properties.
 ; Syntax ........: _LOWriter_FormConPushButtonGeneral(ByRef $oPushButton[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $bRepeat = Null[, $iDelay = Null[, $bTakeFocus = Null[, $bToggle = Null[, $iDefaultState = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $bWordBreak = Null[, $iAction = Null[, $sURL = Null[, $sFrame = Null[, $bDefault = Null[, $sGraphics = Null[, $iGraphicAlign = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oPushButton         - [in/out] an object. A Push Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $bTakeFocus          - [optional] a boolean value. Default is Null. If True, the button takes focus on clicking it.
-;                  $bToggle             - [optional] a boolean value. Default is Null. If True, the button behaves like a toggle.
-;                  $iDefaultState       - [optional] an integer value (0-1). Default is Null. The Default state of the Option button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
-;                  $iAction             - [optional] an integer value (0-12). Default is Null. The action that occurs when the button is pushed. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sURL                - [optional] a string value. Default is Null. The URL or Document path to open.
-;                  $sFrame              - [optional] a string value. Default is Null. The frame to open the URL in. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bDefault            - [optional] a boolean value. Default is Null. If True, this will be set as the Default button.
-;                  $sGraphics           - [optional] a string value. Default is Null. The path to an Image file.
-;                  $iGraphicAlign       - [optional] an integer value (0-12). Default is Null. The Alignment of the Image. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oPushButton         - A Push Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $bTakeFocus          - [optional] Default is Null. If True, the button takes focus on clicking it.
+;                  $bToggle             - [optional] Default is Null. If True, the button behaves like a toggle.
+;                  $iDefaultState       - [optional] (0-1) Default is Null. The Default state of the Option button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bWordBreak          - [optional] Default is Null. If True, line breaks are allowed to be used.
+;                  $iAction             - [optional] (0-12) Default is Null. The action that occurs when the button is pushed. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sURL                - [optional] Default is Null. The URL or Document path to open.
+;                  $sFrame              - [optional] Default is Null. The frame to open the URL in. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bDefault            - [optional] Default is Null. If True, this will be set as the Default button.
+;                  $sGraphics           - [optional] Default is Null. The path to an Image file.
+;                  $iGraphicAlign       - [optional] (0-12) Default is Null. The Alignment of the Image. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -7857,8 +7857,8 @@ EndFunc   ;==>_LOWriter_FormConPushButtonGeneral
 ; Name ..........: _LOWriter_FormConPushButtonState
 ; Description ...: Set or Retrieve the current Push Button state.
 ; Syntax ........: _LOWriter_FormConPushButtonState(ByRef $oPushButton[, $iState = Null])
-; Parameters ....: $oPushButton         - [in/out] an object. A Push Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iState              - [optional] an integer value (0-1). Default is Null. The state of the Push Button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oPushButton         - A Push Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iState              - [optional] (0-1) Default is Null. The state of the Push Button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -7918,8 +7918,8 @@ EndFunc   ;==>_LOWriter_FormConPushButtonState
 ; Name ..........: _LOWriter_FormConsGetList
 ; Description ...: Retrieve an array of Control Objects contained in a Document or a Form.
 ; Syntax ........: _LOWriter_FormConsGetList(ByRef $oObj[, $iType = $LOW_FORM_CON_TYPE_ALL])
-; Parameters ....: $oObj                - [in/out] an object. Either a Document Object or a Form object, or a Grouped Control. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function. Also a Grouped Control or Group Box returned from a _LOWriter_FormConsGetList function.
-;                  $iType               - [optional] an integer value (1-1048575). Default is $LOW_FORM_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oObj                - Either a Document Object or a Form object, or a Grouped Control. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function. Also a Grouped Control or Group Box returned from a _LOWriter_FormConsGetList function.
+;                  $iType               - [optional] (1-1048575) Default is $LOW_FORM_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -8054,10 +8054,10 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ; Name ..........: _LOWriter_FormConSize
 ; Description ...: Set or Retrieve Control Size related settings.
 ; Syntax ........: _LOWriter_FormConSize(ByRef $oControl[, $iWidth = Null[, $iHeight = Null[, $bProtectSize = Null]]])
-; Parameters ....: $oControl            - [in/out] an object. A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the Shape.
+; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iWidth              - [optional] Default is Null. The width of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $iHeight             - [optional] Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the Shape.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -8136,9 +8136,9 @@ EndFunc   ;==>_LOWriter_FormConSize
 ; Name ..........: _LOWriter_FormConTableConCheckBoxData
 ; Description ...: Set or Retrieve Table Control Check Box Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConCheckBoxData(ByRef $oCheckBox[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oCheckBox           - [in/out] an object. A Table Control Check Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oCheckBox           - A Table Control Check Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -8203,20 +8203,20 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ; Name ..........: _LOWriter_FormConTableConCheckBoxGeneral
 ; Description ...: Set or Retrieve general Table Control Checkbox control properties.
 ; Syntax ........: _LOWriter_FormConTableConCheckBoxGeneral(ByRef $oCheckBox[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bEnabled = Null[, $iDefaultState = Null[, $iWidth = Null[, $iStyle = Null[, $iAlign = Null[, $bWordBreak = Null[, $bTriState = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]])
-; Parameters ....: $oCheckBox           - [in/out] an object. A Table Control Checkbox Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $iDefaultState       - [optional] an integer value (0-2). Default is Null. The Default state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $iStyle              - [optional] an integer value (1-2). Default is Null. The display style of the checkbox. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bWordBreak          - [optional] a boolean value. Default is Null. If True, line breaks are allowed to be used.
-;                  $bTriState           - [optional] a boolean value. Default is Null. If True, the checkbox will have a third checked state.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oCheckBox           - A Table Control Checkbox Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $iDefaultState       - [optional] (0-2) Default is Null. The Default state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $iStyle              - [optional] (1-2) Default is Null. The display style of the checkbox. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bWordBreak          - [optional] Default is Null. If True, line breaks are allowed to be used.
+;                  $bTriState           - [optional] Default is Null. If True, the checkbox will have a third checked state.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -8422,9 +8422,9 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxGeneral
 ; Name ..........: _LOWriter_FormConTableConColumnAdd
 ; Description ...: Add a column to a Table Control.
 ; Syntax ........: _LOWriter_FormConTableConColumnAdd(ByRef $oTableCon, $iControl[, $iPos = Null])
-; Parameters ....: $oTableCon           - [in/out] an object. A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iControl            - an integer value. The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
-;                  $iPos                - [optional] an integer value. Default is Null. The position in the Column list to insert the new Column. 0 = insert at the beginning. Null = insert at the end.
+; Parameters ....: $oTableCon           - A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iControl            - The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
+;                  $iPos                - [optional] Default is Null. The position in the Column list to insert the new Column. 0 = insert at the beginning. Null = insert at the end.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -8529,7 +8529,7 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnAdd
 ; Name ..........: _LOWriter_FormConTableConColumnDelete
 ; Description ...: Delete a Table Control Column.
 ; Syntax ........: _LOWriter_FormConTableConColumnDelete(ByRef $oColumn)
-; Parameters ....: $oColumn             - [in/out] an object. A Column object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+; Parameters ....: $oColumn             - A Column object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -8576,7 +8576,7 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnDelete
 ; Name ..........: _LOWriter_FormConTableConColumnsGetList
 ; Description ...: Retrieve a list of Columns contained in a Table Control.
 ; Syntax ........: _LOWriter_FormConTableConColumnsGetList(ByRef $oTableCon)
-; Parameters ....: $oTableCon           - [in/out] an object. A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+; Parameters ....: $oTableCon           - A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -8631,12 +8631,12 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnsGetList
 ; Name ..........: _LOWriter_FormConTableConComboBoxData
 ; Description ...: Set or Retrieve Table Control Combo Box Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConComboBoxData(ByRef $oComboBox[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $iType = Null[, $sListContent = Null]]]]])
-; Parameters ....: $oComboBox           - [in/out] an object. A Table Control Combo Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $iType               - [optional] an integer value (1-5). Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sListContent        - [optional] a string value. Default is Null. Default is Null. The SQL statement, Table Name, etc., depending on the value of $iType.
+; Parameters ....: $oComboBox           - A Table Control Combo Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bEmptyIsNull        - [optional] Default is Null. If True, an empty string will be treated as a Null value.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $iType               - [optional] (1-5) Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sListContent        - [optional] Default is Null. Default is Null. The SQL statement, Table Name, etc., depending on the value of $iType.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -8728,23 +8728,23 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ; Name ..........: _LOWriter_FormConTableConComboBoxGeneral
 ; Description ...: Set or Retrieve general Table Control Combo Box Properties.
 ; Syntax ........: _LOWriter_FormConTableConComboBoxGeneral(ByRef $oComboBox[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $iMaxLen = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iMouseScroll = Null[, $iWidth = Null[, $asList = Null[, $sDefaultTxt = Null[, $iAlign = Null[, $iLines = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]])
-; Parameters ....: $oComboBox           - [in/out] an object. A Table Control Combo Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Combo box will accept.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $asList              - [optional] an array of strings. Default is Null. An array of entries. See remarks.
-;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text of the combo Box.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLines              - [optional] an integer value. Default is Null. How many lines are shown in the dropdown list.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oComboBox           - A Table Control Combo Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iMaxLen             - [optional] (-1-2147483647) Default is Null. The maximum text length that the Combo box will accept.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $asList              - [optional] Default is Null. An array of entries. See remarks.
+;                  $sDefaultTxt         - [optional] Default is Null. The default text of the combo Box.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLines              - [optional] Default is Null. How many lines are shown in the dropdown list.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -8995,9 +8995,9 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxGeneral
 ; Name ..........: _LOWriter_FormConTableConCurrencyFieldData
 ; Description ...: Set or Retrieve Table Control Currency Field Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConCurrencyFieldData(ByRef $oCurrencyField[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oCurrencyField      - [in/out] an object. A Table Control Currency Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oCurrencyField      - A Table Control Currency Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -9061,31 +9061,31 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ; Name ..........: _LOWriter_FormConTableConCurrencyFieldGeneral
 ; Description ...: Set or Retrieve general Table Control Currency Field properties.
 ; Syntax ........: _LOWriter_FormConTableConCurrencyFieldGeneral(ByRef $oCurrencyField[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bStrict = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iMouseScroll = Null[, $nMin = Null[, $nMax = Null[, $iIncr = Null[, $nDefault = Null[, $iDecimal = Null[, $bThousandsSep = Null[, $sCurrSymbol = Null[, $bPrefix = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $iWidth = Null[, $iAlign = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oCurrencyField      - [in/out] an object. A Table Control Currency Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null.If True, the control is enabled.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $nMin                - [optional] a general number value. Default is Null. The minimum value the control can be set to.
-;                  $nMax                - [optional] a general number value. Default is Null. The maximum value the control can be set to.
-;                  $iIncr               - [optional] an integer value. Default is Null. The amount to Increase or Decrease the value by.
-;                  $nDefault            - [optional] a general number value. Default is Null. The default value the control will be set to.
-;                  $iDecimal            - [optional] an integer value (0-20). Default is Null. The amount of decimal accuracy.
-;                  $bThousandsSep       - [optional] a boolean value. Default is Null. If True, a thousands separator will be added.
-;                  $sCurrSymbol         - [optional] a string value. Default is Null. The symbol to use for currency.
-;                  $bPrefix             - [optional] a boolean value. Default is Null. If True, the currency symbol is prefixed to the value.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oCurrencyField      - A Table Control Currency Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null.If True, the control is enabled.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $nMin                - [optional] Default is Null. The minimum value the control can be set to.
+;                  $nMax                - [optional] Default is Null. The maximum value the control can be set to.
+;                  $iIncr               - [optional] Default is Null. The amount to Increase or Decrease the value by.
+;                  $nDefault            - [optional] Default is Null. The default value the control will be set to.
+;                  $iDecimal            - [optional] (0-20) Default is Null. The amount of decimal accuracy.
+;                  $bThousandsSep       - [optional] Default is Null. If True, a thousands separator will be added.
+;                  $sCurrSymbol         - [optional] Default is Null. The symbol to use for currency.
+;                  $bPrefix             - [optional] Default is Null. If True, the currency symbol is prefixed to the value.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -9428,9 +9428,9 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldGeneral
 ; Name ..........: _LOWriter_FormConTableConDateFieldData
 ; Description ...: Set or Retrieve Table Control Date Field Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConDateFieldData(ByRef $oDateField[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oDateField          - [in/out] an object. A Table Control Date Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oDateField          - A Table Control Date Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -9494,28 +9494,28 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ; Name ..........: _LOWriter_FormConTableConDateFieldGeneral
 ; Description ...: Set or Retrieve general Table Control Date Field properties.
 ; Syntax ........: _LOWriter_FormConTableConDateFieldGeneral(ByRef $oDateField[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bStrict = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iMouseScroll = Null[, $tDateMin = Null[, $tDateMax = Null[, $iFormat = Null[, $tDateDefault = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $iWidth = Null[, $iAlign = Null[, $bDropdown = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oDateField          - [in/out] an object. A Table Control Date Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $tDateMin            - [optional] a dll struct value. Default is Null. The minimum date allowed to be entered, created previously by _LOWriter_DateStructCreate.
-;                  $tDateMax            - [optional] a dll struct value. Default is Null. The maximum date allowed to be entered, created previously by _LOWriter_DateStructCreate.
-;                  $iFormat             - [optional] an integer value (0-11). Default is Null. The Date Format to display the content in. See Constants $LOW_FORM_CON_DATE_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $tDateDefault        - [optional] a dll struct value. Default is Null. The Default date to display, created previously by _LOWriter_DateStructCreate.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bDropdown           - [optional] a boolean value. Default is Null. If True, the field will behave as a dropdown control.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oDateField          - A Table Control Date Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $tDateMin            - [optional] Default is Null. The minimum date allowed to be entered, created previously by _LOWriter_DateStructCreate.
+;                  $tDateMax            - [optional] Default is Null. The maximum date allowed to be entered, created previously by _LOWriter_DateStructCreate.
+;                  $iFormat             - [optional] (0-11) Default is Null. The Date Format to display the content in. See Constants $LOW_FORM_CON_DATE_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $tDateDefault        - [optional] Default is Null. The Default date to display, created previously by _LOWriter_DateStructCreate.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bDropdown           - [optional] Default is Null. If True, the field will behave as a dropdown control.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -9880,11 +9880,11 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldGeneral
 ; Name ..........: _LOWriter_FormConTableConFormattedFieldData
 ; Description ...: Set or Retrieve Table Control Formatted Field Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConFormattedFieldData(ByRef $oFormatField[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $bFilter = Null]]]])
-; Parameters ....: $oFormatField        - [in/out] an object. A Table Control Formatted Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $bFilter             - [optional] a boolean value. Default is Null. If True, filter proposal is active.
+; Parameters ....: $oFormatField        - A Table Control Formatted Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bEmptyIsNull        - [optional] Default is Null. If True, an empty string will be treated as a Null value.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -9967,27 +9967,27 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ; Name ..........: _LOWriter_FormConTableConFormattedFieldGeneral
 ; Description ...: Set or Retrieve general Table Control Formatted Field properties.
 ; Syntax ........: _LOWriter_FormConTableConFormattedFieldGeneral(ByRef $oFormatField[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $iMaxLen = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iMouseScroll = Null[, $nMin = Null[, $nMax = Null[, $nDefault = Null[, $iFormat = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $iWidth = Null[, $iAlign = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oFormatField        - [in/out] an object. A Table Control Formatted Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Formatted field will accept.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $nMin                - [optional] a general number value. Default is Null. The minimum value allowed in the field.
-;                  $nMax                - [optional] a general number value. Default is Null. The maximum value allowed in the field.
-;                  $nDefault            - [optional] a general number value. Default is Null. The default value of the field.
-;                  $iFormat             - [optional] an integer value. Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOWriter_FormatKeysGetList call, or created by _LOWriter_FormatKeyCreate function.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oFormatField        - A Table Control Formatted Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iMaxLen             - [optional] (-1-2147483647) Default is Null. The maximum text length that the Formatted field will accept.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $nMin                - [optional] Default is Null. The minimum value allowed in the field.
+;                  $nMax                - [optional] Default is Null. The maximum value allowed in the field.
+;                  $nDefault            - [optional] Default is Null. The default value of the field.
+;                  $iFormat             - [optional] Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOWriter_FormatKeysGetList call, or created by _LOWriter_FormatKeyCreate function.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -10292,24 +10292,24 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ; Name ..........: _LOWriter_FormConTableConGeneral
 ; Description ...: Set or Retrieve general Table Control properties.
 ; Syntax ........: _LOWriter_FormConTableConGeneral(ByRef $oTableCon[, $sName = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bVisible = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $mFont = Null[, $nRowHeight = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bNavBar = Null[, $bRecordMarker = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]])
-; Parameters ....: $oTableCon           - [in/out] an object. A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $nRowHeight          - [optional] a general number value (-21474836.48-21474836.48). Default is Null. The Row height, set in Hundredths of a Millimeter (HMM).
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bNavBar             - [optional] a boolean value. Default is Null. If True, the Navigation Bar is displayed on the lower border of the Table control.
-;                  $bRecordMarker       - [optional] a boolean value. Default is Null. If True, a record marker is displayed.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oTableCon           - A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $nRowHeight          - [optional] (-21474836.48-21474836.48) Default is Null. The Row height, set in Hundredths of a Millimeter (HMM).
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bNavBar             - [optional] Default is Null. If True, the Navigation Bar is displayed on the lower border of the Table control.
+;                  $bRecordMarker       - [optional] Default is Null. If True, a record marker is displayed.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -10564,12 +10564,12 @@ EndFunc   ;==>_LOWriter_FormConTableConGeneral
 ; Name ..........: _LOWriter_FormConTableConListBoxData
 ; Description ...: Set or Retrieve Table Control List Box Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConListBoxData(ByRef $oListBox[, $sDataField = Null[, $bInputRequired = Null[, $iType = Null[, $asListContent = Null[, $iBoundField = Null]]]]])
-; Parameters ....: $oListBox            - [in/out] an object. A Table Control List Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $iType               - [optional] an integer value (0-5). Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $asListContent       - [optional] an array of strings. Default is Null. A single dimension array. See remarks
-;                  $iBoundField         - [optional] an integer value (-1-2147483647). Default is Null. The bound data field of a linked table to display.
+; Parameters ....: $oListBox            - A Table Control List Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $iType               - [optional] (0-5) Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $asListContent       - [optional] Default is Null. A single dimension array. See remarks
+;                  $iBoundField         - [optional] (-1-2147483647) Default is Null. The bound data field of a linked table to display.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -10666,21 +10666,21 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ; Name ..........: _LOWriter_FormConTableConListBoxGeneral
 ; Description ...: Set or Retrieve general Table Control List box properties.
 ; Syntax ........: _LOWriter_FormConTableConListBoxGeneral(ByRef $oListBox[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iMouseScroll = Null[, $iWidth = Null[, $asList = Null[, $iAlign = Null[, $iLines = Null[, $aiDefaultSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]])
-; Parameters ....: $oListBox            - [in/out] an object. A Table Control List Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $asList              - [optional] an array of strings. Default is Null. An array of List entries. See remarks.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLines              - [optional] an integer value (-2147483648-2147483647). Default is Null. If $bDropdown is True, $iLines specifies how many lines are shown in the dropdown list.
-;                  $aiDefaultSel        - [optional] an array of integers. Default is Null. A single dimension array of selection values. See remarks.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oListBox            - A Table Control List Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $asList              - [optional] Default is Null. An array of List entries. See remarks.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLines              - [optional] (-2147483648-2147483647) Default is Null. If $bDropdown is True, $iLines specifies how many lines are shown in the dropdown list.
+;                  $aiDefaultSel        - [optional] Default is Null. A single dimension array of selection values. See remarks.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -10914,9 +10914,9 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxGeneral
 ; Name ..........: _LOWriter_FormConTableConNumericFieldData
 ; Description ...: Set or Retrieve Table Control Numeric Field Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConNumericFieldData(ByRef $oNumericField[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oNumericField       - [in/out] an object. A Table Control Numeric Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oNumericField       - A Table Control Numeric Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -10980,29 +10980,29 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ; Name ..........: _LOWriter_FormConTableConNumericFieldGeneral
 ; Description ...: Set or Retrieve general Table Control Numeric Field properties.
 ; Syntax ........: _LOWriter_FormConTableConNumericFieldGeneral(ByRef $oNumericField[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bStrict = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iMouseScroll = Null[, $nMin = Null[, $nMax = Null[, $iIncr = Null[, $nDefault = Null[, $iDecimal = Null[, $bThousandsSep = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $iWidth = Null[, $iAlign = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oNumericField       - [in/out] an object. A Table Control Numeric Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $nMin                - [optional] a general number value. Default is Null. The minimum value the control can be set to.
-;                  $nMax                - [optional] a general number value. Default is Null. The maximum value the control can be set to.
-;                  $iIncr               - [optional] an integer value. Default is Null. The amount to Increase or Decrease the value by.
-;                  $nDefault            - [optional] a general number value. Default is Null. The default value the control will be set to.
-;                  $iDecimal            - [optional] an integer value (0-20). Default is Null. The amount of decimal accuracy.
-;                  $bThousandsSep       - [optional] a boolean value. Default is Null. If True, a thousands separator will be added.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oNumericField       - A Table Control Numeric Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $nMin                - [optional] Default is Null. The minimum value the control can be set to.
+;                  $nMax                - [optional] Default is Null. The maximum value the control can be set to.
+;                  $iIncr               - [optional] Default is Null. The amount to Increase or Decrease the value by.
+;                  $nDefault            - [optional] Default is Null. The default value the control will be set to.
+;                  $iDecimal            - [optional] (0-20) Default is Null. The amount of decimal accuracy.
+;                  $bThousandsSep       - [optional] Default is Null. If True, a thousands separator will be added.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -11320,11 +11320,11 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldGeneral
 ; Name ..........: _LOWriter_FormConTableConPatternFieldData
 ; Description ...: Set or Retrieve Table Control Pattern Field Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConPatternFieldData(ByRef $oPatternField[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $bFilter = Null]]]])
-; Parameters ....: $oPatternField       - [in/out] an object. A Table Control Pattern Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $bFilter             - [optional] a boolean value. Default is Null. If True, filter proposal is active.
+; Parameters ....: $oPatternField       - A Table Control Pattern Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bEmptyIsNull        - [optional] Default is Null. If True, an empty string will be treated as a Null value.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -11407,24 +11407,24 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ; Name ..........: _LOWriter_FormConTableConPatternFieldGeneral
 ; Description ...: Set or Retrieve general Table Control Pattern Field properties.
 ; Syntax ........: _LOWriter_FormConTableConPatternFieldGeneral(ByRef $oPatternField[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $iMaxLen = Null[, $sEditMask = Null[, $sLiteralMask = Null[, $bStrict = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iMouseScroll = Null[, $iWidth = Null[, $sDefaultTxt = Null[, $iAlign = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]])
-; Parameters ....: $oPatternField       - [in/out] an object. A Table Control Pattern Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The maximum text length that the Pattern field will accept.
-;                  $sEditMask           - [optional] a string value. Default is Null. The edit mask of the field.
-;                  $sLiteralMask        - [optional] a string value. Default is Null. The literal mask of the field.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text to display in the field.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oPatternField       - A Table Control Pattern Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iMaxLen             - [optional] (-1-2147483647) Default is Null. The maximum text length that the Pattern field will accept.
+;                  $sEditMask           - [optional] Default is Null. The edit mask of the field.
+;                  $sLiteralMask        - [optional] Default is Null. The literal mask of the field.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $sDefaultTxt         - [optional] Default is Null. The default text to display in the field.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -11681,11 +11681,11 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldGeneral
 ; Name ..........: _LOWriter_FormConTableConTextBoxData
 ; Description ...: Set or Retrieve Table Control Text Box Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConTextBoxData(ByRef $oTextBox[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $bFilter = Null]]]])
-; Parameters ....: $oTextBox            - [in/out] an object. A Table Control Text Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $bFilter             - [optional] a boolean value. Default is Null. If True, filter proposal is active.
+; Parameters ....: $oTextBox            - A Table Control Text Box Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bEmptyIsNull        - [optional] Default is Null. If True, an empty string will be treated as a Null value.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -11768,22 +11768,22 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ; Name ..........: _LOWriter_FormConTableConTextBoxGeneral
 ; Description ...: Set or Retrieve general Table Control Textbox control properties.
 ; Syntax ........: _LOWriter_FormConTableConTextBoxGeneral(ByRef $oTextBox[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $iMaxLen = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iWidth = Null[, $sDefaultTxt = Null[, $iAlign = Null[, $bMultiLine = Null[, $bEndWithLF = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]])
-; Parameters ....: $oTextBox            - [in/out] an object. A Table Control Textbox Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control Name.
-;                  $sLabel              - [optional] a string value. Default is Null. The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The max length of text that can be entered. 0 = unlimited.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text to display in the control.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bMultiLine          - [optional] a boolean value. Default is Null. If True, the text may contain multiple lines.
-;                  $bEndWithLF          - [optional] a boolean value. Default is Null. If True, the line ends will be a Line-Feed type, else a Carriage-Return plus a Line-Feed.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oTextBox            - A Table Control Textbox Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control Name.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iMaxLen             - [optional] (-1-2147483647) Default is Null. The max length of text that can be entered. 0 = unlimited.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $sDefaultTxt         - [optional] Default is Null. The default text to display in the control.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bMultiLine          - [optional] Default is Null. If True, the text may contain multiple lines.
+;                  $bEndWithLF          - [optional] Default is Null. If True, the line ends will be a Line-Feed type, else a Carriage-Return plus a Line-Feed.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -12023,9 +12023,9 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxGeneral
 ; Name ..........: _LOWriter_FormConTableConTimeFieldData
 ; Description ...: Set or Retrieve Table Control Time Field Data Properties.
 ; Syntax ........: _LOWriter_FormConTableConTimeFieldData(ByRef $oTimeField[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oTimeField          - [in/out] an object. A Table Control Time Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oTimeField          - A Table Control Time Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -12089,27 +12089,27 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ; Name ..........: _LOWriter_FormConTableConTimeFieldGeneral
 ; Description ...: Set or Retrieve general Table Control Time Field properties.
 ; Syntax ........: _LOWriter_FormConTableConTimeFieldGeneral(ByRef $oTimeField[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bStrict = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iMouseScroll = Null[, $tTimeMin = Null[, $tTimeMax = Null[, $iFormat = Null[, $tTimeDefault = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $iWidth = Null[, $iAlign = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oTimeField          - [in/out] an object. A Table Control Time Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $sLabel              - [optional] a string value. Default is Null.The control's label to display.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $tTimeMin            - [optional] a dll struct value. Default is Null. The minimum time	 allowed to be entered, created previously by _LOWriter_DateStructCreate.
-;                  $tTimeMax            - [optional] a dll struct value. Default is Null. The maximum time	 allowed to be entered, created previously by _LOWriter_DateStructCreate.
-;                  $iFormat             - [optional] an integer value (0-5). Default is Null. The Time Format to display the content in. See Constants $LOW_FORM_CON_TIME_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $tTimeDefault        - [optional] a dll struct value. Default is Null. The Default time to display, created previously by _LOWriter_DateStructCreate.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $iWidth              - [optional] an integer value (100-200000). Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oTimeField          - A Table Control Time Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $sLabel              - [optional] Default is Null.The control's label to display.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $tTimeMin            - [optional] Default is Null. The minimum time	 allowed to be entered, created previously by _LOWriter_DateStructCreate.
+;                  $tTimeMax            - [optional] Default is Null. The maximum time	 allowed to be entered, created previously by _LOWriter_DateStructCreate.
+;                  $iFormat             - [optional] (0-5) Default is Null. The Time Format to display the content in. See Constants $LOW_FORM_CON_TIME_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $tTimeDefault        - [optional] Default is Null. The Default time to display, created previously by _LOWriter_DateStructCreate.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $iWidth              - [optional] (100-200000) Default is Null. The width of the Column tab, in Hundredths of a Millimeter (HMM).
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -12472,7 +12472,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldGeneral
 ; Name ..........: _LOWriter_FormConTextBoxCreateTextCursor
 ; Description ...: Create a Text Cursor in a Text Box to add text etc.
 ; Syntax ........: _LOWriter_FormConTextBoxCreateTextCursor(ByRef $oTextBox)
-; Parameters ....: $oTextBox            - [in/out] an object. A Text Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+; Parameters ....: $oTextBox            - A Text Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -12511,11 +12511,11 @@ EndFunc   ;==>_LOWriter_FormConTextBoxCreateTextCursor
 ; Name ..........: _LOWriter_FormConTextBoxData
 ; Description ...: Set or Retrieve Text Box Data Properties.
 ; Syntax ........: _LOWriter_FormConTextBoxData(ByRef $oTextBox[, $sDataField = Null[, $bEmptyIsNull = Null[, $bInputRequired = Null[, $bFilter = Null]]]])
-; Parameters ....: $oTextBox            - [in/out] an object. A Text Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bEmptyIsNull        - [optional] a boolean value. Default is Null. If True, an empty string will be treated as a Null value.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
-;                  $bFilter             - [optional] a boolean value. Default is Null. If True, filter proposal is active.
+; Parameters ....: $oTextBox            - A Text Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bEmptyIsNull        - [optional] Default is Null. If True, an empty string will be treated as a Null value.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
+;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -12598,32 +12598,32 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ; Name ..........: _LOWriter_FormConTextBoxGeneral
 ; Description ...: Set or Retrieve general Textbox control properties.
 ; Syntax ........: _LOWriter_FormConTextBoxGeneral(ByRef $oTextBox[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $iMaxLen = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $bTabStop = Null[, $iTabOrder = Null[, $sDefaultTxt = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $iTextType = Null[, $bEndWithLF = Null[, $iScrollbars = Null[, $iPassChar = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oTextBox            - [in/out] an object. A Textbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control Name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iMaxLen             - [optional] an integer value (-1-2147483647). Default is Null. The max length of text that can be entered. 0 = unlimited.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $sDefaultTxt         - [optional] a string value. Default is Null. The default text to display in the control.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iTextType           - [optional] an integer value (0-2). Default is Null. The text type. See Constants $LOW_FORM_CON_TXT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEndWithLF          - [optional] a boolean value. Default is Null. If True, the line ends will be a Line-Feed type, else a Carriage-Return plus a Line-Feed.
-;                  $iScrollbars         - [optional] an integer value (0-3). Default is Null. The Scrollbars to use, if any. See Constants $LOW_FORM_CON_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iPassChar           - [optional] an integer value. Default is Null. The ASCII value of the Password character to display.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oTextBox            - A Textbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control Name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iMaxLen             - [optional] (-1-2147483647) Default is Null. The max length of text that can be entered. 0 = unlimited.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $sDefaultTxt         - [optional] Default is Null. The default text to display in the control.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iTextType           - [optional] (0-2) Default is Null. The text type. See Constants $LOW_FORM_CON_TXT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEndWithLF          - [optional] Default is Null. If True, the line ends will be a Line-Feed type, else a Carriage-Return plus a Line-Feed.
+;                  $iScrollbars         - [optional] (0-3) Default is Null. The Scrollbars to use, if any. See Constants $LOW_FORM_CON_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iPassChar           - [optional] Default is Null. The ASCII value of the Password character to display.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -13028,9 +13028,9 @@ EndFunc   ;==>_LOWriter_FormConTextBoxGeneral
 ; Name ..........: _LOWriter_FormConTimeFieldData
 ; Description ...: Set or Retrieve Time Field Data Properties.
 ; Syntax ........: _LOWriter_FormConTimeFieldData(ByRef $oTimeField[, $sDataField = Null[, $bInputRequired = Null]])
-; Parameters ....: $oTimeField          - [in/out] an object. A Time Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sDataField          - [optional] a string value. Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
-;                  $bInputRequired      - [optional] a boolean value. Default is Null. If True, the control requires input.
+; Parameters ....: $oTimeField          - A Time Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
+;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -13094,35 +13094,35 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ; Name ..........: _LOWriter_FormConTimeFieldGeneral
 ; Description ...: Set or Retrieve general Time Field properties.
 ; Syntax ........: _LOWriter_FormConTimeFieldGeneral(ByRef $oTimeField[, $sName = Null[, $oLabelField = Null[, $iTxtDir = Null[, $bStrict = Null[, $bEnabled = Null[, $bVisible = Null[, $bReadOnly = Null[, $bPrintable = Null[, $iMouseScroll = Null[, $bTabStop = Null[, $iTabOrder = Null[, $tTimeMin = Null[, $tTimeMax = Null[, $iFormat = Null[, $tTimeDefault = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $mFont = Null[, $iAlign = Null[, $iVertAlign = Null[, $iBackColor = Null[, $iBorder = Null[, $iBorderColor = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $oTimeField          - [in/out] an object.object. A Time Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The control name.
-;                  $oLabelField         - [optional] an object. Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $iTxtDir             - [optional] an integer value (0-5). Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bStrict             - [optional] a boolean value. Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] a boolean value. Default is Null. If True, the control is enabled.
-;                  $bVisible            - [optional] a boolean value. Default is Null. If True, the control is visible.
-;                  $bReadOnly           - [optional] a boolean value. Default is Null. If True, the control is Read-Only.
-;                  $bPrintable          - [optional] a boolean value. Default is Null. If True, the control will be displayed when printed.
-;                  $iMouseScroll        - [optional] an integer value (0-2). Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bTabStop            - [optional] a boolean value. Default is Null. If True, the control can be selected with the Tab key.
-;                  $iTabOrder           - [optional] an integer value (0-2147483647). Default is Null. The order the control is focused by the Tab key.
-;                  $tTimeMin            - [optional] a dll struct value. Default is Null. The minimum time	 allowed to be entered, created previously by _LOWriter_DateStructCreate.
-;                  $tTimeMax            - [optional] a dll struct value. Default is Null. The maximum time	 allowed to be entered, created previously by _LOWriter_DateStructCreate.
-;                  $iFormat             - [optional] an integer value (0-5). Default is Null. The Time Format to display the content in. See Constants $LOW_FORM_CON_TIME_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $tTimeDefault        - [optional] a dll struct value. Default is Null. The Default time to display, created previously by _LOWriter_DateStructCreate.
-;                  $bSpin               - [optional] a boolean value. Default is Null. If True, the field will act as a spin button.
-;                  $bRepeat             - [optional] a boolean value. Default is Null. If True, the button action will repeat if the button is clicked and held down.
-;                  $iDelay              - [optional] an integer value (0-2147483647). Default is Null. The delay between button repeats, set in milliseconds.
-;                  $mFont               - [optional] a map. Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
-;                  $iAlign              - [optional] an integer value (0-2). Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBackColor          - [optional] an integer value (0-16777215). Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBorder             - [optional] an integer value (0-2). Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iBorderColor        - [optional] an integer value (0-16777215). Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $bHideSel            - [optional] a boolean value. Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
-;                  $sAddInfo            - [optional] a string value. Default is Null. Additional information text.
-;                  $sHelpText           - [optional] a string value. Default is Null. The Help text.
-;                  $sHelpURL            - [optional] a string value. Default is Null. The Help URL.
+; Parameters ....: $oTimeField          - object. A Time Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The control name.
+;                  $oLabelField         - [optional] Default is Null. A Label Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
+;                  $bVisible            - [optional] Default is Null. If True, the control is visible.
+;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
+;                  $bPrintable          - [optional] Default is Null. If True, the control will be displayed when printed.
+;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bTabStop            - [optional] Default is Null. If True, the control can be selected with the Tab key.
+;                  $iTabOrder           - [optional] (0-2147483647) Default is Null. The order the control is focused by the Tab key.
+;                  $tTimeMin            - [optional] Default is Null. The minimum time	 allowed to be entered, created previously by _LOWriter_DateStructCreate.
+;                  $tTimeMax            - [optional] Default is Null. The maximum time	 allowed to be entered, created previously by _LOWriter_DateStructCreate.
+;                  $iFormat             - [optional] (0-5) Default is Null. The Time Format to display the content in. See Constants $LOW_FORM_CON_TIME_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $tTimeDefault        - [optional] Default is Null. The Default time to display, created previously by _LOWriter_DateStructCreate.
+;                  $bSpin               - [optional] Default is Null. If True, the field will act as a spin button.
+;                  $bRepeat             - [optional] Default is Null. If True, the button action will repeat if the button is clicked and held down.
+;                  $iDelay              - [optional] (0-2147483647) Default is Null. The delay between button repeats, set in milliseconds.
+;                  $mFont               - [optional] Default is Null. The Font descriptor to use. A Font descriptor Map returned by a previous _LOWriter_FontDescCreate or _LOWriter_FontDescEdit function.
+;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBackColor          - [optional] (0-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBorder             - [optional] (0-2) Default is Null. The Border Style. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iBorderColor        - [optional] (0-16777215) Default is Null. The Border color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $bHideSel            - [optional] Default is Null. If True, any selections in the control will not remain selected when the control loses focus.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+;                  $sHelpText           - [optional] Default is Null. The Help text.
+;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -13585,8 +13585,8 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldGeneral
 ; Name ..........: _LOWriter_FormConTimeFieldValue
 ; Description ...: Set or retrieve the current Time field value.
 ; Syntax ........: _LOWriter_FormConTimeFieldValue(ByRef $oTimeField[, $tTimeValue = Null])
-; Parameters ....: $oTimeField          - [in/out] an object. A Time Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
-;                  $tTimeValue          - [optional] a dll struct value. Default is Null. The time value to set the field to, created previously by _LOWriter_DateStructCreate.
+; Parameters ....: $oTimeField          - A Time Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $tTimeValue          - [optional] Default is Null. The time value to set the field to, created previously by _LOWriter_DateStructCreate.
 ; Return values .: Success: 1 or Structure
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -13668,7 +13668,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldValue
 ; Name ..........: _LOWriter_FormDelete
 ; Description ...: Delete a form or sub-form from a document.
 ; Syntax ........: _LOWriter_FormDelete(ByRef $oForm)
-; Parameters ....: $oForm               - [in/out] an object. A Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
+; Parameters ....: $oForm               - A Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -13740,11 +13740,11 @@ EndFunc   ;==>_LOWriter_FormDelete
 ; Name ..........: _LOWriter_FormDocSettings
 ; Description ...: Set or Retrieve Document Form related settings.
 ; Syntax ........: _LOWriter_FormDocSettings(ByRef $oDoc[, $bFormDesignMode = Null[, $bOpenInDesignMode = Null[, $bAutoControlFocus = Null[, $bUseControlWizards = Null]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $bFormDesignMode     - [optional] a boolean value. Default is Null. If True, Form design mode will be active.
-;                  $bOpenInDesignMode   - [optional] a boolean value. Default is Null. If True, Form design mode will be active automatically upon opening the document.
-;                  $bAutoControlFocus   - [optional] a boolean value. Default is Null. If True, the first Form control will have the focus upon opening the document.
-;                  $bUseControlWizards  - [optional] a boolean value. Default is Null. If True, Control Wizards will be used.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bFormDesignMode     - [optional] Default is Null. If True, Form design mode will be active.
+;                  $bOpenInDesignMode   - [optional] Default is Null. If True, Form design mode will be active automatically upon opening the document.
+;                  $bAutoControlFocus   - [optional] Default is Null. If True, the first Form control will have the focus upon opening the document.
+;                  $bUseControlWizards  - [optional] Default is Null. If True, Control Wizards will be used.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -13934,8 +13934,8 @@ EndFunc   ;==>_LOWriter_FormDocSettings
 ; Name ..........: _LOWriter_FormGetObjByIndex
 ; Description ...: Retrieve a Form Object by index.
 ; Syntax ........: _LOWriter_FormGetObjByIndex(ByRef $oObj, $iForm)
-; Parameters ....: $oObj                - [in/out] an object. Either a Document Object or a Form object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
-;                  $iForm               - an integer value. The Index value of the Form to retrieve. 0 Based.
+; Parameters ....: $oObj                - Either a Document Object or a Form object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
+;                  $iForm               - The Index value of the Form to retrieve. 0 Based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -13993,8 +13993,8 @@ EndFunc   ;==>_LOWriter_FormGetObjByIndex
 ; Name ..........: _LOWriter_FormParent
 ; Description ...: Set or Retrieve a Form's parent, i.e. set a form as Sub-Form, or a Sub-Form as a top-level form.
 ; Syntax ........: _LOWriter_FormParent(ByRef $oForm[, $oParent = Null])
-; Parameters ....: $oForm               - [in/out] an object. A Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
-;                  $oParent             - [optional] an object. Default is Null. A Document or Form object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
+; Parameters ....: $oForm               - A Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
+;                  $oParent             - [optional] Default is Null. A Document or Form object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -14104,21 +14104,21 @@ EndFunc   ;==>_LOWriter_FormParent
 ; Name ..........: _LOWriter_FormPropertiesData
 ; Description ...: Set or Retrieve Form Data properties.
 ; Syntax ........: _LOWriter_FormPropertiesData(ByRef $oForm[, $sSource = Null[, $iContentType = Null[, $sContent = Null[, $bAnalyzeSQL = Null[, $sFilter = Null[, $sSort = Null[, $aLinkMaster = Null[, $aLinkSlave = Null[, $bAdditions = Null[, $bModifications = Null[, $bDeletions = Null[, $bAddOnly = Null[, $iNavBar = Null[, $iCycle = Null]]]]]]]]]]]]]])
-; Parameters ....: $oForm               - [in/out] an object. A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
-;                  $sSource             - [optional] a string value. Default is Null. The registered Database name, or path to the Database file to set as a source.
-;                  $iContentType        - [optional] an integer value (0-2). Default is Null. The type of Data to use from the Data Source. See Constants $LOW_FORM_CONTENT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $sContent            - [optional] a string value. Default is Null. The Content to be used for the form, either a Table or Query name, or an SQL statement.
-;                  $bAnalyzeSQL         - [optional] a boolean value. Default is Null. If True, SQL commands will be analyzed by LibreOffice.
-;                  $sFilter             - [optional] a string value. Default is Null. The SQL filter command.
-;                  $sSort               - [optional] a string value. Default is Null. The SQL Sort command.
-;                  $aLinkMaster         - [optional] an array of unknowns. Default is Null. An array of Master Field names. See remarks.
-;                  $aLinkSlave          - [optional] an array of unknowns. Default is Null. An array of Slave Field names. See remarks.
-;                  $bAdditions          - [optional] a boolean value. Default is Null. If True, additions are allowed.
-;                  $bModifications      - [optional] a boolean value. Default is Null. If True, Modifications are allowed.
-;                  $bDeletions          - [optional] a boolean value. Default is Null. If True, Deletions are allowed.
-;                  $bAddOnly            - [optional] a boolean value. Default is Null. If True, Data can only be added.
-;                  $iNavBar             - [optional] an integer value (0-2). Default is Null. The Navigation Bar mode. See Constants $LOW_FORM_NAV_BAR_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iCycle              - [optional] an integer value (0-2). Default is Null. What happens when you press the Tab key at the end of a record. See remarks. See Constants $LOW_FORM_CYCLE_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oForm               - A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
+;                  $sSource             - [optional] Default is Null. The registered Database name, or path to the Database file to set as a source.
+;                  $iContentType        - [optional] (0-2) Default is Null. The type of Data to use from the Data Source. See Constants $LOW_FORM_CONTENT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $sContent            - [optional] Default is Null. The Content to be used for the form, either a Table or Query name, or an SQL statement.
+;                  $bAnalyzeSQL         - [optional] Default is Null. If True, SQL commands will be analyzed by LibreOffice.
+;                  $sFilter             - [optional] Default is Null. The SQL filter command.
+;                  $sSort               - [optional] Default is Null. The SQL Sort command.
+;                  $aLinkMaster         - [optional] Default is Null. An array of Master Field names. See remarks.
+;                  $aLinkSlave          - [optional] Default is Null. An array of Slave Field names. See remarks.
+;                  $bAdditions          - [optional] Default is Null. If True, additions are allowed.
+;                  $bModifications      - [optional] Default is Null. If True, Modifications are allowed.
+;                  $bDeletions          - [optional] Default is Null. If True, Deletions are allowed.
+;                  $bAddOnly            - [optional] Default is Null. If True, Data can only be added.
+;                  $iNavBar             - [optional] (0-2) Default is Null. The Navigation Bar mode. See Constants $LOW_FORM_NAV_BAR_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iCycle              - [optional] (0-2) Default is Null. What happens when you press the Tab key at the end of a record. See remarks. See Constants $LOW_FORM_CYCLE_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -14314,12 +14314,12 @@ EndFunc   ;==>_LOWriter_FormPropertiesData
 ; Name ..........: _LOWriter_FormPropertiesGeneral
 ; Description ...: Set or Retrieve Form general properties.
 ; Syntax ........: _LOWriter_FormPropertiesGeneral(ByRef $oForm[, $sName = Null[, $sURL = Null[, $sFrame = Null[, $iEncoding = Null[, $iSubType = Null]]]]])
-; Parameters ....: $oForm               - [in/out] an object. A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
-;                  $sName               - [optional] a string value. Default is Null. The name of the Form.
-;                  $sURL                - [optional] a string value. Default is Null. The URL or Document path to open.
-;                  $sFrame              - [optional] a string value. Default is Null. The frame to open the URL in. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iEncoding           - [optional] an integer value (0-2). Default is Null. The type of encoding for the data transfer. See Constants $LOW_FORM_SUBMIT_ENCODING_* as defined in LibreOfficeWriter_Constants.au3
-;                  $iSubType            - [optional] an integer value (0-1). Default is Null. The method to submit the completed form. See Constants $LOW_FORM_SUBMIT_METHOD_* as defined in LibreOfficeWriter_Constants.au3
+; Parameters ....: $oForm               - A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
+;                  $sName               - [optional] Default is Null. The name of the Form.
+;                  $sURL                - [optional] Default is Null. The URL or Document path to open.
+;                  $sFrame              - [optional] Default is Null. The frame to open the URL in. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iEncoding           - [optional] (0-2) Default is Null. The type of encoding for the data transfer. See Constants $LOW_FORM_SUBMIT_ENCODING_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iSubType            - [optional] (0-1) Default is Null. The method to submit the completed form. See Constants $LOW_FORM_SUBMIT_METHOD_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -14410,7 +14410,7 @@ EndFunc   ;==>_LOWriter_FormPropertiesGeneral
 ; Name ..........: _LOWriter_FormsGetCount
 ; Description ...: Retrieve a count of top-level forms contained in a document or sub-forms of a form.
 ; Syntax ........: _LOWriter_FormsGetCount(ByRef $oObj)
-; Parameters ....: $oObj                - [in/out] an object. Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
+; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -14456,7 +14456,7 @@ EndFunc   ;==>_LOWriter_FormsGetCount
 ; Name ..........: _LOWriter_FormsGetList
 ; Description ...: Retrieve an array of Form Objects.
 ; Syntax ........: _LOWriter_FormsGetList(ByRef $oObj)
-; Parameters ....: $oObj                - [in/out] an object. Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
+; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
