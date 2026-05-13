@@ -125,14 +125,14 @@
 ; Name ..........: __LOWriter_AnyAreDefault
 ; Description ...: Tests whether any input parameters are equal to Default keyword.
 ; Syntax ........: __LOWriter_AnyAreDefault($vVar1[, $vVar2 = Null[, $vVar3 = Null[, $vVar4 = Null[, $vVar5 = Null[, $vVar6 = Null[, $vVar7 = Null[, $vVar8 = Null]]]]]]])
-; Parameters ....: $vVar1               -
-;                  $vVar2               - [optional] Default is Null.
-;                  $vVar3               - [optional] Default is Null.
-;                  $vVar4               - [optional] Default is Null.
-;                  $vVar5               - [optional] Default is Null.
-;                  $vVar6               - [optional] Default is Null.
-;                  $vVar7               - [optional] Default is Null.
-;                  $vVar8               - [optional] Default is Null.
+; Parameters ....: $vVar1               - The variable to test if it is set to Default keyword.
+;                  $vVar2               - [optional] Default is Null. The variable to test if it is set to Default keyword.
+;                  $vVar3               - [optional] Default is Null. The variable to test if it is set to Default keyword.
+;                  $vVar4               - [optional] Default is Null. The variable to test if it is set to Default keyword.
+;                  $vVar5               - [optional] Default is Null. The variable to test if it is set to Default keyword.
+;                  $vVar6               - [optional] Default is Null. The variable to test if it is set to Default keyword.
+;                  $vVar7               - [optional] Default is Null. The variable to test if it is set to Default keyword.
+;                  $vVar8               - [optional] Default is Null. The variable to test if it is set to Default keyword.
 ; Return values .: Success: Boolean
 ;                  Failure: False
 ;                  --Success--
