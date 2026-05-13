@@ -1746,7 +1746,7 @@ EndFunc   ;==>_LOWriter_FrameGetObjByCursor
 ; Syntax ........: _LOWriter_FrameGetObjByName(ByRef $oDoc, $sFrameName)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sFrameName          - The frame name to search for.
-; Return values .: Success: 0 or Object.
+; Return values .: Success: 1 or Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
