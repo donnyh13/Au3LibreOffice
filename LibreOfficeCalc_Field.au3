@@ -46,10 +46,10 @@
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oField not a map.
-;                  @Error 1 @Extended 2 Return 0 = $bFieldName not a Boolean.
+;                  @Error 1 @Extended 1 = $oField not a map.
+;                  @Error 1 @Extended 2 = $bFieldName not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Field's current display.
+;                  @Error 3 @Extended 1 = Failed to retrieve Field's current display.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning current Field display content in String format.
 ; Author ........: donnyh13
@@ -86,14 +86,14 @@ EndFunc   ;==>_LOCalc_FieldCurrentDisplayGet
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bIsDate not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 3 = $bIsDate not a Boolean.
+;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.DateTime" Object.
+;                  @Error 2 @Extended 1 = Failed to Create a "com.sun.star.text.TextField.DateTime" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
+;                  @Error 3 @Extended 1 = Failed to identify and retrieve Field object after insertion.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a Map containing the Field's Object.
 ; Author ........: donnyh13
@@ -141,9 +141,9 @@ EndFunc   ;==>_LOCalc_FieldDateTimeInsert
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $mField not a map.
+;                  @Error 1 @Extended 1 = $mField not a map.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a new Text Cursor.
+;                  @Error 2 @Extended 1 = Failed to Create a new Text Cursor.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted the field.
 ; Author ........: donnyh13
@@ -185,14 +185,14 @@ EndFunc   ;==>_LOCalc_FieldDelete
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bPath not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 3 = $bPath not a Boolean.
+;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.FileName" Object.
+;                  @Error 2 @Extended 1 = Failed to Create a "com.sun.star.text.TextField.FileName" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
+;                  @Error 3 @Extended 1 = Failed to identify and retrieve Field object after insertion.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
 ; Author ........: donnyh13
@@ -237,9 +237,9 @@ EndFunc   ;==>_LOCalc_FieldFileNameInsert
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $mField not a map.
+;                  @Error 1 @Extended 1 = $mField not a map.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to retrieve Field anchor Object.
+;                  @Error 2 @Extended 1 = Failed to retrieve Field anchor Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Field Anchor Cursor Object.
 ; Author ........: donnyh13
@@ -276,16 +276,16 @@ EndFunc   ;==>_LOCalc_FieldGetAnchor
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sURL not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sText not a String.
-;                  @Error 1 @Extended 5 Return 0 = $sTargetFrame not a String.
-;                  @Error 1 @Extended 6 Return 0 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 3 = $sURL not a String.
+;                  @Error 1 @Extended 4 = $sText not a String.
+;                  @Error 1 @Extended 5 = $sTargetFrame not a String.
+;                  @Error 1 @Extended 6 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.URL" Object.
+;                  @Error 2 @Extended 1 = Failed to Create a "com.sun.star.text.TextField.URL" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
+;                  @Error 3 @Extended 1 = Failed to identify and retrieve Field object after insertion.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
 ; Author ........: donnyh13
@@ -336,12 +336,12 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkInsert
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $mHyperlinkField not a map.
-;                  @Error 1 @Extended 2 Return 0 = $sURL not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sText not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sTargetFrame not a String.
+;                  @Error 1 @Extended 1 = $mHyperlinkField not a map.
+;                  @Error 1 @Extended 2 = $sURL not a String.
+;                  @Error 1 @Extended 3 = $sText not a String.
+;                  @Error 1 @Extended 4 = $sTargetFrame not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sURL
 ;                  |                               2 = Error setting $sText
 ;                  |                               4 = Error setting $sTargetFrame
@@ -405,13 +405,13 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkModify
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 3 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.PageCount" Object.
+;                  @Error 2 @Extended 1 = Failed to Create a "com.sun.star.text.TextField.PageCount" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
+;                  @Error 3 @Extended 1 = Failed to identify and retrieve Field object after insertion.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
 ; Author ........: donnyh13
@@ -454,13 +454,13 @@ EndFunc   ;==>_LOCalc_FieldPageCountInsert
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 3 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.PageNumber" Object.
+;                  @Error 2 @Extended 1 = Failed to Create a "com.sun.star.text.TextField.PageNumber" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
+;                  @Error 3 @Extended 1 = Failed to identify and retrieve Field object after insertion.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
 ; Author ........: donnyh13
@@ -503,20 +503,20 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $bFieldTypeNum not a Boolean.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 = $bFieldTypeNum not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create enumeration of paragraphs in Cell.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create enumeration of Text Portions in Paragraph.
+;                  @Error 2 @Extended 1 = Failed to create enumeration of paragraphs in Cell.
+;                  @Error 2 @Extended 2 = Failed to create enumeration of Text Portions in Paragraph.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify requested Field Types.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Text Fields Object/
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve total count of Fields.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Text Field Object.
-;                  @Error 3 @Extended 5 Return 0 = More fields found than total count of Fields. Try creating a new cursor, and trying again.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve secondary Text Field Object.
-;                  @Error 3 @Extended 7 Return 0 = Number of Fields found not equal to number of expected Fields. Try creating a new cursor, and trying again.
+;                  @Error 3 @Extended 1 = Failed to identify requested Field Types.
+;                  @Error 3 @Extended 2 = Failed to retrieve Text Fields Object/
+;                  @Error 3 @Extended 3 = Failed to retrieve total count of Fields.
+;                  @Error 3 @Extended 4 = Failed to retrieve Text Field Object.
+;                  @Error 3 @Extended 5 = More fields found than total count of Fields. Try creating a new cursor, and trying again.
+;                  @Error 3 @Extended 6 = Failed to retrieve secondary Text Field Object.
+;                  @Error 3 @Extended 7 = Number of Fields found not equal to number of expected Fields. Try creating a new cursor, and trying again.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning Array of maps containing Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
 ; Author ........: donnyh13
@@ -632,13 +632,13 @@ EndFunc   ;==>_LOCalc_FieldsGetList
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 3 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.SheetName" Object.
+;                  @Error 2 @Extended 1 = Failed to Create a "com.sun.star.text.TextField.SheetName" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
+;                  @Error 3 @Extended 1 = Failed to identify and retrieve Field object after insertion.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
 ; Author ........: donnyh13
@@ -681,13 +681,13 @@ EndFunc   ;==>_LOCalc_FieldSheetNameInsert
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 3 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.docinfo.Title" Object.
+;                  @Error 2 @Extended 1 = Failed to Create a "com.sun.star.text.TextField.docinfo.Title" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
+;                  @Error 3 @Extended 1 = Failed to identify and retrieve Field object after insertion.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
 ; Author ........: donnyh13

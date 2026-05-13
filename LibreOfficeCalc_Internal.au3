@@ -66,8 +66,8 @@
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $tCellAddr1 not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $tCellAddr2 not an Object.
+;                  @Error 1 @Extended 1 = $tCellAddr1 not an Object.
+;                  @Error 1 @Extended 2 = $tCellAddr2 not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If the Cell Addresses are identical, True is returned, else False.
 ; Author ........: donnyh13
@@ -100,12 +100,12 @@ EndFunc   ;==>__LOCalc_CellAddressIsSame
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current background color.
+;                  @Error 3 @Extended 1 = Failed to retrieve current background color.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iBackColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -160,22 +160,22 @@ EndFunc   ;==>__LOCalc_CellBackColor
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oRange not an Object.
+;                  @Error 1 @Extended 1 = $oRange not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Error Retrieving TableBorder2 Object.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Top Border Style/Color when Top Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Left Border Style/Color when Left Border width not set.
-;                  @Error 3 @Extended 6 Return 0 = Cannot set Right Border Style/Color when Right Border width not set.
-;                  @Error 3 @Extended 7 Return 0 = Cannot set Vertical Border Style/Color when Vertical Border width not set.
-;                  @Error 3 @Extended 8 Return 0 = Cannot set Horizontal Border Style/Color when Horizontal Border width not set.
-;                  @Error 3 @Extended 9 Return 0 = Cannot set Top-Left to Bottom-Right Diagonal Border Style/Color when Top-Left to Bottom-Right Diagonal Border width not set.
-;                  @Error 3 @Extended 10 Return 0 = Cannot set Bottom-Left to Top-Right Diagonal Border Style/Color when Bottom-Left to Top-Right Diagonal Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Error Retrieving TableBorder2 Object.
+;                  @Error 3 @Extended 3 = Cannot set Top Border Style/Color when Top Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error 3 @Extended 6 = Cannot set Right Border Style/Color when Right Border width not set.
+;                  @Error 3 @Extended 7 = Cannot set Vertical Border Style/Color when Vertical Border width not set.
+;                  @Error 3 @Extended 8 = Cannot set Horizontal Border Style/Color when Horizontal Border width not set.
+;                  @Error 3 @Extended 9 = Cannot set Top-Left to Bottom-Right Diagonal Border Style/Color when Top-Left to Bottom-Right Diagonal Border width not set.
+;                  @Error 3 @Extended 10 = Cannot set Bottom-Left to Top-Right Diagonal Border Style/Color when Bottom-Left to Top-Right Diagonal Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -185,7 +185,7 @@ EndFunc   ;==>__LOCalc_CellBackColor
 ;                  |                               64 = Error setting $iTLBRDiag
 ;                  |                               128 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
@@ -367,14 +367,14 @@ EndFunc   ;==>__LOCalc_CellBorder
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iAll not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $iAll not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, or less than 0.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, or less than 0.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, or less than 0.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -462,12 +462,12 @@ EndFunc   ;==>__LOCalc_CellBorderPadding
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $bOutline not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bShadow not a Boolean.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 = $bOutline not a Boolean.
+;                  @Error 1 @Extended 4 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iRelief
 ;                  |                               2 = Error setting $bOutline
 ;                  |                               4 = Error setting $bShadow
@@ -533,14 +533,14 @@ EndFunc   ;==>__LOCalc_CellEffect
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
-;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not available.
-;                  @Error 1 @Extended 4 Return 0 = $nFontSize not a number.
-;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $sFontName not a String.
+;                  @Error 1 @Extended 3 = Font called in $sFontName not available.
+;                  @Error 1 @Extended 4 = $nFontSize not a number.
+;                  @Error 1 @Extended 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFontName
 ;                  |                               2 = Error setting $nFontSize
 ;                  |                               4 = Error setting $iPosture
@@ -614,12 +614,12 @@ EndFunc   ;==>__LOCalc_CellFont
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $iFontColor not an Integer, less than 0 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Font Color.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Font Color.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFontColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -667,14 +667,14 @@ EndFunc   ;==>__LOCalc_CellFontColor
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = Format Key called in $iFormatKey not found in document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oObj not an Object.
+;                  @Error 1 @Extended 3 = $iFormatKey not an Integer.
+;                  @Error 1 @Extended 4 = Format Key called in $iFormatKey not found in document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering Format.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Numbering Format.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFormatKey
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -723,12 +723,12 @@ EndFunc   ;==>__LOCalc_CellNumberFormat
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
-;                  @Error 1 @Extended 3 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
+;                  @Error 1 @Extended 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iOverLineStyle
 ;                  |                               2 = Error setting $iOLColor
 ;                  |                               4 = Error setting $bWordOnly
@@ -803,15 +803,15 @@ EndFunc   ;==>__LOCalc_CellOverLine
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bHideAll not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bProtected not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bHideFormula not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bHideWhenPrint not a Boolean.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $bHideAll not a Boolean.
+;                  @Error 1 @Extended 3 = $bProtected not a Boolean.
+;                  @Error 1 @Extended 4 = $bHideFormula not a Boolean.
+;                  @Error 1 @Extended 5 = $bHideWhenPrint not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Cell Protection Structure.
+;                  @Error 3 @Extended 1 = Failed to retrieve Cell Protection Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bHideAll
 ;                  |                               2 = Error setting $bProtected
 ;                  |                               4 = Error setting $bHideFormula
@@ -892,14 +892,14 @@ EndFunc   ;==>__LOCalc_CellProtection
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, less than 0 or greater than 5009.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOC_SHADOW_LOCATION_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iWidth not an Integer, less than 0 or greater than 5009.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shadow Format Structure.
+;                  @Error 3 @Extended 1 = Failed to retrieve Shadow Format Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -970,11 +970,11 @@ EndFunc   ;==>__LOCalc_CellShadow
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iStrikeLineStyle
 ;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
@@ -1037,19 +1037,19 @@ EndFunc   ;==>__LOCalc_CellStrikeOut
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCellStyle not an Object.
+;                  @Error 1 @Extended 1 = $oCellStyle not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style/Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style/Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style/Color when Right Border width not set.
-;                  @Error 3 @Extended 6 Return 0 = Cannot set Top-Left to Bottom-Right Diagonal Border Style/Color when Top-Left to Bottom-Right Diagonal Border width not set.
-;                  @Error 3 @Extended 7 Return 0 = Cannot set Bottom-Left to Top-Right Diagonal Border Style/Color when Bottom-Left to Top-Right Diagonal Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Style/Color when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Style/Color when Right Border width not set.
+;                  @Error 3 @Extended 6 = Cannot set Top-Left to Bottom-Right Diagonal Border Style/Color when Top-Left to Bottom-Right Diagonal Border width not set.
+;                  @Error 3 @Extended 7 = Cannot set Bottom-Left to Top-Right Diagonal Border Style/Color when Bottom-Left to Top-Right Diagonal Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -1057,7 +1057,7 @@ EndFunc   ;==>__LOCalc_CellStrikeOut
 ;                  |                               16 = Error setting $iTLBRDiag
 ;                  |                               32 = Error setting $iBLTRDiag
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1200,12 +1200,12 @@ EndFunc   ;==>__LOCalc_CellStyleBorder
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iHoriAlign not an Integer, less than 0 or greater than 6. See Constants, $LOC_CELL_ALIGN_HORI_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 5. See Constants, $LOC_CELL_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iIndent not an Integer.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $iHoriAlign not an Integer, less than 0 or greater than 6. See Constants, $LOC_CELL_ALIGN_HORI_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 = $iVertAlign not an Integer, less than 0 or greater than 5. See Constants, $LOC_CELL_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 4 = $iIndent not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iHoriAlign
 ;                  |                               2 = Error setting $iVertAlign
 ;                  |                               4 = Error setting $iIndent
@@ -1292,13 +1292,13 @@ EndFunc   ;==>__LOCalc_CellTextAlign
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRotate not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 3 Return 0 = $iReference not an Integer, less than 0 or greater than 1, but not equal to 3. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $bVerticalStack not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bAsianLayout not a Boolean.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $iRotate not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 3 = $iReference not an Integer, less than 0 or greater than 1, but not equal to 3. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 4 = $bVerticalStack not a Boolean.
+;                  @Error 1 @Extended 5 = $bAsianLayout not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iRotate
 ;                  |                               2 = Error setting $iReference
 ;                  |                               4 = Error setting $bVerticalStack
@@ -1383,13 +1383,13 @@ EndFunc   ;==>__LOCalc_CellTextOrient
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bAutoWrapText not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bHyphen not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bShrinkToFitnot a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $bAutoWrapText not a Boolean.
+;                  @Error 1 @Extended 3 = $bHyphen not a Boolean.
+;                  @Error 1 @Extended 4 = $bShrinkToFitnot a Boolean.
+;                  @Error 1 @Extended 5 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bAutoWrapText
 ;                  |                               2 = Error setting $bHyphen
 ;                  |                               4 = Error setting $bShrinkToFit
@@ -1462,12 +1462,12 @@ EndFunc   ;==>__LOCalc_CellTextProperties
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
-;                  @Error 1 @Extended 3 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 1 = $oObj an Object.
+;                  @Error 1 @Extended 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
+;                  @Error 1 @Extended 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iUnderLineStyle
 ;                  |                               2 = Error setting $iULColor
 ;                  |                               4 = Error setting $bWordOnly
@@ -1539,9 +1539,9 @@ EndFunc   ;==>__LOCalc_CellUnderLine
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oAnnotationShape not an Object.
+;                  @Error 1 @Extended 1 = $oAnnotationShape not an Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iDistance
 ;                  --Success--
@@ -1684,9 +1684,9 @@ EndFunc   ;==>__LOCalc_CommentAreaShadowModify
 ; Return values .: Success: String or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3
-;                  @Error 1 @Extended 2 Return 0 = $sArrowStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = Both $iArrowStyle and $sArrowStyle called with Null.
+;                  @Error 1 @Extended 1 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3
+;                  @Error 1 @Extended 2 = $sArrowStyle not a String.
+;                  @Error 1 @Extended 3 = Both $iArrowStyle and $sArrowStyle called with Null.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iArrowStyle was successfully converted to its corresponding Arrow Type Name.
 ;                  @Error 0 @Extended 1 Return Integer = Success. Arrow Type Name called in $sArrowStyle was successfully converted to its corresponding Constant value.
@@ -1766,13 +1766,13 @@ EndFunc   ;==>__LOCalc_CommentArrowStyleName
 ; Return values .: Success: Integer or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCell not a Cell Object.
-;                  @Error 1 @Extended 3 Return 0 = $bReturnIndex not a Boolean.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $oCell not a Cell Object.
+;                  @Error 1 @Extended 3 = $bReturnIndex not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Annotations Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Cell Address.
-;                  @Error 3 @Extended 3 Return 0 = Failed to find comment for specified cell.
+;                  @Error 3 @Extended 1 = Failed to retrieve Annotations Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Cell Address.
+;                  @Error 3 @Extended 3 = Failed to find comment for specified cell.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. $bReturnIndex Called with True, returning Comment's Index number.
 ;                  @Error 0 @Extended ? Return Object = Success. Returning Comment's Object. @Extended set to Comment's Index number.
@@ -1824,9 +1824,9 @@ EndFunc   ;==>__LOCalc_CommentGetObjByCell
 ; Return values .: Success: String or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3
-;                  @Error 1 @Extended 2 Return 0 = $sLineStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = Both $iLineStyle and $sLineStyle called with Null.
+;                  @Error 1 @Extended 1 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3
+;                  @Error 1 @Extended 2 = $sLineStyle not a String.
+;                  @Error 1 @Extended 3 = Both $iLineStyle and $sLineStyle called with Null.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iLineStyle was successfully converted to its corresponding Line Style Name.
 ;                  @Error 0 @Extended 1 Return Integer = Success. Line Style Name called in $sLineStyle was successfully converted to its corresponding Constant value.
@@ -1906,19 +1906,19 @@ EndFunc   ;==>__LOCalc_CommentLineStyleName
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create enumeration of paragraphs in Cell.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create enumeration of Text Portions in Paragraph.
+;                  @Error 2 @Extended 1 = Failed to create enumeration of paragraphs in Cell.
+;                  @Error 2 @Extended 2 = Failed to create enumeration of Text Portions in Paragraph.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify requested Field Types.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Text Fields Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve total Fields count.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Text Field Object.
-;                  @Error 3 @Extended 5 Return 0 = Number of identified fields is greater than number of expected fields.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Alternate Text Field Object.
-;                  @Error 3 @Extended 7 Return 0 = Failed to identify newly created Field.
+;                  @Error 3 @Extended 1 = Failed to identify requested Field Types.
+;                  @Error 3 @Extended 2 = Failed to retrieve Text Fields Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve total Fields count.
+;                  @Error 3 @Extended 4 = Failed to retrieve Text Field Object.
+;                  @Error 3 @Extended 5 = Number of identified fields is greater than number of expected fields.
+;                  @Error 3 @Extended 6 = Failed to retrieve Alternate Text Field Object.
+;                  @Error 3 @Extended 7 = Failed to identify newly created Field.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Returning newly inserted Field's Object inside of a map.
 ; Author ........: donnyh13
@@ -2001,7 +2001,7 @@ EndFunc   ;==>__LOCalc_FieldGetObj
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iFieldType not an Integer.
+;                  @Error 1 @Extended 1 = $iFieldType not an Integer.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Array = Success. $iFieldType called with All, returning full regular Field Service list String Array.
 ;                  @Error 0 @Extended 1 Return Array = Success. $iFieldType BitOr'd together, determining which flags are called from the Array. Returning Field Service String list Array.
@@ -2048,9 +2048,9 @@ EndFunc   ;==>__LOCalc_FieldTypeServices
 ; Return values .: Success: String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sDocSavePath is not a string.
-;                  @Error 1 @Extended 2 Return 0 = $bExportFilters not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sDocSavePath is not a correct path or URL.
+;                  @Error 1 @Extended 1 = $sDocSavePath is not a string.
+;                  @Error 1 @Extended 2 = $bExportFilters not a Boolean.
+;                  @Error 1 @Extended 3 = $sDocSavePath is not a correct path or URL.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Success. Returning required filtername from "SaveAs" FilterNames.
 ;                  @Error 0 @Extended 2 Return String = Success. Returning required filtername from "Export" FilterNames.
@@ -2160,9 +2160,9 @@ EndFunc   ;==>__LOCalc_FilterNameGet
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
+;                  @Error 1 @Extended 1 = $oCursor not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Unknown Cursor type.
+;                  @Error 3 @Extended 1 = Unknown Cursor type.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Return value will be one of the constants, $LOC_CURTYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Author ........: donnyh13
@@ -2271,14 +2271,14 @@ EndFunc   ;==>__LOCalc_InternalComErrorHandler
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $iTokenIndex not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $sContent not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = $iTokenIndex not an Integer.
+;                  @Error 1 @Extended 4 = $sContent not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Named Range Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Sheet Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Scope Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Named Range Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Sheet Object.
+;                  @Error 3 @Extended 3 = Failed to identify Scope Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning Scope object (Doc or Sheet) that contains the Named Range.
 ; Author ........: donnyh13
@@ -2340,23 +2340,23 @@ EndFunc   ;==>__LOCalc_NamedRangeGetScopeObj
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oPageStyle not an Object.
+;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style/Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style/Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style/Color when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Style/Color when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Style/Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2474,24 +2474,24 @@ EndFunc   ;==>__LOCalc_PageStyleBorder
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oPageStyle not an Object.
+;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Footers are not enabled for this Page Style.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Top Border Style/Color when Top Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Left Border Style/Color when Left Border width not set.
-;                  @Error 3 @Extended 6 Return 0 = Cannot set Right Border Style/Color when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Footers are not enabled for this Page Style.
+;                  @Error 3 @Extended 3 = Cannot set Top Border Style/Color when Top Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error 3 @Extended 6 = Cannot set Right Border Style/Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2610,24 +2610,24 @@ EndFunc   ;==>__LOCalc_PageStyleFooterBorder
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oPageStyle not an Object.
+;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Headers are not enabled for this Page Style.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Top Border Style/Color when Top Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Left Border Style/Color when Left Border width not set.
-;                  @Error 3 @Extended 6 Return 0 = Cannot set Right Border Style/Color when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Headers are not enabled for this Page Style.
+;                  @Error 3 @Extended 3 = Cannot set Top Border Style/Color when Top Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error 3 @Extended 6 = Cannot set Right Border Style/Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2740,8 +2740,8 @@ EndFunc   ;==>__LOCalc_PageStyleHeaderBorder
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $tRange1 not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $tRange2 not an Object.
+;                  @Error 1 @Extended 1 = $tRange1 not an Object.
+;                  @Error 1 @Extended 2 = $tRange2 not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If the Range Addresses are identical, True is returned, else False.
 ; Author ........: donnyh13
@@ -2817,13 +2817,13 @@ EndFunc   ;==>__LOCalc_TransparencyGradientConvert
 ; Return values .: Success: String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $tTGradient not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $tTGradient not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.drawing.TransparencyGradientTable" Object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.awt.Gradient" structure.
+;                  @Error 2 @Extended 1 = Error creating "com.sun.star.drawing.TransparencyGradientTable" Object.
+;                  @Error 2 @Extended 2 = Error creating "com.sun.star.awt.Gradient" structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error creating Transparency Gradient Name.
+;                  @Error 3 @Extended 1 = Error creating Transparency Gradient Name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. A new transparency Gradient name was created. Returning the new name as a string.
 ; Author ........: donnyh13

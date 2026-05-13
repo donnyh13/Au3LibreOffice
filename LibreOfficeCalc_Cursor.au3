@@ -54,16 +54,16 @@
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer, less than 0 or greater than 12. See Move Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iColumns not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iRows not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iCount not an Integer or is a negative.
-;                  @Error 1 @Extended 6 Return 0 = $bSelect not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = Cursor called in $oCursor not a Sheet Cursor.
+;                  @Error 1 @Extended 1 = $oCursor not an Object.
+;                  @Error 1 @Extended 2 = $iMove not an Integer, less than 0 or greater than 12. See Move Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 = $iColumns not an Integer.
+;                  @Error 1 @Extended 4 = $iRows not an Integer.
+;                  @Error 1 @Extended 5 = $iCount not an Integer or is a negative.
+;                  @Error 1 @Extended 6 = $bSelect not a Boolean.
+;                  @Error 1 @Extended 7 = Cursor called in $oCursor not a Sheet Cursor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error determining cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
+;                  @Error 3 @Extended 1 = Error determining cursor type.
+;                  @Error 3 @Extended 2 = Error processing cursor move.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return 1 = Success, Cursor object movement was processed successfully. See Remarks
 ; Author ........: donnyh13
@@ -187,15 +187,15 @@ EndFunc   ;==>_LOCalc_SheetCursorMove
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor does not support Character properties.
-;                  @Error 1 @Extended 3 Return 0 = $iSuperScript not an Integer, less than -1 or greater than 100.
-;                  @Error 1 @Extended 4 Return 0 = $iSubScript not an Integer, less than -1 or greater than 100.
-;                  @Error 1 @Extended 5 Return 0 = $iRelativeSize not an Integer, less than 1 or greater than 100.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $oTextCursor does not support Character properties.
+;                  @Error 1 @Extended 3 = $iSuperScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 4 = $iSubScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 5 = $iRelativeSize not an Integer, less than 1 or greater than 100.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
+;                  @Error 2 @Extended 1 = Failed to create Text Cursor for Paragraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iSuperScript
 ;                  |                               2 = Error setting $iSubScript
 ;                  |                               4 = Error setting $iRelativeSize.
@@ -294,14 +294,14 @@ EndFunc   ;==>_LOCalc_TextCursorCharPosition
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor does not support Character properties.
-;                  @Error 1 @Extended 3 Return 0 = $bAutoKerning not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $nKerning not a number, less than -2 or greater than 928.8 Points.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $oTextCursor does not support Character properties.
+;                  @Error 1 @Extended 3 = $bAutoKerning not a Boolean.
+;                  @Error 1 @Extended 4 = $nKerning not a number, less than -2 or greater than 928.8 Points.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
+;                  @Error 2 @Extended 1 = Failed to create Text Cursor for Paragraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoKerning
 ;                  |                               2 = Error setting $nKerning.
 ;                  --Success--
@@ -377,15 +377,15 @@ EndFunc   ;==>_LOCalc_TextCursorCharSpacing
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $bOutline not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bShadow not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oTextCursor does not support Character properties.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOC_CHAR_RELIEF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 = $bOutline not a Boolean.
+;                  @Error 1 @Extended 4 = $bShadow not a Boolean.
+;                  @Error 1 @Extended 5 = $oTextCursor does not support Character properties.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
+;                  @Error 2 @Extended 1 = Failed to create Text Cursor for Paragraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iRelief
 ;                  |                               2 = Error setting $bOutline
 ;                  |                               4 = Error setting $bShadow
@@ -439,17 +439,17 @@ EndFunc   ;==>_LOCalc_TextCursorEffect
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
-;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not available.
-;                  @Error 1 @Extended 4 Return 0 = $nFontSize not a number.
-;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $oTextCursor does not support Character properties.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $sFontName not a String.
+;                  @Error 1 @Extended 3 = Font called in $sFontName not available.
+;                  @Error 1 @Extended 4 = $nFontSize not a number.
+;                  @Error 1 @Extended 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 7 = $oTextCursor does not support Character properties.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
+;                  @Error 2 @Extended 1 = Failed to create Text Cursor for Paragraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFontName
 ;                  |                               2 = Error setting $nFontSize
 ;                  |                               4 = Error setting $iPosture
@@ -502,15 +502,15 @@ EndFunc   ;==>_LOCalc_TextCursorFont
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 3 Return 0 = $oTextCursor does not support Character properties.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $iFontColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 3 = $oTextCursor does not support Character properties.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
+;                  @Error 2 @Extended 1 = Failed to create Text Cursor for Paragraph Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Font Color.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Font Color.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iFontColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -558,10 +558,10 @@ EndFunc   ;==>_LOCalc_TextCursorFontColor
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oObj doesn't support Character Properties service.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $oObj doesn't support Character Properties service.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve String.
+;                  @Error 3 @Extended 1 = Failed to retrieve String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. The selected text in String format.
 ; Author ........: donnyh13
@@ -596,14 +596,14 @@ EndFunc   ;==>_LOCalc_TextCursorGetString
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bSelect not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $oCursor not a Text Cursor.
-;                  @Error 1 @Extended 5 Return 0 = $oRange is a Sheet Cursor and is not supported.
+;                  @Error 1 @Extended 1 = $oCursor not an Object.
+;                  @Error 1 @Extended 2 = $oRange not an Object.
+;                  @Error 1 @Extended 3 = $bSelect not a Boolean.
+;                  @Error 1 @Extended 4 = $oCursor not a Text Cursor.
+;                  @Error 1 @Extended 5 = $oRange is a Sheet Cursor and is not supported.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error determining $oCursor cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Error determining $oRange cursor type.
+;                  @Error 3 @Extended 1 = Error determining $oCursor cursor type.
+;                  @Error 3 @Extended 2 = Error determining $oRange cursor type.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Cursor successfully moved to $oRange position.
 ; Author ........: donnyh13
@@ -646,12 +646,12 @@ EndFunc   ;==>_LOCalc_TextCursorGoToRange
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sString not a string..
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $oCursor is not a Text Cursor.
+;                  @Error 1 @Extended 1 = $oCursor not an Object.
+;                  @Error 1 @Extended 2 = $sString not a string..
+;                  @Error 1 @Extended 3 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 4 = $oCursor is not a Text Cursor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor type.
+;                  @Error 3 @Extended 1 = Error retrieving Cursor type.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. String was successfully inserted.
 ; Author ........: donnyh13
@@ -688,10 +688,10 @@ EndFunc   ;==>_LOCalc_TextCursorInsertString
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor unknown cursor type.
+;                  @Error 1 @Extended 1 = $oCursor not an Object.
+;                  @Error 1 @Extended 2 = $oCursor unknown cursor type.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Cursor Type.
+;                  @Error 3 @Extended 1 = Failed to retrieve Cursor Type.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Successfully queried whether cursor's selection is collapsed. Returning Boolean result, True = Cursor has no data selected, False = cursor has data selected.
 ; Author ........: donnyh13
@@ -736,14 +736,14 @@ EndFunc   ;==>_LOCalc_TextCursorIsCollapsed
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer, less than 0 or greater than 5. See Move Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer or is a negative.
-;                  @Error 1 @Extended 4 Return 0 = $bSelect not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = Cursor called in $oCursor not a Text Cursor.
+;                  @Error 1 @Extended 1 = $oCursor not an Object.
+;                  @Error 1 @Extended 2 = $iMove not an Integer, less than 0 or greater than 5. See Move Constants, $LOC_TEXTCUR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 = $iCount not an Integer or is a negative.
+;                  @Error 1 @Extended 4 = $bSelect not a Boolean.
+;                  @Error 1 @Extended 5 = Cursor called in $oCursor not a Text Cursor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error determining cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
+;                  @Error 3 @Extended 1 = Error determining cursor type.
+;                  @Error 3 @Extended 2 = Error processing cursor move.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. See Remarks
 ; Author ........: donnyh13
@@ -827,15 +827,15 @@ EndFunc   ;==>_LOCalc_TextCursorMove
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
-;                  @Error 1 @Extended 3 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oTextCursor does not support Character properties.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
+;                  @Error 1 @Extended 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 5 = $oTextCursor does not support Character properties.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
+;                  @Error 2 @Extended 1 = Failed to create Text Cursor for Paragraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iOverLineStyle
 ;                  |                               2 = Error setting $iOLColor
 ;                  |                               4 = Error setting $bWordOnly
@@ -886,9 +886,9 @@ EndFunc   ;==>_LOCalc_TextCursorOverline
 ; Return values .: Success: 1D Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Enumeration of Paragraphs.
+;                  @Error 2 @Extended 1 = Failed to create Enumeration of Paragraphs.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning an Array of Paragraph Objects, @Extended is set to the number of results.
 ; Author ........: donnyh13
@@ -935,10 +935,10 @@ EndFunc   ;==>_LOCalc_TextCursorParObjCreateList
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oParObj is not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oParObj not a paragraph Object.
+;                  @Error 1 @Extended 1 = $oParObj is not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oParObj not a paragraph Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error enumerating Paragraph sections.
+;                  @Error 2 @Extended 1 = Error enumerating Paragraph sections.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Array = Success. A two column array. See remarks.
 ; Author ........: donnyh13
@@ -1002,14 +1002,14 @@ EndFunc   ;==>_LOCalc_TextCursorParObjSectionsGet
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $oTextCursor does not support Character properties.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOC_CHAR_STRIKEOUT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error 1 @Extended 3 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 4 = $oTextCursor does not support Character properties.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
+;                  @Error 2 @Extended 1 = Failed to create Text Cursor for Paragraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iStrikeLineStyle
 ;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
@@ -1061,15 +1061,15 @@ EndFunc   ;==>_LOCalc_TextCursorStrikeOut
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
-;                  @Error 1 @Extended 3 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oTextCursor does not support Character properties.
+;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error 1 @Extended 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOC_CHAR_UNDERLINE_* as defined in LibreOfficeCalc_Constants.au3. See Remarks.
+;                  @Error 1 @Extended 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 5 = $oTextCursor does not support Character properties.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor for Paragraph Object.
+;                  @Error 2 @Extended 1 = Failed to create Text Cursor for Paragraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iUnderLineStyle
 ;                  |                               2 = Error setting $iULColor
 ;                  |                               4 = Error setting $bWordOnly
