@@ -663,7 +663,7 @@ EndFunc   ;==>_LOBase_DatabaseMetaDataQuery
 ; Name ..........: _LOBase_DatabaseName
 ; Description ...: Retrieve the Database Name property. See remarks.
 ; Syntax ........: _LOBase_DatabaseName(ByRef $oDBase)
-; Parameters ....: $oDBase              - 
+; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
