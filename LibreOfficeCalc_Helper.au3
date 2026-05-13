@@ -367,7 +367,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorModify
 ;                  $nValue              - [optional] Default is 0. The numerical Value to filter the Range for. Only valid if $bIsNumeric is set to True. Call with any number to skip, it will not be used unless $bIsNumeric is True.
 ;                  $sString             - [optional] Default is "". The string Value to filter the Range for. Only valid if $bIsNumeric is set to False. Call with an empty string to skip, it will not be used unless $bIsNumeric is False.
 ;                  $iCondition          - [optional] (0-17) Default is $LOC_FILTER_CONDITION_EMPTY. The comparative condition to test each cell and value by. See Constants $LOC_FILTER_CONDITION_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iOperator           - [optional] an integer value (0,1). Default is $LOC_FILTER_OPERATOR_AND. The connection this filter field has with the previous filter field. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iOperator           - [optional] (0,1) Default is $LOC_FILTER_OPERATOR_AND. The connection this filter field has with the previous filter field. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Struct
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -426,7 +426,7 @@ EndFunc   ;==>_LOCalc_FilterFieldCreate
 ;                  $nValue              - [optional] Default is Null. The numerical Value to filter the Range for. Only valid if $bIsNumeric is set to True.
 ;                  $sString             - [optional] Default is Null. The string Value to filter the Range for. Only valid if $bIsNumeric is set to False.
 ;                  $iCondition          - [optional] (0-17) Default is Null. The comparative condition to test each cell and value by. See Constants $LOC_FILTER_CONDITION_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iOperator           - [optional] an integer value (0,1). Default is Null. The connection this filter field has with the previous filter field. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iOperator           - [optional] (0,1) Default is Null. The connection this filter field has with the previous filter field. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Struct
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

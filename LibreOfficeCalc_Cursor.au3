@@ -435,7 +435,7 @@ EndFunc   ;==>_LOCalc_TextCursorEffect
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
 ;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] an integer value(0,50-200). Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional](0,50-200) Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -590,8 +590,8 @@ EndFunc   ;==>_LOCalc_TextCursorGetString
 ; Name ..........: _LOCalc_TextCursorGoToRange
 ; Description ...: Moves a Text cursor to another Text Cursor or Paragraph portion Position or Range.
 ; Syntax ........: _LOCalc_TextCursorGoToRange(ByRef $oCursor, ByRef $oRange[, $bSelect = False])
-; Parameters ....: $oCursor             - an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $oRange              - an object. The Cursor or paragraph portion to move cursor called in $oCursor to. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+; Parameters ....: $oCursor             - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $oRange              - The Cursor or paragraph portion to move cursor called in $oCursor to. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
 ;                  $bSelect             - [optional] Default is False. If True, the selection is expanded or created from original cursor location to Range location.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

@@ -260,14 +260,14 @@ EndFunc   ;==>_LOCalc_CellBorderPadding
 ; Description ...: Set and retrieve the Cell or Cell Range Border Line style. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_CellBorderStyle(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]]]])
 ; Parameters ....: $oCell               - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
-;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iVert               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Vertical Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iHori               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Horizontal Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iTLBRDiag           - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top-Left to Bottom-Right Diagonal Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iBLTRDiag           - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom-Left to Top-Right Diagonal Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iVert               - [optional] (0x7FFF,0-17) Default is Null. The Vertical Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iHori               - [optional] (0x7FFF,0-17) Default is Null. The Horizontal Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iTLBRDiag           - [optional] (0x7FFF,0-17) Default is Null. The Top-Left to Bottom-Right Diagonal Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iBLTRDiag           - [optional] (0x7FFF,0-17) Default is Null. The Bottom-Left to Top-Right Diagonal Border Line Style of the Cell Range. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -524,7 +524,7 @@ EndFunc   ;==>_LOCalc_CellEffect
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
 ;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] an integer value(0,50-200). Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0,50-200) Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1176,12 +1176,12 @@ EndFunc   ;==>_LOCalc_CellStyleBorderPadding
 ; Description ...: Set and retrieve the Cell Style Border Line style. LibreOffice Version 3.6 and Up.
 ; Syntax ........: _LOCalc_CellStyleBorderStyle(ByRef $oCellStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iTLBRDiag = Null[, $iBLTRDiag = Null]]]]]])
 ; Parameters ....: $oCellStyle          - A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iTLBRDiag           - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top-Left to Bottom-Right Diagonal Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iBLTRDiag           - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom-Left to Top-Right Diagonal Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iTLBRDiag           - [optional] (0x7FFF,0-17) Default is Null. The Top-Left to Bottom-Right Diagonal Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iBLTRDiag           - [optional] (0x7FFF,0-17) Default is Null. The Bottom-Left to Top-Right Diagonal Border Line Style of the Cell Style. See Constants, $LOC_BORDER_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1572,7 +1572,7 @@ EndFunc   ;==>_LOCalc_CellStyleExists
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
 ;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] an integer value(0,50-200). Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0,50-200) Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2119,7 +2119,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextAlign
 ; Syntax ........: _LOCalc_CellStyleTextOrient(ByRef $oCellStyle[, $iRotate = Null[, $iReference = Null[, $bVerticalStack = Null[, $bAsianLayout = Null]]]])
 ; Parameters ....: $oCellStyle          - A Cell Style object returned by a previous _LOCalc_CellStyleCreate, or _LOCalc_CellStyleGetObjByName function.
 ;                  $iRotate             - [optional] (0-359) Default is Null. The rotation angle of the text in all cells using this Cell Style.
-;                  $iReference          - [optional] an integer value (0,1,3). Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iReference          - [optional] (0,1,3) Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bVerticalStack      - [optional] Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in LibreOffice settings.
 ;                  $bAsianLayout        - [optional] Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in LibreOffice settings, and enable vertical text.
 ; Return values .: Success: 1 or Array.
@@ -2170,7 +2170,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextOrient
 ;                  $bAutoWrapText       - [optional] Default is Null. If True, Wraps text onto another line at the cell border.
 ;                  $bHyphen             - [optional] Default is Null. If True, Enables word hyphenation for text wrapping to the next line.
 ;                  $bShrinkToFit        - [optional] Default is Null. If True, Reduces the apparent size of the font so that the contents of the cell fit into the current cell width.
-;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
+;                  $iTextDirection      - [optional] (0,1,4) Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2311,7 +2311,7 @@ EndFunc   ;==>_LOCalc_CellTextAlign
 ; Syntax ........: _LOCalc_CellTextOrient(ByRef $oCell[, $iRotate = Null[, $iReference = Null[, $bVerticalStack = Null[, $bAsianLayout = Null]]]])
 ; Parameters ....: $oCell               - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iRotate             - [optional] (0-359) Default is Null. The rotation angle of the text in the cell.
-;                  $iReference          - [optional] an integer value (0,1,3). Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iReference          - [optional] (0,1,3) Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bVerticalStack      - [optional] Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in LibreOffice settings.
 ;                  $bAsianLayout        - [optional] Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in LibreOffice settings, and enable vertical text.
 ; Return values .: Success: 1 or Array.
@@ -2364,7 +2364,7 @@ EndFunc   ;==>_LOCalc_CellTextOrient
 ;                  $bAutoWrapText       - [optional] Default is Null. If True, Wraps text onto another line at the cell border.
 ;                  $bHyphen             - [optional] Default is Null. If True, Enables word hyphenation for text wrapping to the next line.
 ;                  $bShrinkToFit        - [optional] Default is Null. If True, Reduces the apparent size of the font so that the contents of the cell fit into the current cell width.
-;                  $iTextDirection      - [optional] an integer value (0,1,4). Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
+;                  $iTextDirection      - [optional] (0,1,4) Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
