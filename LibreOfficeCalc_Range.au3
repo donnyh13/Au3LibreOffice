@@ -985,8 +985,8 @@ EndFunc   ;==>_LOCalc_RangeDatabaseDelete
 ; Name ..........: _LOCalc_RangeDatabaseExists
 ; Description ...: Check if a Database Range exists in a document.
 ; Syntax ........: _LOCalc_RangeDatabaseExists(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                -
-;                  $sName               -
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $sName               - The Database Range name to search for.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
