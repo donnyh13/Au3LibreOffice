@@ -65,7 +65,7 @@
 ; Name ..........: _LOWriter_ComError_UserFunction
 ; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
 ; Syntax ........: _LOWriter_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
-; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
+; Parameters ....: $vUserFunction       - [optional] Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
 ;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam2             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam3             - [optional] Default is Null. Any optional parameter to be called with the user function.
@@ -1332,8 +1332,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPageBreak
 ; Description ...: Modify or Add Find Format Position Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyPosition(ByRef $atFormat[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null]]])
 ; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iSuperScript        - [optional] an integer value (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
-;                  $iSubScript          - [optional] an integer value (-1-100) Default is Null. The Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
+;                  $iSuperScript        - [optional] (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
+;                  $iSubScript          - [optional] (-1-100) Default is Null. The Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
 ;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

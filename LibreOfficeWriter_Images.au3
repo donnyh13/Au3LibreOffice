@@ -2101,8 +2101,8 @@ EndFunc   ;==>_LOWriter_ImageShadow
 ; Description ...: Set or retrieve Image size settings.
 ; Syntax ........: _LOWriter_ImageSize(ByRef $oImage[, $iScaleWidth = Null[, $iScaleHeight = Null[, $iWidth = Null[, $iHeight = Null[, $bOriginalSize = Null]]]]])
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
-;                  $iScaleWidth         - [optional] an integer value (Min. 1%). Default is Null. The Scale Width percentage of the image.
-;                  $iScaleHeight        - [optional] an integer value (Min. 1%). Default is Null. The Scale Height percentage of the image.
+;                  $iScaleWidth         - [optional] Default is Null. The Scale Width percentage of the image.
+;                  $iScaleHeight        - [optional] Default is Null. The Scale Height percentage of the image.
 ;                  $iWidth              - [optional] Default is Null. The Width of the image, set in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - [optional] Default is Null. The Height of the image, set in Hundredths of a Millimeter (HMM).
 ;                  $bOriginalSize       - [optional] Default is Null. Only accepts True. If True, the image is returned to its original size, or the maximum size allowed for the current page size.

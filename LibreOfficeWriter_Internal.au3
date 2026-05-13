@@ -125,7 +125,7 @@
 ; Name ..........: __LOWriter_AnyAreDefault
 ; Description ...: Tests whether any input parameters are equal to Default keyword.
 ; Syntax ........: __LOWriter_AnyAreDefault($vVar1[, $vVar2 = Null[, $vVar3 = Null[, $vVar4 = Null[, $vVar5 = Null[, $vVar6 = Null[, $vVar7 = Null[, $vVar8 = Null]]]]]]])
-; Parameters ....: $vVar1               - 
+; Parameters ....: $vVar1               -
 ;                  $vVar2               - [optional] Default is Null.
 ;                  $vVar3               - [optional] Default is Null.
 ;                  $vVar4               - [optional] Default is Null.
@@ -1883,7 +1883,7 @@ EndFunc   ;==>__LOWriter_FilterNameGet
 ; Description ...: Add or Update a setting in a Find Format Array.
 ; Syntax ........: __LOWriter_FindFormatAddSetting(ByRef $atArray, $tSetting)
 ; Parameters ....: $atArray             - A Find Format Array of Settings to Search. Array will be directly modified.
-;                  $tSetting            - a struct value. A LibreOffice Structure setting.
+;                  $tSetting            - A LibreOffice Structure setting.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

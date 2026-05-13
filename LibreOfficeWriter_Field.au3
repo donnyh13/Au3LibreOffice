@@ -2679,7 +2679,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintDateTimeModify
 ;                  $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
-;                  $iRevNum             - [optional] a Integer value. Default is Null. The Revision Number Integer to display, note, $bIsFixed must be True for this to be displayed.
+;                  $iRevNum             - [optional] Default is Null. The Revision Number Integer to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2743,7 +2743,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoRevNumInsert
 ; Syntax ........: _LOWriter_FieldDocInfoRevNumModify(ByRef $oDocInfoRevNum[, $bIsFixed = Null[, $iRevNum = Null]])
 ; Parameters ....: $oDocInfoRevNum      - A Doc Info Revision Number field Object from a previous _LOWriter_FieldDocInfoRevNumInsert, or _LOWriter_FieldsDocInfoGetList function.
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
-;                  $iRevNum             - [optional] a Integer value. Default is Null. The Revision Number Integer to display, note, $bIsFixed must be True for this to be displayed.
+;                  $iRevNum             - [optional] Default is Null. The Revision Number Integer to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
