@@ -44,10 +44,10 @@
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $aArray not an Array
-;                  @Error 1 @Extended 2 Return 0 = $bCountinFirst not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $aArray contains too many columns.
-;                  @Error 1 @Extended 4 Return 0 = $aArray[0] contains non-Integer data or is not empty, and $bCountInFirst is called with True.
+;                  @Error 1 @Extended 1 = $aArray not an Array
+;                  @Error 1 @Extended 2 = $bCountinFirst not a Boolean.
+;                  @Error 1 @Extended 3 = $aArray contains too many columns.
+;                  @Error 1 @Extended 4 = $aArray[0] contains non-Integer data or is not empty, and $bCountInFirst is called with True.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Array item was successfully added.
 ; Author ........: donnyh13
@@ -140,10 +140,10 @@ EndFunc   ;==>__LO_ArrayFill
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sStructName not a string
+;                  @Error 1 @Extended 1 = $sStructName not a string
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.ServiceManager" Object
-;                  @Error 2 @Extended 2 Return 0 = Error creating requested structure.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.ServiceManager" Object
+;                  @Error 2 @Extended 2 = Error creating requested structure.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Structure = Success. Property Structure Returned
 ; Author ........: mLipok
@@ -178,9 +178,9 @@ EndFunc   ;==>__LO_CreateStruct
 ; Return values .: Success: 1, 2
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $asRegKeys not an Array.
+;                  @Error 1 @Extended 1 = $asRegKeys not an Array.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended ? Return 0 = Error Deleting Registry key. @Extended set to number of errors encountered.
+;                  @Error 3 @Extended ? = Error Deleting Registry key. @Extended set to number of errors encountered.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully stored Registry keys to delete.
 ;                  @Error 0 @Extended 0 Return 2 = Success. Successfully deleted Registry keys.
@@ -428,11 +428,11 @@ EndFunc   ;==>__LO_NumIsBetween
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bPortable not a Boolean.
-;                  @Error 1 @Extended 2 Return 0 = $oServiceManager not an Object.
-;                  @Error 1 @Extended 3 Return 0 =Object called in $oServiceManager not a ServiceManager Object.
+;                  @Error 1 @Extended 1 = $bPortable not a Boolean.
+;                  @Error 1 @Extended 2 = $oServiceManager not an Object.
+;                  @Error 1 @Extended 3 =Object called in $oServiceManager not a ServiceManager Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a ServiceManager.
+;                  @Error 2 @Extended 1 = Failed to create a ServiceManager.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared stored ServiceManager.
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning ServiceManager Object.
@@ -497,19 +497,19 @@ EndFunc   ;==>__LO_ServiceManager
 ; Return values .: Success: 1, 2
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sPortableLO_Path not a String.
-;                  @Error 1 @Extended 2 Return 0 = Path called in $sPortableLO_Path doesn't exist.
+;                  @Error 1 @Extended 1 = $sPortableLO_Path not a String.
+;                  @Error 1 @Extended 2 = Path called in $sPortableLO_Path doesn't exist.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create "com.sun.star.bridge.UnoUrlResolver" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Failed to create "com.sun.star.bridge.UnoUrlResolver" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No stored Portable LibreOffice path.
-;                  @Error 3 @Extended 2 Return 0 = Stored Portable LibreOffice path no longer exists.
-;                  @Error 3 @Extended 3 Return 0 = Failed to add temporary Registry keys.
-;                  @Error 3 @Extended 4 Return 0 = Failed to start Portable LibreOffice in listening mode.
-;                  @Error 3 @Extended 5 Return 0 = Portable LibreOffice failed to start in listening mode
-;                  @Error 3 @Extended 6 Return 0 = Failed to connect to Portable LibreOffice.
-;                  @Error 3 @Extended 7 Return 0 = Failed to retrieve ServiceManager from Portable LibreOffice.
+;                  @Error 3 @Extended 1 = No stored Portable LibreOffice path.
+;                  @Error 3 @Extended 2 = Stored Portable LibreOffice path no longer exists.
+;                  @Error 3 @Extended 3 = Failed to add temporary Registry keys.
+;                  @Error 3 @Extended 4 = Failed to start Portable LibreOffice in listening mode.
+;                  @Error 3 @Extended 5 = Portable LibreOffice failed to start in listening mode
+;                  @Error 3 @Extended 6 = Failed to connect to Portable LibreOffice.
+;                  @Error 3 @Extended 7 = Failed to retrieve ServiceManager from Portable LibreOffice.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Created and stored Portable LibreOffice ServiceManager.
 ;                  @Error 0 @Extended 0 Return 2 = Success. Cleared stored Portable LibreOffice path.
@@ -693,9 +693,9 @@ EndFunc   ;==>__LO_SetPortableServiceManager
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sName not a string
+;                  @Error 1 @Extended 1 = $sName not a string
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Properties Structure.
+;                  @Error 2 @Extended 1 = Failed to create Properties Structure.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Property Object Returned
 ; Author ........: Leagnus, GMK
@@ -734,14 +734,14 @@ EndFunc   ;==>__LO_SetPropertyValue
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sStyleFamily not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bAppliedOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bDisplayName not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = Style family called in $sStyleFamily doesn't exist.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sStyleFamily not a String.
+;                  @Error 1 @Extended 3 = $bUserOnly not a Boolean.
+;                  @Error 1 @Extended 4 = $bAppliedOnly not a Boolean.
+;                  @Error 1 @Extended 5 = $bDisplayName not a Boolean.
+;                  @Error 1 @Extended 6 = Style family called in $sStyleFamily doesn't exist.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve called Style family Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve called Style family Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return Array = Success. An Array containing all Styles matching the called parameters. See remarks.
 ; Author ........: donnyh13
@@ -954,9 +954,9 @@ EndFunc   ;==>__LO_VarsAreNull
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $fRequiredVersion not a Number.
+;                  @Error 1 @Extended 1 = $fRequiredVersion not a Number.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Current L.O. Version.
+;                  @Error 3 @Extended 1 = Error retrieving Current L.O. Version.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If the Current L.O. version is greater than or equal to the required version, then True is returned, else False.
 ; Author ........: donnyh13

@@ -50,7 +50,7 @@
 ; Return values .: Success: 1 or UserFunction.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
+;                  @Error 1 @Extended 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set the UserFunction.
 ;                  @Error 0 @Extended 0 Return 2 = Successfully cleared the set UserFunction.
@@ -129,8 +129,8 @@ EndFunc   ;==>_LO_ComError_UserFunction
 ; Return values .: Success: String or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = No parameters set.
-;                  @Error 1 @Extended 2 Return 0 = No parameters called with an Integer.
+;                  @Error 1 @Extended 1 = No parameters set.
+;                  @Error 1 @Extended 2 = No parameters called with an Integer.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = RGB Integer converted To Hexadecimal (as a String). (Without the "0x" prefix)
 ;                  @Error 0 @Extended 2 Return Array = Array containing RGB Integer converted To Red, Green, Blue,(RGB). $Array[0] = R, $Array[1] = G, etc.
@@ -275,16 +275,16 @@ EndFunc   ;==>_LO_ConvertColorFromLong
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = No parameters set.
-;                  @Error 1 @Extended 2 Return 0 = One parameter called, but not in String format(Hex).
-;                  @Error 1 @Extended 3 Return 0 = Hex parameter contains non Hex characters.
-;                  @Error 1 @Extended 4 Return 0 = Hex parameter not 6 characters long.
-;                  @Error 1 @Extended 5 Return 0 = Hue parameter contains more than just digits.
-;                  @Error 1 @Extended 6 Return 0 = Saturation parameter contains more than just digits.
-;                  @Error 1 @Extended 7 Return 0 = Brightness parameter contains more than just digits.
-;                  @Error 1 @Extended 8 Return 0 = Three parameters called but not all Integers (RGB) and not all Strings (HSB).
-;                  @Error 1 @Extended 9 Return 0 = Four parameters called but not all Integers(CMYK).
-;                  @Error 1 @Extended 10 Return 0 = Too many or too few parameters called.
+;                  @Error 1 @Extended 1 = No parameters set.
+;                  @Error 1 @Extended 2 = One parameter called, but not in String format(Hex).
+;                  @Error 1 @Extended 3 = Hex parameter contains non Hex characters.
+;                  @Error 1 @Extended 4 = Hex parameter not 6 characters long.
+;                  @Error 1 @Extended 5 = Hue parameter contains more than just digits.
+;                  @Error 1 @Extended 6 = Saturation parameter contains more than just digits.
+;                  @Error 1 @Extended 7 = Brightness parameter contains more than just digits.
+;                  @Error 1 @Extended 8 = Three parameters called but not all Integers (RGB) and not all Strings (HSB).
+;                  @Error 1 @Extended 9 = Four parameters called but not all Integers(CMYK).
+;                  @Error 1 @Extended 10 = Too many or too few parameters called.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return Integer = RGB Color Integer converted from Hexadecimal.
 ;                  @Error 0 @Extended 2 Return Integer = RGB Color Integer converted from Red, Green, Blue, (RGB).
@@ -445,19 +445,19 @@ EndFunc   ;==>_LO_ConvertColorToLong
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
-;                  @Error 1 @Extended 2 Return 0 = $sSearch not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bCaseless not a Boolean.
+;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 2 = $sSearch not a String.
+;                  @Error 1 @Extended 3 = $bCaseless not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
-;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
+;                  @Error 2 @Extended 1 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Error converting path to LibreOffice URL.
-;                  @Error 3 @Extended 5 Return 0 = No matches found.
+;                  @Error 3 @Extended 1 = No open LibreOffice documents.
+;                  @Error 3 @Extended 2 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 = Error converting path to LibreOffice URL.
+;                  @Error 3 @Extended 5 = No matches found.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
 ;                  @Error 0 @Extended ? Return Object = Success, The Object for the found Document with matching Name, Title or Path. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
@@ -591,12 +591,12 @@ EndFunc   ;==>_LO_DocConnect
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve a Form Cursor.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Table or Query name.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Active Connection Object.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Document Creation Arguments Array.
+;                  @Error 3 @Extended 1 = Failed to retrieve a Form Cursor.
+;                  @Error 3 @Extended 2 = Failed to retrieve Table or Query name.
+;                  @Error 3 @Extended 3 = Failed to retrieve Active Connection Object.
+;                  @Error 3 @Extended 4 = Failed to retrieve Document Creation Arguments Array.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning the document's type as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
 ; Author ........: donnyh13
@@ -776,11 +776,11 @@ EndFunc   ;==>_LO_DocGetType
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
-;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
-;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  @Error 1 @Extended 4 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 = $iColor not an Integer, less than 0 or greater than 16777215.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully added to array.
 ; Author ........: donnyh13
@@ -830,9 +830,9 @@ EndFunc   ;==>_LO_GradientMulticolorAdd
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  @Error 1 @Extended 1 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully removed from array.
 ; Author ........: donnyh13
@@ -878,11 +878,11 @@ EndFunc   ;==>_LO_GradientMulticolorDelete
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element.
-;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
-;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 = $iIndex not an Integer, less than 0 or greater than last element.
+;                  @Error 1 @Extended 4 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 = $iColor not an Integer, less than 0 or greater than 16777215.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully modified.
 ; Author ........: donnyh13
@@ -925,13 +925,13 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sOfficePortablePath not a String.
-;                  @Error 1 @Extended 2 Return 0 = Folder called in $sOfficePortablePath does not contain the App folder. Perhaps wrong directory?
-;                  @Error 1 @Extended 3 Return 0 = soffice.exe not found in $sOfficePortablePath\App\libreoffice\program\ or $sOfficePortablePath\App\openoffice\program\.
+;                  @Error 1 @Extended 1 = $sOfficePortablePath not a String.
+;                  @Error 1 @Extended 2 = Folder called in $sOfficePortablePath does not contain the App folder. Perhaps wrong directory?
+;                  @Error 1 @Extended 3 = soffice.exe not found in $sOfficePortablePath\App\libreoffice\program\ or $sOfficePortablePath\App\openoffice\program\.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to clear stored Portable LO/OO ServiceManager.
-;                  @Error 3 @Extended 2 Return 0 = Failed to initialize portable LibreOffice ServiceManager.
-;                  @Error 3 @Extended 3 Return 0 = Failed to initialize portable OpenOffice ServiceManager.
+;                  @Error 3 @Extended 1 = Failed to clear stored Portable LO/OO ServiceManager.
+;                  @Error 3 @Extended 2 = Failed to initialize portable LibreOffice ServiceManager.
+;                  @Error 3 @Extended 3 = Failed to initialize portable OpenOffice ServiceManager.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Portable LibreOffice/OpenOffice ServiceManager successfully created and stored.
 ; Author ........: donnyh13
@@ -990,8 +990,8 @@ EndFunc   ;==>_LO_InitializePortable
 ; Return values .: Success: String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sFilePath is not a string
-;                  @Error 1 @Extended 2 Return 0 = $iReturnMode not a Integer, less than 0 or greater than 2. See constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3..
+;                  @Error 1 @Extended 1 = $sFilePath is not a string
+;                  @Error 1 @Extended 2 = $iReturnMode not a Integer, less than 0 or greater than 2. See constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3..
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Returning converted File Path from LibreOffice URL.
 ;                  @Error 0 @Extended 2 Return String = Returning converted path from File Path to LibreOffice URL.
@@ -1064,16 +1064,16 @@ EndFunc   ;==>_LO_PathConvert
 ; Return values .: Success: An array or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bDefaultOnly not a Boolean.
+;                  @Error 1 @Extended 1 = $bDefaultOnly not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failure Creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failure creating "com.sun.star.awt.PrinterServer" Object.
+;                  @Error 2 @Extended 1 = Failure Creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Failure creating "com.sun.star.awt.PrinterServer" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Default printer name.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Array of printer names.
+;                  @Error 3 @Extended 1 = Failed to retrieve Default printer name.
+;                  @Error 3 @Extended 2 = Failed to retrieve Array of printer names.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
-;                  @Error 6 @Extended 2 Return 0 = Current LibreOffice version lower than 6.3.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.1.
+;                  @Error 6 @Extended 2 = Current LibreOffice version lower than 6.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Returning the default printer's name.
 ;                  @Error 0 @Extended ? Return Array = Returning an array of strings of all installed printers' names. @Extended set to number of results.
@@ -1125,15 +1125,15 @@ EndFunc   ;==>_LO_PrintersGetNames
 ; Return values .: Success: Array or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sPrinterName not a String.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnDefault not a Boolean.
+;                  @Error 1 @Extended 1 = $sPrinterName not a String.
+;                  @Error 1 @Extended 2 = $bReturnDefault not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failure Creating Object.
-;                  @Error 2 @Extended 2 Return 0 = Failure retrieving printer list Object.
+;                  @Error 2 @Extended 1 = Failure Creating Object.
+;                  @Error 2 @Extended 2 = Failure retrieving printer list Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve default printer name.
+;                  @Error 3 @Extended 1 = Failed to retrieve default printer name.
 ;                  --Printer Related Errors--
-;                  @Error 5 @Extended 1 Return 0 = No default printer found.
+;                  @Error 5 @Extended 1 = No default printer found.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Returning the default printer name. See remarks. @Extended is set to the number of results.
 ;                  @Error 0 @Extended ? Return Array = Returning an array of strings containing all installed printers. See remarks. Number of results returned in @Extended.
@@ -1198,11 +1198,11 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bForceClose not a Boolean.
-;                  @Error 1 @Extended 2 Return 0 = $iSleep not an Integer or less than 0.
+;                  @Error 1 @Extended 1 = $bForceClose not a Boolean.
+;                  @Error 1 @Extended 2 = $iSleep not an Integer or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a ServiceManager Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a com.sun.star.frame.Desktop Object.
+;                  @Error 2 @Extended 1 = Failed to create a ServiceManager Object.
+;                  @Error 2 @Extended 2 = Failed to create a com.sun.star.frame.Desktop Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Terminate command was successfuly processed. Returning True if all Documents agree to be terminated.
 ; Author ........: donnyh13
@@ -1250,11 +1250,11 @@ EndFunc   ;==>_LO_Terminate
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
-;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
-;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  @Error 1 @Extended 4 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully added to array.
 ; Author ........: donnyh13
@@ -1304,9 +1304,9 @@ EndFunc   ;==>_LO_TransparencyGradientMultiAdd
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
+;                  @Error 1 @Extended 1 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully removed from array.
 ; Author ........: donnyh13
@@ -1352,11 +1352,11 @@ EndFunc   ;==>_LO_TransparencyGradientMultiDelete
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $avColorStops not an Array.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $iIndex not an Integer, less than 0 or greater than last element.
-;                  @Error 1 @Extended 4 Return 0 = $nStopOffset not a number, less than 0 or greater than 1.0.
-;                  @Error 1 @Extended 5 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $avColorStops not an Array.
+;                  @Error 1 @Extended 2 = $avColorStops does not contain two columns.
+;                  @Error 1 @Extended 3 = $iIndex not an Integer, less than 0 or greater than last element.
+;                  @Error 1 @Extended 4 = $nStopOffset not a number, less than 0 or greater than 1.0.
+;                  @Error 1 @Extended 5 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. ColorStop successfully modified.
 ; Author ........: donnyh13
@@ -1400,9 +1400,9 @@ EndFunc   ;==>_LO_TransparencyGradientMultiModify
 ; Return values .: Success: Integer or Number.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $nValue is not a Number.
-;                  @Error 1 @Extended 2 Return 0 = $iReturnType is not a Integer, less than 0 or greater than 10. See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iReturnType does not match constants, See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 1 = $nValue is not a Number.
+;                  @Error 1 @Extended 2 = $iReturnType is not a Integer, less than 0 or greater than 10. See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 3 = $iReturnType does not match constants, See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return Number = Returning Number converted from TWIPS to Centimeters.
 ;                  @Error 0 @Extended 2 Return Number = Returning Number converted from TWIPS to Inches.
@@ -1517,12 +1517,12 @@ EndFunc   ;==>_LO_UnitConvert
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bSimpleVersion not a Boolean.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnName not a Boolean.
+;                  @Error 1 @Extended 1 = $bSimpleVersion not a Boolean.
+;                  @Error 1 @Extended 2 = $bReturnName not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.configuration.ConfigurationProvider" Object.
-;                  @Error 2 @Extended 3 Return 0 = Error creating property value.
+;                  @Error 2 @Extended 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Error creating "com.sun.star.configuration.ConfigurationProvider" Object.
+;                  @Error 2 @Extended 3 = Error creating property value.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the Office version in String format.
 ; Author ........: Laurent Godard as found in Andrew Pitonyak's book; Zizi64 as found on OpenOffice forum.
