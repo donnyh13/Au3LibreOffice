@@ -660,7 +660,7 @@ EndFunc   ;==>__LOWriter_CharEffect
 ;                  $sFontName           - [optional] Default is Null. The Font Name to change to.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
 ;                  $iPosture            - [optional] (0-5) Default is Null. Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] an integer value (0,50-200). Default is Null. Bold settings see Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0,50-200) Default is Null. Bold settings see Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -999,7 +999,7 @@ EndFunc   ;==>__LOWriter_CharPosition
 ; Description ...: Set or retrieve the character rotational and Scale settings.
 ; Syntax ........: __LOWriter_CharRotateScale(ByRef $oObj[, $iRotation = Null[, $iScaleWidth = Null[, $bRotateFitLine = Null]]])
 ; Parameters ....: $oObj                - An Object that supports "com.sun.star.text.Paragraph" Or "com.sun.star.text.TextPortion" services, such as a Cursor with data selected or paragraph section.
-;                  $iRotation           - [optional] an integer value (0,90,270). Default is Null. Degrees to rotate the text.
+;                  $iRotation           - [optional] (0,90,270) Default is Null. Degrees to rotate the text.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
 ;                  $bRotateFitLine      - [optional] Default is Null. Default is Null. If True, Stretches or compresses the selected text so that it fits between the line that is above the text and the line that is below the text. Only works with Direct Formatting.
 ; Return values .: Success: 1 or Array.
@@ -5146,7 +5146,7 @@ EndFunc   ;==>__LOWriter_ParAreaFillStyle
 ;                  $oObj                - A Paragraph Style Object or a Cursor or Paragraph Object.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iIncrement          - [optional] an integer value (0, 3-256). Default is Null. The number of steps of color change. 0 = Automatic.
+;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -5921,7 +5921,7 @@ EndFunc   ;==>__LOWriter_ParBorderPadding
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oObj                - Paragraph Style Object or a Cursor or Paragraph Object.
 ;                  $iNumChar            - [optional] (0-9) Default is Null. The number of characters to make into DropCaps.
-;                  $iLines              - [optional] an integer value (0, 2-9). Default is Null. The number of lines to drop down.
+;                  $iLines              - [optional] (0, 2-9) Default is Null. The number of lines to drop down.
 ;                  $iSpcTxt             - [optional] Default is Null. The distance between the drop cap and the following text. In Hundredths of a Millimeter (HMM).
 ;                  $bWholeWord          - [optional] Default is Null. If True, DropCap the whole first word. (Nullifys $iNumChars.)
 ;                  $sCharStyle          - [optional] Default is Null. The character style to use for the DropCaps. See Remarks.
@@ -7063,8 +7063,8 @@ EndFunc   ;==>__LOWriter_ParTabStopsGetList
 ; Parameters ....: $oObj                - Paragraph Style Object or a Cursor or Paragraph Object.
 ;                  $bParSplit           - [optional] Default is Null. If False, prevents the paragraph from getting split between two pages or columns
 ;                  $bKeepTogether       - [optional] Default is Null. If True, prevents page or column breaks between this and the following paragraph
-;                  $iParOrphans         - [optional] an integer value (0, 2-9). Default is Null. Specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = disabled.
-;                  $iParWidows          - [optional] an integer value (0, 2-9). Default is Null. Specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = disabled.
+;                  $iParOrphans         - [optional] (0, 2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = disabled.
+;                  $iParWidows          - [optional] (0, 2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = disabled.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -9161,7 +9161,7 @@ EndFunc   ;==>__LOWriter_ShapePointGetSettings
 ;                  $iArrayElement       - The Array element that contains the point to modify. This may be directly modified, depending on the settings.
 ;                  $iX                  - [optional] Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
-;                  $iPointType          - [optional] an integer value (0,1,3). Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOW_SHAPE_POINT_TYPE_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iPointType          - [optional] (0,1,3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOW_SHAPE_POINT_TYPE_* as defined in LibreOfficeWriter_Constants.au3
 ;                  $bIsCurve            - [optional] Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

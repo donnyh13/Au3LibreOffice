@@ -256,8 +256,8 @@ EndFunc   ;==>_LOWriter_CursorGetType
 ; Name ..........: _LOWriter_CursorGoToRange
 ; Description ...: Moves a Text or View cursor to another View or Text Cursor Position or Range.
 ; Syntax ........: _LOWriter_CursorGoToRange(ByRef $oCursor, ByRef $oRange[, $bSelect = False])
-; Parameters ....: $oCursor             - an object. A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $oRange              - an object. A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions to move $oCursor to.
+; Parameters ....: $oCursor             - A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
+;                  $oRange              - A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions to move $oCursor to.
 ;                  $bSelect             - [optional] Default is False. If True, the selection is expanded or created from original cursor location to Range location.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

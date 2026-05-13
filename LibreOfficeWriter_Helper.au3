@@ -434,7 +434,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeysGetList
 ;                  $iHours              - [optional] (0-23) Default is Null. The Hour, as a 2 digit Integer.
 ;                  $iMinutes            - [optional] (0-59) Default is Null. Minutes, as a 2 digit Integer.
 ;                  $iSeconds            - [optional] (0-59) Default is Null. Seconds, as a 2 digit Integer.
-;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
+;                  $iNanoSeconds        - [optional] (0-999,999,999) Default is Null. Nano-Second, as an Integer.
 ;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -558,7 +558,7 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ;                  $iHours              - [optional] (0-23) Default is Null. The Hour, as a 2 digit Integer.
 ;                  $iMinutes            - [optional] (0-59) Default is Null. Minutes, as a 2 digit Integer.
 ;                  $iSeconds            - [optional] (0-59) Default is Null. Seconds, as a 2 digit Integer.
-;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
+;                  $iNanoSeconds        - [optional] (0-999,999,999) Default is Null. Nano-Second, as an Integer.
 ;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -874,7 +874,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ;                  $sFontName           - [optional] Default is Null. The Font name to search for.
 ;                  $iFontSize           - [optional] Default is Null. The Font size to search for.
 ;                  $iFontPosture        - [optional] (0-5) Default is Null. The Font Posture(Italic etc.,) See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iFontWeight         - [optional] an integer value(0,50-200). Default is Null. The Font weight to search for. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iFontWeight         - [optional](0,50-200) Default is Null. The Font weight to search for. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The percentage of Transparency. 0 is visible, 100 is invisible. Seems to require a color entered in $iFontColor before transparency can be searched for. LibreOffice 7.0 and Up.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The Highlight color to search for, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -1414,7 +1414,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ; Description ...: Modify or Add Find Format Rotate, Scale, and Space Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyRotateScaleSpace(ByRef $atFormat[, $iRotation = Null[, $iScaleWidth = Null[, $bAutoKerning = Null[, $nKerning = Null]]]])
 ; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
-;                  $iRotation           - [optional] an integer value (0,90,270). Default is Null. Degrees to rotate the text. See remarks.
+;                  $iRotation           - [optional] (0,90,270) Default is Null. Degrees to rotate the text. See remarks.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing. See remarks.
 ;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
 ;                  $nKerning            - [optional] (-2-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
@@ -1689,8 +1689,8 @@ EndFunc   ;==>_LOWriter_FindFormatModifyStrikeout
 ; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $bParSplit           - [optional] Default is Null. If False, prevents the paragraph from getting split into two pages or columns
 ;                  $bKeepTogether       - [optional] Default is Null. If True, prevents page or column breaks between this and the following paragraph.
-;                  $iParOrphans         - [optional] an integer value (0,2-9). Default is Null. Specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = disabled. See remarks.
-;                  $iParWidows          - [optional] an integer value (0,2-9). Default is Null. Specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = disabled.
+;                  $iParOrphans         - [optional] (0,2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = disabled. See remarks.
+;                  $iParWidows          - [optional] (0,2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = disabled.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

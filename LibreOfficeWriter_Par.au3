@@ -213,7 +213,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaFillStyle
 ;                  $oParStyle           - A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iIncrement          - [optional] an integer value (0, 3-256). Default is Null. The number of steps of color change. 0 = Automatic.
+;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -619,10 +619,10 @@ EndFunc   ;==>_LOWriter_ParStyleBorderPadding
 ; Description ...: Set and retrieve the Paragraph Style Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_ParStyleBorderStyle(ByRef $oParStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oParStyle           - A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Paragraph Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -949,7 +949,7 @@ EndFunc   ;==>_LOWriter_ParStyleDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oParStyle           - A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
 ;                  $iNumChar            - [optional] (0-9) Default is Null. The number of characters to make into DropCaps.
-;                  $iLines              - [optional] an integer value (0,2-9). Default is Null. The number of lines to drop down.
+;                  $iLines              - [optional] (0,2-9) Default is Null. The number of lines to drop down.
 ;                  $iSpcTxt             - [optional] Default is Null. The distance between the drop cap and the following text. in Hundredths of a Millimeter (HMM).
 ;                  $bWholeWord          - [optional] Default is Null. If True, DropCap the whole first word. (Nullifys $iNumChars.)
 ;                  $sCharStyle          - [optional] Default is Null. The character style to use for the DropCaps. See Remarks.
@@ -1094,7 +1094,7 @@ EndFunc   ;==>_LOWriter_ParStyleExists
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
 ;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] an integer value (0,50-200). Default is Null. The Font Bold settings. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0,50-200) Default is Null. The Font Bold settings. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1651,7 +1651,7 @@ EndFunc   ;==>_LOWriter_ParStylePosition
 ; Description ...: Set or retrieve the character rotational and Scale settings for a paragraph Style.
 ; Syntax ........: _LOWriter_ParStyleRotateScale(ByRef $oParStyle[, $iRotation = Null[, $iScaleWidth = Null]])
 ; Parameters ....: $oParStyle           - A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
-;                  $iRotation           - [optional] an integer value (0,90,270). Default is Null. Degrees to rotate the text.
+;                  $iRotation           - [optional] (0,90,270) Default is Null. Degrees to rotate the text.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2155,8 +2155,8 @@ EndFunc   ;==>_LOWriter_ParStyleTabStopsGetList
 ; Parameters ....: $oParStyle           - A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
 ;                  $bParSplit           - [optional] Default is Null. If False, prevents the paragraph from splitting between two pages or columns
 ;                  $bKeepTogether       - [optional] Default is Null. If True, prevents page or column breaks between this and the following paragraph
-;                  $iParOrphans         - [optional] an integer value (0,2-9). Default is Null. The minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = (disabled).
-;                  $iParWidows          - [optional] an integer value (0,2-9). Default is Null. The minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = (disabled).
+;                  $iParOrphans         - [optional] (0,2-9) Default is Null. The minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = (disabled).
+;                  $iParWidows          - [optional] (0,2-9) Default is Null. The minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = (disabled).
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
