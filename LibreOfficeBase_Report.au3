@@ -1540,7 +1540,7 @@ EndFunc   ;==>_LOBase_ReportDocData
 ;                  $iForceNewPage       - [optional] (0-3) Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
 ;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
-;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
+;                  $iHeight             - [optional] Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
@@ -1656,7 +1656,7 @@ EndFunc   ;==>_LOBase_ReportDocDetail
 ;                  $iForceNewPage       - [optional] (0-3) Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
 ;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
-;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
+;                  $iHeight             - [optional] Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
@@ -2190,7 +2190,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupsGetCount
 ;                  $iForceNewPage       - [optional] (0-3) Default is Null. If and when to force a new page. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
 ;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
-;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
+;                  $iHeight             - [optional] Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
@@ -3573,7 +3573,7 @@ EndFunc   ;==>_LOBase_ReportFoldersGetNames
 ;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
 ;                  $bRepeatSec          - [optional] Default is Null. If True, the Group Footer section will be repeated on the next page if the section spans more than one page.
 ;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
-;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
+;                  $iHeight             - [optional] Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array
@@ -3755,7 +3755,7 @@ EndFunc   ;==>_LOBase_ReportGroupFooter
 ;                  $bKeepTogether       - [optional] Default is Null. If True, the section should be printed on one page.
 ;                  $bRepeatSec          - [optional] Default is Null. If True, the Group Header section will be repeated on the next page if the section spans more than one page.
 ;                  $bVisible            - [optional] Default is Null. If True, the section is visible in the Report.
-;                  $iHeight             - [optional] an integer value (1753-??). Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
+;                  $iHeight             - [optional] Default is Null. The height of the Section, in Hundredths of a Millimeter (HMM). See remarks.
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array
