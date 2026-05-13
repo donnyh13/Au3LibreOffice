@@ -985,8 +985,8 @@ EndFunc   ;==>_LOCalc_RangeDatabaseDelete
 ; Name ..........: _LOCalc_RangeDatabaseExists
 ; Description ...: Check if a Database Range exists in a document.
 ; Syntax ........: _LOCalc_RangeDatabaseExists(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - 
-;                  $sName               - 
+; Parameters ....: $oDoc                -
+;                  $sName               -
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1369,8 +1369,8 @@ EndFunc   ;==>_LOCalc_RangeFill
 ; Description ...: Fill a range with random numbers.
 ; Syntax ........: _LOCalc_RangeFillRandom(ByRef $oRange[, $nMin = 0.0000[, $nMax = 1.0000[, $iDecPlc = 15[, $nSeed = Null[, $bFillByRows = True]]]]])
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
-;                  $nMin                - [optional] a general number value (-2^31-2^31). Default is 0.0000. The minimum number value. Max is -2^31-2^31.
-;                  $nMax                - [optional] a general number value (-2^31-2^31). Default is 1.0000. The maximum number value. Max is -2^31-2^31.
+;                  $nMin                - [optional] (-2^31-2^31). Default is 0.0000. The minimum number value. Max is -2^31-2^31.
+;                  $nMax                - [optional] (-2^31-2^31). Default is 1.0000. The maximum number value. Max is -2^31-2^31.
 ;                  $iDecPlc             - [optional] (0-255) Default is 15. The decimal place to round the value to. Call with 0 to fill with Integers only.
 ;                  $nSeed               - [optional] Default is Null. A seed to use for generating the Random number. Null means no seed is used.
 ;                  $bFillByRows         - [optional] Default is True. If True, the range is filled top to bottom, left to right. If False, the range is filled left to right, top to bottom.

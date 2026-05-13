@@ -1043,7 +1043,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ;                  $iCalloutStyle       - [optional] (0-2) Default is Null. The Style of Callout connector line. See Constants $LOC_COMMENT_CALLOUT_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iSpacing            - [optional] (0-240005) Default is Null. The amount of space between the Callout connector line end and the comment box, in Hundredths of a Millimeter (HMM).
 ;                  $iExtension          - [optional] (0-4) Default is Null. The position to extend the Callout line from. See Constants $LOC_COMMENT_CALLOUT_EXT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  $iExtendBy           - [optional] an integer value (0-240005;0,5000,10000). Default is Null. The length to extend the Callout line, in Hundredths of a Millimeter (HMM), or the alignment of the line depending on the current setting of $iExtension. See remarks. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, or $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iExtendBy           - [optional] (0-240005; 0, 5000, 10000). Default is Null. The length to extend the Callout line, in Hundredths of a Millimeter (HMM), or the alignment of the line depending on the current setting of $iExtension. See remarks. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, or $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bOptimal            - [optional] Default is Null. If True a angled line will be used optimally.
 ;                  $iLength             - [optional] (0-240005) Default is Null. The length of the callout line, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
@@ -1445,11 +1445,11 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ; Description ...: Set or Retrieve Comment Line Start and End Arrow Style settings.
 ; Syntax ........: _LOCalc_CommentLineArrowStyles(ByRef $oComment[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $vStartStyle         - [optional] a variant value (0-32, or String). Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3. See remarks.
+;                  $vStartStyle         - [optional] (0-32, or String). Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3. See remarks.
 ;                  $iStartWidth         - [optional] (0-5004) Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bStartCenter        - [optional] Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
 ;                  $bSync               - [optional] Default is Null. If True, Synchronizes the Start Arrowhead settings with the end Arrowhead settings. See remarks.
-;                  $vEndStyle           - [optional] a variant value (0-32, or String). Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3. See remarks.
+;                  $vEndStyle           - [optional] (0-32, or String). Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3. See remarks.
 ;                  $iEndWidth           - [optional] (0-5004) Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bEndCenter          - [optional] Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
 ; Return values .: Success: Integer or Array.
@@ -1597,7 +1597,7 @@ EndFunc   ;==>_LOCalc_CommentLineArrowStyles
 ; Description ...: Set or Retrieve Comment Line settings.
 ; Syntax ........: _LOCalc_CommentLineProperties(ByRef $oComment[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
-;                  $vStyle              - [optional] a variant value (0-31, or String). Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3. See remarks.
+;                  $vStyle              - [optional] (0-31, or String). Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3. See remarks.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] (0-5004) Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The Line transparency percentage. 100% = fully transparent.

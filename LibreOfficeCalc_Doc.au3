@@ -1156,7 +1156,7 @@ EndFunc   ;==>_LOCalc_DocPosAndSize
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $iCopies             - [optional] Default is 1. Specifies the number of copies to print.
 ;                  $bCollate            - [optional] Default is True. Advises the printer to collate the pages of the copies.
-;                  $vPages              - [optional] a String or Integer value. Default is "ALL". Specifies which pages to print. See remarks.
+;                  $vPages              - [optional] Default is "ALL". Specifies which pages to print. See remarks.
 ;                  $bWait               - [optional] Default is True. If True, the corresponding print request will be executed synchronous. Default is to use synchronous print mode.
 ;                  $iDuplexMode         - [optional] (0-3) Default is $__g_iDuplexOFF. Determines the duplex mode for the print job. See Constants, $LOC_PRINT_DUPLEX_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $sPrinter            - [optional] Default is "". Printer name. If left blank, or if printer name is not found, default printer is used.
