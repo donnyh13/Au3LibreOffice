@@ -52,7 +52,7 @@
 ; Return values .: Success: 1 or UserFunction.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
+;                  @Error 1 @Extended 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set the UserFunction.
 ;                  @Error 0 @Extended 0 Return 2 = Successfully cleared the set UserFunction.
@@ -135,19 +135,19 @@ EndFunc   ;==>_LOBase_ComError_UserFunction
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iYear not an Integer.
-;                  @Error 1 @Extended 2 Return 0 = $iYear not 4 digits long.
-;                  @Error 1 @Extended 3 Return 0 = $iMonth not an Integer, less than 0 or greater than 12.
-;                  @Error 1 @Extended 4 Return 0 = $iDay not an Integer, less than 0 or greater than 31.
-;                  @Error 1 @Extended 5 Return 0 = $iHours not an Integer, less than 0 or greater than 23.
-;                  @Error 1 @Extended 6 Return 0 = $iMinutes not an Integer, less than 0 or greater than 59.
-;                  @Error 1 @Extended 7 Return 0 = $iSeconds not an Integer, less than 0 or greater than 59.
-;                  @Error 1 @Extended 8 Return 0 = $iNanoSeconds not an Integer, less than 0 or greater than 999999999.
-;                  @Error 1 @Extended 9 Return 0 = $bIsUTC not a Boolean.
+;                  @Error 1 @Extended 1 = $iYear not an Integer.
+;                  @Error 1 @Extended 2 = $iYear not 4 digits long.
+;                  @Error 1 @Extended 3 = $iMonth not an Integer, less than 0 or greater than 12.
+;                  @Error 1 @Extended 4 = $iDay not an Integer, less than 0 or greater than 31.
+;                  @Error 1 @Extended 5 = $iHours not an Integer, less than 0 or greater than 23.
+;                  @Error 1 @Extended 6 = $iMinutes not an Integer, less than 0 or greater than 59.
+;                  @Error 1 @Extended 7 = $iSeconds not an Integer, less than 0 or greater than 59.
+;                  @Error 1 @Extended 8 = $iNanoSeconds not an Integer, less than 0 or greater than 999999999.
+;                  @Error 1 @Extended 9 = $bIsUTC not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.util.DateTime" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.util.DateTime" Object.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Structure = Success. Successfully created the Date/Time Structure, Returning its Object.
 ; Author ........: donnyh13
@@ -259,18 +259,18 @@ EndFunc   ;==>_LOBase_DateStructCreate
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $tDateStruct not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iYear not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iYear not 4 digits long.
-;                  @Error 1 @Extended 4 Return 0 = $iMonth not an Integer, less than 0 or greater than 12.
-;                  @Error 1 @Extended 5 Return 0 = $iDay not an Integer, less than 0 or greater than 31.
-;                  @Error 1 @Extended 6 Return 0 = $iHours not an Integer, less than 0 or greater than 23.
-;                  @Error 1 @Extended 7 Return 0 = $iMinutes not an Integer, less than 0 or greater than 59.
-;                  @Error 1 @Extended 8 Return 0 = $iSeconds not an Integer, less than 0 or greater than 59.
-;                  @Error 1 @Extended 9 Return 0 = $iNanoSeconds not an Integer, less than 0 or greater than 999999999.
-;                  @Error 1 @Extended 10 Return 0 = $bIsUTC not a Boolean.
+;                  @Error 1 @Extended 1 = $tDateStruct not an Object.
+;                  @Error 1 @Extended 2 = $iYear not an Integer.
+;                  @Error 1 @Extended 3 = $iYear not 4 digits long.
+;                  @Error 1 @Extended 4 = $iMonth not an Integer, less than 0 or greater than 12.
+;                  @Error 1 @Extended 5 = $iDay not an Integer, less than 0 or greater than 31.
+;                  @Error 1 @Extended 6 = $iHours not an Integer, less than 0 or greater than 23.
+;                  @Error 1 @Extended 7 = $iMinutes not an Integer, less than 0 or greater than 59.
+;                  @Error 1 @Extended 8 = $iSeconds not an Integer, less than 0 or greater than 59.
+;                  @Error 1 @Extended 9 = $iNanoSeconds not an Integer, less than 0 or greater than 999999999.
+;                  @Error 1 @Extended 10 = $bIsUTC not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iYear
 ;                  |                               2 = Error setting $iMonth
 ;                  |                               4 = Error setting $iDay
@@ -280,7 +280,7 @@ EndFunc   ;==>_LOBase_DateStructCreate
 ;                  |                               64 = Error setting $iNanoSeconds
 ;                  |                               128 = Error setting $bIsUTC
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.1.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.1.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in an 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the $bIsUTC parameter will return a Null value.
@@ -396,21 +396,21 @@ EndFunc   ;==>_LOBase_DateStructModify
 ; Return values .: Success: Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sFontName not a String.
-;                  @Error 1 @Extended 2 Return 0 = Font called in $sFontName not found.
-;                  @Error 1 @Extended 3 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $nSize not a number.
-;                  @Error 1 @Extended 6 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 7 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 8 Return 0 = $iUnderlineColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 9 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 10 Return 0 = $bIndividualWords not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 12 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 13 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 14 Return 0 = $bOutline not a Boolean.
-;                  @Error 1 @Extended 15 Return 0 = $bShadow not a Boolean.
+;                  @Error 1 @Extended 1 = $sFontName not a String.
+;                  @Error 1 @Extended 2 = Font called in $sFontName not found.
+;                  @Error 1 @Extended 3 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 4 = $iPosture not an Integer, less than 0 or greater than 5. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 5 = $nSize not a number.
+;                  @Error 1 @Extended 6 = $iColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 7 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 8 = $iUnderlineColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 9 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 10 = $bIndividualWords not a Boolean.
+;                  @Error 1 @Extended 11 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 12 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 13 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 14 = $bOutline not a Boolean.
+;                  @Error 1 @Extended 15 = $bShadow not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Map = Success. Returning the created Map Font Descriptor.
 ; Author ........: donnyh13
@@ -482,22 +482,22 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $mFontDesc not a Map.
-;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
-;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not found.
-;                  @Error 1 @Extended 4 Return 0 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $nSize not a number.
-;                  @Error 1 @Extended 7 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 8 Return 0 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 9 Return 0 = $iUnderlineColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 10 Return 0 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 11 Return 0 = $bIndividualWords not a Boolean.
-;                  @Error 1 @Extended 12 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 13 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 14 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 15 Return 0 = $bOutline not a Boolean.
-;                  @Error 1 @Extended 16 Return 0 = $bShadow not a Boolean.
+;                  @Error 1 @Extended 1 = $mFontDesc not a Map.
+;                  @Error 1 @Extended 2 = $sFontName not a String.
+;                  @Error 1 @Extended 3 = Font called in $sFontName not found.
+;                  @Error 1 @Extended 4 = $iWeight not an Integer, less than 0 or greater than 200. See Constants $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 6 = $nSize not a number.
+;                  @Error 1 @Extended 7 = $iColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 8 = $iUnderlineStyle not an Integer, less than 0 or greater than 18. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 9 = $iUnderlineColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 10 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 11 = $bIndividualWords not a Boolean.
+;                  @Error 1 @Extended 12 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 13 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOB_CHAR_CASEMAP_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 14 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 15 = $bOutline not a Boolean.
+;                  @Error 1 @Extended 16 = $bShadow not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
@@ -622,14 +622,14 @@ EndFunc   ;==>_LOBase_FontDescEdit
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sFontName not a String.
+;                  @Error 1 @Extended 1 = $sFontName not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.frame.Desktop" Object.
-;                  @Error 2 @Extended 3 Return 0 = Failed to create a Property Struct.
-;                  @Error 2 @Extended 4 Return 0 = Failed to create a new Document.
+;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.frame.Desktop" Object.
+;                  @Error 2 @Extended 3 = Failed to create a Property Struct.
+;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Font list.
+;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Font is available, else False.
 ; Author ........: donnyh13
@@ -697,12 +697,12 @@ EndFunc   ;==>_LOBase_FontExists
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.frame.Desktop" Object.
-;                  @Error 2 @Extended 3 Return 0 = Failed to create a Property Struct.
-;                  @Error 2 @Extended 4 Return 0 = Failed to create a new Document.
+;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.frame.Desktop" Object.
+;                  @Error 2 @Extended 3 = Failed to create a Property Struct.
+;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Font list.
+;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ; Author ........: donnyh13
@@ -777,14 +777,14 @@ EndFunc   ;==>_LOBase_FontsGetNames
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
-;                  @Error 1 @Extended 3 Return 0 = $sFormat not a String.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
+;                  @Error 1 @Extended 3 = $sFormat not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create "com.sun.star.lang.Locale" Object.
+;                  @Error 2 @Extended 1 = Failed to Create "com.sun.star.lang.Locale" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Number Formats Object.
-;                  @Error 3 @Extended 2 Return 0 = Attempted to Create or Retrieve the Format key, but failed.
+;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
+;                  @Error 3 @Extended 2 = Attempted to Create or Retrieve the Format key, but failed.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Format Key was successfully created, returning Format Key Integer.
 ;                  @Error 0 @Extended 1 Return Integer = Success. Format Key already existed, returning Format Key Integer.
@@ -837,14 +837,14 @@ EndFunc   ;==>_LOBase_FormatKeyCreate
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
-;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = Format Key called in $iFormatKey not found in Document.
-;                  @Error 1 @Extended 5 Return 0 = Format Key called in $iFormatKey not User-Created.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
+;                  @Error 1 @Extended 3 = $iFormatKey not an Integer.
+;                  @Error 1 @Extended 4 = Format Key called in $iFormatKey not found in Document.
+;                  @Error 1 @Extended 5 = Format Key called in $iFormatKey not User-Created.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Number Formats Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to delete key.
+;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
+;                  @Error 3 @Extended 2 = Failed to delete key.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Format Key was successfully deleted.
 ; Author ........: donnyh13
@@ -891,15 +891,15 @@ EndFunc   ;==>_LOBase_FormatKeyDelete
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
-;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iFormatType not an Integer, less than 0 or greater than 15881. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
+;                  @Error 1 @Extended 3 = $iFormatKey not an Integer.
+;                  @Error 1 @Extended 4 = $iFormatType not an Integer, less than 0 or greater than 15881. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create "com.sun.star.lang.Locale" Object.
+;                  @Error 2 @Extended 1 = Failed to Create "com.sun.star.lang.Locale" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Number Formats Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to obtain Array of Date/Time Formats.
+;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
+;                  @Error 3 @Extended 2 = Failed to obtain Array of Date/Time Formats.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If the Format Key exists in document, True is Returned. Else False.
 ; Author ........: donnyh13
@@ -954,14 +954,14 @@ EndFunc   ;==>_LOBase_FormatKeyExists
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
-;                  @Error 1 @Extended 3 Return 0 = $iFormatKeyType not an Integer, less than 1 or greater than 8196. See Constants $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
+;                  @Error 1 @Extended 3 = $iFormatKeyType not an Integer, less than 1 or greater than 8196. See Constants $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.lang.Locale" Struct.
+;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.lang.Locale" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Number Formats Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve the Standard Format for the requested Format Key Type.
+;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve the Standard Format for the requested Format Key Type.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Standard Format for the requested Format Key Type.
 ; Author ........: donnyh13
@@ -1010,14 +1010,14 @@ EndFunc   ;==>_LOBase_FormatKeyGetStandard
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
-;                  @Error 1 @Extended 3 Return 0 = $iFormatKey not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iFormatKey not found in Document.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
+;                  @Error 1 @Extended 3 = $iFormatKey not an Integer.
+;                  @Error 1 @Extended 4 = $iFormatKey not found in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Number Formats Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve requested Format Key Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Format Key String.
+;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve requested Format Key Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Format Key String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ; Author ........: donnyh13
@@ -1068,16 +1068,16 @@ EndFunc   ;==>_LOBase_FormatKeyGetString
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
-;                  @Error 1 @Extended 3 Return 0 = $bIsUser not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iFormatKeyType not an Integer, less than 0 or greater than 15881. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oObj not a Connection Object and not a Report document opened in Design mode.
+;                  @Error 1 @Extended 3 = $bIsUser not a Boolean.
+;                  @Error 1 @Extended 4 = $bUserOnly not a Boolean.
+;                  @Error 1 @Extended 5 = $iFormatKeyType not an Integer, less than 0 or greater than 15881. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.lang.Locale" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.lang.Locale" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve NumberFormats Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to obtain Array of Format Keys.
+;                  @Error 3 @Extended 1 = Failed to retrieve NumberFormats Object.
+;                  @Error 3 @Extended 2 = Failed to obtain Array of Format Keys.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning a 2 or three column Array, depending on current $bIsUser setting. See remarks. @Extended is set to the number of Keys returned.
 ; Author ........: donnyh13

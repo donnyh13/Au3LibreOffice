@@ -57,21 +57,21 @@
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sInputForm not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sOutputForm not a String.
-;                  @Error 1 @Extended 4 Return 0 = Requested Form not found.
-;                  @Error 1 @Extended 5 Return 0 = Form name called in $sInputForm not a Form.
-;                  @Error 1 @Extended 6 Return 0 = Folder name called in $sOutputForm not found.
-;                  @Error 1 @Extended 7 Return 0 = Form already exists with called name in Destination.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = $sInputForm not a String.
+;                  @Error 1 @Extended 3 = $sOutputForm not a String.
+;                  @Error 1 @Extended 4 = Requested Form not found.
+;                  @Error 1 @Extended 5 = Form name called in $sInputForm not a Form.
+;                  @Error 1 @Extended 6 = Folder name called in $sOutputForm not found.
+;                  @Error 1 @Extended 7 = Form already exists with called name in Destination.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.sdb.DocumentDefinition" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.sdb.DocumentDefinition" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Source Form Object.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Destination Form name.
-;                  @Error 3 @Extended 5 Return 0 = Failed to insert copied Form.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Source Form Object.
+;                  @Error 3 @Extended 4 = Failed to retrieve Destination Form name.
+;                  @Error 3 @Extended 5 = Failed to insert copied Form.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Copied Form successfully inserted.
 ; Author ........: donnyh13
@@ -134,24 +134,24 @@ EndFunc   ;==>_LOBase_FormCopy
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sForm not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bOpen not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bDesign not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = Folder or Sub-Folder not found.
-;                  @Error 1 @Extended 7 Return 0 = Form name called in $sForm already exists in Folder.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = $sForm not a String.
+;                  @Error 1 @Extended 3 = $bOpen not a Boolean.
+;                  @Error 1 @Extended 4 = $bDesign not a Boolean.
+;                  @Error 1 @Extended 5 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 = Folder or Sub-Folder not found.
+;                  @Error 1 @Extended 7 = Form name called in $sForm already exists in Folder.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.ServiceManager Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create com.sun.star.frame.Desktop Object.
-;                  @Error 2 @Extended 3 Return 0 = Failed to open a new Writer Document instance.
-;                  @Error 2 @Extended 4 Return 0 = Failed to create com.sun.star.sdb.DocumentDefinition Object.
+;                  @Error 2 @Extended 1 = Failed to create com.sun.star.ServiceManager Object.
+;                  @Error 2 @Extended 2 = Failed to create com.sun.star.frame.Desktop Object.
+;                  @Error 2 @Extended 3 = Failed to open a new Writer Document instance.
+;                  @Error 2 @Extended 4 = Failed to create com.sun.star.sdb.DocumentDefinition Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Form Name.
-;                  @Error 3 @Extended 4 Return 0 = Failed to insert new Form into Base Document.
-;                  @Error 3 @Extended 5 Return 0 = Failed to open new Form Document.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Form Name.
+;                  @Error 3 @Extended 4 = Failed to insert new Form into Base Document.
+;                  @Error 3 @Extended 5 = Failed to open new Form Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. New Form was successfully inserted.
 ;                  @Error 0 @Extended 1 Return Object = Success. Returning opened Form Document's Object.
@@ -253,13 +253,13 @@ EndFunc   ;==>_LOBase_FormCreate
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = Name called in $sName not found in Folder.
-;                  @Error 1 @Extended 4 Return 0 = Name called in $sName not a Form.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = Name called in $sName not found in Folder.
+;                  @Error 1 @Extended 4 = Name called in $sName not a Form.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to delete form.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to delete form.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully deleted.
 ; Author ........: donnyh13
@@ -299,14 +299,14 @@ EndFunc   ;==>_LOBase_FormDelete
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bForceClose not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = Document called in $oFormDoc has not been saved to a Base Document yet.
+;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
+;                  @Error 1 @Extended 2 = $bForceClose not a Boolean.
+;                  @Error 1 @Extended 3 = Document called in $oFormDoc has not been saved to a Base Document yet.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Document has been modified and not saved, and $bForceClose is False.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Document's Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Form Document's properties.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify Form in Parent Document.
+;                  @Error 3 @Extended 1 = Document has been modified and not saved, and $bForceClose is False.
+;                  @Error 3 @Extended 2 = Failed to retrieve Form Document's Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Form Document's properties.
+;                  @Error 3 @Extended 4 = Failed to identify Form in Parent Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value of whether the Form Document was successfully closed (True), or not.
 ; Author ........: donnyh13
@@ -355,17 +355,17 @@ EndFunc   ;==>_LOBase_FormDocClose
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
-;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
+;                  @Error 2 @Extended 1 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Current Document not a Base Form Document.
-;                  @Error 3 @Extended 5 Return 0 = No matches found.
+;                  @Error 3 @Extended 1 = No open LibreOffice documents.
+;                  @Error 3 @Extended 2 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 = Current Document not a Base Form Document.
+;                  @Error 3 @Extended 5 = No matches found.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Form document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
 ;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Form Documents. @Extended is set to number of results. See remarks.
@@ -443,11 +443,11 @@ EndFunc   ;==>_LOBase_FormDocConnect
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
+;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Form Document called in $oFormDoc was opened "Hidden", can't return full document name. Document must be re-opened.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document's name.
+;                  @Error 3 @Extended 1 = Form Document called in $oFormDoc was opened "Hidden", can't return full document name. Document must be re-opened.
+;                  @Error 3 @Extended 2 = Failed to retrieve Document's name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
@@ -488,9 +488,9 @@ EndFunc   ;==>_LOBase_FormDocGetName
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
+;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document has been modified.
+;                  @Error 3 @Extended 1 = Failed to query whether the Document has been modified.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Form has been modified since last being saved.
 ; Author ........: donnyh13
@@ -525,16 +525,16 @@ EndFunc   ;==>_LOBase_FormDocIsModified
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bDesign not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = Name called in $sName not found.
-;                  @Error 1 @Extended 6 Return 0 = Name called in $sName not a Form.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = $bDesign not a Boolean.
+;                  @Error 1 @Extended 4 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 5 = Name called in $sName not found.
+;                  @Error 1 @Extended 6 = Name called in $sName not a Form.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to open Form Document.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 3 = Failed to open Form Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning opened Form Document's Object.
 ; Author ........: donnyh13
@@ -582,12 +582,12 @@ EndFunc   ;==>_LOBase_FormDocOpen
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Document called in $oFormDoc has not been saved to a Base Document yet or is read only.
+;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
+;                  @Error 1 @Extended 2 = Document called in $oFormDoc has not been saved to a Base Document yet or is read only.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Form Document's properties.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Form in Parent Document.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Form Document's properties.
+;                  @Error 3 @Extended 3 = Failed to identify Form in Parent Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully saved.
 ; Author ........: donnyh13
@@ -630,13 +630,13 @@ EndFunc   ;==>_LOBase_FormDocSave
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
+;                  @Error 1 @Extended 2 = $bVisible not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Form Document called in $oFormDoc was opened "Hidden", document must be re-opened.
-;                  @Error 3 @Extended 2 Return 0 = Failed to query whether the Document is Visible.
+;                  @Error 3 @Extended 1 = Form Document called in $oFormDoc was opened "Hidden", document must be re-opened.
+;                  @Error 3 @Extended 2 = Failed to query whether the Document is Visible.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
@@ -684,17 +684,17 @@ EndFunc   ;==>_LOBase_FormDocVisible
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Form by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Form with the same name is found in the Document (In sub-folders).
 ; Author ........: donnyh13
@@ -796,19 +796,19 @@ EndFunc   ;==>_LOBase_FormExists
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sInputFolder not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sOutputFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Requested Folder not found.
-;                  @Error 1 @Extended 5 Return 0 = Name called in $sInputFolder not a Folder.
-;                  @Error 1 @Extended 6 Return 0 = Folder already exists with called name in Destination.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sInputFolder not a String.
+;                  @Error 1 @Extended 3 = $sOutputFolder not a String.
+;                  @Error 1 @Extended 4 = Requested Folder not found.
+;                  @Error 1 @Extended 5 = Name called in $sInputFolder not a Folder.
+;                  @Error 1 @Extended 6 = Folder already exists with called name in Destination.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.sdb.Forms" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.sdb.Forms" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Source Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Destination Folder Name.
-;                  @Error 3 @Extended 4 Return 0 = Failed to insert copied Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Source Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Destination Folder Name.
+;                  @Error 3 @Extended 4 = Failed to insert copied Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Copied Folder successfully inserted.
 ; Author ........: donnyh13
@@ -867,16 +867,16 @@ EndFunc   ;==>_LOBase_FormFolderCopy
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bCreateMulti not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = Name called in $sFolder already exists in Folder.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFolder not a String.
+;                  @Error 1 @Extended 3 = $bCreateMulti not a Boolean.
+;                  @Error 1 @Extended 4 = Name called in $sFolder already exists in Folder.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Folder Object.
+;                  @Error 2 @Extended 1 = Failed to create Folder Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to insert new Folder into Base Document.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to insert new Folder into Base Document.
+;                  @Error 3 @Extended 3 = Failed to retrieve Destination Folder Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully created the Folder(s).
 ; Author ........: donnyh13
@@ -943,13 +943,13 @@ EndFunc   ;==>_LOBase_FormFolderCreate
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = Name called in $sName not found in Folder.
-;                  @Error 1 @Extended 4 Return 0 = Name called in $sName not a Folder.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = Name called in $sName not found in Folder.
+;                  @Error 1 @Extended 4 = Name called in $sName not a Folder.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to delete Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to delete Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Folder was successfully deleted.
 ; Author ........: donnyh13
@@ -991,17 +991,17 @@ EndFunc   ;==>_LOBase_FormFolderDelete
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Folder by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Folder with the same name is found in the Document (In sub-folders).
 ; Author ........: donnyh13
@@ -1103,14 +1103,14 @@ EndFunc   ;==>_LOBase_FormFolderExists
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sNewName not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder name called in $sFolder not found in Folder or is not a Folder.
-;                  @Error 1 @Extended 5 Return 0 = Name called in $sNewName already exists in Folder.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFolder not a String.
+;                  @Error 1 @Extended 3 = $sNewName not a String.
+;                  @Error 1 @Extended 4 = Folder name called in $sFolder not found in Folder or is not a Folder.
+;                  @Error 1 @Extended 5 = Name called in $sNewName already exists in Folder.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to rename folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to rename folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Folder
 ; Author ........: donnyh13
@@ -1152,17 +1152,17 @@ EndFunc   ;==>_LOBase_FormFolderRename
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 3 = $sFolder not a String.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Form Folders contained in the Document as an Integer.
 ; Author ........: donnyh13
@@ -1256,17 +1256,17 @@ EndFunc   ;==>_LOBase_FormFoldersGetCount
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 3 = $sFolder not a String.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Folder names contained in this Document. @Extended is set to number of results.
 ; Author ........: donnyh13
@@ -1370,14 +1370,14 @@ EndFunc   ;==>_LOBase_FormFoldersGetNames
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sForm not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sNewName not a String.
-;                  @Error 1 @Extended 4 Return 0 = Form name called in $sForm not found in Folder or is not a Form.
-;                  @Error 1 @Extended 5 Return 0 = Name called in $sNewName already exists in Folder.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sForm not a String.
+;                  @Error 1 @Extended 3 = $sNewName not a String.
+;                  @Error 1 @Extended 4 = Form name called in $sForm not found in Folder or is not a Form.
+;                  @Error 1 @Extended 5 = Name called in $sNewName already exists in Folder.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to rename form.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to rename form.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Form.
 ; Author ........: donnyh13
@@ -1419,17 +1419,17 @@ EndFunc   ;==>_LOBase_FormRename
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 3 = $sFolder not a String.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Forms contained in the Document as an Integer.
 ; Author ........: donnyh13
@@ -1527,17 +1527,17 @@ EndFunc   ;==>_LOBase_FormsGetCount
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 3 = $sFolder not a String.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Form names contained in this Document. @Extended is set to number of results.
 ; Author ........: donnyh13

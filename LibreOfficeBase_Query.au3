@@ -55,11 +55,11 @@
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Queries.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve count of Queries.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Queries contained in the Document as an Integer.
 ; Author ........: donnyh13
@@ -93,11 +93,11 @@ EndFunc   ;==>_LOBase_QueriesGetCount
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Array of Element names.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Array of Element names.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Query names contained in this Document. @Extended is set to number of results.
 ; Author ........: donnyh13
@@ -134,24 +134,24 @@ EndFunc   ;==>_LOBase_QueriesGetNames
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $sQueryName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sSourceName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $sFieldName not a String.
-;                  @Error 1 @Extended 6 Return 0 = Document already contains a Query with the name called in $sQueryName.
-;                  @Error 1 @Extended 7 Return 0 = Document already contains a Table with the name called in $sQueryName.
-;                  @Error 1 @Extended 8 Return 0 = Query or Table with name called in $sSourceName not found.
-;                  @Error 1 @Extended 9 Return 0 = Source called in $sSourceName does not contain a field with name as called in $sFieldName.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 = $sQueryName not a String.
+;                  @Error 1 @Extended 4 = $sSourceName not a String.
+;                  @Error 1 @Extended 5 = $sFieldName not a String.
+;                  @Error 1 @Extended 6 = Document already contains a Query with the name called in $sQueryName.
+;                  @Error 1 @Extended 7 = Document already contains a Table with the name called in $sQueryName.
+;                  @Error 1 @Extended 8 = Query or Table with name called in $sSourceName not found.
+;                  @Error 1 @Extended 9 = Source called in $sSourceName does not contain a field with name as called in $sFieldName.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a Query Descriptor.
+;                  @Error 2 @Extended 1 = Failed to create a Query Descriptor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Queries Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Source Object.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Database specific Quotation character.
-;                  @Error 3 @Extended 5 Return 0 = Failed to insert new Query.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve New Query's Object.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Queries Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Source Object.
+;                  @Error 3 @Extended 4 = Failed to retrieve Database specific Quotation character.
+;                  @Error 3 @Extended 5 = Failed to insert new Query.
+;                  @Error 3 @Extended 6 = Failed to retrieve New Query's Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning new Query's Object.
 ; Author ........: donnyh13
@@ -226,19 +226,19 @@ EndFunc   ;==>_LOBase_QueryAddByName
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $sQueryName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sSQL_Command not a String.
-;                  @Error 1 @Extended 5 Return 0 = Document already contains a Query with the name called in $sQueryName.
-;                  @Error 1 @Extended 6 Return 0 = Document already contains a Table with the name called in $sQueryName.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 = $sQueryName not a String.
+;                  @Error 1 @Extended 4 = $sSQL_Command not a String.
+;                  @Error 1 @Extended 5 = Document already contains a Query with the name called in $sQueryName.
+;                  @Error 1 @Extended 6 = Document already contains a Table with the name called in $sQueryName.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a Query Descriptor.
+;                  @Error 2 @Extended 1 = Failed to create a Query Descriptor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Queries Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to insert new Query.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve New Query's Object.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Queries Object.
+;                  @Error 3 @Extended 3 = Failed to insert new Query.
+;                  @Error 3 @Extended 4 = Failed to retrieve New Query's Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning new Query's Object.
 ; Author ........: donnyh13
@@ -291,15 +291,15 @@ EndFunc   ;==>_LOBase_QueryAddBySQL
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $oQuery not an Object.
-;                  @Error 1 @Extended 4 Return 0 = Connection called in $oConnection does not contain the Query called in $oQuery.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 = $oQuery not an Object.
+;                  @Error 1 @Extended 4 = Connection called in $oConnection does not contain the Query called in $oQuery.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Queries Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Query name.
-;                  @Error 3 @Extended 4 Return 0 = Failed to delete Query.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Queries Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Query name.
+;                  @Error 3 @Extended 4 = Failed to delete Query.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Query was successfully deleted.
 ; Author ........: donnyh13
@@ -346,10 +346,10 @@ EndFunc   ;==>_LOBase_QueryDelete
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQueryDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bDeliverOwnership not a Boolean.
+;                  @Error 1 @Extended 1 = $oQueryDoc not an Object.
+;                  @Error 1 @Extended 2 = $bDeliverOwnership not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to close the Query Document.
+;                  @Error 3 @Extended 1 = Failed to close the Query Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully closed the Query Document.
 ; Author ........: donnyh13
@@ -383,17 +383,17 @@ EndFunc   ;==>_LOBase_QueryDocClose
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
-;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
+;                  @Error 2 @Extended 1 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Current Document not a Base Query Document.
-;                  @Error 3 @Extended 5 Return 0 = No matches found.
+;                  @Error 3 @Extended 1 = No open LibreOffice documents.
+;                  @Error 3 @Extended 2 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 = Current Document not a Base Query Document.
+;                  @Error 3 @Extended 5 = No matches found.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Query document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
 ;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Query Documents. @Extended is set to number of results. See remarks.
@@ -471,10 +471,10 @@ EndFunc   ;==>_LOBase_QueryDocConnect
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQueryDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  @Error 1 @Extended 1 = $oQueryDoc not an Object.
+;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Document's name.
+;                  @Error 3 @Extended 1 = Failed to retrieve Document's name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
@@ -518,10 +518,10 @@ EndFunc   ;==>_LOBase_QueryDocGetName
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQueryDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oQueryDoc not Query opened in viewing/data entry mode.
+;                  @Error 1 @Extended 1 = $oQueryDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oQueryDoc not Query opened in viewing/data entry mode.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve RowSet Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve RowSet Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning Query's RowSet Object.
 ; Author ........: donnyh13
@@ -557,17 +557,17 @@ EndFunc   ;==>_LOBase_QueryDocGetRowSet
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $sQuery not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bEdit not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = No Query with name called in $sQuery found.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 = $sQuery not a String.
+;                  @Error 1 @Extended 4 = $bEdit not a Boolean.
+;                  @Error 1 @Extended 5 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 6 = No Query with name called in $sQuery found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Queries Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to create a Connection to Database.
-;                  @Error 3 @Extended 4 Return 0 = Failed to open Query Document.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Queries Object.
+;                  @Error 3 @Extended 3 = Failed to create a Connection to Database.
+;                  @Error 3 @Extended 4 = Failed to open Query Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened the Query Document, returning its object.
 ; Author ........: donnyh13
@@ -617,16 +617,16 @@ EndFunc   ;==>_LOBase_QueryDocOpenByName
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $oQuery not an Object.
-;                  @Error 1 @Extended 4 Return 0 = $bEdit not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 = $oQuery not an Object.
+;                  @Error 1 @Extended 4 = $bEdit not a Boolean.
+;                  @Error 1 @Extended 5 = $bHidden not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Query Name.
-;                  @Error 3 @Extended 3 Return 0 = Failed to create a Connection to Database.
-;                  @Error 3 @Extended 4 Return 0 = Failed to open Query Document.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Query Name.
+;                  @Error 3 @Extended 3 = Failed to create a Connection to Database.
+;                  @Error 3 @Extended 4 = Failed to open Query Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened Query Document, returning its object.
 ; Author ........: donnyh13
@@ -674,12 +674,12 @@ EndFunc   ;==>_LOBase_QueryDocOpenByObject
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQueryDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 1 = $oQueryDoc not an Object.
+;                  @Error 1 @Extended 2 = $bVisible not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current visibility setting.
+;                  @Error 3 @Extended 1 = Failed to retrieve current visibility setting.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -723,13 +723,13 @@ EndFunc   ;==>_LOBase_QueryDocVisible
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 = $sName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Queries Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to query Queries for Query name.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Queries Object.
+;                  @Error 3 @Extended 3 = Failed to query Queries for Query name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Query by the called name (True) or not.
 ; Author ........: donnyh13
@@ -769,11 +769,11 @@ EndFunc   ;==>_LOBase_QueryExists
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQuery not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iField not an Integer, less than 0 or greater than number of Fields contained in the query.
+;                  @Error 1 @Extended 1 = $oQuery not an Object.
+;                  @Error 1 @Extended 2 = $iField not an Integer, less than 0 or greater than number of Fields contained in the query.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Column Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Columns Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Column Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Column's Object.
 ; Author ........: donnyh13
@@ -810,12 +810,12 @@ EndFunc   ;==>_LOBase_QueryFieldGetObjByIndex
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQuery not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = Query does not contain a Field with the name called in $sName.
+;                  @Error 1 @Extended 1 = $oQuery not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = Query does not contain a Field with the name called in $sName.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Column Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Columns Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Column Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Column's Object.
 ; Author ........: donnyh13
@@ -855,11 +855,11 @@ EndFunc   ;==>_LOBase_QueryFieldGetObjByName
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oField not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sAlias not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 1 = $oField not an Object.
+;                  @Error 1 @Extended 2 = $sAlias not a String.
+;                  @Error 1 @Extended 3 = $bVisible not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sAlias
 ;                  |                               2 = Error setting $bVisible
 ;                  --Success--
@@ -914,9 +914,9 @@ EndFunc   ;==>_LOBase_QueryFieldModify
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQuery not an Object.
+;                  @Error 1 @Extended 1 = $oQuery not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve count of Queries.
+;                  @Error 3 @Extended 1 = Failed to retrieve count of Queries.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Queries contained in the document.
 ; Author ........: donnyh13
@@ -948,9 +948,9 @@ EndFunc   ;==>_LOBase_QueryFieldsGetCount
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQuery not an Object.
+;                  @Error 1 @Extended 1 = $oQuery not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Query names.
+;                  @Error 3 @Extended 1 = Failed to retrieve Array of Query names.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning array of Query names. @Extended will be set to the number of results.
 ; Author ........: donnyh13
@@ -983,13 +983,13 @@ EndFunc   ;==>_LOBase_QueryFieldsGetNames
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $iQuery not an Integer, less than 0 or greater than number of Queries contained in the Database.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 = $iQuery not an Integer, less than 0 or greater than number of Queries contained in the Database.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Queries Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Query Object.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Queries Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Query Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Query's Object.
 ; Author ........: donnyh13
@@ -1028,14 +1028,14 @@ EndFunc   ;==>_LOBase_QueryGetObjByIndex
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = Query with name called in $sName not found.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = Query with name called in $sName not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Queries Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Query Object.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Queries Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Query Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Query's Object.
 ; Author ........: donnyh13
@@ -1075,12 +1075,12 @@ EndFunc   ;==>_LOBase_QueryGetObjByName
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQuery not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 1 = $oQuery not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Query's name.
+;                  @Error 3 @Extended 1 = Failed to retrieve Query's name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -1127,12 +1127,12 @@ EndFunc   ;==>_LOBase_QueryName
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oQuery not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sSQL_Command not a String.
+;                  @Error 1 @Extended 1 = $oQuery not an Object.
+;                  @Error 1 @Extended 2 = $sSQL_Command not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current SQL command.
+;                  @Error 3 @Extended 1 = Failed to retrieve current SQL command.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sSQL_Command
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.

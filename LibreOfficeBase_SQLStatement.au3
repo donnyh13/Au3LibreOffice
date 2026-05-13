@@ -50,13 +50,13 @@
 ; Return values .: Success: Variable
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oResult not a Result Set Object.
-;                  @Error 1 @Extended 3 Return 0 = $iColumn not an Integer, less than 1 or greater than number of Columns contained in Result Set.
-;                  @Error 1 @Extended 4 Return 0 = $iQuery not an Integer, less than 0 or greater than 18. See Constants, $LOB_RESULT_METADATA_QUERY_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = $oResult not a Result Set Object.
+;                  @Error 1 @Extended 3 = $iColumn not an Integer, less than 1 or greater than number of Columns contained in Result Set.
+;                  @Error 1 @Extended 4 = $iQuery not an Integer, less than 0 or greater than 18. See Constants, $LOB_RESULT_METADATA_QUERY_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Column Count.
-;                  @Error 3 @Extended 2 Return 0 = Failed to Execute Query.
+;                  @Error 3 @Extended 1 = Failed to retrieve Column Count.
+;                  @Error 3 @Extended 2 = Failed to Execute Query.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Variable = Success. Returning Query result. See Query description for expected return type.
 ; Author ........: donnyh13
@@ -130,10 +130,10 @@ EndFunc   ;==>_LOBase_SQLResultColumnMetaDataQuery
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oResult not a Result Set Object.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = $oResult not a Result Set Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Column Count.
+;                  @Error 3 @Extended 1 = Failed to retrieve Column Count.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Columns contained in the Result Set.
 ; Author ........: donnyh13
@@ -166,10 +166,10 @@ EndFunc   ;==>_LOBase_SQLResultColumnsGetCount
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oResult not a Result Set Object.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = $oResult not a Result Set Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Column Names.
+;                  @Error 3 @Extended 1 = Failed to retrieve Array of Column Names.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Column Names contained in the Result Set. @Extended is set to the number of Elements contained in the Array.
 ; Author ........: donnyh13
@@ -204,12 +204,12 @@ EndFunc   ;==>_LOBase_SQLResultColumnsGetNames
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oResult not a Result Set object.
-;                  @Error 1 @Extended 3 Return 0 = $iMove not an Integer, less than 0 or greater than 7. See Constants, $LOB_RESULT_CURSOR_MOVE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iNumber not an Integer.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oResult not a Result Set object.
+;                  @Error 1 @Extended 3 = $iMove not an Integer, less than 0 or greater than 7. See Constants, $LOB_RESULT_CURSOR_MOVE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 4 = $iNumber not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to process Cursor move.
+;                  @Error 3 @Extended 1 = Failed to process Cursor move.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning Boolean whether the move was successful (True) or not (False).
 ; Author ........: donnyh13
@@ -266,12 +266,12 @@ EndFunc   ;==>_LOBase_SQLResultCursorMove
 ; Return values .: Success: Boolean or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oResult not a Result Set object.
-;                  @Error 1 @Extended 3 Return 0 = $iQuery not an Integer, less than 0 or greater than 4. See Constants, $LOB_RESULT_CURSOR_QUERY_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oResult not a Result Set object.
+;                  @Error 1 @Extended 3 = $iQuery not an Integer, less than 0 or greater than 4. See Constants, $LOB_RESULT_CURSOR_QUERY_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to process Cursor Query.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Cursor row.
+;                  @Error 3 @Extended 1 = Failed to process Cursor Query.
+;                  @Error 3 @Extended 2 = Failed to retrieve Cursor row.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning cursor query result.
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning current row number containing the cursor.
@@ -325,21 +325,21 @@ EndFunc   ;==>_LOBase_SQLResultCursorQuery
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oResult not a Result Set object.
-;                  @Error 1 @Extended 3 Return 0 = $iModify not an Integer, less than 0 or greater than 12. See Constants, $LOB_RESULT_ROW_MOD_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iColumn not an Integer, or less than 1.
-;                  @Error 1 @Extended 5 Return 0 = $iModify called with $LOB_RESULT_ROW_MOD_BOOL and $vValue not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iModify called with $LOB_RESULT_ROW_MOD_SHORT, $LOB_RESULT_ROW_MOD_INT, or $LOB_RESULT_ROW_MOD_LONG and $vValue not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iModify called with $LOB_RESULT_ROW_MOD_FLOAT, or $LOB_RESULT_ROW_MOD_DOUBLE and $vValue not a Number.
-;                  @Error 1 @Extended 8 Return 0 = $iModify called with $LOB_RESULT_ROW_MOD_STRING and $vValue not a String.
-;                  @Error 1 @Extended 9 Return 0 = $iModify called with $LOB_RESULT_ROW_MOD_DATE, $LOB_RESULT_ROW_MOD_TIME, or $LOB_RESULT_ROW_MOD_TIMESTAMP and $vValue not an Object.
-;                  @Error 1 @Extended 10 Return 0 = $iModify called with $LOB_RESULT_ROW_MOD_BYTE, or $LOB_RESULT_ROW_MOD_BYTES and $vValue not a Binary value.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oResult not a Result Set object.
+;                  @Error 1 @Extended 3 = $iModify not an Integer, less than 0 or greater than 12. See Constants, $LOB_RESULT_ROW_MOD_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 4 = $iColumn not an Integer, or less than 1.
+;                  @Error 1 @Extended 5 = $iModify called with $LOB_RESULT_ROW_MOD_BOOL and $vValue not a Boolean.
+;                  @Error 1 @Extended 6 = $iModify called with $LOB_RESULT_ROW_MOD_SHORT, $LOB_RESULT_ROW_MOD_INT, or $LOB_RESULT_ROW_MOD_LONG and $vValue not an Integer.
+;                  @Error 1 @Extended 7 = $iModify called with $LOB_RESULT_ROW_MOD_FLOAT, or $LOB_RESULT_ROW_MOD_DOUBLE and $vValue not a Number.
+;                  @Error 1 @Extended 8 = $iModify called with $LOB_RESULT_ROW_MOD_STRING and $vValue not a String.
+;                  @Error 1 @Extended 9 = $iModify called with $LOB_RESULT_ROW_MOD_DATE, $LOB_RESULT_ROW_MOD_TIME, or $LOB_RESULT_ROW_MOD_TIMESTAMP and $vValue not an Object.
+;                  @Error 1 @Extended 10 = $iModify called with $LOB_RESULT_ROW_MOD_BYTE, or $LOB_RESULT_ROW_MOD_BYTES and $vValue not a Binary value.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.util.Date" Struct.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.util.Time" Struct.
+;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.util.Date" Struct.
+;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.util.Time" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Modification command.
+;                  @Error 3 @Extended 1 = Failed to identify Modification command.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully performed the Result Row Modification command.
 ; Author ........: donnyh13
@@ -457,11 +457,11 @@ EndFunc   ;==>_LOBase_SQLResultRowModify
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oResult not a Result Set object.
-;                  @Error 1 @Extended 3 Return 0 = $iQuery not an Integer, less than 0 or greater than 2. See Constants, $LOB_RESULT_ROW_QUERY_IS_ROW_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oResult not a Result Set object.
+;                  @Error 1 @Extended 3 = $iQuery not an Integer, less than 0 or greater than 2. See Constants, $LOB_RESULT_ROW_QUERY_IS_ROW_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to process query.
+;                  @Error 3 @Extended 1 = Failed to process query.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning result of query as a Boolean value.
 ; Author ........: donnyh13
@@ -501,15 +501,15 @@ EndFunc   ;==>_LOBase_SQLResultRowQuery
 ; Return values .: Success: Variable
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oResult not a Result Set object.
-;                  @Error 1 @Extended 3 Return 0 = $iRead not an Integer, less than 0 or greater than 12. See Constants, $LOB_RESULT_ROW_READ_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iColumn not an Integer, or less than 1.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oResult not a Result Set object.
+;                  @Error 1 @Extended 3 = $iRead not an Integer, less than 0 or greater than 12. See Constants, $LOB_RESULT_ROW_READ_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 4 = $iColumn not an Integer, or less than 1.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.util.DateTime" Struct.
+;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve a Date Struct from Row Read.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve a Time Struct from Row Read.
+;                  @Error 3 @Extended 1 = Failed to retrieve a Date Struct from Row Read.
+;                  @Error 3 @Extended 2 = Failed to retrieve a Time Struct from Row Read.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Variable = Success. Successfully performed Row read, returning corresponding data type as the read command performed.
 ; Author ........: donnyh13
@@ -594,8 +594,8 @@ EndFunc   ;==>_LOBase_SQLResultRowRead
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oResult not a Result Set object.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oResult not a Result Set object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully refreshed the Result Set Row.
 ; Author ........: donnyh13
@@ -626,11 +626,11 @@ EndFunc   ;==>_LOBase_SQLResultRowRefresh
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oResult not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oResult not a Result Set object.
-;                  @Error 1 @Extended 3 Return 0 = $iUpdate not an Integer, less than 0 or greater than 5. See Constants, $LOB_RESULT_ROW_UPDATE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oResult not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oResult not a Result Set object.
+;                  @Error 1 @Extended 3 = $iUpdate not an Integer, less than 0 or greater than 5. See Constants, $LOB_RESULT_ROW_UPDATE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to process Update.
+;                  @Error 3 @Extended 1 = Failed to process Update.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully executed Update command.
 ; Author ........: donnyh13
@@ -671,14 +671,14 @@ EndFunc   ;==>_LOBase_SQLResultRowUpdate
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oConnection not a Connection Object.
-;                  @Error 1 @Extended 3 Return 0 = $sSQL not a String.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oConnection not a Connection Object.
+;                  @Error 1 @Extended 3 = $sSQL not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a prepared Statement.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a Statement.
+;                  @Error 2 @Extended 1 = Failed to create a prepared Statement.
+;                  @Error 2 @Extended 2 = Failed to create a Statement.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning the created Prepared Statement Object.
 ;                  @Error 0 @Extended 1 Return Object = Success. Returning the created Statement Object.
@@ -724,15 +724,15 @@ EndFunc   ;==>_LOBase_SQLStatementCreate
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oStatement not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oStatement not a Statement or Prepared Statement Object.
-;                  @Error 1 @Extended 3 Return 0 = Statement called in $oStatement is not a Prepared Statement, and $sSQL is not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bWritable not a Boolean.
+;                  @Error 1 @Extended 1 = $oStatement not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oStatement not a Statement or Prepared Statement Object.
+;                  @Error 1 @Extended 3 = Statement called in $oStatement is not a Prepared Statement, and $sSQL is not a String.
+;                  @Error 1 @Extended 4 = $bWritable not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create "com.sun.star.sdb.RowSet" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Failed to create "com.sun.star.sdb.RowSet" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to perform the Query.
+;                  @Error 3 @Extended 1 = Failed to perform the Query.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning the Result set returned from the SQL Statement Query.
 ; Author ........: donnyh13
@@ -789,11 +789,11 @@ EndFunc   ;==>_LOBase_SQLStatementExecuteQuery
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oStatement not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oStatement not a Statement or Prepared Statement Object.
-;                  @Error 1 @Extended 3 Return 0 = Statement called in $oStatement is not a Prepared Statement, and $sSQL is not a String.
+;                  @Error 1 @Extended 1 = $oStatement not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oStatement not a Statement or Prepared Statement Object.
+;                  @Error 1 @Extended 3 = Statement called in $oStatement is not a Prepared Statement, and $sSQL is not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to perform the Update.
+;                  @Error 3 @Extended 1 = Failed to perform the Update.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Row count for INSERT, DELETE or UPDATE SQL Statements, or 0 for SQL Statements that return nothing.
 ; Author ........: donnyh13
@@ -836,19 +836,19 @@ EndFunc   ;==>_LOBase_SQLStatementExecuteUpdate
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oStatement not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oStatement not a Statement or Prepared Statement Object.
-;                  @Error 1 @Extended 3 Return 0 = $iCommand not an Integer, or less than 1.
-;                  @Error 1 @Extended 4 Return 0 = $iSetType not an Integer, less than 0 or greater than 16. See Constants, $LOB_DATA_SET_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iSetType called with $LOB_DATA_SET_TYPE_BOOL and $vValue is not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iSetType called with $LOB_DATA_SET_TYPE_BYTE or $LOB_DATA_SET_TYPE_BYTES and $vValue is not a Binary value.
-;                  @Error 1 @Extended 7 Return 0 = $iSetType called with $LOB_DATA_SET_TYPE_SHORT, $LOB_DATA_SET_TYPE_INT, or $LOB_DATA_SET_TYPE_LONG and $vValue is not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = $iSetType called with $LOB_DATA_SET_TYPE_FLOAT, or $LOB_DATA_SET_TYPE_DOUBLE and $vValue is not a Number.
-;                  @Error 1 @Extended 9 Return 0 = $iSetType called with $LOB_DATA_SET_TYPE_STRING and $vValue is not a String.
-;                  @Error 1 @Extended 10 Return 0 = $iSetType called with $LOB_DATA_SET_TYPE_DATE, $LOB_DATA_SET_TYPE_TIME, or $LOB_DATA_SET_TYPE_TIMESTAMP and $vValue is not an Object.
+;                  @Error 1 @Extended 1 = $oStatement not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oStatement not a Statement or Prepared Statement Object.
+;                  @Error 1 @Extended 3 = $iCommand not an Integer, or less than 1.
+;                  @Error 1 @Extended 4 = $iSetType not an Integer, less than 0 or greater than 16. See Constants, $LOB_DATA_SET_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 5 = $iSetType called with $LOB_DATA_SET_TYPE_BOOL and $vValue is not a Boolean.
+;                  @Error 1 @Extended 6 = $iSetType called with $LOB_DATA_SET_TYPE_BYTE or $LOB_DATA_SET_TYPE_BYTES and $vValue is not a Binary value.
+;                  @Error 1 @Extended 7 = $iSetType called with $LOB_DATA_SET_TYPE_SHORT, $LOB_DATA_SET_TYPE_INT, or $LOB_DATA_SET_TYPE_LONG and $vValue is not an Integer.
+;                  @Error 1 @Extended 8 = $iSetType called with $LOB_DATA_SET_TYPE_FLOAT, or $LOB_DATA_SET_TYPE_DOUBLE and $vValue is not a Number.
+;                  @Error 1 @Extended 9 = $iSetType called with $LOB_DATA_SET_TYPE_STRING and $vValue is not a String.
+;                  @Error 1 @Extended 10 = $iSetType called with $LOB_DATA_SET_TYPE_DATE, $LOB_DATA_SET_TYPE_TIME, or $LOB_DATA_SET_TYPE_TIMESTAMP and $vValue is not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.util.Date" Struct.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.util.Time" Struct.
+;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.util.Date" Struct.
+;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.util.Time" Struct.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully set the prepared SQL statement Data.
 ;                  @Error 0 @Extended 1 Return 1 = Success. Successfully cleared the SQL prepared statement of the set data.

@@ -39,10 +39,10 @@
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oNewCol not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oOldCol not an Object.
+;                  @Error 1 @Extended 1 = $oNewCol not an Object.
+;                  @Error 1 @Extended 2 = $oOldCol not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Old Column's Properties.
+;                  @Error 3 @Extended 1 = Failed to retrieve Old Column's Properties.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully transferred Column properties.
 ; Author ........: donnyh13
@@ -80,8 +80,8 @@ EndFunc   ;==>__LOBase_ColTransferProps
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iType not an Integer, less than -16 or greater than 2014. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 2 Return 0 = $iType not one of the pre-defined constants. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $iType not an Integer, less than -16 or greater than 2014. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 2 = $iType not one of the pre-defined constants. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the Type name corresponding to the Type Constant.
 ; Author ........: donnyh13
@@ -230,7 +230,7 @@ EndFunc   ;==>__LOBase_ColTypeName
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iQuery not an Integer, less than 0 or greater than number of query commands. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $iQuery not an Integer, less than 0 or greater than number of query commands. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the requested Query command.
 ; Author ........: donnyh13
@@ -466,9 +466,9 @@ EndFunc   ;==>__LOBase_InternalComErrorHandler
 ; Return values .: Success: Integer or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oControl not an Object, and $iControlType not an Integer, less than 1 or greater than 32. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oControl not an Object, and $iControlType not an Integer, less than 1 or greater than 32. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control, or return requested Service name.
+;                  @Error 3 @Extended 1 = Failed to identify Control, or return requested Service name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning Constant value for Control type.
 ;                  @Error 0 @Extended 1 Return String = Success. Returning requested Control type's service name.
@@ -512,10 +512,10 @@ EndFunc   ;==>__LOBase_ReportConIdentify
 ; Return values .: Success: 1 or Map
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oControl not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $mFontDesc not a Map.
+;                  @Error 1 @Extended 1 = $oControl not an Object.
+;                  @Error 1 @Extended 2 = $mFontDesc not a Map.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting Font Name.
 ;                  |                               2 = Error setting Font Weight.
 ;                  |                               4 = Error setting Font Posture.

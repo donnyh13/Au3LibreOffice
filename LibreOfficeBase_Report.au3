@@ -83,10 +83,10 @@
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oControl not an Object.
+;                  @Error 1 @Extended 1 = $oControl not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Control's parent.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve parent document.
+;                  @Error 3 @Extended 1 = Failed to retrieve Control's parent.
+;                  @Error 3 @Extended 2 = Failed to retrieve parent document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Control was successfully deleted.
 ; Author ........: donnyh13
@@ -122,14 +122,14 @@ EndFunc   ;==>_LOBase_ReportConDelete
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormatField not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oFormatField not a Formatted Field Control.
-;                  @Error 1 @Extended 3 Return 0 = $sDataField not a String.
+;                  @Error 1 @Extended 1 = $oFormatField not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oFormatField not a Formatted Field Control.
+;                  @Error 1 @Extended 3 = $sDataField not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current DataField value.
+;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error 3 @Extended 2 = Failed to retrieve current DataField value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -189,23 +189,23 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldData
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFormatField not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oFormatField not a Formatted Field Control.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 5 Return 0 = $bPrintRep not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bPrintRepOnGroup not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 8 Return 0 = $mFont not a Map.
-;                  @Error 1 @Extended 9 Return 0 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 10 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 11 Return 0 = $iFormat not an Integer.
-;                  @Error 1 @Extended 12 Return 0 = Format key called in $iFormat not found in document.
+;                  @Error 1 @Extended 1 = $oFormatField not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oFormatField not a Formatted Field Control.
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = $sCondPrint not a String.
+;                  @Error 1 @Extended 5 = $bPrintRep not a Boolean.
+;                  @Error 1 @Extended 6 = $bPrintRepOnGroup not a Boolean.
+;                  @Error 1 @Extended 7 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 8 = $mFont not a Map.
+;                  @Error 1 @Extended 9 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 10 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 11 = $iFormat not an Integer.
+;                  @Error 1 @Extended 12 = Format key called in $iFormat not found in document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to identify Parent Document.
+;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error 3 @Extended 2 = Failed to identify Parent Document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sCondPrint
 ;                  |                               4 = Error setting $bPrintRep
@@ -333,14 +333,14 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldGeneral
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oImageControl not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oImageControl not a Image Control.
-;                  @Error 1 @Extended 3 Return 0 = $sDataField not a String.
+;                  @Error 1 @Extended 1 = $oImageControl not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oImageControl not a Image Control.
+;                  @Error 1 @Extended 3 = $sDataField not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current DataField value.
+;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error 3 @Extended 2 = Failed to retrieve current DataField value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -400,21 +400,21 @@ EndFunc   ;==>_LOBase_ReportConImageConData
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oImageControl not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oImageControl not an Image Control.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bPreserveAsLink not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 6 Return 0 = $bPrintRep not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bPrintRepOnGroup not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 9 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 10 Return 0 = $sGraphics not a String.
-;                  @Error 1 @Extended 11 Return 0 = $iScale not an Integer, less than 0 or greater than 2. See Constants $LOB_REP_CON_IMG_BTN_SCALE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oImageControl not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oImageControl not an Image Control.
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = $bPreserveAsLink not a Boolean.
+;                  @Error 1 @Extended 5 = $sCondPrint not a String.
+;                  @Error 1 @Extended 6 = $bPrintRep not a Boolean.
+;                  @Error 1 @Extended 7 = $bPrintRepOnGroup not a Boolean.
+;                  @Error 1 @Extended 8 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 9 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 10 = $sGraphics not a String.
+;                  @Error 1 @Extended 11 = $iScale not an Integer, less than 0 or greater than 2. See Constants $LOB_REP_CON_IMG_BTN_SCALE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $bPreserveAsLink
 ;                  |                               4 = Error setting $sCondPrint
@@ -536,22 +536,22 @@ EndFunc   ;==>_LOBase_ReportConImageConGeneral
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oSection not a Section Object.
-;                  @Error 1 @Extended 3 Return 0 = $iControl not an Integer, less than 1 or greater than 32. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iWidth not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iHeight not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 9 Return 0 = Can't insert a chart.
+;                  @Error 1 @Extended 1 = $oSection not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oSection not a Section Object.
+;                  @Error 1 @Extended 3 = $iControl not an Integer, less than 1 or greater than 32. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 4 = $iX not an Integer.
+;                  @Error 1 @Extended 5 = $iY not an Integer.
+;                  @Error 1 @Extended 6 = $iWidth not an Integer.
+;                  @Error 1 @Extended 7 = $iHeight not an Integer.
+;                  @Error 1 @Extended 8 = $sName not a String.
+;                  @Error 1 @Extended 9 = Can't insert a chart.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create the Control.
+;                  @Error 2 @Extended 1 = Failed to create the Control.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Section parent document Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Control Service name.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Control Size Structure.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Control Position Structure.
+;                  @Error 3 @Extended 1 = Failed to retrieve Section parent document Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Control Service name.
+;                  @Error 3 @Extended 3 = Failed to retrieve Control Size Structure.
+;                  @Error 3 @Extended 4 = Failed to retrieve Control Position Structure.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Control was inserted successfully, returning its object.
 ; Author ........: donnyh13
@@ -647,21 +647,21 @@ EndFunc   ;==>_LOBase_ReportConInsert
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oLabel not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oLabel not a Label Control.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sLabel not a String.
-;                  @Error 1 @Extended 5 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 6 Return 0 = $bPrintRep not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bPrintRepOnGroup not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 9 Return 0 = $mFont not a Map.
-;                  @Error 1 @Extended 10 Return 0 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 11 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oLabel not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oLabel not a Label Control.
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = $sLabel not a String.
+;                  @Error 1 @Extended 5 = $sCondPrint not a String.
+;                  @Error 1 @Extended 6 = $bPrintRep not a Boolean.
+;                  @Error 1 @Extended 7 = $bPrintRepOnGroup not a Boolean.
+;                  @Error 1 @Extended 8 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 9 = $mFont not a Map.
+;                  @Error 1 @Extended 10 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 11 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $sCondPrint
@@ -780,15 +780,15 @@ EndFunc   ;==>_LOBase_ReportConLabelGeneral
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oLabel not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oLabel not a Label Control.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iOrient not an Integer, less than 0 or greater than 1. See Constants $LOB_REP_CON_LINE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oLabel not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oLabel not a Label Control.
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 5 = $iOrient not an Integer, less than 0 or greater than 1. See Constants $LOB_REP_CON_LINE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $iVertAlign
 ;                  |                               4 = Error setting $iOrient
@@ -855,13 +855,13 @@ EndFunc   ;==>_LOBase_ReportConLineGeneral
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oControl not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iX not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iY not an Integer.
+;                  @Error 1 @Extended 1 = $oControl not an Object.
+;                  @Error 1 @Extended 2 = $iX not an Integer.
+;                  @Error 1 @Extended 3 = $iY not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Control's Position Structure.
+;                  @Error 3 @Extended 1 = Failed to retrieve Control's Position Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iX
 ;                  |                               2 = Error setting $iY
 ;                  --Success--
@@ -922,12 +922,12 @@ EndFunc   ;==>_LOBase_ReportConPosition
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Called Object not a Section Object.
-;                  @Error 1 @Extended 3 Return 0 = $iType not an Integer, less than 1 or greater than 63. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oSection not an Object.
+;                  @Error 1 @Extended 2 = Called Object not a Section Object.
+;                  @Error 1 @Extended 3 = $iType not an Integer, less than 1 or greater than 63. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Control Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to identify Control type.
+;                  @Error 3 @Extended 1 = Failed to retrieve Control Object.
+;                  @Error 3 @Extended 2 = Failed to identify Control type.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3
 ; Author ........: donnyh13
@@ -983,14 +983,14 @@ EndFunc   ;==>_LOBase_ReportConsGetList
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oControl not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer, or less than 51.
-;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer, or less than 51.
-;                  @Error 1 @Extended 4 Return 0 = $bAutoGrow not a Boolean.
+;                  @Error 1 @Extended 1 = $oControl not an Object.
+;                  @Error 1 @Extended 2 = $iWidth not an Integer, or less than 51.
+;                  @Error 1 @Extended 3 = $iHeight not an Integer, or less than 51.
+;                  @Error 1 @Extended 4 = $bAutoGrow not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Control Size Structure.
+;                  @Error 3 @Extended 1 = Failed to retrieve Control Size Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iHeight
 ;                  |                               4 = Error setting $bAutoGrow
@@ -1063,21 +1063,21 @@ EndFunc   ;==>_LOBase_ReportConSize
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sInputReport not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sOutputReport not a String.
-;                  @Error 1 @Extended 4 Return 0 = Requested report not found.
-;                  @Error 1 @Extended 5 Return 0 = Name called in $sInputReport not a Report.
-;                  @Error 1 @Extended 6 Return 0 = Folder name called in $sOutputReport not found.
-;                  @Error 1 @Extended 7 Return 0 = Report already exists with called name in Destination.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = $sInputReport not a String.
+;                  @Error 1 @Extended 3 = $sOutputReport not a String.
+;                  @Error 1 @Extended 4 = Requested report not found.
+;                  @Error 1 @Extended 5 = Name called in $sInputReport not a Report.
+;                  @Error 1 @Extended 6 = Folder name called in $sOutputReport not found.
+;                  @Error 1 @Extended 7 = Report already exists with called name in Destination.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.sdb.DocumentDefinition" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.sdb.DocumentDefinition" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Report Object.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Destination Report name.
-;                  @Error 3 @Extended 5 Return 0 = Failed to insert copied Report.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Report Object.
+;                  @Error 3 @Extended 4 = Failed to retrieve Destination Report name.
+;                  @Error 3 @Extended 5 = Failed to insert copied Report.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Copied report successfully inserted.
 ; Author ........: donnyh13
@@ -1139,21 +1139,21 @@ EndFunc   ;==>_LOBase_ReportCopy
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sReport not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bOpen not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = Folder or Sub-Folder not found.
-;                  @Error 1 @Extended 6 Return 0 = Name called in $sReport already exists in Folder.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = $sReport not a String.
+;                  @Error 1 @Extended 3 = $bOpen not a Boolean.
+;                  @Error 1 @Extended 4 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 5 = Folder or Sub-Folder not found.
+;                  @Error 1 @Extended 6 = Name called in $sReport already exists in Folder.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.sdb.DocumentDefinition Object.
+;                  @Error 2 @Extended 1 = Failed to create com.sun.star.sdb.DocumentDefinition Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Document URL.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Report name.
-;                  @Error 3 @Extended 5 Return 0 = Failed to insert new Report into Base Document.
-;                  @Error 3 @Extended 6 Return 0 = Failed to open new Report Document.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Document URL.
+;                  @Error 3 @Extended 4 = Failed to retrieve Report name.
+;                  @Error 3 @Extended 5 = Failed to insert new Report into Base Document.
+;                  @Error 3 @Extended 6 = Failed to open new Report Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. New Report was successfully inserted.
 ;                  @Error 0 @Extended 1 Return Object = Success. Returning opened Report Document's Object.
@@ -1227,13 +1227,13 @@ EndFunc   ;==>_LOBase_ReportCreate
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = Name called in $sName not found in Folder.
-;                  @Error 1 @Extended 4 Return 0 = Name called in $sName not a Report.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = Name called in $sName not found in Folder.
+;                  @Error 1 @Extended 4 = Name called in $sName not a Report.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to delete Report.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to delete Report.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Report was successfully deleted.
 ; Author ........: donnyh13
@@ -1273,14 +1273,14 @@ EndFunc   ;==>_LOBase_ReportDelete
 ; Return values .: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bForceClose not a Boolean.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = $bForceClose not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Document has been modified and not saved, and $bForceClose is False.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Report Document's properties.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify Report in Parent Document.
-;                  @Error 3 @Extended 5 Return 0 = Document called in $oReportDoc not a Report Document.
+;                  @Error 3 @Extended 1 = Document has been modified and not saved, and $bForceClose is False.
+;                  @Error 3 @Extended 2 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Report Document's properties.
+;                  @Error 3 @Extended 4 = Failed to identify Report in Parent Document.
+;                  @Error 3 @Extended 5 = Document called in $oReportDoc not a Report Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value of whether the Report Document was successfully closed (True), or not.
 ; Author ........: donnyh13
@@ -1338,17 +1338,17 @@ EndFunc   ;==>_LOBase_ReportDocClose
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
-;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
+;                  @Error 2 @Extended 1 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Current Document not a Base Report Document.
-;                  @Error 3 @Extended 5 Return 0 = No matches found.
+;                  @Error 3 @Extended 1 = No open LibreOffice documents.
+;                  @Error 3 @Extended 2 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 = Current Document not a Base Report Document.
+;                  @Error 3 @Extended 5 = No matches found.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Report document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
 ;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Report Documents. @Extended is set to number of results. See remarks.
@@ -1431,16 +1431,16 @@ EndFunc   ;==>_LOBase_ReportDocConnect
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $iContentType not an Integer, less than 0 or greater than 2. See Constants, $LOB_REP_CONTENT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $sContent not a String.
-;                  @Error 1 @Extended 5 Return 0 = $bAnalyzeSQL not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $sFilter not a String.
-;                  @Error 1 @Extended 7 Return 0 = $iReportOutput not an Integer, less than 1 or greater than 2. See Constants, $LOB_REP_OUTPUT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 8 Return 0 = $bSuppress not a Boolean.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $iContentType not an Integer, less than 0 or greater than 2. See Constants, $LOB_REP_CONTENT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 4 = $sContent not a String.
+;                  @Error 1 @Extended 5 = $bAnalyzeSQL not a Boolean.
+;                  @Error 1 @Extended 6 = $sFilter not a String.
+;                  @Error 1 @Extended 7 = $iReportOutput not an Integer, less than 1 or greater than 2. See Constants, $LOB_REP_OUTPUT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 8 = $bSuppress not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iContentType
 ;                  |                               2 = Error setting $sContent
 ;                  |                               4 = Error setting $bAnalyzeSQL
@@ -1546,17 +1546,17 @@ EndFunc   ;==>_LOBase_ReportDocData
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $bKeepTogether not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iHeight not an Integer, or less than 1753.
-;                  @Error 1 @Extended 8 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 9 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 5 = $bKeepTogether not a Boolean.
+;                  @Error 1 @Extended 6 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 7 = $iHeight not an Integer, or less than 1753.
+;                  @Error 1 @Extended 8 = $sCondPrint not a String.
+;                  @Error 1 @Extended 9 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $iForceNewPage
 ;                  |                               4 = Error setting $bKeepTogether
@@ -1662,18 +1662,18 @@ EndFunc   ;==>_LOBase_ReportDocDetail
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bKeepTogether not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $iHeight not an Integer, or less than 1753.
-;                  @Error 1 @Extended 9 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 10 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $bEnabled not a Boolean.
+;                  @Error 1 @Extended 4 = $sName not a String.
+;                  @Error 1 @Extended 5 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 6 = $bKeepTogether not a Boolean.
+;                  @Error 1 @Extended 7 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 8 = $iHeight not an Integer, or less than 1753.
+;                  @Error 1 @Extended 9 = $sCondPrint not a String.
+;                  @Error 1 @Extended 10 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bEnabled
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $iForceNewPage
@@ -1826,15 +1826,15 @@ EndFunc   ;==>_LOBase_ReportDocFooter
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iPageHeader not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_PAGE_PRINT_OPT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iPageFooter not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_PAGE_PRINT_OPT_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bAutoGrow not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bPrintRep not a Boolean.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = $iPageHeader not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_PAGE_PRINT_OPT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 5 = $iPageFooter not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_PAGE_PRINT_OPT_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 6 = $bAutoGrow not a Boolean.
+;                  @Error 1 @Extended 7 = $bPrintRep not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $iPageHeader
 ;                  |                               4 = Error setting $iPageFooter
@@ -1914,11 +1914,11 @@ EndFunc   ;==>_LOBase_ReportDocGeneral
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Report Document called in $oReportDoc was opened "Hidden", can't return full document name. Document must be re-opened.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document's name.
+;                  @Error 3 @Extended 1 = Report Document called in $oReportDoc was opened "Hidden", can't return full document name. Document must be re-opened.
+;                  @Error 3 @Extended 2 = Failed to retrieve Document's name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
@@ -1964,13 +1964,13 @@ EndFunc   ;==>_LOBase_ReportDocGetName
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $iPosition not an Integer, less than 0 or greater than number of Groups contained in the Report plus one.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $iPosition not an Integer, less than 0 or greater than number of Groups contained in the Report plus one.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create new Group object.
+;                  @Error 2 @Extended 1 = Failed to create new Group object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed retrieve new Group Object.
+;                  @Error 3 @Extended 1 = Failed retrieve new Group Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning new Group Object.
 ; Author ........: donnyh13
@@ -2015,12 +2015,12 @@ EndFunc   ;==>_LOBase_ReportDocGroupAdd
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $iGroup not an Integer, less than 0 or greater than number of Groups contained in the Report.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $iGroup not an Integer, less than 0 or greater than number of Groups contained in the Report.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed retrieve a count of Groups.
-;                  @Error 3 @Extended 2 Return 0 = Failed to delete Group.
+;                  @Error 3 @Extended 1 = Failed retrieve a count of Groups.
+;                  @Error 3 @Extended 2 = Failed to delete Group.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Returning requested Group Object.
 ; Author ........: donnyh13
@@ -2058,12 +2058,12 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByIndex
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oGroup not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oGroup not a Group Object.
+;                  @Error 1 @Extended 1 = $oGroup not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oGroup not a Group Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed retrieve a Group Parent Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed retrieve a count of Groups.
-;                  @Error 3 @Extended 3 Return 0 = Failed to delete Group.
+;                  @Error 3 @Extended 1 = Failed retrieve a Group Parent Object.
+;                  @Error 3 @Extended 2 = Failed retrieve a count of Groups.
+;                  @Error 3 @Extended 3 = Failed to delete Group.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Returning requested Group Object.
 ; Author ........: donnyh13
@@ -2114,11 +2114,11 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByObj
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $iReport not an Integer, less than 0 or greater than number of Groups contained in the Report.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $iReport not an Integer, less than 0 or greater than number of Groups contained in the Report.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed retrieve Group Object.
+;                  @Error 3 @Extended 1 = Failed retrieve Group Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Group Object.
 ; Author ........: donnyh13
@@ -2152,10 +2152,10 @@ EndFunc   ;==>_LOBase_ReportDocGroupGetByIndex
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve count of Groups.
+;                  @Error 3 @Extended 1 = Failed to retrieve count of Groups.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning total number of Groups contained in the Report.
 ; Author ........: donnyh13
@@ -2196,18 +2196,18 @@ EndFunc   ;==>_LOBase_ReportDocGroupsGetCount
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bKeepTogether not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $iHeight not an Integer, or less than 1753.
-;                  @Error 1 @Extended 9 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 10 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $bEnabled not a Boolean.
+;                  @Error 1 @Extended 4 = $sName not a String.
+;                  @Error 1 @Extended 5 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 6 = $bKeepTogether not a Boolean.
+;                  @Error 1 @Extended 7 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 8 = $iHeight not an Integer, or less than 1753.
+;                  @Error 1 @Extended 9 = $sCondPrint not a String.
+;                  @Error 1 @Extended 10 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bEnabled
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $iForceNewPage
@@ -2355,9 +2355,9 @@ EndFunc   ;==>_LOBase_ReportDocHeader
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether Document has been modified.
+;                  @Error 3 @Extended 1 = Failed to query whether Document has been modified.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Report has been modified since last being saved.
 ; Author ........: donnyh13
@@ -2392,16 +2392,16 @@ EndFunc   ;==>_LOBase_ReportDocIsModified
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bDesign not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = Report name called in $sName not found in Folder.
-;                  @Error 1 @Extended 6 Return 0 = Name called in $sName not a Report.
+;                  @Error 1 @Extended 1 = $oConnection not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = $bDesign not a Boolean.
+;                  @Error 1 @Extended 4 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 5 = Report name called in $sName not found in Folder.
+;                  @Error 1 @Extended 6 = Name called in $sName not a Report.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to open Report Document.
+;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
+;                  @Error 3 @Extended 2 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 3 = Failed to open Report Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning opened Report Document's Object.
 ; Author ........: donnyh13
@@ -2455,16 +2455,16 @@ EndFunc   ;==>_LOBase_ReportDocOpen
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iHeight not an Integer, or less than 1753.
-;                  @Error 1 @Extended 7 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 8 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $bEnabled not a Boolean.
+;                  @Error 1 @Extended 4 = $sName not a String.
+;                  @Error 1 @Extended 5 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 6 = $iHeight not an Integer, or less than 1753.
+;                  @Error 1 @Extended 7 = $sCondPrint not a String.
+;                  @Error 1 @Extended 8 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bEnabled
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $bVisible
@@ -2591,16 +2591,16 @@ EndFunc   ;==>_LOBase_ReportDocPageFooter
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iHeight not an Integer, or less than 1753.
-;                  @Error 1 @Extended 7 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 8 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $bEnabled not a Boolean.
+;                  @Error 1 @Extended 4 = $sName not a String.
+;                  @Error 1 @Extended 5 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 6 = $iHeight not an Integer, or less than 1753.
+;                  @Error 1 @Extended 7 = $sCondPrint not a String.
+;                  @Error 1 @Extended 8 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bEnabled
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $bVisible
@@ -2721,13 +2721,13 @@ EndFunc   ;==>_LOBase_ReportDocPageHeader
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Document called in $oReportDoc is read only.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Document called in $oReportDoc is read only.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Report Document's properties.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Report in Parent Document.
-;                  @Error 3 @Extended 4 Return 0 = Document called in $oReportDoc not a Report Document.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Report Document's properties.
+;                  @Error 3 @Extended 3 = Failed to identify Report in Parent Document.
+;                  @Error 3 @Extended 4 = Document called in $oReportDoc not a Report Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Report was successfully saved.
 ; Author ........: donnyh13
@@ -2777,11 +2777,11 @@ EndFunc   ;==>_LOBase_ReportDocSave
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oReportDoc not a Report Document.
-;                  @Error 1 @Extended 3 Return 0 = $iSection not an Integer, less than 0 or greater than 4. See Constants, $LOB_REP_SECTION_TYPE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
+;                  @Error 1 @Extended 3 = $iSection not an Integer, less than 0 or greater than 4. See Constants, $LOB_REP_SECTION_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Section Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Section Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Section Object.
 ; Author ........: donnyh13
@@ -2832,13 +2832,13 @@ EndFunc   ;==>_LOBase_ReportDocSectionGetObj
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oReportDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
+;                  @Error 1 @Extended 2 = $bVisible not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Report Document called in $oReportDoc was opened "Hidden", document must be re-opened.
-;                  @Error 3 @Extended 2 Return 0 = Failed to query whether Document is visible.
+;                  @Error 3 @Extended 1 = Report Document called in $oReportDoc was opened "Hidden", document must be re-opened.
+;                  @Error 3 @Extended 2 = Failed to query whether Document is visible.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
@@ -2886,17 +2886,17 @@ EndFunc   ;==>_LOBase_ReportDocVisible
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Report and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Report or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Report and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Report by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Report with the same name is found in the Document (In sub-folders).
 ; Author ........: donnyh13
@@ -2998,19 +2998,19 @@ EndFunc   ;==>_LOBase_ReportExists
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sInputFolder not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sOutputFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Requested Folder not found.
-;                  @Error 1 @Extended 5 Return 0 = Name called in $sInputFolder not a Folder.
-;                  @Error 1 @Extended 6 Return 0 = Folder already exists with called name in Destination.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sInputFolder not a String.
+;                  @Error 1 @Extended 3 = $sOutputFolder not a String.
+;                  @Error 1 @Extended 4 = Requested Folder not found.
+;                  @Error 1 @Extended 5 = Name called in $sInputFolder not a Folder.
+;                  @Error 1 @Extended 6 = Folder already exists with called name in Destination.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.sdb.Reports" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.sdb.Reports" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Source Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Destination Folder name.
-;                  @Error 3 @Extended 4 Return 0 = Failed to insert copied Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Source Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Destination Folder name.
+;                  @Error 3 @Extended 4 = Failed to insert copied Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Copied Folder successfully inserted.
 ; Author ........: donnyh13
@@ -3069,16 +3069,16 @@ EndFunc   ;==>_LOBase_ReportFolderCopy
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bCreateMulti not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = Name called in $sFolder already exists in Folder.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFolder not a String.
+;                  @Error 1 @Extended 3 = $bCreateMulti not a Boolean.
+;                  @Error 1 @Extended 4 = Name called in $sFolder already exists in Folder.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Folder Object.
+;                  @Error 2 @Extended 1 = Failed to create Folder Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to insert new Folder into Base Document.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to insert new Folder into Base Document.
+;                  @Error 3 @Extended 3 = Failed to retrieve Destination Folder Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully created the Folder(s).
 ; Author ........: donnyh13
@@ -3145,13 +3145,13 @@ EndFunc   ;==>_LOBase_ReportFolderCreate
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = Name called in $sName not found in Folder.
-;                  @Error 1 @Extended 4 Return 0 = Name called in $sName not a Folder.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = Name called in $sName not found in Folder.
+;                  @Error 1 @Extended 4 = Name called in $sName not a Folder.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to delete Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to delete Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Folder was successfully deleted.
 ; Author ........: donnyh13
@@ -3193,17 +3193,17 @@ EndFunc   ;==>_LOBase_ReportFolderDelete
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error 1 @Extended 3 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Report and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Report or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Report and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Folder by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Folder with the same name is found in the Document (In sub-folders).
 ; Author ........: donnyh13
@@ -3305,14 +3305,14 @@ EndFunc   ;==>_LOBase_ReportFolderExists
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sNewName not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder name called in $sFolder not found in Folder or is not a Folder.
-;                  @Error 1 @Extended 5 Return 0 = Name called in $sNewName already exists in Folder.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFolder not a String.
+;                  @Error 1 @Extended 3 = $sNewName not a String.
+;                  @Error 1 @Extended 4 = Folder name called in $sFolder not found in Folder or is not a Folder.
+;                  @Error 1 @Extended 5 = Name called in $sNewName already exists in Folder.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to rename folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to rename folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Folder
 ; Author ........: donnyh13
@@ -3354,17 +3354,17 @@ EndFunc   ;==>_LOBase_ReportFolderRename
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 3 = $sFolder not a String.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Report and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Report or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Report and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Report Folders contained in the Document as an Integer.
 ; Author ........: donnyh13
@@ -3458,17 +3458,17 @@ EndFunc   ;==>_LOBase_ReportFoldersGetCount
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 3 = $sFolder not a String.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Report and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Report or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Report and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Folder names contained in this Document. @Extended is set to number of results.
 ; Author ........: donnyh13
@@ -3579,19 +3579,19 @@ EndFunc   ;==>_LOBase_ReportFoldersGetNames
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oGroup not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oGroup not a Group Object.
-;                  @Error 1 @Extended 3 Return 0 = $bFooterOn not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bKeepTogether not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bRepeatSec not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 9 Return 0 = $iHeight not an Integer, or less than 1753.
-;                  @Error 1 @Extended 10 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 11 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oGroup not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oGroup not a Group Object.
+;                  @Error 1 @Extended 3 = $bFooterOn not a Boolean.
+;                  @Error 1 @Extended 4 = $sName not a String.
+;                  @Error 1 @Extended 5 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 6 = $bKeepTogether not a Boolean.
+;                  @Error 1 @Extended 7 = $bRepeatSec not a Boolean.
+;                  @Error 1 @Extended 8 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 9 = $iHeight not an Integer, or less than 1753.
+;                  @Error 1 @Extended 10 = $sCondPrint not a String.
+;                  @Error 1 @Extended 11 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bFooterOn
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $iForceNewPage
@@ -3761,19 +3761,19 @@ EndFunc   ;==>_LOBase_ReportGroupFooter
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oGroup not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oGroup not a Group Object.
-;                  @Error 1 @Extended 3 Return 0 = $bHeaderOn not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bKeepTogether not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bRepeatSec not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 9 Return 0 = $iHeight not an Integer, or less than 1753.
-;                  @Error 1 @Extended 10 Return 0 = $sCondPrint not a String.
-;                  @Error 1 @Extended 11 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oGroup not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oGroup not a Group Object.
+;                  @Error 1 @Extended 3 = $bHeaderOn not a Boolean.
+;                  @Error 1 @Extended 4 = $sName not a String.
+;                  @Error 1 @Extended 5 = $iForceNewPage not an Integer, less than 0 or greater than 3. See Constants, $LOB_REP_FORCE_PAGE_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 6 = $bKeepTogether not a Boolean.
+;                  @Error 1 @Extended 7 = $bRepeatSec not a Boolean.
+;                  @Error 1 @Extended 8 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 9 = $iHeight not an Integer, or less than 1753.
+;                  @Error 1 @Extended 10 = $sCondPrint not a String.
+;                  @Error 1 @Extended 11 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bHeaderOn
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $iForceNewPage
@@ -3935,15 +3935,15 @@ EndFunc   ;==>_LOBase_ReportGroupHeader
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oGroup not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oGroup not a Group Object.
-;                  @Error 1 @Extended 3 Return 0 = $iPos not an Integer, less than 0 or greater than number of Groups.
+;                  @Error 1 @Extended 1 = $oGroup not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oGroup not a Group Object.
+;                  @Error 1 @Extended 3 = $iPos not an Integer, less than 0 or greater than number of Groups.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Group's Parent Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Groups.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Group's current Position.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Group's new Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to delete old Group.
+;                  @Error 3 @Extended 1 = Failed to retrieve Group's Parent Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve count of Groups.
+;                  @Error 3 @Extended 3 = Failed to identify Group's current Position.
+;                  @Error 3 @Extended 4 = Failed to retrieve Group's new Object.
+;                  @Error 3 @Extended 5 = Failed to delete old Group.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Group was successfully moved.
 ;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Position as an Integer.
@@ -4014,15 +4014,15 @@ EndFunc   ;==>_LOBase_ReportGroupPosition
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oGroup not an Object.
-;                  @Error 1 @Extended 2 Return 0 = Object called in $oGroup not a Group Object.
-;                  @Error 1 @Extended 3 Return 0 = $sField not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bSortAsc not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iGroupOn not an Integer, less than 0 or greater than 9. See Constants, $LOB_REP_GROUP_ON_* as defined in LibreOfficeBase_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iGroupInt not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iKeepTogether not an Integer, less than 0 or greater than 2. See Constants, $LOB_REP_KEEP_TOG_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 1 = $oGroup not an Object.
+;                  @Error 1 @Extended 2 = Object called in $oGroup not a Group Object.
+;                  @Error 1 @Extended 3 = $sField not a String.
+;                  @Error 1 @Extended 4 = $bSortAsc not a Boolean.
+;                  @Error 1 @Extended 5 = $iGroupOn not an Integer, less than 0 or greater than 9. See Constants, $LOB_REP_GROUP_ON_* as defined in LibreOfficeBase_Constants.au3.
+;                  @Error 1 @Extended 6 = $iGroupInt not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 7 = $iKeepTogether not an Integer, less than 0 or greater than 2. See Constants, $LOB_REP_KEEP_TOG_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sField
 ;                  |                               2 = Error setting $bSortAsc
 ;                  |                               4 = Error setting $iGroupOn
@@ -4105,14 +4105,14 @@ EndFunc   ;==>_LOBase_ReportGroupSort
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sReport not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sNewName not a String.
-;                  @Error 1 @Extended 4 Return 0 = Report name called in $sReport not found in Folder or is not a Report.
-;                  @Error 1 @Extended 5 Return 0 = Name called in $sNewName already exists in Folder.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sReport not a String.
+;                  @Error 1 @Extended 3 = $sNewName not a String.
+;                  @Error 1 @Extended 4 = Report name called in $sReport not found in Folder or is not a Report.
+;                  @Error 1 @Extended 5 = Name called in $sNewName already exists in Folder.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to rename Report.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to rename Report.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Report.
 ; Author ........: donnyh13
@@ -4154,17 +4154,17 @@ EndFunc   ;==>_LOBase_ReportRename
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 3 = $sFolder not a String.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Report and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Report or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Report and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Reports contained in the Document, as an Integer.
 ; Author ........: donnyh13
@@ -4262,17 +4262,17 @@ EndFunc   ;==>_LOBase_ReportsGetCount
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sFolder not a String.
-;                  @Error 1 @Extended 4 Return 0 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 3 = $sFolder not a String.
+;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Report Documents Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Array of Report and Folder names.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Report or Folder Object.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve Object in Sub-Folder.
+;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Array of Report and Folder names.
+;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
+;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
+;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Report names contained in this Document. @Extended is set to number of results.
 ; Author ........: donnyh13
