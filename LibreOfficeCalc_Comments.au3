@@ -1601,7 +1601,7 @@ EndFunc   ;==>_LOCalc_CommentLineArrowStyles
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] (0-5004) Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The Line transparency percentage. 100% = fully transparent.
-;                  $iCornerStyle        - [optional] (0,2-4) Default is Null. The Line Corner Style. See Constants $LOC_COMMENT_LINE_JOINT_* as defined in LibreOfficeCalc_Constants.au3
+;                  $iCornerStyle        - [optional] (0, 2-4) Default is Null. The Line Corner Style. See Constants $LOC_COMMENT_LINE_JOINT_* as defined in LibreOfficeCalc_Constants.au3
 ;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOC_COMMENT_LINE_CAP_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

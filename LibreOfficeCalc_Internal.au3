@@ -1286,7 +1286,7 @@ EndFunc   ;==>__LOCalc_CellTextAlign
 ; Syntax ........: __LOCalc_CellTextOrient(ByRef $oObj[, $iRotate = Null[, $iReference = Null[, $bVerticalStack = Null[, $bAsianLayout = Null]]]])
 ; Parameters ....: $oObj                - A Cell, Cell Range or Cell Style Object returned from an applicable function.
 ;                  $iRotate             - [optional] (0-359) Default is Null. The rotation angle of the text.
-;                  $iReference          - [optional] (0,1,3) Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iReference          - [optional] (0, 1, 3) Default is Null. The cell edge from which to write the rotated text. See Constants $LOC_CELL_ROTATE_REF_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bVerticalStack      - [optional] Default is Null. If True, Aligns text vertically. Only available after you enable support for Asian languages in LibreOffice settings.
 ;                  $bAsianLayout        - [optional] Default is Null. If True, Aligns Asian characters one below the other. Only available after you enable support for Asian languages in LibreOffice settings, and enable vertical text.
 ; Return values .: Success: 1 or Array.
@@ -1379,7 +1379,7 @@ EndFunc   ;==>__LOCalc_CellTextOrient
 ;                  $bAutoWrapText       - [optional] Default is Null. If True, Wraps text onto another line at the cell border.
 ;                  $bHyphen             - [optional] Default is Null. If True, Enables word hyphenation for text wrapping to the next line.
 ;                  $bShrinkToFit        - [optional] Default is Null. If True, Reduces the apparent size of the font so that the contents of the cell fit into the current cell width.
-;                  $iTextDirection      - [optional] (0,1,4) Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
+;                  $iTextDirection      - [optional] (0, 1, 4) Default is Null. The Text Writing Direction. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--

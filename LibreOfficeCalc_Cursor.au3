@@ -435,7 +435,7 @@ EndFunc   ;==>_LOCalc_TextCursorEffect
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
 ;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOC_CHAR_POSTURE_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional](0,50-200) Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOC_CHAR_WEIGHT_* as defined in LibreOfficeCalc_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
