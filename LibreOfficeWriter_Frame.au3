@@ -94,13 +94,13 @@
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Background color.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve old Transparency value.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Background color.
+;                  @Error 3 @Extended 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -149,9 +149,9 @@ EndFunc   ;==>_LOWriter_FrameAreaColor
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Fill Style.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
@@ -196,26 +196,26 @@ EndFunc   ;==>_LOWriter_FrameAreaFillStyle
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sGradientName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iIncrement not an Integer, less than 3 but not 0, or greater than 256.
-;                  @Error 1 @Extended 6 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 9 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 Return 0 = $iFromColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 11 Return 0 = $iToColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 Return 0 = $iFromIntense not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 13 Return 0 = $iToIntense not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrame not an Object.
+;                  @Error 1 @Extended 3 = $sGradientName not a String.
+;                  @Error 1 @Extended 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iIncrement not an Integer, less than 3 but not 0, or greater than 256.
+;                  @Error 1 @Extended 6 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 7 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 9 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 10 = $iFromColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 11 = $iToColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 12 = $iFromIntense not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 13 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Gradient Name.
+;                  @Error 3 @Extended 1 = Error retrieving "FillGradient" Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Error creating Gradient Name.
+;                  @Error 3 @Extended 4 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -414,21 +414,21 @@ EndFunc   ;==>_LOWriter_FrameAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops contains less than two rows.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
 ;                  @Error 1 @Extended 4 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
 ;                  @Error 1 @Extended 5 Return ? = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
+;                  @Error 3 @Extended 1 = Failed to retrieve FillGradient Struct.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -523,12 +523,12 @@ EndFunc   ;==>_LOWriter_FrameAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
@@ -581,22 +581,22 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparency
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iXCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 5 Return 0 = $iYCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 Return 0 = $iAngle Not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 7 Return 0 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 Return 0 = $iEnd Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrame not an Object.
+;                  @Error 1 @Extended 3 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iXCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 5 = $iYCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 6 = $iAngle Not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 7 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 = $iStart Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 9 = $iEnd Not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Transparency Gradient Name.
+;                  @Error 3 @Extended 1 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Error creating Transparency Gradient Name.
+;                  @Error 3 @Extended 4 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -761,21 +761,21 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops contains less than two rows.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
 ;                  @Error 1 @Extended 4 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
 ;                  @Error 1 @Extended 5 Return ? = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
+;                  @Error 3 @Extended 1 = Failed to retrieve FillTransparenceGradient Struct.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -873,27 +873,27 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradientMulti
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -936,14 +936,14 @@ EndFunc   ;==>_LOWriter_FrameBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iAll not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $Left not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iAll not an Integer.
+;                  @Error 1 @Extended 3 = $iTop not an Integer.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer.
+;                  @Error 1 @Extended 5 = $Left not an Integer.
+;                  @Error 1 @Extended 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
@@ -1026,27 +1026,27 @@ EndFunc   ;==>_LOWriter_FrameBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1088,23 +1088,23 @@ EndFunc   ;==>_LOWriter_FrameBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iTop not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer, or less than 0.
+;                  @Error 1 @Extended 5 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1148,17 +1148,17 @@ EndFunc   ;==>_LOWriter_FrameBorderWidth
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bSeparatorOn not a Boolean value.
-;                  @Error 1 @Extended 3 Return 0 = $iStyle not an Integer, less than 0 or greater than 3. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, less than 5 or greater than 180.
-;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 Return 0 = $iHeight not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $bSeparatorOn not a Boolean value.
+;                  @Error 1 @Extended 3 = $iStyle not an Integer, less than 0 or greater than 3. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iWidth not an Integer, less than 5 or greater than 180.
+;                  @Error 1 @Extended 5 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 6 = $iHeight not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 7 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
+;                  @Error 3 @Extended 1 = Error retrieving Text Columns Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bSeparatorOn
 ;                  |                               2 = Error setting $iStyle
 ;                  |                               4 = Error setting $iWidth
@@ -1252,13 +1252,13 @@ EndFunc   ;==>_LOWriter_FrameColumnSeparator
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumns not an Integer, or less than 1.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iColumns not an Integer, or less than 1.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Text Columns.
+;                  @Error 3 @Extended 1 = Error retrieving Text Columns Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve count of Text Columns.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColumns
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -1313,20 +1313,20 @@ EndFunc   ;==>_LOWriter_FrameColumnSettings
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iColumn greater than number of columns in the document or less than 1.
-;                  @Error 1 @Extended 4 Return 0 = $bAutoWidth not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iGlobalSpacing not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iSpacing not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iWidth not an Integer.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iColumn not an Integer.
+;                  @Error 1 @Extended 3 = $iColumn greater than number of columns in the document or less than 1.
+;                  @Error 1 @Extended 4 = $bAutoWidth not a Boolean.
+;                  @Error 1 @Extended 5 = $iGlobalSpacing not an Integer.
+;                  @Error 1 @Extended 6 = $iSpacing not an Integer.
+;                  @Error 1 @Extended 7 = $iWidth not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Frame Style Column Object Array.
-;                  @Error 3 @Extended 3 Return 0 = No columns present for requested Frame.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Array of Columns.
+;                  @Error 3 @Extended 1 = Error retrieving Text Columns Object.
+;                  @Error 3 @Extended 2 = Error retrieving Frame Style Column Object Array.
+;                  @Error 3 @Extended 3 = No columns present for requested Frame.
+;                  @Error 3 @Extended 4 = Failed to retrieve Array of Columns.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoWidth
 ;                  |                               2 = Error setting $iGlobalSpacing
 ;                  |                               4 = Error setting $iSpacing
@@ -1476,16 +1476,16 @@ EndFunc   ;==>_LOWriter_FrameColumnSize
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oCursor is a Table Cursor, cannot insert a Frame using a Table Cursor.
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $sFrameName not a String.
-;                  @Error 1 @Extended 6 Return 0 = Document already contains a Frame with same name as $sFrameName.
-;                  @Error 1 @Extended 7 Return 0 = $iWidth not an Integer, or less than 51 Hundredths of a Millimeter (HMM).
-;                  @Error 1 @Extended 8 Return 0 = $iHeight not an Integer, or less than 51 Hundredths of a Millimeter (HMM).
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oCursor not an Object.
+;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, cannot insert a Frame using a Table Cursor.
+;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 5 = $sFrameName not a String.
+;                  @Error 1 @Extended 6 = Document already contains a Frame with same name as $sFrameName.
+;                  @Error 1 @Extended 7 = $iWidth not an Integer, or less than 51 Hundredths of a Millimeter (HMM).
+;                  @Error 1 @Extended 8 = $iHeight not an Integer, or less than 51 Hundredths of a Millimeter (HMM).
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextFrame" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextFrame" Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Frame was created successfully and inserted at cursor position. Returning Frame Object.
 ; Author ........: donnyh13
@@ -1544,9 +1544,9 @@ EndFunc   ;==>_LOWriter_FrameCreate
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a TextCursor.
+;                  @Error 2 @Extended 1 = Failed to create a TextCursor.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. A Text Cursor Object located in the Frame.
 ; Author ........: donnyh13
@@ -1579,10 +1579,10 @@ EndFunc   ;==>_LOWriter_FrameCreateTextCursor
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrame not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Frame was attempted to be deleted, but the document still contains a frame named the same.
+;                  @Error 3 @Extended 1 = Frame was attempted to be deleted, but the document still contains a frame named the same.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Frame was successfully deleted.
 ; Author ........: donnyh13
@@ -1619,11 +1619,11 @@ EndFunc   ;==>_LOWriter_FrameDelete
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameName not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFrameName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Frames Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Shapes Object.
+;                  @Error 3 @Extended 1 = Error retrieving Text Frames Object.
+;                  @Error 3 @Extended 2 = Error retrieving Shapes Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Search was successful, If Frame was found matching $sFrameName True is Returned, else False
 ;                  @Error 0 @Extended 1 Return Boolean = Success. Search was successful, Frame found matching $sFrameName listed as a shape.
@@ -1675,9 +1675,9 @@ EndFunc   ;==>_LOWriter_FrameExists
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to retrieve Frame anchor Object.
+;                  @Error 2 @Extended 1 = Failed to retrieve Frame anchor Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully returned the Frame Anchor.
 ; Author ........: donnyh13
@@ -1710,11 +1710,11 @@ EndFunc   ;==>_LOWriter_FrameGetAnchor
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oCursor not located in a Frame.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oCursor not an Object.
+;                  @Error 1 @Extended 3 = $oCursor not located in a Frame.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Frame Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Frame Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning an Object for the requested Frame.
 ; Author ........: donnyh13
@@ -1749,12 +1749,12 @@ EndFunc   ;==>_LOWriter_FrameGetObjByCursor
 ; Return values .: Success: 1 or Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameName not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFrameName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving TextFrame Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Shapes Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Frame Object.
+;                  @Error 3 @Extended 1 = Error retrieving TextFrame Object.
+;                  @Error 3 @Extended 2 = Error retrieving Shapes Object.
+;                  @Error 3 @Extended 3 = Failed to retrieve Frame Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. No matches found.
 ;                  @Error 0 @Extended 1 Return Object = Success. Successfully found requested Frame by name, returning Frame Object.
@@ -1819,14 +1819,14 @@ EndFunc   ;==>_LOWriter_FrameGetObjByName
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sURL not a String
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sFrameTarget not a String.
-;                  @Error 1 @Extended 5 Return 0 = $sFrameTarget not equal to one of the Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bServerSideMap not a boolean.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $sURL not a String
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = $sFrameTarget not a String.
+;                  @Error 1 @Extended 5 = $sFrameTarget not equal to one of the Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $bServerSideMap not a boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sURL
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $sFrameTarget
@@ -1910,16 +1910,16 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bProtectContent not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bProtectPos not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bProtectSize not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bEditInRead not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bPrint not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $bProtectContent not a Boolean.
+;                  @Error 1 @Extended 3 = $bProtectPos not a Boolean.
+;                  @Error 1 @Extended 4 = $bProtectSize not a Boolean.
+;                  @Error 1 @Extended 5 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $bEditInRead not a Boolean.
+;                  @Error 1 @Extended 7 = $bPrint not a Boolean.
+;                  @Error 1 @Extended 8 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bProtectContent
 ;                  |                               2 = Error setting $bProtectPos
 ;                  |                               4 = Error setting $bProtectSize
@@ -2019,17 +2019,17 @@ EndFunc   ;==>_LOWriter_FrameOptions
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = Document already contains Frame with same name as $sName.
-;                  @Error 1 @Extended 5 Return 0 = $sDesc not a string.
-;                  @Error 1 @Extended 6 Return 0 = $sPrevLink not a String.
-;                  @Error 1 @Extended 7 Return 0 = Document does not contain Frame matching $sPrevLink.
-;                  @Error 1 @Extended 8 Return 0 = $sNextLink not a String.
-;                  @Error 1 @Extended 9 Return 0 = Document does not contain Frame matching $sNextLink
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrame not an Object.
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = Document already contains Frame with same name as $sName.
+;                  @Error 1 @Extended 5 = $sDesc not a string.
+;                  @Error 1 @Extended 6 = $sPrevLink not a String.
+;                  @Error 1 @Extended 7 = Document does not contain Frame matching $sPrevLink.
+;                  @Error 1 @Extended 8 = $sNextLink not a String.
+;                  @Error 1 @Extended 9 = Document does not contain Frame matching $sNextLink
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sDesc
 ;                  |                               4 = Error setting $sPrevLink
@@ -2104,11 +2104,11 @@ EndFunc   ;==>_LOWriter_FrameOptionsName
 ; Return values .: Success: Array of Strings.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bSearchShapes not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bSearchShapes not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failure retrieving Frame objects.
-;                  @Error 3 @Extended 2 Return 0 = Failure retrieving Shape objects.
+;                  @Error 3 @Extended 1 = Failure retrieving Frame objects.
+;                  @Error 3 @Extended 2 = Failure retrieving Shape objects.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Returning Array of Frame names. @Extended set to number of Frame Names returned.
 ; Author ........: donnyh13
@@ -2182,15 +2182,15 @@ EndFunc   ;==>_LOWriter_FramesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3..
-;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error 1 @Extended 3 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ShadowFormat Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving ShadowFormat Object for Error checking.
+;                  @Error 3 @Extended 1 = Error retrieving ShadowFormat Object.
+;                  @Error 3 @Extended 2 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -2264,14 +2264,14 @@ EndFunc   ;==>_LOWriter_FrameShadow
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Background color.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve old Transparency value.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Background color.
+;                  @Error 3 @Extended 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -2321,9 +2321,9 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaColor
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Fill Style.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
@@ -2368,27 +2368,27 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaFillStyle
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $sGradientName Not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3..
-;                  @Error 1 @Extended 6 Return 0 = $iIncrement Not an Integer, less than 3 but not 0, or greater than 256.
-;                  @Error 1 @Extended 7 Return 0 = $iXCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iYCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 Return 0 = $iAngle Not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 10 Return 0 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 11 Return 0 = $iFromColor Not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 Return 0 = $iToColor Not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 13 Return 0 = $iFromIntense Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 14 Return 0 = $iToIntense Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 4 = $sGradientName Not a String.
+;                  @Error 1 @Extended 5 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error 1 @Extended 6 = $iIncrement Not an Integer, less than 3 but not 0, or greater than 256.
+;                  @Error 1 @Extended 7 = $iXCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 = $iYCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 9 = $iAngle Not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 10 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 11 = $iFromColor Not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 12 = $iToColor Not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 13 = $iFromIntense Not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 14 = $iToIntense Not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Gradient Name.
+;                  @Error 3 @Extended 1 = Error retrieving "FillGradient" Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Error creating Gradient Name.
+;                  @Error 3 @Extended 4 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -2588,22 +2588,22 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 Return 0 = $avColorStops contains less than two rows.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
 ;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
 ;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
+;                  @Error 3 @Extended 1 = Failed to retrieve FillGradient Struct.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -2699,13 +2699,13 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
@@ -2759,23 +2759,23 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparency
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 8 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 Return 0 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 Return 0 = $iEnd not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 4 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 6 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 7 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 8 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 9 = $iStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 10 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Transparency Gradient Name.
+;                  @Error 3 @Extended 1 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Error creating Transparency Gradient Name.
+;                  @Error 3 @Extended 4 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -2941,22 +2941,22 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 Return 0 = $avColorStops contains less than two rows.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
 ;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
 ;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
+;                  @Error 3 @Extended 1 = Failed to retrieve FillTransparenceGradient Struct.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -3055,28 +3055,28 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradientMulti
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -3120,15 +3120,15 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iAll not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iBottom not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $Left not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iRight not an Integer.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iAll not an Integer.
+;                  @Error 1 @Extended 4 = $iTop not an Integer.
+;                  @Error 1 @Extended 5 = $iBottom not an Integer.
+;                  @Error 1 @Extended 6 = $Left not an Integer.
+;                  @Error 1 @Extended 7 = $iRight not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
@@ -3212,28 +3212,28 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -3276,24 +3276,24 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, or less than 0.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, or less than 0.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -3338,18 +3338,18 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderWidth
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $bSeparatorOn not a Boolean value.
-;                  @Error 1 @Extended 4 Return 0 = $iStyle not an Integer, less than 0 or greater than 3. See constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iWidth not an Integer, less than 5 or greater than 180.
-;                  @Error 1 @Extended 6 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 7 Return 0 = $iHeight not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $bSeparatorOn not a Boolean value.
+;                  @Error 1 @Extended 4 = $iStyle not an Integer, less than 0 or greater than 3. See constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iWidth not an Integer, less than 5 or greater than 180.
+;                  @Error 1 @Extended 6 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 7 = $iHeight not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
+;                  @Error 3 @Extended 1 = Error retrieving Text Columns Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bSeparatorOn
 ;                  |                               2 = Error setting $iStyle
 ;                  |                               4 = Error setting $iWidth
@@ -3444,14 +3444,14 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSeparator
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iColumns not an Integer, or less than 1.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iColumns not an Integer, or less than 1.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Text Columns.
+;                  @Error 3 @Extended 1 = Error retrieving Text Columns Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve count of Text Columns.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColumns
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -3507,21 +3507,21 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSettings
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iColumn not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iColumn greater than number of columns in the document or less than 1.
-;                  @Error 1 @Extended 5 Return 0 = $bAutoWidth not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iGlobalSpacing not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iSpacing not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = $iWidth not an Integer.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iColumn not an Integer.
+;                  @Error 1 @Extended 4 = $iColumn greater than number of columns in the document or less than 1.
+;                  @Error 1 @Extended 5 = $bAutoWidth not a Boolean.
+;                  @Error 1 @Extended 6 = $iGlobalSpacing not an Integer.
+;                  @Error 1 @Extended 7 = $iSpacing not an Integer.
+;                  @Error 1 @Extended 8 = $iWidth not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Frame Style Column Object Array.
-;                  @Error 3 @Extended 3 Return 0 = No columns present for requested Frame Style.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve array of Columns.
+;                  @Error 3 @Extended 1 = Error retrieving Text Columns Object.
+;                  @Error 3 @Extended 2 = Error retrieving Frame Style Column Object Array.
+;                  @Error 3 @Extended 3 = No columns present for requested Frame Style.
+;                  @Error 3 @Extended 4 = Failed to retrieve array of Columns.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoWidth
 ;                  |                               2 = Error setting $iGlobalSpacing
 ;                  |                               4 = Error setting $iSpacing
@@ -3668,15 +3668,15 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSize
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sFrameStyle name already exists in document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFrameStyle not a String.
+;                  @Error 1 @Extended 3 = $sFrameStyle name already exists in document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating "com.sun.star.style.FrameStyle" Object.
+;                  @Error 2 @Extended 1 = Error Creating "com.sun.star.style.FrameStyle" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error Retrieving "FrameStyles" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error creating new Frame Style by Name.
-;                  @Error 3 @Extended 3 Return 0 = Error Retrieving New Frame Style Object.
+;                  @Error 3 @Extended 1 = Error Retrieving "FrameStyles" Object.
+;                  @Error 3 @Extended 2 = Error creating new Frame Style by Name.
+;                  @Error 3 @Extended 3 = Error Retrieving New Frame Style Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. New Frame Style successfully created. Returning its Object.
 ; Author ........: donnyh13
@@ -3722,15 +3722,15 @@ EndFunc   ;==>_LOWriter_FrameStyleCreate
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameObj not an Object.
-;                  @Error 1 @Extended 3 Return 0 = Object called in $oFrameObj not a Frame Object.
-;                  @Error 1 @Extended 4 Return 0 = $sFrameStyle not a String.
-;                  @Error 1 @Extended 5 Return 0 = Frame Style called in $sFrameStyle doesn't exist in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrameObj not an Object.
+;                  @Error 1 @Extended 3 = Object called in $oFrameObj not a Frame Object.
+;                  @Error 1 @Extended 4 = $sFrameStyle not a String.
+;                  @Error 1 @Extended 5 = Frame Style called in $sFrameStyle doesn't exist in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Frame Style.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Frame Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFrameStyle
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Frame Style successfully set.
@@ -3780,18 +3780,18 @@ EndFunc   ;==>_LOWriter_FrameStyleCurrent
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $bForceDelete not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $sReplacementStyle not a String.
-;                  @Error 1 @Extended 6 Return 0 = Frame Style called in $sReplacementStyle doesn't exist in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 4 = $bForceDelete not a Boolean.
+;                  @Error 1 @Extended 5 = $sReplacementStyle not a String.
+;                  @Error 1 @Extended 6 = Frame Style called in $sReplacementStyle doesn't exist in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FrameStyles" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Frame Style Name.
-;                  @Error 3 @Extended 3 Return 0 = $sFrameStyle is not a User-Created Frame Style and cannot be deleted.
-;                  @Error 3 @Extended 4 Return 0 = $sFrameStyle is in use and $bForceDelete is False.
-;                  @Error 3 @Extended 5 Return 0 = $sFrameStyle still exists after deletion attempt.
+;                  @Error 3 @Extended 1 = Error retrieving "FrameStyles" Object.
+;                  @Error 3 @Extended 2 = Error retrieving Frame Style Name.
+;                  @Error 3 @Extended 3 = $sFrameStyle is not a User-Created Frame Style and cannot be deleted.
+;                  @Error 3 @Extended 4 = $sFrameStyle is in use and $bForceDelete is False.
+;                  @Error 3 @Extended 5 = $sFrameStyle still exists after deletion attempt.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Frame Style called in $sFrameStyle was successfully deleted.
 ; Author ........: donnyh13
@@ -3843,8 +3843,8 @@ EndFunc   ;==>_LOWriter_FrameStyleDelete
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameStyle not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFrameStyle not a String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Document contains a Frame style matching the input name, else False.
 ; Author ........: donnyh13
@@ -3875,11 +3875,11 @@ EndFunc   ;==>_LOWriter_FrameStyleExists
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = Frame Style called in $sFrameStyle not found in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFrameStyle not a String.
+;                  @Error 1 @Extended 3 = Frame Style called in $sFrameStyle not found in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Frame Style Object.
+;                  @Error 3 @Extended 1 = Error retrieving Frame Style Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Frame Style successfully retrieved, returning its Object.
 ; Author ........: donnyh13
@@ -3920,17 +3920,17 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObjByName
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $bProtectContent not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bProtectPos not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bProtectSize not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $bEditInRead not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $bPrint not a Boolean.
-;                  @Error 1 @Extended 9 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $bProtectContent not a Boolean.
+;                  @Error 1 @Extended 4 = $bProtectPos not a Boolean.
+;                  @Error 1 @Extended 5 = $bProtectSize not a Boolean.
+;                  @Error 1 @Extended 6 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 = $bEditInRead not a Boolean.
+;                  @Error 1 @Extended 8 = $bPrint not a Boolean.
+;                  @Error 1 @Extended 9 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bProtectContent
 ;                  |                               2 = Error setting $bProtectPos
 ;                  |                               4 = Error setting $bProtectSize
@@ -4031,24 +4031,24 @@ EndFunc   ;==>_LOWriter_FrameStyleOptions
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $sNewFrameStyleName not a String.
-;                  @Error 1 @Extended 5 Return 0 = A Frame style already exists in document by the name called in $sNewFrameStyleName.
-;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Frame Styles.
-;                  @Error 1 @Extended 7 Return 0 = $sParentStyle not a String.
-;                  @Error 1 @Extended 8 Return 0 = Frame Style called in $sParentStyle doesn't exist in this Document.
-;                  @Error 1 @Extended 9 Return 0 = $bAutoUpdate not a Boolean.
-;                  @Error 1 @Extended 10 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 4 = $sNewFrameStyleName not a String.
+;                  @Error 1 @Extended 5 = A Frame style already exists in document by the name called in $sNewFrameStyleName.
+;                  @Error 1 @Extended 6 = Cannot rename built-in Frame Styles.
+;                  @Error 1 @Extended 7 = $sParentStyle not a String.
+;                  @Error 1 @Extended 8 = Frame Style called in $sParentStyle doesn't exist in this Document.
+;                  @Error 1 @Extended 9 = $bAutoUpdate not a Boolean.
+;                  @Error 1 @Extended 10 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewFrameStyleName
 ;                  |                               2 = Error setting $sParentStyle
 ;                  |                               4 = Error setting $bAutoUpdate
 ;                  |                               8 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
@@ -4130,12 +4130,12 @@ EndFunc   ;==>_LOWriter_FrameStyleOrganizer
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bAppliedOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bDisplayName not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bUserOnly not a Boolean.
+;                  @Error 1 @Extended 3 = $bAppliedOnly not a Boolean.
+;                  @Error 1 @Extended 4 = $bDisplayName not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Frame Style names.
+;                  @Error 3 @Extended 1 = Failed to retrieve Array of Frame Style names.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Frame Styles matching the called parameters. @Extended contains the count of results returned.
 ; Author ........: donnyh13
@@ -4175,16 +4175,16 @@ EndFunc   ;==>_LOWriter_FrameStylesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ShadowFormat Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving ShadowFormat Object for Error checking.
+;                  @Error 3 @Extended 1 = Error retrieving ShadowFormat Object.
+;                  @Error 3 @Extended 2 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -4267,19 +4267,19 @@ EndFunc   ;==>_LOWriter_FrameStyleShadow
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iHorPos not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3..
-;                  @Error 1 @Extended 6 Return 0 = $bMirror not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 8 Return 0 = $iVertPos not an Integer.
-;                  @Error 1 @Extended 9 Return 0 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3..
-;                  @Error 1 @Extended 10 Return 0 = $bKeepInside not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_AT_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iHorPos not an Integer.
+;                  @Error 1 @Extended 5 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error 1 @Extended 6 = $bMirror not a Boolean.
+;                  @Error 1 @Extended 7 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 8 = $iVertPos not an Integer.
+;                  @Error 1 @Extended 9 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error 1 @Extended 10 = $bKeepInside not a Boolean.
+;                  @Error 1 @Extended 11 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_AT_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
 ;                  |                               2 = Error setting $iHorPos
 ;                  |                               4 = Error setting $iHorRelation
@@ -4528,20 +4528,20 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth Not an Integer, or less than 51.
-;                  @Error 1 @Extended 5 Return 0 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 6 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $bAutoWidth not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $iHeight Not an Integer, or less than 51.
-;                  @Error 1 @Extended 9 Return 0 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 10 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 11 Return 0 = $bAutoHeight not a Boolean.
-;                  @Error 1 @Extended 12 Return 0 = $bKeepRatio not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 4 = $iWidth Not an Integer, or less than 51.
+;                  @Error 1 @Extended 5 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
+;                  @Error 1 @Extended 6 = $iWidthRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 = $bAutoWidth not a Boolean.
+;                  @Error 1 @Extended 8 = $iHeight Not an Integer, or less than 51.
+;                  @Error 1 @Extended 9 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
+;                  @Error 1 @Extended 10 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 11 = $bAutoHeight not a Boolean.
+;                  @Error 1 @Extended 12 = $bKeepRatio not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iRelativeWidth
 ;                  |                               4 = Error setting $iWidthRelativeTo
@@ -4552,7 +4552,7 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ;                  |                               128 = Error setting $bAutoHeight
 ;                  |                               256 = Error setting $bKeepRatio
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If the current LibreOffice version is less than 4.3, then both $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
@@ -4685,17 +4685,17 @@ EndFunc   ;==>_LOWriter_FrameStyleTypeSize
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iBottom not an Integer.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer.
+;                  @Error 1 @Extended 5 = $iRight not an Integer.
+;                  @Error 1 @Extended 6 = $iTop not an Integer.
+;                  @Error 1 @Extended 7 = $iBottom not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Property Set Info Object.
+;                  @Error 3 @Extended 1 = Error retrieving Property Set Info Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWrapType
 ;                  |                               2 = Error setting $iLeft
 ;                  |                               4 = Error setting $iRight
@@ -4794,13 +4794,13 @@ EndFunc   ;==>_LOWriter_FrameStyleWrap
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $bFirstPar not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bInBackground not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bAllowOverlap not a Boolean.
+;                  @Error 1 @Extended 1 = $oFrameStyle not an Object.
+;                  @Error 1 @Extended 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error 1 @Extended 3 = $bFirstPar not a Boolean.
+;                  @Error 1 @Extended 4 = $bInBackground not a Boolean.
+;                  @Error 1 @Extended 5 = $bAllowOverlap not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bFirstPar
 ;                  |                               2 = Error setting $bInBackground
 ;                  |                               4 = Error setting $bAllowOverlap
@@ -4874,18 +4874,18 @@ EndFunc   ;==>_LOWriter_FrameStyleWrapOptions
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iHorPos not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $bMirror not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $iVertPos not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 9 Return 0 = $bKeepInside not a Boolean.
-;                  @Error 1 @Extended 10 Return 0 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iHorPos not an Integer.
+;                  @Error 1 @Extended 4 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $bMirror not a Boolean.
+;                  @Error 1 @Extended 6 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 = $iVertPos not an Integer.
+;                  @Error 1 @Extended 8 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 9 = $bKeepInside not a Boolean.
+;                  @Error 1 @Extended 10 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
 ;                  |                               2 = Error setting $iHorPos
 ;                  |                               4 = Error setting $iHorRelation
@@ -5133,19 +5133,19 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iWidth Not an Integer, or less than 51.
-;                  @Error 1 @Extended 4 Return 0 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 5 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bAutoWidth not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iHeight Not an Integer, or less than 51.
-;                  @Error 1 @Extended 8 Return 0 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 9 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 10 Return 0 = $bAutoHeight not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $bKeepRatio not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oFrame not an Object.
+;                  @Error 1 @Extended 3 = $iWidth Not an Integer, or less than 51.
+;                  @Error 1 @Extended 4 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
+;                  @Error 1 @Extended 5 = $iWidthRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $bAutoWidth not a Boolean.
+;                  @Error 1 @Extended 7 = $iHeight Not an Integer, or less than 51.
+;                  @Error 1 @Extended 8 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
+;                  @Error 1 @Extended 9 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 10 = $bAutoHeight not a Boolean.
+;                  @Error 1 @Extended 11 = $bKeepRatio not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iRelativeWidth
 ;                  |                               4 = Error setting $iWidthRelativeTo
@@ -5156,7 +5156,7 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ;                  |                               128 = Error setting $bAutoHeight
 ;                  |                               256 = Error setting $bKeepRatio
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.3.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater or equal to than 4.3, then a 9 element Array is returned, else 7 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
@@ -5287,16 +5287,16 @@ EndFunc   ;==>_LOWriter_FrameTypeSize
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iLeft not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iRight not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iBottom not an Integer.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iLeft not an Integer.
+;                  @Error 1 @Extended 4 = $iRight not an Integer.
+;                  @Error 1 @Extended 5 = $iTop not an Integer.
+;                  @Error 1 @Extended 6 = $iBottom not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Property Set Info Object.
+;                  @Error 3 @Extended 1 = Error retrieving Property Set Info Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWrapType
 ;                  |                               2 = Error setting $iLeft
 ;                  |                               4 = Error setting $iRight
@@ -5395,12 +5395,12 @@ EndFunc   ;==>_LOWriter_FrameWrap
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bFirstPar not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bInBackground not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bAllowOverlap not a Boolean.
+;                  @Error 1 @Extended 1 = $oFrame not an Object.
+;                  @Error 1 @Extended 2 = $bFirstPar not a Boolean.
+;                  @Error 1 @Extended 3 = $bInBackground not a Boolean.
+;                  @Error 1 @Extended 4 = $bAllowOverlap not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bFirstPar
 ;                  |                               2 = Error setting $bInBackground
 ;                  |                               4 = Error setting $bAllowOverlap

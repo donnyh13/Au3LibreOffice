@@ -86,12 +86,12 @@
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Background color.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Background color.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -141,26 +141,26 @@ EndFunc   ;==>_LOWriter_TableBackColor
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 Return 0 = $iVert not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 7 Return 0 = $iHori not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 6 = $iVert not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 7 = $iHori not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Object "TableBorder2".
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 6 Return 0 = Cannot set Right Border Color when Right Border width not set.
-;                  @Error 3 @Extended 7 Return 0 = Cannot set Vertical Border Color when Vertical Border width not set.
-;                  @Error 3 @Extended 8 Return 0 = Cannot set Horizontal Border Color when Horizontal Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Error retrieving Object "TableBorder2".
+;                  @Error 3 @Extended 3 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error 3 @Extended 6 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error 3 @Extended 7 = Cannot set Vertical Border Color when Vertical Border width not set.
+;                  @Error 3 @Extended 8 = Cannot set Horizontal Border Color when Horizontal Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -168,7 +168,7 @@ EndFunc   ;==>_LOWriter_TableBackColor
 ;                  |                               16 = Error setting $iVert
 ;                  |                               32 = Error setting $iHori
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -209,16 +209,16 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $Left not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iTop not an Integer.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer.
+;                  @Error 1 @Extended 4 = $Left not an Integer.
+;                  @Error 1 @Extended 5 = $iRight not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving TableBorderDistances Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving TableBorderDistances Object for Error checking.
+;                  @Error 3 @Extended 1 = Error retrieving TableBorderDistances Object.
+;                  @Error 3 @Extended 2 = Error retrieving TableBorderDistances Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTop border distance
 ;                  |                               2 = Error setting $iBottom border distance
 ;                  |                               4 = Error setting $iLeft border distance
@@ -305,26 +305,26 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iVert not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $iHori not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iVert not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 = $iHori not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Object "TableBorder2".
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 6 Return 0 = Cannot set Right Border Style when Right Border width not set.
-;                  @Error 3 @Extended 7 Return 0 = Cannot set Vertical Border Style when Vertical Border width not set.
-;                  @Error 3 @Extended 8 Return 0 = Cannot set Horizontal Border Style when Horizontal Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Error retrieving Object "TableBorder2".
+;                  @Error 3 @Extended 3 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error 3 @Extended 6 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error 3 @Extended 7 = Cannot set Vertical Border Style when Vertical Border width not set.
+;                  @Error 3 @Extended 8 = Cannot set Horizontal Border Style when Horizontal Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -332,7 +332,7 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 ;                  |                               16 = Error setting $iVert
 ;                  |                               32 = Error setting $iHori
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -375,20 +375,20 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 Return 0 = $iVert not an Integer, or less than 0.
-;                  @Error 1 @Extended 7 Return 0 = $iHori not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iTop not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer, or less than 0.
+;                  @Error 1 @Extended 5 = $iRight not an Integer, or less than 0.
+;                  @Error 1 @Extended 6 = $iVert not an Integer, or less than 0.
+;                  @Error 1 @Extended 7 = $iHori not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Object "TableBorder2".
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Error retrieving Object "TableBorder2".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -396,7 +396,7 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 ;                  |                               16 = Error setting $iVert
 ;                  |                               32 = Error setting $iHori
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -437,14 +437,14 @@ EndFunc   ;==>_LOWriter_TableBorderWidth
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTable not an Object
-;                  @Error 1 @Extended 3 Return 0 = $iBreakType not an Integer, less than 0 or greater than 6. See Constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $sPageStyle not a String.
-;                  @Error 1 @Extended 5 Return 0 = $sPageStyle not found in current document.
-;                  @Error 1 @Extended 6 Return 0 = $iPgNumOffSet not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTable not an Object
+;                  @Error 1 @Extended 3 = $iBreakType not an Integer, less than 0 or greater than 6. See Constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $sPageStyle not a String.
+;                  @Error 1 @Extended 5 = $sPageStyle not found in current document.
+;                  @Error 1 @Extended 6 = $iPgNumOffSet not an Integer, or less than 0.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBreakType
 ;                  |                               2 = Error setting $sPageStyle
 ;                  |                               4 = Error setting $iPgNumOffSet
@@ -511,12 +511,12 @@ EndFunc   ;==>_LOWriter_TableBreak
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iBackColor not an Integer, set less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $iBackColor not an Integer, set less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Background color.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Background color.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -564,27 +564,27 @@ EndFunc   ;==>_LOWriter_TableCellBackColor
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object .
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oCell not an Object .
+;                  @Error 1 @Extended 2 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style/Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style/Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style/Color when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Style/Color when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Style/Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -624,13 +624,13 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $Left not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer.
+;                  @Error 1 @Extended 1 = $oCell an Object.
+;                  @Error 1 @Extended 2 = $iTop not an Integer.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer.
+;                  @Error 1 @Extended 4 = $Left not an Integer.
+;                  @Error 1 @Extended 5 = $iRight not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTop.
 ;                  |                               2 = Error setting $iBottom.
 ;                  |                               4 = Error setting $iLeft.
@@ -704,27 +704,27 @@ EndFunc   ;==>_LOWriter_TableCellBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -764,23 +764,23 @@ EndFunc   ;==>_LOWriter_TableCellBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell Variable not Object type variable.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oCell Variable not Object type variable.
+;                  @Error 1 @Extended 2 = $iTop not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 = $iBottom not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = $iLeft not an Integer, or less than 0.
+;                  @Error 1 @Extended 5 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -816,10 +816,10 @@ EndFunc   ;==>_LOWriter_TableCellBorderWidth
 ; Return values .: Success: An Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $oCell is a CellRange not an individual cell.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a TextCursor.
+;                  @Error 2 @Extended 1 = Failed to create a TextCursor.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning a Text Cursor Object located in the specified Cell.
 ; Author ........: donnyh13
@@ -853,13 +853,13 @@ EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
-;                  @Error 1 @Extended 3 Return 0 = $sFormula not a String.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $oCell is a CellRange not an individual cell.
+;                  @Error 1 @Extended 3 = $sFormula not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current cell formula.
+;                  @Error 3 @Extended 1 = Failed to retrieve current cell formula.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFormula
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Formula was successfully set.
@@ -907,10 +907,10 @@ EndFunc   ;==>_LOWriter_TableCellFormula
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $oCell is a CellRange not an individual cell.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify cell data type.
+;                  @Error 3 @Extended 1 = Failed to identify cell data type.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. The Data Type as an Integer, See Constants, $LOW_CELL_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
@@ -944,10 +944,10 @@ EndFunc   ;==>_LOWriter_TableCellGetDataType
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $oCell is a CellRange not an individual cell.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve cell error value.
+;                  @Error 3 @Extended 1 = Failed to retrieve cell error value.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. The Cell formula error code as an Integer.
 ; Author ........: donnyh13
@@ -980,10 +980,10 @@ EndFunc   ;==>_LOWriter_TableCellGetError
 ; Return values .: Success: A String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $oCell is a CellRange not an individual cell.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve cell name.
+;                  @Error 3 @Extended 1 = Failed to retrieve cell name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. The Cell name in String format.
 ; Author ........: donnyh13
@@ -1017,13 +1017,13 @@ EndFunc   ;==>_LOWriter_TableCellGetName
 ; Return values .: Success: 1 Or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCell is a Cell Range. Can only set Write-Protect on individual cells.
-;                  @Error 1 @Extended 3 Return 0 = $bProtect not a Boolean or not Null keyword.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $oCell is a Cell Range. Can only set Write-Protect on individual cells.
+;                  @Error 1 @Extended 3 = $bProtect not a Boolean or not Null keyword.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query if cell is protected.
+;                  @Error 3 @Extended 1 = Failed to query if cell is protected.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bProtect
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set Cell Protect setting.
@@ -1068,9 +1068,9 @@ EndFunc   ;==>_LOWriter_TableCellProtect
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Cell Names.
+;                  @Error 3 @Extended 1 = Failed to retrieve Array of Cell Names.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Array of Cell names. @Extended set to number of names returned in the array.
 ; Author ........: donnyh13
@@ -1103,11 +1103,11 @@ EndFunc   ;==>_LOWriter_TableCellsGetNames
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
-;                  @Error 1 @Extended 3 Return 0 = $sString not a String.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $oCell is a CellRange not an individual cell.
+;                  @Error 1 @Extended 3 = $sString not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current string.
+;                  @Error 3 @Extended 1 = Failed to retrieve current string.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set the cell String.
 ;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current string.
@@ -1156,13 +1156,13 @@ EndFunc   ;==>_LOWriter_TableCellString
 ; Return values .: Success: 1 or Number.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCell is a CellRange not an individual cell.
-;                  @Error 1 @Extended 3 Return 0 = $nValue not a Number.
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $oCell is a CellRange not an individual cell.
+;                  @Error 1 @Extended 3 = $nValue not a Number.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current value.
+;                  @Error 3 @Extended 1 = Failed to retrieve current value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nValue
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set cell value.
@@ -1211,12 +1211,12 @@ EndFunc   ;==>_LOWriter_TableCellValue
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCell not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iVertOrient not an Integer, less than 0 or greater than 3. See constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error 1 @Extended 1 = $oCell not an Object.
+;                  @Error 1 @Extended 2 = $iVertOrient not an Integer, less than 0 or greater than 3. See constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Vertical Orientation.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Vertical Orientation.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iVertOrient
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set Vertical Orientation.
@@ -1263,10 +1263,10 @@ EndFunc   ;==>_LOWriter_TableCellVertOrient
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer, or less than 1.
-;                  @Error 1 @Extended 4 Return 0 = Requested column greater than number of columns contained in table.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iColumn not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 = $iCount not an Integer, or less than 1.
+;                  @Error 1 @Extended 4 = Requested column greater than number of columns contained in table.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return 1 = Full amount of columns deleted. @Extended set to total columns deleted.
 ;                  @Error 0 @Extended ? Return 2 = $iCount greater than amount of columns contained in Table; deleted all columns from $iColumn over. @Extended set to total columns deleted.
@@ -1307,9 +1307,9 @@ EndFunc   ;==>_LOWriter_TableColumnDelete
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Column count.
+;                  @Error 3 @Extended 1 = Failed to retrieve Column count.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Returning Column Count as an Integer.
 ; Author ........: donnyh13
@@ -1343,12 +1343,12 @@ EndFunc   ;==>_LOWriter_TableColumnGetCount
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iCount not an Integer, or less than 1.
-;                  @Error 1 @Extended 3 Return 0 = $iColumn not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = Column called in $iColumn greater than number of columns contained in table.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iCount not an Integer, or less than 1.
+;                  @Error 1 @Extended 3 = $iColumn not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = Column called in $iColumn greater than number of columns contained in table.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to insert columns.
+;                  @Error 3 @Extended 1 = Failed to insert columns.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully inserted the number of desired columns.
 ; Author ........: donnyh13
@@ -1398,23 +1398,23 @@ EndFunc   ;==>_LOWriter_TableColumnInsert
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iColumns not an Integer, or less than 1.
-;                  @Error 1 @Extended 4 Return 0 = $iRows not an Integer, or less than 1.
-;                  @Error 1 @Extended 5 Return 0 = $oCursor Object located in a Foot/EndNote.
-;                  @Error 1 @Extended 6 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 7 Return 0 = $sTableName not a String.
-;                  @Error 1 @Extended 8 Return 0 = Name called in $sTableName already exists.
-;                  @Error 1 @Extended 9 Return 0 = $sStyle not a String.
-;                  @Error 1 @Extended 10 Return 0 = Table Style called in $sStyle not found.
-;                  @Error 1 @Extended 11 Return 0 = $bSplit not a Boolean.
-;                  @Error 1 @Extended 12 Return 0 = $bRepeatHeading not a Boolean.
-;                  @Error 1 @Extended 13 Return 0 = $iHeadingRows not an Integer, or less than 1.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oCursor not an Object.
+;                  @Error 1 @Extended 3 = $iColumns not an Integer, or less than 1.
+;                  @Error 1 @Extended 4 = $iRows not an Integer, or less than 1.
+;                  @Error 1 @Extended 5 = $oCursor Object located in a Foot/EndNote.
+;                  @Error 1 @Extended 6 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 7 = $sTableName not a String.
+;                  @Error 1 @Extended 8 = Name called in $sTableName already exists.
+;                  @Error 1 @Extended 9 = $sStyle not a String.
+;                  @Error 1 @Extended 10 = Table Style called in $sStyle not found.
+;                  @Error 1 @Extended 11 = $bSplit not a Boolean.
+;                  @Error 1 @Extended 12 = $bRepeatHeading not a Boolean.
+;                  @Error 1 @Extended 13 = $iHeadingRows not an Integer, or less than 1.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create "com.sun.star.text.TextTable" Object.
+;                  @Error 2 @Extended 1 = Failed to Create "com.sun.star.text.TextTable" Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iBackColor
 ;                  |                               2 = Error setting $sTableName
 ;                  |                               4 = Error setting $bHeading
@@ -1540,16 +1540,16 @@ EndFunc   ;==>_LOWriter_TableCreate
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTable and $oCursor not Objects.
-;                  @Error 1 @Extended 3 Return 0 = $oTable and $oCursor both Objects.
-;                  @Error 1 @Extended 4 Return 0 = $sCellName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $oCursor not in a Table.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTable and $oCursor not Objects.
+;                  @Error 1 @Extended 3 = $oTable and $oCursor both Objects.
+;                  @Error 1 @Extended 4 = $sCellName not a String.
+;                  @Error 1 @Extended 5 = $oCursor not in a Table.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Cursor by Cell Name or by first Cell name in Table.
+;                  @Error 2 @Extended 1 = Failed to create Cursor by Cell Name or by first Cell name in Table.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failure retrieving Table by Table Name from Cursor.
-;                  @Error 3 @Extended 2 Return 0 = Failure retrieving list of Table Cell Names.
+;                  @Error 3 @Extended 1 = Failure retrieving Table by Table Name from Cursor.
+;                  @Error 3 @Extended 2 = Failure retrieving list of Table Cell Names.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success, TableCursor object was created successfully. Returning Table Cursor Object for further Table manipulation functions.
 ; Author ........: donnyh13
@@ -1611,14 +1611,14 @@ EndFunc   ;==>_LOWriter_TableCreateCursor
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not a Table Cursor.
-;                  @Error 1 @Extended 3 Return 0 = $sGoToCellByName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bSelect not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iSplitRangeInto not an Integer, or less than 1.
-;                  @Error 1 @Extended 6 Return 0 = $bSplitRangeHori not a Boolean.
+;                  @Error 1 @Extended 1 = $oCursor not an Object.
+;                  @Error 1 @Extended 2 = $oCursor not a Table Cursor.
+;                  @Error 1 @Extended 3 = $sGoToCellByName not a String.
+;                  @Error 1 @Extended 4 = $bSelect not a Boolean.
+;                  @Error 1 @Extended 5 = $iSplitRangeInto not an Integer, or less than 1.
+;                  @Error 1 @Extended 6 = $bSplitRangeHori not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended ? Return 0 = Some commands were not successfully completed. Use BitAND to test @Extended for the following values:
+;                  @Error 3 @Extended ? = Some commands were not successfully completed. Use BitAND to test @Extended for the following values:
 ;                  |                                1 = Failed while processing $sGoToCellByName.
 ;                  |                                2 = Failed while processing $bMergeRange.
 ;                  |                                4 = Failed while processing $iSplitRangeInto.
@@ -1674,11 +1674,11 @@ EndFunc   ;==>_LOWriter_TableCursor
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTable not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTable not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Table name.
-;                  @Error 3 @Extended 2 Return 0 = Failed to delete Table.
+;                  @Error 3 @Extended 1 = Failed to retrieve Table name.
+;                  @Error 3 @Extended 2 = Failed to delete Table.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Table was successfully deleted.
 ; Author ........: donnyh13
@@ -1717,10 +1717,10 @@ EndFunc   ;==>_LOWriter_TableDelete
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sTableName not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sTableName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Tables Object.
+;                  @Error 3 @Extended 1 = Error retrieving Text Tables Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If a table was found matching $sTableName, True is returned, else False.
 ; Author ........: donnyh13
@@ -1757,13 +1757,13 @@ EndFunc   ;==>_LOWriter_TableExists
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 4 Return 0 = $oCursor is not currently located inside of a Table Cell.
-;                  @Error 1 @Extended 5 Return 0 = $oCursor unknown cursor type.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTable not an Object.
+;                  @Error 1 @Extended 3 = $oCursor not an Object.
+;                  @Error 1 @Extended 4 = $oCursor is not currently located inside of a Table Cell.
+;                  @Error 1 @Extended 5 = $oCursor unknown cursor type.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failure Retrieving Cell Object
+;                  @Error 3 @Extended 1 = Failure Retrieving Cell Object
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = A Cell object or a Cell Range.
 ; Author ........: donnyh13
@@ -1830,13 +1830,13 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByCursor
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable is not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sCellName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sToCellName not a String.
-;                  @Error 1 @Extended 4 Return 0 = Table does not contain the Requested Cell name as called in $sCellName.
-;                  @Error 1 @Extended 5 Return 0 = Table does not contain the Requested Cell name as called in $sToCellName.
+;                  @Error 1 @Extended 1 = $oTable is not an Object.
+;                  @Error 1 @Extended 2 = $sCellName not a String.
+;                  @Error 1 @Extended 3 = $sToCellName not a String.
+;                  @Error 1 @Extended 4 = Table does not contain the Requested Cell name as called in $sCellName.
+;                  @Error 1 @Extended 5 = Table does not contain the Requested Cell name as called in $sToCellName.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Cell Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Cell Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. A Cell object or a Cell Range Object.
 ; Author ........: donnyh13
@@ -1882,13 +1882,13 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByName
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, or less than 0 or greater than number of Columns contained in the table.
-;                  @Error 1 @Extended 3 Return 0 = $iRow not an Integer, or less than 0 or greater than number of Rows contained in the table.
-;                  @Error 1 @Extended 4 Return 0 = $iToColumn not an Integer, or less than $iColumn or greater than number of Columns contained in the table.
-;                  @Error 1 @Extended 5 Return 0 = $iToRow not an Integer, or less than $iRow or greater than number of Rows contained in the table.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iColumn not an Integer, or less than 0 or greater than number of Columns contained in the table.
+;                  @Error 1 @Extended 3 = $iRow not an Integer, or less than 0 or greater than number of Rows contained in the table.
+;                  @Error 1 @Extended 4 = $iToColumn not an Integer, or less than $iColumn or greater than number of Columns contained in the table.
+;                  @Error 1 @Extended 5 = $iToRow not an Integer, or less than $iRow or greater than number of Rows contained in the table.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Cell Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Cell Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. A Cell object or a Cell Range.
 ; Author ........: donnyh13
@@ -1940,11 +1940,11 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByPosition
 ; Return values .: Success: Array or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer, less than -1 or greater than number of Columns containted in the Table.
-;                  @Error 1 @Extended 3 Return 0 = $iRow not an Integer, less than -1 or greater than number of Rows containted in the Table.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iColumn not an Integer, less than -1 or greater than number of Columns containted in the Table.
+;                  @Error 1 @Extended 3 = $iRow not an Integer, less than -1 or greater than number of Rows containted in the Table.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Table data.
+;                  @Error 3 @Extended 1 = Failed to retrieve Array of Table data.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return Array of Arrays = Array of Table data.
 ;                  @Error 0 @Extended 2 Return Array = Returning a specific row of data.
@@ -2009,11 +2009,11 @@ EndFunc   ;==>_LOWriter_TableGetData
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oCursor not located in a Table.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oCursor not an Object.
+;                  @Error 1 @Extended 3 = $oCursor not located in a Table.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Table Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Table Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning Table Object.
 ; Author ........: donnyh13
@@ -2048,11 +2048,11 @@ EndFunc   ;==>_LOWriter_TableGetObjByCursor
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sTableName not a String.
-;                  @Error 1 @Extended 3 Return 0 = No table matching $sTableName found in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sTableName not a String.
+;                  @Error 1 @Extended 3 = No table matching $sTableName found in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Table Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Table Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning an Object for the requested Table.
 ; Author ........: donnyh13
@@ -2090,16 +2090,16 @@ EndFunc   ;==>_LOWriter_TableGetObjByName
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTopMargin not an Integer, less than 0 or greater than 100,000.
-;                  @Error 1 @Extended 3 Return 0 = $iBottomMargin not an Integer, less than 0 or greater than 100,000
-;                  @Error 1 @Extended 4 Return 0 = $iLeftMargin not an Integer, or less than -100,000.
-;                  @Error 1 @Extended 5 Return 0 = $iRightMargin not an Integer, or less than -100,000.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iTopMargin not an Integer, less than 0 or greater than 100,000.
+;                  @Error 1 @Extended 3 = $iBottomMargin not an Integer, less than 0 or greater than 100,000
+;                  @Error 1 @Extended 4 = $iLeftMargin not an Integer, or less than -100,000.
+;                  @Error 1 @Extended 5 = $iRightMargin not an Integer, or less than -100,000.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Unable to set Left Margin with orientation set to $LOW_ORIENT_HORI_FULL(6) Or $LOW_ORIENT_HORI_LEFT(3).
-;                  @Error 3 @Extended 2 Return 0 = Unable to set Right Margin with orientation set to other than $LOW_ORIENT_HORI_NONE(0) Or $LOW_ORIENT_HORI_LEFT(3).
+;                  @Error 3 @Extended 1 = Unable to set Left Margin with orientation set to $LOW_ORIENT_HORI_FULL(6) Or $LOW_ORIENT_HORI_LEFT(3).
+;                  @Error 3 @Extended 2 = Unable to set Right Margin with orientation set to other than $LOW_ORIENT_HORI_NONE(0) Or $LOW_ORIENT_HORI_LEFT(3).
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTopMargin
 ;                  |                               2 = Error setting $iBottomMargin
 ;                  |                               4 = Error setting $iLeftMargin
@@ -2181,18 +2181,18 @@ EndFunc   ;==>_LOWriter_TableMargin
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTableAlign not an Integer, less than 0 or greater than 7. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $bKeepTogether not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $sTableName not a String.
-;                  @Error 1 @Extended 6 Return 0 = Table with same name as called in $sTableName already exists.
-;                  @Error 1 @Extended 7 Return 0 = $bSplit not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $bSplitRows not a Boolean.
-;                  @Error 1 @Extended 9 Return 0 = $bRepeatHeading not a Boolean.
-;                  @Error 1 @Extended 10 Return 0 = $iHeaderRows not an Integer, less than 0 or greater than number of rows in table.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTable not an Object.
+;                  @Error 1 @Extended 3 = $iTableAlign not an Integer, less than 0 or greater than 7. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $bKeepTogether not a Boolean.
+;                  @Error 1 @Extended 5 = $sTableName not a String.
+;                  @Error 1 @Extended 6 = Table with same name as called in $sTableName already exists.
+;                  @Error 1 @Extended 7 = $bSplit not a Boolean.
+;                  @Error 1 @Extended 8 = $bSplitRows not a Boolean.
+;                  @Error 1 @Extended 9 = $bRepeatHeading not a Boolean.
+;                  @Error 1 @Extended 10 = $iHeaderRows not an Integer, less than 0 or greater than number of rows in table.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTableAlign
 ;                  |                               2 = Error setting $bKeepTogether
 ;                  |                               4 = Error setting $sTableName
@@ -2292,15 +2292,15 @@ EndFunc   ;==>_LOWriter_TableProperties
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 Return 0 = Requested row greater than number of rows contained in Table.
-;                  @Error 1 @Extended 4 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iRow not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 = Requested row greater than number of rows contained in Table.
+;                  @Error 1 @Extended 4 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failure retrieving specified Row object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve current Background color.
+;                  @Error 3 @Extended 1 = Failure retrieving specified Row object.
+;                  @Error 3 @Extended 2 = Failed to retrieve current Background color.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -2352,10 +2352,10 @@ EndFunc   ;==>_LOWriter_TableRowBackColor
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 Return 0 = $iCount not an Integer, or less than 1.
-;                  @Error 1 @Extended 4 Return 0 = Requested row greater than number of rows contained in table.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iRow not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 = $iCount not an Integer, or less than 1.
+;                  @Error 1 @Extended 4 = Requested row greater than number of rows contained in table.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return 1 = Full amount of Rows deleted. @Extended set to total rows deleted.
 ;                  @Error 0 @Extended ? Return 2 = $iCount greater than amount of rows contained in Table; deleted all rows from $iRow over. @Extended set to total rows deleted.
@@ -2396,9 +2396,9 @@ EndFunc   ;==>_LOWriter_TableRowDelete
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Row count.
+;                  @Error 3 @Extended 1 = Failed to retrieve Row count.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Returning Row count.
 ; Author ........: donnyh13
@@ -2432,12 +2432,12 @@ EndFunc   ;==>_LOWriter_TableRowGetCount
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iCount not an Integer, or less than 1.
-;                  @Error 1 @Extended 3 Return 0 = $iRow not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = Requested Row greater than number of Rows contained in table.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iCount not an Integer, or less than 1.
+;                  @Error 1 @Extended 3 = $iRow not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = Requested Row greater than number of Rows contained in table.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to insert Rows.
+;                  @Error 3 @Extended 1 = Failed to insert Rows.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully inserted requested number of rows.
 ; Author ........: donnyh13
@@ -2482,16 +2482,16 @@ EndFunc   ;==>_LOWriter_TableRowInsert
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRow not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 Return 0 = Requested row greater than number of rows contained in Table.
-;                  @Error 1 @Extended 4 Return 0 = $iHeight not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $bIsAutoHeight not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bIsSplitAllowed not a Boolean.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iRow not an Integer, or less than 0.
+;                  @Error 1 @Extended 3 = Requested row greater than number of rows contained in Table.
+;                  @Error 1 @Extended 4 = $iHeight not an Integer.
+;                  @Error 1 @Extended 5 = $bIsAutoHeight not a Boolean.
+;                  @Error 1 @Extended 6 = $bIsSplitAllowed not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failure retrieving specified Row object.
+;                  @Error 3 @Extended 1 = Failure retrieving specified Row object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHeight
 ;                  |                               2 = Error setting $bIsAutoHeight
 ;                  |                               4 = Error setting $bIsSplitAllowed
@@ -2562,9 +2562,9 @@ EndFunc   ;==>_LOWriter_TableRowProperty
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $avData not an Array.
-;                  @Error 1 @Extended 3 Return 0 = $avData Array does not contain the same number of elements as Rows in the Table.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $avData not an Array.
+;                  @Error 1 @Extended 3 = $avData Array does not contain the same number of elements as Rows in the Table.
 ;                  @Error 1 @Extended 4 Return ? = $avData sub arrays do not contain enough elements to match columns contained in Table. Return set to element number in main array containing faulty array.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Table data was successfully set.
@@ -2615,9 +2615,9 @@ EndFunc   ;==>_LOWriter_TableSetData
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failure retrieving Table objects.
+;                  @Error 3 @Extended 1 = Failure retrieving Table objects.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Returning Array of Table Names. @Extended set to number of results.
 ; Author ........: donnyh13
@@ -2655,14 +2655,14 @@ EndFunc   ;==>_LOWriter_TablesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ShadowFormat Object.
+;                  @Error 3 @Extended 1 = Error retrieving ShadowFormat Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -2734,14 +2734,14 @@ EndFunc   ;==>_LOWriter_TableShadow
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sTableStyle not a String.
-;                  @Error 1 @Extended 4 Return 0 = TableStyle called in $sTableStyle not found in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTable not an Object.
+;                  @Error 1 @Extended 3 = $sTableStyle not a String.
+;                  @Error 1 @Extended 4 = TableStyle called in $sTableStyle not found in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Table Style.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Table Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sTableStyle
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Table Style successfully set.
@@ -2788,8 +2788,8 @@ EndFunc   ;==>_LOWriter_TableStyleCurrent
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sTableStyle not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sTableStyle not a String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If the Document contains the Table style called in $sTableStyle, True is returned, else False.
 ; Author ........: donnyh13
@@ -2822,12 +2822,12 @@ EndFunc   ;==>_LOWriter_TableStyleExists
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bAppliedOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bDisplayName not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bUserOnly not a Boolean.
+;                  @Error 1 @Extended 3 = $bAppliedOnly not a Boolean.
+;                  @Error 1 @Extended 4 = $bDisplayName not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Table Style names.
+;                  @Error 3 @Extended 1 = Failed to retrieve Array of Table Style names.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Table Styles matching the called parameters. See remarks. @Extended contains the count of results returned.
 ; Author ........: donnyh13
@@ -2869,14 +2869,14 @@ EndFunc   ;==>_LOWriter_TableStylesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iRelativeWidth not an Integer.
+;                  @Error 1 @Extended 1 = $oTable not an Object.
+;                  @Error 1 @Extended 2 = $iWidth not an Integer.
+;                  @Error 1 @Extended 3 = $iRelativeWidth not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Unable to set $iWidth with Table orientation set to $LOW_ORIENT_HORI_FULL(6).
-;                  @Error 3 @Extended 2 Return 0 = Unable to set $iRelativeWidth with orientation set to $LOW_ORIENT_HORI_FULL(6).
+;                  @Error 3 @Extended 1 = Unable to set $iWidth with Table orientation set to $LOW_ORIENT_HORI_FULL(6).
+;                  @Error 3 @Extended 2 = Unable to set $iRelativeWidth with orientation set to $LOW_ORIENT_HORI_FULL(6).
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iRelativeWidth
 ;                  --Success--

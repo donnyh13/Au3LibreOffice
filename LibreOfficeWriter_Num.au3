@@ -47,15 +47,15 @@
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sNumStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = Numbering Style name called in $sNumStyle already exists in this document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sNumStyle not a String.
+;                  @Error 1 @Extended 3 = Numbering Style name called in $sNumStyle already exists in this document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating "com.sun.star.style.NumberingStyle" Object.
+;                  @Error 2 @Extended 1 = Error Creating "com.sun.star.style.NumberingStyle" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error Retrieving "NumberingStyle" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error creating new Numbering Style by Name.
-;                  @Error 3 @Extended 3 Return 0 = Error Retrieving New Numbering Style Object.
+;                  @Error 3 @Extended 1 = Error Retrieving "NumberingStyle" Object.
+;                  @Error 3 @Extended 2 = Error creating new Numbering Style by Name.
+;                  @Error 3 @Extended 3 = Error Retrieving New Numbering Style Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. New Numbering Style successfully created. Returning Numbering Style Object.
 ; Author ........: donnyh13
@@ -101,15 +101,15 @@ EndFunc   ;==>_LOWriter_NumStyleCreate
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oObj does not support Paragraph Properties Service.
-;                  @Error 1 @Extended 4 Return 0 = $sNumStyle not a String.
-;                  @Error 1 @Extended 5 Return 0 = Numbering Style called in $sNumStyle doesn't exist in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oObj not an Object.
+;                  @Error 1 @Extended 3 = $oObj does not support Paragraph Properties Service.
+;                  @Error 1 @Extended 4 = $sNumStyle not a String.
+;                  @Error 1 @Extended 5 = Numbering Style called in $sNumStyle doesn't exist in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering Style.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Numbering Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sNumStyle
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Numbering Style successfully set.
@@ -167,32 +167,32 @@ EndFunc   ;==>_LOWriter_NumStyleCurrent
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oNumStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oNumStyle not a Numbering Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $iLevel not between 0 - 10.
-;                  @Error 1 @Extended 5 Return 0 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iStartAt not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $sCharStyle not a string.
-;                  @Error 1 @Extended 8 Return 0 = Character Style called in $sCharStyle, not found in document.
-;                  @Error 1 @Extended 9 Return 0 = $iSubLevels not an Integer, less than 1 or greater than 10.
-;                  @Error 1 @Extended 10 Return 0 = $iLevel called with 0 (all levels) And $iSubLevels greater than 1.
-;                  @Error 1 @Extended 11 Return 0 = $iSubLevels greater than $iLevel.
-;                  @Error 1 @Extended 12 Return 0 = $sSepBefore not a string.
-;                  @Error 1 @Extended 13 Return 0 = $sSepAfter not a string.
-;                  @Error 1 @Extended 14 Return 0 = $bConsecutiveNum not a Boolean.
-;                  @Error 1 @Extended 15 Return 0 = $sBulletFont not a string.
-;                  @Error 1 @Extended 16 Return 0 = Font style called in $sBulletFont not found in document.
-;                  @Error 1 @Extended 17 Return 0 = $sBulletFont was called and Number Format not set to $LOW_NUM_STYLE_CHAR_SPECIAL.
-;                  @Error 1 @Extended 18 Return 0 = $iCharDecimal not an Integer.
-;                  @Error 1 @Extended 19 Return 0 = $iCharDecimal was called and Number Format not set to $LOW_NUM_STYLE_CHAR_SPECIAL.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oNumStyle not an Object.
+;                  @Error 1 @Extended 3 = $oNumStyle not a Numbering Style Object.
+;                  @Error 1 @Extended 4 = $iLevel not between 0 - 10.
+;                  @Error 1 @Extended 5 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iStartAt not an Integer.
+;                  @Error 1 @Extended 7 = $sCharStyle not a string.
+;                  @Error 1 @Extended 8 = Character Style called in $sCharStyle, not found in document.
+;                  @Error 1 @Extended 9 = $iSubLevels not an Integer, less than 1 or greater than 10.
+;                  @Error 1 @Extended 10 = $iLevel called with 0 (all levels) And $iSubLevels greater than 1.
+;                  @Error 1 @Extended 11 = $iSubLevels greater than $iLevel.
+;                  @Error 1 @Extended 12 = $sSepBefore not a string.
+;                  @Error 1 @Extended 13 = $sSepAfter not a string.
+;                  @Error 1 @Extended 14 = $bConsecutiveNum not a Boolean.
+;                  @Error 1 @Extended 15 = $sBulletFont not a string.
+;                  @Error 1 @Extended 16 = Font style called in $sBulletFont not found in document.
+;                  @Error 1 @Extended 17 = $sBulletFont was called and Number Format not set to $LOW_NUM_STYLE_CHAR_SPECIAL.
+;                  @Error 1 @Extended 18 = $iCharDecimal not an Integer.
+;                  @Error 1 @Extended 19 = $iCharDecimal was called and Number Format not set to $LOW_NUM_STYLE_CHAR_SPECIAL.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error mapping setting values.
+;                  @Error 2 @Extended 1 = Error mapping setting values.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Numbering Rules Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Numbering Rule Array for level.
+;                  @Error 3 @Extended 1 = Error retrieving Numbering Rules Object.
+;                  @Error 3 @Extended 2 = Error retrieving Numbering Rule Array for level.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iNumFormat
 ;                  |                               2 = Error setting $iStartAt
 ;                  |                               4 = Error setting $sCharStyle
@@ -392,15 +392,15 @@ EndFunc   ;==>_LOWriter_NumStyleCustomize
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oNumStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oNumStyle not a Numbering Style Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oNumStyle not an Object.
+;                  @Error 1 @Extended 3 = $oNumStyle not a Numbering Style Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "Numbering Styles" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Numbering Style Name.
-;                  @Error 3 @Extended 3 Return 0 = $sNumStyle is not a User-Created Numbering Style and cannot be deleted.
-;                  @Error 3 @Extended 4 Return 0 = $sNumStyle is in use and cannot be deleted.
-;                  @Error 3 @Extended 5 Return 0 = $sNumStyle still exists after deletion attempt.
+;                  @Error 3 @Extended 1 = Error retrieving "Numbering Styles" Object.
+;                  @Error 3 @Extended 2 = Error retrieving Numbering Style Name.
+;                  @Error 3 @Extended 3 = $sNumStyle is not a User-Created Numbering Style and cannot be deleted.
+;                  @Error 3 @Extended 4 = $sNumStyle is in use and cannot be deleted.
+;                  @Error 3 @Extended 5 = $sNumStyle still exists after deletion attempt.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. $sNumStyle was successfully deleted.
 ; Author ........: donnyh13
@@ -446,8 +446,8 @@ EndFunc   ;==>_LOWriter_NumStyleDelete
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sNumStyle not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sNumStyle not a String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if Numbering Style exists in the document, else False.
 ; Author ........: donnyh13
@@ -478,11 +478,11 @@ EndFunc   ;==>_LOWriter_NumStyleExists
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sNumStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = Numbering Style Style called in $sNumStyle not found in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sNumStyle not a String.
+;                  @Error 1 @Extended 3 = Numbering Style Style called in $sNumStyle not found in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Numbering Style Style Object.
+;                  @Error 3 @Extended 1 = Error retrieving Numbering Style Style Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Numbering Style Style successfully retrieved, returning its Object.
 ; Author ........: donnyh13
@@ -519,19 +519,19 @@ EndFunc   ;==>_LOWriter_NumStyleGetObjByName
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oNumStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oNumStyle not a Numbering Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $sNewNumStyleName not a String.
-;                  @Error 1 @Extended 5 Return 0 = Numbering Style name called in $sNewNumStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Numbering Styles.
-;                  @Error 1 @Extended 7 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oNumStyle not an Object.
+;                  @Error 1 @Extended 3 = $oNumStyle not a Numbering Style Object.
+;                  @Error 1 @Extended 4 = $sNewNumStyleName not a String.
+;                  @Error 1 @Extended 5 = Numbering Style name called in $sNewNumStyleName already exists in document.
+;                  @Error 1 @Extended 6 = Cannot rename built-in Numbering Styles.
+;                  @Error 1 @Extended 7 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
 ;                  |                               2 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
@@ -600,22 +600,22 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oNumStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oNumStyle not a Numbering Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $iLevel not between 0 - 10.
-;                  @Error 1 @Extended 5 Return 0 = $iAlignedAt not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iNumAlign not an Integer, less than 1 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $iFollowedBy not an Integer, less than 0 or greater than 2. See Constants, $LOW_NUM_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 8 Return 0 = $iTabstop not an Integer.
-;                  @Error 1 @Extended 9 Return 0 = $iIndent not an Integer.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oNumStyle not an Object.
+;                  @Error 1 @Extended 3 = $oNumStyle not a Numbering Style Object.
+;                  @Error 1 @Extended 4 = $iLevel not between 0 - 10.
+;                  @Error 1 @Extended 5 = $iAlignedAt not an Integer.
+;                  @Error 1 @Extended 6 = $iNumAlign not an Integer, less than 1 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 = $iFollowedBy not an Integer, less than 0 or greater than 2. See Constants, $LOW_NUM_FOLLOW_BY_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 8 = $iTabstop not an Integer.
+;                  @Error 1 @Extended 9 = $iIndent not an Integer.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error mapping setting values.
+;                  @Error 2 @Extended 1 = Error mapping setting values.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Numbering Rules Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Numbering Rule Array for level.
+;                  @Error 3 @Extended 1 = Error retrieving Numbering Rules Object.
+;                  @Error 3 @Extended 2 = Error retrieving Numbering Rule Array for level.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAlignedAt
 ;                  |                               2 = Error setting $iNumAlign
 ;                  |                               4 = Error setting $iFollowedBy
@@ -742,13 +742,13 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oObj does not support Paragraph Properties Service.
-;                  @Error 1 @Extended 3 Return 0 = $iLevel not an Integer, less than 1 or greater than 10.
+;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error 1 @Extended 2 = $oObj does not support Paragraph Properties Service.
+;                  @Error 1 @Extended 3 = $iLevel not an Integer, less than 1 or greater than 10.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Numbering level.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Numbering level.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLevel
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Numbering Style level successfully set.
@@ -797,12 +797,12 @@ EndFunc   ;==>_LOWriter_NumStyleSetLevel
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bAppliedOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bDisplayName not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bUserOnly not a Boolean.
+;                  @Error 1 @Extended 3 = $bAppliedOnly not a Boolean.
+;                  @Error 1 @Extended 4 = $bDisplayName not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Numbering Style names.
+;                  @Error 3 @Extended 1 = Failed to retrieve Array of Numbering Style names.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Numbering Styles matching the called parameters. See remarks. @Extended contains the count of results returned.
 ; Author ........: donnyh13

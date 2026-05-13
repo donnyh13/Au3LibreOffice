@@ -60,28 +60,28 @@
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCharStyle not a Character Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -127,22 +127,22 @@ EndFunc   ;==>_LOWriter_CharStyleBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iAll not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $Left not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $iAll not an Integer.
+;                  @Error 1 @Extended 3 = $iTop not an Integer.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer.
+;                  @Error 1 @Extended 5 = $Left not an Integer.
+;                  @Error 1 @Extended 6 = $iRight not an Integer.
+;                  @Error 1 @Extended 7 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
 ;                  |                               8 = Error setting $iLeft border distance
 ;                  |                               16 = Error setting $iRight border distance
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
@@ -181,28 +181,28 @@ EndFunc   ;==>_LOWriter_CharStyleBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCharStyle not a Character Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -246,24 +246,24 @@ EndFunc   ;==>_LOWriter_CharStyleBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCharStyle not a Character Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, or less than 0.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, or less than 0.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -305,15 +305,15 @@ EndFunc   ;==>_LOWriter_CharStyleBorderWidth
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sCharStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sCharStyle name already exists in document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sCharStyle not a String.
+;                  @Error 1 @Extended 3 = $sCharStyle name already exists in document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating "com.sun.star.style.CharacterStyle" Object.
+;                  @Error 2 @Extended 1 = Error Creating "com.sun.star.style.CharacterStyle" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error Retrieving "CharacterStyles" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error Retrieving Created Character Style Object.
-;                  @Error 3 @Extended 3 Return 0 = Error creating new Character Style by Name.
+;                  @Error 3 @Extended 1 = Error Retrieving "CharacterStyles" Object.
+;                  @Error 3 @Extended 2 = Error Retrieving Created Character Style Object.
+;                  @Error 3 @Extended 3 = Error creating new Character Style by Name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. New Character Style successfully created. Returning Character Style Object.
 ; Author ........: donnyh13
@@ -359,15 +359,15 @@ EndFunc   ;==>_LOWriter_CharStyleCreate
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oObj does not support Character Properties.
-;                  @Error 1 @Extended 4 Return 0 = $sCharStyle not a String.
-;                  @Error 1 @Extended 5 Return 0 = Character Style called in $sCharStyle doesn't exist in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oObj not an Object.
+;                  @Error 1 @Extended 3 = $oObj does not support Character Properties.
+;                  @Error 1 @Extended 4 = $sCharStyle not a String.
+;                  @Error 1 @Extended 5 = Character Style called in $sCharStyle doesn't exist in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Character Style.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Character Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sCharStyle
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Character Style successfully set.
@@ -417,18 +417,18 @@ EndFunc   ;==>_LOWriter_CharStyleCurrent
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oCharStyle not a Character Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $bForceDelete not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $sReplacementStyle not a String.
-;                  @Error 1 @Extended 6 Return 0 = Character Style called in $sReplacementStyle doesn't exist in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 3 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 4 = $bForceDelete not a Boolean.
+;                  @Error 1 @Extended 5 = $sReplacementStyle not a String.
+;                  @Error 1 @Extended 6 = Character Style called in $sReplacementStyle doesn't exist in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "CharacterStyles" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Character Style Name.
-;                  @Error 3 @Extended 3 Return 0 = $sCharStyle is not a User-Created Character Style and cannot be deleted.
-;                  @Error 3 @Extended 4 Return 0 = $sCharStyle is in use and $bForceDelete is False.
-;                  @Error 3 @Extended 5 Return 0 = $sCharStyle still exists after deletion attempt.
+;                  @Error 3 @Extended 1 = Error retrieving "CharacterStyles" Object.
+;                  @Error 3 @Extended 2 = Error retrieving Character Style Name.
+;                  @Error 3 @Extended 3 = $sCharStyle is not a User-Created Character Style and cannot be deleted.
+;                  @Error 3 @Extended 4 = $sCharStyle is in use and $bForceDelete is False.
+;                  @Error 3 @Extended 5 = $sCharStyle still exists after deletion attempt.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Requested Character Style was successfully deleted.
 ; Author ........: donnyh13
@@ -484,15 +484,15 @@ EndFunc   ;==>_LOWriter_CharStyleDelete
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
-;                  @Error 1 @Extended 3 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $bOutline not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bShadow not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error 1 @Extended 3 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 4 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $bOutline not a Boolean.
+;                  @Error 1 @Extended 6 = $bShadow not a Boolean.
+;                  @Error 1 @Extended 7 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iCase
 ;                  |                               2 = Error setting $bHidden
 ;                  |                               4 = Error setting $iRelief
@@ -532,8 +532,8 @@ EndFunc   ;==>_LOWriter_CharStyleEffect
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object,
-;                  @Error 1 @Extended 2 Return 0 = $sCharStyle not a String
+;                  @Error 1 @Extended 1 = $oDoc not an Object,
+;                  @Error 1 @Extended 2 = $sCharStyle not a String
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If Character Style exists then True is returned, if not, False.
 ; Author ........: donnyh13
@@ -567,15 +567,15 @@ EndFunc   ;==>_LOWriter_CharStyleExists
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
-;                  @Error 1 @Extended 3 Return 0 = Font called in $sFontName not available in current document.
-;                  @Error 1 @Extended 4 Return 0 = $nFontSize not a Number.
-;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iWeight less than 50 and not 0, or more than 200. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $sFontName not a String.
+;                  @Error 1 @Extended 3 = Font called in $sFontName not available in current document.
+;                  @Error 1 @Extended 4 = $nFontSize not a Number.
+;                  @Error 1 @Extended 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iWeight less than 50 and not 0, or more than 200. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sFontName
 ;                  |                               2 = Error setting $nFontSize
 ;                  |                               4 = Error setting $iPosture
@@ -618,20 +618,20 @@ EndFunc   ;==>_LOWriter_CharStyleFont
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 3 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100%.
-;                  @Error 1 @Extended 4 Return 0 = $iHighlight not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 3 = $iTransparency not an Integer, less than 0 or greater than 100%.
+;                  @Error 1 @Extended 4 = $iHighlight not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $oCharStyle not a Character Style Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve old Transparency value.
+;                  @Error 3 @Extended 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $FontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
@@ -666,11 +666,11 @@ EndFunc   ;==>_LOWriter_CharStyleFontColor
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sCharStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = Character Style defined in $sCharStyle not found in Document.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sCharStyle not a String.
+;                  @Error 1 @Extended 3 = Character Style defined in $sCharStyle not found in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Character Style Object.
+;                  @Error 3 @Extended 1 = Error retrieving Character Style Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Successfully retrieved and returned requested Character Style Object.
 ; Author ........: donnyh13
@@ -708,22 +708,22 @@ EndFunc   ;==>_LOWriter_CharStyleGetObjByName
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oCharStyle not a Character Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $sNewCharStyleName not a String.
-;                  @Error 1 @Extended 5 Return 0 = Character Style called in $sNewCharStyleName already exists in document.
-;                  @Error 1 @Extended 6 Return 0 = Cannot rename built-in Character Styles.
-;                  @Error 1 @Extended 7 Return 0 = $sParentStyle not a String.
-;                  @Error 1 @Extended 8 Return 0 = Character Style called in $sParentStyle doesn't exist in this Document.
-;                  @Error 1 @Extended 9 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 3 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 4 = $sNewCharStyleName not a String.
+;                  @Error 1 @Extended 5 = Character Style called in $sNewCharStyleName already exists in document.
+;                  @Error 1 @Extended 6 = Cannot rename built-in Character Styles.
+;                  @Error 1 @Extended 7 = $sParentStyle not a String.
+;                  @Error 1 @Extended 8 = Character Style called in $sParentStyle doesn't exist in this Document.
+;                  @Error 1 @Extended 9 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
 ;                  |                               2 = Error setting $sParentStyle
 ;                  |                               4 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
@@ -796,13 +796,13 @@ EndFunc   ;==>_LOWriter_CharStyleOrganizer
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 5 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iOverLineStyle
 ;                  |                               2 = Error setting $iOLColor
 ;                  |                               4 = Error setting $bWordOnly
@@ -843,13 +843,13 @@ EndFunc   ;==>_LOWriter_CharStyleOverLine
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iSuperScript not an Integer, less than -1 or greater than 100.
-;                  @Error 1 @Extended 3 Return 0 = $iSubScript not an Integer, less than -1 or greater than 100.
-;                  @Error 1 @Extended 4 Return 0 = $iRelativeSize not an Integer, less than 1 or greater than 100.
-;                  @Error 1 @Extended 5 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $iSuperScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 3 = $iSubScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 4 = $iRelativeSize not an Integer, less than 1 or greater than 100.
+;                  @Error 1 @Extended 5 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iSuperScript
 ;                  |                               2 = Error setting $iSubScript
 ;                  |                               4 = Error setting $iRelativeSize.
@@ -892,13 +892,13 @@ EndFunc   ;==>_LOWriter_CharStylePosition
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRotation not an Integer or not equal to 0, 90 or 270 degrees.
-;                  @Error 1 @Extended 3 Return 0 = $iScaleWidth not an Integer or less than 1% or greater than 100%.
-;                  @Error 1 @Extended 4 Return 0 = [Placeholder for DirectFormatting error checking.]
-;                  @Error 1 @Extended 5 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $iRotation not an Integer or not equal to 0, 90 or 270 degrees.
+;                  @Error 1 @Extended 3 = $iScaleWidth not an Integer or less than 1% or greater than 100%.
+;                  @Error 1 @Extended 4 = [Placeholder for DirectFormatting error checking.]
+;                  @Error 1 @Extended 5 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iRotation
 ;                  |                               2 = Error setting $iScaleWidth
 ;                  --Success--
@@ -937,12 +937,12 @@ EndFunc   ;==>_LOWriter_CharStyleRotateScale
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bAppliedOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bDisplayName not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bUserOnly not a Boolean.
+;                  @Error 1 @Extended 3 = $bAppliedOnly not a Boolean.
+;                  @Error 1 @Extended 4 = $bDisplayName not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Character Style names.
+;                  @Error 3 @Extended 1 = Failed to retrieve Array of Character Style names.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Character Styles matching the called parameters. @Extended contains the count of results returned.
 ; Author ........: donnyh13
@@ -989,21 +989,21 @@ EndFunc   ;==>_LOWriter_CharStylesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iWidth not an Integer.
+;                  @Error 1 @Extended 5 = $oCharStyle not a Character Style Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Shadow format Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Shadow format Object for Error Checking.
+;                  @Error 3 @Extended 1 = Error retrieving Shadow format Object.
+;                  @Error 3 @Extended 2 = Error retrieving Shadow format Object for Error Checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1041,12 +1041,12 @@ EndFunc   ;==>_LOWriter_CharStyleShadow
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bAutoKerning not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $nKerning not a number, less than -2 or greater than 928.8 Points.
-;                  @Error 1 @Extended 4 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $bAutoKerning not a Boolean.
+;                  @Error 1 @Extended 3 = $nKerning not a number, less than -2 or greater than 928.8 Points.
+;                  @Error 1 @Extended 4 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoKerning
 ;                  |                               2 = Error setting $nKerning.
 ;                  --Success--
@@ -1088,12 +1088,12 @@ EndFunc   ;==>_LOWriter_CharStyleSpacing
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 4 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iStrikeLineStyle
 ;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
@@ -1133,13 +1133,13 @@ EndFunc   ;==>_LOWriter_CharStyleStrikeOut
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCharStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oCharStyle not a Character Style Object.
+;                  @Error 1 @Extended 1 = $oCharStyle not an Object.
+;                  @Error 1 @Extended 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 5 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iUnderLineStyle
 ;                  |                               2 = Error setting $iULColor
 ;                  |                               4 = Error setting $bWordOnly

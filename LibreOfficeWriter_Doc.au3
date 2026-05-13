@@ -91,16 +91,16 @@
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bSaveChanges not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sSaveName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bDeliverOwnership not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bSaveChanges not a Boolean.
+;                  @Error 1 @Extended 3 = $sSaveName not a String.
+;                  @Error 1 @Extended 4 = $bDeliverOwnership not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error while creating Filter Name properties.
+;                  @Error 2 @Extended 1 = Error while creating Filter Name properties.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Path Conversion to L.O. URL Failed.
-;                  @Error 3 @Extended 2 Return 0 = Error while retrieving FilterName.
-;                  @Error 3 @Extended 3 Return 0 = Failed to close Document.
+;                  @Error 3 @Extended 1 = Path Conversion to L.O. URL Failed.
+;                  @Error 3 @Extended 2 = Error while retrieving FilterName.
+;                  @Error 3 @Extended 3 = Failed to close Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
 ;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
@@ -188,20 +188,20 @@ EndFunc   ;==>_LOWriter_DocClose
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
-;                  @Error 1 @Extended 2 Return 0 = $sSearch not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bCaseless not a Boolean.
+;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 2 = $sSearch not a String.
+;                  @Error 1 @Extended 3 = $bCaseless not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
-;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
+;                  @Error 2 @Extended 1 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Error converting path to LibreOffice URL.
-;                  @Error 3 @Extended 5 Return 0 = Current Document not a Writer Document.
-;                  @Error 3 @Extended 6 Return 0 = No matches found.
+;                  @Error 3 @Extended 1 = No open LibreOffice documents.
+;                  @Error 3 @Extended 2 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 = Error converting path to LibreOffice URL.
+;                  @Error 3 @Extended 5 = Current Document not a Writer Document.
+;                  @Error 3 @Extended 6 = No matches found.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active Writer document is returned.
 ;                  @Error 0 @Extended 1 Return Object = Success, The Object for the found Document with matching Name, Title or Path.
@@ -339,15 +339,15 @@ EndFunc   ;==>_LOWriter_DocConnect
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTable not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sDelimiter not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oTable not an Object.
+;                  @Error 1 @Extended 3 = $sDelimiter not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create "com.sun.star.frame.DispatchHelper" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Failed to create "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve array of CellNames.
-;                  @Error 3 @Extended 2 Return 0 = Failed to create a backup of the ViewCursor's current location.
+;                  @Error 3 @Extended 1 = Failed to retrieve array of CellNames.
+;                  @Error 3 @Extended 2 = Failed to create a backup of the ViewCursor's current location.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Table was successfully converted to text.
 ; Author ........: donnyh13
@@ -410,24 +410,24 @@ EndFunc   ;==>_LOWriter_DocConvertTableToText
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sDelimiter not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bHeader not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iRepeatHeaderLines not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $bBorder not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bDontSplitTable not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $oCursor is a Table Cursor and is not supported.
-;                  @Error 1 @Extended 9 Return 0 = $oCursor has no data selected.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oCursor not an Object.
+;                  @Error 1 @Extended 3 = $sDelimiter not a String.
+;                  @Error 1 @Extended 4 = $bHeader not a Boolean.
+;                  @Error 1 @Extended 5 = $iRepeatHeaderLines not an Integer.
+;                  @Error 1 @Extended 6 = $bBorder not a Boolean.
+;                  @Error 1 @Extended 7 = $bDontSplitTable not a Boolean.
+;                  @Error 1 @Extended 8 = $oCursor is a Table Cursor and is not supported.
+;                  @Error 1 @Extended 9 = $oCursor has no data selected.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create "com.sun.star.frame.DispatchHelper" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Failed to create "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve TextTables Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve array of Table names.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify $oCursor's cursor type.
-;                  @Error 3 @Extended 4 Return 0 = Failed to backup ViewCursor's position.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve new Table's Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve TextTables Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve array of Table names.
+;                  @Error 3 @Extended 3 = Failed to identify $oCursor's cursor type.
+;                  @Error 3 @Extended 4 = Failed to backup ViewCursor's position.
+;                  @Error 3 @Extended 5 = Failed to retrieve new Table's Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Text was successfully converted to a Table, returning the new Table's Object.
 ; Author ........: donnyh13
@@ -525,15 +525,15 @@ EndFunc   ;==>_LOWriter_DocConvertTextToTable
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bForceNew not a Boolean.
-;                  @Error 1 @Extended 2 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 1 = $bForceNew not a Boolean.
+;                  @Error 1 @Extended 2 = $bHidden not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failure Creating Object com.sun.star.ServiceManager.
-;                  @Error 2 @Extended 2 Return 0 = Failure Creating Object com.sun.star.frame.Desktop.
-;                  @Error 2 @Extended 3 Return 0 = Failed to enumerate available documents.
-;                  @Error 2 @Extended 4 Return 0 = Failure Creating New Document.
+;                  @Error 2 @Extended 1 = Failure Creating Object com.sun.star.ServiceManager.
+;                  @Error 2 @Extended 2 = Failure Creating Object com.sun.star.frame.Desktop.
+;                  @Error 2 @Extended 3 = Failed to enumerate available documents.
+;                  @Error 2 @Extended 4 = Failure Creating New Document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Document Object is still returned. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Document Object is still returned. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bHidden
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return Object = Successfully connected to an existing Document. Returning Document's Object
@@ -607,23 +607,23 @@ EndFunc   ;==>_LOWriter_DocCreate
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sTitle not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sSubject not a String.
-;                  @Error 1 @Extended 4 Return 0 = $asKeywords not an Array.
-;                  @Error 1 @Extended 5 Return 0 = $sComments not a String.
-;                  @Error 1 @Extended 6 Return 0 = $asContributor not an Array.
-;                  @Error 1 @Extended 7 Return 0 = $sCoverage not a String.
-;                  @Error 1 @Extended 8 Return 0 = $sIdentifier not a String.
-;                  @Error 1 @Extended 9 Return 0 = $asPublisher not an Array.
-;                  @Error 1 @Extended 10 Return 0 = $asRelation not an Array.
-;                  @Error 1 @Extended 11 Return 0 = $sRights not a String.
-;                  @Error 1 @Extended 12 Return 0 = $sSource not a String.
-;                  @Error 1 @Extended 13 Return 0 = $sType not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sTitle not a String.
+;                  @Error 1 @Extended 3 = $sSubject not a String.
+;                  @Error 1 @Extended 4 = $asKeywords not an Array.
+;                  @Error 1 @Extended 5 = $sComments not a String.
+;                  @Error 1 @Extended 6 = $asContributor not an Array.
+;                  @Error 1 @Extended 7 = $sCoverage not a String.
+;                  @Error 1 @Extended 8 = $sIdentifier not a String.
+;                  @Error 1 @Extended 9 = $asPublisher not an Array.
+;                  @Error 1 @Extended 10 = $asRelation not an Array.
+;                  @Error 1 @Extended 11 = $sRights not a String.
+;                  @Error 1 @Extended 12 = $sSource not a String.
+;                  @Error 1 @Extended 13 = $sType not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Document Properties Object.
+;                  @Error 3 @Extended 1 = Error retrieving Document Properties Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sTitle
 ;                  |                               2 = Error setting $sSubject
 ;                  |                               4 = Error setting $asKeywords
@@ -637,7 +637,7 @@ EndFunc   ;==>_LOWriter_DocCreate
 ;                  |                               1024 = Error setting $sSource
 ;                  |                               2048 = Error setting $sType
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version is less than 24.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version is less than 24.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 12 Element Array with values in order of function parameters. If current LibreOffice version is less than 24.2, $asContributor, $sCoverage, $sIdentifier, $asPublisher, $asRelation, $sRights, $sSource, $sType will return a Null value.
@@ -781,11 +781,11 @@ EndFunc   ;==>_LOWriter_DocDescription
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sDispatch not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sDispatch not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;                  @Error 2 @Extended 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully executed dispatch command.
 ; Author ........: donnyh13
@@ -861,20 +861,20 @@ EndFunc   ;==>_LOWriter_DocExecuteDispatch
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFilePath not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bSamePath not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $sFilterName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $sPassword not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFilePath not a String.
+;                  @Error 1 @Extended 3 = $bSamePath not a Boolean.
+;                  @Error 1 @Extended 4 = $sFilterName not a String.
+;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 6 = $sPassword not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating FilterName Property.
-;                  @Error 2 @Extended 2 Return 0 = Error creating Overwrite Property.
-;                  @Error 2 @Extended 3 Return 0 = Error creating Password Property.
+;                  @Error 2 @Extended 1 = Error creating FilterName Property.
+;                  @Error 2 @Extended 2 = Error creating Overwrite Property.
+;                  @Error 2 @Extended 3 = Error creating Password Property.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error Converting Path to/from L.O. URL
-;                  @Error 3 @Extended 2 Return 0 = Document has no save path, and $bSamePath is called with True.
-;                  @Error 3 @Extended 3 Return 0 = Error retrieving FilterName.
+;                  @Error 3 @Extended 1 = Error Converting Path to/from L.O. URL
+;                  @Error 3 @Extended 2 = Document has no save path, and $bSamePath is called with True.
+;                  @Error 3 @Extended 3 = Error retrieving FilterName.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning save path for exported document.
 ; Author ........: donnyh13
@@ -956,14 +956,14 @@ EndFunc   ;==>_LOWriter_DocExport
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSrchDescript not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oSrchDescriptObject not a Search Descriptor Object.
-;                  @Error 1 @Extended 4 Return 0 = $sSearchString not a String.
-;                  @Error 1 @Extended 5 Return 0 = $atFindFormat not an Array.
-;                  @Error 1 @Extended 6 Return 0 = $atFindFormat does not contain an Object in the first Element.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSrchDescript not an Object.
+;                  @Error 1 @Extended 3 = $oSrchDescriptObject not a Search Descriptor Object.
+;                  @Error 1 @Extended 4 = $sSearchString not a String.
+;                  @Error 1 @Extended 5 = $atFindFormat not an Array.
+;                  @Error 1 @Extended 6 = $atFindFormat does not contain an Object in the first Element.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Search did not return an Object, something went wrong.
+;                  @Error 3 @Extended 1 = Search did not return an Object, something went wrong.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Search was Successful, returning 1 dimensional array containing the objects to each match, @Extended is set to the number of matches.
 ; Author ........: donnyh13
@@ -1016,16 +1016,16 @@ EndFunc   ;==>_LOWriter_DocFindAll
 ; Return values .: Success: 1 or Array..
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSrchDescript not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oSrchDescript not a Search Descriptor Object.
-;                  @Error 1 @Extended 4 Return 0 = $sSearchString not a String.
-;                  @Error 1 @Extended 5 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 6 Return 0 = $oRange has no data selected.
-;                  @Error 1 @Extended 7 Return 0 = $atFindFormat not an Array.
-;                  @Error 1 @Extended 8 Return 0 = First element in $atFindFormat not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSrchDescript not an Object.
+;                  @Error 1 @Extended 3 = $oSrchDescript not a Search Descriptor Object.
+;                  @Error 1 @Extended 4 = $sSearchString not a String.
+;                  @Error 1 @Extended 5 = $oRange not an Object.
+;                  @Error 1 @Extended 6 = $oRange has no data selected.
+;                  @Error 1 @Extended 7 = $atFindFormat not an Array.
+;                  @Error 1 @Extended 8 = First element in $atFindFormat not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Search did not return an Object, something went wrong.
+;                  @Error 3 @Extended 1 = Search did not return an Object, something went wrong.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Search was Successful, returning 1 dimensional array containing the objects for each match, @Extended is set to the number of matches.
 ; Author ........: donnyh13
@@ -1128,17 +1128,17 @@ EndFunc   ;==>_LOWriter_DocFindAllInRange
 ; Return values .: Success: Object or 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSrchDescript not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oSrchDescript not a Search Descriptor Object.
-;                  @Error 1 @Extended 4 Return 0 = $sSearchString not a String.
-;                  @Error 1 @Extended 5 Return 0 = $atFindFormat not an Array.
-;                  @Error 1 @Extended 6 Return 0 = First element in $atFindFormat not an Object.
-;                  @Error 1 @Extended 7 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 8 Return 0 = $oRange has no data selected.
-;                  @Error 1 @Extended 9 Return 0 = $oLastFind not an Object, or failed to retrieve starting position from $oRange.
-;                  @Error 1 @Extended 10 Return 0 = $oLastFind incorrect Object type.
-;                  @Error 1 @Extended 11 Return 0 = $bExhaustive not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSrchDescript not an Object.
+;                  @Error 1 @Extended 3 = $oSrchDescript not a Search Descriptor Object.
+;                  @Error 1 @Extended 4 = $sSearchString not a String.
+;                  @Error 1 @Extended 5 = $atFindFormat not an Array.
+;                  @Error 1 @Extended 6 = First element in $atFindFormat not an Object.
+;                  @Error 1 @Extended 7 = $oRange not an Object.
+;                  @Error 1 @Extended 8 = $oRange has no data selected.
+;                  @Error 1 @Extended 9 = $oLastFind not an Object, or failed to retrieve starting position from $oRange.
+;                  @Error 1 @Extended 10 = $oLastFind incorrect Object type.
+;                  @Error 1 @Extended 11 = $bExhaustive not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Search was successful but found no matches.
 ;                  @Error 0 @Extended 1 Return Object = Success. Search was successful, returning the resulting Object.
@@ -1262,18 +1262,18 @@ EndFunc   ;==>_LOWriter_DocFindNext
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sNewAuthor not a String and $bResetUserData called with True.
-;                  @Error 1 @Extended 3 Return 0 = $sNewAuthor not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iRevisions not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iEditDuration not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $bApplyUserData not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sNewAuthor not a String and $bResetUserData called with True.
+;                  @Error 1 @Extended 3 = $sNewAuthor not a String.
+;                  @Error 1 @Extended 4 = $iRevisions not an Integer.
+;                  @Error 1 @Extended 5 = $iEditDuration not an Integer.
+;                  @Error 1 @Extended 6 = $bApplyUserData not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error retrieving Document Settings Object.
+;                  @Error 2 @Extended 1 = Error retrieving Document Settings Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Document Properties Object.
+;                  @Error 3 @Extended 1 = Error retrieving Document Properties Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewAuthor
 ;                  |                               2 = Error setting $iRevisions
 ;                  |                               4 = Error setting $iEditDuration
@@ -1367,13 +1367,13 @@ EndFunc   ;==>_LOWriter_DocGenProp
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sAuthor not a String.
-;                  @Error 1 @Extended 3 Return 0 = $tDateStruct not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sAuthor not a String.
+;                  @Error 1 @Extended 3 = $tDateStruct not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Document Properties Object.
+;                  @Error 3 @Extended 1 = Error retrieving Document Properties Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sAuthor
 ;                  |                               2 = Error setting $tDateStruct
 ;                  --Success--
@@ -1433,13 +1433,13 @@ EndFunc   ;==>_LOWriter_DocGenPropCreation
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sModifiedBy not a String.
-;                  @Error 1 @Extended 3 Return 0 = $tDateStruct not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sModifiedBy not a String.
+;                  @Error 1 @Extended 3 = $tDateStruct not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Document Properties Object.
+;                  @Error 3 @Extended 1 = Error retrieving Document Properties Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sModifiedBy
 ;                  |                               2 = Error setting $tDateStruct
 ;                  --Success--
@@ -1499,13 +1499,13 @@ EndFunc   ;==>_LOWriter_DocGenPropModification
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sPrintedBy not a String.
-;                  @Error 1 @Extended 3 Return 0 = $tDateStruct not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sPrintedBy not a String.
+;                  @Error 1 @Extended 3 = $tDateStruct not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Document Properties Object.
+;                  @Error 3 @Extended 1 = Error retrieving Document Properties Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sPrintedBy
 ;                  |                               2 = Error setting $tDateStruct
 ;                  --Success--
@@ -1566,15 +1566,15 @@ EndFunc   ;==>_LOWriter_DocGenPropPrint
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sTemplateName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sTemplateURL not a String.
-;                  @Error 1 @Extended 4 Return 0 = $tDateStruct not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sTemplateName not a String.
+;                  @Error 1 @Extended 3 = $sTemplateURL not a String.
+;                  @Error 1 @Extended 4 = $tDateStruct not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Document Properties Object.
-;                  @Error 3 @Extended 2 Return 0 = Error converting Computer path to LibreOffice URL.
+;                  @Error 3 @Extended 1 = Error retrieving Document Properties Object.
+;                  @Error 3 @Extended 2 = Error converting Computer path to LibreOffice URL.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sTemplateName
 ;                  |                               2 = Error setting $sTemplateURL
 ;                  |                               4 = Error setting $tDateStruct
@@ -1644,9 +1644,9 @@ EndFunc   ;==>_LOWriter_DocGenPropTemplate
 ; Return values .: Success: 1 dimension array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Document Statistics Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve Document Statistics Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Array = Success. A 1 dimension, 0 based, 9 row Array of Integers, in the order described in remarks.
 ; Author ........: donnyh13
@@ -1690,10 +1690,10 @@ EndFunc   ;==>_LOWriter_DocGetCounts
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Document's name.
+;                  @Error 3 @Extended 1 = Failed to retrieve Document's name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
@@ -1734,11 +1734,11 @@ EndFunc   ;==>_LOWriter_DocGetName
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnLibreURL not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = Document has no save path.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bReturnLibreURL not a Boolean.
+;                  @Error 1 @Extended 3 = Document has no save path.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error converting LibreOffice URL to Computer path format.
+;                  @Error 3 @Extended 1 = Error converting LibreOffice URL to Computer path format.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
 ; Author ........: donnyh13
@@ -1776,9 +1776,9 @@ EndFunc   ;==>_LOWriter_DocGetPath
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query Document whether it has a path.
+;                  @Error 3 @Extended 1 = Failed to query Document whether it has a path.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has a save location. Else False.
 ; Author ........: donnyh13
@@ -1810,9 +1810,9 @@ EndFunc   ;==>_LOWriter_DocHasPath
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query Document whether it is active.
+;                  @Error 3 @Extended 1 = Failed to query Document whether it is active.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active LibreOffice window. See remarks.
 ; Author ........: donnyh13
@@ -1844,9 +1844,9 @@ EndFunc   ;==>_LOWriter_DocIsActive
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query Document whether it has been modified.
+;                  @Error 3 @Extended 1 = Failed to query Document whether it has been modified.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has been modified since last being saved.
 ; Author ........: donnyh13
@@ -1878,9 +1878,9 @@ EndFunc   ;==>_LOWriter_DocIsModified
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether Document is Read-Only.
+;                  @Error 3 @Extended 1 = Failed to query whether Document is Read-Only.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True is document is currently Read Only, else False.
 ; Author ........: donnyh13
@@ -1913,12 +1913,12 @@ EndFunc   ;==>_LOWriter_DocIsReadOnly
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bMaximize not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bMaximize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document is Maximized.
+;                  @Error 3 @Extended 1 = Failed to query whether the Document is Maximized.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMaximize
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
@@ -1963,12 +1963,12 @@ EndFunc   ;==>_LOWriter_DocMaximize
 ; Return values .: Success: 1 or Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bMinimize not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bMinimize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether the Document is Minimized.
+;                  @Error 3 @Extended 1 = Failed to query whether the Document is Minimized.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMinimize
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
@@ -2018,20 +2018,20 @@ EndFunc   ;==>_LOWriter_DocMinimize
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sFilePath not string, or file not found.
-;                  @Error 1 @Extended 2 Return 0 = Error converting filepath to URL path.
-;                  @Error 1 @Extended 3 Return 0 = $bConnectIfOpen not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $sPassword not a string.
-;                  @Error 1 @Extended 7 Return 0 = $bLoadAsTemplate not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $sFilterName not a string.
+;                  @Error 1 @Extended 1 = $sFilePath not string, or file not found.
+;                  @Error 1 @Extended 2 = Error converting filepath to URL path.
+;                  @Error 1 @Extended 3 = $bConnectIfOpen not a Boolean.
+;                  @Error 1 @Extended 4 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 5 = $bReadOnly not a Boolean.
+;                  @Error 1 @Extended 6 = $sPassword not a string.
+;                  @Error 1 @Extended 7 = $bLoadAsTemplate not a Boolean.
+;                  @Error 1 @Extended 8 = $sFilterName not a string.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create ServiceManager Object
-;                  @Error 2 @Extended 2 Return 0 = Failed to create Desktop Object
-;                  @Error 2 @Extended 3 Return 0 = Failed opening or connecting to document.
+;                  @Error 2 @Extended 1 = Failed to create ServiceManager Object
+;                  @Error 2 @Extended 2 = Failed to create Desktop Object
+;                  @Error 2 @Extended 3 = Failed opening or connecting to document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bHidden
 ;                  |                               2 = Error setting $bReadOnly
 ;                  |                               4 = Error setting $sPassword
@@ -2133,16 +2133,16 @@ EndFunc   ;==>_LOWriter_DocOpen
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iX not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iHeight not an Integer.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $iX not an Integer.
+;                  @Error 1 @Extended 3 = $iY not an Integer.
+;                  @Error 1 @Extended 4 = $iWidth not an Integer.
+;                  @Error 1 @Extended 5 = $iHeight not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Position and Size Structure Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Position and Size Structure Object for error checking.
+;                  @Error 3 @Extended 1 = Error retrieving Position and Size Structure Object.
+;                  @Error 3 @Extended 2 = Error retrieving Position and Size Structure Object for error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iX
 ;                  |                               2 = Error setting $iY
 ;                  |                               4 = Error setting $iWidth
@@ -2232,25 +2232,25 @@ EndFunc   ;==>_LOWriter_DocPosAndSize
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iCopies not a Integer.
-;                  @Error 1 @Extended 3 Return 0 = $bCollate not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $vPages not an Integer or String.
-;                  @Error 1 @Extended 5 Return 0 = $vPages contains invalid characters, a-z, or a period(.).
-;                  @Error 1 @Extended 6 Return 0 = $bWait not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iDuplexMode not an Integer, less than 0 or greater than 3. See Constants, $LOW_PRINT_DUPLEX_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 8 Return 0 = $sPrinter not a String.
-;                  @Error 1 @Extended 9 Return 0 = $sFilePathName not a
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $iCopies not a Integer.
+;                  @Error 1 @Extended 3 = $bCollate not a Boolean.
+;                  @Error 1 @Extended 4 = $vPages not an Integer or String.
+;                  @Error 1 @Extended 5 = $vPages contains invalid characters, a-z, or a period(.).
+;                  @Error 1 @Extended 6 = $bWait not a Boolean.
+;                  @Error 1 @Extended 7 = $iDuplexMode not an Integer, less than 0 or greater than 3. See Constants, $LOW_PRINT_DUPLEX_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 8 = $sPrinter not a String.
+;                  @Error 1 @Extended 9 = $sFilePathName not a
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating "Printer Name" property.
-;                  @Error 2 @Extended 2 Return 0 = Error creating "Copies" property.
-;                  @Error 2 @Extended 3 Return 0 = Error creating "Collate" property.
-;                  @Error 2 @Extended 4 Return 0 = Error creating "Wait" property.
-;                  @Error 2 @Extended 5 Return 0 = Error creating "DuplexMode" property.
-;                  @Error 2 @Extended 6 Return 0 = Error creating "Pages" property.
-;                  @Error 2 @Extended 7 Return 0 = Error creating "PrintToFile" property.
+;                  @Error 2 @Extended 1 = Error creating "Printer Name" property.
+;                  @Error 2 @Extended 2 = Error creating "Copies" property.
+;                  @Error 2 @Extended 3 = Error creating "Collate" property.
+;                  @Error 2 @Extended 4 = Error creating "Wait" property.
+;                  @Error 2 @Extended 5 = Error creating "DuplexMode" property.
+;                  @Error 2 @Extended 6 = Error creating "Pages" property.
+;                  @Error 2 @Extended 7 = Error creating "PrintToFile" property.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error converting PrintToFile Path.
+;                  @Error 3 @Extended 1 = Error converting PrintToFile Path.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success Document was successfully printed.
 ; Author ........: donnyh13
@@ -2336,16 +2336,16 @@ EndFunc   ;==>_LOWriter_DocPrint
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bGraphics not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bControls not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bDrawings not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bTables not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bHiddenText not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bGraphics not a Boolean.
+;                  @Error 1 @Extended 3 = $bControls not a Boolean.
+;                  @Error 1 @Extended 4 = $bDrawings not a Boolean.
+;                  @Error 1 @Extended 5 = $bTables not a Boolean.
+;                  @Error 1 @Extended 6 = $bHiddenText not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.DocumentSettings" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.DocumentSettings" Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bGraphics
 ;                  |                               2 = Error setting $bControls
 ;                  |                               4 = Error setting $bDrawings
@@ -2434,19 +2434,19 @@ EndFunc   ;==>_LOWriter_DocPrintIncludedSettings
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iPaperOrient not an Integer, less than 0 or greater than 1. See Constants, $LOW_PAPER_ORIENT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $sPrinterName not a string.
-;                  @Error 1 @Extended 4 Return 0 = $iCommentsMode not an Integer, less than 0 or greater than 3. See Constants, $LOW_PRINT_NOTES_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $bBrochure not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bBrochureRTL not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bReversed not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $iPaperOrient not an Integer, less than 0 or greater than 1. See Constants, $LOW_PAPER_ORIENT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $sPrinterName not a string.
+;                  @Error 1 @Extended 4 = $iCommentsMode not an Integer, less than 0 or greater than 3. See Constants, $LOW_PRINT_NOTES_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $bBrochure not a Boolean.
+;                  @Error 1 @Extended 6 = $bBrochureRTL not a Boolean.
+;                  @Error 1 @Extended 7 = $bReversed not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.DocumentSettings" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.DocumentSettings" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving setting value of "CanSetPaperOrientation" from Printer.
+;                  @Error 3 @Extended 1 = Error retrieving setting value of "CanSetPaperOrientation" from Printer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPaperOrient
 ;                  |                               2 = Error setting $sPrinterName
 ;                  |                               4 = Error setting $iCommentsMode
@@ -2454,7 +2454,7 @@ EndFunc   ;==>_LOWriter_DocPrintIncludedSettings
 ;                  |                               16 = Error setting $bBrochureRTL
 ;                  |                               32 = Error setting $bReversed
 ;                  --Printer Related Errors--
-;                  @Error 5 @Extended 1 Return 0 = Printer does not allow changing paper orientation.
+;                  @Error 5 @Extended 1 = Printer does not allow changing paper orientation.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -2561,16 +2561,16 @@ EndFunc   ;==>_LOWriter_DocPrintMiscSettings
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bBlackOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bLeftOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bRightOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bBackground not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bEmptyPages not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bBlackOnly not a Boolean.
+;                  @Error 1 @Extended 3 = $bLeftOnly not a Boolean.
+;                  @Error 1 @Extended 4 = $bRightOnly not a Boolean.
+;                  @Error 1 @Extended 5 = $bBackground not a Boolean.
+;                  @Error 1 @Extended 6 = $bEmptyPages not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.DocumentSettings" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.DocumentSettings" Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bBlackOnly
 ;                  |                               2 = Error setting $bLeftOnly
 ;                  |                               4 = Error setting $bRightOnly
@@ -2657,23 +2657,23 @@ EndFunc   ;==>_LOWriter_DocPrintPageSettings
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iPaperFormat not an Integer, less than 0 or greater than 8. See constants, $LOW_PAPER_FORMAT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iPaperWidth not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iPaperHeight not an Integer.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $iPaperFormat not an Integer, less than 0 or greater than 8. See constants, $LOW_PAPER_FORMAT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iPaperWidth not an Integer.
+;                  @Error 1 @Extended 4 = $iPaperHeight not an Integer.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.awt.Size" Object.
+;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.awt.Size" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Printer setting "CanSetPaperFormat".
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Printer setting "CanSetPaperSize".
+;                  @Error 3 @Extended 1 = Failed to retrieve Printer setting "CanSetPaperFormat".
+;                  @Error 3 @Extended 2 = Failed to retrieve Printer setting "CanSetPaperSize".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPaperFormat
 ;                  |                               2 = Error setting $iPaperWidth
 ;                  |                               4 = Error setting $iPaperHeight
 ;                  --Printer Related Errors--
-;                  @Error 5 @Extended 1 Return 0 = Printer doesn't allow paper format to be set.
-;                  @Error 5 @Extended 2 Return 0 = Printer doesn't allow paper size to be set.
+;                  @Error 5 @Extended 1 = Printer doesn't allow paper format to be set.
+;                  @Error 5 @Extended 2 = Printer doesn't allow paper size to be set.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -2761,9 +2761,9 @@ EndFunc   ;==>_LOWriter_DocPrintSizeSettings
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Document does not have a redo action to perform.
+;                  @Error 3 @Extended 1 = Document does not have a redo action to perform.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully performed a redo action.
 ; Author ........: donnyh13
@@ -2798,7 +2798,7 @@ EndFunc   ;==>_LOWriter_DocRedo
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Redo Actions.
 ; Author ........: donnyh13
@@ -2827,9 +2827,9 @@ EndFunc   ;==>_LOWriter_DocRedoClear
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Redo Action.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Redo Action.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Returning the current available redo action title as a String. Will be an empty String if no action is available.
 ; Author ........: donnyh13
@@ -2862,9 +2862,9 @@ EndFunc   ;==>_LOWriter_DocRedoCurActionTitle
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve an array of Redo action titles.
+;                  @Error 3 @Extended 1 = Failed to retrieve an array of Redo action titles.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Returning all available redo action Titles in an array of Strings. @Extended set to number of results.
 ; Author ........: donnyh13
@@ -2896,9 +2896,9 @@ EndFunc   ;==>_LOWriter_DocRedoGetAllActionTitles
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query if a Redo is possible.
+;                  @Error 3 @Extended 1 = Failed to query if a Redo is possible.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = If the document has a redo action to perform, True is returned, else False.
 ; Author ........: donnyh13
@@ -2935,15 +2935,15 @@ EndFunc   ;==>_LOWriter_DocRedoIsPossible
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSrchDescript not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oSrchDescript not a Search Descriptor Object.
-;                  @Error 1 @Extended 4 Return 0 = $sSearchString not a String.
-;                  @Error 1 @Extended 5 Return 0 = $sReplaceString not a String.
-;                  @Error 1 @Extended 6 Return 0 = $atFindFormat not an Array.
-;                  @Error 1 @Extended 7 Return 0 = $atReplaceFormat not an Array.
-;                  @Error 1 @Extended 8 Return 0 = First Element of $atFindFormat not an Object.
-;                  @Error 1 @Extended 9 Return 0 = First Element of $atReplaceFormat not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSrchDescript not an Object.
+;                  @Error 1 @Extended 3 = $oSrchDescript not a Search Descriptor Object.
+;                  @Error 1 @Extended 4 = $sSearchString not a String.
+;                  @Error 1 @Extended 5 = $sReplaceString not a String.
+;                  @Error 1 @Extended 6 = $atFindFormat not an Array.
+;                  @Error 1 @Extended 7 = $atReplaceFormat not an Array.
+;                  @Error 1 @Extended 8 = First Element of $atFindFormat not an Object.
+;                  @Error 1 @Extended 9 = First Element of $atReplaceFormat not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Search and Replace was successful, returning number of replacements made.
 ; Author ........: donnyh13
@@ -2995,27 +2995,27 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSrchDescript not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oSrchDescript not a Search Descriptor Object.
-;                  @Error 1 @Extended 4 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 5 Return 0 = $oRange contains no selected Data.
-;                  @Error 1 @Extended 6 Return 0 = $sSearchString not a String.
-;                  @Error 1 @Extended 7 Return 0 = $sReplaceString not a String.
-;                  @Error 1 @Extended 8 Return 0 = $atFindFormat not an Array.
-;                  @Error 1 @Extended 9 Return 0 = $atReplaceFormat not an Array.
-;                  @Error 1 @Extended 10 Return 0 = First Element in $atFindFormat not a Property Object.
-;                  @Error 1 @Extended 11 Return 0 = First Element in $atReplaceFormat not a Property Object.
-;                  @Error 1 @Extended 12 Return 0 = Paragraph Style Name called in $sReplaceString does not exist.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSrchDescript not an Object.
+;                  @Error 1 @Extended 3 = $oSrchDescript not a Search Descriptor Object.
+;                  @Error 1 @Extended 4 = $oRange not an Object.
+;                  @Error 1 @Extended 5 = $oRange contains no selected Data.
+;                  @Error 1 @Extended 6 = $sSearchString not a String.
+;                  @Error 1 @Extended 7 = $sReplaceString not a String.
+;                  @Error 1 @Extended 8 = $atFindFormat not an Array.
+;                  @Error 1 @Extended 9 = $atReplaceFormat not an Array.
+;                  @Error 1 @Extended 10 = First Element in $atFindFormat not a Property Object.
+;                  @Error 1 @Extended 11 = First Element in $atReplaceFormat not a Property Object.
+;                  @Error 1 @Extended 12 = Paragraph Style Name called in $sReplaceString does not exist.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating backup of ViewCursor location and selection.
-;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 3 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;                  @Error 2 @Extended 1 = Error creating backup of ViewCursor location and selection.
+;                  @Error 2 @Extended 2 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 3 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error Finding all results in Range.
-;                  @Error 3 @Extended 2 Return 0 = Error searching for property values.
-;                  @Error 3 @Extended 3 Return 0 = Error finding temporary property to use.
-;                  @Error 3 @Extended 4 Return 0 = Error retrieving current selection and ViewCursor position.
+;                  @Error 3 @Extended 1 = Error Finding all results in Range.
+;                  @Error 3 @Extended 2 = Error searching for property values.
+;                  @Error 3 @Extended 3 = Error finding temporary property to use.
+;                  @Error 3 @Extended 4 = Error retrieving current selection and ViewCursor position.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Search and Replace was successful, returning number of replacements.
 ; Author ........: donnyh13
@@ -3187,9 +3187,9 @@ EndFunc   ;==>_LOWriter_DocReplaceAllInRange
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Document is ReadOnly or Document has no save location, try SaveAs.
+;                  @Error 3 @Extended 1 = Document is ReadOnly or Document has no save location, try SaveAs.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Document Successfully saved.
 ; Author ........: donnyh13
@@ -3223,18 +3223,18 @@ EndFunc   ;==>_LOWriter_DocSave
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFilePath not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sFilterName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $sPassword not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFilePath not a String.
+;                  @Error 1 @Extended 3 = $sFilterName not a String.
+;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 5 = $sPassword not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating FilterName Property
-;                  @Error 2 @Extended 2 Return 0 = Error creating Overwrite Property
-;                  @Error 2 @Extended 3 Return 0 = Error creating Password Property
+;                  @Error 2 @Extended 1 = Error creating FilterName Property
+;                  @Error 2 @Extended 2 = Error creating Overwrite Property
+;                  @Error 2 @Extended 3 = Error creating Password Property
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error Converting Path to/from L.O. URL
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving FilterName.
+;                  @Error 3 @Extended 1 = Error Converting Path to/from L.O. URL
+;                  @Error 3 @Extended 2 = Error retrieving FilterName.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Successfully Saved the document. Returning document save path.
 ; Author ........: donnyh13
@@ -3298,17 +3298,17 @@ EndFunc   ;==>_LOWriter_DocSaveAs
 ; Return values .: Success: 1, Object or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bReturnMultiAsObj not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oObj not an Object.
+;                  @Error 1 @Extended 3 = $bReturnMultiAsObj not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a TextCursor.
+;                  @Error 2 @Extended 1 = Failed to create a TextCursor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current selection.
-;                  @Error 3 @Extended 2 Return 0 =There is no text selected.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve count of multiple selections.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify current selection.
-;                  @Error 3 @Extended 5 Return 0 = Failed to select object.
+;                  @Error 3 @Extended 1 = Failed to retrieve current selection.
+;                  @Error 3 @Extended 2 =There is no text selected.
+;                  @Error 3 @Extended 3 = Failed to retrieve count of multiple selections.
+;                  @Error 3 @Extended 4 = Failed to identify current selection.
+;                  @Error 3 @Extended 5 = Failed to select object.
 ;                  --Success--
 ;                  @Error 0 @Extended -6 Return Object = Success. The current selection is within a Table, returning a Table Cursor Object.
 ;                  @Error 0 @Extended -5 Return Object = Success. The current selection was a Frame, returning a Frame Object.
@@ -3427,7 +3427,7 @@ EndFunc   ;==>_LOWriter_DocSelection
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Window was successfully brought to the front of the open windows.
 ; Author ........: donnyh13
@@ -3456,9 +3456,9 @@ EndFunc   ;==>_LOWriter_DocToFront
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Document does not have an undo action to perform.
+;                  @Error 3 @Extended 1 = Document does not have an undo action to perform.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully performed an undo action.
 ; Author ........: donnyh13
@@ -3494,8 +3494,8 @@ EndFunc   ;==>_LOWriter_DocUndo
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully began an Undo Action group recording.
 ; Author ........: donnyh13
@@ -3527,7 +3527,7 @@ EndFunc   ;==>_LOWriter_DocUndoActionBegin
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully ended the last Undo Action group recording.
 ; Author ........: donnyh13
@@ -3556,7 +3556,7 @@ EndFunc   ;==>_LOWriter_DocUndoActionEnd
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Undo and Redo Actions.
 ; Author ........: donnyh13
@@ -3585,9 +3585,9 @@ EndFunc   ;==>_LOWriter_DocUndoClear
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Undo Action.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Undo Action.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Returning the current available Undo action title as a String. Will be an empty String if no action is available.
 ; Author ........: donnyh13
@@ -3620,9 +3620,9 @@ EndFunc   ;==>_LOWriter_DocUndoCurActionTitle
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve an array of Undo action titles.
+;                  @Error 3 @Extended 1 = Failed to retrieve an array of Undo action titles.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Returning all available undo action Titles in an array of Strings. @Extended set to number of results.
 ; Author ........: donnyh13
@@ -3654,9 +3654,9 @@ EndFunc   ;==>_LOWriter_DocUndoGetAllActionTitles
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query if an Undo is possible.
+;                  @Error 3 @Extended 1 = Failed to query if an Undo is possible.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = If the document has an undo action to perform, True is returned, else False.
 ; Author ........: donnyh13
@@ -3688,7 +3688,7 @@ EndFunc   ;==>_LOWriter_DocUndoIsPossible
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully reset the undo manager.
 ; Author ........: donnyh13
@@ -3718,12 +3718,12 @@ EndFunc   ;==>_LOWriter_DocUndoReset
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bVisible not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether Document is visible.
+;                  @Error 3 @Extended 1 = Failed to query whether Document is visible.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
@@ -3768,15 +3768,15 @@ EndFunc   ;==>_LOWriter_DocVisible
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iZoom not an Integer, less than 20 or greater than 600.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $iZoom not an Integer, less than 20 or greater than 600.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;                  @Error 2 @Extended 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Zoom value.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Zoom value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iZoom
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = $iZoom set successfully.

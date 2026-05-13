@@ -61,13 +61,13 @@
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $iColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current color value.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve old Transparency value.
+;                  @Error 3 @Extended 1 = Failed to retrieve current color value.
+;                  @Error 3 @Extended 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -126,9 +126,9 @@ EndFunc   ;==>_LOWriter_ShapeAreaColor
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Fill Style.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
@@ -173,26 +173,26 @@ EndFunc   ;==>_LOWriter_ShapeAreaFillStyle
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sGradientName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
-;                  @Error 1 @Extended 6 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 9 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 Return 0 = $iFromColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 11 Return 0 = $iToColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 Return 0 = $iFromIntense not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 13 Return 0 = $iToIntense not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oShape not an Object.
+;                  @Error 1 @Extended 3 = $sGradientName not a String.
+;                  @Error 1 @Extended 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
+;                  @Error 1 @Extended 6 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 7 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 9 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 10 = $iFromColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 11 = $iToColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 12 = $iFromIntense not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 13 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Gradient Name.
+;                  @Error 3 @Extended 1 = Error retrieving "FillGradient" Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Error creating Gradient Name.
+;                  @Error 3 @Extended 4 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -391,21 +391,21 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops contains less than two rows.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
 ;                  @Error 1 @Extended 4 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
 ;                  @Error 1 @Extended 5 Return ? = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
+;                  @Error 3 @Extended 1 = Failed to retrieve FillGradient Struct.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -500,12 +500,12 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
@@ -558,22 +558,22 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparency
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 5 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 7 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 Return 0 = $iEnd not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oShape not an Object.
+;                  @Error 1 @Extended 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 5 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 6 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 7 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 = $iStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 9 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Transparency Gradient Name.
+;                  @Error 3 @Extended 1 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Error creating Transparency Gradient Name.
+;                  @Error 3 @Extended 4 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -738,21 +738,21 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops contains less than two rows.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
 ;                  @Error 1 @Extended 4 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
 ;                  @Error 1 @Extended 5 Return ? = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
+;                  @Error 3 @Extended 1 = Failed to retrieve FillTransparenceGradient Struct.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -847,11 +847,11 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradientMulti
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oShape not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oShape not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape's name.
-;                  @Error 3 @Extended 2 Return 0 = Shape with the same name still exists in document after deletion attempt.
+;                  @Error 3 @Extended 1 = Failed to retrieve Shape's name.
+;                  @Error 3 @Extended 2 = Shape with the same name still exists in document after deletion attempt.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Shape was successfully deleted.
 ; Author ........: donnyh13
@@ -890,10 +890,10 @@ EndFunc   ;==>_LOWriter_ShapeDelete
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sShapeName not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sShapeName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Draw Page Object.
+;                  @Error 3 @Extended 1 = Error retrieving Draw Page Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If a Shape was found matching $sShapeName, True is returned, else False.
 ; Author ........: donnyh13
@@ -934,9 +934,9 @@ EndFunc   ;==>_LOWriter_ShapeExists
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to retrieve Shape anchor Object.
+;                  @Error 2 @Extended 1 = Failed to retrieve Shape anchor Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Successfully returned the Shape Anchor.
 ; Author ........: donnyh13
@@ -969,12 +969,12 @@ EndFunc   ;==>_LOWriter_ShapeGetAnchor
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sShapeName not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sShapeName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Draw Page Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Shape Object.
-;                  @Error 3 @Extended 3 Return 0 = Shape requested in $sShapeName not found in document.
+;                  @Error 3 @Extended 1 = Failed to retrieve Draw Page Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve Shape Object.
+;                  @Error 3 @Extended 3 = Shape requested in $sShapeName not found in document.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. Returning the requested Shape Object.
 ; Author ........: donnyh13
@@ -1020,13 +1020,13 @@ EndFunc   ;==>_LOWriter_ShapeGetObjByName
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve CustomShapeGeometry Array.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve CustomShapeGeometry "Type" value.
-;                  @Error 3 @Extended 3 Return 0 = Failed to determine CustomShape's type.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify what type of "com.sun.star.drawing.EllipseShape" called shape is.
-;                  @Error 3 @Extended 5 Return 0 = Called Shape is a unknown shape type.
+;                  @Error 3 @Extended 1 = Failed to retrieve CustomShapeGeometry Array.
+;                  @Error 3 @Extended 2 = Failed to retrieve CustomShapeGeometry "Type" value.
+;                  @Error 3 @Extended 3 = Failed to determine CustomShape's type.
+;                  @Error 3 @Extended 4 = Failed to identify what type of "com.sun.star.drawing.EllipseShape" called shape is.
+;                  @Error 3 @Extended 5 = Called Shape is a unknown shape type.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return Integer = Success. Shape is a Custom Shape Type. Returning appropriate Constant for shape type if successfully identified, else -1 if identification failed. See Remarks #1. See Constants, $LOW_SHAPE_TYPE_* as defined in LibreOfficeWriter_Constants.au3
 ;                  @Error 0 @Extended 2 Return Integer = Success. Shape is a *_BASIC_CIRCLE_SEGMENT or *_BASIC_ARC Type Shape. Returning appropriate Constant, See Constants, $LOW_SHAPE_TYPE_* as defined in LibreOfficeWriter_Constants.au3
@@ -1159,18 +1159,18 @@ EndFunc   ;==>_LOWriter_ShapeGetType
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iShapeType not an Integer, less than 0 or greater than 122. See $LOW_SHAPE_TYPE_* as defined in LibreOfficeWriter_Constants.au3
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iHeight not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iX not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = Cursor called in $oCursor is a Table Cursor, and cannot be used.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oCursor not an Object.
+;                  @Error 1 @Extended 3 = $iShapeType not an Integer, less than 0 or greater than 122. See $LOW_SHAPE_TYPE_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error 1 @Extended 4 = $iWidth not an Integer.
+;                  @Error 1 @Extended 5 = $iHeight not an Integer.
+;                  @Error 1 @Extended 6 = $iX not an Integer.
+;                  @Error 1 @Extended 7 = $iY not an Integer.
+;                  @Error 1 @Extended 8 = Cursor called in $oCursor is a Table Cursor, and cannot be used.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create requested Shape.
+;                  @Error 2 @Extended 1 = Failed to create requested Shape.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to determine Cursor type.
+;                  @Error 3 @Extended 1 = Failed to determine Cursor type.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Object = Success. The Shape was successfully inserted. Returning the Shape's Object.
 ; Author ........: donnyh13
@@ -1257,20 +1257,20 @@ EndFunc   ;==>_LOWriter_ShapeInsert
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $vStartStyle not a String, and not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iStartWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error 1 @Extended 5 Return 0 = $bStartCenter not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bSync not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $vEndStyle not a String, and not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 9 Return 0 = $iEndWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error 1 @Extended 10 Return 0 = $bEndCenter not a Boolean.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $vStartStyle not a String, and not an Integer.
+;                  @Error 1 @Extended 3 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iStartWidth not an Integer, less than 0 or greater than 5004.
+;                  @Error 1 @Extended 5 = $bStartCenter not a Boolean.
+;                  @Error 1 @Extended 6 = $bSync not a Boolean.
+;                  @Error 1 @Extended 7 = $vEndStyle not a String, and not an Integer.
+;                  @Error 1 @Extended 8 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 9 = $iEndWidth not an Integer, less than 0 or greater than 5004.
+;                  @Error 1 @Extended 10 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to convert Constant to Arrowhead name.
+;                  @Error 3 @Extended 1 = Failed to convert Constant to Arrowhead name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStartStyle
 ;                  |                               2 = Error setting $iStartWidth
 ;                  |                               4 = Error setting $bStartCenter
@@ -1403,18 +1403,18 @@ EndFunc   ;==>_LOWriter_ShapeLineArrowStyles
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $vStyle not a String, and not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOW_SHAPE_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error 1 @Extended 6 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOW_SHAPE_LINE_JOINT_* as defined in LibreOfficeWriter_Constants.au3
-;                  @Error 1 @Extended 8 Return 0 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOW_SHAPE_LINE_CAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $vStyle not a String, and not an Integer.
+;                  @Error 1 @Extended 3 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOW_SHAPE_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $iWidth not an Integer, less than 0 or greater than 5004.
+;                  @Error 1 @Extended 6 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 7 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOW_SHAPE_LINE_JOINT_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error 1 @Extended 8 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOW_SHAPE_LINE_CAP_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to convert Constant to Line Style name.
+;                  @Error 3 @Extended 1 = Failed to convert Constant to Line Style name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStyle
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -1543,14 +1543,14 @@ EndFunc   ;==>_LOWriter_ShapeLineProperties
 ; Return values .: Success: 1 or String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = Document already contains a Shape with the same name as called in $sName.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oShape not an Object.
+;                  @Error 1 @Extended 3 = $sName not a String.
+;                  @Error 1 @Extended 4 = Document already contains a Shape with the same name as called in $sName.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape's current name.
+;                  @Error 3 @Extended 1 = Failed to retrieve Shape's current name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sName
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Shape's name was successfully set.
@@ -1601,26 +1601,26 @@ EndFunc   ;==>_LOWriter_ShapeName
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
-;                  @Error 1 @Extended 3 Return 0 = $iPoint not an Integer, less than 0 or greater than number of points in the shape.
-;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer
-;                  @Error 1 @Extended 6 Return 0 = $iPointType not an Integer, less than 0 or greater than 3, or equal to 2. See constants $LOW_SHAPE_POINT_TYPE_* as defined in LibreOfficeWriter_Constants.au3
-;                  @Error 1 @Extended 7 Return 0 = $bIsCurve not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = First or Last Points in a shape can only be a "Normal" type point.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
+;                  @Error 1 @Extended 3 = $iPoint not an Integer, less than 0 or greater than number of points in the shape.
+;                  @Error 1 @Extended 4 = $iX not an Integer.
+;                  @Error 1 @Extended 5 = $iY not an Integer
+;                  @Error 1 @Extended 6 = $iPointType not an Integer, less than 0 or greater than 3, or equal to 2. See constants $LOW_SHAPE_POINT_TYPE_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error 1 @Extended 7 = $bIsCurve not a Boolean.
+;                  @Error 1 @Extended 8 = First or Last Points in a shape can only be a "Normal" type point.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a new Position Point Structure.
-;                  @Error 2 @Extended 2 Return 0 = Failed to Create a new Position Point Structure for the First Control Point.
-;                  @Error 2 @Extended 3 Return 0 = Failed to Create a new Position Point Structure for the Second Control Point.
-;                  @Error 2 @Extended 4 Return 0 = Failed to Create a new Position Point Structure for the Third Control Point.
-;                  @Error 2 @Extended 5 Return 0 = Failed to Create a new Position Point Structure for the Fourth Control Point.
+;                  @Error 2 @Extended 1 = Failed to Create a new Position Point Structure.
+;                  @Error 2 @Extended 2 = Failed to Create a new Position Point Structure for the First Control Point.
+;                  @Error 2 @Extended 3 = Failed to Create a new Position Point Structure for the Second Control Point.
+;                  @Error 2 @Extended 4 = Failed to Create a new Position Point Structure for the Third Control Point.
+;                  @Error 2 @Extended 5 = Failed to Create a new Position Point Structure for the Fourth Control Point.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to Retrieve Array of Point Type Flags.
-;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Array of Points.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify the requested Array element.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify the next normal Point in the Array of Points.
-;                  @Error 3 @Extended 5 Return 0 = Failed to Retrieve PolyPolygonBezier Structure.
+;                  @Error 3 @Extended 1 = Failed to Retrieve Array of Point Type Flags.
+;                  @Error 3 @Extended 2 = Failed to Retrieve Array of Points.
+;                  @Error 3 @Extended 3 = Failed to identify the requested Array element.
+;                  @Error 3 @Extended 4 = Failed to identify the next normal Point in the Array of Points.
+;                  @Error 3 @Extended 5 = Failed to Retrieve PolyPolygonBezier Structure.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. New Position Point was successfully added to the Shape.
 ; Author ........: donnyh13
@@ -2044,10 +2044,10 @@ EndFunc   ;==>_LOWriter_ShapePointsAdd
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to Retrieve Array of Point Type Flags.
+;                  @Error 3 @Extended 1 = Failed to Retrieve Array of Point Type Flags.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning total number of points present in a shape.
 ; Author ........: donnyh13
@@ -2093,22 +2093,22 @@ EndFunc   ;==>_LOWriter_ShapePointsGetCount
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
-;                  @Error 1 @Extended 3 Return 0 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
-;                  @Error 1 @Extended 4 Return 0 = $iX not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iY not an Integer
-;                  @Error 1 @Extended 6 Return 0 = $PointType not an Integer, less than 0 or greater than 3, or equal to 2.
-;                  @Error 1 @Extended 7 Return 0 = $PointType called with other than Normal while $iPoint is referencing first or last point.
-;                  @Error 1 @Extended 8 Return 0 = $bIsCurve not a Boolean.
-;                  @Error 1 @Extended 9 Return 0 = $bIsCurve cannot be set for last point in a shape.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
+;                  @Error 1 @Extended 3 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
+;                  @Error 1 @Extended 4 = $iX not an Integer.
+;                  @Error 1 @Extended 5 = $iY not an Integer
+;                  @Error 1 @Extended 6 = $PointType not an Integer, less than 0 or greater than 3, or equal to 2.
+;                  @Error 1 @Extended 7 = $PointType called with other than Normal while $iPoint is referencing first or last point.
+;                  @Error 1 @Extended 8 = $bIsCurve not a Boolean.
+;                  @Error 1 @Extended 9 = $bIsCurve cannot be set for last point in a shape.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to Retrieve Array of Point Type Flags.
-;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Array of Points.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify the requested Array element.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve current settings for requested point.
-;                  @Error 3 @Extended 5 Return 0 = Failed to modify the requested point.
-;                  @Error 3 @Extended 6 Return 0 = Failed to Retrieve PolyPolygonBezier Structure.
+;                  @Error 3 @Extended 1 = Failed to Retrieve Array of Point Type Flags.
+;                  @Error 3 @Extended 2 = Failed to Retrieve Array of Points.
+;                  @Error 3 @Extended 3 = Failed to identify the requested Array element.
+;                  @Error 3 @Extended 4 = Failed to retrieve current settings for requested point.
+;                  @Error 3 @Extended 5 = Failed to modify the requested point.
+;                  @Error 3 @Extended 6 = Failed to Retrieve PolyPolygonBezier Structure.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2218,20 +2218,20 @@ EndFunc   ;==>_LOWriter_ShapePointsModify
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
-;                  @Error 1 @Extended 3 Return 0 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
+;                  @Error 1 @Extended 3 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a new Position Point Structure for the Second Control Point.
-;                  @Error 2 @Extended 2 Return 0 = Failed to Create a new Position Point Structure for the Third Control Point.
-;                  @Error 2 @Extended 3 Return 0 = Failed to Create a new Position Point Structure for the Fourth Control Point.
+;                  @Error 2 @Extended 1 = Failed to Create a new Position Point Structure for the Second Control Point.
+;                  @Error 2 @Extended 2 = Failed to Create a new Position Point Structure for the Third Control Point.
+;                  @Error 2 @Extended 3 = Failed to Create a new Position Point Structure for the Fourth Control Point.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to Retrieve Array of Point Type Flags.
-;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Array of Points.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify the requested Array element.
-;                  @Error 3 @Extended 4 Return 0 = Failed to identify the next normal Point in the Array of Points.
-;                  @Error 3 @Extended 5 Return 0 = Failed to identify the Previous normal Point in the Array of Points.
-;                  @Error 3 @Extended 6 Return 0 = Failed to Retrieve PolyPolygonBezier Structure.
+;                  @Error 3 @Extended 1 = Failed to Retrieve Array of Point Type Flags.
+;                  @Error 3 @Extended 2 = Failed to Retrieve Array of Points.
+;                  @Error 3 @Extended 3 = Failed to identify the requested Array element.
+;                  @Error 3 @Extended 4 = Failed to identify the next normal Point in the Array of Points.
+;                  @Error 3 @Extended 5 = Failed to identify the Previous normal Point in the Array of Points.
+;                  @Error 3 @Extended 6 = Failed to Retrieve PolyPolygonBezier Structure.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Position Point was successfully deleted from the Shape.
 ; Author ........: donnyh13
@@ -2550,14 +2550,14 @@ EndFunc   ;==>_LOWriter_ShapePointsRemove
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iX not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $bProtectPos not a Boolean.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $iX not an Integer.
+;                  @Error 1 @Extended 3 = $iY not an Integer.
+;                  @Error 1 @Extended 4 = $bProtectPos not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape's Position Structure.
+;                  @Error 3 @Extended 1 = Failed to retrieve Shape's Position Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iX
 ;                  |                               2 = Error setting $iY
 ;                  |                               4 = Error setting $bProtectPos
@@ -2629,11 +2629,11 @@ EndFunc   ;==>_LOWriter_ShapePosition
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $nRotate not a Number, less than 0 or greater than 359.99.
-;                  @Error 1 @Extended 3 Return 0 = $nSlant not a Number, less than -89 or greater than 89.00.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $nRotate not a Number, less than 0 or greater than 359.99.
+;                  @Error 1 @Extended 3 = $nSlant not a Number, less than -89 or greater than 89.00.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nRotate
 ;                  |                               2 = Error setting $nSlant
 ;                  --Success--
@@ -2691,9 +2691,9 @@ EndFunc   ;==>_LOWriter_ShapeRotateSlant
 ; Return values .: Success: 2D Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Shapes Object.
+;                  @Error 3 @Extended 1 = Error retrieving Shapes Object.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning 2D Array of Shape names contained in a document, the first column ($aArray[0][0] contains the shape name, the second column ($aArray[0][1] contains the shape's Type. See Remarks.
 ; Author ........: donnyh13
@@ -2745,13 +2745,13 @@ EndFunc   ;==>_LOWriter_ShapesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bTextBox not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sContent not a String.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $bTextBox not a Boolean.
+;                  @Error 1 @Extended 3 = $sContent not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Shape called in $oShape does not support "com.sun.star.drawing.CustomShape", and does not support adding a TextBox.
+;                  @Error 3 @Extended 1 = Shape called in $oShape does not support "com.sun.star.drawing.CustomShape", and does not support adding a TextBox.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bTextBox
 ;                  |                               2 = Error setting $sContent
 ;                  --Success--
@@ -2823,18 +2823,18 @@ EndFunc   ;==>_LOWriter_ShapeTextBox
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iHorPos not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $bMirror not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $iVertPos not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = $iVertRelation not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 9 Return 0 = $bKeepInside not a Boolean.
-;                  @Error 1 @Extended 10 Return 0 = $iAnchorPos not an Integer, or not equal to 0, 1 or 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iHorPos not an Integer.
+;                  @Error 1 @Extended 4 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $bMirror not a Boolean.
+;                  @Error 1 @Extended 6 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 = $iVertPos not an Integer.
+;                  @Error 1 @Extended 8 = $iVertRelation not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 9 = $bKeepInside not a Boolean.
+;                  @Error 1 @Extended 10 = $iAnchorPos not an Integer, or not equal to 0, 1 or 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
 ;                  |                               2 = Error setting $iHorPos
 ;                  |                               4 = Error setting $iHorRelation
@@ -3067,14 +3067,14 @@ EndFunc   ;==>_LOWriter_ShapeTypePosition
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWidth not an Integer, or less than 51.
-;                  @Error 1 @Extended 3 Return 0 = $iHeight not an Integer, or less than 51.
-;                  @Error 1 @Extended 4 Return 0 = $bProtectSize not a Boolean.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $iWidth not an Integer, or less than 51.
+;                  @Error 1 @Extended 3 = $iHeight not an Integer, or less than 51.
+;                  @Error 1 @Extended 4 = $bProtectSize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Shape Structure.
+;                  @Error 3 @Extended 1 = Failed to retrieve Shape Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iHeight
 ;                  |                               4 = Error setting $bProtectSize
@@ -3151,16 +3151,16 @@ EndFunc   ;==>_LOWriter_ShapeTypeSize
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iLeft not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iRight not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iBottom not an Integer.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iLeft not an Integer.
+;                  @Error 1 @Extended 4 = $iRight not an Integer.
+;                  @Error 1 @Extended 5 = $iTop not an Integer.
+;                  @Error 1 @Extended 6 = $iBottom not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Property Set Info Object.
+;                  @Error 3 @Extended 1 = Error retrieving Property Set Info Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWrapType
 ;                  |                               2 = Error setting $iLeft
 ;                  |                               4 = Error setting $iRight
@@ -3259,12 +3259,12 @@ EndFunc   ;==>_LOWriter_ShapeWrap
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oShape not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bFirstPar not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bInBackground not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bAllowOverlap not a Boolean.
+;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error 1 @Extended 2 = $bFirstPar not a Boolean.
+;                  @Error 1 @Extended 3 = $bInBackground not a Boolean.
+;                  @Error 1 @Extended 4 = $bAllowOverlap not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bFirstPar
 ;                  |                               2 = Error setting $bInBackground
 ;                  |                               4 = Error setting $bAllowOverlap

@@ -80,28 +80,28 @@
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -159,22 +159,22 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderColor
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iAll not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $Left not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iAll not an Integer.
+;                  @Error 1 @Extended 3 = $iTop not an Integer.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer.
+;                  @Error 1 @Extended 5 = $Left not an Integer.
+;                  @Error 1 @Extended 6 = $iRight not an Integer.
+;                  @Error 1 @Extended 7 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
 ;                  |                               8 = Error setting $iLeft border distance
 ;                  |                               16 = Error setting $iRight border distance
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
@@ -223,28 +223,28 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderPadding
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -301,24 +301,24 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderStyle
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, or less than 0.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 3 = $iTop not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, or less than 0.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, or less than 0.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -375,15 +375,15 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderWidth
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $bOutline not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bShadow not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOW_CHAR_CASEMAP_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 4 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $bOutline not a Boolean.
+;                  @Error 1 @Extended 6 = $bShadow not a Boolean.
+;                  @Error 1 @Extended 7 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iCase
 ;                  |                               2 = Error setting $bHidden
 ;                  |                               4 = Error setting $iRelief
@@ -459,13 +459,13 @@ EndFunc   ;==>_LOWriter_DirFrmtCharEffect
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iSuperScript not an Integer, less than -1 or greater than 100.
-;                  @Error 1 @Extended 3 Return 0 = $iSubScript not an Integer, less than -1 or greater than 100.
-;                  @Error 1 @Extended 4 Return 0 = $iRelativeSize not an Integer, less than 1 or greater than 100.
-;                  @Error 1 @Extended 5 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iSuperScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 3 = $iSubScript not an Integer, less than -1 or greater than 100.
+;                  @Error 1 @Extended 4 = $iRelativeSize not an Integer, less than 1 or greater than 100.
+;                  @Error 1 @Extended 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iSuperScript
 ;                  |                               2 = Error setting $iSubScript
 ;                  |                               4 = Error setting $iRelativeSize.
@@ -517,13 +517,13 @@ EndFunc   ;==>_LOWriter_DirFrmtCharPosition
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iRotation not an Integer or not equal to 0, 90 or 270 degrees.
-;                  @Error 1 @Extended 3 Return 0 = $iScaleWidth not an Integer or less than 1% or greater than 100%.
-;                  @Error 1 @Extended 4 Return 0 = $bRotateFitLine not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iRotation not an Integer or not equal to 0, 90 or 270 degrees.
+;                  @Error 1 @Extended 3 = $iScaleWidth not an Integer or less than 1% or greater than 100%.
+;                  @Error 1 @Extended 4 = $bRotateFitLine not a Boolean.
+;                  @Error 1 @Extended 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iRotation
 ;                  |                               2 = Error setting $iScaleWidth
 ;                  |                               4 = Error setting $bRotateFitLine
@@ -594,21 +594,21 @@ EndFunc   ;==>_LOWriter_DirFrmtCharRotateScale
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iWidth not an Integer.
+;                  @Error 1 @Extended 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Shadow format Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Shadow format Object for Error checking.
+;                  @Error 3 @Extended 1 = Error retrieving Shadow format Object.
+;                  @Error 3 @Extended 2 = Error retrieving Shadow format Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.2.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.2.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -654,12 +654,12 @@ EndFunc   ;==>_LOWriter_DirFrmtCharShadow
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bAutoKerning not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $nKerning not a number, less than -2 or greater than 928.8 Points.
-;                  @Error 1 @Extended 4 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $bAutoKerning not a Boolean.
+;                  @Error 1 @Extended 3 = $nKerning not a number, less than -2 or greater than 928.8 Points.
+;                  @Error 1 @Extended 4 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoKerning
 ;                  |                               2 = Error setting $nKerning.
 ;                  --Success--
@@ -717,16 +717,16 @@ EndFunc   ;==>_LOWriter_DirFrmtCharSpacing
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
-;                  @Error 1 @Extended 4 Return 0 = $oSelection is a Table Cursor, which is not supported.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not an Object.
+;                  @Error 1 @Extended 3 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 4 = $oSelection is a Table Cursor, which is not supported.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;                  @Error 2 @Extended 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to determine $oSelection's cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to backup Viewcursor's position.
+;                  @Error 3 @Extended 1 = Failed to determine $oSelection's cursor type.
+;                  @Error 3 @Extended 2 = Failed to backup Viewcursor's position.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Direct Formatting was successfully cleared.
 ; Author ........: donnyh13
@@ -790,15 +790,15 @@ EndFunc   ;==>_LOWriter_DirFrmtClear
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFontName not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sFontName not available in current document.
-;                  @Error 1 @Extended 4 Return 0 = $nFontSize not a Number.
-;                  @Error 1 @Extended 5 Return 0 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iWeight less than 50 and not 0, or more than 200. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $sFontName not a String.
+;                  @Error 1 @Extended 3 = $sFontName not available in current document.
+;                  @Error 1 @Extended 4 = $nFontSize not a Number.
+;                  @Error 1 @Extended 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iWeight less than 50 and not 0, or more than 200. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 7 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sFontName
 ;                  |                               2 = Error setting $nFontSize
 ;                  |                               4 = Error setting $iPosture
@@ -869,20 +869,20 @@ EndFunc   ;==>_LOWriter_DirFrmtFont
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iFontColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 3 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100%.
-;                  @Error 1 @Extended 4 Return 0 = $iHighlight not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 3 = $iTransparency not an Integer, less than 0 or greater than 100%.
+;                  @Error 1 @Extended 4 = $iHighlight not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve old Transparency value.
+;                  @Error 3 @Extended 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $FontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 7.0.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 7.0.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
@@ -942,9 +942,9 @@ EndFunc   ;==>_LOWriter_DirFrmtFontColor
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection does not support Paragraph Properties service.
-;                  @Error 1 @Extended 3 Return 0 = $oSelection does not support Character Properties service.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $oSelection does not support Paragraph Properties service.
+;                  @Error 1 @Extended 3 = $oSelection does not support Character Properties service.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Array = Success. Returning a 4 element array in the following order: Paragraph Style Name, Character Style Name, Page Style Name, Numbering Style Name. See Remarks.
 ; Author ........: donnyh13
@@ -980,13 +980,13 @@ EndFunc   ;==>_LOWriter_DirFrmtGetCurStyles
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iOLColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iOverLineStyle
 ;                  |                               2 = Error setting $iOLColor
 ;                  |                               4 = Error setting $bWordOnly
@@ -1053,16 +1053,16 @@ EndFunc   ;==>_LOWriter_DirFrmtOverLine
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_ALIGN_HOR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 4. See Constants, $LOW_PAR_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $bExpandSingleWord not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $bSnapToGrid not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 8 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_ALIGN_HOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iVertAlign not an Integer, less than 0 or greater than 4. See Constants, $LOW_PAR_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LAST_LINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $bExpandSingleWord not a Boolean.
+;                  @Error 1 @Extended 6 = $bSnapToGrid not a Boolean.
+;                  @Error 1 @Extended 7 = $iTxtDirection not an Integer, less than 0 or greater than 5. See constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 8 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
 ;                  |                               2 = Error setting $iVertAlign
 ;                  |                               4 = Error setting $iLastLineALign
@@ -1144,14 +1144,14 @@ EndFunc   ;==>_LOWriter_DirFrmtParAlignment
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 3 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 3 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current background color.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve TextParagraph Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve current background color.
+;                  @Error 3 @Extended 2 = Failed to retrieve TextParagraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -1197,11 +1197,11 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaColor
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Fill Style.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve TextParagraph Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
+;                  @Error 3 @Extended 2 = Failed to retrieve TextParagraph Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
@@ -1254,28 +1254,28 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaFillStyle
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sGradientName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
-;                  @Error 1 @Extended 6 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 9 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 Return 0 = $iFromColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 11 Return 0 = $iToColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 Return 0 = $iFromIntense not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 13 Return 0 = $iToIntense not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 14 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not an Object.
+;                  @Error 1 @Extended 3 = $sGradientName not a String.
+;                  @Error 1 @Extended 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
+;                  @Error 1 @Extended 6 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 7 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 8 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error 1 @Extended 9 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 10 = $iFromColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 11 = $iToColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 12 = $iFromIntense not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 13 = $iToIntense not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 14 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Gradient Name.
-;                  @Error 3 @Extended 5 Return 0 = Failed to retrieve TextParagraph Object.
+;                  @Error 3 @Extended 1 = Error retrieving "FillGradient" Object.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Error creating Gradient Name.
+;                  @Error 3 @Extended 4 = Error setting Gradient Name.
+;                  @Error 3 @Extended 5 = Failed to retrieve TextParagraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -1339,23 +1339,23 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops contains less than two rows.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
 ;                  @Error 1 @Extended 4 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
 ;                  @Error 1 @Extended 5 Return ? = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
-;                  @Error 1 @Extended 6 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 6 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve TextParagraph Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve FillGradient Struct.
+;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
+;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error 3 @Extended 4 = Failed to retrieve TextParagraph Object.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
@@ -1402,14 +1402,14 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 3 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error 1 @Extended 3 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve TextParagraph Object.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Transparency value.
+;                  @Error 3 @Extended 2 = Failed to retrieve TextParagraph Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
@@ -1462,28 +1462,28 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaTransparency
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1541,15 +1541,15 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderColor
 ; Return values .: Success: Integer or Array, see Remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iAll not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $Left not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iAll not an Integer.
+;                  @Error 1 @Extended 3 = $iTop not an Integer.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer.
+;                  @Error 1 @Extended 5 = $Left not an Integer.
+;                  @Error 1 @Extended 6 = $iRight not an Integer.
+;                  @Error 1 @Extended 7 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
@@ -1601,28 +1601,28 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderPadding
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error 3 @Extended 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error 3 @Extended 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1680,26 +1680,26 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderStyle
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, or less than 0.
-;                  @Error 1 @Extended 7 Return 0 = $bConnectBorder not a Boolean.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 3 = $iTop not an Integer, or less than 0.
+;                  @Error 1 @Extended 4 = $iBottom not an Integer, or less than 0.
+;                  @Error 1 @Extended 5 = $iLeft not an Integer, or less than 0.
+;                  @Error 1 @Extended 6 = $iRight not an Integer, or less than 0.
+;                  @Error 1 @Extended 7 = $bConnectBorder not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  |                               16 = Error setting $bConnectBorder
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
@@ -1789,19 +1789,19 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderWidth
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iNumChar not an Integer, less than 0 or greater than 9.
-;                  @Error 1 @Extended 4 Return 0 = $iLines not an Integer, less than 0, equal to 1 or greater than 9
-;                  @Error 1 @Extended 5 Return 0 = $iSpaceTxt not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 Return 0 = $bWholeWord not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $sCharStyle not a String.
-;                  @Error 1 @Extended 8 Return 0 = Character Style called in $sCharStyle not found in current document.
-;                  @Error 1 @Extended 9 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not an Object.
+;                  @Error 1 @Extended 3 = $iNumChar not an Integer, less than 0 or greater than 9.
+;                  @Error 1 @Extended 4 = $iLines not an Integer, less than 0, equal to 1 or greater than 9
+;                  @Error 1 @Extended 5 = $iSpaceTxt not an Integer, or less than 0.
+;                  @Error 1 @Extended 6 = $bWholeWord not a Boolean.
+;                  @Error 1 @Extended 7 = $sCharStyle not a String.
+;                  @Error 1 @Extended 8 = Character Style called in $sCharStyle not found in current document.
+;                  @Error 1 @Extended 9 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving DropCap Format Object.
+;                  @Error 3 @Extended 1 = Error retrieving DropCap Format Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iNumChar
 ;                  |                               2 = Error setting $iLines
 ;                  |                               4 = Error setting $iSpcTxt
@@ -1857,22 +1857,22 @@ EndFunc   ;==>_LOWriter_DirFrmtParDropCaps
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bAutoHyphen not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bHyphenNoCaps not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iMaxHyphens not an Integer, less than 0 or greater than 99.
-;                  @Error 1 @Extended 5 Return 0 = $iMinLeadingChar not an Integer, less than 2 or greater than 9.
-;                  @Error 1 @Extended 6 Return 0 = $iMinTrailingChar not an Integer, less than 2 or greater than 9.
-;                  @Error 1 @Extended 7 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $bAutoHyphen not a Boolean.
+;                  @Error 1 @Extended 3 = $bHyphenNoCaps not a Boolean.
+;                  @Error 1 @Extended 4 = $iMaxHyphens not an Integer, less than 0 or greater than 99.
+;                  @Error 1 @Extended 5 = $iMinLeadingChar not an Integer, less than 2 or greater than 9.
+;                  @Error 1 @Extended 6 = $iMinTrailingChar not an Integer, less than 2 or greater than 9.
+;                  @Error 1 @Extended 7 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoHyphen
 ;                  |                               2 = Error setting $bHyphenNoCaps
 ;                  |                               4 = Error setting $iMaxHyphens
 ;                  |                               8 = Error setting $iMinLeadingChar
 ;                  |                               16 = Error setting $iMinTrailingChar
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 6.4.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 6.4.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If the current LibreOffice Version is below 6.4, the $bHyphenNoCaps parameter will return a Null value.
@@ -1920,14 +1920,14 @@ EndFunc   ;==>_LOWriter_DirFrmtParHyphenation
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iBeforeText not an Integer, less than -9998989 or greater than 17094.
-;                  @Error 1 @Extended 3 Return 0 = $iAfterText not an Integer, less than -9998989 or greater than 17094.
-;                  @Error 1 @Extended 4 Return 0 = $iFirstLine not an Integer, less than -57785 or greater than 17094.
-;                  @Error 1 @Extended 5 Return 0 = $bAutoFirstLine not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iBeforeText not an Integer, less than -9998989 or greater than 17094.
+;                  @Error 1 @Extended 3 = $iAfterText not an Integer, less than -9998989 or greater than 17094.
+;                  @Error 1 @Extended 4 = $iFirstLine not an Integer, less than -57785 or greater than 17094.
+;                  @Error 1 @Extended 5 = $bAutoFirstLine not a Boolean.
+;                  @Error 1 @Extended 6 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBeforeTxt
 ;                  |                               2 = Error setting $iAfterTxt
 ;                  |                               4 = Error setting $iFirstLine
@@ -1982,16 +1982,16 @@ EndFunc   ;==>_LOWriter_DirFrmtParIndent
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iOutline not an Integer, less than 0 or greater than 10. See Constants, $LOW_PAR_OUTLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $sNumStyle not a String.
-;                  @Error 1 @Extended 5 Return 0 = Numbering Style called in $sNumStyle not found in document.
-;                  @Error 1 @Extended 6 Return 0 = $bParLineCount not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iLineCountVal not an Integer, or less than 0.
-;                  @Error 1 @Extended 8 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not an Object.
+;                  @Error 1 @Extended 3 = $iOutline not an Integer, less than 0 or greater than 10. See Constants, $LOW_PAR_OUTLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $sNumStyle not a String.
+;                  @Error 1 @Extended 5 = Numbering Style called in $sNumStyle not found in document.
+;                  @Error 1 @Extended 6 = $bParLineCount not a Boolean.
+;                  @Error 1 @Extended 7 = $iLineCountVal not an Integer, or less than 0.
+;                  @Error 1 @Extended 8 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iOutline
 ;                  |                               2 = Error setting $sNumStyle
 ;                  |                               4 = Error setting $bParLineCount
@@ -2065,15 +2065,15 @@ EndFunc   ;==>_LOWriter_DirFrmtParOutLineAndList
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iBreakType not an Integer, less than 0 or greater than 6. See Constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $sPageStyle not a String.
-;                  @Error 1 @Extended 5 Return 0 = Page Style called in $sPageStyle not found in document.
-;                  @Error 1 @Extended 6 Return 0 = $iPgNumOffSet not an Integer, or less than 0.
-;                  @Error 1 @Extended 7 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not an Object.
+;                  @Error 1 @Extended 3 = $iBreakType not an Integer, less than 0 or greater than 6. See Constants, $LOW_BREAK_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 4 = $sPageStyle not a String.
+;                  @Error 1 @Extended 5 = Page Style called in $sPageStyle not found in document.
+;                  @Error 1 @Extended 6 = $iPgNumOffSet not an Integer, or less than 0.
+;                  @Error 1 @Extended 7 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBreakType
 ;                  |                               2 = Error setting $sPageStyle
 ;                  |                               4 = Error setting $iPgNumOffSet
@@ -2131,16 +2131,16 @@ EndFunc   ;==>_LOWriter_DirFrmtParPageBreak
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $iWidth not an Integer, or less than 0.
+;                  @Error 1 @Extended 5 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Shadow Format Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Shadow Format Object for Error checking.
+;                  @Error 3 @Extended 1 = Error retrieving Shadow Format Object.
+;                  @Error 3 @Extended 2 = Error retrieving Shadow Format Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -2192,21 +2192,21 @@ EndFunc   ;==>_LOWriter_DirFrmtParShadow
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iAbovePar not an Integer, less than 0 or greater than 10008.
-;                  @Error 1 @Extended 3  Return 0 = $iBelowPar not an Integer, less than 0 or greater than 10008.
-;                  @Error 1 @Extended 4 Return 0 = $bAddSpc not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iLineSpcMode Not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iLineSpcHeight not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iLineSpcMode set to 0 (Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
-;                  @Error 1 @Extended 8 Return 0 = $iLineSpcMode set to 1 or 2 (Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 10008.
-;                  @Error 1 @Extended 9 Return 0 = $iLineSpcMode set to 3(Fixed) and $iLineSpcHeight less than 51 or greater than 10008.
-;                  @Error 1 @Extended 10 Return 0 = $bPageLineSpc not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iAbovePar not an Integer, less than 0 or greater than 10008.
+;                  @Error 1 @Extended 3 = $iBelowPar not an Integer, less than 0 or greater than 10008.
+;                  @Error 1 @Extended 4 = $bAddSpc not a Boolean.
+;                  @Error 1 @Extended 5 = $iLineSpcMode Not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iLineSpcHeight not an Integer.
+;                  @Error 1 @Extended 7 = $iLineSpcMode set to 0 (Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
+;                  @Error 1 @Extended 8 = $iLineSpcMode set to 1 or 2 (Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 10008.
+;                  @Error 1 @Extended 9 = $iLineSpcMode set to 3(Fixed) and $iLineSpcHeight less than 51 or greater than 10008.
+;                  @Error 1 @Extended 10 = $bPageLineSpc not a Boolean.
+;                  @Error 1 @Extended 11 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ParaLineSpacing Object.
+;                  @Error 3 @Extended 1 = Error retrieving ParaLineSpacing Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAbovePar
 ;                  |                               2 = Error setting $iBelowPar
 ;                  |                               4 = Error setting $bAddSpace
@@ -2214,7 +2214,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParShadow
 ;                  |                               16 = Error setting $iLineSpcHeight
 ;                  |                               32 = Error setting bPageLineSpc
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.6.
+;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters. If the LibreOffice version is below 3.6, the $bAddSpace parameter will return a Null value.
@@ -2296,19 +2296,19 @@ EndFunc   ;==>_LOWriter_DirFrmtParSpace
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iPosition not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = Tab Stop position called in $iPosition already exists in this Paragraph.
-;                  @Error 1 @Extended 4 Return 0 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOW_PAR_TAB_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iDecChar not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iFillChar not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iPosition not an Integer.
+;                  @Error 1 @Extended 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
+;                  @Error 1 @Extended 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOW_PAR_TAB_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 5 = $iDecChar not an Integer.
+;                  @Error 1 @Extended 6 = $iFillChar not an Integer.
+;                  @Error 1 @Extended 7 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.style.TabStop" Object.
+;                  @Error 2 @Extended 1 = Error creating "com.sun.star.style.TabStop" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ParaTabStops Array Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving list of TabStop Positions.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify the new Tabstop position once inserted.
+;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Array Object.
+;                  @Error 3 @Extended 2 = Error retrieving list of TabStop Positions.
+;                  @Error 3 @Extended 3 = Failed to identify the new Tabstop position once inserted.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? Return Integer = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
@@ -2349,14 +2349,14 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopCreate
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTabStop not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iTabStop not found in this Paragraph.
-;                  @Error 1 @Extended 5 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not an Object.
+;                  @Error 1 @Extended 3 = $iTabStop not an Integer.
+;                  @Error 1 @Extended 4 = $iTabStop not found in this Paragraph.
+;                  @Error 1 @Extended 5 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ParaTabStops Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to identify and delete TabStop in Paragraph.
+;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Object.
+;                  @Error 3 @Extended 2 = Failed to identify and delete TabStop in Paragraph.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Returning True if the TabStop was successfully deleted.
 ; Author ........: donnyh13
@@ -2392,21 +2392,21 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopDelete
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTabStop not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = TabStop called in $iTabStop not found in this Paragraph or selection.
-;                  @Error 1 @Extended 4 Return 0 = $iPosition not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOW_PAR_TAB_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iDecChar not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iFillChar not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iTabStop not an Integer.
+;                  @Error 1 @Extended 3 = TabStop called in $iTabStop not found in this Paragraph or selection.
+;                  @Error 1 @Extended 4 = $iPosition not an Integer.
+;                  @Error 1 @Extended 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOW_PAR_TAB_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 6 = $iDecChar not an Integer.
+;                  @Error 1 @Extended 7 = $iFillChar not an Integer.
+;                  @Error 1 @Extended 8 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ParaTabStops Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Requested TabStop Object.
-;                  @Error 3 @Extended 3 Return 0 = Paragraph style already contains a TabStop at the length/Position specified in $iPosition.
-;                  @Error 3 @Extended 4 Return 0 = Error retrieving list of TabStop Positions.
+;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Object.
+;                  @Error 3 @Extended 2 = Error retrieving Requested TabStop Object.
+;                  @Error 3 @Extended 3 = Paragraph style already contains a TabStop at the length/Position specified in $iPosition.
+;                  @Error 3 @Extended 4 = Error retrieving list of TabStop Positions.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
 ;                  |                               2 = Error setting $iAlignment
 ;                  |                               4 = Error setting $iDecChar
@@ -2459,10 +2459,10 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopMod
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ParaTabStops Object.
+;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Object.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. An Array of TabStops. @Extended set to number of results.
 ; Author ........: donnyh13
@@ -2495,14 +2495,14 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopsGetList
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bParSplit not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bKeepTogether not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $iParOrphans not an Integer, less than 0, equal to 1, or greater than 9.
-;                  @Error 1 @Extended 5 Return 0 = $iParWidows not an Integer, less than 0, equal to 1, or greater than 9.
-;                  @Error 1 @Extended 6 Return 0 = $oSelection not a Cursor Object and not a Paragraph portion Object.
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $bParSplit not a Boolean.
+;                  @Error 1 @Extended 3 = $bKeepTogether not a Boolean.
+;                  @Error 1 @Extended 4 = $iParOrphans not an Integer, less than 0, equal to 1, or greater than 9.
+;                  @Error 1 @Extended 5 = $iParWidows not an Integer, less than 0, equal to 1, or greater than 9.
+;                  @Error 1 @Extended 6 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bParSplit
 ;                  |                               2 = Error setting $bKeepTogether
 ;                  |                               4 = Error setting $iParOrphans
@@ -2571,12 +2571,12 @@ EndFunc   ;==>_LOWriter_DirFrmtParTxtFlowOpt
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 4 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iStrikeLineStyle
 ;                  |                               2 = Error setting $bWordOnly
 ;                  --Success--
@@ -2635,13 +2635,13 @@ EndFunc   ;==>_LOWriter_DirFrmtStrikeOut
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oSelection not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iULColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $bWordOnly not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  @Error 1 @Extended 1 = $oSelection not an Object.
+;                  @Error 1 @Extended 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error 1 @Extended 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error 1 @Extended 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iUnderLineStyle
 ;                  |                               2 = Error setting $iULColor
 ;                  |                               4 = Error setting $bWordOnly
