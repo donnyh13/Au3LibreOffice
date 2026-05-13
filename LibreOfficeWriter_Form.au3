@@ -7261,7 +7261,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $iX                  - [optional] Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iAnchor             - [optional](0-4) Default is Null. The anchoring position for the Control. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iAnchor             - [optional] (0-4) Default is Null. The anchoring position for the Control. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bProtectPos         - [optional] Default is Null. If True, the Shape's position is locked.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

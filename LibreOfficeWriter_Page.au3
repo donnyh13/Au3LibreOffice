@@ -184,7 +184,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaFillStyle
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See Constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient that you want to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iIncrement          - [optional] (0,3-256) Default is Null. Specifies the number of steps of change color. 0 = Automatic.
+;                  $iIncrement          - [optional] (0, 3-256) Default is Null. Specifies the number of steps of change color. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -1930,7 +1930,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaFillStyle
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See Constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient that you want to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iIncrement          - [optional] (0,3-256) Default is Null. Specifies the number of steps of change color. 0 = Automatic.
+;                  $iIncrement          - [optional] (0, 3-256) Default is Null. Specifies the number of steps of change color. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -3513,7 +3513,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaFillStyle
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See Constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient type that you want to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iIncrement          - [optional] (0,3-256) Default is Null. Specifies the number of steps of change color. 0 = Automatic.
+;                  $iIncrement          - [optional] (0, 3-256) Default is Null. Specifies the number of steps of change color. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".

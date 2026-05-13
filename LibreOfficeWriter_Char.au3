@@ -887,7 +887,7 @@ EndFunc   ;==>_LOWriter_CharStylePosition
 ; Description ...: Set or retrieve the character rotational and Scale settings for a Character Style.
 ; Syntax ........: _LOWriter_CharStyleRotateScale(ByRef $oCharStyle[, $iRotation = Null[, $iScaleWidth = Null]])
 ; Parameters ....: $oCharStyle          - A Character Style object returned by a previous _LOWriter_CharStyleCreate, or _LOWriter_CharStyleGetObjByName, function.
-;                  $iRotation           - [optional] (0,90,270) Default is Null. Degrees to rotate the text.
+;                  $iRotation           - [optional] (0, 90, 270) Default is Null. Degrees to rotate the text.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100% is a normal sizing.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

@@ -159,7 +159,7 @@ EndFunc   ;==>_LOWriter_ImageAreaFillStyle
 ;                  $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See Constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iIncrement          - [optional] (0,3-256) Default is Null. Specifies the number of steps of change color. 0 = Automatic.
+;                  $iIncrement          - [optional] (0, 3-256) Default is Null. Specifies the number of steps of change color. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -1587,7 +1587,7 @@ EndFunc   ;==>_LOWriter_ImageHyperlink
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sImage              - The file path to the image to insert.
 ;                  $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
-;                  $iAnchorType         - [optional] (0-2,4) Default is $LOW_ANCHOR_AT_CHARACTER. Specify the anchoring options for the Image. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iAnchorType         - [optional] (0-2, 4) Default is $LOW_ANCHOR_AT_CHARACTER. Specify the anchoring options for the Image. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3
 ;                  $bOverwrite          - [optional] Default is False. If True, any data selected by the cursor is overwritten.
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -2284,7 +2284,7 @@ EndFunc   ;==>_LOWriter_ImageTransparency
 ;                  $iVertPos            - [optional] Default is Null. The vertical position of the Image. set in Hundredths of a Millimeter (HMM). Only valid if $iVertAlign is set to $LOW_ORIENT_VERT_NONE().
 ;                  $iVertRelation       - [optional] (-1-9) Default is Null. The reference point for the selected vertical alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3, and Remarks for acceptable values.
 ;                  $bKeepInside         - [optional] Default is Null. If True, Keeps the Image within the layout boundaries of the text that the Image is anchored to.
-;                  $iAnchorPos          - [optional] (0-2,4) Default is Null. Specify the anchoring options for the Image. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iAnchorPos          - [optional] (0-2, 4) Default is Null. Specify the anchoring options for the Image. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2519,10 +2519,10 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iWidth              - [optional] Default is Null. The width of the Image, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeWidth      - [optional] (0-254) Default is Null. Calculates the width of the Image as a percentage of the width of the page text area. 0 = off.
-;                  $iWidthRelativeTo    - [optional] (0,7) Default is Null. Decides what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
+;                  $iWidthRelativeTo    - [optional] (0, 7) Default is Null. Decides what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $iHeight             - [optional] Default is Null. The height of the Image, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iRelativeHeight     - [optional] (0-254) Default is Null. Calculates the Height of the Image as a percentage of the Height of the page text area. 0 = off.
-;                  $iHeightRelativeTo   - [optional] (0,7) Default is Null. Decides what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
+;                  $iHeightRelativeTo   - [optional] (0, 7) Default is Null. Decides what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $bKeepRatio          - [optional] Default is Null. Maintains the height and width ratio when you change the width or the height setting.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

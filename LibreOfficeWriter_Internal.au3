@@ -660,7 +660,7 @@ EndFunc   ;==>__LOWriter_CharEffect
 ;                  $sFontName           - [optional] Default is Null. The Font Name to change to.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
 ;                  $iPosture            - [optional] (0-5) Default is Null. Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] (0,50-200) Default is Null. Bold settings see Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0, 50-200) Default is Null. Bold settings see Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -999,7 +999,7 @@ EndFunc   ;==>__LOWriter_CharPosition
 ; Description ...: Set or retrieve the character rotational and Scale settings.
 ; Syntax ........: __LOWriter_CharRotateScale(ByRef $oObj[, $iRotation = Null[, $iScaleWidth = Null[, $bRotateFitLine = Null]]])
 ; Parameters ....: $oObj                - An Object that supports "com.sun.star.text.Paragraph" Or "com.sun.star.text.TextPortion" services, such as a Cursor with data selected or paragraph section.
-;                  $iRotation           - [optional] (0,90,270) Default is Null. Degrees to rotate the text.
+;                  $iRotation           - [optional] (0, 90, 270) Default is Null. Degrees to rotate the text.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
 ;                  $bRotateFitLine      - [optional] Default is Null. Default is Null. If True, Stretches or compresses the selected text so that it fits between the line that is above the text and the line that is below the text. Only works with Direct Formatting.
 ; Return values .: Success: 1 or Array.
@@ -9161,7 +9161,7 @@ EndFunc   ;==>__LOWriter_ShapePointGetSettings
 ;                  $iArrayElement       - The Array element that contains the point to modify. This may be directly modified, depending on the settings.
 ;                  $iX                  - [optional] Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
-;                  $iPointType          - [optional] (0,1,3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOW_SHAPE_POINT_TYPE_* as defined in LibreOfficeWriter_Constants.au3
+;                  $iPointType          - [optional] (0, 1, 3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOW_SHAPE_POINT_TYPE_* as defined in LibreOfficeWriter_Constants.au3
 ;                  $bIsCurve            - [optional] Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.

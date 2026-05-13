@@ -511,7 +511,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharPosition
 ; Description ...: Set or retrieve the character rotational and Scale settings by Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtCharRotateScale(ByRef $oSelection[, $iRotation = Null[, $iScaleWidth = Null[, $bRotateFitLine = Null]]])
 ; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iRotation           - [optional] (0,90,270) Default is Null. Degrees to rotate the text.
+;                  $iRotation           - [optional] (0, 90, 270) Default is Null. Degrees to rotate the text.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
 ;                  $bRotateFitLine      - [optional] Default is Null. If True, Stretches or compresses the selected text so that it fits between the line that is above the text and the line that is below the text.
 ; Return values .: Success: Integer or Array.
@@ -1781,7 +1781,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderWidth
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ;                  $iNumChar            - [optional] (0-9) Default is Null. The number of characters to make into DropCaps.
-;                  $iLines              - [optional] (0,2-9) Default is Null. The number of lines to drop down.
+;                  $iLines              - [optional] (0, 2-9) Default is Null. The number of lines to drop down.
 ;                  $iSpcTxt             - [optional] Default is Null. The distance between the drop cap and the following text. In Hundredths of a Millimeter (HMM).
 ;                  $bWholeWord          - [optional] Default is Null. If True, DropCap the whole first word. (Nullifys $iNumChar.)
 ;                  $sCharStyle          - [optional] Default is Null. The character style to use for the DropCaps. See Remarks.
@@ -2490,8 +2490,8 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopsGetList
 ; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ;                  $bParSplit           - [optional] Default is Null. If False, prevents the paragraph from getting split between two pages or columns
 ;                  $bKeepTogether       - [optional] Default is Null. If True, prevents page or column breaks between this and the following paragraph
-;                  $iParOrphans         - [optional](0,2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = disabled.
-;                  $iParWidows          - [optional](0,2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = disabled.
+;                  $iParOrphans         - [optional] (0, 2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = disabled.
+;                  $iParWidows          - [optional] (0, 2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = disabled.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
