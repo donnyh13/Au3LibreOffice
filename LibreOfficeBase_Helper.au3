@@ -130,7 +130,7 @@ EndFunc   ;==>_LOBase_ComError_UserFunction
 ;                  $iHours              - [optional] (0-23) Default is Null. The Hour, as a 2 digit Integer.
 ;                  $iMinutes            - [optional] (0-59) Default is Null. Minutes, as a 2 digit Integer.
 ;                  $iSeconds            - [optional] (0-59) Default is Null. Seconds, as a 2 digit Integer.
-;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
+;                  $iNanoSeconds        - [optional] (0-999,999,999) Default is Null. Nano-Second, as an Integer.
 ;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
@@ -254,7 +254,7 @@ EndFunc   ;==>_LOBase_DateStructCreate
 ;                  $iHours              - [optional] (0-23) Default is Null. The Hour, as a 2 digit Integer.
 ;                  $iMinutes            - [optional] (0-59) Default is Null. Minutes, as a 2 digit Integer.
 ;                  $iSeconds            - [optional] (0-59) Default is Null. Seconds, as a 2 digit Integer.
-;                  $iNanoSeconds        - [optional] an integer value (0-999,999,999). Default is Null. Nano-Second, as an Integer.
+;                  $iNanoSeconds        - [optional] (0-999,999,999) Default is Null. Nano-Second, as an Integer.
 ;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
