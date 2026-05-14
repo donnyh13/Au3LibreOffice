@@ -2776,7 +2776,7 @@ EndFunc   ;==>__LOCalc_RangeAddressIsSame
 ; Return values .: Success: Integer.
 ;                  Failure: Null and sets the @Error and @Extended flags to non-zero.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return Null = No values called in parameters.
+;                  @Error 3 @Extended 1 No values called in parameters.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. The requested Integer value converted from percentage to a RGB Color Integer.
 ;                  @Error 0 @Extended 1 Return Integer = Success. The requested Integer value from a RGB Color Integer to percentage.
@@ -2804,7 +2804,7 @@ Func __LOCalc_TransparencyGradientConvert($iPercentToLong = Null, $iLongToPercen
 
 	Else
 
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, Null)
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	EndIf
 EndFunc   ;==>__LOCalc_TransparencyGradientConvert
 
