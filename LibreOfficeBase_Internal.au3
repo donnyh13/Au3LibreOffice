@@ -37,14 +37,13 @@
 ; Parameters ....: $oNewCol             - A new column Object.
 ;                  $oOldCol             - A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully transferred Column properties.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oNewCol not an Object.
 ;                  @Error 1 @Extended 2 = $oOldCol not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Old Column's Properties.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully transferred Column properties.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -78,12 +77,11 @@ EndFunc   ;==>__LOBase_ColTransferProps
 ; Syntax ........: __LOBase_ColTypeName($iType)
 ; Parameters ....: $iType               - The Column Type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning the Type name corresponding to the Type Constant.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $iType not an Integer, less than -16 or greater than 2014. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error 1 @Extended 2 = $iType not one of the pre-defined constants. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the Type name corresponding to the Type Constant.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -228,11 +226,10 @@ EndFunc   ;==>__LOBase_ColTypeName
 ; Syntax ........: __LOBase_DatabaseMetaGetQuery($iQuery)
 ; Parameters ....: $iQuery              - (0-148) The Query to retrieve the command for. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning the requested Query command.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $iQuery not an Integer, less than 0 or greater than number of query commands. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the requested Query command.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -464,14 +461,13 @@ EndFunc   ;==>__LOBase_InternalComErrorHandler
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
 ;                  $iControlType        - [optional] (1-32) Default is Null. The Control Type Constant. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Integer or String
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning Constant value for Control type.
+;                  @Error 0 @Extended 1 Return String = Success. Returning requested Control type's service name.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oControl not an Object, and $iControlType not an Integer, less than 1 or greater than 32. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to identify Control, or return requested Service name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning Constant value for Control type.
-;                  @Error 0 @Extended 1 Return String = Success. Returning requested Control type's service name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -510,6 +506,8 @@ EndFunc   ;==>__LOBase_ReportConIdentify
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
 ;                  $mFontDesc           - [optional] Default is Null. A Font descriptor Map returned by a previous _LOBase_FontDescCreate or _LOBase_FontDescEdit function.
 ; Return values .: Success: 1 or Map
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Map = Success. All optional parameters were called with Null, returning current settings as a Map.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oControl not an Object.
@@ -530,9 +528,6 @@ EndFunc   ;==>__LOBase_ReportConIdentify
 ;                  |                               2048 = Error setting Font Character Hidden.
 ;                  |                               4096 = Error setting Font Character Contoured.
 ;                  |                               8192 = Error setting Font Character Shadowed.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Map = Success. All optional parameters were called with Null, returning current settings as a Map.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.

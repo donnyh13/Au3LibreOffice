@@ -492,6 +492,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Fix incorrect Constant name in `_LOBase_ReportConImageConData` header.
 - Added missing "See Constants" to applicable variables in headers.
 - Removed "[in/out]", Return (integer, String, 0) and parameter descriptions, such as "a string value", from Header parameter descriptions for chm compatibility.
+- Moved Success values in the header above error values.
 
 #### Fixed
 

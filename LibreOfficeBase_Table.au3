@@ -65,6 +65,7 @@
 ;                  $sColTypeName        - [optional] Default is "". If the column type is a user-defined type, then a fully-qualified type name will be entered here.
 ;                  $sColDesc            - [optional] Default is "". The description text of the new column.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning new Table's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -87,8 +88,6 @@
 ;                  @Error 3 @Extended 4 = Failed to retrieve Columns Object.
 ;                  @Error 3 @Extended 5 = Failed to insert new Table.
 ;                  @Error 3 @Extended 6 = Failed to retrieve New Table's Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning new Table's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The first column created is set as the primary key.
@@ -200,6 +199,7 @@ EndFunc   ;==>_LOBase_TableAdd
 ;                  $sTypeName           - [optional] Default is "". If the column type is a user-defined type, then a fully-qualified type name will be entered here.
 ;                  $sDescription        - [optional] Default is "". The description text of the new column.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted the new column, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -215,8 +215,6 @@ EndFunc   ;==>_LOBase_TableAdd
 ;                  @Error 3 @Extended 2 = Failed to retrieve Columns Object.
 ;                  @Error 3 @Extended 3 = Failed to insert new Column.
 ;                  @Error 3 @Extended 4 = Failed to retrieve new Column's Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted the new column, returning its Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -299,6 +297,8 @@ EndFunc   ;==>_LOBase_TableColAdd
 ;                  $sTypeName           - [optional] Default is Null. If the column type is a user-defined type, then a fully-qualified type name will be entered here.
 ;                  $sDescription        - [optional] Default is Null. The description text of the column.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -322,9 +322,6 @@ EndFunc   ;==>_LOBase_TableColAdd
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $sTypeName
 ;                  |                               8 = Error setting $sDescription
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -418,6 +415,7 @@ EndFunc   ;==>_LOBase_TableColDefinition
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ;                  $oColumn             - A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Column was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -426,8 +424,6 @@ EndFunc   ;==>_LOBase_TableColDefinition
 ;                  @Error 3 @Extended 1 = Failed to retrieve Column Name.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Columns Object.
 ;                  @Error 3 @Extended 3 = Failed to delete Column.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Column was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -466,6 +462,7 @@ EndFunc   ;==>_LOBase_TableColDelete
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ;                  $iIndex              - The Index of the Column to retrieve the Column for. 0 Based.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Column's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -473,8 +470,6 @@ EndFunc   ;==>_LOBase_TableColDelete
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Columns Object
 ;                  @Error 3 @Extended 2 = Failed to retrieve Column Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Column's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -507,6 +502,7 @@ EndFunc   ;==>_LOBase_TableColGetObjByIndex
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ;                  $sName               - The name of the Column to retrieve the Object for.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Column's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -515,8 +511,6 @@ EndFunc   ;==>_LOBase_TableColGetObjByIndex
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Columns Object
 ;                  @Error 3 @Extended 2 = Failed to retrieve Column Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Column's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I found one place online stating more than one column can have the same name, and thus, this could be an unreliable method of obtaining the Column's object, in the case that there are two columns identically named. However I have not been able to reproduce this behavior.
@@ -558,6 +552,8 @@ EndFunc   ;==>_LOBase_TableColGetObjByName
 ;                  $iFormat             - [optional] Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOBase_FormatKeysGetList call, or created by _LOBase_FormatKeyCreate function.
 ;                  $iAlign              - [optional] (0-2) Default is Null. The alignment of the column's text. See Constants, $LOB_COL_TXT_ALIGN_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -587,9 +583,6 @@ EndFunc   ;==>_LOBase_TableColGetObjByName
 ;                  |                               16 = Error setting $bAutoValue
 ;                  |                               32 = Error setting $iFormat
 ;                  |                               64 = Error setting $iAlign
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: For $sDefaultVal, enter any numerical values as strings.
@@ -706,14 +699,13 @@ EndFunc   ;==>_LOBase_TableColProperties
 ; Syntax ........: _LOBase_TableColsGetCount(ByRef $oTable)
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Columns contained in the Table.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Columns Object
 ;                  @Error 3 @Extended 2 = Failed to retrieve count of columns contained in the Table.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Columns contained in the Table.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -745,14 +737,13 @@ EndFunc   ;==>_LOBase_TableColsGetCount
 ; Syntax ........: _LOBase_TableColsGetNames(ByRef $oTable)
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Column names. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Columns Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Array of Column names.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Column names. @Extended is set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -785,6 +776,7 @@ EndFunc   ;==>_LOBase_TableColsGetNames
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ;                  $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Table was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -795,8 +787,6 @@ EndFunc   ;==>_LOBase_TableColsGetNames
 ;                  @Error 3 @Extended 2 = Failed to retrieve Tables Object.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Table name.
 ;                  @Error 3 @Extended 4 = Failed to delete Table.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Table was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -838,14 +828,13 @@ EndFunc   ;==>_LOBase_TableDelete
 ; Parameters ....: $oTableDoc           - A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ;                  $bDeliverOwnership   - [optional] Default is True. If True, deliver ownership of the Table Document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully closed the Table Document.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTableDoc not an Object.
 ;                  @Error 1 @Extended 2 = $bDeliverOwnership not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to close the Table Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully closed the Table Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -875,6 +864,8 @@ EndFunc   ;==>_LOBase_TableDocClose
 ; Syntax ........: _LOBase_TableDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
 ; Parameters ....: $iMode               - [optional] (0-1) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: Object or Array.
+;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Table document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Table Documents. @Extended is set to number of results. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
@@ -888,9 +879,6 @@ EndFunc   ;==>_LOBase_TableDocClose
 ;                  @Error 3 @Extended 3 = Failed to identify Document type.
 ;                  @Error 3 @Extended 4 = Current Document not a Base Table Document.
 ;                  @Error 3 @Extended 5 = No matches found.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Table document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
-;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Table Documents. @Extended is set to number of results. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only Base Table documents are returned using either of the flags.
@@ -963,14 +951,13 @@ EndFunc   ;==>_LOBase_TableDocConnect
 ; Parameters ....: $oTableDoc           - A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTableDoc not an Object.
 ;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Document's name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be one of the following:
@@ -1010,14 +997,13 @@ EndFunc   ;==>_LOBase_TableDocGetName
 ; Syntax ........: _LOBase_TableDocGetRowSet(ByRef $oTableDoc)
 ; Parameters ....: $oTableDoc           - A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning Table's RowSet Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTableDoc not an Object.
 ;                  @Error 1 @Extended 2 = Object called in $oTableDoc not Table opened in viewing/data entry mode.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve RowSet Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning Table's RowSet Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Retrieving the RowSet for the table allows you to manipulate data contained in the Table using _LOBase_SQLResultRowUpdate, etc. functions.
@@ -1049,6 +1035,7 @@ EndFunc   ;==>_LOBase_TableDocGetRowSet
 ;                  $bEdit               - [optional] Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
 ;                  $bHidden             - [optional] Default is False. If True, the Document will be invisible.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened Table Document, returning its object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -1062,8 +1049,6 @@ EndFunc   ;==>_LOBase_TableDocGetRowSet
 ;                  @Error 3 @Extended 2 = Failed to retrieve Tables Object.
 ;                  @Error 3 @Extended 3 = Failed to create a Connection to Database.
 ;                  @Error 3 @Extended 4 = Failed to open Table Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened Table Document, returning its object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1110,6 +1095,7 @@ EndFunc   ;==>_LOBase_TableDocOpenByName
 ;                  $bEdit               - [optional] Default is False. If True, the Table is opened in editing mode to add or remove columns. If False, the table is opened in data viewing mode, to modify Table Data.
 ;                  $bHidden             - [optional] Default is False. If True, the Document will be invisible.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened Table's Document, returning its object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1123,8 +1109,6 @@ EndFunc   ;==>_LOBase_TableDocOpenByName
 ;                  @Error 3 @Extended 2 = Failed to retrieve Table Name.
 ;                  @Error 3 @Extended 3 = Failed to create a Connection to Database.
 ;                  @Error 3 @Extended 4 = Failed to open Table Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully opened Table's Document, returning its object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1169,6 +1153,8 @@ EndFunc   ;==>_LOBase_TableDocOpenByObject
 ; Parameters ....: $oTableDoc           - A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ;                  $bVisible            - [optional] Default is Null. If True, the Table Document will be visible.
 ; Return values .: Success: 1 or Boolean.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning current visibility setting.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTableDoc not an Object.
@@ -1178,9 +1164,6 @@ EndFunc   ;==>_LOBase_TableDocOpenByObject
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning current visibility setting.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1218,6 +1201,7 @@ EndFunc   ;==>_LOBase_TableDocVisible
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ;                  $sName               - The name of the Table to look for.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value indicating if the Database contains a Table by the called name (True) or not.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -1227,8 +1211,6 @@ EndFunc   ;==>_LOBase_TableDocVisible
 ;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Tables Object.
 ;                  @Error 3 @Extended 3 = Failed to query Tables for Table name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value indicating if the Database contains a Table by the called name (True) or not.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1264,6 +1246,7 @@ EndFunc   ;==>_LOBase_TableExists
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ;                  $iTable              - The Index value of the Table to retrieve. 0 Based.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Table's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -1273,8 +1256,6 @@ EndFunc   ;==>_LOBase_TableExists
 ;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Tables Object.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Table Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Table's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1309,6 +1290,7 @@ EndFunc   ;==>_LOBase_TableGetObjByIndex
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ;                  $sName               - The Table's name to retrieve the Object for.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Table's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -1319,8 +1301,6 @@ EndFunc   ;==>_LOBase_TableGetObjByIndex
 ;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Tables Object.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Table Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Table's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1358,6 +1338,7 @@ EndFunc   ;==>_LOBase_TableGetObjByName
 ;                  $avColumns           - A 2 column array of Column names and accompanying Boolean values. See Remarks.
 ;                  $bIsUnique           - [optional] Default is False. If True the Indexed Column(s) can contain only unique entries.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. New Index was successfully added to the Table.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -1373,8 +1354,6 @@ EndFunc   ;==>_LOBase_TableGetObjByName
 ;                  @Error 2 @Extended 2 = Failed to create a Column Descriptor.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to append the new Index.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. New Index was successfully added to the Table.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array called in $avColumns needs to be a 2 Column array, the Column name must be placed in the first (0th) column, and a Boolean value indicating whether the Column should should be sorted Ascending (True) or Descending (False) be found in the second (1st) column.
@@ -1429,6 +1408,7 @@ EndFunc   ;==>_LOBase_TableIndexAdd
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
 ;                  $sName               - The Index name to delete.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted the Index.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -1436,8 +1416,6 @@ EndFunc   ;==>_LOBase_TableIndexAdd
 ;                  @Error 1 @Extended 3 = Table called in $oTable does not contain an Index with the name called in $sName.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to delete the Index.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted the Index.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1465,13 +1443,12 @@ EndFunc   ;==>_LOBase_TableIndexDelete
 ; Syntax ........: _LOBase_TableIndexesGetCount(ByRef $oTable)
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Indexes contained in the Table.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Index Count.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Indexes contained in the Table.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1499,13 +1476,12 @@ EndFunc   ;==>_LOBase_TableIndexesGetCount
 ; Syntax ........: _LOBase_TableIndexesGetNames(ByRef $oTable)
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex or _LOBase_TableGetObjByName function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning an Array of Index names. @Extended is set to the number of Elements contained in the Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve array of Index names.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning an Array of Index names. @Extended is set to the number of Elements contained in the Array.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1536,6 +1512,8 @@ EndFunc   ;==>_LOBase_TableIndexesGetNames
 ;                  $avColumns           - [optional] Default is Null. A 2 column array of Column names and accompanying Boolean values. See Remarks.
 ;                  $bIsUnique           - [optional] Default is Null. If True the Indexed Column(s) can contain only unique entries.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -1560,9 +1538,6 @@ EndFunc   ;==>_LOBase_TableIndexesGetNames
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColumns
 ;                  |                               2 = Error setting $bIsUnique
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array called in $avColumns needs to be a 2 Column array, the Column name must be placed in the first (0th) column, and a Boolean value indicating whether the Column should should be sorted Ascending (True) or Descending (False) be found in the second (1st) column.
@@ -1703,6 +1678,8 @@ EndFunc   ;==>_LOBase_TableIndexModify
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ;                  $sName               - [optional] Default is Null. The new name to set the Table to. See Remarks.
 ; Return values .: Success: 1 or String
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. $sName called with Null, returning current Table Name.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -1712,9 +1689,6 @@ EndFunc   ;==>_LOBase_TableIndexModify
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. $sName called with Null, returning current Table Name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function does not check if the new name already exists in Tables or Queries.
@@ -1755,6 +1729,7 @@ EndFunc   ;==>_LOBase_TableName
 ; Parameters ....: $oTable              - A Table object returned by a previous _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName or _LOBase_TableAdd function.
 ;                  $aoPrimary           - [optional] Default is Null. An array containing Column Objects (Returned from a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function).
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Array of Column Objects that are currently set as the Primary key.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
@@ -1766,8 +1741,6 @@ EndFunc   ;==>_LOBase_TableName
 ;                  @Error 3 @Extended 1 = Failed to retrieve Keys Object
 ;                  @Error 3 @Extended 2 = Failed to retrieve Primary Key Object.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Columns Object.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Array of Column Objects that are currently set as the Primary key.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: There is generally only one Primary key, however it is possible to set more than one Primary key.
@@ -1851,6 +1824,7 @@ EndFunc   ;==>_LOBase_TablePrimaryKey
 ; Syntax ........: _LOBase_TablesGetCount(ByRef $oConnection)
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Tables contained in the Database as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -1859,8 +1833,6 @@ EndFunc   ;==>_LOBase_TablePrimaryKey
 ;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Tables Object.
 ;                  @Error 3 @Extended 3 = Failed to retrieve count of Tables.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Tables contained in the Database as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1894,6 +1866,7 @@ EndFunc   ;==>_LOBase_TablesGetCount
 ; Syntax ........: _LOBase_TablesGetNames(ByRef $oConnection)
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Table names contained in this Database. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -1901,8 +1874,6 @@ EndFunc   ;==>_LOBase_TablesGetCount
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Array of Element names.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Table names contained in this Database. @Extended is set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:

@@ -50,13 +50,12 @@
 ;                  $vParam4             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam5             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ; Return values .: Success: 1 or UserFunction.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
-;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set the UserFunction.
 ;                  @Error 0 @Extended 0 Return 2 = Successfully cleared the set UserFunction.
 ;                  @Error 0 @Extended 0 Return Function = Returning the set UserFunction.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
 ; Author ........: mLipok
 ; Modified ......: donnyh13 - Added a clear UserFunction without error option. Also added parameters option.
 ; Remarks .......: The first parameter passed to the User function will always be the COM Error object. See below.
@@ -133,6 +132,7 @@ EndFunc   ;==>_LOBase_ComError_UserFunction
 ;                  $iNanoSeconds        - [optional] (0-999999999) Default is Null. Nano-Second, as an Integer.
 ;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: Structure.
+;                  @Error 0 @Extended 0 Return Structure = Success. Successfully created the Date/Time Structure, Returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $iYear not an Integer.
@@ -148,8 +148,6 @@ EndFunc   ;==>_LOBase_ComError_UserFunction
 ;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.util.DateTime" Object.
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.1.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Structure = Success. Successfully created the Date/Time Structure, Returning its Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Calling a value with Null keyword will auto fill the value with the current value, such as current hour, etc.
@@ -257,6 +255,8 @@ EndFunc   ;==>_LOBase_DateStructCreate
 ;                  $iNanoSeconds        - [optional] (0-999999999) Default is Null. Nano-Second, as an Integer.
 ;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in an 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the $bIsUTC parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $tDateStruct not an Object.
@@ -281,9 +281,6 @@ EndFunc   ;==>_LOBase_DateStructCreate
 ;                  |                               128 = Error setting $bIsUTC
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.1.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in an 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the $bIsUTC parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -394,6 +391,7 @@ EndFunc   ;==>_LOBase_DateStructModify
 ;                  $bOutline            - [optional] Default is False. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is False. If True, the characters have a shadow.
 ; Return values .: Success: Map
+;                  @Error 0 @Extended 0 Return Map = Success. Returning the created Map Font Descriptor.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $sFontName not a String.
@@ -411,8 +409,6 @@ EndFunc   ;==>_LOBase_DateStructModify
 ;                  @Error 1 @Extended 13 = $bHidden not a Boolean.
 ;                  @Error 1 @Extended 14 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 15 = $bShadow not a Boolean.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Map = Success. Returning the created Map Font Descriptor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -480,6 +476,8 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $mFontDesc not a Map.
@@ -498,9 +496,6 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ;                  @Error 1 @Extended 14 = $bHidden not a Boolean.
 ;                  @Error 1 @Extended 15 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 16 = $bShadow not a Boolean.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -620,6 +615,7 @@ EndFunc   ;==>_LOBase_FontDescEdit
 ; Parameters ....: $sFontName           - The Font name to search for.
 ;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Font is available, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $sFontName not a String.
@@ -630,8 +626,6 @@ EndFunc   ;==>_LOBase_FontDescEdit
 ;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Font is available, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function may cause a processor usage spike for a moment or two. If you wish to eliminate this, comment out the current sleep function and place a sleep(10) in its place.
@@ -695,6 +689,7 @@ EndFunc   ;==>_LOBase_FontExists
 ; Syntax ........: _LOBase_FontsGetNames([$oDoc = Null])
 ; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen, _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.ServiceManager" Object.
@@ -703,8 +698,6 @@ EndFunc   ;==>_LOBase_FontExists
 ;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oDoc is optional, if not called, a Writer Document is created invisibly to retrieve the list.
@@ -775,6 +768,8 @@ EndFunc   ;==>_LOBase_FontsGetNames
 ; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $sFormat             - The format key String to create.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Format Key was successfully created, returning Format Key Integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. Format Key already existed, returning Format Key Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
@@ -785,9 +780,6 @@ EndFunc   ;==>_LOBase_FontsGetNames
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Attempted to Create or Retrieve the Format key, but failed.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Format Key was successfully created, returning Format Key Integer.
-;                  @Error 0 @Extended 1 Return Integer = Success. Format Key already existed, returning Format Key Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -835,6 +827,7 @@ EndFunc   ;==>_LOBase_FormatKeyCreate
 ; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $iFormatKey          - The User-Created format Key to delete.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Format Key was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
@@ -845,8 +838,6 @@ EndFunc   ;==>_LOBase_FormatKeyCreate
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to delete key.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Format Key was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -889,6 +880,7 @@ EndFunc   ;==>_LOBase_FormatKeyDelete
 ;                  $iFormatKey          - The Format Key to look for.
 ;                  $iFormatType         - [optional] (0-15881) Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. If the Format Key exists in document, True is Returned. Else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
@@ -900,8 +892,6 @@ EndFunc   ;==>_LOBase_FormatKeyDelete
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to obtain Array of Date/Time Formats.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. If the Format Key exists in document, True is Returned. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -952,6 +942,7 @@ EndFunc   ;==>_LOBase_FormatKeyExists
 ; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $iFormatKeyType      - (1-8196) The Format Key type to retrieve the standard Format for. See Constants $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Standard Format for the requested Format Key Type.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
@@ -962,8 +953,6 @@ EndFunc   ;==>_LOBase_FormatKeyExists
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve the Standard Format for the requested Format Key Type.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Standard Format for the requested Format Key Type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1008,6 +997,7 @@ EndFunc   ;==>_LOBase_FormatKeyGetStandard
 ; Parameters ....: $oObj                - A Connection or Document object returned by a previous _LOBase_DatabaseConnectionGet, _LOBase_ReportDocConnect, or _LOBase_ReportDocOpen function.
 ;                  $iFormatKey          - The Format Key to retrieve the string for.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
@@ -1018,8 +1008,6 @@ EndFunc   ;==>_LOBase_FormatKeyGetStandard
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve requested Format Key Object.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Format Key String.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1066,6 +1054,7 @@ EndFunc   ;==>_LOBase_FormatKeyGetString
 ;                  $bUserOnly           - [optional] Default is False. If True, only user-created Format Keys are returned.
 ;                  $iFormatKeyType      - [optional] (0-15881) Default is $LOB_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOB_FORMAT_KEYS_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a 2 or three column Array, depending on current $bIsUser setting. See remarks. @Extended is set to the number of Keys returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
@@ -1078,8 +1067,6 @@ EndFunc   ;==>_LOBase_FormatKeyGetString
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve NumberFormats Object.
 ;                  @Error 3 @Extended 2 = Failed to obtain Array of Format Keys.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a 2 or three column Array, depending on current $bIsUser setting. See remarks. @Extended is set to the number of Keys returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Column One (Array[0][0]) will contain the Format Key Integer,

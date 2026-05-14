@@ -81,14 +81,13 @@
 ; Syntax ........: _LOBase_ReportConDelete(ByRef $oControl)
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Control was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oControl not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Control's parent.
 ;                  @Error 3 @Extended 2 = Failed to retrieve parent document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Control was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -120,6 +119,8 @@ EndFunc   ;==>_LOBase_ReportConDelete
 ; Parameters ....: $oFormatField        - A Formatted Field Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
 ;                  $sDataField          - [optional] Default is Null. The DataField value, see Remarks.
 ; Return values .: Success: 1 or String
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current setting as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFormatField not an Object.
@@ -131,9 +132,6 @@ EndFunc   ;==>_LOBase_ReportConDelete
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current setting as a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -187,6 +185,8 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldData
 ;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iFormat             - [optional] Default is Null. The Number Format Key to display the content in, retrieved from a previous _LOBase_FormatKeysGetList call, or created by _LOBase_FormatKeyCreate function.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFormatField not an Object.
@@ -215,9 +215,6 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldData
 ;                  |                               64 = Error setting $iAlign
 ;                  |                               128 = Error setting $iVertAlign
 ;                  |                               256 = Error setting $iFormat
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -331,6 +328,8 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldGeneral
 ; Parameters ....: $oImageControl       - A Image Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
 ;                  $sDataField          - [optional] Default is Null. The DataField value, see Remarks.
 ; Return values .: Success: 1 or String
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current setting as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oImageControl not an Object.
@@ -342,9 +341,6 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current setting as a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -398,6 +394,8 @@ EndFunc   ;==>_LOBase_ReportConImageConData
 ;                  $sGraphics           - [optional] Default is Null. The path to an Image file.
 ;                  $iScale              - [optional] (0-2) Default is Null. How to scale the image to fit the button. See Constants $LOB_REP_CON_IMG_BTN_SCALE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oImageControl not an Object.
@@ -424,9 +422,6 @@ EndFunc   ;==>_LOBase_ReportConImageConData
 ;                  |                               64 = Error setting $iVertAlign
 ;                  |                               128 = Error setting $sGraphics
 ;                  |                               256 = Error setting $iScale
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -534,6 +529,7 @@ EndFunc   ;==>_LOBase_ReportConImageConGeneral
 ;                  $iHeight             - The Height of the control, in Hundredths of a Millimeter (HMM).
 ;                  $sName               - [optional] Default is "". The name of the control, if called with "", a name is automatically given it.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Control was inserted successfully, returning its object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSection not an Object.
@@ -552,8 +548,6 @@ EndFunc   ;==>_LOBase_ReportConImageConGeneral
 ;                  @Error 3 @Extended 2 = Failed to retrieve Control Service name.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Control Size Structure.
 ;                  @Error 3 @Extended 4 = Failed to retrieve Control Position Structure.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Control was inserted successfully, returning its object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I presently do not know how to insert a Chart successfully.
@@ -645,6 +639,8 @@ EndFunc   ;==>_LOBase_ReportConInsert
 ;                  $iAlign              - [optional] (0-2) Default is Null. The Horizontal alignment of the text. See Constants $LOB_PAR_TXT_ALIGN_HORI_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oLabel not an Object.
@@ -671,9 +667,6 @@ EndFunc   ;==>_LOBase_ReportConInsert
 ;                  |                               64 = Error setting $mFont
 ;                  |                               128 = Error setting $iAlign
 ;                  |                               256 = Error setting $iVertAlign
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -778,6 +771,8 @@ EndFunc   ;==>_LOBase_ReportConLabelGeneral
 ;                  $iVertAlign          - [optional] (0-2) Default is Null. The Vertical alignment of the text. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $iOrient             - [optional] (0-1) Default is Null. The orientation of the line. See Constants $LOB_REP_CON_LINE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oLabel not an Object.
@@ -792,9 +787,6 @@ EndFunc   ;==>_LOBase_ReportConLabelGeneral
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $iVertAlign
 ;                  |                               4 = Error setting $iOrient
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -853,6 +845,8 @@ EndFunc   ;==>_LOBase_ReportConLineGeneral
 ;                  $iX                  - [optional] Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oControl not an Object.
@@ -864,9 +858,6 @@ EndFunc   ;==>_LOBase_ReportConLineGeneral
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iX
 ;                  |                               2 = Error setting $iY
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -920,6 +911,7 @@ EndFunc   ;==>_LOBase_ReportConPosition
 ; Parameters ....: $oSection            - A section object returned by a previous _LOBase_ReportDocSectionGetObj, _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
 ;                  $iType               - [optional] (1-63) Default is $LOB_REP_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSection not an Object.
@@ -928,8 +920,6 @@ EndFunc   ;==>_LOBase_ReportConPosition
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Control Object.
 ;                  @Error 3 @Extended 2 = Failed to identify Control type.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -981,6 +971,8 @@ EndFunc   ;==>_LOBase_ReportConsGetList
 ;                  $iHeight             - [optional] Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $bAutoGrow           - [optional] Default is Null. If True, the control's size will automatically adjust to fit content.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oControl not an Object.
@@ -994,9 +986,6 @@ EndFunc   ;==>_LOBase_ReportConsGetList
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iHeight
 ;                  |                               4 = Error setting $bAutoGrow
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1061,6 +1050,7 @@ EndFunc   ;==>_LOBase_ReportConSize
 ;                  $sInputReport        - The Name of the Report to Copy. Also the Sub-directory the Report is in. See Remarks.
 ;                  $sOutputReport       - The Name of the Report to Create. Also the Sub-directory to place the Report in. See Remarks.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Copied report successfully inserted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -1078,8 +1068,6 @@ EndFunc   ;==>_LOBase_ReportConSize
 ;                  @Error 3 @Extended 3 = Failed to retrieve Report Object.
 ;                  @Error 3 @Extended 4 = Failed to retrieve Destination Report name.
 ;                  @Error 3 @Extended 5 = Failed to insert copied Report.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Copied report successfully inserted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To copy a Report located inside a folder, the Report name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to copy ReportXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sInputReport with the following path: Folder1/Folder2/Folder3/ReportXYZ.
@@ -1137,6 +1125,8 @@ EndFunc   ;==>_LOBase_ReportCopy
 ;                  $bOpen               - [optional] Default is False. If True, the new Report will be opened in Design mode.
 ;                  $bHidden             - [optional] Default is False. If True, the Report will be invisible when opened.
 ; Return values .: Success: 1 or Object
+;                  @Error 0 @Extended 0 Return 1 = Success. New Report was successfully inserted.
+;                  @Error 0 @Extended 1 Return Object = Success. Returning opened Report Document's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -1154,9 +1144,6 @@ EndFunc   ;==>_LOBase_ReportCopy
 ;                  @Error 3 @Extended 4 = Failed to retrieve Report name.
 ;                  @Error 3 @Extended 5 = Failed to insert new Report into Base Document.
 ;                  @Error 3 @Extended 6 = Failed to open new Report Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. New Report was successfully inserted.
-;                  @Error 0 @Extended 1 Return Object = Success. Returning opened Report Document's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To create a Report inside a folder, the Report name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to create ReportXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sReport with the following path: Folder1/Folder2/Folder3/ReportXYZ.
@@ -1225,6 +1212,7 @@ EndFunc   ;==>_LOBase_ReportCreate
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ;                  $sName               - The Report name to Delete. See remarks.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Report was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1234,8 +1222,6 @@ EndFunc   ;==>_LOBase_ReportCreate
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
 ;                  @Error 3 @Extended 2 = Failed to delete Report.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Report was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To delete a report contained in a folder, you MUST prefix the Report name called in $sName by the folder path it is located in, separated by forward slashes (/). e.g. to delete ReportXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/ReportXYZ
@@ -1271,6 +1257,7 @@ EndFunc   ;==>_LOBase_ReportDelete
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ;                  $bForceClose         - [optional] Default is False. If True, the Report document will be closed regardless if there are unsaved changes. See remarks.
 ; Return values .: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value of whether the Report Document was successfully closed (True), or not.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -1281,8 +1268,6 @@ EndFunc   ;==>_LOBase_ReportDelete
 ;                  @Error 3 @Extended 3 = Failed to retrieve Report Document's properties.
 ;                  @Error 3 @Extended 4 = Failed to identify Report in Parent Document.
 ;                  @Error 3 @Extended 5 = Document called in $oReportDoc not a Report Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value of whether the Report Document was successfully closed (True), or not.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If there are unsaved changes in the document when close is called, and $bForceClose is True, they will be lost.
@@ -1336,6 +1321,8 @@ EndFunc   ;==>_LOBase_ReportDocClose
 ; Syntax ........: _LOBase_ReportDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
 ; Parameters ....: $iMode               - [optional] (0-1) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: Object or Array.
+;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Report document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Report Documents. @Extended is set to number of results. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
@@ -1349,9 +1336,6 @@ EndFunc   ;==>_LOBase_ReportDocClose
 ;                  @Error 3 @Extended 3 = Failed to identify Document type.
 ;                  @Error 3 @Extended 4 = Current Document not a Base Report Document.
 ;                  @Error 3 @Extended 5 = No matches found.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Report document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
-;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Report Documents. @Extended is set to number of results. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only Base Report documents are returned using either of the flags.
@@ -1429,6 +1413,8 @@ EndFunc   ;==>_LOBase_ReportDocConnect
 ;                  $iReportOutput       - [optional] (1-2) Default is Null. The type of output document when the Report is executed. See Constants, $LOB_REP_OUTPUT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $bSuppress           - [optional] Default is Null. If True, the "Add a Field" dialog will be suppressed from coming up. See remarks.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -1447,9 +1433,6 @@ EndFunc   ;==>_LOBase_ReportDocConnect
 ;                  |                               8 = Error setting $sFilter
 ;                  |                               16 = Error setting $iReportOutput
 ;                  |                               32 = Error setting $bSuppress
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1544,6 +1527,8 @@ EndFunc   ;==>_LOBase_ReportDocData
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -1564,9 +1549,6 @@ EndFunc   ;==>_LOBase_ReportDocData
 ;                  |                               16 = Error setting $iHeight
 ;                  |                               32 = Error setting $sCondPrint
 ;                  |                               64 = Error setting $iBackColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The minimum height of a Section is 1753 Hundredths of a Millimeter (HMM), the maximum is unknown, but I found that setting a large value tends to cause a freeze up/crash of the Report.
@@ -1660,6 +1642,8 @@ EndFunc   ;==>_LOBase_ReportDocDetail
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -1682,9 +1666,6 @@ EndFunc   ;==>_LOBase_ReportDocDetail
 ;                  |                               32 = Error setting $iHeight
 ;                  |                               64 = Error setting $sCondPrint
 ;                  |                               128 = Error setting $iBackColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Report Footer must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Footer is disabled, the return values will be Null, except for the Boolean value of $bEnabled.
@@ -1824,6 +1805,8 @@ EndFunc   ;==>_LOBase_ReportDocFooter
 ;                  $bAutoGrow           - [optional] Default is Null. If True, the Report will automatically grow to fit content.
 ;                  $bPrintRep           - [optional] Default is Null. If True, repeated values will be printed.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -1840,9 +1823,6 @@ EndFunc   ;==>_LOBase_ReportDocFooter
 ;                  |                               4 = Error setting $iPageFooter
 ;                  |                               8 = Error setting $bAutoGrow
 ;                  |                               16 = Error setting $bPrintRep
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1912,6 +1892,7 @@ EndFunc   ;==>_LOBase_ReportDocGeneral
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -1919,8 +1900,6 @@ EndFunc   ;==>_LOBase_ReportDocGeneral
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Report Document called in $oReportDoc was opened "Hidden", can't return full document name. Document must be re-opened.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Document's name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be one of the following:
@@ -1962,6 +1941,7 @@ EndFunc   ;==>_LOBase_ReportDocGetName
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ;                  $iPosition           - [optional] Default is Null. The position to insert the new Group. 0 Based, call Null to insert at the end.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning new Group Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -1971,8 +1951,6 @@ EndFunc   ;==>_LOBase_ReportDocGetName
 ;                  @Error 2 @Extended 1 = Failed to create new Group object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed retrieve new Group Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning new Group Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2013,6 +1991,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupAdd
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ;                  $iGroup              - The Index position of the Group to Delete. 0 based.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Returning requested Group Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -2021,8 +2000,6 @@ EndFunc   ;==>_LOBase_ReportDocGroupAdd
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed retrieve a count of Groups.
 ;                  @Error 3 @Extended 2 = Failed to delete Group.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Returning requested Group Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2056,6 +2033,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByIndex
 ; Syntax ........: _LOBase_ReportDocGroupDeleteByObj(ByRef $oGroup)
 ; Parameters ....: $oGroup              - A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Returning requested Group Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oGroup not an Object.
@@ -2064,8 +2042,6 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByIndex
 ;                  @Error 3 @Extended 1 = Failed retrieve a Group Parent Object.
 ;                  @Error 3 @Extended 2 = Failed retrieve a count of Groups.
 ;                  @Error 3 @Extended 3 = Failed to delete Group.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Returning requested Group Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2112,6 +2088,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByObj
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ;                  $iReport             - The index position for the Group to retrieve the Object for. 0 Based.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Group Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -2119,8 +2096,6 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByObj
 ;                  @Error 1 @Extended 3 = $iReport not an Integer, less than 0 or greater than number of Groups contained in the Report.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed retrieve Group Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Group Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2150,14 +2125,13 @@ EndFunc   ;==>_LOBase_ReportDocGroupGetByIndex
 ; Syntax ........: _LOBase_ReportDocGroupsGetCount(ByRef $oReportDoc)
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning total number of Groups contained in the Report.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
 ;                  @Error 1 @Extended 2 = Object called in $oReportDoc not a Report Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve count of Groups.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning total number of Groups contained in the Report.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2194,6 +2168,8 @@ EndFunc   ;==>_LOBase_ReportDocGroupsGetCount
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -2216,9 +2192,6 @@ EndFunc   ;==>_LOBase_ReportDocGroupsGetCount
 ;                  |                               32 = Error setting $iHeight
 ;                  |                               64 = Error setting $sCondPrint
 ;                  |                               128 = Error setting $iBackColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Report Header must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Header is disabled, the return values will be Null, except for the Boolean value of $bEnabled.
@@ -2353,13 +2326,12 @@ EndFunc   ;==>_LOBase_ReportDocHeader
 ; Syntax ........: _LOBase_ReportDocIsModified(ByRef $oReportDoc)
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Report has been modified since last being saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query whether Document has been modified.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Report has been modified since last being saved.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2390,6 +2362,7 @@ EndFunc   ;==>_LOBase_ReportDocIsModified
 ;                  $bDesign             - [optional] Default is True. If True, the Report is opened in Design mode.
 ;                  $bHidden             - [optional] Default is False. If True, the Report document will be invisible when opened.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning opened Report Document's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oConnection not an Object.
@@ -2402,8 +2375,6 @@ EndFunc   ;==>_LOBase_ReportDocIsModified
 ;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Report Documents Object.
 ;                  @Error 3 @Extended 3 = Failed to open Report Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning opened Report Document's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To open a Report located inside a folder, the Report name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to open ReportXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/ReportXYZ.
@@ -2453,6 +2424,8 @@ EndFunc   ;==>_LOBase_ReportDocOpen
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -2471,9 +2444,6 @@ EndFunc   ;==>_LOBase_ReportDocOpen
 ;                  |                               8 = Error setting $iHeight
 ;                  |                               16 = Error setting $sCondPrint
 ;                  |                               32 = Error setting $iBackColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Page Header must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Footer is disabled, the return values will be Null, except for the Boolean value of $bEnabled.
@@ -2589,6 +2559,8 @@ EndFunc   ;==>_LOBase_ReportDocPageFooter
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -2607,9 +2579,6 @@ EndFunc   ;==>_LOBase_ReportDocPageFooter
 ;                  |                               8 = Error setting $iHeight
 ;                  |                               16 = Error setting $sCondPrint
 ;                  |                               32 = Error setting $iBackColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Page Header must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Header is disabled, the return values will be Null, except for the Boolean value of $bEnabled.
@@ -2719,6 +2688,7 @@ EndFunc   ;==>_LOBase_ReportDocPageHeader
 ; Syntax ........: _LOBase_ReportDocSave(ByRef $oReportDoc)
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Report was successfully saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -2728,8 +2698,6 @@ EndFunc   ;==>_LOBase_ReportDocPageHeader
 ;                  @Error 3 @Extended 2 = Failed to retrieve Report Document's properties.
 ;                  @Error 3 @Extended 3 = Failed to identify Report in Parent Document.
 ;                  @Error 3 @Extended 4 = Document called in $oReportDoc not a Report Document.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Report was successfully saved.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: _LOBase_ReportDocIsModified
@@ -2775,6 +2743,7 @@ EndFunc   ;==>_LOBase_ReportDocSave
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ;                  $iSection            - (0-4) The section type to retrieve the Object for. See Constants, $LOB_REP_SECTION_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Section Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -2782,8 +2751,6 @@ EndFunc   ;==>_LOBase_ReportDocSave
 ;                  @Error 1 @Extended 3 = $iSection not an Integer, less than 0 or greater than 4. See Constants, $LOB_REP_SECTION_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Section Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Section Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2830,6 +2797,8 @@ EndFunc   ;==>_LOBase_ReportDocSectionGetObj
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ;                  $bVisible            - [optional] Default is Null. If True, the document is visible.
 ; Return values .: Success: 1 or Boolean.
+;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
+;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oReportDoc not an Object.
@@ -2840,9 +2809,6 @@ EndFunc   ;==>_LOBase_ReportDocSectionGetObj
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current visibility setting.
@@ -2884,6 +2850,7 @@ EndFunc   ;==>_LOBase_ReportDocVisible
 ;                  $sName               - The name of the Report to look for. See remarks.
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Report by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Report with the same name is found in the Document (In sub-folders).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2897,8 +2864,6 @@ EndFunc   ;==>_LOBase_ReportDocVisible
 ;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
 ;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
 ;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Report by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Report with the same name is found in the Document (In sub-folders).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To narrow the search for a Report down to a specific folder, you MUST prefix the Report name called in $sName by the folder path to look in, separated by forward slashes (/). e.g. to search for ReportXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/ReportXYZ
@@ -2996,6 +2961,7 @@ EndFunc   ;==>_LOBase_ReportExists
 ;                  $sInputFolder        - The Name of the Folder to Copy. Also the Sub-directory the Folder is in. See Remarks.
 ;                  $sOutputFolder       - The Name of the Folder to Create. Also the Sub-directory to place the Folder in. See Remarks.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Copied Folder successfully inserted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -3011,8 +2977,6 @@ EndFunc   ;==>_LOBase_ReportExists
 ;                  @Error 3 @Extended 2 = Failed to retrieve Source Folder Object.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Destination Folder name.
 ;                  @Error 3 @Extended 4 = Failed to insert copied Folder.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Copied Folder successfully inserted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To create a Folder contained in a folder, you MUST prefix the Folder name called in $sInputFolder by the folder path it is located in, separated by forward slashes (/). e.g. to copy FolderXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sInputFolder with the following path: Folder1/Folder2/Folder3/FolderXYZ
@@ -3067,6 +3031,7 @@ EndFunc   ;==>_LOBase_ReportFolderCopy
 ;                  $sFolder             - The Folder name to create. Can also include the sub-folder path. See Remarks.
 ;                  $bCreateMulti        - [optional] Default is False. If True, multiple folders in a path will be created if they do not exist.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully created the Folder(s).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -3079,8 +3044,6 @@ EndFunc   ;==>_LOBase_ReportFolderCopy
 ;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
 ;                  @Error 3 @Extended 2 = Failed to insert new Folder into Base Document.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Destination Folder Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully created the Folder(s).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To create a Folder inside a folder, the Folder name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to create FolderXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sFolder with the following path: Folder1/Folder2/Folder3/FolderXYZ.
@@ -3143,6 +3106,7 @@ EndFunc   ;==>_LOBase_ReportFolderCreate
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ;                  $sName               - The Folder name to Delete. See remarks.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Folder was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -3152,8 +3116,6 @@ EndFunc   ;==>_LOBase_ReportFolderCreate
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
 ;                  @Error 3 @Extended 2 = Failed to delete Folder.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Folder was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To delete a Folder contained in a folder, you MUST prefix the Folder name called in $sName by the folder path it is located in, separated by forward slashes (/). e.g. to delete FolderXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FolderXYZ
@@ -3191,6 +3153,7 @@ EndFunc   ;==>_LOBase_ReportFolderDelete
 ;                  $sName               - The name of the Folder to look for.
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Folder by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Folder with the same name is found in the Document (In sub-folders).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -3204,8 +3167,6 @@ EndFunc   ;==>_LOBase_ReportFolderDelete
 ;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
 ;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
 ;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Folder by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Folder with the same name is found in the Document (In sub-folders).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To narrow the search for a Folder down to a specific folder, you MUST prefix the Folder name called in $sName by the folder path to look in, separated by forward slashes (/). e.g. to search for FolderXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FolderXYZ
@@ -3303,6 +3264,7 @@ EndFunc   ;==>_LOBase_ReportFolderExists
 ;                  $sFolder             - The Folder to rename, including the Sub-Folder path, if applicable. See Remarks.
 ;                  $sNewName            - The New name to rename the Report Folder to.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Folder
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -3313,8 +3275,6 @@ EndFunc   ;==>_LOBase_ReportFolderExists
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
 ;                  @Error 3 @Extended 2 = Failed to rename folder.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Folder
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To rename a Folder inside a folder, the original Folder name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to rename FolderXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sFolder with the following path: Folder1/Folder2/Folder3/FolderXYZ.
@@ -3352,6 +3312,7 @@ EndFunc   ;==>_LOBase_ReportFolderRename
 ;                  $bExhaustive         - [optional] Default is True. If True, retrieves a count of all folders, including those in sub-folders.
 ;                  $sFolder             - [optional] Default is "". The Folder to return the count of folders for. See remarks.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Report Folders contained in the Document as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -3365,8 +3326,6 @@ EndFunc   ;==>_LOBase_ReportFolderRename
 ;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
 ;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
 ;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Report Folders contained in the Document as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sFolder can be left as a blank string "", which will either return only the count of main level Folders (not located in folders), or if $bExhaustive is called with True, it will return a count of all Folders contained in the document.
@@ -3456,6 +3415,7 @@ EndFunc   ;==>_LOBase_ReportFoldersGetCount
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of Folder names from. See remarks.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Folder names contained in this Document. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -3469,8 +3429,6 @@ EndFunc   ;==>_LOBase_ReportFoldersGetCount
 ;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
 ;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
 ;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Folder names contained in this Document. @Extended is set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sFolder can be left as a blank string "", which will either return only an array of main level Folder names (not located in sub-folders), or if $bExhaustive is called with True, it will return an array of all folders contained in the document.
@@ -3577,6 +3535,8 @@ EndFunc   ;==>_LOBase_ReportFoldersGetNames
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oGroup not an Object.
@@ -3601,9 +3561,6 @@ EndFunc   ;==>_LOBase_ReportFoldersGetNames
 ;                  |                               64 = Error setting $iHeight
 ;                  |                               128 = Error setting $sCondPrint
 ;                  |                               256 = Error setting $iBackColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Group Footer must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Footer is disabled, the return values will be Null, except for the Boolean value of $bFooterOn.
@@ -3759,6 +3716,8 @@ EndFunc   ;==>_LOBase_ReportGroupFooter
 ;                  $sCondPrint          - [optional] Default is Null. The Conditional Print Statement.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The Background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF to set Background color to default / Background Transparent = True.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oGroup not an Object.
@@ -3783,9 +3742,6 @@ EndFunc   ;==>_LOBase_ReportGroupFooter
 ;                  |                               64 = Error setting $iHeight
 ;                  |                               128 = Error setting $sCondPrint
 ;                  |                               256 = Error setting $iBackColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Group Header must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Header is disabled, the return values will be Null, except for the Boolean value of $bHeaderOn.
@@ -3933,6 +3889,8 @@ EndFunc   ;==>_LOBase_ReportGroupHeader
 ; Parameters ....: $oGroup              - A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
 ;                  $iPos                - [optional] Default is Null. The position of the in the list of Groups. 0 Based. See Remarks.
 ; Return values .: Success: 1 or Integer
+;                  @Error 0 @Extended 0 Return 1 = Success. Group was successfully moved.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Position as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oGroup not an Object.
@@ -3944,9 +3902,6 @@ EndFunc   ;==>_LOBase_ReportGroupHeader
 ;                  @Error 3 @Extended 3 = Failed to identify Group's current Position.
 ;                  @Error 3 @Extended 4 = Failed to retrieve Group's new Object.
 ;                  @Error 3 @Extended 5 = Failed to delete old Group.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Group was successfully moved.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Position as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Group will be moved to the position before that called in $iPos. Thus to move a Group to the end of the list call $iPos with the total count of Groups, i.e., index of the last Group + 1.
@@ -4012,6 +3967,8 @@ EndFunc   ;==>_LOBase_ReportGroupPosition
 ;                  $iGroupInt           - [optional] (0-100) Default is Null. The Group Interval value.
 ;                  $iKeepTogether       - [optional] (0-2) Default is Null. Whether or not, and how to keep Data together on one page. See Constants, $LOB_REP_KEEP_TOG_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oGroup not an Object.
@@ -4028,9 +3985,6 @@ EndFunc   ;==>_LOBase_ReportGroupPosition
 ;                  |                               4 = Error setting $iGroupOn
 ;                  |                               8 = Error setting $iGroupInt
 ;                  |                               16 = Error setting $iKeepTogether
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4103,6 +4057,7 @@ EndFunc   ;==>_LOBase_ReportGroupSort
 ;                  $sReport             - The Report to rename, including the Sub-Folder path, if applicable. See Remarks.
 ;                  $sNewName            - The New name to rename the Report to.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Report.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -4113,8 +4068,6 @@ EndFunc   ;==>_LOBase_ReportGroupSort
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Report Documents Object.
 ;                  @Error 3 @Extended 2 = Failed to rename Report.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Report.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To rename a Report inside a folder, the original Report name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to rename ReportXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sReport with the following path: Folder1/Folder2/Folder3/ReportXYZ.
@@ -4152,6 +4105,7 @@ EndFunc   ;==>_LOBase_ReportRename
 ;                  $bExhaustive         - [optional] Default is True. If True, retrieves a count of all Reports, including those in sub-folders.
 ;                  $sFolder             - [optional] Default is "". The Folder to return the count of Reports for. See remarks.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Reports contained in the Document, as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -4165,8 +4119,6 @@ EndFunc   ;==>_LOBase_ReportRename
 ;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
 ;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
 ;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Reports contained in the Document, as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sFolder can be left as a blank string "", which will either return only the count of main level Reports (not located in folders), or if $bExhaustive is called with True, the return will be a count of all Reports contained in the document.
@@ -4260,6 +4212,7 @@ EndFunc   ;==>_LOBase_ReportsGetCount
 ;                  $bExhaustive         - [optional] Default is True. If True, retrieves all Report names, including those in sub-folders.
 ;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of Report names from. See remarks.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Report names contained in this Document. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -4273,8 +4226,6 @@ EndFunc   ;==>_LOBase_ReportsGetCount
 ;                  @Error 3 @Extended 4 = Failed to retrieve Report or Folder Object.
 ;                  @Error 3 @Extended 5 = Failed to retrieve Array of Report and Folder names for Sub-Folder.
 ;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Report names contained in this Document. @Extended is set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sFolder can be left as a blank string "", which will either return only an array of main level Report names (not located in folders), or if $bExhaustive is called with True, it will return an array of all Reports contained in the document.

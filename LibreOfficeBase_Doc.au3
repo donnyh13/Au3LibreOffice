@@ -52,6 +52,9 @@
 ;                  $sSaveName           - [optional] Default is "". The file name to save the file as, if the file hasn't been saved before. See Remarks.
 ;                  $bDeliverOwnership   - [optional] Default is True. If True, deliver ownership of the document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: 1 or String
+;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
+;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
+;                  @Error 0 @Extended 3 Return 1 = Success, Document was successfully closed.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -65,10 +68,6 @@
 ;                  @Error 3 @Extended 2 = Document hasn't been assigned a Database type yet. Set it using _LOBase_DocDatabaseType.
 ;                  @Error 3 @Extended 3 = Path Conversion to L.O. URL Failed.
 ;                  @Error 3 @Extended 4 = Failed to close Document.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
-;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
-;                  @Error 0 @Extended 3 Return 1 = Success, Document was successfully closed.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bSaveChanges is True and the document hasn't been saved yet, the document is saved to the desktop.
@@ -150,6 +149,9 @@ EndFunc   ;==>_LOBase_DocClose
 ;                  $sSearch             - [optional] Default is "". The Name, Title or Path of the Document to search for. See remarks.
 ;                  $bCaseless           - [optional] Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
 ; Return values .: Success: Object or Array.
+;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active Base document is returned.
+;                  @Error 0 @Extended 1 Return Object = Success, The Object for the found Document with matching Name, Title or Path.
+;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Base Documents. @Extended is set to number of results. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
@@ -166,10 +168,6 @@ EndFunc   ;==>_LOBase_DocClose
 ;                  @Error 3 @Extended 4 = Error converting path to LibreOffice URL.
 ;                  @Error 3 @Extended 5 = Current Document not a Base Document.
 ;                  @Error 3 @Extended 6 = No matches found.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active Base document is returned.
-;                  @Error 0 @Extended 1 Return Object = Success, The Object for the found Document with matching Name, Title or Path.
-;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Base Documents. @Extended is set to number of results. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only Base documents are searched or returned using any of the flags.
@@ -301,6 +299,8 @@ EndFunc   ;==>_LOBase_DocConnect
 ;                  $bHidden             - [optional] Default is False. If True opens the new document invisible or changes the existing document to invisible.
 ;                  $bWizard             - [optional] Default is False. If True, opens the Create a Database Document wizard. See remarks.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 1 Return Object = Successfully connected to an existing Document. Returning Document's Object
+;                  @Error 0 @Extended 2 Return Object = Successfully created a new document. Returning Document's Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $bForceNew not a Boolean.
@@ -315,9 +315,6 @@ EndFunc   ;==>_LOBase_DocConnect
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Document Object is still returned. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bHidden
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Successfully connected to an existing Document. Returning Document's Object
-;                  @Error 0 @Extended 2 Return Object = Successfully created a new document. Returning Document's Object
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bWizard is True, $bHidden must be False.
@@ -388,6 +385,8 @@ EndFunc   ;==>_LOBase_DocCreate
 ;                  $sType               - [optional] Default is Default. Default is "sdbc:embedded:hsqldb". The Database Type string to set the document to. See remarks.
 ;                  $bOverwrite          - [optional] Default is False. If True, an existing Database type will be overwritten. See remarks.
 ; Return values .: Success: 1 or String.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. $sType called with Null, returning current Database type as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -399,9 +398,6 @@ EndFunc   ;==>_LOBase_DocCreate
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sType
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. $sType called with Null, returning current Database type as a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I have not investigated the various settings for each Database type therefore I have no checks for right or wrong values, if you know the appropriate string to use you can set $sType to the desired setting, but make sure you know what you are doing. "sdbc:embedded:hsqldb" is the default setting for LibreOffice, which creates an embedded HSQLDB Base Document. The Type format is as follows jdbc:subprotocol:subname or sdbc:subprotocol:subname.
@@ -448,14 +444,13 @@ EndFunc   ;==>_LOBase_DocDatabaseType
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Document's name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be like: "<Database Doc name>.<extension> — LibreOffice Base" e.g. "Testing.odb — LibreOffice Base".
@@ -492,6 +487,7 @@ EndFunc   ;==>_LOBase_DocGetName
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ;                  $bReturnLibreURL     - [optional] Default is False. If True, returns a path in LibreOffice URL format, else False returns a regular Windows path.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -499,8 +495,6 @@ EndFunc   ;==>_LOBase_DocGetName
 ;                  @Error 1 @Extended 3 = Document has no save path.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Error converting LibreOffice URL to Computer path format.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -534,13 +528,12 @@ EndFunc   ;==>_LOBase_DocGetPath
 ; Syntax ........: _LOBase_DocHasPath(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has a save location. Else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query whether the Document had a path value.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has a save location. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -568,13 +561,12 @@ EndFunc   ;==>_LOBase_DocHasPath
 ; Syntax ........: _LOBase_DocIsActive(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active LibreOffice window. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query whether the Document is active.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active LibreOffice window. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
@@ -602,13 +594,12 @@ EndFunc   ;==>_LOBase_DocIsActive
 ; Syntax ........: _LOBase_DocIsModified(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has been modified since last being saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query whether the Document has been modified.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has been modified since last being saved.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -637,6 +628,8 @@ EndFunc   ;==>_LOBase_DocIsModified
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ;                  $bMaximize           - [optional] Default is Null. If True, document window is maximized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean.
+;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
+;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -646,9 +639,6 @@ EndFunc   ;==>_LOBase_DocIsModified
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMaximize
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -687,6 +677,8 @@ EndFunc   ;==>_LOBase_DocMaximize
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ;                  $bMinimize           - [optional] Default is Null. If True, document window is minimized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean
+;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
+;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -696,9 +688,6 @@ EndFunc   ;==>_LOBase_DocMaximize
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMinimize
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -741,6 +730,8 @@ EndFunc   ;==>_LOBase_DocMinimize
 ;                  $sPassword           - [optional] Default is Null. The password that was used to read-protect the document, if any.
 ;                  $bLoadAsTemplate     - [optional] Default is Null. If True, opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
 ; Return values .: Success: Object.
+;                  @Error 0 @Extended 1 Return Object = Successfully connected to requested Document without requested parameters. Returning Document's Object.
+;                  @Error 0 @Extended 2 Return Object = Successfully opened requested Document with requested parameters. Returning Document's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $sFilePath not string, or file not found.
@@ -760,9 +751,6 @@ EndFunc   ;==>_LOBase_DocMinimize
 ;                  |                               2 = Error setting $bReadOnly
 ;                  |                               4 = Error setting $sPassword
 ;                  |                               8 = Error setting $bLoadAsTemplate
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Successfully connected to requested Document without requested parameters. Returning Document's Object.
-;                  @Error 0 @Extended 2 Return Object = Successfully opened requested Document with requested parameters. Returning Document's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Any parameters (Hidden, template etc.,) will not be applied when connecting to a document.
@@ -842,13 +830,12 @@ EndFunc   ;==>_LOBase_DocOpen
 ; Syntax ........: _LOBase_DocSave(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Document Successfully saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Document is Read Only or Document has no save location, try SaveAs.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Document Successfully saved.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You must set the DataBase type using _LOBase_DocDatabaseType, before you can save the document.
@@ -877,6 +864,7 @@ EndFunc   ;==>_LOBase_DocSave
 ;                  $bOverwrite          - [optional] Default is Null. If True, the existing file will be overwritten.
 ;                  $sPassword           - [optional] Default is Null. Sets a password for the document. (Not all file formats can have a Password set). Null or "" (blank string) = No Password.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Successfully Saved the document. Returning document save path.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -890,8 +878,6 @@ EndFunc   ;==>_LOBase_DocSave
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Document hasn't been assigned a Database type yet. Set it using _LOBase_DocDatabaseType.
 ;                  @Error 3 @Extended 2 = Error Converting Path to/from L.O. URL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Successfully Saved the document. Returning document save path.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Alters original save path (if there was one) to the new path.
@@ -955,6 +941,7 @@ EndFunc   ;==>_LOBase_DocSaveAs
 ;                  $bOverwrite          - [optional] Default is Null. If True, file will be overwritten.
 ;                  $sPassword           - [optional] Default is Null. Password String to set for the document. (Not all file formats can have a Password set). "" (blank string) or Null = No Password.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning save path for exported document.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -968,8 +955,6 @@ EndFunc   ;==>_LOBase_DocSaveAs
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Document hasn't been assigned a Database type yet. Set it using _LOBase_DocDatabaseType.
 ;                  @Error 3 @Extended 2 = Error Converting Path to/from L.O. URL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning save path for exported document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Does not alter the original save path (if there was one), saves a copy of the document to the new path.
@@ -1024,14 +1009,13 @@ EndFunc   ;==>_LOBase_DocSaveCopy
 ; Syntax ........: _LOBase_DocSubComponentsClose(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean whether all SubComponents were closed successfully (True), or if some failed to close (False).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 = Document called in $oDoc has not been saved to a location yet.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to attempt to close components.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean whether all SubComponents were closed successfully (True), or if some failed to close (False).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This functions attempts to close all open Sub components (Tables, Queries, Forms or Reports [Except Reports in Viewing mode]). This will fail if any of the following is True for any open components: there are unsaved changes, if a dialog is open or if the user is printing from one of the documents.
@@ -1060,6 +1044,7 @@ EndFunc   ;==>_LOBase_DocSubComponentsClose
 ; Syntax ........: _LOBase_DocSubComponentsGetList(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a four column Array of currently open SubComponents (Tables, Queries, Forms or Reports [Except Reports in Viewing mode]). @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1067,8 +1052,6 @@ EndFunc   ;==>_LOBase_DocSubComponentsClose
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve array of SubComponents.
 ;                  @Error 3 @Extended 2 = Failed to identify SubComponent type.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a four column Array of currently open SubComponents (Tables, Queries, Forms or Reports [Except Reports in Viewing mode]). @Extended is set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Return is a 4 column Array.
@@ -1129,6 +1112,8 @@ EndFunc   ;==>_LOBase_DocSubComponentsGetList
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ;                  $bVisible            - [optional] Default is Null. If True, the document is visible.
 ; Return values .: Success: 1 or Boolean.
+;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
+;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1138,9 +1123,6 @@ EndFunc   ;==>_LOBase_DocSubComponentsGetList
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $bVisible with Null to return the current visibility setting.
