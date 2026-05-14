@@ -919,7 +919,7 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_InitializePortable
-; Description ...: Setup Portable LibreOffice (Or Open Office) for use in this UDF. See remarks.
+; Description ...: Setup Portable LibreOffice (Or Open Office) for use in this UDF.
 ; Syntax ........: _LO_InitializePortable($sOfficePortablePath)
 ; Parameters ....: $sOfficePortablePath - The Path to the Portable LibreOffice/OpenOffice folder. See remarks.
 ; Return values .: Success: 1
@@ -1191,7 +1191,7 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_Terminate
-; Description ...: Closes the background instance of LibreOffice. See Remarks.
+; Description ...: Closes the background instance of LibreOffice.
 ; Syntax ........: _LO_Terminate([$bForceClose = False[, $iSleep = 250]])
 ; Parameters ....: $bForceClose         - [optional] Default is False. If True, any opened documents will be closed. See remarks.
 ;                  $iSleep              - [optional] Default is 250. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
