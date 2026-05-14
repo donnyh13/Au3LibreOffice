@@ -284,7 +284,7 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ; Return values .: Success: Boolean
 ;                  Failure: False and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return Boolean = $iTest not an Integer.
+;                  @Error 1 @Extended 1 = $iTest not an Integer.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
 ; Author ........: donnyh13
