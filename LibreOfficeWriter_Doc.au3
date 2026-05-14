@@ -2983,7 +2983,7 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DocReplaceAllInRange
-; Description ...: Replace all instances of a search within a selection. See Remarks.
+; Description ...: Replace all instances of a search within a selection.
 ; Syntax ........: _LOWriter_DocReplaceAllInRange(ByRef $oDoc, ByRef $oSrchDescript, ByRef $oRange, $sSearchString, $sReplaceString[, $atFindFormat = Null[, $atReplaceFormat = Null]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oSrchDescript       - A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.

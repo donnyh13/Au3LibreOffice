@@ -901,7 +901,7 @@ EndFunc   ;==>_LOWriter_TableCellFormula
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableCellGetDataType
-; Description ...: Get the Data type of a specific cell, see remarks.
+; Description ...: Get the Data type of a specific cell.
 ; Syntax ........: _LOWriter_TableCellGetDataType(ByRef $oCell)
 ; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ; Return values .: Success: Integer.
@@ -1872,7 +1872,7 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableGetCellObjByPosition
-; Description ...: Retrieve a Cell object or Cell Range by position. See Remarks
+; Description ...: Retrieve a Cell object or Cell Range by position.
 ; Syntax ........: _LOWriter_TableGetCellObjByPosition(ByRef $oTable, $iColumn, $iRow[, $iToColumn = Null[, $iToRow = Null]])
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ;                  $iColumn             - The column the desired cell is located in, or where to start the the cell range from.

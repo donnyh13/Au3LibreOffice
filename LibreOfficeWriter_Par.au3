@@ -286,7 +286,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ParStyleAreaGradientMulticolor
-; Description ...: Set or retrieve a Paragraph's Multicolor Gradient settings. See remarks.
+; Description ...: Set or retrieve a Paragraph's Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_ParStyleAreaGradientMulticolor(ByRef $oParStyle[, $avColorStops = Null])
 ; Parameters ....: $oParStyle           - A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -446,7 +446,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ParStyleAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Paragraph's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Paragraph's Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_ParStyleAreaTransparencyGradientMulti(ByRef $oParStyle[, $avColorStops = Null])
 ; Parameters ....: $oParStyle           - A Paragraph Style object returned by a previous _LOWriter_ParStyleCreate, or _LOWriter_ParStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.

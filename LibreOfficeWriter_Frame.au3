@@ -407,7 +407,7 @@ EndFunc   ;==>_LOWriter_FrameAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameAreaGradientMulticolor
-; Description ...: Set or Retrieve a Frame's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Frame's Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_FrameAreaGradientMulticolor(ByRef $oFrame[, $avColorStops = Null])
 ; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -754,7 +754,7 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Frame's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Frame's Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_FrameAreaTransparencyGradientMulti(ByRef $oFrame[, $avColorStops = Null])
 ; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
@@ -2581,7 +2581,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleAreaGradientMulticolor
-; Description ...: Set or Retrieve a Frame Style's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Frame Style's Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_FrameStyleAreaGradientMulticolor(ByRef $oFrameStyle[, $avColorStops = Null])
 ; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -2934,7 +2934,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Frame Style's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Frame Style's Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_FrameStyleAreaTransparencyGradientMulti(ByRef $oFrameStyle[, $avColorStops = Null])
 ; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.

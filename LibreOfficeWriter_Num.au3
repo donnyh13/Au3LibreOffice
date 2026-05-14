@@ -150,7 +150,7 @@ EndFunc   ;==>_LOWriter_NumStyleCurrent
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_NumStyleCustomize
-; Description ...: Retrieve and Set Numbering Style Customize settings. See Remarks.
+; Description ...: Retrieve and Set Numbering Style Customize settings.
 ; Syntax ........: _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel[, $iNumFormat = Null[, $iStartAt = Null[, $sCharStyle = Null[, $iSubLevels = Null[, $sSepBefore = Null[, $sSepAfter = Null[, $bConsecutiveNum = Null[, $sBulletFont = Null[, $iCharDecimal = Null]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oNumStyle           - A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObjByName function.
@@ -587,7 +587,7 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_NumStylePosition
-; Description ...: Retrieve and Set Numbering Style Position settings. See Remarks.
+; Description ...: Retrieve and Set Numbering Style Position settings.
 ; Syntax ........: _LOWriter_NumStylePosition(ByRef $oDoc, $oNumStyle, $iLevel[, $iAlignedAt = Null[, $iNumAlign = Null[, $iFollowedBy = Null[, $iTabstop = Null[, $iIndent = Null]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oNumStyle           - A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObjByName function.

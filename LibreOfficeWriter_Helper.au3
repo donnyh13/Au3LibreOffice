@@ -998,7 +998,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyFont
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FindFormatModifyHyphenation
-; Description ...: Modify or Add Find Format Hyphenation Settings. See Remarks.
+; Description ...: Modify or Add Find Format Hyphenation Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyHyphenation(ByRef $atFormat[, $bAutoHyphen = Null[, $bHyphenNoCaps = Null[, $iMaxHyphens = Null[, $iMinLeadingChar = Null[, $iMinTrailingChar = Null]]]]])
 ; Parameters ....: $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.
 ;                  $bAutoHyphen         - [optional] Default is Null. If True, automatic hyphenation is applied.
@@ -1255,7 +1255,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyOverline
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FindFormatModifyPageBreak
-; Description ...: Modify or Add Find Format Page Break Settings. See Remarks.
+; Description ...: Modify or Add Find Format Page Break Settings.
 ; Syntax ........: _LOWriter_FindFormatModifyPageBreak(ByRef $oDoc, ByRef $atFormat[, $iBreakType = Null[, $sPageStyle = Null[, $iPgNumOffSet = Null]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $atFormat            - A Find Format Array of Settings to modify. Array will be directly modified.

@@ -1332,7 +1332,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtParAreaGradientMulticolor
-; Description ...: Set or retrieve a Paragraph's Direct Formatting Multicolor Gradient settings. See remarks.
+; Description ...: Set or retrieve a Paragraph's Direct Formatting Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_DirFrmtParAreaGradientMulticolor(ByRef $oSelection[, $avColorStops = Null])
 ; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.

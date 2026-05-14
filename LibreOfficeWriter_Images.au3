@@ -382,7 +382,7 @@ EndFunc   ;==>_LOWriter_ImageAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageAreaGradientMulticolor
-; Description ...: Set or Retrieve an Image's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve an Image's Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_ImageAreaGradientMulticolor(ByRef $oImage[, $avColorStops = Null])
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -729,7 +729,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve an Image's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve an Image's Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_ImageAreaTransparencyGradientMulti(ByRef $oImage[, $avColorStops = Null])
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.

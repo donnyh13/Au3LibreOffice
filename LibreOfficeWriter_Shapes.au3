@@ -384,7 +384,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ShapeAreaGradientMulticolor
-; Description ...: Set or Retrieve a Shape's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Shape's Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_ShapeAreaGradientMulticolor(ByRef $oShape[, $avColorStops = Null])
 ; Parameters ....: $oShape              - A Shape object returned by previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -731,7 +731,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ShapeAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Shape's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Shape's Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_ShapeAreaTransparencyGradientMulti(ByRef $oShape[, $avColorStops = Null])
 ; Parameters ....: $oShape              - A Shape object returned by previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.

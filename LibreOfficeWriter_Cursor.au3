@@ -688,7 +688,7 @@ EndFunc   ;==>_LOWriter_CursorParObjCreateList
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorParObjDelete
-; Description ...: Delete a Paragraph Object returned from _LOWriter_CursorParObjCreateList. See Remarks.
+; Description ...: Delete a Paragraph Object returned from _LOWriter_CursorParObjCreateList.
 ; Syntax ........: _LOWriter_CursorParObjDelete(ByRef $oParObj)
 ; Parameters ....: $oParObj             - A Paragraph Object returned by _LOWriter_CursorParObjCreateList.
 ; Return values .: Success: Integer
@@ -754,7 +754,7 @@ EndFunc   ;==>_LOWriter_CursorParObjPaste
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorParObjSectionsGet
-; Description ...: Break a Paragraph Object into individual Sections for Direct Formatting etc. See Remarks.
+; Description ...: Break a Paragraph Object into individual Sections for Direct Formatting etc.
 ; Syntax ........: _LOWriter_CursorParObjSectionsGet(ByRef $oParagraph)
 ; Parameters ....: $oParagraph          - A Paragraph Object returned from _LOWriter_CursorParObjCreateList function. Make sure it's not a Table!
 ; Return values .: Success: Array

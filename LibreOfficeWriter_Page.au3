@@ -408,7 +408,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleAreaGradientMulticolor
-; Description ...: Set or Retrieve a Page Style's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Page Style's Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_PageStyleAreaGradientMulticolor(ByRef $oPageStyle[, $avColorStops = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -761,7 +761,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Page Style's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Page Style's Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_PageStyleAreaTransparencyGradientMulti(ByRef $oPageStyle[, $avColorStops = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
@@ -1323,7 +1323,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSettings
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleColumnSize
-; Description ...: Modify or retrieve Column sizing settings. See remarks.
+; Description ...: Modify or retrieve Column sizing settings.
 ; Syntax ........: _LOWriter_PageStyleColumnSize(ByRef $oPageStyle, $iColumn[, $bAutoWidth = Null[, $iGlobalSpacing = Null[, $iSpacing = Null[, $iWidth = Null]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iColumn             - The column to modify the settings on. See Remarks.
@@ -2156,7 +2156,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleFooterAreaGradientMulticolor
-; Description ...: Set or Retrieve a Page Style's Footer Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Page Style's Footer Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_PageStyleFooterAreaGradientMulticolor(ByRef $oPageStyle[, $avColorStops = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -2513,7 +2513,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleFooterAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Page Style's Footer Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Page Style's Footer Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_PageStyleFooterAreaTransparencyGradientMulti(ByRef $oPageStyle[, $avColorStops = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
@@ -3739,7 +3739,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleHeaderAreaGradientMulticolor
-; Description ...: Set or Retrieve a Page Style's Header Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Page Style's Header Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_PageStyleHeaderAreaGradientMulticolor(ByRef $oPageStyle[, $avColorStops = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -4096,7 +4096,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleHeaderAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Page Style's Header Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Page Style's Header Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_PageStyleHeaderAreaTransparencyGradientMulti(ByRef $oPageStyle[, $avColorStops = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
