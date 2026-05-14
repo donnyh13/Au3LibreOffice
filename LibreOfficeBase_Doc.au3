@@ -306,7 +306,7 @@ EndFunc   ;==>_LOBase_DocConnect
 ;                  @Error 1 @Extended 1 = $bForceNew not a Boolean.
 ;                  @Error 1 @Extended 2 = $bHidden not a Boolean.
 ;                  @Error 1 @Extended 3 = $bWizard not a Boolean.
-;                  @Error 1 @Extended 4 = $bWizar and $bHidden both called with True.
+;                  @Error 1 @Extended 4 = $bWizard and $bHidden both called with True.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failure Creating Object com.sun.star.ServiceManager.
 ;                  @Error 2 @Extended 2 = Failure Creating Object com.sun.star.frame.Desktop.
