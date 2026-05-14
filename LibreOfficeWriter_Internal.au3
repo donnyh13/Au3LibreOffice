@@ -1362,7 +1362,7 @@ EndFunc   ;==>__LOWriter_CharUnderLine
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return $iColor = $iColor not an Integer. Returning $iColor to be sure not to lose the value.
+;                  @Error 1 @Extended 1 = $iColor not an Integer. Returning $iColor to be sure not to lose the value.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Color already has no Alpha value, returning same color.
 ;                  @Error 0 @Extended 1 Return Integer = Success. Removed Alpha value from the RGB Color Integer, returning new Color value.
@@ -1440,10 +1440,10 @@ EndFunc   ;==>__LOWriter_CreatePoint
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return False = $tDateStruct1 not an Object.
-;                  @Error 1 @Extended 2 Return False = $tDateStruct2 not an Object.
-;                  @Error 1 @Extended 3 Return False = $bIsDate not a Boolean.
-;                  @Error 1 @Extended 4 Return False = $bIsTime not a Boolean.
+;                  @Error 1 @Extended 1 = $tDateStruct1 not an Object.
+;                  @Error 1 @Extended 2 = $tDateStruct2 not an Object.
+;                  @Error 1 @Extended 3 = $bIsDate not a Boolean.
+;                  @Error 1 @Extended 4 = $bIsTime not a Boolean.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. If the Dates/Times in $tDateStruct1 and $tDateStruct2 are the same, True is returned. Else False.
 ; Author ........: donnyh13
@@ -6704,7 +6704,7 @@ EndFunc   ;==>__LOWriter_ParStyleCompare
 ;                  @Error 3 @Extended 2 = Error retrieving list of TabStop Positions.
 ;                  @Error 3 @Extended 3 = Failed to identify the new Tabstop once inserted.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return Integer = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
 ;                  |                               2 = Error setting $iAlignment
 ;                  |                               4 = Error setting $iDecChar
@@ -10241,7 +10241,7 @@ EndFunc   ;==>__LOWriter_TextCursorMove
 ; Return values .: Success: Integer.
 ;                  Failure: Null and sets the @Error and @Extended flags to non-zero.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return Null = No values called in parameters.
+;                  @Error 3 @Extended 1 = No values called in parameters.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. The requested Integer value converted from percentage to a RGB Color Integer.
 ;                  @Error 0 @Extended 1 Return Integer = Success. The requested Integer value from a RGB Color Integer to percentage.
@@ -10269,7 +10269,7 @@ Func __LOWriter_TransparencyGradientConvert($iPercentToLong = Null, $iLongToPerc
 
 	Else
 
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, Null)
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	EndIf
 EndFunc   ;==>__LOWriter_TransparencyGradientConvert
 
