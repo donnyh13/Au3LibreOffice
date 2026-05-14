@@ -60,6 +60,7 @@
 ; Parameters ....: $oCell               - A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
 ;                  $sText               - The initial text of the Comment. Cannot be empty.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning newly inserted Comment's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCell not an Object.
@@ -70,8 +71,6 @@
 ;                  @Error 3 @Extended 2 = Called Cell already contains a Comment.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Cell Address.
 ;                  @Error 3 @Extended 4 = Failed to retrieve new Comment Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning newly inserted Comment's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -114,6 +113,8 @@ EndFunc   ;==>_LOCalc_CommentAdd
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The comment color background, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -124,9 +125,6 @@ EndFunc   ;==>_LOCalc_CommentAdd
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current setting.
@@ -168,13 +166,12 @@ EndFunc   ;==>_LOCalc_CommentAreaColor
 ; Syntax ........: _LOCalc_CommentAreaFillStyle(ByRef $oComment)
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOC_AREA_FILL_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOC_AREA_FILL_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
@@ -214,6 +211,9 @@ EndFunc   ;==>_LOCalc_CommentAreaFillStyle
 ;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
 ;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
+;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -246,10 +246,6 @@ EndFunc   ;==>_LOCalc_CommentAreaFillStyle
 ;                  |                               256 = Error setting $iToColor
 ;                  |                               512 = Error setting $iFromIntense
 ;                  |                               1024 = Error setting $iToIntense
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -437,6 +433,8 @@ EndFunc   ;==>_LOCalc_CommentAreaGradient
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -456,9 +454,6 @@ EndFunc   ;==>_LOCalc_CommentAreaGradient
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = Current version less than 7.6.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -556,6 +551,8 @@ EndFunc   ;==>_LOCalc_CommentAreaGradientMulticolor
 ;                  $iBlur               - [optional] (0-150) Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -578,9 +575,6 @@ EndFunc   ;==>_LOCalc_CommentAreaGradientMulticolor
 ;                  |                               8 = Error setting $iDistance
 ;                  |                               16 = Error setting $iBlur
 ;                  |                               32 = Error setting $iTransparency
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -680,6 +674,8 @@ EndFunc   ;==>_LOCalc_CommentAreaShadow
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -690,9 +686,6 @@ EndFunc   ;==>_LOCalc_CommentAreaShadow
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -742,6 +735,9 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparency
 ;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
+;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -769,10 +765,6 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparency
 ;                  |                               16 = Error setting $iTransitionStart
 ;                  |                               32 = Error setting $iStart
 ;                  |                               64 = Error setting $iEnd
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -928,6 +920,8 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradient
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -947,9 +941,6 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradient
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = Current version less than 7.6.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -1047,6 +1038,8 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ;                  $bOptimal            - [optional] Default is Null. If True a angled line will be used optimally.
 ;                  $iLength             - [optional] (0-240005) Default is Null. The length of the callout line, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -1068,9 +1061,6 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ;                  |                               8 = Error setting $iExtendBy
 ;                  |                               16 = Error setting $bOptimal
 ;                  |                               32 = Error setting $iLength
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $iExtension is set to $LOC_COMMENT_CALLOUT_EXT_HORI, or $LOC_COMMENT_CALLOUT_EXT_VERT, $iExtendBy will be set to the alignment value of either constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, or $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_*.
@@ -1193,14 +1183,13 @@ EndFunc   ;==>_LOCalc_CommentCallout
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $bAtEnd              - [optional] Default is True. If True, The Text Cursor will be created at the end of any Text Content present.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning newly created Text Cursor.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
 ;                  @Error 1 @Extended 2 = $bAtEnd not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create a Text Cursor.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning newly created Text Cursor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1236,6 +1225,7 @@ EndFunc   ;==>_LOCalc_CommentCreateTextCursor
 ; Syntax ........: _LOCalc_CommentDelete(ByRef $oComment)
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Comment was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -1244,8 +1234,6 @@ EndFunc   ;==>_LOCalc_CommentCreateTextCursor
 ;                  @Error 3 @Extended 2 = Failed to retrieve Annotations Object.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Comment's Index number.
 ;                  @Error 3 @Extended 4 = Failed to delete Comment.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Comment was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1287,13 +1275,12 @@ EndFunc   ;==>_LOCalc_CommentDelete
 ; Syntax ........: _LOCalc_CommentGetCell(ByRef $oComment)
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning Object for Cell containing this comment.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve parent Cell Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning Object for Cell containing this comment.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1321,14 +1308,13 @@ EndFunc   ;==>_LOCalc_CommentGetCell
 ; Syntax ........: _LOCalc_CommentGetLastEdit(ByRef $oComment)
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended 0 Return Array = Success. Returning 2 element array containing Author and Date values.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Author.
 ;                  @Error 3 @Extended 2 = Failed to retrieve last Edit date.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Array = Success. Returning 2 element array containing Author and Date values.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The returned array will have two elements, the first element will contain the Author, and the second will be the last edit Date and Time.
@@ -1362,14 +1348,13 @@ EndFunc   ;==>_LOCalc_CommentGetLastEdit
 ; Syntax ........: _LOCalc_CommentGetObjByCell(ByRef $oCell)
 ; Parameters ....: $oCell               - A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Comment's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCell not an Object.
 ;                  @Error 1 @Extended 2 = $oCell not a Cell Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve requested Comment Object, or no Comment present in Cell.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Comment's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1399,6 +1384,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByCell
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $iComment            - The Index number of the comment to retrieve. 0 based.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Comment's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSheet not an Object.
@@ -1408,8 +1394,6 @@ EndFunc   ;==>_LOCalc_CommentGetObjByCell
 ;                  @Error 3 @Extended 1 = Failed to retrieve Annotations Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve total count of Comments.
 ;                  @Error 3 @Extended 3 = Failed to retrieve requested Comment Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Comment's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1453,6 +1437,8 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ;                  $iEndWidth           - [optional] (0-5004) Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bEndCenter          - [optional] Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
 ; Return values .: Success: Integer or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -1477,9 +1463,6 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ;                  |                               16 = Error setting $vEndStyle
 ;                  |                               32 = Error setting $iEndWidth
 ;                  |                               64 = Error setting $bEndCenter
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: LibreOffice has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
@@ -1604,6 +1587,8 @@ EndFunc   ;==>_LOCalc_CommentLineArrowStyles
 ;                  $iCornerStyle        - [optional] (0, 2-4) Default is Null. The Line Corner Style. See Constants $LOC_COMMENT_LINE_JOINT_* as defined in LibreOfficeCalc_Constants.au3
 ;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOC_COMMENT_LINE_CAP_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: Integer or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -1625,9 +1610,6 @@ EndFunc   ;==>_LOCalc_CommentLineArrowStyles
 ;                  |                               8 = Error setting $iTransparency
 ;                  |                               16 = Error setting $iCornerStyle
 ;                  |                               32 = Error setting $iCapStyle
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $vStyle accepts a String or an Integer because there is the possibility of a custom Line Style being available that the user may want to use.
@@ -1750,6 +1732,8 @@ EndFunc   ;==>_LOCalc_CommentLineProperties
 ;                  $iY                  - [optional] Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $bProtectPos         - [optional] Default is Null. If True, the Comment's position is locked.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -1764,9 +1748,6 @@ EndFunc   ;==>_LOCalc_CommentLineProperties
 ;                  |                               1 = Error setting $iX
 ;                  |                               2 = Error setting $iY
 ;                  |                               4 = Error setting $bProtectPos
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The X Coordinate seems to be measured from the right hand edge of the Comment Box, and the Y Coordinate seems to be measured from the top of the comment box.
@@ -1834,6 +1815,8 @@ EndFunc   ;==>_LOCalc_CommentPosition
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $nRotate             - [optional] (0-359.99) Default is Null. The Degrees to rotate the Comment. See remarks.
 ; Return values .: Success: 1 or Number.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current setting as a Number.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -1844,9 +1827,6 @@ EndFunc   ;==>_LOCalc_CommentPosition
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nRotate
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current setting as a Number.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function uses the deprecated LibreOffice method RotateAngle and may stop working in future LibreOffice versions, after 7.3.4.2.
@@ -1889,14 +1869,13 @@ EndFunc   ;==>_LOCalc_CommentRotate
 ; Syntax ........: _LOCalc_CommentsGetCount(ByRef $oSheet)
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning total number of comments contained in the Sheet as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSheet not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Annotations Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve total count of Comments.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning total number of comments contained in the Sheet as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1928,14 +1907,13 @@ EndFunc   ;==>_LOCalc_CommentsGetCount
 ; Syntax ........: _LOCalc_CommentsGetList(ByRef $oSheet)
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning array of Comment Objects contained in the Sheet. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSheet not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Annotations Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve total count of Comments.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning array of Comment Objects contained in the Sheet. @Extended is set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1978,6 +1956,8 @@ EndFunc   ;==>_LOCalc_CommentsGetList
 ;                  $iHeight             - [optional] Default is Null. The height of the Comment, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the Comment.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -1992,9 +1972,6 @@ EndFunc   ;==>_LOCalc_CommentsGetList
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iHeight
 ;                  |                               4 = Error setting $bProtectSize
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2063,6 +2040,8 @@ EndFunc   ;==>_LOCalc_CommentSize
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $sText               - [optional] Default is Null. The text to set the Comment to. Will overwrite any previous text.
 ; Return values .: Success: 1 or String
+;                  @Error 0 @Extended 0 Return 1 = Success. Text were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current text contained in Comment, as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -2072,9 +2051,6 @@ EndFunc   ;==>_LOCalc_CommentSize
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sText
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Text were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current text contained in Comment, as a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current text content of the comment.
@@ -2116,6 +2092,8 @@ EndFunc   ;==>_LOCalc_CommentText
 ;                  $iAnchor             - [optional] (0-8) Default is Null. The Comment Anchor position. See Constants $LOC_COMMENT_ANCHOR_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bFullWidth          - [optional] Default is Null. If True, the text will be expanded to cover the full width of the comment.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -2127,9 +2105,6 @@ EndFunc   ;==>_LOCalc_CommentText
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iAnchor
 ;                  |                               2 = Error setting $bFullWidth
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2290,6 +2265,8 @@ EndFunc   ;==>_LOCalc_CommentTextAnchor
 ;                  $iIncrement          - [optional] (0-25400) Default is Null. The increment value measured in Hundredths of a Millimeter (HMM). See remarks.
 ;                  $iDelay              - [optional] (0-30000) Default is Null. The delay between animation repeats, in milliseconds. 0 = Automatic.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -2313,9 +2290,6 @@ EndFunc   ;==>_LOCalc_CommentTextAnchor
 ;                  |                               32 = Error setting $iPixelIncrement
 ;                  |                               64 = Error setting $iIncrement
 ;                  |                               128 = Error setting $iDelay
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Increment value can be set in either Pixels or Hundredths of a Millimeter (HMM), but internally it uses the same property. To make setting this easier, I have made two separate parameters to set, depending on if you wish to set increment using pixels ($iPixelIncrement) or Hundredths of a Millimeter ($iIncrement). Only one should be used, otherwise $iIncrement will overwrite $iPixelIncrement.
@@ -2418,6 +2392,8 @@ EndFunc   ;==>_LOCalc_CommentTextAnimation
 ;                  $iColumns            - [optional] (1-16) Default is Null. The number of columns to break the text area into.
 ;                  $iSpacing            - [optional] Default is Null. The amount of spacing between the columns, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2433,9 +2409,6 @@ EndFunc   ;==>_LOCalc_CommentTextAnimation
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColumns
 ;                  |                               2 = Error setting $iSpacing
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2511,6 +2484,8 @@ EndFunc   ;==>_LOCalc_CommentTextColumns
 ;                  $iTop                - [optional] (-100000-100000) Default is Null. The spacing on the Top side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] (-100000-100000) Default is Null. The spacing on the Bottom side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -2534,9 +2509,6 @@ EndFunc   ;==>_LOCalc_CommentTextColumns
 ;                  |                               32 = Error setting $iRight
 ;                  |                               64 = Error setting $iTop
 ;                  |                               128 = Error setting $iBottom
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If either $bFitWidth or $bFitHeight is set to True, $bFitToFrame cannot be set to True, and vice versa.
@@ -2650,6 +2622,8 @@ EndFunc   ;==>_LOCalc_CommentTextSettings
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $bVisible            - [optional] Default is Null. If True, the comment will be always visible.
 ; Return values .: Success: 1 or Boolean
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning current setting as a Boolean value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComment not an Object.
@@ -2659,9 +2633,6 @@ EndFunc   ;==>_LOCalc_CommentTextSettings
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning current setting as a Boolean value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current setting.
