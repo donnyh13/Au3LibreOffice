@@ -419,8 +419,8 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradient
 ;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
 ;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
 ;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
@@ -772,8 +772,8 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradient
 ;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
 ;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
 ;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
@@ -2167,8 +2167,8 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradient
 ;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
 ;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
 ;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
@@ -2524,8 +2524,8 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparencyGradient
 ;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
 ;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
 ;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
@@ -3750,8 +3750,8 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradient
 ;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
 ;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
 ;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
@@ -4107,8 +4107,8 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparencyGradient
 ;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
 ;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
 ;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--

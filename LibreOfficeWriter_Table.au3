@@ -2558,14 +2558,14 @@ EndFunc   ;==>_LOWriter_TableRowProperty
 ; Description ...: Fill a Text Table with Data.
 ; Syntax ........: _LOWriter_TableSetData(ByRef $oTable, ByRef $avData)
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $avData              - See Remarks.
+;                  $avData              - Array of Data to fill the Table with. See Remarks.
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
 ;                  @Error 1 @Extended 2 = $avData not an Array.
 ;                  @Error 1 @Extended 3 = $avData Array does not contain the same number of elements as Rows in the Table.
-;                  @Error 1 @Extended 4 Return ? = $avData sub arrays do not contain enough elements to match columns contained in Table. Return set to element number in main array containing faulty array.
+;                  @Error 1 @Extended 4 = $avData sub arrays do not contain enough elements to match count of columns contained in Table. Returning problem element index.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Table data was successfully set.
 ; Author ........: donnyh13

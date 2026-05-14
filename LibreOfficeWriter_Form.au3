@@ -802,7 +802,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  @Error 1 @Extended 13 = $bTabStop not a Boolean.
 ;                  @Error 1 @Extended 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
 ;                  @Error 1 @Extended 15 = $asList not an Array.
-;                  @Error 1 @Extended 16 Return ? = Element contained in $asList not a String. Returning problem element position.
+;                  @Error 1 @Extended 16 = Element contained in $asList not a String. Returning problem element index.
 ;                  @Error 1 @Extended 17 = $sDefaultTxt not a String.
 ;                  @Error 1 @Extended 18 = $mFont not a Map.
 ;                  @Error 1 @Extended 19 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
@@ -4957,7 +4957,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ;                  @Error 1 @Extended 12 = $bTabStop not a Boolean.
 ;                  @Error 1 @Extended 13 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
 ;                  @Error 1 @Extended 14 = $asList not an Array.
-;                  @Error 1 @Extended 15 Return ? = Element contained in $asList not a String. Returning problem element position.
+;                  @Error 1 @Extended 15 = Element contained in $asList not a String. Returning problem element index.
 ;                  @Error 1 @Extended 16 = $mFont not a Map.
 ;                  @Error 1 @Extended 17 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 18 = $iBackColor not an Integer, less than 0 or greater than 16777215.
@@ -4967,8 +4967,8 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ;                  @Error 1 @Extended 22 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
 ;                  @Error 1 @Extended 23 = $bMultiSel not an Boolean.
 ;                  @Error 1 @Extended 24 = $aiDefaultSel not an Array.
-;                  @Error 1 @Extended 25 Return ? = Element contained in $aiDefaultSel not an Integer. Returning problem element position.
-;                  @Error 1 @Extended 26 Return ? = Integer contained in Element of $aiDefaultSel greater than number of List items. Returning problem element position.
+;                  @Error 1 @Extended 25 = Element contained in $aiDefaultSel not an Integer. Returning problem element index.
+;                  @Error 1 @Extended 26 = Integer contained in Element of $aiDefaultSel greater than number of List items. Returning problem element index.
 ;                  @Error 1 @Extended 27 = $sAddInfo not a String.
 ;                  @Error 1 @Extended 28 = $sHelpText not a String.
 ;                  @Error 1 @Extended 29 = $sHelpURL not a String.
@@ -5333,8 +5333,8 @@ EndFunc   ;==>_LOWriter_FormConListBoxGetCount
 ;                  @Error 1 @Extended 2 = Object called in $oListBox not a List Box Control.
 ;                  @Error 1 @Extended 3 = $bReturnValue not a Boolean.
 ;                  @Error 1 @Extended 4 = $aiSelection not an array.
-;                  @Error 1 @Extended 5 Return ? = Array called in $aiSelection contains an element with a non-Integer value. Returning problem element position.
-;                  @Error 1 @Extended 6 Return ? = Array called in $aiSelection contains an element with an Integer value less than 0 or greater than number of List Box entries. Returning problem element position.
+;                  @Error 1 @Extended 5 = Array called in $aiSelection contains an element with a non-Integer value. Returning problem element index.
+;                  @Error 1 @Extended 6 = Array called in $aiSelection contains an element with an Integer value less than 0 or greater than number of List Box entries. Returning problem element index.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to identify control type.
 ;                  @Error 3 @Extended 2 = Failed to retrieve current selection.
@@ -8759,7 +8759,7 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ;                  @Error 1 @Extended 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 10 = $iWidth not an Integer, less than 100 or greater than 200,000.
 ;                  @Error 1 @Extended 11 = $asList not an Array.
-;                  @Error 1 @Extended 12 Return ? = Element contained in $asList not a String. Returning problem element position.
+;                  @Error 1 @Extended 12 = Element contained in $asList not a String. Returning problem element index.
 ;                  @Error 1 @Extended 13 = $sDefaultTxt not a String.
 ;                  @Error 1 @Extended 14 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 15 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
@@ -10694,12 +10694,12 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ;                  @Error 1 @Extended 8 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 9 = $iWidth not an Integer, less than 100 or greater than 200,000.
 ;                  @Error 1 @Extended 10 = $asList not an Array.
-;                  @Error 1 @Extended 11 Return ? = Element contained in $asList not a String. Returning problem element position.
+;                  @Error 1 @Extended 11 = Element contained in $asList not a String. Returning problem element index.
 ;                  @Error 1 @Extended 12 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 13 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
 ;                  @Error 1 @Extended 14 = $aiDefaultSel not an Array.
-;                  @Error 1 @Extended 15 Return ? = Element contained in $aiDefaultSel not an Integer. Returning problem element position.
-;                  @Error 1 @Extended 16 Return ? = Integer contained in Element of $aiDefaultSel greater than number of List items. Returning problem element position.
+;                  @Error 1 @Extended 15 = Element contained in $aiDefaultSel not an Integer. Returning problem element index.
+;                  @Error 1 @Extended 16 = Integer contained in Element of $aiDefaultSel greater than number of List items. Returning problem element index.
 ;                  @Error 1 @Extended 17 = $sAddInfo not a String.
 ;                  @Error 1 @Extended 18 = $sHelpText not a String.
 ;                  @Error 1 @Extended 19 = $sHelpURL not a String.
