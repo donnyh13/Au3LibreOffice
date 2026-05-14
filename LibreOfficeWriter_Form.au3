@@ -117,6 +117,7 @@
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ;                  $sName               - The name of the new Form. Form names do not need to be unique, but it will help for clarity.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning newly created Form's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
@@ -130,8 +131,6 @@
 ;                  @Error 3 @Extended 3 = Failed to insert new Form.
 ;                  @Error 3 @Extended 4 = Failed to retrieve new Form Object.
 ;                  @Error 3 @Extended 5 = Failed to name Form.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning newly created Form's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $oObj is called with a Document object, the new form will be a top level form. If a Form object is called, a sub-form will be created.
@@ -198,6 +197,8 @@ EndFunc   ;==>_LOWriter_FormAdd
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
@@ -210,9 +211,6 @@ EndFunc   ;==>_LOWriter_FormAdd
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -285,6 +283,8 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
@@ -338,9 +338,6 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ;                  |                               524288 = Error setting $sAddInfo
 ;                  |                               1048576 = Error setting $sHelpText
 ;                  |                               2097152 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
@@ -605,6 +602,8 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxGeneral
 ; Parameters ....: $oCheckBox           - A Checkbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $iState              - [optional] (0-2) Default is Null. The current checked state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Check Box State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
@@ -616,9 +615,6 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iState
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Check Box State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current check box state.
@@ -668,6 +664,8 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxState
 ;                  $iType               - [optional] (1-5) Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sListContent        - [optional] Default is Null. Default is Null. The SQL statement, Table Name, etc., depending on the value of $iType.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComboBox not an Object.
@@ -686,9 +684,6 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxState
 ;                  |                               4 = Error setting $bInputRequired
 ;                  |                               8 = Error setting $iType
 ;                  |                               16 = Error setting $sListContent
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -785,6 +780,8 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComboBox not an Object.
@@ -845,9 +842,6 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  |                               4194304 = Error setting $sAddInfo
 ;                  |                               8388608 = Error setting $sHelpText
 ;                  |                               16777216 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1147,6 +1141,8 @@ EndFunc   ;==>_LOWriter_FormConComboBoxGeneral
 ; Parameters ....: $oComboBox           - A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sValue              - [optional] Default is Null. The current value in the Combo Box's entry field. Value doesn't need to match an available field.
 ; Return values .: Success: 1 or String
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning currently selected Combo Box value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComboBox not an Object.
@@ -1158,9 +1154,6 @@ EndFunc   ;==>_LOWriter_FormConComboBoxGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sValue
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning currently selected Combo Box value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the currently selected value.
@@ -1208,6 +1201,8 @@ EndFunc   ;==>_LOWriter_FormConComboBoxValue
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
@@ -1220,9 +1215,6 @@ EndFunc   ;==>_LOWriter_FormConComboBoxValue
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1304,6 +1296,8 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 32 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
@@ -1377,9 +1371,6 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ;                  |                               536870912 = Error setting $sAddInfo
 ;                  |                               1073741824 = Error setting $sHelpText
 ;                  |                               -1 = Error setting $sHelpURL (See remarks.)
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 32 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1748,6 +1739,8 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldGeneral
 ; Parameters ....: $oCurrencyField      - A Currency Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $nValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or Number
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
@@ -1758,9 +1751,6 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nValue
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value. Return will be Null if a value hasn't been set.
@@ -1807,6 +1797,8 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldValue
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDateField not an Object.
@@ -1819,9 +1811,6 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldValue
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1900,6 +1889,8 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 29 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDateField not an Object.
@@ -1972,9 +1963,6 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ;                  |                               67108864 = Error setting $sAddInfo
 ;                  |                               134217728 = Error setting $sHelpText
 ;                  |                               268435456 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 29 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2364,6 +2352,8 @@ EndFunc   ;==>_LOWriter_FormConDateFieldGeneral
 ; Parameters ....: $oDateField          - A Date Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $tDateValue          - [optional] Default is Null. The date to set the field to, created previously by _LOWriter_DateStructCreate.
 ; Return values .: Success: 1 or Structure
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were called with Null, returning current Date value as a Date Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDateField not an Object.
@@ -2377,9 +2367,6 @@ EndFunc   ;==>_LOWriter_FormConDateFieldGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $tDateValue
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were called with Null, returning current Date value as a Date Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Date value. Return will be Null if the Date hasn't been set.
@@ -2442,6 +2429,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldValue
 ; Syntax ........: _LOWriter_FormConDelete(ByRef $oControl)
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Control was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oControl not an Object.
@@ -2449,8 +2437,6 @@ EndFunc   ;==>_LOWriter_FormConDateFieldValue
 ;                  @Error 3 @Extended 1 = Failed to retrieve Control's parent Object.
 ;                  @Error 3 @Extended 2 = Cannot delete the last control in a Grouped control.
 ;                  @Error 3 @Extended 3 = Failed to delete the Control.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Control was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You cannot delete the last control contained in a Grouped Control.
@@ -2504,6 +2490,8 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 19 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFileSel not an Object.
@@ -2550,9 +2538,6 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ;                  |                               65536 = Error setting $sAddInfo
 ;                  |                               131072 = Error setting $sHelpText
 ;                  |                               262144 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 19 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2784,6 +2769,8 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldGeneral
 ; Parameters ....: $oFileSel            - A File Selection Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or String
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFileSel not an Object.
@@ -2795,9 +2782,6 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sValue
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value.
@@ -2847,6 +2831,8 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldValue
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFormatField not an Object.
@@ -2863,9 +2849,6 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldValue
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
 ;                  |                               8 = Error setting $bFilter
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2958,6 +2941,8 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFormatField not an Object.
@@ -3025,9 +3010,6 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  |                               33554432 = Error setting $sAddInfo
 ;                  |                               67108864 = Error setting $sHelpText
 ;                  |                               134217728 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -3363,6 +3345,8 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldGeneral
 ; Parameters ....: $oFormatField        - A Formatted Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $nValue              - [optional] Default is Null. The Value to set the Formatted Field to.
 ; Return values .: Success: 1 or Number
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFormatField not an Object.
@@ -3374,9 +3358,6 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nValue
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value.
@@ -3421,14 +3402,13 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldValue
 ; Syntax ........: _LOWriter_FormConGetParent(ByRef $oControl)
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the Form Object that contains the Control.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oControl not an Object.
 ;                  @Error 1 @Extended 2 = Object called in $oControl not an Control Object and not a Grouped Control.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve parent form Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the Form Object that contains the Control.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Unfortunately I am unable to successfully set the parent for controls. It sets, but doesn't literally "move" the control to the new form, and also causes the control to no-longer work.
@@ -3481,6 +3461,8 @@ EndFunc   ;==>_LOWriter_FormConGetParent
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oGroupBox not an Object.
@@ -3509,9 +3491,6 @@ EndFunc   ;==>_LOWriter_FormConGetParent
 ;                  |                               128 = Error setting $sAddInfo
 ;                  |                               256 = Error setting $sHelpText
 ;                  |                               512 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -3668,6 +3647,8 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oImageButton not an Object.
@@ -3713,9 +3694,6 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ;                  |                               32768 = Error setting $sAddInfo
 ;                  |                               65536 = Error setting $sHelpText
 ;                  |                               131072 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
@@ -4042,6 +4020,8 @@ EndFunc   ;==>_LOWriter_FormConImageButtonGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oImageControl not an Object.
@@ -4054,9 +4034,6 @@ EndFunc   ;==>_LOWriter_FormConImageButtonGeneral
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4123,6 +4100,8 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oImageControl not an Object.
@@ -4166,9 +4145,6 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ;                  |                               16384 = Error setting $sAddInfo
 ;                  |                               32768 = Error setting $sHelpText
 ;                  |                               65536 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
@@ -4388,6 +4364,8 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ;                  $iHeight             - The Height of the control, in Hundredths of a Millimeter (HMM).
 ;                  $sName               - [optional] Default is "". The name of the control, if called with "", a name is automatically given it.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Grouped Control was inserted successfully, returning its object.
+;                  @Error 0 @Extended 1 Return Object = Success. Control was inserted successfully, returning its object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oParentForm not an Object.
@@ -4408,9 +4386,6 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ;                  @Error 3 @Extended 3 = Failed to retrieve Control Service name.
 ;                  @Error 3 @Extended 4 = Failed to retrieve Shape Position Structure.
 ;                  @Error 3 @Extended 5 = Failed to retrieve Shape Size Structure.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Grouped Control was inserted successfully, returning its object.
-;                  @Error 0 @Extended 1 Return Object = Success. Control was inserted successfully, returning its object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: When inserting a Grouped Control, a Group box will be automatically created and inserted into it.
@@ -4574,6 +4549,8 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oLabel not an Object.
@@ -4614,9 +4591,6 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ;                  |                               8192 = Error setting $sAddInfo
 ;                  |                               16384 = Error setting $sHelpText
 ;                  |                               32768 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4821,6 +4795,8 @@ EndFunc   ;==>_LOWriter_FormConLabelGeneral
 ;                  $asListContent       - [optional] Default is Null. A single dimension array. See remarks
 ;                  $iBoundField         - [optional] (-1-2147483647) Default is Null. The bound data field of a linked table to display.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oListBox not an Object.
@@ -4840,9 +4816,6 @@ EndFunc   ;==>_LOWriter_FormConLabelGeneral
 ;                  |                               4 = Error setting $iType
 ;                  |                               8 = Error setting $asListContent
 ;                  |                               16 = Error setting $iBoundField
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4941,6 +4914,8 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 23 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oListBox not an Object.
@@ -4999,9 +4974,6 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ;                  |                               1048576 = Error setting $sAddInfo
 ;                  |                               2097152 = Error setting $sHelpText
 ;                  |                               4194304 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 23 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The array called for $asList should be a single dimension array, with one List entry as a String, per array element.
@@ -5287,6 +5259,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxGeneral
 ; Syntax ........: _LOWriter_FormConListBoxGetCount(ByRef $oListBox)
 ; Parameters ....: $oListBox            - A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning the count of List Box entries.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oListBox not an Object.
@@ -5294,8 +5267,6 @@ EndFunc   ;==>_LOWriter_FormConListBoxGeneral
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to identify control type.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Item Count.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning the count of List Box entries.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5327,6 +5298,8 @@ EndFunc   ;==>_LOWriter_FormConListBoxGetCount
 ;                  $aiSelection         - [optional] Default is Null. A single dimension array of selection values. See remarks.
 ;                  $bReturnValue        - [optional] Default is False. If True, when retrieving the the current selection(s), the current selected VALUE, instead of the position is returned.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current selection(s) of the List Box. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oListBox not an Object.
@@ -5341,9 +5314,6 @@ EndFunc   ;==>_LOWriter_FormConListBoxGetCount
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $aiSelection
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current selection(s) of the List Box. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The array called for $aiSelection should be a single dimension array, with one Integer value, corresponding to the position in the List box value array, per array element, to indicate which value(s) is/are selected.
@@ -5424,6 +5394,8 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oNavBar not an Object.
@@ -5468,9 +5440,6 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ;                  |                               32768 = Error setting $sAddInfo
 ;                  |                               65536 = Error setting $sHelpText
 ;                  |                               131072 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -5695,6 +5664,8 @@ EndFunc   ;==>_LOWriter_FormConNavBarGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oNumericField not an Object.
@@ -5707,9 +5678,6 @@ EndFunc   ;==>_LOWriter_FormConNavBarGeneral
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -5789,6 +5757,8 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 30 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oNumericField not an Object.
@@ -5858,9 +5828,6 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  |                               134217728 = Error setting $sAddInfo
 ;                  |                               268435456 = Error setting $sHelpText
 ;                  |                               536870912 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 30 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -6207,6 +6174,8 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldGeneral
 ; Parameters ....: $oNumericField       - A Numeric Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $nValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or Number
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oNumericField not an Object.
@@ -6217,9 +6186,6 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nValue
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value. Return will be Null if a value hasn't been set.
@@ -6266,6 +6232,8 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldValue
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oOptionButton not an Object.
@@ -6278,9 +6246,6 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldValue
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -6353,6 +6318,8 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oOptionButton not an Object.
@@ -6406,9 +6373,6 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ;                  |                               524288 = Error setting $sAddInfo
 ;                  |                               1048576 = Error setting $sHelpText
 ;                  |                               2097152 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
@@ -6674,6 +6638,8 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonGeneral
 ; Parameters ....: $oOptionButton       - A Option Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $iState              - [optional] (0-1) Default is Null. The current state of the Option Button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Option Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oOptionButton not an Object.
@@ -6685,9 +6651,6 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iState
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Option Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Option Button state.
@@ -6736,6 +6699,8 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonState
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oPatternField not an Object.
@@ -6752,9 +6717,6 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonState
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
 ;                  |                               8 = Error setting $bFilter
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -6844,6 +6806,8 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oPatternField not an Object.
@@ -6903,9 +6867,6 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ;                  |                               4194304 = Error setting $sAddInfo
 ;                  |                               8388608 = Error setting $sHelpText
 ;                  |                               16777216 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -7201,6 +7162,8 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldGeneral
 ; Parameters ....: $oPatternField       - A Pattern Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or String
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oPatternField not an Object.
@@ -7212,9 +7175,6 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sValue
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value.
@@ -7264,6 +7224,8 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ;                  $iAnchor             - [optional] (0-4) Default is Null. The anchoring position for the Control. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bProtectPos         - [optional] Default is Null. If True, the Shape's position is locked.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oControl not an Object.
@@ -7279,9 +7241,6 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ;                  |                               2 = Error setting $iY
 ;                  |                               4 = Error setting $iAnchor
 ;                  |                               8 = Error setting $bProtectPos
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -7377,6 +7336,8 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 27 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oPushButton not an Object.
@@ -7440,9 +7401,6 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ;                  |                               16777216 = Error setting $sAddInfo
 ;                  |                               33554432 = Error setting $sHelpText
 ;                  |                               67108864 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 27 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
@@ -7860,6 +7818,8 @@ EndFunc   ;==>_LOWriter_FormConPushButtonGeneral
 ; Parameters ....: $oPushButton         - A Push Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $iState              - [optional] (0-1) Default is Null. The state of the Push Button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Push Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oPushButton not an Object.
@@ -7871,9 +7831,6 @@ EndFunc   ;==>_LOWriter_FormConPushButtonGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iState
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Push Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Push Button state.
@@ -7921,6 +7878,7 @@ EndFunc   ;==>_LOWriter_FormConPushButtonState
 ; Parameters ....: $oObj                - Either a Document Object or a Form object, or a Grouped Control. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function. Also a Grouped Control or Group Box returned from a _LOWriter_FormConsGetList function.
 ;                  $iType               - [optional] (1-1048575) Default is $LOW_FORM_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOW_FORM_CON_* as defined in LibreOfficeWriter_Constants.au3
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
@@ -7932,8 +7890,6 @@ EndFunc   ;==>_LOWriter_FormConPushButtonState
 ;                  @Error 3 @Extended 3 = Failed to retrieve Shape Object.
 ;                  @Error 3 @Extended 4 = Failed to identify Control type.
 ;                  @Error 3 @Extended 5 = Failed to retrieve Control Object.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOW_FORM_CON_* as defined in LibreOfficeWriter_Constants.au3
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If a Document object is called in $oObj, all the controls are returned (except controls in a Grouped Control). If a Form Object is called in $oObj, only the controls contained in the Form are returned. And if a Grouped control is called, only controls in the group are returned.
@@ -8059,6 +8015,8 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ;                  $iHeight             - [optional] Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the Shape.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oControl not an Object.
@@ -8072,9 +8030,6 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iHeight
 ;                  |                               4 = Error setting $bProtectSize
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -8140,6 +8095,8 @@ EndFunc   ;==>_LOWriter_FormConSize
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
@@ -8152,9 +8109,6 @@ EndFunc   ;==>_LOWriter_FormConSize
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -8218,6 +8172,8 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 13 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
@@ -8252,9 +8208,6 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ;                  |                               1024 = Error setting $sAddInfo
 ;                  |                               2048 = Error setting $sHelpText
 ;                  |                               4096 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 13 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -8426,6 +8379,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxGeneral
 ;                  $iControl            - The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
 ;                  $iPos                - [optional] Default is Null. The position in the Column list to insert the new Column. 0 = insert at the beginning. Null = insert at the end.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully created the Column, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTableCon not an Object.
@@ -8439,8 +8393,6 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxGeneral
 ;                  @Error 3 @Extended 2 = Failed to retrieve Control type name.
 ;                  @Error 3 @Extended 3 = Failed to split Control type name.
 ;                  @Error 3 @Extended 4 = Failed to insert new Column.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully created the Column, returning its Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only the following Control types are allowed to be created as a column tab: $LOW_FORM_CON_TYPE_FORMATTED_FIELD, $LOW_FORM_CON_TYPE_LIST_BOX, $LOW_FORM_CON_TYPE_NUMERIC_FIELD, $LOW_FORM_CON_TYPE_PATTERN_FIELD, $LOW_FORM_CON_TYPE_TEXT_BOX, $LOW_FORM_CON_TYPE_TIME_FIELD
@@ -8531,14 +8483,13 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnAdd
 ; Syntax ........: _LOWriter_FormConTableConColumnDelete(ByRef $oColumn)
 ; Parameters ....: $oColumn             - A Column object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Column was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oColumn not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Column's parent.
 ;                  @Error 3 @Extended 2 = Failed to delete the Column.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Column was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -8578,6 +8529,7 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnDelete
 ; Syntax ........: _LOWriter_FormConTableConColumnsGetList(ByRef $oTableCon)
 ; Parameters ....: $oTableCon           - A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a two column array containing Column objects. See remarks. @Extended is set to the number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTableCon not an Object.
@@ -8587,8 +8539,6 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnDelete
 ;                  @Error 3 @Extended 2 = Failed to retrieve count of Columns.
 ;                  @Error 3 @Extended 3 = Failed to retrieve Column object.
 ;                  @Error 3 @Extended 4 = Failed to identify Column type.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a two column array containing Column objects. See remarks. @Extended is set to the number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The returned array will contain two columns. The first column ($aArray[0][0], contains the Column object, and the second column ($aArray[0][1], contains the Column type, corresponding to one of the constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -8638,6 +8588,8 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnsGetList
 ;                  $iType               - [optional] (1-5) Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sListContent        - [optional] Default is Null. Default is Null. The SQL statement, Table Name, etc., depending on the value of $iType.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComboBox not an Object.
@@ -8656,9 +8608,6 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnsGetList
 ;                  |                               4 = Error setting $bInputRequired
 ;                  |                               8 = Error setting $iType
 ;                  |                               16 = Error setting $sListContent
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -8746,6 +8695,8 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oComboBox not an Object.
@@ -8787,9 +8738,6 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ;                  |                               8192 = Error setting $sAddInfo
 ;                  |                               16384 = Error setting $sHelpText
 ;                  |                               32768 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -8999,6 +8947,8 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
@@ -9011,9 +8961,6 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxGeneral
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -9087,6 +9034,8 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 24 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
@@ -9143,9 +9092,6 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ;                  |                               2097152 = Error setting $sAddInfo
 ;                  |                               4194304 = Error setting $sHelpText
 ;                  |                               8388608 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 24 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -9432,6 +9378,8 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDateField not an Object.
@@ -9444,9 +9392,6 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldGeneral
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -9517,6 +9462,8 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 21 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDateField not an Object.
@@ -9572,9 +9519,6 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ;                  |                               262144 = Error setting $sAddInfo
 ;                  |                               524288 = Error setting $sHelpText
 ;                  |                               1048576 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 21 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -9886,6 +9830,8 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldGeneral
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFormatField not an Object.
@@ -9902,9 +9848,6 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldGeneral
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
 ;                  |                               8 = Error setting $bFilter
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -9989,6 +9932,8 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFormatField not an Object.
@@ -10039,9 +9984,6 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ;                  |                               131072 = Error setting $sAddInfo
 ;                  |                               262144 = Error setting $sHelpText
 ;                  |                               524288 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -10311,6 +10253,8 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTableCon not an Object.
@@ -10353,9 +10297,6 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ;                  |                               16384 = Error setting $sAddInfo
 ;                  |                               32768 = Error setting $sHelpText
 ;                  |                               65536 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -10571,6 +10512,8 @@ EndFunc   ;==>_LOWriter_FormConTableConGeneral
 ;                  $asListContent       - [optional] Default is Null. A single dimension array. See remarks
 ;                  $iBoundField         - [optional] (-1-2147483647) Default is Null. The bound data field of a linked table to display.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oListBox not an Object.
@@ -10590,9 +10533,6 @@ EndFunc   ;==>_LOWriter_FormConTableConGeneral
 ;                  |                               4 = Error setting $iType
 ;                  |                               8 = Error setting $asListContent
 ;                  |                               16 = Error setting $iBoundField
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -10682,6 +10622,8 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oListBox not an Object.
@@ -10721,9 +10663,6 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ;                  |                               2048 = Error setting $sAddInfo
 ;                  |                               4096 = Error setting $sHelpText
 ;                  |                               8192 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The array called for $asList should be a single dimension array, with one List entry as a String, per array element.
@@ -10918,6 +10857,8 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oNumericField not an Object.
@@ -10930,9 +10871,6 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxGeneral
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -11004,6 +10942,8 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oNumericField not an Object.
@@ -11056,9 +10996,6 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ;                  |                               524288 = Error setting $sAddInfo
 ;                  |                               1048576 = Error setting $sHelpText
 ;                  |                               2097152 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -11326,6 +11263,8 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldGeneral
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oPatternField not an Object.
@@ -11342,9 +11281,6 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldGeneral
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
 ;                  |                               8 = Error setting $bFilter
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -11426,6 +11362,8 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oPatternField not an Object.
@@ -11468,9 +11406,6 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ;                  |                               16384 = Error setting $sAddInfo
 ;                  |                               32768 = Error setting $sHelpText
 ;                  |                               65536 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -11687,6 +11622,8 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldGeneral
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTextBox not an Object.
@@ -11703,9 +11640,6 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldGeneral
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
 ;                  |                               8 = Error setting $bFilter
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -11785,6 +11719,8 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 15 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTextBox not an Object.
@@ -11823,9 +11759,6 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ;                  |                               4096 = Error setting $sAddInfo
 ;                  |                               8192 = Error setting $sHelpText
 ;                  |                               16384 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 15 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -12027,6 +11960,8 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTimeField not an Object.
@@ -12039,9 +11974,6 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxGeneral
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -12111,6 +12043,8 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTimeField not an Object.
@@ -12164,9 +12098,6 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ;                  |                               131072 = Error setting $sAddInfo
 ;                  |                               262144 = Error setting $sHelpText
 ;                  |                               524288 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -12474,6 +12405,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldGeneral
 ; Syntax ........: _LOWriter_FormConTextBoxCreateTextCursor(ByRef $oTextBox)
 ; Parameters ....: $oTextBox            - A Text Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the Text Cursor object created in the Text Box.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTextBox not an Object.
@@ -12482,8 +12414,6 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldGeneral
 ;                  @Error 2 @Extended 1 = Failed to create a Text Cursor.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to identify control.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the Text Cursor object created in the Text Box.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I am unable to format text in a Text Box (even manually), even though it is supposed to be possible. Thus formatting may or may not work.
@@ -12517,6 +12447,8 @@ EndFunc   ;==>_LOWriter_FormConTextBoxCreateTextCursor
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTextBox not an Object.
@@ -12533,9 +12465,6 @@ EndFunc   ;==>_LOWriter_FormConTextBoxCreateTextCursor
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
 ;                  |                               8 = Error setting $bFilter
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -12625,6 +12554,8 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTextBox not an Object.
@@ -12684,9 +12615,6 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ;                  |                               4194304 = Error setting $sAddInfo
 ;                  |                               8388608 = Error setting $sHelpText
 ;                  |                               16777216 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -13032,6 +12960,8 @@ EndFunc   ;==>_LOWriter_FormConTextBoxGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTimeField not an Object.
@@ -13044,9 +12974,6 @@ EndFunc   ;==>_LOWriter_FormConTextBoxGeneral
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -13124,6 +13051,8 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTimeField not an Object.
@@ -13194,9 +13123,6 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ;                  |                               33554432 = Error setting $sAddInfo
 ;                  |                               67108864 = Error setting $sHelpText
 ;                  |                               134217728 = Error setting $sHelpURL
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -13588,6 +13514,8 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldGeneral
 ; Parameters ....: $oTimeField          - A Time Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $tTimeValue          - [optional] Default is Null. The time value to set the field to, created previously by _LOWriter_DateStructCreate.
 ; Return values .: Success: 1 or Structure
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were called with Null, returning current Time value as a Time Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTimeField not an Object.
@@ -13601,9 +13529,6 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldGeneral
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $tTimeValue
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were called with Null, returning current Time value as a Time Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Time value. Return will be Null if the Time hasn't been set.
@@ -13670,6 +13595,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldValue
 ; Syntax ........: _LOWriter_FormDelete(ByRef $oForm)
 ; Parameters ....: $oForm               - A Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oForm not an Object.
@@ -13681,8 +13607,6 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldValue
 ;                  @Error 3 @Extended 4 = Failed to retrieve Forms Object.
 ;                  @Error 3 @Extended 5 = Failed to modify Form name.
 ;                  @Error 3 @Extended 6 = Failed to delete form.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -13746,6 +13670,8 @@ EndFunc   ;==>_LOWriter_FormDelete
 ;                  $bAutoControlFocus   - [optional] Default is Null. If True, the first Form control will have the focus upon opening the document.
 ;                  $bUseControlWizards  - [optional] Default is Null. If True, Control Wizards will be used.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -13765,9 +13691,6 @@ EndFunc   ;==>_LOWriter_FormDelete
 ;                  |                               2 = Error setting $bOpenInDesignMode
 ;                  |                               4 = Error setting $bAutoControlFocus
 ;                  |                               8 = Error setting $bUseControlWizards
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -13937,6 +13860,7 @@ EndFunc   ;==>_LOWriter_FormDocSettings
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ;                  $iForm               - The Index value of the Form to retrieve. 0 Based.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested form Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
@@ -13945,8 +13869,6 @@ EndFunc   ;==>_LOWriter_FormDocSettings
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve a count of forms.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Form Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested form Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -13996,6 +13918,9 @@ EndFunc   ;==>_LOWriter_FormGetObjByIndex
 ; Parameters ....: $oForm               - A Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ;                  $oParent             - [optional] Default is Null. A Document or Form object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: 1 or Object
+;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully moved, Object called in $oForm has been updated to new Object.
+;                  @Error 0 @Extended 1 Return Object = Success. Returning Form's parent Object, which is a Document Object.
+;                  @Error 0 @Extended 2 Return Object = Success. Returning Form's parent Object, which is a Form Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oForm not an Object.
@@ -14016,10 +13941,6 @@ EndFunc   ;==>_LOWriter_FormGetObjByIndex
 ;                  @Error 3 @Extended 7 = Failed to delete original form.
 ;                  @Error 3 @Extended 8 = Failed to retrieve new form's Object.
 ;                  @Error 3 @Extended 9 = Failed to set form's name back to original name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully moved, Object called in $oForm has been updated to new Object.
-;                  @Error 0 @Extended 1 Return Object = Success. Returning Form's parent Object, which is a Document Object.
-;                  @Error 0 @Extended 2 Return Object = Success. Returning Form's parent Object, which is a Form Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function allows you to change a sub-form into being a top-level form, change a top-level form into being a sub-form, or move a sub-form to be a sub-form of another form.
@@ -14120,6 +14041,8 @@ EndFunc   ;==>_LOWriter_FormParent
 ;                  $iNavBar             - [optional] (0-2) Default is Null. The Navigation Bar mode. See Constants $LOW_FORM_NAV_BAR_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iCycle              - [optional] (0-2) Default is Null. What happens when you press the Tab key at the end of a record. See remarks. See Constants $LOW_FORM_CYCLE_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oForm not an Object.
@@ -14161,9 +14084,6 @@ EndFunc   ;==>_LOWriter_FormParent
 ;                  |                               2048 = Error setting $bAddOnly
 ;                  |                               4096 = Error setting $iNavBar
 ;                  |                               8192 = Error setting $iCycle
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The array called for either $aLinkMaster or $aLinkSlave, should be a single dimension array, with one Field name per array element.
@@ -14321,6 +14241,8 @@ EndFunc   ;==>_LOWriter_FormPropertiesData
 ;                  $iEncoding           - [optional] (0-2) Default is Null. The type of encoding for the data transfer. See Constants $LOW_FORM_SUBMIT_ENCODING_* as defined in LibreOfficeWriter_Constants.au3
 ;                  $iSubType            - [optional] (0-1) Default is Null. The method to submit the completed form. See Constants $LOW_FORM_SUBMIT_METHOD_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oForm not an Object.
@@ -14338,9 +14260,6 @@ EndFunc   ;==>_LOWriter_FormPropertiesData
 ;                  |                               4 = Error setting $sFrame
 ;                  |                               8 = Error setting $iEncoding
 ;                  |                               16 = Error setting $iSubType
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -14412,14 +14331,13 @@ EndFunc   ;==>_LOWriter_FormPropertiesGeneral
 ; Syntax ........: _LOWriter_FormsGetCount(ByRef $oObj)
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning a count of Forms contained in the Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
 ;                  @Error 1 @Extended 2 = Called Object in $oObj, not a Document Object, and not a Form Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve a count of forms.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning a count of Forms contained in the Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $oObj is called with a Document object, a count of top level forms will be returned. If a Form object is called, a count of all sub-forms for the form wil be returned.
@@ -14458,14 +14376,13 @@ EndFunc   ;==>_LOWriter_FormsGetCount
 ; Syntax ........: _LOWriter_FormsGetList(ByRef $oObj)
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning an array of Form Objects. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oObj not an Object.
 ;                  @Error 1 @Extended 2 = Called Object in $oObj, not a Document Object, and not a Form Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve form Object.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning an array of Form Objects. @Extended is set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $oObj is called with a Document object, an array of top level forms will be returned. If a Form object is called, all sub-forms for the form will be returned.

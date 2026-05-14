@@ -72,13 +72,12 @@
 ;                  $vParam4             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam5             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ; Return values .: Success: 1 or UserFunction.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
-;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set the UserFunction.
 ;                  @Error 0 @Extended 0 Return 2 = Successfully cleared the set UserFunction.
 ;                  @Error 0 @Extended 0 Return Function = Returning the set UserFunction.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
 ; Author ........: mLipok
 ; Modified ......: donnyh13 - Added a clear UserFunction without error option. Also added parameters option.
 ; Remarks .......: The first parameter passed to the User function will always be the COM Error object. See below.
@@ -149,6 +148,8 @@ EndFunc   ;==>_LOWriter_ComError_UserFunction
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sFormat             - The Date/Time format String to create.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Format Key was successfully created, returning Format Key Integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. Format Key already existed, returning Format Key Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -158,9 +159,6 @@ EndFunc   ;==>_LOWriter_ComError_UserFunction
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to Create or Retrieve the Format key.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Format Key was successfully created, returning Format Key Integer.
-;                  @Error 0 @Extended 1 Return Integer = Success. Format Key already existed, returning Format Key Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -200,6 +198,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyCreate
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iFormatKey          - The User-Created Date/Time format Key to delete.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Format Key was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -209,8 +208,6 @@ EndFunc   ;==>_LOWriter_DateFormatKeyCreate
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to delete the format key.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Format Key was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -245,6 +242,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iFormatKey          - The Date Format Key to check for.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. If the Date/Time Format already exists in document, True is Returned. Else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -254,8 +252,6 @@ EndFunc   ;==>_LOWriter_DateFormatKeyDelete
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to obtain Array of Date/Time Formats.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. If the Date/Time Format already exists in document, True is Returned. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -298,6 +294,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyExists
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iFormatKey          - The Date/Time Format Key to retrieve the string for.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -306,8 +303,6 @@ EndFunc   ;==>_LOWriter_DateFormatKeyExists
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve requested Format Key Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Format Key string.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -345,6 +340,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyGetString
 ;                  $bDateOnly           - [optional] Default is False. If True, Only Date FormatKeys are returned.
 ;                  $bTimeOnly           - [optional] Default is False. If True, Only Time Format Keys are returned.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a 2 or three column Array, depending on current $bIsUser setting. See remarks. @Extended is set to the number of Keys returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -358,8 +354,6 @@ EndFunc   ;==>_LOWriter_DateFormatKeyGetString
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to obtain Array of Date/Time Formats.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a 2 or three column Array, depending on current $bIsUser setting. See remarks. @Extended is set to the number of Keys returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Column One (Array[0][0]) will contain the Format Key Integer,
@@ -437,6 +431,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeysGetList
 ;                  $iNanoSeconds        - [optional] (0-999999999) Default is Null. Nano-Second, as an Integer.
 ;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: Structure.
+;                  @Error 0 @Extended 0 Return Structure = Success. Successfully created the Date/Time Structure, Returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $iYear not an Integer.
@@ -452,8 +447,6 @@ EndFunc   ;==>_LOWriter_DateFormatKeysGetList
 ;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.util.DateTime" Object.
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.1.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Structure = Success. Successfully created the Date/Time Structure, Returning its Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -561,6 +554,8 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ;                  $iNanoSeconds        - [optional] (0-999999999) Default is Null. Nano-Second, as an Integer.
 ;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the $bIsUTC  parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $tDateStruct not an Object.
@@ -585,9 +580,6 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ;                  |                               128 = Error setting $bIsUTC
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.1.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the $bIsUTC  parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -691,6 +683,7 @@ EndFunc   ;==>_LOWriter_DateStructModify
 ;                  $bSnapToGrid         - [optional] Default is Null. If True, Aligns the paragraph to a text grid (if one is active).
 ;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3. [LibreOffice Default is 4] In my personal testing, searching for the Text Direction setting using this parameter alone, without using other parameters, causes any results matching the searched for string to be replaced, whether they contain the Text Direction format or not, this is supposed to be fixed in L.O. 7.6.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
@@ -700,8 +693,6 @@ EndFunc   ;==>_LOWriter_DateStructModify
 ;                  @Error 1 @Extended 5 = $bExpandSingleWord not a Boolean.
 ;                  @Error 1 @Extended 6 = $bSnapToGrid not a Boolean.
 ;                  @Error 1 @Extended 7 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -796,6 +787,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
@@ -803,8 +795,6 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ;                  @Error 1 @Extended 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 4 = $bOutline not a Boolean.
 ;                  @Error 1 @Extended 5 = $bShadow not a Boolean.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -879,6 +869,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The percentage of Transparency. 0 is visible, 100 is invisible. Seems to require a color entered in $iFontColor before transparency can be searched for. LibreOffice 7.0 and Up.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The Highlight color to search for, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
@@ -892,8 +883,6 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ;                  @Error 1 @Extended 9 = $iHighlight not an Integer, less than -1 or greater than 16777215.
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 7.0.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -1007,6 +996,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyFont
 ;                  $iMinLeadingChar     - [optional] (2-9) Default is Null. Specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied).
 ;                  $iMinTrailingChar    - [optional] (2-9) Default is Null. Specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied).
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
@@ -1017,8 +1007,6 @@ EndFunc   ;==>_LOWriter_FindFormatModifyFont
 ;                  @Error 1 @Extended 6 = $iMinTrailingChar not an Integer, less than 2 or greater than 9.
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 6.4.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: In my personal testing, searching for any of these hyphenation formatting settings causes any results matching the searched for string to be replaced, whether they contain these formatting settings or not. This is a bug in LibreOffice.
@@ -1103,6 +1091,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyHyphenation
 ;                  $iFirstLine          - [optional] (-57785-17094) Default is Null. Indentation distance of the first line of a paragraph, Set in Hundredths of a Millimeter (HMM). Both $iBeforeText and $iAfterText must be set to perform a search for $iFirstLine.
 ;                  $bAutoFirstLine      - [optional] Default is Null. If True, the first line will be indented automatically. Both $iBeforeText and $iAfterText must be set to perform a search for $bAutoFirstLine.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
@@ -1110,8 +1099,6 @@ EndFunc   ;==>_LOWriter_FindFormatModifyHyphenation
 ;                  @Error 1 @Extended 3 = $iAfterText not an Integer, less than -9998989 or greater than 17094.
 ;                  @Error 1 @Extended 4 = $iFirstLine not an Integer, less than -57785 or greater than 17094.
 ;                  @Error 1 @Extended 5 = $bAutoFirstLine not a Boolean.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -1185,14 +1172,13 @@ EndFunc   ;==>_LOWriter_FindFormatModifyIndent
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined. See remarks.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
 ;                  @Error 1 @Extended 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -1263,6 +1249,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyOverline
 ;                  $sPageStyle          - [optional] Default is Null. Creates a page break before the paragraph it belongs to and assigns the new page style to use.
 ;                  $iPgNumOffSet        - [optional] Default is Null. If a page break property is set at a paragraph, this property contains the new value for the page number.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
@@ -1270,8 +1257,6 @@ EndFunc   ;==>_LOWriter_FindFormatModifyOverline
 ;                  @Error 1 @Extended 3 = $sPageStyle not a String.
 ;                  @Error 1 @Extended 4 = Page Style defined in $sPageStyle not found in current document.
 ;                  @Error 1 @Extended 5 = $iPgNumOffSet not an Integer, or less than 0.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: In my personal testing, searching for a page break was very hit and miss, especially when searching with the "PageStyle" Name parameter, and it never worked for searching for PageNumberOffset.
@@ -1336,14 +1321,13 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPageBreak
 ;                  $iSubScript          - [optional] (-1-100) Default is Null. The Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks. Note: $iRelativeSize must be set to be able to search for Super/Subscript settings.
 ;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
 ;                  @Error 1 @Extended 2 = $iSuperScript not an Integer, less than -1 or greater than 100.
 ;                  @Error 1 @Extended 3 = $iSubScript not an Integer, less than -1 or greater than 100.
 ;                  @Error 1 @Extended 4 = $iRelativeSize not an Integer, less than 1 or greater than 100.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -1419,6 +1403,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
 ;                  $nKerning            - [optional] (-2-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
@@ -1426,8 +1411,6 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ;                  @Error 1 @Extended 3 = $iScaleWidth not an Integer, less than 1 or greater than 100.
 ;                  @Error 1 @Extended 4 = $bAutoKerning not a Boolean.
 ;                  @Error 1 @Extended 5 = $nKerning not a number, less than -2 or greater than 928.8 Points.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -1508,6 +1491,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The type of line spacing of a paragraph. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3, also notice min and max values for each. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
 ;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the spacing of the lines. See Remarks for Minimum and Max values. Must set both $iLineSpcMode and $iLineSpcHeight to be able to search either.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
@@ -1523,8 +1507,6 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ;                  @Error 2 @Extended 1 = Error creating LineSpacing Object.
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.6.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -1627,13 +1609,12 @@ EndFunc   ;==>_LOWriter_FindFormatModifySpacing
 ;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined. See remarks.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
 ;                  @Error 1 @Extended 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See Constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  @Error 1 @Extended 3 = $bWordOnly not a Boolean.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -1692,6 +1673,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyStrikeout
 ;                  $iParOrphans         - [optional] (0, 2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page. 0 = disabled. See remarks.
 ;                  $iParWidows          - [optional] (0, 2-9) Default is Null. Specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page. 0 = disabled.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
@@ -1699,8 +1681,6 @@ EndFunc   ;==>_LOWriter_FindFormatModifyStrikeout
 ;                  @Error 1 @Extended 3 = $bKeepTogether not a Boolean.
 ;                  @Error 1 @Extended 4 = $iParOrphans not an Integer, less than 0, equal to 1, or greater than 9.
 ;                  @Error 1 @Extended 5 = $iParWidows not an Integer, less than 0, equal to 1, or greater than 9.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -1773,14 +1753,13 @@ EndFunc   ;==>_LOWriter_FindFormatModifyTxtFlowOpt
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.. $LO_COLOR_OFF(-1) is automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined. See remarks.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $atFormat not an Array or contains more than 1 column.
 ;                  @Error 1 @Extended 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See Constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  @Error 1 @Extended 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. FindFormat Array of Settings was successfully modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -1855,6 +1834,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ;                  $bIndividualWords    - [optional] Default is False. If True, only individual words are underlined.
 ;                  $iRelief             - [optional] (0-2) Default is $LOW_CHAR_RELIEF_NONE. The Font relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Map
+;                  @Error 0 @Extended 0 Return Map = Success. Returning the created Map Font Descriptor.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $sFontName not a String.
@@ -1868,8 +1848,6 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ;                  @Error 1 @Extended 9 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 10 = $bIndividualWords not a Boolean.
 ;                  @Error 1 @Extended 11 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Map = Success. Returning the created Map Font Descriptor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1925,6 +1903,8 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ;                  $bIndividualWords    - [optional] Default is Null. If True, only individual words are underlined.
 ;                  $iRelief             - [optional] (0-2) Default is Null. The Font relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $mFontDesc not a Map.
@@ -1939,9 +1919,6 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ;                  @Error 1 @Extended 10 = $iStrikelineStyle not an Integer, less than 0 or greater than 6. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error 1 @Extended 11 = $bIndividualWords not a Boolean.
 ;                  @Error 1 @Extended 12 = $iRelief not an Integer, less than 0 or greater than 2. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2036,6 +2013,7 @@ EndFunc   ;==>_LOWriter_FontDescEdit
 ; Parameters ....: $sFontName           - The Font name to search for.
 ;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Boolean.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Font is available, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $sFontName not a String.
@@ -2046,8 +2024,6 @@ EndFunc   ;==>_LOWriter_FontDescEdit
 ;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Font is available, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function may cause a processor usage spike for a moment or two. If you wish to eliminate this, comment out the current sleep function and place a sleep(10) in its place.
@@ -2111,6 +2087,7 @@ EndFunc   ;==>_LOWriter_FontExists
 ; Syntax ........: _LOWriter_FontsGetNames([$oDoc = Null])
 ; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.ServiceManager" Object.
@@ -2119,8 +2096,6 @@ EndFunc   ;==>_LOWriter_FontExists
 ;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oDoc is optional, if not called, a Writer Document is created invisibly to retrieve the list.
@@ -2191,6 +2166,8 @@ EndFunc   ;==>_LOWriter_FontsGetNames
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sFormat             - The format key String to create.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Format Key was successfully created, returning Format Key Integer.
+;                  @Error 0 @Extended 1 Return Integer = Success. Format Key already existed, returning Format Key Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2200,9 +2177,6 @@ EndFunc   ;==>_LOWriter_FontsGetNames
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Attempted to Create or Retrieve the Format key, but failed.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Format Key was successfully created, returning Format Key Integer.
-;                  @Error 0 @Extended 1 Return Integer = Success. Format Key already existed, returning Format Key Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2242,6 +2216,7 @@ EndFunc   ;==>_LOWriter_FormatKeyCreate
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iFormatKey          - The User-Created format Key to delete.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Format Key was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2251,8 +2226,6 @@ EndFunc   ;==>_LOWriter_FormatKeyCreate
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to delete key.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Format Key was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2288,6 +2261,7 @@ EndFunc   ;==>_LOWriter_FormatKeyDelete
 ;                  $iFormatKey          - The Format Key to look for.
 ;                  $iFormatType         - [optional] (0-15881) Default is $LOW_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. If the Format Key exists in document, True is Returned. Else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2298,8 +2272,6 @@ EndFunc   ;==>_LOWriter_FormatKeyDelete
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to obtain Array of Date/Time Formats.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. If the Format Key exists in document, True is Returned. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2343,6 +2315,7 @@ EndFunc   ;==>_LOWriter_FormatKeyExists
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iFormatKeyType      - (1-8196) The Format Key type to retrieve the standard Format for. See Constants $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Standard Format for the requested Format Key Type.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2352,8 +2325,6 @@ EndFunc   ;==>_LOWriter_FormatKeyExists
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Number Formats Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve the Standard Format for the requested Format Key Type.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Standard Format for the requested Format Key Type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2391,6 +2362,7 @@ EndFunc   ;==>_LOWriter_FormatKeyGetStandard
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iFormatKey          - The Format Key to retrieve the string for.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2399,8 +2371,6 @@ EndFunc   ;==>_LOWriter_FormatKeyGetStandard
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve requested Format Key Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Format Key string.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning Format Key's Format String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2437,6 +2407,7 @@ EndFunc   ;==>_LOWriter_FormatKeyGetString
 ;                  $bUserOnly           - [optional] Default is False. If True, only user-created Format Keys are returned.
 ;                  $iFormatKeyType      - [optional] (0-15881) Default is $LOW_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3..
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a 2 or three column Array, depending on current $bIsUser setting. See remarks. @Extended is set to the number of Keys returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2448,8 +2419,6 @@ EndFunc   ;==>_LOWriter_FormatKeyGetString
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve NumberFormats Object.
 ;                  @Error 3 @Extended 2 = Failed to obtain Array of Format Keys.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a 2 or three column Array, depending on current $bIsUser setting. See remarks. @Extended is set to the number of Keys returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Column One (Array[0][0]) will contain the Format Key Integer,
@@ -2522,6 +2491,7 @@ EndFunc   ;==>_LOWriter_FormatKeysGetList
 ;                  $bStyles             - [optional] Default is False. If True, the string is considered a Paragraph Style name, and the search will return any paragraph utilizing the specified name, EXCEPT if you input Format properties to search for, then setting this to True causes the search to search both for direct formatting matching those properties and also Paragraph/Character styles that contain matching properties.
 ;                  $bSearchPropValues   - [optional] Default is False. If True, any formatting properties searched for are matched based on their value, else if False, the search only looks for their existence. See Remarks.
 ; Return values .: Success: Object.
+;                  @Error 0 @Extended 0 Return Object = Success. Returning a Search Descriptor Object for setting Search options.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2533,8 +2503,6 @@ EndFunc   ;==>_LOWriter_FormatKeysGetList
 ;                  @Error 1 @Extended 7 = $bSearchPropValues not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create Search Descriptor.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning a Search Descriptor Object for setting Search options.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bSearchPropValues is equivalent to the difference in selecting "Format" options in LibreOffice's search box and "Attributes".
@@ -2585,6 +2553,8 @@ EndFunc   ;==>_LOWriter_SearchDescriptorCreate
 ;                  $bStyles             - [optional] Default is False. If True, the string is considered a Paragraph Style name, and the search will return any paragraph utilizing the specified name, EXCEPT if you input Format properties to search for, then setting this to True causes the search to search both for direct formatting matching those properties and also Paragraph/Character styles that contain matching properties.
 ;                  $bSearchPropValues   - [optional] Default is False. If True, any formatting properties searched for are matched based on their value, else if False, the search only looks for their existence. See Remarks.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Returning 1 after directly modifying Search Descriptor Object.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSrchDescript not an Object.
@@ -2597,9 +2567,6 @@ EndFunc   ;==>_LOWriter_SearchDescriptorCreate
 ;                  @Error 1 @Extended 8 = $bSearchPropValues not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = $bRegExp is called with True while Similarity Search is set to True.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Returning 1 after directly modifying Search Descriptor Object.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bSearchPropValues is equivalent to the difference in selecting "Format" options in LibreOffice's search box and "Attributes".
@@ -2677,6 +2644,8 @@ EndFunc   ;==>_LOWriter_SearchDescriptorModify
 ;                  $iAdd                - [optional] Default is Null. Specifies the number of characters that must be added to match the search pattern.
 ;                  $iExchange           - [optional] Default is Null. Specifies the number of characters that must be replaced to match the search pattern.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Returning 1 after directly modifying Search Descriptor Object.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSrchDescript not an Object.
@@ -2689,9 +2658,6 @@ EndFunc   ;==>_LOWriter_SearchDescriptorModify
 ;                  @Error 1 @Extended 8 = $iExchange not an Integer.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = $bSimilarity is called with True while Regular Expression Search is set to True.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Returning 1 after directly modifying Search Descriptor Object.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.

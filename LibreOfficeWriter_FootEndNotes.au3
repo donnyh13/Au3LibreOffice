@@ -48,13 +48,12 @@
 ; Syntax ........: _LOWriter_EndnoteDelete(ByRef $oEndNote)
 ; Parameters ....: $oEndNote            - A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Endnote successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oEndNote not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to delete Endnote.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Endnote successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -83,13 +82,12 @@ EndFunc   ;==>_LOWriter_EndnoteDelete
 ; Syntax ........: _LOWriter_EndnoteGetAnchor(ByRef $oEndNote)
 ; Parameters ....: $oEndNote            - A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully returned the Endnote's Anchor.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oEndNote not an Object.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to retrieve Endnote anchor Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully returned the Endnote's Anchor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Anchor cursor returned is just a Text Cursor placed at the anchor's position.
@@ -117,13 +115,12 @@ EndFunc   ;==>_LOWriter_EndnoteGetAnchor
 ; Syntax ........: _LOWriter_EndnoteGetTextCursor(ByRef $oEndNote)
 ; Parameters ....: $oEndNote            - A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully retrieved the Endnote Cursor Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oEndNote not an Object.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Error retrieving Cursor Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully retrieved the Endnote Cursor Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -154,6 +151,7 @@ EndFunc   ;==>_LOWriter_EndnoteGetTextCursor
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $sLabel              - [optional] Default is Null. A custom anchor label for the Endnote.
 ; Return values .: Success: Object.
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted a new Endnote, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -165,8 +163,6 @@ EndFunc   ;==>_LOWriter_EndnoteGetTextCursor
 ;                  @Error 1 @Extended 7 = $sLabel not a string.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.Endnote" Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted a new Endnote, returning its Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Endnote cannot be inserted into a Frame, a Footnote, a Endnote, or the Header/Footer.
@@ -217,6 +213,9 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 ; Parameters ....: $oEndNote            - A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
 ;                  $sLabel              - [optional] Default is Null. A custom anchor label for the Endnote. Call with "" for automatic numbering.
 ; Return values .: Success: 1 or String.
+;                  @Error 0 @Extended 0 Return 1 = Success. Endnote settings were successfully modified.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, current Endnote Label returned.
+;                  @Error 0 @Extended 2 Return String = Success. All optional parameters were called with Null, current Endnote Auto-Numbering number returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oEndNote not an Object.
@@ -226,10 +225,6 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sLabel
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Endnote settings were successfully modified.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, current Endnote Label returned.
-;                  @Error 0 @Extended 2 Return String = Success. All optional parameters were called with Null, current Endnote Auto-Numbering number returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -281,6 +276,8 @@ EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
 ;                  $sBefore             - [optional] Default is Null. The text to display before an Endnote number in the note text.
 ;                  $sAfter              - [optional] Default is Null. The text to display after an Endnote number in the note text.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -294,9 +291,6 @@ EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
 ;                  |                               2 = Error setting $iStartAt
 ;                  |                               4 = Error setting $sBefore
 ;                  |                               8 = Error setting $sAfter
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -362,6 +356,8 @@ EndFunc   ;==>_LOWriter_EndnoteSettingsAutoNumber
 ;                  $sTextArea           - [optional] Default is Null. The Character Style to use for the Endnote anchor in the document text.
 ;                  $sEndnoteArea        - [optional] Default is Null. The Character Style to use for the Endnote number in the Endnote text.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -379,9 +375,6 @@ EndFunc   ;==>_LOWriter_EndnoteSettingsAutoNumber
 ;                  |                               2 = Error setting $sPage
 ;                  |                               4 = Error setting $sTextArea
 ;                  |                               8 = Error setting $sEndnoteArea
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -446,13 +439,12 @@ EndFunc   ;==>_LOWriter_EndnoteSettingsStyles
 ; Syntax ........: _LOWriter_EndnotesGetList(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Successfully searched for Endnotes, Returning Array of Endnote Objects. @Extended set to number found.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Error retrieving Endnotes Object.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Successfully searched for Endnotes, Returning Array of Endnote Objects. @Extended set to number found.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -494,13 +486,12 @@ EndFunc   ;==>_LOWriter_EndnotesGetList
 ; Syntax ........: _LOWriter_FootnoteDelete(ByRef $oFootNote)
 ; Parameters ....: $oFootNote           - A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Footnote successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFootNote not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to delete Footnote.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Footnote successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -529,13 +520,12 @@ EndFunc   ;==>_LOWriter_FootnoteDelete
 ; Syntax ........: _LOWriter_FootnoteGetAnchor(ByRef $oFootNote)
 ; Parameters ....: $oFootNote           - A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning the Footnote Anchor.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFootNote not an Object.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to retrieve Footnote anchor Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the Footnote Anchor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -563,13 +553,12 @@ EndFunc   ;==>_LOWriter_FootnoteGetAnchor
 ; Syntax ........: _LOWriter_FootnoteGetTextCursor(ByRef $oFootNote)
 ; Parameters ....: $oFootNote           - A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully retrieved the footnote Cursor Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFootNote not an Object.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Error retrieving Cursor Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully retrieved the footnote Cursor Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -600,6 +589,7 @@ EndFunc   ;==>_LOWriter_FootnoteGetTextCursor
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $sLabel              - [optional] Default is Null. A custom anchor label for the footnote.
 ; Return values .: Success: Object.
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted a new footnote, returning Footnote Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -611,8 +601,6 @@ EndFunc   ;==>_LOWriter_FootnoteGetTextCursor
 ;                  @Error 1 @Extended 7 = $sLabel not a string.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.Footnote" Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted a new footnote, returning Footnote Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Footnote cannot be inserted into a Frame, a Footnote, an Endnote, or a Header/Footer.
@@ -663,6 +651,9 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 ; Parameters ....: $oFootNote           - A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
 ;                  $sLabel              - [optional] Default is Null. A custom anchor label for the Footnote. Call with "" for automatic numbering.
 ; Return values .: Success: 1 or String.
+;                  @Error 0 @Extended 0 Return 1 = Success. Footnote settings were successfully modified.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, current Footnote Custom Label returned.
+;                  @Error 0 @Extended 2 Return String = Success. All optional parameters were called with Null, current Footnote AutoNumbering number returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oFootNote not an Object.
@@ -672,10 +663,6 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sLabel
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Footnote settings were successfully modified.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, current Footnote Custom Label returned.
-;                  @Error 0 @Extended 2 Return String = Success. All optional parameters were called with Null, current Footnote AutoNumbering number returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -729,6 +716,8 @@ EndFunc   ;==>_LOWriter_FootnoteModifyAnchor
 ;                  $iCounting           - [optional] (0-2) Default is Null. The Counting type of the footnotes, such as per page etc., see constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  $bEndOfDoc           - [optional] Default is Null. If True, Footnotes are placed at the end of the document, like Endnotes.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -746,9 +735,6 @@ EndFunc   ;==>_LOWriter_FootnoteModifyAnchor
 ;                  |                               8 = Error setting $sAfter
 ;                  |                               16 = Error setting $iCounting
 ;                  |                               32 = Error setting $bEndOfDoc
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -828,6 +814,8 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsAutoNumber
 ;                  $sEnd                - [optional] Default is Null. The text to display at the end of a Footnote before it continues on the next page.
 ;                  $sBegin              - [optional] Default is Null. The text to display at the beginning of a Footnote that has continued on the next page.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -837,9 +825,6 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsAutoNumber
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sEnd
 ;                  |                               2 = Error setting $sBegin
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -890,6 +875,8 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsContinuation
 ;                  $sTextArea           - [optional] Default is Null. The Character Style to use for the Footnote anchor in the document text.
 ;                  $sFootnoteArea       - [optional] Default is Null. The Character Style to use for the Footnote number in the footnote text.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -907,9 +894,6 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsContinuation
 ;                  |                               2 = Error setting $sPage
 ;                  |                               4 = Error setting $sTextArea
 ;                  |                               8 = Error setting $sFootnoteArea
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -974,13 +958,12 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsStyles
 ; Syntax ........: _LOWriter_FootnotesGetList(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Successfully searched for Footnotes, Returning Array of Footnote Objects. @Extended set to number found.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Error retrieving Footnotes Object.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Successfully searched for Footnotes, Returning Array of Footnote Objects. @Extended set to number found.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
