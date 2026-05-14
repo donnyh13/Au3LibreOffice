@@ -1711,12 +1711,12 @@ EndFunc   ;==>_LOCalc_DocSelectionSet
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an object.
 ;                  @Error 1 @Extended 2 = $aoRange not an Array.
-;                  @Error 1 @Extended 3 Return ? = Array called in $aoRange does not contain an Object in returned element number.
-;                  @Error 1 @Extended 4 Return ? = Array called in $aoRange contains an Object in returned element that is not a Cell Object and not a Cell Range.
+;                  @Error 1 @Extended 3 = Array called in $aoRange does not contain an Object. Returning problem element index.
+;                  @Error 1 @Extended 4 = Array called in $aoRange contains an Object that is not a Cell Object and not a Cell Range. Returning problem element index.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.sheet.SheetCellRanges" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return ? = Failed to retrieve Range Address from Object located in array called in $aoRange, returning problem element.
+;                  @Error 3 @Extended 1 = Failed to retrieve Range Address from Object located in array called in $aoRange. Returning problem element index.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Objects were successfully selected.
 ; Author ........: donnyh13

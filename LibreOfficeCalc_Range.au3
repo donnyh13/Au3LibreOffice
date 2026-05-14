@@ -761,9 +761,9 @@ EndFunc   ;==>_LOCalc_RangeCreateCursor
 ;                  @Error 1 @Extended 2 = $aavData not an Array.
 ;                  @Error 1 @Extended 3 = $bStrictSize not a Boolean.
 ;                  @Error 1 @Extended 4 = $bStrictSize called with True, and $aavData array contains less or more elements than number of rows contained in the cell range.
-;                  @Error 1 @Extended 5 Return ? = Element of $aavData does not contain an array. Returning array element number of $aavData containing error.
-;                  @Error 1 @Extended 6 Return ? = $bStrictSize called with True, and Array contained in $aavData has less or more elements than number of columns in the cell range. Returning array element number of $aavData containing faulty array.
-;                  @Error 1 @Extended 7 Return ? = $bStrictSize called with False, and Array contained in $aavData has less or more elements than first Array contained in $aavData. Returning array element number of $aavData containing faulty array.
+;                  @Error 1 @Extended 5 = Element of $aavData does not contain an array. Returning problem element index.
+;                  @Error 1 @Extended 6 = $bStrictSize called with True, and Array contained in $aavData has less or more elements than number of columns in the cell range. Returning problem element index.
+;                  @Error 1 @Extended 7 = $bStrictSize called with False, and Array contained in $aavData has less or more elements than first Array contained in $aavData. Returning problem element index.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve array of Formula Data contained in the Cell Range.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Start of Row from Cell Range.
@@ -1482,7 +1482,7 @@ EndFunc   ;==>_LOCalc_RangeFillSeries
 ;                  @Error 1 @Extended 1 = $oRange not an Object.
 ;                  @Error 1 @Extended 2 = $oFilterDesc not an Object.
 ;                  @Error 1 @Extended 3 = Object called in $oFilterDesc not a Filter Descriptor.
-;                  @Error 1 @Extended 4 Return ? = Column called in one Filter Field is greater than number of columns in the Range. Returning FilterFields Array element containing bad Filter Field, as an Integer.
+;                  @Error 1 @Extended 4 = Column called in one Filter Field is greater than number of columns in the Range. Returning FilterFields Array element containing bad Filter Field, as an Integer.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Filter Fields array from Filter Descriptor.
 ;                  @Error 3 @Extended 2 = Failed to get count of columns contained in Range.
@@ -1721,9 +1721,9 @@ EndFunc   ;==>_LOCalc_RangeFindNext
 ;                  @Error 1 @Extended 2 = $aasFormulas not an Array.
 ;                  @Error 1 @Extended 3 = $bStrictSize not a Boolean.
 ;                  @Error 1 @Extended 4 = $bStrictSize called with True, and $aasFormulas array contains less or more elements than number of rows contained in the cell range.
-;                  @Error 1 @Extended 5 Return ? = Element of $aasFormulas does not contain an array. Returning array element number of $aasFormulas containing error.
-;                  @Error 1 @Extended 6 Return ? = $bStrictSize called with True, and Array contained in $aasFormulas has less or more elements than number of columns in the cell range. Returning array element number of $aasFormulas containing faulty array.
-;                  @Error 1 @Extended 7 Return ? = $bStrictSize called with False, and Array contained in $aasFormulas has less or more elements than first Array contained in $aasFormulas. Returning array element number of $aasFormulas containing faulty array.
+;                  @Error 1 @Extended 5 = Element of $aasFormulas does not contain an array. Returning problem element index.
+;                  @Error 1 @Extended 6 = $bStrictSize called with True, and Array contained in $aasFormulas has less or more elements than number of columns in the cell range. Returning problem element index.
+;                  @Error 1 @Extended 7 = $bStrictSize called with False, and Array contained in $aasFormulas has less or more elements than first Array contained in $aasFormulas. Returning problem element index.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve array of Formula Data contained in the Cell Range.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Start of Row from Cell Range.
@@ -2734,9 +2734,9 @@ EndFunc   ;==>_LOCalc_RangeNamedModify
 ;                  @Error 1 @Extended 2 = $aanNumbers not an Array.
 ;                  @Error 1 @Extended 3 = $bStrictSize not a Boolean.
 ;                  @Error 1 @Extended 4 = $bStrictSize called with True, and $aanNumbers array contains less or more elements than number of rows contained in the cell range.
-;                  @Error 1 @Extended 5 Return ? = Element of $aanNumbers does not contain an array. Returning array element number of $aanNumbers containing error.
-;                  @Error 1 @Extended 6 Return ? = $bStrictSize called with True, and Array contained in $aanNumbers has less or more elements than number of columns in the cell range. Returning array element number of $aanNumbers containing faulty array.
-;                  @Error 1 @Extended 7 Return ? = $bStrictSize called with False, and Array contained in $aanNumbers has less or more elements than first Array contained in $aanNumbers. Returning array element number of $aanNumbers containing faulty array.
+;                  @Error 1 @Extended 5 = Element of $aanNumbers does not contain an array. Returning problem element index.
+;                  @Error 1 @Extended 6 = $bStrictSize called with True, and Array contained in $aanNumbers has less or more elements than number of columns in the cell range. Returning problem element index.
+;                  @Error 1 @Extended 7 = $bStrictSize called with False, and Array contained in $aanNumbers has less or more elements than first Array contained in $aanNumbers. Returning problem element index.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve array of Formula Data contained in the Cell Range.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Start of Row from Cell Range.
@@ -3650,7 +3650,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsUnusedGetNames
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oPivotTable not an Object.
 ;                  @Error 1 @Extended 2 = $atFilterField not an array or has more than 3 elements.
-;                  @Error 1 @Extended 3 Return ? = $atFilterField contains an element that is not an Object. Returning the element number containing the error.
+;                  @Error 1 @Extended 3 = $atFilterField contains an element that is not an Object. Returning problem element index.
 ;                  @Error 1 @Extended 4 = $bCaseSensitive not a Boolean.
 ;                  @Error 1 @Extended 5 = $bSkipDupl not a Boolean.
 ;                  @Error 1 @Extended 6 = $bUseRegExp not a Boolean.

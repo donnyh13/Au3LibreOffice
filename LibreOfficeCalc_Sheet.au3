@@ -1159,7 +1159,7 @@ EndFunc   ;==>_LOCalc_SheetPrintColumnsRepeat
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSheet not an Object.
 ;                  @Error 1 @Extended 2 = $aoRange not an Array.
-;                  @Error 1 @Extended 3 Return ? = Element in Array called in $aoRange not an Object, returning problem array element number.
+;                  @Error 1 @Extended 3 = Element in Array called in $aoRange not an Object. Returning problem element index.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Array of Print Area Addresses.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Cell Range Object.

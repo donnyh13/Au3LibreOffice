@@ -150,7 +150,7 @@ EndFunc   ;==>_LOCalc_ComError_UserFunction
 ;                  @Error 1 @Extended 7 = $bCopyOutput not a Boolean.
 ;                  @Error 1 @Extended 8 = $oCopyOutput not an Object.
 ;                  @Error 1 @Extended 9 = $bSaveCriteria not a Boolean.
-;                  @Error 1 @Extended 10 Return ? = $atFilterField contains an element that is not an Object. Returning the element number containing the error.
+;                  @Error 1 @Extended 10 = $atFilterField contains an element that is not an Object. Returning problem element index.
 ;                  @Error 1 @Extended 11 = $bCopyOutput called with True, but $oCopyOutput not an Object.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create a Filter Descriptor Object.
@@ -245,7 +245,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ;                  @Error 1 @Extended 1 = $oRange not an Object.
 ;                  @Error 1 @Extended 2 = $oFilterDesc not an Object.
 ;                  @Error 1 @Extended 3 = $atFilterField not an Array, or Array contains more than 8 elements.
-;                  @Error 1 @Extended 4 Return ? = $atFilterField contains an element that is not an Object. Returning the element number containing the error.
+;                  @Error 1 @Extended 4 = $atFilterField contains an element that is not an Object. Returning problem element index.
 ;                  @Error 1 @Extended 5 = $bCaseSensitive not a Boolean.
 ;                  @Error 1 @Extended 6 = $bSkipDupl not a Boolean.
 ;                  @Error 1 @Extended 7 = $bUseRegExp not a Boolean.
