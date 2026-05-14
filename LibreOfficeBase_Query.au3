@@ -512,7 +512,7 @@ EndFunc   ;==>_LOBase_QueryDocGetName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_QueryDocGetRowSet
-; Description ...: Retrieve a Row Set for a Query opened for Data entry/Viewing. See remarks.
+; Description ...: Retrieve a Row Set for a Query opened for Data entry/Viewing.
 ; Syntax ........: _LOBase_QueryDocGetRowSet(ByRef $oQueryDoc)
 ; Parameters ....: $oQueryDoc           - A Query Document Object from a previous _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject or _LOBase_QueryDocConnect function.
 ; Return values .: Success: Object

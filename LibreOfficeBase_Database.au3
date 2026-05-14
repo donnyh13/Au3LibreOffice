@@ -43,7 +43,7 @@
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_DatabaseAutoCommit
-; Description ...: Set or Retrieve the Database's current AutoCommit setting. See remarks.
+; Description ...: Set or Retrieve the Database's current AutoCommit setting.
 ; Syntax ........: _LOBase_DatabaseAutoCommit(ByRef $oConnection[, $bAutoCommit = Null])
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ;                  $bAutoCommit         - [optional] Default is Null. If True, all of the SQL statements will be executed and committed as individual transactions.
@@ -661,7 +661,7 @@ EndFunc   ;==>_LOBase_DatabaseMetaDataQuery
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_DatabaseName
-; Description ...: Retrieve the Database Name property. See remarks.
+; Description ...: Retrieve the Database Name property.
 ; Syntax ........: _LOBase_DatabaseName(ByRef $oDBase)
 ; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
 ; Return values .: Success: String

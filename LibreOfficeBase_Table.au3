@@ -1006,7 +1006,7 @@ EndFunc   ;==>_LOBase_TableDocGetName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_TableDocGetRowSet
-; Description ...: Retrieve a Row Set for a Table opened for Data entry/Viewing. See remarks.
+; Description ...: Retrieve a Row Set for a Table opened for Data entry/Viewing.
 ; Syntax ........: _LOBase_TableDocGetRowSet(ByRef $oTableDoc)
 ; Parameters ....: $oTableDoc           - A Table Document Object from a previous _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject or _LOBase_TableDocConnect function.
 ; Return values .: Success: Object
