@@ -5387,11 +5387,11 @@ EndFunc   ;==>__LOWriter_ParAreaGradient
 ;                  @Error 3 @Extended 1 = Failed to retrieve FillGradient Struct.
 ;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
 ;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
@@ -5734,11 +5734,11 @@ EndFunc   ;==>__LOWriter_ParAreaTransparencyGradient
 ;                  @Error 3 @Extended 1 = Failed to retrieve FillTransparenceGradient Struct.
 ;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
 ;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
 ;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
