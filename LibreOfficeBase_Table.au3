@@ -1365,9 +1365,9 @@ EndFunc   ;==>_LOBase_TableGetObjByName
 ;                  @Error 1 @Extended 3 = Table does not have an Index with the name called in $sName.
 ;                  @Error 1 @Extended 4 = $avColumns is not an Array, or has 0 Elements, or does not contain 2 columns.
 ;                  @Error 1 @Extended 5 = $bIsUnique not a Boolean.
-;                  @Error 1 @Extended 6 Return ? = Column 1 (0th Column) of $avColumns contains a non-string. Returning problem Element number.
-;                  @Error 1 @Extended 7 Return ? = Column name called in Column 1 (0th Column) of $avColumns does not exist in Table. Returning problem Element number.
-;                  @Error 1 @Extended 8 Return ? = Column 2 (1) of $avColumns contains a non-Boolean value. Returning problem Element number.
+;                  @Error 1 @Extended 6 = Column 1 (0th Column) of $avColumns contains a non-string. Returning problem Element number.
+;                  @Error 1 @Extended 7 = Column name called in Column 1 (0th Column) of $avColumns does not exist in Table. Returning problem Element number.
+;                  @Error 1 @Extended 8 = Column 2 (1) of $avColumns contains a non-Boolean value. Returning problem Element number.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create an Index Descriptor.
 ;                  @Error 2 @Extended 2 = Failed to create a Column Descriptor.
@@ -1542,9 +1542,9 @@ EndFunc   ;==>_LOBase_TableIndexesGetNames
 ;                  @Error 1 @Extended 2 = $sName not a String.
 ;                  @Error 1 @Extended 3 = Table called in $oTable does not contain an Index with the name called in $sName.
 ;                  @Error 1 @Extended 4 = $avColumns is not an Array, or has 0 Elements, or does not contain 2 columns.
-;                  @Error 1 @Extended 5 Return ? = Column 1 (0th Column) of $avColumns contains a non-string. Returning problem Element number.
-;                  @Error 1 @Extended 6 Return ? = Column name called in Column 1 (0th Column) of $avColumns does not exist in Table. Returning problem Element number.
-;                  @Error 1 @Extended 7 Return ? = Column 2 (1) of $avColumns contains a non-Boolean value. Returning problem Element number.
+;                  @Error 1 @Extended 5 = Column 1 (0th Column) of $avColumns contains a non-string. Returning problem Element number.
+;                  @Error 1 @Extended 6 = Column name called in Column 1 (0th Column) of $avColumns does not exist in Table. Returning problem Element number.
+;                  @Error 1 @Extended 7 = Column 2 (1) of $avColumns contains a non-Boolean value. Returning problem Element number.
 ;                  @Error 1 @Extended 8 = $bIsUnique not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create an Index Descriptor.
@@ -1759,7 +1759,7 @@ EndFunc   ;==>_LOBase_TableName
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oTable not an Object.
 ;                  @Error 1 @Extended 2 = $aoPrimary not an Array.
-;                  @Error 1 @Extended 3 Return ? = $aoPrimary contains an element that is not a Column Object. Returning problem Element number.
+;                  @Error 1 @Extended 3 = $aoPrimary contains an element that is not a Column Object. Returning problem Element number.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create a Data Descriptor.
 ;                  --Processing Errors--
