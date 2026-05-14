@@ -608,7 +608,7 @@ EndFunc   ;==>_LOCalc_RangeColumnWidth
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_RangeCompute
-; Description ...: Perform a Computation function on a Range. See Remarks.
+; Description ...: Perform a Computation function on a Range.
 ; Syntax ........: _LOCalc_RangeCompute(ByRef $oRange, $iFunction)
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iFunction           - (0-12) The Computation Function to perform. See Constants $LOC_COMPUTE_FUNC_* as defined in LibreOfficeCalc_Constants.au3.
@@ -1331,7 +1331,7 @@ EndFunc   ;==>_LOCalc_RangeDetail
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_RangeFill
-; Description ...: Automatically fill cells with a value. See Remarks.
+; Description ...: Automatically fill cells with a value.
 ; Syntax ........: _LOCalc_RangeFill(ByRef $oRange, $iDirection[, $iCount = 1])
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $iDirection          - (0-3) The Direction to perform the Fill operation. See Constants $LOC_FILL_DIR_* as defined in LibreOfficeCalc_Constants.au3.

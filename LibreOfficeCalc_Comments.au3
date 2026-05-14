@@ -432,7 +432,7 @@ EndFunc   ;==>_LOCalc_CommentAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CommentAreaGradientMulticolor
-; Description ...: Set or Retrieve a Comment's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Comment's Multicolor Gradient settings.
 ; Syntax ........: _LOCalc_CommentAreaGradientMulticolor(ByRef $oComment[, $avColorStops = Null])
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -923,7 +923,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CommentAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Comment's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Comment's Multi Transparency Gradient settings.
 ; Syntax ........: _LOCalc_CommentAreaTransparencyGradientMulti(ByRef $oComment[, $avColorStops = Null])
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.

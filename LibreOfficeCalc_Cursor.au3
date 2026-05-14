@@ -929,7 +929,7 @@ EndFunc   ;==>_LOCalc_TextCursorParObjCreateList
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_TextCursorParObjSectionsGet
-; Description ...: Break a Paragraph Object into individual Sections for Formatting etc. See Remarks.
+; Description ...: Break a Paragraph Object into individual Sections for Formatting etc.
 ; Syntax ........: _LOCalc_TextCursorParObjSectionsGet(ByRef $oParObj)
 ; Parameters ....: $oParObj             - A Paragraph Object returned from _LOCalc_TextCursorParObjCreateList function.
 ; Return values .: Success: Array

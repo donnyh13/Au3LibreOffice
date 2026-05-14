@@ -1133,7 +1133,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterCreateTextCursor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleFooterObj
-; Description ...: Set or Retrieve the Object for the Page Style Footer Object. See Remarks.
+; Description ...: Set or Retrieve the Object for the Page Style Footer Object.
 ; Syntax ........: _LOCalc_PageStyleFooterObj(ByRef $oPageStyle[, $oFirstPage = Null[, $oRightPage = Null[, $oLeftPage = Null]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $oFirstPage          - [optional] Default is Null. Set or Retrieve the First Page Footer Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
@@ -1886,7 +1886,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderCreateTextCursor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleHeaderObj
-; Description ...: Set or Retrieve the Object for the Page Style Header Object. See Remarks.
+; Description ...: Set or Retrieve the Object for the Page Style Header Object.
 ; Syntax ........: _LOCalc_PageStyleHeaderObj(ByRef $oPageStyle[, $oFirstPage = Null[, $oRightPage = Null[, $oLeftPage = Null]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $oFirstPage          - [optional] Default is Null. Set or Retrieve the First Page Header Object. Call with Default Keyword to retrieve the Object, else Call with the modified Object to set the new content.
