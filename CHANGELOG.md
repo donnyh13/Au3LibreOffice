@@ -101,6 +101,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Reworded Color terminology.
 - Reworded measurement terminology.
 - Removed "[in/out]", Return (integer, String, 0) and parameter descriptions, such as "a string value", from Header parameter descriptions for chm compatibility.
+- Moved Success values in the header above error values.
 
 #### Fixed
 
