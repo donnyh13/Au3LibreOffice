@@ -399,11 +399,11 @@ EndFunc   ;==>_LOWriter_ImageAreaGradient
 ;                  @Error 3 @Extended 1 = Failed to retrieve FillGradient Struct.
 ;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
 ;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -743,11 +743,11 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradient
 ;                  @Error 3 @Extended 1 = Failed to retrieve FillTransparenceGradient Struct.
 ;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
 ;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.

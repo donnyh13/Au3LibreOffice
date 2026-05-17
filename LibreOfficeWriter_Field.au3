@@ -925,8 +925,6 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ;                  @Error 1 @Extended 6 = $sInitials not a String.
 ;                  @Error 1 @Extended 7 = $sName not a String.
 ;                  @Error 1 @Extended 8 = $bResolved not a Boolean.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice Version lower than 4.0.
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sContent
@@ -935,6 +933,8 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ;                  |                               8 = Error setting $sInitials
 ;                  |                               16 = Error setting $sName
 ;                  |                               32 = Error setting $bResolved
+;                  --Version Related Errors--
+;                  @Error 6 @Extended 1 = Current LibreOffice Version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
