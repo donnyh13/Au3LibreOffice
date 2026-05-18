@@ -92,7 +92,7 @@
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -147,7 +147,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaColor
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  --Processing Errors--
@@ -195,7 +195,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaFillStyle
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
@@ -412,7 +412,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -522,7 +522,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -582,7 +582,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparency
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
@@ -762,7 +762,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -875,7 +875,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradientMulti
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -939,7 +939,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -1030,7 +1030,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -1093,7 +1093,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -1154,7 +1154,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderWidth
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -1259,7 +1259,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSeparator
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current column count.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -1321,7 +1321,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSettings
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -1481,7 +1481,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSize
 ;                  $sPageStyle          - The Name of the new Page Style to create.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. New page Style successfully created. Returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sPageStyle not a String.
@@ -1535,7 +1535,7 @@ EndFunc   ;==>_LOWriter_PageStyleCreate
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Page Style successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current Page Style set for the selection.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
@@ -1589,7 +1589,7 @@ EndFunc   ;==>_LOWriter_PageStyleCurrent
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function. Must be User-Created, not a built-in Style native to LibreOffice.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Page Style called in $oPageStyle was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
@@ -1642,7 +1642,7 @@ EndFunc   ;==>_LOWriter_PageStyleDelete
 ;                  $sPageStyle          - The Page Style Name to search for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If Page Style name exists, then True is returned, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object,
 ;                  @Error: 1, @Extended: 2 = $sPageStyle not a String
@@ -1682,7 +1682,7 @@ EndFunc   ;==>_LOWriter_PageStyleExists
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, the $bSameOnFirst parameter will return a Null value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -1817,7 +1817,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooter
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -1874,7 +1874,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaColor
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  --Processing Errors--
@@ -1922,7 +1922,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaFillStyle
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
@@ -2141,7 +2141,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -2251,7 +2251,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -2313,7 +2313,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparency
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
@@ -2495,7 +2495,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -2608,7 +2608,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparencyGradientMulti
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -2671,7 +2671,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderColor
 ; Return values .: Success: 1 or Array, see Remarks.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -2765,7 +2765,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -2827,7 +2827,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -2885,7 +2885,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderWidth
 ; Return values .: Success: Object or Array.
 ;                  @Error: 0, @Extended: 0, Return: Array = Success. See Remarks.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. See Remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $bFooter not a Boolean value.
@@ -2948,7 +2948,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterCreateTextCursor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -3034,7 +3034,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterShadow
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -3099,7 +3099,7 @@ EndFunc   ;==>_LOWriter_PageStyleFootnoteArea
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -3201,7 +3201,7 @@ EndFunc   ;==>_LOWriter_PageStyleFootnoteLine
 ;                  $sPageStyle          - The Page Style name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Page Style successfully retrieved, returning Page Style Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sPageStyle not a String.
@@ -3248,7 +3248,7 @@ EndFunc   ;==>_LOWriter_PageStyleGetObjByName
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, the $bSameOnFirst parameter will return a Null value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -3383,7 +3383,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeader
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -3440,7 +3440,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaColor
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  --Processing Errors--
@@ -3488,7 +3488,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaFillStyle
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
@@ -3707,7 +3707,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -3817,7 +3817,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -3879,7 +3879,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparency
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
@@ -4061,7 +4061,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -4174,7 +4174,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparencyGradientMulti
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -4237,7 +4237,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -4331,7 +4331,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -4393,7 +4393,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -4451,7 +4451,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderWidth
 ; Return values .: Success: Object or Array.
 ;                  @Error: 0, @Extended: 0, Return: Array = Success. See Remarks.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. See Remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $bHeader not a Boolean value.
@@ -4514,7 +4514,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderCreateTextCursor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -4606,7 +4606,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the parameters $bGutterOnRight, $bGutterAtTop, and $bBackCoversMargins will return a Null value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
@@ -4738,7 +4738,7 @@ EndFunc   ;==>_LOWriter_PageStyleLayout
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the $iGutter parameter will return a Null value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -4837,7 +4837,7 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
@@ -4924,7 +4924,7 @@ EndFunc   ;==>_LOWriter_PageStyleOrganizer
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
@@ -5007,7 +5007,7 @@ EndFunc   ;==>_LOWriter_PageStylePaperFormat
 ;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Page Styles matching the called parameters. See remarks. @Extended contains the count of results returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bUserOnly not a Boolean.
@@ -5055,7 +5055,7 @@ EndFunc   ;==>_LOWriter_PageStylesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.

@@ -94,7 +94,7 @@
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iBackColor not an Integer, less than -1 or greater than 16777215.
@@ -147,7 +147,7 @@ EndFunc   ;==>_LOWriter_FrameAreaColor
 ; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  --Processing Errors--
@@ -195,7 +195,7 @@ EndFunc   ;==>_LOWriter_FrameAreaFillStyle
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
@@ -411,7 +411,7 @@ EndFunc   ;==>_LOWriter_FrameAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -519,7 +519,7 @@ EndFunc   ;==>_LOWriter_FrameAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTransparency not an Integer, less than 0 or greater than 100.
@@ -577,7 +577,7 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparency
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
@@ -755,7 +755,7 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -866,7 +866,7 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradientMulti
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 16777215.
@@ -928,7 +928,7 @@ EndFunc   ;==>_LOWriter_FrameBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
@@ -1017,7 +1017,7 @@ EndFunc   ;==>_LOWriter_FrameBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -1078,7 +1078,7 @@ EndFunc   ;==>_LOWriter_FrameBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer, or less than 0.
@@ -1137,7 +1137,7 @@ EndFunc   ;==>_LOWriter_FrameBorderWidth
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $bSeparatorOn not a Boolean value.
@@ -1240,7 +1240,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSeparator
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current column count.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumns not an Integer, or less than 1.
@@ -1300,7 +1300,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSettings
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumn not an Integer.
@@ -1461,7 +1461,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSize
 ;                  $bOverwrite          - [optional] Default is False. If True, content selected by Cursor is overwritten., Else Frame is inserted after the selection.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Frame was created successfully and inserted at cursor position. Returning Frame Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
@@ -1528,7 +1528,7 @@ EndFunc   ;==>_LOWriter_FrameCreate
 ; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. A Text Cursor Object located in the Frame.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  --Initialization Errors--
@@ -1562,7 +1562,7 @@ EndFunc   ;==>_LOWriter_FrameCreateTextCursor
 ;                  $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
@@ -1602,7 +1602,7 @@ EndFunc   ;==>_LOWriter_FrameDelete
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, If Frame was found matching $sFrameName True is Returned, else False
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Search was successful, Frame found matching $sFrameName listed as a shape.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFrameName not a String.
@@ -1656,7 +1656,7 @@ EndFunc   ;==>_LOWriter_FrameExists
 ; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully returned the Frame Anchor.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  --Initialization Errors--
@@ -1690,7 +1690,7 @@ EndFunc   ;==>_LOWriter_FrameGetAnchor
 ;                  $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions. Cursor object must be located in a Frame.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning an Object for the requested Frame.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
@@ -1730,7 +1730,7 @@ EndFunc   ;==>_LOWriter_FrameGetObjByCursor
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. No matches found.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. Successfully found requested Frame by name, returning Frame Object.
 ;                  @Error: 0, @Extended: 2, Return: Object = Success. Successfully found requested Frame by name in Shapes list, returning Frame Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFrameName not a String.
@@ -1798,7 +1798,7 @@ EndFunc   ;==>_LOWriter_FrameGetObjByName
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $sURL not a String
@@ -1888,7 +1888,7 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $bProtectContent not a Boolean.
@@ -1996,7 +1996,7 @@ EndFunc   ;==>_LOWriter_FrameOptions
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
@@ -2079,7 +2079,7 @@ EndFunc   ;==>_LOWriter_FrameOptionsName
 ;                  $bSearchShapes       - [optional] Default is False. If True, function searches and adds any Frames listed as "Shapes" in the document to the array of Frame names. See remarks.
 ; Return values .: Success: Array of Strings.
 ;                  @Error: 0, @Extended: ?, Return: Array = Returning Array of Frame names. @Extended set to number of Frame Names returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bSearchShapes not a Boolean.
@@ -2157,7 +2157,7 @@ EndFunc   ;==>_LOWriter_FramesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3..
@@ -2238,7 +2238,7 @@ EndFunc   ;==>_LOWriter_FrameShadow
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -2293,7 +2293,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaColor
 ; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  --Processing Errors--
@@ -2341,7 +2341,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaFillStyle
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
@@ -2559,7 +2559,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -2669,7 +2669,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -2729,7 +2729,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparency
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
@@ -2909,7 +2909,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -3022,7 +3022,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradientMulti
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -3086,7 +3086,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -3177,7 +3177,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -3240,7 +3240,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -3301,7 +3301,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderWidth
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -3406,7 +3406,7 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSeparator
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current column count.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -3468,7 +3468,7 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSettings
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -3627,7 +3627,7 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSize
 ;                  $sFrameStyle         - The Name of the New Frame Style to Create.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. New Frame Style successfully created. Returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFrameStyle not a String.
@@ -3681,7 +3681,7 @@ EndFunc   ;==>_LOWriter_FrameStyleCreate
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame Style successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current Frame Style set for the Frame.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameObj not an Object.
@@ -3737,7 +3737,7 @@ EndFunc   ;==>_LOWriter_FrameStyleCurrent
 ;                  $sReplacementStyle   - [optional] Default is "Frame". The Frame style to use instead of the one being deleted if the Frame style being deleted was already applied to a Frame in the document.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame Style called in $sFrameStyle was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
@@ -3799,7 +3799,7 @@ EndFunc   ;==>_LOWriter_FrameStyleDelete
 ;                  $sFrameStyle         - The Frame Style Name to search for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document contains a Frame style matching the input name, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFrameStyle not a String.
@@ -3830,7 +3830,7 @@ EndFunc   ;==>_LOWriter_FrameStyleExists
 ;                  $sFrameStyle         - The Frame Style name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Frame Style successfully retrieved, returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFrameStyle not a String.
@@ -3875,7 +3875,7 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObjByName
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -3985,7 +3985,7 @@ EndFunc   ;==>_LOWriter_FrameStyleOptions
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
@@ -4082,7 +4082,7 @@ EndFunc   ;==>_LOWriter_FrameStyleOrganizer
 ;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Frame Styles matching the called parameters. @Extended contains the count of results returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bUserOnly not a Boolean.
@@ -4127,7 +4127,7 @@ EndFunc   ;==>_LOWriter_FrameStylesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -4218,7 +4218,7 @@ EndFunc   ;==>_LOWriter_FrameStyleShadow
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -4478,7 +4478,7 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If the current LibreOffice version is less than 4.3, then both $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
@@ -4634,7 +4634,7 @@ EndFunc   ;==>_LOWriter_FrameStyleTypeSize
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -4742,7 +4742,7 @@ EndFunc   ;==>_LOWriter_FrameStyleWrap
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
@@ -4821,7 +4821,7 @@ EndFunc   ;==>_LOWriter_FrameStyleWrapOptions
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
@@ -5079,7 +5079,7 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If the LibreOffice version is below 4.3, the $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
@@ -5232,7 +5232,7 @@ EndFunc   ;==>_LOWriter_FrameTypeSize
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -5339,7 +5339,7 @@ EndFunc   ;==>_LOWriter_FrameWrap
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  @Error: 1, @Extended: 2 = $bFirstPar not a Boolean.

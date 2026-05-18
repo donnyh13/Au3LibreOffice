@@ -118,7 +118,7 @@
 ;                  $sName               - The name of the new Form. Form names do not need to be unique, but it will help for clarity.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning newly created Form's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -199,7 +199,7 @@ EndFunc   ;==>_LOWriter_FormAdd
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
@@ -285,7 +285,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
@@ -604,7 +604,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxGeneral
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Check Box State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
@@ -666,7 +666,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxState
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
@@ -782,7 +782,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
@@ -1143,7 +1143,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxGeneral
 ; Return values .: Success: 1 or String
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning currently selected Combo Box value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
@@ -1203,7 +1203,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxValue
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
@@ -1298,7 +1298,7 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 32 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
@@ -1741,7 +1741,7 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldGeneral
 ; Return values .: Success: 1 or Number
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Number = Success. All optional parameters were called with Null, returning current value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
@@ -1799,7 +1799,7 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldValue
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
@@ -1891,7 +1891,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 29 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
@@ -2354,7 +2354,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldGeneral
 ; Return values .: Success: 1 or Structure
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Structure = Success. All optional parameters were called with Null, returning current Date value as a Date Structure.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
@@ -2430,7 +2430,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldValue
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Control was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
 ;                  --Processing Errors--
@@ -2492,7 +2492,7 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 19 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFileSel not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oFileSel not a File Selection Control.
@@ -2771,7 +2771,7 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldGeneral
 ; Return values .: Success: 1 or String
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFileSel not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oFileSel not a File Selection Control.
@@ -2833,7 +2833,7 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldValue
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
@@ -2943,7 +2943,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
@@ -3347,7 +3347,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldGeneral
 ; Return values .: Success: 1 or Number
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Number = Success. All optional parameters were called with Null, returning current value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
@@ -3403,7 +3403,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldValue
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the Form Object that contains the Control.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oControl not an Control Object and not a Grouped Control.
@@ -3463,7 +3463,7 @@ EndFunc   ;==>_LOWriter_FormConGetParent
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oGroupBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oGroupBox not a GroupBox Control.
@@ -3649,7 +3649,7 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oImageButton not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oImageButton not an Image Button Control.
@@ -4022,7 +4022,7 @@ EndFunc   ;==>_LOWriter_FormConImageButtonGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oImageControl not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oImageControl not a Image Control.
@@ -4102,7 +4102,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oImageControl not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oImageControl not an Image Control.
@@ -4366,7 +4366,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Grouped Control was inserted successfully, returning its object.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. Control was inserted successfully, returning its object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oParentForm not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oParentForm not a Form Object.
@@ -4551,7 +4551,7 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oLabel not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oLabel not a Label Control.
@@ -4797,7 +4797,7 @@ EndFunc   ;==>_LOWriter_FormConLabelGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
@@ -4916,7 +4916,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 23 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
@@ -5260,7 +5260,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxGeneral
 ; Parameters ....: $oListBox            - A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the count of List Box entries.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
@@ -5300,7 +5300,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxGetCount
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current selection(s) of the List Box. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
@@ -5396,7 +5396,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oNavBar not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oNavBar not a Navigation Bar Control.
@@ -5666,7 +5666,7 @@ EndFunc   ;==>_LOWriter_FormConNavBarGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
@@ -5759,7 +5759,7 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 30 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
@@ -6176,7 +6176,7 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldGeneral
 ; Return values .: Success: 1 or Number
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Number = Success. All optional parameters were called with Null, returning current value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
@@ -6234,7 +6234,7 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldValue
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oOptionButton not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oOptionButton not a Option Button Control.
@@ -6320,7 +6320,7 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oOptionButton not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oOptionButton not a Option Button Control.
@@ -6640,7 +6640,7 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonGeneral
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Option Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oOptionButton not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oOptionButton not a Option Button Control.
@@ -6701,7 +6701,7 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonState
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
@@ -6808,7 +6808,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
@@ -7164,7 +7164,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldGeneral
 ; Return values .: Success: 1 or String
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
@@ -7226,7 +7226,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
 ;                  @Error: 1, @Extended: 2 = $iX not an Integer.
@@ -7338,7 +7338,7 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 27 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPushButton not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oPushButton not a Push Button Control.
@@ -7820,7 +7820,7 @@ EndFunc   ;==>_LOWriter_FormConPushButtonGeneral
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Push Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPushButton not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oPushButton not a Push Button Control.
@@ -7879,7 +7879,7 @@ EndFunc   ;==>_LOWriter_FormConPushButtonState
 ;                  $iType               - [optional] (1-1048575) Default is $LOW_FORM_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOW_FORM_CON_* as defined in LibreOfficeWriter_Constants.au3
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 1048575. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -8017,7 +8017,7 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer, or less than 51.
@@ -8097,7 +8097,7 @@ EndFunc   ;==>_LOWriter_FormConSize
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
@@ -8174,7 +8174,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 13 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
@@ -8380,7 +8380,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxGeneral
 ;                  $iPos                - [optional] Default is Null. The position in the Column list to insert the new Column. 0 = insert at the beginning. Null = insert at the end.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully created the Column, returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTableCon not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTableCon not a Table Control Object.
@@ -8484,7 +8484,7 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnAdd
 ; Parameters ....: $oColumn             - A Column object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Column was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oColumn not an Object.
 ;                  --Processing Errors--
@@ -8530,7 +8530,7 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnDelete
 ; Parameters ....: $oTableCon           - A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a two column array containing Column objects. See remarks. @Extended is set to the number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTableCon not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTableCon not a Table Control Object.
@@ -8590,7 +8590,7 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnsGetList
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
@@ -8697,7 +8697,7 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
@@ -8949,7 +8949,7 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
@@ -9036,7 +9036,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 24 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
@@ -9380,7 +9380,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
@@ -9464,7 +9464,7 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 21 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
@@ -9832,7 +9832,7 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
@@ -9934,7 +9934,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
@@ -10255,7 +10255,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTableCon not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTableCon not a Table Control.
@@ -10514,7 +10514,7 @@ EndFunc   ;==>_LOWriter_FormConTableConGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
@@ -10624,7 +10624,7 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
@@ -10859,7 +10859,7 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
@@ -10944,7 +10944,7 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
@@ -11265,7 +11265,7 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
@@ -11364,7 +11364,7 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
@@ -11624,7 +11624,7 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
@@ -11721,7 +11721,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 15 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
@@ -11962,7 +11962,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
@@ -12045,7 +12045,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
@@ -12406,7 +12406,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldGeneral
 ; Parameters ....: $oTextBox            - A Text Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the Text Cursor object created in the Text Box.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
@@ -12449,7 +12449,7 @@ EndFunc   ;==>_LOWriter_FormConTextBoxCreateTextCursor
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
@@ -12556,7 +12556,7 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
@@ -12962,7 +12962,7 @@ EndFunc   ;==>_LOWriter_FormConTextBoxGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
@@ -13053,7 +13053,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
@@ -13516,7 +13516,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldGeneral
 ; Return values .: Success: 1 or Structure
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Structure = Success. All optional parameters were called with Null, returning current Time value as a Time Structure.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
@@ -13596,7 +13596,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldValue
 ; Parameters ....: $oForm               - A Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Form was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oForm not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oForm not a Form Object.
@@ -13672,7 +13672,7 @@ EndFunc   ;==>_LOWriter_FormDelete
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bFormDesignMode not a Boolean.
@@ -13861,7 +13861,7 @@ EndFunc   ;==>_LOWriter_FormDocSettings
 ;                  $iForm               - The Index value of the Form to retrieve. 0 Based.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested form Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iForm not an Integer, less than 0 or greater then number of forms contained in object.
@@ -13921,7 +13921,7 @@ EndFunc   ;==>_LOWriter_FormGetObjByIndex
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Form was successfully moved, Object called in $oForm has been updated to new Object.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. Returning Form's parent Object, which is a Document Object.
 ;                  @Error: 0, @Extended: 2, Return: Object = Success. Returning Form's parent Object, which is a Form Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oForm not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oForm not a Form Object.
@@ -14043,7 +14043,7 @@ EndFunc   ;==>_LOWriter_FormParent
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oForm not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oForm not a Form Object.
@@ -14243,7 +14243,7 @@ EndFunc   ;==>_LOWriter_FormPropertiesData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oForm not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oForm not a Form Object.
@@ -14332,7 +14332,7 @@ EndFunc   ;==>_LOWriter_FormPropertiesGeneral
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning a count of Forms contained in the Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = Called Object in $oObj, not a Document Object, and not a Form Object.
@@ -14377,7 +14377,7 @@ EndFunc   ;==>_LOWriter_FormsGetCount
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Form Objects. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = Called Object in $oObj, not a Document Object, and not a Form Object.

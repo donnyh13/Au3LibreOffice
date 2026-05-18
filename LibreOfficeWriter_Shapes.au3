@@ -61,7 +61,7 @@
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Fill color as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColor not an Integer, less than -1 or greater than 16777215.
@@ -124,7 +124,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaColor
 ; Parameters ....: $oShape              - A Shape object returned by previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  --Processing Errors--
@@ -172,7 +172,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaFillStyle
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oShape not an Object.
@@ -388,7 +388,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -496,7 +496,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradientMulticolor
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTransparency not an Integer, less than 0 or greater than 100.
@@ -554,7 +554,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparency
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oShape not an Object.
@@ -732,7 +732,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -839,7 +839,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradientMulti
 ;                  $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Shape was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oShape not an Object.
@@ -881,7 +881,7 @@ EndFunc   ;==>_LOWriter_ShapeDelete
 ;                  $sShapeName          - The Shape name to search for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If a Shape was found matching $sShapeName, True is returned, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sShapeName not a String.
@@ -924,7 +924,7 @@ EndFunc   ;==>_LOWriter_ShapeExists
 ; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully returned the Shape Anchor.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  --Initialization Errors--
@@ -958,7 +958,7 @@ EndFunc   ;==>_LOWriter_ShapeGetAnchor
 ;                  $sShapeName          - The Shape name to retrieve the object for.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the requested Shape Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sShapeName not a String.
@@ -1013,7 +1013,7 @@ EndFunc   ;==>_LOWriter_ShapeGetObjByName
 ;                  @Error: 0, @Extended: 4, Return: Integer = Success. Shape is a *_LINE_CURVE_FILLED or *_LINE_FREEFORM_LINE_FILLED Type Shape. Returning $LOW_SHAPE_TYPE_LINE_CURVE_FILLED Constant Value. See Remarks #2.
 ;                  @Error: 0, @Extended: 5, Return: Integer = Success. Shape is a *_LINE_LINE Type Shape. Returning $LOW_SHAPE_TYPE_LINE_LINE Constant Value.
 ;                  @Error: 0, @Extended: 6, Return: Integer = Success. Shape is a *_LINE_POLYGON, *_LINE_POLYGON_45 or *_LINE_POLYGON_45_FILLED Type Shape. Returning $LOW_SHAPE_TYPE_LINE_POLYGON Constant Value. See Remarks #2.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  --Processing Errors--
@@ -1146,7 +1146,7 @@ EndFunc   ;==>_LOWriter_ShapeGetType
 ;                  $iY                  - [optional] Default is 0. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. The Shape was successfully inserted. Returning the Shape's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
@@ -1244,7 +1244,7 @@ EndFunc   ;==>_LOWriter_ShapeInsert
 ; Return values .: Success: Integer or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $vStartStyle not a String, and not an Integer.
@@ -1389,7 +1389,7 @@ EndFunc   ;==>_LOWriter_ShapeLineArrowStyles
 ; Return values .: Success: Integer or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $vStyle not a String, and not an Integer.
@@ -1528,7 +1528,7 @@ EndFunc   ;==>_LOWriter_ShapeLineProperties
 ; Return values .: Success: 1 or String
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Shape's name was successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning the Shape's current name.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oShape not an Object.
@@ -1584,7 +1584,7 @@ EndFunc   ;==>_LOWriter_ShapeName
 ;                  $bIsCurve            - [optional] Default is False. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. New Position Point was successfully added to the Shape.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
@@ -2026,7 +2026,7 @@ EndFunc   ;==>_LOWriter_ShapePointsAdd
 ; Parameters ....: $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function. See remarks.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total number of points present in a shape.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
@@ -2075,7 +2075,7 @@ EndFunc   ;==>_LOWriter_ShapePointsGetCount
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
@@ -2198,7 +2198,7 @@ EndFunc   ;==>_LOWriter_ShapePointsModify
 ;                  $iPoint              - The Point to in the Shape to delete, beginning at 1.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Position Point was successfully deleted from the Shape.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
@@ -2530,7 +2530,7 @@ EndFunc   ;==>_LOWriter_ShapePointsRemove
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $iX not an Integer.
@@ -2608,7 +2608,7 @@ EndFunc   ;==>_LOWriter_ShapePosition
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $nRotate not a Number, less than 0 or greater than 359.99.
@@ -2668,7 +2668,7 @@ EndFunc   ;==>_LOWriter_ShapeRotateSlant
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: 2D Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning 2D Array of Shape names contained in a document, the first column ($aArray[0][0] contains the shape name, the second column ($aArray[0][1] contains the shape's Type. See Remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
@@ -2722,7 +2722,7 @@ EndFunc   ;==>_LOWriter_ShapesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $bTextBox not a Boolean.
@@ -2799,7 +2799,7 @@ EndFunc   ;==>_LOWriter_ShapeTextBox
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
@@ -3042,7 +3042,7 @@ EndFunc   ;==>_LOWriter_ShapeTypePosition
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer, or less than 51.
@@ -3125,7 +3125,7 @@ EndFunc   ;==>_LOWriter_ShapeTypeSize
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -3232,7 +3232,7 @@ EndFunc   ;==>_LOWriter_ShapeWrap
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $bFirstPar not a Boolean.

@@ -86,7 +86,7 @@
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iBackColor not an Integer, less than -1 or greater than 16777215.
@@ -140,7 +140,7 @@ EndFunc   ;==>_LOWriter_TableBackColor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 16777215.
@@ -207,7 +207,7 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer.
@@ -302,7 +302,7 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -371,7 +371,7 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer, or less than 0.
@@ -432,7 +432,7 @@ EndFunc   ;==>_LOWriter_TableBorderWidth
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTable not an Object
@@ -505,7 +505,7 @@ EndFunc   ;==>_LOWriter_TableBreak
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current setting as an Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $iBackColor not an Integer, set less than -1 or greater than 16777215.
@@ -557,7 +557,7 @@ EndFunc   ;==>_LOWriter_TableCellBackColor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object .
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 16777215.
@@ -616,7 +616,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer.
@@ -695,7 +695,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderPadding
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -754,7 +754,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderStyle
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell Variable not Object type variable.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer, or less than 0.
@@ -804,7 +804,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderWidth
 ; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ; Return values .: Success: An Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning a Text Cursor Object located in the specified Cell.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell is a CellRange not an individual cell.
@@ -841,7 +841,7 @@ EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Formula was successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. Current formula is returned in String format.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell is a CellRange not an individual cell.
@@ -893,7 +893,7 @@ EndFunc   ;==>_LOWriter_TableCellFormula
 ; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. The Data Type as an Integer, See Constants, $LOW_CELL_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell is a CellRange not an individual cell.
@@ -929,7 +929,7 @@ EndFunc   ;==>_LOWriter_TableCellGetDataType
 ; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. The Cell formula error code as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell is a CellRange not an individual cell.
@@ -964,7 +964,7 @@ EndFunc   ;==>_LOWriter_TableCellGetError
 ; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
 ; Return values .: Success: A String.
 ;                  @Error: 0, @Extended: 0, Return: String = Success. The Cell name in String format.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell is a CellRange not an individual cell.
@@ -1001,7 +1001,7 @@ EndFunc   ;==>_LOWriter_TableCellGetName
 ; Return values .: Success: 1 Or Boolean.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set Cell Protect setting.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. All optional parameters were called with Null, returning a Boolean whether the cell isprotected (True) or not.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell is a Cell Range. Can only set Write-Protect on individual cells.
@@ -1050,7 +1050,7 @@ EndFunc   ;==>_LOWriter_TableCellProtect
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Array of Cell names. @Extended set to number of names returned in the array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  --Processing Errors--
@@ -1085,7 +1085,7 @@ EndFunc   ;==>_LOWriter_TableCellsGetNames
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set the cell String.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current string.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell is a CellRange not an individual cell.
@@ -1137,7 +1137,7 @@ EndFunc   ;==>_LOWriter_TableCellString
 ; Return values .: Success: 1 or Number.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set cell value.
 ;                  @Error: 0, @Extended: 1, Return: Number = Success. All optional parameters were called with Null, returning current cell value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell is a CellRange not an individual cell.
@@ -1191,7 +1191,7 @@ EndFunc   ;==>_LOWriter_TableCellValue
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set Vertical Orientation.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. All optional parameters were called with Null, returning current Cell Vertical orientation, see constants $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $iVertOrient not an Integer, less than 0 or greater than 3. See constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3
@@ -1242,7 +1242,7 @@ EndFunc   ;==>_LOWriter_TableCellVertOrient
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: ?, Return: 1 = Full amount of columns deleted. @Extended set to total columns deleted.
 ;                  @Error: 0, @Extended: ?, Return: 2 = $iCount greater than amount of columns contained in Table; deleted all columns from $iColumn over. @Extended set to total columns deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, or less than 0.
@@ -1284,7 +1284,7 @@ EndFunc   ;==>_LOWriter_TableColumnDelete
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Returning Column Count as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  --Processing Errors--
@@ -1319,7 +1319,7 @@ EndFunc   ;==>_LOWriter_TableColumnGetCount
 ;                  $iColumn             - [optional] Default is Null. The column to insert columns after. See Remarks.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully inserted the number of desired columns.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iCount not an Integer, or less than 1.
@@ -1373,7 +1373,7 @@ EndFunc   ;==>_LOWriter_TableColumnInsert
 ;                  $iHeadingRows        - [optional] Default is Null. The number of rows to count as a Heading. See remarks.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Table was created successfully and inserted at cursor position. Returning Table Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
@@ -1514,7 +1514,7 @@ EndFunc   ;==>_LOWriter_TableCreate
 ;                  $oCursor             - [optional] Default is Null. A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success, TableCursor object was created successfully. Returning Table Cursor Object for further Table manipulation functions.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTable and $oCursor not Objects.
@@ -1584,7 +1584,7 @@ EndFunc   ;==>_LOWriter_TableCreateCursor
 ;                  $bSplitRangeHori     - [optional] Default is False. If True, splits the selected cell or cell range horizontally, else, False for vertically.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Command was successfully completed.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCursor not a Table Cursor.
@@ -1646,7 +1646,7 @@ EndFunc   ;==>_LOWriter_TableCursor
 ;                  $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Table was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTable not an Object.
@@ -1688,7 +1688,7 @@ EndFunc   ;==>_LOWriter_TableDelete
 ;                  $sTableName          - The Table name to search for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If a table was found matching $sTableName, True is returned, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sTableName not a String.
@@ -1727,7 +1727,7 @@ EndFunc   ;==>_LOWriter_TableExists
 ;                  $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = A Cell object or a Cell Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTable not an Object.
@@ -1799,7 +1799,7 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByCursor
 ;                  $sToCellName         - [optional] Default is $sCellName. The Cell name to end the Cell Range. Note: Case Sensitive.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. A Cell object or a Cell Range Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable is not an Object.
 ;                  @Error: 1, @Extended: 2 = $sCellName not a String.
@@ -1850,7 +1850,7 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByName
 ;                  $iToRow              - [optional] Default is Null. The row containing the cell where to end the the cell range. Can be the same as $iRow or higher. If left blank $iToRow will be the same as $iRow.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. A Cell object or a Cell Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, or less than 0 or greater than number of Columns contained in the table.
@@ -1910,7 +1910,7 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByPosition
 ;                  @Error: 0, @Extended: 2, Return: Array = Returning a specific row of data.
 ;                  @Error: 0, @Extended: 3, Return: Array = Returning a specific column of data.
 ;                  @Error: 0, @Extended: 4, Return: String = Returning the data of a specific cell.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, less than -1 or greater than number of Columns containted in the Table.
@@ -1975,7 +1975,7 @@ EndFunc   ;==>_LOWriter_TableGetData
 ;                  $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions. Cursor object must be located in a Table.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Table Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
@@ -2013,7 +2013,7 @@ EndFunc   ;==>_LOWriter_TableGetObjByCursor
 ;                  $sTableName          - Table Name to retrieve the Object for.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning an Object for the requested Table.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sTableName not a String.
@@ -2055,7 +2055,7 @@ EndFunc   ;==>_LOWriter_TableGetObjByName
 ; Return values .: Success: Integer or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTopMargin not an Integer, less than 0 or greater than 100,000.
@@ -2145,7 +2145,7 @@ EndFunc   ;==>_LOWriter_TableMargin
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTable not an Object.
@@ -2255,7 +2255,7 @@ EndFunc   ;==>_LOWriter_TableProperties
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iRow not an Integer, or less than 0.
@@ -2314,7 +2314,7 @@ EndFunc   ;==>_LOWriter_TableRowBackColor
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: ?, Return: 1 = Full amount of Rows deleted. @Extended set to total rows deleted.
 ;                  @Error: 0, @Extended: ?, Return: 2 = $iCount greater than amount of rows contained in Table; deleted all rows from $iRow over. @Extended set to total rows deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iRow not an Integer, or less than 0.
@@ -2356,7 +2356,7 @@ EndFunc   ;==>_LOWriter_TableRowDelete
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Returning Row count.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  --Processing Errors--
@@ -2391,7 +2391,7 @@ EndFunc   ;==>_LOWriter_TableRowGetCount
 ;                  $iRow                - [optional] Default is Null. The row to insert rows after. See Remarks.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully inserted requested number of rows.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iCount not an Integer, or less than 1.
@@ -2441,7 +2441,7 @@ EndFunc   ;==>_LOWriter_TableRowInsert
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iRow not an Integer, or less than 0.
@@ -2519,7 +2519,7 @@ EndFunc   ;==>_LOWriter_TableRowProperty
 ;                  $avData              - Array of Data to fill the Table with. See Remarks.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Table data was successfully set.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $avData not an Array.
@@ -2571,7 +2571,7 @@ EndFunc   ;==>_LOWriter_TableSetData
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Returning Array of Table Names. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
@@ -2611,7 +2611,7 @@ EndFunc   ;==>_LOWriter_TablesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
@@ -2689,7 +2689,7 @@ EndFunc   ;==>_LOWriter_TableShadow
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Table Style successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current TableStyle name as a String.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTable not an Object.
@@ -2741,7 +2741,7 @@ EndFunc   ;==>_LOWriter_TableStyleCurrent
 ;                  $sTableStyle         - The Table Style Name to search for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Document contains the Table style called in $sTableStyle, True is returned, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sTableStyle not a String.
@@ -2774,7 +2774,7 @@ EndFunc   ;==>_LOWriter_TableStyleExists
 ;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Table Styles matching the called parameters. See remarks. @Extended contains the count of results returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bUserOnly not a Boolean.
@@ -2821,7 +2821,7 @@ EndFunc   ;==>_LOWriter_TableStylesGetNames
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters, the third element is a Boolean, If True, the relative width is used, else False means "plain" Width is used.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
