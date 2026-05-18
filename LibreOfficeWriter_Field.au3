@@ -136,18 +136,18 @@
 ;                  $sAuthor             - [optional] Default is Null. The Author Name to insert. Note, $bIsFixed must be set to True for this value to stay the same as set.
 ;                  $bFullName           - [optional] Default is Null. If True, displays the full name. Else Initials. For a Fixed custom name, this does nothing.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Author field, returning Author Field Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Author field, returning Author Field Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $sAuthor not a String.
-;                  @Error 1 @Extended 7 = $bFullName not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 7 = $bFullName not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.Author" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.Author" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -207,16 +207,16 @@ EndFunc   ;==>_LOWriter_FieldAuthorInsert
 ;                  $sAuthor             - [optional] Default is Null. The Author Name to insert. Note, $bIsFixed must be set to True for this value to stay the same as set.
 ;                  $bFullName           - [optional] Default is Null. If True, displays the full name. Else Initials.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oAuthField not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $sAuthor not a String.
-;                  @Error 1 @Extended 4 = $bFullName not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oAuthField not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 4 = $bFullName not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $sAuthor
 ;                  |                               4 = Error setting $bFullName
@@ -276,13 +276,13 @@ EndFunc   ;==>_LOWriter_FieldAuthorModify
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oBookmark           - A Bookmark Object from a previous _LOWriter_FieldBookmarkInsert, or _LOWriter_FieldBookmarkGetObjByName function to delete.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted requested Bookmark.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted requested Bookmark.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oBookmark not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oBookmark not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Attempted to delete Bookmark, but document still contains a Bookmark by that name.
+;                  @Error: 3, @Extended: 1 = Attempted to delete Bookmark, but document still contains a Bookmark by that name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -316,14 +316,14 @@ EndFunc   ;==>_LOWriter_FieldBookmarkDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sBookmarkName       - The Bookmark name to search for.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. If the document contains a Bookmark by the called name, then True is returned, Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the document contains a Bookmark by the called name, then True is returned, Else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sBookmarkName not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sBookmarkName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Bookmarks Object.
-;                  @Error 3 @Extended 2 = Failed to query if Bookmark exists.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Bookmarks Object.
+;                  @Error: 3, @Extended: 2 = Failed to query if Bookmark exists.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -356,12 +356,12 @@ EndFunc   ;==>_LOWriter_FieldBookmarkExists
 ; Syntax ........: _LOWriter_FieldBookmarkGetAnchor(ByRef $oBookmark)
 ; Parameters ....: $oBookmark           - A Bookmark Object from a previous _LOWriter_FieldBookmarkInsert, or _LOWriter_FieldBookmarkGetObjByName function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Bookmark Anchor Cursor Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Bookmark Anchor Cursor Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oBookmark not an Object.
+;                  @Error: 1, @Extended: 1 = $oBookmark not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to retrieve Bookmark anchor Object.
+;                  @Error: 2, @Extended: 1 = Failed to retrieve Bookmark anchor Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Anchor cursor returned is just a Text Cursor placed at the anchor's position.
@@ -390,14 +390,14 @@ EndFunc   ;==>_LOWriter_FieldBookmarkGetAnchor
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sBookmarkName       - The Bookmark name to retrieve the Object for.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully retrieved requested Bookmark Object. Returning requested Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully retrieved requested Bookmark Object. Returning requested Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sBookmarkName not a String.
-;                  @Error 1 @Extended 3 = Document does not contain a Bookmark named in $sBookmarkName.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sBookmarkName not a String.
+;                  @Error: 1, @Extended: 3 = Document does not contain a Bookmark named in $sBookmarkName.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve requested Bookmark Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve requested Bookmark Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -430,17 +430,17 @@ EndFunc   ;==>_LOWriter_FieldBookmarkGetObjByName
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $sBookmarkName       - [optional] Default is Null. The Name of the Bookmark to create. See Remarks.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Bookmark into the document. Returning the Bookmark Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Bookmark into the document. Returning the Bookmark Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, which is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $sBookmarkName not a String.
-;                  @Error 1 @Extended 6 = $sBookmarkName contains illegal characters, /\@:*?";,.# .
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, which is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sBookmarkName not a String.
+;                  @Error: 1, @Extended: 6 = $sBookmarkName contains illegal characters, /\@:*?";,.# .
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.Bookmark" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.Bookmark" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the cursor used to insert a Bookmark has text selected, the Bookmark will envelope the text, else the Bookmark will be inserted at a single point.
@@ -486,17 +486,17 @@ EndFunc   ;==>_LOWriter_FieldBookmarkInsert
 ; Parameters ....: $oBookmark           - A Bookmark Object from a previous _LOWriter_FieldBookmarkInsert, or _LOWriter_FieldBookmarkGetObjByName function.
 ;                  $sBookmarkName       - [optional] Default is Null. The new name to rename the bookmark called in $oBookmark.
 ; Return values .: Success: 1 or String
-;                  @Error 0 @Extended 0 Return 1 = Success. Bookmark name successfully modified.
-;                  @Error 0 @Extended 0 Return String = Success. All optional parameters were called with Null, returning current Bookmark name.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Bookmark name successfully modified.
+;                  @Error: 0, @Extended: 0, Return: String = Success. All optional parameters were called with Null, returning current Bookmark name.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oBookmark not an Object.
-;                  @Error 1 @Extended 2 = $sBookmarkName not a String.
-;                  @Error 1 @Extended 3 = $sBookmarkName contains illegal characters, /\@:*?";,.# .
+;                  @Error: 1, @Extended: 1 = $oBookmark not an Object.
+;                  @Error: 1, @Extended: 2 = $sBookmarkName not a String.
+;                  @Error: 1, @Extended: 3 = $sBookmarkName contains illegal characters, /\@:*?";,.# .
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Bookmark name.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Bookmark name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sBookmarkName
 ; Author ........: donnyh13
 ; Modified ......:
@@ -539,12 +539,12 @@ EndFunc   ;==>_LOWriter_FieldBookmarkModify
 ; Syntax ........: _LOWriter_FieldBookmarksGetNames(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Successfully searched for Bookmarks, returning Array of Bookmark names, @Extended set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Successfully searched for Bookmarks, returning Array of Bookmark names, @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Array of Bookmark Names.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Array of Bookmark Names.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -576,17 +576,17 @@ EndFunc   ;==>_LOWriter_FieldBookmarksGetNames
 ;                  $iChapFrmt           - [optional] (0-4) Default is Null. The Display format for the Chapter Field. See Constants, $LOW_FIELD_CHAP_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLevel              - [optional] (1-10) Default is Null. The Chapter level to display.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Chapter field, returning Chapter Field Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Chapter field, returning Chapter Field Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $iChapFrmt not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_CHAP_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iLevel not an Integer, less than 1 or greater than 10.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iChapFrmt not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_CHAP_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iLevel not an Integer, less than 1 or greater than 10.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.Chapter" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.Chapter" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -635,15 +635,15 @@ EndFunc   ;==>_LOWriter_FieldChapterInsert
 ;                  $iChapFrmt           - [optional] (0-4) Default is Null. The Display format for the Chapter Field. See Constants, $LOW_FIELD_CHAP_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLevel              - [optional] (1-10) Default is Null. The Chapter level to display.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oChapField not an Object.
-;                  @Error 1 @Extended 2 = $iChapFrmt not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_CHAP_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = $iLevel not an Integer, less than 1 or greater than 10.
+;                  @Error: 1, @Extended: 1 = $oChapField not an Object.
+;                  @Error: 1, @Extended: 2 = $iChapFrmt not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_CHAP_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLevel not an Integer, less than 1 or greater than 10.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iChapFrmt
 ;                  |                               2 = Error setting $iLevel
 ; Author ........: donnyh13
@@ -697,17 +697,17 @@ EndFunc   ;==>_LOWriter_FieldChapterModify
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $sCharacters         - [optional] Default is Null. The Characters to insert in a combined character field. Max 6 character String Length.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Combined Character field, returning Combined Character Field Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Combined Character field, returning Combined Character Field Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $sCharacters not a String.
-;                  @Error 1 @Extended 6 = $sCharacters longer than 6 characters.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sCharacters not a String.
+;                  @Error: 1, @Extended: 6 = $sCharacters longer than 6 characters.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.CombinedCharacters" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.CombinedCharacters" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -750,17 +750,17 @@ EndFunc   ;==>_LOWriter_FieldCombCharInsert
 ; Parameters ....: $oCombCharField      - A Combined Character field Object from a previous _LOWriter_FieldCombCharInsert, or _LOWriter_FieldsGetList( function.
 ;                  $sCharacters         - [optional] Default is Null. The Characters to insert in a combined character field. Max 6 character String Length.
 ; Return values .: Success: 1 or String.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current Combined Characters value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current Combined Characters value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sCharacters not a String.
-;                  @Error 1 @Extended 3 = String called in $sCharacters longer than 6 characters.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sCharacters not a String.
+;                  @Error: 1, @Extended: 3 = String called in $sCharacters longer than 6 characters.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Combined Character Field value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Combined Character Field value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sCharacters
 ; Author ........: donnyh13
 ; Modified ......:
@@ -811,23 +811,23 @@ EndFunc   ;==>_LOWriter_FieldCombCharModify
 ;                  $sName               - [optional] Default is Null. The name of the creator. LibreOffice version 4.0 and up only.
 ;                  $bResolved           - [optional] Default is Null. If True, the comment is marked as resolved.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted comment field, returning Comment Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted comment field, returning Comment Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $sContent not a String.
-;                  @Error 1 @Extended 6 = $sAuthor not a String.
-;                  @Error 1 @Extended 7 = $tDateStruct not an Object.
-;                  @Error 1 @Extended 8 = $sInitials not a String.
-;                  @Error 1 @Extended 9 = $sName not a String.
-;                  @Error 1 @Extended 10 = $bResolved not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sContent not a String.
+;                  @Error: 1, @Extended: 6 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 7 = $tDateStruct not an Object.
+;                  @Error: 1, @Extended: 8 = $sInitials not a String.
+;                  @Error: 1, @Extended: 9 = $sName not a String.
+;                  @Error: 1, @Extended: 10 = $bResolved not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.Annotation" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.Annotation" Object.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice Version lower than 4.0.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice Version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -913,20 +913,20 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ;                  $sName               - [optional] Default is Null. The name of the creator. LibreOffice version 4.0 and up only.
 ;                  $bResolved           - [optional] Default is Null. If True, the comment is marked as resolved.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.0, the $sInitials and $sName parameters will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.0, the $sInitials and $sName parameters will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCommentField not an Object.
-;                  @Error 1 @Extended 3 = $sContent not a String.
-;                  @Error 1 @Extended 4 = $sAuthor not a String.
-;                  @Error 1 @Extended 5 = $tDateStruct not an Object.
-;                  @Error 1 @Extended 6 = $sInitials not a String.
-;                  @Error 1 @Extended 7 = $sName not a String.
-;                  @Error 1 @Extended 8 = $bResolved not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCommentField not an Object.
+;                  @Error: 1, @Extended: 3 = $sContent not a String.
+;                  @Error: 1, @Extended: 4 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 5 = $tDateStruct not an Object.
+;                  @Error: 1, @Extended: 6 = $sInitials not a String.
+;                  @Error: 1, @Extended: 7 = $sName not a String.
+;                  @Error: 1, @Extended: 8 = $bResolved not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sContent
 ;                  |                               2 = Error setting $sAuthor
 ;                  |                               4 = Error setting $tDateStruct
@@ -934,7 +934,7 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ;                  |                               16 = Error setting $sName
 ;                  |                               32 = Error setting $bResolved
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice Version lower than 4.0.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice Version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1031,18 +1031,18 @@ EndFunc   ;==>_LOWriter_FieldCommentModify
 ;                  $sThen               - [optional] Default is Null. The text to display if the condition is True.
 ;                  $sElse               - [optional] Default is Null. The text to display if the condition is False.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted a Conditional Text field, returning the Conditional Text Field Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted a Conditional Text field, returning the Conditional Text Field Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $sCondition not a String.
-;                  @Error 1 @Extended 6 = $sThen not a String.
-;                  @Error 1 @Extended 7 = $sElse not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sCondition not a String.
+;                  @Error: 1, @Extended: 6 = $sThen not a String.
+;                  @Error: 1, @Extended: 7 = $sElse not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.ConditionalText" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.ConditionalText" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1098,16 +1098,16 @@ EndFunc   ;==>_LOWriter_FieldCondTextInsert
 ;                  $sThen               - [optional] Default is Null. The text to display if the condition is True.
 ;                  $sElse               - [optional] Default is Null. The text to display if the condition is False.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters, with an additional parameter in the last element to indicate if the condition is evaluated as True or not.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters, with an additional parameter in the last element to indicate if the condition is evaluated as True or not.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sCondition not a String.
-;                  @Error 1 @Extended 3 = $sThen not a String.
-;                  @Error 1 @Extended 4 = $sElse not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sCondition not a String.
+;                  @Error: 1, @Extended: 3 = $sThen not a String.
+;                  @Error: 1, @Extended: 4 = $sElse not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sCondition
 ;                  |                               2 = Error setting $sThen
 ;                  |                               4 = Error setting $sElse
@@ -1167,10 +1167,10 @@ EndFunc   ;==>_LOWriter_FieldCondTextModify
 ; Syntax ........: _LOWriter_FieldCurrentDisplayGet(ByRef $oField)
 ; Parameters ....: $oField              - A Field Object returned from a previous insert, _LOWriter_FieldsGetList, _LOWriter_FieldsDocInfoGetList function.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Success. Returning current Field display content in String format.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Returning current Field display content in String format.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oField not an Object.
+;                  @Error: 1, @Extended: 1 = $oField not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Comment Field will return an empty string, use the Comment Field function to retrieve the current comment content. A DocInfoComments field will work with this function however.
@@ -1211,21 +1211,21 @@ EndFunc   ;==>_LOWriter_FieldCurrentDisplayGet
 ;                  $iOffset             - [optional] Default is Null. The offset to apply to the date, either in Minutes or Days, depending on the current $bIsDate setting.
 ;                  $iDateFormatKey      - [optional] Default is Null. A Date or Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Date/Time field, returning Date/Time Field Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Date/Time field, returning Date/Time Field Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $tDateStruct not an Object.
-;                  @Error 1 @Extended 7 = $bIsDate not a Boolean.
-;                  @Error 1 @Extended 8 = $iOffset not an Integer.
-;                  @Error 1 @Extended 9 = $iDateFormatKey not an Integer.
-;                  @Error 1 @Extended 10 = $iDateFormatKey not found in current Document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $tDateStruct not an Object.
+;                  @Error: 1, @Extended: 7 = $bIsDate not a Boolean.
+;                  @Error: 1, @Extended: 8 = $iOffset not an Integer.
+;                  @Error: 1, @Extended: 9 = $iDateFormatKey not an Integer.
+;                  @Error: 1, @Extended: 10 = $iDateFormatKey not found in current Document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.DateTime" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.DateTime" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1303,20 +1303,20 @@ EndFunc   ;==>_LOWriter_FieldDateTimeInsert
 ;                  $iOffset             - [optional] Default is Null. The offset to apply to the date, either in Minutes or Days, depending on the current $bIsDate setting.
 ;                  $iDateFormatKey      - [optional] Default is Null. A Date or Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oDateTimeField not an Object.
-;                  @Error 1 @Extended 3 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 4 = $tDateStruct not an Object.
-;                  @Error 1 @Extended 5 = $bIsDate not a Boolean.
-;                  @Error 1 @Extended 6 = $iOffset not an Integer.
-;                  @Error 1 @Extended 7 = $iDateFormatKey not an Integer.
-;                  @Error 1 @Extended 8 = $iDateFormatKey not found in current Document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oDateTimeField not an Object.
+;                  @Error: 1, @Extended: 3 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 4 = $tDateStruct not an Object.
+;                  @Error: 1, @Extended: 5 = $bIsDate not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iOffset not an Integer.
+;                  @Error: 1, @Extended: 7 = $iDateFormatKey not an Integer.
+;                  @Error: 1, @Extended: 8 = $iDateFormatKey not found in current Document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $tDateStruct
 ;                  |                               4 = Error setting $bIsDate
@@ -1406,16 +1406,16 @@ EndFunc   ;==>_LOWriter_FieldDateTimeModify
 ; Parameters ....: $oField              - A Field Object from a previous Insert, _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, or _LOWriter_FieldsDocInfoGetList function.
 ;                  $bDeleteMaster       - [optional] Default is False. If True, and the field has a Master Field, the MasterField (With any other dependent fields) will be deleted.
 ; Return values .: Success: 1.
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted the field with the Text Master Field.
-;                  @Error 0 @Extended 1 Return 1 = Success. Successfully deleted the field.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted the field with the Text Master Field.
+;                  @Error: 0, @Extended: 1, Return: 1 = Success. Successfully deleted the field.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oField not an Object.
-;                  @Error 1 @Extended 2 = $bDeleteMaster not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oField not an Object.
+;                  @Error: 1, @Extended: 2 = $bDeleteMaster not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving TextFieldMaster Object.
-;                  @Error 3 @Extended 2 = Error retrieving Field Master Array of dependent fields.
-;                  @Error 3 @Extended 3 = Failed to delete field.
+;                  @Error: 3, @Extended: 1 = Error retrieving TextFieldMaster Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Field Master Array of dependent fields.
+;                  @Error: 3, @Extended: 3 = Failed to delete field.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1475,17 +1475,17 @@ EndFunc   ;==>_LOWriter_FieldDelete
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sComments           - [optional] Default is Null. The Comments text to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Comments Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Comments Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $sComments not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sComments not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.Description" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.Description" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1538,15 +1538,15 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCommentsInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sComments           - [optional] Default is Null. The Comments text to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDocInfoComment not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $sComments not a String.
+;                  @Error: 1, @Extended: 1 = $oDocInfoComment not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sComments not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $sComments
 ; Author ........: donnyh13
@@ -1601,17 +1601,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCommentsModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sAuthor             - [optional] Default is Null. The Author's name, note, $bIsFixed must be set to True in order for this to remain as set.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Created By Author Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Created By Author Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sAuthor not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.CreateAuthor" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.CreateAuthor" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1664,15 +1664,15 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateAuthInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sAuthor             - [optional] Default is Null. The Author's name, note, $bIsFixed must be set to True in order for this to remain as set.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDocInfoCreateAuth not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 1 = $oDocInfoCreateAuth not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sAuthor not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $sAuthor
 ; Author ........: donnyh13
@@ -1727,18 +1727,18 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateAuthModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iDateFormatKey      - [optional] Default is Null. A Date or Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Created Date/Time Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Created Date/Time Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $iDateFormatKey not an Integer.
-;                  @Error 1 @Extended 7 = $iDateFormatKey not found in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iDateFormatKey not an Integer.
+;                  @Error: 1, @Extended: 7 = $iDateFormatKey not found in document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.CreateDateTime" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.CreateDateTime" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1789,17 +1789,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateDateTimeInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iDateFormatKey      - [optional] Default is Null. A Date or Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oDocInfoCreateDtTm not an Object.
-;                  @Error 1 @Extended 3 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 4 = $iDateFormatKey not an Integer.
-;                  @Error 1 @Extended 5 = $iDateFormatKey not found in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oDocInfoCreateDtTm not an Object.
+;                  @Error: 1, @Extended: 3 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 4 = $iDateFormatKey not an Integer.
+;                  @Error: 1, @Extended: 5 = $iDateFormatKey not found in document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $iDateFormatKey
 ; Author ........: donnyh13
@@ -1862,18 +1862,18 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateDateTimeModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iTimeFormatKey      - [optional] Default is Null. A Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Total Editing Time Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Total Editing Time Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $iTimeFormatKey not an Integer.
-;                  @Error 1 @Extended 7 = $iTimeFormatKey not found in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iTimeFormatKey not an Integer.
+;                  @Error: 1, @Extended: 7 = $iTimeFormatKey not found in document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.EditTime" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.EditTime" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: _LOWriter_FieldDocInfoEditTimeModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenProp
@@ -1923,16 +1923,16 @@ EndFunc   ;==>_LOWriter_FieldDocInfoEditTimeInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iTimeFormatKey      - [optional] Default is Null. A Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDocInfoEditTime not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $iTimeFormatKey not an Integer.
-;                  @Error 1 @Extended 4 = $iTimeFormatKey not found in document.
+;                  @Error: 1, @Extended: 1 = $oDocInfoEditTime not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $iTimeFormatKey not an Integer.
+;                  @Error: 1, @Extended: 4 = $iTimeFormatKey not found in document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $iTimeFormatKey
 ; Author ........: donnyh13
@@ -1994,17 +1994,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoEditTimeModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sKeywords           - [optional] Default is Null. The Keywords text to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Keywords Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Keywords Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $sKeywords not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sKeywords not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.Keywords" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.Keywords" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2057,15 +2057,15 @@ EndFunc   ;==>_LOWriter_FieldDocInfoKeywordsInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sKeywords           - [optional] Default is Null. The Keywords text to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDocInfoKeyword not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $sKeywords not a String.
+;                  @Error: 1, @Extended: 1 = $oDocInfoKeyword not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sKeywords not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $sKeywords
 ; Author ........: donnyh13
@@ -2120,17 +2120,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoKeywordsModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sAuthor             - [optional] Default is Null. The Author's name, note, $bIsFixed must be set to True in order for this to remain as set.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Modified By Author Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Modified By Author Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sAuthor not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.ChangeAuthor" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.ChangeAuthor" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2183,15 +2183,15 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModAuthInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sAuthor             - [optional] Default is Null. The Author's name, note, $bIsFixed must be set to True in order for this to remain as set.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDocInfoModAuth not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 1 = $oDocInfoModAuth not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sAuthor not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $sAuthor
 ; Author ........: donnyh13
@@ -2246,18 +2246,18 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModAuthModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iDateFormatKey      - [optional] Default is Null. A Date or Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Modified Date/Time Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Modified Date/Time Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $iDateFormatKey not an Integer.
-;                  @Error 1 @Extended 7 = $iDateFormatKey not found in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iDateFormatKey not an Integer.
+;                  @Error: 1, @Extended: 7 = $iDateFormatKey not found in document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.ChangeDateTime" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.ChangeDateTime" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2308,17 +2308,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModDateTimeInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iDateFormatKey      - [optional] Default is Null. A Date or Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oDocInfoPrintAuthField not an Object.
-;                  @Error 1 @Extended 3 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 4 = $iDateFormatKey not an Integer.
-;                  @Error 1 @Extended 5 = $iDateFormatKey not found in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oDocInfoPrintAuthField not an Object.
+;                  @Error: 1, @Extended: 3 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 4 = $iDateFormatKey not an Integer.
+;                  @Error: 1, @Extended: 5 = $iDateFormatKey not found in document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $iDateFormatKey
 ; Author ........: donnyh13
@@ -2381,17 +2381,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModDateTimeModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sAuthor             - [optional] Default is Null. The Author's name, note, $bIsFixed must be set to True in order for this to remain as set.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Printed By Author Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Printed By Author Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sAuthor not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.PrintAuthor" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.PrintAuthor" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2444,15 +2444,15 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintAuthInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sAuthor             - [optional] Default is Null. The Author's name, note, $bIsFixed must be set to True in order for this to remain as set.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDocInfoPrintAuth not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $sAuthor not a String.
+;                  @Error: 1, @Extended: 1 = $oDocInfoPrintAuth not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sAuthor not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $sAuthor
 ; Author ........: donnyh13
@@ -2507,18 +2507,18 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintAuthModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iDateFormatKey      - [optional] Default is Null. A Date or Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Printed Date/Time Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Printed Date/Time Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $iDateFormatKey not an Integer.
-;                  @Error 1 @Extended 7 = $iDateFormatKey not found in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iDateFormatKey not an Integer.
+;                  @Error: 1, @Extended: 7 = $iDateFormatKey not found in document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.PrintDateTime" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.PrintDateTime" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2569,17 +2569,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintDateTimeInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iDateFormatKey      - [optional] Default is Null. A Date or Time Format Key returned from a previous _LOWriter_DateFormatKeyCreate or _LOWriter_DateFormatKeysGetList function.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oDocInfoPrintDtTm not an Object.
-;                  @Error 1 @Extended 3 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 4 = $iDateFormatKey not an Integer.
-;                  @Error 1 @Extended 5 = $iDateFormatKey not found in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oDocInfoPrintDtTm not an Object.
+;                  @Error: 1, @Extended: 3 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 4 = $iDateFormatKey not an Integer.
+;                  @Error: 1, @Extended: 5 = $iDateFormatKey not found in document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $iDateFormatKey
 ; Author ........: donnyh13
@@ -2642,17 +2642,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintDateTimeModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iRevNum             - [optional] Default is Null. The Revision Number Integer to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Revision Number Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Revision Number Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $iRevNum not an Integer.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iRevNum not an Integer.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.Revision" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.Revision" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2705,15 +2705,15 @@ EndFunc   ;==>_LOWriter_FieldDocInfoRevNumInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iRevNum             - [optional] Default is Null. The Revision Number Integer to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDocInfoRevNum not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $iRevNum not an Integer.
+;                  @Error: 1, @Extended: 1 = $oDocInfoRevNum not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $iRevNum not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $iRevNum
 ; Author ........: donnyh13
@@ -2768,17 +2768,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoRevNumModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sSubject            - [optional] Default is Null. The Subject text to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Subject Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Subject Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $sSubject not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sSubject not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.Subject" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.Subject" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2831,15 +2831,15 @@ EndFunc   ;==>_LOWriter_FieldDocInfoSubjectInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sSubject            - [optional] Default is Null. The Subject text to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDocInfoSub not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $sSubject not a String.
+;                  @Error: 1, @Extended: 1 = $oDocInfoSub not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sSubject not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $sSubject
 ; Author ........: donnyh13
@@ -2894,17 +2894,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoSubjectModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sTitle              - [optional] Default is Null. The Title text to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Document Info Title Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Document Info Title Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $sTitle not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sTitle not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.textfield.docinfo.Title" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.Title" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2957,15 +2957,15 @@ EndFunc   ;==>_LOWriter_FieldDocInfoTitleInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $sTitle              - [optional] Default is Null. The Title text to display, note, $bIsFixed must be True for this to be displayed.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDocInfoTitle not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $sTitle not a String.
+;                  @Error: 1, @Extended: 1 = $oDocInfoTitle not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sTitle not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $sTitle
 ; Author ........: donnyh13
@@ -3020,17 +3020,17 @@ EndFunc   ;==>_LOWriter_FieldDocInfoTitleModify
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iFormat             - [optional] (0-3) Default is Null. The Data Format to display. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted File Name field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted File Name field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.FileName" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.FileName" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Until L.O. Version 26.8, there is a bug where the wrong Path Format type is displayed when the content is set to Fixed = True. For example, $LOW_FIELD_FILENAME_NAME_AND_EXT, displays in the format of $LOW_FIELD_FILENAME_NAME. See (https://bugs.documentfoundation.org/show_bug.cgi?id=155780).
@@ -3079,15 +3079,15 @@ EndFunc   ;==>_LOWriter_FieldFileNameInsert
 ;                  $bIsFixed            - [optional] Default is Null. If True, the value is static, that is, the value does not update if the source changes or all fields are updated.
 ;                  $iFormat             - [optional] (0-3) Default is Null. The Data Format to display. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFileNameField not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oFileNameField not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $iFormat
 ; Author ........: donnyh13
@@ -3142,16 +3142,16 @@ EndFunc   ;==>_LOWriter_FieldFileNameModify
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $sCondition          - [optional] Default is Null. The condition to evaluate.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Hidden Paragraph Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Hidden Paragraph Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $sCondition not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sCondition not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.HiddenParagraph" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.HiddenParagraph" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3193,14 +3193,14 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenParInsert
 ; Parameters ....: $oHidParField        - A Hidden Paragraph field Object from a previous _LOWriter_FieldFuncHiddenParInsert, or _LOWriter_FieldsGetList function.
 ;                  $sCondition          - [optional] Default is Null. The condition to evaluate.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters. The second Element is a boolean whether the Paragraph is Hidden(True) or Visible(False).
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters. The second Element is a boolean whether the Paragraph is Hidden(True) or Visible(False).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oHidParField not an Object.
-;                  @Error 1 @Extended 2 = $sCondition not a String.
+;                  @Error: 1, @Extended: 1 = $oHidParField not an Object.
+;                  @Error: 1, @Extended: 2 = $sCondition not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sCondition
 ; Author ........: donnyh13
 ; Modified ......:
@@ -3247,17 +3247,17 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenParModify
 ;                  $sCondition          - [optional] Default is Null. The Condition to evaluate.
 ;                  $sText               - [optional] Default is Null. The Text to show if the condition evaluates as True.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Hidden Text Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Hidden Text Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $sCondition not a String.
-;                  @Error 1 @Extended 6 = $sText not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sCondition not a String.
+;                  @Error: 1, @Extended: 6 = $sText not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.HiddenText" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.HiddenText" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3306,15 +3306,15 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenTextInsert
 ;                  $sCondition          - [optional] Default is Null. The Condition to evaluate.
 ;                  $sText               - [optional] Default is Null. The Text to show if the condition evaluates as True.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. The Third Element is a boolean whether the Text is Hidden(True) Or Visible(False).
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. The Third Element is a boolean whether the Text is Hidden(True) Or Visible(False).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oHidTxtField not an Object.
-;                  @Error 1 @Extended 2 = $sCondition not a String.
-;                  @Error 1 @Extended 3 = $sText not a String.
+;                  @Error: 1, @Extended: 1 = $oHidTxtField not an Object.
+;                  @Error: 1, @Extended: 2 = $sCondition not a String.
+;                  @Error: 1, @Extended: 3 = $sText not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sCondition
 ;                  |                               2 = Error setting $sText
 ; Author ........: donnyh13
@@ -3369,17 +3369,17 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenTextModify
 ;                  $sReference          - [optional] Default is Null. The Reference to display for the input field.
 ;                  $sText               - [optional] Default is Null. The Text to insert in the Input Field.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Input Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Input Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $sReference not a String.
-;                  @Error 1 @Extended 6 = $sText not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sReference not a String.
+;                  @Error: 1, @Extended: 6 = $sText not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.Input" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.Input" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3428,15 +3428,15 @@ EndFunc   ;==>_LOWriter_FieldFuncInputInsert
 ;                  $sReference          - [optional] Default is Null. The Reference to display for the input field.
 ;                  $sText               - [optional] Default is Null. The Text to insert in the Input Field.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oHidTxtField not an Object.
-;                  @Error 1 @Extended 2 = $sReference not a String.
-;                  @Error 1 @Extended 3 = $sText not a String.
+;                  @Error: 1, @Extended: 1 = $oHidTxtField not an Object.
+;                  @Error: 1, @Extended: 2 = $sReference not a String.
+;                  @Error: 1, @Extended: 3 = $sText not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sReference
 ;                  |                               2 = Error setting $sText
 ; Author ........: donnyh13
@@ -3492,18 +3492,18 @@ EndFunc   ;==>_LOWriter_FieldFuncInputModify
 ;                  $sPHolderName        - [optional] Default is Null. The Placeholder's name.
 ;                  $sReference          - [optional] Default is Null. A Reference to display when the mouse hovers the Placeholder.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Placeholder Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Placeholder Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $iPHolderType not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_PLACEHOLD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $sPHolderName not a String.
-;                  @Error 1 @Extended 7 = $sReference not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iPHolderType not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_PLACEHOLD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $sPHolderName not a String.
+;                  @Error: 1, @Extended: 7 = $sReference not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.JumpEdit" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.JumpEdit" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3559,16 +3559,16 @@ EndFunc   ;==>_LOWriter_FieldFuncPlaceholderInsert
 ;                  $sPHolderName        - [optional] Default is Null. The Placeholder's name.
 ;                  $sReference          - [optional] Default is Null. A Reference to display when the mouse hovers the Placeholder.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPHolderField not an Object.
-;                  @Error 1 @Extended 2 = $iPHolderType not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_PLACEHOLD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = $sPHolderName not a String.
-;                  @Error 1 @Extended 4 = $sReference not a String.
+;                  @Error: 1, @Extended: 1 = $oPHolderField not an Object.
+;                  @Error: 1, @Extended: 2 = $iPHolderType not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_PLACEHOLD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $sPHolderName not a String.
+;                  @Error: 1, @Extended: 4 = $sReference not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPHolderType
 ;                  |                               2 = Error setting $sPHolderName
 ;                  |                               4 = Error setting $sReference
@@ -3627,12 +3627,12 @@ EndFunc   ;==>_LOWriter_FieldFuncPlaceholderModify
 ; Syntax ........: _LOWriter_FieldGetAnchor(ByRef $oField)
 ; Parameters ....: $oField              - A Field Object returned from a previous Insert, _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, or _LOWriter_FieldsDocInfoGetList function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Field Anchor Cursor Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Field Anchor Cursor Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oField not an Object.
+;                  @Error: 1, @Extended: 1 = $oField not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to retrieve Field anchor Object.
+;                  @Error: 2, @Extended: 1 = Failed to retrieve Field anchor Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3665,18 +3665,18 @@ EndFunc   ;==>_LOWriter_FieldGetAnchor
 ;                  $sName               - [optional] Default is Null. The name of the Input List Field.
 ;                  $sSelectedItem       - [optional] Default is Null. The Item in the list to be currently selected. Defaults to "" if Item is not found.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Input List field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Input List field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $asItems not an Array.
-;                  @Error 1 @Extended 6 = $sName not a String.
-;                  @Error 1 @Extended 7 = $sSelectedItem not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $asItems not an Array.
+;                  @Error: 1, @Extended: 6 = $sName not a String.
+;                  @Error: 1, @Extended: 7 = $sSelectedItem not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.DropDown" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.DropDown" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3732,16 +3732,16 @@ EndFunc   ;==>_LOWriter_FieldInputListInsert
 ;                  $sName               - [optional] Default is Null. The name of the Input List Field.
 ;                  $sSelectedItem       - [optional] Default is Null. The Item in the list to be currently selected. Defaults to "" if Item is not found.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oInputField not an Object.
-;                  @Error 1 @Extended 2 = $asItems not an Array.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sSelectedItem not a String.
+;                  @Error: 1, @Extended: 1 = $oInputField not an Object.
+;                  @Error: 1, @Extended: 2 = $asItems not an Array.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sSelectedItem not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $asItems
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $sSelectedItem
@@ -3806,19 +3806,19 @@ EndFunc   ;==>_LOWriter_FieldInputListModify
 ;                  $iPageNumType        - [optional] (0-2) Default is Null. The Page Number type, either previous, current or next page. See Constants, $LOW_PAGE_NUM_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sUserText           - [optional] Default is Null. The custom user text to display. Only valid if $iNumFormat is set to $LOW_NUM_STYLE_CHAR_SPECIAL(6).
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Page Number field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Page Number field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iOffset not an Integer.
-;                  @Error 1 @Extended 7 = $iPageNumType not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAGE_NUM_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 8 = $sUserText not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iOffset not an Integer.
+;                  @Error: 1, @Extended: 7 = $iPageNumType not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAGE_NUM_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $sUserText not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.PageNumber" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.PageNumber" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3895,20 +3895,20 @@ EndFunc   ;==>_LOWriter_FieldPageNumberInsert
 ;                  $iPageNumType        - [optional] (0-2) Default is Null. The Page Number type, either previous, current or next page. See Constants, $LOW_PAGE_NUM_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sUserText           - [optional] Default is Null. The custom User text to display. Only valid if $iNumFormat is set to $LOW_NUM_STYLE_CHAR_SPECIAL(6).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageNumField not an Object.
-;                  @Error 1 @Extended 3 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iOffset not an Integer.
-;                  @Error 1 @Extended 5 = $iPageNumType not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAGE_NUM_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $sUserText not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageNumField not an Object.
+;                  @Error: 1, @Extended: 3 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOffset not an Integer.
+;                  @Error: 1, @Extended: 5 = $iPageNumType not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAGE_NUM_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $sUserText not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.PageNumber" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.PageNumber" Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iNumFormat
 ;                  |                               2 = Error setting $iOffset
 ;                  |                               4 = Error setting $iPageNumType
@@ -3997,18 +3997,18 @@ EndFunc   ;==>_LOWriter_FieldPageNumberModify
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $iRefUsing           - [optional] (0-4) Default is Null. The Type of reference to use to reference the bookmark. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Bookmark Reference Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Bookmark Reference Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $sBookmarkName not a String.
-;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 = Document does not contain a Bookmark by the same name as called in $sBookmarkName.
-;                  @Error 1 @Extended 7 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $sBookmarkName not a String.
+;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 6 = Document does not contain a Bookmark by the same name as called in $sBookmarkName.
+;                  @Error: 1, @Extended: 7 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4057,17 +4057,17 @@ EndFunc   ;==>_LOWriter_FieldRefBookmarkInsert
 ;                  $sBookmarkName       - [optional] Default is Null. The Bookmark name to Reference.
 ;                  $iRefUsing           - [optional] (0-4) Default is Null. The Type of reference to use to reference the bookmark. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oBookmarkRefField not an Object.
-;                  @Error 1 @Extended 3 = $sBookmarkName not a String.
-;                  @Error 1 @Extended 4 = Document does not contain a Bookmark by the same name as called in $sBookmarkName.
-;                  @Error 1 @Extended 5 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oBookmarkRefField not an Object.
+;                  @Error: 1, @Extended: 3 = $sBookmarkName not a String.
+;                  @Error: 1, @Extended: 4 = Document does not contain a Bookmark by the same name as called in $sBookmarkName.
+;                  @Error: 1, @Extended: 5 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sBookmarkName
 ;                  |                               2 = Error setting $iRefUsing
 ; Author ........: donnyh13
@@ -4125,17 +4125,17 @@ EndFunc   ;==>_LOWriter_FieldRefBookmarkModify
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $iRefUsing           - [optional] (0-4) Default is Null. The Type of reference to use to reference the Endnote. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Endnote Reference Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Endnote Reference Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $oEndNote not an Object.
-;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $oEndNote not an Object.
+;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4184,19 +4184,19 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteInsert
 ;                  $oEndNote            - [optional] Default is Null. A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
 ;                  $iRefUsing           - [optional] (0-4) Default is Null. The Type of reference to use to reference the Endnote. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oEndNoteRefField not an Object.
-;                  @Error 1 @Extended 3 = Optional Parameters called with Null, but object called in $oEndNoteRefField not set as an Endnote Reference type field.
-;                  @Error 1 @Extended 4 = $oEndNote not an Object.
-;                  @Error 1 @Extended 5 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oEndNoteRefField not an Object.
+;                  @Error: 1, @Extended: 3 = Optional Parameters called with Null, but object called in $oEndNoteRefField not set as an Endnote Reference type field.
+;                  @Error: 1, @Extended: 4 = $oEndNote not an Object.
+;                  @Error: 1, @Extended: 5 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Endnote Object for setting return.
+;                  @Error: 3, @Extended: 1 = Error retrieving Endnote Object for setting return.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $oEndNote
 ;                  |                               2 = Error setting $iRefUsing
 ; Author ........: donnyh13
@@ -4266,17 +4266,17 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteModify
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $iRefUsing           - [optional] (0-4) Default is Null. The Type of reference to use to reference the Footnote See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Footnote Reference Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Footnote Reference Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $oFootNote not an Object.
-;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $oFootNote not an Object.
+;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4325,19 +4325,19 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteInsert
 ;                  $oFootNote           - [optional] Default is Null. A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
 ;                  $iRefUsing           - [optional] (0-4) Default is Null. The Type of reference to use to reference the Footnote. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oFootNoteRefField not an Object.
-;                  @Error 1 @Extended 3 = Optional Parameters called with Null, but object called in $oFootNoteRefField not set as a Footnote Reference type field.
-;                  @Error 1 @Extended 4 = $oFootNote not an Object.
-;                  @Error 1 @Extended 5 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFootNoteRefField not an Object.
+;                  @Error: 1, @Extended: 3 = Optional Parameters called with Null, but object called in $oFootNoteRefField not set as a Footnote Reference type field.
+;                  @Error: 1, @Extended: 4 = $oFootNote not an Object.
+;                  @Error: 1, @Extended: 5 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Footnote Object for setting return.
+;                  @Error: 3, @Extended: 1 = Error retrieving Footnote Object for setting return.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $oFootNote
 ;                  |                               2 = Error setting $iRefUsing
 ; Author ........: donnyh13
@@ -4403,12 +4403,12 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteModify
 ; Syntax ........: _LOWriter_FieldRefGetType(ByRef $oRefField)
 ; Parameters ....: $oRefField           - a Reference Field Object from a previous Insert or _LOWriter_FieldsGetList function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Data Type Source for the reference Field. See constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the Data Type Source for the reference Field. See constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oRefField not an Object.
+;                  @Error: 1, @Extended: 1 = $oRefField not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Reference type.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Reference type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Reference Field can be referencing multiple different types of Data, such as a Reference Mark, or Bookmark, etc.
@@ -4440,20 +4440,20 @@ EndFunc   ;==>_LOWriter_FieldRefGetType
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $iRefUsing           - [optional] (0-4) Default is Null. The Type of reference to insert. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Reference Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Reference Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $sRefMarkName not a String.
-;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 = Document does not contain a Reference Mark by the same name as called in $sRefMarkName.
-;                  @Error 1 @Extended 7 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $sRefMarkName not a String.
+;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 6 = Document does not contain a Reference Mark by the same name as called in $sRefMarkName.
+;                  @Error: 1, @Extended: 7 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.GetReference" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Reference Marks Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Reference Marks Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4503,16 +4503,16 @@ EndFunc   ;==>_LOWriter_FieldRefInsert
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sName               - The Reference Mark name to delete.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted requested Reference Mark.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted requested Reference Mark.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sName not a String.
-;                  @Error 1 @Extended 3 = Document does not contain a Reference Mark named the same as called in $sName
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = Document does not contain a Reference Mark named the same as called in $sName
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Reference Marks Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Reference Mark object called in $sName.
-;                  @Error 3 @Extended 3 = Attempted to delete Reference Mark, but document still contains a Reference Mark by that name.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Reference Marks Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Reference Mark object called in $sName.
+;                  @Error: 3, @Extended: 3 = Attempted to delete Reference Mark, but document still contains a Reference Mark by that name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4549,17 +4549,17 @@ EndFunc   ;==>_LOWriter_FieldRefMarkDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sName               - The Reference Mark name to retrieve the anchor for.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Reference Mark Anchor Cursor Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Reference Mark Anchor Cursor Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sName not a String.
-;                  @Error 1 @Extended 3 = Document does not contain a Reference Mark named the same as called in $sName
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = Document does not contain a Reference Mark named the same as called in $sName
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a TextCursor at Reference Mark's anchor.
+;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor at Reference Mark's anchor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Reference Marks Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Reference Mark object called in $sName.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Reference Marks Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Reference Mark object called in $sName.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4599,19 +4599,19 @@ EndFunc   ;==>_LOWriter_FieldRefMarkGetAnchor
 ;                  $sName               - The name of the Reference Mark to create.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully created a Reference Mark.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully created a Reference Mark.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $sName not a String.
-;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 = Document already contains a Reference Mark by the same name as called in $sName.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $sName not a String.
+;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 6 = Document already contains a Reference Mark by the same name as called in $sName.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.ReferenceMark" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.ReferenceMark" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Reference Marks Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Reference Marks Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4651,13 +4651,13 @@ EndFunc   ;==>_LOWriter_FieldRefMarkSet
 ; Syntax ........: _LOWriter_FieldRefMarksGetNames(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Successfully searched for Reference Marks, returning Array of Reference Mark Names, with @Extended set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Successfully searched for Reference Marks, returning Array of Reference Mark Names, with @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Reference Marks Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Array of Reference Mark Names.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Reference Marks Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Array of Reference Mark Names.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4692,19 +4692,19 @@ EndFunc   ;==>_LOWriter_FieldRefMarksGetNames
 ;                  $sRefMarkName        - [optional] Default is Null. The Reference Mark Name to Reference.
 ;                  $iRefUsing           - [optional] (0-4) Default is Null. The Type of reference to insert. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oRefField not an Object.
-;                  @Error 1 @Extended 3 = $sRefMarkName not a String.
-;                  @Error 1 @Extended 4 = Document does not contain a Reference Mark by the same name as called in $sRefMarkName.
-;                  @Error 1 @Extended 5 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oRefField not an Object.
+;                  @Error: 1, @Extended: 3 = $sRefMarkName not a String.
+;                  @Error: 1, @Extended: 4 = Document does not contain a Reference Mark by the same name as called in $sRefMarkName.
+;                  @Error: 1, @Extended: 5 = $iRefUsing not an Integer, less than 0 or greater than 4. See Constants, $LOW_FIELD_REF_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Reference Marks Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Reference Marks Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sRefMarkName
 ;                  |                               2 = Error setting $iRefUsing
 ; Author ........: donnyh13
@@ -4766,19 +4766,19 @@ EndFunc   ;==>_LOWriter_FieldRefModify
 ;                  $bFieldType          - [optional] Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOW_FIELD_ADV_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iType not an Integer, less than 1 or greater than 1023. (The total of all Constants added together.) See Constants, $LOW_FIELD_ADV_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = $bSupportedServices not a Boolean.
-;                  @Error 1 @Extended 4 = $bFieldType not a Boolean.
-;                  @Error 1 @Extended 5 = $bFieldTypeNum not a Boolean.
-;                  @Error 1 @Extended 6 = $avFieldTypes passed to internal function not an Array. UDF needs fixed.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 1023. (The total of all Constants added together.) See Constants, $LOW_FIELD_ADV_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $bSupportedServices not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bFieldType not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bFieldTypeNum not a Boolean.
+;                  @Error: 1, @Extended: 6 = $avFieldTypes passed to internal function not an Array. UDF needs fixed.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create enumeration of fields in document.
+;                  @Error: 2, @Extended: 1 = Failed to create enumeration of fields in document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error converting Field type Constants.
+;                  @Error: 3, @Extended: 1 = Error converting Field type Constants.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array can vary in the number of columns, if $bSupportedServices, $bFieldType, and $bFieldTypeNum are called with False, the Array will be a single column. With each of the above listed options being set to True, a column will be added in the order they are listed in the UDF parameters. The First column will always be the Field Object.
@@ -4821,19 +4821,19 @@ EndFunc   ;==>_LOWriter_FieldsAdvGetList
 ;                  $bFieldType          - [optional] Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOW_FIELD_DOCINFO_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iType not an Integer, less than 1 or greater than 16383. (The total of all Constants added together.) See Constants, $LOW_FIELD_DOCINFO_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = $bSupportedServices not a Boolean.
-;                  @Error 1 @Extended 4 = $bFieldType not a Boolean.
-;                  @Error 1 @Extended 5 = $bFieldTypeNum not a Boolean.
-;                  @Error 1 @Extended 6 = $avFieldTypes passed to internal function not an Array. UDF needs fixed.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 16383. (The total of all Constants added together.) See Constants, $LOW_FIELD_DOCINFO_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $bSupportedServices not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bFieldType not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bFieldTypeNum not a Boolean.
+;                  @Error: 1, @Extended: 6 = $avFieldTypes passed to internal function not an Array. UDF needs fixed.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create enumeration of fields in document.
+;                  @Error: 2, @Extended: 1 = Failed to create enumeration of fields in document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error converting Field type Constants.
+;                  @Error: 3, @Extended: 1 = Error converting Field type Constants.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array can vary in the number of columns, if $bSupportedServices, $bFieldType, and $bFieldTypeNum are called with False, the Array will be a single column. With each of the above listed options being set to True, a column will be added in the order they are listed in the UDF parameters. The First column will always be the Field Object.
@@ -4877,18 +4877,18 @@ EndFunc   ;==>_LOWriter_FieldsDocInfoGetList
 ;                  $sContent            - [optional] Default is Null. The Content to Display, only valid if $bIsFixed is set to True.
 ;                  $iDataType           - [optional] (0-14) Default is Null. The Data Type to display. See Constants, $LOW_FIELD_USER_DATA_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Sender field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Sender field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 6 = $sContent not a String.
-;                  @Error 1 @Extended 7 = $iDataType not an Integer, less than 0 or greater than 14. See Constants, $LOW_FIELD_USER_DATA_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sContent not a String.
+;                  @Error: 1, @Extended: 7 = $iDataType not an Integer, less than 0 or greater than 14. See Constants, $LOW_FIELD_USER_DATA_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.ExtendedUser" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.ExtendedUser" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4948,16 +4948,16 @@ EndFunc   ;==>_LOWriter_FieldSenderInsert
 ;                  $sContent            - [optional] Default is Null. The Content to Display, only valid if $bIsFixed is set to True.
 ;                  $iDataType           - [optional] (0-14) Default is Null. The Data Type to display. See Constants, $LOW_FIELD_USER_DATA_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSenderField not an Object.
-;                  @Error 1 @Extended 2 = $bIsFixed not a Boolean.
-;                  @Error 1 @Extended 3 = $sContent not a String.
-;                  @Error 1 @Extended 4 = $iDataType not an Integer, less than 0 or greater than 14. See Constants, $LOW_FIELD_USER_DATA_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oSenderField not an Object.
+;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sContent not a String.
+;                  @Error: 1, @Extended: 4 = $iDataType not an Integer, less than 0 or greater than 14. See Constants, $LOW_FIELD_USER_DATA_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bIsFixed
 ;                  |                               2 = Error setting $sContent
 ;                  |                               4 = Error setting $iDataType
@@ -5022,23 +5022,23 @@ EndFunc   ;==>_LOWriter_FieldSenderModify
 ;                  $iNumFormatKey       - [optional] Default is Null. The Number Format Key to use for displaying this variable.
 ;                  $bIsVisible          - [optional] Default is Null. If False, the Set Variable Field is invisible. L.O.'s default is True.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Set Variable field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Set Variable field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $sName not a String.
-;                  @Error 1 @Extended 5 = $sValue not a String.
-;                  @Error 1 @Extended 6 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 7 = $iNumFormatKeyKey not an Integer.
-;                  @Error 1 @Extended 8 = $iNumFormatKeyKey not equal to -1 and Number Format key called in $iNumFormatKeyKey not found in document.
-;                  @Error 1 @Extended 9 = $bIsVisible not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $sName not a String.
+;                  @Error: 1, @Extended: 5 = $sValue not a String.
+;                  @Error: 1, @Extended: 6 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 7 = $iNumFormatKeyKey not an Integer.
+;                  @Error: 1, @Extended: 8 = $iNumFormatKeyKey not equal to -1 and Number Format key called in $iNumFormatKeyKey not found in document.
+;                  @Error: 1, @Extended: 9 = $bIsVisible not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.SetExpression" Object.
-;                  @Error 2 @Extended 2 = Error creating Master Field Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.SetExpression" Object.
+;                  @Error: 2, @Extended: 2 = Error creating Master Field Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Master Field Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Master Field Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5107,16 +5107,16 @@ EndFunc   ;==>_LOWriter_FieldSetVarInsert
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sMasterFieldName    - The Set Variable Master Field name to create.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully created the MasterField, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully created the MasterField, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sMasterFieldName not a String.
-;                  @Error 1 @Extended 3 = Document already contains a MasterField by the name called in $sMasterFieldName
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sMasterFieldName not a String.
+;                  @Error: 1, @Extended: 3 = Document already contains a MasterField by the name called in $sMasterFieldName
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to Create MasterField Object.
+;                  @Error: 2, @Extended: 1 = Failed to Create MasterField Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve MasterFields Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve MasterFields Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5155,16 +5155,16 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterCreate
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sMasterField        - The Set Variable Master Field name to delete.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted requested MasterField.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted requested MasterField.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sMasterField not a String.
-;                  @Error 1 @Extended 3 = Document does not contain a Masterfield with the name called in $sMasterField.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sMasterField not a String.
+;                  @Error: 1, @Extended: 3 = Document does not contain a Masterfield with the name called in $sMasterField.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve MasterFields Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve MasterField object called in $sMasterField.
-;                  @Error 3 @Extended 3 = Failed to delete MasterField.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve MasterFields Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve MasterField object called in $sMasterField.
+;                  @Error: 3, @Extended: 3 = Failed to delete MasterField.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5205,14 +5205,14 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByName
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oMasterField        - The Set Variable Master Field Object to delete as returned by a previous _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, or _LOWriter_FieldSetVarMastersGetNames function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted requested MasterField.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted requested MasterField.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oMasterField not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oMasterField not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve MasterFields Object.
-;                  @Error 3 @Extended 2 = Failed to delete MasterField.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve MasterFields Object.
+;                  @Error: 3, @Extended: 2 = Failed to delete MasterField.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5251,13 +5251,13 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByObj
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sMasterFieldName    - The Set Variable Master Field name to look for.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. If the document contains a MasterField called in $sMasterFieldName, then True is returned, Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the document contains a MasterField called in $sMasterFieldName, then True is returned, Else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sMasterFieldName not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sMasterFieldName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve MasterFields Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve MasterFields Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5291,12 +5291,12 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterExists
 ; Syntax ........: _LOWriter_FieldSetVarMasterFieldsGetList(ByRef $oMasterfield)
 ; Parameters ....: $oMasterfield        - The Set Variable Master Field Object returned from a previous _LOWriter_FieldSetVarMasterCreate, or _LOWriter_FieldSetVarMasterGetObjByName function.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Successfully searched for dependent fields, returning Array of dependent SetVariable Fields, with @Extended set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Successfully searched for dependent fields, returning Array of dependent SetVariable Fields, with @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oMasterfield not an Object.
+;                  @Error: 1, @Extended: 1 = $oMasterfield not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve dependent fields Array.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve dependent fields Array.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Dependent Fields are SetVariable Fields that are referencing the Master field.
@@ -5325,15 +5325,15 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterFieldsGetList
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sMasterFieldName    - The Set Variable Master Field to retrieve the Object for.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully retrieved requested FieldMaster Object, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully retrieved requested FieldMaster Object, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sMasterFieldName not an Object.
-;                  @Error 1 @Extended 3 = Document does not contain FieldMaster named as called in $sMasterFieldName.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sMasterFieldName not an Object.
+;                  @Error: 1, @Extended: 3 = Document does not contain FieldMaster named as called in $sMasterFieldName.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve MasterFields Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve requested FieldMaster Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve MasterFields Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve requested FieldMaster Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5369,13 +5369,13 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterGetObjByName
 ; Syntax ........: _LOWriter_FieldSetVarMastersGetNames(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Successfully retrieved Array of Set Variable MasterField Names, returning Array of Set Variable MasterField Names with @Extended set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Successfully retrieved Array of Set Variable MasterField Names, returning Array of Set Variable MasterField Names with @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve MasterFields Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Array of MasterField Objects.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve MasterFields Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Array of MasterField Objects.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function includes in the list about 5 built-in Master Fields from LibreOffice, namely: Illustration, Table, Text, Drawing, and Figure.
@@ -5426,18 +5426,18 @@ EndFunc   ;==>_LOWriter_FieldSetVarMastersGetNames
 ;                  $iNumFormatKey       - [optional] Default is Null. The Number Format Key to use for displaying this variable.
 ;                  $bIsVisible          - [optional] Default is Null. If False, the Set Variable Field is invisible. L.O.'s default is True.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. The fourth element is the Variable Name.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. The fourth element is the Variable Name.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oSetVarField not an Object.
-;                  @Error 1 @Extended 3 = $sValue not a String.
-;                  @Error 1 @Extended 4 = $iNumFormatKeyKey not an Integer.
-;                  @Error 1 @Extended 5 = $iNumFormatKeyKey not equal to -1 and Number Format key called in $iNumFormatKeyKey not found in document.
-;                  @Error 1 @Extended 6 = $bIsVisible not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oSetVarField not an Object.
+;                  @Error: 1, @Extended: 3 = $sValue not a String.
+;                  @Error: 1, @Extended: 4 = $iNumFormatKeyKey not an Integer.
+;                  @Error: 1, @Extended: 5 = $iNumFormatKeyKey not equal to -1 and Number Format key called in $iNumFormatKeyKey not found in document.
+;                  @Error: 1, @Extended: 6 = $bIsVisible not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sValue
 ;                  |                               2 = Error setting $iNumFormatKey
 ;                  |                               4 = Error setting $bIsVisible
@@ -5508,19 +5508,19 @@ EndFunc   ;==>_LOWriter_FieldSetVarModify
 ;                  $bFieldType          - [optional] Default is True. If True, adds a column to the array that has the Field Type String for that particular Field as described by LibreOffice. To assist in identifying the Field type.
 ;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOW_FIELD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iType not an Integer, less than 1 or greater than 2147483647. (The total of all Constants added together.) See Constants, $LOW_FIELD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = $bSupportedServices not a Boolean.
-;                  @Error 1 @Extended 4 = $bFieldType not a Boolean.
-;                  @Error 1 @Extended 5 = $bFieldTypeNum not a Boolean.
-;                  @Error 1 @Extended 6 = $avFieldTypes passed to internal function not an Array. UDF needs fixed.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 2147483647. (The total of all Constants added together.) See Constants, $LOW_FIELD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $bSupportedServices not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bFieldType not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bFieldTypeNum not a Boolean.
+;                  @Error: 1, @Extended: 6 = $avFieldTypes passed to internal function not an Array. UDF needs fixed.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create enumeration of fields in document.
+;                  @Error: 2, @Extended: 1 = Failed to create enumeration of fields in document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error converting Field type Constants.
+;                  @Error: 3, @Extended: 1 = Error converting Field type Constants.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array can vary in the number of columns, if $bSupportedServices, $bFieldType, and $bFieldTypeNum are called with False, the Array will be a single column. With each of the above listed options being set to True, a column will be added in the order they are listed in the UDF parameters. The First column will always be the Field Object.
@@ -5564,20 +5564,20 @@ EndFunc   ;==>_LOWriter_FieldsGetList
 ;                  $iNumFormatKey       - [optional] Default is Null. The Number Format Key to display the content in.
 ;                  $bShowName           - [optional] Default is Null. If True, the Set Variable name is displayed rather than its value.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully inserted Show Variable field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Show Variable field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $sSetVarName not a String.
-;                  @Error 1 @Extended 6 = Did not find a Set Var Field Master with same name as $sSetVarName.
-;                  @Error 1 @Extended 7 = $iNumFormatKey not an Integer.
-;                  @Error 1 @Extended 8 = Number Format key called in $iNumFormatKey not found in document.
-;                  @Error 1 @Extended 9 = $bShowName not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sSetVarName not a String.
+;                  @Error: 1, @Extended: 6 = Did not find a Set Var Field Master with same name as $sSetVarName.
+;                  @Error: 1, @Extended: 7 = $iNumFormatKey not an Integer.
+;                  @Error: 1, @Extended: 8 = Number Format key called in $iNumFormatKey not found in document.
+;                  @Error: 1, @Extended: 9 = $bShowName not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.text.TextField.GetExpression" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.GetExpression" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function checks if there is a Set Variable matching the name called in $sSetVarName.
@@ -5634,19 +5634,19 @@ EndFunc   ;==>_LOWriter_FieldShowVarInsert
 ;                  $iNumFormatKey       - [optional] Default is Null. The Number Format Key to display the content in.
 ;                  $bShowName           - [optional] Default is Null. If True, the Set Variable name is displayed rather than its value.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oShowVarField not an Object.
-;                  @Error 1 @Extended 3 = $sSetVarName not a String.
-;                  @Error 1 @Extended 4 = Did not find a Set Var Field Master with same name as $sSetVarName.
-;                  @Error 1 @Extended 5 = $iNumFormatKey not an Integer.
-;                  @Error 1 @Extended 6 = Number Format key called in $iNumFormatKey not found in document.
-;                  @Error 1 @Extended 7 = $bShowName not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oShowVarField not an Object.
+;                  @Error: 1, @Extended: 3 = $sSetVarName not a String.
+;                  @Error: 1, @Extended: 4 = Did not find a Set Var Field Master with same name as $sSetVarName.
+;                  @Error: 1, @Extended: 5 = $iNumFormatKey not an Integer.
+;                  @Error: 1, @Extended: 6 = Number Format key called in $iNumFormatKey not found in document.
+;                  @Error: 1, @Extended: 7 = $bShowName not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sSetVarName
 ;                  |                               2 = Error setting $iNumFormatKey
 ;                  |                               4 = Error setting $bShowName
@@ -5719,19 +5719,19 @@ EndFunc   ;==>_LOWriter_FieldShowVarModify
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $iNumFormat          - [optional] (0-71) Default is Null. The numbering format to use for Count field numbering. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Count Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Count Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $iCountType not an Integer, less than 0 or greater than 6. See Constants, $LOW_FIELD_COUNT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $iCountType not an Integer, less than 0 or greater than 6. See Constants, $LOW_FIELD_COUNT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create requested Count Field Object.
+;                  @Error: 2, @Extended: 1 = Failed to create requested Count Field Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Field Count Service Type. Check Constants.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Field Count Service Type. Check Constants.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: After insertion there seems to be a necessary delay before the value to display is available, thus when a new count field is inserted, the value will be "0". If you call a _LOWriter_FieldUpdate for this field after a few seconds, the value should appear.
@@ -5783,20 +5783,20 @@ EndFunc   ;==>_LOWriter_FieldStatCountInsert
 ;                  $iCountType          - [optional] (0-6) Default is Null. The type of data to count. See Constants, $LOW_FIELD_COUNT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iNumFormat          - [optional] (0-71) Default is Null. The numbering format to use for Count field numbering. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCountField not an Object.
-;                  @Error 1 @Extended 3 = $iCountType not an Integer, less than 0 or greater than 6. See Constants, $LOW_FIELD_COUNT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCountField not an Object.
+;                  @Error: 1, @Extended: 3 = $iCountType not an Integer, less than 0 or greater than 6. See Constants, $LOW_FIELD_COUNT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create requested Count Field Object.
+;                  @Error: 2, @Extended: 1 = Failed to create requested Count Field Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Field Count Service Type. Check Constants.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Field Count Service Type. Check Constants.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iCountType
 ;                  |                               2 = Error setting $iNumFormat
 ; Author ........: donnyh13
@@ -5874,16 +5874,16 @@ EndFunc   ;==>_LOWriter_FieldStatCountModify
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $iFormat             - [optional] (0-5) Default is Null. The Format to display the template data in. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Template Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Template Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $iFormat not an Integer, less than 0 or greater than 5. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iFormat not an Integer, less than 0 or greater than 5. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.TemplateName" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.TemplateName" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5925,16 +5925,16 @@ EndFunc   ;==>_LOWriter_FieldStatTemplateInsert
 ; Parameters ....: $oTemplateField      - A Template field Object from a previous _LOWriter_FieldStatTemplateInsert, or _LOWriter_FieldsGetList function.
 ;                  $iFormat             - [optional] (0-5) Default is Null. The Format to display the template data in. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Template Format Type setting, as an Integer. See File Name Constants.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Template Format Type setting, as an Integer. See File Name Constants.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTemplateField not an Object.
-;                  @Error 1 @Extended 2 = $iFormat not an Integer, less than 0 or greater than 5. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oTemplateField not an Object.
+;                  @Error: 1, @Extended: 2 = $iFormat not an Integer, less than 0 or greater than 5. See Constants, $LOW_FIELD_FILENAME_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Field Format.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Field Format.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iFormat
 ; Author ........: donnyh13
 ; Modified ......:
@@ -5977,16 +5977,16 @@ EndFunc   ;==>_LOWriter_FieldStatTemplateModify
 ;                  $oField              - [optional] Default is Null. A Field Object returned from a previous Insert, _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, or _LOWriter_FieldsDocInfoGetList function. If left as Null, all Fields will be updated.
 ;                  $bForceUpdate        - [optional] Default is False. If True, Field(s) will be updated whether fixed or not. See remarks.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully updated requested field.
-;                  @Error 0 @Extended 1 Return 1 = Success. Requested field is set to Fixed and $bForceUpdate is called with False, Field was not updated.
-;                  @Error 0 @Extended ? Return 1 = Success. Successfully updated all fields, @Extended set to number of fields updated.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully updated requested field.
+;                  @Error: 0, @Extended: 1, Return: 1 = Success. Requested field is set to Fixed and $bForceUpdate is called with False, Field was not updated.
+;                  @Error: 0, @Extended: ?, Return: 1 = Success. Successfully updated all fields, @Extended set to number of fields updated.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object
-;                  @Error 1 @Extended 2 = $oField not an Object.
-;                  @Error 1 @Extended 3 = $bForceUpdate not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object
+;                  @Error: 1, @Extended: 2 = $oField not an Object.
+;                  @Error: 1, @Extended: 3 = $bForceUpdate not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to retrieve enumeration of all fields.
+;                  @Error: 2, @Extended: 1 = Failed to retrieve enumeration of all fields.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Updating a fixed field will usually erase any user-provided content, such as an author name, creation date etc.
@@ -6056,17 +6056,17 @@ EndFunc   ;==>_LOWriter_FieldUpdate
 ;                  $bRefOn              - [optional] Default is Null. If True, Reference point is enabled, else disabled.
 ;                  $iOffset             - [optional] Default is Null. The offset to start the page count from.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Set Page Variable Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Set Page Variable Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $bRefOn not a Boolean.
-;                  @Error 1 @Extended 6 = $iOffset not an Integer.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bRefOn not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iOffset not an Integer.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.ReferencePageSet" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.ReferencePageSet" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -6115,15 +6115,15 @@ EndFunc   ;==>_LOWriter_FieldVarSetPageInsert
 ;                  $bRefOn              - [optional] Default is Null. If True, Reference point is enabled, else disabled.
 ;                  $iOffset             - [optional] Default is Null. The offset to start the page count from.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageVarSetField not an Object.
-;                  @Error 1 @Extended 2 = $bRefOn not a Boolean.
-;                  @Error 1 @Extended 3 = $iOffset not an Integer.
+;                  @Error: 1, @Extended: 1 = $oPageVarSetField not an Object.
+;                  @Error: 1, @Extended: 2 = $bRefOn not a Boolean.
+;                  @Error: 1, @Extended: 3 = $iOffset not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bRefOn
 ;                  |                               2 = Error setting $iOffset
 ; Author ........: donnyh13
@@ -6177,16 +6177,16 @@ EndFunc   ;==>_LOWriter_FieldVarSetPageModify
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
 ;                  $iNumFormat          - [optional] (0-71) Default is Null. The numbering format to use for Show Page Variable numbering. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully Inserted a Show Page Variable Field, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully Inserted a Show Page Variable Field, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 = $oCursor is a Table Cursor, and is not supported.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextField.ReferencePageGet" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextField.ReferencePageGet" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -6231,16 +6231,16 @@ EndFunc   ;==>_LOWriter_FieldVarShowPageInsert
 ; Parameters ....: $oPageShowField      - A Show Page Variable field Object from a previous _LOWriter_FieldVarShowPageInsert, or _LOWriter_FieldsGetList function.
 ;                  $iNumFormat          - [optional] (0-71) Default is Null. The numbering format to use for Show Page Variable numbering. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current numbering type setting, as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current numbering type setting, as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageShowField not an Object.
-;                  @Error 1 @Extended 2 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oPageShowField not an Object.
+;                  @Error: 1, @Extended: 2 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Numbering Format.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Numbering Format.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iNumFormat
 ; Author ........: donnyh13
 ; Modified ......:

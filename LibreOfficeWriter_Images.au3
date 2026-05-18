@@ -67,17 +67,17 @@
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: 1 or Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Background color.
-;                  @Error 3 @Extended 2 = Failed to retrieve old Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Background color.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
@@ -121,12 +121,12 @@ EndFunc   ;==>_LOWriter_ImageAreaColor
 ; Syntax ........: _LOWriter_ImageAreaFillStyle(ByRef $oImage)
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Fill Style.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
@@ -167,31 +167,31 @@ EndFunc   ;==>_LOWriter_ImageAreaFillStyle
 ;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
 ;                  $iToIntense          - [optional] (0-100) Default is Null . Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oImage not an Object.
-;                  @Error 1 @Extended 3 = $sGradientName not a String.
-;                  @Error 1 @Extended 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
-;                  @Error 1 @Extended 6 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 9 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 = $iFromColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 11 = $iToColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 = $iFromIntense not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 13 = $iToIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oImage not an Object.
+;                  @Error: 1, @Extended: 3 = $sGradientName not a String.
+;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
+;                  @Error: 1, @Extended: 6 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 9 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 10 = $iFromColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 11 = $iToColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 12 = $iFromIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 13 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Error creating Gradient Name.
-;                  @Error 3 @Extended 4 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -384,26 +384,26 @@ EndFunc   ;==>_LOWriter_ImageAreaGradient
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 5 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 5 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -492,16 +492,16 @@ EndFunc   ;==>_LOWriter_ImageAreaGradientMulticolor
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
@@ -549,27 +549,27 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparency
 ;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oImage not an Object.
-;                  @Error 1 @Extended 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 5 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 7 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iEnd not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oImage not an Object.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 5 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 7 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 4 = Error setting Transparency Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -728,26 +728,26 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradient
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 5 = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 5 = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillTransparenceGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -839,31 +839,31 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradientMulti
 ;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Image, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Image, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 3 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 3 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 5 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error: 3, @Extended: 3 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
@@ -901,18 +901,18 @@ EndFunc   ;==>_LOWriter_ImageBorderColor
 ;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Image in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Image in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iAll not an Integer.
-;                  @Error 1 @Extended 3 = $iTop not an Integer.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer.
-;                  @Error 1 @Extended 5 = $Left not an Integer.
-;                  @Error 1 @Extended 6 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
@@ -990,31 +990,31 @@ EndFunc   ;==>_LOWriter_ImageBorderPadding
 ;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Image. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Image. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error: 3, @Extended: 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
@@ -1051,27 +1051,27 @@ EndFunc   ;==>_LOWriter_ImageBorderStyle
 ;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Image in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 = $iRight not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
@@ -1112,21 +1112,21 @@ EndFunc   ;==>_LOWriter_ImageBorderWidth
 ;                  $iColorMode          - [optional] (0-3) Default is Null. The color mode of the graphic. See constants, $LOW_COLORMODE_* as defined in LibreOfficeWriter_Constants.au3
 ;                  $bInvert             - [optional] Default is Null. If True, the graphic is displayed in inverted colors. See remarks.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iRed not an Integer, less than -100 or greater than 100.
-;                  @Error 1 @Extended 3 = $iGreen not an Integer, less than -100 or greater than 100.
-;                  @Error 1 @Extended 4 = $iBlue not an Integer, less than -100 or greater than 100.
-;                  @Error 1 @Extended 5 = $iBrightness not an Integer, less than -100 or greater than 100.
-;                  @Error 1 @Extended 6 = $iContrast not an Integer, less than -100 or greater than 100.
-;                  @Error 1 @Extended 7 = $nGamma not a number, less than 0.1, or greater than 10.
-;                  @Error 1 @Extended 8 = $iColorMode not an Integer, less than 0 or greater than 3. See constants, $LOW_COLORMODE_* as defined in LibreOfficeWriter_Constants.au3
-;                  @Error 1 @Extended 9 = $bInvert not a boolean.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iRed not an Integer, less than -100 or greater than 100.
+;                  @Error: 1, @Extended: 3 = $iGreen not an Integer, less than -100 or greater than 100.
+;                  @Error: 1, @Extended: 4 = $iBlue not an Integer, less than -100 or greater than 100.
+;                  @Error: 1, @Extended: 5 = $iBrightness not an Integer, less than -100 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iContrast not an Integer, less than -100 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $nGamma not a number, less than 0.1, or greater than 10.
+;                  @Error: 1, @Extended: 8 = $iColorMode not an Integer, less than 0 or greater than 3. See constants, $LOW_COLORMODE_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error: 1, @Extended: 9 = $bInvert not a boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iRed
 ;                  |                               2 = Error setting $iGreen
 ;                  |                               4 = Error setting $iBlue
@@ -1231,21 +1231,21 @@ EndFunc   ;==>_LOWriter_ImageColorAdjust
 ;                  $iBottom             - [optional] Default is Null. The amount in Hundredths of a Millimeter (HMM) to either extend the background of the image, (negative numbers), or to crop, (positive numbers) from the Bottom side.
 ;                  $bKeepScale          - [optional] Default is Null. If True, crop amounts are removed or added to the image, while keeping the scaling. If False, crop values are removed or added while retaining the image size. See remarks.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $bKeepScale not a Boolean.
-;                  @Error 1 @Extended 3 = $iLeft not an Integer.
-;                  @Error 1 @Extended 4 = $iRight not an Integer.
-;                  @Error 1 @Extended 5 = $iTop not an Integer.
-;                  @Error 1 @Extended 6 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $bKeepScale not a Boolean.
+;                  @Error: 1, @Extended: 3 = $iLeft not an Integer.
+;                  @Error: 1, @Extended: 4 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 5 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 6 = $iBottom not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve the image Crop structure.
-;                  @Error 3 @Extended 2 = Failed to retrieve the image Size structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve the image Crop structure.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve the image Size structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLeft
 ;                  |                               2 = Error setting $iRight
 ;                  |                               4 = Error setting $iTop
@@ -1337,13 +1337,13 @@ EndFunc   ;==>_LOWriter_ImageCrop
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Image was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Image was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oImage not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oImage not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to delete image.
+;                  @Error: 3, @Extended: 1 = Failed to delete image.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1376,11 +1376,11 @@ EndFunc   ;==>_LOWriter_ImageDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sImageName          - The Image name to search for.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Search was successful, If an Image was found matching $sImageName, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, If an Image was found matching $sImageName, True is returned, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sImageName not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sImageName not a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1406,12 +1406,12 @@ EndFunc   ;==>_LOWriter_ImageExists
 ; Syntax ........: _LOWriter_ImageGetAnchor(ByRef $oImage)
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully returned the Image Anchor.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully returned the Image Anchor.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to retrieve Image anchor Object.
+;                  @Error: 2, @Extended: 1 = Failed to retrieve Image anchor Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1440,15 +1440,15 @@ EndFunc   ;==>_LOWriter_ImageGetAnchor
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sImage              - The Image name to retrieve the Object for.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully found requested Image by name, returning Image Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully found requested Image by name, returning Image Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sImage not a string.
-;                  @Error 1 @Extended 3 = Image name called in $sImage not found in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sImage not a string.
+;                  @Error: 1, @Extended: 3 = Image name called in $sImage not found in document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve GraphicObjects object.
-;                  @Error 3 @Extended 2 = Failed to retrieve requested Image object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve GraphicObjects object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve requested Image object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1485,18 +1485,18 @@ EndFunc   ;==>_LOWriter_ImageGetObjByName
 ;                  $sFrameTarget        - [optional] Default is Null. Specify the name of the frame where you want to open the targeted file. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bServerSideMap      - [optional] Default is Null. If True, Uses a server-side image map.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $sURL not a String
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sFrameTarget not a String.
-;                  @Error 1 @Extended 5 = $sFrameTarget not equal to one of the Constants. See constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bServerSideMap not a boolean.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $sURL not a String
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sFrameTarget not a String.
+;                  @Error: 1, @Extended: 5 = $sFrameTarget not equal to one of the Constants. See constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bServerSideMap not a boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sURL
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $sFrameTarget
@@ -1572,27 +1572,27 @@ EndFunc   ;==>_LOWriter_ImageHyperlink
 ;                  $iAnchorType         - [optional] (0-2, 4) Default is $LOW_ANCHOR_AT_CHARACTER. Specify the anchoring options for the Image. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3
 ;                  $bOverwrite          - [optional] Default is False. If True, any data selected by the cursor is overwritten.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 0 Return Object = Success. Image was successfully inserted, returning image Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Image was successfully inserted, returning image Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sImage not a String.
-;                  @Error 1 @Extended 3 = $oCursor not an Object. And not called with Default
-;                  @Error 1 @Extended 4 = $iAnchorType not an Integer, less than 0 or greater than 2, but not equal to 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3
-;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 = $oCursor is a Table Cursor and is not supported.
-;                  @Error 1 @Extended 7 = Image called in $sImage doesn't exist at given path.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sImage not a String.
+;                  @Error: 1, @Extended: 3 = $oCursor not an Object. And not called with Default
+;                  @Error: 1, @Extended: 4 = $iAnchorType not an Integer, less than 0 or greater than 2, but not equal to 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 6 = $oCursor is a Table Cursor and is not supported.
+;                  @Error: 1, @Extended: 7 = Image called in $sImage doesn't exist at given path.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failure creating "com.sun.star.text.TextGraphicObject" Object.
-;                  @Error 2 @Extended 2 = Failure creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 3 = Failure Creating "com.sun.star.graphic.GraphicProvider" Object.
-;                  @Error 2 @Extended 4 = Error creating a property value for retrieving the Image's size.
+;                  @Error: 2, @Extended: 1 = Failure creating "com.sun.star.text.TextGraphicObject" Object.
+;                  @Error: 2, @Extended: 2 = Failure creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 3 = Failure Creating "com.sun.star.graphic.GraphicProvider" Object.
+;                  @Error: 2, @Extended: 4 = Error creating a property value for retrieving the Image's size.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error getting Cursor type.
-;                  @Error 3 @Extended 2 = Error converting Image Path to LibreOffice URL.
-;                  @Error 3 @Extended 3 = Error retrieving current Page Style name at insertion point.
-;                  @Error 3 @Extended 4 = Error retrieving Page Style Object.
-;                  @Error 3 @Extended 5 = Error calculating suggested image size.
+;                  @Error: 3, @Extended: 1 = Error getting Cursor type.
+;                  @Error: 3, @Extended: 2 = Error converting Image Path to LibreOffice URL.
+;                  @Error: 3, @Extended: 3 = Error retrieving current Page Style name at insertion point.
+;                  @Error: 3, @Extended: 4 = Error retrieving Page Style Object.
+;                  @Error: 3, @Extended: 5 = Error calculating suggested image size.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Unfortunately, I am unable to find a way to insert an image "linked", images can only be inserted as embedded.
@@ -1667,17 +1667,17 @@ EndFunc   ;==>_LOWriter_ImageInsert
 ;                  $bFlipHoriOnLeft     - [optional] Default is Null. If True, the image is flipped horizontally on left (even) pages. Set both this and $bFlipHoriOnRight to True to flip on all pages.
 ;                  $nAngle              - [optional] (0-360) Default is Null. The angle to rotate the image.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $bFlipVert not a Boolean.
-;                  @Error 1 @Extended 3 = $bFlipHoriOnRight not a Boolean.
-;                  @Error 1 @Extended 4 = $bFlipHoriOnLeft not a Boolean.
-;                  @Error 1 @Extended 5 = $nAngle not a number, less than 0 or greater than 360.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $bFlipVert not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bFlipHoriOnRight not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bFlipHoriOnLeft not a Boolean.
+;                  @Error: 1, @Extended: 5 = $nAngle not a number, less than 0 or greater than 360.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bFlipVert
 ;                  |                               2 = Error setting $bFlipHoriOnRight
 ;                  |                               4 = Error setting $bFlipHoriOnLeft
@@ -1748,17 +1748,17 @@ EndFunc   ;==>_LOWriter_ImageModify
 ;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the Image.
 ;                  $bPrint              - [optional] Default is Null. If True, Includes the image when you print the document.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $bProtectContent not a Boolean.
-;                  @Error 1 @Extended 3 = $bProtectPos not a Boolean.
-;                  @Error 1 @Extended 4 = $bProtectSize not a Boolean.
-;                  @Error 1 @Extended 5 = $bPrint not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $bProtectContent not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bProtectPos not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bProtectSize not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bPrint not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bProtectContent
 ;                  |                               2 = Error setting $bProtectPos
 ;                  |                               4 = Error setting $bProtectSize
@@ -1828,25 +1828,25 @@ EndFunc   ;==>_LOWriter_ImageOptions
 ;                  $sDesc               - [optional] Default is Null. Description of the Image.
 ;                  $bDecorative         - [optional] Default is Null. If True, the image is considered decorative and is ignored by assistive readers. L.O. 7.6+.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. If the LibreOffice version is below 7.6, the $bDecorative parameter will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. If the LibreOffice version is below 7.6, the $bDecorative parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oImage not an Object.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = Document already contains Image with same name as called in $sName.
-;                  @Error 1 @Extended 5 = $sAltText not a string.
-;                  @Error 1 @Extended 6 = $sDesc not a string.
-;                  @Error 1 @Extended 7 = $bDecorative not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oImage not an Object.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = Document already contains Image with same name as called in $sName.
+;                  @Error: 1, @Extended: 5 = $sAltText not a string.
+;                  @Error: 1, @Extended: 6 = $sDesc not a string.
+;                  @Error: 1, @Extended: 7 = $bDecorative not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sAltText
 ;                  |                               4 = Error setting $sDesc
 ;                  |                               8 = Error setting $bDecorative
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1917,14 +1917,14 @@ EndFunc   ;==>_LOWriter_ImageOptionsName
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $sNewImage           - The file path to the new image.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Image was successfully replaced.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Image was successfully replaced.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $sNewImage not a string.
-;                  @Error 1 @Extended 3 = File called in $sNewImage doesn't exist.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $sNewImage not a string.
+;                  @Error: 1, @Extended: 3 = File called in $sNewImage doesn't exist.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to convert $sNewImage Path to LibreOffice URL.
+;                  @Error: 3, @Extended: 1 = Failed to convert $sNewImage Path to LibreOffice URL.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Unfortunately I am unable to find a way to convert or insert an image as a linked image instead of an embedded image. All linked images will remain as such, all embedded images will stay as embedded.
@@ -1954,12 +1954,12 @@ EndFunc   ;==>_LOWriter_ImageReplace
 ; Syntax ........: _LOWriter_ImagesGetNames(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Image Names. @Extended set to number of Names returned.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Image Names. @Extended set to number of Names returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve GraphicObjects object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve GraphicObjects object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1997,19 +1997,19 @@ EndFunc   ;==>_LOWriter_ImagesGetNames
 ;                  $iColor              - [optional] (-1-16777215) Default is Null. The Color of the Image shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] Default is Null. The Width of the Image Shadow set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 = $iWidth not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ShadowFormat Object.
-;                  @Error 3 @Extended 2 = Error retrieving ShadowFormat Object for Error checking.
+;                  @Error: 3, @Extended: 1 = Error retrieving ShadowFormat Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -2082,22 +2082,22 @@ EndFunc   ;==>_LOWriter_ImageShadow
 ;                  $iHeight             - [optional] Default is Null. The Height of the image, set in Hundredths of a Millimeter (HMM).
 ;                  $bOriginalSize       - [optional] Default is Null. Only accepts True. If True, the image is returned to its original size, or the maximum size allowed for the current page size.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iScaleWidth not an Integer, or less than 1%.
-;                  @Error 1 @Extended 3 = $iScaleHeight not an Integer, or less than 1%.
-;                  @Error 1 @Extended 4 = $iWidth not an Integer.
-;                  @Error 1 @Extended 5 = $iHeight not an Integer.
-;                  @Error 1 @Extended 6 = $bOriginalSize not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iScaleWidth not an Integer, or less than 1%.
+;                  @Error: 1, @Extended: 3 = $iScaleHeight not an Integer, or less than 1%.
+;                  @Error: 1, @Extended: 4 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 5 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 6 = $bOriginalSize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve the image's Actual Size structure.
-;                  @Error 3 @Extended 2 = Failed to retrieve the image's Size structure.
-;                  @Error 3 @Extended 3 = Failed to retrieve the image's Size structure again after setting scale sizing.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve the image's Actual Size structure.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve the image's Size structure.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve the image's Size structure again after setting scale sizing.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iScaleWidth
 ;                  |                               2 = Error setting $iScaleHeight
 ;                  |                               4 = Error setting $iWidth
@@ -2202,16 +2202,16 @@ EndFunc   ;==>_LOWriter_ImageSize
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The percentage of transparency. 0% = visible, 100% = transparent.
 ; Return values .: Success: 1 or Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning the current Transparency setting as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning the current Transparency setting as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2259,22 +2259,22 @@ EndFunc   ;==>_LOWriter_ImageTransparency
 ;                  $bKeepInside         - [optional] Default is Null. If True, Keeps the Image within the layout boundaries of the text that the Image is anchored to.
 ;                  $iAnchorPos          - [optional] (0-2, 4) Default is Null. Specify the anchoring options for the Image. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = $iHorPos not an Integer.
-;                  @Error 1 @Extended 4 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $bMirror not a Boolean.
-;                  @Error 1 @Extended 6 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $iVertPos not an Integer.
-;                  @Error 1 @Extended 8 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 9 = $bKeepInside not a Boolean.
-;                  @Error 1 @Extended 10 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iHorPos not an Integer.
+;                  @Error: 1, @Extended: 4 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $bMirror not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iVertPos not an Integer.
+;                  @Error: 1, @Extended: 8 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $bKeepInside not a Boolean.
+;                  @Error: 1, @Extended: 10 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
 ;                  |                               2 = Error setting $iHorPos
 ;                  |                               4 = Error setting $iHorRelation
@@ -2497,21 +2497,21 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  $iHeightRelativeTo   - [optional] (0, 7) Default is Null. Decides what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
 ;                  $bKeepRatio          - [optional] Default is Null. Maintains the height and width ratio when you change the width or the height setting.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. If the LibreOffice version is below 7.6, the $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. If the LibreOffice version is below 7.6, the $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oImage not an Object.
-;                  @Error 1 @Extended 3 = $iWidth Not an Integer, or less than 51.
-;                  @Error 1 @Extended 4 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 5 = $iWidthRelativeTo not an Integer, not equal to 0, and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
-;                  @Error 1 @Extended 6 = $iHeight Not an Integer, or less than 51.
-;                  @Error 1 @Extended 7 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 8 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
-;                  @Error 1 @Extended 9 = $bKeepRatio not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oImage not an Object.
+;                  @Error: 1, @Extended: 3 = $iWidth Not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 4 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
+;                  @Error: 1, @Extended: 5 = $iWidthRelativeTo not an Integer, not equal to 0, and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
+;                  @Error: 1, @Extended: 6 = $iHeight Not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 7 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
+;                  @Error: 1, @Extended: 8 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
+;                  @Error: 1, @Extended: 9 = $bKeepRatio not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iRelativeWidth
 ;                  |                               4 = Error setting $iWidthRelativeTo
@@ -2520,7 +2520,7 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  |                               32 = Error setting $iHeightRelativeTo
 ;                  |                               64 = Error setting $bKeepRatio
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.3.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.3.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2624,20 +2624,20 @@ EndFunc   ;==>_LOWriter_ImageTypeSize
 ;                  $iTop                - [optional] Default is Null. The amount of space between the Top edge of the Image and the text. Set in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] Default is Null. The amount of space between the Bottom edge of the Image and the text. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = $iLeft not an Integer.
-;                  @Error 1 @Extended 4 = $iRight not an Integer.
-;                  @Error 1 @Extended 5 = $iTop not an Integer.
-;                  @Error 1 @Extended 6 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLeft not an Integer.
+;                  @Error: 1, @Extended: 4 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 5 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 6 = $iBottom not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Property Set Info Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Property Set Info Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWrapType
 ;                  |                               2 = Error setting $iLeft
 ;                  |                               4 = Error setting $iRight
@@ -2732,18 +2732,18 @@ EndFunc   ;==>_LOWriter_ImageWrap
 ;                  $bInBackground       - [optional] Default is Null. If True, moves the selected Image to the background. This option is only available with the "Through" wrap type.
 ;                  $bAllowOverlap       - [optional] Default is Null. If True, the Image is allowed to overlap another Image. This option has no effect on wrap through Images, which can always overlap.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImage not an Object.
-;                  @Error 1 @Extended 2 = $bFirstPar not a Boolean.
-;                  @Error 1 @Extended 3 = $bContour not a Boolean.
-;                  @Error 1 @Extended 4 = $bOutsideOnly not a Boolean.
-;                  @Error 1 @Extended 5 = $bInBackground not a Boolean.
-;                  @Error 1 @Extended 6 = $bAllowOverlap not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oImage not an Object.
+;                  @Error: 1, @Extended: 2 = $bFirstPar not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bContour not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bOutsideOnly not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bInBackground not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bAllowOverlap not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bFirstPar
 ;                  |                               2 = Error setting $bContour
 ;                  |                               4 = Error setting $bOutsideOnly

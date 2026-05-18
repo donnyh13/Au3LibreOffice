@@ -117,20 +117,20 @@
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ;                  $sName               - The name of the new Form. Form names do not need to be unique, but it will help for clarity.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning newly created Form's Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning newly created Form's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $sName not a String.
-;                  @Error 1 @Extended 3 = Called Object in $oObj, not a Document Object, and not a Form Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = Called Object in $oObj, not a Document Object, and not a Form Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.form.component.Form" object.
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.form.component.Form" object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve parent Document Object.
-;                  @Error 3 @Extended 2 = Parent Document is Read Only.
-;                  @Error 3 @Extended 3 = Failed to insert new Form.
-;                  @Error 3 @Extended 4 = Failed to retrieve new Form Object.
-;                  @Error 3 @Extended 5 = Failed to name Form.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Document Object.
+;                  @Error: 3, @Extended: 2 = Parent Document is Read Only.
+;                  @Error: 3, @Extended: 3 = Failed to insert new Form.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve new Form Object.
+;                  @Error: 3, @Extended: 5 = Failed to name Form.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $oObj is called with a Document object, the new form will be a top level form. If a Form object is called, a sub-form will be created.
@@ -197,18 +197,18 @@ EndFunc   ;==>_LOWriter_FormAdd
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCheckBox not a Check Box Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -283,39 +283,39 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCheckBox not a Check Box Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $oLabelField not an Object.
-;                  @Error 1 @Extended 6 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 7 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 8 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 9 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 10 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 11 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 12 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 13 = $iDefaultState not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 14 = $mFont not a Map.
-;                  @Error 1 @Extended 15 = $iStyle not an Integer, less than 1 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 16 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 17 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 18 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 19 = $bWordBreak not a Boolean.
-;                  @Error 1 @Extended 20 = $sGraphics not a String.
-;                  @Error 1 @Extended 21 = $iGraphicAlign not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 22 = $bTriState not a Boolean.
-;                  @Error 1 @Extended 23 = $sAddInfo not a String.
-;                  @Error 1 @Extended 24 = $sHelpText not a String.
-;                  @Error 1 @Extended 25 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 6 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 7 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 13 = $iDefaultState not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 14 = $mFont not a Map.
+;                  @Error: 1, @Extended: 15 = $iStyle not an Integer, less than 1 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 16 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 17 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 18 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 19 = $bWordBreak not a Boolean.
+;                  @Error: 1, @Extended: 20 = $sGraphics not a String.
+;                  @Error: 1, @Extended: 21 = $iGraphicAlign not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 22 = $bTriState not a Boolean.
+;                  @Error: 1, @Extended: 23 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 24 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 25 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $oLabelField
@@ -602,18 +602,18 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxGeneral
 ; Parameters ....: $oCheckBox           - A Checkbox Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $iState              - [optional] (0-2) Default is Null. The current checked state of the Checkbox, $LOW_FORM_CON_CHKBX_STATE_NOT_DEFINED is only available if $bTriState is True. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Check Box State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Check Box State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCheckBox not a Check Box Control.
-;                  @Error 1 @Extended 3 = $iState not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
+;                  @Error: 1, @Extended: 3 = $iState not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve current control State.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current control State.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iState
 ; Author ........: donnyh13
 ; Modified ......:
@@ -664,21 +664,21 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxState
 ;                  $iType               - [optional] (1-5) Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sListContent        - [optional] Default is Null. Default is Null. The SQL statement, Table Name, etc., depending on the value of $iType.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComboBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oComboBox not a Combo Box Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bEmptyIsNull not a Boolean.
-;                  @Error 1 @Extended 5 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 6 = $iType not an Integer, less than 1 or greater than 5. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $sListContent not a String.
+;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bEmptyIsNull not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iType not an Integer, less than 1 or greater than 5. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $sListContent not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
@@ -780,43 +780,43 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComboBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oComboBox not a Combo Box Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
-;                  @Error 1 @Extended 8 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 9 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 10 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 11 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 15 = $asList not an Array.
-;                  @Error 1 @Extended 16 = Element contained in $asList not a String. Returning problem element index.
-;                  @Error 1 @Extended 17 = $sDefaultTxt not a String.
-;                  @Error 1 @Extended 18 = $mFont not a Map.
-;                  @Error 1 @Extended 19 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 20 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 21 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 22 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 23 = $bDropdown not a Boolean.
-;                  @Error 1 @Extended 24 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
-;                  @Error 1 @Extended 25 = $bAutoFill not an Boolean.
-;                  @Error 1 @Extended 26 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 27 = $sAddInfo not a String.
-;                  @Error 1 @Extended 28 = $sHelpText not a String.
-;                  @Error 1 @Extended 29 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 8 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 15 = $asList not an Array.
+;                  @Error: 1, @Extended: 16 = Element contained in $asList not a String. Returning problem element index.
+;                  @Error: 1, @Extended: 17 = $sDefaultTxt not a String.
+;                  @Error: 1, @Extended: 18 = $mFont not a Map.
+;                  @Error: 1, @Extended: 19 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 20 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 21 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 22 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 23 = $bDropdown not a Boolean.
+;                  @Error: 1, @Extended: 24 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
+;                  @Error: 1, @Extended: 25 = $bAutoFill not an Boolean.
+;                  @Error: 1, @Extended: 26 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 27 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 28 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 29 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -1141,18 +1141,18 @@ EndFunc   ;==>_LOWriter_FormConComboBoxGeneral
 ; Parameters ....: $oComboBox           - A Combo Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sValue              - [optional] Default is Null. The current value in the Combo Box's entry field. Value doesn't need to match an available field.
 ; Return values .: Success: 1 or String
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning currently selected Combo Box value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning currently selected Combo Box value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComboBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oComboBox not a Combo Box Control.
-;                  @Error 1 @Extended 3 = $sValue not a String.
+;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
+;                  @Error: 1, @Extended: 3 = $sValue not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve currently selected value.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve currently selected value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sValue
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1201,18 +1201,18 @@ EndFunc   ;==>_LOWriter_FormConComboBoxValue
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCurrencyField not a Currency Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -1296,49 +1296,49 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 32 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 32 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCurrencyField not a Currency Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 8 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 9 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 10 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 11 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 15 = $nMin not a Number.
-;                  @Error 1 @Extended 16 = $nMax not a Number.
-;                  @Error 1 @Extended 17 = $iIncr not an Integer.
-;                  @Error 1 @Extended 18 = $nDefault not a Number.
-;                  @Error 1 @Extended 19 = $iDecimal not an Integer, less than 0 or greater than 20.
-;                  @Error 1 @Extended 20 = $bThousandsSep not a Boolean.
-;                  @Error 1 @Extended 21 = $sCurrSymbol not a String.
-;                  @Error 1 @Extended 22 = $bPrefix not a Boolean.
-;                  @Error 1 @Extended 23 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 24 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 25 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 26 = $mFont not a Map.
-;                  @Error 1 @Extended 27 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 28 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 29 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 30 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 31 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 32 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 33 = $sAddInfo not a String.
-;                  @Error 1 @Extended 34 = $sHelpText not a String.
-;                  @Error 1 @Extended 35 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 15 = $nMin not a Number.
+;                  @Error: 1, @Extended: 16 = $nMax not a Number.
+;                  @Error: 1, @Extended: 17 = $iIncr not an Integer.
+;                  @Error: 1, @Extended: 18 = $nDefault not a Number.
+;                  @Error: 1, @Extended: 19 = $iDecimal not an Integer, less than 0 or greater than 20.
+;                  @Error: 1, @Extended: 20 = $bThousandsSep not a Boolean.
+;                  @Error: 1, @Extended: 21 = $sCurrSymbol not a String.
+;                  @Error: 1, @Extended: 22 = $bPrefix not a Boolean.
+;                  @Error: 1, @Extended: 23 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 24 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 25 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 26 = $mFont not a Map.
+;                  @Error: 1, @Extended: 27 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 28 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 29 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 30 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 31 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 32 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 33 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 34 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 35 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -1739,17 +1739,17 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldGeneral
 ; Parameters ....: $oCurrencyField      - A Currency Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $nValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or Number
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Number = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCurrencyField not a Currency Field Control.
-;                  @Error 1 @Extended 3 = $nValue not a Number.
+;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
+;                  @Error: 1, @Extended: 3 = $nValue not a Number.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nValue
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1797,18 +1797,18 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldValue
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDateField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oDateField not a Date Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -1889,51 +1889,51 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 29 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 29 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDateField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oDateField not a Date Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 8 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 9 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 10 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 11 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 15 = $tDateMin not an Object.
-;                  @Error 1 @Extended 16 = $tDateMax not an Object.
-;                  @Error 1 @Extended 17 = $iFormat not an Integer, less then 0 or greater than 11. See Constants $LOW_FORM_CON_DATE_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 18 = $tDateDefault not an Object.
-;                  @Error 1 @Extended 19 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 20 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 21 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 22 = $mFont not a Map.
-;                  @Error 1 @Extended 23 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 24 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 25 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 26 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 27 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 28 = $bDropdown not a Boolean.
-;                  @Error 1 @Extended 29 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 30 = $sAddInfo not a String.
-;                  @Error 1 @Extended 31 = $sHelpText not a String.
-;                  @Error 1 @Extended 32 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 15 = $tDateMin not an Object.
+;                  @Error: 1, @Extended: 16 = $tDateMax not an Object.
+;                  @Error: 1, @Extended: 17 = $iFormat not an Integer, less then 0 or greater than 11. See Constants $LOW_FORM_CON_DATE_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 18 = $tDateDefault not an Object.
+;                  @Error: 1, @Extended: 19 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 20 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 21 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 22 = $mFont not a Map.
+;                  @Error: 1, @Extended: 23 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 24 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 25 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 26 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 27 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 28 = $bDropdown not a Boolean.
+;                  @Error: 1, @Extended: 29 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 30 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 31 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 32 = $sHelpURL not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.util.Date" Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
+;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.util.Date" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Minimum Date.
-;                  @Error 3 @Extended 3 = Failed to retrieve current Maximum Date.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Minimum Date.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve current Maximum Date.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -2352,20 +2352,20 @@ EndFunc   ;==>_LOWriter_FormConDateFieldGeneral
 ; Parameters ....: $oDateField          - A Date Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $tDateValue          - [optional] Default is Null. The date to set the field to, created previously by _LOWriter_DateStructCreate.
 ; Return values .: Success: 1 or Structure
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were called with Null, returning current Date value as a Date Structure.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Structure = Success. All optional parameters were called with Null, returning current Date value as a Date Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDateField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oDateField not a Date Field Control.
-;                  @Error 1 @Extended 3 = $tDateValue not an Object.
+;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
+;                  @Error: 1, @Extended: 3 = $tDateValue not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.util.Date" Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
+;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.util.Date" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $tDateValue
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2429,14 +2429,14 @@ EndFunc   ;==>_LOWriter_FormConDateFieldValue
 ; Syntax ........: _LOWriter_FormConDelete(ByRef $oControl)
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Control was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Control was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oControl not an Object.
+;                  @Error: 1, @Extended: 1 = $oControl not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Control's parent Object.
-;                  @Error 3 @Extended 2 = Cannot delete the last control in a Grouped control.
-;                  @Error 3 @Extended 3 = Failed to delete the Control.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Control's parent Object.
+;                  @Error: 3, @Extended: 2 = Cannot delete the last control in a Grouped control.
+;                  @Error: 3, @Extended: 3 = Failed to delete the Control.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You cannot delete the last control contained in a Grouped Control.
@@ -2490,35 +2490,35 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 19 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 19 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFileSel not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oFileSel not a File Selection Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 6 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 7 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 8 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 9 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 10 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 11 = $sDefaultTxt not a String.
-;                  @Error 1 @Extended 12 = $mFont not a Map.
-;                  @Error 1 @Extended 13 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 14 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 15 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 16 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 17 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 18 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 19 = $sAddInfo not a String.
-;                  @Error 1 @Extended 20 = $sHelpText not a String.
-;                  @Error 1 @Extended 21 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oFileSel not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oFileSel not a File Selection Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 10 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 11 = $sDefaultTxt not a String.
+;                  @Error: 1, @Extended: 12 = $mFont not a Map.
+;                  @Error: 1, @Extended: 13 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 14 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 15 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 16 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 17 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 18 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 19 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 20 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 21 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $iTxtDir
 ;                  |                               4 = Error setting $bEnabled
@@ -2769,18 +2769,18 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldGeneral
 ; Parameters ....: $oFileSel            - A File Selection Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or String
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFileSel not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oFileSel not a File Selection Control.
-;                  @Error 1 @Extended 3 = $sValue not a String.
+;                  @Error: 1, @Extended: 1 = $oFileSel not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oFileSel not a File Selection Control.
+;                  @Error: 1, @Extended: 3 = $sValue not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve the current value of the control.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve the current value of the control.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sValue
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2831,20 +2831,20 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldValue
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormatField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oFormatField not a Formatted Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bEmptyIsNull not a Boolean.
-;                  @Error 1 @Extended 5 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 6 = $bFilter not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bEmptyIsNull not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bFilter not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
@@ -2941,47 +2941,47 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormatField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oFormatField not a Formatted Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
-;                  @Error 1 @Extended 8 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 9 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 10 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 11 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 15 = $nMin not a Number.
-;                  @Error 1 @Extended 16 = $nMax not a Number.
-;                  @Error 1 @Extended 17 = $nDefault not a Number.
-;                  @Error 1 @Extended 18 = $iFormat not an Integer.
-;                  @Error 1 @Extended 19 = Format key called in $iFormat not found in document.
-;                  @Error 1 @Extended 20 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 21 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 22 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 23 = $mFont not a Map.
-;                  @Error 1 @Extended 24 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 25 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 26 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 27 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 28 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 29 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 30 = $sAddInfo not a String.
-;                  @Error 1 @Extended 31 = $sHelpText not a String.
-;                  @Error 1 @Extended 32 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 8 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 15 = $nMin not a Number.
+;                  @Error: 1, @Extended: 16 = $nMax not a Number.
+;                  @Error: 1, @Extended: 17 = $nDefault not a Number.
+;                  @Error: 1, @Extended: 18 = $iFormat not an Integer.
+;                  @Error: 1, @Extended: 19 = Format key called in $iFormat not found in document.
+;                  @Error: 1, @Extended: 20 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 21 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 22 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 23 = $mFont not a Map.
+;                  @Error: 1, @Extended: 24 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 25 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 26 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 27 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 28 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 29 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 30 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 31 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 32 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve Form parent Document Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Form parent Document Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -3345,18 +3345,18 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldGeneral
 ; Parameters ....: $oFormatField        - A Formatted Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $nValue              - [optional] Default is Null. The Value to set the Formatted Field to.
 ; Return values .: Success: 1 or Number
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Number = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormatField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oFormatField not a Formatted Field Control.
-;                  @Error 1 @Extended 3 = $nValue not a Number.
+;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
+;                  @Error: 1, @Extended: 3 = $nValue not a Number.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve current value.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nValue
 ; Author ........: donnyh13
 ; Modified ......:
@@ -3402,13 +3402,13 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldValue
 ; Syntax ........: _LOWriter_FormConGetParent(ByRef $oControl)
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the Form Object that contains the Control.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the Form Object that contains the Control.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oControl not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oControl not an Control Object and not a Grouped Control.
+;                  @Error: 1, @Extended: 1 = $oControl not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oControl not an Control Object and not a Grouped Control.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve parent form Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent form Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Unfortunately I am unable to successfully set the parent for controls. It sets, but doesn't literally "move" the control to the new form, and also causes the control to no-longer work.
@@ -3461,26 +3461,26 @@ EndFunc   ;==>_LOWriter_FormConGetParent
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oGroupBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oGroupBox not a GroupBox Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 7 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 8 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 9 = $mFont not a Map.
-;                  @Error 1 @Extended 10 = $sAddInfo not a String.
-;                  @Error 1 @Extended 11 = $sHelpText not a String.
-;                  @Error 1 @Extended 12 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oGroupBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oGroupBox not a GroupBox Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 9 = $mFont not a Map.
+;                  @Error: 1, @Extended: 10 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 11 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 12 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -3647,35 +3647,35 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImageButton not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oImageButton not an Image Button Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 6 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 7 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 8 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 9 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 10 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 11 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 12 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 13 = $iAction not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 14 = $sURL not a String.
-;                  @Error 1 @Extended 15 = $sFrame not a String.
-;                  @Error 1 @Extended 16 = $sFrame not called with correct constant. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 17 = $sGraphics not a String.
-;                  @Error 1 @Extended 18 = $iScale not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_IMG_BTN_SCALE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 19 = $sAddInfo not a String.
-;                  @Error 1 @Extended 20 = $sHelpText not a String.
-;                  @Error 1 @Extended 21 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oImageButton not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oImageButton not an Image Button Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 10 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 11 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 12 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 13 = $iAction not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 14 = $sURL not a String.
+;                  @Error: 1, @Extended: 15 = $sFrame not a String.
+;                  @Error: 1, @Extended: 16 = $sFrame not called with correct constant. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 17 = $sGraphics not a String.
+;                  @Error: 1, @Extended: 18 = $iScale not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_IMG_BTN_SCALE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 19 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 20 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 21 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $iTxtDir
 ;                  |                               4 = Error setting $bEnabled
@@ -4020,18 +4020,18 @@ EndFunc   ;==>_LOWriter_FormConImageButtonGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImageControl not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oImageControl not a Image Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oImageControl not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oImageControl not a Image Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -4100,34 +4100,34 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oImageControl not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oImageControl not an Image Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 8 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 9 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 10 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 11 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 12 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 13 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 14 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 15 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 16 = $sGraphics not a String.
-;                  @Error 1 @Extended 17 = $iScale not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_IMG_BTN_SCALE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 18 = $sAddInfo not a String.
-;                  @Error 1 @Extended 19 = $sHelpText not a String.
-;                  @Error 1 @Extended 20 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oImageControl not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oImageControl not an Image Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 13 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 14 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 15 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 16 = $sGraphics not a String.
+;                  @Error: 1, @Extended: 17 = $iScale not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_IMG_BTN_SCALE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 18 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 19 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 20 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -4364,28 +4364,28 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ;                  $iHeight             - The Height of the control, in Hundredths of a Millimeter (HMM).
 ;                  $sName               - [optional] Default is "". The name of the control, if called with "", a name is automatically given it.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Grouped Control was inserted successfully, returning its object.
-;                  @Error 0 @Extended 1 Return Object = Success. Control was inserted successfully, returning its object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Grouped Control was inserted successfully, returning its object.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. Control was inserted successfully, returning its object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oParentForm not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oParentForm not a Form Object.
-;                  @Error 1 @Extended 3 = $iControl not an Integer, less than 1 or greater than 524288. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer.
-;                  @Error 1 @Extended 6 = $iWidth not an Integer.
-;                  @Error 1 @Extended 7 = $iHeight not an Integer.
-;                  @Error 1 @Extended 8 = $sName not a String.
+;                  @Error: 1, @Extended: 1 = $oParentForm not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oParentForm not a Form Object.
+;                  @Error: 1, @Extended: 3 = $iControl not an Integer, less than 1 or greater than 524288. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer.
+;                  @Error: 1, @Extended: 6 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 7 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 8 = $sName not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create the Control.
-;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.drawing.ControlShape" Object.
-;                  @Error 2 @Extended 3 = Failed to create a "com.sun.star.drawing.GroupShape" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create the Control.
+;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.drawing.ControlShape" Object.
+;                  @Error: 2, @Extended: 3 = Failed to create a "com.sun.star.drawing.GroupShape" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form parent document Object.
-;                  @Error 3 @Extended 2 = Parent Document is ReadOnly.
-;                  @Error 3 @Extended 3 = Failed to retrieve Control Service name.
-;                  @Error 3 @Extended 4 = Failed to retrieve Shape Position Structure.
-;                  @Error 3 @Extended 5 = Failed to retrieve Shape Size Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form parent document Object.
+;                  @Error: 3, @Extended: 2 = Parent Document is ReadOnly.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Control Service name.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Shape Position Structure.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Shape Size Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: When inserting a Grouped Control, a Group box will be automatically created and inserted into it.
@@ -4549,32 +4549,32 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oLabel not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oLabel not a Label Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 7 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 8 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 9 = $mFont not a Map.
-;                  @Error 1 @Extended 10 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 11 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 12 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 13 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 14 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 15 = $bWordBreak not a Boolean.
-;                  @Error 1 @Extended 16 = $sAddInfo not a String.
-;                  @Error 1 @Extended 17 = $sHelpText not a String.
-;                  @Error 1 @Extended 18 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oLabel not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oLabel not a Label Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 9 = $mFont not a Map.
+;                  @Error: 1, @Extended: 10 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 11 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 12 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 13 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 14 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 15 = $bWordBreak not a Boolean.
+;                  @Error: 1, @Extended: 16 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 17 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 18 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -4795,22 +4795,22 @@ EndFunc   ;==>_LOWriter_FormConLabelGeneral
 ;                  $asListContent       - [optional] Default is Null. A single dimension array. See remarks
 ;                  $iBoundField         - [optional] (-1-2147483647) Default is Null. The bound data field of a linked table to display.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oListBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oListBox not a List Box Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 5 = $iType not an Integer, less than 0 or greater than 5. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $asListContent not an Array.
-;                  @Error 1 @Extended 7 = $iType not set to Valuelist and array called in $asListContent has more than 1 element.
-;                  @Error 1 @Extended 8 = $iBoundField not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iType not an Integer, less than 0 or greater than 5. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $asListContent not an Array.
+;                  @Error: 1, @Extended: 7 = $iType not set to Valuelist and array called in $asListContent has more than 1 element.
+;                  @Error: 1, @Extended: 8 = $iBoundField not an Integer, less than -1 or greater than 2147483647.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ;                  |                               4 = Error setting $iType
@@ -4914,43 +4914,43 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 23 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 23 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oListBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oListBox not a List Box Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 8 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 9 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 10 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 11 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 12 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 13 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 14 = $asList not an Array.
-;                  @Error 1 @Extended 15 = Element contained in $asList not a String. Returning problem element index.
-;                  @Error 1 @Extended 16 = $mFont not a Map.
-;                  @Error 1 @Extended 17 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 18 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 19 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 20 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 21 = $bDropdown not a Boolean.
-;                  @Error 1 @Extended 22 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
-;                  @Error 1 @Extended 23 = $bMultiSel not an Boolean.
-;                  @Error 1 @Extended 24 = $aiDefaultSel not an Array.
-;                  @Error 1 @Extended 25 = Element contained in $aiDefaultSel not an Integer. Returning problem element index.
-;                  @Error 1 @Extended 26 = Integer contained in Element of $aiDefaultSel greater than number of List items. Returning problem element index.
-;                  @Error 1 @Extended 27 = $sAddInfo not a String.
-;                  @Error 1 @Extended 28 = $sHelpText not a String.
-;                  @Error 1 @Extended 29 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 11 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 12 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 13 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 14 = $asList not an Array.
+;                  @Error: 1, @Extended: 15 = Element contained in $asList not a String. Returning problem element index.
+;                  @Error: 1, @Extended: 16 = $mFont not a Map.
+;                  @Error: 1, @Extended: 17 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 18 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 19 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 20 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 21 = $bDropdown not a Boolean.
+;                  @Error: 1, @Extended: 22 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
+;                  @Error: 1, @Extended: 23 = $bMultiSel not an Boolean.
+;                  @Error: 1, @Extended: 24 = $aiDefaultSel not an Array.
+;                  @Error: 1, @Extended: 25 = Element contained in $aiDefaultSel not an Integer. Returning problem element index.
+;                  @Error: 1, @Extended: 26 = Integer contained in Element of $aiDefaultSel greater than number of List items. Returning problem element index.
+;                  @Error: 1, @Extended: 27 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 28 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 29 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -5259,14 +5259,14 @@ EndFunc   ;==>_LOWriter_FormConListBoxGeneral
 ; Syntax ........: _LOWriter_FormConListBoxGetCount(ByRef $oListBox)
 ; Parameters ....: $oListBox            - A List Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning the count of List Box entries.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the count of List Box entries.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oListBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oListBox not a List Box Control.
+;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve Item Count.
+;                  @Error: 3, @Extended: 1 = Failed to identify control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Item Count.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5298,21 +5298,21 @@ EndFunc   ;==>_LOWriter_FormConListBoxGetCount
 ;                  $aiSelection         - [optional] Default is Null. A single dimension array of selection values. See remarks.
 ;                  $bReturnValue        - [optional] Default is False. If True, when retrieving the the current selection(s), the current selected VALUE, instead of the position is returned.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current selection(s) of the List Box. See remarks.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current selection(s) of the List Box. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oListBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oListBox not a List Box Control.
-;                  @Error 1 @Extended 3 = $bReturnValue not a Boolean.
-;                  @Error 1 @Extended 4 = $aiSelection not an array.
-;                  @Error 1 @Extended 5 = Array called in $aiSelection contains an element with a non-Integer value. Returning problem element index.
-;                  @Error 1 @Extended 6 = Array called in $aiSelection contains an element with an Integer value less than 0 or greater than number of List Box entries. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
+;                  @Error: 1, @Extended: 3 = $bReturnValue not a Boolean.
+;                  @Error: 1, @Extended: 4 = $aiSelection not an array.
+;                  @Error: 1, @Extended: 5 = Array called in $aiSelection contains an element with a non-Integer value. Returning problem element index.
+;                  @Error: 1, @Extended: 6 = Array called in $aiSelection contains an element with an Integer value less than 0 or greater than number of List Box entries. Returning problem element index.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve current selection.
+;                  @Error: 3, @Extended: 1 = Failed to identify control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current selection.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $aiSelection
 ; Author ........: donnyh13
 ; Modified ......:
@@ -5394,34 +5394,34 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 18 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oNavBar not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oNavBar not a Navigation Bar Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 6 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 7 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 8 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 9 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 10 = $mFont not a Map.
-;                  @Error 1 @Extended 11 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $bSmallIcon not a Boolean.
-;                  @Error 1 @Extended 14 = $bShowPos not a Boolean.
-;                  @Error 1 @Extended 15 = $bShowNav not a Boolean.
-;                  @Error 1 @Extended 16 = $bShowActing not a Boolean.
-;                  @Error 1 @Extended 17 = $bShowFiltering not a Boolean.
-;                  @Error 1 @Extended 18 = $sAddInfo not a String.
-;                  @Error 1 @Extended 19 = $sHelpText not a String.
-;                  @Error 1 @Extended 20 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oNavBar not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oNavBar not a Navigation Bar Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 8 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 9 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 10 = $mFont not a Map.
+;                  @Error: 1, @Extended: 11 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 12 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $bSmallIcon not a Boolean.
+;                  @Error: 1, @Extended: 14 = $bShowPos not a Boolean.
+;                  @Error: 1, @Extended: 15 = $bShowNav not a Boolean.
+;                  @Error: 1, @Extended: 16 = $bShowActing not a Boolean.
+;                  @Error: 1, @Extended: 17 = $bShowFiltering not a Boolean.
+;                  @Error: 1, @Extended: 18 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 19 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 20 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $iTxtDir
 ;                  |                               4 = Error setting $bEnabled
@@ -5664,18 +5664,18 @@ EndFunc   ;==>_LOWriter_FormConNavBarGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oNumericField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oNumericField not a Numeric Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -5757,47 +5757,47 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 30 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 30 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oNumericField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oNumericField not a Numeric Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 8 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 9 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 10 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 11 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 15 = $nMin not a Number.
-;                  @Error 1 @Extended 16 = $nMax not a Number.
-;                  @Error 1 @Extended 17 = $iIncr not an Integer.
-;                  @Error 1 @Extended 18 = $nDefault not a Number.
-;                  @Error 1 @Extended 19 = $iDecimal not an Integer, less than 0 or greater than 20.
-;                  @Error 1 @Extended 20 = $bThousandsSep not a Boolean.
-;                  @Error 1 @Extended 21 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 22 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 23 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 24 = $mFont not a Map.
-;                  @Error 1 @Extended 25 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 26 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 27 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 28 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 29 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 30 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 31 = $sAddInfo not a String.
-;                  @Error 1 @Extended 32 = $sHelpText not a String.
-;                  @Error 1 @Extended 33 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 15 = $nMin not a Number.
+;                  @Error: 1, @Extended: 16 = $nMax not a Number.
+;                  @Error: 1, @Extended: 17 = $iIncr not an Integer.
+;                  @Error: 1, @Extended: 18 = $nDefault not a Number.
+;                  @Error: 1, @Extended: 19 = $iDecimal not an Integer, less than 0 or greater than 20.
+;                  @Error: 1, @Extended: 20 = $bThousandsSep not a Boolean.
+;                  @Error: 1, @Extended: 21 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 22 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 23 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 24 = $mFont not a Map.
+;                  @Error: 1, @Extended: 25 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 26 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 27 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 28 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 29 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 30 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 31 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 32 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 33 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -6174,17 +6174,17 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldGeneral
 ; Parameters ....: $oNumericField       - A Numeric Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $nValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or Number
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Number = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oNumericField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oNumericField not a Numeric Field Control.
-;                  @Error 1 @Extended 3 = $nValue not a Number.
+;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
+;                  @Error: 1, @Extended: 3 = $nValue not a Number.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nValue
 ; Author ........: donnyh13
 ; Modified ......:
@@ -6232,18 +6232,18 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldValue
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oOptionButton not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oOptionButton not a Option Button Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oOptionButton not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oOptionButton not a Option Button Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -6318,39 +6318,39 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oOptionButton not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oOptionButton not a Option Button Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $oLabelField not an Object.
-;                  @Error 1 @Extended 6 = Object called in $oLabelField not a Group Box Control.
-;                  @Error 1 @Extended 7 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 8 = $sGroupName not a String.
-;                  @Error 1 @Extended 9 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 10 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 11 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 12 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 13 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 14 = $iDefaultState not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 15 = $mFont not a Map.
-;                  @Error 1 @Extended 16 = $iStyle not an Integer, less than 1 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 17 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 18 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 19 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 20 = $bWordBreak not a Boolean.
-;                  @Error 1 @Extended 21 = $sGraphics not a String.
-;                  @Error 1 @Extended 22 = $iGraphicAlign not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 23 = $sAddInfo not a String.
-;                  @Error 1 @Extended 24 = $sHelpText not a String.
-;                  @Error 1 @Extended 25 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oOptionButton not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oOptionButton not a Option Button Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 6 = Object called in $oLabelField not a Group Box Control.
+;                  @Error: 1, @Extended: 7 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $sGroupName not a String.
+;                  @Error: 1, @Extended: 9 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 12 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 13 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 14 = $iDefaultState not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 15 = $mFont not a Map.
+;                  @Error: 1, @Extended: 16 = $iStyle not an Integer, less than 1 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 17 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 18 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 19 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 20 = $bWordBreak not a Boolean.
+;                  @Error: 1, @Extended: 21 = $sGraphics not a String.
+;                  @Error: 1, @Extended: 22 = $iGraphicAlign not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 23 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 24 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 25 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $oLabelField
@@ -6638,18 +6638,18 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonGeneral
 ; Parameters ....: $oOptionButton       - A Option Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $iState              - [optional] (0-1) Default is Null. The current state of the Option Button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Option Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Option Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oOptionButton not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oOptionButton not a Option Button Control.
-;                  @Error 1 @Extended 3 = $iState not an Integer, less than 0 or greater than 1. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oOptionButton not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oOptionButton not a Option Button Control.
+;                  @Error: 1, @Extended: 3 = $iState not an Integer, less than 0 or greater than 1. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve current control State.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current control State.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iState
 ; Author ........: donnyh13
 ; Modified ......:
@@ -6699,20 +6699,20 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonState
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPatternField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oPatternField not a Pattern Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bEmptyIsNull not a Boolean.
-;                  @Error 1 @Extended 5 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 6 = $bFilter not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bEmptyIsNull not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bFilter not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
@@ -6806,42 +6806,42 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPatternField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oPatternField not a Pattern Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
-;                  @Error 1 @Extended 8 = $sEditMask
-;                  @Error 1 @Extended 9 = $sLiteralMask not a String.
-;                  @Error 1 @Extended 10 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 11 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 12 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 13 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 14 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 15 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 16 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 17 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 18 = $sDefaultTxt not a String.
-;                  @Error 1 @Extended 19 = $mFont not a Map.
-;                  @Error 1 @Extended 20 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 21 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 22 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 23 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 24 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 25 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 26 = $sAddInfo not a String.
-;                  @Error 1 @Extended 27 = $sHelpText not a String.
-;                  @Error 1 @Extended 28 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 8 = $sEditMask
+;                  @Error: 1, @Extended: 9 = $sLiteralMask not a String.
+;                  @Error: 1, @Extended: 10 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 12 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 13 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 14 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 15 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 16 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 17 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 18 = $sDefaultTxt not a String.
+;                  @Error: 1, @Extended: 19 = $mFont not a Map.
+;                  @Error: 1, @Extended: 20 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 21 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 22 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 23 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 24 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 25 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 26 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 27 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 28 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -7162,18 +7162,18 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldGeneral
 ; Parameters ....: $oPatternField       - A Pattern Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $sValue              - [optional] Default is Null. The value to set the field to.
 ; Return values .: Success: 1 or String
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPatternField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oPatternField not a Pattern Field Control.
-;                  @Error 1 @Extended 3 = $sValue not a String.
+;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
+;                  @Error: 1, @Extended: 3 = $sValue not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve the current value of the control.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve the current value of the control.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sValue
 ; Author ........: donnyh13
 ; Modified ......:
@@ -7224,19 +7224,19 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ;                  $iAnchor             - [optional] (0-4) Default is Null. The anchoring position for the Control. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bProtectPos         - [optional] Default is Null. If True, the Shape's position is locked.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oControl not an Object.
-;                  @Error 1 @Extended 2 = $iX not an Integer.
-;                  @Error 1 @Extended 3 = $iY not an Integer.
-;                  @Error 1 @Extended 4 = $iAnchor not an Integer, less than 0 or greater than 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $bProtectPos not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oControl not an Object.
+;                  @Error: 1, @Extended: 2 = $iX not an Integer.
+;                  @Error: 1, @Extended: 3 = $iY not an Integer.
+;                  @Error: 1, @Extended: 4 = $iAnchor not an Integer, less than 0 or greater than 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $bProtectPos not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Control's Position Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Control's Position Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iX
 ;                  |                               2 = Error setting $iY
 ;                  |                               4 = Error setting $iAnchor
@@ -7336,44 +7336,44 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 27 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 27 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPushButton not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oPushButton not a Push Button Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 7 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 8 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 9 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 10 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 11 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 12 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 13 = $bTakeFocus not a Boolean.
-;                  @Error 1 @Extended 14 = $bToggle not a Boolean.
-;                  @Error 1 @Extended 15 = $iDefaultState not an Integer, less than 0 or greater than 1. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 16 = $mFont not a Map.
-;                  @Error 1 @Extended 17 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 18 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 19 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 20 = $bWordBreak not a Boolean.
-;                  @Error 1 @Extended 21 = $iAction not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 22 = $sURL not a String.
-;                  @Error 1 @Extended 23 = $sFrame not a String.
-;                  @Error 1 @Extended 24 = $sFrame not called with correct constant. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 25 = $bDefault not a Boolean.
-;                  @Error 1 @Extended 26 = $sGraphics not a String.
-;                  @Error 1 @Extended 27 = $iGraphicAlign not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 28 = $sAddInfo not a String.
-;                  @Error 1 @Extended 29 = $sHelpText not a String.
-;                  @Error 1 @Extended 30 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oPushButton not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oPushButton not a Push Button Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 10 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 11 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 13 = $bTakeFocus not a Boolean.
+;                  @Error: 1, @Extended: 14 = $bToggle not a Boolean.
+;                  @Error: 1, @Extended: 15 = $iDefaultState not an Integer, less than 0 or greater than 1. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 16 = $mFont not a Map.
+;                  @Error: 1, @Extended: 17 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 18 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 19 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 20 = $bWordBreak not a Boolean.
+;                  @Error: 1, @Extended: 21 = $iAction not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_PUSH_CMD_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 22 = $sURL not a String.
+;                  @Error: 1, @Extended: 23 = $sFrame not a String.
+;                  @Error: 1, @Extended: 24 = $sFrame not called with correct constant. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 25 = $bDefault not a Boolean.
+;                  @Error: 1, @Extended: 26 = $sGraphics not a String.
+;                  @Error: 1, @Extended: 27 = $iGraphicAlign not an Integer, less than 0 or greater than 12. See Constants $LOW_FORM_CON_IMG_ALIGN_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 28 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 29 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 30 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -7818,18 +7818,18 @@ EndFunc   ;==>_LOWriter_FormConPushButtonGeneral
 ; Parameters ....: $oPushButton         - A Push Button Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $iState              - [optional] (0-1) Default is Null. The state of the Push Button. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Integer
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Push Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Push Button State as an Integer, matching one of the constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPushButton not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oPushButton not a Push Button Control.
-;                  @Error 1 @Extended 3 = $iState not an Integer, less than 0 or greater than 1. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oPushButton not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oPushButton not a Push Button Control.
+;                  @Error: 1, @Extended: 3 = $iState not an Integer, less than 0 or greater than 1. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve current control State.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current control State.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iState
 ; Author ........: donnyh13
 ; Modified ......:
@@ -7878,18 +7878,18 @@ EndFunc   ;==>_LOWriter_FormConPushButtonState
 ; Parameters ....: $oObj                - Either a Document Object or a Form object, or a Grouped Control. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function. Also a Grouped Control or Group Box returned from a _LOWriter_FormConsGetList function.
 ;                  $iType               - [optional] (1-1048575) Default is $LOW_FORM_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOW_FORM_CON_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOW_FORM_CON_* as defined in LibreOfficeWriter_Constants.au3
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iType not an Integer, less than 1 or greater than 1048575. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 = Called Object in $oObj, not a Document Object, not a Form Object, and not a Grouped Control.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 1048575. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = Called Object in $oObj, not a Document Object, not a Form Object, and not a Grouped Control.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify parent document of Form.
-;                  @Error 3 @Extended 2 = Failed to retrieve Draw Page object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Shape Object.
-;                  @Error 3 @Extended 4 = Failed to identify Control type.
-;                  @Error 3 @Extended 5 = Failed to retrieve Control Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify parent document of Form.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Draw Page object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Shape Object.
+;                  @Error: 3, @Extended: 4 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Control Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If a Document object is called in $oObj, all the controls are returned (except controls in a Grouped Control). If a Form Object is called in $oObj, only the controls contained in the Form are returned. And if a Grouped control is called, only controls in the group are returned.
@@ -8015,18 +8015,18 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ;                  $iHeight             - [optional] Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the Shape.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oControl not an Object.
-;                  @Error 1 @Extended 2 = $iWidth not an Integer, or less than 51.
-;                  @Error 1 @Extended 3 = $iHeight not an Integer, or less than 51.
-;                  @Error 1 @Extended 4 = $bProtectSize not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oControl not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 4 = $bProtectSize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Control Size Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Control Size Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iHeight
 ;                  |                               4 = Error setting $bProtectSize
@@ -8095,18 +8095,18 @@ EndFunc   ;==>_LOWriter_FormConSize
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCheckBox not a Check Box Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -8172,29 +8172,29 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 13 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 13 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCheckBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCheckBox not a Check Box Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 7 = $iDefaultState not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 8 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 9 = $iStyle not an Integer, less than 1 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 10 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 11 = $bWordBreak not a Boolean.
-;                  @Error 1 @Extended 12 = $bTriState not a Boolean.
-;                  @Error 1 @Extended 13 = $sAddInfo not a String.
-;                  @Error 1 @Extended 14 = $sHelpText not a String.
-;                  @Error 1 @Extended 15 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oCheckBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCheckBox not a Check Box Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 7 = $iDefaultState not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_CHKBX_STATE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 9 = $iStyle not an Integer, less than 1 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 11 = $bWordBreak not a Boolean.
+;                  @Error: 1, @Extended: 12 = $bTriState not a Boolean.
+;                  @Error: 1, @Extended: 13 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 14 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 15 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -8379,20 +8379,20 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxGeneral
 ;                  $iControl            - The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
 ;                  $iPos                - [optional] Default is Null. The position in the Column list to insert the new Column. 0 = insert at the beginning. Null = insert at the end.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully created the Column, returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully created the Column, returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTableCon not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTableCon not a Table Control Object.
-;                  @Error 1 @Extended 3 = Control type called in $iControl not an Integer, or not one of the accepted controls.
-;                  @Error 1 @Extended 4 = $iPos not an Integer, less than 0 or greater than count of Columns + 1.
+;                  @Error: 1, @Extended: 1 = $oTableCon not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTableCon not a Table Control Object.
+;                  @Error: 1, @Extended: 3 = Control type called in $iControl not an Integer, or not one of the accepted controls.
+;                  @Error: 1, @Extended: 4 = $iPos not an Integer, less than 0 or greater than count of Columns + 1.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create Column object.
+;                  @Error: 2, @Extended: 1 = Failed to create Column object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve Control type name.
-;                  @Error 3 @Extended 3 = Failed to split Control type name.
-;                  @Error 3 @Extended 4 = Failed to insert new Column.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Control type name.
+;                  @Error: 3, @Extended: 3 = Failed to split Control type name.
+;                  @Error: 3, @Extended: 4 = Failed to insert new Column.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only the following Control types are allowed to be created as a column tab: $LOW_FORM_CON_TYPE_FORMATTED_FIELD, $LOW_FORM_CON_TYPE_LIST_BOX, $LOW_FORM_CON_TYPE_NUMERIC_FIELD, $LOW_FORM_CON_TYPE_PATTERN_FIELD, $LOW_FORM_CON_TYPE_TEXT_BOX, $LOW_FORM_CON_TYPE_TIME_FIELD
@@ -8483,13 +8483,13 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnAdd
 ; Syntax ........: _LOWriter_FormConTableConColumnDelete(ByRef $oColumn)
 ; Parameters ....: $oColumn             - A Column object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Column was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Column was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oColumn not an Object.
+;                  @Error: 1, @Extended: 1 = $oColumn not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Column's parent.
-;                  @Error 3 @Extended 2 = Failed to delete the Column.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Column's parent.
+;                  @Error: 3, @Extended: 2 = Failed to delete the Column.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -8529,16 +8529,16 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnDelete
 ; Syntax ........: _LOWriter_FormConTableConColumnsGetList(ByRef $oTableCon)
 ; Parameters ....: $oTableCon           - A Table Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning a two column array containing Column objects. See remarks. @Extended is set to the number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a two column array containing Column objects. See remarks. @Extended is set to the number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTableCon not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTableCon not a Table Control Object.
+;                  @Error: 1, @Extended: 1 = $oTableCon not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTableCon not a Table Control Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve count of Columns.
-;                  @Error 3 @Extended 3 = Failed to retrieve Column object.
-;                  @Error 3 @Extended 4 = Failed to identify Column type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve count of Columns.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Column object.
+;                  @Error: 3, @Extended: 4 = Failed to identify Column type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The returned array will contain two columns. The first column ($aArray[0][0], contains the Column object, and the second column ($aArray[0][1], contains the Column type, corresponding to one of the constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -8588,21 +8588,21 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnsGetList
 ;                  $iType               - [optional] (1-5) Default is Null. The type of content to fill the control with. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sListContent        - [optional] Default is Null. Default is Null. The SQL statement, Table Name, etc., depending on the value of $iType.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComboBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oComboBox not a Combo Box Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bEmptyIsNull not a Boolean.
-;                  @Error 1 @Extended 5 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 6 = $iType not an Integer, less than 1 or greater than 5. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $sListContent not a String.
+;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bEmptyIsNull not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iType not an Integer, less than 1 or greater than 5. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $sListContent not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
@@ -8695,33 +8695,33 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComboBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oComboBox not a Combo Box Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
-;                  @Error 1 @Extended 7 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 8 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 10 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 11 = $asList not an Array.
-;                  @Error 1 @Extended 12 = Element contained in $asList not a String. Returning problem element index.
-;                  @Error 1 @Extended 13 = $sDefaultTxt not a String.
-;                  @Error 1 @Extended 14 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 15 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
-;                  @Error 1 @Extended 16 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 17 = $sAddInfo not a String.
-;                  @Error 1 @Extended 18 = $sHelpText not a String.
-;                  @Error 1 @Extended 19 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 7 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 11 = $asList not an Array.
+;                  @Error: 1, @Extended: 12 = Element contained in $asList not a String. Returning problem element index.
+;                  @Error: 1, @Extended: 13 = $sDefaultTxt not a String.
+;                  @Error: 1, @Extended: 14 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 15 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
+;                  @Error: 1, @Extended: 16 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 17 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 18 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 19 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -8947,18 +8947,18 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCurrencyField not a Currency Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -9034,40 +9034,40 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 24 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 24 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCurrencyField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oCurrencyField not a Currency Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 7 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 8 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 10 = $nMin not a Number.
-;                  @Error 1 @Extended 11 = $nMax not a Number.
-;                  @Error 1 @Extended 12 = $iIncr not an Integer.
-;                  @Error 1 @Extended 13 = $nDefault not a Number.
-;                  @Error 1 @Extended 14 = $iDecimal not an Integer, less than 0 or greater than 20.
-;                  @Error 1 @Extended 15 = $bThousandsSep not a Boolean.
-;                  @Error 1 @Extended 16 = $sCurrSymbol not a String.
-;                  @Error 1 @Extended 17 = $bPrefix not a Boolean.
-;                  @Error 1 @Extended 18 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 19 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 20 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 21 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 22 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 23 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 24 = $sAddInfo not a String.
-;                  @Error 1 @Extended 25 = $sHelpText not a String.
-;                  @Error 1 @Extended 26 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oCurrencyField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCurrencyField not a Currency Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $nMin not a Number.
+;                  @Error: 1, @Extended: 11 = $nMax not a Number.
+;                  @Error: 1, @Extended: 12 = $iIncr not an Integer.
+;                  @Error: 1, @Extended: 13 = $nDefault not a Number.
+;                  @Error: 1, @Extended: 14 = $iDecimal not an Integer, less than 0 or greater than 20.
+;                  @Error: 1, @Extended: 15 = $bThousandsSep not a Boolean.
+;                  @Error: 1, @Extended: 16 = $sCurrSymbol not a String.
+;                  @Error: 1, @Extended: 17 = $bPrefix not a Boolean.
+;                  @Error: 1, @Extended: 18 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 19 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 20 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 21 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 22 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 23 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 24 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 25 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 26 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -9378,18 +9378,18 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDateField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oDateField not a Date Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -9462,42 +9462,42 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 21 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 21 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDateField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oDateField not a Date Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 7 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 8 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 10 = $tDateMin not an Object.
-;                  @Error 1 @Extended 11 = $tDateMax not an Object.
-;                  @Error 1 @Extended 12 = $iFormat not an Integer, less then 0 or greater than 11. See Constants $LOW_FORM_CON_DATE_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $tDateDefault not an Object.
-;                  @Error 1 @Extended 14 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 15 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 16 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 17 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 18 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 19 = $bDropdown not a Boolean.
-;                  @Error 1 @Extended 20 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 21 = $sAddInfo not a String.
-;                  @Error 1 @Extended 22 = $sHelpText not a String.
-;                  @Error 1 @Extended 23 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oDateField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oDateField not a Date Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $tDateMin not an Object.
+;                  @Error: 1, @Extended: 11 = $tDateMax not an Object.
+;                  @Error: 1, @Extended: 12 = $iFormat not an Integer, less then 0 or greater than 11. See Constants $LOW_FORM_CON_DATE_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $tDateDefault not an Object.
+;                  @Error: 1, @Extended: 14 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 15 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 16 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 17 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 18 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 19 = $bDropdown not a Boolean.
+;                  @Error: 1, @Extended: 20 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 21 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 22 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 23 = $sHelpURL not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.util.Date" Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
+;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.util.Date" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Minimum Date.
-;                  @Error 3 @Extended 3 = Failed to retrieve current Maximum Date.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Minimum Date.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve current Maximum Date.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -9830,20 +9830,20 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldGeneral
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormatField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oFormatField not a Formatted Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bEmptyIsNull not a Boolean.
-;                  @Error 1 @Extended 5 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 6 = $bFilter not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bEmptyIsNull not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bFilter not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
@@ -9932,38 +9932,38 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormatField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oFormatField not a Formatted Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
-;                  @Error 1 @Extended 7 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 8 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 10 = $nMin not a Number.
-;                  @Error 1 @Extended 11 = $nMax not a Number.
-;                  @Error 1 @Extended 12 = $nDefault not a Number.
-;                  @Error 1 @Extended 13 = $iFormat not an Integer.
-;                  @Error 1 @Extended 14 = Format key called in $iFormat not found in document.
-;                  @Error 1 @Extended 15 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 16 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 17 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 18 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 19 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 20 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 21 = $sAddInfo not a String.
-;                  @Error 1 @Extended 22 = $sHelpText not a String.
-;                  @Error 1 @Extended 23 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 7 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $nMin not a Number.
+;                  @Error: 1, @Extended: 11 = $nMax not a Number.
+;                  @Error: 1, @Extended: 12 = $nDefault not a Number.
+;                  @Error: 1, @Extended: 13 = $iFormat not an Integer.
+;                  @Error: 1, @Extended: 14 = Format key called in $iFormat not found in document.
+;                  @Error: 1, @Extended: 15 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 16 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 17 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 18 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 19 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 20 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 21 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 22 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 23 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve form parent document Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve form parent document Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -10253,33 +10253,33 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTableCon not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTableCon not a Table Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 6 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 7 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 8 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 9 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 10 = $mFont not a Map.
-;                  @Error 1 @Extended 11 = $nRowHeight not a Number, less than -21474836.48 or greater than 21474836.48.
-;                  @Error 1 @Extended 12 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 13 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 14 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 15 = $bNavBar not a Boolean.
-;                  @Error 1 @Extended 16 = $bRecordMarker not a Boolean.
-;                  @Error 1 @Extended 17 = $sAddInfo not a String.
-;                  @Error 1 @Extended 18 = $sHelpText not a String.
-;                  @Error 1 @Extended 19 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oTableCon not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTableCon not a Table Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 10 = $mFont not a Map.
+;                  @Error: 1, @Extended: 11 = $nRowHeight not a Number, less than -21474836.48 or greater than 21474836.48.
+;                  @Error: 1, @Extended: 12 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 13 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 14 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 15 = $bNavBar not a Boolean.
+;                  @Error: 1, @Extended: 16 = $bRecordMarker not a Boolean.
+;                  @Error: 1, @Extended: 17 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 18 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 19 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $iTxtDir
 ;                  |                               4 = Error setting $bEnabled
@@ -10512,22 +10512,22 @@ EndFunc   ;==>_LOWriter_FormConTableConGeneral
 ;                  $asListContent       - [optional] Default is Null. A single dimension array. See remarks
 ;                  $iBoundField         - [optional] (-1-2147483647) Default is Null. The bound data field of a linked table to display.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oListBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oListBox not a List Box Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 5 = $iType not an Integer, less than 0 or greater than 5. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $asListContent not an Array.
-;                  @Error 1 @Extended 7 = $iType not set to Valuelist and array called in $asListContent has more than 1 element.
-;                  @Error 1 @Extended 8 = $iBoundField not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iType not an Integer, less than 0 or greater than 5. See Constants $LOW_FORM_CON_SOURCE_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $asListContent not an Array.
+;                  @Error: 1, @Extended: 7 = $iType not set to Valuelist and array called in $asListContent has more than 1 element.
+;                  @Error: 1, @Extended: 8 = $iBoundField not an Integer, less than -1 or greater than 2147483647.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ;                  |                               4 = Error setting $iType
@@ -10622,33 +10622,33 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oListBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oListBox not a List Box Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 7 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 8 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 9 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 10 = $asList not an Array.
-;                  @Error 1 @Extended 11 = Element contained in $asList not a String. Returning problem element index.
-;                  @Error 1 @Extended 12 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
-;                  @Error 1 @Extended 14 = $aiDefaultSel not an Array.
-;                  @Error 1 @Extended 15 = Element contained in $aiDefaultSel not an Integer. Returning problem element index.
-;                  @Error 1 @Extended 16 = Integer contained in Element of $aiDefaultSel greater than number of List items. Returning problem element index.
-;                  @Error 1 @Extended 17 = $sAddInfo not a String.
-;                  @Error 1 @Extended 18 = $sHelpText not a String.
-;                  @Error 1 @Extended 19 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 8 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 10 = $asList not an Array.
+;                  @Error: 1, @Extended: 11 = Element contained in $asList not a String. Returning problem element index.
+;                  @Error: 1, @Extended: 12 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $iLines not an Integer, less than -2147483648 or greater than 2147483647.
+;                  @Error: 1, @Extended: 14 = $aiDefaultSel not an Array.
+;                  @Error: 1, @Extended: 15 = Element contained in $aiDefaultSel not an Integer. Returning problem element index.
+;                  @Error: 1, @Extended: 16 = Integer contained in Element of $aiDefaultSel greater than number of List items. Returning problem element index.
+;                  @Error: 1, @Extended: 17 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 18 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 19 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -10857,18 +10857,18 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oNumericField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oNumericField not a Numeric Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -10942,38 +10942,38 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 22 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oNumericField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oNumericField not a Numeric Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 7 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 8 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 10 = $nMin not a Number.
-;                  @Error 1 @Extended 11 = $nMax not a Number.
-;                  @Error 1 @Extended 12 = $iIncr not an Integer.
-;                  @Error 1 @Extended 13 = $nDefault not a Number.
-;                  @Error 1 @Extended 14 = $iDecimal not an Integer, less than 0 or greater than 20.
-;                  @Error 1 @Extended 15 = $bThousandsSep not a Boolean.
-;                  @Error 1 @Extended 16 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 17 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 18 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 19 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 20 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 21 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 22 = $sAddInfo not a String.
-;                  @Error 1 @Extended 23 = $sHelpText not a String.
-;                  @Error 1 @Extended 24 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oNumericField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oNumericField not a Numeric Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $nMin not a Number.
+;                  @Error: 1, @Extended: 11 = $nMax not a Number.
+;                  @Error: 1, @Extended: 12 = $iIncr not an Integer.
+;                  @Error: 1, @Extended: 13 = $nDefault not a Number.
+;                  @Error: 1, @Extended: 14 = $iDecimal not an Integer, less than 0 or greater than 20.
+;                  @Error: 1, @Extended: 15 = $bThousandsSep not a Boolean.
+;                  @Error: 1, @Extended: 16 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 17 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 18 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 19 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 20 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 21 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 22 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 23 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 24 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -11263,20 +11263,20 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldGeneral
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPatternField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oPatternField not a Pattern Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bEmptyIsNull not a Boolean.
-;                  @Error 1 @Extended 5 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 6 = $bFilter not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bEmptyIsNull not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bFilter not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
@@ -11362,33 +11362,33 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 17 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPatternField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oPatternField not a Pattern Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
-;                  @Error 1 @Extended 7 = $sEditMask
-;                  @Error 1 @Extended 8 = $sLiteralMask not a String.
-;                  @Error 1 @Extended 9 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 10 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 11 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 14 = $sDefaultTxt not a String.
-;                  @Error 1 @Extended 15 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 16 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 17 = $sAddInfo not a String.
-;                  @Error 1 @Extended 18 = $sHelpText not a String.
-;                  @Error 1 @Extended 19 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oPatternField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oPatternField not a Pattern Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 7 = $sEditMask
+;                  @Error: 1, @Extended: 8 = $sLiteralMask not a String.
+;                  @Error: 1, @Extended: 9 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 14 = $sDefaultTxt not a String.
+;                  @Error: 1, @Extended: 15 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 16 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 17 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 18 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 19 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -11622,20 +11622,20 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldGeneral
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTextBox not a Text Box Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bEmptyIsNull not a Boolean.
-;                  @Error 1 @Extended 5 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 6 = $bFilter not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bEmptyIsNull not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bFilter not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
@@ -11719,31 +11719,31 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 15 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 15 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTextBox not a Text Box Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
-;                  @Error 1 @Extended 7 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 8 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 9 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 10 = $sDefaultTxt not a String.
-;                  @Error 1 @Extended 11 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 12 = $bMultiLine not a Boolean.
-;                  @Error 1 @Extended 13 = $bEndWithLF not a Boolean.
-;                  @Error 1 @Extended 14 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 15 = $sAddInfo not a String.
-;                  @Error 1 @Extended 16 = $sHelpText not a String.
-;                  @Error 1 @Extended 17 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 7 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 10 = $sDefaultTxt not a String.
+;                  @Error: 1, @Extended: 11 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 12 = $bMultiLine not a Boolean.
+;                  @Error: 1, @Extended: 13 = $bEndWithLF not a Boolean.
+;                  @Error: 1, @Extended: 14 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 15 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 16 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 17 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -11960,18 +11960,18 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTimeField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTimeField not a Time Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -12043,41 +12043,41 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 20 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTimeField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTimeField not a Time Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sLabel not a String.
-;                  @Error 1 @Extended 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 7 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 8 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 10 = $tTimeMin not an Object.
-;                  @Error 1 @Extended 11 = $tTimeMax not an Object.
-;                  @Error 1 @Extended 12 = $iFormat not an Integer, less than 0 or greater than 5. See Constants $LOW_FORM_CON_TIME_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $tTimeDefault not an Object.
-;                  @Error 1 @Extended 14 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 15 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 16 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 17 = $iWidth not an Integer, less than 100 or greater than 200,000.
-;                  @Error 1 @Extended 18 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 19 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 20 = $sAddInfo not a String.
-;                  @Error 1 @Extended 21 = $sHelpText not a String.
-;                  @Error 1 @Extended 22 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sLabel not a String.
+;                  @Error: 1, @Extended: 5 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $tTimeMin not an Object.
+;                  @Error: 1, @Extended: 11 = $tTimeMax not an Object.
+;                  @Error: 1, @Extended: 12 = $iFormat not an Integer, less than 0 or greater than 5. See Constants $LOW_FORM_CON_TIME_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $tTimeDefault not an Object.
+;                  @Error: 1, @Extended: 14 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 15 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 16 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 17 = $iWidth not an Integer, less than 100 or greater than 200,000.
+;                  @Error: 1, @Extended: 18 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 19 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 20 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 21 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 22 = $sHelpURL not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.util.Time" Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
+;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.util.Time" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Minimum Time.
-;                  @Error 3 @Extended 3 = Failed to retrieve current Maximum Time.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Minimum Time.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve current Maximum Time.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sLabel
 ;                  |                               4 = Error setting $iTxtDir
@@ -12405,15 +12405,15 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldGeneral
 ; Syntax ........: _LOWriter_FormConTextBoxCreateTextCursor(ByRef $oTextBox)
 ; Parameters ....: $oTextBox            - A Text Box Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the Text Cursor object created in the Text Box.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the Text Cursor object created in the Text Box.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTextBox not a Text Box Control.
+;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a Text Cursor.
+;                  @Error: 2, @Extended: 1 = Failed to create a Text Cursor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify control.
+;                  @Error: 3, @Extended: 1 = Failed to identify control.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I am unable to format text in a Text Box (even manually), even though it is supposed to be possible. Thus formatting may or may not work.
@@ -12447,20 +12447,20 @@ EndFunc   ;==>_LOWriter_FormConTextBoxCreateTextCursor
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ;                  $bFilter             - [optional] Default is Null. If True, filter proposal is active.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTextBox not a Text Box Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bEmptyIsNull not a Boolean.
-;                  @Error 1 @Extended 5 = $bInputRequired not a Boolean.
-;                  @Error 1 @Extended 6 = $bFilter not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bEmptyIsNull not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bFilter not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bEmptyIsNull
 ;                  |                               4 = Error setting $bInputRequired
@@ -12554,42 +12554,42 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextBox not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTextBox not a Text Box Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
-;                  @Error 1 @Extended 8 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 9 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 10 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 11 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 12 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 13 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 14 = $sDefaultTxt not a String.
-;                  @Error 1 @Extended 15 = $mFont not a Map.
-;                  @Error 1 @Extended 16 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 17 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 18 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 19 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 20 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 21 = $iTextType not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 22 = $bEndWithLF not a Boolean.
-;                  @Error 1 @Extended 23 = $iScrollbars not an Integer, less than 0 or greater than 3. See Constants $LOW_FORM_CON_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 24 = $iPassChar not an Integer.
-;                  @Error 1 @Extended 25 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 26 = $sAddInfo not a String.
-;                  @Error 1 @Extended 27 = $sHelpText not a String.
-;                  @Error 1 @Extended 28 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oTextBox not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTextBox not a Text Box Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iMaxLen not an Integer, less than -1 or greater than 2147483647.
+;                  @Error: 1, @Extended: 8 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 12 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 13 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 14 = $sDefaultTxt not a String.
+;                  @Error: 1, @Extended: 15 = $mFont not a Map.
+;                  @Error: 1, @Extended: 16 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 17 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 18 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 19 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 20 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 21 = $iTextType not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 22 = $bEndWithLF not a Boolean.
+;                  @Error: 1, @Extended: 23 = $iScrollbars not an Integer, less than 0 or greater than 3. See Constants $LOW_FORM_CON_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 24 = $iPassChar not an Integer.
+;                  @Error: 1, @Extended: 25 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 26 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 27 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 28 = $sHelpURL not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -12960,18 +12960,18 @@ EndFunc   ;==>_LOWriter_FormConTextBoxGeneral
 ;                  $sDataField          - [optional] Default is Null. The Datafield name to retrieve content from, either a Table name, SQL query, or other.
 ;                  $bInputRequired      - [optional] Default is Null. If True, the control requires input.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTimeField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTimeField not a Time Field Control.
-;                  @Error 1 @Extended 3 = $sDataField not a String.
-;                  @Error 1 @Extended 4 = $bInputRequired not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
+;                  @Error: 1, @Extended: 3 = $sDataField not a String.
+;                  @Error: 1, @Extended: 4 = $bInputRequired not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sDataField
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
@@ -13051,50 +13051,50 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ;                  $sHelpText           - [optional] Default is Null. The Help text.
 ;                  $sHelpURL            - [optional] Default is Null. The Help URL.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 28 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTimeField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTimeField not a Time Field Control.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $oLabelField not an Object.
-;                  @Error 1 @Extended 5 = Object called in $oLabelField not a Label Control.
-;                  @Error 1 @Extended 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $bStrict not a Boolean.
-;                  @Error 1 @Extended 8 = $bEnabled not a Boolean.
-;                  @Error 1 @Extended 9 = $bVisible not a Boolean.
-;                  @Error 1 @Extended 10 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 11 = $bPrintable not a Boolean.
-;                  @Error 1 @Extended 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 13 = $bTabStop not a Boolean.
-;                  @Error 1 @Extended 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 15 = $tTimeMin not an Object.
-;                  @Error 1 @Extended 16 = $tTimeMax not an Object.
-;                  @Error 1 @Extended 17 = $iFormat not an Integer, less than 0 or greater than 5. See Constants $LOW_FORM_CON_TIME_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 18 = $tTimeDefault not an Object.
-;                  @Error 1 @Extended 19 = $bSpin not a Boolean.
-;                  @Error 1 @Extended 20 = $bRepeat not a Boolean.
-;                  @Error 1 @Extended 21 = $iDelay not an Integer, less than 0 or greater than 2147483647.
-;                  @Error 1 @Extended 22 = $mFont not a Map.
-;                  @Error 1 @Extended 23 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 24 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 25 = $iBackColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 26 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 27 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 28 = $bHideSel not a Boolean.
-;                  @Error 1 @Extended 29 = $sAddInfo not a String.
-;                  @Error 1 @Extended 30 = $sHelpText not a String.
-;                  @Error 1 @Extended 31 = $sHelpURL not a String.
+;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $oLabelField not an Object.
+;                  @Error: 1, @Extended: 5 = Object called in $oLabelField not a Label Control.
+;                  @Error: 1, @Extended: 6 = $iTxtDir not an Integer, less than 0 or greater than 5. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bStrict not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bEnabled not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iMouseScroll not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 13 = $bTabStop not a Boolean.
+;                  @Error: 1, @Extended: 14 = $iTabOrder not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 15 = $tTimeMin not an Object.
+;                  @Error: 1, @Extended: 16 = $tTimeMax not an Object.
+;                  @Error: 1, @Extended: 17 = $iFormat not an Integer, less than 0 or greater than 5. See Constants $LOW_FORM_CON_TIME_FRMT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 18 = $tTimeDefault not an Object.
+;                  @Error: 1, @Extended: 19 = $bSpin not a Boolean.
+;                  @Error: 1, @Extended: 20 = $bRepeat not a Boolean.
+;                  @Error: 1, @Extended: 21 = $iDelay not an Integer, less than 0 or greater than 2147483647.
+;                  @Error: 1, @Extended: 22 = $mFont not a Map.
+;                  @Error: 1, @Extended: 23 = $iAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 24 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 25 = $iBackColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 26 = $iBorder not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CON_BORDER_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 27 = $iBorderColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 28 = $bHideSel not a Boolean.
+;                  @Error: 1, @Extended: 29 = $sAddInfo not a String.
+;                  @Error: 1, @Extended: 30 = $sHelpText not a String.
+;                  @Error: 1, @Extended: 31 = $sHelpURL not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.util.Time" Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
+;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.util.Time" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Minimum Time.
-;                  @Error 3 @Extended 3 = Failed to retrieve current Maximum Time.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Minimum Time.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve current Maximum Time.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $oLabelField
 ;                  |                               4 = Error setting $iTxtDir
@@ -13514,20 +13514,20 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldGeneral
 ; Parameters ....: $oTimeField          - A Time Field Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
 ;                  $tTimeValue          - [optional] Default is Null. The time value to set the field to, created previously by _LOWriter_DateStructCreate.
 ; Return values .: Success: 1 or Structure
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Structure = Success. All optional parameters were called with Null, returning current Time value as a Time Structure.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Structure = Success. All optional parameters were called with Null, returning current Time value as a Time Structure.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTimeField not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oTimeField not a Time Field Control.
-;                  @Error 1 @Extended 3 = $tTimeValue not an Object.
+;                  @Error: 1, @Extended: 1 = $oTimeField not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oTimeField not a Time Field Control.
+;                  @Error: 1, @Extended: 3 = $tTimeValue not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
-;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.util.Time" Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.util.DateTime" Struct.
+;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.util.Time" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify Control type.
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $tTimeValue
 ; Author ........: donnyh13
 ; Modified ......:
@@ -13595,18 +13595,18 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldValue
 ; Syntax ........: _LOWriter_FormDelete(ByRef $oForm)
 ; Parameters ....: $oForm               - A Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Form was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oForm not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oForm not a Form Object.
+;                  @Error: 1, @Extended: 1 = $oForm not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oForm not a Form Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve parent Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve parent Document Object.
-;                  @Error 3 @Extended 3 = Parent Document is Read Only.
-;                  @Error 3 @Extended 4 = Failed to retrieve Forms Object.
-;                  @Error 3 @Extended 5 = Failed to modify Form name.
-;                  @Error 3 @Extended 6 = Failed to delete form.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve parent Document Object.
+;                  @Error: 3, @Extended: 3 = Parent Document is Read Only.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Forms Object.
+;                  @Error: 3, @Extended: 5 = Failed to modify Form name.
+;                  @Error: 3, @Extended: 6 = Failed to delete form.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -13670,23 +13670,23 @@ EndFunc   ;==>_LOWriter_FormDelete
 ;                  $bAutoControlFocus   - [optional] Default is Null. If True, the first Form control will have the focus upon opening the document.
 ;                  $bUseControlWizards  - [optional] Default is Null. If True, Control Wizards will be used.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bFormDesignMode not a Boolean.
-;                  @Error 1 @Extended 3 = $bOpenInDesignMode not a Boolean.
-;                  @Error 1 @Extended 4 = $bAutoControlFocus not a Boolean.
-;                  @Error 1 @Extended 5 = $bUseControlWizards not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bFormDesignMode not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bOpenInDesignMode not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bAutoControlFocus not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bUseControlWizards not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Standard Macro library Object.
-;                  @Error 3 @Extended 2 = Failed to create a Macro Library.
-;                  @Error 3 @Extended 3 = Failed to retrieve Macro Script Object.
-;                  @Error 3 @Extended 4 = Failed to delete Macro Library.
-;                  @Error 3 @Extended 5 = Failed to execute a Document toggle control dispatch.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Standard Macro library Object.
+;                  @Error: 3, @Extended: 2 = Failed to create a Macro Library.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Macro Script Object.
+;                  @Error: 3, @Extended: 4 = Failed to delete Macro Library.
+;                  @Error: 3, @Extended: 5 = Failed to execute a Document toggle control dispatch.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bFormDesignMode
 ;                  |                               2 = Error setting $bOpenInDesignMode
 ;                  |                               4 = Error setting $bAutoControlFocus
@@ -13860,15 +13860,15 @@ EndFunc   ;==>_LOWriter_FormDocSettings
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ;                  $iForm               - The Index value of the Form to retrieve. 0 Based.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested form Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested form Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iForm not an Integer, less than 0 or greater then number of forms contained in object.
-;                  @Error 1 @Extended 3 = Called Object in $oObj, not a Document Object, and not a Form Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iForm not an Integer, less than 0 or greater then number of forms contained in object.
+;                  @Error: 1, @Extended: 3 = Called Object in $oObj, not a Document Object, and not a Form Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve a count of forms.
-;                  @Error 3 @Extended 2 = Failed to retrieve Form Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve a count of forms.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Form Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -13918,29 +13918,29 @@ EndFunc   ;==>_LOWriter_FormGetObjByIndex
 ; Parameters ....: $oForm               - A Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ;                  $oParent             - [optional] Default is Null. A Document or Form object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: 1 or Object
-;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully moved, Object called in $oForm has been updated to new Object.
-;                  @Error 0 @Extended 1 Return Object = Success. Returning Form's parent Object, which is a Document Object.
-;                  @Error 0 @Extended 2 Return Object = Success. Returning Form's parent Object, which is a Form Object.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Form was successfully moved, Object called in $oForm has been updated to new Object.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. Returning Form's parent Object, which is a Document Object.
+;                  @Error: 0, @Extended: 2, Return: Object = Success. Returning Form's parent Object, which is a Form Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oForm not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oForm not a Form Object.
-;                  @Error 1 @Extended 3 = $oParent not an Object.
-;                  @Error 1 @Extended 4 = Object called in $oParent not an Form and not a Document.
-;                  @Error 1 @Extended 5 = Destination called in $oParent is the same as form's current parent.
-;                  @Error 1 @Extended 6 = Destination called in $oParent is the same as form called in $oForm.
+;                  @Error: 1, @Extended: 1 = $oForm not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oForm not a Form Object.
+;                  @Error: 1, @Extended: 3 = $oParent not an Object.
+;                  @Error: 1, @Extended: 4 = Object called in $oParent not an Form and not a Document.
+;                  @Error: 1, @Extended: 5 = Destination called in $oParent is the same as form's current parent.
+;                  @Error: 1, @Extended: 6 = Destination called in $oParent is the same as form called in $oForm.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to clone the form Object.
+;                  @Error: 2, @Extended: 1 = Failed to clone the form Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form's parent Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Document's Forms Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Destination Parent Object.
-;                  @Error 3 @Extended 4 = Failed to retrieve Form's name.
-;                  @Error 3 @Extended 5 = Failed to rename Form.
-;                  @Error 3 @Extended 6 = Failed to insert cloned form into destination.
-;                  @Error 3 @Extended 7 = Failed to delete original form.
-;                  @Error 3 @Extended 8 = Failed to retrieve new form's Object.
-;                  @Error 3 @Extended 9 = Failed to set form's name back to original name.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form's parent Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Document's Forms Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Destination Parent Object.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Form's name.
+;                  @Error: 3, @Extended: 5 = Failed to rename Form.
+;                  @Error: 3, @Extended: 6 = Failed to insert cloned form into destination.
+;                  @Error: 3, @Extended: 7 = Failed to delete original form.
+;                  @Error: 3, @Extended: 8 = Failed to retrieve new form's Object.
+;                  @Error: 3, @Extended: 9 = Failed to set form's name back to original name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function allows you to change a sub-form into being a top-level form, change a top-level form into being a sub-form, or move a sub-form to be a sub-form of another form.
@@ -14041,35 +14041,35 @@ EndFunc   ;==>_LOWriter_FormParent
 ;                  $iNavBar             - [optional] (0-2) Default is Null. The Navigation Bar mode. See Constants $LOW_FORM_NAV_BAR_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iCycle              - [optional] (0-2) Default is Null. What happens when you press the Tab key at the end of a record. See remarks. See Constants $LOW_FORM_CYCLE_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oForm not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oForm not a Form Object.
-;                  @Error 1 @Extended 3 = $sSource not a String.
-;                  @Error 1 @Extended 4 = Source called in $sSource not a registered Database, and file does not exist.
-;                  @Error 1 @Extended 5 = $iContentType not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CONTENT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $sContent not a String.
-;                  @Error 1 @Extended 7 = $bAnalyzeSQL not a Boolean.
-;                  @Error 1 @Extended 8 = $sFilter not a String.
-;                  @Error 1 @Extended 9 = $sSort not a String.
-;                  @Error 1 @Extended 10 = $aLinkMaster not an Array.
-;                  @Error 1 @Extended 11 = $aLinkSlave not an Array.
-;                  @Error 1 @Extended 12 = $bAdditions not a Boolean.
-;                  @Error 1 @Extended 13 = $bModifications not a Boolean.
-;                  @Error 1 @Extended 14 = $bDeletions not a Boolean.
-;                  @Error 1 @Extended 15 = $bAddOnly not a Boolean.
-;                  @Error 1 @Extended 16 = $iNavBar not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_NAV_BAR_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 17 = $iCycle not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CYCLE_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oForm not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oForm not a Form Object.
+;                  @Error: 1, @Extended: 3 = $sSource not a String.
+;                  @Error: 1, @Extended: 4 = Source called in $sSource not a registered Database, and file does not exist.
+;                  @Error: 1, @Extended: 5 = $iContentType not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CONTENT_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $sContent not a String.
+;                  @Error: 1, @Extended: 7 = $bAnalyzeSQL not a Boolean.
+;                  @Error: 1, @Extended: 8 = $sFilter not a String.
+;                  @Error: 1, @Extended: 9 = $sSort not a String.
+;                  @Error: 1, @Extended: 10 = $aLinkMaster not an Array.
+;                  @Error: 1, @Extended: 11 = $aLinkSlave not an Array.
+;                  @Error: 1, @Extended: 12 = $bAdditions not a Boolean.
+;                  @Error: 1, @Extended: 13 = $bModifications not a Boolean.
+;                  @Error: 1, @Extended: 14 = $bDeletions not a Boolean.
+;                  @Error: 1, @Extended: 15 = $bAddOnly not a Boolean.
+;                  @Error: 1, @Extended: 16 = $iNavBar not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_NAV_BAR_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 17 = $iCycle not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_CYCLE_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 = Failed to create "com.sun.star.sdb.DatabaseContext" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Failed to create "com.sun.star.sdb.DatabaseContext" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Data Source Name.
-;                  @Error 3 @Extended 2 = Failed to convert path to URL for Data Source.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Data Source Name.
+;                  @Error: 3, @Extended: 2 = Failed to convert path to URL for Data Source.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sSource
 ;                  |                               2 = Error setting $iContentType
 ;                  |                               4 = Error setting $sContent
@@ -14241,20 +14241,20 @@ EndFunc   ;==>_LOWriter_FormPropertiesData
 ;                  $iEncoding           - [optional] (0-2) Default is Null. The type of encoding for the data transfer. See Constants $LOW_FORM_SUBMIT_ENCODING_* as defined in LibreOfficeWriter_Constants.au3
 ;                  $iSubType            - [optional] (0-1) Default is Null. The method to submit the completed form. See Constants $LOW_FORM_SUBMIT_METHOD_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oForm not an Object.
-;                  @Error 1 @Extended 2 = Object called in $oForm not a Form Object.
-;                  @Error 1 @Extended 3 = $sName not a String.
-;                  @Error 1 @Extended 4 = $sURL not a String.
-;                  @Error 1 @Extended 5 = $sFrame not a String.
-;                  @Error 1 @Extended 6 = $sFrame not called with correct constant. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 = $iEncoding not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_SUBMIT_ENCODING_* as defined in LibreOfficeWriter_Constants.au3
-;                  @Error 1 @Extended 8 = $iSubType not an Integer, less than 0 or greater than 1. See Constants $LOW_FORM_SUBMIT_METHOD_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error: 1, @Extended: 1 = $oForm not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oForm not a Form Object.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sURL not a String.
+;                  @Error: 1, @Extended: 5 = $sFrame not a String.
+;                  @Error: 1, @Extended: 6 = $sFrame not called with correct constant. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iEncoding not an Integer, less than 0 or greater than 2. See Constants $LOW_FORM_SUBMIT_ENCODING_* as defined in LibreOfficeWriter_Constants.au3
+;                  @Error: 1, @Extended: 8 = $iSubType not an Integer, less than 0 or greater than 1. See Constants $LOW_FORM_SUBMIT_METHOD_* as defined in LibreOfficeWriter_Constants.au3
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sURL
 ;                  |                               4 = Error setting $sFrame
@@ -14331,13 +14331,13 @@ EndFunc   ;==>_LOWriter_FormPropertiesGeneral
 ; Syntax ........: _LOWriter_FormsGetCount(ByRef $oObj)
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning a count of Forms contained in the Object.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning a count of Forms contained in the Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = Called Object in $oObj, not a Document Object, and not a Form Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = Called Object in $oObj, not a Document Object, and not a Form Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve a count of forms.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve a count of forms.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $oObj is called with a Document object, a count of top level forms will be returned. If a Form object is called, a count of all sub-forms for the form wil be returned.
@@ -14376,13 +14376,13 @@ EndFunc   ;==>_LOWriter_FormsGetCount
 ; Syntax ........: _LOWriter_FormsGetList(ByRef $oObj)
 ; Parameters ....: $oObj                - Either a Document Object or a Form object. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning an array of Form Objects. @Extended is set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Form Objects. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = Called Object in $oObj, not a Document Object, and not a Form Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = Called Object in $oObj, not a Document Object, and not a Form Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve form Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve form Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $oObj is called with a Document object, an array of top level forms will be returned. If a Form object is called, all sub-forms for the form will be returned.

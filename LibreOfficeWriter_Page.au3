@@ -90,18 +90,18 @@
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Background color.
-;                  @Error 3 @Extended 2 = Failed to retrieve old Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Background color.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
@@ -146,12 +146,12 @@ EndFunc   ;==>_LOWriter_PageStyleAreaColor
 ; Syntax ........: _LOWriter_PageStyleAreaFillStyle(ByRef $oPageStyle)
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Fill Style.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
@@ -192,32 +192,32 @@ EndFunc   ;==>_LOWriter_PageStyleAreaFillStyle
 ;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
 ;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 3 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 4 = $sGradientName Not a String.
-;                  @Error 1 @Extended 5 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iIncrement Not an Integer, less than 3 but not 0, or greater than 256.
-;                  @Error 1 @Extended 7 = $iXCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iYCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iAngle Not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 10 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 11 = $iFromColor Not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 = $iToColor Not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 13 = $iFromIntense Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 14 = $iToIntense Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 4 = $sGradientName Not a String.
+;                  @Error: 1, @Extended: 5 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iIncrement Not an Integer, less than 3 but not 0, or greater than 256.
+;                  @Error: 1, @Extended: 7 = $iXCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iYCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iAngle Not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 10 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 11 = $iFromColor Not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 12 = $iToColor Not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 13 = $iFromIntense Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 14 = $iToIntense Not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Error creating Gradient Name.
-;                  @Error 3 @Extended 4 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -410,27 +410,27 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradient
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 4 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -520,17 +520,17 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradientMulticolor
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
@@ -579,28 +579,28 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparency
 ;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 3 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 4 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 8 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 = $iEnd not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 8 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 10 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 4 = Error setting Transparency Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -760,27 +760,27 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradient
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 4 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillTransparenceGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -873,32 +873,32 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradientMulti
 ;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 3 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 5 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error: 3, @Extended: 3 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
@@ -937,19 +937,19 @@ EndFunc   ;==>_LOWriter_PageStyleBorderColor
 ;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iAll not an Integer.
-;                  @Error 1 @Extended 4 = $iTop not an Integer.
-;                  @Error 1 @Extended 5 = $iBottom not an Integer.
-;                  @Error 1 @Extended 6 = $Left not an Integer.
-;                  @Error 1 @Extended 7 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iAll not an Integer.
+;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 6 = $Left not an Integer.
+;                  @Error: 1, @Extended: 7 = $iRight not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
@@ -1028,32 +1028,32 @@ EndFunc   ;==>_LOWriter_PageStyleBorderPadding
 ;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Page. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Page. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error: 3, @Extended: 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
@@ -1091,28 +1091,28 @@ EndFunc   ;==>_LOWriter_PageStyleBorderStyle
 ;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Page in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 = $iRight not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 3.4.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
@@ -1152,22 +1152,22 @@ EndFunc   ;==>_LOWriter_PageStyleBorderWidth
 ;                  $iHeight             - [optional] (0-100) Default is Null. The length of the separator line as a percentage of the height of the column area.
 ;                  $iPosition           - [optional] (0-2) Default is Null. The vertical alignment of the separator line. This option is only available if Height value of the line is less than 100%. See Constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $bSeparatorOn not a Boolean value.
-;                  @Error 1 @Extended 4 = $iStyle not an Integer, less than 0 or greater than 3. See constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iWidth not an Integer, less than 5 or greater than 180.
-;                  @Error 1 @Extended 6 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 7 = $iHeight not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $bSeparatorOn not a Boolean value.
+;                  @Error: 1, @Extended: 4 = $iStyle not an Integer, less than 0 or greater than 3. See constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iWidth not an Integer, less than 5 or greater than 180.
+;                  @Error: 1, @Extended: 6 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 7 = $iHeight not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Text Columns Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Columns Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bSeparatorOn
 ;                  |                               2 = Error setting $iStyle
 ;                  |                               4 = Error setting $iWidth
@@ -1257,18 +1257,18 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSeparator
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iColumns            - [optional] Default is Null. The number of columns that you want in the page. Minimum 1.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current column count.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current column count.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iColumns not an Integer, or less than 1.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iColumns not an Integer, or less than 1.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve count of Text Columns.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Columns Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve count of Text Columns.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColumns
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1319,24 +1319,24 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSettings
 ;                  $iSpacing            - [optional] Default is Null. The Space between two columns, in Hundredths of a Millimeter (HMM). Cannot be set for the last column.
 ;                  $iWidth              - [optional] Default is Null. If $iGlobalSpacing is set to other than 0, enter the width of the column. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iColumn not an Integer.
-;                  @Error 1 @Extended 4 = $iColumn greater than number of columns in the document or less than 1.
-;                  @Error 1 @Extended 5 = $bAutoWidth not a Boolean.
-;                  @Error 1 @Extended 6 = $iGlobalSpacing not an Integer.
-;                  @Error 1 @Extended 7 = $iSpacing not an Integer.
-;                  @Error 1 @Extended 8 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iColumn not an Integer.
+;                  @Error: 1, @Extended: 4 = $iColumn greater than number of columns in the document or less than 1.
+;                  @Error: 1, @Extended: 5 = $bAutoWidth not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iGlobalSpacing not an Integer.
+;                  @Error: 1, @Extended: 7 = $iSpacing not an Integer.
+;                  @Error: 1, @Extended: 8 = $iWidth not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 = Error retrieving Page Style Column Object Array.
-;                  @Error 3 @Extended 3 = No columns present for requested Page Style.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Columns Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Page Style Column Object Array.
+;                  @Error: 3, @Extended: 3 = No columns present for requested Page Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoWidth
 ;                  |                               2 = Error setting $iGlobalSpacing
 ;                  |                               4 = Error setting $iSpacing
@@ -1480,18 +1480,18 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSize
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sPageStyle          - The Name of the new Page Style to create.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. New page Style successfully created. Returning its Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. New page Style successfully created. Returning its Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sPageStyle not a String.
-;                  @Error 1 @Extended 3 = Page Style name called in $sPageStyle already exists in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sPageStyle not a String.
+;                  @Error: 1, @Extended: 3 = Page Style name called in $sPageStyle already exists in document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating "com.sun.star.style.PageStyle" Object.
+;                  @Error: 2, @Extended: 1 = Error Creating "com.sun.star.style.PageStyle" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error Retrieving "PageStyle" Object.
-;                  @Error 3 @Extended 2 = Error creating new Page Style by name.
-;                  @Error 3 @Extended 3 = Error Retrieving Created Page Style Object.
+;                  @Error: 3, @Extended: 1 = Error Retrieving "PageStyle" Object.
+;                  @Error: 3, @Extended: 2 = Error creating new Page Style by name.
+;                  @Error: 3, @Extended: 3 = Error Retrieving Created Page Style Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1533,19 +1533,19 @@ EndFunc   ;==>_LOWriter_PageStyleCreate
 ;                  $oObj                - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object returned from _LOWriter_CursorParObjCreateList function.
 ;                  $sPageStyle          - [optional] Default is Null. The Page Style name to set the Page to.
 ; Return values .: Success: 1 or String.
-;                  @Error 0 @Extended 0 Return 1 = Success. Page Style successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current Page Style set for the selection.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Page Style successfully set.
+;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current Page Style set for the selection.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oObj not an Object.
-;                  @Error 1 @Extended 3 = $oObj does not support Paragraph Properties Service.
-;                  @Error 1 @Extended 4 = $sPageStyle not a String.
-;                  @Error 1 @Extended 5 = Page Style called in $sPageStyle doesn't exist in Document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oObj not an Object.
+;                  @Error: 1, @Extended: 3 = $oObj does not support Paragraph Properties Service.
+;                  @Error: 1, @Extended: 4 = $sPageStyle not a String.
+;                  @Error: 1, @Extended: 5 = Page Style called in $sPageStyle doesn't exist in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Page Style.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Page Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sPageStyle
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1588,18 +1588,18 @@ EndFunc   ;==>_LOWriter_PageStyleCurrent
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function. Must be User-Created, not a built-in Style native to LibreOffice.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Page Style called in $oPageStyle was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Page Style called in $oPageStyle was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 3 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oPageStyle not a Page Style Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving "PageStyles" Object.
-;                  @Error 3 @Extended 2 = Error retrieving Page Style Name.
-;                  @Error 3 @Extended 3 = $oPageStyle is not a User-Created Page Style and cannot be deleted.
-;                  @Error 3 @Extended 4 = $oPageStyle is in use and cannot be deleted.
-;                  @Error 3 @Extended 5 = $oPageStyle still exists after deletion attempt.
+;                  @Error: 3, @Extended: 1 = Error retrieving "PageStyles" Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Page Style Name.
+;                  @Error: 3, @Extended: 3 = $oPageStyle is not a User-Created Page Style and cannot be deleted.
+;                  @Error: 3, @Extended: 4 = $oPageStyle is in use and cannot be deleted.
+;                  @Error: 3, @Extended: 5 = $oPageStyle still exists after deletion attempt.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1641,11 +1641,11 @@ EndFunc   ;==>_LOWriter_PageStyleDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sPageStyle          - The Page Style Name to search for.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. If Page Style name exists, then True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If Page Style name exists, then True is returned, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object,
-;                  @Error 1 @Extended 2 = $sPageStyle not a String
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object,
+;                  @Error: 1, @Extended: 2 = $sPageStyle not a String
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1680,23 +1680,23 @@ EndFunc   ;==>_LOWriter_PageStyleExists
 ;                  $iHeight             - [optional] Default is Null. The height of the footer. Set in Hundredths of a Millimeter (HMM).
 ;                  $bAutoHeight         - [optional] Default is Null. If True, automatically adjusts the height of the footer to fit the contents.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, the $bSameOnFirst parameter will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, the $bSameOnFirst parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $bFooterOn not a Boolean value.
-;                  @Error 1 @Extended 4 = $bSameLeftRight not a Boolean value.
-;                  @Error 1 @Extended 5 = $bSameOnFirst not a Boolean value.
-;                  @Error 1 @Extended 6 = $iLeftMargin not an Integer.
-;                  @Error 1 @Extended 7 = $iRightMargin not an Integer.
-;                  @Error 1 @Extended 8 = $iSpacing not an Integer.
-;                  @Error 1 @Extended 9 = $bDynamicSpacing not a Boolean value.
-;                  @Error 1 @Extended 10 = $iHeight not an Integer.
-;                  @Error 1 @Extended 11 = $bAutoHeight not a Boolean value.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $bFooterOn not a Boolean value.
+;                  @Error: 1, @Extended: 4 = $bSameLeftRight not a Boolean value.
+;                  @Error: 1, @Extended: 5 = $bSameOnFirst not a Boolean value.
+;                  @Error: 1, @Extended: 6 = $iLeftMargin not an Integer.
+;                  @Error: 1, @Extended: 7 = $iRightMargin not an Integer.
+;                  @Error: 1, @Extended: 8 = $iSpacing not an Integer.
+;                  @Error: 1, @Extended: 9 = $bDynamicSpacing not a Boolean value.
+;                  @Error: 1, @Extended: 10 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 11 = $bAutoHeight not a Boolean value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bFooterOn
 ;                  |                               2 = Error setting $bSameLeftRight
 ;                  |                               4 = Error setting $bSameOnFirst
@@ -1707,7 +1707,7 @@ EndFunc   ;==>_LOWriter_PageStyleExists
 ;                  |                               128 = Error setting $iHeight
 ;                  |                               256 = Error setting $bAutoHeight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.0.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1815,19 +1815,19 @@ EndFunc   ;==>_LOWriter_PageStyleFooter
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Footers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Background color.
-;                  @Error 3 @Extended 3 = Failed to retrieve old Transparency value.
+;                  @Error: 3, @Extended: 1 = Footers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Background color.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1873,12 +1873,12 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaColor
 ; Syntax ........: _LOWriter_PageStyleFooterAreaFillStyle(ByRef $oPageStyle)
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Fill Style.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
@@ -1919,33 +1919,33 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaFillStyle
 ;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in "From Color", where 0% corresponds to black, and 100 % to the selected color.
 ;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 3 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 4 = $sGradientName not a String.
-;                  @Error 1 @Extended 5 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
-;                  @Error 1 @Extended 7 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 10 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 11 = $iFromColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 = $iToColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 13 = $iFromIntense not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 14 = $iToIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 4 = $sGradientName not a String.
+;                  @Error: 1, @Extended: 5 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
+;                  @Error: 1, @Extended: 7 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 10 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 11 = $iFromColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 12 = $iToColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 13 = $iFromIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 14 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Footers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 4 = Error creating Gradient Name.
-;                  @Error 3 @Extended 5 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 1 = Footers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Error retrieving "FillGradient" Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 4 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 5 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -2139,27 +2139,27 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradient
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 4 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve FooterFillGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FooterFillGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -2249,18 +2249,18 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradientMulticolor
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency percentage. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Footers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Transparency value.
+;                  @Error: 3, @Extended: 1 = Footers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2310,29 +2310,29 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparency
 ;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 3 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 4 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iXCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 = $iYCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 = $iAngle Not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 8 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 = $iEnd Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 4 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iXCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iYCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iAngle Not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 8 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iStart Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 10 = $iEnd Not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Footers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 4 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 5 = Error setting Transparency Gradient Name.
+;                  @Error: 3, @Extended: 1 = Footers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 4 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 5 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -2493,27 +2493,27 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparencyGradient
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 4 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve FooterFillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FooterFillTransparenceGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -2606,27 +2606,27 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparencyGradientMulti
 ;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Footers are not enabled for this Page Style.
-;                  @Error 3 @Extended 3 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 4 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 5 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 6 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Footers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 3 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error: 3, @Extended: 6 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -2669,21 +2669,21 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderColor
 ;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Page contents in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array, see Remarks.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iAll not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 = $Left not an Integer, or less than 0.
-;                  @Error 1 @Extended 7 = $iRight not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iAll not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 4 = $iTop not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 6 = $Left not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 7 = $iRight not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Footers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 1 = Footers are not enabled for this Page Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
@@ -2763,27 +2763,27 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderPadding
 ;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Page Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Page Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Footers are not enabled for this Page Style.
-;                  @Error 3 @Extended 3 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 4 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 5 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 6 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Footers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 3 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error: 3, @Extended: 6 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -2825,23 +2825,23 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderStyle
 ;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 = $iRight not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Footers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Footers are not enabled for this Page Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -2883,16 +2883,16 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderWidth
 ;                  $bLeftPage           - [optional] Default is False. If True, creates a text cursor for Left pages in the Footer. See Remarks.
 ;                  $bRightPage          - [optional] Default is False. If True, creates a text cursor for Right pages in the Footer. See Remarks.
 ; Return values .: Success: Object or Array.
-;                  @Error 0 @Extended 0 Return Array = Success. See Remarks.
-;                  @Error 0 @Extended 1 Return Object = Success. See Remarks.
+;                  @Error: 0, @Extended: 0, Return: Array = Success. See Remarks.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. See Remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $bFooter not a Boolean value.
-;                  @Error 1 @Extended 3 = $bFirstPage not a Boolean value.
-;                  @Error 1 @Extended 4 = $bLeftPage not a Boolean value.
-;                  @Error 1 @Extended 5 = $bRightPage not a Boolean value.
-;                  @Error 1 @Extended 6 = No parameters called with True.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $bFooter not a Boolean value.
+;                  @Error: 1, @Extended: 3 = $bFirstPage not a Boolean value.
+;                  @Error: 1, @Extended: 4 = $bLeftPage not a Boolean value.
+;                  @Error: 1, @Extended: 5 = $bRightPage not a Boolean value.
+;                  @Error: 1, @Extended: 6 = No parameters called with True.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If more than one parameter is called with True, an array is returned with the requested objects in the order that the True parameters are listed. Else the requested object is returned.
@@ -2946,21 +2946,21 @@ EndFunc   ;==>_LOWriter_PageStyleFooterCreateTextCursor
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Color of the Footer shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] Default is Null. The Shadow Width of the footer, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iWidth not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Footers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Error retrieving ShadowFormat Object.
-;                  @Error 3 @Extended 3 = Error retrieving ShadowFormat Object for Error checking.
+;                  @Error: 3, @Extended: 1 = Footers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Error retrieving ShadowFormat Object.
+;                  @Error: 3, @Extended: 3 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -3032,16 +3032,16 @@ EndFunc   ;==>_LOWriter_PageStyleFooterShadow
 ;                  $iFootnoteHeight     - [optional] Default is Null. The maximum height for the footnote area. Set in Hundredths of a Millimeter (HMM). Enter 0 for "Not larger than page", else minimum 508.
 ;                  $iSpaceToText        - [optional] Default is Null. The amount of space to leave between the bottom page margin and the first line of text in the footnote area. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iFootnoteHeight not an Integer, less than 508, but not 0.
-;                  @Error 1 @Extended 4 = $iSpaceToText not an Integer.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iFootnoteHeight not an Integer, less than 508, but not 0.
+;                  @Error: 1, @Extended: 4 = $iSpaceToText not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iFootnoteHeight
 ;                  |                               2 = Error setting $iSpaceToText
 ; Author ........: donnyh13
@@ -3097,22 +3097,22 @@ EndFunc   ;==>_LOWriter_PageStyleFootnoteArea
 ;                  $iLength             - [optional] (0-100) Default is Null. The length of the separator line as a percentage of the page width area.
 ;                  $iSpacing            - [optional] Default is Null. The amount of space to leave between the separator line and the first line of the footnote area. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iPosition not an Integer, less than 0 or greater than 2. See Constants, $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iStyle not an Integer, less than 0 or greater than 3. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $nThickness not a Number, less than 0 or greater than 9.
-;                  @Error 1 @Extended 6 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 7 = $iLength not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iSpacing not an Integer.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iPosition not an Integer, less than 0 or greater than 2. See Constants, $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iStyle not an Integer, less than 0 or greater than 3. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $nThickness not a Number, less than 0 or greater than 9.
+;                  @Error: 1, @Extended: 6 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 7 = $iLength not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iSpacing not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error converting from Printer's Points to Hundredths of a Millimeter (HMM).
+;                  @Error: 3, @Extended: 1 = Error converting from Printer's Points to Hundredths of a Millimeter (HMM).
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
 ;                  |                               2 = Error setting $iStyle
 ;                  |                               4 = Error setting $nThickness
@@ -3200,14 +3200,14 @@ EndFunc   ;==>_LOWriter_PageStyleFootnoteLine
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sPageStyle          - The Page Style name to retrieve the Object for.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Page Style successfully retrieved, returning Page Style Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Page Style successfully retrieved, returning Page Style Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sPageStyle not a String.
-;                  @Error 1 @Extended 3 = Page Style called in $sPageStyle not found in Document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sPageStyle not a String.
+;                  @Error: 1, @Extended: 3 = Page Style called in $sPageStyle not found in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Page Style Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Page Style Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3246,23 +3246,23 @@ EndFunc   ;==>_LOWriter_PageStyleGetObjByName
 ;                  $iHeight             - [optional] Default is Null. The height for the Header. Set in Hundredths of a Millimeter (HMM).
 ;                  $bAutoHeight         - [optional] Default is Null. If True, Automatically adjusts the height of the Header to fit the contents.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, the $bSameOnFirst parameter will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If LibreOffice version is less than 4.0, the $bSameOnFirst parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $bHeaderOn not a Boolean value.
-;                  @Error 1 @Extended 4 = $bSameLeftRight not a Boolean value.
-;                  @Error 1 @Extended 5 = $bSameOnFirst not a Boolean value.
-;                  @Error 1 @Extended 6 = $iLeftMargin not an Integer.
-;                  @Error 1 @Extended 7 = $iRightMargin not an Integer.
-;                  @Error 1 @Extended 8 = $iSpacing not an Integer.
-;                  @Error 1 @Extended 9 = $bDynamicSpacing not a Boolean value.
-;                  @Error 1 @Extended 10 = $iHeight not an Integer.
-;                  @Error 1 @Extended 11 = $bAutoHeight not a Boolean value.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $bHeaderOn not a Boolean value.
+;                  @Error: 1, @Extended: 4 = $bSameLeftRight not a Boolean value.
+;                  @Error: 1, @Extended: 5 = $bSameOnFirst not a Boolean value.
+;                  @Error: 1, @Extended: 6 = $iLeftMargin not an Integer.
+;                  @Error: 1, @Extended: 7 = $iRightMargin not an Integer.
+;                  @Error: 1, @Extended: 8 = $iSpacing not an Integer.
+;                  @Error: 1, @Extended: 9 = $bDynamicSpacing not a Boolean value.
+;                  @Error: 1, @Extended: 10 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 11 = $bAutoHeight not a Boolean value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bHeaderOn
 ;                  |                               2 = Error setting $bSameLeftRight
 ;                  |                               4 = Error setting $bSameOnFirst
@@ -3273,7 +3273,7 @@ EndFunc   ;==>_LOWriter_PageStyleGetObjByName
 ;                  |                               128 = Error setting $iHeight
 ;                  |                               256 = Error setting $bAutoHeight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.0.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -3381,19 +3381,19 @@ EndFunc   ;==>_LOWriter_PageStyleHeader
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Headers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Background color.
-;                  @Error 3 @Extended 3 = Failed to retrieve old Transparency value.
+;                  @Error: 3, @Extended: 1 = Headers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Background color.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
@@ -3439,12 +3439,12 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaColor
 ; Syntax ........: _LOWriter_PageStyleHeaderAreaFillStyle(ByRef $oPageStyle)
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Fill Style.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
@@ -3485,33 +3485,33 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaFillStyle
 ;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in "From Color", where 0% corresponds to black, and 100 % to the selected color.
 ;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 3 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 4 = $sGradientName Not a String.
-;                  @Error 1 @Extended 5 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iIncrement Not an Integer, less than 3 but not 0, or greater than 256.
-;                  @Error 1 @Extended 7 = $iXCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iYCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iAngle Not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 10 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 11 = $iFromColor Not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 = $iToColor Not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 13 = $iFromIntense Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 14 = $iToIntense Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 4 = $sGradientName Not a String.
+;                  @Error: 1, @Extended: 5 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iIncrement Not an Integer, less than 3 but not 0, or greater than 256.
+;                  @Error: 1, @Extended: 7 = $iXCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iYCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iAngle Not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 10 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 11 = $iFromColor Not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 12 = $iToColor Not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 13 = $iFromIntense Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 14 = $iToIntense Not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Headers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 4 = Error creating Gradient Name.
-;                  @Error 3 @Extended 5 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 1 = Headers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Error retrieving "FillGradient" Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 4 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 5 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -3705,27 +3705,27 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradient
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 4 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve HeaderFillGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve HeaderFillGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -3815,18 +3815,18 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradientMulticolor
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Headers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Transparency value.
+;                  @Error: 3, @Extended: 1 = Headers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
@@ -3876,29 +3876,29 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparency
 ;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 3 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 4 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 8 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 = $iEnd not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 8 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 10 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Headers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 4 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 5 = Error setting Transparency Gradient Name.
+;                  @Error: 3, @Extended: 1 = Headers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 4 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 5 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -4059,27 +4059,27 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparencyGradient
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 4 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve HeaderFillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve HeaderFillTransparenceGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -4172,27 +4172,27 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparencyGradientMulti
 ;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Page Style, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Headers are not enabled for this Page Style.
-;                  @Error 3 @Extended 3 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 4 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 5 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 6 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Headers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 3 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error: 3, @Extended: 6 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -4235,21 +4235,21 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderColor
 ;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Page Header contents in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iAll not an Integer.
-;                  @Error 1 @Extended 4 = $iTop not an Integer.
-;                  @Error 1 @Extended 5 = $iBottom not an Integer.
-;                  @Error 1 @Extended 6 = $Left not an Integer.
-;                  @Error 1 @Extended 7 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iAll not an Integer.
+;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 6 = $Left not an Integer.
+;                  @Error: 1, @Extended: 7 = $iRight not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Headers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 1 = Headers are not enabled for this Page Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
@@ -4329,27 +4329,27 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderPadding
 ;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Page Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Page Style. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Headers are not enabled for this Page Style.
-;                  @Error 3 @Extended 3 = Cannot set Top Border Style/Color when Top Border width not set.
-;                  @Error 3 @Extended 4 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
-;                  @Error 3 @Extended 5 = Cannot set Left Border Style/Color when Left Border width not set.
-;                  @Error 3 @Extended 6 = Cannot set Right Border Style/Color when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Headers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 3 = Cannot set Top Border Style/Color when Top Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error: 3, @Extended: 6 = Cannot set Right Border Style/Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -4391,23 +4391,23 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderStyle
 ;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Page Style in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 = $iRight not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 = Headers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Headers are not enabled for this Page Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
@@ -4449,16 +4449,16 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderWidth
 ;                  $bLeftPage           - [optional] Default is False. If True, creates a text cursor in the Left pages of the header. See Remarks.
 ;                  $bRightPage          - [optional] Default is False. If True, creates a text cursor in the Right pages of the header. See Remarks.
 ; Return values .: Success: Object or Array.
-;                  @Error 0 @Extended 0 Return Array = Success. See Remarks.
-;                  @Error 0 @Extended 1 Return Object = Success. See Remarks.
+;                  @Error: 0, @Extended: 0, Return: Array = Success. See Remarks.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. See Remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $bHeader not a Boolean value.
-;                  @Error 1 @Extended 3 = $bFirstPage not a Boolean value.
-;                  @Error 1 @Extended 4 = $bLeftPage not a Boolean value.
-;                  @Error 1 @Extended 5 = $bRightPage not a Boolean value.
-;                  @Error 1 @Extended 6 = No parameters called with True.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $bHeader not a Boolean value.
+;                  @Error: 1, @Extended: 3 = $bFirstPage not a Boolean value.
+;                  @Error: 1, @Extended: 4 = $bLeftPage not a Boolean value.
+;                  @Error: 1, @Extended: 5 = $bRightPage not a Boolean value.
+;                  @Error: 1, @Extended: 6 = No parameters called with True.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If more than one parameter is called with True, an array is returned with the requested objects in the order that the True parameters are listed. Else the requested object is returned.
@@ -4512,21 +4512,21 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderCreateTextCursor
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Color of the Header shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] Default is Null. The Shadow Width of the Header, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iLocation not an Integer, less than 0 or greater than 4. See constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iWidth not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 4. See constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Headers are not enabled for this Page Style.
-;                  @Error 3 @Extended 2 = Error retrieving ShadowFormat Object.
-;                  @Error 3 @Extended 3 = Error retrieving ShadowFormat Object for Error Checking.
+;                  @Error: 3, @Extended: 1 = Headers are not enabled for this Page Style.
+;                  @Error: 3, @Extended: 2 = Error retrieving ShadowFormat Object.
+;                  @Error: 3, @Extended: 3 = Error retrieving ShadowFormat Object for Error Checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -4604,25 +4604,25 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 ;                  $bBackCoversMargins  - [optional] Default is Null. If True, the background covers the full page, Else only inside the margins. LibreOffice 7.2 and up.
 ;                  $sPaperTray          - [optional] Default is Null. The paper source for your printer. See remarks.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the parameters $bGutterOnRight, $bGutterAtTop, and $bBackCoversMargins will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the parameters $bGutterOnRight, $bGutterAtTop, and $bBackCoversMargins will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 3 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 4 = $iLayout not an Integer, less than 0 or greater than 4. See Constants, $LOW_PAGE_LAYOUT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 = $sRefStyle not a String.
-;                  @Error 1 @Extended 7 = Paragraph style referenced in $sRefStyle not found in document and $sRefStyle not equal to "".
-;                  @Error 1 @Extended 8 = $bGutterOnRight not a Boolean value.
-;                  @Error 1 @Extended 9 = $bGutterAtTop not a Boolean value.
-;                  @Error 1 @Extended 10 = $bBackCoversMargins not a Boolean value.
-;                  @Error 1 @Extended 11 = $sPaperTray not a string.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 4 = $iLayout not an Integer, less than 0 or greater than 4. See Constants, $LOW_PAGE_LAYOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOW_NUM_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $sRefStyle not a String.
+;                  @Error: 1, @Extended: 7 = Paragraph style referenced in $sRefStyle not found in document and $sRefStyle not equal to "".
+;                  @Error: 1, @Extended: 8 = $bGutterOnRight not a Boolean value.
+;                  @Error: 1, @Extended: 9 = $bGutterAtTop not a Boolean value.
+;                  @Error: 1, @Extended: 10 = $bBackCoversMargins not a Boolean value.
+;                  @Error: 1, @Extended: 11 = $sPaperTray not a string.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating Document Settings Object.
+;                  @Error: 2, @Extended: 1 = Error creating Document Settings Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLayout
 ;                  |                               2 = Error setting $iNumFormat
 ;                  |                               4 = Error setting $sRefStyle
@@ -4631,7 +4631,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 ;                  |                               32 = Error setting $bBackCoversMargins
 ;                  |                               64 = Error setting $sPaperTray
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 7.2.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.2.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4736,26 +4736,26 @@ EndFunc   ;==>_LOWriter_PageStyleLayout
 ;                  $iBottom             - [optional] Default is Null. The amount of space to leave between the lower edge of the page and the document text. Set in Hundredths of a Millimeter (HMM).
 ;                  $iGutter             - [optional] Default is Null. The amount of space to leave between the left edge of the page and the left margin. If you are using the Mirrored page layout, enter the amount of space to leave between the inner page margin and the inner edge of the page. Set in Hundredths of a Millimeter (HMM). LibreOffice 7.2 and up.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the $iGutter parameter will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If the current LibreOffice version is less than 7.2, the $iGutter parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iLeft not an Integer.
-;                  @Error 1 @Extended 4 = $iRight not an Integer.
-;                  @Error 1 @Extended 5 = $iTop not an Integer.
-;                  @Error 1 @Extended 6 = $iBottom not an Integer.
-;                  @Error 1 @Extended 7 = $iGutter not an Integer.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iLeft not an Integer.
+;                  @Error: 1, @Extended: 4 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 5 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 6 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 7 = $iGutter not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLeft
 ;                  |                               2 = Error setting $iRight
 ;                  |                               4 = Error setting $iTop
 ;                  |                               8 = Error setting $iBottom
 ;                  |                               16 = Error setting $iGutter
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 7.2.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.2.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4835,26 +4835,26 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ;                  $sFollowStyle        - [optional] Default is Null. The name of the Page style that is applied After this Page Style.
 ;                  $bHidden             - [optional] Default is Null. If True, the style is hidden in L.O. UI. LibreOffice 4.0 and Up.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 3 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 4 = $sNewPageStyleName not a String.
-;                  @Error 1 @Extended 5 = Page Style name called in $sNewPageStyleName already exists in document.
-;                  @Error 1 @Extended 6 = Cannot rename built-in Page Styles.
-;                  @Error 1 @Extended 7 = $sFollowStyle not a String.
-;                  @Error 1 @Extended 8 = Page Style called in $sFollowStyle doesn't exist in this document.
-;                  @Error 1 @Extended 9 = $bHidden not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 4 = $sNewPageStyleName not a String.
+;                  @Error: 1, @Extended: 5 = Page Style name called in $sNewPageStyleName already exists in document.
+;                  @Error: 1, @Extended: 6 = Cannot rename built-in Page Styles.
+;                  @Error: 1, @Extended: 7 = $sFollowStyle not a String.
+;                  @Error: 1, @Extended: 8 = Page Style called in $sFollowStyle doesn't exist in this document.
+;                  @Error: 1, @Extended: 9 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewParStyleName
 ;                  |                               2 = Error setting $sFollowStyle
 ;                  |                               4 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 4.0.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -4922,17 +4922,17 @@ EndFunc   ;==>_LOWriter_PageStyleOrganizer
 ;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOW_PAPER_HEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bLandscape          - [optional] Default is Null. If True, displays the page in Landscape layout.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iWidth not an Integer.
-;                  @Error 1 @Extended 4 = $iHeight not an Integer.
-;                  @Error 1 @Extended 5 = $bLandscape not a Boolean value.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 4 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 5 = $bLandscape not a Boolean value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iHeight
 ;                  |                               4 = Error setting $bLandscape
@@ -5006,15 +5006,15 @@ EndFunc   ;==>_LOWriter_PageStylePaperFormat
 ;                  $bAppliedOnly        - [optional] Default is False. If True only Applied Page Styles are returned.
 ;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Page Styles matching the called parameters. See remarks. @Extended contains the count of results returned.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Page Styles matching the called parameters. See remarks. @Extended contains the count of results returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 3 = $bAppliedOnly not a Boolean.
-;                  @Error 1 @Extended 4 = $bDisplayName not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bUserOnly not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bAppliedOnly not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bDisplayName not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Array of Page Style names.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Array of Page Style names.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If Only a Document object is input, all available Page styles will be returned.
@@ -5053,20 +5053,20 @@ EndFunc   ;==>_LOWriter_PageStylesGetNames
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The shadow Color of the Page, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] Default is Null. The Shadow Width of the Page, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oPageStyle not an Object.
-;                  @Error 1 @Extended 2 = $oPageStyle not a Page Style Object.
-;                  @Error 1 @Extended 3 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iWidth not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oPageStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oPageStyle not a Page Style Object.
+;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ShadowFormat Object.
-;                  @Error 3 @Extended 2 = Error retrieving ShadowFormat Object for Error checking.
+;                  @Error: 3, @Extended: 1 = Error retrieving ShadowFormat Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
