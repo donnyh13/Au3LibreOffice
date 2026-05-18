@@ -5078,7 +5078,7 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ;                  $bKeepRatio          - [optional] Default is Null. Maintains the height and width ratio when you change the width or the height setting.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater or equal to than 4.3, then a 9 element Array is returned, else 7 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If the LibreOffice version is below 4.3, the $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -5119,7 +5119,7 @@ Func _LOWriter_FrameTypeSize(ByRef $oDoc, ByRef $oFrame, $iWidth = Null, $iRelat
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avSize[7]
+	Local $avSize[9]
 	Local Const $iCONST_AutoHW_OFF = 1, $iCONST_AutoHW_ON = 2
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -5133,9 +5133,9 @@ Func _LOWriter_FrameTypeSize(ByRef $oDoc, ByRef $oFrame, $iWidth = Null, $iRelat
 					(($oFrame.IsSyncHeightToWidth() And $oFrame.IsSyncWidthToHeight()) ? (True) : (False)))
 
 		Else
-			__LO_ArrayFill($avSize, $oFrame.Width(), $oFrame.RelativeWidth(), _
-					($oFrame.WidthType() = $iCONST_AutoHW_ON) ? (True) : (False), $oFrame.Height(), _
-					$oFrame.RelativeHeight(), ($oFrame.SizeType() = $iCONST_AutoHW_ON) ? (True) : (False), _
+			__LO_ArrayFill($avSize, $oFrame.Width(), $oFrame.RelativeWidth(), Null, _
+					($oFrame.WidthType() = $iCONST_AutoHW_ON) ? (True) : (False), $oFrame.Height(), $oFrame.RelativeHeight(), _
+					Null, ($oFrame.SizeType() = $iCONST_AutoHW_ON) ? (True) : (False), _
 					(($oFrame.IsSyncHeightToWidth() And $oFrame.IsSyncWidthToHeight()) ? (True) : (False)))
 		EndIf
 
