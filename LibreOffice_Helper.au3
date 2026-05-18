@@ -51,7 +51,7 @@
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set the UserFunction.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Successfully cleared the set UserFunction.
 ;                  @Error: 0, @Extended: 0, Return: Function = Returning the set UserFunction.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
 ; Author ........: mLipok
@@ -130,7 +130,7 @@ EndFunc   ;==>_LO_ComError_UserFunction
 ;                  @Error: 0, @Extended: 2, Return: Array = Array containing RGB Integer converted To Red, Green, Blue,(RGB). $Array[0] = R, $Array[1] = G, etc.
 ;                  @Error: 0, @Extended: 3, Return: Array = Array containing RGB Integer converted To Hue, Saturation, Brightness, (HSB). $Array[0] = H, $Array[1] = S, etc.
 ;                  @Error: 0, @Extended: 4, Return: Array = Array containing RGB Integer converted To Cyan, Magenta, Yellow, Black, (CMYK). $Array[0] = C, $Array[1] = M, etc.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = No parameters set.
 ;                  @Error: 1, @Extended: 2 = No parameters called with an Integer.
@@ -275,7 +275,7 @@ EndFunc   ;==>_LO_ConvertColorFromLong
 ;                  @Error: 0, @Extended: 2, Return: Integer = RGB Color Integer converted from Red, Green, Blue, (RGB).
 ;                  @Error: 0, @Extended: 3, Return: Integer = RGB Color Integer converted from (H)ue, (S)aturation, (B)rightness,
 ;                  @Error: 0, @Extended: 4, Return: Integer = RGB Color Integer converted from (C)yan, (M)agenta, (Y)ellow, Blac(k)
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = No parameters set.
 ;                  @Error: 1, @Extended: 2 = One parameter called, but not in String format(Hex).
@@ -443,7 +443,7 @@ EndFunc   ;==>_LO_ConvertColorToLong
 ;                  @Error: 0, @Extended: ?, Return: Object = Success, The Object for the current, or last active document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
 ;                  @Error: 0, @Extended: ?, Return: Object = Success, The Object for the found Document with matching Name, Title or Path. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success, An Array of all open LibreOffice Documents. @Extended is set to number of results. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  @Error: 1, @Extended: 2 = $sSearch not a String.
@@ -586,7 +586,7 @@ EndFunc   ;==>_LO_DocConnect
 ; Parameters ....: $oDoc                - A Document object returned by a previous Document Open, Connect, or Create function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the document's type as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
@@ -770,7 +770,7 @@ EndFunc   ;==>_LO_DocGetType
 ;                  $iColor              - (0-16777215) The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. ColorStop successfully added to array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $avColorStops not an Array.
 ;                  @Error: 1, @Extended: 2 = $avColorStops does not contain two columns.
@@ -823,7 +823,7 @@ EndFunc   ;==>_LO_GradientMulticolorAdd
 ;                  $iIndex              - The array index to delete. 0 Based.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. ColorStop successfully removed from array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $avColorStops not an Array.
 ;                  @Error: 1, @Extended: 2 = $avColorStops does not contain two columns.
@@ -870,7 +870,7 @@ EndFunc   ;==>_LO_GradientMulticolorDelete
 ;                  $iColor              - (0-16777215) The ColorStop color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. ColorStop successfully modified.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $avColorStops not an Array.
 ;                  @Error: 1, @Extended: 2 = $avColorStops does not contain two columns.
@@ -916,7 +916,7 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ; Parameters ....: $sOfficePortablePath - The Path to the Portable LibreOffice/OpenOffice folder. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Portable LibreOffice/OpenOffice ServiceManager successfully created and stored.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sOfficePortablePath not a String.
 ;                  @Error: 1, @Extended: 2 = Folder called in $sOfficePortablePath does not contain the App folder. Perhaps wrong directory?
@@ -981,7 +981,7 @@ EndFunc   ;==>_LO_InitializePortable
 ; Return values .: Success: String.
 ;                  @Error: 0, @Extended: 1, Return: String = Returning converted File Path from LibreOffice URL.
 ;                  @Error: 0, @Extended: 2, Return: String = Returning converted path from File Path to LibreOffice URL.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sFilePath is not a string
 ;                  @Error: 1, @Extended: 2 = $iReturnMode not a Integer, less than 0 or greater than 2. See constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3..
@@ -1054,7 +1054,7 @@ EndFunc   ;==>_LO_PathConvert
 ; Return values .: Success: An array or String.
 ;                  @Error: 0, @Extended: 1, Return: String = Returning the default printer's name.
 ;                  @Error: 0, @Extended: ?, Return: Array = Returning an array of strings of all installed printers' names. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $bDefaultOnly not a Boolean.
 ;                  --Initialization Errors--
@@ -1114,7 +1114,7 @@ EndFunc   ;==>_LO_PrintersGetNames
 ; Return values .: Success: Array or String.
 ;                  @Error: 0, @Extended: 1, Return: String = Returning the default printer name. See remarks. @Extended is set to the number of results.
 ;                  @Error: 0, @Extended: ?, Return: Array = Returning an array of strings containing all installed printers. See remarks. Number of results returned in @Extended.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sPrinterName not a String.
 ;                  @Error: 1, @Extended: 2 = $bReturnDefault not a Boolean.
@@ -1185,7 +1185,7 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ;                  $iSleep              - [optional] Default is 250. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Terminate command was successfuly processed. Returning True if all Documents agree to be terminated.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $bForceClose not a Boolean.
 ;                  @Error: 1, @Extended: 2 = $iSleep not an Integer or less than 0.
@@ -1236,7 +1236,7 @@ EndFunc   ;==>_LO_Terminate
 ;                  $iTransparency       - (0-100) The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. ColorStop successfully added to array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $avColorStops not an Array.
 ;                  @Error: 1, @Extended: 2 = $avColorStops does not contain two columns.
@@ -1289,7 +1289,7 @@ EndFunc   ;==>_LO_TransparencyGradientMultiAdd
 ;                  $iIndex              - The array index to delete. 0 Based.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. ColorStop successfully removed from array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $avColorStops not an Array.
 ;                  @Error: 1, @Extended: 2 = $avColorStops does not contain two columns.
@@ -1336,7 +1336,7 @@ EndFunc   ;==>_LO_TransparencyGradientMultiDelete
 ;                  $iTransparency       - (0-100) The ColorStop Transparency value percentage. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. ColorStop successfully modified.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $avColorStops not an Array.
 ;                  @Error: 1, @Extended: 2 = $avColorStops does not contain two columns.
@@ -1393,7 +1393,7 @@ EndFunc   ;==>_LO_TransparencyGradientMultiModify
 ;                  @Error: 0, @Extended: 9, Return: Integer = Returning Number converted from TWIPS to Hundredths of a Millimeter (HMM).
 ;                  @Error: 0, @Extended: 10, Return: Integer = Returning Number converted from Point to Hundredths of a Millimeter (HMM).
 ;                  @Error: 0, @Extended: 11, Return: Number = Returning Number converted from Hundredths of a Millimeter (HMM) to Point.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $nValue is not a Number.
 ;                  @Error: 1, @Extended: 2 = $iReturnType is not a Integer, less than 0 or greater than 10. See Constants, $LO_CONVERT_UNIT_* as defined in LibreOffice_Constants.au3.
@@ -1499,7 +1499,7 @@ EndFunc   ;==>_LO_UnitConvert
 ;                  $bReturnName         - [optional] Default is True. If True returns the Program Name, such as "LibreOffice", appended by the version, i.e. "LibreOffice 7.3".
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the Office version in String format.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $bSimpleVersion not a Boolean.
 ;                  @Error: 1, @Extended: 2 = $bReturnName not a Boolean.

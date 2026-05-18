@@ -43,7 +43,7 @@
 ;                  $bCountInFirst       - [optional] Default is False. If True the first element of the array is a count of contained elements.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Array item was successfully added.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $aArray not an Array
 ;                  @Error: 1, @Extended: 2 = $bCountinFirst not a Boolean.
@@ -138,7 +138,7 @@ EndFunc   ;==>__LO_ArrayFill
 ; Parameters ....: $sStructName         - Name of structure to create.
 ; Return values .: Success: Structure.
 ;                  @Error: 0, @Extended: 0, Return: Structure = Success. Property Structure Returned
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sStructName not a string
 ;                  --Initialization Errors--
@@ -176,7 +176,7 @@ EndFunc   ;==>__LO_CreateStruct
 ; Return values .: Success: 1, 2
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully stored Registry keys to delete.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Successfully deleted Registry keys.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $asRegKeys not an Array.
 ;                  --Processing Errors--
@@ -280,7 +280,7 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ;                  $vIncl               - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
-;                  Failure: False and sets the @Error and @Extended flags to non-zero.
+;                  Failure: False and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iTest not an Integer.
 ; Author ........: donnyh13
@@ -369,7 +369,7 @@ EndFunc   ;==>__LO_IsObjInvalid
 ;                  $vIncl               - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
-;                  Failure: False
+;                  Failure: False and sets @Error and @Extended to non-zero.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If Minimum is a negative, and there is no max defined, it is treated as such that if a value is more negative, it is outside the range. e.g., min = -2, -3 is outside of the range, but -1 is inside.
@@ -423,7 +423,7 @@ EndFunc   ;==>__LO_NumIsBetween
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully cleared stored ServiceManager.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning ServiceManager Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $bPortable not a Boolean.
 ;                  @Error: 1, @Extended: 2 = $oServiceManager not an Object.
@@ -491,7 +491,7 @@ EndFunc   ;==>__LO_ServiceManager
 ; Return values .: Success: 1, 2
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Created and stored Portable LibreOffice ServiceManager.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Cleared stored Portable LibreOffice path.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sPortableLO_Path not a String.
 ;                  @Error: 1, @Extended: 2 = Path called in $sPortableLO_Path doesn't exist.
@@ -685,7 +685,7 @@ EndFunc   ;==>__LO_SetPortableServiceManager
 ;                  $vValue              - Property value.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Property Object Returned
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sName not a string
 ;                  --Initialization Errors--
@@ -725,7 +725,7 @@ EndFunc   ;==>__LO_SetPropertyValue
 ;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. An Array containing all Styles matching the called parameters. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sStyleFamily not a String.
@@ -900,7 +900,7 @@ EndFunc   ;==>__LO_TestObjCOM
 ;                  $vVar32              - [optional] Default is Null.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = If All parameters are Equal to Null, True is returned. Else False.
-;                  Failure: False
+;                  Failure: False and sets @Error and @Extended to non-zero.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -943,7 +943,7 @@ EndFunc   ;==>__LO_VarsAreNull
 ; Parameters ....: $fRequiredVersion    - The version of LibreOffice required.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Current L.O. version is greater than or equal to the required version, then True is returned, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $fRequiredVersion not a Number.
 ;                  --Processing Errors--
