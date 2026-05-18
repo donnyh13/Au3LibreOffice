@@ -82,21 +82,21 @@
 ;                  $sSaveName           - [optional] Default is "". The file name to save the file as, if the file hasn't been saved before. See Remarks.
 ;                  $bDeliverOwnership   - [optional] Default is True. If True, deliver ownership of the document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
-;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
-;                  @Error 0 @Extended 3 Return String = Success, Document was successfully closed, document either had no changes to save, or $bSaveChanges was called with False. If document had a save location, or if document was saved to a location, it is returned, else an empty string is returned.
+;                  @Error: 0, @Extended: 1, Return: String = Success, Document was successfully closed, and was saved to the returned file Path.
+;                  @Error: 0, @Extended: 2, Return: String = Success, Document was successfully closed, document's changes were saved to its existing location.
+;                  @Error: 0, @Extended: 3, Return: String = Success, Document was successfully closed, document either had no changes to save, or $bSaveChanges was called with False. If document had a save location, or if document was saved to a location, it is returned, else an empty string is returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bSaveChanges not a Boolean.
-;                  @Error 1 @Extended 3 = $sSaveName not a String.
-;                  @Error 1 @Extended 4 = $bDeliverOwnership not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bSaveChanges not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sSaveName not a String.
+;                  @Error: 1, @Extended: 4 = $bDeliverOwnership not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error while creating Filter Name properties.
+;                  @Error: 2, @Extended: 1 = Error while creating Filter Name properties.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Path Conversion to L.O. URL Failed.
-;                  @Error 3 @Extended 2 = Error while retrieving FilterName.
-;                  @Error 3 @Extended 3 = Failed to close Document.
+;                  @Error: 3, @Extended: 1 = Path Conversion to L.O. URL Failed.
+;                  @Error: 3, @Extended: 2 = Error while retrieving FilterName.
+;                  @Error: 3, @Extended: 3 = Failed to close Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bSaveChanges is True and the document hasn't been saved yet, the document is saved to the desktop.
@@ -175,12 +175,12 @@ EndFunc   ;==>_LOCalc_DocClose
 ; Syntax ........: _LOCalc_DocColumnsRowsAreFrozen(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Document currently contains frozen Columns/Rows.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document currently contains frozen Columns/Rows.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query Document whether frozen Columns/Rows are present.
+;                  @Error: 3, @Extended: 1 = Failed to query Document whether frozen Columns/Rows are present.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -210,12 +210,12 @@ EndFunc   ;==>_LOCalc_DocColumnsRowsAreFrozen
 ;                  $iColumns            - [optional] Default is 0. The number of Columns to freeze. Call with 0 to skip. See remarks.
 ;                  $iRows               - [optional] Default is 0. The number of Rows to freeze. See remarks.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Called Columns/Rows were successfully frozen.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Called Columns/Rows were successfully frozen.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iColumns not an Integer, less than 0 or greater than number of columns contained in the document.
-;                  @Error 1 @Extended 3 = $iRows not an Integer, less than 0 or greater than number of rows contained in the document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iColumns not an Integer, less than 0 or greater than number of columns contained in the document.
+;                  @Error: 1, @Extended: 3 = $iRows not an Integer, less than 0 or greater than number of rows contained in the document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To set no Columns or rows to be frozen in view, set both $iColumns and $iRows to 0.
@@ -245,25 +245,25 @@ EndFunc   ;==>_LOCalc_DocColumnsRowsFreeze
 ;                  $sSearch             - [optional] Default is "". The Name, Title or Path of the Document to search for. See remarks.
 ;                  $bCaseless           - [optional] Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
 ; Return values .: Success: Object or Array.
-;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active Calc document is returned.
-;                  @Error 0 @Extended 1 Return Object = Success, The Object for the found Document with matching Name, Title or Path.
-;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Calc Documents. @Extended is set to number of results. See remarks.
+;                  @Error: 0, @Extended: 1, Return: Object = Success, The Object for the current, or last active Calc document is returned.
+;                  @Error: 0, @Extended: 1, Return: Object = Success, The Object for the found Document with matching Name, Title or Path.
+;                  @Error: 0, @Extended: ?, Return: Array = Success, An Array of all open LibreOffice Calc Documents. @Extended is set to number of results. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
-;                  @Error 1 @Extended 2 = $sSearch not a String.
-;                  @Error 1 @Extended 3 = $bCaseless not a Boolean.
+;                  @Error: 1, @Extended: 1 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $sSearch not a String.
+;                  @Error: 1, @Extended: 3 = $bCaseless not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating ServiceManager object.
-;                  @Error 2 @Extended 2 = Error creating Desktop object.
-;                  @Error 2 @Extended 3 = Error creating enumeration of open documents.
+;                  @Error: 2, @Extended: 1 = Error creating ServiceManager object.
+;                  @Error: 2, @Extended: 2 = Error creating Desktop object.
+;                  @Error: 2, @Extended: 3 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = No open LibreOffice documents.
-;                  @Error 3 @Extended 2 = Failed to retrieve Document Object.
-;                  @Error 3 @Extended 3 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 = Error converting path to LibreOffice URL.
-;                  @Error 3 @Extended 5 = Current Document not a Calc Document.
-;                  @Error 3 @Extended 6 = No matches found.
+;                  @Error: 3, @Extended: 1 = No open LibreOffice documents.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Document Object.
+;                  @Error: 3, @Extended: 3 = Failed to identify Document type.
+;                  @Error: 3, @Extended: 4 = Error converting path to LibreOffice URL.
+;                  @Error: 3, @Extended: 5 = Current Document not a Calc Document.
+;                  @Error: 3, @Extended: 6 = No matches found.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only Calc documents are searched or returned using any of the flags.
@@ -394,19 +394,19 @@ EndFunc   ;==>_LOCalc_DocConnect
 ; Parameters ....: $bForceNew           - [optional] Default is True. If True, force opening a new Calc Document instead of checking for a usable blank.
 ;                  $bHidden             - [optional] Default is False. If True opens the new document invisible or changes the existing document to invisible.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 1 Return Object = Successfully connected to an existing Document. Returning Document's Object
-;                  @Error 0 @Extended 2 Return Object = Successfully created a new document. Returning Document's Object
+;                  @Error: 0, @Extended: 1, Return: Object = Successfully connected to an existing Document. Returning Document's Object
+;                  @Error: 0, @Extended: 2, Return: Object = Successfully created a new document. Returning Document's Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $bForceNew not a Boolean.
-;                  @Error 1 @Extended 2 = $bHidden not a Boolean.
+;                  @Error: 1, @Extended: 1 = $bForceNew not a Boolean.
+;                  @Error: 1, @Extended: 2 = $bHidden not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failure Creating Object com.sun.star.ServiceManager.
-;                  @Error 2 @Extended 2 = Failure Creating Object com.sun.star.frame.Desktop.
-;                  @Error 2 @Extended 3 = Failed to enumerate available documents.
-;                  @Error 2 @Extended 4 = Failure Creating New Document.
+;                  @Error: 2, @Extended: 1 = Failure Creating Object com.sun.star.ServiceManager.
+;                  @Error: 2, @Extended: 2 = Failure Creating Object com.sun.star.frame.Desktop.
+;                  @Error: 2, @Extended: 3 = Failed to enumerate available documents.
+;                  @Error: 2, @Extended: 4 = Failure Creating New Document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Document Object is still returned. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Document Object is still returned. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bHidden
 ; Author ........: donnyh13
 ; Modified ......:
@@ -470,23 +470,23 @@ EndFunc   ;==>_LOCalc_DocCreate
 ;                  $bOverwrite          - [optional] Default is Null. If True, file will be overwritten.
 ;                  $sPassword           - [optional] Default is Null. Password String to set for the document. (Not all file formats can have a Password set). "" (blank string) or Null = No Password.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Success. Returning save path for exported document.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Returning save path for exported document.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sFilePath not a String.
-;                  @Error 1 @Extended 3 = $bSamePath not a Boolean.
-;                  @Error 1 @Extended 4 = $sFilterName not a String.
-;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 = $sPassword not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sFilePath not a String.
+;                  @Error: 1, @Extended: 3 = $bSamePath not a Boolean.
+;                  @Error: 1, @Extended: 4 = $sFilterName not a String.
+;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sPassword not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating FilterName Property
-;                  @Error 2 @Extended 2 = Error creating Overwrite Property
-;                  @Error 2 @Extended 3 = Error creating Password Property
+;                  @Error: 2, @Extended: 1 = Error creating FilterName Property
+;                  @Error: 2, @Extended: 2 = Error creating Overwrite Property
+;                  @Error: 2, @Extended: 3 = Error creating Password Property
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error Converting Path to/from L.O. URL
-;                  @Error 3 @Extended 2 = Document has no save path, and $bSamePath is called with True.
-;                  @Error 3 @Extended 3 = Error retrieving FilterName.
+;                  @Error: 3, @Extended: 1 = Error Converting Path to/from L.O. URL
+;                  @Error: 3, @Extended: 2 = Document has no save path, and $bSamePath is called with True.
+;                  @Error: 3, @Extended: 3 = Error retrieving FilterName.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Does not alter the original save path (if there was one), saves a copy of the document to the new path, in the new file format if one is chosen.
@@ -562,19 +562,19 @@ EndFunc   ;==>_LOCalc_DocExport
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $iHeight             - [optional] (1-25) Default is Null. The number of lines to display in the formula bar.
 ; Return values .: Success: 1 or Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Formula Bar Height as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Formula Bar Height as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iHeight not an Integer, less than 1 or greater than 25.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iHeight not an Integer, less than 1 or greater than 25.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Formula Bar height.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Formula Bar height.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iHeight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version less than 7.4.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 7.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -613,13 +613,13 @@ EndFunc   ;==>_LOCalc_DocFormulaBarHeight
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the document's Name as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Document's name. See remarks.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Document's name. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be like: "<Calc Doc name>.<extension> — LibreOffice Calc" e.g. "Testing.ods — LibreOffice Calc".
@@ -656,14 +656,14 @@ EndFunc   ;==>_LOCalc_DocGetName
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $bReturnLibreURL     - [optional] Default is False. If True, returns a path in LibreOffice URL format, else False returns a regular Windows path.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the document's save path as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bReturnLibreURL not a Boolean.
-;                  @Error 1 @Extended 3 = Document has no save path.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bReturnLibreURL not a Boolean.
+;                  @Error: 1, @Extended: 3 = Document has no save path.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error converting LibreOffice URL to Computer path format.
+;                  @Error: 3, @Extended: 1 = Error converting LibreOffice URL to Computer path format.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -697,12 +697,12 @@ EndFunc   ;==>_LOCalc_DocGetPath
 ; Syntax ........: _LOCalc_DocHasPath(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has a save location. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the document has a save location. Else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query Document whether it has a path.
+;                  @Error: 3, @Extended: 1 = Failed to query Document whether it has a path.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -730,12 +730,12 @@ EndFunc   ;==>_LOCalc_DocHasPath
 ; Syntax ........: _LOCalc_DocIsActive(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active LibreOffice window. See remarks.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if document is the currently active LibreOffice window. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query Document whether it is active.
+;                  @Error: 3, @Extended: 1 = Failed to query Document whether it is active.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
@@ -763,12 +763,12 @@ EndFunc   ;==>_LOCalc_DocIsActive
 ; Syntax ........: _LOCalc_DocIsModified(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has been modified since last being saved.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the document has been modified since last being saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query Document whether it has been modified.
+;                  @Error: 3, @Extended: 1 = Failed to query Document whether it has been modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -796,12 +796,12 @@ EndFunc   ;==>_LOCalc_DocIsModified
 ; Syntax ........: _LOCalc_DocIsReadOnly(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True is document is currently Read Only, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True is document is currently Read Only, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query whether Document is Read-Only.
+;                  @Error: 3, @Extended: 1 = Failed to query whether Document is Read-Only.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only documents that have been saved to a location, will ever be "ReadOnly".
@@ -830,16 +830,16 @@ EndFunc   ;==>_LOCalc_DocIsReadOnly
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $bMaximize           - [optional] Default is Null. If True, document window is maximized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean.
-;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Document was successfully maximized.
+;                  @Error: 0, @Extended: 1, Return: Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bMaximize not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bMaximize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query whether Document is Maximized.
+;                  @Error: 3, @Extended: 1 = Failed to query whether Document is Maximized.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMaximize
 ; Author ........: donnyh13
 ; Modified ......:
@@ -879,16 +879,16 @@ EndFunc   ;==>_LOCalc_DocMaximize
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $bMinimize           - [optional] Default is Null. If True, document window is minimized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean
-;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Document was successfully minimized.
+;                  @Error: 0, @Extended: 1, Return: Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bMinimize not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bMinimize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query whether Document is Minimized.
+;                  @Error: 3, @Extended: 1 = Failed to query whether Document is Minimized.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMinimize
 ; Author ........: donnyh13
 ; Modified ......:
@@ -933,24 +933,24 @@ EndFunc   ;==>_LOCalc_DocMinimize
 ;                  $bLoadAsTemplate     - [optional] Default is Null. If True, opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
 ;                  $sFilterName         - [optional] Default is Null. Name of a LibreOffice filter to use to load the specified document. LibreOffice automatically selects which to use by default.
 ; Return values .: Success: Object.
-;                  @Error 0 @Extended 1 Return Object = Successfully connected to requested Document without requested parameters. Returning Document's Object.
-;                  @Error 0 @Extended 2 Return Object = Successfully opened requested Document with requested parameters. Returning Document's Object.
+;                  @Error: 0, @Extended: 1, Return: Object = Successfully connected to requested Document without requested parameters. Returning Document's Object.
+;                  @Error: 0, @Extended: 2, Return: Object = Successfully opened requested Document with requested parameters. Returning Document's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $sFilePath not string, or file not found.
-;                  @Error 1 @Extended 2 = Error converting file path to URL path.
-;                  @Error 1 @Extended 3 = $bConnectIfOpen not a Boolean.
-;                  @Error 1 @Extended 4 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 5 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 6 = $sPassword not a string.
-;                  @Error 1 @Extended 7 = $bLoadAsTemplate not a Boolean.
-;                  @Error 1 @Extended 8 = $sFilterName not a string.
+;                  @Error: 1, @Extended: 1 = $sFilePath not string, or file not found.
+;                  @Error: 1, @Extended: 2 = Error converting file path to URL path.
+;                  @Error: 1, @Extended: 3 = $bConnectIfOpen not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bHidden not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bReadOnly not a Boolean.
+;                  @Error: 1, @Extended: 6 = $sPassword not a string.
+;                  @Error: 1, @Extended: 7 = $bLoadAsTemplate not a Boolean.
+;                  @Error: 1, @Extended: 8 = $sFilterName not a string.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create ServiceManager Object
-;                  @Error 2 @Extended 2 = Failed to create Desktop Object
-;                  @Error 2 @Extended 3 = Failed opening or connecting to document.
+;                  @Error: 2, @Extended: 1 = Failed to create ServiceManager Object
+;                  @Error: 2, @Extended: 2 = Failed to create Desktop Object
+;                  @Error: 2, @Extended: 3 = Failed opening or connecting to document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bHidden
 ;                  |                               2 = Error setting $bReadOnly
 ;                  |                               4 = Error setting $sPassword
@@ -1047,20 +1047,20 @@ EndFunc   ;==>_LOCalc_DocOpen
 ;                  $iWidth              - [optional] Default is Null. The width of the window, in pixels(?).
 ;                  $iHeight             - [optional] Default is Null. The height of the window, in pixels(?).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iX not an Integer.
-;                  @Error 1 @Extended 3 = $iY not an Integer.
-;                  @Error 1 @Extended 4 = $iWidth not an Integer.
-;                  @Error 1 @Extended 5 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iX not an Integer.
+;                  @Error: 1, @Extended: 3 = $iY not an Integer.
+;                  @Error: 1, @Extended: 4 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 5 = $iHeight not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Position and Size Structure Object.
-;                  @Error 3 @Extended 2 = Error retrieving Position and Size Structure Object for error checking.
+;                  @Error: 3, @Extended: 1 = Error retrieving Position and Size Structure Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Position and Size Structure Object for error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iX
 ;                  |                               2 = Error setting $iY
 ;                  |                               4 = Error setting $iWidth
@@ -1145,28 +1145,28 @@ EndFunc   ;==>_LOCalc_DocPosAndSize
 ;                  $sPrinter            - [optional] Default is "". Printer name. If left blank, or if printer name is not found, default printer is used.
 ;                  $sFilePathName       - [optional] Default is "". Specifies the name of a file to print to. Creates a .prn file at the given Path. Must include the desired path destination with file name.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success Document was successfully printed.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success Document was successfully printed.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iCopies not a Integer.
-;                  @Error 1 @Extended 3 = $bCollate not a Boolean.
-;                  @Error 1 @Extended 4 = $vPages not an Integer or String.
-;                  @Error 1 @Extended 5 = $vPages contains invalid characters, a-z, or a period(.).
-;                  @Error 1 @Extended 6 = $bWait not a Boolean.
-;                  @Error 1 @Extended 7 = $iDuplexMode not an Integer, less than 0 or greater than 3. See Constants, $LOC_PRINT_DUPLEX_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 8 = $sPrinter not a String.
-;                  @Error 1 @Extended 9 = $sFilePathName not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iCopies not a Integer.
+;                  @Error: 1, @Extended: 3 = $bCollate not a Boolean.
+;                  @Error: 1, @Extended: 4 = $vPages not an Integer or String.
+;                  @Error: 1, @Extended: 5 = $vPages contains invalid characters, a-z, or a period(.).
+;                  @Error: 1, @Extended: 6 = $bWait not a Boolean.
+;                  @Error: 1, @Extended: 7 = $iDuplexMode not an Integer, less than 0 or greater than 3. See Constants, $LOC_PRINT_DUPLEX_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $sPrinter not a String.
+;                  @Error: 1, @Extended: 9 = $sFilePathName not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "Printer Name" property.
-;                  @Error 2 @Extended 2 = Error creating "Copies" property.
-;                  @Error 2 @Extended 3 = Error creating "Collate" property.
-;                  @Error 2 @Extended 4 = Error creating "Wait" property.
-;                  @Error 2 @Extended 5 = Error creating "DuplexMode" property.
-;                  @Error 2 @Extended 6 = Error creating "Pages" property.
-;                  @Error 2 @Extended 7 = Error creating "PrintToFile" property.
+;                  @Error: 2, @Extended: 1 = Error creating "Printer Name" property.
+;                  @Error: 2, @Extended: 2 = Error creating "Copies" property.
+;                  @Error: 2, @Extended: 3 = Error creating "Collate" property.
+;                  @Error: 2, @Extended: 4 = Error creating "Wait" property.
+;                  @Error: 2, @Extended: 5 = Error creating "DuplexMode" property.
+;                  @Error: 2, @Extended: 6 = Error creating "Pages" property.
+;                  @Error: 2, @Extended: 7 = Error creating "PrintToFile" property.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error converting PrintToFile Path.
+;                  @Error: 3, @Extended: 1 = Error converting PrintToFile Path.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Setting $bWait to True is highly recommended. Otherwise following actions (as e.g. closing the Document) can fail.
@@ -1244,12 +1244,12 @@ EndFunc   ;==>_LOCalc_DocPrint
 ; Syntax ........: _LOCalc_DocRedo(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Successfully performed a redo action.
+;                  @Error: 0, @Extended: 0, Return: 1 = Successfully performed a redo action.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Document does not have a redo action to perform.
+;                  @Error: 3, @Extended: 1 = Document does not have a redo action to perform.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1280,10 +1280,10 @@ EndFunc   ;==>_LOCalc_DocRedo
 ; Syntax ........: _LOCalc_DocRedoClear(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Redo Actions.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully cleared all Redo Actions.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This will silently fail if there are any _LOCalc_DocUndoActionBegin still active.
@@ -1308,12 +1308,12 @@ EndFunc   ;==>_LOCalc_DocRedoClear
 ; Syntax ........: _LOCalc_DocRedoCurActionTitle(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Returning the current available redo action title as a String. Will be an empty String if no action is available.
+;                  @Error: 0, @Extended: 0, Return: String = Returning the current available redo action title as a String. Will be an empty String if no action is available.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Redo Action.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Redo Action.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1342,12 +1342,12 @@ EndFunc   ;==>_LOCalc_DocRedoCurActionTitle
 ; Syntax ........: _LOCalc_DocRedoGetAllActionTitles(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Array.
-;                  @Error 0 @Extended ? Return Array = Returning all available redo action Titles in an array of Strings. @Extended set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Returning all available redo action Titles in an array of Strings. @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve an array of Redo action titles.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve an array of Redo action titles.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1375,12 +1375,12 @@ EndFunc   ;==>_LOCalc_DocRedoGetAllActionTitles
 ; Syntax ........: _LOCalc_DocRedoIsPossible(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = If the document has a redo action to perform, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = If the document has a redo action to perform, True is returned, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query whether a Redo is possible.
+;                  @Error: 3, @Extended: 1 = Failed to query whether a Redo is possible.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1408,12 +1408,12 @@ EndFunc   ;==>_LOCalc_DocRedoIsPossible
 ; Syntax ........: _LOCalc_DocSave(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Document Successfully saved.
+;                  @Error: 0, @Extended: 0, Return: 1 = Document Successfully saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Document is Read Only or Document has no save location, try SaveAs.
+;                  @Error: 3, @Extended: 1 = Document is Read Only or Document has no save location, try SaveAs.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1443,21 +1443,21 @@ EndFunc   ;==>_LOCalc_DocSave
 ;                  $bOverwrite          - [optional] Default is Null. If True, the existing file will be overwritten.
 ;                  $sPassword           - [optional] Default is Null. Sets a password for the document. (Not all file formats can have a Password set). Null or "" (blank string) = No Password.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Successfully Saved the document. Returning document save path.
+;                  @Error: 0, @Extended: 0, Return: String = Successfully Saved the document. Returning document save path.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sFilePath not a String.
-;                  @Error 1 @Extended 3 = $sFilterName not a String.
-;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 = $sPassword not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sFilePath not a String.
+;                  @Error: 1, @Extended: 3 = $sFilterName not a String.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sPassword not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating FilterName Property
-;                  @Error 2 @Extended 2 = Error creating Overwrite Property
-;                  @Error 2 @Extended 3 = Error creating Password Property
+;                  @Error: 2, @Extended: 1 = Error creating FilterName Property
+;                  @Error: 2, @Extended: 2 = Error creating Overwrite Property
+;                  @Error: 2, @Extended: 3 = Error creating Password Property
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error Converting Path to/from L.O. URL
-;                  @Error 3 @Extended 2 = Error retrieving FilterName.
+;                  @Error: 3, @Extended: 1 = Error Converting Path to/from L.O. URL
+;                  @Error: 3, @Extended: 2 = Error retrieving FilterName.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Alters original save path (if there was one) to the new path.
@@ -1515,12 +1515,12 @@ EndFunc   ;==>_LOCalc_DocSaveAs
 ; Syntax ........: _LOCalc_DocSelectionCopy(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Data was successfully copied, returning an Object for use in _LOCalc_DocSelectionPaste.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Data was successfully copied, returning an Object for use in _LOCalc_DocSelectionPaste.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to Copy Selected Data, make sure Data is selected.
+;                  @Error: 3, @Extended: 1 = Failed to Copy Selected Data, make sure Data is selected.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Data you desire to be copied must be selected first, see _LOCalc_DocSelectionSet, _LOCalc_DocSelectionSetMulti.
@@ -1551,16 +1551,16 @@ EndFunc   ;==>_LOCalc_DocSelectionCopy
 ; Syntax ........: _LOCalc_DocSelectionGet(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Object or Array
-;                  @Error 0 @Extended 0 Return Object = Success. Single cell selected or cursor is editing a cell, returning Cell Object.
-;                  @Error 0 @Extended 1 Return Object = Success. Cell Range selected, returning Cell Range Object.
-;                  @Error 0 @Extended ? Return Array = Success. Multiple Cells or Cell Ranges selected, returning array of Cell Range Objects.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Single cell selected or cursor is editing a cell, returning Cell Object.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. Cell Range selected, returning Cell Range Object.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Multiple Cells or Cell Ranges selected, returning array of Cell Range Objects.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current selection.
-;                  @Error 3 @Extended 2 = Failed to retrieve count of multiple selections.
-;                  @Error 3 @Extended 3 = Failed to determine selection type.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current selection.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve count of multiple selections.
+;                  @Error: 3, @Extended: 3 = Failed to determine selection type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the user has nothing selected, or is typing in a cell, the return will still be the single cell Object.
@@ -1613,11 +1613,11 @@ EndFunc   ;==>_LOCalc_DocSelectionGet
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oData               - A Object returned from _LOCalc_DocSelectionCopy to insert.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return 1 = Success. Data was successfully inserted at the currently selected cell.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Data was successfully inserted at the currently selected cell.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oData not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oData not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The data will be pasted into the document, beginning at the currently selected cell.
@@ -1644,12 +1644,12 @@ EndFunc   ;==>_LOCalc_DocSelectionPaste
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oObj                - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Object called in $oObj successfully selected.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Object called in $oObj successfully selected.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oObj not an Object.
-;                  @Error 1 @Extended 3 = Object called in $oObj not a Cell Object and not a Cell Range.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oObj not an Object.
+;                  @Error: 1, @Extended: 3 = Object called in $oObj not a Cell Object and not a Cell Range.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1678,17 +1678,17 @@ EndFunc   ;==>_LOCalc_DocSelectionSet
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $aoRange             - An array of Cell or Cell Range objects returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Objects were successfully selected.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Objects were successfully selected.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an object.
-;                  @Error 1 @Extended 2 = $aoRange not an Array.
-;                  @Error 1 @Extended 3 = Array called in $aoRange does not contain an Object. Returning problem element index.
-;                  @Error 1 @Extended 4 = Array called in $aoRange contains an Object that is not a Cell Object and not a Cell Range. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oDoc not an object.
+;                  @Error: 1, @Extended: 2 = $aoRange not an Array.
+;                  @Error: 1, @Extended: 3 = Array called in $aoRange does not contain an Object. Returning problem element index.
+;                  @Error: 1, @Extended: 4 = Array called in $aoRange contains an Object that is not a Cell Object and not a Cell Range. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.sheet.SheetCellRanges" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.sheet.SheetCellRanges" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Range Address from Object located in array called in $aoRange. Returning problem element index.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Range Address from Object located in array called in $aoRange. Returning problem element index.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1734,10 +1734,10 @@ EndFunc   ;==>_LOCalc_DocSelectionSetMulti
 ; Syntax ........: _LOCalc_DocToFront(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Window was successfully brought to the front of the open windows.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Window was successfully brought to the front of the open windows.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If minimized, the document is restored and brought to the front of the visible pages. Generally only brings the document to the front of other LibreOffice windows.
@@ -1762,12 +1762,12 @@ EndFunc   ;==>_LOCalc_DocToFront
 ; Syntax ........: _LOCalc_DocUndo(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Successfully performed an undo action.
+;                  @Error: 0, @Extended: 0, Return: 1 = Successfully performed an undo action.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Document does not have an undo action to perform.
+;                  @Error: 3, @Extended: 1 = Document does not have an undo action to perform.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1799,11 +1799,11 @@ EndFunc   ;==>_LOCalc_DocUndo
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $sName               - [optional] Default is "AU3LO-Automation". The name of the Undo Action to display in the UI when completed.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully began an Undo Action group recording.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully began an Undo Action group recording.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sName not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This begins an Undo Action Group, any functions and actions done after this function is called will be grouped together, and if undone, all actions will be undone together at once.
@@ -1831,10 +1831,10 @@ EndFunc   ;==>_LOCalc_DocUndoActionBegin
 ; Syntax ........: _LOCalc_DocUndoActionEnd(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully ended the last Undo Action group recording.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully ended the last Undo Action group recording.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This stops the grouping of actions into the last created Undo Action Group.
@@ -1859,10 +1859,10 @@ EndFunc   ;==>_LOCalc_DocUndoActionEnd
 ; Syntax ........: _LOCalc_DocUndoClear(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Undo and Redo Actions.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully cleared all Undo and Redo Actions.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This will silently fail if there are any _LOCalc_DocUndoActionBegin still active.
@@ -1887,12 +1887,12 @@ EndFunc   ;==>_LOCalc_DocUndoClear
 ; Syntax ........: _LOCalc_DocUndoCurActionTitle(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Returning the current available Undo action title as a String. Will be an empty String if no action is available.
+;                  @Error: 0, @Extended: 0, Return: String = Returning the current available Undo action title as a String. Will be an empty String if no action is available.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Undo Action.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Undo Action.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1920,12 +1920,12 @@ EndFunc   ;==>_LOCalc_DocUndoCurActionTitle
 ; Syntax ........: _LOCalc_DocUndoGetAllActionTitles(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Array.
-;                  @Error 0 @Extended ? Return Array = Returning all available undo action Titles in an array of Strings. @Extended set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Returning all available undo action Titles in an array of Strings. @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve an array of Undo action titles.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve an array of Undo action titles.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1953,12 +1953,12 @@ EndFunc   ;==>_LOCalc_DocUndoGetAllActionTitles
 ; Syntax ........: _LOCalc_DocUndoIsPossible(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = If the document has an undo action to perform, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = If the document has an undo action to perform, True is returned, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query whether an Undo is possible.
+;                  @Error: 3, @Extended: 1 = Failed to query whether an Undo is possible.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1986,10 +1986,10 @@ EndFunc   ;==>_LOCalc_DocUndoIsPossible
 ; Syntax ........: _LOCalc_DocUndoReset(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully reset the undo manager.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully reset the undo manager.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Calling this function does the following: remove all locks from the undo manager; closes all open undo group actions, clears all undo actions, clears all redo actions.
@@ -2023,24 +2023,24 @@ EndFunc   ;==>_LOCalc_DocUndoReset
 ;                  $bGrid               - [optional] Default is Null. If True, Gridlines are displayed.
 ;                  $iGridColor          - [optional] (0-16777215) Default is Null. The Grid line color, as a RGB Color Integer. Can be one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3 or a custom value.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bFormulas not a Boolean.
-;                  @Error 1 @Extended 3 = $bZeroValues not a Boolean.
-;                  @Error 1 @Extended 4 = $bComments not a Boolean.
-;                  @Error 1 @Extended 5 = $bPageBreaks not a Boolean.
-;                  @Error 1 @Extended 6 = $bHelpLines not a Boolean.
-;                  @Error 1 @Extended 7 = $bValueHighlight not a Boolean.
-;                  @Error 1 @Extended 8 = $bAnchors not a Boolean.
-;                  @Error 1 @Extended 9 = $bGrid not a Boolean.
-;                  @Error 1 @Extended 10 = $iGridColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bFormulas not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bZeroValues not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bComments not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bPageBreaks not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bHelpLines not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bValueHighlight not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bAnchors not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bGrid not a Boolean.
+;                  @Error: 1, @Extended: 10 = $iGridColor not an Integer, less than 0 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Current Controller Object for the Document.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Current Controller Object for the Document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bFormulas
 ;                  |                               2 = Error setting $bZeroValues
 ;                  |                               4 = Error setting $bComments
@@ -2158,23 +2158,23 @@ EndFunc   ;==>_LOCalc_DocViewDisplaySettings
 ;                  $bDrawing            - [optional] Default is Null. If True, Drawing Objects are visible in the document.
 ;                  $bObjects            - [optional] Default is Null. If True, Objects/Graphics are visible in the document.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bHeaders not a Boolean.
-;                  @Error 1 @Extended 3 = $bVertScroll not a Boolean.
-;                  @Error 1 @Extended 4 = $bHoriScroll not a Boolean.
-;                  @Error 1 @Extended 5 = $bSheetTabs not a Boolean.
-;                  @Error 1 @Extended 6 = $bOutlineSymbols not a Boolean.
-;                  @Error 1 @Extended 7 = $bCharts not a Boolean.
-;                  @Error 1 @Extended 8 = $bDrawing not a Boolean.
-;                  @Error 1 @Extended 9 = $bObjects not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bHeaders not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bVertScroll not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bHoriScroll not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bSheetTabs not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bOutlineSymbols not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bCharts not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bDrawing not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bObjects not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Current Controller Object for the Document.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Current Controller Object for the Document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bHeaders
 ;                  |                               2 = Error setting $bVertScroll
 ;                  |                               4 = Error setting $bHoriScroll
@@ -2279,16 +2279,16 @@ EndFunc   ;==>_LOCalc_DocViewWindowSettings
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $bVisible            - [optional] Default is Null. If True, the document is visible.
 ; Return values .: Success: 1 or Boolean.
-;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. $bVisible successfully set.
+;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bVisible not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query whether Document is visible.
+;                  @Error: 3, @Extended: 1 = Failed to query whether Document is visible.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2328,16 +2328,16 @@ EndFunc   ;==>_LOCalc_DocVisible
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $iColumn             - [optional] Default is Null. The column number to set as the first visible column on the page, 0 based.
 ; Return values .: Success: 1 or Integer
-;                  @Error 0 @Extended 0 Return 1 = Success. First visible Column was successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning the first visible column number as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. First visible Column was successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning the first visible column number as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iColumn not an Integer, less than 0 or greater than number of columns contained in the document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, less than 0 or greater than number of columns contained in the document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve the First Column value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve the First Column value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColumn
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2377,16 +2377,16 @@ EndFunc   ;==>_LOCalc_DocWindowFirstColumn
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $iRow                - [optional] Default is Null. The row number to set as the first visible row on the page, 0 based.
 ; Return values .: Success: 1 or Integer
-;                  @Error 0 @Extended 0 Return 1 = Success. First visible Row was successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning the first visible row number as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. First visible Row was successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning the first visible row number as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve the First Row value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve the First Row value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iRow
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2425,12 +2425,12 @@ EndFunc   ;==>_LOCalc_DocWindowFirstRow
 ; Syntax ........: _LOCalc_DocWindowIsSplit(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Document view is currently split.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document view is currently split.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query Document whether the Document view is currently split.
+;                  @Error: 3, @Extended: 1 = Failed to query Document whether the Document view is currently split.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2461,15 +2461,15 @@ EndFunc   ;==>_LOCalc_DocWindowIsSplit
 ;                  $iY                  - [optional] Default is Null. See remarks. The Vertical (Y) position to split the View, in pixels. Call with 0 to skip.
 ;                  $bReturnPixels       - [optional] Default is True. See remarks. If True, return value will be in pixels, Else, return value will be Column Number (X), and Row Number (Y).
 ; Return values .: Success: 1, 2 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in Pixels, in a 2 Element Array with values in order of function parameters.
-;                  @Error 0 @Extended 2 Return Array = Success. All optional parameters were called with Null, returning current settings in Column/Row values, in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in Pixels, in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 2, Return: Array = Success. All optional parameters were called with Null, returning current settings in Column/Row values, in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bReturnPixels not a Boolean.
-;                  @Error 1 @Extended 3 = $iX not an Integer.
-;                  @Error 1 @Extended 4 = $iY not an Integer.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bReturnPixels not a Boolean.
+;                  @Error: 1, @Extended: 3 = $iX not an Integer.
+;                  @Error: 1, @Extended: 4 = $iY not an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To remove the split view, set both $iX and $iY to 0.
@@ -2516,14 +2516,14 @@ EndFunc   ;==>_LOCalc_DocWindowSplit
 ; Syntax ........: _LOCalc_DocWindowVisibleRange(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning currently visible Range of cells as a Cell Range Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning currently visible Range of cells as a Cell Range Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve currently visible Range Address.
-;                  @Error 3 @Extended 2 = Failed to retrieve Sheet Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Cell Range Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve currently visible Range Address.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Sheet Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Cell Range Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2560,15 +2560,15 @@ EndFunc   ;==>_LOCalc_DocWindowVisibleRange
 ;                  $iZoomType           - [optional] (0-4) Default is Null. The Zoom type, See remarks. See constants $LOC_ZOOMTYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iZoom               - [optional] (20-600) Default is Null. The zoom percentage. Only valid if Zoom type is set to "By Value"
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iZoomType not an Integer, less than 0 or greater than 4. See constants $LOC_ZOOMTYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 = $iZoom not an Integer, less than 20 or greater than 600.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iZoomType not an Integer, less than 0 or greater than 4. See constants $LOC_ZOOMTYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iZoom not an Integer, less than 20 or greater than 600.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iZoom
 ; Author ........: donnyh13
 ; Modified ......:

@@ -60,17 +60,17 @@
 ; Parameters ....: $oCell               - A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
 ;                  $sText               - The initial text of the Comment. Cannot be empty.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning newly inserted Comment's Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning newly inserted Comment's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCell not an Object.
-;                  @Error 1 @Extended 2 = $oCell not a Cell Object.
-;                  @Error 1 @Extended 3 = $sText not a String or string is empty.
+;                  @Error: 1, @Extended: 1 = $oCell not an Object.
+;                  @Error: 1, @Extended: 2 = $oCell not a Cell Object.
+;                  @Error: 1, @Extended: 3 = $sText not a String or string is empty.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotations Object.
-;                  @Error 3 @Extended 2 = Called Cell already contains a Comment.
-;                  @Error 3 @Extended 3 = Failed to retrieve Cell Address.
-;                  @Error 3 @Extended 4 = Failed to retrieve new Comment Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotations Object.
+;                  @Error: 3, @Extended: 2 = Called Cell already contains a Comment.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Cell Address.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve new Comment Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -113,17 +113,17 @@ EndFunc   ;==>_LOCalc_CommentAdd
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The comment color background, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $iColor not an Integer, less than 0 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Fill color.
+;                  @Error: 3, @Extended: 1 = Error retrieving Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Fill color.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColor
 ; Author ........: donnyh13
 ; Modified ......:
@@ -166,12 +166,12 @@ EndFunc   ;==>_LOCalc_CommentAreaColor
 ; Syntax ........: _LOCalc_CommentAreaFillStyle(ByRef $oComment)
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOC_AREA_FILL_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOC_AREA_FILL_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Fill Style.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
@@ -211,30 +211,30 @@ EndFunc   ;==>_LOCalc_CommentAreaFillStyle
 ;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
 ;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $sGradientName not a String.
-;                  @Error 1 @Extended 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOC_GRAD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
-;                  @Error 1 @Extended 5 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 8 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iFromColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 10 = $iToColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 11 = $iFromIntense not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 12 = $iToIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $sGradientName not a String.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOC_GRAD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
+;                  @Error: 1, @Extended: 5 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 8 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iFromColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 10 = $iToColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 11 = $iFromIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 12 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 3 = Error retrieving Color Stop Array for "From" color
-;                  @Error 3 @Extended 4 = Error retrieving Color Stop Array for "To" color
+;                  @Error: 3, @Extended: 1 = Error retrieving Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving "FillGradient" Object.
+;                  @Error: 3, @Extended: 3 = Error retrieving Color Stop Array for "From" color
+;                  @Error: 3, @Extended: 4 = Error retrieving Color Stop Array for "To" color
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -433,27 +433,27 @@ EndFunc   ;==>_LOCalc_CommentAreaGradient
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 5 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 5 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve AnnotationShape Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 3 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 4 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve AnnotationShape Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve FillGradient Struct.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -551,24 +551,24 @@ EndFunc   ;==>_LOCalc_CommentAreaGradientMulticolor
 ;                  $iBlur               - [optional] (0-150) Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $bShadow not a Boolean.
-;                  @Error 1 @Extended 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iDistance not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
-;                  @Error 1 @Extended 7 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $bShadow not a Boolean.
+;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOC_COMMENT_SHADOW_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iDistance not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 6 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
+;                  @Error: 1, @Extended: 7 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Distance and Location Values.
-;                  @Error 3 @Extended 3 = Failed to modify Location property.
-;                  @Error 3 @Extended 4 = Failed to modify Distance property.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Distance and Location Values.
+;                  @Error: 3, @Extended: 3 = Failed to modify Location property.
+;                  @Error: 3, @Extended: 4 = Failed to modify Distance property.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bShadow
 ;                  |                               2 = Error setting $iLocation
 ;                  |                               4 = Error setting $iColor
@@ -674,17 +674,17 @@ EndFunc   ;==>_LOCalc_CommentAreaShadow
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
@@ -735,29 +735,29 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparency
 ;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oComment not an Object.
-;                  @Error 1 @Extended 3 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOC_GRAD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 = $iXCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 5 = $iYCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 = $iAngle Not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 7 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iEnd Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oComment not an Object.
+;                  @Error: 1, @Extended: 3 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOC_GRAD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iXCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 5 = $iYCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iAngle Not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 7 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iStart Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iEnd Not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 3 = Error retrieving Color Stop Array for "From" color
-;                  @Error 3 @Extended 4 = Error retrieving Color Stop Array for "To" color
-;                  @Error 3 @Extended 5 = Error creating Transparency Gradient name.
-;                  @Error 3 @Extended 6 = Error setting Transparency Gradient name.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error: 3, @Extended: 3 = Error retrieving Color Stop Array for "From" color
+;                  @Error: 3, @Extended: 4 = Error retrieving Color Stop Array for "To" color
+;                  @Error: 3, @Extended: 5 = Error creating Transparency Gradient name.
+;                  @Error: 3, @Extended: 6 = Error setting Transparency Gradient name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -920,27 +920,27 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradient
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 5 = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 5 = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve AnnotationShape Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error 3 @Extended 3 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 4 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve AnnotationShape Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve FillTransparenceGradient Struct.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
@@ -1038,23 +1038,23 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ;                  $bOptimal            - [optional] Default is Null. If True a angled line will be used optimally.
 ;                  $iLength             - [optional] (0-240005) Default is Null. The length of the callout line, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $iCalloutStyle not an Integer, less than 0 or greater than 2. See Constants $LOC_COMMENT_CALLOUT_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 = $iSpacing not an Integer, less than 0 or greater than 240,005.
-;                  @Error 1 @Extended 4 = $iExtension not an Integer, less than 0 or greater than 4. See Constants $LOC_COMMENT_CALLOUT_EXT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 5 = $iExtendBy not an Integer, not equal to 0, 5,000, or 10,000. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 6 = $iExtendBy not an Integer, not equal to 0, 5,000, or 10,000. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 7 = $iExtendBy not an Integer, less than 0 or greater than 240,005.
-;                  @Error 1 @Extended 8 = $bOptimal not a Boolean.
-;                  @Error 1 @Extended 9 = $iLength not an Integer, less than 0 or greater than 240,005.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $iCalloutStyle not an Integer, less than 0 or greater than 2. See Constants $LOC_COMMENT_CALLOUT_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iSpacing not an Integer, less than 0 or greater than 240,005.
+;                  @Error: 1, @Extended: 4 = $iExtension not an Integer, less than 0 or greater than 4. See Constants $LOC_COMMENT_CALLOUT_EXT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iExtendBy not an Integer, not equal to 0, 5,000, or 10,000. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iExtendBy not an Integer, not equal to 0, 5,000, or 10,000. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iExtendBy not an Integer, less than 0 or greater than 240,005.
+;                  @Error: 1, @Extended: 8 = $bOptimal not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iLength not an Integer, less than 0 or greater than 240,005.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotation Shape Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotation Shape Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iCalloutStyle
 ;                  |                               2 = Error setting $iSpacing
 ;                  |                               4 = Error setting $iExtension
@@ -1183,13 +1183,13 @@ EndFunc   ;==>_LOCalc_CommentCallout
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $bAtEnd              - [optional] Default is True. If True, The Text Cursor will be created at the end of any Text Content present.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning newly created Text Cursor.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning newly created Text Cursor.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $bAtEnd not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $bAtEnd not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a Text Cursor.
+;                  @Error: 2, @Extended: 1 = Failed to create a Text Cursor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1225,15 +1225,15 @@ EndFunc   ;==>_LOCalc_CommentCreateTextCursor
 ; Syntax ........: _LOCalc_CommentDelete(ByRef $oComment)
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Comment was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Comment was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Parent Cell Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Annotations Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Comment's Index number.
-;                  @Error 3 @Extended 4 = Failed to delete Comment.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Cell Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Annotations Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Comment's Index number.
+;                  @Error: 3, @Extended: 4 = Failed to delete Comment.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1275,12 +1275,12 @@ EndFunc   ;==>_LOCalc_CommentDelete
 ; Syntax ........: _LOCalc_CommentGetCell(ByRef $oComment)
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning Object for Cell containing this comment.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Object for Cell containing this comment.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve parent Cell Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Cell Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1308,13 +1308,13 @@ EndFunc   ;==>_LOCalc_CommentGetCell
 ; Syntax ........: _LOCalc_CommentGetLastEdit(ByRef $oComment)
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended 0 Return Array = Success. Returning 2 element array containing Author and Date values.
+;                  @Error: 0, @Extended: 0, Return: Array = Success. Returning 2 element array containing Author and Date values.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Author.
-;                  @Error 3 @Extended 2 = Failed to retrieve last Edit date.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Author.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve last Edit date.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The returned array will have two elements, the first element will contain the Author, and the second will be the last edit Date and Time.
@@ -1348,13 +1348,13 @@ EndFunc   ;==>_LOCalc_CommentGetLastEdit
 ; Syntax ........: _LOCalc_CommentGetObjByCell(ByRef $oCell)
 ; Parameters ....: $oCell               - A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Comment's Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Comment's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCell not an Object.
-;                  @Error 1 @Extended 2 = $oCell not a Cell Object.
+;                  @Error: 1, @Extended: 1 = $oCell not an Object.
+;                  @Error: 1, @Extended: 2 = $oCell not a Cell Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve requested Comment Object, or no Comment present in Cell.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve requested Comment Object, or no Comment present in Cell.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1384,16 +1384,16 @@ EndFunc   ;==>_LOCalc_CommentGetObjByCell
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ;                  $iComment            - The Index number of the comment to retrieve. 0 based.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Comment's Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Comment's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSheet not an Object.
-;                  @Error 1 @Extended 2 = $iComment not an Integer.
-;                  @Error 1 @Extended 3 = Index number called in $iComment less than 0 or greater than number of Comments contained in Sheet.
+;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
+;                  @Error: 1, @Extended: 2 = $iComment not an Integer.
+;                  @Error: 1, @Extended: 3 = Index number called in $iComment less than 0 or greater than number of Comments contained in Sheet.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotations Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve total count of Comments.
-;                  @Error 3 @Extended 3 = Failed to retrieve requested Comment Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotations Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve total count of Comments.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve requested Comment Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1437,25 +1437,25 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ;                  $iEndWidth           - [optional] (0-5004) Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bEndCenter          - [optional] Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $vStartStyle not a String, and not an Integer.
-;                  @Error 1 @Extended 3 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 = $iStartWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error 1 @Extended 5 = $bStartCenter not a Boolean.
-;                  @Error 1 @Extended 6 = $bSync not a Boolean.
-;                  @Error 1 @Extended 7 = $vEndStyle not a String, and not an Integer.
-;                  @Error 1 @Extended 8 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 9 = $iEndWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error 1 @Extended 10 = $bEndCenter not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $vStartStyle not a String, and not an Integer.
+;                  @Error: 1, @Extended: 3 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iStartWidth not an Integer, less than 0 or greater than 5004.
+;                  @Error: 1, @Extended: 5 = $bStartCenter not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bSync not a Boolean.
+;                  @Error: 1, @Extended: 7 = $vEndStyle not a String, and not an Integer.
+;                  @Error: 1, @Extended: 8 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $iEndWidth not an Integer, less than 0 or greater than 5004.
+;                  @Error: 1, @Extended: 10 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Failed to convert Constant to Arrowhead name.
+;                  @Error: 3, @Extended: 1 = Error retrieving Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Failed to convert Constant to Arrowhead name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStartStyle
 ;                  |                               2 = Error setting $iStartWidth
 ;                  |                               4 = Error setting $bStartCenter
@@ -1587,23 +1587,23 @@ EndFunc   ;==>_LOCalc_CommentLineArrowStyles
 ;                  $iCornerStyle        - [optional] (0, 2-4) Default is Null. The Line Corner Style. See Constants $LOC_COMMENT_LINE_JOINT_* as defined in LibreOfficeCalc_Constants.au3
 ;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOC_COMMENT_LINE_CAP_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $vStyle not a String, and not an Integer.
-;                  @Error 1 @Extended 3 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error 1 @Extended 6 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOC_COMMENT_LINE_JOINT_* as defined in LibreOfficeCalc_Constants.au3
-;                  @Error 1 @Extended 8 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOC_COMMENT_LINE_CAP_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $vStyle not a String, and not an Integer.
+;                  @Error: 1, @Extended: 3 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iWidth not an Integer, less than 0 or greater than 5004.
+;                  @Error: 1, @Extended: 6 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOC_COMMENT_LINE_JOINT_* as defined in LibreOfficeCalc_Constants.au3
+;                  @Error: 1, @Extended: 8 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOC_COMMENT_LINE_CAP_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Failed to convert Constant to Line Style name.
+;                  @Error: 3, @Extended: 1 = Error retrieving Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Failed to convert Constant to Line Style name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStyle
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -1732,19 +1732,19 @@ EndFunc   ;==>_LOCalc_CommentLineProperties
 ;                  $iY                  - [optional] Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $bProtectPos         - [optional] Default is Null. If True, the Comment's position is locked.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $iX not an Integer.
-;                  @Error 1 @Extended 3 = $iY not an Integer.
-;                  @Error 1 @Extended 4 = $bProtectPos not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $iX not an Integer.
+;                  @Error: 1, @Extended: 3 = $iY not an Integer.
+;                  @Error: 1, @Extended: 4 = $bProtectPos not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Error retrieving Comment's Position Structure.
+;                  @Error: 3, @Extended: 1 = Error retrieving Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Comment's Position Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iX
 ;                  |                               2 = Error setting $iY
 ;                  |                               4 = Error setting $bProtectPos
@@ -1815,17 +1815,17 @@ EndFunc   ;==>_LOCalc_CommentPosition
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $nRotate             - [optional] (0-359.99) Default is Null. The Degrees to rotate the Comment. See remarks.
 ; Return values .: Success: 1 or Number.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Number = Success. All optional parameters were called with Null, returning current setting as a Number.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Number = Success. All optional parameters were called with Null, returning current setting as a Number.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $nRotate not a Number, less than 0 or greater than 359.99.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $nRotate not a Number, less than 0 or greater than 359.99.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve current rotation value.
+;                  @Error: 3, @Extended: 1 = Error retrieving Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current rotation value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $nRotate
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1869,13 +1869,13 @@ EndFunc   ;==>_LOCalc_CommentRotate
 ; Syntax ........: _LOCalc_CommentsGetCount(ByRef $oSheet)
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning total number of comments contained in the Sheet as an Integer.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total number of comments contained in the Sheet as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSheet not an Object.
+;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotations Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve total count of Comments.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotations Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve total count of Comments.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1907,13 +1907,13 @@ EndFunc   ;==>_LOCalc_CommentsGetCount
 ; Syntax ........: _LOCalc_CommentsGetList(ByRef $oSheet)
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning array of Comment Objects contained in the Sheet. @Extended is set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning array of Comment Objects contained in the Sheet. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSheet not an Object.
+;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotations Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve total count of Comments.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotations Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve total count of Comments.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1956,19 +1956,19 @@ EndFunc   ;==>_LOCalc_CommentsGetList
 ;                  $iHeight             - [optional] Default is Null. The height of the Comment, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the Comment.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $iWidth not an Integer, or less than 51.
-;                  @Error 1 @Extended 3 = $iHeight not an Integer, or less than 51.
-;                  @Error 1 @Extended 4 = $bProtectSize not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 4 = $bProtectSize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Error retrieving Comment's Size Structure.
+;                  @Error: 3, @Extended: 1 = Error retrieving Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Comment's Size Structure.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iHeight
 ;                  |                               4 = Error setting $bProtectSize
@@ -2040,16 +2040,16 @@ EndFunc   ;==>_LOCalc_CommentSize
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $sText               - [optional] Default is Null. The text to set the Comment to. Will overwrite any previous text.
 ; Return values .: Success: 1 or String
-;                  @Error 0 @Extended 0 Return 1 = Success. Text were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current text contained in Comment, as a String.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Text were successfully set.
+;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current text contained in Comment, as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $sText not a String.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $sText not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current text content of the comment.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current text content of the comment.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sText
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2092,17 +2092,17 @@ EndFunc   ;==>_LOCalc_CommentText
 ;                  $iAnchor             - [optional] (0-8) Default is Null. The Comment Anchor position. See Constants $LOC_COMMENT_ANCHOR_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bFullWidth          - [optional] Default is Null. If True, the text will be expanded to cover the full width of the comment.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants $LOC_COMMENT_ANCHOR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 = $bFullWidth not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants $LOC_COMMENT_ANCHOR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $bFullWidth not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotation Shape Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotation Shape Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iAnchor
 ;                  |                               2 = Error setting $bFullWidth
 ; Author ........: donnyh13
@@ -2265,23 +2265,23 @@ EndFunc   ;==>_LOCalc_CommentTextAnchor
 ;                  $iIncrement          - [optional] (0-25400) Default is Null. The increment value measured in Hundredths of a Millimeter (HMM). See remarks.
 ;                  $iDelay              - [optional] (0-30000) Default is Null. The delay between animation repeats, in milliseconds. 0 = Automatic.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $iAnimation not an Integer, less than 0 or greater than 4. See Constants $LOC_COMMENT_ANIMATION_KIND_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 = $iDirection not an Integer, less than 0 or greater than 3. See Constants $LOC_COMMENT_ANIMATION_DIR_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 4 = $bBeginInside not a Boolean.
-;                  @Error 1 @Extended 5 = $bVisibleOnExit not a Boolean.
-;                  @Error 1 @Extended 6 = $iCycles not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 = $iPixelIncrement not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iIncrement not an Integer, less than 0 or greater than 25,400.
-;                  @Error 1 @Extended 9 = $iDelay not an Integer, less than 0 or greater than 30,000.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $iAnimation not an Integer, less than 0 or greater than 4. See Constants $LOC_COMMENT_ANIMATION_KIND_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iDirection not an Integer, less than 0 or greater than 3. See Constants $LOC_COMMENT_ANIMATION_DIR_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $bBeginInside not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bVisibleOnExit not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iCycles not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iPixelIncrement not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iIncrement not an Integer, less than 0 or greater than 25,400.
+;                  @Error: 1, @Extended: 9 = $iDelay not an Integer, less than 0 or greater than 30,000.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotation Shape Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotation Shape Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iAnimation
 ;                  |                               2 = Error setting $iDirection
 ;                  |                               4 = Error setting $bBeginInside
@@ -2392,21 +2392,21 @@ EndFunc   ;==>_LOCalc_CommentTextAnimation
 ;                  $iColumns            - [optional] (1-16) Default is Null. The number of columns to break the text area into.
 ;                  $iSpacing            - [optional] Default is Null. The amount of spacing between the columns, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oComment not an Object.
-;                  @Error 1 @Extended 3 = $iColumns not an Integer, less than 0 or greater than 16.
-;                  @Error 1 @Extended 4 = $iSpacing not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oComment not an Object.
+;                  @Error: 1, @Extended: 3 = $iColumns not an Integer, less than 0 or greater than 16.
+;                  @Error: 1, @Extended: 4 = $iSpacing not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.text.TextColumns" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextColumns" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotation Shape Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Text Columns Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotation Shape Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Text Columns Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColumns
 ;                  |                               2 = Error setting $iSpacing
 ; Author ........: donnyh13
@@ -2484,23 +2484,23 @@ EndFunc   ;==>_LOCalc_CommentTextColumns
 ;                  $iTop                - [optional] (-100000-100000) Default is Null. The spacing on the Top side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] (-100000-100000) Default is Null. The spacing on the Bottom side of the text between the text and the Comment border, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $bFitWidth not a Boolean.
-;                  @Error 1 @Extended 3 = $bFitHeight not a Boolean.
-;                  @Error 1 @Extended 4 = $bFitToFrame not a Boolean.
-;                  @Error 1 @Extended 5 = $iSpacingAll not an Integer, less than -100,000 or greater than 100,000.
-;                  @Error 1 @Extended 6 = $iLeft not an Integer, less than -100,000 or greater than 100,000.
-;                  @Error 1 @Extended 7 = $iRight not an Integer, less than -100,000 or greater than 100,000.
-;                  @Error 1 @Extended 8 = $iTop not an Integer, less than -100,000 or greater than 100,000.
-;                  @Error 1 @Extended 9 = $iBottom not an Integer, less than -100,000 or greater than 100,000.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $bFitWidth not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bFitHeight not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bFitToFrame not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iSpacingAll not an Integer, less than -100,000 or greater than 100,000.
+;                  @Error: 1, @Extended: 6 = $iLeft not an Integer, less than -100,000 or greater than 100,000.
+;                  @Error: 1, @Extended: 7 = $iRight not an Integer, less than -100,000 or greater than 100,000.
+;                  @Error: 1, @Extended: 8 = $iTop not an Integer, less than -100,000 or greater than 100,000.
+;                  @Error: 1, @Extended: 9 = $iBottom not an Integer, less than -100,000 or greater than 100,000.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Annotation Shape Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Annotation Shape Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bFitWidth
 ;                  |                               2 = Error setting $bFitHeight
 ;                  |                               4 = Error setting $bFitToFrame
@@ -2622,16 +2622,16 @@ EndFunc   ;==>_LOCalc_CommentTextSettings
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $bVisible            - [optional] Default is Null. If True, the comment will be always visible.
 ; Return values .: Success: 1 or Boolean
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. All optional parameters were called with Null, returning current setting as a Boolean value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Boolean = Success. All optional parameters were called with Null, returning current setting as a Boolean value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oComment not an Object.
-;                  @Error 1 @Extended 2 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oComment not an Object.
+;                  @Error: 1, @Extended: 2 = $bVisible not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query if Comment is visible.
+;                  @Error: 3, @Extended: 1 = Failed to query if Comment is visible.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
