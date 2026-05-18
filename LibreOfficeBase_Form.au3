@@ -56,7 +56,7 @@
 ;                  $sOutputForm         - The Name of the Form to Create. Also the Sub-directory to place the Form in. See Remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Copied Form successfully inserted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $sInputForm not a String.
@@ -133,7 +133,7 @@ EndFunc   ;==>_LOBase_FormCopy
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. New Form was successfully inserted.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. Returning opened Form Document's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $sForm not a String.
@@ -250,7 +250,7 @@ EndFunc   ;==>_LOBase_FormCreate
 ;                  $sName               - The Form name to Delete. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Form was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -295,7 +295,7 @@ EndFunc   ;==>_LOBase_FormDelete
 ;                  $bForceClose         - [optional] Default is False. If True, the Form document will be closed regardless if there are unsaved changes. See remarks.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning a Boolean value of whether the Form Document was successfully closed (True), or not.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bForceClose not a Boolean.
@@ -351,7 +351,7 @@ EndFunc   ;==>_LOBase_FormDocClose
 ; Return values .: Success: Object or Array.
 ;                  @Error: 0, @Extended: ?, Return: Object = Success, The Object for the current, or last active Base Form document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success, A two columned Array of all open LibreOffice Base Form Documents. @Extended is set to number of results. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  --Initialization Errors--
@@ -437,7 +437,7 @@ EndFunc   ;==>_LOBase_FormDocConnect
 ;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the document's Name as a String. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bReturnFull not a Boolean.
@@ -481,7 +481,7 @@ EndFunc   ;==>_LOBase_FormDocGetName
 ; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Form has been modified since last being saved.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
 ;                  --Processing Errors--
@@ -517,7 +517,7 @@ EndFunc   ;==>_LOBase_FormDocIsModified
 ;                  $bHidden             - [optional] Default is False. If True, the form document will be invisible when opened.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning opened Form Document's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -573,7 +573,7 @@ EndFunc   ;==>_LOBase_FormDocOpen
 ; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Form was successfully saved.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Document called in $oFormDoc has not been saved to a Base Document yet or is read only.
@@ -621,7 +621,7 @@ EndFunc   ;==>_LOBase_FormDocSave
 ; Return values .: Success: 1 or Boolean.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. $bVisible successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bVisible not a Boolean.
@@ -673,7 +673,7 @@ EndFunc   ;==>_LOBase_FormDocVisible
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: ?, Return: Boolean = Success. Returning a Boolean value indicating if the Document contains a Form by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Form with the same name is found in the Document (In sub-folders).
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -784,7 +784,7 @@ EndFunc   ;==>_LOBase_FormExists
 ;                  $sOutputFolder       - The Name of the Folder to Create. Also the Sub-directory to place the Folder in. See Remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Copied Folder successfully inserted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sInputFolder not a String.
@@ -854,7 +854,7 @@ EndFunc   ;==>_LOBase_FormFolderCopy
 ;                  $bCreateMulti        - [optional] Default is False. If True, multiple folders in a path will be created if they do not exist.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully created the Folder(s).
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFolder not a String.
@@ -929,7 +929,7 @@ EndFunc   ;==>_LOBase_FormFolderCreate
 ;                  $sName               - The Folder name to Delete. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Folder was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -976,7 +976,7 @@ EndFunc   ;==>_LOBase_FormFolderDelete
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: ?, Return: Boolean = Success. Returning a Boolean value indicating if the Document contains a Folder by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Folder with the same name is found in the Document (In sub-folders).
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -1087,7 +1087,7 @@ EndFunc   ;==>_LOBase_FormFolderExists
 ;                  $sNewName            - The New name to rename the form Folder to.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully renamed the Folder
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFolder not a String.
@@ -1135,7 +1135,7 @@ EndFunc   ;==>_LOBase_FormFolderRename
 ;                  $sFolder             - [optional] Default is "". The Folder to return the count of folders for. See remarks.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of Form Folders contained in the Document as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
@@ -1238,7 +1238,7 @@ EndFunc   ;==>_LOBase_FormFoldersGetCount
 ;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of Folder names from. See remarks.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Folder names contained in this Document. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
@@ -1351,7 +1351,7 @@ EndFunc   ;==>_LOBase_FormFoldersGetNames
 ;                  $sNewName            - The New name to rename the form to.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully renamed the Form.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sForm not a String.
@@ -1399,7 +1399,7 @@ EndFunc   ;==>_LOBase_FormRename
 ;                  $sFolder             - [optional] Default is "". The Folder to return the count of forms for. See remarks.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of Forms contained in the Document as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
@@ -1506,7 +1506,7 @@ EndFunc   ;==>_LOBase_FormsGetCount
 ;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of form names from. See remarks.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Form names contained in this Document. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.

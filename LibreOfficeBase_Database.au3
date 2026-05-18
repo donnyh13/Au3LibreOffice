@@ -50,7 +50,7 @@
 ; Return values .: Success: 1 or Boolean
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. All optional parameters were called with Null, returning current AutoCommit setting as a Boolean value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $oConnection not a connection Object.
@@ -101,7 +101,7 @@ EndFunc   ;==>_LOBase_DatabaseAutoCommit
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully executed commit command.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $oConnection not a connection Object.
@@ -131,7 +131,7 @@ EndFunc   ;==>_LOBase_DatabaseCommit
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully closed the connection.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $oConnection not a connection Object.
@@ -173,7 +173,7 @@ EndFunc   ;==>_LOBase_DatabaseConnectionClose
 ;                  $bPrivate            - [optional] Default is False. If True, a private connection is created, otherwise a public connection is created.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully connected to the Database, returning a Connection Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDBase not an Object.
 ;                  @Error: 1, @Extended: 2 = $sUser not a String.
@@ -245,7 +245,7 @@ EndFunc   ;==>_LOBase_DatabaseConnectionGet
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the default Quote character used by the Database to quote SQL identifiers.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $oConnection not a connection Object.
@@ -280,7 +280,7 @@ EndFunc   ;==>_LOBase_DatabaseGetDefaultQuote
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Database Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Initialization Errors--
@@ -330,7 +330,7 @@ EndFunc   ;==>_LOBase_DatabaseGetObjByDoc
 ; Parameters ....: $sURL                - The File path of the Database file or a Database name that is registered.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Database Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sURL not a String.
 ;                  --Initialization Errors--
@@ -378,7 +378,7 @@ EndFunc   ;==>_LOBase_DatabaseGetObjByURL
 ; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If Database is currently Read-Only, True is returned. Else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDBase not an Object.
 ;                  --Processing Errors--
@@ -418,7 +418,7 @@ EndFunc   ;==>_LOBase_DatabaseIsReadOnly
 ;                  $vParam6             - [optional] Default is Null. The sixth Parameter required by the Query. See remarks for the queries that have parameters. See Constants, $LOB_RESULT_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Variable
 ;                  @Error: 0, @Extended: 0, Return: Variable = Success. Returning the Result of the query. See respective query for expected return.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $oConnection not a connection Object.
@@ -657,7 +657,7 @@ EndFunc   ;==>_LOBase_DatabaseMetaDataQuery
 ; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the Name value as a String. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDBase not an Object.
 ;                  --Processing Errors--
@@ -696,7 +696,7 @@ EndFunc   ;==>_LOBase_DatabaseName
 ;                  $sName               - The name to register the Database under.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Database successfully registered.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDBase not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -742,7 +742,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredAdd
 ; Parameters ....: $sName               - The Database name to look for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If Registered Database with called name exists, True is returned. Else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sName not a String.
 ;                  --Initialization Errors--
@@ -785,7 +785,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredExists
 ; Parameters ....: None
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning array of Registered Database names. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.ServiceManager" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create "com.sun.star.sdb.DatabaseContext" Object.
@@ -824,7 +824,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredGetNames
 ; Parameters ....: $sName               - The Registered Database name to remove.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Database successfully unregistered.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sName not a String.
 ;                  @Error: 1, @Extended: 2 = No Registered Database found with name as called in $sName.
@@ -868,7 +868,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredRemoveByName
 ; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If Database requires a password to connect to it, True is returned. Else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDBase not an Object.
 ;                  --Processing Errors--
@@ -901,7 +901,7 @@ EndFunc   ;==>_LOBase_DatabaseRequiresPassword
 ; Parameters ....: $oConnection         - A Connection object returned by a previous _LOBase_DatabaseConnectionGet function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully executed rollback command.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $oConnection not a connection Object.

@@ -82,7 +82,7 @@
 ; Parameters ....: $oControl            - A Control object returned by a previous _LOBase_ReportConInsert or _LOBase_ReportConsGetList function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Control was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
 ;                  --Processing Errors--
@@ -121,7 +121,7 @@ EndFunc   ;==>_LOBase_ReportConDelete
 ; Return values .: Success: 1 or String
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current setting as a String.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
@@ -187,7 +187,7 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 10 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFormatField not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oFormatField not a Formatted Field Control.
@@ -330,7 +330,7 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldGeneral
 ; Return values .: Success: 1 or String
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current setting as a String.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oImageControl not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oImageControl not a Image Control.
@@ -396,7 +396,7 @@ EndFunc   ;==>_LOBase_ReportConImageConData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oImageControl not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oImageControl not an Image Control.
@@ -530,7 +530,7 @@ EndFunc   ;==>_LOBase_ReportConImageConGeneral
 ;                  $sName               - [optional] Default is "". The name of the control, if called with "", a name is automatically given it.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Control was inserted successfully, returning its object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSection not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oSection not a Section Object.
@@ -641,7 +641,7 @@ EndFunc   ;==>_LOBase_ReportConInsert
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oLabel not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oLabel not a Label Control.
@@ -773,7 +773,7 @@ EndFunc   ;==>_LOBase_ReportConLabelGeneral
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oLabel not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oLabel not a Label Control.
@@ -847,7 +847,7 @@ EndFunc   ;==>_LOBase_ReportConLineGeneral
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
 ;                  @Error: 1, @Extended: 2 = $iX not an Integer.
@@ -912,7 +912,7 @@ EndFunc   ;==>_LOBase_ReportConPosition
 ;                  $iType               - [optional] (1-63) Default is $LOB_REP_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSection not an Object.
 ;                  @Error: 1, @Extended: 2 = Called Object not a Section Object.
@@ -973,7 +973,7 @@ EndFunc   ;==>_LOBase_ReportConsGetList
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer, or less than 51.
@@ -1051,7 +1051,7 @@ EndFunc   ;==>_LOBase_ReportConSize
 ;                  $sOutputReport       - The Name of the Report to Create. Also the Sub-directory to place the Report in. See Remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Copied report successfully inserted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $sInputReport not a String.
@@ -1127,7 +1127,7 @@ EndFunc   ;==>_LOBase_ReportCopy
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. New Report was successfully inserted.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. Returning opened Report Document's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $sReport not a String.
@@ -1213,7 +1213,7 @@ EndFunc   ;==>_LOBase_ReportCreate
 ;                  $sName               - The Report name to Delete. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Report was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -1258,7 +1258,7 @@ EndFunc   ;==>_LOBase_ReportDelete
 ;                  $bForceClose         - [optional] Default is False. If True, the Report document will be closed regardless if there are unsaved changes. See remarks.
 ; Return values .: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning a Boolean value of whether the Report Document was successfully closed (True), or not.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bForceClose not a Boolean.
@@ -1323,7 +1323,7 @@ EndFunc   ;==>_LOBase_ReportDocClose
 ; Return values .: Success: Object or Array.
 ;                  @Error: 0, @Extended: ?, Return: Object = Success, The Object for the current, or last active Base Report document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success, A two columned Array of all open LibreOffice Base Report Documents. @Extended is set to number of results. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  --Initialization Errors--
@@ -1415,7 +1415,7 @@ EndFunc   ;==>_LOBase_ReportDocConnect
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -1529,7 +1529,7 @@ EndFunc   ;==>_LOBase_ReportDocData
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -1644,7 +1644,7 @@ EndFunc   ;==>_LOBase_ReportDocDetail
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -1807,7 +1807,7 @@ EndFunc   ;==>_LOBase_ReportDocFooter
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -1893,7 +1893,7 @@ EndFunc   ;==>_LOBase_ReportDocGeneral
 ;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the document's Name as a String. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bReturnFull not a Boolean.
@@ -1942,7 +1942,7 @@ EndFunc   ;==>_LOBase_ReportDocGetName
 ;                  $iPosition           - [optional] Default is Null. The position to insert the new Group. 0 Based, call Null to insert at the end.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning new Group Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -1992,7 +1992,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupAdd
 ;                  $iGroup              - The Index position of the Group to Delete. 0 based.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Returning requested Group Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -2034,7 +2034,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByIndex
 ; Parameters ....: $oGroup              - A Group object returned by a previous _LOBase_ReportDocGroupAdd, or _LOBase_ReportDocGroupGetByIndex function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Returning requested Group Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a Group Object.
@@ -2089,7 +2089,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupDeleteByObj
 ;                  $iReport             - The index position for the Group to retrieve the Object for. 0 Based.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Group Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -2126,7 +2126,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupGetByIndex
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total number of Groups contained in the Report.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -2170,7 +2170,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupsGetCount
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -2327,7 +2327,7 @@ EndFunc   ;==>_LOBase_ReportDocHeader
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Report has been modified since last being saved.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  --Processing Errors--
@@ -2363,7 +2363,7 @@ EndFunc   ;==>_LOBase_ReportDocIsModified
 ;                  $bHidden             - [optional] Default is False. If True, the Report document will be invisible when opened.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning opened Report Document's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -2426,7 +2426,7 @@ EndFunc   ;==>_LOBase_ReportDocOpen
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -2561,7 +2561,7 @@ EndFunc   ;==>_LOBase_ReportDocPageFooter
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -2689,7 +2689,7 @@ EndFunc   ;==>_LOBase_ReportDocPageHeader
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Report was successfully saved.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Document called in $oReportDoc is read only.
@@ -2744,7 +2744,7 @@ EndFunc   ;==>_LOBase_ReportDocSave
 ;                  $iSection            - (0-4) The section type to retrieve the Object for. See Constants, $LOB_REP_SECTION_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Section Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oReportDoc not a Report Document.
@@ -2799,7 +2799,7 @@ EndFunc   ;==>_LOBase_ReportDocSectionGetObj
 ; Return values .: Success: 1 or Boolean.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. $bVisible successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bVisible not a Boolean.
@@ -2851,7 +2851,7 @@ EndFunc   ;==>_LOBase_ReportDocVisible
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: ?, Return: Boolean = Success. Returning a Boolean value indicating if the Document contains a Report by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Report with the same name is found in the Document (In sub-folders).
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -2962,7 +2962,7 @@ EndFunc   ;==>_LOBase_ReportExists
 ;                  $sOutputFolder       - The Name of the Folder to Create. Also the Sub-directory to place the Folder in. See Remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Copied Folder successfully inserted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sInputFolder not a String.
@@ -3032,7 +3032,7 @@ EndFunc   ;==>_LOBase_ReportFolderCopy
 ;                  $bCreateMulti        - [optional] Default is False. If True, multiple folders in a path will be created if they do not exist.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully created the Folder(s).
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFolder not a String.
@@ -3107,7 +3107,7 @@ EndFunc   ;==>_LOBase_ReportFolderCreate
 ;                  $sName               - The Folder name to Delete. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Folder was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -3154,7 +3154,7 @@ EndFunc   ;==>_LOBase_ReportFolderDelete
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: ?, Return: Boolean = Success. Returning a Boolean value indicating if the Document contains a Folder by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Folder with the same name is found in the Document (In sub-folders).
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -3265,7 +3265,7 @@ EndFunc   ;==>_LOBase_ReportFolderExists
 ;                  $sNewName            - The New name to rename the Report Folder to.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully renamed the Folder
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFolder not a String.
@@ -3313,7 +3313,7 @@ EndFunc   ;==>_LOBase_ReportFolderRename
 ;                  $sFolder             - [optional] Default is "". The Folder to return the count of folders for. See remarks.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of Report Folders contained in the Document as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
@@ -3416,7 +3416,7 @@ EndFunc   ;==>_LOBase_ReportFoldersGetCount
 ;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of Folder names from. See remarks.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Folder names contained in this Document. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
@@ -3537,7 +3537,7 @@ EndFunc   ;==>_LOBase_ReportFoldersGetNames
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a Group Object.
@@ -3718,7 +3718,7 @@ EndFunc   ;==>_LOBase_ReportGroupFooter
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a Group Object.
@@ -3891,7 +3891,7 @@ EndFunc   ;==>_LOBase_ReportGroupHeader
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Group was successfully moved.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Position as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a Group Object.
@@ -3969,7 +3969,7 @@ EndFunc   ;==>_LOBase_ReportGroupPosition
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a Group Object.
@@ -4058,7 +4058,7 @@ EndFunc   ;==>_LOBase_ReportGroupSort
 ;                  $sNewName            - The New name to rename the Report to.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully renamed the Report.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sReport not a String.
@@ -4106,7 +4106,7 @@ EndFunc   ;==>_LOBase_ReportRename
 ;                  $sFolder             - [optional] Default is "". The Folder to return the count of Reports for. See remarks.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of Reports contained in the Document, as an Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
@@ -4213,7 +4213,7 @@ EndFunc   ;==>_LOBase_ReportsGetCount
 ;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of Report names from. See remarks.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Report names contained in this Document. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.

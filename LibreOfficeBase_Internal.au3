@@ -38,7 +38,7 @@
 ;                  $oOldCol             - A Column object returned by a previous _LOBase_TableColGetObjByIndex or _LOBase_TableColGetObjByName function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully transferred Column properties.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oNewCol not an Object.
 ;                  @Error: 1, @Extended: 2 = $oOldCol not an Object.
@@ -78,7 +78,7 @@ EndFunc   ;==>__LOBase_ColTransferProps
 ; Parameters ....: $iType               - The Column Type. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the Type name corresponding to the Type Constant.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iType not an Integer, less than -16 or greater than 2014. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error: 1, @Extended: 2 = $iType not one of the pre-defined constants. See Constants, $LOB_DATA_TYPE_* as defined in LibreOfficeBase_Constants.au3.
@@ -227,7 +227,7 @@ EndFunc   ;==>__LOBase_ColTypeName
 ; Parameters ....: $iQuery              - (0-148) The Query to retrieve the command for. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the requested Query command.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iQuery not an Integer, less than 0 or greater than number of query commands. See Constants, $LOB_DBASE_META_* as defined in LibreOfficeBase_Constants.au3.
 ; Author ........: donnyh13
@@ -463,7 +463,7 @@ EndFunc   ;==>__LOBase_InternalComErrorHandler
 ; Return values .: Success: Integer or String
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning Constant value for Control type.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. Returning requested Control type's service name.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object, and $iControlType not an Integer, less than 1 or greater than 32. See Constants $LOB_REP_CON_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  --Processing Errors--
@@ -508,7 +508,7 @@ EndFunc   ;==>__LOBase_ReportConIdentify
 ; Return values .: Success: 1 or Map
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Map = Success. All optional parameters were called with Null, returning current settings as a Map.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
 ;                  @Error: 1, @Extended: 2 = $mFontDesc not a Map.

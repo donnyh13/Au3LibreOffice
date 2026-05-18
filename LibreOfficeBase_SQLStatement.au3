@@ -49,7 +49,7 @@
 ;                  $iQuery              - (0-18) The Query command to perform. See Constants, $LOB_RESULT_METADATA_QUERY_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Variable
 ;                  @Error: 0, @Extended: 0, Return: Variable = Success. Returning Query result. See Query description for expected return type.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = $oResult not a Result Set Object.
@@ -128,7 +128,7 @@ EndFunc   ;==>_LOBase_SQLResultColumnMetaDataQuery
 ; Parameters ....: $oResult             - A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of Columns contained in the Result Set.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = $oResult not a Result Set Object.
@@ -163,7 +163,7 @@ EndFunc   ;==>_LOBase_SQLResultColumnsGetCount
 ; Parameters ....: $oResult             - A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Column Names contained in the Result Set. @Extended is set to the number of Elements contained in the Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = $oResult not a Result Set Object.
@@ -200,7 +200,7 @@ EndFunc   ;==>_LOBase_SQLResultColumnsGetNames
 ;                  $iNumber             - [optional] Default is Null. The Absolute row number or number of moves to go forward or backward. See Remarks.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning Boolean whether the move was successful (True) or not (False).
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oResult not a Result Set object.
@@ -262,7 +262,7 @@ EndFunc   ;==>_LOBase_SQLResultCursorMove
 ; Return values .: Success: Boolean or Integer.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning cursor query result.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current row number containing the cursor.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oResult not a Result Set object.
@@ -319,7 +319,7 @@ EndFunc   ;==>_LOBase_SQLResultCursorQuery
 ;                  $vValue              - The Value to change the column to.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully performed the Result Row Modification command.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oResult not a Result Set object.
@@ -450,7 +450,7 @@ EndFunc   ;==>_LOBase_SQLResultRowModify
 ;                  $iQuery              - (0-2) The Query to perform for the current row of the Result Set. See Constants, $LOB_RESULT_ROW_QUERY_IS_ROW_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning result of query as a Boolean value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oResult not a Result Set object.
@@ -493,7 +493,7 @@ EndFunc   ;==>_LOBase_SQLResultRowQuery
 ;                  $iColumn             - The column to perform the Query for. 1 based.
 ; Return values .: Success: Variable
 ;                  @Error: 0, @Extended: 0, Return: Variable = Success. Successfully performed Row read, returning corresponding data type as the read command performed.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oResult not a Result Set object.
@@ -585,7 +585,7 @@ EndFunc   ;==>_LOBase_SQLResultRowRead
 ; Parameters ....: $oResult             - A Result Set object returned by a previous _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, or _LOBase_TableDocGetRowSet function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully refreshed the Result Set Row.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oResult not a Result Set object.
@@ -616,7 +616,7 @@ EndFunc   ;==>_LOBase_SQLResultRowRefresh
 ;                  $iUpdate             - (0-5) The Update command to perform for the current row of the Result Set. See Constants, $LOB_RESULT_ROW_UPDATE_* as defined in LibreOfficeBase_Constants.au3.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully executed Update command.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oResult not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oResult not a Result Set object.
@@ -661,7 +661,7 @@ EndFunc   ;==>_LOBase_SQLResultRowUpdate
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the created Prepared Statement Object.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. Returning the created Statement Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oConnection not a Connection Object.
@@ -712,7 +712,7 @@ EndFunc   ;==>_LOBase_SQLStatementCreate
 ;                  $bWritable           - [optional] Default is False. If True, returns a readable and writable Result set. Only works for non-Prepared Statements.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the Result set returned from the SQL Statement Query.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oStatement not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oStatement not a Statement or Prepared Statement Object.
@@ -776,7 +776,7 @@ EndFunc   ;==>_LOBase_SQLStatementExecuteQuery
 ;                  $sSQL                - [optional] Default is Null. If the statement being called is not a Prepared Statement, the SQL update command will be called here.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the Row count for INSERT, DELETE or UPDATE SQL Statements, or 0 for SQL Statements that return nothing.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oStatement not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oStatement not a Statement or Prepared Statement Object.
@@ -823,7 +823,7 @@ EndFunc   ;==>_LOBase_SQLStatementExecuteUpdate
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully set the prepared SQL statement Data.
 ;                  @Error: 0, @Extended: 1, Return: 1 = Success. Successfully cleared the SQL prepared statement of the set data.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oStatement not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oStatement not a Statement or Prepared Statement Object.
